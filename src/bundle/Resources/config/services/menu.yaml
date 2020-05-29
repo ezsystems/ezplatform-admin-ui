@@ -135,6 +135,11 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.url_edit.sidebar_right }
 
+    EzSystems\EzPlatformAdminUi\Menu\URLWildcardEditRightSidebarBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu_configure.url_wildcard_edit_sidebar_right }
+
     EzSystems\EzPlatformAdminUi\Menu\UserPasswordChangeRightSidebarBuilder:
         public: true
         tags:
@@ -168,6 +173,11 @@ services:
     EzSystems\EzPlatformAdminUi\Menu\Admin\ReorderMenuListener:
         tags:
             - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: moveAdminToLast, priority: -50 }
+
+    ezplatform.adminui.listener.menu.reorder_by_order_number:
+        class: EzSystems\EzPlatformAdminUi\Menu\Listener\ReorderByOrderNumberListener
+        tags:
+            - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: reorderMenuItems, priority: -50 }
 
     EzSystems\EzPlatformAdminUi\Menu\ContentTypeRightSidebarBuilder:
         public: true

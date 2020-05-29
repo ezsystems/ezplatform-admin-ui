@@ -6,67 +6,36 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
-use eZ\Publish\API\Repository\Values\URL\URL;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use EzSystems\EzPlatformAdminUi\Tab\URLManagement\URLWildcardsTab;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class URLEditRightSidebarBuilder extends AbstractBuilder implements TranslationContainerInterface
+final class URLWildcardEditRightSidebarBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
     /* Menu items */
-    const ITEM__SAVE = 'url_edit__sidebar_right__save';
-    const ITEM__CANCEL = 'url_edit__sidebar_right__cancel';
+    const ITEM__SAVE = 'url_wildcard_edit__sidebar_right__save';
+    const ITEM__CANCEL = 'url_wildcard_edit__sidebar_right__cancel';
 
     /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory $menuItemFactory
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
+     */
     public function __construct(
-        MenuItemFactory $factory,
+        MenuItemFactory $menuItemFactory,
         EventDispatcherInterface $eventDispatcher,
-        TranslatorInterface $translator)
-    {
-        parent::__construct($factory, $eventDispatcher);
+        TranslatorInterface $translator
+    ) {
+        parent::__construct($menuItemFactory, $eventDispatcher);
 
         $this->translator = $translator;
-    }
-
-    protected function getConfigureEventName(): string
-    {
-        return ConfigureMenuEvent::URL_EDIT_SIDEBAR_RIGHT;
-    }
-
-    protected function createStructure(array $options): ItemInterface
-    {
-        /** @var URL $url */
-        $url = $options['url'];
-
-        /** @var ItemInterface|ItemInterface[] $menu */
-        $menu = $this->factory->createItem('root');
-
-        $menu->setChildren([
-            self::ITEM__SAVE => $this->createMenuItem(
-                self::ITEM__SAVE,
-                [
-                    'attributes' => [
-                        'class' => 'btn--trigger',
-                        'data-click' => sprintf('#url-update', $url->id),
-                    ],
-                    'extras' => ['icon' => 'save'],
-                ]
-            ),
-            self::ITEM__CANCEL => $this->createMenuItem(
-                self::ITEM__CANCEL,
-                [
-                    'route' => 'ezplatform.url_management',
-                    'extras' => ['icon' => 'circle-close'],
-                ]
-            ),
-        ]);
-
-        return $menu;
     }
 
     public static function getTranslationMessages(): array
@@ -75,5 +44,41 @@ class URLEditRightSidebarBuilder extends AbstractBuilder implements TranslationC
             (new Message(self::ITEM__SAVE, 'menu'))->setDesc('Save'),
             (new Message(self::ITEM__CANCEL, 'menu'))->setDesc('Discard changes'),
         ];
+    }
+
+    protected function getConfigureEventName(): string
+    {
+        return ConfigureMenuEvent::URL_WILDCARD_EDIT_SIDEBAR_RIGHT;
+    }
+
+    protected function createStructure(array $options): ItemInterface
+    {
+        /** @var \Knp\Menu\ItemInterface $menu */
+        $menu = $this->factory->createItem('root');
+
+        $menu->setChildren([
+            self::ITEM__SAVE => $this->createMenuItem(
+                self::ITEM__SAVE,
+                [
+                    'attributes' => [
+                        'class' => 'btn--trigger',
+                        'data-click' => $options['submit_selector'],
+                    ],
+                    'extras' => ['icon' => 'save'],
+                ]
+            ),
+            self::ITEM__CANCEL => $this->createMenuItem(
+                self::ITEM__CANCEL,
+                [
+                    'route' => 'ezplatform.url_management',
+                    'routeParameters' => [
+                        '_fragment' => URLWildcardsTab::URI_FRAGMENT,
+                    ],
+                    'extras' => ['icon' => 'circle-close'],
+                ]
+            ),
+        ]);
+
+        return $menu;
     }
 }

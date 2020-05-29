@@ -4,14 +4,18 @@
 
 {% trans_default_domain "linkmanager" %}
 
+{% block title %}
+    {{ 'url.view'|trans({ '%url%': url.url|u.truncate(60) })|desc('Link %url%') }}
+{% endblock %}
+
 {%- block content -%}
     <div class="row align-items-stretch ez-main-row">
         <div class="px-0 pb-4 ez-content-container">
             <div class="ez-header">
                 <div class="container">
                     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
-                        { value: 'url.list'|trans, url: path('ezplatform.link_manager.list') },
-                        { value: 'url.edit'|trans }
+                        { value: 'url.breadcrumb.list'|trans|desc('URL management'), url: path('ezplatform.url_management') },
+                        { value: 'url.breadcrumb.edit'|trans|desc('Edit') }
                     ]} %}
 
                     {% include '@ezdesign/ui/page_title.html.twig' with {

@@ -60,6 +60,9 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
+use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardData;
+use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
+use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\Setting\UserSettingUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
@@ -120,6 +123,9 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType;
+use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType;
+use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardUpdateType;
 use EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserEditType;
@@ -1218,5 +1224,68 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentRemoveType::class);
 
         return $this->formFactory->createNamed($name, ContentRemoveType::class, $data);
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardData|null $data
+     * @param string|null $name
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function createURLWildcard(
+        ?URLWildcardData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(URLWildcardType::class);
+
+        return $this->formFactory->createNamed(
+            $name,
+            URLWildcardType::class,
+            $data ?? new URLWildcardData()
+        );
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardUpdateData|null $data
+     * @param string|null $name
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function createURLWildcardUpdate(
+        ?URLWildcardUpdateData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(URLWildcardUpdateType::class);
+
+        return $this->formFactory->createNamed(
+            $name,
+            URLWildcardUpdateType::class,
+            $data ?? new URLWildcardUpdateData()
+        );
+    }
+
+    /**
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData|null $data
+     * @param string|null $name
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function deleteURLWildcard(
+        ?URLWildcardDeleteData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(URLWildcardDeleteType::class);
+
+        return $this->formFactory->createNamed(
+            $name,
+            URLWildcardDeleteType::class,
+            $data ?? new URLWildcardDeleteData()
+        );
     }
 }

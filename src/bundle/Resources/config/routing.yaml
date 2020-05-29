@@ -601,12 +601,6 @@ ezplatform.search:
 #
 # Link manager
 #
-
-ezplatform.link_manager.list:
-    path: /linkmanagement
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\LinkManagerController::listAction'
-
 ezplatform.link_manager.edit:
     path: /linkmanagement/edit/{urlId}
     defaults:
@@ -658,6 +652,37 @@ ezplatform.custom_url.remove:
     methods: ['POST']
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\UrlAliasController::removeAction'
+
+#
+# URL wildcards
+#
+ezplatform.url_wildcard.add:
+    path: /url-wildcard/add
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\URLWildcardController::addAction'
+
+ezplatform.url_wildcard.update:
+    path: /url-wildcard/update/{urlWildcardId}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\URLWildcardController::updateAction'
+    requirements:
+        URLWildcardId: \d+
+
+ezplatform.url_wildcard.bulk_delete:
+    path: /url-wildcard/bulk-delete
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\URLWildcardController::bulkDeleteAction'
+
+#
+# URL Management
+#
+ezplatform.url_management:
+    path: /url-management
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\URLManagementController::urlManagementAction'
 
 #
 # Content on the Fly

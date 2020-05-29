@@ -191,7 +191,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../../ui-dev/src/modules/universal-discovery/components/sort-switcher/sort.switcher.js'),
             path.resolve(__dirname, '../../ui-dev/src/modules/universal-discovery/components/view-switcher/view.switcher.js'),
             path.resolve(
-                __dirname, 
+                __dirname,
                 '../../ui-dev/src/modules/universal-discovery/components/tree-item-toggle-selection-button/tree.item.toggle.selection.button.js'
             ),
         ])
@@ -201,5 +201,13 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-subitems-js', [path.resolve(__dirname, '../../ui-dev/src/modules/sub-items/sub.items.module.js')])
         .addEntry('ezplatform-admin-ui-content-tree-js', [
             path.resolve(__dirname, '../../ui-dev/src/modules/content-tree/content.tree.module.js'),
+        ])
+        .addEntry('ezplatform-admin-ui-url-management-js', [
+            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
+            path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.url.wildcards.create.js'),
+        ])
+        .addEntry('ezplatform-admin-ui-url-management-update-js', [
+            path.resolve(__dirname, '../public/js/scripts/admin.url.wildcards.update.js'),
         ]);
 };

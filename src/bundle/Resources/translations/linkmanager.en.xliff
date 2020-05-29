@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="ab72a512e67c913f2fdbaa37d7cba2bf16df6681" resname="tab.name.link_manager">
+        <source>Link manager</source>
+        <target state="new">Link manager</target>
+        <note>key: tab.name.link_manager</note>
+      </trans-unit>
       <trans-unit id="44ab49e25d0037a06f7c26582462d2d876e9546c" resname="url.action.edit">
         <source>Edit URL</source>
         <target state="new">Edit URL</target>
@@ -16,15 +21,20 @@
         <target state="new">Edit content</target>
         <note>key: url.action.item.edit</note>
       </trans-unit>
-      <trans-unit id="6a23ab14fca2c76fe7ea84f53221ed5caf907f45" resname="url.detail">
+      <trans-unit id="a53272ba95dfff73c2fbab9fd4517d466b1753c2" resname="url.breadcrumb.detail">
         <source>Link details</source>
         <target state="new">Link details</target>
-        <note>key: url.detail</note>
+        <note>key: url.breadcrumb.detail</note>
       </trans-unit>
-      <trans-unit id="23bfb0e222eeac1bfa481ba09c5b4aea1d0295da" resname="url.edit">
+      <trans-unit id="ac3c0d7621f2d6d5f452060a8c639fdbe760ef3a" resname="url.breadcrumb.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
-        <note>key: url.edit</note>
+        <note>key: url.breadcrumb.edit</note>
+      </trans-unit>
+      <trans-unit id="67f94fa41322d4fd15518686d51fca4892ad0e7c" resname="url.breadcrumb.list">
+        <source>URL management</source>
+        <target state="new">URL management</target>
+        <note>key: url.breadcrumb.list</note>
       </trans-unit>
       <trans-unit id="e890168e1ef7753c250affa3fcdfb21074c35c6f" resname="url.editing">
         <source>Editing URL: %url%</source>
@@ -60,11 +70,6 @@
         <source>Status</source>
         <target state="new">Status</target>
         <note>key: url.label.status</note>
-      </trans-unit>
-      <trans-unit id="d2c96c077eb7c3751d39ec3a861b17e60b210a1a" resname="url.list">
-        <source>Link manager</source>
-        <target state="new">Link manager</target>
-        <note>key: url.list</note>
       </trans-unit>
       <trans-unit id="fd026c688f943eb5d0cb4dadf54c0dac101a9b8b" resname="url.list.no_urls">
         <source>No URLs</source>

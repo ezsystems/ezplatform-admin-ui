@@ -186,6 +186,11 @@
         <target state="new">System Information</target>
         <note>key: main__admin__systeminfo</note>
       </trans-unit>
+      <trans-unit id="82375ef2c63989a07c692f526407d75316414dff" resname="main__admin__url_management">
+        <source>URL Management</source>
+        <target state="new">URL Management</target>
+        <note>key: main__admin__url_management</note>
+      </trans-unit>
       <trans-unit id="975e43875a74d509e3e0cedd926de1223d09cdf4" resname="main__admin__users">
         <source>Users</source>
         <target state="new">Users</target>
@@ -200,11 +205,6 @@
         <source>Content structure</source>
         <target state="new">Content structure</target>
         <note>key: main__content__content_structure</note>
-      </trans-unit>
-      <trans-unit id="2887dd09dcb0f287e947da3e735133c540991df1" resname="main__content__linkmanager">
-        <source>Link Manager</source>
-        <target state="new">Link Manager</target>
-        <note>key: main__content__linkmanager</note>
       </trans-unit>
       <trans-unit id="e8c5aefc86b31ee2bed9359787ddf0a2b1cad4a6" resname="main__content__media">
         <source>Media</source>
@@ -375,6 +375,16 @@
         <source>Save</source>
         <target state="new">Save</target>
         <note>key: url_edit__sidebar_right__save</note>
+      </trans-unit>
+      <trans-unit id="279fb028abf07d3fadda07ff6e00b91f0fd53932" resname="url_wildcard_edit__sidebar_right__cancel">
+        <source>Discard changes</source>
+        <target state="new">Discard changes</target>
+        <note>key: url_wildcard_edit__sidebar_right__cancel</note>
+      </trans-unit>
+      <trans-unit id="02bb48356132caeef070ebc7eb4d266884044e85" resname="url_wildcard_edit__sidebar_right__save">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note>key: url_wildcard_edit__sidebar_right__save</note>
       </trans-unit>
       <trans-unit id="8acab9e005da20efe4001fac5f84ff2c835bb7c8" resname="user__bookmark">
         <source>Bookmarks</source>

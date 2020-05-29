@@ -27,7 +27,6 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     const ITEM_CONTENT = 'main__content';
     const ITEM_CONTENT__CONTENT_STRUCTURE = 'main__content__content_structure';
     const ITEM_CONTENT__MEDIA = 'main__content__media';
-    const ITEM_CONTENT__LINK_MANAGER = 'main__content__linkmanager';
 
     /* Main Menu / Admin */
     const ITEM_ADMIN = 'main_admin';
@@ -38,9 +37,15 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     const ITEM_ADMIN__CONTENT_TYPES = 'main__admin__content_types';
     const ITEM_ADMIN__USERS = 'main__admin__users';
     const ITEM_ADMIN__OBJECT_STATES = 'main__admin__object_states';
+    const ITEM_ADMIN__URL_MANAGEMENT = 'main__admin__url_management';
 
     public const ITEM_ADMIN_OPTIONS = [
-        self::ITEM_ADMIN__SYSTEMINFO => ['route' => 'ezplatform.systeminfo'],
+        self::ITEM_ADMIN__SYSTEMINFO => [
+            'route' => 'ezplatform.systeminfo',
+            'extras' => [
+                'orderNumber' => 10,
+            ],
+        ],
         self::ITEM_ADMIN__SECTIONS => [
             'route' => 'ezplatform.section.list',
             'extras' => [
@@ -49,6 +54,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'view' => 'ezplatform.section.view',
                     'create' => 'ezplatform.section.create',
                 ],
+                'orderNumber' => 20,
             ],
         ],
         self::ITEM_ADMIN__ROLES => [
@@ -63,6 +69,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'policy_create' => 'ezplatform.policy.create',
                     'policy_create_with_limitation' => 'ezplatform.policy.create_with_limitation',
                 ],
+                'orderNumber' => 30,
             ],
         ],
         self::ITEM_ADMIN__LANGUAGES => [
@@ -73,6 +80,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'view' => 'ezplatform.language.view',
                     'create' => 'ezplatform.language.create',
                 ],
+                'orderNumber' => 40,
             ],
         ],
         self::ITEM_ADMIN__CONTENT_TYPES => [
@@ -87,6 +95,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'content_type_edit' => 'ezplatform.content_type.edit',
                     'content_type_update' => 'ezplatform.content_type.update',
                 ],
+                'orderNumber' => 50,
             ],
         ],
         self::ITEM_ADMIN__OBJECT_STATES => [
@@ -101,6 +110,18 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     'state_view' => 'ezplatform.object_state.state.view',
                     'state_edit' => 'ezplatform.object_state.state.update',
                 ],
+                'orderNumber' => 60,
+            ],
+        ],
+        self::ITEM_ADMIN__URL_MANAGEMENT => [
+            'route' => 'ezplatform.url_management',
+            'extras' => [
+                'routes' => [
+                    'link_manager_edit' => 'ezplatform.link_manager.edit',
+                    'link_manager_view' => 'ezplatform.link_manager.view',
+                    'url_wildcard_edit' => 'ezplatform.url_wildcard.update',
+                ],
+                'orderNumber' => 80,
             ],
         ],
     ];
@@ -188,7 +209,6 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $rootMediaId,
             ['label' => self::ITEM_CONTENT__MEDIA]
         );
-        $linkManagerItem = $this->createLinkManagerMenuItem();
 
         if (null !== $contentStructureItem) {
             $menuItems[$contentStructureItem->getName()] = $contentStructureItem;
@@ -196,10 +216,6 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
         if (null !== $mediaItem) {
             $menuItems[$mediaItem->getName()] = $mediaItem;
-        }
-
-        if (null !== $linkManagerItem) {
-            $menuItems[$linkManagerItem->getName()] = $linkManagerItem;
         }
 
         return $menuItems;
@@ -250,7 +266,12 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         $usersItem = $this->factory->createLocationMenuItem(
             self::ITEM_ADMIN__USERS,
             $rootUsersId,
-            ['label' => self::ITEM_ADMIN__USERS]
+            [
+                'label' => self::ITEM_ADMIN__USERS,
+                'extras' => [
+                    'orderNumber' => 60,
+                ],
+            ]
         );
 
         if (null !== $usersItem) {
@@ -264,32 +285,12 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             );
         }
 
-        return $menuItems;
-    }
-
-    /**
-     * @return ItemInterface|null
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     */
-    private function createLinkManagerMenuItem(): ?ItemInterface
-    {
-        if (!$this->permissionResolver->hasAccess('url', 'view')) {
-            return null;
-        }
-
-        return $this->factory->createItem(
-            self::ITEM_CONTENT__LINK_MANAGER,
-            [
-                'route' => 'ezplatform.link_manager.list',
-                'extras' => [
-                    'routes' => [
-                        'edit' => 'ezplatform.link_manager.edit',
-                        'view' => 'ezplatform.link_manager.view',
-                    ],
-                ],
-            ]
+        $menuItems[self::ITEM_ADMIN__URL_MANAGEMENT] = $this->createMenuItem(
+            self::ITEM_ADMIN__URL_MANAGEMENT,
+            self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__URL_MANAGEMENT]
         );
+
+        return $menuItems;
     }
 
     /**
@@ -308,8 +309,8 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             (new Message(self::ITEM_ADMIN__LANGUAGES, 'menu'))->setDesc('Languages'),
             (new Message(self::ITEM_ADMIN__CONTENT_TYPES, 'menu'))->setDesc('Content Types'),
             (new Message(self::ITEM_ADMIN__USERS, 'menu'))->setDesc('Users'),
-            (new Message(self::ITEM_CONTENT__LINK_MANAGER, 'menu'))->setDesc('Link Manager'),
             (new Message(self::ITEM_ADMIN__OBJECT_STATES, 'menu'))->setDesc('Object States'),
+            (new Message(self::ITEM_ADMIN__URL_MANAGEMENT, 'menu'))->setDesc('URL Management'),
         ];
     }
 }
