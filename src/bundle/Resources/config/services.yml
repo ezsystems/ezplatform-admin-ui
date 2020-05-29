@@ -72,6 +72,12 @@ services:
         tags:
             - {name: kernel.event_subscriber}
 
+    EzSystems\EzPlatformAdminUi\EventListener\ContentDownloadRouteReferenceListener:
+        arguments:
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+        tags:
+            - {name: kernel.event_subscriber}
+
     EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory:
         lazy: true
         arguments:
