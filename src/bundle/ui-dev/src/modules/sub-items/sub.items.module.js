@@ -247,7 +247,7 @@ export default class SubItemsModule extends Component {
             () => ({ activeView }),
             () => {
                 eZ.helpers.tooltips.hideAll();
-                window.localStorage.setItem(`ez-location-active-view-${this.props.parentLocationId}`, activeView);
+                window.localStorage.setItem(`ez-subitems-active-view-location-${this.props.parentLocationId}`, activeView);
             }
         );
     }

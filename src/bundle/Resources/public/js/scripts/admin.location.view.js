@@ -130,7 +130,7 @@
     const getLocationActiveView = (parentLocationId) => {
         const mediaLocationId = eZ.adminUiConfig.locations.media;
         const defaultActiveView = parentLocationId === mediaLocationId ? 'grid' : 'table';
-        const activeView = localStorage.getItem(`ez-location-active-view-${parentLocationId}`);
+        const activeView = localStorage.getItem(`ez-subitems-active-view-location-${parentLocationId}`);
 
         return activeView || defaultActiveView;
     };
@@ -158,8 +158,6 @@
 
             return contentTypeDataMap;
         }, {});
-
-        console.log('View: ', activeView);
 
         ReactDOM.render(
             React.createElement(eZ.modules.SubItems, {
