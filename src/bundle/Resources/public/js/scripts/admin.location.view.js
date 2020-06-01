@@ -1,4 +1,4 @@
-(function (global, doc, $, React, ReactDOM, eZ, Routing, Translator) {
+(function (global, doc, localStorage, $, React, ReactDOM, eZ, Routing, Translator) {
     const SELECTOR_MODAL_BULK_ACTION_FAIL = '#bulk-action-failed-modal';
     const listContainers = doc.querySelectorAll('.ez-sil');
     const mfuContainer = doc.querySelector('#ez-mfu');
@@ -127,10 +127,17 @@
 
         $(SELECTOR_MODAL_BULK_ACTION_FAIL).modal('show');
     };
+    const getLocationActiveView = (parentLocationId) => {
+        const mediaLocationId = eZ.adminUiConfig.locations.media;
+        const defaultActiveView = parentLocationId === mediaLocationId ? 'grid' : 'table';
+        const activeView = localStorage.getItem(`ez-location-active-view-${parentLocationId}`);
+
+        return activeView || defaultActiveView;
+    };
 
     listContainers.forEach((container) => {
         const parentLocationId = parseInt(container.dataset.location, 10);
-        const activeView = parentLocationId === eZ.adminUiConfig.locations.media ? 'grid' : 'table';
+        const activeView = getLocationActiveView(parentLocationId);
         const subItemsList = JSON.parse(container.dataset.items).SubitemsList;
         const items = subItemsList.SubitemsRow.map((item) => ({
             content: item.Content,
@@ -151,6 +158,8 @@
 
             return contentTypeDataMap;
         }, {});
+
+        console.log('View: ', activeView);
 
         ReactDOM.render(
             React.createElement(eZ.modules.SubItems, {
@@ -181,4 +190,14 @@
             container
         );
     });
-})(window, window.document, window.jQuery, window.React, window.ReactDOM, window.eZ, window.Routing, window.Translator);
+})(
+    window,
+    window.document,
+    window.localStorage,
+    window.jQuery,
+    window.React,
+    window.ReactDOM,
+    window.eZ,
+    window.Routing,
+    window.Translator
+);

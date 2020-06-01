@@ -245,7 +245,10 @@ export default class SubItemsModule extends Component {
     switchView(activeView) {
         this.setState(
             () => ({ activeView }),
-            () => eZ.helpers.tooltips.hideAll()
+            () => {
+                eZ.helpers.tooltips.hideAll();
+                window.localStorage.setItem(`ez-location-active-view-${this.props.parentLocationId}`, activeView);
+            }
         );
     }
 
