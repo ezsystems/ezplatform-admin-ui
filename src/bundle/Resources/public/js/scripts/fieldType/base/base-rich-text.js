@@ -85,6 +85,10 @@
                             importChildNodes(newElement, element.attributes[i], false);
                         }
 
+                        if (element.localName === 'a' && parent.dataset.ezelement === 'ezembed') {
+                            element.setAttribute('data-cke-survive', '1');
+                        }
+
                         parent.appendChild(newElement);
                     } else if (element.nodeType === Node.TEXT_NODE) {
                         parent.appendChild(parent.ownerDocument.createTextNode(element.nodeValue));
