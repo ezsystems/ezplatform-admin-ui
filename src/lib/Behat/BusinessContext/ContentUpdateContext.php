@@ -8,6 +8,8 @@ namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
 use EzSystems\EzPlatformAdminUi\Behat\Helper\EzEnvironmentConstants;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ContentUpdateForm;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentUpdateItemPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
 
@@ -24,6 +26,15 @@ class ContentUpdateContext extends BusinessContext
             $values = $this->filterOutNonEmptyValues($row);
             $updateItemPage->contentUpdateForm->fillFieldWithValue($row['label'], $values);
         }
+    }
+
+    /**
+     * @When I select :contentPath from Image Asset Repository for :fieldName field
+     */
+    public function selectContentFromIARepository(string $contentPath, string $fieldName): void
+    {
+        $contentUpdateForm = ElementFactory::createElement($this->utilityContext, ContentUpdateForm::ELEMENT_NAME);
+        $contentUpdateForm->getField($fieldName)->selectFromRepository($contentPath);
     }
 
     private function filterOutNonEmptyValues(array $parameters): array
