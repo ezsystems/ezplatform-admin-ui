@@ -23,21 +23,60 @@
                 {{ form_start(form, {'attr': {'class': 'ez-form-validate'}}) }}
 
                 {% block form_fields %}
-                    {% for field in form.fieldsData %}
-                        {% if not field.rendered %}
-                            {% if field.value is defined %}
-                                {{- form_widget(field) -}}
-                            {% else %}
-                                <div>
-                                    {{- form_label(field) -}}
-                                    <p class="non-editable">
-                                        {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
-                                    </p>
-                                    {% do field.setRendered() %}
+                    {% if grouped_form_fields_views is defined and grouped_form_fields_views|length > 1 %}
+                        <ul class="nav nav-tabs ez-nav-tabs--content-edit ez-tabs" role="tablist">
+                            {% for key, group in grouped_form_fields_views %}
+                                <li role="presentation" class="nav-item nav-item--{{ key }}-key">
+                                    <a href="#{{ key }}-key" class="nav-link {{ loop.first ? 'active' }}" role="tab" data-toggle="tab">
+                                        {{ key|capitalize }}
+                                    </a>
+                                    {% include '@ezdesign/content/warning_icon.html.twig' %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="tab-content px-3">
+                            {% for key, group in grouped_form_fields_views %}
+                                <div role="tabpanel" class="tab-pane {{ loop.first ? 'active' }}" id="{{ key }}-key">
+                                    {% for field in group %}
+                                        {% set formField = form.fieldsData[field] %}
+                                        
+                                        {% if not formField.rendered %}
+                                            {% if formField.value is defined %}
+                                                {{- form_widget(formField) -}}
+                                            {% else %}
+                                                <div>
+                                                    {{- form_label(formField) -}}
+                                                    <p class="non-editable">
+                                                        {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
+                                                    </p>
+                                                    {% do formField.setRendered() %}
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
-                            {% endif %}
-                        {% endif %}
-                    {%- endfor %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="px-3">
+                            {% for field in form.fieldsData %}
+                                {% if not field.rendered %}
+                                    {% if field.value is defined %}
+                                        {{- form_widget(field) -}}
+                                    {% else %}
+                                        <div>
+                                            {{- form_label(field) -}}
+                                            <p class="non-editable">
+                                                {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
+                                            </p>
+                                            {% do field.setRendered() %}
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {%- endfor %}
+                        </div>
+                    {% endif %}
                 {% endblock %}
 
                 {{ form_end(form) }}

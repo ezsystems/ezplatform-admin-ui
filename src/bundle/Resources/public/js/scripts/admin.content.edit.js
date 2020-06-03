@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const enterKeyCode = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',
@@ -28,7 +28,16 @@
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
         const validatorName = validator.constructor.name;
-        const result = { isValid, validatorName };
+        const tabErroKeys = validator.fieldsToValidate.reduce((tabsId, value) => {
+            const tabPane = value.item.closest('.tab-pane');
+
+            if (tabPane && value.item.classList.contains('is-invalid')) {
+                tabsId.push(tabPane.id);
+            }
+
+            return tabsId;
+        }, []);
+        const result = { isValid, validatorName, tabErroKeys };
 
         return result;
     };
@@ -70,6 +79,25 @@
                         return total;
                     }, new Set())
             ).join();
+
+            // Hide warnings icons
+            doc.querySelectorAll(`.nav-item .ez-warning-icon`).forEach((node) => {
+                node.style.display = 'none';
+            });
+
+            // Show warnings icons for tabs with invalide fields
+            validationResults
+                .reduce((total, result) => {
+                    result.tabErroKeys.map((key) => {
+                        total.push(key);
+                    });
+
+                    return total;
+                }, [])
+                .filter((value, index, self) => self.indexOf(value) === index)
+                .forEach((key) => {
+                    doc.querySelector(`.nav-item--${key} .ez-warning-icon`).style.display = 'block';
+                });
 
             fields.forEach((field) => field.removeAttribute('id'));
 

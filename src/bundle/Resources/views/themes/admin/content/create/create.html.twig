@@ -59,9 +59,9 @@
 {% endblock %}
 
 {% block form_fields %}
-    <section class="container mt-4 mb-5 px-5">
+    <section class="container mt-4 mb-5">
         <div class="card ez-card">
-            <div class="card-body">
+            <div class="card-body px-0">
                 {{ parent() }}
                 {{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}
                 {{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}
