@@ -7,10 +7,12 @@
 namespace EzSystems\EzPlatformAdminUi\Behat\BusinessContext;
 
 use Behat\Gherkin\Node\TableNode;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
+use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use EzSystems\Behat\Core\Environment\EnvironmentConstants;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\NonEditableField;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\ContentUpdateForm;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentUpdateItemPage;
-use EzSystems\Behat\Browser\Factory\PageObjectFactory;
 use PHPUnit\Framework\Assert;
 
 class ContentUpdateContext extends BusinessContext
@@ -36,6 +38,15 @@ class ContentUpdateContext extends BusinessContext
         $updateItemPage = PageObjectFactory::createPage($this->browserContext, ContentUpdateItemPage::PAGE_NAME, '');
         $field = $updateItemPage->contentUpdateForm->getField($fieldName);
         Assert::assertEquals(NonEditableField::EXPECTED_NON_EDITABLE_TEXT, $field->getValue()[0]);
+    }
+
+    /**
+     * @When I select :contentPath from Image Asset Repository for :fieldName field
+     */
+    public function selectContentFromIARepository(string $contentPath, string $fieldName): void
+    {
+        $contentUpdateForm = ElementFactory::createElement($this->browserContext, ContentUpdateForm::ELEMENT_NAME);
+        $contentUpdateForm->getField($fieldName)->selectFromRepository($contentPath);
     }
 
     private function filterOutNonEmptyValues(array $parameters): array
