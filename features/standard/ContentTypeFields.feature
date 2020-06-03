@@ -50,6 +50,25 @@ Feature: Content fields setting and editing
       | ezmatrix             | Matrix                       | Min_rows:2,Columns:col1-col2-col3                                     | value     | col1:col2:col3,Ala:miała:kota,Szpak:dziobał:bociana,Bociana:dziobał:szpak |            |                       |         |             | Matrix                    |
       | ezimageasset         | Image Asset                  |                                                                       | value     |  imageasset1.png.zip                                                      |            |                       |         |             | imageasset1.png           |
 
+  @javascript @common @admin
+  Scenario: Create an ImageAsset Content item and edit specified field
+    Given I create "Image" Content items in "/Media/Images/" in "eng-GB"
+      | name             | image                                                        |
+      | ImageAssetImage  | vendor/ezsystems/behatbundle/src/lib/Data/Images/small2.jpg  |
+      And I create a 'Image Asset CT2' Content Type in "Content" with 'ImageAssetCT2' identifier
+      | Field Type  | Name         | Identifier        | Required | Searchable | Translatable | Settings        |
+      | Image Asset | ImageAField  | imageafield       | yes      | no	       | yes          |                 |
+      And I am logged as "admin"
+      And I go to "Content structure" in "Content" tab
+    When I start creating a new content 'Image Asset CT2'
+      And I select "Media/Images/ImageAssetImage" from Image Asset Repository for "ImageAField" field
+      And I click on the edit action bar button "Publish"
+    Then success notification that "Content published." appears
+      And I should be on content item page "ImageAssetImage" of type "Image Asset CT2" in root path
+      And content attributes equal
+      | label          | value      |
+      | ImageAField    | small2.jpg |
+
   @javascript @common
   Scenario Outline: Edit content item with given field
     Given I am logged as "admin"
