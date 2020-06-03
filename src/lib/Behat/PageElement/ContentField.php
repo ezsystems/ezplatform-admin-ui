@@ -20,7 +20,7 @@ class ContentField extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'nthFieldContainer' => '.ez-content-field:nth-child(%s)',
+            'nthFieldContainer' => 'div.ez-content-field:nth-of-type(%s)',
             'fieldName' => '.ez-content-field-name',
             'fieldValue' => '.ez-content-field-value',
             'fieldValueContainer' => ':first-child',
@@ -32,7 +32,7 @@ class ContentField extends Element
         $fieldIndex = $this->context->getElementPositionByText(sprintf('%s:', $label), $this->fields['fieldName']);
         $fieldLocator = sprintf(
             '%s %s',
-            sprintf($this->fields['nthFieldContainer'], $fieldIndex + 1),
+            sprintf($this->fields['nthFieldContainer'], $fieldIndex),
             $this->fields['fieldValue']
         );
 

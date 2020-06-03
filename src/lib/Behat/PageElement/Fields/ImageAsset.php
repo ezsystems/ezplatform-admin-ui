@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Notification;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 use PHPUnit\Framework\Assert;
 
 class ImageAsset extends Image
@@ -32,5 +33,14 @@ class ImageAsset extends Image
         $imageAssetNotification = ElementFactory::createElement($this->context, Notification::ELEMENT_NAME);
         $imageAssetNotification->verifyAlertSuccess();
         Assert::assertEquals(self::IMAGE_ASSET_NOTIFICATION_MESSAGE, $imageAssetNotification->getMessage());
+    }
+
+    public function selectFromRepository(string $path): void
+    {
+        $this->context->findElement(sprintf('%s .ez-data-source__btn-select', $this->fields['fieldContainer']))->click();
+        $udw = ElementFactory::createElement($this->context, UniversalDiscoveryWidget::ELEMENT_NAME);
+        $udw->verifyVisibility();
+        $udw->selectContent($path);
+        $udw->confirm();
     }
 }
