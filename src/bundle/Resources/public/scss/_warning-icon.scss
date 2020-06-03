@@ -1,9 +1,10 @@
 .ez-tabs {
     .ez-warning-icon {
         position: absolute;
+        z-index: 2;
         right: -0.5rem;
         left: auto;
-        background: #d92d42;
+        background: $ez-color-danger;
         border-radius: 50%;
         width: 1.25rem;
         height: 1.25rem;
@@ -13,10 +14,10 @@
         display: none;
         
         .ez-icon {
-            height: 12px;
-            width: 12px;
-            margin: -10px 4px 0;
-            fill: #fff;
+            height: calculateRem(12px);
+            width: calculateRem(12px);
+            margin: calculateRem(-10px) calculateRem(4px) 0;
+            fill: $ez-white;
         }
     }
 }
