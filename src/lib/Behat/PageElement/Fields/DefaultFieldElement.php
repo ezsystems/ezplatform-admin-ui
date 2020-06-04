@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields;
 
+use Behat\Mink\Element\NodeElement;
 use EzSystems\Behat\Browser\Context\BrowserContext;
 use EzSystems\Behat\Browser\Element\Element;
 use PHPUnit\Framework\Assert;
@@ -13,51 +14,67 @@ use PHPUnit\Framework\Assert;
 class DefaultFieldElement extends Element
 {
     public const ELEMENT_NAME = 'DefaultFieldElement';
-    private $fieldNode;
 
-    public function __construct(BrowserContext $context, string $fieldName, string $container)
+    /** @var string */
+    private $fieldName;
+
+    /** @var string */
+    private $containerSelector;
+
+    public function __construct(BrowserContext $context, string $fieldName, string $containerSelector)
     {
         parent::__construct($context);
-
-        $containerNode = $this->context->findElement($container);
-        $this->fieldNode = $containerNode->findField($fieldName);
-
-        Assert::assertNotNull(!$this->fieldNode, sprintf('Field %s not found.', $fieldName));
+        $this->fieldName = $fieldName;
+        $this->containerSelector = $containerSelector;
     }
 
     public function setValue(string $value): void
     {
-        switch ($this->fieldNode->getAttribute('type')) {
+        $field = $this->findField();
+        switch ($field->getAttribute('type')) {
             case 'text':
             case 'email':
-                $this->fieldNode->setValue($value);
+                $this->context->waitUntil($this->defaultTimeout, function () use ($field, $value) {
+                    $field->setValue($value);
+
+                    return $this->getValue() === $value;
+                });
                 break;
             case 'checkbox':
-                $this->fieldNode->setValue(filter_var($value, FILTER_VALIDATE_BOOLEAN));
+                $field->setValue(filter_var($value, FILTER_VALIDATE_BOOLEAN));
                 break;
             case 'radio':
-                if ($this->fieldNode->isChecked() !== filter_var($value, FILTER_VALIDATE_BOOLEAN)) {
-                    $this->fieldNode->click();
+                if ($field->isChecked() !== filter_var($value, FILTER_VALIDATE_BOOLEAN)) {
+                    $field->click();
                 }
                 break;
             default:
-                throw new \Exception(sprintf('Field Type "%s" not defined as behat field element.', $this->fieldNode->getAttribute('type')));
+                throw new \Exception(sprintf('Field type "%s" not defined as Behat field element.', $field->getAttribute('type')));
         }
     }
 
     public function getValue(): string
     {
-        switch ($this->fieldNode->getAttribute('type')) {
+        $field = $this->findField();
+
+        switch ($field->getAttribute('type')) {
             case 'text':
             case 'email':
             case 'checkbox':
-                return $this->fieldNode->getValue();
-                break;
+                return $field->getValue();
             case 'radio':
-                return $this->fieldNode->isChecked() ? 'true' : 'false';
-                break;
+                return $field->isChecked() ? 'true' : 'false';
             default:
-                throw new \Exception(sprintf('Field Type "%s" not defined as behat field element.', $this->fieldNode->getAttribute('type')));
+                throw new \Exception(sprintf('Field type "%s" not defined as Behat field element.', $field->getAttribute('type')));
         }
+    }
+
+    private function findField(): NodeElement
+    {
+        $containerNode = $this->context->findElement($this->containerSelector);
+        $field = $containerNode->findField($this->fieldName);
+        Assert::assertNotNull($field, sprintf('Field %s not found.', $this->fieldName));
+
+        return $field;
     }
 }
