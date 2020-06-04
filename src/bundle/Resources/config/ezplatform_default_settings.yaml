@@ -41,6 +41,7 @@ parameters:
     ezsettings.admin_group.subtree_operations.copy_subtree.limit: 100
 
     # Notifications
+    ezsettings.admin_group.notifications.count.interval: 30000
     ezsettings.admin_group.notifications.error.timeout: 0
     ezsettings.admin_group.notifications.warning.timeout: 0
     ezsettings.admin_group.notifications.success.timeout: 5000
