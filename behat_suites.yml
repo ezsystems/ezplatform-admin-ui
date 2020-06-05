@@ -53,6 +53,7 @@ adminui:
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
                 - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
+                - EzSystems\BehatBundle\Context\Object\ContentContext
                 - EzSystems\BehatBundle\Context\Object\ContentTypeContext
                 - EzSystems\BehatBundle\Context\Api\TestContext
 
