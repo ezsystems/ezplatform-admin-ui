@@ -45,6 +45,7 @@ adminui:
                 tags: "@common"
             contexts:
                 - EzSystems\Behat\API\Context\ContentTypeContext
+                - EzSystems\Behat\API\Context\ContentContext
                 - EzSystems\Behat\API\Context\TestContext
                 - EzSystems\Behat\Browser\Context\BrowserContext
                 - EzSystems\Behat\Browser\Context\Hooks
