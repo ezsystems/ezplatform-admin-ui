@@ -24,10 +24,8 @@
 
                 {% block form_fields %}
                     {% if grouped_fields is defined and grouped_fields|length > 1 %}
-                        {% set sortedKeys = grouped_fields|keys|sort %}
-                        
                         <ul class="nav nav-tabs ez-nav-tabs--content-edit ez-tabs" role="tablist">
-                            {% for key in sortedKeys %}
+                            {% for key, group in grouped_fields %}
                                 <li role="presentation" class="nav-item ez-tabs__nav-item" id="item-{{ key }}">
                                     <a href="#{{ key }}" class="nav-link {{ loop.first ? 'active' }}" role="tab" data-toggle="tab">
                                         {{ key|capitalize }}
