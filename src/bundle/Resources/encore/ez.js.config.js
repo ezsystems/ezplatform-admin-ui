@@ -158,6 +158,7 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-change-user-password-js', [path.resolve(__dirname, '../public/js/scripts/user_password.change.js')])
         .addEntry('ezplatform-admin-ui-content-edit-parts-js', [
             path.resolve('./vendor/ezsystems/ezplatform-admin-ui-assets/Resources/public/vendors/leaflet/dist/leaflet.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-field.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-file-field.js'),

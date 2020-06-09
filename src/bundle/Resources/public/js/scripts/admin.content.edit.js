@@ -1,4 +1,4 @@
-(function (global, doc, eZ, $) {
+(function (global, doc, eZ) {
     const enterKeyCode = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',
@@ -83,6 +83,8 @@
                     }, new Set())
             ).join();
 
+            fields.forEach((field) => field.removeAttribute('id'));
+
             doc.querySelectorAll('.ez-tabs__nav-item').forEach((navItem) => {
                 navItem.classList.remove('ez-tabs__nav-item--invalid');
             });
@@ -120,4 +122,4 @@
             itemAuthor.classList.toggle('ez-details-items--collapsed');
         });
     }
-})(window, window.document, window.eZ, window.jQuery);
+})(window, window.document, window.eZ);
