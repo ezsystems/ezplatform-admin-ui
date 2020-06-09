@@ -10,7 +10,7 @@
                 {% if group.fieldDefinitions|length > 0 %}
                     {% set group_name = group.name|lower|replace({' ': ''}) %}
                     {% set collapse_state_key = 'collapse-' ~ group_name ~ location.id %}
-                    {% set collapse_class_name = 'ez-content-preview-collapse__' ~ group_name %}
+                    {% set collapse_class_name = 'ez-content-preview-collapse--' ~ group_name %}
 
                     <section class="ez-fieldgroup container">
                         <a data-toggle="collapse" href=".{{ collapse_class_name }}" class="ez-fieldgroup__toggler">
