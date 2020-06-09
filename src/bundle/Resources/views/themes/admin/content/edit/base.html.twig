@@ -24,10 +24,12 @@
 
                 {% block form_fields %}
                     {% if grouped_fields is defined and grouped_fields|length > 1 %}
+                        {% set sortedKeys = grouped_fields|keys|sort %}
+                        
                         <ul class="nav nav-tabs ez-nav-tabs--content-edit ez-tabs" role="tablist">
-                            {% for key, group in grouped_fields %}
+                            {% for key in sortedKeys %}
                                 <li role="presentation" class="nav-item ez-tabs__nav-item" id="item-{{ key }}">
-                                    <a href="#{{ key }}" class="nav-link" role="tab" data-toggle="tab">
+                                    <a href="#{{ key }}" class="nav-link {{ loop.first ? 'active' }}" role="tab" data-toggle="tab">
                                         {{ key|capitalize }}
                                     </a>
                                     {% include '@ezdesign/ui/component/warning_icon.html.twig' %}
@@ -37,7 +39,7 @@
 
                         <div class="tab-content px-3">
                             {% for key, group in grouped_fields %}
-                                <div role="tabpanel" class="tab-pane" id="{{ key }}">
+                                <div role="tabpanel" class="tab-pane {{ loop.first ? 'active' }}" id="{{ key }}">
                                     {% for field in group %}
                                         {% set formField = form.fieldsData[field] %}
                                         

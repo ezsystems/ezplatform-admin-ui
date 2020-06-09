@@ -25,7 +25,6 @@
     const itemAuthor = doc.querySelector('.ez-details-items__author-breadcrumbs');
     const itemAuthorToggler = doc.querySelector('.ez-details-items__toggler');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
-    const firstNavLink = doc.querySelector('.ez-tabs .nav-link');
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
         const validatorName = validator.constructor.name;
@@ -69,7 +68,6 @@
         const invalidTabs = validators.map(getInvalidTabs);
 
         if (isFormValid) {
-            console.log('valid');
             btn.dataset.isFormValid = 1;
             // for some reason trying to fire click event inside the event handler flow is impossible
             // the following line breaks the flow so it's possible to fire click event on a button again.
@@ -85,7 +83,6 @@
                     }, new Set())
             ).join();
 
-            // Hide warnings icons
             doc.querySelectorAll('.ez-tabs__nav-item').forEach((navItem) => {
                 navItem.classList.remove('ez-tabs__nav-item--invalid');
             });
@@ -122,10 +119,5 @@
             itemAuthorToggler.classList.toggle('ez-details-items__toggler--gray');
             itemAuthor.classList.toggle('ez-details-items--collapsed');
         });
-    }
-
-    //Set active for first tab
-    if (firstNavLink) {
-        $(firstNavLink).tab('show');
     }
 })(window, window.document, window.eZ, window.jQuery);
