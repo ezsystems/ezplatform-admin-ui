@@ -1,23 +1,29 @@
 .ez-tabs {
-    .ez-warning-icon {
-        position: absolute;
-        z-index: 2;
-        right: -0.5rem;
-        left: auto;
-        background: $ez-color-danger;
-        border-radius: 50%;
-        width: 1.25rem;
-        height: 1.25rem;
-        top: -0.5rem;
-        align-items: center;
-        justify-content: center;
-        display: none;
-        
-        .ez-icon {
-            height: calculateRem(12px);
-            width: calculateRem(12px);
-            margin: calculateRem(-10px) calculateRem(4px) 0;
-            fill: $ez-white;
+    &__nav-item {
+        .ez-warning-icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: auto;
+            background: $ez-color-danger;
+            border-radius: 50%;
+            width: 1.25rem;
+            height: 1.25rem;
+            align-items: center;
+            justify-content: center;
+            display: none;
+
+            .ez-icon {
+                height: calculateRem(12px);
+                width: calculateRem(12px);
+                margin: calculateRem(-10px) calculateRem(4px) 0;
+            }
+        }
+
+        &--invalid {
+            .ez-warning-icon {
+                display: block;
+            }
         }
     }
 }

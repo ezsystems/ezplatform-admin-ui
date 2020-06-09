@@ -1,4 +1,4 @@
-(function (global, doc, eZ) {
+(function (global, doc, eZ, $) {
     const enterKeyCode = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',
@@ -25,21 +25,24 @@
     const itemAuthor = doc.querySelector('.ez-details-items__author-breadcrumbs');
     const itemAuthorToggler = doc.querySelector('.ez-details-items__toggler');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
+    const firstNavLink = doc.querySelector('.ez-tabs .nav-link');
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
         const validatorName = validator.constructor.name;
-        const tabErroKeys = validator.fieldsToValidate.reduce((tabsId, value) => {
-            const tabPane = value.item.closest('.tab-pane');
-
-            if (tabPane && value.item.classList.contains('is-invalid')) {
-                tabsId.push(tabPane.id);
-            }
-
-            return tabsId;
-        }, []);
-        const result = { isValid, validatorName, tabErroKeys };
+        const result = { isValid, validatorName };
 
         return result;
+    };
+    const getInvalidTabs = (validator) => {
+        return validator.fieldsToValidate.reduce((invalidTabs, field) => {
+            const tabPane = field.item.closest('.tab-pane');
+
+            if (tabPane && field.item.classList.contains('is-invalid')) {
+                invalidTabs.add(tabPane.id);
+            }
+
+            return invalidTabs;
+        }, new Set());
     };
     const fields = doc.querySelectorAll('.ez-field-edit');
     const focusOnFirstError = () => {
@@ -63,8 +66,10 @@
         const validators = eZ.fieldTypeValidators;
         const validationResults = validators.map(getValidationResults);
         const isFormValid = validationResults.every((result) => result.isValid);
+        const invalidTabs = validators.map(getInvalidTabs);
 
         if (isFormValid) {
+            console.log('valid');
             btn.dataset.isFormValid = 1;
             // for some reason trying to fire click event inside the event handler flow is impossible
             // the following line breaks the flow so it's possible to fire click event on a button again.
@@ -81,25 +86,15 @@
             ).join();
 
             // Hide warnings icons
-            doc.querySelectorAll(`.nav-item .ez-warning-icon`).forEach((node) => {
-                node.style.display = 'none';
+            doc.querySelectorAll('.ez-tabs__nav-item').forEach((navItem) => {
+                navItem.classList.remove('ez-tabs__nav-item--invalid');
             });
 
-            // Show warnings icons for tabs with invalide fields
-            validationResults
-                .reduce((total, result) => {
-                    result.tabErroKeys.map((key) => {
-                        total.push(key);
-                    });
-
-                    return total;
-                }, [])
-                .filter((value, index, self) => self.indexOf(value) === index)
-                .forEach((key) => {
-                    doc.querySelector(`.nav-item--${key} .ez-warning-icon`).style.display = 'block';
+            invalidTabs.forEach((invalidInputs) => {
+                invalidInputs.forEach((invalidInputKey) => {
+                    doc.querySelector(`#item-${invalidInputKey}`).classList.add('ez-tabs__nav-item--invalid');
                 });
-
-            fields.forEach((field) => field.removeAttribute('id'));
+            });
 
             focusOnFirstError();
         }
@@ -128,4 +123,9 @@
             itemAuthor.classList.toggle('ez-details-items--collapsed');
         });
     }
-})(window, window.document, window.eZ);
+
+    //Set active for first tab
+    if (firstNavLink) {
+        $(firstNavLink).tab('show');
+    }
+})(window, window.document, window.eZ, window.jQuery);

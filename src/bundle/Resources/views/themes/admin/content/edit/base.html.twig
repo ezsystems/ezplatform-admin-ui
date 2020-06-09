@@ -23,21 +23,21 @@
                 {{ form_start(form, {'attr': {'class': 'ez-form-validate'}}) }}
 
                 {% block form_fields %}
-                    {% if grouped_form_fields_views is defined and grouped_form_fields_views|length > 1 %}
+                    {% if grouped_fields is defined and grouped_fields|length > 1 %}
                         <ul class="nav nav-tabs ez-nav-tabs--content-edit ez-tabs" role="tablist">
-                            {% for key, group in grouped_form_fields_views %}
-                                <li role="presentation" class="nav-item nav-item--{{ key }}-key">
-                                    <a href="#{{ key }}-key" class="nav-link {{ loop.first ? 'active' }}" role="tab" data-toggle="tab">
+                            {% for key, group in grouped_fields %}
+                                <li role="presentation" class="nav-item ez-tabs__nav-item" id="item-{{ key }}">
+                                    <a href="#{{ key }}" class="nav-link" role="tab" data-toggle="tab">
                                         {{ key|capitalize }}
                                     </a>
-                                    {% include '@ezdesign/content/warning_icon.html.twig' %}
+                                    {% include '@ezdesign/ui/component/warning_icon.html.twig' %}
                                 </li>
                             {% endfor %}
                         </ul>
 
                         <div class="tab-content px-3">
-                            {% for key, group in grouped_form_fields_views %}
-                                <div role="tabpanel" class="tab-pane {{ loop.first ? 'active' }}" id="{{ key }}-key">
+                            {% for key, group in grouped_fields %}
+                                <div role="tabpanel" class="tab-pane" id="{{ key }}">
                                     {% for field in group %}
                                         {% set formField = form.fieldsData[field] %}
                                         
