@@ -93,10 +93,15 @@ class NavigationContext extends BusinessContext
      */
     public function iNavigateToContent(string $contentName, string $contentType, string $path = null)
     {
-        $contentPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $contentName);
         if ($path !== null) {
             $path = $this->argumentParser->replaceRootKeyword($path);
+            $pathArray = explode('/', $path);
+            $lastItemInPath = end($pathArray);
+
+            $contentPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $lastItemInPath);
             $contentPage->navigateToPath($path);
+        } else {
+            $contentPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, null);
         }
         $contentPage->goToSubItem($contentName, $contentType);
     }

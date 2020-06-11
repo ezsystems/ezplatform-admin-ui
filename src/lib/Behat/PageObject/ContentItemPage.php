@@ -35,17 +35,17 @@ class ContentItemPage extends Page
     /** @var string */
     public $contentTypeLocator;
 
-    public function __construct(BrowserContext $context, string $contentName)
+    public function __construct(BrowserContext $context, ?string $contentName)
     {
         parent::__construct($context);
         $this->siteAccess = 'admin';
         $this->route = '/view/content';
-        $this->rightMenu = ElementFactory::createElement($context, RightMenu::ELEMENT_NAME);
-        $this->subItemList = ElementFactory::createElement($context, SubItemsList::ELEMENT_NAME);
-        $this->contentField = ElementFactory::createElement($context, ContentField::ELEMENT_NAME);
         $this->pageTitle = $contentName;
         $this->pageTitleLocator = '.ez-page-title h1';
         $this->contentTypeLocator = '.ez-page-title h4';
+        $this->rightMenu = ElementFactory::createElement($context, RightMenu::ELEMENT_NAME);
+        $this->subItemList = ElementFactory::createElement($context, SubItemsList::ELEMENT_NAME, $this->hasGridViewEnabledByDefault());
+        $this->contentField = ElementFactory::createElement($context, ContentField::ELEMENT_NAME);
     }
 
     /**
@@ -88,8 +88,10 @@ class ContentItemPage extends Page
 
     public function goToSubItem(string $contentName, string $contentType): void
     {
+        $parentContentPage = PageObjectFactory::createPage($this->context, self::PAGE_NAME, null);
+        $parentContentPage->subItemList->table->clickListElement($contentName, $contentType);
+
         $contentPage = PageObjectFactory::createPage($this->context, self::PAGE_NAME, $contentName);
-        $contentPage->subItemList->table->clickListElement($contentName, $contentType);
         $contentPage->verifyIsLoaded();
         $contentPage->verifyContentType($contentType);
     }
@@ -111,5 +113,12 @@ class ContentItemPage extends Page
                 $contentPage->subItemList->table->clickListElement($pathArray[$i]);
             }
         }
+    }
+
+    private function hasGridViewEnabledByDefault(): bool
+    {
+        $pageTitle = $this->pageTitle ?? $this->getPageTitle();
+
+        return $pageTitle === 'Media';
     }
 }
