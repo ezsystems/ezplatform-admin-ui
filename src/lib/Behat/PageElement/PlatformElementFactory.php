@@ -43,6 +43,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\IconLinkedListTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\LinkedListTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleListTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SimpleTable;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SubitemsGridList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SubItemsTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SystemInfoTable;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\TrashTable;
@@ -108,8 +109,10 @@ class PlatformElementFactory extends ElementFactory
                 return new TrashTable($context, $parameters[0]);
             case SubItemsTable::ELEMENT_NAME:
                 return new SubItemsTable($context, $parameters[0]);
+            case SubitemsGridList::ELEMENT_NAME:
+                return new SubitemsGridList($context, $parameters[0]);
             case SubItemsList::ELEMENT_NAME:
-                return new SubItemsList($context);
+                return new SubItemsList($context, $parameters[0]);
             case NavLinkTabs::ELEMENT_NAME:
                 return new NavLinkTabs($context);
             case PreviewNav::ELEMENT_NAME:

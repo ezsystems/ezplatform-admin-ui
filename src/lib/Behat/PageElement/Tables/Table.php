@@ -8,22 +8,16 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables;
 
 use Behat\Mink\Element\TraversableElement;
 use EzSystems\Behat\Browser\Context\BrowserContext;
-use EzSystems\Behat\Browser\Element\Element;
-use EzSystems\Behat\Browser\Factory\ElementFactory;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\Pagination;
 
-abstract class Table extends Element
+abstract class Table extends ItemsList
 {
     public function __construct(BrowserContext $context, string $containerLocator)
     {
-        parent::__construct($context);
-        $this->fields = [
-            'list' => $containerLocator,
-            'tableCell' => $containerLocator . ' tr:nth-child(%d) td:nth-child(%d)',
-            'editButton' => $containerLocator . ' tr:nth-child(%s) .ez-icon-edit',
-            'listRow' => $containerLocator . ' tbody tr',
-            'horizontalHeaders' => $containerLocator . ' thead th',
-        ];
+        parent::__construct($context, $containerLocator);
+        $this->fields['tableCell'] = $containerLocator . ' tr:nth-child(%d) td:nth-child(%d)';
+        $this->fields['editButton'] = $containerLocator . ' tr:nth-child(%s) .ez-icon-edit';
+        $this->fields['listRow'] = $containerLocator . ' tbody tr';
+        $this->fields['horizontalHeaders'] = $containerLocator . ' thead th';
     }
 
     abstract public function getTableCellValue(string $header, ?string $secondHeader = null): string;
@@ -105,36 +99,5 @@ abstract class Table extends Element
         }
 
         return $elementsPositions;
-    }
-
-    /**
-     * Check if list contains list element with given name.
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function isElementOnCurrentPage(string $name): bool
-    {
-        return $this->context->getElementByText($name, $this->fields['listElement']) !== null;
-    }
-
-    public function isElementInTable(string $contentName): bool
-    {
-        $pagination = ElementFactory::createElement($this->context, Pagination::ELEMENT_NAME);
-
-        while (true) {
-            if ($this->isElementOnCurrentPage($contentName)) {
-                return true;
-            }
-
-            if ($pagination->isNextButtonActive()) {
-                $pagination->clickNextButton();
-            } else {
-                break;
-            }
-        }
-
-        return false;
     }
 }

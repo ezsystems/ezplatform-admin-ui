@@ -100,3 +100,9 @@ services:
             - { name: ezplatform.admin_ui.config_provider, key: 'sections' }
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\TimeDiffExtension: ~
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\Locations:
+        arguments:
+            $configResolver: '@ezpublish.config.resolver'
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'locations' }

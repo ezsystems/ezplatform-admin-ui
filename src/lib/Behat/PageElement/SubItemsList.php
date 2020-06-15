@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 use EzSystems\Behat\Browser\Context\BrowserContext;
 use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\Behat\Browser\Element\Element;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SubitemsGridList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\Tables\SubItemsTable;
 
 class SubItemsList extends Element
@@ -18,7 +19,7 @@ class SubItemsList extends Element
     /** @var SubItemsTable */
     public $table;
 
-    public function __construct(BrowserContext $context)
+    public function __construct(BrowserContext $context, bool $isGridViewEnabledByDefault)
     {
         parent::__construct($context);
         $this->fields = [
@@ -31,7 +32,8 @@ class SubItemsList extends Element
             'showMoreButton' => '.ez-sil .c-load-more .c-load-more__btn--load',
             'showMoreMessage' => '.ez-sil .c-load-more .c-load-more__message',
         ];
-        $this->table = ElementFactory::createElement($context, SubItemsTable::ELEMENT_NAME, $this->fields['listTable']);
+        $tableName = $isGridViewEnabledByDefault ? SubitemsGridList::ELEMENT_NAME : SubItemsTable::ELEMENT_NAME;
+        $this->table = ElementFactory::createElement($context, $tableName, $this->fields['listTable']);
     }
 
     public function verifyVisibility(): void
