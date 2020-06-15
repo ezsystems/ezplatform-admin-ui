@@ -5,16 +5,15 @@
 {% block body_class %}ez-has-no-sidebars{% endblock %}
 
 {% block content %}
-<div class="row align-items-stretch ez-main-row">
-    <div class="error-page">
-        <div class="error-page__image-wrapper">
-            <img src="{{ asset('bundles/ezplatformadminui/img/errors/500.png') }}" />
-        </div>
-        <h2 class="error-page__title">{{ 'error.page.default.title'|trans|desc('Something went wrong. Sorry!') }}</h2>
-        <div class="error-page__messages">
-            <p class="error-page__message">{{ 'error.page.default.message'|trans|raw|desc('Error 500: internal server error. The server was unable to complete your request because of an internal problem.') }}</p>
-            <p class="error-page__message">{{ 'error.page.default.actions'|trans|raw|desc('Contact your Administrator and inform them about the time the error occurred, the URL in your browser window, and anything related that you think may have caused the error.<br/>You can also go back or try to reload the application.') }}
-            </p>
+<div class="row error-page-wrapper">
+    <div class="container">
+        <div class="row error-page">
+            <h2 class="error-page__title">{{ 'error.page.default.title'|trans|desc('Something went wrong') }}</h2>
+            <div class="error-page__messages">
+                <p class="error-page__message error-page__message--title">{{ 'error.page.default.sub_title'|trans|raw|desc('We apologize for the internal server error.') }}</p>
+                <p class="error-page__message error-page__message--content">{{ 'error.page.default.message'|trans|raw|desc('The server was unable to complete your request because of an internal problem.') }}</p>
+                <p class="error-page__message error-page__message--actions">{{ 'error.page.default.actions'|trans|raw|desc('Contact your Administrator and inform them about the time the error occurred, the URL in your browser window, and anything related that you think may have caused the error.<br/>You can also go back or try to reload the application.') }}</p>
+            </div>
         </div>
     </div>
 <div>

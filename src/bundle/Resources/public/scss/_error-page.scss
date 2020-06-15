@@ -1,23 +1,49 @@
-.error-page {
+.error-page-wrapper {
+    width: 100vw;
+    height: 100vh;
     background: $ez-white;
-    text-align: center;
-    width: 100%;
+    
+    .error-page {
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        &__title {
+            text-align: center;
+            font-size: calculateRem(58px);
+        }
 
-    &__image-wrapper {
-        margin-top: 18vh;
-    }
+        &__messages {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+        }
 
-    &__title,
-    &__messages {
-        max-width: 596px;
-        margin: 3rem auto auto;
-    }
+        &__message {
+            text-align: center;
+            font-size: calculateRem(16px);
 
-    &__message {
-        font-size: 17px;
+            &--title {
+                margin: calculateRem(70px) auto calculateRem(70px);
+                font-size: calculateRem(45px);
+            }
+
+            &--content {
+                max-width: calculateRem(630px);
+            }
+
+            &--actions {
+                max-width: calculateRem(700px);
+                margin-top: calculateRem(40px);
+                font-size: calculateRem(21px);
+                line-height: calculateRem(38px);
+            }
+        }
     }
 
     &__link {
-        text-decoration: underline;
+        color: #0058BA;
+        text-decoration: none;
     }
 }

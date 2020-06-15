@@ -9,17 +9,16 @@
 {% block body_class %}ez-has-no-sidebars{% endblock %}
 
 {% block content %}
-<div class="row align-items-stretch ez-main-row">
-    <div class="error-page">
-        <div class="error-page__image-wrapper">
-            <img src="{{ asset('bundles/ezplatformadminui/img/errors/404.png') }}" />
-        </div>
-        <h2 class="error-page__title">{{ 'error.page.404.title'|trans|desc('Page not found.') }}</h2>
-        <div class="error-page__messages">
-            <p class="error-page__message">{{ 'error.page.404.message'|trans|raw|desc('Error 404: the page you requested was not found.<br/>It might have been deleted or it is temporarily unavailable.') }}</p>
-            <p class="error-page__message">{{ 'error.page.404.actions'|trans({ '%dashboard%': path('ezplatform.dashboard'), '%search%': path('ezplatform.search') })|raw|desc('Check the URL for a typo and try again.<br/>Otherwise, go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.') }}
-            </p>
+<div class="row error-page-wrapper">
+    <div class="container">
+        <div class="row error-page">
+            <h2 class="error-page__title">{{ 'error.page.404.title'|trans|desc('Page not found') }}</h2>
+            <div class="error-page__messages">
+                <p class="error-page__message error-page__message--title">{{ 'error.page.404.sub_title'|trans|raw|desc('You probably weren\'t expecting to land here.') }}</p>
+                <p class="error-page__message error-page__message--content">{{ 'error.page.404.message'|trans|raw|desc('The page you requested was not found.<br/> It might have been deleted or it is temporarily unavailable.') }}</p>
+                <p class="error-page__message error-page__message--actions">{{ 'error.page.404.actions'|trans({ '%dashboard%': path('ezplatform.dashboard'), '%search%': path('ezplatform.search') })|raw|desc('Check the URL for a typo and try again.<br/>Otherwise, go back to the <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.') }}</p>
+            </div>
         </div>
     </div>
-</div>
+<div>
 {% endblock %}

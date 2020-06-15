@@ -11,9 +11,12 @@
         color: $ez-color-warning-dark;
     }
 
-    &__hyperlink,
+    &__hyperlink {
+        color: #D8D8D8;
+        text-decoration: underline;
+    }
     &__hyperlink:hover {
-        color: #0005a6;
+        color: #FF4713;
     }
 
     &__image {
@@ -22,7 +25,7 @@
     }
 
     &__form {
-        background: linear-gradient(135deg, #007dbe 0%, #0097d1 100%);
+        background: #131C26;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -36,13 +39,19 @@
         &-input {
             border: none;
         }
-
+        
         &-wrapper {
             width: 18rem;
             height: 90%;
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+
+        &-logo-description {
+            margin: calculateRem(18px) auto calculateRem(40px) auto;
+            text-align: center;
+            font-size: calculateRem(18px);
         }
     }
 
@@ -58,5 +67,9 @@
 
     &__header {
         font-weight: 400;
+    }
+
+    &__footer {
+        color: #D8D8D8;
     }
 }
