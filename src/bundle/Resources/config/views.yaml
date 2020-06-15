@@ -51,6 +51,12 @@ system:
                     match:
                         Identifier: [full_datetime_format, short_datetime_format]
 
+        search_list_view:
+            full:
+                ezplatform_admin_ui:
+                    template: '@ezdesign/ui/search/index.html.twig'
+                    match: true
+
     default:
         fielddefinition_edit_templates:
             - { template: '@ezdesign/content_type/field_types.html.twig', priority: 0 }

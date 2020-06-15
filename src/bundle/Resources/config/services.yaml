@@ -129,3 +129,9 @@ services:
 
     EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatter: ~
     EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatterInterface: '@EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatter'
+
+    EzSystems\EzPlatformAdminUi\EventListener\EditFormSearchListViewFilterParametersListener:
+        arguments:
+            $formFactory: '@form.factory'
+        tags:
+            - {name: kernel.event_subscriber}
