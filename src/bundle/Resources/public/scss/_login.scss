@@ -39,7 +39,7 @@
         &-input {
             border: none;
         }
-        
+
         &-wrapper {
             width: 18rem;
             height: 90%;
@@ -49,7 +49,7 @@
         }
 
         &-logo-description {
-            margin: calculateRem(18px) auto calculateRem(40px) auto;
+            margin: calculateRem(18px) auto calculateRem(40px);
             text-align: center;
             font-size: calculateRem(18px);
         }
