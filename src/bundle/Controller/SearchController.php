@@ -21,6 +21,9 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @deprecated, use Ibexa\Platform\Bundle\SearchBundle for customizable search feature.
+ */
 class SearchController extends Controller
 {
     /** @var \eZ\Publish\API\Repository\SearchService */
