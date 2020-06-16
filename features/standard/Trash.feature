@@ -59,6 +59,16 @@ Scenario: Element in trash can be restored under new location
     And there is no "Folder" "Folder3" on trash list
     And going to "Media/Files" there is a "Folder3" "Folder" on Sub-items list
 
+@javascript @common @admin
+Scenario: Content can be moved to trash from non-root location
+  Given I create "Folder" Content items in "/Media/Files/" in "eng-GB"
+      | name               | short_name         |
+      | TestFolderToRemove | TestFolderToRemove |
+    And I navigate to content "TestFolderToRemove" of type "Folder" in "Media/Files"
+  When I send content to trash
+  Then there's no "Folder" "TestFolderToRemove" on "Files" Sub-items list
+    And going to trash there is "Folder" "TestFolderToRemove" on list
+
 @javascript @common
 Scenario: Trash can be emptied
   Given I click on the left menu bar button "Trash"
