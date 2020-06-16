@@ -22,8 +22,8 @@ class LanguagePicker extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'languagePickerSelector' => '#content_edit_language',
-            'languageSelector' => '#content_edit_language .form-check-label',
+            'languagePickerSelector' => '.ez-extra-actions--edit:not(.ez-extra-actions--hidden) #content_edit_language',
+            'languageSelector' => '.ez-extra-actions--edit:not(.ez-extra-actions--hidden) #content_edit_language .form-check-label',
         ];
         $this->loadingTimeout = 5;
     }
