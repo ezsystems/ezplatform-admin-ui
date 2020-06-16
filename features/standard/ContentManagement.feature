@@ -87,18 +87,3 @@ Scenario: Subtree can be copied
   Then success notification that "Subtree 'Files' copied to Location 'Images'" appears
     And I should be on content container page "Files" of type "Folder" in "Media/Images"
     And there's "Test Article Manage" "Article" on "Files" Sub-items list
-
-@javascript @common
-Scenario: Content can be moved to trash from non-root location
-  Given I navigate to content "Test Article Manage" of type "Article" in "Media/Files"
-  When I send content to trash
-  Then there's no "Article" "Test Article Manage" on "Files" Sub-items list
-    And going to trash there is "Article" "Test Article Manage" on list
-
-@javascript @common
-Scenario: Content can be moved to trash from root location
-  Given I open UDW and go to "root/Test Article Manage"
-  When I send content to trash
-  Then I should be redirected to root in default view
-    And going to trash there is "Article" "Test Article Manage" on list
-
