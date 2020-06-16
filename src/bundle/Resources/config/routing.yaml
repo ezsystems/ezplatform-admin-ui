@@ -589,16 +589,6 @@ ezplatform.content.draft.create:
         expose: true
 
 #
-# Search
-#
-
-ezplatform.search:
-    path: /search
-    methods: ['GET']
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\SearchController::searchAction'
-
-#
 # Link manager
 #
 ezplatform.link_manager.edit:

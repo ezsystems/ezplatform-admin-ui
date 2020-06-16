@@ -38,6 +38,7 @@
         "ezsystems/ezplatform-user": "^2.0@dev",
         "ezsystems/ezplatform-richtext": "^2.0@dev",
         "ezsystems/ezplatform-rest": "^1.0@dev",
+        "ezsystems/ezplatform-search": "^1.0@dev",
         "babdev/pagerfanta-bundle": "^2.1",
         "knplabs/knp-menu-bundle": "^3.0",
         "mck89/peast": "^1.9",
