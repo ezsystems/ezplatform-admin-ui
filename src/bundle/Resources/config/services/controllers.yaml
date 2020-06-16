@@ -53,16 +53,6 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\SearchController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        lazy: true
-        arguments:
-            $searchQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\SearchQueryType'
-            $configResolver: '@ezpublish.config.resolver'
-        tags:
-            - controller.service_arguments
-
     EzSystems\EzPlatformAdminUiBundle\Controller\User\UserDeleteController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
