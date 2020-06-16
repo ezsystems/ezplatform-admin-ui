@@ -92,7 +92,7 @@ class PreviewFormProcessor implements EventSubscriberInterface
         $referrerLocation = $event->getOption('referrerLocation');
 
         try {
-            $contentDraft = $this->saveDraft($data, $languageCode);
+            $contentDraft = $this->saveDraft($data, $languageCode, []);
             $contentLocation = $this->resolveLocation($contentDraft, $referrerLocation, $data);
             $url = $this->urlGenerator->generate('ezplatform.content.preview', [
                 'locationId' => null !== $contentLocation ? $contentLocation->id : null,
@@ -130,7 +130,7 @@ class PreviewFormProcessor implements EventSubscriberInterface
      * @throws ContentValidationException
      * @throws ContentFieldValidationException
      */
-    private function saveDraft(ContentStruct $data, string $languageCode): Content
+    private function saveDraft(ContentStruct $data, string $languageCode, ?array $fieldIdentifiersToValidate): Content
     {
         $mainLanguageCode = $this->resolveMainLanguageCode($data);
         foreach ($data->fieldsData as $fieldDefIdentifier => $fieldData) {
@@ -142,9 +142,9 @@ class PreviewFormProcessor implements EventSubscriberInterface
         }
 
         if ($data->isNew()) {
-            $contentDraft = $this->contentService->createContent($data, $data->getLocationStructs());
+            $contentDraft = $this->contentService->createContent($data, $data->getLocationStructs(), $fieldIdentifiersToValidate);
         } else {
-            $contentDraft = $this->contentService->updateContent($data->contentDraft->getVersionInfo(), $data);
+            $contentDraft = $this->contentService->updateContent($data->contentDraft->getVersionInfo(), $data, $fieldIdentifiersToValidate);
         }
 
         return $contentDraft;
