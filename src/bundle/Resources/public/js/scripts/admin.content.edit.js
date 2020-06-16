@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const enterKeyCode = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',
@@ -32,6 +32,17 @@
 
         return result;
     };
+    const getInvalidTabs = (validator) => {
+        return validator.fieldsToValidate.reduce((invalidTabs, field) => {
+            const tabPane = field.item.closest('.tab-pane');
+
+            if (tabPane && field.item.classList.contains('is-invalid')) {
+                invalidTabs.add(tabPane.id);
+            }
+
+            return invalidTabs;
+        }, new Set());
+    };
     const fields = doc.querySelectorAll('.ez-field-edit');
     const focusOnFirstError = () => {
         const invalidFields = doc.querySelectorAll('.ez-field-edit.is-invalid');
@@ -54,6 +65,7 @@
         const validators = eZ.fieldTypeValidators;
         const validationResults = validators.map(getValidationResults);
         const isFormValid = validationResults.every((result) => result.isValid);
+        const invalidTabs = validators.map(getInvalidTabs);
 
         if (isFormValid) {
             btn.dataset.isFormValid = 1;
@@ -72,6 +84,16 @@
             ).join();
 
             fields.forEach((field) => field.removeAttribute('id'));
+
+            doc.querySelectorAll('.ez-tabs__nav-item').forEach((navItem) => {
+                navItem.classList.remove('ez-tabs__nav-item--invalid');
+            });
+
+            invalidTabs.forEach((invalidInputs) => {
+                invalidInputs.forEach((invalidInputKey) => {
+                    doc.querySelector(`#item-${invalidInputKey}`).classList.add('ez-tabs__nav-item--invalid');
+                });
+            });
 
             focusOnFirstError();
         }

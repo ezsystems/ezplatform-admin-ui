@@ -149,4 +149,13 @@
     &--role {
         border-bottom: none;
     }
+
+    &--content-edit {
+        border-bottom: none;
+        background-color: $ez-ground-base-pale;
+
+        .nav-item {
+            position: relative;
+        }
+    }
 }
