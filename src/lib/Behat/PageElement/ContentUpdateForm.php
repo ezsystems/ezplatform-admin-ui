@@ -26,8 +26,8 @@ class ContentUpdateForm extends Element
         $this->fields = [
             'formElement' => '[name=ezplatform_content_forms_content_edit]',
             'closeButton' => '.ez-content-edit-container__close',
-            'fieldLabel' => '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ez-card > .card-body > div > legend',
-            'nthField' => '.ez-card .card-body > div:nth-of-type(%s)',
+            'fieldLabel' => '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ez-card > .card-body > div > div > legend',
+            'nthField' => '.ez-card .card-body > div > div:nth-of-type(%s)',
             'editableFieldClass' => 'ez-field-edit',
             'fieldOfType' => '.ez-field-edit--%s',
         ];
