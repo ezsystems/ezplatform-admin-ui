@@ -5,10 +5,14 @@
         </svg>
     </td>
     <td class="ez-table__cell ez-table__cell--after-icon">
-        <a href="{{ path('_ez_content_view', {
-            'contentId': row.contentId,
-            'languageCode': row.translation_language_code,
-        }) }}">{{ row.name }}</a>
+        {% if (row.mainLocationId is not null) %}
+            <a href="{{ path('_ez_content_view', {
+                'contentId': row.contentId,
+                'languageCode': row.translation_language_code,
+            }) }}">{{ row.name }}</a>
+        {% else %}
+            {{ row.name }}
+        {% endif %}
     </td>
     <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
     <td class="ez-table__cell">{{ row.type }}</td>
