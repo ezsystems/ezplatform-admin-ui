@@ -7,7 +7,9 @@
     }
 
     .navbar-brand {
+        width: calculateRem(47px);
         padding-top: 0;
+        text-align: center;
     }
 
     .nav-tabs {
