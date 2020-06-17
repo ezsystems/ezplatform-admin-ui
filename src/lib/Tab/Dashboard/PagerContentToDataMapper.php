@@ -14,7 +14,7 @@ use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
-use EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper;
+use EzSystems\EzPlatformAdminUi\Pagination\Mapper\AbstractPagerContentToDataMapper;
 use Pagerfanta\Pagerfanta;
 
 class PagerContentToDataMapper extends AbstractPagerContentToDataMapper

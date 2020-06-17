@@ -8,53 +8,19 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Search;
 
-use Pagerfanta\Pagerfanta;
+use function class_alias;
 
-class PagerSearchContentToDataMapper extends AbstractPagerContentToDataMapper
-{
+class_alias(
+    \Ibexa\Platform\Search\Mapper\PagerSearchContentToDataMapper::class,
+    __NAMESPACE__ . '\PagerSearchContentToDataMapper'
+);
+
+if (false) {
     /**
-     * @param \Pagerfanta\Pagerfanta $pager
-     *
-     * @return array
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @deprecated since 3.1, to be removed in 4.0.
+     * Use \Ibexa\Platform\Search\Mapper\PagerSearchContentToDataMapper instead
      */
-    public function map(Pagerfanta $pager): array
+    class PagerSearchContentToDataMapper extends \Ibexa\Platform\Search\Mapper\PagerSearchContentToDataMapper
     {
-        $data = [];
-        $contentTypeIds = [];
-
-        /** @var \eZ\Publish\API\Repository\Values\Content\Search\SearchHit $searchHit */
-        foreach ($pager as $searchHit) {
-            /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
-            $content = $searchHit->valueObject;
-            $contentInfo = $content->contentInfo;
-
-            $contentTypeIds[] = $contentInfo->contentTypeId;
-            $data[] = [
-                'content' => $content,
-                'contentTypeId' => $contentInfo->contentTypeId,
-                'contentId' => $content->id,
-                'mainLocationId' => $contentInfo->mainLocationId,
-                'name' => $this->translationHelper->getTranslatedContentName(
-                    $content,
-                    $searchHit->matchedTranslation
-                ),
-                'language' => $contentInfo->mainLanguageCode,
-                'contributor' => $this->getContributor($contentInfo),
-                'version' => $content->versionInfo->versionNo,
-                'content_type' => $content->getContentType(),
-                'modified' => $content->versionInfo->modificationDate,
-                'initialLanguageCode' => $content->versionInfo->initialLanguageCode,
-                'content_is_user' => $this->isContentIsUser($content),
-                'available_enabled_translations' => $this->getAvailableTranslations($content, true),
-                'available_translations' => $this->getAvailableTranslations($content),
-                'translation_language_code' => $searchHit->matchedTranslation,
-            ];
-        }
-
-        $this->setTranslatedContentTypesNames($data, $contentTypeIds);
-
-        return $data;
     }
 }
