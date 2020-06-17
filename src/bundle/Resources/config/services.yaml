@@ -130,8 +130,11 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatter: ~
     EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatterInterface: '@EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatter'
 
-    EzSystems\EzPlatformAdminUi\EventListener\EditFormSearchListViewFilterParametersListener:
+    EzSystems\EzPlatformAdminUi\EventListener\SearchListViewFilterParametersListener:
         arguments:
             $formFactory: '@form.factory'
+            $configResolver: '@ezpublish.config.resolver'
+            $requestStack: '@request_stack'
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
         tags:
             - {name: kernel.event_subscriber}
