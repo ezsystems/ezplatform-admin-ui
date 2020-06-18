@@ -33,6 +33,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
+use EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessNameGeneratorInterface;
 use EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
@@ -83,6 +84,9 @@ class ContentController extends Controller
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessNameGeneratorInterface */
+    private $siteAccessNameGenerator;
+
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         ContentService $contentService,
@@ -95,7 +99,8 @@ class ContentController extends Controller
         PermissionResolver $permissionResolver,
         LookupLimitationsTransformer $lookupLimitationsTransformer,
         TranslationHelper $translationHelper,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        SiteAccessNameGeneratorInterface $siteAccessNameGenerator
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->contentService = $contentService;
@@ -109,6 +114,7 @@ class ContentController extends Controller
         $this->translationHelper = $translationHelper;
         $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
         $this->configResolver = $configResolver;
+        $this->siteAccessNameGenerator = $siteAccessNameGenerator;
     }
 
     /**
@@ -323,20 +329,25 @@ class ContentController extends Controller
             $location = $this->locationService->loadLocation($content->contentInfo->mainLocationId);
         }
 
-        $siteaccesses = $this->siteaccessResolver->getSiteaccessesForLocation($location, $versionNo, $languageCode);
+        $siteAccesses = $this->siteaccessResolver->getSiteAccessesListForLocation($location, $versionNo, $languageCode);
 
-        if (empty($siteaccesses)) {
+        if (empty($siteAccesses)) {
             throw new BadStateException(
                 'siteaccess',
                 'There is no SiteAccess available for this Content item'
             );
         }
 
+        $siteAccessesList = [];
+        foreach ($siteAccesses as $siteAccess) {
+            $siteAccessesList[$siteAccess->name] = $this->siteAccessNameGenerator->generate($siteAccess);
+        }
+
         return $this->render('@ezdesign/content/content_preview.html.twig', [
             'location' => $location,
             'content' => $content,
             'language_code' => $languageCode,
-            'siteaccesses' => $siteaccesses,
+            'siteaccesses' => $siteAccessesList,
             'version_no' => $versionNo ?? $content->getVersionInfo()->versionNo,
         ]);
     }

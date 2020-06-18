@@ -42,6 +42,29 @@ class NonAdminSiteaccessResolver implements SiteaccessResolverInterface
         );
     }
 
+    /**
+     * @return \eZ\Publish\Core\MVC\Symfony\SiteAccess[]
+     */
+    public function getSiteAccessesListForLocation(
+        Location $location,
+        int $versionNo = null,
+        string $languageCode = null
+    ): array {
+        if (!array_key_exists('admin_group', $this->siteAccessGroups)) {
+            throw new BadStateException(
+                'siteaccess',
+                'SiteAccess group `admin_group` not found.'
+            );
+        }
+
+        return array_filter(
+            $this->siteaccessResolver->getSiteAccessesListForLocation($location, $versionNo, $languageCode),
+            function ($siteAccess) {
+                return !in_array($siteAccess->name, $this->siteAccessGroups['admin_group']);
+            }
+        );
+    }
+
     public function getSiteaccesses(): array
     {
         return $this->filter($this->siteaccessResolver->getSiteaccesses());
