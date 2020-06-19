@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="3d9f547776de4846ff54fcd1cd173ac5937e5a46" resname="search.creator_input.placeholder">
+        <source>Type creator's name</source>
+        <target state="new">Type creator's name</target>
+        <note>key: search.creator_input.placeholder</note>
+      </trans-unit>
       <trans-unit id="6aa460340bed42d0d1baf9d1ea542c83a3f00821" resname="trash">
         <source>Trash</source>
         <target state="new">Trash</target>
@@ -20,6 +25,21 @@
         <source>Restore in a new Location</source>
         <target state="new">Restore in a new Location</target>
         <note>key: trash.button.restore_new_location</note>
+      </trans-unit>
+      <trans-unit id="a644965219fc4d129dd4a5ef1cdb6eb073003702" resname="trash.content_type">
+        <source>Content type</source>
+        <target state="new">Content type</target>
+        <note>key: trash.content_type</note>
+      </trans-unit>
+      <trans-unit id="937a500a6ede32aeaf33dcc2bfc7233578c8e48c" resname="trash.creator">
+        <source>Creator</source>
+        <target state="new">Creator</target>
+        <note>key: trash.creator</note>
+      </trans-unit>
+      <trans-unit id="a05764fe660902e89eefa65d4834f03cf3954160" resname="trash.date">
+        <source>Sent to trash date</source>
+        <target state="new">Sent to trash date</target>
+        <note>key: trash.date</note>
       </trans-unit>
       <trans-unit id="7ffaa1444a83e959f8de3c2410bb65acdd3e3ff0" resname="trash.delete">
         <source>Delete</source>
@@ -76,15 +96,15 @@
         <target state="new">Restored content to its original Location.</target>
         <note>key: trash.restore_original_location.success</note>
       </trans-unit>
+      <trans-unit id="8b64a1510f907791766cbccffcff7898bda76bde" resname="trash.section">
+        <source>Section</source>
+        <target state="new">Section</target>
+        <note>key: trash.section</note>
+      </trans-unit>
       <trans-unit id="06b530d8c8b3d7af7b3f2df9f5102927e7275de4" resname="trash.table.header">
         <source>Trash</source>
         <target state="new">Trash</target>
         <note>key: trash.table.header</note>
-      </trans-unit>
-      <trans-unit id="04098b87c58e41ab39820db75eee1d13856f9616" resname="trash.type">
-        <source>Type</source>
-        <target state="new">Type</target>
-        <note>key: trash.type</note>
       </trans-unit>
     </body>
   </file>

@@ -10,19 +10,22 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\TrashService;
-use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
+use EzSystems\EzPlatformAdminUi\Form\Data\Search\TrashSearchData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
 use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\Factory\TrashFormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\Type\Search\TrashSearchType;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\TrashItemAdapter;
+use EzSystems\EzPlatformAdminUi\QueryType\TrashSearchQueryType;
 use Pagerfanta\Pagerfanta;
+use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +42,7 @@ class TrashController extends Controller
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\TrashFormFactory */
     private $formFactory;
 
     /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
@@ -54,15 +57,19 @@ class TrashController extends Controller
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
+    /** @var \EzSystems\EzPlatformAdminUi\QueryType\TrashSearchQueryType */
+    private $trashSearchQueryType;
+
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         TrashService $trashService,
         ContentTypeService $contentTypeService,
         UiPathService $uiPathService,
-        FormFactory $formFactory,
+        TrashFormFactory $formFactory,
         SubmitHandler $submitHandler,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        TrashSearchQueryType $trashSearchQueryType
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->trashService = $trashService;
@@ -72,6 +79,7 @@ class TrashController extends Controller
         $this->submitHandler = $submitHandler;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->configResolver = $configResolver;
+        $this->trashSearchQueryType = $trashSearchQueryType;
     }
 
     public function performAccessCheck(): void
@@ -99,15 +107,22 @@ class TrashController extends Controller
      */
     public function listAction(Request $request): Response
     {
-        $page = $request->query->get('page') ?? 1;
+        $searchFormName = StringUtil::fqcnToBlockPrefix(TrashSearchType::class);
+        $searchForm = $this->formFactory->searchTrash(new TrashSearchData());
+
+        $searchForm->handleRequest($request);
+
+        $requestedPage = $request->query->get($searchFormName)['page'] ?? null;
+        $page = empty($requestedPage) ? 1 : (int)$requestedPage;
         $trashItemsList = [];
 
-        $query = new Query([
-            'sortClauses' => [new Query\SortClause\Location\Priority(Query::SORT_ASC)],
-        ]);
-
         $pagerfanta = new Pagerfanta(
-            new TrashItemAdapter($query, $this->trashService)
+            new TrashItemAdapter(
+                $this->trashSearchQueryType->getQuery([
+                    'search_data' => $searchForm->getData(),
+                ]),
+                $this->trashService
+            )
         );
 
         $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination.trash_limit'));
@@ -145,6 +160,8 @@ class TrashController extends Controller
             'form_trash_item_restore' => $trashItemRestoreForm->createView(),
             'form_trash_item_delete' => $trashItemDeleteForm->createView(),
             'form_trash_empty' => $trashEmptyForm->createView(),
+            'form_search' => $searchForm->createView(),
+            'user_content_type_identifier' => $this->configResolver->getParameter('user_content_type_identifier'),
         ]);
     }
 

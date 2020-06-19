@@ -57,9 +57,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardUpdateData;
@@ -120,9 +117,6 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType;
 use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType;
 use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardUpdateType;
@@ -148,7 +142,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class FormFactory
 {
     /** @var \Symfony\Component\Form\FormFactoryInterface */
-    protected $formFactory;
+    private $formFactory;
 
     /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     protected $urlGenerator;
@@ -494,53 +488,6 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(LocationUpdateType::class);
 
         return $this->formFactory->createNamed($name, LocationUpdateType::class, $data);
-    }
-
-    /**
-     * @param TrashItemRestoreData|null $data
-     * @param string|null $name
-     *
-     * @return FormInterface
-     */
-    public function restoreTrashItem(
-        TrashItemRestoreData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashItemRestoreType::class);
-
-        return $this->formFactory->createNamed($name, TrashItemRestoreType::class, $data);
-    }
-
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData|null $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
-     */
-    public function deleteTrashItem(
-        TrashItemDeleteData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashItemDeleteType::class);
-
-        return $this->formFactory->createNamed($name, TrashItemDeleteType::class, $data);
-    }
-
-    /**
-     * @param TrashEmptyData|null $data
-     * @param string|null $name
-     *
-     * @return FormInterface
-     */
-    public function emptyTrash(
-        TrashEmptyData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashEmptyType::class);
-
-        return $this->formFactory->createNamed($name, TrashEmptyType::class, $data);
     }
 
     /**

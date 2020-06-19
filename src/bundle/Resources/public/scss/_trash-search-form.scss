@@ -1,0 +1,105 @@
+.ez-trash-search-form {
+    margin: calculateRem(26px) 0 calculateRem(42px);
+
+    &__inputs-group {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    &__item {
+        display: inline-block;
+        width: calculateRem(258px);
+
+        &--creator {
+            position: relative;
+
+            .ez-trash-search-form  {
+                &__input-wrapper {
+                    position: relative;
+                }
+
+                &__input {
+                    + .ez-icon {
+                        display: none;
+                    }
+
+                    &:disabled {
+                        cursor: auto;
+                        background-color: $ez-color-base-pale;
+                        color: $ez-black;
+                        padding-right: calculateRem(32px);
+                        text-overflow: ellipsis;
+
+                        & + .ez-icon {
+                            display: block;
+                            position: absolute;
+                            bottom: calculateRem(7px);
+                            right: calculateRem(6px);
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__user-list {
+        padding: 0;
+        list-style: none;
+        position: absolute;
+        right: 0;
+        min-width: 100%;
+        border-radius: calculateRem(5px);
+        margin-bottom: 0;
+        background-color: $ez-ground-base-dark;
+        max-height: calculateRem(300px);
+        overflow: auto;
+        transform: scaleY(1);
+        transform-origin: top center;
+        transition: transform 0.2s $ez-admin-transition;
+    
+        &--hidden {
+            transform: scaleY(0);
+        }
+    }
+    
+    &__user-item {
+        padding: calculateRem(8px) calculateRem(16px);
+        cursor: pointer;
+    }
+
+    &__input {
+        &:disabled + .ez-btn--reset-creator {
+            display: block;
+        }
+    }
+   
+    .ez-btn--reset-creator {
+        display: none;
+        position: absolute;
+        right: calculateRem(5px);
+        bottom: calculateRem(6px);
+    }
+
+    &__range-wrapper {
+        height: 0;
+        opacity: 0;
+        margin-top: calculateRem(8px);
+        background: $ez-white;
+        border: calculateRem(1px) solid $ez-ground-base-medium;
+        border-radius: calculateRem(4px);
+        transition: all 0.2s ease-in;
+        pointer-events: none;
+    
+        &--visible {
+            height: calculateRem(40px);
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+
+    &__range-select {
+        border: none;
+        outline: none;
+    }
+}
