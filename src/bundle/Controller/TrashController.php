@@ -151,12 +151,11 @@ class TrashController extends Controller
             'form_trash_item_delete' => $trashItemDeleteForm->createView(),
             'form_trash_empty' => $trashEmptyForm->createView(),
 
-
 //            'pagerX' => $pagerfantaX,
 //            'form_edit' => $editForm->createView(),
 //            'results' => $this->contentToDataMapper->map($pagerfantaX),
             'form_search' => $formSearch->createView(),
-//            'user_content_type_identifier' => $this->configResolver->getParameter('user_content_type_identifier'),
+            'user_content_type_identifier' => $this->configResolver->getParameter('user_content_type_identifier'),
         ]);
     }
 

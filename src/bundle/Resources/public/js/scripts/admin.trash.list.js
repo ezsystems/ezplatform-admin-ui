@@ -1,4 +1,15 @@
-(function(global, doc, eZ, React, ReactDOM, Translator) {
+(function (global, doc, eZ, React, ReactDOM, Translator) {
+    let getUsersTimeout;
+    const token = doc.querySelector('meta[name="CSRF-Token"]').content;
+    const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
+    const formSearch = doc.querySelector('form[name="trash_search"]');
+    const sortField = doc.querySelector('#trash_search_sort_field');
+    const sortDirection = doc.querySelector('#trash_search_sort_direction');
+    const creatorInput = doc.querySelector('.ez-trash-search-form__item--creator .ez-trash-search-form__input');
+    const usersList = doc.querySelector('.ez-trash-search-form__item--creator .ez-trash-search-form__user-list');
+    const resetCreatorBtn = doc.querySelector('.ez-trash-search-form__item--creator .ez-icon--reset');
+    const searchCreatorInput = doc.querySelector('#trash_search_creator');
+    const sortableColumns = doc.querySelectorAll('.ez-table__sort-column');
     const btns = doc.querySelectorAll('.btn--open-udw');
     const udwContainer = doc.getElementById('react-udw');
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
@@ -71,7 +82,104 @@
         updateTrashForm([event.target]);
         enableButtons();
     };
+    const handleResetUser = () => {
+        searchCreatorInput.value = '';
 
+        creatorInput.value = '';
+        creatorInput.removeAttribute('disabled');
+    };
+    const handleClickOutsideUserList = (event) => {
+        if (event.target.closest('.ez-trash-search-form__item--creator')) {
+            return;
+        }
+
+        creatorInput.value = '';
+        usersList.classList.add('ez-trash-search-form__item__user-list--hidden');
+        doc.querySelector('body').removeEventListener('click', handleClickOutsideUserList, false);
+    };
+    const getUsersList = (value) => {
+        const body = JSON.stringify({
+            ViewInput: {
+                identifier: `find-user-by-name-${value}`,
+                public: false,
+                ContentQuery: {
+                    FacetBuilders: {},
+                    SortClauses: {},
+                    Query: {
+                        FullTextCriterion: `${value}*`,
+                        ContentTypeIdentifierCriterion: creatorInput.dataset.contentTypeIdentifiers.split(','),
+                    },
+                    limit: 50,
+                    offset: 0,
+                },
+            },
+        });
+        const request = new Request('/api/ezp/v2/views', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/vnd.ez.api.View+json; version=1.1',
+                'Content-Type': 'application/vnd.ez.api.ViewInput+json; version=1.1',
+                'X-Siteaccess': siteaccess,
+                'X-CSRF-Token': token,
+            },
+            body,
+            mode: 'same-origin',
+            credentials: 'same-origin',
+        });
+
+        fetch(request)
+            .then((response) => response.json())
+            .then(showUsersList);
+    };
+    const createUsersListItem = (user) => {
+        return `<li data-id="${user._id}" data-name="${user.TranslatedName}" class="ez-trash-search-form__user-item">${user.TranslatedName}</li>`;
+    };
+    const showUsersList = (data) => {
+        const hits = data.View.Result.searchHits.searchHit;
+        const users = hits.reduce((total, hit) => total + createUsersListItem(hit.value.Content), '');
+        const methodName = users ? 'addEventListener' : 'removeEventListener';
+
+        usersList.innerHTML = users;
+        usersList.classList.remove('ez-trash-search-form__user-list--hidden');
+
+        doc.querySelector('body')[methodName]('click', handleClickOutsideUserList, false);
+    };
+    const handleTyping = (event) => {
+        const value = event.target.value.trim();
+
+        window.clearTimeout(getUsersTimeout);
+
+        if (value.length > 2) {
+            getUsersTimeout = window.setTimeout(getUsersList.bind(null, value), 200);
+        } else {
+            usersList.classList.add('ez-trash-search-form__user-list--hidden');
+            doc.querySelector('body').removeEventListener('click', handleClickOutsideUserList, false);
+        }
+    };
+    const handleSelectUser = (event) => {
+        searchCreatorInput.value = event.target.dataset.id;
+
+        usersList.classList.add('ez-trash-search-form__user-list--hidden');
+
+        creatorInput.value = event.target.dataset.name;
+        creatorInput.setAttribute('disabled', true);
+
+        doc.querySelector('body').removeEventListener('click', handleClickOutsideUserList, false);
+    };
+    const sortTrashItems = (event) => {
+        const { target } = event;
+        const { field, direction } = target.dataset;
+
+        sortField.value = field;
+        target.dataset.direction = direction === 'ASC' ? 'DESC' : 'ASC';
+        sortDirection.setAttribute('value', direction === 'ASC' ? 1 : 0);
+        formSearch.submit();
+    };
+
+    sortableColumns.forEach((column) => column.addEventListener('click', sortTrashItems, false));
+    creatorInput.addEventListener('keyup', handleTyping, false);
+    usersList.addEventListener('click', handleSelectUser, false);
+    resetCreatorBtn.addEventListener('click', handleResetUser, false);
     updateTrashForm(checkboxes);
     enableButtons();
     checkboxes.forEach((checkbox) => checkbox.addEventListener('change', handleCheckboxChange, false));
