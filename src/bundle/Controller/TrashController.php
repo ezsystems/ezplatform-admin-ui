@@ -99,11 +99,16 @@ class TrashController extends Controller
      */
     public function listAction(Request $request): Response
     {
+        $formSearch = $this->formFactory->searchTrash();
+        $formSearch->handleRequest($request);
+
         $page = $request->query->get('page') ?? 1;
         $trashItemsList = [];
 
         $query = new Query([
-            'sortClauses' => [new Query\SortClause\Location\Priority(Query::SORT_ASC)],
+            'sortClauses' => [
+                new Query\SortClause\Location\Priority(Query::SORT_ASC),
+            ],
         ]);
 
         $pagerfanta = new Pagerfanta(
@@ -145,6 +150,13 @@ class TrashController extends Controller
             'form_trash_item_restore' => $trashItemRestoreForm->createView(),
             'form_trash_item_delete' => $trashItemDeleteForm->createView(),
             'form_trash_empty' => $trashEmptyForm->createView(),
+
+
+//            'pagerX' => $pagerfantaX,
+//            'form_edit' => $editForm->createView(),
+//            'results' => $this->contentToDataMapper->map($pagerfantaX),
+            'form_search' => $formSearch->createView(),
+//            'user_content_type_identifier' => $this->configResolver->getParameter('user_content_type_identifier'),
         ]);
     }
 

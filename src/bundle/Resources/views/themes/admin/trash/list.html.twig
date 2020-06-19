@@ -6,6 +6,7 @@
 
 {% form_theme form_trash_item_restore '@ezdesign/ui/form_fields.html.twig' %}
 {% form_theme form_trash_item_delete '@ezdesign/ui/form_fields.html.twig' %}
+{% form_theme form_search '@ezdesign/ui/form_fields.html.twig' %}
 
 {% block body_class %}ez-trash-list-view ez-has-two-sidebars{% endblock %}
 
@@ -15,6 +16,16 @@
         {% block left_sidebar %}
             {{ parent() }}
         {% endblock left_sidebar %}
+
+        {{ form_start(form_search, {'attr': {'class': 'ez-trash-search-form'}}) }}
+            {{ form_widget(form_search.content_type) }}
+            {{ form_widget(form_search.section) }}
+            {{ form_widget(form_search.trashed) }}
+            {{ form_widget(form_search.creator) }}
+
+            {{ form_widget(form_search.sort, {'attr': {'hidden': 'hidden'}}) }}
+            {{ form_widget(form_search.trashed_interval, {'attr': {'hidden': 'hidden'}}) }}
+        {{ form_end(form_search) }}
 
         <div class="px-0 ez-content-container">
             <section class="container mt-5">
@@ -69,8 +80,11 @@
                                 <th class="ez-table__header-cell"></th>
                                 <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
                                 <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'trash.name'|trans|desc('Name') }}</th>
-                                <th class="ez-table__header-cell">{{ 'trash.type'|trans|desc('Type') }}</th>
+                                <th class="ez-table__header-cell">{{ 'trash.content_type'|trans|desc('Content type') }}</th>
+                                <th class="ez-table__header-cell">{{ 'trash.creator'|trans|desc('Creator') }}</th>
+                                <th class="ez-table__header-cell">{{ 'trash.section'|trans|desc('Section') }}</th>
                                 <th class="ez-table__header-cell">{{ 'trash.original_location'|trans|desc('Original Location') }}</th>
+                                <th class="ez-table__header-cell">{{ 'trash.date'|trans|desc('Sent to trash date') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -104,6 +118,8 @@
                                             </span>
                                         </td>
                                         <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
+                                        <td class="ez-table__cell">{{ trash_item.location.contentInfo.owner.login }}</td>
+                                        <td class="ez-table__cell">{{ trash_item.location.contentInfo.section.name }}</td>
                                         <td class="ez-table__cell">
                                             {% if not is_parent_in_trash %}
                                                 {% include '@ezdesign/ui/location_path.html.twig' with {'locations': trash_item.ancestors, 'link_last_element': true} %}
@@ -111,6 +127,7 @@
                                                 <em>{{ 'trash.item.ancesor_in_trash'|trans|desc('Ancestor is in the Trash') }}</em>
                                             {% endif %}
                                         </td>
+                                        <td class="ez-table__cell">{{ trash_item.location.trashed|ez_full_datetime }}</td>
                                     </tr>
                                 {% endfor %}
                             {% endif %}

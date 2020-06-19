@@ -374,6 +374,21 @@
         <target state="new">Are you sure you want to send this Content item to Trash?</target>
         <note>key: trash.modal.message</note>
       </trans-unit>
+      <trans-unit id="3a46b65a9b678fb947285b2c9509943ee6764195" resname="trash.search.any_content_types">
+        <source>Any content types</source>
+        <target state="new">Any content types</target>
+        <note>key: trash.search.any_content_types</note>
+      </trans-unit>
+      <trans-unit id="9a88e9a17cd461dcd7d54dca50c6d3b981aba7fc" resname="trash.search.any_time">
+        <source>Any time</source>
+        <target state="new">Any time</target>
+        <note>key: trash.search.any_time</note>
+      </trans-unit>
+      <trans-unit id="c2b2679781ad4a22bb232e2ab34669ffe49c760b" resname="trash.search.section.any">
+        <source>Any section</source>
+        <target state="new">Any section</target>
+        <note>key: trash.search.section.any</note>
+      </trans-unit>
       <trans-unit id="bd97a738137e75de44544db1104bab3a46222791" resname="trash_asset.modal.message_body">
         <source>If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content Relations in the Relations tab.</source>
         <target state="new">If you wish to delete these assets too, first make sure they are not used by other content. To check, go to the asset preview and look at its content Relations in the Relations tab.</target>

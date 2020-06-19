@@ -52,6 +52,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RolesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Search\TrashSearchData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
@@ -115,6 +116,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RolesDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Search\TrashSearchType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionContentAssignType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType;
@@ -541,6 +543,21 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashEmptyType::class);
 
         return $this->formFactory->createNamed($name, TrashEmptyType::class, $data);
+    }
+
+    /**
+     * @param TrashSearchData|null $data
+     * @param string|null $name
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function searchTrash(
+        TrashSearchData $data = null,
+        ?string $name = null
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(TrashSearchType::class);
+
+        return $this->formFactory->createNamed($name, TrashSearchType::class, $data);
     }
 
     /**
