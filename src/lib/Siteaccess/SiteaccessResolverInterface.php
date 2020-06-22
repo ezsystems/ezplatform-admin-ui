@@ -34,8 +34,8 @@ interface SiteaccessResolverInterface
      */
     public function getSiteAccessesListForLocation(
         Location $location,
-        int $versionNo = null,
-        string $languageCode = null
+        ?int $versionNo = null,
+        ?string $languageCode = null
     ): array;
 
     /**

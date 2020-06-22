@@ -49,8 +49,8 @@ class NonAdminSiteaccessResolver implements SiteaccessResolverInterface
      */
     public function getSiteAccessesListForLocation(
         Location $location,
-        int $versionNo = null,
-        string $languageCode = null
+        ?int $versionNo = null,
+        ?string $languageCode = null
     ): array {
         return array_filter(
             $this->siteaccessResolver->getSiteAccessesListForLocation($location, $versionNo, $languageCode),
