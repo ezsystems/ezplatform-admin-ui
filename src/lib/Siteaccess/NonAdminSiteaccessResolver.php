@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Siteaccess;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\Core\Base\Exceptions\BadStateException;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 
