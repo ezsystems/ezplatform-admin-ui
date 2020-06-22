@@ -40,9 +40,12 @@
                                     placeholder="{{ 'search.creator_input.placeholder'|trans|desc('Type creator\'s name') }}"
                                     {{ creator is not empty ? 'disabled'  }}
                                 >
-                                <svg class="ez-icon ez-icon--dark ez-icon--medium ez-icon--reset">
-                                    <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>
-                                </svg>
+                                
+                                <button class="btn btn-icon ez-btn--reset-creator">
+                                    <svg class="ez-icon ez-icon--dark ez-icon--medium ez-icon--reset">
+                                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>
+                                    </svg>
+                                </button>
                             </div>
                             <ul class="ez-trash-search-form__user-list ez-trash-search-form__user-list--hidden"></ul>
                         </div>
@@ -57,8 +60,14 @@
                 
                 {{ form_start(form_trash_item_restore, {'action': path('ezplatform.trash.restore')}) }}
 
-                {% set current_field = form_search.vars.data.sort['field'] %}
-                {% set current_direction = form_search.vars.data.sort['direction'] %}
+                {% if form_search.vars.data.sort is defined %}    
+                    {% set current_field = form_search.vars.data.sort['field'] %}
+                    {% set current_direction = form_search.vars.data.sort['direction'] %}
+                {% else %}
+                    {% set current_field = '' %}
+                    {% set current_direction = '' %}
+                {% endif %}
+
                 {% set sort_directions = {
                     'name' : current_field == 'name'and current_direction == 1 ? 'DESC' : 'ASC',
                     'content_type' : current_field == 'content_type' and current_direction == 1 ? 'DESC' : 'ASC',

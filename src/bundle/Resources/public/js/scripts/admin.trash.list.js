@@ -7,7 +7,7 @@
     const sortDirection = doc.querySelector('#trash_search_sort_direction');
     const creatorInput = doc.querySelector('.ez-trash-search-form__item--creator .ez-trash-search-form__input');
     const usersList = doc.querySelector('.ez-trash-search-form__item--creator .ez-trash-search-form__user-list');
-    const resetCreatorBtn = doc.querySelector('.ez-trash-search-form__item--creator .ez-icon--reset');
+    const resetCreatorBtn = doc.querySelector('.ez-btn--reset-creator');
     const searchCreatorInput = doc.querySelector('#trash_search_creator');
     const sortableColumns = doc.querySelectorAll('.ez-table__sort-column');
     const btns = doc.querySelectorAll('.btn--open-udw');
@@ -128,8 +128,9 @@
         });
 
         fetch(request)
-            .then((response) => response.json())
-            .then(showUsersList);
+            .then(eZ.helpers.request.getJsonFromResponse)
+            .then(showUsersList)
+            .catch(() => eZ.helpers.notification.showErrorNotification(errorMessage));
     };
     const createUsersListItem = (user) => {
         return `<li data-id="${user._id}" data-name="${user.TranslatedName}" class="ez-trash-search-form__user-item">${user.TranslatedName}</li>`;
@@ -147,10 +148,10 @@
     const handleTyping = (event) => {
         const value = event.target.value.trim();
 
-        window.clearTimeout(getUsersTimeout);
+        global.clearTimeout(getUsersTimeout);
 
         if (value.length > 2) {
-            getUsersTimeout = window.setTimeout(getUsersList.bind(null, value), 200);
+            getUsersTimeout = global.setTimeout(getUsersList.bind(null, value), 200);
         } else {
             usersList.classList.add('ez-trash-search-form__user-list--hidden');
             doc.querySelector('body').removeEventListener('click', handleClickOutsideUserList, false);

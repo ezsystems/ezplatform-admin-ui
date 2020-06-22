@@ -8,7 +8,6 @@
     
     &__item {
         display: inline-block;
-        
         width: calculateRem(258px);
 
         &--creator {
@@ -68,12 +67,17 @@
         padding: calculateRem(8px) calculateRem(16px);
         cursor: pointer;
     }
-}
 
-.ez-table {
-    &__sort-column {
-        color: $ez-black;
+    &__input {
+        &:disabled + .ez-btn--reset-creator {
+            display: block;
+        }
+    }
+
+    .ez-btn--reset-creator {
+        display: none;
+        position: absolute;
+        right: calculateRem(5px);
+        bottom: calculateRem(6px);
     }
 }
-
-
