@@ -37,13 +37,6 @@ abstract class AbstractPagerContentToDataMapper
     /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
-    /**
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\API\Repository\UserService $userService
-     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
-     * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
-     * @param \eZ\Publish\API\Repository\LanguageService $languageService
-     */
     public function __construct(
         ContentTypeService $contentTypeService,
         UserService $userService,

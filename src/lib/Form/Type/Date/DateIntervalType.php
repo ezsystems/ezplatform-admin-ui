@@ -14,9 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateIntervalType as BaseDateInter
 
 class DateIntervalType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

@@ -15,7 +15,7 @@ class_alias(
 
 if (false) {
     /**
-     * @deprecated since 3.1, to be removed in 4.0.
+     * @deprecated since 3.1, to be removed in 3.2.
      * Use \Ibexa\Platform\Bundle\SearchBundle\Form\Type\SearchType instead
      */
     class SearchType extends \Ibexa\Platform\Bundle\SearchBundle\Form\Type\SearchType
