@@ -42,17 +42,16 @@
                 <div class="ez-preview__item ez-preview__item--siteaccess">
                     <select class="form-control">
                         {% for site_accesses_name, site_access_label in siteaccesses %}
-                            <option value="{{
-                                path(
-                                    '_ezpublishPreviewContent',
-                                    {
-                                        'contentId': content.id,
-                                        'versionNo': version_no,
-                                        'language': language_code,
-                                        'siteAccessName': site_accesses_name
-                                    }
-                                )
-                            }}">
+                            {% set option_value = path(
+                                '_ezpublishPreviewContent',
+                                {
+                                    'contentId': content.id,
+                                    'versionNo': version_no,
+                                    'language': language_code,
+                                    'siteAccessName': site_accesses_name
+                                }
+                            ) %}
+                            <option value="{{ option_value }}">
                                 {{ site_access_label|trans({}, 'ezplatform_siteaccess') }}
                             </option>
                         {% endfor %}

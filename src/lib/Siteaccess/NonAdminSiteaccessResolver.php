@@ -10,6 +10,8 @@ namespace EzSystems\EzPlatformAdminUi\Siteaccess;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess;
+use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 
 /**
  * Decorator for SiteaccessResolverInterface filtering out all non admin siteaccesses.
@@ -50,17 +52,10 @@ class NonAdminSiteaccessResolver implements SiteaccessResolverInterface
         int $versionNo = null,
         string $languageCode = null
     ): array {
-        if (!array_key_exists('admin_group', $this->siteAccessGroups)) {
-            throw new BadStateException(
-                'siteaccess',
-                'SiteAccess group `admin_group` not found.'
-            );
-        }
-
         return array_filter(
             $this->siteaccessResolver->getSiteAccessesListForLocation($location, $versionNo, $languageCode),
             function ($siteAccess) {
-                return !in_array($siteAccess->name, $this->siteAccessGroups['admin_group']);
+                return !$this->isAdminSiteAccess($siteAccess);
             }
         );
     }
@@ -72,13 +67,11 @@ class NonAdminSiteaccessResolver implements SiteaccessResolverInterface
 
     private function filter(array $siteaccesses): array
     {
-        if (!array_key_exists('admin_group', $this->siteAccessGroups)) {
-            throw new BadStateException(
-                'siteaccess',
-                'SiteAccess group `admin_group` not found.'
-            );
-        }
-
         return array_diff($siteaccesses, $this->siteAccessGroups['admin_group']);
+    }
+
+    private function isAdminSiteAccess(SiteAccess $siteAccess): bool
+    {
+        return (new IsAdmin($this->siteAccessGroups))->isSatisfiedBy($siteAccess);
     }
 }

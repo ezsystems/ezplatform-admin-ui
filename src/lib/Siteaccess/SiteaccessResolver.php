@@ -53,9 +53,8 @@ class SiteaccessResolver implements SiteaccessResolverInterface
         int $versionNo = null,
         string $languageCode = null
     ): array {
-        return array_column(
-            $this->getSiteAccessesListForLocation($location, $versionNo, $languageCode),
-            'name'
+        return $this->getSiteAccessList(
+            $this->getSiteAccessesListForLocation($location, $versionNo, $languageCode)
         );
     }
 
@@ -88,16 +87,18 @@ class SiteaccessResolver implements SiteaccessResolverInterface
 
     public function getSiteaccesses(): array
     {
-        return $this->getSiteAccessList();
+        $siteAccessList = iterator_to_array($this->siteAccessService->getAll());
+
+        return $this->getSiteAccessList($siteAccessList);
     }
 
     /**
      * @return string[]
      */
-    private function getSiteAccessList(): array
+    private function getSiteAccessList(array $siteAccessList): array
     {
         return array_column(
-            iterator_to_array($this->siteAccessService->getAll()),
+            $siteAccessList,
             'name'
         );
     }
