@@ -14,6 +14,7 @@ services:
             $siteaccessResolver: '@EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver'
             $translationHelper: '@ezpublish.translation_helper'
             $configResolver: '@ezpublish.config.resolver'
+            $siteAccessNameGenerator: '@EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessNameGenerator'
         tags:
             - controller.service_arguments
 

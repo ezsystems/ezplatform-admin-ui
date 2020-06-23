@@ -8,10 +8,12 @@ services:
 
     EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessKeyGenerator: ~
 
+    EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessNameGenerator: ~
+
     EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolver:
         arguments:
             $siteaccessPreviewVoters: !tagged ezplatform.admin_ui.siteaccess_preview_voter
-            $siteAccesses: '%ezpublish.siteaccess.list%'
+            $siteAccessService: '@ezpublish.siteaccess_service'
 
     EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver:
         arguments:

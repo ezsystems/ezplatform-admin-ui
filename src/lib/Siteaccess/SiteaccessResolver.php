@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Siteaccess;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessService;
 
 class SiteaccessResolver implements SiteaccessResolverInterface
 {
@@ -17,10 +18,10 @@ class SiteaccessResolver implements SiteaccessResolverInterface
     private $contentService;
 
     /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessPreviewVoterInterface[] */
-    private $siteaccessPreviewVoters;
+    private $siteAccessPreviewVoters;
 
-    /** @var string[] */
-    private $siteAccesses;
+    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessService */
+    private $siteAccessService;
 
     /**
      * @param \eZ\Publish\API\Repository\ContentService $contentService
@@ -30,11 +31,11 @@ class SiteaccessResolver implements SiteaccessResolverInterface
     public function __construct(
         ContentService $contentService,
         iterable $siteaccessPreviewVoters,
-        array $siteAccesses
+        SiteAccessService $siteAccessService
     ) {
         $this->contentService = $contentService;
-        $this->siteaccessPreviewVoters = $siteaccessPreviewVoters;
-        $this->siteAccesses = $siteAccesses;
+        $this->siteAccessPreviewVoters = $siteaccessPreviewVoters;
+        $this->siteAccessService = $siteAccessService;
     }
 
     /**
@@ -52,26 +53,53 @@ class SiteaccessResolver implements SiteaccessResolverInterface
         int $versionNo = null,
         string $languageCode = null
     ): array {
+        return $this->getSiteAccessList(
+            $this->getSiteAccessesListForLocation($location, $versionNo, $languageCode)
+        );
+    }
+
+    /**
+     * @return \eZ\Publish\Core\MVC\Symfony\SiteAccess[]
+     */
+    public function getSiteAccessesListForLocation(
+        Location $location,
+        ?int $versionNo = null,
+        ?string $languageCode = null
+    ): array {
         $contentInfo = $location->getContentInfo();
         $versionInfo = $this->contentService->loadVersionInfo($contentInfo, $versionNo);
         $languageCode = $languageCode ?? $contentInfo->mainLanguageCode;
 
-        $eligibleSiteaccesses = [];
-        foreach ($this->getSiteaccesses() as $siteaccess) {
-            $context = new SiteaccessPreviewVoterContext($location, $versionInfo, $siteaccess, $languageCode);
-            foreach ($this->siteaccessPreviewVoters as $siteaccessPreviewVoter) {
-                if ($siteaccessPreviewVoter->vote($context)) {
-                    $eligibleSiteaccesses[] = $siteaccess;
+        $eligibleSiteAccesses = [];
+        /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess $siteAccess */
+        foreach ($this->siteAccessService->getAll() as $siteAccess) {
+            $context = new SiteaccessPreviewVoterContext($location, $versionInfo, $siteAccess->name, $languageCode);
+            foreach ($this->siteAccessPreviewVoters as $siteAccessPreviewVoter) {
+                if ($siteAccessPreviewVoter->vote($context)) {
+                    $eligibleSiteAccesses[] = $siteAccess;
                     break;
                 }
             }
         }
 
-        return $eligibleSiteaccesses;
+        return $eligibleSiteAccesses;
     }
 
     public function getSiteaccesses(): array
     {
-        return $this->siteAccesses;
+        $siteAccessList = iterator_to_array($this->siteAccessService->getAll());
+
+        return $this->getSiteAccessList($siteAccessList);
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getSiteAccessList(array $siteAccessList): array
+    {
+        return array_column(
+            $siteAccessList,
+            'name'
+        );
     }
 }
