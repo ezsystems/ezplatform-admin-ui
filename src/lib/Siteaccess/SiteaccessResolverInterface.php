@@ -28,7 +28,18 @@ interface SiteaccessResolverInterface
     ): array;
 
     /**
-     * Returns complete list of siteaccesses.
+     * Returns a complete list of Site Access objects.
+     *
+     * @return \eZ\Publish\Core\MVC\Symfony\SiteAccess[]
+     */
+    public function getSiteAccessesListForLocation(
+        Location $location,
+        ?int $versionNo = null,
+        ?string $languageCode = null
+    ): array;
+
+    /**
+     * Returns a complete list of Site Access names.
      *
      * @return array
      */
