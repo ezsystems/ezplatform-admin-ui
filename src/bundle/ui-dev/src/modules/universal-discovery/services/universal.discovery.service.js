@@ -130,11 +130,14 @@ export const loadAccordionData = (
         .catch(showErrorNotification);
 };
 
-export const findLocationsBySearchQuery = ({ token, siteaccess, query, limit = QUERY_LIMIT, offset = 0 }, callback) => {
+export const findLocationsBySearchQuery = ({ token, siteaccess, query, limit = QUERY_LIMIT, offset = 0, languageCode = null }, callback) => {
+    const useAlwaysAvailable = true;
     const body = JSON.stringify({
         ViewInput: {
             identifier: `udw-locations-by-search-query-${query.FullTextCriterion}`,
             public: false,
+            languageCode,
+            useAlwaysAvailable,
             LocationQuery: {
                 FacetBuilders: {},
                 SortClauses: {},

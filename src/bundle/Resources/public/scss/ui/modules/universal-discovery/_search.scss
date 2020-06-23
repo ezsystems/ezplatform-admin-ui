@@ -11,6 +11,12 @@
         margin-right: calculateRem(16px);
     }
 
+    &__selector-wrapper {
+        display: flex;
+        flex-grow: 0.1;
+        margin-right: calculateRem(16px);
+    }
+
     &__input {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;

@@ -26,6 +26,8 @@ const selectedContentTypesReducer = (state, action) => {
     }
 };
 
+const languages = Object.values(window.eZ.adminUiConfig.languages.mappings);
+
 const Search = ({ itemsPerPage }) => {
     const allowedContentTypes = useContext(AllowedContentTypesContext);
     const [searchText, setSearchText] = useState('');
@@ -34,6 +36,9 @@ const Search = ({ itemsPerPage }) => {
     const [selectedContentTypes, dispatchSelectedContentTypesAction] = useReducer(selectedContentTypesReducer, []);
     const [selectedSection, setSelectedSection] = useState('');
     const [selectedSubtree, setSelectedSubtree] = useState('');
+    const firstLanguageCode = languages.length ? languages[0].languageCode : '';
+    const [selectedLanguage, setSelectedLanguage] = useState(firstLanguageCode);
+    const updateSelectedLanguage = (event) => setSelectedLanguage(event.target.value);
     const [isLoading, data, searchByQuery] = useSearchByQueryFetch();
     const updateSearchQuery = ({ target: { value } }) => setSearchText(value);
     const search = (forcedOffset) => {
@@ -49,7 +54,7 @@ const Search = ({ itemsPerPage }) => {
 
         const contentTypes = !!selectedContentTypes.length ? [...selectedContentTypes] : allowedContentTypes;
 
-        searchByQuery(searchText, contentTypes, selectedSection, selectedSubtree, itemsPerPage, offset);
+        searchByQuery(searchText, contentTypes, selectedSection, selectedSubtree, itemsPerPage, offset, selectedLanguage);
     };
     const handleKeyPressed = ({ charCode }) => {
         if (charCode === ENTER_CHAR_CODE) {
@@ -141,6 +146,21 @@ const Search = ({ itemsPerPage }) => {
                         <Icon name="search" extraClasses="ez-icon--small-medium ez-icon--light" />
                         Search
                     </button>
+                </div>
+                <div className="c-search__selector-wrapper">
+                    <select className="form-control" onChange={updateSelectedLanguage} value={selectedLanguage}>
+                        {languages.map((language) => {
+                            if (!language.enabled) {
+                                return null;
+                            }
+
+                            return (
+                                <option key={language.id} value={language.languageCode} onChange={updateSelectedLanguage}>
+                                    {language.name}
+                                </option>
+                            );
+                        })}
+                    </select>
                 </div>
                 <div className="c-search__filters-btn-wrapper">
                     <button className="c-search__toggle-filters-btn btn btn-dark" onClick={toggleFiltersCollapsed}>
