@@ -6,30 +6,19 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
 
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\DateIntervalTransformer;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\DateIntervalType as BaseDateIntervalType;
+use function class_alias;
 
-class DateIntervalType extends AbstractType
-{
+class_alias(
+    \EzSystems\EzPlatformAdminUi\Form\Type\Date\DateIntervalType::class,
+    __NAMESPACE__ . '\DateIntervalType'
+);
+
+if (false) {
     /**
-     * {@inheritdoc}
+     * @deprecated since 3.1, to be removed in 3.2.
+     * Use \EzSystems\EzPlatformAdminUi\Form\Type\Date\DateIntervalType instead
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    class DateIntervalType extends \EzSystems\EzPlatformAdminUi\Form\Type\Date\DateIntervalType
     {
-        $builder
-            ->add('date_interval', BaseDateIntervalType::class, [
-                'attr' => ['hidden' => true],
-                'input' => 'string',
-                'widget' => 'single_text',
-                'required' => false,
-            ])
-            ->add('end_date', IntegerType::class, [
-                'attr' => ['hidden' => true],
-                'required' => false,
-            ])
-            ->addModelTransformer(new DateIntervalTransformer());
     }
 }

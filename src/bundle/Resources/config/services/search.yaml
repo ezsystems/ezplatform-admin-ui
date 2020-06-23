@@ -7,6 +7,6 @@ services:
       $translationHelper: '@ezpublish.translation_helper'
 
   EzSystems\EzPlatformAdminUi\Search\PagerSearchContentToDataMapper:
-    parent: EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper
+    parent: Ibexa\Platform\Search\Mapper\PagerSearchContentToDataMapper
     autowire: true
     public: false
