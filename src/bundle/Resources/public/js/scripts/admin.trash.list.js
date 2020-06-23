@@ -1,5 +1,12 @@
 (function (global, doc, eZ, React, ReactDOM, Translator) {
     let getUsersTimeout;
+    const CLASS_SORTED_ASC = 'ez-table__sort-column--asc';
+    const CLASS_SORTED_DESC = 'ez-table__sort-column--desc';
+    const CLASS_VISIBLE_DATE_RANGE = 'ez-trash-search-form__range-wrapper--visible';
+    const sortedActiveField = doc.querySelector('#trash_search_sort_field').value;
+    const sortedActiveDirection = doc.querySelector('#trash_search_sort_direction').value;
+    const dateFields = doc.querySelectorAll('.ez-trash-search-form__range-select');
+    const trashedTypeInput = doc.querySelector('#trash_search_trashed');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const formSearch = doc.querySelector('form[name="trash_search"]');
@@ -12,6 +19,14 @@
     const sortableColumns = doc.querySelectorAll('.ez-table__sort-column');
     const btns = doc.querySelectorAll('.btn--open-udw');
     const udwContainer = doc.getElementById('react-udw');
+    const autoSendNodes = doc.querySelectorAll('.ez-trash-search-form__item--auto-send');
+    const dateConfig = {
+        mode: 'range',
+        locale: {
+            rangeSeparator: ' - ',
+        },
+        formatDate: (date) => eZ.helpers.timezone.formatShortDateTime(date, null, eZ.adminUiConfig.dateFormat.shortDate),
+    };
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (form, content) => {
         const field = form.querySelector('#trash_item_restore_location_location');
@@ -166,6 +181,7 @@
         creatorInput.setAttribute('disabled', true);
 
         doc.querySelector('body').removeEventListener('click', handleClickOutsideUserList, false);
+        formSearch.submit();
     };
     const sortTrashItems = (event) => {
         const { target } = event;
@@ -176,8 +192,80 @@
         sortDirection.setAttribute('value', direction === 'ASC' ? 1 : 0);
         formSearch.submit();
     };
+    const toggleDatesSelectVisibility = (event) => {
+        const datesRangeNode = doc.querySelector(event.target.dataset.targetSelector);
 
+        if (event.target.value !== 'custom_range') {
+            doc.querySelector(datesRangeNode.dataset.periodSelector).value = event.target.value;
+            doc.querySelector(datesRangeNode.dataset.endSelector).value = '';
+            datesRangeNode.classList.remove(CLASS_VISIBLE_DATE_RANGE);
+            formSearch.submit();
+
+            return;
+        }
+
+        datesRangeNode.classList.add(CLASS_VISIBLE_DATE_RANGE);
+    };
+    const setSelectedDateRange = (selectedDates, dateString, instance) => {
+        const dateRange = instance.input.closest('.ez-trash-search-form__range-wrapper');
+
+        if (selectedDates.length === 2) {
+            const startDate = getUnixTimestampUTC(selectedDates[0]);
+            const endDate = getUnixTimestampUTC(selectedDates[1]);
+            const secondsInDay = 86400;
+            const days = (endDate - startDate) / secondsInDay;
+
+            doc.querySelector(dateRange.dataset.periodSelector).value = `P0Y0M${days}D`;
+            doc.querySelector(dateRange.dataset.endSelector).value = endDate;
+
+            formSearch.submit();
+        }
+    };
+    const getUnixTimestampUTC = (dateObject) => {
+        date = new Date(Date.UTC(dateObject.getFullYear(), dateObject.getMonth(), dateObject.getDate()));
+        date = Math.floor(date.getTime() / 1000);
+
+        return date;
+    };
+    const initFlatPickr = (dateRangePickerNode) => {
+        const { start, end } = dateRangePickerNode.dataset;
+        const defaultDate = start && end ? [start, end] : [];
+
+        flatpickr(dateRangePickerNode, {
+            ...dateConfig,
+            onChange: setSelectedDateRange,
+            defaultDate,
+        });
+    };
+    const handleAutoSubmitNodes = (event) => {
+        event.preventDefault();
+
+        if (event.target.value !== 'custom_range') {
+            formSearch.submit();
+        }
+    };
+    const setSortedClass = () => {
+        doc.querySelectorAll('.ez-table__sort-column').forEach((node) => {
+            node.classList.remove(CLASS_SORTED_ASC);
+            node.classList.remove(CLASS_SORTED_DESC);
+        });
+
+        if (sortedActiveField) {
+            const sortedFieldNode = doc.querySelector(`.ez-table__sort-column--${sortedActiveField}`);
+
+            if (parseInt(sortedActiveDirection) === 1) {
+                sortedFieldNode.classList.add(CLASS_SORTED_DESC);
+            } else {
+                sortedFieldNode.classList.add(CLASS_SORTED_ASC);
+            }
+        }
+    };
+
+    setSortedClass();
+    dateFields.forEach(initFlatPickr);
+    autoSendNodes.forEach((node) => node.addEventListener('change', handleAutoSubmitNodes, false));
     sortableColumns.forEach((column) => column.addEventListener('click', sortTrashItems, false));
+    trashedTypeInput.addEventListener('change', toggleDatesSelectVisibility, false);
     creatorInput.addEventListener('keyup', handleTyping, false);
     usersList.addEventListener('click', handleSelectUser, false);
     resetCreatorBtn.addEventListener('click', handleResetUser, false);

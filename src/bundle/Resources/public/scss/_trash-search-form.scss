@@ -73,11 +73,33 @@
             display: block;
         }
     }
-
+   
     .ez-btn--reset-creator {
         display: none;
         position: absolute;
         right: calculateRem(5px);
         bottom: calculateRem(6px);
+    }
+
+    &__range-wrapper {
+        height: 0;
+        opacity: 0;
+        margin-top: calculateRem(8px);
+        background: $ez-white;
+        border: calculateRem(1px) solid $ez-ground-base-medium;
+        border-radius: calculateRem(4px);
+        transition: all 0.2s ease-in;
+        pointer-events: none;
+    
+        &--visible {
+            height: calculateRem(40px);
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+
+    &__range-select {
+        border: none;
+        outline: none;
     }
 }

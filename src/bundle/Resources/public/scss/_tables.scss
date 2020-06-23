@@ -27,7 +27,12 @@
     }
 
     &__sort-column {
+        position: relative;
         color: $ez-black;
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 
     &__cell {

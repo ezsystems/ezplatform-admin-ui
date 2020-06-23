@@ -73,6 +73,10 @@
     <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
 {%- endblock -%}
 
+{%-block _test_widget %}
+    aaaa
+{% endblock %}
+
 {%- block _trash_item_restore_restore_widget -%}
     {%- set type = type|default('submit') -%}
     {%- if label is not same as(false) and label is empty -%}
@@ -212,6 +216,25 @@
             placeholder="{{ 'search.date.range'|trans(domain='search')|desc('From date - to date') }}"
             data-start="{{ form.parent.vars.data.created.start_date is defined ? form.parent.vars.data.created.start_date|date("Y-m-d") : '' }}"
             data-end="{{ form.parent.vars.data.created.end_date is defined ? form.parent.vars.data.created.end_date|date("Y-m-d") : '' }}"
+        />
+    </div>
+{%- endblock -%}
+
+
+{%- block _trash_search_trashed_widget -%}
+    {{ form_widget(form) }}
+    <div 
+        class="ez-trash-search-form__range-wrapper ez-trash-search-form__range-wrapper--select-trashed-range {% if form.vars.data == "custom_range" %}ez-trash-search-form__range-wrapper--visible{% endif %}" 
+        data-period-selector="#trash_search_trashed_interval_date_interval" 
+        data-end-selector="#trash_search_trashed_interval_end_date"
+    >
+
+        <input 
+            type="text"
+            class="ez-trash-search-form__range-select form-control"
+            placeholder="{{ 'search.date.range'|trans(domain='search')|desc('From date - to date') }}"
+            data-start="{{ form.parent.vars.data.trashedInterval.start_date is defined ? form.parent.vars.data.trashedInterval.start_date|date("Y-m-d") : '' }}"
+            data-end="{{ form.parent.vars.data.trashedInterval.end_date is defined ? form.parent.vars.data.trashedInterval.end_date|date("Y-m-d") : '' }}"
         />
     </div>
 {%- endblock -%}

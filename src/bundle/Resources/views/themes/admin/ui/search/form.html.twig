@@ -6,6 +6,7 @@
 {% set subtree_selected = form.subtree.vars.value is not empty %}
 
 {{ form_start(form, {'attr': {'class': 'ez-search-form'}}) }}
+{{ dump(form) }}
 <div class="input-group px-4">
     {{ form_widget(form.query) }}
 
