@@ -5,7 +5,7 @@
         </svg>
     </td>
     <td class="ez-table__cell ez-table__cell--after-icon">
-        {% if (row.mainLocationId is not null) %}
+        {% if row.mainLocationId is not null %}
             <a href="{{ path('_ez_content_view', {
                 'contentId': row.contentId,
                 'languageCode': row.translation_language_code,
@@ -24,10 +24,12 @@
         </td>
     {% endif %}
     <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
-        {% include '@ezdesign/ui/edit_translation_button.html.twig' with {
-            'contentId': row.contentId,
-            'translations': row.available_enabled_translations,
-            'top_offset': 100
-        }%}
+        {% if row.mainLocationId is not null %}
+            {% include '@ezdesign/ui/edit_translation_button.html.twig' with {
+                'contentId': row.contentId,
+                'translations': row.available_enabled_translations,
+                'top_offset': 100
+            }%}
+        {% endif %}
     </td>
 </tr>
