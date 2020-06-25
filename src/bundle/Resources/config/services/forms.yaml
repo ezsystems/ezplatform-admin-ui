@@ -98,11 +98,6 @@ services:
         tags:
             - { name: form.type, alias: ezplatform_content_forms_fielddefinition_update }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentFieldType:
-        arguments: ["@ezplatform.content_forms.field_type_form_mapper.dispatcher"]
-        tags:
-            - { name: form.type, alias: ezplatform_content_forms_content_field }
-
     EzSystems\EzPlatformAdminUi\Form\Type\URL\URLListType:
         arguments:
             - '@translator'
