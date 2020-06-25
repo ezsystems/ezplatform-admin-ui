@@ -51,7 +51,7 @@ system:
                     match:
                         Identifier: [full_datetime_format, short_datetime_format]
 
-        search_list_view:
+        search_view:
             full:
                 ezplatform_admin_ui:
                     template: '@ezdesign/ui/search/index.html.twig'
