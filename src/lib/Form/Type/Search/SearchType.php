@@ -6,19 +6,103 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
 
-use function class_alias;
+use EzSystems\EzPlatformAdminUi\Form\Type\Date\DateIntervalType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-class_alias(
-    \Ibexa\Platform\Bundle\SearchBundle\Form\Type\SearchType::class,
-    __NAMESPACE__ . '\SearchType'
-);
+final class SearchType extends AbstractType
+{
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    private $translator;
 
-if (false) {
-    /**
-     * @deprecated since 3.1, to be removed in 3.2.
-     * Use \Ibexa\Platform\Bundle\SearchBundle\Form\Type\SearchType instead
-     */
-    class SearchType extends \Ibexa\Platform\Bundle\SearchBundle\Form\Type\SearchType
+    /** @var \Symfony\Component\Form\AbstractType */
+    private $baseType;
+
+    public function __construct(AbstractType $baseType, TranslatorInterface $translator)
     {
+        $this->translator = $translator;
+        $this->baseType = $baseType;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $this->baseType->buildForm($builder, $options);
+
+        $builder
+            ->add('last_modified', DateIntervalType::class)
+            ->add('created', DateIntervalType::class)
+            ->add('last_modified_select', ChoiceType::class, [
+                'choices' => $this->getTimePeriodChoices(),
+                'required' => false,
+                'placeholder' => /** @Desc("Any time") */ 'search.any_time',
+                'mapped' => false,
+            ])
+            ->add('created_select', ChoiceType::class, [
+                'choices' => $this->getTimePeriodChoices(),
+                'required' => false,
+                'placeholder' => /** @Desc("Any time") */ 'search.any_time',
+                'mapped' => false,
+            ])
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $this->baseType->configureOptions($resolver);
+
+        $resolver->setDefaults([
+            'error_mapping' => [
+                'created' => 'created_select',
+                'last_modified' => 'last_modified_select',
+            ],
+        ]);
+    }
+
+    /**
+     * Generate time periods options available to choose.
+     *
+     * @return array
+     *
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     */
+    private function getTimePeriodChoices(): array
+    {
+        $choices = [];
+        foreach ($this->getTimePeriodField() as $label => $value) {
+            $choices[$label] = $value;
+        }
+
+        return $choices;
+    }
+
+    /**
+     * Returns available time periods values.
+     *
+     * @return array
+     *
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     */
+    private function getTimePeriodField(): array
+    {
+        return [
+            $this->translator->trans(/** @Desc("Last week") */ 'search.last_week', [], 'search') => 'P0Y0M7D',
+            $this->translator->trans(/** @Desc("Last month") */ 'search.last_month', [], 'search') => 'P0Y1M0D',
+            $this->translator->trans(/** @Desc("Last year") */ 'search.last_year', [], 'search') => 'P1Y0M0D',
+            $this->translator->trans(/** @Desc("Custom range") */ 'search.custom_range', [], 'search') => 'custom_range',
+        ];
     }
 }

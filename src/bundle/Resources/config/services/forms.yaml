@@ -127,3 +127,10 @@ services:
     EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasAssetRelation:
         tags:
             - { name: 'ezplatform.form.trash_location_option', priority: 40 }
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType:
+        arguments:
+            $baseType: '@Ibexa\Platform\Bundle\SearchBundle\Form\Type\SearchType'
+            $translator: '@translator'
+        tags:
+            - { name: form.type, alias: EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType }
