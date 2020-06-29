@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\TrashItem as APITrashItem;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\API\Repository\Values\User\User;
 
 /**
  * @todo This class cannot be a part of Form/ namespace, it should be moved to UI/Value.
@@ -24,21 +25,22 @@ class TrashItemData
     /** @var Location[] */
     protected $ancestors;
 
+    /** @var \eZ\Publish\API\Repository\Values\User\User */
+    private $creator;
+
     /**
-     * TrashItemData constructor.
-     *
-     * @param APITrashItem $location
-     * @param ContentType|null $contentType
-     * @param Location[] $ancestors
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $ancestors
      */
     public function __construct(
         APITrashItem $location,
         ContentType $contentType = null,
-        array $ancestors = []
+        array $ancestors = [],
+        ?User $creator = null
     ) {
         $this->location = $location;
         $this->contentType = $contentType;
         $this->ancestors = $ancestors;
+        $this->creator = $creator;
     }
 
     /**
@@ -94,5 +96,10 @@ class TrashItemData
         $lastAncestor = end($this->ancestors);
 
         return $this->location->path !== array_merge($lastAncestor->path, [(string)$this->location->id]);
+    }
+
+    public function getCreator(): ?User
+    {
+        return $this->creator;
     }
 }

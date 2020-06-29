@@ -26,6 +26,37 @@
         }
     }
 
+    &__sort-column {
+        position: relative;
+        display: block;
+        color: $ez-black;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: calculateRem(9px);
+            right: calculateRem(-7px);
+        }
+
+        &--asc:after {
+            border-left: calculateRem(3px) solid transparent;
+            border-right: calculateRem(3px) solid transparent;
+            border-bottom: calculateRem(5px) solid $ez-black;
+        }
+
+        &--desc::after {
+            border-left: calculateRem(3px) solid transparent;
+            border-right: calculateRem(3px) solid transparent;
+            border-top: calculateRem(5px) solid $ez-black;
+        }
+    }
+
     &__cell {
         vertical-align: top;
 

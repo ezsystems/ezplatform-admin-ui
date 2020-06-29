@@ -51,6 +51,8 @@ services:
         arguments:
             $configResolver: "@ezpublish.config.resolver"
 
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\TimePeriodChoiceLoader: ~
+
     EzSystems\EzPlatformAdminUi\Form\Extension\RichTextTypeExtension:
         public: true
         tags:

@@ -1,4 +1,4 @@
-(function(global, doc, eZ, $, flatpickr) {
+(function (global, doc, eZ, $, flatpickr) {
     let getUsersTimeout;
     const CLASS_DATE_RANGE = 'ez-filters__range-wrapper';
     const CLASS_VISIBLE_DATE_RANGE = 'ez-filters__range-wrapper--visible';
