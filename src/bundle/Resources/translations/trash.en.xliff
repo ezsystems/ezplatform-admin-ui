@@ -71,6 +71,11 @@
         <target state="new">Ancestor is in the Trash</target>
         <note>key: trash.item.ancesor_in_trash</note>
       </trans-unit>
+      <trans-unit id="02b7fe2ffdf670f9d5e2dadd3cd1be5109a22b49" resname="trash.item.deleted_user">
+        <source>Deleted user</source>
+        <target state="new">Deleted user</target>
+        <note>key: trash.item.deleted_user</note>
+      </trans-unit>
       <trans-unit id="2720e3018fc8b1158cb728b1d5dc377ef7293b57" resname="trash.modal.message">
         <source>Do you want to delete the selected item(s) from Trash?</source>
         <target state="new">Do you want to delete the selected item(s) from Trash?</target>

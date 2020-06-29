@@ -210,7 +210,12 @@
                                             </span>
                                         </td>
                                         <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
-                                        <td class="ez-table__cell">{{ trash_item.location.contentInfo.owner.login }}</td>
+                                        <td class="ez-table__cell">
+                                            {{ trash_item.creator is not empty
+                                                ? trash_item.creator.login :
+                                                'trash.item.deleted_user'|trans|desc('Deleted user')
+                                            }}
+                                        </td>
                                         <td class="ez-table__cell">{{ trash_item.location.contentInfo.section.name }}</td>
                                         <td class="ez-table__cell">
                                             {% if not is_parent_in_trash %}

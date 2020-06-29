@@ -10,6 +10,9 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\TrashService;
+use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\API\Repository\Values\Content\TrashItem;
+use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
@@ -24,6 +27,7 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Search\TrashSearchType;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\TrashItemAdapter;
 use EzSystems\EzPlatformAdminUi\QueryType\TrashSearchQueryType;
+use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -60,6 +64,9 @@ class TrashController extends Controller
     /** @var \EzSystems\EzPlatformAdminUi\QueryType\TrashSearchQueryType */
     private $trashSearchQueryType;
 
+    /** @var \eZ\Publish\API\Repository\UserService */
+    private $userService;
+
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         TrashService $trashService,
@@ -69,7 +76,8 @@ class TrashController extends Controller
         SubmitHandler $submitHandler,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
         ConfigResolverInterface $configResolver,
-        TrashSearchQueryType $trashSearchQueryType
+        TrashSearchQueryType $trashSearchQueryType,
+        UserService $userService
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->trashService = $trashService;
@@ -80,6 +88,7 @@ class TrashController extends Controller
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->configResolver = $configResolver;
         $this->trashSearchQueryType = $trashSearchQueryType;
+        $this->userService = $userService;
     }
 
     public function performAccessCheck(): void
@@ -135,8 +144,9 @@ class TrashController extends Controller
                 $this->userLanguagePreferenceProvider->getPreferredLanguages()
             );
             $ancestors = $this->uiPathService->loadPathLocations($item);
+            $creator = $this->getCreatorFromTrashItem($item);
 
-            $trashItemsList[] = new TrashItemData($item, $contentType, $ancestors);
+            $trashItemsList[] = new TrashItemData($item, $contentType, $ancestors, $creator);
         }
 
         $trashItemRestoreForm = $this->formFactory->restoreTrashItem(
@@ -317,5 +327,19 @@ class TrashController extends Controller
         return $this->redirect(
             $this->generateUrl('ezplatform.trash.list', $params)
         );
+    }
+
+    /**
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     */
+    private function getCreatorFromTrashItem(TrashItem $trashItem): ?User
+    {
+        $ownerId = $trashItem->getContentInfo()->ownerId;
+
+        if (false === (new UserExists($this->userService))->isSatisfiedBy($ownerId)) {
+            return null;
+        }
+
+        return $this->userService->loadUser($trashItem->getContentInfo()->ownerId);
     }
 }
