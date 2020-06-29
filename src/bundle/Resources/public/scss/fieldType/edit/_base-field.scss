@@ -45,7 +45,8 @@
 }
 
 .ez-field-edit--disabled {
-    opacity: 0.5;
+    opacity: 0.4;
+    pointer-events: none;
 }
 
 .ez-content-edit {
