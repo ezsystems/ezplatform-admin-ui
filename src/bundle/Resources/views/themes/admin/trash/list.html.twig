@@ -27,22 +27,29 @@
                     <div class="ez-trash-search-form__inputs-group px-4">
                         {% set creator = form_search.vars.data ? form_search.vars.data.creator : '' %}
 
-                        {{ form_widget(form_search.content_type, {'attr': {'class': 'ez-trash-search-form__item ez-trash-search-form__item--auto-send'}}) }}
-                        {{ form_widget(form_search.section, {'attr': {'class': 'ez-trash-search-form__item ez-trash-search-form__item--auto-send'}}) }}
+                        {{ form_widget(form_search.content_type, {
+                            'attr': {'class': 'ez-trash-search-form__item ez-trash-search-form__item--auto-send'}
+                        }) }}
+                        {{ form_widget(form_search.section, {
+                            'attr': {'class': 'ez-trash-search-form__item ez-trash-search-form__item--auto-send'}
+                        }) }}
                         
                         <div class='ez-trash-search-form__item ez-trash-search-form__item--trashed'>
-                            {{ form_widget(form_search.trashed, {'attr': {'data-target-selector': '.ez-trash-search-form__range-wrapper--select-trashed-range'}}) }}
+                            {{ form_widget(form_search.trashed, {
+                                'attr': {'data-target-selector': '.ez-trash-search-form__range-wrapper--select-trashed-range'}
+                            }) }}
                         </div>
                         <div class="ez-trash-search-form__item ez-trash-search-form__item--creator">
                             {% set creator = form_search.vars.data ? form_search.vars.data.creator : '' %}
+                            {% set creatorExists =  creator is not empty ? true : false %}
                             <div class="ez-trash-search-form__input-wrapper">
                                 <input 
                                     type="text"
                                     class="form-control ez-trash-search-form__input"
                                     data-content-type-identifiers="{{ user_content_type_identifier|join(',') }}"
-                                    value="{{ creator is not empty ? ez_content_name(creator) }}"
+                                    value="{{ creatorExists ? ez_content_name(creator) }}"
                                     placeholder="{{ 'search.creator_input.placeholder'|trans|desc('Type creator\'s name') }}"
-                                    {{ creator is not empty ? 'disabled'  }}
+                                    {{ creatorExists ? 'disabled'  }}
                                 >
                                 <button class="btn btn-icon ez-btn--reset-creator">
                                     <svg class="ez-icon ez-icon--dark ez-icon--medium ez-icon--reset">
@@ -127,12 +134,49 @@
                             <tr>
                                 <th class="ez-table__header-cell"></th>
                                 <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
-                                <th class="ez-table__header-cell ez-table__header-cell--after-icon"><a class="ez-table__sort-column ez-table__sort-column--name" href="#" data-field="name" data-direction="{{ sort_directions.name }}">{{ 'trash.name'|trans|desc('Name') }}</a></th>
-                                <th class="ez-table__header-cell"><a class="ez-table__sort-column ez-table__sort-column--content_type" href="#" data-field="content_type" data-direction="{{ sort_directions.content_type }}">{{ 'trash.content_type'|trans|desc('Content type') }}</a></th>
-                                <th class="ez-table__header-cell"><a class="ez-table__sort-column ez-table__sort-column--creator" href="#" data-field="creator" data-direction="{{ sort_directions.creator }}">{{ 'trash.creator'|trans|desc('Creator') }}</a></th>
-                                <th class="ez-table__header-cell"><a class="ez-table__sort-column ez-table__sort-column--section" href="#" data-field="section" data-direction="{{ sort_directions.section }}">{{ 'trash.section'|trans|desc('Section') }}</a></th>
-                                <th class="ez-table__header-cell">{{ 'trash.original_location'|trans|desc('Original Location') }}</th>
-                                <th class="ez-table__header-cell"><a class="ez-table__sort-column ez-table__sort-column--trashed" href="#" data-field="trashed" data-direction="{{ sort_directions.trashed }}">{{ 'trash.date'|trans|desc('Sent to trash date') }}</a></th>
+                                <th class="ez-table__header-cell ez-table__header-cell--after-icon">
+                                    <a 
+                                        class="ez-table__sort-column ez-table__sort-column--name" 
+                                        href="#" 
+                                        data-field="name" 
+                                        data-direction="{{ sort_directions.name }}"
+                                    >{{ 'trash.name'|trans|desc('Name') }}</a>
+                                </th>
+                                <th class="ez-table__header-cell">
+                                    <a 
+                                        class="ez-table__sort-column ez-table__sort-column--content_type" 
+                                        href="#" 
+                                        data-field="content_type" 
+                                        data-direction="{{ sort_directions.content_type }}"
+                                    >{{ 'trash.content_type'|trans|desc('Content type') }}</a>
+                                </th>
+                                <th class="ez-table__header-cell">
+                                    <a 
+                                        class="ez-table__sort-column ez-table__sort-column--creator" 
+                                        href="#" 
+                                        data-field="creator" 
+                                        data-direction="{{ sort_directions.creator }}"
+                                    >{{ 'trash.creator'|trans|desc('Creator') }}</a>
+                                </th>
+                                <th class="ez-table__header-cell">
+                                    <a 
+                                        class="ez-table__sort-column ez-table__sort-column--section" 
+                                        href="#" 
+                                        data-field="section" 
+                                        data-direction="{{ sort_directions.section }}"
+                                    >{{ 'trash.section'|trans|desc('Section') }}</a>
+                                </th>
+                                <th class="ez-table__header-cell">
+                                    {{ 'trash.original_location'|trans|desc('Original Location') }}
+                                </th>
+                                <th class="ez-table__header-cell">
+                                    <a 
+                                        class="ez-table__sort-column ez-table__sort-column--trashed" 
+                                        href="#" 
+                                        data-field="trashed" 
+                                        data-direction="{{ sort_directions.trashed }}"
+                                    >{{ 'trash.date'|trans|desc('Sent to trash date') }}</a>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
