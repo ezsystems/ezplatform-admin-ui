@@ -375,7 +375,7 @@
         <note>key: trash.modal.message</note>
       </trans-unit>
       <trans-unit id="3a46b65a9b678fb947285b2c9509943ee6764195" resname="trash.search.any_content_types">
-        <source>Any content types</source>
+        <source>Any Content Types</source>
         <target state="new">Any content types</target>
         <note>key: trash.search.any_content_types</note>
       </trans-unit>
@@ -386,7 +386,7 @@
       </trans-unit>
       <trans-unit id="c2b2679781ad4a22bb232e2ab34669ffe49c760b" resname="trash.search.section.any">
         <source>Any section</source>
-        <target state="new">Any section</target>
+        <target state="new">Any Section</target>
         <note>key: trash.search.section.any</note>
       </trans-unit>
       <trans-unit id="bd97a738137e75de44544db1104bab3a46222791" resname="trash_asset.modal.message_body">
