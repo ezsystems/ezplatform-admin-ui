@@ -223,3 +223,15 @@ services:
         tags:
             - { name: ez.limitation.formMapper, limitationType: Subtree }
             - { name: ez.limitation.valueMapper, limitationType: Subtree }
+
+    ezplatform.content_forms.limitation.form_mapper.field_group:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        autowire: true
+        autoconfigure: false
+        public: false
+        class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\FieldGroupLimitationMapper
+        arguments:
+            $fieldsGroupsList: '@ezpublish.fields_groups.list'
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: FieldGroup }
+            - { name: ez.limitation.valueMapper, limitationType: FieldGroup }

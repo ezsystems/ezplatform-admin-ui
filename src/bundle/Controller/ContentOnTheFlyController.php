@@ -162,6 +162,7 @@ class ContentOnTheFlyController extends Controller
         $form = $this->createForm(ContentEditType::class, $data, [
             'languageCode' => $language->languageCode,
             'mainLanguageCode' => $language->languageCode,
+            'contentCreateStruct' => $data,
             'drafts_enabled' => false,
             'intent' => 'create',
         ]);
@@ -230,6 +231,8 @@ class ContentOnTheFlyController extends Controller
             [
                 'languageCode' => $languageCode,
                 'mainLanguageCode' => $content->contentInfo->mainLanguageCode,
+                'content' => $content,
+                'contentUpdateStruct' => $contentUpdate,
                 'drafts_enabled' => true,
             ]
         );

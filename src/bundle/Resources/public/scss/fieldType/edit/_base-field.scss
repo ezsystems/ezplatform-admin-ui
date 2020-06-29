@@ -44,6 +44,10 @@
     }
 }
 
+.ez-field-edit--disabled {
+    opacity: 0.5;
+}
+
 .ez-content-edit {
     .ez-field-edit {
         &__label-wrapper {

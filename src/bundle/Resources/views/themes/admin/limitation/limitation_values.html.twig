@@ -116,3 +116,9 @@
     {{ values|join(', ') }}
 {% endapply %}
 {% endblock %}
+
+{% block ez_limitation_fieldgroup_value %}
+    {% apply spaceless %}
+        {{ values|join(', ') }}
+    {% endapply %}
+{% endblock %}
