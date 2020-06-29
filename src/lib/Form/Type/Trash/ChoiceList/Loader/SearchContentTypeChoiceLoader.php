@@ -21,11 +21,7 @@ class SearchContentTypeChoiceLoader extends ContentTypeChoiceLoader
 {
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
-
-    /**
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
-     */
+    
     public function __construct(
         ContentTypeService $contentTypeService,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
