@@ -53,7 +53,7 @@ class TrashSearchType extends AbstractType
             ->add('page', HiddenType::class)
             ->add('content_type', ContentTypeChoiceType::class, [
                 'required' => false,
-                'placeholder' => /** @Desc("Any content types") */ 'trash.search.any_content_types',
+                'placeholder' => /** @Desc("Any Content Types") */ 'trash.search.any_content_types',
             ])
             ->add('creator', UserType::class)
             ->add('trashed_interval', DateIntervalType::class)
@@ -73,7 +73,7 @@ class TrashSearchType extends AbstractType
             $builder->add('section', SectionChoiceType::class, [
                 'required' => false,
                 'multiple' => false,
-                'placeholder' => /** @Desc("Any section") */ 'trash.search.section.any',
+                'placeholder' => /** @Desc("Any Section") */ 'trash.search.section.any',
             ]);
         }
     }

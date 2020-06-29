@@ -25,7 +25,7 @@ final class TrashSearchQueryType extends OptionsResolverBasedQueryType
         'trashed' => SortClause\Trash\DateTrashed::class,
         'content_type' => SortClause\Trash\ContentTypeName::class,
         'section' => SortClause\SectionName::class,
-        'creator' => SortClause\Trash\UserName::class,
+        'creator' => SortClause\Trash\UserLogin::class,
     ];
 
     protected function doGetQuery(array $parameters): Query

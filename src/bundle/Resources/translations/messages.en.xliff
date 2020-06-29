@@ -385,7 +385,7 @@
         <note>key: trash.search.any_time</note>
       </trans-unit>
       <trans-unit id="c2b2679781ad4a22bb232e2ab34669ffe49c760b" resname="trash.search.section.any">
-        <source>Any section</source>
+        <source>Any Section</source>
         <target state="new">Any Section</target>
         <note>key: trash.search.section.any</note>
       </trans-unit>
