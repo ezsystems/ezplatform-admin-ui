@@ -7,7 +7,7 @@ Background:
   Given I am logged as "admin"
     And I go to "Content structure" in "Content" tab
 
-@javascript @common
+@javascript
 Scenario Outline: Content can be moved to trash
   Given I start creating a new content "Folder"
     And I set content fields
@@ -27,7 +27,7 @@ Scenario Outline: Content can be moved to trash
     | Folder3     |
     | Folder4     |
 
-@javascript @common
+@javascript
 Scenario: Element in trash can be deleted
   Given I click on the left menu bar button "Trash"
     And there is "Folder" "Folder1" on trash list
@@ -37,7 +37,7 @@ Scenario: Element in trash can be deleted
   Then success notification that "Deleted selected item(s) from Trash." appears
     And there is no "Folder" "Folder1" on trash list
 
-@javascript @common
+@javascript
 Scenario: Element in trash can be restored
   Given I click on the left menu bar button "Trash"
     And there is "Folder" "Folder2" on trash list
@@ -48,7 +48,7 @@ Scenario: Element in trash can be restored
     And there is no "Folder" "Folder2" on trash list
     And going to root path there is "Folder2" "Folder" on Sub-items list
 
-@javascript @common
+@javascript
 Scenario: Element in trash can be restored under new location
   Given I click on the left menu bar button "Trash"
     And there is "Folder" "Folder3" on trash list
@@ -59,7 +59,7 @@ Scenario: Element in trash can be restored under new location
     And there is no "Folder" "Folder3" on trash list
     And going to "Media/Files" there is a "Folder3" "Folder" on Sub-items list
 
-@javascript @common @admin
+@javascript @admin
 Scenario: Content can be moved to trash from non-root location
   Given I create "Folder" Content items in "/Media/Files/" in "eng-GB"
       | name               | short_name         |
@@ -69,7 +69,7 @@ Scenario: Content can be moved to trash from non-root location
   Then there's no "Folder" "TestFolderToRemove" on "Files" Sub-items list
     And going to trash there is "Folder" "TestFolderToRemove" on list
 
-@javascript @common
+@javascript
 Scenario: Trash can be emptied
   Given I click on the left menu bar button "Trash"
   When I empty the trash
