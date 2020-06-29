@@ -11,8 +11,8 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\TrashSearchData;
 use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\DatePeriodChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\SortType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Trash\ChoiceList\Loader\SearchContentTypeChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -34,14 +34,19 @@ class TrashSearchType extends AbstractType
     /** @var \EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\DatePeriodChoiceLoader */
     private $datePeriodChoiceLoader;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Type\Trash\ChoiceList\Loader\SearchContentTypeChoiceLoader */
+    private $searchContentTypeChoiceLoader;
+
     public function __construct(
         TranslatorInterface $translator,
         PermissionResolver $permissionResolver,
-        DatePeriodChoiceLoader $datePeriodChoiceLoader
+        DatePeriodChoiceLoader $datePeriodChoiceLoader,
+        SearchContentTypeChoiceLoader $searchContentTypeChoiceLoader
     ) {
         $this->translator = $translator;
         $this->permissionResolver = $permissionResolver;
         $this->datePeriodChoiceLoader = $datePeriodChoiceLoader;
+        $this->searchContentTypeChoiceLoader = $searchContentTypeChoiceLoader;
     }
 
     /**
@@ -51,7 +56,11 @@ class TrashSearchType extends AbstractType
     {
         $builder
             ->add('page', HiddenType::class)
-            ->add('content_type', ContentTypeChoiceType::class, [
+            ->add('content_type', ChoiceType::class, [
+                'choice_loader' => $this->searchContentTypeChoiceLoader,
+                'choice_label' => 'name',
+                'choice_name' => 'identifier',
+                'choice_value' => 'identifier',
                 'required' => false,
                 'placeholder' => /** @Desc("Any Content Types") */ 'trash.search.any_content_types',
             ])
