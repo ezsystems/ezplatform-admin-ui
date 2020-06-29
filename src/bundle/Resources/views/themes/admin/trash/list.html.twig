@@ -11,6 +11,8 @@
 {% block body_class %}ez-trash-list-view ez-has-two-sidebars{% endblock %}
 
 {% block content %}
+    {%  set trashSearchParams = app.request.get('trash_search') %}
+
     <div class="row align-items-stretch ez-main-row">
 
         {% block left_sidebar %}
@@ -57,7 +59,9 @@
                     </div>
                 {{ form_end(form_search) }}
                 
-                {{ form_start(form_trash_item_restore, {'action': path('ezplatform.trash.restore')}) }}
+                {{ form_start(form_trash_item_restore, {
+                    'action': path('ezplatform.trash.restore', { 'trash_search': trashSearchParams })
+                }) }}
 
                 {% if form_search.vars.data.sort is defined %}    
                     {% set current_field = form_search.vars.data.sort['field'] %}
@@ -183,7 +187,7 @@
                 </div>
 
                 {{ form_start(form_trash_item_delete, {
-                    'action': path('ezplatform.trash.delete')
+                    'action': path('ezplatform.trash.delete', { 'trash_search': trashSearchParams })
                 }) }}
                 {% for key, form in form_trash_item_delete.trash_items %}
                     {% set trash_item = trash_items[key] %}

@@ -219,45 +219,48 @@ class TrashController extends Controller
     public function restoreAction(Request $request): Response
     {
         if (!$this->isGranted(new Attribute('content', 'restore'))) {
-            return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+            return $this->redirectToTrashList($request);
         }
 
         $form = $this->formFactory->restoreTrashItem();
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (TrashItemRestoreData $data) {
-                $newParentLocation = $data->getLocation();
+            $result = $this->submitHandler->handle(
+                $form,
+                function (TrashItemRestoreData $data) use ($request) {
+                    $newParentLocation = $data->getLocation();
 
-                foreach ($data->getTrashItems() as $trashItem) {
-                    $this->trashService->recover($trashItem, $newParentLocation);
+                    foreach ($data->getTrashItems() as $trashItem) {
+                        $this->trashService->recover($trashItem, $newParentLocation);
+                    }
+
+                    if (null === $newParentLocation) {
+                        $this->notificationHandler->success(
+                            /** @Desc("Restored content to its original Location.") */
+                            'trash.restore_original_location.success',
+                            [],
+                            'trash'
+                        );
+                    } else {
+                        $this->notificationHandler->success(
+                            /** @Desc("Restored content under Location '%location%'.") */
+                            'trash.restore_new_location.success',
+                            ['%location%' => $newParentLocation->getContentInfo()->name],
+                            'trash'
+                        );
+                    }
+
+                    return $this->redirectToTrashList($request);
                 }
-
-                if (null === $newParentLocation) {
-                    $this->notificationHandler->success(
-                        /** @Desc("Restored content to its original Location.") */
-                        'trash.restore_original_location.success',
-                        [],
-                        'trash'
-                    );
-                } else {
-                    $this->notificationHandler->success(
-                        /** @Desc("Restored content under Location '%location%'.") */
-                        'trash.restore_new_location.success',
-                        ['%location%' => $newParentLocation->getContentInfo()->name],
-                        'trash'
-                    );
-                }
-
-                return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));
-            });
+            );
 
             if ($result instanceof Response) {
                 return $result;
             }
         }
 
-        return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+        return $this->redirectToTrashList($request);
     }
 
     /**
@@ -273,33 +276,46 @@ class TrashController extends Controller
     public function deleteAction(Request $request): Response
     {
         if (!$this->isGranted(new Attribute('content', 'remove'))) {
-            return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+            return $this->redirectToTrashList($request);
         }
 
         $form = $this->formFactory->deleteTrashItem();
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $result = $this->submitHandler->handle($form, function (TrashItemDeleteData $data) {
-                foreach ($data->getTrashItems() as $trashItem) {
-                    $this->trashService->deleteTrashItem($trashItem);
+            $result = $this->submitHandler->handle(
+                $form,
+                function (TrashItemDeleteData $data) use ($request) {
+                    foreach ($data->getTrashItems() as $trashItem) {
+                        $this->trashService->deleteTrashItem($trashItem);
+                    }
+
+                    $this->notificationHandler->success(
+                        /** @Desc("Deleted selected item(s) from Trash.") */
+                        'trash.deleted.success',
+                        [],
+                        'trash'
+                    );
+
+                    return $this->redirectToTrashList($request);
                 }
-
-                $this->notificationHandler->success(
-                    /** @Desc("Deleted selected item(s) from Trash.") */
-                    'trash.deleted.success',
-                    [],
-                    'trash'
-                );
-
-                return new RedirectResponse($this->generateUrl('ezplatform.trash.list'));
-            });
+            );
 
             if ($result instanceof Response) {
                 return $result;
             }
         }
 
-        return $this->redirect($this->generateUrl('ezplatform.trash.list'));
+        return $this->redirectToTrashList($request);
+    }
+
+    private function redirectToTrashList(Request $request): RedirectResponse
+    {
+        $trashSearchParams = $request->get('trash_search');
+        $params = $trashSearchParams ? ['trash_search' => $trashSearchParams] : [];
+
+        return $this->redirect(
+            $this->generateUrl('ezplatform.trash.list', $params)
+        );
     }
 }
