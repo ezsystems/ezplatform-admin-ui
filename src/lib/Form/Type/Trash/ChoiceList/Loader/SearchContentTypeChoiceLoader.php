@@ -21,7 +21,7 @@ class SearchContentTypeChoiceLoader extends ContentTypeChoiceLoader
 {
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
-    
+
     public function __construct(
         ContentTypeService $contentTypeService,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
