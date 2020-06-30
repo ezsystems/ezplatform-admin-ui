@@ -344,6 +344,11 @@
         <target state="new">Cancel</target>
         <note>key: trash.form.cancel</note>
       </trans-unit>
+      <trans-unit id="7f37e5f732ee7101a696a881cf22045bcd11359c" resname="trash.modal.close">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: trash.modal.close</note>
+      </trans-unit>
       <trans-unit id="2720e3018fc8b1158cb728b1d5dc377ef7293b57" resname="trash.modal.message">
         <source>Are you sure you want to send this Content item to Trash?</source>
         <target state="new">Are you sure you want to send this Content item to Trash?</target>
