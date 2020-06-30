@@ -72,6 +72,11 @@
     {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({'class': (widget_wrapper_attr.class|default('') ~ ' ez-field-edit__data')|trim}) %}
     {% set wrapper_class = 'ez-field-edit ez-field-edit--' ~ fieldtype_identifier %}
 
+    {% if fieldtype.vars.disabled %}
+        {% set wrapper_class = wrapper_class ~ ' ez-field-edit--disabled' %}
+        {% set attr = attr|merge({'readonly': 'readonly'}) %}
+    {% endif %}
+
     {# BC: to maintain BC we have to map errors which orginated from compound fieldtypes #}
     {% for error in form.parent.parent.parent.vars.errors %}
         {% if error.origin == form.vars.errors.form %}
