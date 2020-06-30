@@ -172,6 +172,8 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
             [
                 'languageCode' => $toLanguage->languageCode,
                 'mainLanguageCode' => $content->contentInfo->mainLanguageCode,
+                'content' => $content,
+                'contentUpdateStruct' => $contentUpdate,
                 'drafts_enabled' => true,
             ]
         );
