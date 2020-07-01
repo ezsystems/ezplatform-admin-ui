@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const enterKeyCode = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',
@@ -95,6 +95,7 @@
     if (itemAuthorToggler) {
         itemAuthorToggler.addEventListener('click', (event) => {
             event.preventDefault();
+            eZ.helpers.tooltips.hideAll();
 
             itemAuthorToggler.classList.toggle('ez-details-items__toggler--gray');
             itemAuthor.classList.toggle('ez-details-items--collapsed');

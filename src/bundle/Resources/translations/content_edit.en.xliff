@@ -73,6 +73,11 @@
         <target state="new">Location ID: %locationId%</target>
         <note>key: location_id</note>
       </trans-unit>
+      <trans-unit id="b50bb4a4a1f5081a047f89673318ef4e24fd1fdb" resname="more_info">
+        <source>More info</source>
+        <target state="new">More info</target>
+        <note>key: more_info</note>
+      </trans-unit>
       <trans-unit id="32d50c07b2eacd6fa72742ff1c1f5963c26a251d" resname="new_content_item">
         <source>New %contentType%</source>
         <target state="new">New %contentType%</target>
