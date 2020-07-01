@@ -11,7 +11,7 @@ adminui:
             paths:
               - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard'
             filters:
-                tags: "@common"
+                tags: "@common,~@broken"
             contexts:
                 - EzSystems\Behat\API\Context\ContentTypeContext
                 - EzSystems\Behat\API\Context\ContentContext
@@ -42,7 +42,7 @@ adminui:
             paths:
                 - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentTypeFields.feature'
             filters:
-                tags: "@common"
+                tags: "@common,~@broken"
             contexts:
                 - EzSystems\Behat\API\Context\ContentTypeContext
                 - EzSystems\Behat\API\Context\ContentContext
@@ -62,7 +62,7 @@ adminui:
                 - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentCreation.feature'
                 - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentDraft.feature'
             filters:
-                tags: "@common"
+                tags: "@common,~@broken"
             contexts:
                 - EzSystems\Behat\Browser\Context\BrowserContext
                 - EzSystems\Behat\Browser\Context\Hooks
