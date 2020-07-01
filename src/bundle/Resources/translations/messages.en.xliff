@@ -279,6 +279,11 @@
         <target state="new">Cancel</target>
         <note>key: modal.cancel</note>
       </trans-unit>
+      <trans-unit id="ec403158b3fd1e13dbc66f2de51e235fdb178188" resname="modal.close">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: modal.close</note>
+      </trans-unit>
       <trans-unit id="9eae227b7c27ab230a6d0ce5947d93e7d2e1626f" resname="modal.delete">
         <source>Delete</source>
         <target state="new">Delete</target>
