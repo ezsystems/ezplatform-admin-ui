@@ -12,7 +12,7 @@
 
                 if (removedNodes.length) {
                     removedNodes.forEach((removedNode) => {
-                        if (removedNode.classList && !removedNode.classList.contains('ez-tooltip')) {
+                        if (!removedNode.classList.contains('ez-tooltip')) {
                             lastInsertTooltipTarget = null;
                             doc.querySelectorAll('.ez-tooltip.show').forEach((tooltipNode) => {
                                 tooltipNode.remove();
