@@ -94,11 +94,10 @@
 
         if (sourceInput.value) {
             defaultDate = new Date(sourceInput.value * 1000);
-            const currentDate = new Date();
 
             const actionType = sourceInput.dataset.actionType;
             if (actionType.length && actionType === 'create') {
-                defaultDate.setTime(currentDate.getTime() + currentDate.getTimezoneOffset() * 60 * 1000);
+                defaultDate.setTime(new Date().getTime());
             } else if (actionType.length && actionType === 'edit') {
                 defaultDate.setTime(defaultDate.getTime() + defaultDate.getTimezoneOffset() * 60 * 1000);
             }
