@@ -1,4 +1,4 @@
-(function(global, doc, React, ReactDOM, eZ, localStorage) {
+(function (global, doc, React, ReactDOM, eZ, localStorage) {
     const KEY_CONTENT_TREE_EXPANDED = 'ez-content-tree-expanded';
     const CLASS_CONTENT_TREE_EXPANDED = 'ez-content-tree-container--expanded';
     const CLASS_CONTENT_TREE_ANIMATE = 'ez-content-tree-container--animate';
@@ -12,6 +12,7 @@
     const userId = window.eZ.helpers.user.getId();
     let frame = null;
     const toggleContentTreePanel = () => {
+        document.activeElement.blur();
         contentTreeContainer.classList.toggle(CLASS_CONTENT_TREE_EXPANDED);
         contentTreeContainer.classList.add(CLASS_CONTENT_TREE_ANIMATE);
         btn.classList.toggle(CLASS_BTN_CONTENT_TREE_EXPANDED);
