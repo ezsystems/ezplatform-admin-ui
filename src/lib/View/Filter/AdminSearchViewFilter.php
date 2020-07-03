@@ -86,6 +86,7 @@ class AdminSearchViewFilter implements EventSubscriberInterface
 
         if (!$this->isAdminSiteAccess($request)) {
             $this->innerFilter->handleSearchForm($event);
+
             return;
         }
 
