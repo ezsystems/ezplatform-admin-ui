@@ -16,6 +16,7 @@ use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
 use EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use Ibexa\Platform\Bundle\SearchBundle\Form\Data\SearchData;
+use Ibexa\Platform\Search\View\SearchViewFilter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,23 +38,28 @@ class AdminSearchViewFilter implements EventSubscriberInterface
     /** @var array */
     private $siteAccessGroups;
 
+    /** @var \Ibexa\Platform\Search\View\SearchViewFilter */
+    private $innerFilter;
+
     public function __construct(
         ConfigResolverInterface $configResolver,
         FormFactoryInterface $formFactory,
         SectionService $sectionService,
         ContentTypeService $contentTypeService,
-        array $siteAccessGroups
+        array $siteAccessGroups,
+        SearchViewFilter $innerFilter
     ) {
         $this->configResolver = $configResolver;
         $this->formFactory = $formFactory;
         $this->sectionService = $sectionService;
         $this->contentTypeService = $contentTypeService;
         $this->siteAccessGroups = $siteAccessGroups;
+        $this->innerFilter = $innerFilter;
     }
 
     public static function getSubscribedEvents()
     {
-        return [ViewEvents::FILTER_BUILDER_PARAMETERS => ['handleSearchForm', -10]];
+        return [ViewEvents::FILTER_BUILDER_PARAMETERS => 'handleSearchForm'];
     }
 
     /**
@@ -79,6 +85,7 @@ class AdminSearchViewFilter implements EventSubscriberInterface
         $request = $event->getRequest();
 
         if (!$this->isAdminSiteAccess($request)) {
+            $this->innerFilter->handleSearchForm($event);
             return;
         }
 
