@@ -7,8 +7,7 @@
             </svg>
         </button>
     </div>
-    {% set contentId = app.request.attributes.get('contentId') %}
-    {% set attr = attr|merge({'class': 'ez-data-source__input', 'hidden': 'hidden',
-        'data-content-id': contentId}) %}
+    {% set action_type = app.request.attributes.get('_route') is same as('ez_content_draft_edit') ? 'edit' : 'create' %}
+    {% set attr = attr|merge({'class': 'ez-data-source__input', 'hidden': 'hidden', 'data-action-type': action_type}) %}
     {{ block('form_widget') }}
 {% endblock %}
