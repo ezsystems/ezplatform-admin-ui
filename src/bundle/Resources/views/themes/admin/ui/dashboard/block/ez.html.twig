@@ -14,8 +14,11 @@
     {% if not ez.release %}
         {% set severity = 1 %}
         <div class="alert alert-warning mb-0 mt-3" role="alert">
-            {{ 'dashboard.ez_version.release_not_determined'|trans|desc("The system could not find your <code>composer.lock</code> file. It's needed to determine information about
-            your eZ install, and recommended to be kept on project development to make sure same package versions are used across all environments.")}}
+            {{ 'dashboard.ez_version.release_not_determined'|trans
+            |desc("The system could not find your <code>composer.lock</code> file. It's needed to determine information about
+                your eZ install, and recommended to be kept on project development to make sure same package versions are
+                used across all environments.")
+            |raw }}
         </div>
     {% elseif ez.stability != 'stable'  %}
         {% set severity = 1 %}
@@ -59,8 +62,13 @@
             {# In the future with retrival of info from updates.ez.no we can detect missing (public) security fixes and then let this become an error #}
             {% set severity = 1 %}
             <div class="alert alert-warning mb-0 mt-3" role="alert">
-                {{ 'dashboard.ez_version.community_end_of_maintenance'|trans({'%release%': ez.release, '%update_url%': urls['update']})
-                |desc("Unfortunately %release% open source version has reached end of life, <a target=\"_blank\" href=\"%update_url%\">please upgrade</a>.")}}
+                {{ 'dashboard.ez_version.community_end_of_maintenance'|trans({
+                    '%release%': ez.release,
+                    '%update_url%': urls['update']
+                })
+                |desc("Unfortunately %release% open source version has reached end of life,
+                    <a target=\"_blank\" href=\"%update_url%\">please upgrade</a>.")
+                |raw }}
                 <em>
                     {{ 'dashboard.ez_version.community_end_of_maintenance_upgrade'|trans({
                         '%license_url%': urls['license'],
