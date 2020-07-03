@@ -376,7 +376,7 @@
       </trans-unit>
       <trans-unit id="3a46b65a9b678fb947285b2c9509943ee6764195" resname="trash.search.any_content_types">
         <source>Any Content Types</source>
-        <target state="new">Any content types</target>
+        <target state="new">Any Content Types</target>
         <note>key: trash.search.any_content_types</note>
       </trans-unit>
       <trans-unit id="9a88e9a17cd461dcd7d54dca50c6d3b981aba7fc" resname="trash.search.any_time">
