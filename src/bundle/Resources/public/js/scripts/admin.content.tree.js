@@ -12,7 +12,7 @@
     const userId = window.eZ.helpers.user.getId();
     let frame = null;
     const toggleContentTreePanel = () => {
-        document.activeElement.blur();
+        doc.activeElement.blur();
         contentTreeContainer.classList.toggle(CLASS_CONTENT_TREE_EXPANDED);
         contentTreeContainer.classList.add(CLASS_CONTENT_TREE_ANIMATE);
         btn.classList.toggle(CLASS_BTN_CONTENT_TREE_EXPANDED);
