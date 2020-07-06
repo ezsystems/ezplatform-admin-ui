@@ -1,17 +1,27 @@
 (function (global, doc, eZ, $) {
+    let lastInsertTooltipTarget = null;
     const TOOLTIPS_SELECTOR = '[title]';
     const observerConfig = {
         childList: true,
         subtree: true,
     };
     const observer = new MutationObserver((mutationsList) => {
-        mutationsList.forEach((mutation) => {
-            const showedTooltipNode = doc.querySelector('.ez-tooltip.show');
+        if (lastInsertTooltipTarget) {
+            mutationsList.forEach((mutation) => {
+                const { removedNodes } = mutation;
 
-            if (mutation.removedNodes.length && showedTooltipNode) {
-                showedTooltipNode.remove();
-            }
-        });
+                if (removedNodes.length) {
+                    removedNodes.forEach((removedNode) => {
+                        if (!removedNode.classList.contains('ez-tooltip')) {
+                            lastInsertTooltipTarget = null;
+                            doc.querySelectorAll('.ez-tooltip.show').forEach((tooltipNode) => {
+                                tooltipNode.remove();
+                            });
+                        }
+                    });
+                }
+            });
+        }
     });
     const parse = (baseElement = doc) => {
         if (!baseElement) {
@@ -38,6 +48,10 @@
                                     <div class="arrow ez-tooltip__arrow"></div>
                                     <div class="tooltip-inner ez-tooltip__inner"></div>
                                </div>`,
+                });
+
+                $(tooltipNode).on('inserted.bs.tooltip', (event) => {
+                    lastInsertTooltipTarget = event.currentTarget;
                 });
             }
         }
