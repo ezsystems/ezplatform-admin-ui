@@ -100,11 +100,6 @@ services:
         tags:
             - { name: form.type, alias: ezplatform_content_forms_fielddefinition_update }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentFieldType:
-        arguments: ["@ezplatform.content_forms.field_type_form_mapper.dispatcher"]
-        tags:
-            - { name: form.type, alias: ezplatform_content_forms_content_field }
-
     EzSystems\EzPlatformAdminUi\Form\Type\URL\URLListType:
         arguments:
             - '@translator'
@@ -134,3 +129,10 @@ services:
     EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasAssetRelation:
         tags:
             - { name: 'ezplatform.form.trash_location_option', priority: 40 }
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType:
+        arguments:
+            $baseType: '@Ibexa\Platform\Bundle\SearchBundle\Form\Type\SearchType'
+            $translator: '@translator'
+        tags:
+            - { name: form.type, alias: EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType }

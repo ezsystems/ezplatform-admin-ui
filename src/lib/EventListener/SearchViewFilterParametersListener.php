@@ -12,13 +12,13 @@ use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentEditType;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
-use Ibexa\Platform\Search\View\SearchListView;
+use Ibexa\Platform\Search\View\SearchView;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class SearchListViewFilterParametersListener implements EventSubscriberInterface
+final class SearchViewFilterParametersListener implements EventSubscriberInterface
 {
     /** @var \Symfony\Component\Form\FormFactoryInterface */
     private $formFactory;
@@ -55,7 +55,7 @@ final class SearchListViewFilterParametersListener implements EventSubscriberInt
     {
         $view = $event->getView();
 
-        if (!$view instanceof SearchListView) {
+        if (!$view instanceof SearchView) {
             return;
         }
 
