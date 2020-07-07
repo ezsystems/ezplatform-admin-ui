@@ -52,7 +52,7 @@ class TrashPage extends Page
     public function verifyIfItemInTrash(string $itemType, string $itemName, bool $elementShouldExist): void
     {
         $isElementInTrash = !$this->isTrashEmpty() &&
-            ($this->trashTable->isElementInTable($itemName) && $this->trashTable->getTableCellValue('Type', $itemName) == $itemType);
+            ($this->trashTable->isElementInTable($itemName) && $this->trashTable->getTableCellValue('Content type', $itemName) == $itemType);
         $elementShouldExistString = $elementShouldExist ? 'n\'t' : '';
 
         Assert::assertTrue(
