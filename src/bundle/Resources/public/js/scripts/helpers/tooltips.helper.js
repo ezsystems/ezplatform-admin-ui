@@ -1,4 +1,4 @@
-(function (global, doc, eZ, $) {
+(function(global, doc, eZ, $) {
     let lastInsertTooltipTarget = null;
     const TOOLTIPS_SELECTOR = '[title]';
     const observerConfig = {
@@ -12,7 +12,7 @@
 
                 if (removedNodes.length) {
                     removedNodes.forEach((removedNode) => {
-                        if (!removedNode.classList.contains('ez-tooltip')) {
+                        if (removedNode.classList && !removedNode.classList.contains('ez-tooltip')) {
                             lastInsertTooltipTarget = null;
                             doc.querySelectorAll('.ez-tooltip.show').forEach((tooltipNode) => {
                                 tooltipNode.remove();
