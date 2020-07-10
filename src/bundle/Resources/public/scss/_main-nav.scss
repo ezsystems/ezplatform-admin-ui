@@ -2,6 +2,7 @@
     padding: 0;
     background-color: $ez-white;
     border-bottom: calculateRem(1px) solid $ez-ground-base-dark;
+    
     > .container-fluid {
         padding-right: 0;
     }

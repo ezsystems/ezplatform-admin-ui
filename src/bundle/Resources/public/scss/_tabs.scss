@@ -49,7 +49,7 @@
 
         &.ez-tabs {
             .nav-item {
-                margin-bottom: -1px;
+                margin-bottom: calculateRem(-1px);
             }
         }
 
