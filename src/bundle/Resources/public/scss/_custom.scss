@@ -3,12 +3,22 @@ $ez-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
 $ez-admin-widget-open-transition: all 0.3s ease-in;
 $ez-admin-widget-close-transition: all 0.3s ease-out;
 
+/* Ibexa colors */
+$ibexa-color-red: #DB0032;
+$ibexa-color-black: #131C26;
+$ibexa-color-snow: #E0E0E8;
+$ibexa-color-snow-pale: #E5E3E3;
+$ibexa-color-red-medium: rgba($ibexa-color-red, 0.5);
+$ibexa-color-red-light: rgba($ibexa-color-red, 0.31);
+$ibexa-color-black-medium: #878B90;
+$ibexa-color-black-light: rgba($ibexa-color-black, 0.31);
+
 /* eZ colors */
-$ez-color-primary: #f15a10;
+$ez-color-primary: #DB0032;
 $ez-color-primary-hover: darken($ez-color-primary, 15%);
-$ez-color-secondary: #106d95;
+$ez-color-secondary: #DB0032;
 $ez-color-secondary-hover: darken($ez-color-secondary, 15%);
-$ez-color-hyperlink: #0645ad;
+$ez-color-hyperlink: #DB0032;
 $ez-color-hyperlink-hover: darken($ez-color-hyperlink, 15%);
 $ez-color-positive: #00825c;
 $ez-color-warning: #f7d000;
@@ -16,25 +26,28 @@ $ez-color-danger: #d92d42;
 $ez-color-danger-hover: darken($ez-color-danger, 15%);
 
 $ez-white: #fff;
-$ez-ground-base-pale: #fafafa;
-$ez-ground-base-light: #f5f5f5;
+$ez-ground-base-pale: #F7F7F9;
+$ez-ground-base-light: #F5F5F5;
 $ez-ground-base: #f3f3f3;
-$ez-ground-base-medium: #ededed;
-$ez-ground-base-dark: #e5e3e3;
+$ez-ground-base-medium: #fff;
+$ez-ground-base-dark: #F7F7F9;
 $ez-ground-base-dark-hover: darken($ez-ground-base-dark, 15%);
-$ez-color-base-pale: #dbdbdb;
-$ez-color-base-light: #878787;
+$ez-color-base-pale: #fff;
+$ez-color-base-light: #878B90;
 $ez-color-base-light-hover: darken($ez-color-base-light, 15%);
 $ez-color-base-medium: #646464;
 $ez-color-base-medium-hover: darken($ez-color-base-medium, 15%);
-$ez-color-base-dark: #555;
-$ez-black: #333;
+$ez-color-base-dark: #131C26;
+$ez-black: #131C26;;
 
-$ez-secondary-ground-pale: #e1f5ff;
-$ez-ground-primary: #a8c8d5;
-$ez-secondary-ground: #2b84b1;
-$ez-secondary-ground-medium: #106d95;
-$ez-secondary-ground-dark: #0a5574;
+
+$ez-secondary-ground-pale: #E0E0E8;
+$ez-ground-primary: #fff;
+$ez-secondary-ground: #DB0032;
+$ez-secondary-ground-medium: #DB0032;
+
+$ez-secondary-ground-dark: #DB0032;
+
 $ez-ground-primary-inverted-light: #445a64;
 $ez-ground-primary-inverted: #565e63;
 
@@ -114,6 +127,7 @@ $theme-colors: (
 
 // Typography
 $base-font-size: 16px;
+$small-font-size: 0.8rem !default;
 $h1-font-size: 1.75rem !default;
 $h2-font-size: 1.5rem !default;
 $h3-font-size: 1.375rem !default;

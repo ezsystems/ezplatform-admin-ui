@@ -1,22 +1,24 @@
 .nav-tabs {
-    border-bottom: calculateRem(2px) solid $ez-ground-base-dark;
-    background-color: $ez-ground-base-dark;
+    border-bottom: calculateRem(1px) solid transparent;
+    background-color: $ez-white;
 
     .nav-item {
         margin-bottom: 0;
     }
 
     .nav-link {
-        color: $ez-color-base-medium;
-
+        margin-left: calculateRem(16px);
+        padding: calculateRem(16px) calculateRem(8px);
+        color: $ez-black;
+        border-radius: 0;
+        
         &:hover {
-            background-color: $ez-color-base-pale;
-            border-color: $ez-color-base-pale;
+            @include nav-item-active-hover;
+            color: $ez-color-primary;
         }
 
         &.active {
-            background-color: $ez-ground-base-light;
-            border-color: $ez-ground-base-light;
+            @include nav-item-active-hover;
             color: $ez-black;
         }
     }
@@ -25,14 +27,13 @@
 .ez-dashboard {
     .nav-tabs {
         border-bottom: calculateRem(2px) solid $ez-ground-primary-inverted;
-        background-color: $white;
+        background-color: $ez-white;
         margin-bottom: calculateRem(16px);
 
         .nav-link {
             &.active {
-                background-color: $ez-ground-primary-inverted;
                 border-color: $ez-ground-primary-inverted;
-                color: $white;
+                color: $ez-white;
             }
         }
     }
@@ -44,11 +45,11 @@
     }
 
     .nav-tabs {
-        border-bottom: calculateRem(2px) solid $ez-ground-base-dark;
+        border-bottom: calculateRem(1px) solid $ez-ground-base-dark;
 
         &.ez-tabs {
             .nav-item {
-                margin-bottom: -2px;
+                margin-bottom: -1px;
             }
         }
 
@@ -120,8 +121,6 @@
                     }
 
                     .nav-link {
-                        background-color: $ez-ground-base-light;
-                        border-color: $ez-ground-base-light;
                         border-radius: 0;
                         border: 0;
 

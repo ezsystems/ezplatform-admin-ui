@@ -1,5 +1,4 @@
 .ez-header {
-    background-color: $ez-ground-base-dark;
 
     .container {
     	position: relative;
@@ -7,8 +6,10 @@
     }
 
     .breadcrumb {
-        margin-bottom: 0;
+        margin: calculateRem(16px) 0;
         padding-left: 0;
+        color: $ibexa-color-black-medium;
+        background: transparent;
         font-size: .8125rem;
         flex-wrap: nowrap;
     }
