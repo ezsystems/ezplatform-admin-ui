@@ -4,20 +4,20 @@ $ez-admin-widget-open-transition: all 0.3s ease-in;
 $ez-admin-widget-close-transition: all 0.3s ease-out;
 
 /* eZ colors */
-$ez-color-primary: #DB0032; //
-$ez-color-primary-hover: darken($ez-color-primary, 15%); //
-$ez-color-secondary: #DB0032; //
-$ez-color-secondary-hover: darken($ez-color-secondary, 15%); //
-$ez-color-hyperlink: #DB0032; //
+$ez-color-primary: #DB0032;
+$ez-color-primary-hover: darken($ez-color-primary, 15%);
+$ez-color-secondary: #DB0032;
+$ez-color-secondary-hover: darken($ez-color-secondary, 15%);
+$ez-color-hyperlink: #DB0032;
 $ez-color-hyperlink-hover: darken($ez-color-hyperlink, 15%);
 $ez-color-positive: #00825c;
 $ez-color-warning: #f7d000;
 $ez-color-danger: #d92d42;
 $ez-color-danger-hover: darken($ez-color-danger, 15%);
 
-$ez-white: #fff; //
-$ez-ground-base-pale: #F7F7F9; //
-$ez-ground-base-light: #F5F5F5; //
+$ez-white: #fff;
+$ez-ground-base-pale: #F7F7F9;
+$ez-ground-base-light: #F5F5F5;
 $ez-ground-base: #f3f3f3;
 $ez-ground-base-medium: #fff;
 $ez-ground-base-dark: #F7F7F9;
