@@ -24,7 +24,7 @@
     &--create-location {
         &:not(.c-action-btn--disabled):hover,
         &:not(.c-action-btn--disabled):focus {
-            svg {
+            .ez-icon {
                 fill: $ez-color-primary;
             }
         }
