@@ -1,5 +1,5 @@
 .ez-page-title {
-    padding-bottom: calculateRem(16px);
+    margin-bottom: calculateRem(14px);
     display: grid;
     grid-template-columns: calc(100% - #{calculateRem(50px)}) calculateRem(50px);
     grid-column-gap: calculateRem(10px);
@@ -19,14 +19,15 @@
     &__content-name {
         white-space: nowrap;
         overflow: hidden;
+        font-weight: normal;
+        font-size: calculateRem(26px);
         text-overflow: ellipsis;
         width: calc(100% - #{calculateRem(36px)});
-        padding-left: calculateRem(8px);
+        margin-bottom: calculateRem(16px);
     }
 
     &__content-type-name {
-        padding-left: calculateRem(44px);
-        font-size: calculateRem(18px);
+        font-size: calculateRem(16px);
         font-weight: 400;
         color: $ez-color-base-light;
         grid-area: content-type-name;
