@@ -1,7 +1,8 @@
 .ez-main-nav {
     padding: 0;
-    background-color: $ez-ground-base-medium;
-
+    background-color: $ez-white;
+    border-bottom: calculateRem(1px) solid $ez-ground-base-dark;
+    
     > .container-fluid {
         padding-right: 0;
     }
@@ -13,7 +14,7 @@
     }
 
     .nav-tabs {
-        background-color: $ez-ground-base-medium;
+        background-color: $ez-white;
         border: none;
         margin-bottom: 0;
 
@@ -29,13 +30,13 @@
 
             &:hover {
                 background-color: $ez-ground-base-pale;
-                border-color: transparent;
+                border-color: $ez-white;
             }
 
             &.active {
-                background-color: $white;
-                border-color: $white;
-                color: $ez-black;
+                background-color: $ez-white;
+                border-color: $ez-white;
+                color: $ez-color-primary
             }
         }
     }
@@ -52,9 +53,8 @@
             color: $ez-black;
 
             &.active {
-                border-bottom: 3px solid $ez-color-primary;
-                font-weight: bold;
                 padding-bottom: 0.4375rem;
+                color: $ez-color-primary;
             }
         }
     }

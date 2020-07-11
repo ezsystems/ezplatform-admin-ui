@@ -8,31 +8,28 @@
 
     &__btn--upload {
         display: inline-flex;
-        border-radius: calculateRem(4px);
         text-align: center;
         cursor: pointer;
         letter-spacing: calculateRem(0.5px);
         color: $ez-white;
         font-size: calculateRem(14px);
-        font-weight: bold;
-        border: calculateRem(1px) solid $ez-color-primary;
-        background: $ez-color-primary;
         transition: background 0.3s $ez-admin-transition;
         align-items: center;
-        height: calculateRem(40px);
-        width: calculateRem(40px);
+        height: calculateRem(32px);
+        width: calculateRem(32px);
         justify-content: center;
+        border: none;
 
         &:hover,
         &:focus {
-            background: $ez-color-primary-hover;
+            .ez-icon {
+                fill: $ez-color-primary;
+            }
         }
 
         &[disabled],
         &[disabled]:hover,
         &[disabled]:focus {
-            border: calculateRem(1px) solid $ez-color-primary;
-            background: $ez-color-primary;
             cursor: not-allowed;
             opacity: 0.3;
         }

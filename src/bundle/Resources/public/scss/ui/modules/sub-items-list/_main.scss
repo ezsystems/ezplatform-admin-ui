@@ -1,26 +1,26 @@
 .m-sub-items {
+    padding: calculateRem(16px);
+    background: $ez-white;
+
     &,
     & * {
         box-sizing: border-box;
     }
 
     &__header {
-        height: calculateRem(50px);
         width: 100%;
-        border-radius: calculateRem(4px) calculateRem(4px) 0 0;
+        padding: 0 calculateRem(8px) calculateRem(36px);
         font-weight: bold;
         line-height: calculateRem(50px);
-        background: $ez-ground-primary-inverted-light;
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
-        padding: 0 calculateRem(16px);
         align-items: center;
     }
 
     &__title {
-        font-size: calculateRem(17px);
-        color: $ez-white;
+        font-size: calculateRem(16px);
+        color: $ez-black;
         flex: 1 1 auto;
     }
 
@@ -29,12 +29,11 @@
     }
 
     &__actions .m-mfu {
-        margin-right: calculateRem(8px);
+        margin-right: calculateRem(24px);
         display: flex;
     }
 
     &__list {
-        background: $ez-white;
         font-size: calculateRem(15px);
         line-height: calculateRem(40px);
         text-align: left;

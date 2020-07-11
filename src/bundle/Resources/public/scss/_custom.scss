@@ -3,40 +3,63 @@ $ez-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
 $ez-admin-widget-open-transition: all 0.3s ease-in;
 $ez-admin-widget-close-transition: all 0.3s ease-out;
 
-/* eZ colors */
-$ez-color-primary: #f15a10;
+// Ibexa colors
+$ibexa-white: #fff;
+$ibexa-black: #131C26;
+
+$ibexa-color-primary: #DB0032;
+$ibexa-color-primary-pale: #F3E4E7;
+$ibexa-color-primary-light: #E75476;
+
+$ibexa-color-base: #E0E0E8;
+$ibexa-color-base-pale: #F5F5F5;
+$ibexa-color-base-light: #F7F7F9;
+$ibexa-color-base-medium: #ECECF1;
+$ibexa-color-base-dark: #878B90;
+$ibexa-color-base-deep-dark: #131C26;
+
+$ibexa-color-font: #131C26;
+$ibexa-color-font-pale: #878B90;
+
+$ibexa-color-positive: #00825c;
+$ibexa-color-warning: #f7d000;
+$ibexa-color-danger: #d92d42;
+
+/* eZ colors: These colors are deprecated, please use colors with the "ibexa" prefix */
+$ez-color-primary: $ibexa-color-primary;
 $ez-color-primary-hover: darken($ez-color-primary, 15%);
-$ez-color-secondary: #106d95;
+$ez-color-secondary: $ibexa-color-primary;
 $ez-color-secondary-hover: darken($ez-color-secondary, 15%);
-$ez-color-hyperlink: #0645ad;
+$ez-color-hyperlink: $ibexa-color-primary;
 $ez-color-hyperlink-hover: darken($ez-color-hyperlink, 15%);
-$ez-color-positive: #00825c;
-$ez-color-warning: #f7d000;
-$ez-color-danger: #d92d42;
+$ez-color-positive: $ibexa-color-positive;
+$ez-color-warning: $ibexa-color-warning;
+$ez-color-danger: $ibexa-color-danger;
 $ez-color-danger-hover: darken($ez-color-danger, 15%);
 
-$ez-white: #fff;
-$ez-ground-base-pale: #fafafa;
-$ez-ground-base-light: #f5f5f5;
+$ez-white: $ibexa-white;
+$ez-ground-base-pale: $ibexa-color-base-light;
+$ez-ground-base-light: $ibexa-color-base-pale;
 $ez-ground-base: #f3f3f3;
-$ez-ground-base-medium: #ededed;
-$ez-ground-base-dark: #e5e3e3;
+$ez-ground-base-medium: $ibexa-white;
+$ez-ground-base-dark: $ibexa-color-base-light;
 $ez-ground-base-dark-hover: darken($ez-ground-base-dark, 15%);
-$ez-color-base-pale: #dbdbdb;
-$ez-color-base-light: #878787;
+$ez-color-base-pale: $ibexa-white;
+$ez-color-base-light: $ibexa-color-base-dark;
 $ez-color-base-light-hover: darken($ez-color-base-light, 15%);
-$ez-color-base-medium: #646464;
+$ez-color-base-medium: $ibexa-color-base-dark;
 $ez-color-base-medium-hover: darken($ez-color-base-medium, 15%);
-$ez-color-base-dark: #555;
-$ez-black: #333;
+$ez-color-base-dark: $ibexa-black;
+$ez-black: $ibexa-black;
 
-$ez-secondary-ground-pale: #e1f5ff;
-$ez-ground-primary: #a8c8d5;
-$ez-secondary-ground: #2b84b1;
-$ez-secondary-ground-medium: #106d95;
-$ez-secondary-ground-dark: #0a5574;
+$ez-secondary-ground-pale: $ibexa-color-base;
+$ez-ground-primary: $ibexa-white;
+$ez-secondary-ground: $ibexa-color-primary;
+$ez-secondary-ground-medium: $ibexa-color-primary;
+$ez-secondary-ground-dark: $ibexa-color-primary;
+
 $ez-ground-primary-inverted-light: #445a64;
-$ez-ground-primary-inverted: #565e63;
+$ez-ground-primary-inverted: $ibexa-color-base;
 
 $ez-color-warning-pale: #fceaec;
 $ez-color-warning-dark: #aa0000;
@@ -50,50 +73,50 @@ $ez-pagination-page-link-radius: 50%;
 $ez-pagination-border-radius: 0.3rem;
 
 /* boostrap variables*/
-$white: $ez-white;
-$gray-100: $ez-ground-base-pale;
-$gray-200: $ez-ground-base-light;
-$gray-300: $ez-ground-base;
-$gray-400: $ez-ground-base-medium;
-$gray-500: $ez-ground-base-dark;
-$gray-600: $ez-color-base-pale;
-$gray-700: $ez-color-base-light;
-$gray-800: $ez-color-base-medium;
-$gray-900: $ez-color-base-dark;
-$black: $ez-black;
+$white: $ibexa-white;
+$gray-100: $ibexa-color-base-pale;
+$gray-200: $ibexa-color-base-pale;
+$gray-300: $ibexa-color-base-light;
+$gray-400: $ibexa-color-base-light;
+$gray-500: $ibexa-color-base-medium;
+$gray-600: $ibexa-color-base-medium;
+$gray-700: $ibexa-color-base;
+$gray-800: $ibexa-color-base;
+$gray-900: $ibexa-color-base-dark;
+$black: $ibexa-black;
 
 $grays: (
-    100: $ez-ground-base-pale,
-    200: $ez-ground-base-light,
-    300: $ez-ground-base,
-    400: $ez-ground-base-medium,
-    500: $ez-ground-base-dark,
-    600: $ez-color-base-pale,
-    700: $ez-color-base-light,
-    800: $ez-color-base-medium,
-    900: $ez-color-base-dark
+    100: $ibexa-color-base-pale,
+    200: $ibexa-color-base-pale,
+    300: $ibexa-color-base-light,
+    400: $ibexa-color-base-light,
+    500: $ibexa-color-base-medium,
+    600: $ibexa-color-base-medium,
+    700: $ibexa-color-base,
+    800: $ibexa-color-base,
+    900: $ibexa-color-base-dark
 );
 
-$blue: $ez-color-secondary;
-$red: $ez-color-danger;
-$orange: $ez-color-primary;
-$yellow: $ez-color-warning;
-$green: $ez-color-positive;
-$teal: $ez-ground-primary;
+$blue: $ibexa-color-primary;
+$red: $ibexa-color-primary;
+$orange: $ibexa-color-primary;
+$yellow: $ibexa-color-warning;
+$green: $ibexa-color-positive;
+$teal: $ibexa-white;
 $pink: #e83e8c !default;
 $indigo: #6610f2 !default;
 $purple: #6f42c1 !default;
 $cyan: #17a2b8 !default;
 
 $colors: (
-    blue: $ez-color-secondary,
-    red: $ez-color-danger,
-    orange: $ez-color-primary,
-    yellow: $ez-color-warning,
-    green: $ez-color-positive,
-    teal: $ez-ground-primary,
-    white: $white,
-    gray: $ez-color-base-light,
+    blue: $ibexa-color-primary,
+    red: $ibexa-color-primary,
+    orange: $ibexa-color-primary,
+    yellow: $ibexa-color-warning,
+    green: $ibexa-color-positive,
+    teal: $ibexa-white,
+    white: $ibexa-white,
+    gray: $ibexa-color-base-dark,
     gray-dark: #e83e8c,
     indigo: $indigo,
     purple: $purple,
@@ -102,18 +125,19 @@ $colors: (
 );
 
 $theme-colors: (
-    primary: $ez-color-primary,
-    secondary: $ez-color-secondary,
-    success: $ez-color-positive,
-    warning: $ez-color-warning,
-    danger: $ez-color-danger,
-    light: $ez-ground-base-pale,
-    dark: $ez-color-base-dark,
+    primary: $ibexa-color-primary,
+    secondary: $ibexa-color-primary,
+    success: $ibexa-color-positive,
+    warning: $ibexa-color-warning,
+    danger: $ibexa-color-danger,
+    light: $ibexa-color-base-light,
+    dark: $ibexa-black,
     info: $cyan
 );
 
 // Typography
 $base-font-size: 16px;
+$small-font-size: 0.8rem !default;
 $h1-font-size: 1.75rem !default;
 $h2-font-size: 1.5rem !default;
 $h3-font-size: 1.375rem !default;

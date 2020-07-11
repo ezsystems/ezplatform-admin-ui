@@ -1,15 +1,15 @@
 @import 'mixins/image-preview';
 
 @mixin checkbox-icon() {
-    border: 2px solid $ez-color-secondary;
-    padding: 4px;
+    border: calculateRem(1px) solid $ez-color-secondary;
     margin: 0;
-    line-height: 0.5;
-    border-radius: 0.25rem;
+    padding: 0;
+    width: calculateRem(64px);
+    height: calculateRem(32px);
+    border-radius: calculateRem(2px);
     position: relative;
     z-index: 0;
     cursor: pointer;
-    min-width: 4.6875rem;
 
     &:before {
         content: '';
@@ -20,21 +20,19 @@
         left: 0;
         background-color: $ez-color-secondary;
         z-index: -1;
-        border-radius: 0.25rem;
+        border-radius: calculateRem(2px);
         transform: translate(calc(100% + 0.3rem), -50%);
         transition: all 0.2s $ez-admin-transition;
     }
 
     .ez-icon {
         fill: $ez-color-secondary;
-        margin: 0.125rem;
         height: 1.5rem;
         width: 1.5rem;
     }
 
     .ez-icon + .ez-icon {
         fill: $ez-white;
-        margin: 0.125rem 0.125rem 0.125rem 0.3125rem;
     }
 
     &.is-checked {
@@ -240,4 +238,12 @@
         height: calculateRem(36px);
         line-height: calculateRem(36px);
     }
+}
+
+@mixin nav-item-active-hover {
+    background-color: $ez-white;
+    border-top-color: $ez-white;
+    border-right-color: $ez-white;
+    border-bottom-color: $ez-color-primary;
+    border-left-color: $ez-white;
 }
