@@ -19,7 +19,6 @@
     }
 
     &__cell {
-        border-top: calculateRem(1px) solid $ez-ground-primary;
         padding-left: calculateRem(16px);
         padding-top: calculateRem(13px);
         font-size: calculateRem(14px);
@@ -42,7 +41,6 @@
             position: absolute;
             left: 0;
             width: calculateRem(30px);
-            border-top: calculateRem(1px) solid $ez-ground-primary;
             line-height: 0;
             padding-top: calculateRem(16px);
             margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
