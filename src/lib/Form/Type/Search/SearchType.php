@@ -7,8 +7,9 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
 
 use EzSystems\EzPlatformAdminUi\Form\Type\Date\DateIntervalType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use EzSystems\EzPlatformAdminUi\Form\Type\User\UserType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -31,9 +32,6 @@ final class SearchType extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -41,6 +39,10 @@ final class SearchType extends AbstractType
         $this->baseType->buildForm($builder, $options);
 
         $builder
+            ->remove('search_in_users');
+
+        $builder
+            ->add('creator', UserType::class)
             ->add('last_modified', DateIntervalType::class)
             ->add('created', DateIntervalType::class)
             ->add('last_modified_select', ChoiceType::class, [
@@ -78,8 +80,6 @@ final class SearchType extends AbstractType
     /**
      * Generate time periods options available to choose.
      *
-     * @return array
-     *
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     private function getTimePeriodChoices(): array
@@ -94,8 +94,6 @@ final class SearchType extends AbstractType
 
     /**
      * Returns available time periods values.
-     *
-     * @return array
      *
      * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
