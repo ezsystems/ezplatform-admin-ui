@@ -23,8 +23,10 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\ContentType\TranslationsTab;
+use EzSystems\RepositoryForms\Data\ContentTypeCreateData;
 use EzSystems\RepositoryForms\Data\Mapper\ContentTypeDraftMapper;
 use EzSystems\RepositoryForms\Form\ActionDispatcher\ActionDispatcherInterface;
+use EzSystems\RepositoryForms\Form\Type\ContentType\ContentTypeCreateType;
 use EzSystems\RepositoryForms\Form\Type\ContentType\ContentTypeUpdateType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -174,45 +176,46 @@ class ContentTypeController extends Controller
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
+     * @throws NotFoundException
      */
-    public function addAction(ContentTypeGroup $group): Response
+    public function addAction(Request $request, ContentTypeGroup $group): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('class', 'create'));
         $mainLanguageCode = reset($this->languages);
 
-        $createStruct = $this->contentTypeService->newContentTypeCreateStruct('__new__' . md5((string)microtime(true)));
-        $createStruct->mainLanguageCode = $mainLanguageCode;
-        $createStruct->names = [$mainLanguageCode => 'New Content Type'];
+        $form = $this->createAddForm($group);
+        $form->handleRequest($request);
 
-        try {
-            $contentTypeDraft = $this->contentTypeService->createContentType($createStruct, [$group]);
-        } catch (NotFoundException $e) {
-            $this->notificationHandler->error(
-                $this->translator->trans(
-                    /** @Desc("Cannot create Content Type. Could not find 'Language' with identifier '%languageCode%'") */
-                    'content_type.add.missing_language',
-                    ['%languageCode%' => $mainLanguageCode],
-                    'content_type'
-                )
-            );
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ContentTypeCreateData $data) use ($group, $mainLanguageCode) {
+                $createStruct = $this->contentTypeDraftMapper->reverseMap($data, $mainLanguageCode);
+                $contentTypeDraft = $this->contentTypeService->createContentType($createStruct, [$group]);
+                $this->contentTypeService->publishContentTypeDraft($contentTypeDraft);
 
-            return $this->redirectToRoute('ezplatform.content_type_group.view', [
-                'contentTypeGroupId' => $group->id,
-            ]);
+                $this->notificationHandler->success(
+                    $this->translator->trans(
+                        /** @Desc("Content Type '%name%' created.") */
+                        'content_type.create.success',
+                        ['%name%' => $contentTypeDraft->getName()],
+                        'content_type'
+                    )
+                );
+
+                return $this->redirectToRoute('ezplatform.content_type.view', [
+                    'contentTypeGroupId' => $group->id,
+                    'contentTypeId' => $contentTypeDraft->id,
+                ]);
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
-        $language = $this->languageService->loadLanguage($mainLanguageCode);
-        $form = $this->createUpdateForm($group, $contentTypeDraft, $language);
 
-        return $this->render('@ezdesign/admin/content_type/create.html.twig', [
+        return $this->render('@ezdesign/admin/content_type/add.html.twig', [
             'content_type_group' => $group,
-            'content_type' => $contentTypeDraft,
             'form' => $form->createView(),
         ]);
     }
@@ -611,6 +614,16 @@ class ContentTypeController extends Controller
             'can_update' => $canUpdate,
             'languages' => $languages,
             'form_content_type_edit' => $contentTypeEdit->createView(),
+        ]);
+    }
+
+    public function createAddForm(ContentTypeGroup $contentTypeGroup): FormInterface
+    {
+        return $this->createForm(ContentTypeCreateType::class, new ContentTypeCreateData($contentTypeGroup->id), [
+            'method' => Request::METHOD_POST,
+            'action' => $this->generateUrl('ezplatform.content_type.add', [
+                'contentTypeGroupId' => $contentTypeGroup->id,
+            ]),
         ]);
     }
 

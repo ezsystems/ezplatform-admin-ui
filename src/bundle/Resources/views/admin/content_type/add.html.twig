@@ -1,0 +1,74 @@
+{% extends "@ezdesign/admin/base.html.twig" %}
+
+{% trans_default_domain 'content_type' %}
+
+{% form_theme form _self '@ezdesign/form_fields.html.twig'  %}
+
+{% block breadcrumbs_admin %}
+    {% include '@ezdesign/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
+        { url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }), value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%') },
+        { value: 'content_type.breadcrumb.create'|trans|desc('Creating a new Content Type') }
+    ]} %}
+{% endblock %}
+
+{% block page_title_admin %}
+    {% include '@ezdesign/parts/page_title.html.twig' with {
+        title: 'content_type.view.create.title'|trans|desc('Creating a new Content Type'),
+        iconName: 'content-type'
+    } %}
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+
+    <section class="container mt-4 px-5">
+        <div class="card ez-card">
+            <div class="ez-card__header ez-card__header--secondary">
+                {{ 'content_type.view.create.global_properties'|trans|desc('Global properties') }}
+            </div>
+            <div class="card-body">
+                {{ form_row(form.contentTypeGroupId) }}
+                {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
+                {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.description, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.nameSchema, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.urlAliasSchema, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.isContainer, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+                {{ form_row(form.defaultSortField, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.defaultSortOrder, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form.defaultAlwaysAvailable, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+            </div>
+        </div>
+    </section>
+    <section class="container mt-4 px-5">
+        <div class="card ez-card">
+            <div class="ez-card__header ez-card__header--secondary d-flex justify-content-between">
+                <div class="p-3">
+                    {{ 'content_type.view.create.content_field_definitions'|trans|desc('Content field definitions') }}
+                </div>
+                <div class="form-inline">
+                    <div class="ez-card__field-control mr-2">
+                        {{ form_widget(form.fieldTypeSelection, {'attr': {'class': 'ez-field-selection'}}) }}
+                        {{ form_widget(form.addFieldDefinition, {'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{ form_widget(form.publishContentType, { attr: { hidden: 'hidden' }}) }}
+
+    {{ form_widget(form._token) }}
+    {{ form_end(form, {'render_rest': false }) }}
+{% endblock %}
+
+{% block right_sidebar %}
+    {% set content_type_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_create.sidebar_right', [], {'save_id': form.publishContentType.vars.id, 'group': content_type_group}) %}
+    {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/parts/menu/sidebar_right.html.twig'}) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-content-type-create-js', null, 'ezplatform') }}
+{% endblock %}

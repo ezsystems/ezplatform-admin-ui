@@ -41,6 +41,11 @@
         <target state="new">Content Type</target>
         <note>key: content_type.content_type</note>
       </trans-unit>
+      <trans-unit id="cb1c754b0c1d906f22cc5f91dd29251d746fa0d7" resname="content_type.create.success">
+        <source>Content Type '%name%' created.</source>
+        <target state="new">Content Type '%name%' created.</target>
+        <note>key: content_type.create.success</note>
+      </trans-unit>
       <trans-unit id="693f9ade0c2bb6a7c19b6f9b818d96aa23f1e013" resname="content_type.default_availability">
         <source>Default content availability</source>
         <target state="new">Default content availability</target>
