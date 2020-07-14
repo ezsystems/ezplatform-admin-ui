@@ -1,9 +1,12 @@
 .ez-dashboard__header {
     display: grid;
-    grid-template-columns: auto 6.5rem;
+    grid-template-columns: auto 7.5rem;
 
     .ez-dashboard__create {
         .ez-btn--cotf-create {
+            color: $ibexa-color-primary;
+            text-decoration: none;
+
             .ez-icon {
                 margin-right: .25rem;
             }

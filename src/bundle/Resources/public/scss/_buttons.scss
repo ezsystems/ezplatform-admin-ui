@@ -1,5 +1,13 @@
 @import 'extra-actions';
 
+.ez-btn {
+    &--action-icon {
+        .ez-icon {
+            fill: $ibexa-color-base-dark;
+        }
+    }
+}
+
 .btn-icon {
     padding: 0;
 }

@@ -1,3 +1,5 @@
+@import './public/bundles/ezplatformadminui/scss/functions/calculate.rem';
+
 // eZ transition function
 $ez-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
 $ez-admin-widget-open-transition: all 0.3s ease-in;
@@ -20,6 +22,7 @@ $ibexa-color-base-deep-dark: #131C26;
 
 $ibexa-color-font: #131C26;
 $ibexa-color-font-pale: #878B90;
+$ibexa-color-border-light: #ECDFD1;
 
 $ibexa-color-positive: #00825c;
 $ibexa-color-warning: #f7d000;
@@ -151,21 +154,24 @@ $headings-font-weight: 700;
 $font-family-sans-serif: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
 
 // Tables
+$table-cell-padding: calculateRem(12px) calculateRem(16px);
 $table-bg: $white;
-$table-border-color: $ez-ground-primary;
+$table-border-width: 0;
+$table-hover-bg: $ibexa-color-base-pale;
 
 // Breadcrumbs
 $breadcrumb-bg: $ez-ground-base;
 
 // Links
-$link-color: $ez-color-hyperlink;
+$link-color: $ibexa-color-font;
+$link-hover-decoration: none;
+$link-hover-color: $ibexa-color-primary;
 
 // Body
 $body-bg: $ez-ground-base-pale;
 $body-color: $ez-black;
 
 // Pagination
-
 $pagination-color: $ez-black;
 $pagination-bg: $ez-pagination-bg;
 
@@ -181,4 +187,19 @@ $pagination-border-width: 0;
 $pagination-border-color: transparent;
 
 // Modals
-$modal-content-bg: $ez-ground-base-medium;
+$modal-header-padding: calculateRem(16px) calculateRem(24px);
+$modal-header-border-width: 0;
+
+//Components
+$border-radius: calculateRem(2px);
+
+//Cards
+$card-spacer-x: 0;
+
+//Grid
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1280px
+) !default;

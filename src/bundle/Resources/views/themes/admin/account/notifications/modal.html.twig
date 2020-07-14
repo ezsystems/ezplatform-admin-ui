@@ -1,7 +1,7 @@
 {% trans_default_domain 'notifications' %}
 
 <div
-    class="modal fade ez-notifications-modal"
+    class="modal fade ez-notifications-modal ez-modal"
     id="view-notifications"
     tabindex="-1"
     role="dialog">
@@ -10,11 +10,11 @@
         role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 
+                <div 
                     class="modal-title" 
                     data-notifications-total="">
                     {{ 'notifications'|trans|desc('Notifications') }} 
-                </h5>
+                </div>
                 <button
                     type="button"
                     class="close"
@@ -22,7 +22,7 @@
                     data-dismiss="modal"
                     aria-label="Close">
                     <svg
-                        class="ez-icon ez-icon--medium"
+                        class="ez-icon ez-icon--small-medium"
                         aria-hidden="true">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
                     </svg>

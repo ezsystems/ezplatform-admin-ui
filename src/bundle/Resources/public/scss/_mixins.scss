@@ -1,4 +1,6 @@
 @import 'mixins/image-preview';
+@import 'mixins/type-icon';
+@import 'mixins/inputs';
 
 @mixin checkbox-icon() {
     border: calculateRem(1px) solid $ez-color-secondary;

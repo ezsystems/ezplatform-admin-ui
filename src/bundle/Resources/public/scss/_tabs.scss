@@ -11,6 +11,7 @@
         padding: calculateRem(16px) calculateRem(8px);
         color: $ez-black;
         border-radius: 0;
+        text-decoration: none;
         
         &:hover {
             @include nav-item-active-hover;
@@ -26,14 +27,12 @@
 
 .ez-dashboard {
     .nav-tabs {
-        border-bottom: calculateRem(2px) solid $ez-ground-primary-inverted;
         background-color: $ez-white;
-        margin-bottom: calculateRem(16px);
+        margin-bottom: calculateRem(-2px);
 
         .nav-link {
             &.active {
-                border-color: $ez-ground-primary-inverted;
-                color: $ez-white;
+                color: $ibexa-color-primary;
             }
         }
     }

@@ -44,6 +44,12 @@
         }
     }
 
+    &__title {
+        padding: calculateRem(24px) 0 calculateRem(16px) calculateRem(24px);
+        font-weight: bold;
+        background: $ez-white;
+    }
+
     &__body {
         padding: .75rem 1.25rem;
     }
@@ -55,6 +61,12 @@
 
         .form-control {
             margin-bottom: 0;
+        }
+    }
+
+    &--no-padding {
+        .ez-card__body {
+            padding: 0;
         }
     }
 }
