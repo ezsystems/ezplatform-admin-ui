@@ -436,6 +436,201 @@
         <target>Setup / System info</target>
         <note>key: role.policy.setup.system_info</note>
       </trans-unit>
+      <trans-unit id="029ea67634ff66aa9afd7c8850ebf6abe0f2e7be" resname="role.policy.siso_control_center">
+        <source>Siso control center</source>
+        <target>Siso control center</target>
+        <note>key: role.policy.siso_control_center</note>
+      </trans-unit>
+      <trans-unit id="ad4e634b7a562503b6e50d2b057490b8d7dc6336" resname="role.policy.siso_control_center.all_functions">
+        <source>Siso control center / All functions</source>
+        <target>Siso control center / All functions</target>
+        <note>key: role.policy.siso_control_center.all_functions</note>
+      </trans-unit>
+      <trans-unit id="a0f12a7663039fde6f8aed723fb9d34a3980fb2a" resname="role.policy.siso_control_center.api_econtent">
+        <source>Siso control center / Api econtent</source>
+        <target>Siso control center / Api econtent</target>
+        <note>key: role.policy.siso_control_center.api_econtent</note>
+      </trans-unit>
+      <trans-unit id="f5fd141280162ef0849b611320d7a0dd8443089e" resname="role.policy.siso_control_center.api_erp">
+        <source>Siso control center / Api erp</source>
+        <target>Siso control center / Api erp</target>
+        <note>key: role.policy.siso_control_center.api_erp</note>
+      </trans-unit>
+      <trans-unit id="45414effd965bb5556bb824a587757ecc008c182" resname="role.policy.siso_control_center.api_jobs">
+        <source>Siso control center / Api jobs</source>
+        <target>Siso control center / Api jobs</target>
+        <note>key: role.policy.siso_control_center.api_jobs</note>
+      </trans-unit>
+      <trans-unit id="4b5b94dfe8ce0ed99afad6c08ad6926941e84a17" resname="role.policy.siso_control_center.manage_emails">
+        <source>Siso control center / Manage emails</source>
+        <target>Siso control center / Manage emails</target>
+        <note>key: role.policy.siso_control_center.manage_emails</note>
+      </trans-unit>
+      <trans-unit id="7fa7d6588d2604254dcf303b4b400c4f73954ad8" resname="role.policy.siso_control_center.manage_erp">
+        <source>Siso control center / Manage erp</source>
+        <target>Siso control center / Manage erp</target>
+        <note>key: role.policy.siso_control_center.manage_erp</note>
+      </trans-unit>
+      <trans-unit id="c65f946a026df0c1c1dd82f341c93f037e7e355e" resname="role.policy.siso_control_center.manage_erp_logs">
+        <source>Siso control center / Manage erp logs</source>
+        <target>Siso control center / Manage erp logs</target>
+        <note>key: role.policy.siso_control_center.manage_erp_logs</note>
+      </trans-unit>
+      <trans-unit id="6fb68c71d5d02066779acbd48adec60b00cda435" resname="role.policy.siso_control_center.manage_exports">
+        <source>Siso control center / Manage exports</source>
+        <target>Siso control center / Manage exports</target>
+        <note>key: role.policy.siso_control_center.manage_exports</note>
+      </trans-unit>
+      <trans-unit id="46733f57f8e3374f10e13976cbf0745e050d0533" resname="role.policy.siso_control_center.manage_imports">
+        <source>Siso control center / Manage imports</source>
+        <target>Siso control center / Manage imports</target>
+        <note>key: role.policy.siso_control_center.manage_imports</note>
+      </trans-unit>
+      <trans-unit id="d9d75b3eea946a68bc4aa78d3810f6b6a04ebada" resname="role.policy.siso_control_center.manage_jobs">
+        <source>Siso control center / Manage jobs</source>
+        <target>Siso control center / Manage jobs</target>
+        <note>key: role.policy.siso_control_center.manage_jobs</note>
+      </trans-unit>
+      <trans-unit id="e6bebe72ead05d9d16bc0dc9ef80c60cb12572b9" resname="role.policy.siso_policy">
+        <source>Siso policy</source>
+        <target>Siso policy</target>
+        <note>key: role.policy.siso_policy</note>
+      </trans-unit>
+      <trans-unit id="71b4a62c52ac03f0597e07fc3a357e059260206e" resname="role.policy.siso_policy.all_functions">
+        <source>Siso policy / All functions</source>
+        <target>Siso policy / All functions</target>
+        <note>key: role.policy.siso_policy.all_functions</note>
+      </trans-unit>
+      <trans-unit id="e1a252421d392fe73e1978cf223051e1f7103cc5" resname="role.policy.siso_policy.checkout">
+        <source>Siso policy / Checkout</source>
+        <target>Siso policy / Checkout</target>
+        <note>key: role.policy.siso_policy.checkout</note>
+      </trans-unit>
+      <trans-unit id="3289ef5c243b5514c6d98f6419de1592d910b308" resname="role.policy.siso_policy.configuration_list">
+        <source>Siso policy / Configuration list</source>
+        <target>Siso policy / Configuration list</target>
+        <note>key: role.policy.siso_policy.configuration_list</note>
+      </trans-unit>
+      <trans-unit id="83b3cf80005b6506e9fc8430ff52df8137ae71c0" resname="role.policy.siso_policy.dashboard_view">
+        <source>Siso policy / Dashboard view</source>
+        <target>Siso policy / Dashboard view</target>
+        <note>key: role.policy.siso_policy.dashboard_view</note>
+      </trans-unit>
+      <trans-unit id="50b4107c987873e01d004a8aac3d0d9b07356a8d" resname="role.policy.siso_policy.delegate">
+        <source>Siso policy / Delegate</source>
+        <target>Siso policy / Delegate</target>
+        <note>key: role.policy.siso_policy.delegate</note>
+      </trans-unit>
+      <trans-unit id="160c9944f5a3f83ccc70ec541c636de74258b693" resname="role.policy.siso_policy.edit_delivery">
+        <source>Siso policy / Edit delivery</source>
+        <target>Siso policy / Edit delivery</target>
+        <note>key: role.policy.siso_policy.edit_delivery</note>
+      </trans-unit>
+      <trans-unit id="0944816d7abca42fe4381817f59c5b8b2593f2a0" resname="role.policy.siso_policy.edit_invoice">
+        <source>Siso policy / Edit invoice</source>
+        <target>Siso policy / Edit invoice</target>
+        <note>key: role.policy.siso_policy.edit_invoice</note>
+      </trans-unit>
+      <trans-unit id="db0dead69b934a0707e2288b888007bd2bd5bfc4" resname="role.policy.siso_policy.forms_profile_edit">
+        <source>Siso policy / Forms profile edit</source>
+        <target>Siso policy / Forms profile edit</target>
+        <note>key: role.policy.siso_policy.forms_profile_edit</note>
+      </trans-unit>
+      <trans-unit id="9fabf0afc088649c08d703561566ca7547a035f8" resname="role.policy.siso_policy.lostorder_list">
+        <source>Siso policy / Lostorder list</source>
+        <target>Siso policy / Lostorder list</target>
+        <note>key: role.policy.siso_policy.lostorder_list</note>
+      </trans-unit>
+      <trans-unit id="983150cec2926fdd6a4f4067da5b386296378615" resname="role.policy.siso_policy.lostorder_manage">
+        <source>Siso policy / Lostorder manage</source>
+        <target>Siso policy / Lostorder manage</target>
+        <note>key: role.policy.siso_policy.lostorder_manage</note>
+      </trans-unit>
+      <trans-unit id="688e008587c8352f5da048fb406deb56a378e0f7" resname="role.policy.siso_policy.lostorder_process">
+        <source>Siso policy / Lostorder process</source>
+        <target>Siso policy / Lostorder process</target>
+        <note>key: role.policy.siso_policy.lostorder_process</note>
+      </trans-unit>
+      <trans-unit id="c49537d92074b71972584fd044d74b19d8294696" resname="role.policy.siso_policy.manage_config">
+        <source>Siso policy / Manage config</source>
+        <target>Siso policy / Manage config</target>
+        <note>key: role.policy.siso_policy.manage_config</note>
+      </trans-unit>
+      <trans-unit id="5e7b82eec437e05e7bfe872efb13d03a06270d4b" resname="role.policy.siso_policy.manage_orders">
+        <source>Siso policy / Manage orders</source>
+        <target>Siso policy / Manage orders</target>
+        <note>key: role.policy.siso_policy.manage_orders</note>
+      </trans-unit>
+      <trans-unit id="4d011e68fa852b7feca863504519636a7de5a4b0" resname="role.policy.siso_policy.manage_prices">
+        <source>Siso policy / Manage prices</source>
+        <target>Siso policy / Manage prices</target>
+        <note>key: role.policy.siso_policy.manage_prices</note>
+      </trans-unit>
+      <trans-unit id="ad5b397ac92ddf8256ce2d9ab12818a383203a5b" resname="role.policy.siso_policy.manage_rating">
+        <source>Siso policy / Manage rating</source>
+        <target>Siso policy / Manage rating</target>
+        <note>key: role.policy.siso_policy.manage_rating</note>
+      </trans-unit>
+      <trans-unit id="e7c54b592a3ebad126466c968eca3fd64e94feb6" resname="role.policy.siso_policy.manage_shipping_costs">
+        <source>Siso policy / Manage shipping costs</source>
+        <target>Siso policy / Manage shipping costs</target>
+        <note>key: role.policy.siso_policy.manage_shipping_costs</note>
+      </trans-unit>
+      <trans-unit id="4703ea64a83fc55601798cc19d29d879f2b79512" resname="role.policy.siso_policy.manage_stock">
+        <source>Siso policy / Manage stock</source>
+        <target>Siso policy / Manage stock</target>
+        <note>key: role.policy.siso_policy.manage_stock</note>
+      </trans-unit>
+      <trans-unit id="731f061c484863f3367c7ddc90b45420d8edb2ad" resname="role.policy.siso_policy.order_list">
+        <source>Siso policy / Order list</source>
+        <target>Siso policy / Order list</target>
+        <note>key: role.policy.siso_policy.order_list</note>
+      </trans-unit>
+      <trans-unit id="ca5cbff667a1c069eb8b95791ce0d99575da77c7" resname="role.policy.siso_policy.orderhistory_view">
+        <source>Siso policy / Orderhistory view</source>
+        <target>Siso policy / Orderhistory view</target>
+        <note>key: role.policy.siso_policy.orderhistory_view</note>
+      </trans-unit>
+      <trans-unit id="9711026ce5d7f383f5b2254deb8b0202e048dcec" resname="role.policy.siso_policy.quickorder">
+        <source>Siso policy / Quickorder</source>
+        <target>Siso policy / Quickorder</target>
+        <note>key: role.policy.siso_policy.quickorder</note>
+      </trans-unit>
+      <trans-unit id="b15b9699a7bf845ed87f812d8aa33f0a045e9193" resname="role.policy.siso_policy.rating_review">
+        <source>Siso policy / Rating review</source>
+        <target>Siso policy / Rating review</target>
+        <note>key: role.policy.siso_policy.rating_review</note>
+      </trans-unit>
+      <trans-unit id="82fb01df828843524e88fc46a99f1309166365da" resname="role.policy.siso_policy.read_basket">
+        <source>Siso policy / Read basket</source>
+        <target>Siso policy / Read basket</target>
+        <note>key: role.policy.siso_policy.read_basket</note>
+      </trans-unit>
+      <trans-unit id="1e26e0c4e32f262b67793f019b92099edc8d172c" resname="role.policy.siso_policy.read_customers_and_orders">
+        <source>Siso policy / Read customers and orders</source>
+        <target>Siso policy / Read customers and orders</target>
+        <note>key: role.policy.siso_policy.read_customers_and_orders</note>
+      </trans-unit>
+      <trans-unit id="ce07309083f3e9bbc06557a454f86d028bc0b37a" resname="role.policy.siso_policy.see_product_price">
+        <source>Siso policy / See product price</source>
+        <target>Siso policy / See product price</target>
+        <note>key: role.policy.siso_policy.see_product_price</note>
+      </trans-unit>
+      <trans-unit id="a0be285570ab4606874b408bce8d9097d3ef8a52" resname="role.policy.siso_policy.translations">
+        <source>Siso policy / Translations</source>
+        <target>Siso policy / Translations</target>
+        <note>key: role.policy.siso_policy.translations</note>
+      </trans-unit>
+      <trans-unit id="b7006b9e044c2aea8159bac92bd8d70c0eca978d" resname="role.policy.siso_policy.update_exchange_rates">
+        <source>Siso policy / Update exchange rates</source>
+        <target>Siso policy / Update exchange rates</target>
+        <note>key: role.policy.siso_policy.update_exchange_rates</note>
+      </trans-unit>
+      <trans-unit id="b9bc8a260965f23a45db9ce5b412757b41dc1c55" resname="role.policy.siso_policy.write_basket">
+        <source>Siso policy / Write basket</source>
+        <target>Siso policy / Write basket</target>
+        <note>key: role.policy.siso_policy.write_basket</note>
+      </trans-unit>
       <trans-unit id="2e2e751bf3201fb6c68307c683a3ac384b9ec0cf" resname="role.policy.site">
         <source>Site</source>
         <target>Site</target>

@@ -11,6 +11,11 @@
         <target>Content Type</target>
         <note>key: policy.limitation.identifier.class</note>
       </trans-unit>
+      <trans-unit id="57f04cb9d7b09f4314ca3855ee020325d3195ab3" resname="policy.limitation.identifier.fieldgroup">
+        <source>FieldGroup</source>
+        <target>FieldGroup</target>
+        <note>key: policy.limitation.identifier.fieldgroup</note>
+      </trans-unit>
       <trans-unit id="76adf2a27f1ae0ab14b623729cd3f281a6e2c285" resname="policy.limitation.identifier.group">
         <source>Content Type Group</source>
         <target>Content Type Group</target>
