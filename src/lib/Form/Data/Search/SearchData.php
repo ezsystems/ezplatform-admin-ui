@@ -11,16 +11,16 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\Search;
 use function class_alias;
 
 class_alias(
-    \Ibexa\Platform\Bundle\SearchBundle\Form\Data\SearchData::class,
+    \Ibexa\Platform\Bundle\Search\Form\Data\SearchData::class,
     __NAMESPACE__ . '\SearchData'
 );
 
 if (false) {
     /**
      * @deprecated since 3.1, to be removed in 3.2.
-     * Use \Ibexa\Platform\Bundle\SearchBundle\Form\Data\SearchData instead
+     * Use \Ibexa\Platform\Bundle\Search\Form\Data\SearchData instead
      */
-    class SearchData extends \Ibexa\Platform\Bundle\SearchBundle\Form\Data\SearchData
+    class SearchData extends \Ibexa\Platform\Bundle\Search\Form\Data\SearchData
     {
     }
 }

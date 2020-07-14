@@ -132,7 +132,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType:
         arguments:
-            $baseType: '@Ibexa\Platform\Bundle\SearchBundle\Form\Type\SearchType'
+            $baseType: '@Ibexa\Platform\Bundle\Search\Form\Type\SearchType'
             $translator: '@translator'
         tags:
             - { name: form.type, alias: EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType }

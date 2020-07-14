@@ -15,7 +15,7 @@ use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewBuilderParametersEvent;
 use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
 use EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
-use Ibexa\Platform\Bundle\SearchBundle\Form\Data\SearchData;
+use Ibexa\Platform\Bundle\Search\Form\Data\SearchData;
 use Ibexa\Platform\Search\View\SearchViewFilter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -77,7 +77,7 @@ class AdminSearchViewFilter implements EventSubscriberInterface
         $controllerAction = $event->getParameters()->get('_controller');
 
         if (
-            'Ibexa\Platform\Bundle\SearchBundle\Controller\SearchController::searchAction' !== $controllerAction
+            'Ibexa\Platform\Bundle\Search\Controller\SearchController::searchAction' !== $controllerAction
         ) {
             return;
         }
