@@ -8,10 +8,14 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form;
 
+use eZ\Publish\API\Repository\Exceptions\ForbiddenException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\UI\Action\EventDispatcherInterface;
 use EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMappingDispatcher;
 use EzSystems\EzPlatformAdminUi\UI\Action\UiActionEventInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,22 +36,21 @@ class SubmitHandler
     /** @var \EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMappingDispatcher */
     protected $formUiActionMappingDispatcher;
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
-     * @param \Symfony\Component\Routing\RouterInterface $router
-     * @param \EzSystems\EzPlatformAdminUi\UI\Action\EventDispatcherInterface $uiActionEventDispatcher
-     * @param \EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMappingDispatcher $formUiActionMappingDispatcher
-     */
+    /** @var \Psr\Log\LoggerInterface */
+    private $logger;
+
     public function __construct(
         NotificationHandlerInterface $notificationHandler,
         RouterInterface $router,
         EventDispatcherInterface $uiActionEventDispatcher,
-        FormUiActionMappingDispatcher $formUiActionMappingDispatcher
+        FormUiActionMappingDispatcher $formUiActionMappingDispatcher,
+        LoggerInterface $logger
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->router = $router;
         $this->uiActionEventDispatcher = $uiActionEventDispatcher;
         $this->formUiActionMappingDispatcher = $formUiActionMappingDispatcher;
+        $this->logger = $logger;
     }
 
     /**
@@ -78,12 +81,16 @@ class SubmitHandler
 
                     return $event->getResponse();
                 }
+            } catch (ForbiddenException | NotFoundException | UnauthorizedException $e) {
+                $this->notificationHandler->error(/** @Ignore */ $e->getMessage());
             } catch (Exception $e) {
-                $this->notificationHandler->error($e->getMessage());
+                $this->logException($e);
+
+                $this->notificationHandler->error(/** @Ignore */ $e->getMessage());
             }
         } else {
             foreach ($form->getErrors(true, true) as $formError) {
-                $this->notificationHandler->warning($formError->getMessage());
+                $this->notificationHandler->warning(/** @Ignore */ $formError->getMessage());
             }
         }
 
@@ -121,6 +128,8 @@ class SubmitHandler
 
                 return $result;
             } catch (Exception $e) {
+                $this->logException($e);
+
                 return new JsonResponse([], Response::HTTP_BAD_REQUEST);
             }
         } else {
@@ -131,5 +140,15 @@ class SubmitHandler
 
             return new JsonResponse(['errors' => $errors], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+    }
+
+    protected function logException(Exception $e): void
+    {
+        $this->logger->error(
+            'An error has occurred while handling form submission: ' . $e->getMessage(),
+            [
+                'exception' => $e->getPrevious() ?? $e,
+            ]
+        );
     }
 }
