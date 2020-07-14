@@ -394,7 +394,7 @@ export default class SubItemsModule extends Component {
                     'bulk_action.success.link_to_location',
                     {
                         locationName: eZ.helpers.text.escapeHTML(location.ContentInfo.Content.Name),
-                        locationHref: this.props.generateLink(location.id, location.ContentInfo.id),
+                        locationHref: this.props.generateLink(location.id, location.ContentInfo.Content._id),
                     },
                     'sub_items'
                 ),
