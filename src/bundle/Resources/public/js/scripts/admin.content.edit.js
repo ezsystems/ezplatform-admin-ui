@@ -117,6 +117,7 @@
     if (itemAuthorToggler) {
         itemAuthorToggler.addEventListener('click', (event) => {
             event.preventDefault();
+            eZ.helpers.tooltips.hideAll();
 
             itemAuthorToggler.classList.toggle('ez-details-items__toggler--gray');
             itemAuthor.classList.toggle('ez-details-items--collapsed');

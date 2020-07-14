@@ -20,13 +20,13 @@
         <source><![CDATA[Tip: If you upgrade to eZ Platform Enterprise you'll get access to:
                         <a target="_blank" href="%license_url%">A business friendly license</a>,
                         <a target="_blank" href="%ee_product_url%">several productivity features</a>,
-                        <a target="_blank" href="%support_service_url%">professional Support</a> and
-                        <a target="_blank" href="%service_life_url%">longer maintenance periode of your release</a>.]]></source>
+                        <a target="_blank" href="%support_service_url%">professional support</a> and a
+                        <a target="_blank" href="%service_life_url%">longer maintenance period of your release</a>.]]></source>
         <target state="new"><![CDATA[Tip: If you upgrade to eZ Platform Enterprise you'll get access to:
                         <a target="_blank" href="%license_url%">A business friendly license</a>,
                         <a target="_blank" href="%ee_product_url%">several productivity features</a>,
-                        <a target="_blank" href="%support_service_url%">professional Support</a> and
-                        <a target="_blank" href="%service_life_url%">longer maintenance periode of your release</a>.]]></target>
+                        <a target="_blank" href="%support_service_url%">professional support</a> and a
+                        <a target="_blank" href="%service_life_url%">longer maintenance period of your release</a>.]]></target>
         <note>key: dashboard.ez_version.community_end_of_maintenance_upgrade</note>
       </trans-unit>
       <trans-unit id="7eb6ab2973439efa8ff820310952e02bc81209cb" resname="dashboard.ez_version.community_severity_non">

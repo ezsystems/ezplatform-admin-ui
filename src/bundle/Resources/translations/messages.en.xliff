@@ -304,6 +304,11 @@
         <target state="new">Cancel</target>
         <note>key: modal.cancel</note>
       </trans-unit>
+      <trans-unit id="ec403158b3fd1e13dbc66f2de51e235fdb178188" resname="modal.close">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: modal.close</note>
+      </trans-unit>
       <trans-unit id="9eae227b7c27ab230a6d0ce5947d93e7d2e1626f" resname="modal.delete">
         <source>Delete</source>
         <target state="new">Delete</target>
@@ -368,6 +373,11 @@
         <source>Cancel</source>
         <target state="new">Cancel</target>
         <note>key: trash.form.cancel</note>
+      </trans-unit>
+      <trans-unit id="7f37e5f732ee7101a696a881cf22045bcd11359c" resname="trash.modal.close">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: trash.modal.close</note>
       </trans-unit>
       <trans-unit id="2720e3018fc8b1158cb728b1d5dc377ef7293b57" resname="trash.modal.message">
         <source>Are you sure you want to send this Content item to Trash?</source>
