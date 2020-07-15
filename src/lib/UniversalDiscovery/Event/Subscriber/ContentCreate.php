@@ -98,9 +98,9 @@ class ContentCreate implements EventSubscriberInterface
 
         $restrictedContentTypes = $this->contentTypeService->loadContentTypeList($restrictedContentTypesIds);
 
-        return array_map(function (ContentType $contentType): string {
+        return array_values(array_map(function (ContentType $contentType): string {
             return $contentType->identifier;
-        }, (array)$restrictedContentTypes);
+        }, (array)$restrictedContentTypes));
     }
 
     /**
