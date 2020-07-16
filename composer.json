@@ -31,7 +31,7 @@
         "symfony/asset": "^5.0",
         "symfony/yaml": "^5.0",
         "jms/translation-bundle": "^1.5",
-        "ezsystems/ezplatform-kernel": "~1.1.0@dev",
+        "ezsystems/ezplatform-kernel": "^1.1@dev",
         "ezsystems/ezplatform-content-forms": "^1.0@dev",
         "ezsystems/ez-support-tools": "^2.0@dev",
         "ezsystems/ezplatform-design-engine": "^3.0@dev",
@@ -61,8 +61,8 @@
     "extra": {
         "_ezplatform_branch_for_behat_tests": "3.1",
         "branch-alias": {
-            "dev-tmp_ci_branch": "2.1.x-dev",
-            "dev-master": "2.1.x-dev"
+            "dev-tmp_ci_branch": "2.2.x-dev",
+            "dev-master": "2.2.x-dev"
         }
     }
 }
