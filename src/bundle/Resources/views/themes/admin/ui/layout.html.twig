@@ -77,7 +77,8 @@
                 addressNotFound: '{{ 'js.error.address_not_found'|trans({}, 'validators')|desc('Provided address does not exist') }}',
                 notSamePasswords: '{{ 'js.error.not_same_passwords'|trans({}, 'validators')|desc('Passwords do not match') }}',
                 invalidValue: '{{ 'js.error.invalid_value'|trans({}, 'validators')|desc('{fieldName} Field has invalid values') }}',
-                outOfRangeValue: '{{ 'js.error.out_of_range_value'|trans({}, 'validators')|desc('{fieldName} value is out of range. The value must be between {min} and {max}') }}'
+                outOfRangeValue: '{{ 'js.error.out_of_range_value'|trans({}, 'validators')|desc('{fieldName} value is out of range. The value must be between {min} and {max}') }}',
+                invalidInputs: '{{ 'js.error.invalid_inputs'|trans({}, 'validators')|desc('{fieldName} Field has invalid inputs') }}',
             });
 
             window.CKEDITOR_BASEPATH = window.ALLOYEDITOR_BASEPATH = "/bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/";

@@ -119,6 +119,18 @@
             this.updateDisabledState(authorNode);
         }
 
+        getAuthorRowChildrenNodes(selector, fieldNode, input) {
+            return [...input.closest(SELECTOR_AUTHOR).querySelectorAll(selector)];
+        }
+
+        getAuthorRowNode(selector, fieldNode, input) {
+            return [input.closest(SELECTOR_AUTHOR)];
+        }
+
+        getFieldNode(selector, fieldNode) {
+            return [...fieldNode.querySelectorAll(selector)];
+        }
+
         /**
          * Finds the nodes to add validation state
          *
@@ -129,11 +141,8 @@
          * @returns {Array}
          * @memberof EzAuthorValidator
          */
-        findValidationStateNodes(fieldNode, input, selectors) {
-            const authorRow = input.closest(SELECTOR_AUTHOR);
-            const nodes = [fieldNode, authorRow];
-
-            return selectors.reduce((total, selector) => total.concat([...authorRow.querySelectorAll(selector)]), nodes);
+        findValidationStateNodes(fieldNode, input, selectors, getNodesCallback = 'getAuthorRowChildrenNodes') {
+            return selectors.reduce((total, selector) => total.concat(this[getNodesCallback](selector, fieldNode, input)), []);
         }
 
         /**
@@ -146,10 +155,8 @@
          * @returns {Array}
          * @memberof EzAuthorValidator
          */
-        findErrorContainers(fieldNode, input, selectors) {
-            const authorRow = input.closest(SELECTOR_AUTHOR);
-
-            return selectors.reduce((total, selector) => total.concat([...authorRow.querySelectorAll(selector)]), []);
+        findErrorContainers(fieldNode, input, selectors, getNodesCallback = 'getAuthorRowChildrenNodes') {
+            return selectors.reduce((total, selector) => total.concat(this[getNodesCallback](selector, fieldNode, input)), []);
         }
 
         /**
@@ -162,8 +169,8 @@
          * @returns {Array}
          * @memberof EzAuthorValidator
          */
-        findExistingErrorNodes(fieldNode, input, selectors) {
-            return selectors.reduce((total, selector) => total.concat([...input.closest(SELECTOR_AUTHOR).querySelectorAll(selector)]), []);
+        findExistingErrorNodes(fieldNode, input, selectors, getNodesCallback = 'getAuthorRowChildrenNodes') {
+            return selectors.reduce((total, selector) => total.concat(this[getNodesCallback](selector, fieldNode, input)), []);
         }
 
         /**
@@ -204,6 +211,27 @@
                     `${SELECTOR_FIELD_EMAIL} .ez-data-source__label`,
                 ],
                 errorNodeSelectors: [`${SELECTOR_FIELD_EMAIL} .ez-data-source__label-wrapper`],
+            },
+            {
+                selector: `.ez-data-source__author .ez-data-source__input`,
+                toggleInputError: false,
+                eventName: 'blur',
+                callback: 'validateFieldInputs',
+                invalidStateSelectors: [`${SELECTOR_FIELD} ${SELECTOR_AUTHOR}`],
+                containerSelector: `${SELECTOR_FIELD} ${SELECTOR_AUTHOR}`,
+                getNodesCallback: 'getAuthorRowNode',
+                errorNodeSelectors: [],
+            },
+            {
+                selector: `.ez-data-source__author .ez-data-source__input`,
+                toggleInputError: false,
+                eventName: 'blur',
+                callback: 'validateFieldInputs',
+                invalidStateSelectors: [SELECTOR_FIELD],
+                containerSelector: SELECTOR_FIELD,
+                labelSelector: '.ez-field-edit__label',
+                getNodesCallback: 'getFieldNode',
+                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
             },
             {
                 isValueValidator: false,

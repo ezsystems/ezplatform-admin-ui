@@ -9,6 +9,20 @@
             this.isValid = this.isValid.bind(this);
         }
 
+        validateFieldInputs(event, config) {
+            const { containerSelector, labelSelector } = config;
+            const container = event.target.closest(containerSelector);
+            const isError = container.querySelectorAll('.is-invalid').length > 0;
+            const fieldNode = container.querySelector(labelSelector);
+            const label = fieldNode ? fieldNode.innerHTML : '';
+            const errorMessage = eZ.errors.invalidInputs.replace('{fieldName}', label);
+
+            return {
+                isError,
+                errorMessage,
+            };
+        }
+
         getFieldTypeContainer(fallback) {
             return this.fieldContainer ? this.fieldContainer : fallback;
         }
@@ -88,10 +102,13 @@
         toggleInvalidState(isError, config, input) {
             const container = this.getFieldTypeContainer(input.closest(this.fieldSelector));
             const methodName = isError ? 'add' : 'remove';
-            const nodes = this.findValidationStateNodes(container, input, config.invalidStateSelectors);
+            const nodes = this.findValidationStateNodes(container, input, config.invalidStateSelectors, config.getNodesCallback);
 
             container.classList[methodName](this.classInvalid);
-            input.classList[methodName](this.classInvalid);
+
+            if (config.toggleInputError !== false) {
+                input.classList[methodName](this.classInvalid);
+            }
 
             nodes.forEach((el) => el.classList[methodName](this.classInvalid));
         }
@@ -152,9 +169,9 @@
          */
         toggleErrorMessage(validationResult, config, input) {
             const container = this.getFieldTypeContainer(input.closest(this.fieldSelector));
-            const nodes = this.findErrorContainers(container, input, config.errorNodeSelectors);
+            const nodes = this.findErrorContainers(container, input, config.errorNodeSelectors, config.getNodesCallback);
             const existingErrorSelectors = config.errorNodeSelectors.map((selector) => `${selector} .ez-field-edit__error`);
-            const existingErrorNodes = this.findExistingErrorNodes(container, input, existingErrorSelectors);
+            const existingErrorNodes = this.findExistingErrorNodes(container, input, existingErrorSelectors, config.getNodesCallback);
 
             existingErrorNodes.forEach((el) => el.remove());
 
@@ -176,7 +193,7 @@
          * @memberof BaseFieldValidator
          */
         validateField(config, event) {
-            const validationResult = this[config.callback](event);
+            const validationResult = this[config.callback](event, config);
 
             if (!validationResult) {
                 return;
