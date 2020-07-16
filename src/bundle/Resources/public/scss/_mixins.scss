@@ -8,7 +8,7 @@
     padding: 0;
     width: calculateRem(64px);
     height: calculateRem(32px);
-    border-radius: calculateRem(2px);
+    border-radius: $border-radius;
     position: relative;
     z-index: 0;
     cursor: pointer;
@@ -22,7 +22,7 @@
         left: 0;
         background-color: $ez-color-secondary;
         z-index: -1;
-        border-radius: calculateRem(2px);
+        border-radius: $border-radius;
         transform: translate(calc(100% + 0.3rem), -50%);
         transition: all 0.2s $ez-admin-transition;
     }
@@ -116,6 +116,7 @@
             top: 50%;
             background-color: $ez-color-base-pale;
             cursor: pointer;
+            
         }
 
         &:before {

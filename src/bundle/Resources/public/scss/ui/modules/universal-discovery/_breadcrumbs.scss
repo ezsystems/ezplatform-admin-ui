@@ -41,7 +41,7 @@
         height: calculateRem(20px);
         width: calculateRem(26px);
         border: calculateRem(1px) solid $ez-color-base-medium;
-        border-radius: calculateRem(2px);
+        border-radius: $border-radius;
         display: flex;
         padding: 0;
         justify-content: center;

@@ -19,11 +19,11 @@
     }
 
     &:first-of-type {
-        border-radius: calculateRem(2px) 0 0 calculateRem(2px);
+        border-radius: $border-radius 0 0 $border-radius;
     }
 
     &:last-of-type {
-        border-radius: 0 calculateRem(2px) calculateRem(2px) 0;
+        border-radius: 0 $border-radius $border-radius 0;
     }
 
     &--active {

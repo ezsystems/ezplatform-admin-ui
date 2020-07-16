@@ -1,3 +1,9 @@
+.form-control {
+    &--is-invalid {
+        @include invalid-text-input;
+    }
+}
+
 .ez-input {
     outline: none;
     transition: all 0.2s $ez-admin-transition;
@@ -11,7 +17,7 @@
         width: calculateRem(16px);
         height: calculateRem(16px);
         background-color: $ez-white;
-        border-radius: calculateRem(2px);
+        border-radius: $border-radius;
         border: calculateRem(1px) solid $ibexa-color-base-dark;
 
         &:active {

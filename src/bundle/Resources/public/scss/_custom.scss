@@ -163,8 +163,9 @@ $table-hover-bg: $ibexa-color-base-pale;
 $breadcrumb-bg: $ez-ground-base;
 
 // Links
+$link-decoration: underline;
 $link-color: $ibexa-color-font;
-$link-hover-decoration: none;
+$link-hover-decoration: underline;
 $link-hover-color: $ibexa-color-primary;
 
 // Body
@@ -203,3 +204,15 @@ $container-max-widths: (
   lg: 960px,
   xl: 1280px
 ) !default;
+
+//Inputs
+$input-bg: transparent;
+$input-color: $ibexa-color-font;
+$input-border-color: $ibexa-color-base-dark;
+$input-box-shadow: none;
+
+$input-focus-bg: transparent;
+$input-focus-border-color: $ibexa-color-primary;
+$input-focus-color: $ibexa-color-font-pale;
+$input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
+

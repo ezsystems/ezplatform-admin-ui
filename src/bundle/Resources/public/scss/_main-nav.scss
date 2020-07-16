@@ -51,7 +51,8 @@
         .nav-link {
             padding: 0.625rem 1rem;
             color: $ez-black;
-
+            text-decoration: none;
+            
             &.active {
                 padding-bottom: 0.4375rem;
                 color: $ez-color-primary;

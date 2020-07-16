@@ -1,6 +1,64 @@
 @import 'extra-actions';
 
 .ez-btn {
+    display: inline-block;
+    padding: calculateRem(7px) calculateRem(24px);
+    outline: none;
+    border: none;
+    border-radius: $border-radius;
+    text-decoration: none;
+    font-size: calculateRem(13px);
+    transition: all 0.2s $ez-admin-transition;
+
+    &:hover,
+    &:focus,
+    &:active {
+        border: none;
+        outline: none;
+        text-decoration: none;
+    }
+
+    &--primary {
+        color: $ibexa-white;
+        background-color: $ibexa-color-primary;
+
+        &:hover {
+            color: $ibexa-white;
+            background-color: $ibexa-color-primary-light;
+        }
+
+        &:active {
+            background-color: $ibexa-color-primary-light;
+            box-shadow:inset 0 0 0 calculateRem(2px) $ibexa-color-primary;
+        }
+    }
+
+    &--secondary {
+        color: $ibexa-color-primary;
+        background-color: transparent;
+        box-shadow:inset 0 0 0 calculateRem(1px) $ibexa-color-primary;
+
+        &:hover {
+            color: $ibexa-color-primary;
+            background-color: $ibexa-color-primary-pale;
+        }
+
+        &:active {
+            background-color:$ibexa-color-primary-pale;
+            box-shadow:inset 0 0 0 calculateRem(2px) $ibexa-color-primary
+        }
+    }
+
+    &--no-border {
+        color: $ibexa-color-primary;
+    }
+
+    &--login {
+        margin-top: calculateRem(16px);
+    }
+}
+
+.ez-btn {
     &--action-icon {
         .ez-icon {
             fill: $ibexa-color-base-dark;
@@ -17,23 +75,6 @@
         border-radius: 50%;
         height: 2rem;
         width: 2rem;
-    }
-}
-
-.ez-btn--login {
-    float: right;
-    border-color: $ez-white;
-    background-color: transparent;
-    margin-top: 1rem;
-
-    &:hover,
-    &:focus,
-    &:not(:disabled):not(.disabled):active,
-    &:not(:disabled):not(.disabled):active:focus {
-        box-shadow: none;
-        background-color: $ez-white;
-        border-color: transparent;
-        color: #131C26;
     }
 }
 
@@ -64,7 +105,8 @@
         font-size: calculateRem(11px);
         border-radius: 0;
         line-height: 1.4;
-
+        text-decoration: none;
+        
         &:hover,
         &:focus {
             outline: none;
@@ -167,26 +209,6 @@
 
 .ez-btn--cotf-create {
     display: flex;
-}
-
-.ez-search-view {
-    .input-group-btn {
-        display: flex;
-
-        .ez-btn--search,
-        .ez-btn--filter {
-            display: flex;
-            align-items: center;
-
-            .ez-icon {
-                margin-right: calculateRem(4px);
-            }
-        }
-
-        .ez-btn--search {
-            border-radius: 0 calculateRem(4px) calculateRem(4px) 0;
-        }
-    }
 }
 
 .ez-btn--content-tree-expanded {

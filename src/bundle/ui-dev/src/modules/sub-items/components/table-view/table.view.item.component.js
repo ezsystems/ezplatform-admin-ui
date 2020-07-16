@@ -192,14 +192,18 @@ export default class TableViewItemComponent extends PureComponent {
         return (
             <div className="c-table-view-item__priority-wrapper" {...priorityWrapperAttrs}>
                 <div className="c-table-view-item__inner-wrapper c-table-view-item__inner-wrapper--input">
-                    <input className="c-table-view-item__priority-value" ref={this.setPriorityInputRef} {...inputAttrs} />
+                    <input
+                        className="c-table-view-item__priority-value ez-input ez-input--text"
+                        ref={this.setPriorityInputRef}
+                        {...inputAttrs}
+                    />
                 </div>
                 <div className="c-table-view-item__priority-actions" {...innerWrapperAttrs}>
-                    <button type="button" className="c-table-view-item__btn c-table-view-item__btn--cancel" onClick={this.handleCancel}>
-                        <Icon name="discard" extraClasses="ez-icon--medium ez-icon--light" />
-                    </button>
                     <button type="button" className="c-table-view-item__btn c-table-view-item__btn--submit" onClick={this.handleSubmit}>
-                        <Icon name="checkmark" extraClasses="ez-icon--medium ez-icon--light" />
+                        <Icon name="checkmark" extraClasses="ez-icon--small ez-icon--light" />
+                    </button>
+                    <button type="button" className="c-table-view-item__btn c-table-view-item__btn--cancel" onClick={this.handleCancel}>
+                        <Icon name="discard" extraClasses="ez-icon--small ez-icon--light" />
                     </button>
                 </div>
             </div>
@@ -334,6 +338,10 @@ export default class TableViewItemComponent extends PureComponent {
         };
     }
 
+    componentDidMount() {
+        eZ.helpers.table.parseCheckbox('.c-table-view-item__cell .ez-input--checkbox');
+    }
+
     render() {
         const { item, isSelected } = this.props;
         const editLabel = Translator.trans(/*@Desc("Edit")*/ 'edit_item_btn.label', {}, 'sub_items');
@@ -343,7 +351,12 @@ export default class TableViewItemComponent extends PureComponent {
         return (
             <tr className="c-table-view-item">
                 <td className="c-table-view-item__cell c-table-view-item__cell--checkbox">
-                    <input type="checkbox" checked={isSelected} onChange={this.onSelectCheckboxChange} />
+                    <input
+                        type="checkbox"
+                        class="ez-input ez-input--checkbox"
+                        checked={isSelected}
+                        onChange={this.onSelectCheckboxChange}
+                    />
                 </td>
                 <td className="c-table-view-item__cell c-table-view-item__cell--icon">
                     <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--small" />

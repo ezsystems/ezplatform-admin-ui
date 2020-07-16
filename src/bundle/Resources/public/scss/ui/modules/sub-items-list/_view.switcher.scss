@@ -2,7 +2,7 @@
     height: calculateRem(32px);
     width: calculateRem(60px);
     border: calculateRem(1px) solid $ez-color-base-light;
-    border-radius: calculateRem(2px);
+    border-radius: $border-radius;
     display: flex;
     overflow: hidden;
     background: $ez-white;

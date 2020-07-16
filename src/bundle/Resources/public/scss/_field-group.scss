@@ -41,7 +41,8 @@
         padding: calculateRem(24px) calculateRem(16px);
         font-size: calculateRem(16px);
         color: $ez-black;
-
+        text-decoration: none;
+        
         &:hover {
             color: $ez-color-secondary;
             text-decoration: none;
