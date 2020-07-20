@@ -225,15 +225,15 @@
     }
 
     &--active {
-        .c-table-view-item__cell:first-child {
-            border-left: calculateRem(1px) solid $ibexa-color-primary;
-        }
-
-        .c-table-view-item__cell:last-child {
-            border-right: calculateRem(1px) solid $ibexa-color-primary;
-        }
-
         .c-table-view-item__cell {
+            &:first-child {
+                border-left: calculateRem(1px) solid $ibexa-color-primary;
+            }
+
+            &:last-child {
+                border-right: calculateRem(1px) solid $ibexa-color-primary;
+            }
+    
             border-top: calculateRem(1px) solid $ibexa-color-primary;
             border-bottom: calculateRem(1px) solid $ibexa-color-primary;
         }

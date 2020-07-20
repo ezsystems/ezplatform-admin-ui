@@ -6,7 +6,7 @@ $ez-admin-widget-open-transition: all 0.3s ease-in;
 $ez-admin-widget-close-transition: all 0.3s ease-out;
 
 // Ibexa colors
-$ibexa-white: #fff;
+$ibexa-white: #FFF;
 $ibexa-black: #131C26;
 
 $ibexa-color-primary: #DB0032;
@@ -43,7 +43,7 @@ $ez-color-danger-hover: darken($ez-color-danger, 15%);
 $ez-white: $ibexa-white;
 $ez-ground-base-pale: $ibexa-color-base-light;
 $ez-ground-base-light: $ibexa-color-base-pale;
-$ez-ground-base: #f3f3f3;
+$ez-ground-base: #F3F3F3;
 $ez-ground-base-medium: $ibexa-white;
 $ez-ground-base-dark: $ibexa-color-base-light;
 $ez-ground-base-dark-hover: darken($ez-ground-base-dark, 15%);
@@ -61,13 +61,13 @@ $ez-secondary-ground: $ibexa-color-primary;
 $ez-secondary-ground-medium: $ibexa-color-primary;
 $ez-secondary-ground-dark: $ibexa-color-primary;
 
-$ez-ground-primary-inverted-light: #445a64;
+$ez-ground-primary-inverted-light: #445A64;
 $ez-ground-primary-inverted: $ibexa-color-base;
 
-$ez-color-warning-pale: #fceaec;
-$ez-color-warning-dark: #aa0000;
+$ez-color-warning-pale: #FCEAEC;
+$ez-color-warning-dark: #AA0000;
 
-$ez-alloyeditor-color-hover: #65b6f0;
+$ez-alloyeditor-color-hover: #65B6F0;
 
 $ez-pagination-bg: transparent;
 $ez-pagination-margin: 0.25rem;
@@ -106,10 +106,10 @@ $orange: $ibexa-color-primary;
 $yellow: $ibexa-color-warning;
 $green: $ibexa-color-positive;
 $teal: $ibexa-white;
-$pink: #e83e8c !default;
-$indigo: #6610f2 !default;
-$purple: #6f42c1 !default;
-$cyan: #17a2b8 !default;
+$pink: #E83E8C !default;
+$indigo: #6610F2 !default;
+$purple: #6F42C1 !default;
+$cyan: #17A2B8 !default;
 
 $colors: (
     blue: $ibexa-color-primary,
@@ -120,7 +120,7 @@ $colors: (
     teal: $ibexa-white,
     white: $ibexa-white,
     gray: $ibexa-color-base-dark,
-    gray-dark: #e83e8c,
+    gray-dark: $pink,
     indigo: $indigo,
     purple: $purple,
     pink: $pink,
