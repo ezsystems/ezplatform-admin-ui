@@ -6,7 +6,7 @@
     const SELECTOR_FIELD_EMAIL = '.ez-data-source__field--email';
     const SELECTOR_FIELD_NAME = '.ez-data-source__field--name';
 
-    class EzAuthorValidator extends global.eZ.BaseFieldValidator {
+    class EzAuthorValidator extends global.eZ.MultiInputFieldValidator {
         /**
          * Validates the 'name' input field value
          *
@@ -182,6 +182,7 @@
     const validator = new EzAuthorValidator({
         classInvalid: 'is-invalid',
         fieldSelector: SELECTOR_FIELD,
+        containerSelectors: ['.ez-data-source__author', '.ez-field-edit--ezauthor'],
         eventsMap: [
             {
                 selector: `.ez-data-source__author ${SELECTOR_FIELD_NAME} .ez-data-source__input`,
