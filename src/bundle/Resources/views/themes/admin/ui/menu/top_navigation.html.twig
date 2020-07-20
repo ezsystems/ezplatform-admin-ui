@@ -4,7 +4,7 @@
 } %}
 {% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], main_menu_context) %}
 
-<nav class="navbar navbar-expand-sm ez-main-nav" style="flex-wrap:wrap;">
+<nav class="navbar navbar-expand-sm ez-main-nav">
     <div class="container-fluid">
         <a href="{{ url('ezplatform.dashboard') }}" class="navbar-brand">
             <svg class="ez-icon">
@@ -33,7 +33,7 @@
         </div>
     </div>
 </nav>
-<nav class="navbar navbar-expand-sm navbar-light ez-main-sub-nav" style="flex-wrap:wrap;">
+<nav class="navbar navbar-expand-sm navbar-light ez-main-sub-nav">
     {{ knp_menu_render(main_menu, {
         'depth': 2,
         'template': '@ezdesign/ui/menu/top_menu_2nd_level.html.twig',

@@ -106,3 +106,25 @@
     {% endif %}
 {% endapply %}
 {% endset %}
+
+<div class="mb-4">
+    <br>
+    <h2 class="mb-0">
+        {{ ez.name }}&nbsp;
+        {{ ez.release }}{% if ez.stability != 'stable' %}{{ ez.release ? '-' : '' }}{{ ez.stability }}{% endif %}
+        {% if status %}
+            <a class="badge badge-{{ levels[severity] }} ez-badge" data-toggle="collapse" href="#systemInfoCollapse">
+                {% if severity != 0 %}
+                    <svg class="ez-icon ez-icon--small">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#warning"></use>
+                    </svg>
+                {% endif %}
+                {{ badge }}
+            </a>
+        {% endif %}
+    </h2>
+
+    <div class="collapse" id="systemInfoCollapse">
+        {{ status|raw }}
+    </div>
+</div>

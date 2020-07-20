@@ -6,7 +6,7 @@
         padding: calculateRem(24px);
         color: $ez-black;
         align-items: center;
-        border-bottom: calculateRem(1px) solid $ez-ground-base-dark;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
 
         h2 {
             margin: 0 calculateRem(10px) 0 0;
@@ -56,8 +56,8 @@
             display: inline-block;
             width: calculateRem(7px);
             height: calculateRem(7px);
-            border-right: calculateRem(2px) solid $ez-black;
-            border-bottom: calculateRem(2px) solid $ez-black;
+            border-right: calculateRem(2px) solid $ibexa-black;
+            border-bottom: calculateRem(2px) solid $ibexa-black;
             transition: all 0.3s $ez-admin-transition;
             transform: rotate(-135deg);
         }
@@ -78,8 +78,8 @@
         margin-bottom: calculateRem(24px);
 
         .ez-content-field-name {
-            border-top: calculateRem(1px) solid $ez-ground-base-dark;
-            border-bottom: calculateRem(1px) solid $ez-ground-base-dark;
+            border-top: calculateRem(1px) solid $ibexa-color-base;
+            border-bottom: calculateRem(1px) solid $ibexa-color-base;
             background: $ez-white;
             margin-bottom: 0;
             padding: calculateRem(8px) calculateRem(24px);

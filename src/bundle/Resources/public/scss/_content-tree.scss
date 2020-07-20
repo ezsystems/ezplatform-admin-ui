@@ -9,7 +9,7 @@
 
     .ez-content-tree-container {
         position: relative;
-        top: 8px;
+        top: calculateRem(8px);
         flex: 0 0 auto;
         max-width: 0;
         background: $ez-white;

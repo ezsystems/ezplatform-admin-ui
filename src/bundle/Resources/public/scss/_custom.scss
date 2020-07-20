@@ -153,6 +153,9 @@ $headings-font-weight: 700;
 // Fonts
 $font-family-sans-serif: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
 
+//Border
+$ibexa-border-radius: calculateRem(2px);
+
 // Tables
 $table-cell-padding: calculateRem(12px) calculateRem(16px);
 $table-bg: $white;
@@ -192,7 +195,7 @@ $modal-header-padding: calculateRem(16px) calculateRem(24px);
 $modal-header-border-width: 0;
 
 //Components
-$border-radius: calculateRem(2px);
+$border-radius: $ibexa-border-radius;
 
 //Cards
 $card-spacer-x: 0;
@@ -215,4 +218,3 @@ $input-focus-bg: transparent;
 $input-focus-border-color: $ibexa-color-primary;
 $input-focus-color: $ibexa-color-font-pale;
 $input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
-

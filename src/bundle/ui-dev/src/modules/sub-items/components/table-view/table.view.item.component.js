@@ -339,7 +339,7 @@ export default class TableViewItemComponent extends PureComponent {
     }
 
     componentDidMount() {
-        eZ.helpers.table.parseCheckbox('.c-table-view-item__cell .ez-input--checkbox');
+        eZ.helpers.table.parseCheckbox('.c-table-view-item__cell .ez-input--checkbox', 'c-table-view-item--active');
     }
 
     render() {

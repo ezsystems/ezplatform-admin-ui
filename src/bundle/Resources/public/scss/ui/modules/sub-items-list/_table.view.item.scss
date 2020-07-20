@@ -214,13 +214,12 @@
     &__link {
         display: inline-block;
         color: $ez-color-hyperlink;
-        text-decoration: none;
         cursor: pointer;
         transition: color 0.3s $ez-admin-transition;
 
         &:hover,
         &:focus {
-            color: $ez-color-hyperlink-hover;
+            color: $ibexa-color-primary;
             text-decoration: underline;
         }
     }

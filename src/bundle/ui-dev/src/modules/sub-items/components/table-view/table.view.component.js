@@ -6,6 +6,7 @@ import TableViewItemComponent from './table.view.item.component';
 import TableViewColumnsTogglerComponent from './table.view.columns.toggler';
 import ThreeStateCheckboxComponent from '../three-state-checkbox/three.state.checkbox.component';
 import LanguageSelector from '../sub-items-list/language.selector.compoment';
+import { createCssClassNames } from '../../../common/helpers/css.class.names';
 
 const ACTION_COTAINER_SELECTOR = '.ez-extra-actions-container';
 const COLUMNS_VISIBILITY_LOCAL_STORAGE_DATA_KEY = 'sub-items_columns-visibility';
@@ -181,14 +182,24 @@ export default class TableViewComponent extends Component {
                 return null;
             }
 
-            let className = TABLE_HEAD_CLASS;
             let onClick = null;
+            let className = {
+                [TABLE_HEAD_CLASS]: true,
+                [`${TABLE_CELL_CLASS}--sortable`]: false,
+                [`${TABLE_CELL_CLASS}--sorted-asc`]: false,
+                [`${TABLE_CELL_CLASS}--sorted-desc`]: false,
+                'c-table-view-item__cell--name': false,
+            };
 
             if (columnKey in SORTKEY_MAP) {
-                className += ` ${TABLE_CELL_CLASS}--sortable`;
+                className[`${TABLE_CELL_CLASS}--sortable`] = true;
 
                 if (SORTKEY_MAP[columnKey] === sortClause) {
-                    className += sortOrder === 'ascending' ? ` ${TABLE_CELL_CLASS}--sorted-asc` : ` ${TABLE_CELL_CLASS}--sorted-desc`;
+                    if (sortOrder === 'ascending') {
+                        className[`${TABLE_CELL_CLASS}--sorted-asc`] = true;
+                    } else {
+                        className[`${TABLE_CELL_CLASS}--sorted-desc`] = true;
+                    }
                 }
 
                 onClick = () => {
@@ -197,8 +208,10 @@ export default class TableViewComponent extends Component {
             }
 
             if (columnKey === 'name') {
-                className += ' c-table-view-item__cell--name';
+                className['c-table-view-item__cell--name'] = true;
             }
+
+            className = createCssClassNames(className);
 
             return (
                 <th key={columnKey} className={className} onClick={onClick} tabIndex={-1}>
