@@ -188,7 +188,7 @@ export default class TableViewComponent extends Component {
                 [`${TABLE_CELL_CLASS}--sortable`]: columnKey in SORTKEY_MAP,
                 [`${TABLE_CELL_CLASS}--sorted-asc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'ascending',
                 [`${TABLE_CELL_CLASS}--sorted-desc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'descending',
-                'c-table-view__cell--name': columnKey === 'name',
+                [`${TABLE_CELL_CLASS}--name`]: columnKey === 'name',
             });
 
             if (columnKey in SORTKEY_MAP) {
