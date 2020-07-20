@@ -1,11 +1,11 @@
 .c-view-switcher {
     height: calculateRem(32px);
     width: calculateRem(60px);
-    border: calculateRem(1px) solid $ez-color-base-light;
-    border-radius: $border-radius;
+    border: calculateRem(1px) solid $ibexa-color-base-dark;
+    border-radius: $ibexa-border-radius;
     display: flex;
     overflow: hidden;
-    background: $ez-white;
+    background: $ibexa-white;
 
     &--disabled {
         cursor: not-allowed;

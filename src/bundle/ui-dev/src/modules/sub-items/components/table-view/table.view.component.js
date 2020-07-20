@@ -183,35 +183,19 @@ export default class TableViewComponent extends Component {
             }
 
             let onClick = null;
-            let className = {
+            const className = createCssClassNames({
                 [TABLE_HEAD_CLASS]: true,
-                [`${TABLE_CELL_CLASS}--sortable`]: false,
-                [`${TABLE_CELL_CLASS}--sorted-asc`]: false,
-                [`${TABLE_CELL_CLASS}--sorted-desc`]: false,
-                'c-table-view-item__cell--name': false,
-            };
+                [`${TABLE_CELL_CLASS}--sortable`]: columnKey in SORTKEY_MAP,
+                [`${TABLE_CELL_CLASS}--sorted-asc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'ascending',
+                [`${TABLE_CELL_CLASS}--sorted-desc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'descending',
+                'c-table-view-item__cell--name': columnKey === 'name',
+            });
 
             if (columnKey in SORTKEY_MAP) {
-                className[`${TABLE_CELL_CLASS}--sortable`] = true;
-
-                if (SORTKEY_MAP[columnKey] === sortClause) {
-                    if (sortOrder === 'ascending') {
-                        className[`${TABLE_CELL_CLASS}--sorted-asc`] = true;
-                    } else {
-                        className[`${TABLE_CELL_CLASS}--sorted-desc`] = true;
-                    }
-                }
-
                 onClick = () => {
                     onSortChange(SORTKEY_MAP[columnKey]);
                 };
             }
-
-            if (columnKey === 'name') {
-                className['c-table-view-item__cell--name'] = true;
-            }
-
-            className = createCssClassNames(className);
 
             return (
                 <th key={columnKey} className={className} onClick={onClick} tabIndex={-1}>

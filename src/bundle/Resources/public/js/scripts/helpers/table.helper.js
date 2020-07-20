@@ -1,6 +1,6 @@
 (function (global, doc, eZ) {
-    const onChangeHandler = (event) => {
-        const { activeClass, checked } = event.target;
+    const onChangeHandler = (activeClass) => {
+        const { checked } = event.target;
         const action = checked ? 'add' : 'remove';
         const parentRow = event.target.closest('tr');
 
@@ -9,8 +9,7 @@
 
     const parseCheckbox = (checkboxSelector, activeClass) => {
         doc.querySelectorAll(checkboxSelector).forEach((checkboxNode) => {
-            checkboxNode.activeClass = activeClass;
-            checkboxNode.addEventListener('change', onChangeHandler, false);
+            checkboxNode.addEventListener('change', onChangeHandler.bind(this, activeClass), false);
         });
     };
 

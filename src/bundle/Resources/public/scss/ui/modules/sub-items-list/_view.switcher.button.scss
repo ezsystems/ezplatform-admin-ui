@@ -19,11 +19,11 @@
     }
 
     &:first-of-type {
-        border-radius: $border-radius 0 0 $border-radius;
+        border-radius: $ibexa-border-radius 0 0 $ibexa-border-radius;
     }
 
     &:last-of-type {
-        border-radius: 0 $border-radius $border-radius 0;
+        border-radius: 0 $ibexa-border-radius $ibexa-border-radius 0;
     }
 
     &--active {
