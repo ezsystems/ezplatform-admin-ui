@@ -163,6 +163,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-field.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-file-field.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-preview-field.js'),
+            path.resolve(__dirname, '../public/js/scripts/fieldType/base/multi-input-field.js'),
             ...fieldTypes,
             path.resolve(__dirname, '../public/js/scripts/sidebar/extra.actions.js'),
         ])
