@@ -17,10 +17,10 @@
         transform-origin: left;
 
         &--animate {
-            transition: all 0.3s ease-out;
-            
+            transition: $ez-admin-widget-close-transition;
+
             &.ez-content-tree-container--expanded {
-                transition: all 0.3s ease-in;
+                transition: $ez-admin-widget-open-transition;
             }
         }
 
