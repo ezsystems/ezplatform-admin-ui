@@ -128,7 +128,8 @@
                     line-height: calculateRem(20px);
                     background: $ez-color-base-medium;
                     border-radius: 50%;
-
+                    text-decoration: none;
+                    
                     &--gray {
                         color: $ez-color-base-medium;
                         background: none;

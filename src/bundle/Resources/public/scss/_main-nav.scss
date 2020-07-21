@@ -1,7 +1,8 @@
 .ez-main-nav {
+    flex-wrap: wrap;
     padding: 0;
     background-color: $ez-white;
-    border-bottom: calculateRem(1px) solid $ez-ground-base-dark;
+    border-bottom: calculateRem(1px) solid $ibexa-color-border-light;
     
     > .container-fluid {
         padding-right: 0;
@@ -43,6 +44,7 @@
 }
 
 .ez-main-sub-nav {
+    flex-wrap: wrap;
     background-color: $white;
     padding: 0;
     font-size: 0.875rem;
@@ -51,7 +53,8 @@
         .nav-link {
             padding: 0.625rem 1rem;
             color: $ez-black;
-
+            text-decoration: none;
+            
             &.active {
                 padding-bottom: 0.4375rem;
                 color: $ez-color-primary;

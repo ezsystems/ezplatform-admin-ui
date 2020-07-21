@@ -1,7 +1,7 @@
 {% trans_default_domain 'dashboard' %}
 
 {% if data|length %}
-    <table class="ez-table table">
+    <table class="ez-table table table-hover">
         <thead>
             <tr>
                 <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
@@ -19,7 +19,7 @@
             {% if row.isAccessible %}
                 <tr>
                     <td class="ez-table__cell ez-table__cell--has-icon">
-                        <svg class="ez-icon ez-icon--small">
+                        <svg class="ez-icon ez-icon--small-medium ez-icon--base-dark">
                             <use xlink:href="{{ ez_content_type_icon(row.contentType.identifier) }}"></use>
                         </svg>
                     </td>

@@ -20,7 +20,6 @@
         &__item {
             &--notifications {
                 position: relative;
-                padding-left: calculateRem(44px);
 
                 &:before {
                     content: attr(data-count);
