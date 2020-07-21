@@ -5,7 +5,7 @@
     .ez-side-menu,
     .ez-context-menu {
         flex: 0 0 calculateRem(80px);
-        margin: calculateRem(8px);
+        margin: calculateRem(8px) 0 0 calculateRem(8px);
         
         &--expanded {
             z-index: 1200;

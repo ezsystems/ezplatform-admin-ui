@@ -1,25 +1,24 @@
 .ez-filters {
-    border-color: $ez-color-secondary;
-    border-style: solid;
-    border-width: calculateRem(1px) 0;
     transform: scaleY(1);
     transform-origin: top center;
     transition: all 0.2s $ez-admin-transition;
     flex-wrap: wrap;
     position: relative;
-    padding: calculateRem(8px) calculateRem(8px) 0 calculateRem(8px);
+    margin: calculateRem(20px) 0;
+    padding: calculateRem(24px) calculateRem(32px);
+    background: $ibexa-white;
 
     &--collapsed {
+        margin-top: calculateRem(10px);
+        padding: 0;
         transform: scaleY(0);
         height: 0;
         opacity: 0;
     }
 
     &__row {
-        background: $ez-ground-base-medium;
-        padding: calculateRem(16px);
-        border-radius: calculateRem(4px);
-        margin-bottom: calculateRem(16px);
+        padding: calculateRem(16px) 0;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-column-gap: 10%;
@@ -84,30 +83,27 @@
         position: absolute;
         right: calculateRem(40px);
         border-style: solid;
-        border-width: 0 calculateRem(10px) calculateRem(10px);
+        border-width: 0 calculateRem(8px) calculateRem(8px);
         display: block;
         width: 0;
         z-index: 1;
     }
 
     &:before {
-        border-color: $ez-color-secondary transparent;
-        top: calculateRem(-11px);
+        border-color: $ibexa-white transparent;
+        top: calculateRem(-8px);
     }
 
     &:after {
-        border-color: $ez-ground-base-light transparent;
-        top: calculateRem(-10px);
+        border-color: $ibexa-white transparent;
+        top: calculateRem(-8px);
     }
 
     &__btns {
-        flex-basis: 100%;
-        display: flex;
-        justify-content: center;
-        margin: calculateRem(16px);
-
+        padding-top: calculateRem(16px);
+        
         .btn {
-            margin: 0 1rem;
+            margin-right: calculateRem(4px);
         }
     }
 

@@ -6,6 +6,7 @@ import TableViewItemComponent from './table.view.item.component';
 import TableViewColumnsTogglerComponent from './table.view.columns.toggler';
 import ThreeStateCheckboxComponent from '../three-state-checkbox/three.state.checkbox.component';
 import LanguageSelector from '../sub-items-list/language.selector.compoment';
+import { createCssClassNames } from '../../../common/helpers/css.class.names';
 
 const ACTION_COTAINER_SELECTOR = '.ez-extra-actions-container';
 const COLUMNS_VISIBILITY_LOCAL_STORAGE_DATA_KEY = 'sub-items_columns-visibility';
@@ -181,16 +182,16 @@ export default class TableViewComponent extends Component {
                 return null;
             }
 
-            let className = TABLE_HEAD_CLASS;
             let onClick = null;
+            const className = createCssClassNames({
+                [TABLE_HEAD_CLASS]: true,
+                [`${TABLE_CELL_CLASS}--sortable`]: columnKey in SORTKEY_MAP,
+                [`${TABLE_CELL_CLASS}--sorted-asc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'ascending',
+                [`${TABLE_CELL_CLASS}--sorted-desc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'descending',
+                [`${TABLE_CELL_CLASS}--name`]: columnKey === 'name',
+            });
 
             if (columnKey in SORTKEY_MAP) {
-                className += ` ${TABLE_CELL_CLASS}--sortable`;
-
-                if (SORTKEY_MAP[columnKey] === sortClause) {
-                    className += sortOrder === 'ascending' ? ` ${TABLE_CELL_CLASS}--sorted-asc` : ` ${TABLE_CELL_CLASS}--sorted-desc`;
-                }
-
                 onClick = () => {
                     onSortChange(SORTKEY_MAP[columnKey]);
                 };
@@ -231,9 +232,10 @@ export default class TableViewComponent extends Component {
                             checked={anyLocationSelected}
                             onClick={this.selectAll} // We need onClick, because MS Edge does not trigger onChange when checkbox has indeterminate state. (ref: https://stackoverflow.com/a/33529024/5766602)
                             onChange={() => {}} // Dummy callback to not trigger React warning as we cannot use onChange on MS Edge
+                            class="ez-input ez-input--checkbox ez-input--no-select-border"
                         />
                     </th>
-                    <th className={TABLE_HEAD_CLASS} />
+                    <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--icon`} />
                     {this.renderBasicColumnsHeader()}
                     <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--actions`}>
                         <TableViewColumnsTogglerComponent

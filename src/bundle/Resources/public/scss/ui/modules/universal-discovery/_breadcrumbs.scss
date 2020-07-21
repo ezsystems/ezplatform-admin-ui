@@ -5,7 +5,7 @@
     height: calculateRem(30px);
 
     &__hidden-list-wrapper {
-        margin-right: 8px;
+        margin-right: calculateRem(8px);
         position: relative;
     }
 
@@ -21,9 +21,9 @@
             padding-left: 0;
             display: block;
             list-style: none;
-            background-color: $ez-white;
+            background-color: $ibexa-white;
             box-shadow: 0 calculateRem(4px) calculateRem(6px) 0 rgba(135, 135, 135, 0.35);
-            color: $ez-color-hyperlink;
+            color: $ibexa-color-primary;
             padding: calculateRem(16px);
         }
     }
@@ -41,7 +41,7 @@
         height: calculateRem(20px);
         width: calculateRem(26px);
         border: calculateRem(1px) solid $ez-color-base-medium;
-        border-radius: calculateRem(2px);
+        border-radius: $ibexa-border-radius;
         display: flex;
         padding: 0;
         justify-content: center;
@@ -50,14 +50,14 @@
         .ez-icon {
             transform: rotate(90deg);
             transform-origin: center center;
-            fill: $ez-color-base-medium;
+            fill: $ibexa-color-base-dark;
         }
 
         &--active {
-            background-color: $ez-color-base-medium;
+            background-color: $ibexa-color-base-dark;
 
             .ez-icon {
-                fill: $ez-white;
+                fill: $ibexa-white;
             }
         }
     }
@@ -78,7 +78,7 @@
         overflow: hidden;
         white-space: nowrap;
         cursor: pointer;
-        color: $ez-color-hyperlink;
+        color: $ibexa-color-primary;
     }
 
     &__list-item {
@@ -89,7 +89,7 @@
         &--last {
             .c-breadcrumbs__list-item-text {
                 cursor: not-allowed;
-                color: $ez-color-base-medium;
+                color: $ibexa-color-base-dark;
             }
         }
     }

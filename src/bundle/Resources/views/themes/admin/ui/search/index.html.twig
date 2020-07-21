@@ -22,7 +22,7 @@
 
                 {% if results is defined %}
 
-                    <div class="ez-table-header mt-3 mx-4">
+                    <div class="ez-table-header">
                         <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
                     </div>
 
@@ -44,7 +44,7 @@
                             </ul>
                         </div>
                     {% else %}
-                        <div class="ez-scrollable-table-wrapper mx-4">
+                        <div class="ez-scrollable-table-wrapper">
                             <table class="table">
                                 <thead>
                                 <tr>
