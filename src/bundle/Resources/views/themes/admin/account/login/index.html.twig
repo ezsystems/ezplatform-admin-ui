@@ -51,5 +51,6 @@
             <button type="submit" class="btn btn-primary ez-login__btn-sign-in">{{ 'authentication.sign_in'|trans|desc('Sign in') }}</button>
         </fieldset>
     </form>
-    <a class="mt-3 text-right ez-login__hyperlink" href="{{ path('ezplatform.user.forgot_password') }}">{{ 'authentication.forgot_password'|trans|desc('Forgot password?') }}</a>
+
+    {{ encore_entry_script_tags('ezplatform-admin-ui-login-js', null, 'ezplatform') }}
 {%- endblock content -%}
