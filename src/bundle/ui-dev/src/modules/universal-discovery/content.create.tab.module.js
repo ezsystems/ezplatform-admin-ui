@@ -38,16 +38,10 @@ const ContentCreateTabModule = () => {
     const [multiple, multipleItemsLimit] = useContext(MultipleConfigContext);
     const iframeUrl = generateIframeUrl(contentOnTheFlyData);
     const iframeRef = createRef();
-    const showParentFooter = () => {
-        if (window.parent) {
-            window.parent.document.body.dispatchEvent(new CustomEvent('ez-udw-show-footer'));
-        }
-    }
     const cancelContentCreate = () => {
         setCreateContentVisible(false);
         setContentOnTheFlyData({});
         setActiveTab(tabs[0].id);
-        showParentFooter();
     };
     const publishContent = () => {
         const submitButton = iframeRef.current.contentWindow.document.body.querySelector('[data-action="publish"]');

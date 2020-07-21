@@ -9,12 +9,12 @@
 
     &__iframe {
         width: 100%;
-        height: calc(100% - #{calculateRem(60px)});
+        height: 100%;
         border: none;
     }
 
     &__actions {
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
         height: calculateRem(50px);
@@ -27,6 +27,18 @@
 
         &:hover {
             color: $ez-white;
+        }
+    }
+
+    &--footer-visible {
+        .c-content-edit {
+            &__iframe {
+                height: calc(100% - #{calculateRem(60px)});
+            }
+
+            &__actions {
+                display: flex;
+            }
         }
     }
 }

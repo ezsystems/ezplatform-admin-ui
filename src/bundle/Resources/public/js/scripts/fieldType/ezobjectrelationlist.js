@@ -1,4 +1,4 @@
-(function (global, doc, eZ, React, ReactDOM, Translator) {
+(function(global, doc, eZ, React, ReactDOM, Translator) {
     const CLASS_FIELD_SINGLE = 'ez-field-edit--ezobjectrelation';
     const SELECTOR_FIELD_MULTIPLE = '.ez-field-edit--ezobjectrelationlist';
     const SELECTOR_FIELD_SINGLE = '.ez-field-edit--ezobjectrelation';
@@ -75,7 +75,13 @@
         const startingLocationId =
             relationsContainer.dataset.defaultLocation !== '0' ? parseInt(relationsContainer.dataset.defaultLocation, 10) : null;
         const allowedContentTypes = relationsContainer.dataset.allowedContentTypes.split(',').filter((item) => item.length);
-        const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
+        const closeUDW = () => {
+            if (window.parent) {
+                window.parent.document.body.dispatchEvent(new CustomEvent('ez-udw-show-footer'));
+            }
+
+            ReactDOM.unmountComponentAtNode(udwContainer);
+        };
         const renderRows = (items) => items.forEach((...args) => relationsContainer.insertAdjacentHTML('beforeend', renderRow(...args)));
         const updateInputValue = (items) => {
             sourceInput.value = items.join();
@@ -131,6 +137,10 @@
                           'universal_discovery_widget'
                       );
 
+            if (window.parent) {
+                window.parent.document.body.dispatchEvent(new CustomEvent('ez-udw-hide-footer'));
+            }
+
             ReactDOM.render(
                 React.createElement(eZ.modules.UniversalDiscovery, {
                     onConfirm,
@@ -163,9 +173,9 @@
                     <td class="ez-relations__item-name">${contentName}</td>
                     <td>${contentTypeName}</td>
                     <td>${formatShortDateTime(item.ContentInfo.Content.publishedDate)}</td>
-                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${
-                        selectedItems.length + index + 1
-                    }" /></td>
+                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length +
+                        index +
+                        1}" /></td>
                 </tr>
             `;
         };

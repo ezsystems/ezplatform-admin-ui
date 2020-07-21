@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState, useEffect } from 'react';
 
 import {
     TabsContext,
@@ -10,8 +10,10 @@ import {
 } from './universal.discovery.module';
 import { findLocationsByParentLocationId } from './services/universal.discovery.service';
 import deepClone from '../common/helpers/deep.clone.helper';
+import { createCssClassNames } from '../common/helpers/css.class.names';
 
 const ContentEditTabModule = () => {
+    const [footerVisible, setFooterVisible] = useState(true);
     const restInfo = useContext(RestInfoContext);
     const tabs = useContext(TabsContext);
     const [activeTab, setActiveTab] = useContext(ActiveTabContext);
@@ -21,11 +23,6 @@ const ContentEditTabModule = () => {
     const cancelLabel = Translator.trans(/*@Desc("Cancel")*/ 'content_edit.cancel.label', {}, 'universal_discovery_widget');
     const confirmLabel = Translator.trans(/*@Desc("Confirm")*/ 'content_edit.confirm.label', {}, 'universal_discovery_widget');
     const iframeRef = useRef();
-    const showParentFooter = () => {
-        if (window.parent) {
-            window.parent.document.body.dispatchEvent(new CustomEvent('ez-udw-show-footer'));
-        }
-    }
     const publishContent = () => {
         const submitButton = iframeRef.current.contentWindow.document.body.querySelector('[data-action="publish"]');
 
@@ -36,7 +33,6 @@ const ContentEditTabModule = () => {
     const cancelContentEdit = () => {
         setActiveTab(tabs[0].id);
         setEditOnTheFlyData({});
-        showParentFooter();
     };
     const handleContentPublished = (locationId) => {
         const clonedLocationsMap = deepClone(loadedLocationsMap);
@@ -79,6 +75,8 @@ const ContentEditTabModule = () => {
             handleContentPublished(parseInt(locationId.content, 10));
         }
     };
+    const hideFooter = () => setFooterVisible(false);
+    const showFooter = () => setFooterVisible(true);
     const iframeUrl = window.Routing.generate(
         'ezplatform.content_on_the_fly.edit',
         {
@@ -89,9 +87,23 @@ const ContentEditTabModule = () => {
         },
         true
     );
+    const className = createCssClassNames({
+        'c-content-edit': true,
+        'c-content-edit--footer-visible': footerVisible,
+    });
+
+    useEffect(() => {
+        window.document.body.addEventListener('ez-udw-hide-footer', hideFooter, false);
+        window.document.body.addEventListener('ez-udw-show-footer', showFooter, false);
+
+        return () => {
+            window.document.body.removeEventListener('ez-udw-hide-footer', hideFooter, false);
+            window.document.body.removeEventListener('ez-udw-show-footer', showFooter, false);
+        };
+    });
 
     return (
-        <div className="c-content-edit">
+        <div className={className}>
             <iframe src={iframeUrl} className="c-content-edit__iframe" ref={iframeRef} onLoad={handleIframeLoad} />
             <div className="c-content-edit__actions">
                 <button className="c-content-edit__cancel-button btn btn-gray" onClick={cancelContentEdit}>

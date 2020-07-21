@@ -51,10 +51,6 @@ const ContentCreateWidget = () => {
     const updateSelectedLanguage = (event) => setSelectedLanguage(event.target.value);
     const isConfirmDisabled = !selectedContentType || !selectedLanguage || markedLocationId === 1;
     const createContent = () => {
-        if (window.parent) {
-            window.parent.document.body.dispatchEvent(new CustomEvent('ez-udw-hide-footer'));
-        }
-
         setContentOnTheFlyData({
             locationId: markedLocationId,
             languageCode: selectedLanguage,

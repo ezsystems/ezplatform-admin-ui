@@ -43,32 +43,28 @@ const ContentEditButton = ({ version, location, isDisabled }) => {
         if (allowRedirects) {
             const href = isUserContentType
                 ? window.Routing.generate(
-                    'ezplatform.user.update',
-                    {
-                        contentId,
-                        versionNo,
-                        language,
-                    },
-                    true
-                )
+                      'ezplatform.user.update',
+                      {
+                          contentId,
+                          versionNo,
+                          language,
+                      },
+                      true
+                  )
                 : window.Routing.generate(
-                    'ezplatform.content.draft.edit',
-                    {
-                        contentId,
-                        versionNo,
-                        language,
-                        locationId,
-                    },
-                    true
-                );
+                      'ezplatform.content.draft.edit',
+                      {
+                          contentId,
+                          versionNo,
+                          language,
+                          locationId,
+                      },
+                      true
+                  );
 
             window.location.href = href;
 
             return;
-        }
-
-        if (window.parent) {
-            window.parent.document.body.dispatchEvent(new CustomEvent('ez-udw-hide-footer'));
         }
 
         setEditOnTheFlyData({
