@@ -1,5 +1,6 @@
 .c-table-view {
-    border-collapse: collapse;
+    border-spacing: 0 calculateRem(2px);
+    border-collapse: separate;
     width: 100%;
 
     &__wrapper {
@@ -7,8 +8,6 @@
     }
 
     &__scroller {
-        margin-left: calculateRem(28px);
-        margin-right: calculateRem(68px);
         overflow-x: auto;
     }
 
@@ -68,17 +67,19 @@
         &--head {
             padding-left: calculateRem(16px);
             font-weight: 700;
+            border-top: calculateRem(1px) solid $ibexa-color-base;
+            border-bottom: calculateRem(1px) solid $ibexa-color-base;
         }
 
         &--checkbox {
-            position: absolute;
+            position: sticky;
             padding: 0;
             left: 0;
+            z-index: 1;
             height: calculateRem(43px);
             width: calculateRem(30px);
             padding-left: calculateRem(16px);
-            border-top: calculateRem(1px) solid $ez-ground-base-dark; 
-            border-bottom: calculateRem(1px) solid $ez-ground-base-dark; 
+            background: $ibexa-white;
         }
 
         &--sortable {
@@ -102,18 +103,28 @@
             }
         }
 
+        &--icon {
+            position: sticky;
+            z-index: 1;
+            left: calculateRem(34px);
+            background: $ibexa-white;
+        }
+
         &--name {
+            position: sticky;
+            z-index: 1;
+            left: calculateRem(74px);
             padding-left: 0;
+            background: $ibexa-white;
         }
 
         &--actions {
-            position: absolute;
+            position: sticky;
             right: 0;
             height: calculateRem(43px);
             width: calculateRem(70px);
             padding: 0;
-            border-top: calculateRem(1px) solid $ez-ground-base-dark; 
-            border-bottom: calculateRem(1px) solid $ez-ground-base-dark; 
+            background: $ibexa-white;
         }
     }
 

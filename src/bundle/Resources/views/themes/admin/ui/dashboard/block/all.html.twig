@@ -1,8 +1,8 @@
 {% trans_default_domain 'dashboard' %}
 
-<div class="card border-light mb-4">
+<div class="card border-light ez-card ez-card--no-padding mb-4">
+    <div class="ez-card__title">{{ 'everyone'|trans|desc('Common content') }}</div>
     <div class="card-body">
-        <h2 class="mb-3">{{ 'everyone'|trans|desc('Common content') }}</h2>
         {{ ez_render_component_group('dashboard-all-tab-groups') }}
     </div>
 </div>

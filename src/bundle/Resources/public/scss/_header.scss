@@ -13,4 +13,8 @@
         font-size: .8125rem;
         flex-wrap: nowrap;
     }
+
+    &--light {
+        background: $ibexa-white;
+    }
 }

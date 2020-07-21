@@ -3,7 +3,7 @@
 {% import "@ezdesign/ui/dashboard/macros.html.twig" as macros %}
 
 {% if data|length %}
-    <table class="ez-table table">
+    <table class="table table-hover ez-table">
         <thead>
         <tr>
             <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
@@ -18,7 +18,7 @@
         {% for row in data %}
             <tr>
                 <td class="ez-table__cell ez-table__cell--has-icon">
-                    <svg class="ez-icon ez-icon--small">
+                    <svg class="ez-icon ez-icon--small-medium ez-icon--base-dark">
                         <use xlink:href="{{ ez_content_type_icon(row.content_type.identifier) }}"></use>
                     </svg>
                 </td>

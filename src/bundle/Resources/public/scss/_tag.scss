@@ -1,6 +1,7 @@
 .ez-tag {
-    border-radius: calculateRem(4px);
-    background: $ez-color-base-pale;
+    border: calculateRem(1px) solid $ibexa-color-base-dark;
+    border-radius: $ibexa-border-radius;
+    background: $ibexa-color-base;
     padding: calculateRem(8px) calculateRem(48px) calculateRem(8px) calculateRem(8px);
     display: inline-block;
     position: relative;
@@ -16,7 +17,7 @@
 
     &__remove-btn {
         position: absolute;
-        top: calc(50% - #{calculateRem(12px)});
+        top: calc(50% - #{calculateRem(8px)});
         right: calculateRem(6px);
         cursor: pointer;
         border: 0;

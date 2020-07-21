@@ -1,0 +1,21 @@
+@mixin type-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calculateRem(24px);
+    height: calculateRem(24px);
+    text-align: center;
+    border-radius: 50%;
+    background: $ibexa-color-primary;
+
+    .ez-icon {
+        fill: $ibexa-white;
+        width: calculateRem(16px);
+        height: calculateRem(16px);
+    }
+} 
+
+@mixin type-icon-read {
+    fill: $ibexa-color-base-light;
+    background: $ibexa-color-base-dark;
+}

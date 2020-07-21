@@ -26,15 +26,16 @@ form:not(.form-inline) {
     }
 
     .form-control {
-        background-color: $ez-white;
+        margin-right: calculateRem(12px);
+        background-color: $ibexa-white;
     }
 
     .form-control[readonly] {
-        background-color: $ez-white;
+        background-color: $ibexa-white;
     }
 
     .form-control:focus {
-        border-color: $ez-color-secondary;
+        @include input-active;
     }
 }
 

@@ -8,15 +8,16 @@
     <div class="row align-items-stretch ez-main-row ez-dashboard-row">
         {% block left_sidebar %}{% endblock left_sidebar %}
         <div class="ez-content-container">
-            <div class="container-fluid ez-header">
+            <div class="container-fluid ez-header ez-header--light">
                 <div class="container ez-dashboard__header">
                     <h1 class="py-3">{{ 'my.dashboard'|trans|desc('My dashboard') }}</h1>
                     <div class="ez-dashboard__create">
                         <button
-                            class="btn btn-primary ez-btn--cotf-create"
+                            class="btn btn-link ez-btn--cotf-create"
                             data-udw-config="{{ ez_udw_config('create', {'type': 'content_create'}) }}"
-                            {% if not can_create_content %}disabled{% endif %}>
-                            <svg class="ez-icon ez-icon--medium ez-icon--light ez-icon-create">
+                            {% if not can_create_content %}disabled{% endif %}
+                        >
+                            <svg class="ez-icon ez-icon--medium ez-icon--primary ez-icon-create">
                                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                             </svg>
                             <span>{{ 'dashboard.create'|trans|desc('Create') }}</span>

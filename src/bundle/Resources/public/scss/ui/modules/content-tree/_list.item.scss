@@ -4,6 +4,7 @@ $list-item-height: calculateRem(20px);
 #{$list-item} {
     line-height: $list-item-height;
     max-height: $list-item-height;
+    margin: calculateRem(2px);
 
     &__label {
         display: flex;
@@ -15,8 +16,8 @@ $list-item-height: calculateRem(20px);
 
         &:hover,
         &:focus {
-            background: $ez-secondary-ground-pale;
             outline: none;
+            text-decoration: underline;
         }
     }
 
@@ -26,7 +27,8 @@ $list-item-height: calculateRem(20px);
         display: flex;
         align-items: center;
         background: none;
-
+        text-decoration: none;
+        
         &:hover,
         &:focus {
             text-decoration: none;
@@ -154,7 +156,6 @@ $list-item-height: calculateRem(20px);
     &--is-hidden {
         > #{$list-item} {
             &__label {
-                background: $ez-ground-base;
                 opacity: 0.3;
             }
         }
@@ -166,8 +167,7 @@ $list-item-height: calculateRem(20px);
                 &,
                 &:hover,
                 &:focus {
-                    background: $ez-secondary-ground;
-                    color: $ez-white;
+                    color: $ibexa-color-primary;
                 }
 
                 #{$list-item}__toggler {

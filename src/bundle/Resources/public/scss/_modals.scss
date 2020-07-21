@@ -1,3 +1,9 @@
+.ez-modal {
+    .modal-header {
+        background-color: $ibexa-color-base-pale;
+    }
+}
+
 .ez-modal--send-to-trash,
 .ez-modal--trash-container,
 .ez-modal--trash-with-asset {
@@ -104,8 +110,6 @@
     }
 
     .modal-header {
-        background: $ez-color-base-pale;
-
         .close {
             padding-top: calculateRem(20px);
         }
@@ -145,7 +149,6 @@
     }
 
     .modal-header {
-        background-color: $ez-color-base-pale;
         border-bottom: none;
 
         .modal-title {
@@ -171,14 +174,12 @@
 
 .ez-modal--content-hide-confirmation {
     .modal-header {
-        background: $ez-color-base-pale;
         border-bottom: none;
     }
 }
 
 .ez-modal--version-draft-conflict {
     .modal-header {
-        background: $ez-color-base-pale;
         border-bottom: none;
 
         .modal-title {
@@ -216,7 +217,6 @@
     }
 
     .modal-header {
-        background: $ez-color-base-pale;
         border-bottom: none;
 
         .modal-title {

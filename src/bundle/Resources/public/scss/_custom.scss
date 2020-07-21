@@ -1,10 +1,12 @@
+@import './public/bundles/ezplatformadminui/scss/functions/calculate.rem';
+
 // eZ transition function
 $ez-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
 $ez-admin-widget-open-transition: all 0.3s ease-in;
 $ez-admin-widget-close-transition: all 0.3s ease-out;
 
 // Ibexa colors
-$ibexa-white: #fff;
+$ibexa-white: #FFF;
 $ibexa-black: #131C26;
 
 $ibexa-color-primary: #DB0032;
@@ -20,6 +22,7 @@ $ibexa-color-base-deep-dark: #131C26;
 
 $ibexa-color-font: #131C26;
 $ibexa-color-font-pale: #878B90;
+$ibexa-color-border-light: #ECDFD1;
 
 $ibexa-color-positive: #00825c;
 $ibexa-color-warning: #f7d000;
@@ -40,7 +43,7 @@ $ez-color-danger-hover: darken($ez-color-danger, 15%);
 $ez-white: $ibexa-white;
 $ez-ground-base-pale: $ibexa-color-base-light;
 $ez-ground-base-light: $ibexa-color-base-pale;
-$ez-ground-base: #f3f3f3;
+$ez-ground-base: #F3F3F3;
 $ez-ground-base-medium: $ibexa-white;
 $ez-ground-base-dark: $ibexa-color-base-light;
 $ez-ground-base-dark-hover: darken($ez-ground-base-dark, 15%);
@@ -58,13 +61,13 @@ $ez-secondary-ground: $ibexa-color-primary;
 $ez-secondary-ground-medium: $ibexa-color-primary;
 $ez-secondary-ground-dark: $ibexa-color-primary;
 
-$ez-ground-primary-inverted-light: #445a64;
+$ez-ground-primary-inverted-light: #445A64;
 $ez-ground-primary-inverted: $ibexa-color-base;
 
-$ez-color-warning-pale: #fceaec;
-$ez-color-warning-dark: #aa0000;
+$ez-color-warning-pale: #FCEAEC;
+$ez-color-warning-dark: #AA0000;
 
-$ez-alloyeditor-color-hover: #65b6f0;
+$ez-alloyeditor-color-hover: #65B6F0;
 
 $ez-pagination-bg: transparent;
 $ez-pagination-margin: 0.25rem;
@@ -103,10 +106,10 @@ $orange: $ibexa-color-primary;
 $yellow: $ibexa-color-warning;
 $green: $ibexa-color-positive;
 $teal: $ibexa-white;
-$pink: #e83e8c !default;
-$indigo: #6610f2 !default;
-$purple: #6f42c1 !default;
-$cyan: #17a2b8 !default;
+$pink: #E83E8C !default;
+$indigo: #6610F2 !default;
+$purple: #6F42C1 !default;
+$cyan: #17A2B8 !default;
 
 $colors: (
     blue: $ibexa-color-primary,
@@ -117,7 +120,7 @@ $colors: (
     teal: $ibexa-white,
     white: $ibexa-white,
     gray: $ibexa-color-base-dark,
-    gray-dark: #e83e8c,
+    gray-dark: $pink,
     indigo: $indigo,
     purple: $purple,
     pink: $pink,
@@ -150,22 +153,29 @@ $headings-font-weight: 700;
 // Fonts
 $font-family-sans-serif: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
 
+//Border
+$ibexa-border-radius: calculateRem(2px);
+
 // Tables
+$table-cell-padding: calculateRem(12px) calculateRem(16px);
 $table-bg: $white;
-$table-border-color: $ez-ground-primary;
+$table-border-width: 0;
+$table-hover-bg: $ibexa-color-base-pale;
 
 // Breadcrumbs
 $breadcrumb-bg: $ez-ground-base;
 
 // Links
-$link-color: $ez-color-hyperlink;
+$link-decoration: underline;
+$link-color: $ibexa-color-font;
+$link-hover-decoration: underline;
+$link-hover-color: $ibexa-color-primary;
 
 // Body
 $body-bg: $ez-ground-base-pale;
 $body-color: $ez-black;
 
 // Pagination
-
 $pagination-color: $ez-black;
 $pagination-bg: $ez-pagination-bg;
 
@@ -181,4 +191,30 @@ $pagination-border-width: 0;
 $pagination-border-color: transparent;
 
 // Modals
-$modal-content-bg: $ez-ground-base-medium;
+$modal-header-padding: calculateRem(16px) calculateRem(24px);
+$modal-header-border-width: 0;
+
+//Components
+$border-radius: $ibexa-border-radius;
+
+//Cards
+$card-spacer-x: 0;
+
+//Grid
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1280px
+) !default;
+
+//Inputs
+$input-bg: transparent;
+$input-color: $ibexa-color-font;
+$input-border-color: $ibexa-color-base-dark;
+$input-box-shadow: none;
+
+$input-focus-bg: transparent;
+$input-focus-border-color: $ibexa-color-primary;
+$input-focus-color: $ibexa-color-font-pale;
+$input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
