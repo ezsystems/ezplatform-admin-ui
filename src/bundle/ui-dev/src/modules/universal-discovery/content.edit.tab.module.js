@@ -74,6 +74,9 @@ const ContentEditTabModule = () => {
         if (locationId) {
             handleContentPublished(parseInt(locationId.content, 10));
         }
+
+        iframeRef.current.contentWindow.document.body.addEventListener('ez-udw-opened', hideFooter, false);
+        iframeRef.current.contentWindow.document.body.addEventListener('ez-udw-closed', showFooter, false);
     };
     const hideFooter = () => setFooterVisible(false);
     const showFooter = () => setFooterVisible(true);
