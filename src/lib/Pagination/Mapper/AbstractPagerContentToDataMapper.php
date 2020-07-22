@@ -9,16 +9,16 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Pagination\Mapper;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
+use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
-use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 
 abstract class AbstractPagerContentToDataMapper
 {
@@ -88,19 +88,17 @@ abstract class AbstractPagerContentToDataMapper
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
      *
      * @return \eZ\Publish\API\Repository\Values\User\User|null
      */
-    protected function getContributor(ContentInfo $contentInfo): ?User
+    protected function getVersionContributor(VersionInfo $versionInfo): ?User
     {
-        $userExists = (new UserExists($this->userService))->isSatisfiedBy($contentInfo->ownerId);
-
-        if (false === $userExists) {
+        try {
+            return $this->userService->loadUser($versionInfo->creatorId);
+        } catch (NotFoundException $e) {
             return null;
         }
-
-        return $this->userService->loadUser($contentInfo->ownerId);
     }
 
     /**

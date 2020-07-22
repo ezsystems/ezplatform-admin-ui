@@ -78,7 +78,7 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
                 'contentId' => $content->id,
                 'name' => $this->translationHelper->getTranslatedContentName($content),
                 'language' => $contentInfo->mainLanguageCode,
-                'contributor' => $this->getContributor($contentInfo),
+                'contributor' => $this->getVersionContributor($content->versionInfo),
                 'version' => $content->versionInfo->versionNo,
                 'content_type' => $content->getContentType(),
                 'modified' => $content->versionInfo->modificationDate,
