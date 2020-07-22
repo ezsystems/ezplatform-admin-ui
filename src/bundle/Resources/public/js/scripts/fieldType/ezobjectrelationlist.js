@@ -1,4 +1,4 @@
-(function (global, doc, eZ, React, ReactDOM, Translator) {
+(function(global, doc, eZ, React, ReactDOM, Translator) {
     const CLASS_FIELD_SINGLE = 'ez-field-edit--ezobjectrelation';
     const SELECTOR_FIELD_MULTIPLE = '.ez-field-edit--ezobjectrelationlist';
     const SELECTOR_FIELD_SINGLE = '.ez-field-edit--ezobjectrelation';
@@ -163,9 +163,9 @@
                     <td class="ez-relations__item-name">${contentName}</td>
                     <td>${contentTypeName}</td>
                     <td>${formatShortDateTime(item.ContentInfo.Content.publishedDate)}</td>
-                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${
-                        selectedItems.length + index + 1
-                    }" /></td>
+                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length +
+                        index +
+                        1}" /></td>
                 </tr>
             `;
         };

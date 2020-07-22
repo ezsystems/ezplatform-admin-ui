@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState, useEffect } from 'react';
 
 import {
     TabsContext,
@@ -10,8 +10,10 @@ import {
 } from './universal.discovery.module';
 import { findLocationsByParentLocationId } from './services/universal.discovery.service';
 import deepClone from '../common/helpers/deep.clone.helper';
+import { createCssClassNames } from '../common/helpers/css.class.names';
 
 const ContentEditTabModule = () => {
+    const [footerVisible, setFooterVisible] = useState(true);
     const restInfo = useContext(RestInfoContext);
     const tabs = useContext(TabsContext);
     const [activeTab, setActiveTab] = useContext(ActiveTabContext);
@@ -72,7 +74,12 @@ const ContentEditTabModule = () => {
         if (locationId) {
             handleContentPublished(parseInt(locationId.content, 10));
         }
+
+        iframeRef.current.contentWindow.document.body.addEventListener('ez-udw-opened', hideFooter, false);
+        iframeRef.current.contentWindow.document.body.addEventListener('ez-udw-closed', showFooter, false);
     };
+    const hideFooter = () => setFooterVisible(false);
+    const showFooter = () => setFooterVisible(true);
     const iframeUrl = window.Routing.generate(
         'ezplatform.content_on_the_fly.edit',
         {
@@ -83,9 +90,23 @@ const ContentEditTabModule = () => {
         },
         true
     );
+    const className = createCssClassNames({
+        'c-content-edit': true,
+        'c-content-edit--footer-visible': footerVisible,
+    });
+
+    useEffect(() => {
+        window.document.body.addEventListener('ez-udw-hide-footer', hideFooter, false);
+        window.document.body.addEventListener('ez-udw-show-footer', showFooter, false);
+
+        return () => {
+            window.document.body.removeEventListener('ez-udw-hide-footer', hideFooter, false);
+            window.document.body.removeEventListener('ez-udw-show-footer', showFooter, false);
+        };
+    });
 
     return (
-        <div className="c-content-edit">
+        <div className={className}>
             <iframe src={iframeUrl} className="c-content-edit__iframe" ref={iframeRef} onLoad={handleIframeLoad} />
             <div className="c-content-edit__actions">
                 <button className="c-content-edit__cancel-button btn btn-gray" onClick={cancelContentEdit}>
