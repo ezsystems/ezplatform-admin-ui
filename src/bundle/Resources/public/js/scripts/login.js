@@ -4,8 +4,6 @@
     const viewHideIconNode = doc.querySelector('.ez-login__password-visibility-toggler .ez-icon--view-hide');
 
     doc.querySelector('.ez-login__password-visibility-toggler').addEventListener('click', (event) => {
-        event.preventDefault();
-
         if (passwordInputNode) {
             const inputTypeToSet = passwordInputNode.type === 'password' ? 'text' : 'password';
 

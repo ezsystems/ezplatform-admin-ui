@@ -36,7 +36,7 @@
                     name="_password" 
                     required="required"
                 />
-                <button class="ez-login__password-visibility-toggler">
+                <button type="button" class="ez-login__password-visibility-toggler">
                     <svg class="ez-icon ez-icon--medium ez-icon--dark ez-icon--view">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg#view') }}"></use>
                     </svg>
@@ -48,7 +48,7 @@
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}" />
 
-            <button type="submit" class="btn btn-primary ez-login__btn--sign-in">{{ 'authentication.sign_in'|trans|desc('Sign in') }}</button>
+            <button type="submit" class="btn btn-primary ez-login__btn ez-login__btn--sign-in">{{ 'authentication.sign_in'|trans|desc('Sign in') }}</button>
         </fieldset>
     </form>
 
