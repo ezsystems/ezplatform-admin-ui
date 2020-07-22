@@ -2,25 +2,24 @@
     height: 100%;
 
     .form-group {
-        padding-top: 1rem;
+        padding-top: calculateRem(16px);
         margin-bottom: 0;
     }
 
     .ez-field__error {
         margin-left: 0;
-        color: $ez-color-warning-dark;
+        color: $ibexa-color-warning-dark;
     }
 
     &__image-col {
+        position: relative;
         display: flex;
         flex-direction: column;
         background-image: url("../img/login-background.jpg");
     }
 
     &__support-wrapper {
-        height: 97vh;
-        padding: 65vh calculateRem(80px) 0;
-        padding-top: 65vh;
+        margin: 65vh 0 0 calculateRem(80px);
         color: $ibexa-white;
     }
 
@@ -35,6 +34,9 @@
     }
 
     &__application-version {
+        position: absolute;
+        bottom: calculateRem(15px);
+        right: calculateRem(25px);
         color: $ibexa-white;
         font-size: calculateRem(13px);
         text-align: right;
@@ -74,7 +76,7 @@
     &__errors-container {
         display: inline-block;
         margin-bottom: calculateRem(30px);
-        color: $ez-color-danger;
+        color: $ibexa-color-danger;
     }
 
     &__input-label-wrapper {
@@ -98,15 +100,24 @@
 
     &__password-visibility-toggler {
         position: absolute;
-        right: calculateRem(12px);
-        top: calculateRem(45px);
+        right: calculateRem(8px);
+        top: calculateRem(59px);
         z-index: 1;
         margin-left: auto;
+        border: none;
+        outline: none;
+
+        &:focus {
+            border: none;
+            outline: none;
+        }
     }
 
-    &__btn-sign-in,
-    &__btn-reset-password {
-        padding: calculateRem(10px) calculateRem(80px);
+    &__btn {
+        &--sign-in,
+        &--reset-password {
+            padding: calculateRem(10px) calculateRem(80px);
+        }
     }
 
     &__copright {

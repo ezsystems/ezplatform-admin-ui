@@ -24,18 +24,10 @@
                     autocomplete="on"
                 />
             </div>
-            <div class="form-group{% if error %} has-error{% endif %}">
+            <div class="form-group{% if error %} has-error{% endif %} position-relative">
                 <div class="ez-login__input-label-wrapper">
                     <label class="ez-login__input-label" for="password">{{ 'authentication.password'|trans|desc('Password') }}</label>
                     <a href="{{ path('ezplatform.user.forgot_password') }}">{{ 'authentication.forgot_password'|trans|desc('Forgot password?') }}</a>
-                    <a class="ez-login__password-visibility-toggler" href="javascript: void(0)">
-                        <svg class="ez-icon ez-icon--medium ez-icon--dark ez-icon--view">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#view"></use>
-                        </svg>
-                        <svg class="ez-icon ez-icon--medium ez-icon--dark ez-icon--view-hide d-none">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#view-hide"></use>
-                        </svg>
-                    </a>
                 </div>
                 <input 
                     type="password" 
@@ -44,11 +36,19 @@
                     name="_password" 
                     required="required"
                 />
+                <button class="ez-login__password-visibility-toggler">
+                    <svg class="ez-icon ez-icon--medium ez-icon--dark ez-icon--view">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg#view') }}"></use>
+                    </svg>
+                    <svg class="ez-icon ez-icon--medium ez-icon--dark ez-icon--view-hide d-none">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg#view-hide') }}"></use>
+                    </svg>
+                </button>
             </div>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}" />
 
-            <button type="submit" class="btn btn-primary ez-login__btn-sign-in">{{ 'authentication.sign_in'|trans|desc('Sign in') }}</button>
+            <button type="submit" class="btn btn-primary ez-login__btn--sign-in">{{ 'authentication.sign_in'|trans|desc('Sign in') }}</button>
         </fieldset>
     </form>
 
