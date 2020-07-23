@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 24.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 469.20999 131.81999"
+   xml:space="preserve"
+   sodipodi:docname="ibexa_logo.svg"
+   width="469.20999"
+   height="131.81999"
+   inkscape:version="0.92.5 (0.92.5+69)"><metadata
+   id="metadata3789"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+   id="defs3787" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1870"
+   inkscape:window-height="1020"
+   id="namedview3785"
+   showgrid="false"
+   inkscape:zoom="2.0771262"
+   inkscape:cx="211.47681"
+   inkscape:cy="39.840223"
+   inkscape:window-x="50"
+   inkscape:window-y="23"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<style
+   type="text/css"
+   id="style3771">
+	.st0{fill:url(#SVGID_1_);}
+</style>
+<linearGradient
+   id="SVGID_1_"
+   gradientUnits="userSpaceOnUse"
+   x1="22.002501"
+   y1="144.2379"
+   x2="491.20749"
+   y2="144.2379"
+   gradientTransform="translate(-22,-78.33)">
+	<stop
+   offset="0"
+   style="stop-color:#EA571C"
+   id="stop3773" />
+	<stop
+   offset="0.1151"
+   style="stop-color:#E95026"
+   id="stop3775" />
+	<stop
+   offset="0.3315"
+   style="stop-color:#E83E3A"
+   id="stop3777" />
+	<stop
+   offset="0.6176"
+   style="stop-color:#E61850"
+   id="stop3779" />
+</linearGradient>
+<path
+   class="st0"
+   d="m 367.33,7.6300004 h -30.9 L 293.49,50.57 l -9.53,-8.97 -15.45,15.45 9.53,8.97 -23.53,23.53 -0.02,-0.02 c -6.24,5.16 -18.27,12.25 -26.99,12.25 -5.29,0 -10.31,-1.17 -14.84,-3.220001 0,0 59.84,-60.689999 63.67,-64.519999 l -3.26,-3.42 C 259.3,16.5 242.77,8.1200004 227.06,8.1200004 195.11,8.1200004 169.12,34.11 169.12,66.06 c 0,31.949999 25.99,57.94 57.94,57.94 14.94,0 28.04,-4.99 44.3,-20.44 l 22.13,-22.09 40.23,40.25 h 30.9 L 308.94,66.02 Z M 191.33,65.63 c 0,-19.94 16.22,-36.16 36.16,-36.16 7.17,0 13.85,2.11 19.47,5.73 l -49.9,49.9 c -3.61,-5.63 -5.73,-12.3 -5.73,-19.47 z M 6.4899997,59.44 22.22,43.58 V 123.7 H 0 V 75.19 C 0,69.29 2.33,63.63 6.4899997,59.44 Z M 22.22,4.9100004 V 18.78 c 0,0.02 -0.01,0.03 -0.02,0.04 L 5.35,35.67 C 3.38,37.64 0,36.25 0,33.45 V 4.9100004 c 0,-0.03 0.03,-0.06 0.06,-0.06 h 22.1 c 0.03,0 0.06,0.03 0.06,0.06 z M 469.21,109.52 469.12,66.07 c 0,0 0,-0.01 0,-0.01 0,-0.01 0,-0.01 0,-0.02 v -1.25 l -0.01,0.03 C 468.45,33.44 442.72,8.1200004 411.19,8.1200004 379.24,8.1200004 353.25,34.11 353.25,66.06 c 0,31.949999 25.99,57.94 57.94,57.94 13.44,0 25.83,-4.6 35.67,-12.31 l -0.1,20.13 z m -58.47,-6.86 c -19.94,0 -36.16,-16.22 -36.16,-36.16 0,-19.94 16.22,-36.16 36.16,-36.16 19.94,0 36.16,16.22 36.16,36.16 0,19.93 -16.22,36.16 -36.16,36.16 z M 100.86,7.8200004 C 87.42,7.8200004 75.03,12.42 65.19,20.13 L 65.28,0 42.82,22.3 42.91,65.75 c 0,0 0,0.01 0,0.01 0,0.01 0,0.01 0,0.02 v 1.25 L 42.92,67 c 0.66,31.379999 26.39,56.7 57.92,56.7 31.95,0 57.94,-25.990001 57.94,-57.94 C 158.8,33.81 132.81,7.8200004 100.86,7.8200004 Z M 101.3,101.48 c -19.94,0 -36.16,-16.22 -36.16,-36.16 0,-19.94 16.22,-36.16 36.16,-36.16 19.94,0 36.16,16.22 36.16,36.16 0,19.94 -16.22,36.16 -36.16,36.16 z"
+   id="path3782"
+   style="fill:url(#SVGID_1_)"
+   inkscape:connector-curvature="0" />
+</svg>
