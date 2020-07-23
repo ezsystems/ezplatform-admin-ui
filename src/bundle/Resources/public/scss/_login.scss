@@ -2,74 +2,132 @@
     height: 100%;
 
     .form-group {
-        padding-top: 1rem;
+        padding-top: calculateRem(16px);
         margin-bottom: 0;
     }
 
     .ez-field__error {
         margin-left: 0;
-        color: $ez-color-warning-dark;
+        color: $ibexa-color-warning-dark;
     }
 
-    &__hyperlink {
-        color: #D8D8D8;
-        text-decoration: underline;
-    }
-    &__hyperlink:hover {
-        color: #FF4713;
-    }
-
-    &__image {
-        background: url('/bundles/ezplatformadminui/img/login-background.jpg');
-        background-size: cover;
-    }
-
-    &__form {
-        background: #131C26;
+    &__image-col {
+        position: relative;
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
-        color: $ez-white;
+        background-image: url("/bundles/ezplatformadminui/img/login-background.jpg");
+    }
 
-        &-label {
-            margin-bottom: 0;
-        }
+    &__support-wrapper {
+        margin: 65vh 0 0 calculateRem(80px);
+        color: $ibexa-white;
+    }
 
-        &-input {
+    &__support-headline {
+        font-weight: 600;
+        font-size: calculateRem(24px);
+        margin-bottom: calculateRem(24px)
+    }
+
+    &__support-content {
+        font-size: calculateRem(16px);
+    }
+
+    &__application-version {
+        position: absolute;
+        bottom: calculateRem(15px);
+        right: calculateRem(25px);
+        color: $ibexa-white;
+        font-size: calculateRem(13px);
+        text-align: right;
+    }
+
+    &__actions-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $ibexa-color-font;
+        background: $ibexa-white;
+    }
+
+    &__logo {
+        position: absolute;
+        top: calculateRem(30px);
+        right: calculateRem(30px);
+        max-width: calculateRem(120px);
+    }
+
+    &__actions-wrapper {
+        width: calculateRem(450px);
+    }
+
+    &__actions-headline {
+        margin-bottom: calculateRem(12px);
+        color: $ibexa-color-font;
+        font-weight: 500;
+        font-size: calculateRem(26px);
+    }
+
+    &__actions-subheadline {
+        margin-bottom: calculateRem(56px);
+    }
+
+    &__errors-container {
+        display: inline-block;
+        margin-bottom: calculateRem(30px);
+        color: $ibexa-color-danger;
+    }
+
+    &__input-label-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__input-label {
+        margin-bottom: calculateRem(12px);
+    }
+
+    &__input {
+        width: 100%;
+        height: calculateRem(45px);
+        padding: calculateRem(12px);
+        background: $ibexa-white;
+        margin-bottom: calculateRem(32px);
+        position: relative;
+    }
+
+    &__password-visibility-toggler {
+        position: absolute;
+        right: calculateRem(8px);
+        top: calculateRem(59px);
+        z-index: 1;
+        margin-left: auto;
+        border: none;
+        outline: none;
+
+        &:focus {
             border: none;
-        }
-
-        &-wrapper {
-            width: 18rem;
-            height: 90%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        &-logo-description {
-            margin: calculateRem(18px) auto calculateRem(40px);
-            text-align: center;
-            font-size: calculateRem(18px);
+            outline: none;
         }
     }
 
-    &__text {
-        &-wrapper {
-            width: 32rem;
-            height: 90%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+    &__btn {
+        &--sign-in,
+        &--reset-password {
+            padding: calculateRem(10px) calculateRem(80px);
         }
     }
 
-    &__header {
-        font-weight: 400;
-    }
-
-    &__footer {
-        color: #D8D8D8;
+    &__copright {
+        position: absolute;
+        bottom: calculateRem(15px);
+        right: calculateRem(25px);
+        height: calculateRem(20px);
+        width: calculateRem(200px);
+        color: $ibexa-color-base-dark;
+        text-align: right;
+        font-size: calculateRem(13px);
     }
 }

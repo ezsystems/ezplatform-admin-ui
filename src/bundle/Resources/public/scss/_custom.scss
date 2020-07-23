@@ -24,9 +24,11 @@ $ibexa-color-font: #131C26;
 $ibexa-color-font-pale: #878B90;
 $ibexa-color-border-light: #ECDFD1;
 
-$ibexa-color-positive: #00825c;
-$ibexa-color-warning: #f7d000;
-$ibexa-color-danger: #d92d42;
+$ibexa-color-positive: #00825C;
+$ibexa-color-warning: #F7D000;
+$ibexa-color-danger: #D92D42;
+$ibexa-color-warning-dark: #AA0000;
+$ibexa-color-warning-pale: #FCEAEC;
 
 /* eZ colors: These colors are deprecated, please use colors with the "ibexa" prefix */
 $ez-color-primary: $ibexa-color-primary;
@@ -64,8 +66,8 @@ $ez-secondary-ground-dark: $ibexa-color-primary;
 $ez-ground-primary-inverted-light: #445A64;
 $ez-ground-primary-inverted: $ibexa-color-base;
 
-$ez-color-warning-pale: #FCEAEC;
-$ez-color-warning-dark: #AA0000;
+$ez-color-warning-pale: $ibexa-color-warning-pale;
+$ez-color-warning-dark: $ibexa-color-warning-dark;
 
 $ez-alloyeditor-color-hover: #65B6F0;
 

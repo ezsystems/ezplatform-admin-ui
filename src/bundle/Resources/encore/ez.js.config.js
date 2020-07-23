@@ -213,5 +213,6 @@ module.exports = (Encore) => {
         ])
         .addEntry('ezplatform-admin-ui-url-management-update-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.url.wildcards.update.js'),
-        ]);
+        ])
+        .addEntry('ezplatform-admin-ui-login-js', [path.resolve(__dirname, '../public/js/scripts/login.js')]);
 };

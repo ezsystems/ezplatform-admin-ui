@@ -1,0 +1,16 @@
+.ez-link {
+    text-decoration: underline;
+    transition: all 0.2s $ez-admin-transition;
+    
+    &:hover {
+        color: $ibexa-color-primary;
+    }
+
+    &--light {
+        color: $ibexa-white;
+    }
+
+    &--dark {
+        color: $ibexa-black;
+    }
+}
