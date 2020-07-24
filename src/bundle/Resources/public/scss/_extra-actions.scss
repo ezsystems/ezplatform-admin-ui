@@ -1,10 +1,10 @@
 .ez-extra-actions {
     $block: '.ez-extra-actions';
 
-    background-color: $ez-white;
-    border: calculateRem(16px) solid $ez-white;
     width: calculateRem(360px);
-    box-shadow: calculateRem(-4px) calculateRem(4px) calculateRem(6px) 0 rgba($ez-color-base-light, 0.35);
+    padding: calculateRem(16px);
+    background-color: $ibexa-white;
+    box-shadow: calculateRem(-4px) calculateRem(4px) calculateRem(6px) 0 rgba(0, 0, 0, 0.1);
 
     &__action {
         display: block;
@@ -15,8 +15,8 @@
         border-radius: calculateRem(4px);
         padding: 0 calculateRem(16px);
         line-height: calculateRem(45px);
-        background: $ez-white;
-        color: $ez-color-secondary;
+        background: $ibexa-white;
+        color: $ibexa-color-primary;
         text-decoration: none;
         cursor: pointer;
         transition: all 0.2s $ez-admin-transition;
@@ -29,12 +29,12 @@
 
         &:hover,
         &:focus {
-            background: $ez-secondary-ground-pale;
+            background: $ibexa-white;
         }
 
         &:active {
-            background: $ez-secondary-ground;
-            color: $ez-white;
+            background: $ibexa-white;
+            color: $ibexa-color-primary;
         }
     }
 
@@ -43,12 +43,12 @@
     }
 
     &__header {
-        line-height: calculateRem(50px);
-        font-size: calculateRem(17px);
-        color: $ez-color-secondary;
-        margin-bottom: calculateRem(15px);
-        font-weight: 600;
-        border-bottom: calculateRem(1px) solid $ez-color-secondary;
+        margin-bottom: calculateRem(32px);
+        padding: calculateRem(8px) calculateRem(8px) calculateRem(24px);
+        color: $ibexa-color-primary;
+        font-size: calculateRem(16px);
+        font-weight: bold;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
     }
 
     &__content {

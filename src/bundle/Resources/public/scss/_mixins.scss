@@ -1,13 +1,16 @@
 @import 'mixins/image-preview';
-@import 'mixins/type-icon';
+@import 'mixins/type-icons';
 @import 'mixins/inputs';
+@import 'mixins/modals';
+@import 'mixins/general';
 
 @mixin checkbox-icon() {
-    border: calculateRem(1px) solid $ez-color-secondary;
+    display: flex;
     margin: 0;
     padding: 0;
     width: calculateRem(64px);
     height: calculateRem(32px);
+    border: calculateRem(1px) solid $ibexa-color-primary;
     border-radius: $ibexa-border-radius;
     position: relative;
     z-index: 0;
@@ -16,38 +19,39 @@
     &:before {
         content: '';
         position: absolute;
-        width: 2rem;
-        height: 2rem;
+        width: calculateRem(32px);
+        height: calculateRem(32px);
         top: 50%;
         left: 0;
-        background-color: $ez-color-secondary;
         z-index: -1;
+        background-color: $ibexa-color-primary;
         border-radius: $ibexa-border-radius;
-        transform: translate(calc(100% + 0.3rem), -50%);
+        transform: translate(100%, -50%);
         transition: all 0.2s $ez-admin-transition;
     }
 
     .ez-icon {
-        fill: $ez-color-secondary;
-        height: 1.5rem;
-        width: 1.5rem;
+        fill: $ibexa-color-primary;
+        height: calculateRem(16px);
+        width: calculateRem(16px);
+        margin: auto calculateRem(8px);
     }
 
     .ez-icon + .ez-icon {
-        fill: $ez-white;
+        fill: $ibexa-white;
     }
 
     &.is-checked {
         &:before {
-            transform: translate(0.15rem, -50%);
+            transform: translate(0, -50%);
         }
 
         .ez-icon {
-            fill: $ez-white;
+            fill: $ibexa-white;
         }
 
         .ez-icon + .ez-icon {
-            fill: $ez-color-secondary;
+            fill: $ibexa-color-primary;
         }
     }
 
@@ -66,7 +70,7 @@
         position: relative;
         width: $size;
         height: calc(#{$size} + 0.25rem);
-        background-color: $ez-color-base-pale;
+        background-color: $ibexa-white;
         margin-left: calc((#{$size} + 0.25rem) / 2);
         cursor: pointer;
 
@@ -79,7 +83,7 @@
             width: $size;
             height: $size;
             display: block;
-            background-color: $ez-white;
+            background-color: $ibexa-white;
             border-radius: 50%;
             position: absolute;
             top: 2px;
@@ -91,18 +95,18 @@
         }
 
         &.is-checked {
-            background-color: $ez-secondary-ground;
+            background-color: $ibexa-color-primary;
 
             .ez-data-source__indicator {
                 transform: translateX(50%);
             }
 
             &:before {
-                background-color: $ez-secondary-ground;
+                background-color: $ibexa-color-primary;
             }
 
             &:after {
-                background-color: $ez-secondary-ground;
+                background-color: $ibexa-color-primary;
             }
         }
 
@@ -243,9 +247,9 @@
 }
 
 @mixin nav-item-active-hover {
-    background-color: $ez-white;
-    border-top-color: $ez-white;
-    border-right-color: $ez-white;
-    border-bottom-color: $ez-color-primary;
-    border-left-color: $ez-white;
+    background: $ibexa-white;
+    border-top: calculateRem(1px) solid transparent;
+    border-right: calculateRem(1px) solid transparent;
+    border-bottom: calculateRem(1px) solid $ibexa-color-primary;
+    border-left: calculateRem(1px) solid transparent;
 }

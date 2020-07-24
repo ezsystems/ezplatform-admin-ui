@@ -140,7 +140,7 @@ select {
 .ez-sticky-container {
     position: -webkit-sticky;
     position: sticky;
-    top: calculateRem(16px);
+    top: 0;
     height: 100vh;
 
     .ez-icon {

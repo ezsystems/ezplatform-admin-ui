@@ -1,0 +1,26 @@
+@mixin modal-close-btn {
+    position: absolute;
+    top: calculateRem(16px);
+    right: calculateRem(16px);
+    z-index: 2;
+
+    .ez-icon {
+        fill: $ibexa-color-font;
+    }
+}
+
+@mixin modal-header {
+    display: flex;
+    font-family: $font-family-sans-serif;
+    background: $ibexa-color-base-pale;
+}
+
+@mixin modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: calculateRem(80px);
+    background: $ibexa-color-base-pale;
+    padding-left: calculateRem(24px);
+}

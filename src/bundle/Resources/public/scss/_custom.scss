@@ -150,32 +150,25 @@ $h6-font-size: 1.0625rem !default;
 
 $headings-font-weight: 700;
 
-// Fonts
 $font-family-sans-serif: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
 
-//Border
 $ibexa-border-radius: calculateRem(2px);
 
-// Tables
 $table-cell-padding: calculateRem(12px) calculateRem(16px);
 $table-bg: $white;
 $table-border-width: 0;
 $table-hover-bg: $ibexa-color-base-pale;
 
-// Breadcrumbs
 $breadcrumb-bg: $ez-ground-base;
 
-// Links
 $link-decoration: underline;
 $link-color: $ibexa-color-font;
 $link-hover-decoration: underline;
 $link-hover-color: $ibexa-color-primary;
 
-// Body
-$body-bg: $ez-ground-base-pale;
-$body-color: $ez-black;
+$body-bg: $ibexa-color-base-pale;
+$body-color: $ibexa-color-font;
 
-// Pagination
 $pagination-color: $ez-black;
 $pagination-bg: $ez-pagination-bg;
 
@@ -190,17 +183,13 @@ $pagination-disabled-border-color: transparent;
 $pagination-border-width: 0;
 $pagination-border-color: transparent;
 
-// Modals
-$modal-header-padding: calculateRem(16px) calculateRem(24px);
+$modal-header-padding: calculateRem(13px) calculateRem(24px);
 $modal-header-border-width: 0;
 
-//Components
 $border-radius: $ibexa-border-radius;
 
-//Cards
 $card-spacer-x: 0;
 
-//Grid
 $container-max-widths: (
   sm: 540px,
   md: 720px,
@@ -208,7 +197,6 @@ $container-max-widths: (
   xl: 1280px
 ) !default;
 
-//Inputs
 $input-bg: transparent;
 $input-color: $ibexa-color-font;
 $input-border-color: $ibexa-color-base-dark;
@@ -218,3 +206,8 @@ $input-focus-bg: transparent;
 $input-focus-border-color: $ibexa-color-primary;
 $input-focus-color: $ibexa-color-font-pale;
 $input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
+
+$btn-font-size: calculateRem(13px);
+
+$nav-link-padding-y: 1rem;
+$nav-link-padding-x: 0.75rem;

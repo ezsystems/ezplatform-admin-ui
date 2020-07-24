@@ -7,20 +7,17 @@
     }
 
     .nav-link {
-        margin-left: calculateRem(16px);
-        padding: calculateRem(16px) calculateRem(8px);
-        color: $ez-black;
+        margin: 0 calculateRem(16px) calculateRem(-1px) 0;
+        padding: $nav-link-padding-x $nav-link-padding-y; 
+        color: $ibexa-color-font;
         border-radius: 0;
         text-decoration: none;
         
-        &:hover {
-            @include nav-item-active-hover;
-            color: $ez-color-primary;
-        }
 
+        &:hover,
         &.active {
             @include nav-item-active-hover;
-            color: $ez-black;
+            color: $ibexa-color-primary;
         }
     }
 }

@@ -97,15 +97,33 @@
 .ez-side-menu,
 .ez-context-menu {
     .btn {
-        padding: calculateRem(8px) calculateRem(5px);
-        font-size: calculateRem(11px);
+        width: calculateRem(80px);
+        height: calculateRem(80px);
+        margin: 0;
+        padding: 0 calculateRem(2px);
+        font-size: calculateRem(13px);
+        line-height: calculateRem(18px);
         border-radius: 0;
-        line-height: 1.4;
         text-decoration: none;
-        
+
         &:hover,
         &:focus {
+            color: $ibexa-color-font;
+            border: none;
             outline: none;
+            background: $ibexa-white;
+
+            .ez-icon {
+                fill: $ibexa-black;
+            }
+        }
+
+        &:first-child {
+            border-radius: calculateRem(2px) calculateRem(2px) 0 0;
+        }
+    
+        &:last-child {
+            border-radius: 0 0 calculateRem(2px) calculateRem(2px);
         }
     }
 
