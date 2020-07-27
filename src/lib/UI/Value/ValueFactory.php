@@ -169,6 +169,7 @@ class ValueFactory
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\ForbiddenException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function createRelation(Relation $relation, Content $content): UIValue\Content\Relation
     {
@@ -192,6 +193,7 @@ class ValueFactory
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\ForbiddenException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function createRelationItem(RelationListItem $relationListItem, Content $content): UIValue\Content\Relation
     {
