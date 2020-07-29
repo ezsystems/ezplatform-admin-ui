@@ -31,6 +31,7 @@ use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
+use eZ\Publish\Core\Repository\LocationResolver\LocationResolver;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
@@ -69,6 +70,9 @@ class ValueFactory
     /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
 
+    /** @var \eZ\Publish\Core\Repository\LocationResolver\LocationResolver */
+    protected $locationResolver;
+
     /**
      * @param \eZ\Publish\API\Repository\UserService $userService
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -80,6 +84,7 @@ class ValueFactory
      * @param \EzSystems\EzPlatformAdminUi\UI\Service\PathService $pathService
      * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
+     * @param \eZ\Publish\Core\Repository\LocationResolver\LocationResolver $locationResolver
      */
     public function __construct(
         UserService $userService,
@@ -91,7 +96,8 @@ class ValueFactory
         PermissionResolver $permissionResolver,
         PathService $pathService,
         DatasetFactory $datasetFactory,
-        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
+        UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
+        LocationResolver $locationResolver
     ) {
         $this->userService = $userService;
         $this->languageService = $languageService;
@@ -103,6 +109,7 @@ class ValueFactory
         $this->pathService = $pathService;
         $this->datasetFactory = $datasetFactory;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
+        $this->locationResolver = $locationResolver;
     }
 
     /**
@@ -161,6 +168,8 @@ class ValueFactory
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ForbiddenException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function createRelation(Relation $relation, Content $content): UIValue\Content\Relation
     {
@@ -170,7 +179,7 @@ class ValueFactory
         return new UIValue\Content\Relation($relation, [
             'relationFieldDefinitionName' => $fieldDefinition ? $fieldDefinition->getName() : '',
             'relationContentTypeName' => $contentType->getName(),
-            'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
+            'relationLocation' => $this->locationResolver->resolveLocation($content->contentInfo),
             'relationName' => $content->getName(),
         ]);
     }
@@ -183,6 +192,8 @@ class ValueFactory
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ForbiddenException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function createRelationItem(RelationListItem $relationListItem, Content $content): UIValue\Content\Relation
     {
@@ -193,7 +204,7 @@ class ValueFactory
         return new UIValue\Content\Relation($relation, [
             'relationFieldDefinitionName' => $fieldDefinition ? $fieldDefinition->getName() : '',
             'relationContentTypeName' => $contentType->getName(),
-            'relationLocation' => $this->locationService->loadLocation($content->contentInfo->mainLocationId),
+            'relationLocation' => $this->locationResolver->resolveLocation($content->contentInfo),
             'relationName' => $content->getName(),
         ]);
     }
