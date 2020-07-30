@@ -3,7 +3,7 @@ Feature: Content fields setting and editing
   In order to manage content on my site
   I want to set, edit, copy and move content items.
 
-  @javascript @common @admin
+  @javascript @common @admin @test4
   Scenario Outline: Create content item with given field
     Given I create a "<fieldName> CT" Content Type in "Content" with "<fieldInternalName>" identifier
       | Field Type  | Name        | Identifier          | Required | Searchable | Translatable | Settings       |
@@ -111,7 +111,7 @@ Feature: Content fields setting and editing
       | Matrix                       | value     | col1:col2:col3,11:12:13,21:22:23,31:32:33 |                         ||         |           | Matrix                    | Matrix                       |
       | Image Asset                  | value     | imageasset2.png.zip          |            |                          |         |           | imageasset1.png           | imageasset2.png              |
 
-  @javascript @common @admin @queryFieldType
+  @javascript @common @admin @queryFieldType @commerceExcluded
   Scenario Outline: Create content item with Content Query field
     Given I create a "<fieldName> CT" Content Type in "Content" with "<fieldInternalName>" identifier
       | Field Type  | Name        | Identifier          | Required | Searchable | Translatable | Settings        |
@@ -134,7 +134,7 @@ Feature: Content fields setting and editing
       | fieldInternalName | fieldName     | fieldSettings                                               | label1 | value1                 |
       | ezcontentquery    | Content query | QueryType-EzPlatformAdminUi:MediaSubtree,ContentType-folder | value  | Media,Files,Multimedia |
 
-  @javascript @common @queryFieldType
+  @javascript @common @queryFieldType @commerceExcluded
   Scenario: Edit content item with Content Query
     Given I am logged as "admin"
     And I navigate to content "Content query" of type "Content query CT" in root path
