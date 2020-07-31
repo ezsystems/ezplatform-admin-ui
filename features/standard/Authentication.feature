@@ -1,6 +1,6 @@
 Feature: Verify that Admin Panel is available only for authenticated users
 
-  @javascript @common
+  @javascript @common @commerceExcluded
   Scenario: Should be redirected to Dashboard after successful login
     Given I open Login page
     When I log in as admin with password publish
