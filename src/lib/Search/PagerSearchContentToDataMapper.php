@@ -50,6 +50,7 @@ class PagerSearchContentToDataMapper extends AbstractPagerContentToDataMapper
                 'available_enabled_translations' => $this->getAvailableTranslations($content, true),
                 'available_translations' => $this->getAvailableTranslations($content),
                 'translation_language_code' => $searchHit->matchedTranslation,
+                'resolvedLocation' => $this->locationResolver->resolveLocation($contentInfo),
             ];
         }
 

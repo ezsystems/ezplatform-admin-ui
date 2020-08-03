@@ -17,6 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
+use eZ\Publish\Core\Repository\LocationResolver\LocationResolver;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 
@@ -37,6 +38,9 @@ abstract class AbstractPagerContentToDataMapper
     /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
+    /** @var \eZ\Publish\Core\Repository\LocationResolver\LocationResolver */
+    protected $locationResolver;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\UserService $userService
@@ -49,13 +53,15 @@ abstract class AbstractPagerContentToDataMapper
         UserService $userService,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
         TranslationHelper $translationHelper,
-        LanguageService $languageService
+        LanguageService $languageService,
+        LocationResolver $locationResolver
     ) {
         $this->contentTypeService = $contentTypeService;
         $this->userService = $userService;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->translationHelper = $translationHelper;
         $this->languageService = $languageService;
+        $this->locationResolver = $locationResolver;
     }
 
     /**

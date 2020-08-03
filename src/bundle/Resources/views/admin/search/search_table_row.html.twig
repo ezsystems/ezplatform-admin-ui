@@ -6,7 +6,7 @@
     </td>
     <td class="ez-table__cell ez-table__cell--after-icon">
         {% if row.mainLocationId is not null %}
-            <a href="{{ path('_ez_content_view', { 'contentId': row.contentId, 'locationId': row.mainLocationId }) }}">
+            <a href="{{ path('_ez_content_view', { 'contentId': row.contentId, 'locationId': row.resolvedLocation.id }) }}">
                 {{ row.name }}
             </a>
         {% else %}
