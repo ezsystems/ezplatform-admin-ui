@@ -1,20 +1,16 @@
 .ez-header {
-
     .container {
     	position: relative;
         overflow: auto;
     }
 
-    .breadcrumb {
-        margin: calculateRem(16px) 0;
-        padding-left: 0;
-        color: $ez-black;
-        background: transparent;
-        font-size: .8125rem;
-        flex-wrap: nowrap;
-    }
-
     &--light {
         background: $ibexa-white;
+    }
+
+    &--content-edit {
+        padding-bottom: calculateRem(24px);
+        background: $ibexa-white;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
     }
 }

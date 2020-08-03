@@ -1,6 +1,8 @@
 .m-sub-items {
+    margin-top: calculateRem(24px);
     padding: calculateRem(16px);
-    background: $ez-white;
+    background: $ibexa-white;
+    border-radius: $ibexa-border-radius;
 
     &,
     & * {
@@ -9,9 +11,8 @@
 
     &__header {
         width: 100%;
-        padding: 0 calculateRem(8px) calculateRem(36px);
+        padding: 0 calculateRem(8px) calculateRem(32px);
         font-weight: bold;
-        line-height: calculateRem(50px);
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
@@ -20,7 +21,7 @@
 
     &__title {
         font-size: calculateRem(16px);
-        color: $ez-black;
+        color: $ibexa-black;
         flex: 1 1 auto;
     }
 
@@ -34,7 +35,7 @@
     }
 
     &__list {
-        font-size: calculateRem(15px);
+        font-size: calculateRem(16px);
         line-height: calculateRem(40px);
         text-align: left;
         position: relative;
@@ -44,7 +45,7 @@
         content: '';
         position: absolute;
         z-index: 999;
-        background: rgba($ez-black, 0.35);
+        background: rgba($ibexa-black, 0.35);
         top: 0;
         left: 0;
         right: 0;

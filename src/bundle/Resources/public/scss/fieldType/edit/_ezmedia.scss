@@ -1,12 +1,80 @@
 .ez-field-edit--ezmedia {
     .ez-field-edit-preview {
-        padding: 1.25rem 0 .75rem 1.25rem;
+        &__media-wrapper {
+            position: relative;
+            display: inline-block;
+            float: left;
+            width: calculateRem(520px);
+            height: auto;
+            margin: 0 calculateRem(24px) calculateRem(16px) 0;
+        }
 
         &__media {
-            max-width: 100%;
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        &__actions {
+            position: absolute;
+            z-index: 1;
+            top: calculateRem(16px);
+            right: calculateRem(16px);
+            width: calculateRem(40px);
+            height: calculateRem(90px);
+        }
+
+        &__action--remove,
+        &__action--preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calculateRem(40px);
+            height: calculateRem(40px);
+            margin-bottom: calculateRem(12px);
+            background: $ibexa-color-primary;
+            border: none;
+            outline: none;  
+            
+            .ez-icon {
+                fill: $ibexa-white;
+                width: calculateRem(20px);
+            }
+        }
+
+        &__control {
+            display: inline-block;
+            width: calculateRem(300px);
+            
+            .ez-field-edit-preview__section-title {
+                margin-bottom: calculateRem(32px);
+                font-size: calculateRem(16px);
+                color: $ibexa-color-font;
+            }
+
+            .ez-data-source__label-text {
+                display: inline-block;
+                width: calculateRem(130px);
+            }
+        }
+
+        &__details {
+            color: $ibexa-color-font;
+            padding-top: calculateRem(16px);
+        }
+
+        &__file-name,
+        &__file-size {
+            display: inline-block;
+            margin-bottom: calculateRem(32px);
+
+            &:first-child {
+                margin-right: calculateRem(32px);
+            }
+        }
+
+        &__file-name {
+            min-width: calculateRem(270px);
         }
 
         &__spinner {
@@ -14,14 +82,10 @@
         }
 
         &__media-wrapper--loading {
-            background: $ez-ground-base-dark;
-            padding: 1.25rem;
-            text-align: center;
-
             .ez-field-edit-preview__spinner {
                 display: inline-block;
-                width: 2rem;
-                height: 2rem;
+                width: calculateRem(32px);
+                height: calculateRem(32px);
             }
 
             .ez-field-edit-preview__media {
@@ -29,31 +93,23 @@
             }
         }
 
-        &__details {
-            color: $ez-color-base-light;
-            font-size: .75rem;
-            padding-top: 8px;
-        }
-
         &__info {
             & + .ez-field-edit-preview__info {
-                margin-top: 1rem;
+                margin-top: calculateRem(12px);
             }
         }
 
         &__dimensions {
             display: flex;
-            margin-top: 1.25rem;
 
             .ez-field-edit-preview__info {
-                margin-right: 1.25rem;
+                margin-right: calculateRem(24px);
                 margin-top: 0;
 
                 .ez-field-edit-preview__label {
-                    margin-bottom: 0;
-                    font-size: calculateRem(14px);
-                    font-weight: 700;
-                    color: $ez-black;
+                    margin-bottom: calculateRem(12px);
+                    font-size: calculateRem(16px);
+                    color: $ibexa-color-base-dark;
 
                     &:after {
                         content: ': ';
@@ -61,48 +117,16 @@
                 }
 
                 .ez-field-edit-preview__input {
-                    width: 10ch;
+                    width: calculateRem(220px);
                 }
             }
         }
 
         &__settings {
-            @include checkbox-switcher(1rem);
-            margin-top: 1rem;
-
-            .ez-field-edit-preview__section-title {
-                margin-bottom: .25rem;
-                font-size: calculateRem(14px);
-                font-weight: 700;
-                color: $ez-black;
-
-                &:after {
-                    content: ': ';
-                }
-            }
-
             .ez-field-edit-preview__input-wrapper {
                 display: flex;
                 align-items: center;
                 cursor: pointer;
-            }
-
-            .ez-data-source__label {
-                margin-bottom: 0;
-
-                &:after,
-                &:before {
-                    z-index: 0;
-                }
-            }
-
-            .ez-data-source__indicator {
-                z-index: 1;
-            }
-
-            .ez-data-source__label-text {
-                margin-left: 1.25rem;
-                font-size: .875rem;
             }
         }
     }
@@ -125,5 +149,10 @@
                 border-bottom-left-radius: 5px;
             }
         }
+    }
+
+    .ez-data-source {
+        padding: calculateRem(16px) calculateRem(30px);
+        background: $ibexa-color-base-light;
     }
 }

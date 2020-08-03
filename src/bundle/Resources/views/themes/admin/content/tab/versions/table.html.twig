@@ -45,7 +45,7 @@
 
             <tr>
                 {% if form is defined %}
-                    <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form.versions[version.versionNo], {'attr': {'disabled': not version.canDelete}}) }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form.versions[version.versionNo], {'attr': {'class': 'ez-input ez-input--checkbox', 'disabled': not version.canDelete}}) }}</td>
                 {% endif %}
                 <td class="ez-table__cell">
                     {{ version.versionNo }}

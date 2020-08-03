@@ -6,7 +6,7 @@
 } %}
 
 {{ form_start(form, {'action': path('ezplatform.location.swap')}) }}
-<div class="bg-white p-3 mb-5">
+<div class="bg-white ml-4">
     {{ 'tab.locations.swap_with_another'|trans()|desc('Swap the Content item at this Location with another') }}
     {{ form_widget(form.swap, {'attr': {
         'disabled': not can_swap,

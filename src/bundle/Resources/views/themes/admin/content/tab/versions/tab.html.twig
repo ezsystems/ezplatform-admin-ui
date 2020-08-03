@@ -100,9 +100,16 @@
 
 {% macro table_header_tools(form) %}
     {% set modal_data_target = 'modal-' ~ form.remove.vars.id %}
-    <button id="delete-translations-{{ form.remove.vars.id }}" type="button" class="btn btn-danger" disabled data-toggle="modal"
-            data-target="#{{ modal_data_target }}" title="{{ 'tab.versions.action.delete'|trans|desc('Delete version') }}">
-        <svg class="ez-icon ez-icon-trash">
+    <button 
+        id="delete-translations-{{ form.remove.vars.id }}" 
+        type="button" 
+        class="btn btn-icon" 
+        disabled 
+        data-toggle="modal"
+        data-target="#{{ modal_data_target }}" 
+        title="{{ 'tab.versions.action.delete'|trans|desc('Delete version') }}"
+    >
+        <svg class="ez-icon ez-icon--small ez-icon-trash">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>

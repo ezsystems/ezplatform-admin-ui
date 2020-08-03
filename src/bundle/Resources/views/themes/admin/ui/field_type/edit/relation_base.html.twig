@@ -32,7 +32,7 @@
                             }) }}"
                         {% endif %}
                         type="button"
-                        class="ez-relations__table-action--create btn btn-primary"
+                        class="btn btn-icon ez-relations__table-action--create ez-btn"
                         title="{{ 'ezobjectrelationlist.add_relation'|trans|desc('Add relations') }}"
                         disabled>
                         <svg class="ez-icon ez-icon--medium ez-icon--light">
@@ -41,7 +41,7 @@
                     </button>
                     <button 
                         type="button" 
-                        class="ez-relations__table-action--remove btn btn-danger" 
+                        class="btn btn-icon ez-relations__table-action--remove ez-btn" 
                         title="{{ 'ezobjectrelationlist.delete_selected_relations'|trans|desc('Delete selected relation(s)') }}" 
                         disabled
                     >
@@ -93,32 +93,31 @@
         {% endif %}
         </p>
         <button
-                title="{{ 'ezobjectrelationlist.cta.select'|trans|desc('Select content') }}"
-                {% if limit == 1 %}
-                    data-udw-config="{{ ez_udw_config('single', {
-                        'type': 'object_relation',
-                        'starting_location_id' : default_location,
-                        'allowed_content_types': allowed_content_types
-                    }) }}"
-                {% else %}
-                    data-udw-config="{{ ez_udw_config('multiple', {
-                        'type': 'object_relation',
-                        'starting_location_id' : default_location,
-                        'allowed_content_types': allowed_content_types
-                    }) }}"
-                {% endif %}
-                data-limit="{{limit}}"
-                class="ez-relations__cta-btn btn btn-primary"
-                type="button">
-            <svg class="ez-icon ez-icon--medium ez-icon--light">
-                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#relations"></use>
-            </svg>
+            title="{{ 'ezobjectrelationlist.cta.select'|trans|desc('Select content') }}"
+            {% if limit == 1 %}
+                data-udw-config="{{ ez_udw_config('single', {
+                    'type': 'object_relation',
+                    'starting_location_id' : default_location,
+                    'allowed_content_types': allowed_content_types
+                }) }}"
+            {% else %}
+                data-udw-config="{{ ez_udw_config('multiple', {
+                    'type': 'object_relation',
+                    'starting_location_id' : default_location,
+                    'allowed_content_types': allowed_content_types
+                }) }}"
+            {% endif %}
+            data-limit="{{limit}}"
+            class="ez-relations__cta-btn ez-btn ez-btn--secondary"
+            type="button"
+        >
             <span class="ez-relations__cta-btn-label">
                 {{ 'ezobjectrelationlist.cta.select'|trans|desc('Select content') }}
             </span>
         </button>
+        <p class="ez-relations__helper-text">{{ helper }}</p>
     </div>
     {% set attr = attr|merge({'hidden': 'hidden'}) %}
     {{ block('form_widget') }}
-    <div class="ez-relations__helper-text">{{ helper }}</div>
+    
 {% endblock %}

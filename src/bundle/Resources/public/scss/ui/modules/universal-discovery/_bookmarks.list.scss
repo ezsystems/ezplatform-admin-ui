@@ -1,6 +1,6 @@
 .c-bookmarks-list {
     width: calculateRem(215px);
-    background-color: $ez-ground-base-medium;
+    background-color: $ibexa-white;
     overflow: auto;
     flex-shrink: 0;
     margin-left: calculateRem(1px);
@@ -13,7 +13,7 @@
         font-size: calculateRem(13px);
 
         &--not-selectable {
-            background-color: $ez-ground-base-dark;
+            background-color: $ibexa-color-base-light;
             cursor: not-allowed;
         }
 

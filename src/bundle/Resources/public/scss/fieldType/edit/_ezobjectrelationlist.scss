@@ -2,13 +2,19 @@
 .ez-field-edit--ezobjectrelationlist {
     .ez-relations {
         &__cta {
-            background: $ez-ground-base-dark;
-            padding: calculateRem(32px) 0;
-            text-align: center;
+            width: 100%;
+            padding: calculateRem(16px) calculateRem(30px);
+            background: $ibexa-color-base-light;
         }
 
-        &__cta-text {
+        &__cta-text,
+        &__helper-text {
+            margin: 0;
             width: 100%;
+        }
+
+        &__cta-btn {
+            margin: calculateRem(32px) 0;
         }
 
         &__order-input {
@@ -22,12 +28,10 @@
         }
 
         &__table-header {
-            background-color: $ez-ground-primary;
-
             th {
-                vertical-align: middle;
-                padding: calculateRem(4px) calculateRem(12px);
-                font-size: calculateRem(17px);
+                color: $ibexa-color-font;
+                padding: 0 0 calculateRem(25px);
+                border: none;
             }
         }
 
@@ -36,8 +40,6 @@
             text-align: right;
 
             .btn {
-                line-height: 0.85;
-                padding: calculateRem(8px) calculateRem(5px) calculateRem(8px) calculateRem(10px);
                 margin-left: calculateRem(2px);
                 margin-right: 0;
             }
@@ -50,17 +52,9 @@
         &__hidden-column {
             display: none;
         }
-
-        &__helper-text {
-            color: $ez-color-base-medium;
-            font-size: calculateRem(12px);
-        }
     }
 
     .btn {
-        padding: calculateRem(6px) calculateRem(20px);
-        font-weight: bold;
-
         .ez-icon {
             margin-right: calculateRem(4px);
         }

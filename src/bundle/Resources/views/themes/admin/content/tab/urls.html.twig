@@ -67,7 +67,7 @@
 {% macro table_header_tools(form_custom_url_remove, can_edit_custom_url) %}
     {% if can_edit_custom_url %}
         <button
-            class="btn btn-primary ez-btn--prevented"
+            class="btn btn-icon ez-btn--prevented"
             data-toggle="modal"
             data-target="#ez-modal--custom-url-alias"
             title="{{ 'tab.urls.action.add'|trans|desc('Add a custom URL alias') }}">
@@ -80,7 +80,7 @@
         <button
             id="delete-custom-urls"
             type="button"
-            class="btn btn-danger"
+            class="btn btn-icon"
             disabled
             data-toggle="modal"
             data-target="#{{ modal_data_target }}"

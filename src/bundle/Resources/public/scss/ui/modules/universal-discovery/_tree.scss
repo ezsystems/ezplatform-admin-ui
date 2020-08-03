@@ -5,7 +5,8 @@
     .m-tree {
         width: initial;
         max-width: initial;
-
+        border-radius: $ibexa-border-radius;
+        
         .c-list-item {
             &__label {
                 padding-right: calculateRem(8px);

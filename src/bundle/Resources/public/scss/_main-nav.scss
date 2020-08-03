@@ -1,7 +1,7 @@
 .ez-main-nav {
     flex-wrap: wrap;
     padding: 0;
-    background-color: $ez-white;
+    background-color: $ibexa-white;
     border-bottom: calculateRem(1px) solid $ibexa-color-border-light;
     
     > .container-fluid {
@@ -9,55 +9,50 @@
     }
 
     .navbar-brand {
-        width: calculateRem(47px);
+        max-width: calculateRem(88px);
+        max-height: calculateRem(24px);
         padding-top: 0;
         text-align: center;
     }
 
     .nav-tabs {
-        background-color: $ez-white;
+        background-color: $ibexa-white;
         border: none;
-        margin-bottom: 0;
 
         .nav-link {
-            padding: 1rem 2rem;
-            color: $ez-black;
-            display: flex;
+            margin: 0;
+            padding: calculateRem(17px) calculateRem(24px);
+            color: $ibexa-black;
+            font-size: calculateRem(13px);
             transition: all 0.3s $ez-admin-transition;
 
             .ez-icon {
-                margin-right: 0.5rem;
+                margin-right: calculateRem(8px);
             }
 
-            &:hover {
-                background-color: $ez-ground-base-pale;
-                border-color: $ez-white;
-            }
-
+            &:hover,
             &.active {
-                background-color: $ez-white;
-                border-color: $ez-white;
-                color: $ez-color-primary
+                border-bottom-color: transparent;
+                color: $ibexa-color-primary
             }
         }
     }
 }
 
 .ez-main-sub-nav {
-    flex-wrap: wrap;
-    background-color: $white;
-    padding: 0;
-    font-size: 0.875rem;
+    padding: calculateRem(2px) calculateRem(16px) calculateRem(2px) calculateRem(103px);
+    background-color: $ibexa-white;
 
     .navbar-nav {
         .nav-link {
-            padding: 0.625rem 1rem;
-            color: $ez-black;
+            padding: calculateRem(9px) calculateRem(24px);
+            font-size: calculateRem(13px);
+            color: $ibexa-black;
             text-decoration: none;
-            
+
+            &:hover,
             &.active {
-                padding-bottom: 0.4375rem;
-                color: $ez-color-primary;
+                color: $ibexa-color-primary;
             }
         }
     }

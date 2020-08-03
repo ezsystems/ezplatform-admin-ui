@@ -159,7 +159,7 @@
 
             return `
                 <tr class="ez-relations__item" data-content-id="${contentId}">
-                    <td><input type="checkbox" value="${contentId}" /></td>
+                    <td><input class="ez-input ez-input--checkbox" type="checkbox" value="${contentId}" /></td>
                     <td class="ez-relations__item-name">${contentName}</td>
                     <td>${contentTypeName}</td>
                     <td>${formatShortDateTime(item.ContentInfo.Content.publishedDate)}</td>

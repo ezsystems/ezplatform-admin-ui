@@ -7,12 +7,12 @@
 <nav class="navbar navbar-expand-sm ez-main-nav">
     <div class="container-fluid">
         <a href="{{ url('ezplatform.dashboard') }}" class="navbar-brand">
-            <svg class="ez-icon">
-                <use xlink:href="/bundles/ezplatformadminui/img/ez-logo.svg#logo"></use>
+            <svg class="navbar-brand__icon">
+                <use xlink:href="/bundles/ezplatformadminui/img/ibexa-logo.svg"></use>
             </svg>
         </a>
         <div class="collapse navbar-collapse">
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="nav nav-tabs ez-tabs" role="tablist">
                 {{ knp_menu_render(main_menu, {
                     'depth': 1,
                     'template': '@ezdesign/ui/menu/top_menu.html.twig',

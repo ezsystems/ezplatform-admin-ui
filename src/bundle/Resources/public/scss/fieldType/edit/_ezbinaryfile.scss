@@ -1,20 +1,10 @@
 .ez-field-edit--ezbinaryfile {
     &.ez-field-edit--with-preview {
         .ez-field-edit-preview {
-            width: 500px;
-            height: 80px;
-            line-height: 80px;
+            padding-left: 0;
 
             &__visual {
-                display: flex;
-            }
-
-            &__actions {
-                flex: 0 0 100px;
-                display: flex;
-                align-items: center;
-                flex-direction: row;
-                justify-content: space-between;
+                width: auto;
             }
 
             &__action--preview {
@@ -22,7 +12,7 @@
             }
 
             &__file-icon {
-                flex: 0 0 2rem;
+                flex: 0 0 calculateRem(32px);
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -30,24 +20,23 @@
 
             &__file-name,
             &__file-size {
-                flex: 1 1 auto;
-                font-size: .75rem;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
-                display: flex;
-                align-items: center;
+                display: inline-block;
+                font-size: calculateRem(16px);
+                margin-right: calculateRem(40px);
             }
 
             &__file-name {
-                max-width: 240px;
-                padding-left: 1.25rem;
+                max-width: calculateRem(500px);
             }
 
             &__file-size {
-                max-width: 100px;
-                padding: 0 1.25rem;
+                max-width: calculateRem(150px);
             }
         }
+    }
+
+    .ez-data-source {
+        padding: calculateRem(16px) calculateRem(30px);
+        background: $ibexa-color-base-light;
     }
 }

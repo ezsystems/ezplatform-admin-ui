@@ -3,7 +3,7 @@
 {% block root %}
     {% set list_attributes = item.childrenAttributes %}
     {% set current_item = item %}
-    <div class="tab-content mx-4">
+    <div class="tab-content">
         {% for child in current_item.children %}
             <div role="tabpanel"
                  class="tab-pane fade{{ matcher.isAncestor(child, options.matchingDepth) ? ' show active' }}"

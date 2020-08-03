@@ -1,7 +1,7 @@
 .c-finder-branch {
     display: flex;
     position: relative;
-    border-right: calculateRem(1px) solid $ez-color-base-pale;
+    border-right: calculateRem(1px) solid $ibexa-white;
 
     &--collapsed {
         flex: 0 0 calculateRem(30px);

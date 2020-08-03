@@ -165,7 +165,12 @@ $table-border-width: 0;
 $table-hover-bg: $ibexa-color-base-pale;
 
 // Breadcrumbs
-$breadcrumb-bg: $ez-ground-base;
+$breadcrumb-font-size: calculateRem(13px);
+$breadcrumb-padding-y: 0;
+$breadcrumb-padding-x: 0;
+$breadcrumb-item-padding: calculateRem(3px);
+$breadcrumb-bg: transaprent;
+$breadcrumb-divider: quote(">");
 
 // Links
 $link-decoration: underline;
@@ -195,7 +200,8 @@ $pagination-border-color: transparent;
 // Modals
 $modal-header-padding: calculateRem(16px) calculateRem(24px);
 $modal-header-border-width: 0;
-
+$modal-inner-padding: calculateRem(24px);
+$modal-footer-padding: calculateRem(16px) calculateRem(24px);
 //Components
 $border-radius: $ibexa-border-radius;
 
@@ -207,7 +213,7 @@ $container-max-widths: (
   sm: 540px,
   md: 720px,
   lg: 960px,
-  xl: 1280px
+  xl: 1470px
 ) !default;
 
 //Inputs
@@ -220,3 +226,8 @@ $input-focus-bg: transparent;
 $input-focus-border-color: $ibexa-color-primary;
 $input-focus-color: $ibexa-color-font-pale;
 $input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
+
+//Buttons
+$btn-font-size: calculateRem(13px);
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1rem;

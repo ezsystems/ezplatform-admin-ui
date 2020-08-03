@@ -7,14 +7,14 @@
 {% form_theme form with form_templates %}
 
 {% block body_class %}ez-standalone-page ez-content-edit{% endblock %}
-
+{% block header_class %}ez-header--content-edit{% endblock %}
 {% block navigation %}{% endblock %}
 
 {% block content %}
-    <div class="row align-items-stretch ez-main-row">
+    <div class="row align-items-stretch ez-main-row ez-main-row--edit">
         {% block left_sidebar %}{% endblock left_sidebar %}
 
-        <div class="px-0 pb-4 ez-content-edit-container">
+        <div class="ez-content-edit-container">
             {% block details %}{% endblock %}
 
             {% block form_before %}{% endblock %}
@@ -45,7 +45,7 @@
                                             {% if formField.value is defined %}
                                                 {{- form_widget(formField) -}}
                                             {% else %}
-                                                <div>
+                                                <div class="ez-content-edit--ezcontent-query">
                                                     {{- form_label(formField) -}}
                                                     <p class="non-editable">
                                                         {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
@@ -65,7 +65,7 @@
                                     {% if field.value is defined %}
                                         {{- form_widget(field) -}}
                                     {% else %}
-                                        <div>
+                                        <div class="ez-content-edit--ezcontent-query">
                                             {{- form_label(field) -}}
                                             <p class="non-editable">
                                                 {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
@@ -84,8 +84,9 @@
 
             {% block form_after %}{% endblock %}
         </div>
+
         {% block right_sidebar_wrapper %}
-            <div class="pt-4 px-0 bg-secondary ez-context-menu">
+            <div class="ez-context-menu">
                 <div class="ez-sticky-container">
                     {% block right_sidebar %}{% endblock %}
                 </div>

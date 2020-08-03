@@ -11,7 +11,7 @@ $list-item-height: calculateRem(20px);
         align-items: center;
         white-space: nowrap;
         position: relative;
-        font-size: calculateRem(12px);
+        font-size: calculateRem(13px);
         padding-left: calculateRem(14px);
 
         &:hover,
@@ -63,9 +63,14 @@ $list-item-height: calculateRem(20px);
             transform-origin: center center;
         }
 
+        &:focus {
+            border: none;
+            outline: none;
+        }
++
         &--light {
             &:before {
-                border-color: transparent transparent transparent $ez-white;
+                border-color: transparent transparent transparent $ibexa-white;
             }
         }
     }
@@ -74,9 +79,9 @@ $list-item-height: calculateRem(20px);
         display: flex;
         align-items: center;
         padding: 0 calculateRem(4px);
-        background: $ez-white;
-        color: $ez-color-base-dark;
-        border: calculateRem(1px) solid $ez-color-base-dark;
+        background: $ibexa-white;
+        color: $ibexa-black;
+        border: calculateRem(1px) solid $ibexa-black;
         margin-left: calculateRem(26px);
         transition: background 0.3s $ez-admin-transition, color 0.3s $ez-admin-transition;
         font-size: calculateRem(12px);
@@ -86,16 +91,16 @@ $list-item-height: calculateRem(20px);
         }
 
         &:hover {
-            color: $ez-white;
-            background: $ez-color-base-dark;
+            color: $ibexa-white;
+            background: $ibexa-black;
 
             .ez-icon {
-                fill: $ez-white;
+                fill: $ibexa-white;
             }
         }
 
         .ez-icon {
-            fill: $ez-color-base-dark;
+            fill: $ibexa-black;
         }
     }
 
@@ -105,8 +110,8 @@ $list-item-height: calculateRem(20px);
 
     &__load-more-limit-info {
         margin-left: calculateRem(26px);
-        color: $ez-secondary-ground;
-        font-size: calculateRem(12px);
+        color: $ibexa-color-primary;
+        font-size: calculateRem(13px);
         font-style: italic;
     }
 
@@ -145,7 +150,7 @@ $list-item-height: calculateRem(20px);
                 #{$list-item}__toggler {
                     &:before {
                         border-width: calculateRem(6px) calculateRem(3px) 0 calculateRem(3px);
-                        border-color: $ez-black transparent transparent transparent;
+                        border-color: $ibexa-black transparent transparent transparent;
                         transform: translateY(-50%);
                     }
                 }
@@ -176,7 +181,7 @@ $list-item-height: calculateRem(20px);
                         &:hover,
                         &:focus {
                             &:before {
-                                border-color: transparent transparent transparent $ez-white;
+                                border-color: transparent transparent transparent $ibexa-white;
                             }
                         }
                     }
@@ -192,7 +197,7 @@ $list-item-height: calculateRem(20px);
                         &:hover,
                         &:focus {
                             &:before {
-                                border-color: $ez-white transparent transparent transparent;
+                                border-color: $ibexa-white transparent transparent transparent;
                             }
                         }
                     }

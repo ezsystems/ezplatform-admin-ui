@@ -31,12 +31,10 @@
 {% endblock %}
 
 {% block binary_base_widget %}
+
     <div class="ez-data-source__message--main">{{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag your files to the browser window or select them') }}</div>
-    <div class="ez-data-source__btn-add" 
+    <div class="ez-data-source__btn-add ez-btn ez-btn--secondary" 
          title="{{ 'fieldtype.binary_base.upload_file'|trans|desc('Upload file') }}">
-        <svg class="ez-icon">
-            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#upload"></use>
-        </svg>
         <span class="ez-data-source__btn-label">{{ 'fieldtype.binary_base.upload_file'|trans|desc('Upload file') }}</span>
     </div>
     {% if max_file_size is defined and max_file_size > 0 %}
@@ -50,10 +48,18 @@
 {% endblock %}
 
 {% block binary_base_widget_container %}
+    {% set fieldtype = form.parent %}
+    {% set field_type_descriptions = fieldtype.vars.value.fieldDefinition.descriptions %}
+
     <div{% with { attr: preview_attr } %}{{ block('attributes') }}{% endwith %}>
         {{ block(preview_block_name) }}
     </div>
     <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+         {% if field_type_descriptions[fieldtype.vars.languageCode] is defined and field_type_descriptions[fieldtype.vars.languageCode] != '' %}
+            <div class="ez-data-description">
+                {{ field_type_descriptions[fieldtype.vars.languageCode] }}
+            </div>
+        {% endif %}
         <div class="ez-data-source">
             {{ block('binary_base_widget') }}
         </div>

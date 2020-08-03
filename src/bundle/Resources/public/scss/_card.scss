@@ -1,6 +1,6 @@
 .ez-card {
     border: none;
-    background-color: $ez-ground-base-light;
+    background-color: $ibexa-color-base-pale;
 
     .form-group {
         width: 70%;
@@ -11,18 +11,18 @@
     }
 
     .form-control {
-        margin-bottom: 10px;
+        margin-bottom: calculateRem(10px);
     }
 
     &__header {
         display: flex;
-        background-color: $ez-color-base-pale;
-        color: $ez-black;
-        border-radius: .25rem .25rem 0 0;
-        padding: .5rem 1.25rem;
+        background-color: $ibexa-white;
+        color: $ibexa-black;
+        border-radius: $ibexa-border-radius $ibexa-border-radius 0 0;
+        padding: calculateRem(8px) calculateRem(12px);
 
         &--secondary {
-            color: $ez-secondary-ground-medium;
+            color: $ibexa-color-primary;
             font-weight: 400;
         }
 
@@ -31,7 +31,7 @@
             position: -webkit-sticky;
             position: sticky;
             top: 0;
-            padding: .25rem 1.25rem;
+            padding: calculateRem(4px) calculateRem(20px);
             justify-content: space-between;
             z-index: 1040;
         }
@@ -51,13 +51,13 @@
     }
 
     &__body {
-        padding: .75rem 1.25rem;
+        padding: caluclateRem(12px) calculateRem(20px);
     }
 
     &__field-control {
-        background-color: $ez-white;
-        border-radius: .5rem;
-        padding: .3rem;
+        background-color: $ibexa-white;
+        border-radius: $ibexa-border-radius;
+        padding: calculateRem(4px);
 
         .form-control {
             margin-bottom: 0;
@@ -69,10 +69,14 @@
             padding: 0;
         }
     }
+
+    &--light {
+        background: $ibexa-white;
+    }
 }
 
 .ez-card--toggle-group {
-    background: $ez-white;
+    background: $ibexa-white;
 
     &.ez-card--collapsed {
         .ez-card__body {
@@ -98,31 +102,31 @@
     }
 
     .ez-card__header {
-        line-height: 40px;
-        padding: 0 20px;
+        line-height: calculateRem(40px);
+        padding: 0 calculateRem(20px);
         display: flex;
 
         .form-check-label {
             margin-bottom: 0;
             font-weight: 700;
-            color: $ez-black;
-            font-size: 17px;
+            color: $ibexa-black;
+            font-size: calculateRem(16px);
         }
 
         .ez-card__body-display-toggler {
-            margin: .25rem 0 .25rem auto;
-            height: 2rem;
-            width: 2rem;
+            margin: calculateRem(4px) 0 calculateRem(4px) auto;
+            height: calculateRem(32px);
+            width: calculateRem(32px);
             padding: 0;
             cursor: pointer;
-            background: $ez-color-base-pale;
+            background: $ibexa-white;
             transition: background .3s $ez-admin-transition;
             display: flex;
             align-items: center;
             justify-content: center;
 
             &:hover {
-                background: darken($ez-color-base-pale, 15%);
+                background: darken($ibexa-white, 15%);
                 outline: none;
                 box-shadow: none;
             }
@@ -133,7 +137,7 @@
             }
 
             .ez-icon {
-                fill: $ez-black;
+                fill: $ibexa-black;
             }
         }
     }
