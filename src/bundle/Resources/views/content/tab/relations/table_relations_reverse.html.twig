@@ -18,7 +18,9 @@
                 <tr>
                     <td>
                         {% if source.mainLocationId is not null %}
-                            <a href="{{ path('_ez_content_view', { 'contentId': source.id, 'locationId': relation.sourceLocation.id }) }}">
+                            <a href="{{ path('_ez_content_view',
+                                { 'contentId': source.id, 'locationId': relation.resolvedSourceLocation.id }) }}"
+                            >
                                 {{ ez_content_name(source) }}
                             </a>
                         {% else %}
