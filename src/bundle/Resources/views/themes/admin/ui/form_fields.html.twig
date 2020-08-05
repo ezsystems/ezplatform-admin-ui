@@ -35,6 +35,9 @@
             </div>
         {%- else -%}
             <div class="ez-instant-filter__group-item">
+                <svg class="ez-icon ez-icon--small">
+                    <use xlink:href="{{ ez_content_type_icon(choice.value) }}"></use>
+                </svg>
                 {{ form_widget(form[choice.value]) }}
             </div>
         {%- endif -%}

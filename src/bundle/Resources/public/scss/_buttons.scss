@@ -2,7 +2,7 @@
 
 .ez-btn {
     display: inline-block;
-    padding: $btn-padding-y $btn-padding-x;
+    padding: calculateRem(8px) calculateRem(16px);
     outline: none;
     border: none;
     border-radius: $ibexa-border-radius;

@@ -130,7 +130,6 @@
 
         .form-check {
             cursor: pointer;
-            background: $ibexa-white;
             transition: all 0.2s $ez-admin-transition;
             margin-bottom: 0;
             padding-left: 0;
@@ -140,16 +139,15 @@
             &:focus {
                 color: $ibexa-color-primary;
             }
+        }
 
-            &-label {
-                margin: 0;
-                display: block;
-                padding-left: calculateRem(24px);
-            }
+        .form-check-label {
+            display: block;
+            margin: 0 0 0 calculateRem(42px);
+        }
 
-            &-input[type='radio'] {
-                display: none;
-            }
+        .form-check-input[type='radio'] {
+            display: none;
         }
 
         button {

@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block page_title %}
-    {% include '@ezdesign/ui/page_title_edit_content.html.twig' with { 
+    {% include '@ezdesign/content/page_title_edit.html.twig' with { 
         action_name: 'Create'|trans|desc('Creating'),
         title: content_type.name,
         description: content_type.description
