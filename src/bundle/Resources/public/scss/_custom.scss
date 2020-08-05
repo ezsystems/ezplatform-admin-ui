@@ -169,7 +169,7 @@ $breadcrumb-font-size: calculateRem(13px);
 $breadcrumb-padding-y: 0;
 $breadcrumb-padding-x: 0;
 $breadcrumb-item-padding: calculateRem(3px);
-$breadcrumb-bg: transaprent;
+$breadcrumb-bg: transparent;
 $breadcrumb-divider: quote(">");
 
 // Links
@@ -229,5 +229,5 @@ $input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75
 
 //Buttons
 $btn-font-size: calculateRem(13px);
-$btn-padding-y: 0.5rem;
+$btn-padding-y: calculateRem(8px);
 $btn-padding-x: 1rem;

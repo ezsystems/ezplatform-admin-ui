@@ -28,7 +28,7 @@ img {
 }
 
 .ez-main-row {
-    min-height: calc(100vh - 58px);
+    min-height: calc(100vh - #{calculateRem(58px)});
 
     &--edit {
         background: $ibexa-white;

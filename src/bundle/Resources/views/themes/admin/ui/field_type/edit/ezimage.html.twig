@@ -36,12 +36,11 @@
                         </svg>
                     </a>
                 </div>
-                
-
                 <img
                     class="ez-field-edit-preview__media"
                     src="{{ form.parent.vars.value.value.uri }}"
-                    alt="{{ 'content.field_type.ezimage.img_alt'|trans({'%label%': form.vars.label})|desc("Image stored in Field '%label%'") }}" />
+                    alt="{{ 'content.field_type.ezimage.img_alt'|trans({'%label%': form.vars.label})|desc("Image stored in Field '%label%'") }}" 
+                />
             </div>
             <div class="ez-field-edit-preview__details">
                 <div class="ez-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</div>

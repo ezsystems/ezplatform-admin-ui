@@ -101,11 +101,11 @@
                         </svg>
                     </a>
                 </div>
-
                 <img
                     class="ez-field-edit-preview__media {{ image_uri ? '' : 'd-none' }}"
                     src="{{ image_uri|default('//:0') }}"
-                    alt="{{ 'content.field_type.ezimageasset.img_alt'|trans({'%label%': form.vars.label})|desc("Image stored in Field '%label%'") }}"/>
+                    alt="{{ 'content.field_type.ezimageasset.img_alt'|trans({'%label%': form.vars.label})|desc("Image stored in Field '%label%'") }}"
+                />
             </div>
             <div class="ez-field-edit-preview__details">
                 <span class="ez-field-edit-preview__asset-name">

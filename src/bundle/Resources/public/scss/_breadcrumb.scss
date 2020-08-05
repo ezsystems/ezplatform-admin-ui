@@ -9,7 +9,7 @@
         text-overflow: ellipsis;
         max-width: calculateRem(300px);
         
-        + .breadcrumb-item::before,
+        &::before,
         &.active,
         &__link {
             color: $ibexa-color-base-dark;
@@ -17,6 +17,3 @@
         }
     }
 }
-
-
-

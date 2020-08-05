@@ -1,7 +1,7 @@
 .ez-field-edit--ezcountry {
     @include checkbox-switcher();
 
-    ez-data-source__input {
+    .ez-data-source__input {
         max-width: calculateRem(400px);
     }
 }

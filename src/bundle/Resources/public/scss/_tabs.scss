@@ -51,11 +51,11 @@
                 }
 
                 &:before {
-                    transform: translate(3px, -50%) rotate(-135deg);
+                    transform: translate(#{calculateRem(3px)}, -50%) rotate(-135deg);
                 }
 
                 &:after {
-                    transform: translate(-3px, -50%) rotate(135deg);
+                    transform: translate(#{calculateRem(-3px)}, -50%) rotate(135deg);
                 }
             }
         }
@@ -86,11 +86,7 @@
         position: absolute;
 
         &.nav-tabs {
-            z-index: 100;
             box-shadow: 0 calculateRem(6px) calculateRem(16px) 0 rgba(51, 51, 51, 0.3);
-
-            .nav-item {
-            }
 
             .nav-link {
                 border-radius: 0;

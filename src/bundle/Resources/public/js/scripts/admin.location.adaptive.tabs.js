@@ -1,9 +1,9 @@
-(function(global, doc, $, Translator) {
+(function (global, doc, $, Translator) {
     const OFFSET_ROUNDING_COMPENSATOR = 0.5;
     const copyTabs = () => {
-        const primaryTabs = doc.querySelector('.ez-tabs');
+        const primaryTabs = doc.querySelector('.ez-tabs--adaptive');
         const moreLabel = Translator.trans(/*@Desc("More")*/ 'content.view.more.label', {}, 'content');
-
+        console.log(primaryTabs);
         primaryTabs.insertAdjacentHTML(
             'beforeend',
             `<li class="nav-item ez-tabs__tab ez-tabs__tab--more">
@@ -14,7 +14,7 @@
             </li>`
         );
     };
-    const primaryTabsList = doc.querySelector('.ez-tabs');
+    const primaryTabsList = doc.querySelector('.ez-tabs--adaptive');
     const primaryTabs = [...primaryTabsList.querySelectorAll('.ez-tabs__tab')];
     const primaryTabsLinks = [...primaryTabsList.querySelectorAll('.ez-tabs__tab .nav-link')];
 

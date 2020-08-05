@@ -1,4 +1,4 @@
-.ez-page-title-content-edit {
+.ez-content-edit-page-title {
     &__action {
         font-weight: bold;
     }
@@ -63,7 +63,7 @@
             padding: calculateRem(12px) 0;
             color: $ibexa-color-font;
             font-size: calculateRem(16px);
-            font-weight: notmal;
+            font-weight: normal;
             background: $ibexa-white;
             border-bottom: calculateRem(1px) solid $ibexa-color-base;
 

@@ -161,7 +161,7 @@
     border-collapse: separate;
     margin-bottom: calculateRem(48px);
 
-    thead  {
+    thead {
         th {
             padding: calculateRem(12px) calculateRem(16px);
             color: $ibexa-color-base-dark;
@@ -240,9 +240,9 @@
 }
 
 .ez-scrollable-table-wrapper {
-    margin-bottom: calculateRem(48px);
     overflow-x: auto;
-
+    margin-bottom: calculateRem(48px);
+    
     table {
         margin-bottom: 0;
     }

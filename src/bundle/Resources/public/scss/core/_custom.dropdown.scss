@@ -70,7 +70,7 @@
         width: calculateRem(28px);
         height: calculateRem(20px);
         transform: translateY(-50%);
-        
+
         &:before,
         &:after {
             content: '';
@@ -102,7 +102,7 @@
         transition: transform 0.2s $ez-admin-transition;
         width: 50%;
         background: $ibexa-white;
-        border: 1px solid $ibexa-color-base-dark;
+        border: calculateRem(1px) solid $ibexa-color-base-dark;
         color: $ibexa-color-font;
         z-index: 2;
         border-radius: 0 0 $ibexa-border-radius $ibexa-border-radius;

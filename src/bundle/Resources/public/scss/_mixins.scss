@@ -2,6 +2,7 @@
 @import 'mixins/type-icon';
 @import 'mixins/inputs';
 @import 'mixins/general';
+@import 'mixins/tags';
 
 @mixin checkbox-icon($color: $ibexa-color-primary) {
     border: calculateRem(1px) solid $color;
@@ -67,11 +68,15 @@
     }
 }
 
-@mixin checkbox-switcher() {
+@mixin checkbox-switcher($size: 2.5rem) {
+    $labelHeight: calc(#{$size} - #{calculateRem(16px)});
+    $indicatorOffsetLeft: calc(#{$size} / 10);
+    $indicatorOffsetRight: calc(calc(#{$size} / 2) - #{$indicatorOffsetLeft});
+
     .ez-data-source__label {
         position: relative;
-        width: calculateRem(40px);
-        height: calculateRem(24px);
+        width: $size;
+        height: $labelHeight;
         background-color: transparent;
         border-radius: calculateRem(24px);
         cursor: pointer;
@@ -83,8 +88,8 @@
         }
 
         .ez-data-source__indicator {
-            width: calculateRem(16px);
-            height: calculateRem(16px);
+            width: calc(#{$size} - #{calculateRem(24px)});
+            height: calc(#{$size} - #{calculateRem(24px)});
             display: block;
             background-color: $ibexa-color-base-dark;
             border-radius: 50%;
@@ -92,7 +97,7 @@
             top: calculateRem(3px);
             left: 0;
             transition: all 0.3s $ez-admin-transition;
-            transform: translateX(20%);
+            transform: translateX($indicatorOffsetLeft);
             cursor: pointer;
             z-index: 1;
         }
@@ -101,7 +106,7 @@
             background-color: transparent;
 
             .ez-data-source__indicator {
-                transform: translateX(115%);
+                transform: translateX($indicatorOffsetRight);
             }
         }
 
