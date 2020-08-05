@@ -52,7 +52,7 @@ Feature: Content fields setting and editing
 
   @javascript @common @admin
   Scenario: Create an ImageAsset Content item and edit specified field
-    Given I create "Image" Content items in "/Media/Images/" in "eng-GB"
+    Given I create "image" Content items in "/Media/Images/" in "eng-GB"
       | name             | image                                                                              |
       | ImageAssetImage  | vendor/ezsystems/behatbundle/EzSystems/BehatBundle/Data/Images/small2.jpg  |
       And I create a 'Image Asset CT2' Content Type in "Content" with 'ImageAssetCT2' identifier
