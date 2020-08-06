@@ -1,28 +1,28 @@
 .ez-field-edit--ezrichtext {
-	.ez-data-source {
-		&__input {
-			display: none;
-		}
+    .ez-data-source {
+        &__input {
+            display: none;
+        }
 
-		&__richtext {
-			min-height: calculateRem(400px);
-			border-radius: $ibexa-border-radius $ibexa-border-radius 0 0;
-			border-color: $ibexa-color-base-dark;
-			border-width: calculateRem(1px) calculateRem(1px) 0 calculateRem(1px); 
-		}
+        &__richtext {
+            min-height: calculateRem(400px);
+            border-radius: $ibexa-border-radius $ibexa-border-radius 0 0;
+            border-color: $ibexa-color-base-dark;
+            border-width: calculateRem(1px) calculateRem(1px) 0 calculateRem(1px); 
+        }
 
-		.ez-richtext-tools {
-			display: flex;
-			align-items: center;
-			height: calculateRem(40px);
-			border: calculateRem(1px) solid $ibexa-color-base-dark;
-			border-width: 0 calculateRem(1px) calculateRem(1px) calculateRem(1px); 
-		}
+        .ez-richtext-tools {
+            display: flex;
+            align-items: center;
+            height: calculateRem(40px);
+            border: calculateRem(1px) solid $ibexa-color-base-dark;
+            border-width: 0 calculateRem(1px) calculateRem(1px) calculateRem(1px); 
+        }
 
-		.ez-elements-path,
-		.ez-character-counter {
-			font-size: calculateRem(16px);
-			font-weight: normal;
-		}
-	}
+        .ez-elements-path,
+        .ez-character-counter {
+            font-size: calculateRem(16px);
+            font-weight: normal;
+        }
+    }
 }
