@@ -72,7 +72,8 @@ Feature: Content fields setting and editing
   @javascript @common
   Scenario Outline: Edit content item with given field
     Given I am logged as "admin"
-      And I navigate to content "<oldContentItemName>" of type "<fieldName> CT" in root path
+      And I go to "Content structure" in "Content" tab
+      And I open UDW and go to "root/<oldContentItemName>"
     When I click on the edit action bar button "Edit"
       And I set content fields
         | label    | <label1> | <label2> | <label3> |
