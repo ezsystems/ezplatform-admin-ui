@@ -38,18 +38,22 @@
                 for (let i = 0; i < primaryTabs.length; i++) {
                     const tab = primaryTabs[i];
                     const tabLink = tab.querySelector('.nav-link');
+
                     if (tabLink === activePrimaryTabLink) {
                         continue;
                     }
+
                     const isLastTab = i === primaryTabs.length - 1;
                     const allPreviousTabsVisible = hiddenPrimaryTabs.length === 0;
                     const isTabNarrowerThanMoreTab = tab.offsetWidth < moreTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
+
                     if (isLastTab && allPreviousTabsVisible && isTabNarrowerThanMoreTab) {
                         break;
                     }
                     if (currentWidth + tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR > maxTotalWidth) {
                         hiddenPrimaryTabs.push(i);
                     }
+
                     currentWidth += tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
                 }
 

@@ -23,7 +23,7 @@
             margin: 0;
             padding: calculateRem(17px) calculateRem(24px);
             color: $ibexa-black;
-            font-size: calculateRem(13px);
+            font-size: calculateRem(14px);
             transition: all 0.3s $ez-admin-transition;
 
             .ez-icon {
@@ -46,7 +46,7 @@
     .navbar-nav {
         .nav-link {
             padding: calculateRem(9px) calculateRem(24px);
-            font-size: calculateRem(13px);
+            font-size: calculateRem(14px);
             color: $ibexa-black;
             text-decoration: none;
 

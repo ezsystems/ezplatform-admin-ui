@@ -10,7 +10,7 @@
         display: flex;
         align-items: center;
         padding: calculateRem(2px) calculateRem(5px);
-        font-size: calculateRem(13px);
+        font-size: calculateRem(14px);
 
         &--not-selectable {
             background-color: $ibexa-color-base-light;

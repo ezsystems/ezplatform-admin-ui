@@ -3,14 +3,14 @@
 {% block root %}
     {% set list_attributes = item.childrenAttributes %}
     {% set current_item = item %}
-    <div class="tab-content">
+    <div class="tab-content w-100">
         {% for child in current_item.children %}
             <div role="tabpanel"
                  class="tab-pane fade{{ matcher.isAncestor(child, options.matchingDepth) ? ' show active' }}"
                  id="{{ child.name }}">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav ez-tabs ez-tabs--menu-second-level">
                             {% for item in child.children %}
                                 {{ block('item') }}
                             {% endfor %}

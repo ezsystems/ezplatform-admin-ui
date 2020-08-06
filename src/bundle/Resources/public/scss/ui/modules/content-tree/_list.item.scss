@@ -11,7 +11,7 @@ $list-item-height: calculateRem(20px);
         align-items: center;
         white-space: nowrap;
         position: relative;
-        font-size: calculateRem(13px);
+        font-size: calculateRem(14px);
         padding-left: calculateRem(14px);
 
         &:hover,
@@ -111,7 +111,7 @@ $list-item-height: calculateRem(20px);
     &__load-more-limit-info {
         margin-left: calculateRem(26px);
         color: $ibexa-color-primary;
-        font-size: calculateRem(13px);
+        font-size: calculateRem(14px);
         font-style: italic;
     }
 

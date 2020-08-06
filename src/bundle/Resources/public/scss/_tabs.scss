@@ -84,6 +84,7 @@
     &--secondary {
         flex-direction: column;
         position: absolute;
+        z-index: 100;
 
         &.nav-tabs {
             box-shadow: 0 calculateRem(6px) calculateRem(16px) 0 rgba(51, 51, 51, 0.3);
@@ -91,6 +92,7 @@
             .nav-link {
                 border-radius: 0;
                 border: 0;
+                margin: calculateRem(2px) calculateRem(10px);
 
                 &.active {
                     background-color: $ibexa-color-base-light;
@@ -103,6 +105,15 @@
         }
     }
     
+    &--menu-second-level {
+        width: 100%;
+        border: none;
+
+        .nav-link {
+            margin-left: 0;
+        }
+    }
+
 }
 
 .ez-tab-content {

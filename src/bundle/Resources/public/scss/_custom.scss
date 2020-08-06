@@ -165,7 +165,7 @@ $table-border-width: 0;
 $table-hover-bg: $ibexa-color-base-pale;
 
 // Breadcrumbs
-$breadcrumb-font-size: calculateRem(13px);
+$breadcrumb-font-size: calculateRem(14px);
 $breadcrumb-padding-y: 0;
 $breadcrumb-padding-x: 0;
 $breadcrumb-item-padding: calculateRem(3px);
@@ -228,6 +228,6 @@ $input-focus-color: $ibexa-color-font-pale;
 $input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
 
 //Buttons
-$btn-font-size: calculateRem(13px);
+$btn-font-size: calculateRem(14px);
 $btn-padding-y: calculateRem(8px);
 $btn-padding-x: 1rem;
