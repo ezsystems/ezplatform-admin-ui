@@ -5,11 +5,18 @@
     .ez-side-menu,
     .ez-context-menu {
         flex: 0 0 calculateRem(80px);
-        margin: calculateRem(8px) 0 0 calculateRem(8px);
         
         &--expanded {
             z-index: 1200;
         }
+    }
+
+    .ez-side-menu {
+        margin: calculateRem(8px) 0 0 calculateRem(8px);
+    }
+
+    .ez-context-menu {
+        margin: calculateRem(8px) calculateRem(8px) 0;
     }
 
     .ez-content-container {

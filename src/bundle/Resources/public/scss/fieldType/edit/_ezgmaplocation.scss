@@ -1,13 +1,8 @@
 .ez-field-edit--ezgmaplocation {
-    .ez-field-edit__data {
-        padding: 16px 16px 20px 16px;
-        background: $ez-ground-base-medium;
-    }
-
     .ez-data-source {
         display: grid;
-        grid-template-columns: 1fr 16px 200px;
-        grid-template-rows: repeat(4, minmax(50, auto));
+        grid-template-columns: calculateRem(520px) calculateRem(16px) calculateRem(220px);
+        grid-template-rows: repeat(5, minmax(50, auto));
         grid-template-areas:
             'addr . .'
             'map . side1'
@@ -26,12 +21,11 @@
             }
 
             .ez-data-source__input-wrapper {
-                padding-bottom: 8px;
+                padding-bottom: calculateRem(8px);
                 display: flex;
             }
 
             .ez-data-source__input {
-                border-radius: 0.25rem 0 0 0.25rem;
                 margin-bottom: 0;
             }
         }
@@ -40,33 +34,32 @@
             grid-area: side1;
 
             .form-control-label {
-                font-size: calculateRem(14px);
-                font-weight: 700;
-                color: $ez-black;
-
                 &:after {
                     content: ': ';
                 }
             }
+
+            .ez-btn {
+                margin-bottom: calculateRem(32px);
+            }
         }
 
         &__field--latitude {
-            grid-area: side2;
             @include map-invalid-input();
-            margin-top: 0.75rem;
+
+            grid-area: side2;
+            margin-bottom: calculateRem(15px);
         }
 
         &__field--longitude {
-            grid-area: side3;
             @include map-invalid-input();
-            margin-top: 0;
+
+            grid-area: side3;
+            margin-bottom: calculateRem(70px);
         }
     }
 
     .btn--search-by-address {
-        border-radius: 0 calculateRem(4px) calculateRem(4px) 0;
-        padding: calculateRem(1px) calculateRem(8px);
-        height: calculateRem(38px);
-        display: flex;
+        margin-left: calculateRem(8px);
     }
 }

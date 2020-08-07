@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
+    <section class="container ez-container">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'section.list.title'|trans|desc('Sections') }}</div>
             <div>
@@ -30,7 +30,8 @@
                     <a
                         title="{{ 'section.new'|trans|desc('Create a new Section') }}"
                         href="{{ path('ezplatform.section.create') }}"
-                        class="btn btn-primary">
+                        class="btn btn-icon"
+                    >
                         <svg class="ez-icon ez-icon-create">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                         </svg>
@@ -41,11 +42,12 @@
                     <button
                         id="delete-sections"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-icon"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
-                        title="{{ 'section.delete'|trans|desc('Delete Section') }}">
+                        title="{{ 'section.delete'|trans|desc('Delete Section') }}"
+                    >
                         <svg class="ez-icon ez-icon-trash">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
@@ -63,7 +65,7 @@
             'action': path('ezplatform.section.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-sections' }
         }) }}
-        <table class="ez-table table mb-3">
+        <table class="ez-table table">
             <thead>
                 <tr>
                     <th></th>

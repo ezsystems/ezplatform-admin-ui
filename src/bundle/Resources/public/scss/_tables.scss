@@ -1,11 +1,10 @@
 .ez-table {
-    border-collapse: separate;
     border-spacing: 0 calculateRem(1px);
 
     &__header {
         display: flex;
         justify-content: space-between;
-        background-color: $ez-ground-primary;
+        background-color: $ibexa-white;;
         align-items: center;
         padding: 0 calculateRem(20px);
         min-height: calculateRem(50px);
@@ -13,10 +12,10 @@
     }
 
     &__headline {
-        font-size: calculateRem(17px);
+        font-size: calculateRem(16px);
         margin-bottom: 0;
         font-weight: bold;
-        color: $ez-black;
+        color: $ibexa-black;
     }
 
     &__header-cell {
@@ -37,7 +36,7 @@
     &__sort-column {
         position: relative;
         display: block;
-        color: $ez-black;
+        color: $ibexa-black;
 
         &:hover {
             text-decoration: none;
@@ -55,13 +54,13 @@
         &--asc:after {
             border-left: calculateRem(3px) solid transparent;
             border-right: calculateRem(3px) solid transparent;
-            border-bottom: calculateRem(5px) solid $ez-black;
+            border-bottom: calculateRem(5px) solid $ibexa-black;
         }
 
         &--desc::after {
             border-left: calculateRem(3px) solid transparent;
             border-right: calculateRem(3px) solid transparent;
-            border-top: calculateRem(5px) solid $ez-black;
+            border-top: calculateRem(5px) solid $ibexa-black;
         }
     }
 
@@ -115,36 +114,34 @@
         &--no-content {
             margin-bottom: calculateRem(48px);
             padding: calculateRem(12px) calculateRem(16px);
-            background-color: $ez-white;
+            background-color: $ibexa-white;
             font-style: italic;
-            color: $ez-color-base-dark;
+            color: $ibexa-black;;
         }
 
         &--limitation {
             width: 70%;
         }
+    }
 
-        &__link {
-            color: $ibexa-color-primary;
-            text-decoration: none;
-        }
+    &__cell-link,
+    &__cell-link:hover {
+        color: $ibexa-color-font;
+        text-decoration: none;
     }
 }
 
 .ez-table-header {
     display: flex;
     justify-content: space-between;
-    background-color: $ez-ground-primary;
     align-items: center;
-    padding: 0 calculateRem(20px);
-    min-height: calculateRem(50px);
-    border-radius: calculateRem(4px) calculateRem(4px) 0 0;
+    padding: calculateRem(16px) calculateRem(8px) calculateRem(16px);
 
     &__headline {
-        font-size: calculateRem(17px);
+        font-size: calculateRem(16px);
         margin-bottom: 0;
         font-weight: bold;
-        color: $ez-black;
+        color: $ibexa-black;
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -156,17 +153,23 @@
 }
 
 .ez-table-header.ground-base {
-    background-color: $ez-color-base-pale;
+    background-color: $ibexa-white;
 }
 
 .table {
+    border-spacing: 0 calculateRem(1px);
+    border-collapse: separate;
     margin-bottom: calculateRem(48px);
 
-    thead th {
-        padding: calculateRem(12px) calculateRem(22px);
-        color: $ibexa-color-base-dark;
-        font-weight: normal;
-        vertical-align: top;
+    thead {
+        th {
+            padding: calculateRem(12px) calculateRem(16px);
+            color: $ibexa-color-base-dark;
+            font-weight: normal;
+            vertical-align: top;
+            border-top: calculateRem(1px) solid $ibexa-color-base;
+            border-bottom: calculateRem(1px) solid $ibexa-color-base;
+        }
     }
 
     td {
@@ -180,60 +183,48 @@
     .table:not(.ez-table__draft-conflict) {
         margin-bottom: 0;
     }
-}
 
-.ez-table--no-border {
-    td {
-        border: none;
+    .ez-table {
+        &__header-cell {
+            border-top: none;
+        }
     }
 }
 
 .ez-table-no-content {
-    margin-bottom: calculateRem(48px);
-    padding: calculateRem(12px) calculateRem(16px);
-    background-color: $ez-white;
+    margin: 0;
+    padding: 0 calculateRem(24px) calculateRem(48px);
+    overflow-x: auto;
+    background-color: $ibexa-white;
     font-style: italic;
     font-size: calculateRem(14px);
-    color: $ez-color-base-dark;
+    color: $ibexa-color-font;
 }
 
 .ez-table {
+    &--no-border {
+        td {
+            border: none;
+        }
+    }
+
     &--list {
         background: none;
         margin-bottom: calculateRem(48px);
 
         .ez-table {
-            &__row:last-child {
-                .ez-table__cell:first-child {
-                    border-radius: 0 0 0 calculateRem(5px);
-                }
-                .ez-table__cell:last-child {
-                    border-radius: 0 0 calculateRem(5px) 0;
-                }
-            }
-
             &__cell {
-                font-size: calculateRem(15px);
+                font-size: calculateRem(16px);
                 border: none;
 
                 &:first-child {
                     font-weight: bold;
-                    background: $ez-ground-base-dark;
                     width: calc(100% / 3);
                 }
 
                 &:last-child {
                     font-weight: normal;
-                    background: $ez-white;
                     width: (calc((100% / 3) * 2));
-                }
-
-                &--header:first-child,
-                &--header:last-child {
-                    color: $ez-color-secondary-hover;
-                    background: $ez-color-base-pale;
-                    border-radius: calculateRem(5px) calculateRem(5px) 0 0;
-                    border-bottom: none;
                 }
             }
         }

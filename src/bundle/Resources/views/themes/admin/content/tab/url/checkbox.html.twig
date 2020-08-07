@@ -8,7 +8,7 @@
     {% if disabled %}
         {% set attr = attr|merge({'disabled': disabled}) %}
     {% endif %}
-    <div class="ez-field-edit--ezboolean ">
+    <div class="ez-field-edit--ezboolean">
         <label class="ez-data-source__label{% if checked %} is-checked{% endif %}{% if disabled %} is-disabled{% endif %}">
             <span class="ez-data-source__indicator"></span>
             <input type="checkbox" {{ block('widget_attributes') }} />

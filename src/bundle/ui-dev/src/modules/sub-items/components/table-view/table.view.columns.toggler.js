@@ -118,7 +118,7 @@ export default class TableViewColumnsTogglerComponent extends Component {
                     title={filterLabel}
                     className="c-action-btn c-table-view-columns-toggler__btn"
                     onClick={this.togglePanel}>
-                    <Icon name="filters" extraClasses="ez-icon--small ez-icon--base-light" />
+                    <Icon name="filters" extraClasses="ez-icon--small ez-icon--base-dark" />
                 </button>
                 {this.renderPanel()}
             </div>

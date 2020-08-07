@@ -8,7 +8,8 @@
 .ez-extra-actions--create {
     .ez-instant-filter {
         &__group-name {
-            padding-left: calculateRem(8px);
+            margin: calculateRem(16px) calculateRem(8px) 0;
+            color: $ibexa-color-base-dark;
         }
 
         &__group-item {
@@ -19,7 +20,7 @@
             }
 
             .ez-icon {
-                fill: $ez-black;
+                fill: $ibexa-black;
                 position: absolute;
                 top: 0;
                 left: calculateRem(20px);

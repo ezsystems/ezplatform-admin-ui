@@ -29,7 +29,7 @@
     &__preview {
         width: calculateRem(165px);
         height: calculateRem(165px);
-        background-color: $ez-color-base-pale;
+        background-color: $ibexa-white;
         border-top-left-radius: calculateRem(4px);
         border-top-right-radius: calculateRem(4px);
         display: flex;
@@ -60,7 +60,7 @@
     }
 
     &--not-selectable {
-        background-color: $ez-ground-base-dark;
+        background-color: $ibexa-color-base-light;
         cursor: not-allowed;
     }
 }

@@ -11,10 +11,10 @@
 
     <span class="input-group-btn">
         <button type="submit" class="ez-btn ez-btn--primary ez-btn--search">{{ 'search.perform'|trans|desc('Search') }}</button>
-        <span class="ml-4" {% if form.search_language.vars.choices|length == 1 %}hidden{% endif %}>
+        <button type="button" class="ez-btn ez-btn--secondary ez-btn--filter">{{ 'search.filters'|trans|desc('Filters') }}</button>
+        <span class="ml-4" {% if form.search_language.vars.choices|length == 1 %} hidden {% endif %}>
             {{ form_widget(form.search_language, {'attr': {'class': 'ez-search-form__language-selector'}}) }}
         </span>
-        <button type="button" class="ez-btn ez-btn--secondary ez-btn--filter">{{ 'search.filters'|trans|desc('Filters') }}</button>
     </span>
 </div>
 

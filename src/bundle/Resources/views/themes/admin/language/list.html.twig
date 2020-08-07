@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
+    <section class="container ez-container">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'language.list'|trans|desc('Languages') }}</div>
             <div>
@@ -31,7 +31,8 @@
                     <a
                         title="{{ 'language.new'|trans|desc('Create a new language') }}"
                         href="{{ path('ezplatform.language.create') }}"
-                        class="btn btn-primary">
+                        class="btn btn-icon"
+                    >
                         <svg class="ez-icon ez-icon-create">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                         </svg>
@@ -40,11 +41,12 @@
                     <button
                         id="delete-languages"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-icon"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
-                        title="{{ 'language.delete'|trans|desc('Delete language') }}">
+                        title="{{ 'language.delete'|trans|desc('Delete language') }}"
+                    >
                         <svg class="ez-icon ez-icon-trash">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>

@@ -14,7 +14,7 @@
                     aria-label={{ 'draft.conflict.close'|trans|desc('Close') }}
                     title={{ 'draft.conflict.close'|trans|desc('Close') }}
                 >
-                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
+                    <svg class="ez-icon ez-icon--small" aria-hidden="true">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
                     </svg>
                 </button>
@@ -56,8 +56,11 @@
 
 {% macro table_header_tools(show_add_button) %}
     {% if show_add_button %}
-        <button type="button" class="btn btn-primary ez-btn--add-draft"
-                title="{{ 'tab.versions.action.delete'|trans|desc('Create a draft') }}">
+        <button 
+            type="button" 
+            class="btn btn-icon ez-btn--add-draft"
+            title="{{ 'tab.versions.action.delete'|trans|desc('Create a draft') }}"
+        >
             <svg class="ez-icon ez-icon-create">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
             </svg>
