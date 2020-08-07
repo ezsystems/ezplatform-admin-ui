@@ -1,6 +1,5 @@
 .ez-field-edit--ezauthor {
     .ez-data-source__author {
-        background-color: $ez-ground-base-medium;
         padding: calculateRem(16px) calculateRem(16px) calculateRem(20px) calculateRem(16px);
 
         &.form-row {
@@ -25,18 +24,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-
-            .ez-icon {
-                width: calculateRem(24px);
-                height: calculateRem(24px);
-            }
         }
     }
 
     &.is-invalid {
         .ez-data-source__field {
             &.is-invalid {
-                color: $ez-color-warning-dark;
+                color: $ibexa-color-warning-dark;
             }
         }
 
@@ -53,17 +47,22 @@
                 &:before {
                     content: '!';
                     position: absolute;
-                    top: 0;
-                    left: calculateRem(-20px);
-                    width: calculateRem(20px);
-                    background: $ez-color-warning-dark;
-                    color: $ez-white;
+                    top: calculateRem(-5px);
+                    left: calculateRem(-10px);
+                    width: calculateRem(10px);
+                    color: $ibexa-color-danger;
                     text-align: center;
                     font-size: calculateRem(24px);
-                    border-top-left-radius: calculateRem(5px);
-                    border-bottom-left-radius: calculateRem(5px);
                 }
             }
+        }
+    }
+}
+
+.ez-content-edit {
+    .ez-field-edit--ezauthor {
+        .ez-data-source__author {
+            padding: 0;
         }
     }
 }

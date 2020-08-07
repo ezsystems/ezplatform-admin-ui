@@ -1,6 +1,6 @@
 .ez-field-edit--ezuser {
     .ez-field-edit__data {
-        background: $ez-ground-base-medium;
+        background: $ibexa-white;
         padding: 1rem 1rem 1.25rem 1rem;
 
         .ez-data-source {
@@ -8,7 +8,13 @@
         }
     }
 
-    .ez-data-source__input-wrapper {
-    	@include checkbox-switcher();
+    .ez-data-source {
+        &__input-wrapper {
+            @include checkbox-switcher();
+        }
+
+        &__label:after {
+            display: none;
+        }
     }
 }

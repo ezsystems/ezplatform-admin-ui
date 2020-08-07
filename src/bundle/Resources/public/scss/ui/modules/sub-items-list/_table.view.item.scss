@@ -19,10 +19,12 @@
     }
 
     &__cell {
+        padding-top: calculateRem(8px);
+        padding-bottom: calculateRem(8px);
+        padding-left: calculateRem(16px);
         border-top: calculateRem(1px) solid transparent;
         border-bottom: calculateRem(1px) solid transparent;
-        padding-left: calculateRem(16px);
-        font-size: calculateRem(14px);
+        font-size: calculateRem(16px);
         line-height: calculateRem(20px);
         vertical-align: middle;
 
@@ -68,7 +70,7 @@
             background: $ibexa-white;
 
             .ez-icon {
-                fill: $ez-color-base-medium;
+                fill: $ibexa-color-base-dark;
             }
         }
 
@@ -166,7 +168,7 @@
             margin-right: calculateRem(4px);
             padding: 0;
             border-radius: $ibexa-border-radius;
-            background: $ez-color-secondary;
+            background: $ibexa-color-primary;
         }
 
         &--submit:hover,
@@ -177,7 +179,7 @@
         &--cancel {
             padding: 0;
             border-radius: $ibexa-border-radius;
-            background: $ez-color-base-medium;
+            background: $ibexa-color-base-dark;
         }
 
         &--cancel:hover,
@@ -199,7 +201,7 @@
             }
 
             .ez-icon {
-                fill: $ez-color-primary;
+                fill: $ibexa-color-primary;
             }
 
             &:hover,
@@ -213,10 +215,11 @@
 
     &__link {
         display: inline-block;
-        color: $ez-color-hyperlink;
+        color: $ibexa-color-primary;
         cursor: pointer;
         transition: color 0.3s $ez-admin-transition;
-
+        text-decoration: none;
+        
         &:hover,
         &:focus {
             color: $ibexa-color-primary;

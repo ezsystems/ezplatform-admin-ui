@@ -1,10 +1,10 @@
 .ez-extra-actions {
     $block: '.ez-extra-actions';
+    @include container-box-shadow;
 
-    background-color: $ez-white;
-    border: calculateRem(16px) solid $ez-white;
-    width: calculateRem(360px);
-    box-shadow: calculateRem(-4px) calculateRem(4px) calculateRem(6px) 0 rgba($ez-color-base-light, 0.35);
+    background-color: $ibexa-white;
+    padding: calculateRem(16px);
+    width: calculateRem(400px);
 
     &__action {
         display: block;
@@ -15,8 +15,8 @@
         border-radius: calculateRem(4px);
         padding: 0 calculateRem(16px);
         line-height: calculateRem(45px);
-        background: $ez-white;
-        color: $ez-color-secondary;
+        background: $ibexa-white;
+        color: $ibexa-color-primary;
         text-decoration: none;
         cursor: pointer;
         transition: all 0.2s $ez-admin-transition;
@@ -29,12 +29,12 @@
 
         &:hover,
         &:focus {
-            background: $ez-secondary-ground-pale;
+            background: $ibexa-color-base;
         }
 
         &:active {
-            background: $ez-secondary-ground;
-            color: $ez-white;
+            background: $ibexa-color-primary;
+            color: $ibexa-white;
         }
     }
 
@@ -43,12 +43,12 @@
     }
 
     &__header {
-        line-height: calculateRem(50px);
-        font-size: calculateRem(17px);
-        color: $ez-color-secondary;
-        margin-bottom: calculateRem(15px);
-        font-weight: 600;
-        border-bottom: calculateRem(1px) solid $ez-color-secondary;
+        font-size: calculateRem(16px);
+        color: $ibexa-color-primary;
+        margin-bottom: calculateRem(30px);
+        padding: calculateRem(8px) calculateRem(8px) calculateRem(24px);
+        font-weight: bold;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
     }
 
     &__content {
@@ -68,24 +68,24 @@
             border-radius: calculateRem(4px);
             padding: 0 calculateRem(16px);
             line-height: calculateRem(45px);
-            background: $ez-white;
+            background: $ibexa-white;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.2s $ez-admin-transition;
             margin-bottom: calculateRem(10px);
             font-size: calculateRem(15px);
-            box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba($ez-black, 0.1);
+            box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba($ibexa-black, 0.1);
 
             &:hover,
             &:focus {
-                background: $ez-secondary-ground-pale;
+                background: $ibexa-color-base;
                 font-weight: 700;
                 text-decoration: none;
             }
 
             &:active {
-                background: $ez-secondary-ground;
-                color: $ez-white;
+                background: $ibexa-color-primary;
+                color: $ibexa-white;
             }
 
             &-label {
@@ -102,16 +102,15 @@
     }
 
     &__section-header {
-        padding: calculateRem(4px) 0;
+        margin: 0 calculateRem(8px) calculateRem(12px);
+        color: $ibexa-color-base-dark;
         font-size: calculateRem(16px);
-        line-height: calculateRem(22px);
-        font-weight: 700;
     }
 
     &__section-content {
-        background: $ez-white;
+        margin-bottom: calculateRem(32px);
+        background: $ibexa-white;
         font-size: calculateRem(16px);
-        line-height: calculateRem(22px);
 
         select {
             display: inline-block;
@@ -131,30 +130,24 @@
 
         .form-check {
             cursor: pointer;
-            background: $ez-white;
             transition: all 0.2s $ez-admin-transition;
             margin-bottom: 0;
             padding-left: 0;
 
+            &:active,
             &:hover,
             &:focus {
-                background: $ez-secondary-ground-pale;
+                color: $ibexa-color-primary;
             }
+        }
 
-            &:active {
-                background: $ez-secondary-ground;
-                color: $ez-white;
-            }
+        .form-check-label {
+            display: block;
+            margin: 0 0 0 calculateRem(42px);
+        }
 
-            &-label {
-                margin: 0;
-                display: block;
-                padding-left: calculateRem(40px);
-            }
-
-            &-input[type='radio'] {
-                display: none;
-            }
+        .form-check-input[type='radio'] {
+            display: none;
         }
 
         button {
@@ -168,7 +161,7 @@
 .ez-extra-actions-container {
     .ez-extra-actions {
         position: absolute;
-        top: calculateRem(-24px);
+        top: 0;
         bottom: 0;
         left: 0;
         z-index: 2;

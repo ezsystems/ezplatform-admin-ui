@@ -1,31 +1,30 @@
 .c-tooltip-popup {
-    background: $ez-ground-base-medium;
-    padding: calculateRem(16px);
-    box-shadow: 0 0 calculateRem(30px) 0 rgba($ez-black, 0.35);
+    background: $ibexa-white;
+    box-shadow: 0 0 calculateRem(30px) 0 rgba($ibexa-black, 0.35);
     position: relative;
-    border-radius: calculateRem(4px);
+    border-radius: $ibexa-border-radius;
+    overflow: hidden;
 
     &__header {
         position: relative;
+        padding: $modal-header-padding;
+        background: $ibexa-color-base-pale;
     }
 
     &__title {
-        margin-top: 0;
+        margin: 0;
     }
 
     &__close {
         position: absolute;
         display: flex;
         align-items: center;
-        top: 0;
-        bottom: 0;
+        top: calculateRem(16px);
         right: calculateRem(16px);
-        font-weight: normal;
-        font-size: calculateRem(32px);
         cursor: pointer;
 
         .ez-icon {
-            fill: $ez-black;
+            fill: $ibexa-black;
             opacity: 0.5;
             transition: opacity 0.3s $ez-admin-transition;
         }
@@ -38,5 +37,14 @@
                 opacity: 1;
             }
         }
+    }
+
+    &__content {
+        padding: $modal-inner-padding;
+    }
+
+    &__footer {
+        background: $ibexa-color-base-pale;
+        padding: $modal-footer-padding;
     }
 }

@@ -1,47 +1,14 @@
 .c-drop-area {
-    padding: 0 calculateRem(16px);
-    text-align: center;
-
-    &__btn-select {
-        display: inline-flex;
-        padding: 0 calculateRem(20px);
-        border-radius: calculateRem(4px);
-        text-align: center;
-        cursor: pointer;
-        color: $ez-white;
-        font-size: calculateRem(16px);
-        font-weight: bold;
-        border: calculateRem(1px) solid $ez-color-primary;
-        background: $ez-color-primary;
-        transition: background 0.3s $ez-admin-transition;
-        align-items: center;
-    }
-
-    &__btn--select:hover,
-    &__btn--select:focus {
-        background: $ez-color-primary-hover;
-    }
-
     &__message {
         line-height: calculateRem(60px);
 
         &--main {
             cursor: auto;
             font-size: calculateRem(16px);
-            font-weight: bold;
-            margin: 0;
-        }
-
-        &--filesize {
-            font-size: calculateRem(12px);
         }
     }
 
     &__input--hidden {
         display: none;
-    }
-
-    &__icon {
-        margin-right: calculateRem(8px);
     }
 }

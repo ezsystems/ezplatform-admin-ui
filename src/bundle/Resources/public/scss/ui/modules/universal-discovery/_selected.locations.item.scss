@@ -7,7 +7,7 @@
     &__image-wrapper {
         width: calculateRem(75px);
         height: calculateRem(75px);
-        background-color: $ez-color-base-pale;
+        background-color: $ibexa-white;
         border-radius: calculateRem(4px);
         display: flex;
         justify-content: center;
@@ -22,7 +22,7 @@
     }
 
     &__info-name {
-        font-size: calculateRem(13px);
+        font-size: calculateRem(14px);
         font-weight: bold;
     }
 
@@ -39,7 +39,7 @@
         border: none;
 
         .ez-icon {
-            fill: $ez-color-base-pale;
+            fill: $ibexa-white;
         }
     }
 }

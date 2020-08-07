@@ -40,7 +40,7 @@
     &__inner {
         padding: calulateRem(4px) calcuateRem(10px);
         max-width: calculateRem(250px);
-        border: calculateRem(1px) solid $ez-ground-base-dark;
+        border: calculateRem(1px) solid $ibexa-color-base-light;
         border-radius: calculateRem(4px);
         background-color: $ez-white;
         color: $ez-black;
@@ -53,7 +53,7 @@
 
     &--medium &__inner {
         padding: calculateRem(8px) calculateRem(16px);
-        font-size: calculateRem(13px);
+        font-size: calculateRem(14px);
         line-height: calculateRem(15px);
     }
 }

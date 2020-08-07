@@ -23,14 +23,14 @@
         outline: none;
 
         .ez-icon {
-            fill: $ez-ground-base-dark;
+            fill: $ibexa-color-base-light;
             transition: fill 0.3s $ez-admin-transition;
         }
 
         &:hover,
         &:focus {
             .ez-icon {
-                fill: $ez-color-base-pale;
+                fill: $ibexa-white;
             }
         }
     }

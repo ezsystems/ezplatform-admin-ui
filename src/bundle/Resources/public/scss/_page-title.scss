@@ -1,5 +1,4 @@
 .ez-page-title {
-    margin-bottom: calculateRem(14px);
     display: grid;
     grid-template-columns: calc(100% - #{calculateRem(50px)}) calculateRem(50px);
     grid-column-gap: calculateRem(10px);
@@ -27,11 +26,16 @@
     }
 
     &__content-type-name {
-        font-size: calculateRem(16px);
-        font-weight: 400;
-        color: $ez-color-base-light;
+        display: flex;
+        align-items: center;
         grid-area: content-type-name;
-        justify-self: start;
-        align-self: start;
+        margin-bottom: calculateRem(24px);
+        font-size: calculateRem(16px);
+        font-weight: normal;
+        color: $ibexa-color-font-pale;
+        
+        .ez-icon {
+            margin-right: calculateRem(8px);
+        }
     }
 }

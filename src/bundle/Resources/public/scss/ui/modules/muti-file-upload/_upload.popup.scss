@@ -1,12 +1,12 @@
 .c-upload-popup {
-    background: rgba($ez-black, 0.35);
+    background: rgba($ibexa-black, 0.35);
     position: fixed;
     z-index: 99999;
     top: 0;
     left: 0;
     height: 100vh;
     width: 100vw;
-    color: $ez-black;
+    color: $ibexa-black;
 
     .c-tooltip-popup {
         width: 100%;
@@ -17,21 +17,9 @@
         top: 50%;
         transform: translate(-50%, -50%);
         padding: 0;
-
-        &__title {
-            background: $ez-color-base-pale;
-            height: calculateRem(60px);
-            margin: 0;
-            padding: 0 calculateRem(16px);
-            font-size: calculateRem(24px);
-            font-weight: bold;
-            line-height: calculateRem(60px);
-            border-radius: calculateRem(4px) calculateRem(4px) 0 0;
-        }
     }
 
     .c-upload-list {
-        padding: calculateRem(16px);
         overflow-y: auto;
         max-height: 30vw;
     }

@@ -12,7 +12,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: $ez-color-base-pale;
+        background-color: $ibexa-white;
         padding: calculateRem(2px) calculateRem(2px) calculateRem(2px) calculateRem(8px);
         border-top-left-radius: calculateRem(5px);
         border-top-right-radius: calculateRem(5px);
@@ -76,7 +76,7 @@
         &[data-ezelement='eztemplateinline'] {
             padding: 0 calculateRem(8px);
             margin: 0 calculateRem(4px);
-            background-color: $ez-color-base-pale;
+            background-color: $ibexa-white;
             border: none;
             display: inline-flex;
             max-width: none;

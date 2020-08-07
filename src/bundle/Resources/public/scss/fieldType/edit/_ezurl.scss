@@ -1,12 +1,24 @@
 .ez-field-edit--ezurl {
     .ez-field-edit__data {
-        background-color:  $ez-ground-base-medium;
-        padding: 1rem;
+        background-color:  $ibexa-white;
+    }
+
+    .ez-data-source__field {
+        &--link,
+        &--text {
+            display: inline-block;
+            width: 48%;
+            margin-top: calculateRem(8px);
+        }
+
+        &--link {
+            margin-right: 3.5%;
+        }
     }
 
     &.is-invalid {
         .ez-data-source__field--link {
-            color: $ez-color-danger;
+            color: $ibexa-color-danger;
         }
     }
 }

@@ -25,7 +25,7 @@
 
                     &:disabled {
                         cursor: auto;
-                        background-color: $ez-color-base-pale;
+                        background-color: $ibexa-white;
                         color: $ez-black;
                         padding-right: calculateRem(32px);
                         text-overflow: ellipsis;
@@ -51,7 +51,7 @@
         min-width: 100%;
         border-radius: calculateRem(5px);
         margin-bottom: 0;
-        background-color: $ez-ground-base-dark;
+        background-color: $ibexa-color-base-light;
         max-height: calculateRem(300px);
         overflow: auto;
         transform: scaleY(1);
@@ -86,7 +86,7 @@
         opacity: 0;
         margin-top: calculateRem(8px);
         background: $ez-white;
-        border: calculateRem(1px) solid $ez-ground-base-medium;
+        border: calculateRem(1px) solid $ibexa-white;
         border-radius: calculateRem(4px);
         transition: all 0.2s ease-in;
         pointer-events: none;

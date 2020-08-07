@@ -3,6 +3,7 @@
 {# specific fieldtypes theming #}
 {% use '@ezdesign/ui/field_type/edit/ezauthor.html.twig' %}
 {% use '@ezdesign/ui/field_type/edit/ezboolean.html.twig' %}
+{% use '@ezdesign/ui/field_type/edit/ezcountry.html.twig' %}
 {% use '@ezdesign/ui/field_type/edit/ezdatetime.html.twig' %}
 {% use '@ezdesign/ui/field_type/edit/ezrichtext.html.twig' %}
 {% use '@ezdesign/ui/field_type/edit/ezselection.html.twig' %}
@@ -108,11 +109,12 @@
             {{ widget_container_block|raw }}
         {% else %}
             <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
-                <div class="ez-data-source"
-                    {% if field_type_descriptions[fieldtype.vars.languageCode] is defined %}
-                        title="{{ field_type_descriptions[fieldtype.vars.languageCode] }}"
-                    {% endif %}
-                >
+                {% if field_type_descriptions[fieldtype.vars.languageCode] is defined and field_type_descriptions[fieldtype.vars.languageCode] != '' %}
+                    <div class="ez-data-description">
+                        {{ field_type_descriptions[fieldtype.vars.languageCode] }}
+                    </div>
+                {% endif %}
+                <div class="ez-data-source">
                     {{- form_widget(form, {'attr': attr}) -}}
                 </div>
             </div>

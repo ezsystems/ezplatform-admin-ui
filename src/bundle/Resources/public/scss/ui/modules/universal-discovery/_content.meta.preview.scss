@@ -6,7 +6,7 @@
     &__preview {
         width: calculateRem(210px);
         height: calculateRem(210px);
-        background-color: $ez-color-base-pale;
+        background-color: $ibexa-white;
         border-radius: calculateRem(4px);
         display: flex;
         justify-content: center;
@@ -32,7 +32,7 @@
     }
 
     &__content-type-name {
-        font-size: calculateRem(13px);
+        font-size: calculateRem(14px);
         color: $ez-color-base-light;
     }
 
