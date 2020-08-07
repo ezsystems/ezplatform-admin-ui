@@ -1,3 +1,18 @@
+.ez-content-edit-page-title {
+    &__action {
+        font-weight: bold;
+    }
+
+    &__title {
+        font-size: calculateRem(26px);
+    }
+
+    &__description {
+        font-size: calculateRem(14px);
+        color: $ibexa-color-base-dark;
+    }
+}
+
 .ez-content-item {
     &__title {
         display: flex;
@@ -12,34 +27,27 @@
 }
 
 .ez-content-item-status {
-    font-size: calculateRem(18px);
-    color: $ez-color-base-light;
+    font-size: calculateRem(16px);
+    color: $ibexa-color-base-dark;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
 .ez-content-edit-container {
     position: relative;
-    width: 100%;
+    width: calc(100% - #{calculateRem(80px)});
+    margin-left: calculateRem(80px);
 
     &__close {
         position: fixed;
-        top: calculateRem(6px);
-        left: calculateRem(16px);
-        width: calculateRem(40px);
-        height: calculateRem(40px);
-        color: $ez-black;
-        text-align: center;
-        line-height: calculateRem(38px);
-
-        &:hover {
-            background: $ez-color-base-light;
-            border-radius: 50%;
-
-            .ez-icon {
-                fill: $ez-white;
-            }
-        }
+        top: calculateRem(8px);
+        left: calculateRem(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        fill: $ibexa-color-primary;
+        width: calculateRem(30px);
+        height: calculateRem(30px);
     }
 
     .ez-edit-header {
@@ -50,13 +58,18 @@
             z-index: 1100;
             top: 0;
             left: 0;
-            width: calc(100% - #{calculateRem(80px)});
+            width: 100%;
             min-height: calculateRem(55px);
-            padding: calculateRem(12px);
-            color: $ez-black;
-            font-size: calculateRem(20px);
-            font-weight: bold;
-            background: $ez-color-base-pale;
+            padding: calculateRem(12px) 0;
+            color: $ibexa-color-font;
+            font-size: calculateRem(16px);
+            font-weight: normal;
+            background: $ibexa-white;
+            border-bottom: calculateRem(1px) solid $ibexa-color-base;
+
+            .breadcrumb {
+                margin-top: 0;
+            }
         }
 
         &--create-on-the-fly,
@@ -65,127 +78,11 @@
                 width: 100%;
             }
         }
-
-        &__details {
-            color: $ez-black;
-            font-size: calculateRem(12px);
-            padding: calculateRem(2px) 0;
-            background: $ez-ground-base-medium;
-            transition: max-height 0.3s;
-            overflow: hidden;
-
-            .ez-details-items {
-                padding: 0 calculateRem(48px);
-                max-height: calculateRem(32px);
-                transition: max-height 0.3s;
-
-                &__pill {
-                    display: inline-block;
-                    margin: calculateRem(2px) calculateRem(3px);
-                    border-radius: calculateRem(4px);
-
-                    &--content-type {
-                        color: $ez-color-base-medium;
-                        background: $ez-white;
-
-                        .ez-icon {
-                            fill: $ez-color-base-medium;
-                        }
-                    }
-
-                    &--language {
-                        color: $ez-white;
-                        font-style: italic;
-                        background: $ez-color-base-light;
-                    }
-
-                    &--location {
-                        color: $ez-secondary-ground-dark;
-                        background: $ez-white;
-                    }
-                }
-
-                &__connector {
-                    display: inline-block;
-                    color: $ez-color-base-light;
-                    font-size: calculateRem(12px);
-                    font-weight: 600;
-
-                    &--small {
-                        font-size: calculateRem(11px);
-                        font-weight: 100;
-                    }
-                }
-
-                &__toggler {
-                    float: right;
-                    width: calculateRem(20px);
-                    height: calculateRem(20px);
-                    margin: calculateRem(5px) calculateRem(1px) 0 0;
-                    color: $ez-white;
-                    font-size: calculateRem(12px);
-                    text-align: center;
-                    line-height: calculateRem(20px);
-                    background: $ez-color-base-medium;
-                    border-radius: 50%;
-                    text-decoration: none;
-                    
-                    &--gray {
-                        color: $ez-color-base-medium;
-                        background: none;
-                    }
-
-                    &:hover {
-                        text-decoration: none;
-                    }
-                }
-
-                &__author-breadcrumbs {
-                    height: calculateRem(30px);
-                    line-height: calculateRem(30px);
-                    color: $ez-color-base-medium;
-                    font-size: calculateRem(12px);
-                    font-style: italic;
-                }
-
-                &--collapsed {
-                    max-height: 0;
-                }
-            }
-        }
-    }
-}
-
-.ez-content-edit {
-    .ez-field-edit {
-        margin: calculateRem(24px) 0;
-
-        &__label-wrapper {
-            .ez-field-edit {
-                &__label {
-                    margin-top: 0;
-                }
-            }
-        }
-
-        &--ezdate,
-        &--eztime,
-        &--ezdatetime {
-            .ez-field-edit__data {
-                .form-control {
-                    margin-bottom: calculateRem(-8px);
-                }
-            }
-        }
-    }
-
-    .card-body {
-        padding: 0 calculateRem(20px);
     }
 }
 
 .ez-content-item__errors-wrapper {
     font-style: italic;
-    color: $ez-color-warning-dark;
+    color: $ibexa-color-warning-dark;
     font-size: calculateRem(16px);
 }

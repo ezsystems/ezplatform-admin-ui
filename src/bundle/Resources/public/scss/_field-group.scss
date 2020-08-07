@@ -1,17 +1,17 @@
 .ez-view-rawcontentview {
     margin-bottom: calculateRem(25px);
-    background-color: $ez-white;
+    background-color: $ibexa-white;
 
     .ez-raw-content-title {
         padding: calculateRem(24px);
-        color: $ez-black;
+        color: $ibexa-black;
         align-items: center;
         border-bottom: calculateRem(1px) solid $ibexa-color-base;
 
         h2 {
             margin: 0 calculateRem(10px) 0 0;
-            font-size: calculateRem(18px);
-            font-weight: 400;
+            font-size: calculateRem(16px);
+            font-weight: bold;
         }
 
         .form-inline {
@@ -25,14 +25,12 @@
 }
 
 .ez-fieldgroup {
-    padding: 0 calculateRem(40px);
-
     &__name {
-        color: $ez-color-secondary;
-        border-bottom: calculateRem(1px) solid $ez-color-secondary;
-        padding-bottom: calculateRem(8px);
-        font-weight: 400;
-        font-size: calculateRem(18px);
+        color: $ibexa-color-font;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
+        padding: calculateRem(16px) calculateRem(8px) calculateRem(32px);
+        font-weight: normal;
+        font-size: calculateRem(16px);
     }
 
     &__toggler {
@@ -40,11 +38,11 @@
         display: block;
         padding: calculateRem(24px) calculateRem(16px);
         font-size: calculateRem(16px);
-        color: $ez-black;
+        color: $ibexa-black;
         text-decoration: none;
         
         &:hover {
-            color: $ez-color-secondary;
+            color: $ibexa-color-primary;
             text-decoration: none;
         }
 
@@ -69,8 +67,13 @@
         }
     }
 
+    &__content {
+        padding-left: calculateRem(32px);
+        padding-right: calculateRem(32px);
+    }
+
     .ez-content-field-name {
-        background-color: $ez-color-base-pale;
+        background-color: $ibexa-white;
     }
 
     .ez-content-field {
@@ -80,10 +83,10 @@
         .ez-content-field-name {
             border-top: calculateRem(1px) solid $ibexa-color-base;
             border-bottom: calculateRem(1px) solid $ibexa-color-base;
-            background: $ez-white;
+            background: $ibexa-white;
             margin-bottom: 0;
             padding: calculateRem(8px) calculateRem(24px);
-            color: $ez-color-base-light;
+            color: $ibexa-color-base-dark;
         }
 
         .ez-content-field-value {

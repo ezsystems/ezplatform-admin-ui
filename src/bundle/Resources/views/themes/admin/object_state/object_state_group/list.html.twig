@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
+    <section class="container ez-container">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'object_state_group.view.list.title'|trans|desc('Object state groups') }}</div>
             <div>
@@ -31,7 +31,8 @@
                     <a
                         title="{{ 'object_state_group.new'|trans|desc('Create a new Object state group') }}"
                         href="{{ path('ezplatform.object_state.group.add') }}"
-                        class="btn btn-primary">
+                        class="btn btn-icon"
+                    >
                         <svg class="ez-icon ez-icon-create">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                         </svg>
@@ -40,11 +41,12 @@
                     <button
                         id="delete-object-state-groups"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-icon"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
-                        title="{{ 'object_state_group.delete.bulk_delete.submit'|trans|desc('Delete Object state group') }}">
+                        title="{{ 'object_state_group.delete.bulk_delete.submit'|trans|desc('Delete Object state group') }}"
+                    >
                         <svg class="ez-icon ez-icon-trash">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>

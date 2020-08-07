@@ -1,13 +1,13 @@
 .c-upload-list {
     &__title {
-        background: $ez-ground-primary;
-        font-weight: bold;
-        line-height: calculateRem(50px);
-        padding: 0 calculateRem(16px);
-        border-radius: calculateRem(4px) calculateRem(4px) 0 0;
+        padding: calculateRem(12px) calculateRem(32px);
+        color: $ibexa-color-base-dark;
+        background: $ibexa-white;
+        border-top: calculateRem(1px) solid $ibexa-color-base;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
     }
 
     .c-upload-list-item + .c-upload-list-item {
-        border-top: calculateRem(1px) solid $ez-ground-primary;
+        border-top: calculateRem(1px) solid $ibexa-white;
     }
 }

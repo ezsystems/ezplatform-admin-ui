@@ -1,5 +1,5 @@
 .ez-field-edit--ezfloat {
-    .ez-field-edit__data {
-        width: 5rem;
+    .ez-data-source__input {
+        width: calculateRem(100px);
     }
 }

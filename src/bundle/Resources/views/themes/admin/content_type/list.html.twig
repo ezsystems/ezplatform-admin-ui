@@ -4,7 +4,7 @@
 
 {% form_theme form_content_types_delete '@ezdesign/ui/form_fields.html.twig'  %}
 
-<section class="container mt-4 px-5">
+<section class="container ez-container">
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'content_type.view.list.title'|trans({ '%identifier%': content_type_group.identifier })|desc('Content Types in \'%identifier%\'') }}</div>
         <div>
@@ -12,7 +12,8 @@
                 <a
                     href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}"
                     title="{{ 'content_type.view.list.action.add'|trans|desc('Create a Content Type') }}"
-                    class="btn btn-primary">
+                    class="btn btn-icon"
+                >
                     <svg class="ez-icon ez-icon-create">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                     </svg>
@@ -23,11 +24,12 @@
                 <button
                     id="delete-content-types"
                     type="button"
-                    class="btn btn-danger"
+                    class="btn btn-icon"
                     disabled
                     data-toggle="modal"
                     data-target="#{{ modal_data_target }}"
-                    title="{{ 'content_type.view.list.action.delete'|trans|desc('Delete Content Type') }}">
+                    title="{{ 'content_type.view.list.action.delete'|trans|desc('Delete Content Type') }}"
+                >
                     <svg class="ez-icon ez-icon-trash">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                     </svg>

@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
+    <section class="container ez-container">
         {{ form_start(form_roles_delete, {
             'action': path('ezplatform.role.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-roles' }
@@ -33,7 +33,8 @@
                     <a
                         title="{{ 'role.view.list.action.add'|trans|desc('Create a Role') }}"
                         href="{{ path('ezplatform.role.create') }}"
-                        class="btn btn-primary">
+                        class="btn btn-icon"
+                    >
                         <svg class="ez-icon ez-icon-create">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                         </svg>
@@ -44,11 +45,12 @@
                     <button
                         id="delete-roles"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-icon"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
-                        title="{{ 'role.view.list.action.delete'|trans|desc('Delete Role') }}">
+                        title="{{ 'role.view.list.action.delete'|trans|desc('Delete Role') }}"
+                    >
                         <svg class="ez-icon ez-icon-trash">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>

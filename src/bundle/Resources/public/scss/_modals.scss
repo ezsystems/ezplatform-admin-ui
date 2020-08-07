@@ -1,6 +1,14 @@
 .ez-modal {
     .modal-header {
         background-color: $ibexa-color-base-pale;
+
+        .modal-title {
+            font-size: calculateRem(16px);
+        }
+
+        .close {
+            cursor: pointer;
+        }
     }
 }
 
@@ -8,7 +16,7 @@
 .ez-modal--trash-container,
 .ez-modal--trash-with-asset {
     .modal-dialog {
-        background-color: $ez-ground-base-medium;
+        background-color: $ibexa-white;
         border-radius: calculateRem(4px);
     }
 
@@ -47,7 +55,7 @@
         .ez-modal-body__main,
         .ez-modal-body__explanation {
             margin-bottom: 0;
-            color: $ez-black;
+            color: $ibexa-black;
             white-space: initial;
         }
     }
@@ -89,13 +97,6 @@
         }
     }
 }
-
-.ez-modal {
-    .close {
-        cursor: pointer;
-    }
-}
-
 .ez-modal--custom-url-alias,
 .ez-modal--url-wildcards {
     width: 100%;
@@ -145,7 +146,7 @@
 .ez-modal--select-created-range {
     .modal-dialog {
         border-radius: calculateRem(4px);
-        background-color: $ez-ground-base-medium;
+        background-color: $ibexa-white;
     }
 
     .modal-header {
@@ -179,23 +180,7 @@
 }
 
 .ez-modal--version-draft-conflict {
-    .modal-header {
-        border-bottom: none;
-
-        .modal-title {
-            font-size: calculateRem(24px);
-        }
-
-        .close {
-            margin-top: calculateRem(-9px);
-        }
-    }
-
     .modal-body {
-        padding: 2rem;
-        background-color: $ez-ground-base-medium;
-        border-radius: 0 0 calculateRem(4px) calculateRem(4px);
-
         .ez-modal-body__main {
             margin-bottom: calculateRem(24px);
 
@@ -230,7 +215,7 @@
 
     .modal-body {
         padding: calculateRem(32px);
-        background-color: $ez-ground-base-medium;
+        background-color: $ibexa-white;
         border-radius: 0 0 calculateRem(4px) calculateRem(4px);
 
         .ez-modal-body__main {

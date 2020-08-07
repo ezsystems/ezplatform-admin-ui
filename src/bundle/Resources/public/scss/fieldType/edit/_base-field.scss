@@ -1,7 +1,22 @@
 .ez-field-edit {
-    .ez-field-edit__label {
+    &__label-wrapper {
+        padding-top: calculateRem(8px);
+    }
+
+    &__label {
         @include label-required();
     }
+
+    &__data,
+    &__preview {
+        padding-top: calculateRem(8px);
+    }
+
+    .ez-data-description {
+        margin-bottom: calculateRem(16px);
+        color: $ibexa-color-base-dark;
+    }
+
     .ez-data-source__label {
         &:after {
             content: ': ';
@@ -17,7 +32,7 @@
     &.is-invalid {
         .ez-field-edit__label-wrapper,
         .ez-field-edit__label {
-            color: $ez-color-warning-dark;
+            color: $ibexa-color-warning-dark;
         }
 
         .ez-field-edit__data {
@@ -27,39 +42,50 @@
 
     &__error {
         display: inline-block;
+        font-size: calculateRem(14px);
+        font-style: normal;
         margin-left: calculateRem(8px);
-        color: $ez-color-warning-dark;
+        color: $ibexa-color-warning-dark;
     }
 
     .ez-data-source__input {
         &.is-invalid {
-            border-color: $ez-color-danger;
-            background: $ez-color-warning-pale;
+            border-color: $ibexa-color-danger;
+            background: $ibexa-color-warning-pale;
         }
     }
 
     .ez-data-source__label {
         &.is-invalid {
-            color: $ez-color-danger;
+            color: $ibexa-color-danger;
         }
     }
 }
 
 .ez-content-edit {
     .ez-field-edit {
+        display: flex;
+        padding: calculateRem(24px) 0;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
+
         &__label-wrapper {
+            flex: 0 0 calculateRem(200px);
+
             .ez-field-edit__label {
+                margin: 0;
                 font-size: calculateRem(16px);
-                font-weight: 700;
-                color: $ez-black;
+                font-weight: normal;
+                color: $ibexa-color-font-pale;
             }
         }
 
         .ez-data-source__label {
-            margin-bottom: 0;
-            font-size: calculateRem(14px);
-            font-weight: 700;
-            color: $ez-black;
+            margin-bottom: calculateRem(10px);
+            color: $ibexa-color-font-pale;
         }
-    }
+
+        &__data {
+            flex: 0 0 calc(100% - #{calculateRem(200px)});
+        }
+    }        
 }

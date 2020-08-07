@@ -107,7 +107,7 @@
                     </div>
                 </div>
         </div>
-        <div class="pt-4 px-0 bg-secondary ez-context-menu">
+        <div class="ez-context-menu">
             <div class="ez-sticky-container">
                 {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': content_type}) %}
                 {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}

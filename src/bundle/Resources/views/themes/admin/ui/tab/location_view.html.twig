@@ -13,12 +13,12 @@
         </ul>
     </div>
 </div>
-<div class="tab-content container" id="ez-tab-list-content-{{ group }}">
+<div class="tab-content container ez-tab-content" id="ez-tab-list-content-{{ group }}">
     {% for tab in tabs %}
         {% set id = group ~ '-' ~ tab.identifier %}
         {% set active = loop.first %}
 
-        <div class="tab-pane{% if active %} active{% endif %}" id="ez-tab-{{ id }}" role="tabpanel"
+        <div class="tab-pane{% if active %} active{% endif %} ez-tab-content__pane" id="ez-tab-{{ id }}" role="tabpanel"
                 aria-labelledby="ez-tab-label-{{ group }}">
             {{ tab.view|raw }}
         </div>

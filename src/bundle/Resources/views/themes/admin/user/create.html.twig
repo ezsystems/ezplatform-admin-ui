@@ -2,44 +2,26 @@
 
 {% trans_default_domain 'user_create' %}
 
+{% block breadcrumbs %}
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
+        { value: content_type.name ~ '/' ~ 'group_id'|trans({'%groupId%': parent_group.id})|desc('Group ID: %groupId%') }
+    ]} %}
+{% endblock %}
+
+{% block page_title %}
+    {% include '@ezdesign/content/page_title_edit.html.twig' with { 
+        action_name: 'Create'|trans|desc('Creating'),
+        title: content_type.name,
+        description: content_type.description
+    } %}
+{% endblock %}
+
 {% block details %}
-    {% block close_button %}
-        <a 
-            class="ez-content-edit-container__close" 
-            href="{{ path('_ez_content_view', {'contentId': parent_group.content.id, 'locationId': parent_group.content.versionInfo.contentInfo.mainLocationId}) }}"
-            title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
-        >
-            <svg class="ez-icon ez-icon--small-medium">
-                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
-            </svg>
-        </a>
-    {% endblock %}
-
-    <div class="container mt-5 px-5">
-        <h4 class="ez-content-item-status">{{ 'creating'|trans({'%contentType%': content_type.name})|desc('Creating a(n) %contentType%') }}</h4>
-        <h1>
-            <svg class="ez-icon ez-icon-{{ content_type.identifier }}">
-                <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
-            </svg>
-            {{ 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') }}
-        </h1>
-
-        <div class="small">
-            {{ content_type.name }} / {{ 'group_id'|trans({'%groupId%': parent_group.id})|desc('Group ID: %groupId%') }}
-        </div>
-        <div class="ez-content-item__errors-wrapper" hidden>
-            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
-        </div>
-        {# @todo remove if statement once getDescription() bug is resolved in kernel #}
-        {% if content_type.descriptions is not empty %}
-            <div class="small text-muted">{{ content_type.description }}</div>
-        {% endif %}
-    </div>
 {% endblock %}
 
 {% block form_fields %}
-    <section class="container mt-4 mb-5 px-5">
-        <div class="card ez-card">
+    <section class="container">
+        <div class="card ez-card ez-card--light">
             <div class="card-body">
                 {{ parent() }}
                 {{ form_widget(form.create, {'attr': {'hidden': 'hidden'}}) }}

@@ -11,14 +11,14 @@
         top: 0;
         bottom: 0;
         right: 0;
-        background: $ez-ground-base-pale;
+        background: $ibexa-color-base-light;
         cursor: col-resize;
     }
 
     &__scrollable-wrapper {
         height: 100%;
         overflow: auto;
-        padding-top: calculateRem(8px);
+        padding: calculateRem(12px);
     }
 
     &__loading-spinner {
@@ -33,12 +33,12 @@
         width: 100%;
         position: absolute;
         bottom: 0;
-        border-top: 1px solid $ez-ground-base-medium;
+        border-top: calculateRem(1px) solid $ibexa-white;
         height: calculateRem(30px);
         padding: calculateRem(7px);
         font-size: calculateRem(11px);
         text-align: right;
-        color: $ez-color-base-light;
+        color: $ibexa-color-base-dark;
         cursor: pointer;
     }
 }

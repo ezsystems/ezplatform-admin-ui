@@ -1,6 +1,9 @@
 .ez-field-edit--ezimageasset {
     .ez-field-edit-preview {
-        padding: calculateRem(20px) 0 calculateRem(12px) calculateRem(20px);
+        &__media-wrapper {
+            position: relative;
+            display: inline-block;
+        }
 
         &__media {
             max-width: 100%;
@@ -9,15 +12,53 @@
             display: block;
         }
 
+        &__actions {
+            position: absolute;
+            top: calculateRem(16px);
+            right: calculateRem(16px);
+            width: calculateRem(40px);
+            height: calculateRem(90px);
+        }
+
+        &__action--remove,
+        &__action--preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calculateRem(40px);
+            height: calculateRem(40px);
+            margin-bottom: calculateRem(12px);
+            background: $ibexa-color-primary;
+            border: none;
+            outline: none;  
+            
+            .ez-icon {
+                fill: $ibexa-white;
+            }
+        }
+
         &__details {
-            color: $ez-color-base-light;
-            font-size: calculateRem(12px);
-            padding-top: calculateRem(8px);
+            color: $ibexa-color-font;
+            padding-top: calculateRem(16px);
+        }
+
+        &__file-name,
+        &__file-size {
+            display: inline-block;
+
+            &:first-child {
+                margin-right: calculateRem(32px);
+            }
         }
 
         &__image-alt {
-            margin-top: calculateRem(8px);
+            margin-top: calculateRem(24px);
         }
+    }
+
+    .ez-data-source {
+        padding: calculateRem(16px) calculateRem(30px);
+        background: $ibexa-color-base-light;
     }
 
     &.is-invalid {
@@ -30,8 +71,8 @@
                 top: 0;
                 left: calculateRem(-20px);
                 width: calculateRem(20px);
-                background: red;
-                color: white;
+                background: $ibexa-color-primary;
+                color: $ibexa-white;
                 text-align: center;
                 font-size: calculateRem(24px);
                 border-top-left-radius: calculateRem(5px);
@@ -52,7 +93,7 @@
         .ez-icon {
             width: calculateRem(32px);
             height: calculateRem(32px);
-            fill: $ez-black;
+            fill: $ibexa-black;
         }
     }
 }

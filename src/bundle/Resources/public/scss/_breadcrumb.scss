@@ -1,12 +1,19 @@
-.breadcrumb-item {
-    cursor: not-allowed;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: calculateRem(300px);
-    
-    + .breadcrumb-item::before,
-    &.active {
-        color: $ez-color-base-medium;
+.breadcrumb {
+    margin: calculateRem(24px) 0 calculateRem(16px);
+    flex-wrap: nowrap;
+
+    .breadcrumb-item {
+        cursor: not-allowed;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calculateRem(300px);
+        
+        &::before,
+        &.active,
+        &__link {
+            color: $ibexa-color-base-dark;
+            text-decoration: none;
+        }
     }
 }

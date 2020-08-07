@@ -359,7 +359,7 @@ export default class TableViewItemComponent extends PureComponent {
                     />
                 </td>
                 <td className="c-table-view-item__cell c-table-view-item__cell--icon">
-                    <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--small" />
+                    <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--small-medium" />
                 </td>
                 {this.renderBasicColumns()}
                 <td className="c-table-view-item__cell c-table-view-item__cell--actions">
