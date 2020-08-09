@@ -180,6 +180,8 @@ class ValueFactory
             'relationContentTypeName' => $contentType->getName(),
             'relationLocation' => $this->locationResolver->resolveLocation($content->contentInfo),
             'relationName' => $content->getName(),
+            'resolvedSourceLocation' => $this->locationResolver->resolveLocation($relation->sourceContentInfo),
+            'resolvedDestinationLocation' => $this->locationResolver->resolveLocation($relation->destinationContentInfo),
         ]);
     }
 
@@ -204,6 +206,8 @@ class ValueFactory
             'relationContentTypeName' => $contentType->getName(),
             'relationLocation' => $this->locationResolver->resolveLocation($content->contentInfo),
             'relationName' => $content->getName(),
+            'resolvedSourceLocation' => $this->locationResolver->resolveLocation($relation->sourceContentInfo),
+            'resolvedDestinationLocation' => $this->locationResolver->resolveLocation($relation->destinationContentInfo),
         ]);
     }
 

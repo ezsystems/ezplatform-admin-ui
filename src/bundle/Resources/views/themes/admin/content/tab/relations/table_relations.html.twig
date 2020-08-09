@@ -16,8 +16,10 @@
             {% set destination = relation.destinationContentInfo %}
             <tr>
                 <td>
-                    {% if (destination.mainLocationId is not null) %}
-                        <a href="{{ path('_ez_content_view', { 'contentId': destination.id, 'locationId': destination.mainLocationId }) }}">
+                    {% if destination.mainLocationId is not null %}
+                        <a href="{{ path('_ez_content_view',
+                            { 'contentId': destination.id, 'locationId': relation.resolvedDestinationLocation.id }) }}"
+                        >
                             {{ ez_content_name(destination) }}
                         </a>
                     {% else %}
