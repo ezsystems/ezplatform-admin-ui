@@ -52,7 +52,7 @@ Feature: Content fields setting and editing
 
   @javascript @common @admin
   Scenario: Create an ImageAsset Content item and edit specified field
-    Given I create "Image" Content items in "/Media/Images/" in "eng-GB"
+    Given I create "image" Content items in "/Media/Images/" in "eng-GB"
       | name             | image                                                                              |
       | ImageAssetImage  | vendor/ezsystems/behatbundle/EzSystems/BehatBundle/Data/Images/small2.jpg  |
       And I create a 'Image Asset CT2' Content Type in "Content" with 'ImageAssetCT2' identifier
@@ -72,7 +72,8 @@ Feature: Content fields setting and editing
   @javascript @common
   Scenario Outline: Edit content item with given field
     Given I am logged as "admin"
-      And I navigate to content "<oldContentItemName>" of type "<fieldName> CT" in root path
+      And I go to "Content structure" in "Content" tab
+      And I open UDW and go to "root/<oldContentItemName>"
     When I click on the edit action bar button "Edit"
       And I set content fields
         | label    | <label1> | <label2> | <label3> |

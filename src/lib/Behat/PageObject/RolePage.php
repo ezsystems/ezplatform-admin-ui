@@ -107,8 +107,6 @@ class RolePage extends Page
      */
     public function isRoleWithLimitationPresent(string $listName, string $moduleAndFunction, string $limitation): bool
     {
-        $policyExists = false;
-
         $this->navLinkTabs->goToTab($listName);
         $adminList = $this->adminLists[$listName];
         $actualPoliciesList = $adminList->table->getTableHash();
@@ -120,12 +118,43 @@ class RolePage extends Page
             if (
                 $policy['Module'] === $expectedModule &&
                 $policy['Function'] === $expectedFunction &&
-                false !== strpos($policy['Limitations'], $limitation)
+                $this->isLimitationCorrect($limitation, $policy['Limitations'])
             ) {
-                $policyExists = true;
+                return true;
             }
         }
 
-        return $policyExists;
+        return false;
+    }
+
+    private function isLimitationCorrect(string $expectedLimitation, string $actualLimitations): bool
+    {
+        if ($expectedLimitation === 'None') {
+            return $actualLimitations === 'None';
+        }
+
+        [$expectedLimitationType, $expectedLimitationValue] = explode(':', $expectedLimitation);
+        $expectedLimitationValues = array_map(function (string $value) {
+            return trim($value);
+        }, explode(',', $expectedLimitationValue));
+
+        $limitationTypePos = strpos($actualLimitations, $expectedLimitationType);
+        $actualLimitationsStartingFromExpectedType = substr($actualLimitations, $limitationTypePos);
+
+        $valuePositionsDictionary = [];
+
+        foreach ($expectedLimitationValues as $value) {
+            $position = strpos($actualLimitationsStartingFromExpectedType, $value);
+            if ($position === false) {
+                return false;
+            }
+
+            $valuePositionsDictionary[$position] = $value;
+        }
+
+        ksort($valuePositionsDictionary);
+        $combinedExpectedLimitation = sprintf('%s: %s', $expectedLimitationType, implode(', ', $valuePositionsDictionary));
+
+        return strpos($actualLimitations, $combinedExpectedLimitation) !== false;
     }
 }
