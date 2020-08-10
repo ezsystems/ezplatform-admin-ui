@@ -61,7 +61,7 @@ Scenario: Element in trash can be restored under new location
 
 @javascript @common @admin
 Scenario: Content can be moved to trash from non-root location
-  Given I create "Folder" Content items in "/Media/Files/" in "eng-GB"
+  Given I create "folder" Content items in "/Media/Files/" in "eng-GB"
       | name               | short_name         |
       | TestFolderToRemove | TestFolderToRemove |
     And I navigate to content "TestFolderToRemove" of type "Folder" in "Media/Files"

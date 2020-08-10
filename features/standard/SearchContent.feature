@@ -4,7 +4,7 @@ Feature: Searching for a Content item
 
   @javascript @admin @common
   Scenario: Content can be searched for
-    Given I create "Folder" Content items in root in "eng-GB"
+    Given I create "folder" Content items in root in "eng-GB"
       | name              | short_name          |
       | Searched folder   | Searched folder     |
     And I am logged as "admin"
