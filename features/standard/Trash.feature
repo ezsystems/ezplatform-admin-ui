@@ -68,9 +68,3 @@ Scenario: Content can be moved to trash from non-root location
   When I send content to trash
   Then there's no "Folder" "TestFolderToRemove" on "Files" Sub-items list
     And going to trash there is "Folder" "TestFolderToRemove" on list
-
-@javascript @common
-Scenario: Trash can be emptied
-  Given I click on the left menu bar button "Trash"
-  When I empty the trash
-  Then trash is empty
