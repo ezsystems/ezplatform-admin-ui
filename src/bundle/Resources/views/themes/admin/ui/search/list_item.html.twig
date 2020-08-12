@@ -8,6 +8,7 @@
         {% if row.mainLocationId is not null %}
             <a href="{{ path('_ez_content_view', {
                 'contentId': row.contentId,
+                'locationId': row.resolvedLocation.id,
                 'languageCode': row.translation_language_code,
             }) }}">{{ row.name }}</a>
         {% else %}
