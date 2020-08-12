@@ -1,14 +1,17 @@
 .c-selected-locations-item {
     display: flex;
     align-items: center;
-    padding: calculateRem(10px);
-    border-bottom: calculateRem(1px) solid $ez-ground-primary;
+    padding: calculateRem(8px);
+
+    &:first-child {
+        padding-top: calculateRem(16px);
+    }
 
     &__image-wrapper {
-        width: calculateRem(75px);
-        height: calculateRem(75px);
-        background-color: $ibexa-white;
-        border-radius: calculateRem(4px);
+        width: calculateRem(64px);
+        height: calculateRem(64px);
+        background-color: rgba($ibexa-color-base, 0.31);
+        border-radius: $ibexa-border-radius;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -17,29 +20,31 @@
     &__info {
         display: flex;
         flex-direction: column;
-        width: calculateRem(160px);
+        width: calculateRem(185px);
         padding: calculateRem(10px);
     }
 
     &__info-name {
-        font-size: calculateRem(14px);
-        font-weight: bold;
+        font-size: calculateRem(16px);
     }
 
     &__info-description {
-        font-size: calculateRem(12px);
-        color: $ez-color-base-light;
+        font-size: calculateRem(13px);
+        color: $ibexa-color-font-pale;
     }
 
     &__actions-wrapper {
         display: flex;
+        justify-content: flex-end;
     }
 
     &__remove-button {
+        width: calculateRem(32px);
+        height: calculateRem(32px);
         border: none;
 
         .ez-icon {
-            fill: $ibexa-white;
+            fill: $ibexa-black;
         }
     }
 }

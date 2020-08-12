@@ -23,7 +23,7 @@
         &:after {
             content: ' ';
             position: absolute;
-            top: calculateRem(3px);
+            top: calculateRem(2.5px);
             left: calculateRem(3px);
             display: block;
             width: calculateRem(8px);

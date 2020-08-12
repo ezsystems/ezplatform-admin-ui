@@ -1,3 +1,7 @@
 @mixin container-box-shadow {
     box-shadow: 0 0 calculateRem(7px) 0 rgba(0,0,0,0.2);
 }
+
+@mixin container-box-shadow-light {
+    box-shadow: 0 0 calculateRem(5px) 0 rgba(0,0,0,0.1);
+}

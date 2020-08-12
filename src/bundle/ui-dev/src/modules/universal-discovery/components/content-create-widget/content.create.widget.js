@@ -71,6 +71,7 @@ const ContentCreateWidget = () => {
     );
     const createLabel = Translator.trans(/*@Desc("Create")*/ 'create_content.create', {}, 'universal_discovery_widget');
     const closeLabel = Translator.trans(/*@Desc("Close")*/ 'popup.close.label', {}, 'universal_discovery_widget');
+    const cancelLabel = Translator.trans(/*@Desc("Cancel")*/ 'content_create.cancel.label', {}, 'universal_discovery_widget');
     const widgetClassName = createCssClassNames({
         'c-content-create': true,
         'c-content-create--hidden': !createContentVisible,
@@ -161,6 +162,9 @@ const ContentCreateWidget = () => {
             <div className="c-content-create__confirm-wrapper">
                 <button className="c-content-create__confirm-button btn btn-primary" onClick={createContent} disabled={isConfirmDisabled}>
                     {createLabel}
+                </button>
+                <button className="ez-btn ez-btn--no-border" onClick={close}>
+                    {cancelLabel}
                 </button>
             </div>
         </div>

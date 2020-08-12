@@ -1,7 +1,8 @@
 .breadcrumb {
-    margin: calculateRem(24px) 0 calculateRem(16px);
+    padding: calculateRem(12px) 0 calculateRem(16px);
     flex-wrap: nowrap;
-
+    margin-bottom: 0;
+    
     .breadcrumb-item {
         cursor: not-allowed;
         white-space: nowrap;

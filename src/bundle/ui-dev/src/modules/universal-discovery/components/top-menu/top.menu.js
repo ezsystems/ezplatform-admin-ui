@@ -20,7 +20,7 @@ const TopMenu = ({ actionsDisabledMap }) => {
         <div className="c-top-menu">
             <span className="c-top-menu__cancel-btn-wrapper">
                 <button className="c-top-menu__cancel-btn" type="button" onClick={cancelUDW}>
-                    <Icon name="caret-back" />
+                    <Icon name="caret-back" extraClasses="ez-icon--dark ez-icon--medium" />
                 </button>
             </span>
             <span className="c-top-menu__title-wrapper">{title}</span>

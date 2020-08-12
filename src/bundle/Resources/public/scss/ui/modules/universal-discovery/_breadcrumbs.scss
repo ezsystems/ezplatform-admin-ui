@@ -1,8 +1,7 @@
 .c-breadcrumbs {
     display: flex;
     align-items: center;
-    padding: 0 calculateRem(16px);
-    height: calculateRem(30px);
+    padding: calculateRem(12px) calculateRem(16px) calculateRem(14px);
 
     &__hidden-list-wrapper {
         margin-right: calculateRem(8px);
@@ -78,18 +77,18 @@
         overflow: hidden;
         white-space: nowrap;
         cursor: pointer;
-        color: $ibexa-color-primary;
+        color: $ibexa-color-font;
     }
 
     &__list-item {
         max-width: calc(100% / 3);
         display: flex;
-        font-size: calculateRem(12px);
+        font-size: calculateRem(16px);
 
         &--last {
             .c-breadcrumbs__list-item-text {
                 cursor: not-allowed;
-                color: $ibexa-color-base-dark;
+                color: $ibexa-color-font-pale;
             }
         }
     }

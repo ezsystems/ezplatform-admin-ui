@@ -1,19 +1,25 @@
 .c-finder-branch {
     display: flex;
     position: relative;
-    border-right: calculateRem(1px) solid $ibexa-white;
+    border-right: calculateRem(1px) solid $ibexa-color-base;
+
+    &:first-child {
+        border-left: calculateRem(1px) solid $ibexa-color-base;
+    }
 
     &--collapsed {
         flex: 0 0 calculateRem(30px);
         overflow: hidden;
         text-overflow: ellipsis;
-        background-color: $ez-secondary-ground;
-        color: $ez-white;
+        background-color: rgba($ibexa-color-base, 0.5);
+        color: $ibexa-color-primary;
         cursor: pointer;
         display: block;
 
         .c-finder-branch__name {
-            font-size: calculateRem(14px);
+            color: $ibexa-color-primary;
+            font-size: calculateRem(16px);
+            font-weight: bold;
         }
     }
 

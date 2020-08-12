@@ -3,21 +3,22 @@
         min-height: calculateRem(40px);
         display: flex;
         align-items: center;
-        padding-left: calculateRem(16px);
+        padding: calculateRem(12px) calculateRem(16px) calculateRem(12px);
         cursor: pointer;
-        font-size: calculateRem(14px);
+        font-size: calculateRem(16px);
 
         .ez-icon {
-            margin-right: calculateRem(4px);
-            fill: $ez-color-base-medium;
+            margin-right: calculateRem(10px);
+            fill: $ibexa-black;
         }
 
         &--selected {
-            background-color: $ez-color-base-medium;
-            color: $ez-white;
+            background-color: $ibexa-color-base-medium;
+            color: $ibexa-color-primary;
+            font-weight: bold;
 
             .ez-icon {
-                fill: $ez-white;
+                fill: $ibexa-color-primary;
             }
         }
     }

@@ -94,7 +94,7 @@ const Filters = ({ isCollapsed, search }) => {
             <div className="ez-tag">
                 <div className="ez-tag__content">{subtreeBreadcrumbs}</div>
                 <button type="button" className="ez-tag__remove-btn" onClick={clearSelectedSubree}>
-                    <Icon name="circle-close" extraClasses="ez-icon--medium ez-icon--dark" />
+                    <Icon name="discard" extraClasses="ez-icon--small ez-icon--dark" />
                 </button>
             </div>
         );
@@ -144,15 +144,11 @@ const Filters = ({ isCollapsed, search }) => {
                 </div>
             </div>
             <div className="ez-filters__btns">
-                <button className="btn btn-dark ez-btn-clear" onClick={clearFilters}>
-                    {clearLabel}
-                </button>
-                <button
-                    type="submit"
-                    className="btn btn-secondary ez-btn-apply font-weight-bold"
-                    onClick={makeSearch}
-                    disabled={!isApplyButtonEnabled}>
+                <button type="submit" className="btn btn-primary ez-btn-apply" onClick={makeSearch} disabled={!isApplyButtonEnabled}>
                     {applyLabel}
+                </button>
+                <button className="ez-btn ez-btn--no-border" onClick={clearFilters}>
+                    {clearLabel}
                 </button>
             </div>
         </div>
