@@ -15,7 +15,7 @@
 {% block page_title %}
     {% set content_name = content ? content.name : 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') %}
     {% include '@ezdesign/content/page_title_edit.html.twig' with { 
-        action_name: 'Editing'|trans|desc('Editing'),
+        action_name: 'editing'|trans|desc('Editing'),
         title: content_name,
         description: content_type.description
     } %}

@@ -51,7 +51,7 @@ const ContentCreateButton = ({ isDisabled }) => {
                 onClick={toggleContentCreateVisibility}
                 data-tooltip-container-selector=".c-top-menu"
                 title={createLabel}>
-                <Icon name="create" extraClasses="ez-icon--small-medium" /> {createLabel}
+                <Icon name="create" extraClasses="ez-icon--small-medium ez-icon--primary" /> {createLabel}
             </button>
         </div>
     );

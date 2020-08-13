@@ -45,39 +45,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        fill: $ibexa-color-primary;
         width: calculateRem(30px);
         height: calculateRem(30px);
-    }
-
-    .ez-edit-header {
-        margin-top: calculateRem(55px);
-
-        &__content-type-name {
-            position: fixed;
-            z-index: 1100;
-            top: 0;
-            left: 0;
-            width: 100%;
-            min-height: calculateRem(55px);
-            padding: calculateRem(12px) 0;
-            color: $ibexa-color-font;
-            font-size: calculateRem(16px);
-            font-weight: normal;
-            background: $ibexa-white;
-            border-bottom: calculateRem(1px) solid $ibexa-color-base;
-
-            .breadcrumb {
-                margin-top: 0;
-            }
-        }
-
-        &--create-on-the-fly,
-        &--edit-on-the-fly {
-            .ez-edit-header__content-type-name {
-                width: 100%;
-            }
-        }
     }
 }
 
@@ -85,4 +54,10 @@
     font-style: italic;
     color: $ibexa-color-warning-dark;
     font-size: calculateRem(16px);
+}
+
+.ez-header--content-edit {
+    .breadcrumb {
+        margin-bottom: 0;
+    }
 }
