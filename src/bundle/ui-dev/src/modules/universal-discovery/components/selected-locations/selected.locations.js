@@ -72,7 +72,7 @@ const SelectedLocations = () => {
                     onClick={() => onConfirm()}
                     title={confirmSelectionLabel}
                     data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="checkmark" extraClasses="ez-icon--medium ez-icon--light" />
+                    <Icon name="checkmark" extraClasses="ez-icon--small-medium ez-icon--base-dark" />
                 </button>
                 <button
                     type="button"
@@ -80,7 +80,7 @@ const SelectedLocations = () => {
                     onClick={clearSelection}
                     title={clearAllLabel}
                     data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="circle-close" extraClasses="ez-icon--medium ez-icon--light" />
+                    <Icon name="trash" extraClasses="ez-icon--small-medium ez-icon--dark" />
                 </button>
             </Fragment>
         );

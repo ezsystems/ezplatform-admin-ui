@@ -19,10 +19,10 @@ const TranslationSelectorButton = ({ hideTranslationSelector, selectTranslation,
     return (
         <div className={className}>
             <div className="c-translation-selector__header">
+                <span className="c-translation-selector__title">{`${editTranslationLabel} (${languageCodes.length})`}</span>
                 <button className="c-translation-selector__close-button btn" onClick={hideTranslationSelector}>
                     <Icon name="discard" extraClasses="ez-icon--small" />
                 </button>
-                <span className="c-translation-selector__title">{`${editTranslationLabel} (${languageCodes.length})`}</span>
             </div>
             <div className="c-translation-selector__languages-wrapper">
                 {languageCodes.map((languageCode) => (

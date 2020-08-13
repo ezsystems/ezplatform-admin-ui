@@ -1,9 +1,9 @@
 .c-toggle-selection-button {
     border: none;
     border-radius: 50%;
-    background: $ibexa-white;
-    height: calculateRem(20px);
-    width: calculateRem(20px);
+    background: $ibexa-color-base-dark;
+    height: calculateRem(16px);
+    width: calculateRem(16px);
     padding: 0;
     display: flex;
     justify-content: center;
@@ -11,15 +11,13 @@
     opacity: 0;
 
     .ez-icon {
-        fill: $ez-color-base-medium;
+        fill: $ibexa-white;
+        width: calculateRem(10px);
+        height: calculateRem(10px);
     }
 
     &--selected {
-        background-color: $ez-color-positive;
+        background-color: $ibexa-color-primary;
         opacity: 1;
-
-        .ez-icon {
-            fill: $ez-white;
-        }
     }
 }

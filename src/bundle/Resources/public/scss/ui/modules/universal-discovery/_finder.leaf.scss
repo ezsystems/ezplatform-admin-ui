@@ -3,11 +3,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: calculateRem(2px) calculateRem(20px) calculateRem(2px) calculateRem(5px);
+    padding: calculateRem(7px) calculateRem(20px) calculateRem(7px) calculateRem(8px);
     position: relative;
 
     &:hover {
-        background-color: $ez-secondary-ground-pale;
+        background-color: $ibexa-color-base-medium;
 
         .c-toggle-selection-button {
             opacity: 1;
@@ -19,7 +19,7 @@
         width: 0;
         height: 0;
         border-top: calculateRem(5px) solid transparent;
-        border-left: calculateRem(8px) solid $ez-color-base-medium;
+        border-left: calculateRem(8px) solid $ibexa-color-base-dark;
         border-bottom: calculateRem(5px) solid transparent;
         position: absolute;
         right: calculateRem(5px);
@@ -28,38 +28,39 @@
     }
 
     &--marked {
-        background-color: $ez-secondary-ground;
-        color: $ez-white;
+        font-weight: bold;
+        background-color: $ibexa-color-base-medium;
+        color: $ibexa-color-primary;
 
         &:hover {
-            background-color: $ez-secondary-ground;
+            background-color: $ibexa-color-base-medium;
         }
 
         &.c-finder-leaf--not-selectable {
-            background-color: $ez-secondary-ground;
+            background-color: $ibexa-color-base-medium;
 
             &:hover {
-                background-color: $ez-secondary-ground;
+                background-color: $ibexa-color-base-medium;
             }
         }
 
         .c-toggle-selection-button {
             &--selected {
-                background-color: $ez-white;
+                background-color: $ibexa-color-primary;
 
                 .ez-icon {
-                    fill: $ez-color-secondary;
+                    fill: $ibexa-white;
                 }
             }
         }
 
         &.c-finder-leaf--has-children:after {
-            border-left-color: $ez-white;
+            border-left-color: $ibexa-color-primary;
         }
 
         .c-finder-leaf__name {
             .ez-icon {
-                fill: $ez-white;
+                fill: $ibexa-color-primary;
             }
         }
     }
@@ -77,7 +78,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: calculateRem(14px);
+        font-size: calculateRem(16px);
 
         .ez-icon {
             margin-right: calculateRem(5px);

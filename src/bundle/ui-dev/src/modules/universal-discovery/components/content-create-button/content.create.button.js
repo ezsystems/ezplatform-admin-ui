@@ -46,12 +46,12 @@ const ContentCreateButton = ({ isDisabled }) => {
     return (
         <div className="c-content-create-button">
             <button
-                className="c-content-create-button__btn btn btn-primary"
+                className="c-content-create-button__btn btn btn-link"
                 disabled={isDisabled || !hasAccess || !isAllowedLocation || isLimitReached}
                 onClick={toggleContentCreateVisibility}
                 data-tooltip-container-selector=".c-top-menu"
                 title={createLabel}>
-                <Icon name="create" extraClasses="ez-icon--medium ez-icon--light" />
+                <Icon name="create" extraClasses="ez-icon--small-medium ez-icon--primary" /> {createLabel}
             </button>
         </div>
     );

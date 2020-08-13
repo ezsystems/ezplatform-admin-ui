@@ -5,7 +5,8 @@
         'top-bar top-bar top-bar'
         'left-sidebar main right-sidebar';
     grid-template-rows: auto 1fr;
-    grid-template-columns: calculateRem(200px) 1fr calculateRem(250px);
+    grid-template-columns: calculateRem(220px) 1fr calculateRem(285px);
+    transition: all 0.4s ease-in;
 
     &__top-bar {
         grid-area: top-bar;
@@ -20,19 +21,19 @@
 
     &__main {
         grid-area: main;
-        background-color: $ez-ground-base-pale;
+        background-color: $ibexa-color-base-light;
         overflow: auto;
     }
 
     &__right-sidebar {
         grid-area: right-sidebar;
-        background-color: $ez-white;
+        background-color: $ibexa-white;
     }
 }
 
 .m-ud--locations-selected {
     .c-udw-tab {
-        grid-template-columns: calculateRem(200px) 1fr calculateRem(310px);
+        grid-template-columns: calculateRem(220px) 1fr calculateRem(350px);
 
         &__right-sidebar {
             position: relative;

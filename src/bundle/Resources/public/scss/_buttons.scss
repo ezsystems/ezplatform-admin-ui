@@ -178,8 +178,8 @@
             border-color: $ibexa-color-base-dark;
 
             &:hover {
-                background-color: $ez-color-base-medium-hover;
-                border-color: $ez-color-base-medium-hover;
+                background-color: $ibexa-color-base-dark;
+                border-color: $ibexa-color-base-dark;
             }
         }
 
@@ -196,8 +196,8 @@
             border-color: $ibexa-color-base-dark;
 
             &:hover {
-                background-color: $ez-color-base-medium-hover;
-                border-color: $ez-color-base-medium-hover;
+                background-color: $ibexa-color-base-dark;
+                border-color: $ibexa-color-base-dark;
             }
         }
     }
@@ -246,4 +246,8 @@
     .ez-icon {
         fill: $ibexa-color-primary;
     }
+}
+
+button:focus {
+    outline: 0;
 }
