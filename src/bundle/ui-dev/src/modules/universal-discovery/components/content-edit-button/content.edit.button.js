@@ -106,12 +106,12 @@ const ContentEditButton = ({ version, location, isDisabled }) => {
     return (
         <div className="c-content-edit-button">
             <button
-                className="c-content-edit-button__btn btn btn-primary"
+                className="c-content-edit-button__btn btn btn-icon"
                 disabled={!version || isDisabled}
                 onClick={toggleTranslationSelectorVisibility}
                 data-tooltip-container-selector=".c-udw-tab"
                 title={editLabel}>
-                <Icon name="edit" extraClasses="ez-icon--medium ez-icon--light" />
+                <Icon name="edit" extraClasses="ez-icon--small-medium ez-icon--dark" />
             </button>
             {renderTranslationSelector()}
         </div>

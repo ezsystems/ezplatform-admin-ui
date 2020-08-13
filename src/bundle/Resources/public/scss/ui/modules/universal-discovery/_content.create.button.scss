@@ -1,10 +1,10 @@
 .c-content-create-button {
     margin-right: calculateRem(10px);
-
-    &__btn {
+    
+    & &__btn {
+        margin-right: calculateRem(52px);
         padding: calculateRem(4px);
-        width: calculateRem(34px);
-        height: calculateRem(34px);
-        display: flex;
+        color: $ibexa-color-primary;
+        text-decoration: none;
     }
 }

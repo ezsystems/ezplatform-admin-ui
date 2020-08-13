@@ -36,7 +36,7 @@ const TabSelector = () => {
 
                 return (
                     <div className={className} key={tab.id} onClick={onClick}>
-                        <Icon customPath={tab.icon} extraClasses="ez-icon--medium" />
+                        <Icon customPath={tab.icon} extraClasses="ez-icon--small-medium" />
                         {tab.label}
                     </div>
                 );

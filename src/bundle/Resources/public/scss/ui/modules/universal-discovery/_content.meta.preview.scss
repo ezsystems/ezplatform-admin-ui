@@ -4,26 +4,27 @@
     height: 100%;
 
     &__preview {
-        width: calculateRem(210px);
-        height: calculateRem(210px);
-        background-color: $ibexa-white;
-        border-radius: calculateRem(4px);
+        width: calculateRem(248px);
+        height: calculateRem(248px);
+        margin-bottom: calculateRem(16px);
+        background-color: $ibexa-color-base-light;
+        border-radius: $ibexa-border-radius;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     &__content-name {
-        font-size: calculateRem(14px);
+        font-size: calculateRem(16px);
         line-height: calculateRem(16px);
         font-weight: bold;
     }
 
     &__details-item {
         display: flex;
-        font-size: calculateRem(10px);
+        font-size: calculateRem(13px);
         justify-content: space-between;
-        color: $ez-color-base-light;
+        color: $ibexa-color-font;
         margin-top: calculateRem(4px);
     }
 
@@ -32,14 +33,15 @@
     }
 
     &__content-type-name {
-        font-size: calculateRem(14px);
-        color: $ez-color-base-light;
+        font-size: calculateRem(16px);
+        color: $ibexa-color-font;
     }
 
     &__header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: calculateRem(42px);
     }
 
     &__toggle-bookmark-button {
@@ -61,7 +63,7 @@
     &__actions {
         display: flex;
         justify-content: space-between;
-        margin-top: calculateRem(20px);
+        margin-bottom: calculateRem(42px);
     }
 
     &__edit-button,

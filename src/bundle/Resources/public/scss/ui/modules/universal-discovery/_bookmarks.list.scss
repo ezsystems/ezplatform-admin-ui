@@ -1,6 +1,6 @@
 .c-bookmarks-list {
     width: calculateRem(215px);
-    background-color: $ibexa-white;
+    background-color: $ibexa-color-base-light;
     overflow: auto;
     flex-shrink: 0;
     margin-left: calculateRem(1px);
@@ -9,20 +9,21 @@
         cursor: pointer;
         display: flex;
         align-items: center;
-        padding: calculateRem(2px) calculateRem(5px);
-        font-size: calculateRem(14px);
+        padding: calculateRem(7px) calculateRem(12px);
+        font-size: calculateRem(16px);
 
         &--not-selectable {
-            background-color: $ibexa-color-base-light;
+            background-color: $ibexa-color-base-medium;
             cursor: not-allowed;
         }
 
         &--marked {
-            background-color: $ez-color-base-medium;
-            color: $ez-white;
-
+            background-color: $ibexa-color-base-medium;
+            color: $ibexa-color-primary;
+            font-weight: bold;
+            
             .ez-icon {
-                fill: $ez-white;
+                fill: $ibexa-color-primary;
             }
         }
     }

@@ -5,7 +5,7 @@
     flex-wrap: wrap;
     position: relative;
     margin: calculateRem(20px) 0;
-    padding: calculateRem(24px) calculateRem(32px);
+    padding: calculateRem(24px) calculateRem(24px);
     background: $ibexa-white;
 
     &--collapsed {
@@ -17,7 +17,8 @@
     }
 
     &__row {
-        padding: calculateRem(16px) 0;
+        padding: 0 calculateRem(16px) calculateRem(32px);
+        margin-bottom: calculateRem(32px);
         border-bottom: calculateRem(1px) solid $ibexa-color-base;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -26,7 +27,7 @@
 
     &__item {
         &-label {
-            margin-bottom: 0;
+            margin-bottom: calculateRem(16px);
             font-weight: 700;
 
             &--date-range {
@@ -135,10 +136,9 @@
     &__range-wrapper {
         height: 0;
         opacity: 0;
-        margin-top: calculateRem(8px);
+        margin-top: calculateRem(16px);
         background: $ibexa-white;
-        border: calculateRem(1px) solid $ibexa-white;
-        border-radius: calculateRem(4px);
+        border-radius: $ibexa-border-radius;
         transition: all 0.2s ease-in;
         pointer-events: none;
     
@@ -150,7 +150,6 @@
     }
 
     &__range-select {
-        border: none;
         outline: none;
     }
 }

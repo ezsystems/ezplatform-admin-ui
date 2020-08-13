@@ -29,6 +29,8 @@ const selectedContentTypesReducer = (state, action) => {
 const languages = Object.values(window.eZ.adminUiConfig.languages.mappings);
 
 const Search = ({ itemsPerPage }) => {
+    const filtersLabel = Translator.trans(/*@Desc("Filters")*/ 'search.filters', {}, 'universal_discovery_widget');
+    const searchLabel = Translator.trans(/*@Desc("Search")*/ 'search.search', {}, 'universal_discovery_widget');
     const allowedContentTypes = useContext(AllowedContentTypesContext);
     const [searchText, setSearchText] = useState('');
     const [offset, setOffset] = useState(0);
@@ -142,13 +144,9 @@ const Search = ({ itemsPerPage }) => {
                         onKeyPress={handleKeyPressed}
                         value={searchText}
                     />
-                    <button className="c-search__search-btn btn btn-primary" onClick={search.bind(this, 0)}>
-                        <Icon name="search" extraClasses="ez-icon--small-medium ez-icon--light" />
-                        Search
-                    </button>
                 </div>
                 <div className="c-search__selector-wrapper">
-                    <select className="form-control" onChange={updateSelectedLanguage} value={selectedLanguage}>
+                    <select className="form-control c-search__select-language" onChange={updateSelectedLanguage} value={selectedLanguage}>
                         {languages.map((language) => {
                             if (!language.enabled) {
                                 return null;
@@ -162,10 +160,12 @@ const Search = ({ itemsPerPage }) => {
                         })}
                     </select>
                 </div>
+                <button className="c-search__search-btn btn btn-primary" onClick={search.bind(this, 0)}>
+                    {searchLabel}
+                </button>
                 <div className="c-search__filters-btn-wrapper">
-                    <button className="c-search__toggle-filters-btn btn btn-dark" onClick={toggleFiltersCollapsed}>
-                        <Icon name="filters" extraClasses="ez-icon--small-medium ez-icon--light" />
-                        Filters
+                    <button className="c-search__toggle-filters-btn ez-btn ez-btn--secondary" onClick={toggleFiltersCollapsed}>
+                        {filtersLabel}
                     </button>
                 </div>
             </div>
