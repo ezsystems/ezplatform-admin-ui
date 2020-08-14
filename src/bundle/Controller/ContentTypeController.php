@@ -386,6 +386,42 @@ class ContentTypeController extends Controller
     }
 
     /**
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    public function copyAction(ContentTypeGroup $group, ContentType $contentType): Response
+    {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'create'));
+
+        try {
+            $this->contentTypeService->copyContentType($contentType);
+
+            $this->notificationHandler->success(
+            /** @Desc("Content Type '%name%' copied.") */
+                'content_type.copy.success',
+                ['%name%' => $contentType->getName()],
+                'content_type'
+            );
+
+        } catch (\Exception $exception) {
+            $this->notificationHandler->error(
+            /** @Desc("Content Type '%name%' cannot be copied.") */
+                'content_type.copy.error',
+                ['%name%' => $contentType->getName()],
+                'content_type'
+            );
+        }
+
+        return $this->redirectToRoute('ezplatform.content_type_group.view', [
+            'contentTypeGroupId' => $group->id,
+        ]);
+    }
+
+    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft $contentTypeDraft

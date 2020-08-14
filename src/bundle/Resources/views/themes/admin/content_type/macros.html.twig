@@ -14,3 +14,18 @@
         </svg>
     </a>
 {% endmacro %}
+
+{% macro content_type_copy(content_type, content_type_group, class_name) %}
+    {% set copy_url = path('ezplatform.content_type.copy', {
+        'contentTypeGroupId': content_type_group.id,
+        'contentTypeId': content_type.id
+    }) %}
+
+    <a title="{{ 'content_type.action.copy'|trans|desc('Copy') }}"
+       href="{{ copy_url }}"
+       {% if class_name %}class="{{ class_name }}"{% endif %}>
+        <svg class="ez-icon ez-icon-copy">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#copy"></use>
+        </svg>
+    </a>
+{% endmacro %}

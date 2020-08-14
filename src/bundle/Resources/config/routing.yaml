@@ -346,6 +346,14 @@ ezplatform.content_type.edit:
     requirements:
         contentTypeGroupId: \d+
 
+ezplatform.content_type.copy:
+    path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/copy
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController::copyAction'
+    requirements:
+        contentTypeGroupId: \d+
+
 ezplatform.content_type.update:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/update/{toLanguageCode}/{fromLanguageCode}
     methods: ['GET', 'POST']

@@ -57,6 +57,7 @@
                 <th class="ez-table__header-cell">{{ 'content_type.view.list.column.id'|trans|desc('ID') }}</th>
                 <th class="ez-table__header-cell">{{ 'content_type.view.list.column.modification_date'|trans|desc('Modification date') }}</th>
                 <th class="ez-table__header-cell"></th>
+                <th class="ez-table__header-cell"></th>
             </tr>
         </thead>
         <tbody>
@@ -86,6 +87,10 @@
                 <td class="ez-table__cell">{{ content_type.id }}</td>
                 <td class="ez-table__cell">{{ content_type.modificationDate|ez_full_datetime }}</td>
                 <td class="ez-table__cell ez-table__cell--has-action-btns">
+                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    {% if can_create %}
+                        {{ macros.content_type_copy(content_type, content_type_group, 'btn btn-icon mx-2') }}
+                    {% endif %}
                     {% if can_update %}
                         {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-2') }}
                     {% endif %}
