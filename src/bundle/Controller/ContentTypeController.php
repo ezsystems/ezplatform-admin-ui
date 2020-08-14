@@ -31,6 +31,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use eZ\Publish\API\Repository\Exceptions\BadStateException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
@@ -407,7 +408,7 @@ class ContentTypeController extends Controller
                 'content_type'
             );
 
-        } catch (\Exception $exception) {
+        } catch (UnauthorizedException $exception) {
             $this->notificationHandler->error(
             /** @Desc("Content Type '%name%' cannot be copied.") */
                 'content_type.copy.error',
