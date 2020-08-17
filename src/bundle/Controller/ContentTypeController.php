@@ -402,15 +402,14 @@ class ContentTypeController extends Controller
             $this->contentTypeService->copyContentType($contentType);
 
             $this->notificationHandler->success(
-            /** @Desc("Content Type '%name%' copied.") */
+                /** @Desc("Content Type '%name%' copied.") */
                 'content_type.copy.success',
                 ['%name%' => $contentType->getName()],
                 'content_type'
             );
-
         } catch (UnauthorizedException $exception) {
             $this->notificationHandler->error(
-            /** @Desc("Content Type '%name%' cannot be copied.") */
+                /** @Desc("Content Type '%name%' cannot be copied.") */
                 'content_type.copy.error',
                 ['%name%' => $contentType->getName()],
                 'content_type'
