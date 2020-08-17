@@ -38,7 +38,7 @@ class TrashContext extends BusinessContext
      */
     public function trashIsNotEmpty(): void
     {
-        $trash = PageObjectFactory::createPage($this->utilityContext, TrashPage::PAGE_NAME);
+        $trash = PageObjectFactory::createPage($this->browserContext, TrashPage::PAGE_NAME);
         Assert::assertFalse(
             $trash->isTrashEmpty(),
             'Trash is empty.'
