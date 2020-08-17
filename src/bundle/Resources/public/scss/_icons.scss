@@ -1,6 +1,7 @@
 .ez-icon {
     width: calculateRem(32px);
     height: calculateRem(32px);
+    // stroke: $ibexa-black;
     transition: fill 0.3s $ez-admin-transition;
 
     &--small {
@@ -33,24 +34,24 @@
         height: calculateRem(64px);
     }
 
-    &--dark {
-        fill: $ibexa-black;
-    }
-
     &--light {
         fill: $ibexa-white;
+        // stroke: $ibexa-white;
     }
 
     &--base-dark {
         fill: $ibexa-color-base-dark;
+        // stroke: $ibexa-color-base-dark;
     }
 
     &--primary {
         fill: $ibexa-color-primary;
+        // stroke: $ibexa-color-primary;
     }
 
     &--secondary {
         fill: $ibexa-color-primary;
+        // stroke: $ibexa-color-primary;
     }
 }
 
