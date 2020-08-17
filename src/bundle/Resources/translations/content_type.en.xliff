@@ -126,6 +126,11 @@
         <target state="new">Error occoured while copying the '%name%' Content Type.</target>
         <note>key: content_type.copy.error</note>
       </trans-unit>
+      <trans-unit id="af74f7c5362aaee985bf8cda3dd75fc80751ce51" resname="content_type.action.copy">
+        <source>Copy</source>
+        <target state="new">Copy</target>
+        <note>key: content_type.action.copy</note>
+      </trans-unit>
       <trans-unit id="f0338ef34826caa021c41ff85413e48601af30b7" resname="content_type.edit.select_language">
         <source>Select a language:</source>
         <target state="new">Select a language:</target>
