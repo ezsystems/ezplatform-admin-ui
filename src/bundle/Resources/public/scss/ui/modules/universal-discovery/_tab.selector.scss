@@ -9,7 +9,7 @@
 
         .ez-icon {
             margin-right: calculateRem(10px);
-            fill: $ibexa-black;
+            stroke: $ibexa-black;
         }
 
         &--selected {
@@ -18,7 +18,7 @@
             font-weight: bold;
 
             .ez-icon {
-                fill: $ibexa-color-primary;
+                stroke: $ibexa-color-primary;
             }
         }
     }

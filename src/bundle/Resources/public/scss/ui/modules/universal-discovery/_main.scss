@@ -13,7 +13,7 @@
                 .ez-icon {
                     width: calculateRem(120px);
                     height: calculateRem(120px);
-                    fill: $ibexa-color-base-dark;
+                    stroke: $ibexa-color-base-dark;
                 }
             }
         }
@@ -21,7 +21,7 @@
         &--marked {
             .c-thumbnail {
                 .ez-icon {
-                    fill: $ibexa-black;
+                    stroke: $ibexa-black;
                 }
             }
         }
@@ -30,7 +30,7 @@
     .c-selected-locations-item {
         .c-thumbnail {
             .ez-icon {
-                fill: $ibexa-color-base-dark;
+                stroke: $ibexa-color-base-dark;
             }
         }
     }

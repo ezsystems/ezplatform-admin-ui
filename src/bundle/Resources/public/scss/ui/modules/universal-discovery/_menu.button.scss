@@ -6,7 +6,7 @@
     display: flex;
 
     .ez-icon {
-        fill: $ez-color-base-medium;
+        stroke: $ez-color-base-medium;
     }
 
     &--selected {
@@ -14,7 +14,7 @@
         color: $ez-white;
 
         .ez-icon {
-            fill: $ez-white;
+            stroke: $ez-white;
         }
     }
 }

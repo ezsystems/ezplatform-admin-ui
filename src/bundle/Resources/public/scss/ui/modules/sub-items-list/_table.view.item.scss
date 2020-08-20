@@ -70,7 +70,7 @@
             background: $ibexa-white;
 
             .ez-icon {
-                fill: $ibexa-color-base-dark;
+                stroke: $ibexa-color-base-dark;
             }
         }
 
@@ -201,13 +201,13 @@
             }
 
             .ez-icon {
-                fill: $ibexa-color-primary;
+                stroke: $ibexa-color-primary;
             }
 
             &:hover,
             &:focus {
                 .ez-icon {
-                    fill: $ez-color-primary-hover;
+                    stroke: $ez-color-primary-hover;
                 }
             }
         }

@@ -30,7 +30,7 @@
     }
 
     .ez-icon {
-        fill: $color;
+        stroke: $color;
         height: calculateRem(20px);
         width: calculateRem(20px);
         margin: calculateRem(1px) calculateRem(4px) auto;
@@ -41,7 +41,7 @@
     }
 
     .ez-icon + .ez-icon {
-        fill: $ibexa-white;
+        stroke: $ibexa-white;
     }
 
     &.is-checked {
@@ -50,11 +50,11 @@
         }
 
         .ez-icon {
-            fill: $ibexa-white;
+            stroke: $ibexa-white;
         }
 
         .ez-icon + .ez-icon {
-            fill: $color;
+            stroke: $color;
         }
     }
 
@@ -141,14 +141,14 @@
         outline: none;
 
         .ez-icon {
-            fill: $ibexa-color-base-light;
-            transition: fill 0.3s $ez-admin-transition;
+            stroke: $ibexa-color-base-light;
+            transition: stroke 0.3s $ez-admin-transition;
         }
 
         &:hover,
         &:focus {
             .ez-icon {
-                fill: $ibexa-white;
+                stroke: $ibexa-white;
             }
         }
     }

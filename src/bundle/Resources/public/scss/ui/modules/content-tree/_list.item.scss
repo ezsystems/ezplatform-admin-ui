@@ -95,12 +95,12 @@ $list-item-height: calculateRem(20px);
             background: $ibexa-black;
 
             .ez-icon {
-                fill: $ibexa-white;
+                stroke: $ibexa-white;
             }
         }
 
         .ez-icon {
-            fill: $ibexa-black;
+            stroke: $ibexa-black;
         }
     }
 

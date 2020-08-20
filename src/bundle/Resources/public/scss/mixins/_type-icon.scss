@@ -9,13 +9,13 @@
     background: $ibexa-color-primary;
 
     .ez-icon {
-        fill: $ibexa-white;
+        stroke: $ibexa-white;
         width: calculateRem(16px);
         height: calculateRem(16px);
     }
 } 
 
 @mixin type-icon-read {
-    fill: $ibexa-color-base-light;
+    stroke: $ibexa-color-base-light;
     background: $ibexa-color-base-dark;
 }

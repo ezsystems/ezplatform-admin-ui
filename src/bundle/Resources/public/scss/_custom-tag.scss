@@ -35,7 +35,7 @@
             padding: calculateRem(6px) calculateRem(8px);
 
             .ez-icon {
-                fill: $ez-color-secondary;
+                stroke: $ez-color-secondary;
             }
         }
     }
@@ -62,7 +62,7 @@
                 background-color: $ez-color-secondary;
 
                 .ez-icon {
-                    fill: $ez-white;
+                    stroke: $ez-white;
                 }
             }
         }
@@ -91,7 +91,7 @@
                 background-color: $ez-color-secondary;
 
                 .ez-icon {
-                    fill: $ez-white;
+                    stroke: $ez-white;
                 }
             }
         }

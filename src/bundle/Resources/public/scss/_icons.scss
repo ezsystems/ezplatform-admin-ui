@@ -1,8 +1,14 @@
 .ez-icon {
     width: calculateRem(32px);
     height: calculateRem(32px);
-    // stroke: $ibexa-black;
-    transition: fill 0.3s $ez-admin-transition;
+    stroke: $ibexa-black;
+    fill: $ibexa-black;
+    transition: all 0.3s $ez-admin-transition;
+
+    stroke-width: 1.5; 
+    stroke-linecap: "round"; 
+    stroke-linejoin: "round";
+    
 
     &--small {
         width: calculateRem(16px);
@@ -36,22 +42,18 @@
 
     &--light {
         fill: $ibexa-white;
-        // stroke: $ibexa-white;
+        stroke: $ibexa-white;
     }
 
     &--base-dark {
         fill: $ibexa-color-base-dark;
-        // stroke: $ibexa-color-base-dark;
+        stroke: $ibexa-color-base-dark;
     }
 
-    &--primary {
-        fill: $ibexa-color-primary;
-        // stroke: $ibexa-color-primary;
-    }
-
+    &--primary,
     &--secondary {
         fill: $ibexa-color-primary;
-        // stroke: $ibexa-color-primary;
+        stroke: $ibexa-color-primary;
     }
 }
 
@@ -59,18 +61,10 @@
     .ez-icon {
         width: calculateRem(20px);
         height: calculateRem(20px);
-        fill: $ibexa-color-primary;
-
-        &--secondary {
-            fill: $ibexa-color-primary;
-        }
-
-        &--dark {
-            fill: $ibexa-black;
-        }
+        stroke: $ibexa-color-primary;
 
         &--copy {
-            fill: $ibexa-color-base-dark;
+            stroke: $ibexa-color-base-dark;
         }
     }
 }
@@ -78,7 +72,7 @@
 .ez-side-menu,
 .ez-context-menu {
     .ez-icon {
-        fill: $ibexa-white;
+        stroke: $ibexa-white;
     }
 }
 
@@ -99,19 +93,19 @@
     .ez-icon {
         width: calculateRem(24px);
         height: calculateRem(24px);
-        fill: $ibexa-color-base-dark;
+        stroke: $ibexa-color-base-dark;
     }
 
     &:hover,
     &:focus {
         .ez-icon {
-            fill: $ibexa-white;
+            stroke: $ibexa-white;
         }
     }
 
     &.ez-preview__action--selected {
         .ez-icon {
-            fill: $ibexa-white;
+            stroke: $ibexa-white;
         }
     }
 }
@@ -135,26 +129,26 @@
 
 .ez-alert--info {
     .ez-icon-warning {
-        fill: $ibexa-color-primary;
+        stroke: $ibexa-color-primary;
     }
 }
 
 .ez-modal {
     .modal-header {
         .ez-icon {
-            fill: $ibexa-black;
+            stroke: $ibexa-black;
         }
     }
 }
 
 .ez-btn--content-tree-expanded {
     .ez-icon {
-        fill: $ibexa-black;
+        stroke: $ibexa-black;
     }
 
     &:hover {
         .ez-icon {
-            fill: $ibexa-white;
+            stroke: $ibexa-white;
         }
     }
 }

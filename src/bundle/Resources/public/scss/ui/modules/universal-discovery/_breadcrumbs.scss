@@ -49,14 +49,14 @@
         .ez-icon {
             transform: rotate(90deg);
             transform-origin: center center;
-            fill: $ibexa-color-base-dark;
+            stroke: $ibexa-color-base-dark;
         }
 
         &--active {
             background-color: $ibexa-color-base-dark;
 
             .ez-icon {
-                fill: $ibexa-white;
+                stroke: $ibexa-white;
             }
         }
     }

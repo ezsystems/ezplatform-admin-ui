@@ -52,24 +52,22 @@
     &--no-border {
         color: $ibexa-color-primary;
     }
-}
 
-.ez-btn {
     &--action-icon {
         .ez-icon {
-            fill: $ibexa-color-base-dark;
+            stroke: $ibexa-color-base-dark;
+        }
+    }
+
+    &--add-translation {
+        .ez-icon {
+            margin-right: 0;
         }
     }
 }
 
 .btn-icon {
     padding: 0;
-}
-
-.ez-btn--add-translation {
-    .ez-icon {
-        margin-right: 0;
-    }
 }
 
 .ez-side-menu,
@@ -115,7 +113,7 @@
         color: $ibexa-black;
 
         .ez-icon {
-            fill: $ibexa-black;
+            stroke: $ibexa-black;
         }
     }
 }
@@ -136,7 +134,7 @@
         color: $ibexa-color-primary;
 
         .ez-icon {
-            fill: $ibexa-color-primary;
+            stroke: $ibexa-color-primary;
         }
     }
 }
@@ -244,7 +242,7 @@
     border-color: $ibexa-white;
 
     .ez-icon {
-        fill: $ibexa-color-primary;
+        stroke: $ibexa-color-primary;
     }
 }
 

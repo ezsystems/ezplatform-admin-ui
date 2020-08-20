@@ -33,7 +33,8 @@
             outline: none;  
             
             .ez-icon {
-                fill: $ibexa-white;
+                stroke: $ibexa-white;
+                stroke: $ibexa-white;
             }
         }
 
@@ -93,7 +94,8 @@
         .ez-icon {
             width: calculateRem(32px);
             height: calculateRem(32px);
-            fill: $ibexa-black;
+            stroke: $ibexa-black;
+            stroke: $ibexa-black;
         }
     }
 }

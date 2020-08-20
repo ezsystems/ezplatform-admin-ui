@@ -14,7 +14,7 @@
     &:not(.c-view-switcher-btn--active):hover,
     &:not(.c-view-switcher-btn--active):focus {
         .ez-icon {
-            fill: $ez-color-base-light;
+            stroke: $ez-color-base-light;
         }
     }
 
