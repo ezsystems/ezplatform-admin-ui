@@ -23,7 +23,7 @@
 
         &-btns {
             background-color: $ez-white;
-            border: calculateRem(2px) solid $ez-color-secondary;
+            border: calculateRem(2px) solid $ibexa-color-primary;
             border-radius: calculateRem(5px);
             display: flex;
             padding: calculateRem(2px);
@@ -35,7 +35,7 @@
             padding: calculateRem(6px) calculateRem(8px);
 
             .ez-icon {
-                stroke: $ez-color-secondary;
+                stroke: $ibexa-color-primary;
             }
         }
     }
@@ -59,10 +59,10 @@
 
         & > .ez-custom-tag__header {
             .ez-custom-tag__header-btn--attributes {
-                background-color: $ez-color-secondary;
+                background-color: $ibexa-color-primary;
 
                 .ez-icon {
-                    stroke: $ez-white;
+                    stroke: $ibexa-white;
                 }
             }
         }

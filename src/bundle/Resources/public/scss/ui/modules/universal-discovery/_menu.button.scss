@@ -1,20 +1,20 @@
 .c-menu-button {
     border: none;
-    color: $ez-color-base-medium;
+    color: $ibexa-color-base-medium;
     border-radius: $ibexa-border-radius;
     padding: 0 calculateRem(14px);
     display: flex;
 
     .ez-icon {
-        stroke: $ez-color-base-medium;
+        stroke: $ibexa-color-base-medium;
     }
 
     &--selected {
-        background-color: $ez-color-base-medium;
-        color: $ez-white;
+        background-color: $ibexa-color-base-medium;
+        color: $ibexa-white;
 
         .ez-icon {
-            stroke: $ez-white;
+            stroke: $ibexa-white;
         }
     }
 }

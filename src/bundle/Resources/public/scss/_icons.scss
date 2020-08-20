@@ -4,10 +4,9 @@
     stroke: $ibexa-black;
     fill: $ibexa-black;
     transition: all 0.3s $ez-admin-transition;
-
     stroke-width: 1.5; 
-    stroke-linecap: "round"; 
-    stroke-linejoin: "round";
+    stroke-linecap: round; 
+    stroke-linejoin: round;
     
 
     &--small {

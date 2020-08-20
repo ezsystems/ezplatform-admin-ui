@@ -79,7 +79,7 @@
 
         &--edit:hover,
         &--edit:focus {
-            stroke: $ez-color-primary-hover;
+            stroke: $ibexa-color-primary;
         }
 
         &--delete {
@@ -88,7 +88,7 @@
 
         &--delete:hover,
         &--delete:focus {
-            stroke: $ez-color-danger-hover;
+            stroke: $ibexa-color-danger;
         }
 
         &--abort {
@@ -97,7 +97,7 @@
 
         &--abort:hover,
         &--abort:focus {
-            stroke: $ez-color-base-light-hover;
+            stroke: $ibexa-color-base-light;
         }
     }
 
