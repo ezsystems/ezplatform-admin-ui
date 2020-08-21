@@ -1,5 +1,5 @@
 .ez-pagination {
-    font-size: 16px;
+    font-size: calculateRem(16px);
 }
 
 .page-item.prev, .page-item.next {

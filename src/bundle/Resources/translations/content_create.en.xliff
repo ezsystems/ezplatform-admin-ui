@@ -33,6 +33,11 @@
                         <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>]]></target>
         <note>key: creating_details</note>
       </trans-unit>
+      <trans-unit id="9f3b1a45a0ce10a940f96bdba73bba914cc78bb6" resname="list.title">
+        <source>User Settings</source>
+        <target state="new">User Settings</target>
+        <note>key: list.title</note>
+      </trans-unit>
       <trans-unit id="32d50c07b2eacd6fa72742ff1c1f5963c26a251d" resname="new_content_item">
         <source>New %contentType%</source>
         <target state="new">New %contentType%</target>

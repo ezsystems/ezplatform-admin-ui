@@ -231,6 +231,11 @@
         <target state="new">Try fewer keywords. Reducing keywords result in more matches.</target>
         <note>key: search.fewer_keywords</note>
       </trans-unit>
+      <trans-unit id="bf24ae2c9083c948931ad1b4d4405b6261eb9bc6" resname="search.filters">
+        <source>Filters</source>
+        <target state="new">Filters</target>
+        <note>key: search.filters</note>
+      </trans-unit>
       <trans-unit id="5ab8b9fc463113f18cb6826034b6ef21342bb73d" resname="search.label">
         <source>Search</source>
         <target state="new">Search</target>
@@ -245,6 +250,11 @@
         <source>Sorry, no results were found for</source>
         <target state="new">Sorry, no results were found for</target>
         <note>key: search.no_results</note>
+      </trans-unit>
+      <trans-unit id="6ffbb9b14f98e94b8dda5418ef3910942b42c44e" resname="search.search">
+        <source>Search</source>
+        <target state="new">Search</target>
+        <note>key: search.search</note>
       </trans-unit>
       <trans-unit id="69f8e58ee01f604b377aaa638cabe3f245b45a73" resname="search.search_results">
         <source>Search results</source>
