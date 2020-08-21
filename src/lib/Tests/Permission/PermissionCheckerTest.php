@@ -168,6 +168,35 @@ class PermissionCheckerTest extends TestCase
         ];
     }
 
+    public function testGetRestrictionsIsNotCached(): void
+    {
+        $hasAccessA = [
+            [
+                'limitation' => new Limitation\SectionLimitation(['limitationValues' => [44]]),
+                'policies' => [new Policy()],
+            ],
+        ];
+
+        $hasAccessB = [
+            [
+                'limitation' => null,
+                'policies' => [
+                    new Policy(['limitations' => [new Limitation\ContentTypeLimitation(['limitationValues' => [2, 3]])]]),
+                ],
+            ],
+        ];
+
+        $this->assertEquals(
+            [44],
+            $this->permissionChecker->getRestrictions($hasAccessA, Limitation\SectionLimitation::class)
+        );
+
+        $this->assertEquals(
+            [2, 3],
+            $this->permissionChecker->getRestrictions($hasAccessB, Limitation\ContentTypeLimitation::class)
+        );
+    }
+
     /**
      * @param int $id
      *
