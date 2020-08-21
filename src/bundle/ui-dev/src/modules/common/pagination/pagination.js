@@ -81,6 +81,7 @@ const Pagination = ({ totalCount, itemsPerPage, proximity, activePageIndex, onPa
                 pageIndex={previousPage}
                 label={backLabel}
                 additionalClasses="prev"
+                buttonAdditionalClasses="ez-btn ez-btn--secondary"
                 disabled={isFirstPage || paginationDisabled}
                 onPageChange={onPageChange}
             />
@@ -89,6 +90,7 @@ const Pagination = ({ totalCount, itemsPerPage, proximity, activePageIndex, onPa
                 pageIndex={nextPage}
                 label={nextLabel}
                 additionalClasses="next"
+                buttonAdditionalClasses="ez-btn ez-btn--secondary"
                 disabled={isLastPage || paginationDisabled}
                 onPageChange={onPageChange}
             />

@@ -190,7 +190,7 @@
         &--edit {
             text-align: center;
             cursor: pointer;
-            color: $ez-white;
+            color: $ibexa-white;
             display: inline-block;
 
             .c-table-view-item__btn-inner {
@@ -215,30 +215,21 @@
 
     &__link {
         display: inline-block;
-        color: $ibexa-color-primary;
+        color: $ibexa-color-font-black;
         cursor: pointer;
         transition: color 0.3s $ez-admin-transition;
         text-decoration: none;
         
         &:hover,
         &:focus {
-            color: $ibexa-color-primary;
+            color: $ibexa-color-font-black;
             text-decoration: underline;
         }
     }
 
     &--active {
         .c-table-view-item__cell {
-            &:first-child {
-                border-left: calculateRem(1px) solid $ibexa-color-primary;
-            }
-
-            &:last-child {
-                border-right: calculateRem(1px) solid $ibexa-color-primary;
-            }
-    
-            border-top: calculateRem(1px) solid $ibexa-color-primary;
-            border-bottom: calculateRem(1px) solid $ibexa-color-primary;
+            background: $ibexa-color-base-light;
         }
     }
 }

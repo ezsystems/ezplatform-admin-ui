@@ -4,7 +4,7 @@
         flex-wrap: wrap;
         height: auto;
         min-height: calculateRem(38px);
-        padding: 0 calculateRem(8px) calculateRem(7px) calculateRem(8px);
+        padding: 0 calculateRem(8px) calculateRem(4px) calculateRem(4px);
 
         &.ez-data-source__taggify--focused {
             border-color: $ibexa-color-primary;
@@ -41,9 +41,11 @@
     }
 
     .taggify__btn--remove {
+        position: absolute;
+        right: 0;
         color: $ibexa-color-font;
         background: none;
         border: 0 none;
-        margin-left: calculateRem(6px);
+        
     }
 }

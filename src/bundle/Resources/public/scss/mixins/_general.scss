@@ -1,7 +1,7 @@
-@mixin container-box-shadow {
-    box-shadow: 0 0 calculateRem(7px) 0 rgba(0,0,0,0.2);
+@mixin container-box-shadow-right {
+    box-shadow: calculateRem(12px) 0 calculateRem(12px) calculateRem(-12px) rgba(34,34,34,0.25);
 }
 
-@mixin container-box-shadow-light {
-    box-shadow: 0 0 calculateRem(5px) 0 rgba(0,0,0,0.1);
+@mixin container-box-shadow-left {
+    box-shadow: calculateRem(-12px) 0 calculateRem(12px) calculateRem(-12px) rgba(34,34,34,0.25);
 }

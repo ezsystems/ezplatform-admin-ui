@@ -34,7 +34,7 @@
                         {{ 'pagination.viewing'|trans({
                             '%viewing%': reverse_relation_pager.currentPageResults|length,
                             '%total%': reverse_relation_pager.nbResults
-                        }, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                        }, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
                     </span>
             </div>
             <div class="row justify-content-center align-items-center ez-pagination__btn mb-4">
