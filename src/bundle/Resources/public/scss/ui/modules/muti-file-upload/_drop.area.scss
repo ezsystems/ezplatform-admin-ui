@@ -1,11 +1,21 @@
 .c-drop-area {
     &__message {
-        line-height: calculateRem(60px);
+        margin-bottom: calculateRem(24px);
 
         &--main {
             cursor: auto;
             font-size: calculateRem(16px);
         }
+
+        &--filesize {
+            color: $ibexa-color-font-pale;
+            font-size: calculateRem(14px);
+            margin-bottom: calculateRem(64px);
+        }
+    }
+
+    &__btn-select {
+        margin-bottom: calculateRem(16px);
     }
 
     &__input--hidden {

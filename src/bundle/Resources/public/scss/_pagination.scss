@@ -2,6 +2,15 @@
     font-size: calculateRem(16px);
 }
 
+.ez-pagination__spacing {
+    margin-top: calculateRem(40px);
+    margin-bottom: calculateRem(10px);
+}
+
+.ez-pagination__btn {
+    margin-bottom: calculateRem(16px);
+}
+
 .page-item.prev, .page-item.next {
     &.disabled .page-link {
         opacity: .3;

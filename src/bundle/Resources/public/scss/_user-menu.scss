@@ -7,32 +7,32 @@
         &__name-wrapper {
             display: flex;
             height: calculateRem(58px);
-            width: calculateRem(180px);
+            width: calculateRem(200px);
             padding: calculateRem(8px) calculateRem(24px) calculateRem(8px) calculateRem(8px);
             user-select: none;
             justify-content: flex-end;
+            transition: all $ez-admin-transition;
 
-            &:before,
-            &:after {
+            &:before {
                 content: '';
-                height: calculateRem(6px);
-                width: calculateRem(2px);
                 position: absolute;
                 top: 50%;
                 right: calculateRem(11px);
-                background-color: $ez-black;
-            }
-
-            &:before {
-                transform: translate(3px, -50%) rotate(-135deg);
-            }
-
-            &:after {
-                transform: translate(-3px, -50%) rotate(135deg);
+                width: 0; 
+                height: 0; 
+                border-left: calculateRem(5px) solid transparent;
+                border-right: calculateRem(5px) solid transparent;
+                
+                border-top: calculateRem(5px) solid $ibexa-color-base-dark;
             }
 
             &--active {
-                background-color: $ez-white;
+                background-color: $ibexa-white;
+                box-shadow: 0 calculateRem(2px) calculateRem(6px) rgba(0, 0, 0, 0.15);
+
+                &:before {
+                    transform: rotate(180deg);
+                }
             }
 
             transition: background-color 0.3s $ez-admin-transition;
@@ -42,7 +42,7 @@
             display: flex;
             align-items: center;
             text-align: right;
-            font-size: calculateRem(12px);
+            font-size: calculateRem(14px);
         }
 
         &__items {
@@ -52,7 +52,7 @@
             padding-top: calculateRem(6px);
             right: 0;
             background-color: $ez-white;
-            box-shadow: 0 calculateRem(2px) calculateRem(6px) rgba(0, 0, 0, 0.15);
+            box-shadow: 0 calculateRem(5px) calculateRem(6px) rgba(0, 0, 0, 0.15);
             transform-origin: top center;
             white-space: nowrap;
 
@@ -75,6 +75,10 @@
                     color: $ibexa-color-font;
                     text-decoration: none;
                 }
+            }
+
+            &:first-child {
+                padding-top: calculateRem(10px);
             }
 
             &:last-child {

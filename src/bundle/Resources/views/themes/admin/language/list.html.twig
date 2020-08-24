@@ -114,7 +114,7 @@
         {{ form_end(form_languages_delete) }}
 
         {% if pager.haveToPaginate %}
-            <div class="row justify-content-center align-items-center mb-2">
+            <div class="row justify-content-center align-items-center ez-pagination__spacing">
                 <span class="ez-pagination__text">
                     {{ 'language.viewing'|trans({
                         '%viewing%': pager.currentPageResults|length,

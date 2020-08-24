@@ -77,8 +77,9 @@
         &--name {
             position: sticky;
             z-index: 1;
-            left: calculateRem(74px);
+            left: calculateRem(78px);
             padding-left: 0;
+            padding-right: calculateRem(5px);
             background: $ibexa-white;
         }
 
@@ -107,6 +108,13 @@
 
     &__priority-wrapper {
         position: relative;
+
+        &--focused {
+            .ez-input {
+                border-radius: $ibexa-border-radius;
+                border: 2px solid $ibexa-color-primary;
+            }
+        }
     }
 
     &__priority-actions {
@@ -114,9 +122,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        right: calculateRem(-52px);
-        top: calculateRem(10px);
-        width: calculateRem(60px);
+        right: calculateRem(-57px);
+        top: 0;
+        width: calculateRem(62px);
+        height: calculateRem(44px);
+        background: $ibexa-white;
     }
 
     &__priority-value {
@@ -227,8 +237,11 @@
     }
 
     &--active {
-        .c-table-view-item__cell {
-            background: $ibexa-color-base-light;
+        .c-table-view-item {
+            &__cell,
+            &__priority-actions  {
+                background: $ibexa-color-base-light;
+            }
         }
     }
 }

@@ -30,7 +30,7 @@
                     } %}
 
                     {% if draft_pager.haveToPaginate %}
-                        <div class="row justify-content-center align-items-center mb-2">
+                        <div class="row justify-content-center align-items-center ez-pagination__spacing">
                             <span class="ez-pagination__text">
                                 {{ 'pagination.viewing'|trans({ '%viewing%': draft_pager.currentPageResults|length, '%total%': draft_pager.nbResults }, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
                             </span>
