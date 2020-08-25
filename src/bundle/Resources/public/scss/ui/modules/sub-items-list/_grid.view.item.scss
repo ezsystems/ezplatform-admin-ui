@@ -9,7 +9,7 @@
     background: $ibexa-white;
     border: calculateRem(1px) solid rgba(0, 0, 0, 0.1);
     transition: all $ez-admin-transition;
-    
+
     &:hover,
     &:focus {
         color: $ibexa-color-primary;
@@ -55,7 +55,7 @@
     &__title {
         display: flex;
         align-items: center;
-        width: 248px;
+        width: calculateRem(248px);
         height: calculateRem(54px);
         font-size: calculateRem(16px);
         margin: calculateRem(5px) calculateRem(8px);
