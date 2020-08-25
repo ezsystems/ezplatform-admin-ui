@@ -23,12 +23,12 @@
 {% block form %}
     {{ form_start(form) }}
 
-        <section class="container mt-4 px-5">
-            <div class="card ez-card">
+        <section>
+            <div class="card ez-card ez-card--light">
                 <div class="ez-card__header ez-card__header--secondary">
                     {{ 'role_assignment.view.add.panel.users_and_groups.title'|trans|desc('Users and Groups') }}
                 </div>
-                <div class="card-body">
+                <div class="card-body ez-card__body">
                     {{ form_label(form.users) }}
                     {{ form_errors(form.users) }}
                     {{ form_widget(form.users) }}
@@ -92,24 +92,24 @@
             </div>
         </section>
 
-        <section class="container mt-4 px-5">
-            <div class="card ez-card">
+        <section>
+            <div class="card ez-card ez-card--light">
                 <div class="ez-card__header ez-card__header--secondary">
                     {{ 'role_assignment.view.add.panel.limitations.title'|trans|desc('Limitations') }}
                 </div>
-                <div class="card-body ez-limitations">
-                    {{ form_widget(form.limitation_type.none, {'label': 'limitation_type.none'|trans|desc('No Limitations'), 'attr': {'class': 'ez-limitations__radio'}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
+                <div class="card-body ez-card__body ez-limitations">
+                    {{ form_widget(form.limitation_type.none, {'label': 'limitation_type.none'|trans|desc('No Limitations'), 'attr': {'class': 'ez-limitations__radio ez-input ez-input--radio'}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
                     <div class="ez-limitations__item">
                         {% if not form.limitation_type.section.vars.checked %}
                             {% set sections_attr = {'attr': {'disabled': 'disabled'}} %}
                         {% else %}
                             {% set sections_attr = {} %}
                         {% endif %}
-                        {{ form_widget(form.limitation_type.section, {'label': 'limitation_type.section'|trans|desc('Sections'), 'attr': {'class': 'ez-limitations__radio', 'data-disable-selector': '#' ~ form.sections.vars.id}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
+                        {{ form_widget(form.limitation_type.section, {'label': 'limitation_type.section'|trans|desc('Sections'), 'attr': {'class': 'ez-limitations__radio ez-input ez-input--radio', 'data-disable-selector': '#' ~ form.sections.vars.id}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
                         {{ form_widget(form.sections, sections_attr) }}
                     </div>
                     <div class="ez-limitations__item">
-                        {{ form_widget(form.limitation_type.location, {'label': 'limitation_type.subtree'|trans|desc('Subtree'), 'attr': {'class': 'ez-limitations__radio', 'data-disable-selector': '#role_assignment_create_locations_select_content'}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
+                        {{ form_widget(form.limitation_type.location, {'label': 'limitation_type.subtree'|trans|desc('Subtree'), 'attr': {'class': 'ez-limitations__radio ez-input ez-input--radio', 'data-disable-selector': '#role_assignment_create_locations_select_content'}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
                         {{ form_widget(form.locations) }}
                         <div class="ez-limitations__item-subtree">
                             <button id="role_assignment_create_locations_select_content" data-udw-config="{{ ez_udw_config('multiple', {}) }}" class="btn btn-secondary ez-btn--select-subtree"{% if not form.limitation_type.location.vars.checked %} disabled{% endif %}>

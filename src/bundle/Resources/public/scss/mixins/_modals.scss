@@ -12,6 +12,10 @@
     background: $ibexa-color-base-pale;
     font-size: calculateRem(16px);
     font-weight: bold;
+
+    .modal-title {
+        font-size: calculateRem(16px);
+    }
 }
 
 @mixin close-button() {
@@ -39,6 +43,7 @@
 }
 
 @mixin modal-footer() {
+    justify-content: flex-start;
     background: $ibexa-color-base-pale;
     padding: $modal-footer-padding;
 }

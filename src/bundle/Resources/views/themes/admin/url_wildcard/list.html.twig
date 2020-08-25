@@ -25,7 +25,7 @@
             <button
                 id="create-wildcards"
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-icon"
                 {% if not can_manage %}disabled{% endif %}
                 data-toggle="modal"
                 data-target="#{{ modal_create_data_target }}"
@@ -38,7 +38,7 @@
             <button
                 id="delete-wildcards"
                 type="button"
-                class="btn btn-danger"
+                class="btn btn-icon"
                 disabled
                 data-toggle="modal"
                 data-target="#{{ modal_delete_data_target }}"
@@ -91,7 +91,7 @@
                             <td class="ez-table__cell">
                                 {{ wildcard_types[url_wildcard.forward] }}
                             </td>
-                            <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                            <td class="ez-table__cell ez-table__cell--has-action-btns">
                                 {% if can_manage %}
                                     <a href="{{ edit_url }}" class="btn btn-icon mx-2" title="{{ 'url_wildcard.action.edit'|trans|desc('Edit URL wildcard') }}">
                                         <svg class="ez-icon ez-icon-edit">

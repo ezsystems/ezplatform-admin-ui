@@ -73,6 +73,11 @@
 
         .table &--has-action-btns {
             padding-right: calculateRem(20px);
+            text-align: right;
+
+            .btn {
+                margin: 0 calculateRem(5px);
+            }
         }
 
         .table &--has-text-info {

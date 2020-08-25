@@ -76,9 +76,9 @@
             <tbody>
             {% for role in pager.currentPageResults %}
                 <tr>
-                    <td class="ez-table__cell ez-table__cell--has-checkbox">
+                    <td class="">
                         {% if can_delete %}
-                            {{ form_widget(form_roles_delete.roles[role.id]) }}
+                            {{ form_widget(form_roles_delete.roles[role.id], { attr: { "class": "ez-input ez-input--checkbox" } }) }}
                         {% else %}
                             {% do form_roles_delete.roles.setRendered %}
                         {% endif %}
@@ -89,13 +89,13 @@
                         </a>
                     </td>
                     <td class="ez-table__cell">{{ role.id }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <td class="ez-table__cell ez-table__cell--has-action-btns">
                         {% if can_assign %}
                             <a
                                 title="{{ 'role.view.list.action.assign_to_users_or_groups'|trans|desc('Assign to Users/Groups') }}"
                                 href="{{ path('ezplatform.role_assignment.create', { roleId: role.id }) }}"
-                                class="btn btn-icon mx-3">
-                                <svg class="ez-icon ez-icon-relations ez-icon--secondary">
+                                class="btn btn-icon">
+                                <svg class="ez-icon ez-icon--primary">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-user"></use>
                                 </svg>
                             </a>
@@ -104,8 +104,8 @@
                             <a
                                 title="{{ 'role.view.list.action.copy'|trans|desc('Copy') }}"
                                 href="{{ path('ezplatform.role.copy', { roleId: role.id }) }}"
-                                class="btn btn-icon mx-2">
-                                <svg class="ez-icon ez-icon--copy">
+                                class="btn btn-icon">
+                                <svg class="ez-icon ez-icon--primary">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#copy"></use>
                                 </svg>
                             </a>
@@ -114,8 +114,8 @@
                             <a
                                 title="{{ 'role.view.list.action.edit'|trans|desc('Edit') }}"
                                 href="{{ path('ezplatform.role.update', { roleId: role.id }) }}"
-                                class="btn btn-icon mx-2">
-                                <svg class="ez-icon ez-icon-edit">
+                                class="btn btn-icon">
+                                <svg class="ez-icon ez-icon--primary">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                 </svg>
                             </a>

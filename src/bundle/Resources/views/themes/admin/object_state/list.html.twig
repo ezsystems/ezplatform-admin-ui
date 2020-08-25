@@ -75,7 +75,7 @@
                         <td class="ez-table__cell"><a href="{{ path( 'ezplatform.object_state.state.view', {'objectStateId': object_state.id} ) }}">{{ object_state.name }}</a></td>
                         <td class="ez-table__cell">{{ object_state.identifier }}</td>
                         <td class="ez-table__cell">{{ object_state.id }}</td>
-                        <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                        <td class="ez-table__cell ez-table__cell--has-action-btns">
                             {% if can_administrate %}
                                 <a
                                     title="{{ 'object_state.view.list.action.edit'|trans|desc('Edit') }}"
