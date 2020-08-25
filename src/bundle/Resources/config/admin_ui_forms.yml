@@ -3,3 +3,6 @@ system:
         admin_ui_forms:
             content_edit_form_templates:
                 - { template: '@ezdesign/content/form_fields.html.twig', priority: 0 }
+
+        field_templates:
+            - { template: '@ezdesign/fieldtypes/preview/content_fields.html.twig', priority: 20 }

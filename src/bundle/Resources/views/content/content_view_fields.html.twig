@@ -22,9 +22,7 @@
                                         {% if ez_is_field_empty(content, fieldDefinition.identifier) and fieldDefinition.fieldTypeIdentifier is not same as('ezboolean') %}
                                             <em>{{ 'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty') }}</em>
                                         {% else %}
-                                            {{ ez_render_field(content, fieldDefinition.identifier, {
-                                                'template': '@ezdesign/fieldtypes/preview/content_fields.html.twig'
-                                            }) }}
+                                            {{ ez_render_field(content, fieldDefinition.identifier) }}
                                         {% endif %}
                                     </div>
                                 </div>
