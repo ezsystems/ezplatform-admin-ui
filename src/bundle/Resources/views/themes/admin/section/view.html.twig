@@ -56,7 +56,7 @@
             <td class="ez-table__cell">{{ section.name }}</td>
             <td class="ez-table__cell">{{ section.identifier }}</td>
             <td class="ez-table__cell">{{ section.id }}</td>
-            <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+            <td class="ez-table__cell ez-table__cell--has-action-btns">
                 {% if can_edit %}
                     <a
                         href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"

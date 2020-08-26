@@ -31,12 +31,12 @@
 {% block form %}
     {{ form_start(form) }}
 
-    <section class="container mt-4 px-5">
-        <div class="card ez-card">
+    <section>
+        <div class="card ez-card ez-card--light">
             <div class="ez-card__header ez-card__header--secondary">
                 {{ 'content_type.view.create.global_properties'|trans|desc('Global properties') }}
             </div>
-            <div class="card-body">
+            <div class="card-body ez-card__body">
                 {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
                 {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.description, {'label_attr': {'class': 'ez-label'}}) }}
@@ -50,8 +50,8 @@
         </div>
     </section>
 
-    <section class="container mt-4 px-5">
-        <div class="card ez-card">
+    <section>
+        <div class="card ez-card ez-card--light">
             <div class="ez-card__header ez-card__header--secondary d-flex justify-content-between">
                 <div class="p-3">
                     {{ 'content_type.view.create.content_field_definitions'|trans|desc('Field definitions') }}
@@ -64,7 +64,7 @@
                     {{ form_widget(form.removeFieldDefinition, {'attr': {'class': 'btn btn-danger'}}) }}
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body ez-card__body">
                 {% set language_code = content_type.mainLanguageCode %}
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}

@@ -5,28 +5,25 @@
     }
 
     & &__btn--close {
-        position: absolute;
-        top: calculateRem(16px);
-        right: calculateRem(16px);
-        z-index: 2;
-        width: calculateRem(56px);
-        height: calculateRem(40px);
-        padding: calculateRem(8px) calculateRem(16px);
+        @include close-button();
     }
 
     &__header {
-        display: block;
-        background: #dbdbdb;
-        padding: calculateRem(8px) calculateRem(16px);
+        @include modal-header();
     }
 
     &__body {
-        padding: calculateRem(16px) 0 0;
+        padding: calculateRem(16px) 0;
 
         .modal-body {
             padding: 0;
         }
     }
+
+    &__footer {
+        @include modal-footer();
+    }
+
 
     &__headline {
         max-width: calc(100% - #{calculateRem(56px)});
@@ -51,19 +48,11 @@
     &--no-header {
         .c-popup {
             &__header {
-                border-bottom: none;
-                padding: calculateRem(15px) calculateRem(15px) 0 calculateRem(15px);
-                position: relative;
-                min-height: 2.5rem;
-                background: #ededed;
+                background: $ibexa-white;
             }
-
-            &__btn--close {
-                height: calculateRem(56px);
-            }
-
+            
             &__footer {
-                border-top: none;
+                background: $ibexa-white;
             }
         }
     }

@@ -1,257 +1,31 @@
 .ez-modal {
-    .modal-header {
-        background-color: $ibexa-color-base-pale;
+    .modal-dialog {
+        @include modal-main();
+    }
 
-        .modal-title {
-            font-size: calculateRem(16px);
-        }
+    .modal-header {
+        @include modal-header();
 
         .close {
-            cursor: pointer;
-        }
-    }
-}
-
-.ez-modal--send-to-trash,
-.ez-modal--trash-container,
-.ez-modal--trash-with-asset {
-    .modal-dialog {
-        background-color: $ibexa-white;
-        border-radius: calculateRem(4px);
-    }
-
-    .modal-header {
-        border-bottom: none;
-        padding: calculateRem(15px) calculateRem(15px) 0 calculateRem(15px);
-        position: relative;
-        min-height: calculateRem(40px);
-    }
-
-    .modal-body {
-        padding: calculateRem(15px) calculateRem(30px);
-
-        .ez-modal__trash-option {
-            padding: calculateRem(20px) calculateRem(20px) 0;
-
-            &--disabled {
-                cursor: not-allowed;
-                opacity: 0.3;
-            }
-
-            .form-check {
-                margin-left: calculateRem(20px);
-
-                .form-check-label {
-                    color: inherit;
-                }
-            }
-        }
-
-        .ez-modal__option-label,
-        .ez-modal__option-description {
-            margin-bottom: 0;
-        }
-
-        .ez-modal-body__main,
-        .ez-modal-body__explanation {
-            margin-bottom: 0;
-            color: $ibexa-black;
-            white-space: initial;
+            @include close-button();
         }
     }
 
     .modal-footer {
-        border-top: none;
-
-        .btn {
-            padding: calculateRem(6px) calculateRem(12px);
-            font-size: calculateRem(16px);
-            border-radius: calculateRem(4px);
-            line-height: 1.5;
-        }
+        @include modal-footer();
     }
-}
 
-.ez-modal--trash-container {
-    .ez-toggle-btn-state-checkbox {
-        margin-left: calculateRem(30px);
-    }
-}
-
-.ez-modal--trash-with-asset {
-    .ez-trash-with-asset-checkbox-list {
-        margin-left: calculateRem(30px);
-    }
-}
-
-.ez-trash-list-view {
-    .ez-modal--send-to-trash {
-        .modal-body {
-            .ez-modal-body__main {
-                font-weight: 700;
-            }
-
-            .ez-modal-body__explanation {
-                font-size: calculateRem(15px);
-            }
-        }
-    }
-}
-.ez-modal--custom-url-alias,
-.ez-modal--url-wildcards {
-    width: 100%;
-
-    &.modal {
+    &--wide {
         .modal-dialog {
-            max-width: initial;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            max-width: calculateRem(800px); 
+            width: calculateRem(800px);       
         }
     }
 
-    .modal-header {
-        .close {
-            padding-top: calculateRem(20px);
+    &--notice {
+        .modal-header,
+        .modal-footer {
+            background: $ibexa-white;
         }
-    }
-
-    .modal-body {
-        padding: calculateRem(32px);
-    }
-
-    &, .ez-modal {
-        &__label {
-            font-size: calculateRem(14px);
-            font-weight: 700;
-            display: block;
-            margin-top: calculateRem(24px);
-
-            @include label-required();
-        }
-
-        &__info-text {
-            font-size: calculateRem(14px);
-        }
-    }
-}
-
-.ez-modal--url-wildcards.modal {
-    .modal-dialog {
-        max-width: calculateRem(580px);
-    }
-}
-
-.ez-modal--select-modified-range,
-.ez-modal--select-created-range {
-    .modal-dialog {
-        border-radius: calculateRem(4px);
-        background-color: $ibexa-white;
-    }
-
-    .modal-header {
-        border-bottom: none;
-
-        .modal-title {
-            font-size: calculateRem(24px);
-        }
-
-        .close {
-            margin-top: calculateRem(-9px);
-        }
-    }
-
-    .modal-body {
-        display: flex;
-        padding: calculateRem(32px);
-        justify-content: space-between;
-    }
-
-    .modal-footer {
-        border-top: none;
-        justify-content: center;
-    }
-}
-
-.ez-modal--content-hide-confirmation {
-    .modal-header {
-        border-bottom: none;
-    }
-}
-
-.ez-modal--version-draft-conflict {
-    .modal-body {
-        .ez-modal-body__main {
-            margin-bottom: calculateRem(24px);
-
-            .ez-modal-body__main-content {
-                margin-bottom: 0;
-            }
-        }
-
-        .ez-table-header,
-        .ez-table__draft-conflict {
-            margin-bottom: 0;
-        }
-    }
-}
-
-.ez-modal--bulk-action-failed {
-    .modal-dialog {
-        max-width: calculateRem(800px);
-    }
-
-    .modal-header {
-        border-bottom: none;
-
-        .modal-title {
-            font-size: calculateRem(24px);
-        }
-
-        .close {
-            margin-top: calculateRem(-9px);
-        }
-    }
-
-    .modal-body {
-        padding: calculateRem(32px);
-        background-color: $ibexa-white;
-        border-radius: 0 0 calculateRem(4px) calculateRem(4px);
-
-        .ez-modal-body__main {
-            margin-bottom: calculateRem(24px);
-
-            .ez-modal-body__main-content {
-                margin-bottom: 0;
-            }
-        }
-
-        .ez-table-header,
-        .ez-table__draft-conflict {
-            margin-bottom: 0;
-        }
-
-        .form-check {
-            margin-bottom: 0;
-            margin-left: calculateRem(50px);
-        }
-    }
-
-    .modal-footer {
-        justify-content: center;
-    }
-}
-
-.ez-modal--content-hide-confirmation {
-    .modal-body {
-        .ez-modal-body__main {
-            padding: 0 calculateRem(16px);
-        }
-    }
-}
-
-.ez-modal--trash-location {
-    .modal-dialog {
-        max-width: calculateRem(800px);
     }
 }

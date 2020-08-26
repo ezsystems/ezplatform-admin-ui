@@ -22,9 +22,9 @@
 {% block form %}
     {{ form_start(form) }}
 
-    <section class="container mt-4 px-5">
-        <div class="card ez-card">
-            <div class="card-body">
+    <section>
+        <div class="card ez-card ez-card--light">
+            <div class="card-body ez-card__body">
                 {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
             </div>
         </div>

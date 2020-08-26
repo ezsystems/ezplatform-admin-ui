@@ -24,7 +24,7 @@
             {% endfor %}
         </td>
     {% endif %}
-    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+    <td class="ez-table__cell ez-table__cell--has-action-btns">
         {% if row.mainLocationId is not null %}
             {% include '@ezdesign/ui/edit_translation_button.html.twig' with {
                 'contentId': row.contentId,
