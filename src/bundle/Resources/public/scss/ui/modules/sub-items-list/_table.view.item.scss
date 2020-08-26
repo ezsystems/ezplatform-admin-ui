@@ -112,7 +112,7 @@
         &--focused {
             .ez-input {
                 border-radius: $ibexa-border-radius;
-                border: 2px solid $ibexa-color-primary;
+                border: calculateRem(2px) solid $ibexa-color-primary;
             }
         }
     }
