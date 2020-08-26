@@ -38,9 +38,6 @@ class PermissionChecker implements PermissionCheckerInterface
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
-    /** @var array */
-    private $flattenArrayOfLimitations;
-
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
@@ -239,7 +236,7 @@ class PermissionChecker implements PermissionCheckerInterface
             }
         }
 
-        return $this->flattenArrayOfLimitations[$currentUserId] = $limitations;
+        return $limitations;
     }
 
     /**
