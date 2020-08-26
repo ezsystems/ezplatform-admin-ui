@@ -1,50 +1,19 @@
 .ez-pagination {
-    font-size: $ez-pagination-font-size;
-
-    &__text {
-        font-size: .75rem;
-    }
-
-    &__btn {
-        font-size: 1rem;
-    }
-
-    &__spacing {
-        margin-top: -2rem;
-    }
+    font-size: calculateRem(16px);
 }
 
-.page-item {
-    &:first-child:not(.disabled), &:last-child:not(.disabled) {
-        .page-link {
-            background-color: $ez-color-secondary;
-        }
-    }
+.ez-pagination__spacing {
+    margin-top: calculateRem(40px);
+    margin-bottom: calculateRem(10px);
+}
 
-    &:first-child, &:last-child {
-        .page-link {
-            border-radius: $ez-pagination-border-radius;
-            color: $ez-white;
-        }
-    }
-
-    &.active .page-link {
-        z-index: 0;
-        font-weight: bold;
-    }
+.ez-pagination__btn {
+    margin-bottom: calculateRem(16px);
 }
 
 .page-item.prev, .page-item.next {
     &.disabled .page-link {
-        color: $ez-white;
-        background-color: $ez-color-secondary;
-        border: $ez-color-secondary;
         opacity: .3;
         cursor: not-allowed;
     }
-}
-
-.page-link {
-    margin: $ez-pagination-margin;
-    border-radius: $ez-pagination-page-link-radius;
 }

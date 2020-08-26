@@ -70,7 +70,8 @@
 
     &__pagination-info {
         text-align: center;
+        margin-top: calculateRem(16px);
         padding: calculateRem(16px) 0;
-        font-size: calculateRem(12px);
+        font-size: calculateRem(16px);
     }
 }

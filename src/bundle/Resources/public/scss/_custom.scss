@@ -12,16 +12,19 @@ $ibexa-black: #131C26;
 $ibexa-color-primary: #DB0032;
 $ibexa-color-primary-pale: #F3E4E7;
 $ibexa-color-primary-light: #E75476;
+$ibexa-color-deep-black: #222222;
 
 $ibexa-color-base: #E0E0E8;
 $ibexa-color-base-pale: #F5F5F5;
 $ibexa-color-base-light: #F7F7F9;
 $ibexa-color-base-medium: #ECECF1;
 $ibexa-color-base-dark: #878B90;
-$ibexa-color-base-deep-dark: #131C26;
+$ibexa-color-base-deep:#656565;
+$ibexa-color-base-black: #131C26;
 
 $ibexa-color-font: #131C26;
 $ibexa-color-font-pale: #878B90;
+$ibexa-color-font-black: #222222;
 $ibexa-color-border-light: #ECDFD1;
 
 $ibexa-color-positive: #00825C;
@@ -228,6 +231,7 @@ $input-focus-color: $ibexa-color-font-pale;
 $input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
 
 //Buttons
+$btn-line-height: calculateRem(16px);
 $btn-font-size: calculateRem(14px);
 $btn-padding-y: calculateRem(8px);
 $btn-padding-x: 1rem;
