@@ -14,6 +14,7 @@ use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
+use eZ\Publish\Core\Repository\LocationResolver\LocationResolver;
 use EzSystems\EzPlatformAdminUi\Pagination\Mapper\AbstractPagerContentToDataMapper;
 use Pagerfanta\Pagerfanta;
 
@@ -27,6 +28,9 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
 
     /** @var \eZ\Publish\API\Repository\UserService */
     protected $userService;
+
+    /** @var \eZ\Publish\Core\Repository\LocationResolver\LocationResolver */
+    protected $locationResolver;
 
     /**
      * @param \eZ\Publish\API\Repository\ContentService $contentService
@@ -42,11 +46,13 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
         UserService $userService,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
         TranslationHelper $translationHelper,
-        LanguageService $languageService
+        LanguageService $languageService,
+        LocationResolver $locationResolver
     ) {
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->userService = $userService;
+        $this->locationResolver = $locationResolver;
 
         parent::__construct(
             $contentTypeService,
@@ -85,6 +91,7 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
                 'initialLanguageCode' => $content->versionInfo->initialLanguageCode,
                 'content_is_user' => $this->isContentIsUser($content),
                 'available_enabled_translations' => $this->getAvailableTranslations($content, true),
+                'resolvedLocation' => $this->locationResolver->resolveLocation($contentInfo),
             ];
         }
 
