@@ -1,6 +1,6 @@
 .ez-extra-actions {
     $block: '.ez-extra-actions';
-    @include container-box-shadow;
+    @include container-box-shadow-left;
 
     background-color: $ibexa-white;
     padding: calculateRem(16px);

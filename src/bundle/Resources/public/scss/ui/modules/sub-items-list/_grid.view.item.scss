@@ -1,22 +1,20 @@
 .c-grid-view-item {
     position: relative;
     overflow: hidden;
-    border-radius: calculateRem(4px);
     margin-bottom: calculateRem(20px);
     cursor: pointer;
-    color: $ez-black;
+    color: $ibexa-color-font;
     text-decoration: none;
-    transition: background 0.3s $ez-admin-transition;
-    background: $ez-white;
+    transition: all 0.3s $ez-admin-transition;
+    background: $ibexa-white;
     border: calculateRem(1px) solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 calculateRem(2px) calculateRem(10px) calculateRem(0px) rgba(0, 0, 0, 0.15);
 
     &:hover,
     &:focus {
-        color: $ez-white;
+        color: $ibexa-color-primary;
+        font-weight: bold;
         text-decoration: none;
-        background: $ez-secondary-ground;
-        border: calculateRem(1px) solid $ez-secondary-ground;
+        border: calculateRem(1px) solid $ibexa-color-primary;
     }
 
     &__content-type {
@@ -26,7 +24,7 @@
         left: 0;
         width: calculateRem(30px);
         height: calculateRem(30px);
-        background: $ez-white;
+        background: $ibexa-white;
     }
 
     &__content-type .ez-icon {
@@ -40,14 +38,13 @@
         display: block;
         width: auto;
         height: auto;
-        max-width: calculateRem(165px);
-        max-height: calculateRem(165px);
+        max-width: calculateRem(248px);
+        max-height: calculateRem(248px);
     }
 
     &__image-wrapper {
-        height: calculateRem(165px);
-        width: calculateRem(165px);
-        border-radius: calculateRem(4px) calculateRem(4px) 0 0;
+        height: calculateRem(248px);
+        width: calculateRem(248px);
         background: $ibexa-color-base-light;
         display: flex;
         align-items: center;
@@ -55,13 +52,11 @@
     }
 
     &__title {
-        height: calculateRem(33px);
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        line-height: calculateRem(15px);
-        font-size: calculateRem(12px);
-        margin: calculateRem(8px) calculateRem(5px);
+        display: flex;
+        align-items: center;
+        width: calculateRem(248px);
+        height: calculateRem(54px);
+        font-size: calculateRem(16px);
+        margin: calculateRem(5px) calculateRem(8px);
     }
 }

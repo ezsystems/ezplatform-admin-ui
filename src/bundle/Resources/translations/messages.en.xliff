@@ -51,6 +51,11 @@
         <target state="new">Reset your password</target>
         <note>key: authentication.reset_your_password</note>
       </trans-unit>
+      <trans-unit id="daab336a9cb12d2d04146c55228268227cf1017a" resname="authentication.sign_in">
+        <source>Sign in</source>
+        <target state="new">Sign in</target>
+        <note>key: authentication.sign_in</note>
+      </trans-unit>
       <trans-unit id="8785f4abdfdf72fe9001fe0553c6e3a582cfcc08" resname="authentication.submit">
         <source>Login</source>
         <target state="new">Login</target>
@@ -60,6 +65,11 @@
         <source>Username</source>
         <target state="new">Username</target>
         <note>key: authentication.username</note>
+      </trans-unit>
+      <trans-unit id="da372ec3b84bf86c7c894321765e6a8f2172e20b" resname="base.enter_credentials">
+        <source>Enter your login credentials below.</source>
+        <target state="new">Enter your login credentials below.</target>
+        <note>key: base.enter_credentials</note>
       </trans-unit>
       <trans-unit id="b1b04388859d233f757e4f6376af3fc317d4baa6" resname="base.footer_copyright">
         <source><![CDATA[Copyright &#169; IBEXA 1999-%current_year%]]></source>
