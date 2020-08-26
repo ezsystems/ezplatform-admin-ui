@@ -74,7 +74,7 @@
                             disabled
                             {% if language.enabled %}checked{% endif %}>
                     </td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <td class="ez-table__cell ez-table__cell--has-action-btns">
                         {% if can_administrate %}
                             <a
                                 href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"

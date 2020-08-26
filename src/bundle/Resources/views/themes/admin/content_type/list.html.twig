@@ -85,7 +85,7 @@
                 <td class="ez-table__cell">{{ content_type.identifier }}</td>
                 <td class="ez-table__cell">{{ content_type.id }}</td>
                 <td class="ez-table__cell">{{ content_type.modificationDate|ez_full_datetime }}</td>
-                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                <td class="ez-table__cell ez-table__cell--has-action-btns">
                     {% if can_update %}
                         {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-2') }}
                     {% endif %}

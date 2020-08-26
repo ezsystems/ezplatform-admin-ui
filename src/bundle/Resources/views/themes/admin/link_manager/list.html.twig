@@ -3,7 +3,7 @@
 {% trans_default_domain "linkmanager" %}
 
 {%- block content -%}
-    <section class="container mt-4">
+    <section class="container">
         {{ form_start(form, {'attr': {'class': 'form-inline justify-content-between'}}) }}
             <div class="input-group">
                 {{ form_widget(form.searchQuery, { attr: {
@@ -25,7 +25,7 @@
         {{ form_end(form) }}
     </section>
 
-    <section class="container mt-4">
+    <section class="container">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'url.list.title'|trans({ '%count%': urls.count })|desc('Links (%count%)') }}</div>
         </div>
@@ -57,7 +57,7 @@
                         {% endif %}
                     </td>
                     <td class="ez-table__cell">{{ url.modified|ez_full_datetime }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <td class="ez-table__cell ez-table__cell--has-action-btns">
                         {% if can_edit %}
                             <a href="{{ edit_url }}" class="btn btn-icon mx-2" title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
                                 <svg class="ez-icon ez-icon-edit">

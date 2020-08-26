@@ -838,11 +838,11 @@ export default class SubItemsModule extends Component {
 
         return (
             <Fragment>
-                <button onClick={this.closeBulkDeletePopup} type="button" className="btn btn-dark" data-dismiss="modal">
-                    {cancelLabel}
-                </button>
-                <button onClick={this.onBulkDeletePopupConfirm} type="button" className="btn btn-danger font-weight-bold btn--trigger">
+                <button onClick={this.onBulkDeletePopupConfirm} type="button" className="btn btn-primary btn--trigger">
                     {confirmLabel}
+                </button>
+                <button onClick={this.closeBulkDeletePopup} type="button" className="ez-btn ez-btn--no-border" data-dismiss="modal">
+                    {cancelLabel}
                 </button>
             </Fragment>
         );
@@ -854,11 +854,11 @@ export default class SubItemsModule extends Component {
 
         return (
             <Fragment>
-                <button onClick={this.closeBulkHidePopup} type="button" className="btn btn-dark" data-dismiss="modal">
-                    {cancelLabel}
-                </button>
-                <button onClick={this.onBulkHidePopupConfirm} type="button" className="btn btn-danger font-weight-bold btn--trigger">
+                <button onClick={this.onBulkHidePopupConfirm} type="button" className="btn btn-primary btn--trigger">
                     {confirmLabel}
+                </button>
+                <button onClick={this.closeBulkHidePopup} type="button" className="ez-btn ez-btn--no-border" data-dismiss="modal">
+                    {cancelLabel}
                 </button>
             </Fragment>
         );
@@ -870,11 +870,11 @@ export default class SubItemsModule extends Component {
 
         return (
             <Fragment>
-                <button onClick={this.closeBulkUnhidePopup} type="button" className="btn btn-dark" data-dismiss="modal">
-                    {cancelLabel}
-                </button>
-                <button onClick={this.onBulkUnhidePopupConfirm} type="button" className="btn btn-danger font-weight-bold btn--trigger">
+                <button onClick={this.onBulkUnhidePopupConfirm} type="button" className="btn btn-primary btn--trigger">
                     {confirmLabel}
+                </button>
+                <button onClick={this.closeBulkUnhidePopup} type="button" className="ez-btn ez-btn--no-border" data-dismiss="modal">
+                    {cancelLabel}
                 </button>
             </Fragment>
         );

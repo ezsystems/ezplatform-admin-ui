@@ -86,7 +86,7 @@
                     <tr>
                         <td class="ez-table__cell ez-table__cell--has-checkbox">
                             {% if can_administrate %}
-                                {{ form_widget(form_state_groups_delete.objectStateGroups[object_state_group.id]) }}
+                                {{ form_widget(form_state_groups_delete.objectStateGroups[object_state_group.id], { "attr": { "class": "ez-input ez-input--checkbox" } }) }}
                             {% else %}
                                 {% do form_state_groups_delete.objectStateGroups.setRendered %}
                             {% endif %}
@@ -94,7 +94,7 @@
                         <td class="ez-table__cell"><a href="{{ path( 'ezplatform.object_state.group.view', {'objectStateGroupId': object_state_group.id} ) }}">{{ object_state_group.name }}</a></td>
                         <td class="ez-table__cell">{{ object_state_group.identifier }}</td>
                         <td class="ez-table__cell">{{ object_state_group.id }}</td>
-                        <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                        <td class="ez-table__cell ez-table__cell--has-action-btns">
                             {% if can_administrate %}
                                 <a
                                     title="{{ 'object_state_group.view.list.action.edit'|trans|desc('Edit') }}"

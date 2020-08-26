@@ -93,7 +93,7 @@
                     </td>
                     <td class="ez-table__cell">{{ content_type_group.id }}</td>
                     <td class="ez-table__cell">{{ content_types_count[content_type_group.id] }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <td class="ez-table__cell ez-table__cell--has-action-btns">
                         {% if can_update %}
                             {% set edit_url = path('ezplatform.content_type_group.update', {
                                 contentTypeGroupId: content_type_group.id
