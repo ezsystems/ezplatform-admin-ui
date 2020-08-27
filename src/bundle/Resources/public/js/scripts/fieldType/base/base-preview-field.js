@@ -270,6 +270,8 @@
             window.addEventListener('drop', this.preventDefaultAction, false);
             window.addEventListener('dragover', this.preventDefaultAction, false);
 
+            this.fieldContainer.addEventListener('ez-show-preview', () => this.showPreview());
+
             this.initializeDropZone();
             this.initializePreview();
 

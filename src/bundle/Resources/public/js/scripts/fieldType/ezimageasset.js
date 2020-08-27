@@ -252,7 +252,5 @@
         previewField.init();
 
         eZ.addConfig('fieldTypeValidators', [validator], true);
-        eZ.addConfig('EzImageAssetPreviewField', EzImageAssetPreviewField);
-        eZ.addConfig('EzImageAssetFieldValidator', EzImageAssetFieldValidator);
     });
 })(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator, window.Routing);
