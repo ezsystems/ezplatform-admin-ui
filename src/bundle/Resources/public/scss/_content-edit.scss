@@ -36,6 +36,43 @@
         color: $ibexa-color-base-dark;
         border: none;
     }
+
+    &__autosave-wrapper {
+        font-size: calculateRem(14px);
+
+        &--not-saved {
+            .ez-content-edit-page-title {
+                &__autosave-failed,
+                &__autosave-last-saved {
+                    display: none;
+                }
+            }
+        }
+
+        &--saved {
+            .ez-content-edit-page-title {
+                &__autosave-failed {
+                    display: none;
+                }
+            }
+        }
+
+        &--failed {
+            .ez-content-edit-page-title {
+                &__autosave-info {
+                    display: none;
+                }
+
+                &__autosave-failed-marked {
+                    color: $ibexa-color-danger;
+                }
+            }
+
+            .ez-icon {
+                fill: $ibexa-color-danger;
+            }
+        }
+    }
 }
 
 .ez-content-item {

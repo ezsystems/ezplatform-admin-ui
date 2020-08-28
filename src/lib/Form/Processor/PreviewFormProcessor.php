@@ -165,10 +165,10 @@ class PreviewFormProcessor implements EventSubscriberInterface
     private function getContentEditUrl($data, string $languageCode): string
     {
         return $data->isNew()
-            ? $this->urlGenerator->generate('ezplatform.content.create_no_draft', [
+            ? $this->urlGenerator->generate('ezplatform.content.create.proxy', [
                 'parentLocationId' => $data->getLocationStructs()[0]->parentLocationId,
                 'contentTypeIdentifier' => $data->contentType->identifier,
-                'language' => $languageCode,
+                'languageCode' => $languageCode,
             ])
             : $this->urlGenerator->generate('ezplatform.content.draft.edit', [
                 'contentId' => $data->contentDraft->id,

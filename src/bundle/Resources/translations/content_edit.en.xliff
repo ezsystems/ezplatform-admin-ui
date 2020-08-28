@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="20aa73aab64b5a0de7eafb3f7e8f6a765199f873" resname="autosave">
+        <source>Autosave</source>
+        <target state="new">Autosave</target>
+        <note>key: autosave</note>
+      </trans-unit>
       <trans-unit id="cd6fb4cd7385ecdb31009da852c23fb5038b9c72" resname="content.draft_saved.success">
         <source>Content draft saved.</source>
         <target state="new">Content draft saved.</target>

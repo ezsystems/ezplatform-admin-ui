@@ -41,6 +41,36 @@
         <target state="new">My Preferences</target>
         <note>key: section.my_preferences</note>
       </trans-unit>
+      <trans-unit id="53b6d0de00a5f914e863bed8b805457da18742ac" resname="settings.autosave.value.description">
+        <source>Autosave draft every given period</source>
+        <target state="new">Autosave draft every given period</target>
+        <note>key: settings.autosave.value.description</note>
+      </trans-unit>
+      <trans-unit id="8d3d9c3a593c29c5ad69cf09b44cc423b27b1b64" resname="settings.autosave.value.disabled">
+        <source>disabled</source>
+        <target state="new">disabled</target>
+        <note>key: settings.autosave.value.disabled</note>
+      </trans-unit>
+      <trans-unit id="5f85d72d00abca8e47ea83a67c9577c3cdb454b8" resname="settings.autosave.value.enabled">
+        <source>enabled</source>
+        <target state="new">enabled</target>
+        <note>key: settings.autosave.value.enabled</note>
+      </trans-unit>
+      <trans-unit id="6e582329e8e54377b58d547389fda8ac2dd2cf5c" resname="settings.autosave.value.title">
+        <source>Autosave draft</source>
+        <target state="new">Autosave draft</target>
+        <note>key: settings.autosave.value.title</note>
+      </trans-unit>
+      <trans-unit id="16b6d2224d9bf8a8ce12e0540d3528adc39315a0" resname="settings.autosave_interval.value.description">
+        <source>Seconds till next draft autosave</source>
+        <target state="new">Seconds till next draft autosave</target>
+        <note>key: settings.autosave_interval.value.description</note>
+      </trans-unit>
+      <trans-unit id="870ccdccf629e90b1100e2422684918accc5c4c1" resname="settings.autosave_interval.value.title">
+        <source>Autosave interval</source>
+        <target state="new">Autosave interval</target>
+        <note>key: settings.autosave_interval.value.title</note>
+      </trans-unit>
       <trans-unit id="befc3e49a7bee4547f8c720a0fbb9d03d0d3e265" resname="settings.datetime_format.preview_label">
         <source>Date and Time will be displayed in this format:</source>
         <target state="new">Date and Time will be displayed in this format:</target>

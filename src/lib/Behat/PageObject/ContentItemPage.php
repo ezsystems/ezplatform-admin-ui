@@ -66,7 +66,7 @@ class ContentItemPage extends Page
 
         ElementFactory::createElement($this->context, ContentTypePicker::ELEMENT_NAME)->select($contentTypeName);
 
-        $contentUpdatePage = PageObjectFactory::createPage($this->context, ContentUpdateItemPage::PAGE_NAME, $contentTypeName);
+        $contentUpdatePage = PageObjectFactory::createPage($this->context, ContentUpdateItemPage::PAGE_NAME, '');
         $contentUpdatePage->verifyIsLoaded();
 
         return $contentUpdatePage;

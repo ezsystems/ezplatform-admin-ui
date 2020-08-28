@@ -47,6 +47,10 @@ class ContentUpdateItemPage extends Page
 
     public function verifyTitle(): void
     {
+        if ($this->pageTitle === '') {
+            return;
+        }
+
         Assert::assertStringEndsWith(
             $this->pageTitle,
             $this->getPageTitle(),

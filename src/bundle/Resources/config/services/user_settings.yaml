@@ -10,3 +10,13 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+
+    EzSystems\EzPlatformAdminUi\UserSetting\Autosave:
+        tags:
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: autosave, priority: 0 }
+            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: autosave }
+
+    EzSystems\EzPlatformAdminUi\UserSetting\AutosaveInterval:
+        tags:
+            - { name: ezplatform.admin_ui.user_setting.value, identifier: autosave_interval, priority: 0 }
+            - { name: ezplatform.admin_ui.user_setting.form_mapper, identifier: autosave_interval }

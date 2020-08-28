@@ -87,6 +87,10 @@ services:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'dateFormat' }
 
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\Autosave:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'autosave' }
+
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\PathStringExtension: ~
 
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ContentTypeIconExtension: ~

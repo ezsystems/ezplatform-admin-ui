@@ -30,6 +30,7 @@ imports:
     - { resource: services/events.yaml }
     - { resource: services/twig.yaml }
     - { resource: services/on_the_fly.yaml }
+    - { resource: services/autosave.yaml }
 
 services:
     _defaults:
