@@ -42,6 +42,11 @@
     }
 }
 
+@mixin modal-body() {
+    background: $ibexa-white;
+    padding: calculateRem(24px);
+}
+
 @mixin modal-footer() {
     justify-content: flex-start;
     background: $ibexa-color-base-pale;

@@ -1,17 +1,8 @@
 .c-udw-view-switcher {
-    border: calculateRem(1px) solid $ibexa-color-font-pale;
-    border-radius: $ibexa-border-radius;
-    display: flex;
-    margin-right: calculateRem(10px);
+    @include toggler-wrapper();
 
     .c-menu-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: calculateRem(32px);
-        height: calculateRem(32px);
-        padding: 0;
-        border-radius: 0;
+        @include toggler-icon-btn();
     }
 
     &--disabled {

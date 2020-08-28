@@ -6,9 +6,17 @@
     .modal-header {
         @include modal-header();
 
+        .modal-title {
+            margin-right: calculateRem(30px);
+        }
+
         .close {
             @include close-button();
         }
+    }
+
+    .modal-body {
+        @include modal-body();
     }
 
     .modal-footer {

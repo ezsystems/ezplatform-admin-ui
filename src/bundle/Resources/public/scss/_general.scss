@@ -178,4 +178,8 @@ select {
 .ez-container {
     padding: calculateRem(16px);
     background: $ibexa-white;
+
+    &--thin {
+        max-width: calculateRem(1248px);
+    }
 }
