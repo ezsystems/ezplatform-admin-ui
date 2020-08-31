@@ -14,8 +14,8 @@
                 <p>{{ 'language.modal.message'|trans|desc('Do you want to delete the language(s)?') }}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">{{ 'language.form.cancel'|trans|desc('Cancel') }}</button>
-                {{ form_widget(deleteForm.delete, { 'attr': {'class': 'btn btn-danger'} }) }}
+                {{ form_widget(deleteForm.delete, { 'attr': {'class': 'btn btn-primary'} }) }}
+                <button type="button" class="ez-btn ez-btn--no-border" data-dismiss="modal">{{ 'language.form.cancel'|trans|desc('Cancel') }}</button>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@
         background-color: $ibexa-white;
         color: $ibexa-black;
         border-radius: $ibexa-border-radius $ibexa-border-radius 0 0;
-        padding: calculateRem(8px) calculateRem(12px);
+        padding: calculateRem(8px);
 
         &--secondary {
             color: $ibexa-color-primary;
@@ -72,6 +72,13 @@
 
     &--light {
         background: $ibexa-white;
+    }
+
+    &--more-space {
+        .ez-card__body {
+            padding-left: calculateRem(16px);
+            padding-right: calculateRem(16px);
+        }
     }
 }
 

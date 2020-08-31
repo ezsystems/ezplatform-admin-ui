@@ -23,8 +23,8 @@
 {% block form %}
     {{ form_start(form) }}
 
-    <section class="container mt-4 px-5">
-        <div class="card ez-card">
+    <section class="container ez-container">
+        <div class="card ez-card ez-card--light">
             <div class="card-body">
                 {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}

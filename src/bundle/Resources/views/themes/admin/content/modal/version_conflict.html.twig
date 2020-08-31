@@ -31,13 +31,12 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    {{ 'version.conflict.form.cancel'|trans|desc('Cancel') }}
-                </button>
-                <a id="edit-conflicted-draft" class="btn btn-primary"
-                   href="#">
+                <a id="edit-conflicted-draft" class="btn btn-primary" href="#">
                     {{ 'version.conflict.form.continue'|trans|desc('Continue') }}
                 </a>
+                <button type="button" class="ez-btn ez-btn--no-border" data-dismiss="modal">
+                    {{ 'version.conflict.form.cancel'|trans|desc('Cancel') }}
+                </button>
             </div>
         </div>
     </div>

@@ -37,10 +37,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">
+                {{ form_widget(form.add, {'attr': {'class': 'btn btn-primary', 'disabled': 'disabled'}}) }}
+                <button type="button" class="ez-btn ez-btn--no-border" data-dismiss="modal">
                     {{ 'tab.urls.add.cancel'|trans|desc('Cancel') }}
                 </button>
-                {{ form_widget(form.add, {'attr': {'class': 'btn btn-primary font-weight-bold', 'disabled': 'disabled'}}) }}
             </div>
         </div>
         {{ form_end(form) }}

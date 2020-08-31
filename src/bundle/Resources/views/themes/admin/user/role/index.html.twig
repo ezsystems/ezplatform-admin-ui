@@ -17,38 +17,47 @@
         title: 'role.view.view.title'|trans({'%identifier%': role.identifier})|desc('Role "%identifier%"'),
         icon_name: 'roles'
     } %}
-
-    <ul class="nav nav-tabs ez-nav-tabs--role px-4 ez-tabs" role="tablist">
-        <li role="presentation" class="nav-item">
-            <a href="#policies" class="nav-link active" role="tab" data-toggle="tab">
-                {{ 'policy.view.list.title'|trans|desc('Policies') }}
-            </a>
-        </li>
-        <li role="presentation" class="nav-item">
-            <a href="#users-and-groups" class="nav-link" role="tab" data-toggle="tab">
-                {{ 'role_assignment.view.list.title.count'|trans({'%count%': assignments|length})|desc('Assignments (%count%)') }}
-            </a>
-        </li>
-    </ul>
 {% endblock %}
 
 {% block content %}
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="policies">
-            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\PolicyController::listAction', {
-                roleId: role.id,
-                policyPage: policy_page,
-                routeName: route_name
-            })) }}
-        </div>
-        <div role="tabpanel" class="tab-pane" id="users-and-groups">
-            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\RoleAssignmentController::listAction', {
-                roleId: role.id,
-                assignmentPage: assignment_page,
-                routeName: route_name
-            })) }}
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="ez-header">
+                <div class="container">
+                    <ul class="nav nav-tabs ez-nav-tabs--role ez-tabs" role="tablist">
+                        <li role="presentation" class="nav-item">
+                            <a href="#policies" class="nav-link active" role="tab" data-toggle="tab">
+                                {{ 'policy.view.list.title'|trans|desc('Policies') }}
+                            </a>
+                        </li>
+                        <li role="presentation" class="nav-item">
+                            <a href="#users-and-groups" class="nav-link" role="tab" data-toggle="tab">
+                                {{ 'role_assignment.view.list.title.count'|trans({'%count%': assignments|length})|desc('Assignments (%count%)') }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-content container ez-tab-content">
+                <div role="tabpanel" class="tab-pane active" id="policies">
+                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\PolicyController::listAction', {
+                        roleId: role.id,
+                        policyPage: policy_page,
+                        routeName: route_name
+                    })) }}
+                </div>
+                <div role="tabpanel" class="tab-pane" id="users-and-groups">
+                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\RoleAssignmentController::listAction', {
+                        roleId: role.id,
+                        assignmentPage: assignment_page,
+                        routeName: route_name
+                    })) }}
+                </div>
+            </div>
         </div>
     </div>
+    
 {% endblock %}
 
 {% block javascripts %}

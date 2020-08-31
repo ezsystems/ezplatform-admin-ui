@@ -1,4 +1,8 @@
 .ez-content-edit-page-title {
+    &--create-on-the-fly {
+        margin-left: calculateRem(55px);
+    }
+
     &__action {
         font-weight: bold;
     }

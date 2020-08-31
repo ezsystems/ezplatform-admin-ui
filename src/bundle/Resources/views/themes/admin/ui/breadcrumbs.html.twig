@@ -1,5 +1,5 @@
 {% if items is defined %}
-    <ol class="breadcrumb">
+    <ol class="breadcrumb {{ class is defined ? class }}">
         {% for item in items %}
             <li class="breadcrumb-item{% if loop.last %} active{% endif %}">
                 {% if not loop.last and item.url is defined %}

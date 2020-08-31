@@ -3,6 +3,10 @@
     flex-wrap: nowrap;
     margin-bottom: 0;
     
+    &--create-on-the-fly {
+        margin-left: calculateRem(55px);
+    }
+
     .breadcrumb-item {
         cursor: not-allowed;
         white-space: nowrap;

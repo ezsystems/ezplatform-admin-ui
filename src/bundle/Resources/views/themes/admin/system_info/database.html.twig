@@ -2,28 +2,27 @@
 
 <!-- Tab name: {{ 'tab.name.database'|trans|desc('Database') }} -->
 
-<table class="table ez-table--list">
-    <thead>
-        <tr>
-            <th class="ez-table__cell ez-table__cell--header" colspan="2">{{ 'database'|trans|desc('Database') }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ 'database.type'|trans|desc('Type') }}</td>
-            <td class="ez-table__cell">{{ info.type }}</td>
-        </tr>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ 'database.name'|trans|desc('Name') }}</td>
-            <td class="ez-table__cell">{{ info.name }}</td>
-        </tr>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ 'database.host'|trans|desc('Host') }}</td>
-            <td class="ez-table__cell">{{ info.host }}</td>
-        </tr>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ 'database.username'|trans|desc('Username') }}</td>
-            <td class="ez-table__cell">{{ info.username }}</td>
-        </tr>
-    </tbody>
-</table>
+<section class="ez-fieldgroup">
+    <h2 class="ez-fieldgroup__name">{{ 'database'|trans|desc('Database') }}</h2>
+    <div class="ez-fieldgroup__content">
+        <table class="table ez-table--list">
+            <tbody>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ 'database.type'|trans|desc('Type') }}</td>
+                    <td class="ez-table__cell">{{ info.type }}</td>
+                </tr>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ 'database.name'|trans|desc('Name') }}</td>
+                    <td class="ez-table__cell">{{ info.name }}</td>
+                </tr>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ 'database.host'|trans|desc('Host') }}</td>
+                    <td class="ez-table__cell">{{ info.host }}</td>
+                </tr>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ 'database.username'|trans|desc('Username') }}</td>
+                    <td class="ez-table__cell">{{ info.username }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

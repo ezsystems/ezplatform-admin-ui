@@ -2,17 +2,17 @@
     .ez-user-menu {
         &__name-wrapper {
             .n-pending-notifications {
+                position: relative;
+
                 &:before {
-                    content: attr(data-count);
-                    width: calculateRem(16px);
-                    height: calculateRem(16px);
+                    content: '';
+                    width: calculateRem(8px);
+                    height: calculateRem(8px);
                     border-radius: 50%;
-                    background: $ez-color-danger;
+                    background: $ibexa-color-primary;
                     position: absolute;
-                    vertical-align: middle;
-                    text-align: center;
-                    font-size: calculateRem(12px);
-                    color: $ez-white;
+                    top: calculateRem(18px);
+                    left: calculateRem(-15px);
                 }
             }
         }
@@ -21,20 +21,19 @@
             &--notifications {
                 position: relative;
 
-                &:before {
+                &:after {
                     content: attr(data-count);
                     position: absolute;
-                    left: calculateRem(20px);
+                    right: 20px;
                     top: 48%;
                     transform: translateY(-50%);
                     font-size: calculateRem(14px);
-                    font-weight: bold;
-                    color: $ez-black;
+                    color: $ibexa-black;
                 }
 
                 &:hover {
-                    &:before {
-                        color: $ez-black;
+                    &:after {
+                        color: $ibexa-color-font;
                     }
                 }
             }

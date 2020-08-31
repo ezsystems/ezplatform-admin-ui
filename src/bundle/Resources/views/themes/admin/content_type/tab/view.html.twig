@@ -103,7 +103,6 @@
                 <header class="ez-table-header">
                     <div class="ez-table-header__headline">{{ group|capitalize }}</div>
                 </header>
-
                 <table class="table ez-table">
                     <thead>
                     <tr>
@@ -115,7 +114,7 @@
                     <tbody>
                     {% for field_definition in field_definitions %}
                         <tr>
-                            <th class="ez-table__cell" scope="row">{{ field_definition.names[current_language] }}</th>
+                            <td class="ez-table__cell" scope="row">{{ field_definition.names[current_language] }}</td>
                             <td class="ez-table__cell">{{ field_definition.identifier }}</td>
                             <td class="ez-table__cell">{{ field_definition.fieldTypeIdentifier }}</td>
                         </tr>

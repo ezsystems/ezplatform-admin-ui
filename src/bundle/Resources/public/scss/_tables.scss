@@ -149,6 +149,10 @@
     &__tools {
         white-space: nowrap;
     }
+
+    &--bordered-bottom {
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
+    }
 }
 
 .ez-table-header.ground-base {
@@ -192,7 +196,7 @@
 
 .ez-table-no-content {
     margin: 0;
-    padding: 0 calculateRem(24px) calculateRem(48px);
+    padding: 0 calculateRem(24px) calculateRem(24px);
     overflow-x: auto;
     background-color: $ibexa-white;
     font-style: italic;
@@ -204,6 +208,12 @@
     &--no-border {
         td {
             border: none;
+        }
+    }
+
+    &--no-bordered-top {
+        th {
+            border-top-width: 0;
         }
     }
 
@@ -222,7 +232,6 @@
                 }
 
                 &:last-child {
-                    font-weight: normal;
                     width: (calc((100% / 3) * 2));
                 }
             }
