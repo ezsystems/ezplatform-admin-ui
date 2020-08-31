@@ -24,7 +24,7 @@
                 &:after {
                     content: attr(data-count);
                     position: absolute;
-                    right: 20px;
+                    right: calculateRem(20px);
                     top: 48%;
                     transform: translateY(-50%);
                     font-size: calculateRem(14px);
