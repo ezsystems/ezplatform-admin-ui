@@ -95,7 +95,7 @@
 
 .ez-side-menu,
 .ez-context-menu {
-    .btn:not(.ez-btn--confirm-schedule):not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm) {
+    .btn:not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm) {
         width: calculateRem(80px);
         height: calculateRem(80px);
         padding: calculateRem(2px);

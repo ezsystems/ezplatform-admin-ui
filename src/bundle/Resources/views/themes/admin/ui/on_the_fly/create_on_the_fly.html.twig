@@ -8,14 +8,14 @@
 
 {% block page_title %}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { 
-        class: 'breadcrumb--create-on-the-fly',
+        class: 'breadcrumb--reduced-left-margin',
         items: [
             { value: 'Structure > Admin / Content types / Content / all TO DO' }
         ] 
     } %}
 
     {% include '@ezdesign/content/page_title_edit.html.twig' with { 
-        class: 'ez-content-edit-page-title--create-on-the-fly',
+        class: 'ez-content-edit-page-title--reduced-left-margin',
         action_name: 'creating'|trans|desc('Creating'),
         title: 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%'),
         description: content_type.description
