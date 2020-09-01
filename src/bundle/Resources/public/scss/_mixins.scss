@@ -4,6 +4,7 @@
 @import 'mixins/general';
 @import 'mixins/tags';
 @import 'mixins/modals';
+@import 'mixins/togglers';
 
 @mixin checkbox-icon($color: $ibexa-color-primary) {
     border: calculateRem(1px) solid $color;

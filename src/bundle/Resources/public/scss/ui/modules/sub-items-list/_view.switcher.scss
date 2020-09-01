@@ -1,11 +1,5 @@
 .c-view-switcher {
-    height: calculateRem(32px);
-    width: calculateRem(60px);
-    border: calculateRem(1px) solid $ibexa-color-base-dark;
-    border-radius: $ibexa-border-radius;
-    display: flex;
-    overflow: hidden;
-    background: $ibexa-white;
+    @include toggler-wrapper();
 
     &--disabled {
         cursor: not-allowed;
@@ -13,7 +7,12 @@
     }
 
     .c-view-switcher-btn {
+        @include toggler-btn();
+
+        width: calculateRem(32px);
+        height: calculateRem(32px);
+        padding: 0;
         border: none;
-        flex: 1 1 calculateRem(30px);
+        border-radius: 0;
     }
 }

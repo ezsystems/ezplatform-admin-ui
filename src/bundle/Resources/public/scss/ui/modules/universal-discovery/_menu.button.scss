@@ -10,11 +10,6 @@
     }
 
     &--selected {
-        background-color: $ez-color-base-medium;
-        color: $ez-white;
-
-        .ez-icon {
-            fill: $ez-white;
-        }
+        @include toggler-selected-btn();
     }
 }
