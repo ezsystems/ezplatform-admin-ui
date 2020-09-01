@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% if title is defined %}
-    <div class="ez-content-edit-page-title">
+    <div class="ez-content-edit-page-title {{ class is defined ? class }}">
         <div class="ez-content-edit-page-title__action">{{ action_name }}</div>
         <div class="ez-content-edit-page-title__title">{{ title }}</div>
         <div class="ez-content-edit-page-title__description">{{ description }}</div>

@@ -5,14 +5,17 @@
 {% block meta %}
     <meta name="LanguageCode" content="{{ language.languageCode }}"/>
 {% endblock %}
-
-{% block breadcrumbs %}
+{% block page_title %}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
-        { value: 'list.title'|trans|desc('User Settings') }
-    ]} %}
-{% endblock %}
+            { value: 'Structure > Admin / Content types / Content / all !!!!!!!!! TO DO' }
+    ] } %}
 
-{% block page_title %}{% endblock %}
+    {% include '@ezdesign/content/page_title_edit.html.twig' with { 
+        action_name: 'creating'|trans|desc('Creating'),
+        title: 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%'),
+        description: content_type.description
+    } %}
+{% endblock %}
 {% block details %}{% endblock %}
 
 {% block form_fields %}

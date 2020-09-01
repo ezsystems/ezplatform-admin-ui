@@ -28,7 +28,7 @@
     &__name {
         color: $ibexa-color-font;
         border-bottom: calculateRem(1px) solid $ibexa-color-base;
-        padding: calculateRem(16px) calculateRem(8px) calculateRem(32px);
+        padding: calculateRem(24px) calculateRem(8px);
         font-weight: normal;
         font-size: calculateRem(16px);
     }
@@ -40,7 +40,8 @@
         font-size: calculateRem(16px);
         color: $ibexa-black;
         text-decoration: none;
-        
+        font-weight: bold;
+
         &:hover {
             color: $ibexa-color-primary;
             text-decoration: none;

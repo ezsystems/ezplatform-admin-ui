@@ -23,10 +23,10 @@
                 {{ form_start(form, {
                     'action': path('ezplatform.trash.empty')
                 }) }}
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                {{ form_widget(form.empty, {'attr': {'class': 'btn btn-primary'}}) }}
+                <button type="button" class="ez-btn ez-btn--no-border" data-dismiss="modal">
                     {{ 'trash.delete.button.cancel'|trans|desc('Cancel') }}
                 </button>
-                {{ form_widget(form.empty, {'attr': {'class': 'btn-danger font-weight-bold'}}) }}
                 {{ form_widget(form.empty_trash, {'label_attr': {'class': 'checkbox-inline'}, 'attr': {'hidden': true}}) }}
                 {{ form_end(form) }}
             </div>

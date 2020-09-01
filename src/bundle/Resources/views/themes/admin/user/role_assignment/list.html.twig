@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'role' %}
 
-<section class="container mt-4 px-5">
+<section class="container ez-container">
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'role_assignment.view.list.header'|trans|desc('Users and Groups') }}</div>
         <div>
@@ -10,7 +10,7 @@
                 <a
                     href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}"
                     title="{{ 'role_assignment.view.list.action.add'|trans|desc('Assign to Users/Groups') }}"
-                    class="btn btn-secondary">
+                    class="btn btn-icon">
                     <svg class="ez-icon ez-icon-relations ez-icon--secondary">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-user"></use>
                     </svg>
@@ -20,7 +20,7 @@
                 <button
                     id="delete-role-assignments"
                     type="button"
-                    class="btn btn-danger"
+                    class="btn btn-icon"
                     disabled
                     data-toggle="modal"
                     data-target="#{{ modal_data_target }}"
@@ -54,7 +54,7 @@
             <tr>
                 <td class="ez-table__cell ez-table__cell--has-checkbox">
                     {% if can_assign %}
-                        {{ form_widget(form_role_assignments_delete.role_assignments[role_assignment.id]) }}
+                        {{ form_widget(form_role_assignments_delete.role_assignments[role_assignment.id], {'attr': {'class': 'ez-input ez-input--checkbox'}}) }}
                     {% else %}
                         {% do form_role_assignments_delete.role_assignments.setRendered %}
                     {% endif %}

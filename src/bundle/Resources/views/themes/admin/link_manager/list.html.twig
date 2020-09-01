@@ -10,11 +10,9 @@
                     'placeholder': 'url.search.placeholder'|trans,
                 }}) }}
 
-                <span class="input-group-btn">
-                    <button class="btn btn-primary">
-                        {{ 'url.search'|trans|desc("Search") }}
-                    </button>
-                </span>
+                <button class="btn btn-primary">
+                    {{ 'url.search'|trans|desc("Search") }}
+                </button>
             </div>
             <div class="d-inline-flex">
                 {{ form_label(form.status) }} &nbsp;

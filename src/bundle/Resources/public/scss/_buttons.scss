@@ -95,7 +95,7 @@
 
 .ez-side-menu,
 .ez-context-menu {
-    .btn {
+    .btn:not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm) {
         width: calculateRem(80px);
         height: calculateRem(80px);
         padding: calculateRem(2px);
@@ -130,13 +130,28 @@
     }
 }
 
-.ez-side-menu {
-    .btn:focus,
-    .btn:hover {
-        color: $ibexa-black;
+.ez-context-menu {
+    .btn:not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm) {
+        &:hover,
+        &:focus {
+            color: $ibexa-color-primary;
 
-        .ez-icon {
-            fill: $ibexa-black;
+            .ez-icon {
+                fill: $ibexa-color-primary;
+            }
+        }
+    }
+}
+
+.ez-side-menu {
+    .btn {
+        &:focus,
+        &:hover {
+            color: $ibexa-black;
+
+            .ez-icon {
+                fill: $ibexa-black;
+            }
         }
     }
 }
@@ -149,15 +164,6 @@
 
         .ez-icon {
             opacity: 0.5;
-        }
-    }
-
-    .btn:focus,
-    .btn:hover {
-        color: $ibexa-color-primary;
-
-        .ez-icon {
-            fill: $ibexa-color-primary;
         }
     }
 }
@@ -181,31 +187,6 @@
     .modal-footer {
         .btn {
             margin: 0 calculateRem(8px);
-        }
-    }
-}
-
-.ez-modal--send-to-trash {
-    .modal-header {
-        .close {
-            position: absolute;
-            right: calculateRem(16px);
-        }
-    }
-
-    .modal-footer {
-        .btn-secondary {
-            background-color: $ibexa-color-base-dark;
-            border-color: $ibexa-color-base-dark;
-
-            &:hover {
-                background-color: $ibexa-color-base-dark;
-                border-color: $ibexa-color-base-dark;
-            }
-        }
-
-        .btn-danger {
-            margin-right: 0;
         }
     }
 }

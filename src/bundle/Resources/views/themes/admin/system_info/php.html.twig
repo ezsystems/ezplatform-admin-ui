@@ -2,30 +2,30 @@
 
 <!-- Tab name: {{ 'tab.name.php'|trans|desc('PHP') }} -->
 
-<table class="table ez-table--list">
-    <thead>
-        <tr>
-            <th class="ez-table__cell ez-table__cell--header" colspan="2">{{ 'php'|trans|desc('PHP') }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ 'php'|trans|desc('PHP') }}</td>
-            <td class="ez-table__cell">
-                {{ info.version }}
-                (<a href="{{ path( 'ezplatform.systeminfo.php' ) }}"
-                    target="_blank">{{ 'php.info'|trans|desc('PHP Info') }}</a>)
-            </td>
-        </tr>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ 'php.accelerator'|trans|desc('Accelerator') }}</td>
-            <td class="ez-table__cell">
-                {% if not info.acceleratorEnabled %}
-                    <strong>{{ 'disabled'|trans|desc('Disabled') }}</strong>
-                {% endif %}
-                <a href="{{ info.acceleratorURL }}" target="_blank">{{ info.acceleratorName }}
-                    ({{ info.acceleratorVersion }})</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<section class="ez-fieldgroup">
+    <h2 class="ez-fieldgroup__name">{{ 'php'|trans|desc('PHP') }}</h2>
+    <div class="ez-fieldgroup__content">
+        <table class="table ez-table--list ez-table--to-left">
+            <tbody>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ 'php'|trans|desc('PHP') }}</td>
+                    <td class="ez-table__cell">
+                        {{ info.version }}
+                        (<a href="{{ path( 'ezplatform.systeminfo.php' ) }}"
+                            target="_blank">{{ 'php.info'|trans|desc('PHP Info') }}</a>)
+                    </td>
+                </tr>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ 'php.accelerator'|trans|desc('Accelerator') }}</td>
+                    <td class="ez-table__cell">
+                        {% if not info.acceleratorEnabled %}
+                            <strong>{{ 'disabled'|trans|desc('Disabled') }}</strong>
+                        {% endif %}
+                        <a href="{{ info.acceleratorURL }}" target="_blank">{{ info.acceleratorName }}
+                            ({{ info.acceleratorVersion }})</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

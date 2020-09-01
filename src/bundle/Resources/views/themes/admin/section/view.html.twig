@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
+    <section class="container ez-container">
         <header class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'section.information.header'|trans|desc('Section information') }}</div>
 
@@ -29,7 +29,7 @@
                     {% set modalDataAttributes = deletable ? 'data-toggle=modal data-target=#delete-section-modal' : '' %}
                     <button
                         type="button"
-                        class="btn btn-danger {% if not deletable %}disabled{% endif %}"
+                        class="btn btn-icon {% if not deletable %}disabled{% endif %}"
                         {{ modalDataAttributes }}
                         title="{{ 'section.action.delete'|trans|desc('Delete Section') }}">
                         <svg class="ez-icon">

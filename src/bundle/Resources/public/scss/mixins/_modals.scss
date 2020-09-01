@@ -8,6 +8,7 @@
 
 @mixin modal-header() {
     position: relative;
+    min-height: calculateRem(42px);
     padding: $modal-header-padding;
     background: $ibexa-color-base-pale;
     font-size: calculateRem(16px);
@@ -15,6 +16,13 @@
 
     .modal-title {
         font-size: calculateRem(16px);
+    }
+
+    .ez-icon {
+        width: calculateRem(20px);
+        height: calculateRem(20px);
+        margin: 0;
+        fill: $ibexa-black;
     }
 }
 
@@ -45,6 +53,7 @@
 @mixin modal-body() {
     background: $ibexa-white;
     padding: calculateRem(24px);
+    white-space: normal;
 }
 
 @mixin modal-footer() {

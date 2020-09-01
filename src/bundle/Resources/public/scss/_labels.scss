@@ -1,8 +1,7 @@
 .ez-label {
-    margin-bottom: 0;
-    font-weight: 700;
-
     @include label-required();
+    margin-bottom: calculateRem(8px);
+    color: $ibexa-color-font-pale;
 
     &.checkbox-inline,
     &.form-check-label {

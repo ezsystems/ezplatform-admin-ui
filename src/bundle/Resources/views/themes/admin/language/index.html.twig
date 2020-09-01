@@ -24,8 +24,8 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
-        <header class="ez-table-header round">
+    <section class="container ez-container">
+        <header class="ez-table-header">
             <div class="ez-table-header__headline">
                 {{ 'language.information.header'|trans|desc('Language information') }}
             </div>
@@ -36,7 +36,7 @@
                     {{ form_widget(deleteForm.language) }}
                     <button
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-icon"
                         data-toggle="modal"
                         title="{{ 'language.delete'|trans|desc('Delete language') }}"
                         data-target="#delete-language-modal">
