@@ -14,8 +14,8 @@
                 <p class="ez-modal-body__main">{{ 'content_type.field_definitions.modal.message'|trans|desc('Do you want to delete the selected Field definition(s)?') }}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">{{ 'modal.cancel'|trans|desc('Cancel') }}</button>
-                {{ form_widget(form.removeFieldDefinition, { attr: { class: 'btn btn-danger font-weight-bold'}, label: 'modal.delete'|trans|desc('Delete')}) }}
+                {{ form_widget(form.removeFieldDefinition, { attr: { class: 'btn btn-primary'}, label: 'modal.delete'|trans|desc('Delete')}) }}
+                <button type="button" class="ez-btn ez-btn--no-border" data-dismiss="modal">{{ 'modal.cancel'|trans|desc('Cancel') }}</button>
             </div>
         </div>
     </div>

@@ -2,54 +2,61 @@
 
 <!-- Tab name: {{ 'tab.name.composer'|trans|desc('Composer') }} -->
 
-<table class="table ez-table--list">
-    <thead>
-        <tr>
-            <th class="ez-table__cell ez-table__cell--header" colspan="2">
-                {% if info.packages is empty %}
-                    {{ 'packages.empty'|trans|desc('No packages installed.') }}
-                {% else %}
-                   {{ 'composer'|trans|desc('Composer') }}
-                {% endif %}
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ 'composer.minimum_stability'|trans|desc('Minimum stability') }}</td>
-            <td class="ez-table__cell">{{ info.minimumStability }}</td>
-        </tr>
-    </tbody>
-</table>
+<section class="ez-fieldgroup">
+    <h2 class="ez-fieldgroup__name">
+        {% if info.packages is empty %}
+            {{ 'packages.empty'|trans|desc('No packages installed.') }}
+        {% else %}
+            {{ 'composer'|trans|desc('Composer') }}
+        {% endif %}
+    </h2>
+    <div class="ez-fieldgroup__content">
+        <table class="table ez-table--list">
+            <tbody>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ 'composer.minimum_stability'|trans|desc('Minimum stability') }}</td>
+                    <td class="ez-table__cell">{{ info.minimumStability }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 
-<div class="ez-table-header">
-    <div class="ez-table-header__headline">{{ 'packages'|trans|desc('Packages') }}</div>
-</div>
-<table class="table">
-    <thead>
-        <tr>
-            {% if info.packages is empty %}
-                {{ 'packages.empty'|trans|desc('No packages installed.') }}
-            {% else %}
-                <th>{{ 'packages.name'|trans|desc('Name') }}</th>
-                <th>{{ 'packages.version'|trans|desc('Version') }}</th>
-            {% endif %}
-        </tr>
-    </thead>
-    <tbody>
-    {% for package in info.packages %}
-        <tr>
-            {% if package.homepage is empty %}
-                <td>{{ package.name }}</td>
-            {% else %}
-                <td><a href="{{ package.homepage }}" target="_blank">{{ package.name }}</a></td>
-            {% endif %}
-            <td>{{ package.version }} {{ package.stability }}
-                <span>({{ package.dateTime|ez_full_datetime }}
-                    , {{ package.reference | slice(0, 5) }})
-                </span>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<section class="ez-fieldgroup">
+    <h2 class="ez-fieldgroup__name">{{ 'packages'|trans|desc('Packages') }}</h2>
+    <div class="ez-fieldgroup__content">
+        <div class="ez-table-header">
+            <div class="ez-table-header__headline">
+                {{ 'packages'|trans|desc('Packages') }}
+            </div>
+        </div>
+        <table class="table ez-table">
+            <thead>
+                <tr>
+                    {% if info.packages is empty %}
+                        {{ 'packages.empty'|trans|desc('No packages installed.') }}
+                    {% else %}
+                        <th>{{ 'packages.name'|trans|desc('Name') }}</th>
+                        <th>{{ 'packages.version'|trans|desc('Version') }}</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for package in info.packages %}
+                <tr>
+                    {% if package.homepage is empty %}
+                        <td>{{ package.name }}</td>
+                    {% else %}
+                        <td><a href="{{ package.homepage }}" target="_blank">{{ package.name }}</a></td>
+                    {% endif %}
+                    <td>{{ package.version }} {{ package.stability }}
+                        <span>({{ package.dateTime|ez_full_datetime }}
+                            , {{ package.reference | slice(0, 5) }})
+                        </span>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>

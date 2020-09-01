@@ -22,9 +22,9 @@
 
 {% block form %}
     {{ form_start(form) }}
-    <section class="container mt-4 px-5">
-        <div class="card ez-card">
-            <div class="ez-card__header">
+    <section class="container ez-container">
+        <div class="card ez-card ez-card--light">
+            <div class="ez-card__header ml-0">
                 <h5>{{ 'policy.add.policy.title'|trans|desc('Adding Policy of type:') }}</h5>
             </div>
             <div class="ez-card__body">
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="card ez-adminsection-edit mt-4 ez-card">
+        <div class="card ez-adminsection-edit ez-card ez-card--light">
             <div class="card-header">
                 <h2>{{ 'policy.view.limitations.title'|trans|desc('Edit Limitations') }}</h2>
             </div>

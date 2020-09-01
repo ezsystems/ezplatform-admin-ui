@@ -34,6 +34,8 @@ $ibexa-color-danger: #D92D42;
 $ibexa-color-warning-dark: #AA0000;
 $ibexa-color-warning-pale: #FCEAEC;
 
+$ibexa-color-primary-hover: #E75476;
+
 /* eZ colors: These colors are deprecated, please use colors with the "ibexa" prefix */
 $ez-color-primary: $ibexa-color-primary;
 $ez-color-primary-hover: darken($ez-color-primary, 15%);
@@ -236,3 +238,5 @@ $btn-line-height: calculateRem(16px);
 $btn-font-size: calculateRem(14px);
 $btn-padding-y: calculateRem(8px);
 $btn-padding-x: 1rem;
+$btn-border-width: 0;
+$btn-focus-box-shadow: none;

@@ -79,7 +79,7 @@
                 <tr>
                     <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_delete %}
-                            {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"disabled": not deletable[content_type_group.id]}) }}
+                            {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"attr": {"class": "ez-input ez-input--checkbox"}, "disabled": not deletable[content_type_group.id]}) }}
                         {% else %}
                             {% do form_content_type_groups_delete.content_type_groups.setRendered %}
                         {% endif %}

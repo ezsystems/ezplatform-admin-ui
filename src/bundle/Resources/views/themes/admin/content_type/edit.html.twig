@@ -28,8 +28,8 @@
     {% if is_translation %}
         {% include '@ezdesign/content_type/part/nontranslatable_fields_disabled.html.twig' %}
     {% endif %}
-    <section class="container mt-4 px-5">
-        <div class="card ez-card">
+    <section class="container ez-container">
+        <div class="card ez-card ez-card--light">
             <div class="ez-card__header ez-card__header--secondary">
                 {{ 'content_type.view.edit.global_properties'|trans|desc('Global properties') }}
             </div>
@@ -47,8 +47,8 @@
         </div>
     </section>
 
-    <section class="container mt-4 px-5">
-        <div class="card ez-card">
+    <section class="container ez-container">
+        <div class="card ez-card ez-card--light">
             <div class="ez-card__header ez-card__header--sticky-top ez-card__header--secondary">
                 <div class="p-3">
                     {{ 'content_type.view.edit.content_field_definitions'|trans|desc('Field definitions') }}

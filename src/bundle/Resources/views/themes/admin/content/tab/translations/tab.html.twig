@@ -4,7 +4,7 @@
 
 {% import _self as tab %}
 {% set can_translate = can_translate is defined ? can_translate : true %}
-<section>
+<div class="container ez-container">
     {% if can_translate %}
         {{ form_start(form_translation_remove, {
             'action': form_translation_remove_action|default(path('ezplatform.translation.remove')),
@@ -15,44 +15,44 @@
         header_text: 'tab.translations.translation_manger'|trans|desc('Translation manager'),
         tools: tab.table_header_tools(form_translation_remove, can_translate)
     } %}
-    <div class="ez-scrollable-table-wrapper">
-        <table class="ez-table table">
-            <thead>
-            <tr>
-                <th></th>
-                <th>{{ 'tab.translations.language_name'|trans|desc('Language name') }}</th>
-                <th>{{ 'tab.translations.language_code'|trans|desc('Language code') }}</th>
-                {% if main_translation_switch %}
-                    <th>{{ 'tab.translations.main_language'|trans|desc('Main language') }}</th>
-                {% endif %}
-            </tr>
-            </thead>
-            <tbody>
-            {% for translation in translations %}
+        <div class="ez-scrollable-table-wrapper">
+            <table class="ez-table table">
+                <thead>
                 <tr>
-                    <td class="ez-table__cell ez-table__cell--has-checkbox">
-                        {% if can_translate %}
-                            {{ form_widget(form_translation_remove.language_codes[translation.languageCode], {'attr': {'disabled': not translation.canDelete}}) }}
-                        {% endif %}
-                    </td>
-                    <td class="ez-table__cell">{{ translation.name }}</td>
-                    <td class="ez-table__cell">{{ translation.languageCode }}</td>
+                    <th></th>
+                    <th>{{ 'tab.translations.language_name'|trans|desc('Language name') }}</th>
+                    <th>{{ 'tab.translations.language_code'|trans|desc('Language code') }}</th>
                     {% if main_translation_switch %}
-                        <td class="ez-table__cell">
-                            <input
-                                class="ez-input ez-input--radio"
-                                type="radio"
-                                {{ translation.main ? 'checked' }}
-                                {{ not translation.canEdit ? 'disabled' }}
-                                name="main_translation_update"
-                                value="{{ translation.languageCode }}">
-                        </td>
+                        <th>{{ 'tab.translations.main_language'|trans|desc('Main language') }}</th>
                     {% endif %}
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                {% for translation in translations %}
+                    <tr>
+                        <td class="ez-table__cell ez-table__cell--has-checkbox">
+                            {% if can_translate %}
+                                {{ form_widget(form_translation_remove.language_codes[translation.languageCode], {'attr': {'class': 'ez-input ez-input--checkbox', 'disabled': not translation.canDelete}}) }}
+                            {% endif %}
+                        </td>
+                        <td class="ez-table__cell">{{ translation.name }}</td>
+                        <td class="ez-table__cell">{{ translation.languageCode }}</td>
+                        {% if main_translation_switch %}
+                            <td class="ez-table__cell">
+                                <input
+                                    class="ez-input ez-input--radio"
+                                    type="radio"
+                                    {{ translation.main ? 'checked' }}
+                                    {{ not translation.canEdit ? 'disabled' }}
+                                    name="main_translation_update"
+                                    value="{{ translation.languageCode }}">
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% if can_translate %}
         {{ form_end(form_translation_remove) }}
         {% block modal_add_translation %}
@@ -63,9 +63,7 @@
     {% if main_translation_switch %}
         {{ form(form_main_translation_update, {'action': path('ezplatform.content.update_main_translation')})}}
     {% endif %}
-
-</section>
-
+</div>
 {% macro table_header_tools(form_translation_remove, can_translate) %}
     {% if can_translate %}
         <button type="button" class="btn btn-icon ez-btn--prevented ez-btn--add-translation" data-toggle="modal" data-target="#add-translation-modal"

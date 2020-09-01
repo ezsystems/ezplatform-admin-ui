@@ -22,26 +22,20 @@
 
 {% block form %}
     {{ form_start(form) }}
-    <section class="container mt-4 px-5">
-        <div class="card ez-card">
-            <div class="ez-card__header">
-                <h5>{{ 'policy.view.policy.title'|trans|desc('Editing Policy of type:') }}</h5>
-            </div>
-            <div class="ez-card__body">
-                {{ policy.module|capitalize ~ ' / ' ~ policy.function|capitalize }}
-                {% do form.policy.setRendered %}
-            </div>
+    <section class="ez-fieldgroup">
+        <h2 class="ez-fieldgroup__name">{{ 'policy.view.policy.title'|trans|desc('Editing Policy of type:') }}</h2>
+        <div class="ez-fieldgroup__content">
+            {{ policy.module|capitalize ~ ' / ' ~ policy.function|capitalize }}
+            {% do form.policy.setRendered %}
         </div>
+    </section>
 
-        <div class="card ez-adminsection-edit mt-4 ez-card">
-            <div class="card-header">
-                <h2>{{ 'policy.view.limitations.title'|trans|desc('Edit Limitations') }}</h2>
-            </div>
-            <div class="card-body">
-                {% for limitation_form in form.limitations %}
-                    {{ include(limitation_form.vars.template, {form: limitation_form}, with_context = false) }}
-                {% endfor %}
-            </div>
+    <section class="ez-fieldgroup mt-3">
+        <h2 class="ez-fieldgroup__name">{{ 'policy.view.limitations.title'|trans|desc('Edit Limitations') }}</h2>
+        <div class="ez-fieldgroup__content">
+            {% for limitation_form in form.limitations %}
+                {{ include(limitation_form.vars.template, {form: limitation_form}, with_context = false) }}
+            {% endfor %}
         </div>
     </section>
 
