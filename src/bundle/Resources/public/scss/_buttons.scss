@@ -131,7 +131,7 @@
 }
 
 .ez-context-menu {
-    .btn:not(.ez-btn--confirm-schedule):not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm) {
+    .btn:not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm) {
         &:hover,
         &:focus {
             color: $ibexa-color-primary;
