@@ -1,21 +1,13 @@
 .c-sort-switcher {
-    border: calculateRem(1px) solid $ibexa-color-font-pale;
-    border-radius: $ibexa-border-radius;
-    display: flex;
+    @include toggler-wrapper();
     padding: calculateRem(4px);
-    margin-right: calculateRem(10px);
-    font-size: calculateRem(14px);
-    line-height: 1;
-
+    
     &--disabled {
         opacity: 0.3;
     }
 
     .c-menu-button {
-        position: relative;
-        padding: 0 calculateRem(20px) 0 calculateRem(20px);
-        display: flex;
-        align-items: center;
+        @include toggler-btn();
 
         &--selected::after {
             content: '';

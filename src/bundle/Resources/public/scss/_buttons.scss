@@ -8,6 +8,7 @@
     border-radius: $ibexa-border-radius;
     text-decoration: none;
     font-size: calculateRem(14px);
+    line-height: calculateRem(16px);
     transition: all 0.2s $ez-admin-transition;
 
     &:hover,
@@ -46,6 +47,26 @@
         &:active {
             background-color: $ibexa-color-primary-pale;
             box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-primary;
+        }
+    }
+
+    &--base-dark {
+        color: $ibexa-color-base-dark;
+        background-color: transparent;
+        box-shadow: inset 0 0 0 calculateRem(1px) $ibexa-color-base-dark;
+
+        &:hover {
+            color: $ibexa-color-base-dark;
+            background-color: $ibexa-color-base-light;
+        }
+
+        &:active {
+            background-color: $ibexa-color-base-dark;
+            box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-base-dark;
+        }
+
+        .ez-icon {
+            fill: $ibexa-color-base-dark;
         }
     }
 

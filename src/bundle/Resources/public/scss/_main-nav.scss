@@ -42,7 +42,8 @@
 .ez-main-sub-nav {
     padding: calculateRem(2px) calculateRem(16px) calculateRem(2px) calculateRem(103px);
     background-color: $ibexa-white;
-
+    border-bottom: calculateRem(1px) solid $ibexa-color-border-light;
+    
     .navbar-nav {
         .nav-link {
             padding: calculateRem(9px) calculateRem(24px);

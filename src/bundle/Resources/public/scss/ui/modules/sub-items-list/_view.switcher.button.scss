@@ -1,33 +1,11 @@
 .c-view-switcher-btn {
-    max-width: calculateRem(30px);
-    height: calculateRem(30px);
+    @include toggler-wrapper();
+
     padding: 0;
     margin: 0;
-    border: calculateRem(2px) solid $ez-white;
-    background: $ez-white;
-    color: $ez-color-secondary;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    &:not(.c-view-switcher-btn--active):hover,
-    &:not(.c-view-switcher-btn--active):focus {
-        .ez-icon {
-            fill: $ez-color-base-light;
-        }
-    }
-
-    &:first-of-type {
-        border-radius: $ibexa-border-radius 0 0 $ibexa-border-radius;
-    }
-
-    &:last-of-type {
-        border-radius: 0 $ibexa-border-radius $ibexa-border-radius 0;
-    }
 
     &--active {
-        background: $ez-color-base-light;
+        @include toggler-selected-btn();
     }
 
     &--disabled {
