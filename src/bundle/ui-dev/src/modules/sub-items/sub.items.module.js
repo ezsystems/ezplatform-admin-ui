@@ -1175,6 +1175,7 @@ export default class SubItemsModule extends Component {
                 onSortChange={this.changeSorting}
                 sortClause={sortClause}
                 sortOrder={sortOrder}
+                languageContainerSelector={this.props.languageContainerSelector}
             />
         );
     }
@@ -1261,6 +1262,7 @@ SubItemsModule.propTypes = {
     udwConfigBulkMoveItems: PropTypes.object.isRequired,
     udwConfigBulkAddLocation: PropTypes.object.isRequired,
     showBulkActionFailedModal: PropTypes.func.isRequired,
+    languageContainerSelector: PropTypes.string,
 };
 
 SubItemsModule.defaultProps = {
@@ -1274,4 +1276,5 @@ SubItemsModule.defaultProps = {
     limit: parseInt(window.eZ.adminUiConfig.subItems.limit, 10),
     offset: 0,
     totalCount: 0,
+    languageContainerSelector: '.ez-extra-actions-container',
 };
