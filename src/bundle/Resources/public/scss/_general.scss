@@ -110,6 +110,8 @@ img {
 }
 
 .ez-content-preview {
+    margin: 0 calculateRem(16px);
+
     .ez-main-container {
         padding: 0;
     }

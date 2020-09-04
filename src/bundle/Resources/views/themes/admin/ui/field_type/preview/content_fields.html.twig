@@ -248,7 +248,7 @@
             {{ field.value.fileName }}
             {{ field.value.fileSize|ez_file_size( 1 ) }}
             <a download href="{{ path( route_reference.getRoute(), route_reference.getParams() ) }}">
-                <svg class="ez-icon ez-icon--download ez-icon--light">
+                <svg class="ez-icon ez-icon--download">
                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#download"></use>
                 </svg>
             </a>
@@ -369,23 +369,23 @@
         <div class="ez-field-preview__map-wrapper">
             <div class="ez-gmaplocation__map"  data-longitude="{{ longitude }}" data-latitude="{{ latitude }}"></div>
         </div>
-        <div class="ez-field-preview__map-meta">
-            <table>
+        <div class="ez-field-preview__meta-wrapper">
+            <table class="ez-field-preview__meta">
                 <thead>
-                    <tr>
+                    <tr class="ez-field-preview__meta-title-row">
                         <th>{{ 'ezgmaplocation.location_properties'|trans|desc('Location properties') }}:</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr class="ez-field-preview__meta-value-row">
                         <td>{{ 'ezgmaplocation.address'|trans|desc('Address') }}:</td>
                         <td>{{ field.value.address }}</td>
                     </tr>
-                    <tr>
+                    <tr class="ez-field-preview__meta-value-row">
                         <td>{{ 'ezgmaplocation.latitude'|trans|desc('Latitude') }}:</td>
                         <td>{{ field.value.latitude }}</td>
                     </tr>
-                    <tr>
+                    <tr class="ez-field-preview__meta-value-row">
                         <td>{{ 'ezgmaplocation.longitude'|trans|desc('Longitude') }}:</td>
                         <td>{{ field.value.longitude }}</td>
                     </tr>
@@ -409,31 +409,31 @@
         <div class="ez-field-preview__image">
             <img src="{{ src }}">
         </div>
-        <div class="ez-field-preview__image-meta">
+        <div class="ez-field-preview__meta-wrapper">
             <table>
                 <thead>
-                    <tr>
-                        <th>{{ 'ezimage.image_file_properties'|trans|desc('Image file properties') }}:</th>
+                    <tr class="ez-field-preview__meta-title-row">
+                        <th class="">{{ 'ezimage.image_file_properties'|trans|desc('Image file properties') }}:</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr class="ez-field-preview__meta-value-row">
                         <td>{{ 'ezimage.file_name'|trans|desc('File name') }}:</td>
                         <td>{{ field.value.fileName }}</td>
                     </tr>
-                    <tr>
+                    <tr class="ez-field-preview__meta-value-row">
                         <td>{{ 'ezimage.size'|trans|desc('Size') }}:</td>
                         <td>{{ field.value.fileSize|ez_file_size( 1 ) }}</td>
                     </tr>
-                    <tr>
+                    <tr class="ez-field-preview__meta-value-row">
                         <td>{{ 'ezimage.alternative_text'|trans|desc('Alternative text') }}:</td>
                         <td>{{ field.value.alternativeText }}</td>
                     </tr>
-                    <tr>
+                    <tr class="ez-field-preview__meta-value-row">
                         <td>{{ 'ezimage.master_dimensions'|trans|desc('Master dimensions') }}:</td>
                         <td>{{ 'ezimage.width_and_height'|trans({'%width%': field.value.width, '%height%': field.value.height})|desc('Width: %width%px height: %height%px') }}</td>
                     </tr>
-                    <tr>
+                    <tr class="ez-field-preview__meta-value-row">
                         <td>{{ 'ezimage.ratio'|trans|desc('Ratio') }}:</td>
                         <td>{{ (field.value.width/field.value.height)|round(2) }}</td>
                     </tr>

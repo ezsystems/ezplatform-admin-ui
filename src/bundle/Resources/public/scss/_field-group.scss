@@ -11,7 +11,7 @@
         h2 {
             margin: 0 calculateRem(10px) 0 0;
             font-size: calculateRem(16px);
-            font-weight: bold;
+            font-weight: normal;
         }
 
         .form-inline {
@@ -78,21 +78,21 @@
     }
 
     .ez-content-field {
-        padding: 0 calculateRem(24px);
-        margin-bottom: calculateRem(24px);
+        display: flex;
+        border-top: calculateRem(1px) solid $ibexa-color-base;
+
 
         .ez-content-field-name {
-            border-top: calculateRem(1px) solid $ibexa-color-base;
-            border-bottom: calculateRem(1px) solid $ibexa-color-base;
+            flex: 0 0 calculateRem(160px);
             background: $ibexa-white;
             margin-bottom: 0;
-            padding: calculateRem(8px) calculateRem(24px);
+            padding: calculateRem(16px) 0;
             color: $ibexa-color-base-dark;
         }
 
         .ez-content-field-value {
+            width: 100%;
             padding: calculateRem(16px) calculateRem(24px);
-            border-radius: 0 0 calculateRem(5px) calculateRem(5px);
 
             .ezstring-field {
                 display: inline-block;
@@ -103,9 +103,24 @@
         }
     }
 
-    .ez-field-preview--ezobjectrelationlist {
-        .table {
-            margin-bottom: 0;
+    .ez-field-preview {
+        &--ezobjectrelationlist {
+            .table {
+                margin-bottom: 0;
+            }
+        }
+
+        &__meta-title-row {
+            th {
+                font-weight: normal;
+                padding-bottom: calculateRem(24px);
+            }
+        }
+
+        &__meta-value-row {
+            td {
+                padding-bottom: calculateRem(10px);
+            }
         }
     }
 
