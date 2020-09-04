@@ -10,12 +10,8 @@
         }
 
         &__image {
-            flex: 1 1 calculateRem(200px);
+            max-width: calculateRem(520px);
             margin-right: calculateRem(32px);
-        }
-
-        &__image-meta {
-            overflow: auto;
         }
 
         &__actions-wrapper {

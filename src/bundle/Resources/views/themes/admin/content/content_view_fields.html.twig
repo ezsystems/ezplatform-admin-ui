@@ -20,7 +20,7 @@
                             {% for field_definition in group.fieldDefinitions %}
                                 {% block field %}
                                     <div class="ez-content-field">
-                                        <p class="ez-content-field-name">{{ field_definition.name }}:</p>
+                                        <div class="ez-content-field-name">{{ field_definition.name }}:</div>
                                         <div class="ez-content-field-value">
                                             {% if ez_field_is_empty(content, field_definition.identifier) and field_definition.fieldTypeIdentifier is not same as('ezboolean') %}
                                                 <em>{{ 'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty') }}</em>
