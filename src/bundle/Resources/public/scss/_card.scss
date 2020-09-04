@@ -36,6 +36,15 @@
             z-index: 1040;
         }
 
+        &--section-title {
+            display: flex;
+            align-items: center;
+            color: $ibexa-color-font;
+            border-bottom: calculateRem(1px) solid $ibexa-color-base;
+            padding: calculateRem(24px) calculateRem(8px);
+            font-weight: normal;
+        }
+
         .form-inline {
             .btn-danger {
                 display: flex;
@@ -52,6 +61,10 @@
 
     &__body {
         padding: calculateRem(8px);
+
+        &--incresed-margin {
+            margin: calculateRem(24px);
+        }
     }
 
     &__field-control {
