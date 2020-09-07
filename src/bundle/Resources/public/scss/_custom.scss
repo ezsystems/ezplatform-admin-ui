@@ -206,6 +206,8 @@ $pagination-border-color: transparent;
 // Modals
 $modal-header-padding: calculateRem(16px) calculateRem(24px);
 $modal-header-border-width: 0;
+$modal-content-border-width: 0;
+$modal-content-border-radius: $ibexa-border-radius;
 $modal-inner-padding: calculateRem(24px);
 $modal-footer-padding: calculateRem(16px) calculateRem(24px);
 //Components
