@@ -112,7 +112,7 @@ Feature: Content fields setting and editing
       | Matrix                       | value     | col1:col2:col3,11:12:13,21:22:23,31:32:33 |                         ||         |           | Matrix                    | Matrix                       |
       | Image Asset                  | value     | imageasset2.png.zip          |            |                          |         |           | imageasset1.png           | imageasset2.png              |
 
-  @javascript @common @admin @queryFieldType @commerceExcluded
+  @javascript @common @admin @queryFieldType @commerceExcluded @test1 @test3  @test11 @test12
   Scenario Outline: Create content item with Content Query field
     Given I create a "<fieldName> CT" Content Type in "Content" with "<fieldInternalName>" identifier
       | Field Type  | Name        | Identifier          | Required | Searchable | Translatable | Settings        |
@@ -132,10 +132,10 @@ Feature: Content fields setting and editing
       | label    | <label1> | fieldType   |
       | Field    | <value1> | <fieldName> |
     Examples:
-      | fieldInternalName | fieldName     | fieldSettings                                               | label1 | value1                 |
-      | ezcontentquery    | Content query | QueryType-EzPlatformAdminUi:MediaSubtree,ContentType-folder | value  | Media,Files,Multimedia |
+      | fieldInternalName | fieldName     | fieldSettings                                                                                                  | label1 | value1                  |
+      | ezcontentquery    | Content query | QueryType-Folders under media,ContentType-folder,ItemsPerPage-100,Parameters-contentTypeId:folder;locationId:43| value  | Images,Files,Multimedia |
 
-  @javascript @common @queryFieldType @commerceExcluded
+  @javascript @common @queryFieldType @commerceExcluded @test2 @test10 @test12
   Scenario: Edit content item with Content Query
     Given I am logged as "admin"
     And I navigate to content "Content query" of type "Content query CT" in root path
@@ -148,4 +148,4 @@ Feature: Content fields setting and editing
     And I should be on content item page "New Content query" of type "Content query CT" in root path
     And content attributes equal
       | label    | value                  | fieldType     |
-      | Field    | Media,Files,Multimedia | Content query |
+      | Field    | Images,Files,Multimedia | Content query |
