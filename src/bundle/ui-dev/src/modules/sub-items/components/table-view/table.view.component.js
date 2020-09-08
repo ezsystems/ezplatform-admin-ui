@@ -7,7 +7,6 @@ import TableViewColumnsTogglerComponent from './table.view.columns.toggler';
 import ThreeStateCheckboxComponent from '../three-state-checkbox/three.state.checkbox.component';
 import LanguageSelector from '../sub-items-list/language.selector.compoment';
 
-const ACTION_COTAINER_SELECTOR = '.ez-extra-actions-container';
 const COLUMNS_VISIBILITY_LOCAL_STORAGE_DATA_KEY = 'sub-items_columns-visibility';
 const DEFAULT_COLUMNS_VISIBILITY = {
     modified: true,
@@ -264,7 +263,7 @@ export default class TableViewComponent extends Component {
                         close={this.closeLanguageSelector}
                         {...this.state.languageSelectorData}
                     />,
-                    window.document.querySelector(ACTION_COTAINER_SELECTOR)
+                    window.document.querySelector(this.props.languageContainerSelector)
                 )}
             </div>
         );
@@ -283,4 +282,5 @@ TableViewComponent.propTypes = {
     onSortChange: PropTypes.func.isRequired,
     sortClause: PropTypes.string.isRequired,
     sortOrder: PropTypes.string.isRequired,
+    languageContainerSelector: PropTypes.string.isRequired,
 };

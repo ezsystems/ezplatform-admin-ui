@@ -1,4 +1,4 @@
-(function (global, doc, localStorage, $, React, ReactDOM, eZ, Routing, Translator) {
+(function(global, doc, localStorage, $, React, ReactDOM, eZ, Routing, Translator) {
     const SELECTOR_MODAL_BULK_ACTION_FAIL = '#bulk-action-failed-modal';
     const listContainers = doc.querySelectorAll('.ez-sil');
     const mfuContainer = doc.querySelector('#ez-mfu');
