@@ -49,7 +49,7 @@ class LoginPage extends Page
      */
     protected function clickLogin(): void
     {
-        $this->context->getSession()->getPage()->findButton('Login')->click();
+        $this->context->getSession()->getPage()->findButton('Sign in')->click();
     }
 
     /**

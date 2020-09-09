@@ -19,8 +19,8 @@ class Dialog extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'confirm' => '.modal.show button[type="submit"],.modal.show .btn--trigger',
-            'decline' => '.modal.show .btn--no',
+            'confirm' => '.modal.show button[type="submit"],.modal.show button[data-click]',
+            'decline' => '.modal.show .ez-btn--no-border',
         ];
     }
 
