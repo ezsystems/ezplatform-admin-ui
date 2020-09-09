@@ -33,8 +33,8 @@ class DashboardPage extends Page
         $this->siteAccess = 'admin';
         $this->route = '/dashboard';
         $this->fields = [
-            'tableSelector' => '.card-body',
-            'tableTitle' => '.mb-3',
+            'tableSelector' => '.ez-card',
+            'tableTitle' => '.ez-card__title',
             'tableTabSelector' => '.ez-tabs .nav-item',
         ];
         $this->pageTitle = 'My dashboard';

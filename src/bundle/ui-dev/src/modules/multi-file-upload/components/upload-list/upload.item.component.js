@@ -375,7 +375,7 @@ export default class UploadItemComponent extends Component {
 
         const contentTypeIconUrl = eZ.helpers.contentType.getContentTypeIconUrl(contentTypeIdentifier);
 
-        return <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--small-medium" />;
+        return <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--small-medium ez-icon--base-dark" />;
     }
 
     /**

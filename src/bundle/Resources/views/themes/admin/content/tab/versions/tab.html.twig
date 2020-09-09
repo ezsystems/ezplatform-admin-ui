@@ -30,9 +30,9 @@
                     } %}
 
                     {% if draft_pager.haveToPaginate %}
-                        <div class="row justify-content-center align-items-center mb-2">
+                        <div class="row justify-content-center align-items-center ez-pagination__spacing">
                             <span class="ez-pagination__text">
-                                {{ 'pagination.viewing'|trans({ '%viewing%': draft_pager.currentPageResults|length, '%total%': draft_pager.nbResults }, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                                {{ 'pagination.viewing'|trans({ '%viewing%': draft_pager.currentPageResults|length, '%total%': draft_pager.nbResults }, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
                             </span>
                         </div>
                         <div class="row justify-content-center align-items-center ez-pagination__btn mb-4">
@@ -100,9 +100,16 @@
 
 {% macro table_header_tools(form) %}
     {% set modal_data_target = 'modal-' ~ form.remove.vars.id %}
-    <button id="delete-translations-{{ form.remove.vars.id }}" type="button" class="btn btn-danger" disabled data-toggle="modal"
-            data-target="#{{ modal_data_target }}" title="{{ 'tab.versions.action.delete'|trans|desc('Delete version') }}">
-        <svg class="ez-icon ez-icon-trash">
+    <button 
+        id="delete-translations-{{ form.remove.vars.id }}" 
+        type="button" 
+        class="btn btn-icon" 
+        disabled 
+        data-toggle="modal"
+        data-target="#{{ modal_data_target }}" 
+        title="{{ 'tab.versions.action.delete'|trans|desc('Delete version') }}"
+    >
+        <svg class="ez-icon ez-icon--small ez-icon-trash">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
         </svg>
     </button>

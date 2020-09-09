@@ -3,7 +3,6 @@
     {{ block('choice_widget') }}
 
     <div class="ez-custom-dropdown__wrapper">
-
         <ul class="ez-custom-dropdown__selection-info">
             {% for choice in choices %}
                 {% if choice is selectedchoice(value) %}

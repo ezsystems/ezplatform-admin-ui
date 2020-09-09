@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
+    <section class="container ez-container">
         {{ form_start(form_roles_delete, {
             'action': path('ezplatform.role.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-roles' }
@@ -33,7 +33,8 @@
                     <a
                         title="{{ 'role.view.list.action.add'|trans|desc('Create a Role') }}"
                         href="{{ path('ezplatform.role.create') }}"
-                        class="btn btn-primary">
+                        class="btn btn-icon"
+                    >
                         <svg class="ez-icon ez-icon-create">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                         </svg>
@@ -44,11 +45,12 @@
                     <button
                         id="delete-roles"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-icon"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
-                        title="{{ 'role.view.list.action.delete'|trans|desc('Delete Role') }}">
+                        title="{{ 'role.view.list.action.delete'|trans|desc('Delete Role') }}"
+                    >
                         <svg class="ez-icon ez-icon-trash">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
@@ -76,7 +78,7 @@
                 <tr>
                     <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_delete %}
-                            {{ form_widget(form_roles_delete.roles[role.id]) }}
+                            {{ form_widget(form_roles_delete.roles[role.id], { attr: { "class": "ez-input ez-input--checkbox" } }) }}
                         {% else %}
                             {% do form_roles_delete.roles.setRendered %}
                         {% endif %}
@@ -87,13 +89,13 @@
                         </a>
                     </td>
                     <td class="ez-table__cell">{{ role.id }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <td class="ez-table__cell ez-table__cell--has-action-btns">
                         {% if can_assign %}
                             <a
                                 title="{{ 'role.view.list.action.assign_to_users_or_groups'|trans|desc('Assign to Users/Groups') }}"
                                 href="{{ path('ezplatform.role_assignment.create', { roleId: role.id }) }}"
-                                class="btn btn-icon mx-3">
-                                <svg class="ez-icon ez-icon-relations ez-icon--secondary">
+                                class="btn btn-icon">
+                                <svg class="ez-icon ez-icon--primary">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-user"></use>
                                 </svg>
                             </a>
@@ -102,8 +104,8 @@
                             <a
                                 title="{{ 'role.view.list.action.copy'|trans|desc('Copy') }}"
                                 href="{{ path('ezplatform.role.copy', { roleId: role.id }) }}"
-                                class="btn btn-icon mx-2">
-                                <svg class="ez-icon ez-icon--copy">
+                                class="btn btn-icon">
+                                <svg class="ez-icon ez-icon--primary">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#copy"></use>
                                 </svg>
                             </a>
@@ -112,8 +114,8 @@
                             <a
                                 title="{{ 'role.view.list.action.edit'|trans|desc('Edit') }}"
                                 href="{{ path('ezplatform.role.update', { roleId: role.id }) }}"
-                                class="btn btn-icon mx-2">
-                                <svg class="ez-icon ez-icon-edit">
+                                class="btn btn-icon">
+                                <svg class="ez-icon ez-icon--primary">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                 </svg>
                             </a>
@@ -126,11 +128,11 @@
         {{ form_end(form_roles_delete) }}
 
         {% if pager.haveToPaginate %}
-            <div class="row justify-content-center align-items-center mb-2">
+            <div class="row justify-content-center align-items-center ez-pagination__spacing">
                 <span class="ez-pagination__text">
                     {{ 'role.viewing'|trans({
                         '%viewing%': pager.currentPageResults|length,
-                        '%total%': pager.nbResults})|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                        '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% items')|raw }}
                 </span>
             </div>
             <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">

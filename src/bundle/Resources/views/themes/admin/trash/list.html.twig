@@ -247,11 +247,11 @@
                 {{ form_end(form_trash_item_delete, { 'render_rest': false }) }}
 
                 {% if pager.haveToPaginate %}
-                    <div class="row justify-content-center align-items-center mb-2 ez-pagination__spacing">
+                    <div class="row justify-content-center align-items-center ez-pagination__spacing">
                         <span class="ez-pagination__text">
                             {{ 'pagination.viewing'|trans({
                                 '%viewing%': pager.currentPageResults|length,
-                                '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                                '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
                         </span>
                     </div>
                     <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
@@ -262,7 +262,7 @@
             </section>
         </div>
         {% if can_cleantrash and form_trash_item_restore.trash_items|length > 0 %}
-            <div class="pt-4 px-0 bg-secondary ez-context-menu">
+            <div class="ez-context-menu">
                 <div class="ez-sticky-container">
                     {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
                     {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}

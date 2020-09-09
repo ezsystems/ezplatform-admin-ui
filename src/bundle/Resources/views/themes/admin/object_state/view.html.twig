@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
+    <section class="container ez-container">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'object_state.view.information.title'|trans|desc('Object state information') }}</div>
         </div>
@@ -41,7 +41,7 @@
                 <td class="ez-table__cell">{{ object_state.name }}</td>
                 <td class="ez-table__cell">{{ object_state.identifier }}</td>
                 <td class="ez-table__cell">{{ object_state.id }}</td>
-                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                <td class="ez-table__cell ez-table__cell--has-action-btns">
                     {% if can_administrate %}
                         <a title="{{ 'object_state.view.list.action.edit'|trans|desc('Edit') }}"
                            href="{{ path('ezplatform.object_state.state.update', {'objectStateId': object_state.id}) }}"

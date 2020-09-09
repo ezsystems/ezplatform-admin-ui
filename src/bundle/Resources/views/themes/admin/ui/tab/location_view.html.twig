@@ -1,6 +1,6 @@
 <div class="ez-header">
     <div class="container">
-        <ul class="nav nav-tabs ez-tabs px-4" role="tablist" id="ez-tab-list-{{ group }}">
+        <ul class="nav nav-tabs ez-tabs" role="tablist" id="ez-tab-list-{{ group }}">
             {% for tab in tabs %}
                 {% set id = group ~ '-' ~ tab.identifier %}
                 {% set active = loop.first %}
@@ -13,12 +13,12 @@
         </ul>
     </div>
 </div>
-<div class="tab-content container mt-4 px-5" id="ez-tab-list-content-{{ group }}">
+<div class="tab-content container ez-tab-content" id="ez-tab-list-content-{{ group }}">
     {% for tab in tabs %}
         {% set id = group ~ '-' ~ tab.identifier %}
         {% set active = loop.first %}
 
-        <div class="tab-pane{% if active %} active{% endif %}" id="ez-tab-{{ id }}" role="tabpanel"
+        <div class="tab-pane{% if active %} active{% endif %} ez-tab-content__pane" id="ez-tab-{{ id }}" role="tabpanel"
                 aria-labelledby="ez-tab-label-{{ group }}">
             {{ tab.view|raw }}
         </div>

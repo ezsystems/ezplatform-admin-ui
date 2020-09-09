@@ -19,12 +19,22 @@
     }
 
     &__cell {
-        border-top: calculateRem(1px) solid $ez-ground-primary;
+        padding-top: calculateRem(8px);
+        padding-bottom: calculateRem(8px);
         padding-left: calculateRem(16px);
-        padding-top: calculateRem(13px);
-        font-size: calculateRem(14px);
+        border-top: calculateRem(1px) solid transparent;
+        border-bottom: calculateRem(1px) solid transparent;
+        font-size: calculateRem(16px);
         line-height: calculateRem(20px);
-        vertical-align: top;
+        vertical-align: middle;
+
+        &:first-child {
+            border-left: calculateRem(1px) solid transparent;
+        }
+    
+        &:last-child {
+            border-right: calculateRem(1px) solid transparent;
+        }
 
         &--content-type {
             min-width: calculateRem(130px);
@@ -39,30 +49,38 @@
         }
 
         &--checkbox {
-            position: absolute;
+            position: sticky;
+            z-index: 1;
             left: 0;
             width: calculateRem(30px);
-            border-top: calculateRem(1px) solid $ez-ground-primary;
             line-height: 0;
-            padding-top: calculateRem(16px);
             margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
+            background: $ibexa-white;
         }
 
         &--icon {
+            position: sticky;
+            z-index: 1;
+            left: calculateRem(34px);
             padding-right: calculateRem(8px);
             width: calculateRem(24px);
             text-align: right;
             line-height: 0;
             height: calculateRem(47px);
-            padding-top: calculateRem(14px);
+            background: $ibexa-white;
 
             .ez-icon {
-                fill: $ez-color-base-medium;
+                fill: $ibexa-color-base-dark;
             }
         }
 
         &--name {
+            position: sticky;
+            z-index: 1;
+            left: calculateRem(78px);
             padding-left: 0;
+            padding-right: calculateRem(5px);
+            background: $ibexa-white;
         }
 
         &--priority {
@@ -71,14 +89,12 @@
         }
 
         &--actions {
-            position: absolute;
-            display: flex;
-            align-items: center;
+            position: sticky;
             right: 0;
-            height: calculateRem(47px);
             width: calculateRem(70px);
             padding: 0;
             margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
+            background: $ibexa-white;
         }
     }
 
@@ -92,26 +108,38 @@
 
     &__priority-wrapper {
         position: relative;
+
+        &--focused {
+            .ez-input {
+                border-radius: $ibexa-border-radius;
+                border: calculateRem(2px) solid $ibexa-color-primary;
+            }
+        }
     }
 
     &__priority-actions {
         position: absolute;
-        left: calculateRem(-84px);
-        top: calculateRem(2px);
-        width: calculateRem(84px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        right: calculateRem(-57px);
+        top: 0;
+        width: calculateRem(62px);
+        height: calculateRem(44px);
+        background: $ibexa-white;
     }
 
     &__priority-value {
         max-width: 100%;
         height: calculateRem(40px);
-        border: calculateRem(1px) solid $ez-color-secondary;
         margin: calculateRem(2px) 0;
         padding: 0 calculateRem(10px);
+        border: none;
+        border-radius: $ibexa-border-radius;
 
         &[readonly] {
-            border-color: $ez-ground-base-dark;
-            background-color: $ez-white;
-            color: $ez-black;
+            background-color: $ibexa-white;
+            color: $ibexa-color-font;
             cursor: pointer;
         }
 
@@ -141,14 +169,16 @@
     &__btn {
         color: $ez-white;
         border: calculateRem(1px) solid transparent;
-        height: calculateRem(40px);
-        min-width: calculateRem(40px);
-        padding: calculateRem(7px) calculateRem(8px);
+        width: calculateRem(24px);
+        height: calculateRem(24px);
         transition: background 0.3s $ez-admin-transition;
         cursor: pointer;
 
         &--submit {
-            background: $ez-color-secondary;
+            margin-right: calculateRem(4px);
+            padding: 0;
+            border-radius: $ibexa-border-radius;
+            background: $ibexa-color-primary;
         }
 
         &--submit:hover,
@@ -157,7 +187,9 @@
         }
 
         &--cancel {
-            background: $ez-color-base-medium;
+            padding: 0;
+            border-radius: $ibexa-border-radius;
+            background: $ibexa-color-base-dark;
         }
 
         &--cancel:hover,
@@ -168,7 +200,7 @@
         &--edit {
             text-align: center;
             cursor: pointer;
-            color: $ez-white;
+            color: $ibexa-white;
             display: inline-block;
 
             .c-table-view-item__btn-inner {
@@ -179,7 +211,7 @@
             }
 
             .ez-icon {
-                fill: $ez-color-primary;
+                fill: $ibexa-color-primary;
             }
 
             &:hover,
@@ -193,15 +225,23 @@
 
     &__link {
         display: inline-block;
-        color: $ez-color-hyperlink;
-        text-decoration: none;
+        color: $ibexa-color-font;
         cursor: pointer;
         transition: color 0.3s $ez-admin-transition;
-
+        text-decoration: underline;
+        
         &:hover,
         &:focus {
-            color: $ez-color-hyperlink-hover;
-            text-decoration: underline;
+            color: $ibexa-color-primary;
+        }
+    }
+
+    &--active {
+        .c-table-view-item {
+            &__cell,
+            &__priority-actions  {
+                background: $ibexa-color-base-light;
+            }
         }
     }
 }

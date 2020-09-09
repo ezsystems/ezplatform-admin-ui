@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
+    <section class="container ez-container">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'content_type_group.view.list.title'|trans|desc('Content Type groups') }}</div>
             <div>
@@ -29,7 +29,8 @@
                     <a
                         title="{{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type group') }}"
                         href="{{ path('ezplatform.content_type_group.create') }}"
-                        class="btn btn-primary">
+                        class="btn btn-icon"
+                    >
                         <svg class="ez-icon ez-icon-create">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                         </svg>
@@ -40,11 +41,12 @@
                     <button
                         id="delete-content-type-groups"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-icon"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
-                        title="{{ 'content_type_group.view.list.action.delete'|trans|desc('Delete Content Type group(s)') }}">
+                        title="{{ 'content_type_group.view.list.action.delete'|trans|desc('Delete Content Type group(s)') }}"
+                    >
                         <svg class="ez-icon ez-icon-trash">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
@@ -77,7 +79,7 @@
                 <tr>
                     <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_delete %}
-                            {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"disabled": not deletable[content_type_group.id]}) }}
+                            {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"attr": {"class": "ez-input ez-input--checkbox"}, "disabled": not deletable[content_type_group.id]}) }}
                         {% else %}
                             {% do form_content_type_groups_delete.content_type_groups.setRendered %}
                         {% endif %}
@@ -91,7 +93,7 @@
                     </td>
                     <td class="ez-table__cell">{{ content_type_group.id }}</td>
                     <td class="ez-table__cell">{{ content_types_count[content_type_group.id] }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <td class="ez-table__cell ez-table__cell--has-action-btns">
                         {% if can_update %}
                             {% set edit_url = path('ezplatform.content_type_group.update', {
                                 contentTypeGroupId: content_type_group.id
@@ -113,11 +115,11 @@
         {{ form_end(form_content_type_groups_delete) }}
 
         {% if pager.haveToPaginate %}
-            <div class="row justify-content-center align-items-center mb-2 ez-pagination__spacing">
+            <div class="row justify-content-center align-items-center ez-pagination__spacing">
                 <span class="ez-pagination__text">
                     {{ 'pagination.viewing'|trans({
                         '%viewing%': pager.currentPageResults|length,
-                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
                 </span>
             </div>
             <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">

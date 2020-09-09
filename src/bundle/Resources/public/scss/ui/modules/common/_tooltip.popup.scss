@@ -1,42 +1,23 @@
 .c-tooltip-popup {
-    background: $ez-ground-base-medium;
-    padding: calculateRem(16px);
-    box-shadow: 0 0 calculateRem(30px) 0 rgba($ez-black, 0.35);
-    position: relative;
-    border-radius: calculateRem(4px);
+    @include modal-main();
 
     &__header {
-        position: relative;
+        @include modal-header();
     }
 
     &__title {
-        margin-top: 0;
+        margin: 0;
     }
 
     &__close {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        top: 0;
-        bottom: 0;
-        right: calculateRem(16px);
-        font-weight: normal;
-        font-size: calculateRem(32px);
-        cursor: pointer;
+        @include close-button();
+    }
 
-        .ez-icon {
-            fill: $ez-black;
-            opacity: 0.5;
-            transition: opacity 0.3s $ez-admin-transition;
-        }
+    &__content {
+        padding: $modal-inner-padding;
+    }
 
-        &:hover,
-        &:focus {
-            outline: none;
-
-            .ez-icon {
-                opacity: 1;
-            }
-        }
+    &__footer {
+        @include modal-footer();
     }
 }

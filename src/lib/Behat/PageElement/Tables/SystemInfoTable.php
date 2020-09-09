@@ -17,6 +17,7 @@ class SystemInfoTable extends Table
     {
         parent::__construct($context, $containerLocator);
         $this->fields['listElement'] = $this->fields['list'] . ' td:nth-child(1)';
+        $this->fields['tableHeader'] = $this->fields['list'] . ' .ez-fieldgroup__name';
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string
@@ -33,7 +34,7 @@ class SystemInfoTable extends Table
     {
         Assert::assertEquals(
             $header,
-            $this->context->findElement($this->fields['horizontalHeaders'])->getText(),
+            $this->context->findElement($this->fields['tableHeader'])->getText(),
             'System info table "%s" has wrong header.'
         );
     }

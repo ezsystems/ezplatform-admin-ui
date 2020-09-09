@@ -1,10 +1,10 @@
 form:not(.form-inline) {
     .ez-field-edit__label {
         font-weight: 700;
-        font-size: 14px;
+        font-size: calculateRem(16px);
         color: $ez-color-base-dark;
         margin-bottom: 0;
-        margin-top: 20px;
+        margin-top: calculateRem(20px);
 
         &:after {
             content: ': ';
@@ -16,25 +16,25 @@ form:not(.form-inline) {
     }
 
     .col-form-legend {
-        font-weight: 700;
-        font-size: 14px;
-        color: $ez-color-base-dark;
-        margin-bottom: 0;
-        margin-top: 20px;
-
         @include label-required();
+
+        font-weight: 700;
+        font-size: calculateRem(16px);
+        color: $ibexa-black;
+        margin-bottom: 0;
+        margin-top: calculateRem(20px);
     }
 
     .form-control {
-        background-color: $ez-white;
+        background-color: $ibexa-white;
     }
 
     .form-control[readonly] {
-        background-color: $ez-white;
+        background-color: $ibexa-white;
     }
 
     .form-control:focus {
-        border-color: $ez-color-secondary;
+        @include input-active;
     }
 }
 
@@ -50,7 +50,7 @@ form:not(.form-inline) {
     .col-form-label,
     .form-control,
     .ez-field-edit__label {
-        margin-right: 0.5rem;
+        margin-right: calculateRem(8px);
     }
 }
 
@@ -70,7 +70,7 @@ form:not(.form-inline) {
     &.is-invalid {
         .ez-field__label-wrapper,
         .ez-field__label {
-            color: $ez-color-danger;
+            color: $ibexa-color-danger;
         }
 
         .ez-field__data {
@@ -80,23 +80,22 @@ form:not(.form-inline) {
                 content: '!';
                 position: absolute;
                 top: 0;
-                left: -20px;
-                width: 20px;
-
-                background: red;
-                color: white;
+                left: calculateRem(-20px);
+                width: calculateRem(20px);
+                background: $ibexa-color-primary;
+                color: $ibexa-white;
                 text-align: center;
-                font-size: 1.5rem;
-                border-top-left-radius: 5px;
-                border-bottom-left-radius: 5px;
+                font-size: calculateRem(16px);
+                border-top-left-radius: $ibexa-border-radius;
+                border-bottom-left-radius: $ibexa-border-radius;
             }
         }
     }
 
     &__error {
         display: inline-block;
-        margin-left: 8px;
-        color: $ez-color-danger;
+        margin-left: calculateRem(8px);
+        color: $ibexa-color-danger;
     }
 }
 

@@ -1,32 +1,90 @@
 @import 'extra-actions';
 
-.btn-icon {
-    padding: 0;
-}
-
-.ez-field-edit--ezauthor {
-    .btn-icon {
-        border-radius: 50%;
-        height: 2rem;
-        width: 2rem;
-    }
-}
-
-.ez-btn--login {
-    float: right;
-    border-color: $ez-white;
-    background-color: transparent;
-    margin-top: 1rem;
+.ez-btn {
+    display: inline-block;
+    padding: calculateRem(8px) calculateRem(16px);
+    outline: none;
+    border: none;
+    border-radius: $ibexa-border-radius;
+    text-decoration: none;
+    font-size: calculateRem(14px);
+    line-height: calculateRem(16px);
+    transition: all 0.2s $ez-admin-transition;
 
     &:hover,
     &:focus,
-    &:not(:disabled):not(.disabled):active,
-    &:not(:disabled):not(.disabled):active:focus {
-        box-shadow: none;
-        background-color: $ez-white;
-        border-color: transparent;
-        color: #131C26;
+    &:active {
+        border: none;
+        outline: none;
+        text-decoration: none;
     }
+
+    &--primary {
+        color: $ibexa-white;
+        background-color: $ibexa-color-primary;
+
+        &:hover {
+            color: $ibexa-white;
+            background-color: $ibexa-color-primary-light;
+        }
+
+        &:active {
+            background-color: $ibexa-color-primary-light;
+            box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-primary;
+        }
+    }
+
+    &--secondary {
+        color: $ibexa-color-primary;
+        background-color: transparent;
+        box-shadow: inset 0 0 0 calculateRem(1px) $ibexa-color-primary;
+
+        &:hover {
+            color: $ibexa-color-primary;
+            background-color: $ibexa-color-primary-pale;
+        }
+
+        &:active {
+            background-color: $ibexa-color-primary-pale;
+            box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-primary;
+        }
+    }
+
+    &--base-dark {
+        color: $ibexa-color-base-dark;
+        background-color: transparent;
+        box-shadow: inset 0 0 0 calculateRem(1px) $ibexa-color-base-dark;
+
+        &:hover {
+            color: $ibexa-color-base-dark;
+            background-color: $ibexa-color-base-light;
+        }
+
+        &:active {
+            background-color: $ibexa-color-base-dark;
+            box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-base-dark;
+        }
+
+        .ez-icon {
+            fill: $ibexa-color-base-dark;
+        }
+    }
+
+    &--no-border {
+        color: $ibexa-color-primary;
+    }
+}
+
+.ez-btn {
+    &--action-icon {
+        .ez-icon {
+            fill: $ibexa-color-base-dark;
+        }
+    }
+}
+
+.btn-icon {
+    padding: 0;
 }
 
 .ez-btn--add-translation {
@@ -35,37 +93,78 @@
     }
 }
 
-.ez-table-header {
-    .btn {
-        line-height: 0.85;
-        padding: 0.5rem 0.55rem;
-        margin-left: 0.15rem;
-        margin-right: 0;
-
-        .ez-icon-create,
-        .ez-icon-trash {
-            margin-right: 0;
-        }
-    }
-}
-
 .ez-side-menu,
 .ez-context-menu {
-    .btn {
-        padding: calculateRem(8px) calculateRem(5px);
-        font-size: calculateRem(11px);
+    .btn:not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm) {
+        width: calculateRem(80px);
+        height: calculateRem(80px);
+        padding: calculateRem(2px);
+        border: 0;
         border-radius: 0;
-        line-height: 1.4;
+        text-decoration: none;
+        line-height: calculateRem(18px);
 
         &:hover,
         &:focus {
+            box-shadow: none;
+            background: $ibexa-white;
             outline: none;
+        }
+
+        &:first-child {
+            border-top-left-radius: $ibexa-border-radius;
+            border-top-right-radius: $ibexa-border-radius;
+        }
+
+        &:last-child {
+            border-bottom-left-radius: $ibexa-border-radius;
+            border-bottom-right-radius: $ibexa-border-radius;
         }
     }
 
     .ez-icon {
         display: block;
-        margin: 0 auto;
+        width: calculateRem(24px);
+        height: calculateRem(24px);
+        margin: calculateRem(12px) auto calculateRem(5px);
+    }
+}
+
+.ez-context-menu {
+    .btn:not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm) {
+        &:hover,
+        &:focus {
+            color: $ibexa-color-primary;
+
+            .ez-icon {
+                fill: $ibexa-color-primary;
+            }
+        }
+    }
+}
+
+.ez-side-menu {
+    .btn {
+        &:focus,
+        &:hover {
+            color: $ibexa-black;
+
+            .ez-icon {
+                fill: $ibexa-black;
+            }
+        }
+    }
+}
+
+.ez-context-menu {
+    .btn.disabled,
+    .btn[disabled] {
+        opacity: 1;
+        color: rgba($ibexa-white, 0.5);
+
+        .ez-icon {
+            opacity: 0.5;
+        }
     }
 }
 
@@ -87,38 +186,7 @@
 .ez-modal {
     .modal-footer {
         .btn {
-            margin: 0 0.625rem;
-        }
-    }
-}
-
-.ez-modal--send-to-trash {
-    .modal-header {
-        .close {
-            position: absolute;
-            right: 1rem;
-        }
-    }
-
-    .modal-footer {
-        .btn {
-            line-height: 1.25;
-            padding: 0.5rem 0.75rem;
-            font-size: 1rem;
-        }
-
-        .btn-secondary {
-            background-color: $ez-color-base-medium;
-            border-color: $ez-color-base-medium;
-
-            &:hover {
-                background-color: $ez-color-base-medium-hover;
-                border-color: $ez-color-base-medium-hover;
-            }
-        }
-
-        .btn-danger {
-            margin-right: 0;
+            margin: 0 calculateRem(8px);
         }
     }
 }
@@ -126,12 +194,12 @@
 .ez-modal--trash-with-asset {
     .modal-footer {
         .btn-secondary {
-            background-color: $ez-color-base-medium;
-            border-color: $ez-color-base-medium;
+            background-color: $ibexa-color-base-dark;
+            border-color: $ibexa-color-base-dark;
 
             &:hover {
-                background-color: $ez-color-base-medium-hover;
-                border-color: $ez-color-base-medium-hover;
+                background-color: $ibexa-color-base-dark;
+                border-color: $ibexa-color-base-dark;
             }
         }
     }
@@ -159,32 +227,13 @@
 
 .ez-btn--cotf-create {
     display: flex;
-}
-
-.ez-search-view {
-    .input-group-btn {
-        display: flex;
-
-        .ez-btn--search,
-        .ez-btn--filter {
-            display: flex;
-            align-items: center;
-
-            .ez-icon {
-                margin-right: calculateRem(4px);
-            }
-        }
-
-        .ez-btn--search {
-            border-radius: 0 calculateRem(4px) calculateRem(4px) 0;
-        }
-    }
+    align-items: center;
 }
 
 .ez-btn--content-tree-expanded {
-    background: $ez-white;
-    border-color: $ez-white;
-    color: $ez-black;
+    background: $ibexa-white;
+    border-color: $ibexa-white;
+    color: $ibexa-black;
 }
 
 .ez-btn--wide,
@@ -193,11 +242,15 @@
 }
 
 .ez-btn--active-button {
-    background-color: $ez-white;
-    color: $ez-color-secondary;
-    border-color: $ez-white;
+    background-color: $ibexa-white;
+    color: $ibexa-color-primary;
+    border-color: $ibexa-white;
 
     .ez-icon {
-        fill: $ez-color-secondary;
+        fill: $ibexa-color-primary;
     }
+}
+
+button:focus {
+    outline: 0;
 }

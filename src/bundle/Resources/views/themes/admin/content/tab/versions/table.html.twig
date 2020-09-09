@@ -45,7 +45,7 @@
 
             <tr>
                 {% if form is defined %}
-                    <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form.versions[version.versionNo], {'attr': {'disabled': not version.canDelete}}) }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form.versions[version.versionNo], {'attr': {'class': 'ez-input ez-input--checkbox', 'disabled': not version.canDelete}}) }}</td>
                 {% endif %}
                 <td class="ez-table__cell">
                     {{ version.versionNo }}
@@ -70,7 +70,7 @@
                     {{ version.modificationDate|ez_full_datetime }}
                 </td>
                 {% if have_actions %}
-                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <td class="ez-table__cell ez-table__cell--has-action-btns">
                         {% block custom_actions_column %}
                         {% endblock %}
                         {% if is_draft_conflict %}

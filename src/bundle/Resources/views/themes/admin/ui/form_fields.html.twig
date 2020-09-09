@@ -35,10 +35,10 @@
             </div>
         {%- else -%}
             <div class="ez-instant-filter__group-item">
-                {{ form_widget(form[choice.value]) }}
                 <svg class="ez-icon ez-icon--small">
                     <use xlink:href="{{ ez_content_type_icon(choice.value) }}"></use>
                 </svg>
+                {{ form_widget(form[choice.value]) }}
             </div>
         {%- endif -%}
     {%- endfor -%}
@@ -64,7 +64,7 @@
 {%- block search_type_choice_widget_options -%}
     {%- for group_label, choice in options -%}
         <li class="ez-content-type-selector__item">
-            {{ form_widget(form[choice.value], {'attr': {'data-name': choice.label}, 'label_attr': {'class': 'checkbox-inline'}}) }}
+            {{ form_widget(form[choice.value], {'attr': {'class': 'ez-input ez-input--checkbox', 'data-name': choice.label}, 'label_attr': {'class': 'checkbox-inline'}}) }}
         </li>
     {%- endfor -%}
 {%- endblock -%}

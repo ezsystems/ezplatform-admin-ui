@@ -3,11 +3,13 @@
 
     &__tools-wrapper {
         display: flex;
+        align-items: center;
     }
 
     &__input-wrapper {
         display: flex;
         flex-grow: 1;
+        align-items: center;
         margin-right: calculateRem(16px);
     }
 
@@ -18,13 +20,11 @@
     }
 
     &__input {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
+        background: $ibexa-white;
 
-    &__search-btn {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        &:focus {
+            background: $ibexa-white;
+        }
     }
 
     &__search-btn,
@@ -32,16 +32,21 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        height: calculateRem(34px);
+    }
 
-        .ez-icon {
-            margin-right: calculateRem(6px);
-        }
+    &__search-btn {
+        margin-right: calculateRem(16px);
+    }
+
+    &__selector-wrapper {
+        background: $ibexa-white;
     }
 
     &__no-results-title {
         display: flex;
         justify-content: space-between;
-        background-color: $ez-ground-primary;
+        background-color: $ibexa-white;
         align-items: center;
         padding: 0 calculateRem(20px);
         min-height: calculateRem(50px);

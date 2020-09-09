@@ -29,7 +29,7 @@
                 {% for location in locations %}
                     <tr>
                         <td class="ez-table__cell ez-table__cell--has-checkbox">
-                            {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}
+                            {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'class': 'ez-input ez-input--checkbox', 'disabled': not location.canDelete}}) }}
                         </td>
                         <td class="ez-table__cell">
                             {% include '@ezdesign/ui/location_path.html.twig' with {'locations': location.pathLocations} %}
@@ -61,6 +61,7 @@
                         <td class="ez-table__cell"></td>
                         <td class="ez-table__cell">
                             <input
+                                class="ez-input ez-input--radio"
                                 type="radio"
                                 {{ location.main ? 'checked' }}
                                 {{ not location.canEdit ? 'disabled' }}
@@ -88,7 +89,7 @@
 {% macro table_header_tools(form_add, form_remove, can_add) %}
     <button
             data-udw-config="{{ ez_udw_config('single', {}) }}"
-            class="btn btn-primary btn--udw-add"
+            class="btn btn-icon btn--udw-add"
             title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}"
             {{ not can_add ? 'disabled' }}>
         <svg class="ez-icon ez-icon-create">
@@ -100,7 +101,7 @@
     <button
             id="delete-locations"
             type="button"
-            class="btn btn-danger"
+            class="btn btn-icon"
             disabled
             data-toggle="modal"
             data-target="#{{ modal_data_target }}"

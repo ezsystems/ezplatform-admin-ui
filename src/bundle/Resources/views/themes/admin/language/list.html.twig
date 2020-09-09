@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
+    <section class="container ez-container">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'language.list'|trans|desc('Languages') }}</div>
             <div>
@@ -31,7 +31,8 @@
                     <a
                         title="{{ 'language.new'|trans|desc('Create a new language') }}"
                         href="{{ path('ezplatform.language.create') }}"
-                        class="btn btn-primary">
+                        class="btn btn-icon"
+                    >
                         <svg class="ez-icon ez-icon-create">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                         </svg>
@@ -40,11 +41,12 @@
                     <button
                         id="delete-languages"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-icon"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
-                        title="{{ 'language.delete'|trans|desc('Delete language') }}">
+                        title="{{ 'language.delete'|trans|desc('Delete language') }}"
+                    >
                         <svg class="ez-icon ez-icon-trash">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
@@ -78,7 +80,7 @@
                 <tr>
                     <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_administrate %}
-                            {{ form_widget(form_languages_delete.languages[language.id]) }}
+                            {{ form_widget(form_languages_delete.languages[language.id], { attr: { "class": "ez-input ez-input--checkbox" }  }) }}
                         {% else %}
                             {% do form_languages_delete.languages.setRendered %}
                         {% endif %}
@@ -90,16 +92,17 @@
                         <input
                             type="checkbox"
                             title="{{ language.enabled ? 'language.enabled'|trans|desc('Enabled')  : 'language.disabled'|trans|desc('Disabled')  }}"
+                            class="ez-input ez-input--checkbox"
                             disabled
                             {% if language.enabled %}checked{% endif %}>
                     </td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <td class="ez-table__cell ez-table__cell--has-action-btns">
                         {% if can_administrate %}
                             <a
                                 title="{{ 'language.edit'|trans|desc('Edit') }}"
                                 href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
                                 class="btn btn-icon mx-2">
-                                <svg class="ez-icon ez-icon-edit">
+                                <svg class="ez-icon">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
                                 </svg>
                             </a>
@@ -112,11 +115,11 @@
         {{ form_end(form_languages_delete) }}
 
         {% if pager.haveToPaginate %}
-            <div class="row justify-content-center align-items-center mb-2">
+            <div class="row justify-content-center align-items-center ez-pagination__spacing">
                 <span class="ez-pagination__text">
                     {{ 'language.viewing'|trans({
                         '%viewing%': pager.currentPageResults|length,
-                        '%total%': pager.nbResults})|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                        '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% items')|raw }}
                 </span>
             </div>
             <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">

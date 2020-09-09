@@ -3,13 +3,13 @@
 {% form_theme form_forgot_user_password '@ezdesign/account/form_fields.html.twig'  %}
 
 {%- block content -%}
-    <h2 class="ez-login__header">{{ 'authentication.reset_your_password'|trans|desc('Reset your password') }}</h2>
+    <h2 class="ez-login__actions-headline">{{ 'authentication.reset_your_password'|trans|desc('Reset your password') }}</h2>
     {% if form_forgot_user_password is defined %}
         {{ form_start(form_forgot_user_password, {'attr': {'class': 'ez-form-validate'}}) }}
         <fieldset>
-            {{ form_row(form_forgot_user_password.email) }}
+            {{ form_row(form_forgot_user_password.email, {'attr': {'class': 'form-control ez-login__input'}}) }}
         </fieldset>
-        {{ form_widget(form_forgot_user_password.reset, {'attr': {'class': 'btn btn-primary ez-btn ez-btn--login'}}) }}
+        {{ form_widget(form_forgot_user_password.reset, {'attr': {'class': 'btn btn-primary ez-login__btn--reset-password'}}) }}
 
         {{ form_end(form_forgot_user_password) }}
     {% endif %}

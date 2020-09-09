@@ -28,7 +28,17 @@ img {
 }
 
 .ez-main-row {
-    min-height: calc(100vh - 58px);
+    min-height: calc(100vh - #{calculateRem(58px)});
+
+    &--edit {
+        background: $ibexa-white;
+
+        .ez-context-menu {
+            .ez-sticky-container {
+                top: calculateRem(50px);
+            }
+        }
+    }
 }
 
 .ez-standalone-page {
@@ -38,17 +48,13 @@ img {
 }
 
 .ez-dashboard .ez-main-row {
-    background-color: $ez-ground-base-light;
+    background-color: $ibexa-color-base-pale;
 }
 
 .btn {
     white-space: normal;
     cursor: pointer;
     transition: opacity 0.3s $ez-admin-transition, background 0.3s $ez-admin-transition;
-}
-
-.ez-field-edit {
-    margin: calculateRem(16px) 0;
 }
 
 .ezrichtext-field {
@@ -79,7 +85,7 @@ img {
 }
 
 .ez-checkbox-icon {
-    @include checkbox-icon();
+    @include checkbox-icon($ibexa-color-base-dark);
 }
 
 .ez-visually-hidden,
@@ -104,6 +110,8 @@ img {
 }
 
 .ez-content-preview {
+    margin: 0 calculateRem(16px);
+
     .ez-main-container {
         padding: 0;
     }
@@ -134,7 +142,7 @@ select {
 .ez-section-list-view,
 .ez-trash-list-view,
 .ez-bookmark-list-view {
-    background-color: $ez-ground-base-light;
+    background-color: $ibexa-color-base-pale;
 }
 
 .ez-sticky-container {
@@ -167,4 +175,9 @@ select {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.ez-container {
+    padding: calculateRem(16px);
+    background: $ibexa-white;
 }

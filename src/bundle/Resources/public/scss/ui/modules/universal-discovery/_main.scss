@@ -1,5 +1,5 @@
 .m-ud {
-    background-color: $ez-color-base-pale;
+    background-color: $ibexa-white;
     position: fixed;
     z-index: 99999;
     top: 0;
@@ -7,9 +7,31 @@
     height: 100vh;
     width: 100vw;
 
-    .c-thumbnail {
-        .ez-icon {
-            fill: $ez-color-base-medium;
+    .c-grid {
+        &__items-wrapper {
+            .c-thumbnail {
+                .ez-icon {
+                    width: calculateRem(120px);
+                    height: calculateRem(120px);
+                    fill: $ibexa-color-base-dark;
+                }
+            }
+        }
+
+        &--marked {
+            .c-thumbnail {
+                .ez-icon {
+                    fill: $ibexa-black;
+                }
+            }
+        }
+    }
+
+    .c-selected-locations-item {
+        .c-thumbnail {
+            .ez-icon {
+                fill: $ibexa-color-base-dark;
+            }
         }
     }
 }

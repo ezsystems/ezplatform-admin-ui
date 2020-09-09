@@ -2,7 +2,7 @@
 
 {% form_theme form_policies_delete '@ezdesign/ui/form_fields.html.twig'  %}
 
-<section class="container mt-4 px-5">
+<section class="container ez-container">
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'policy.view.list.title.count'|trans({'%count%': role.policies|length})|desc('Policies (%count%)') }}</div>
         <div>
@@ -10,7 +10,7 @@
                 <a
                     title="{{ 'policy.view.list.action.add'|trans|desc('Add a new Policy') }}"
                     href="{{ path('ezplatform.policy.create', {roleId: role.id}) }}"
-                    class="btn btn-primary">
+                    class="btn btn-icon">
                     <svg class="ez-icon ez-icon-create">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                     </svg>
@@ -19,7 +19,7 @@
                 <button
                     id="delete-policies"
                     type="button"
-                    class="btn btn-danger"
+                    class="btn btn-icon"
                     disabled
                     data-toggle="modal"
                     data-target="#{{ modal_data_target }}"
@@ -55,7 +55,7 @@
             <tr>
                 <td class="ez-table__cell ez-table__cell--has-checkbox">
                     {% if can_update %}
-                        {{ form_widget(form_policies_delete.policies[policy.id]) }}
+                        {{ form_widget(form_policies_delete.policies[policy.id], { 'attr': { 'class': 'ez-input ez-input--checkbox' }}) }}
                     {% else %}
                         {% do form_policies_delete.policies.setRendered %}
                     {% endif %}
@@ -90,7 +90,7 @@
                         {{- 'policy.limitation.none'|trans|desc('None') -}}
                     {%- endif -%}
                 </td>
-                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                <td class="ez-table__cell ez-table__cell--has-action-btns">
                     {% if can_update %}
                         <a
                             title="{{ 'policy.view.list.panel.policies.action.edit'|trans|desc('Edit') }}"
@@ -109,11 +109,11 @@
     {{ form_end(form_policies_delete) }}
 
     {% if pager.haveToPaginate %}
-        <div class="row justify-content-center align-items-center mb-2 ez-pagination__spacing">
+        <div class="row justify-content-center align-items-center ez-pagination__spacing">
                 <span class="ez-pagination__text">
                     {{ 'pagination.viewing'|trans({
                         '%viewing%': pager.currentPageResults|length,
-                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
                 </span>
         </div>
         <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">

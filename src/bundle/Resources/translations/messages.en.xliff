@@ -51,6 +51,11 @@
         <target state="new">Reset your password</target>
         <note>key: authentication.reset_your_password</note>
       </trans-unit>
+      <trans-unit id="daab336a9cb12d2d04146c55228268227cf1017a" resname="authentication.sign_in">
+        <source>Sign in</source>
+        <target state="new">Sign in</target>
+        <note>key: authentication.sign_in</note>
+      </trans-unit>
       <trans-unit id="8785f4abdfdf72fe9001fe0553c6e3a582cfcc08" resname="authentication.submit">
         <source>Login</source>
         <target state="new">Login</target>
@@ -61,15 +66,35 @@
         <target state="new">Username</target>
         <note>key: authentication.username</note>
       </trans-unit>
+      <trans-unit id="da372ec3b84bf86c7c894321765e6a8f2172e20b" resname="base.enter_credentials">
+        <source>Enter your login credentials below.</source>
+        <target state="new">Enter your login credentials below.</target>
+        <note>key: base.enter_credentials</note>
+      </trans-unit>
       <trans-unit id="b1b04388859d233f757e4f6376af3fc317d4baa6" resname="base.footer_copyright">
-        <source>eZ Platform ©1999-%current_year% %ez_link_open%Ibexa AS%ez_link_close% and others.</source>
-        <target state="new">eZ Platform ©1999-%current_year% %ez_link_open%Ibexa AS%ez_link_close% and others.</target>
+        <source><![CDATA[Copyright &#169; IBEXA 1999-%current_year%]]></source>
+        <target state="new"><![CDATA[Copyright &#169; IBEXA 1999-%current_year%]]></target>
         <note>key: base.footer_copyright</note>
+      </trans-unit>
+      <trans-unit id="c82a33e6a2272aab44ff7b78c90817c0fc8768cb" resname="base.need_assistance">
+        <source>Need assistance or support?</source>
+        <target state="new">Need assistance or support?</target>
+        <note>key: base.need_assistance</note>
       </trans-unit>
       <trans-unit id="d51e30462e1babe35fd4fc6bcbbe6faf5e065b32" resname="base.platform_by_ibexa">
         <source>platform by Ibexa</source>
         <target state="new">platform by Ibexa</target>
         <note>key: base.platform_by_ibexa</note>
+      </trans-unit>
+      <trans-unit id="b5305384fa0fd949ec756891f50f093fd26dd06c" resname="base.sign_in">
+        <source>Sign in to IBEXA DXP</source>
+        <target state="new">Sign in to IBEXA DXP</target>
+        <note>key: base.sign_in</note>
+      </trans-unit>
+      <trans-unit id="34e898c4a61c4925b523416b0c7ecd9574d8e48b" resname="base.visit_support">
+        <source><![CDATA[Visit our support forums at %ez_forum_link%<br/>or our official channels found at %ez_contact_link%]]></source>
+        <target state="new"><![CDATA[Visit our support forums at %ez_forum_link%<br/>or our official channels found at %ez_contact_link%]]></target>
+        <note>key: base.visit_support</note>
       </trans-unit>
       <trans-unit id="d21d07085caa55b0fee2fc054a6878bbdb24ae78" resname="breadcrumb.admin">
         <source>Admin</source>

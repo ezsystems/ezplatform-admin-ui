@@ -3,13 +3,15 @@
         display: flex;
         flex-wrap: wrap;
         height: auto;
+        min-height: calculateRem(38px);
+        padding: 0 calculateRem(8px) calculateRem(4px) calculateRem(4px);
 
         &.ez-data-source__taggify--focused {
-            border-color: $ez-color-secondary;
+            border-color: $ibexa-color-primary;
         }
 
         &.is-invalid {
-            background: $ez-color-warning-pale;
+            background: $ibexa-color-warning-pale;
         }
     }
 
@@ -19,12 +21,12 @@
     }
 
     .taggify__input {
-        border: 0 none;
+        display: block;
         width: 100%;
         height: 100%;
-        display: block;
+        margin-top: calculateRem(3px);
+        border: 0 none;
         outline: none;
-        min-width: 100px;
         background: transparent;
     }
 
@@ -35,24 +37,14 @@
     }
 
     .taggify__tag {
-        background: $ez-color-secondary;
-        padding: calculateRem(4px) 0 calculateRem(4px) calculateRem(8px);
-        color: $ez-white;
-        margin: 0 calculateRem(8px) 0 0;
-        border-radius: calculateRem(4px);
+        @include tag;
     }
 
     .taggify__btn--remove {
-        color: $ez-white;
+        position: absolute;
+        right: 0;
+        color: $ibexa-color-font;
         background: none;
         border: 0 none;
-        margin-left: calculateRem(6px);
-    }
-
-    &.is-invalid {
-        .ez-data-source__taggify {
-            border: calculateRem(1px) solid $ez-color-danger;
-            background: $ez-color-warning-pale;
-        }
     }
 }

@@ -1,0 +1,19 @@
+{% block close_button %}
+    <a 
+        class="ez-content-edit-container__close" 
+        href="{{ path('_ez_content_view', { 'contentId': parent_location.contentId, 'locationId': parent_location.id}) }}"
+        title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
+    >
+        <svg class="ez-icon ez-icon--small-medium ez-icon--primary">
+            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
+        </svg>
+    </a>
+{% endblock %}
+
+{% if title is defined %}
+    <div class="ez-content-edit-page-title {{ class is defined ? class }}">
+        <div class="ez-content-edit-page-title__action">{{ action_name }}</div>
+        <div class="ez-content-edit-page-title__title">{{ title }}</div>
+        <div class="ez-content-edit-page-title__description">{{ description }}</div>
+    </div>
+{% endif %}

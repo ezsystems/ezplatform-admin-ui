@@ -42,6 +42,7 @@
 @import 'fieldType/edit/ezauthor';
 @import 'fieldType/edit/ezstring';
 @import 'fieldType/edit/ezemail';
+@import 'fieldType/edit/ezcountry';
 @import 'fieldType/edit/ezinteger';
 @import 'fieldType/edit/ezfloat';
 @import 'fieldType/edit/ezboolean';
@@ -59,6 +60,7 @@
 @import 'fieldType/edit/ezgmaplocation';
 @import 'fieldType/edit/ezuser';
 @import 'fieldType/edit/ezobjectrelationlist';
+@import 'fieldType/edit/eznoneditable';
 @import 'fieldType/preview/ezauthor';
 @import 'fieldType/preview/ezkeyword';
 @import 'fieldType/preview/ezselection';
@@ -78,3 +80,5 @@
 @import 'flatpickr';
 @import 'warning-icon';
 @import 'trash-search-form';
+@import 'inputs';
+@import 'links';

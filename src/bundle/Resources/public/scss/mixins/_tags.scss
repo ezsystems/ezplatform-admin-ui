@@ -1,0 +1,14 @@
+@mixin tag {
+    position: relative;
+    display: inline-flex;
+    min-width: calculateRem(70px);
+    margin-right: calculateRem(4px);
+    margin-top: calculateRem(4px);
+    padding: calculateRem(1px) calculateRem(25px) calculateRem(1px) calculateRem(8px);
+    background: $ibexa-color-base;
+    border-radius: $ibexa-border-radius;
+    color: $ibexa-color-font;
+    font-size: calculateRem(14px);
+    font-weight: normal;
+    align-items: center;
+}

@@ -24,9 +24,9 @@
         </div>
         <div class="panel panel-primary">
             <div class="panel-body">
-                <div class="row ez-header pt-3">
+                <div class="ez-header">
                     <div class="container">
-                        <ul class="nav nav-tabs ez-tabs ez-nav-tabs--{{ group }} px-4" role="tablist" id="ez-tab-list-{{ group }}">
+                        <ul class="nav nav-tabs ez-tabs ez-nav-tabs--{{ group }}" role="tablist" id="ez-tab-list-{{ group }}">
                             {% for tab in tabs %}
                                 {% set id = group ~ '-' ~ tab.identifier %}
                                 {% set active = loop.first %}
@@ -39,7 +39,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="tab-content container mt-4 px-5" id="ez-tab-list-content-{{ group }}">
+                <div class="tab-content container ez-tab-content" id="ez-tab-list-content-{{ group }}">
                     {% for tab in tabs %}
                         {% set id = group ~ '-' ~ tab.identifier %}
                         {% set active = loop.first %}
@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="pt-4 px-0 bg-secondary ez-context-menu">
+    <div class="ez-context-menu">
         <div class="ez-sticky-container">
             {% set content_type_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type.sidebar_right', [], {'content_type': content_type}) %}
             {{ knp_menu_render(content_type_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}

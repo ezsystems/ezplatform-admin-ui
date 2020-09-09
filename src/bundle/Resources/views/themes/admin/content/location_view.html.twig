@@ -91,25 +91,23 @@
                         {% if content_type.isContainer %}
                         {{ form_start(form_subitems_content_edit, { 'action': path('ezplatform.content.edit'), 'attr': { 'hidden': 'hidden' }}) }}
                         {{ form_end(form_subitems_content_edit) }}
-                        <div class="container px-5">
-                            <section class="ez-fieldgroup">
-                                {% set udwConfigSingle = ez_udw_config('single_container', {}) %}
-                                <div class="ez-sil"
-                                    data-location="{{ location.id }}"
-                                    data-mfu-create-permissions-config="{{ subitems_module.content_create_permissions_for_mfu|json_encode() }}"
-                                    data-items="{{ subitems_module.items }}"
-                                    data-content-types="{{ subitems_module.content_type_info_list }}"
-                                    data-udw-config-bulk-move-items="{{ udwConfigSingle }}"
-                                    data-udw-config-bulk-add-location="{{ udwConfigSingle }}"
-                                ></div>
-                            </section>
+                        <div class="container">
+                            {% set udwConfigSingle = ez_udw_config('single_container', {}) %}
+                            <div class="ez-sil"
+                                data-location="{{ location.id }}"
+                                data-mfu-create-permissions-config="{{ subitems_module.content_create_permissions_for_mfu|json_encode() }}"
+                                data-items="{{ subitems_module.items }}"
+                                data-content-types="{{ subitems_module.content_type_info_list }}"
+                                data-udw-config-bulk-move-items="{{ udwConfigSingle }}"
+                                data-udw-config-bulk-add-location="{{ udwConfigSingle }}"
+                            ></div>
                             {% include '@ezdesign/content/modal/location_bulk_action_failed.html.twig' only %}
                         </div>
                         {% endif %}
                     </div>
                 </div>
         </div>
-        <div class="pt-4 px-0 bg-secondary ez-context-menu">
+        <div class="ez-context-menu">
             <div class="ez-sticky-container">
                 {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': content_type}) %}
                 {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}

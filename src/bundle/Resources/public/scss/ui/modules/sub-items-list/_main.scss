@@ -1,26 +1,27 @@
 .m-sub-items {
+    margin-top: calculateRem(24px);
+    padding: calculateRem(16px);
+    background: $ibexa-white;
+    border-radius: $ibexa-border-radius;
+
     &,
     & * {
         box-sizing: border-box;
     }
 
     &__header {
-        height: calculateRem(50px);
         width: 100%;
-        border-radius: calculateRem(4px) calculateRem(4px) 0 0;
+        padding: 0 calculateRem(8px) calculateRem(32px);
         font-weight: bold;
-        line-height: calculateRem(50px);
-        background: $ez-ground-primary-inverted-light;
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
-        padding: 0 calculateRem(16px);
         align-items: center;
     }
 
     &__title {
-        font-size: calculateRem(17px);
-        color: $ez-white;
+        font-size: calculateRem(16px);
+        color: $ibexa-black;
         flex: 1 1 auto;
     }
 
@@ -29,13 +30,12 @@
     }
 
     &__actions .m-mfu {
-        margin-right: calculateRem(8px);
+        margin-right: calculateRem(24px);
         display: flex;
     }
 
     &__list {
-        background: $ez-white;
-        font-size: calculateRem(15px);
+        font-size: calculateRem(16px);
         line-height: calculateRem(40px);
         text-align: left;
         position: relative;
@@ -45,7 +45,7 @@
         content: '';
         position: absolute;
         z-index: 999;
-        background: rgba($ez-black, 0.35);
+        background: rgba($ibexa-black, 0.35);
         top: 0;
         left: 0;
         right: 0;
@@ -70,7 +70,8 @@
 
     &__pagination-info {
         text-align: center;
+        margin-top: calculateRem(16px);
         padding: calculateRem(16px) 0;
-        font-size: calculateRem(12px);
+        font-size: calculateRem(16px);
     }
 }

@@ -3,7 +3,7 @@
 {% import "@ezdesign/ui/dashboard/macros.html.twig" as macros %}
 
 {% if data|length %}
-    <table class="ez-table table">
+    <table class="table table-hover ez-table">
         <thead>
         <tr>
             <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
@@ -18,12 +18,12 @@
         {% for row in data %}
             <tr>
                 <td class="ez-table__cell ez-table__cell--has-icon">
-                    <svg class="ez-icon ez-icon--small">
+                    <svg class="ez-icon ez-icon--small-medium ez-icon--base-dark">
                         <use xlink:href="{{ ez_content_type_icon(row.content_type.identifier) }}"></use>
                     </svg>
                 </td>
                 <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
-                    <a href="{{ url('_ez_content_view', { 'contentId': row.contentId, 'locationId': row.resolvedLocation.id }) }}">
+                    <a class="ez-table__cell-link" href="{{ url('_ez_content_view', { 'contentId': row.contentId, 'locationId': row.resolvedLocation.id }) }}">
                         {{ row.name }}
                     </a>
                 </td>
@@ -36,7 +36,7 @@
                     {% endif %}
                 </td>
                 <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
-                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                <td class="ez-table__cell ez-table__cell--has-action-btns">
                     {{ macros.edit_content_button(row, 'dashboard.table.all.content.edit'|trans|desc('Edit Content')) }}
                 </td>
             </tr>

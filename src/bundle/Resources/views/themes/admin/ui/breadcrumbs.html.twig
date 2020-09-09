@@ -1,9 +1,9 @@
 {% if items is defined %}
-    <ol class="breadcrumb px-4">
+    <ol class="breadcrumb {{ class is defined ? class }}">
         {% for item in items %}
             <li class="breadcrumb-item{% if loop.last %} active{% endif %}">
                 {% if not loop.last and item.url is defined %}
-                    <a href="{{ item.url }}">{{ item.value }}</a>
+                    <a class="breadcrumb-item__link" href="{{ item.url }}">{{ item.value }}</a>
                 {% else %}
                     {{ item.value }}
                 {% endif %}

@@ -1,11 +1,14 @@
 .c-content-create {
-    background-color: $ez-white;
+    @include container-box-shadow-left;
+
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: calculateRem(400px);
     z-index: 1;
+    padding: calculateRem(16px);
+    background-color: $ibexa-white;
     transform: scaleX(1);
     transform-origin: left center;
     opacity: 1;
@@ -18,36 +21,39 @@
     }
 
     &__header {
-        background-color: $ez-ground-primary;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: calculateRem(50px);
-        padding: 0 calculateRem(15px) 0 calculateRem(50px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
+        padding-top: calculateRem(8px);
+        padding-bottom: calculateRem(24px);
+        margin-bottom: calculateRem(32px);
     }
 
     &__header-title {
-        font-size: calculateRem(17px);
+        color: $ibexa-color-primary;
+        font-weight: bold;
+        font-size: calculateRem(16px);
     }
 
     &__close-button {
         border: none;
 
         .ez-icon {
-            fill: $ez-color-base-medium;
+            fill: $ibexa-color-base-dark;
         }
     }
 
-    &__language-selector-wrapper {
-        padding: calculateRem(10px) calculateRem(50px);
-    }
-
-    &__language-selector-label {
-        font-weight: bold;
-    }
-
+    &__language-selector-wrapper,
     &__select-content-type-wrapper {
-        padding: calculateRem(10px) calculateRem(50px);
+        margin-bottom: calculateRem(32px);
+    }
+
+    &__language-selector-label,
+    &__select-content-type-label {
+        padding: 0 0 calculateRem(12px) calculateRem(8px);
+        color: $ibexa-color-font-pale;
+        font-size: calculateRem(16px);
     }
 
     &__content-type-list {
@@ -56,17 +62,27 @@
     }
 
     &__group {
-        padding-left: calculateRem(16px);
+        margin-bottom: calculateRem(24px);
+        padding: 0 calculateRem(8px);
+
+        &:first-child {
+            margin-top: calculateRem(32px);
+        }
+    }
+
+    &__group-name {
+        margin-bottom: calculateRem(8px);
+        color: $ibexa-color-font-pale;
     }
 
     &__group-item {
         display: flex;
         align-items: center;
-        padding-left: calculateRem(16px);
         cursor: pointer;
+        padding-left: calculateRem(12px);
 
-        &--selected {
-            background-color: lighten($ez-ground-primary, 15%);
+        &:hover {
+            color: $ibexa-color-primary;
         }
     }
 
@@ -79,7 +95,6 @@
 
     &__confirm-wrapper {
         display: flex;
-        justify-content: center;
         margin-top: calculateRem(20px);
     }
 }

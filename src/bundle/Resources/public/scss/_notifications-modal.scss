@@ -6,10 +6,9 @@
     }
 
     .modal-header {
-        background-color: $ez-color-base-pale;
-
         .modal-title {
-            font-size: 1.5rem;
+            font-size: calculateRem(16px);
+            font-weight: bold;
 
             &::after {
                 content: attr(data-notifications-total);
@@ -17,14 +16,14 @@
         }
 
         .close {
-            margin-top: -0.5625rem;
+            padding: calculateRem(16px);
             outline: none;
         }
     }
 
     .modal-body {
         padding: 2rem;
-        background-color: $ez-ground-base-medium;
+        background-color: $ibexa-white;
         border-radius: 0 0 0.25rem 0.25rem;
     }
 
@@ -35,8 +34,9 @@
 
         th {
             border: none;
-            background-color: $ez-color-base-dark;
-            color: $ez-white;
+            color: $ibexa-color-base-dark;
+            border-top: calculateRem(1px) solid $ibexa-color-base;
+            border-bottom: calculateRem(1px) solid $ibexa-color-base;
         }
 
         tr {
@@ -45,7 +45,6 @@
 
             td {
                 vertical-align: top;
-                border-top: 1px solid $ez-color-base-dark;
             }
         }
     }
@@ -55,17 +54,7 @@
         align-items: center;
 
         .type__icon {
-            border-radius: 50%;
-            display: inline-block;
-            width: 2rem;
-            height: 2rem;
-            background: $ez-color-warning;
-
-            .ez-icon {
-                margin: 0.375rem;
-                width: 1.25rem;
-                height: 1.25rem;
-            }
+            @include type-icon;
         }
 
         .type__text {
@@ -77,8 +66,7 @@
         color: $ez-color-base-light;
 
         .type__icon {
-            fill: $ez-ground-base-pale;
-            background: $ez-color-base-light;
+            @include type-icon-read;
         }
     }
 

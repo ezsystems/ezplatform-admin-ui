@@ -1,14 +1,15 @@
 .c-upload-list-item {
     display: flex;
-    background: $ez-white;
-    padding: calculateRem(8px) calculateRem(16px);
-    align-items: center;
-    height: calculateRem(60px);
+    background: $ibexa-white;
+    padding: calculateRem(8px) calculateRem(32px);
+
+    &:first-child {
+        margin-top: calculateRem(16px);
+    }
 
     &__icon-wrapper {
         flex: 0 0 calculateRem(20px);
         display: flex;
-        align-items: center;
     }
 
     &__meta {
@@ -18,7 +19,7 @@
     }
 
     &__name {
-        font-size: calculateRem(14px);
+        font-size: calculateRem(16px);
         width: 100%;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -26,7 +27,8 @@
     }
 
     &__size {
-        font-size: calculateRem(10px);
+        color: $ibexa-color-base-dark;
+        font-size: calculateRem(14px);
     }
 
     &__info {
@@ -39,19 +41,18 @@
 
         &--error {
             padding-top: calculateRem(3px);
-            color: $ez-color-warning-dark;
+            color: $ibexa-color-warning-dark;
             font-weight: bold;
         }
 
         &--success {
-            color: $ez-color-positive;
+            color: $ibexa-color-positive;
         }
     }
 
     &__actions {
         flex: 1 1 calculateRem(44px);
         max-width: calculateRem(88px);
-        padding-top: calculateRem(8px);
         text-align: right;
     }
 
@@ -69,7 +70,7 @@
         }
 
         &--edit {
-            fill: $ez-color-primary;
+            fill: $ibexa-color-primary;
             transition: all 0.3s $ez-admin-transition;
             width: calculateRem(20px);
             height: calculateRem(20px);
@@ -81,7 +82,7 @@
         }
 
         &--delete {
-            fill: $ez-color-danger;
+            fill: $ibexa-color-danger;
         }
 
         &--delete:hover,
@@ -90,7 +91,7 @@
         }
 
         &--abort {
-            fill: $ez-color-base-light;
+            fill: $ibexa-color-base-dark;
         }
 
         &--abort:hover,

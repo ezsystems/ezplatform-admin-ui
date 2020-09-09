@@ -3,7 +3,7 @@
 {% trans_default_domain 'object_state' %}
 
 {% block content %}
-    <section class="container mt-4 px-5">
+    <section class="container ez-container">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'object_state.view.list.title'|trans({'%count%': object_states|length})|desc('Object states (%count%)') }}</div>
             <div>
@@ -11,7 +11,8 @@
                     <a
                         title="{{ 'object_state.new'|trans|desc('Create a new Object state') }}"
                         href="{{ path('ezplatform.object_state.state.add', {'objectStateGroupId': object_state_group.id}) }}"
-                        class="btn btn-primary">
+                        class="btn btn-icon"
+                    >
                         <svg class="ez-icon ez-icon-create">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
                         </svg>
@@ -21,11 +22,12 @@
                     <button
                         id="delete-object-state"
                         type="button"
-                        class="btn btn-danger"
+                        class="btn btn-icon"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
-                        title="{{ 'object_state.delete.bulk_delete.submit'|trans|desc('Delete Object state') }}">
+                        title="{{ 'object_state.delete.bulk_delete.submit'|trans|desc('Delete Object state') }}"
+                    >
                         <svg class="ez-icon ez-icon-trash">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
                         </svg>
@@ -73,7 +75,7 @@
                         <td class="ez-table__cell"><a href="{{ path( 'ezplatform.object_state.state.view', {'objectStateId': object_state.id} ) }}">{{ object_state.name }}</a></td>
                         <td class="ez-table__cell">{{ object_state.identifier }}</td>
                         <td class="ez-table__cell">{{ object_state.id }}</td>
-                        <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                        <td class="ez-table__cell ez-table__cell--has-action-btns">
                             {% if can_administrate %}
                                 <a
                                     title="{{ 'object_state.view.list.action.edit'|trans|desc('Edit') }}"

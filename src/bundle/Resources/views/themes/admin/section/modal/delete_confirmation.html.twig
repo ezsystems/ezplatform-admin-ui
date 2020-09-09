@@ -20,10 +20,10 @@
                     "action": path('ezplatform.section.delete', {'sectionId': section.id}),
                     'attr': {'class': 'd-inline-block'}
                 }) }}
-                <button type="button" class="btn btn-secondary btn--no" data-dismiss="modal">
+                {{ form_widget(form.delete, {'attr': {'class': 'btn btn-primary', 'disabled': not deletable}}) }}
+                <button type="button" class="ez-btn ez-btn--no-border" data-dismiss="modal">
                     {{ 'form.cancel'|trans|desc('Cancel') }}
                 </button>
-                {{ form_widget(form.delete, {'attr': {'class': 'btn-danger', 'disabled': not deletable}}) }}
                 {{ form_end(form) }}
             </div>
         </div>

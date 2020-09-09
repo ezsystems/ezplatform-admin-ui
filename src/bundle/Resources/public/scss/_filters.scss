@@ -1,25 +1,25 @@
 .ez-filters {
-    border-color: $ez-color-secondary;
-    border-style: solid;
-    border-width: calculateRem(1px) 0;
     transform: scaleY(1);
     transform-origin: top center;
     transition: all 0.2s $ez-admin-transition;
     flex-wrap: wrap;
     position: relative;
-    padding: calculateRem(8px) calculateRem(8px) 0 calculateRem(8px);
+    margin: calculateRem(20px) 0;
+    padding: calculateRem(24px) calculateRem(24px);
+    background: $ibexa-white;
 
     &--collapsed {
+        margin-top: calculateRem(10px);
+        padding: 0;
         transform: scaleY(0);
         height: 0;
         opacity: 0;
     }
 
     &__row {
-        background: $ez-ground-base-medium;
-        padding: calculateRem(16px);
-        border-radius: calculateRem(4px);
-        margin-bottom: calculateRem(16px);
+        padding: 0 calculateRem(16px) calculateRem(32px);
+        margin-bottom: calculateRem(32px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-column-gap: 10%;
@@ -27,7 +27,7 @@
 
     &__item {
         &-label {
-            margin-bottom: 0;
+            margin-bottom: calculateRem(16px);
             font-weight: 700;
 
             &--date-range {
@@ -60,8 +60,8 @@
 
                     &:disabled {
                         cursor: auto;
-                        background-color: $ez-color-base-pale;
-                        color: $ez-black;
+                        background-color: $ibexa-white;
+                        color: $ibexa-black;
                         padding-right: calculateRem(32px);
                         text-overflow: ellipsis;
 
@@ -84,31 +84,24 @@
         position: absolute;
         right: calculateRem(40px);
         border-style: solid;
-        border-width: 0 calculateRem(10px) calculateRem(10px);
+        border-width: 0 calculateRem(8px) calculateRem(8px);
         display: block;
         width: 0;
         z-index: 1;
     }
 
     &:before {
-        border-color: $ez-color-secondary transparent;
-        top: calculateRem(-11px);
+        border-color: $ibexa-white transparent;
+        top: calculateRem(-8px);
     }
 
     &:after {
-        border-color: $ez-ground-base-light transparent;
-        top: calculateRem(-10px);
+        border-color: $ibexa-white transparent;
+        top: calculateRem(-8px);
     }
 
     &__btns {
-        flex-basis: 100%;
-        display: flex;
-        justify-content: center;
-        margin: calculateRem(16px);
-
-        .btn {
-            margin: 0 1rem;
-        }
+        padding-top: calculateRem(16px);
     }
 
     &__option--hidden {
@@ -123,7 +116,7 @@
         min-width: 100%;
         border-radius: calculateRem(5px);
         margin-bottom: 0;
-        background-color: $ez-ground-base-dark;
+        background-color: $ibexa-color-base-light;
         max-height: calculateRem(300px);
         overflow: auto;
         transform: scaleY(1);
@@ -143,10 +136,9 @@
     &__range-wrapper {
         height: 0;
         opacity: 0;
-        margin-top: calculateRem(8px);
-        background: $ez-white;
-        border: calculateRem(1px) solid $ez-ground-base-medium;
-        border-radius: calculateRem(4px);
+        margin-top: calculateRem(16px);
+        background: $ibexa-white;
+        border-radius: $ibexa-border-radius;
         transition: all 0.2s ease-in;
         pointer-events: none;
     
@@ -158,7 +150,6 @@
     }
 
     &__range-select {
-        border: none;
         outline: none;
     }
 }

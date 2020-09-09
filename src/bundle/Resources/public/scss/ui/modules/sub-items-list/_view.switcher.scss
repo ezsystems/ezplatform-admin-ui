@@ -1,13 +1,5 @@
 .c-view-switcher {
-    height: calculateRem(40px);
-    width: calculateRem(70px);
-    border: calculateRem(3px) solid $ez-color-secondary;
-    border-radius: calculateRem(4px);
-    display: flex;
-    overflow: hidden;
-    background: $ez-white;
-    box-shadow: inset 0 0 calculateRem(2px) 0 rgba($ez-color-secondary, 0.35);
-    padding: calculateRem(2px);
+    @include toggler-wrapper();
 
     &--disabled {
         cursor: not-allowed;
@@ -15,6 +7,12 @@
     }
 
     .c-view-switcher-btn {
-        flex: 1 1 calculateRem(30px);
+        @include toggler-btn();
+
+        width: calculateRem(32px);
+        height: calculateRem(32px);
+        padding: 0;
+        border: none;
+        border-radius: 0;
     }
 }

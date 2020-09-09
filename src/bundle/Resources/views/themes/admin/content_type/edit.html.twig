@@ -28,29 +28,29 @@
     {% if is_translation %}
         {% include '@ezdesign/content_type/part/nontranslatable_fields_disabled.html.twig' %}
     {% endif %}
-    <section class="container mt-4 px-5">
-        <div class="card ez-card">
-            <div class="ez-card__header ez-card__header--secondary">
+    <section>
+        <div class="card ez-card ez-card--light">
+            <div class="ez-card__header ez-card__header--section-title">
                 {{ 'content_type.view.edit.global_properties'|trans|desc('Global properties') }}
             </div>
-            <div class="card-body">
+            <div class="card-body ez-card__body ez-card__body--incresed-margin">
                 {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.description, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.nameSchema, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.urlAliasSchema, {'label_attr': {'class': 'ez-label'}}) }}
-                {{ form_row(form.isContainer, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+                {{ form_row(form.isContainer, {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.defaultSortField, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.defaultSortOrder, {'label_attr': {'class': 'ez-label'}}) }}
-                {{ form_row(form.defaultAlwaysAvailable, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+                {{ form_row(form.defaultAlwaysAvailable, {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'ez-label'}}) }}
             </div>
         </div>
     </section>
 
-    <section class="container mt-4 px-5">
-        <div class="card ez-card">
-            <div class="ez-card__header ez-card__header--sticky-top ez-card__header--secondary">
-                <div class="p-3">
+    <section class="container ez-container">
+        <div class="card ez-card ez-card--light">
+            <div class="ez-card__header ez-card__header--sticky-top ez-card__header--section-title">
+                <div>
                     {{ 'content_type.view.edit.content_field_definitions'|trans|desc('Field definitions') }}
                 </div>
                 <div class="form-inline">
@@ -61,7 +61,7 @@
 
                     <button type="button"
                             title="{{ 'content_type.view.edit.content_field_definition.delete'|trans|desc('Delete Field definition(s)') }}"
-                            class="btn btn-danger"
+                            class="btn btn-icon"
                             data-toggle="modal"
                             data-target="#delete-content-type-modal"
                             {% if form.addFieldDefinition.vars.disabled %} disabled {% endif %}>
@@ -74,16 +74,16 @@
 
             {% include '@ezdesign/content_type/modal/delete_confirmation.html.twig' with {'form': form} %}
 
-            <div class="card-body">
+            <div class="card-body ez-card__body ez-card__body--incresed-margin">
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}
 
                     <div class="card ez-card ez-card--toggle-group mb-3 ez-card--collapsed">
-                        <div id="field-definition-{{ value.identifier }}" class="ez-card__header ez-card__header--secondary">
+                        <div id="field-definition-{{ value.identifier }}" class="ez-card__header px-0">
                             {% set name = value.names[language_code] ?? value.names[content_type.mainLanguageCode]  %}
                             {{ form_widget(field_definition.selected, {
                                 'label': '%s (%s)'|format(name, value.fieldTypeIdentifier),
-                                'label_attr': {'class': 'checkbox-inline'}
+                                'attr': {'class': 'ez-input ez-input--checkbox mr-1'}
                             }) }}
                             <button class="ez-card__body-display-toggler btn">
                                 <svg class="ez-icon ez-icon--medium ez-icon--caret-down" aria-hidden="true">
@@ -100,10 +100,10 @@
                             {{ form_row(field_definition.identifier, {'label_attr': {'class': 'ez-label'}}) }}
                             {{ form_row(field_definition.position, {'label_attr': {'class': 'ez-label'}}) }}
                             {{ form_row(field_definition.description, {'label_attr': {'class': 'ez-label'}}) }}
-                            {{ form_row(field_definition.isRequired, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
-                            {{ form_row(field_definition.isSearchable, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
-                            {{ form_row(field_definition.isTranslatable, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
-                            {{ form_row(field_definition.isThumbnail, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+                            {{ form_row(field_definition.isRequired, {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'ez-label'}}) }}
+                            {{ form_row(field_definition.isSearchable, {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'ez-label'}}) }}
+                            {{ form_row(field_definition.isTranslatable, {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'ez-label'}}) }}
+                            {{ form_row(field_definition.isThumbnail, {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'ez-label'}}) }}
                             {{ form_row(field_definition.fieldGroup, {'label_attr': {'class': 'ez-label'}}) }}
 
                             {# Field type specific fields below #}

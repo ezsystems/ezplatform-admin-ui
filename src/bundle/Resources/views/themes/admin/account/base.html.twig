@@ -9,22 +9,25 @@
     <body class="ez-login-view">
         <div class="container-fluid ez-main-container">
             <div class="row ez-login">
-                <div class="col-6 ez-login__image"></div>
-                <div class="col-6 ez-login__form">
-                    <div class="{%- block login_wrapper -%}ez-login__form-wrapper{%- endblock -%}">
-                        <svg class="ez-icon ez-icon--logo">
-                            <use xlink:href="/bundles/ezplatformadminui/img/ez-logo.svg#logo-white"></use>
-                        </svg>
-                        <div class="ez-login__form-logo-description">{{ 'base.platform_by_ibexa'|trans|desc('platform by Ibexa') }}</div>
+                <div class="col-5 ez-login__image-col">
+                    <div class="ez-login__support-wrapper">
+                        <h2 class="ez-login__support-headline">{{ 'base.need_assistance'|trans|desc('Need assistance or support?') }}</h2>
+                        <span class="ez-login__support-content">{{ 'base.visit_support'|trans({
+                                '%ez_forum_link%': '<a class="ez-link ez-link--light" href="http://ibexa.co/support">http://ibexa.co/support</a>', 
+                                '%ez_contact_link%': '<a class="ez-link ez-link--light" href="http://ibexa.co/contact_us">http://ibexa.co/contact_us</a>'
+                              })| desc('Visit our support forums at %ez_forum_link%<br/>or our official channels found at %ez_contact_link%')|raw }}</span>
+                    </div>
+                    <div class="ez-login__application-version">Version 3.2 LTS</div>
+                </div>
+                <div class="col-7 ez-login__actions-col">
+                    <img class="ez-login__logo" src="{{ asset('/bundles/ezplatformadminui/img/ibexa-logo.svg') }}" alt="ibexa" />
+                    <div class="ez-login__actions-wrapper">
                         {%- block content -%} {%- endblock content -%}
                     </div>
-                    <div class="ez-login__footer">
-                        <span>{{ 'base.footer_copyright'|trans({ 
-                                    '%ez_link_open%': '<a class="ez-login__hyperlink" href="http://ez.no">', 
-                                    '%ez_link_close%': '</a>', 
+                    <div class="ez-login__copright">
+                        {{ 'base.footer_copyright'|trans({ 
                                     '%current_year%': "now"|date("Y") 
-                              }) |desc('eZ Platform ©1999-%current_year% %ez_link_open%Ibexa AS%ez_link_close% and others.')|raw }}
-                        </span>
+                        }) |desc('Copyright &#169; IBEXA 1999-%current_year%')|raw }}
                     </div>
                 </div>
             </div>

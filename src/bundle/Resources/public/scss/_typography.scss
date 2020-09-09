@@ -20,20 +20,22 @@
 }
 
 .ez-adminsection-edit {
+    padding: 0 calculateRem(8px);
+
     .card-header {
-        background-color: $ez-color-base-pale;
+        border: none;
+        background-color: $ibexa-white;
 
         h2 {
-            margin-bottom: 0;
-            font-size: 1.125rem;
-            font-weight: 400;
-            color: $ez-color-secondary;
+            font-size: calculateRem(16px);
+            font-weight: normal;;
+            color: $ibexa-color-primary;
         }
     }
 
     .card-body {
         h3 {
-            font-size: 1.0625rem;
+            font-size: calculateRem(16px);
         }
     }
 }

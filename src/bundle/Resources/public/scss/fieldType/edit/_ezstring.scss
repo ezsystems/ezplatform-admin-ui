@@ -2,4 +2,8 @@
     .ez-field-edit__data {
         width: 50%;
     }
+
+    .ez-data-source__input {
+        max-width: calculateRem(550px);
+    }
 }

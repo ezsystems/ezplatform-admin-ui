@@ -22,7 +22,7 @@ class ContentTypePage extends Page
     public $contentTypeName;
 
     /** @var string locator for container of Content list */
-    public $contentFieldDefinitionsListLocator = 'section:nth-of-type(2)';
+    public $contentFieldDefinitionsListLocator = '.ez-fieldgroup:nth-of-type(2)';
 
     /** @var string locator for container of Content list */
     public $globalPropertiesTableLocator = '.ez-table--list';

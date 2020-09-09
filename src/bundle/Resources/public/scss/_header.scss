@@ -1,15 +1,15 @@
 .ez-header {
-    background-color: $ez-ground-base-dark;
-
     .container {
     	position: relative;
-        overflow: auto;
     }
 
-    .breadcrumb {
-        margin-bottom: 0;
-        padding-left: 0;
-        font-size: .8125rem;
-        flex-wrap: nowrap;
+    &--light {
+        background: $ibexa-white;
+    }
+
+    &--content-edit {
+        padding-bottom: calculateRem(24px);
+        background: $ibexa-white;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
     }
 }

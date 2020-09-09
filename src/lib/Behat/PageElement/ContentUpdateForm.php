@@ -28,7 +28,7 @@ class ContentUpdateForm extends Element
             'closeButton' => '.ez-content-edit-container__close',
             'fieldLabel' => '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ez-card > .card-body > div > div > legend',
             'nthField' => '.ez-card .card-body > div > div:nth-of-type(%s)',
-            'editableFieldClass' => 'ez-field-edit',
+            'noneditableFieldClass' => 'ez-field-edit--eznoneditable',
             'fieldOfType' => '.ez-field-edit--%s',
         ];
     }
@@ -62,7 +62,7 @@ class ContentUpdateForm extends Element
 
         $fieldLocator = sprintf($this->fields['nthField'], $fieldPosition);
 
-        $isEditable = $this->context->findElement($fieldLocator)->hasClass($this->fields['editableFieldClass']);
+        $isEditable = !$this->context->findElement($fieldLocator)->hasClass($this->fields['noneditableFieldClass']);
         if (!$isEditable) {
             $fieldType = strtolower($fieldName);
         } else {

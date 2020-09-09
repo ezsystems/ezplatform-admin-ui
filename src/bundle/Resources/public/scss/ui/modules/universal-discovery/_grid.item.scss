@@ -1,11 +1,10 @@
 .c-grid-item {
     position: relative;
-    margin-bottom: calculateRem(29px);
-    border-radius: calculateRem(4px);
-    box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba(51, 51, 51, 0.1);
-    margin-right: calculateRem(29px);
+    margin-bottom: calculateRem(16px);
+    margin-right: calculateRem(16px);
+    border-radius: $ibexa-border-radius;
+    border: calculateRem(1px) solid transparent;
     cursor: pointer;
-    padding-bottom: calculateRem(6px);
 
     &:hover {
         .c-toggle-selection-button {
@@ -14,24 +13,24 @@
     }
 
     &__name {
-        min-height: calculateRem(30px);
-        padding: calculateRem(6px) calculateRem(6px) 0;
-        font-size: calculateRem(12px);
-        line-height: calculateRem(14px);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        width: calculateRem(165px);
+        display: flex;
+        align-items: center;
+        width: calculateRem(248px);
+        height: calculateRem(54px);
+        padding: calculateRem(5px);
+        color: $ibexa-color-font;
+        font-size: calculateRem(16px);
+        border-bottom-left-radius: $ibexa-border-radius;
+        border-bottom-right-radius: $ibexa-border-radius;
+        background: $ibexa-white;
     }
 
     &__preview {
-        width: calculateRem(165px);
-        height: calculateRem(165px);
-        background-color: $ez-color-base-pale;
-        border-top-left-radius: calculateRem(4px);
-        border-top-right-radius: calculateRem(4px);
+        width: calculateRem(248px);
+        height: calculateRem(248px);
+        background-color: rgba($ibexa-color-base, 0.23);
+        border-top-left-radius: $ibexa-border-radius;
+        border-top-right-radius: $ibexa-border-radius;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -41,26 +40,26 @@
         position: absolute;
         top: calculateRem(5px);
         right: calculateRem(5px);
-        background: $ez-white;
+        background: $ibexa-color-base-dark;
 
         &--selected {
-            background-color: $ez-color-positive;
+            background-color: $ibexa-color-primary;
         }
     }
 
     &--marked {
-        border: calculateRem(1px) solid $ez-color-secondary;
+        border: calculateRem(1px) solid $ibexa-color-primary;
 
         .c-grid-item {
             &__name {
-                background-color: $ez-color-secondary;
-                color: $ez-white;
+                background-color: $ibexa-color-primary;
+                color: $ibexa-white;
             }
         }
     }
 
     &--not-selectable {
-        background-color: $ez-ground-base-dark;
+        background-color: $ibexa-color-base-light;
         cursor: not-allowed;
     }
 }

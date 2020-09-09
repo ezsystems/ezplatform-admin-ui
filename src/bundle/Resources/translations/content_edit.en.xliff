@@ -31,6 +31,11 @@
         <target state="new">Created by %name%</target>
         <note>key: created_by</note>
       </trans-unit>
+      <trans-unit id="f34946beab1da2af6535a8e4a88145e9557de0aa" resname="editing">
+        <source>Editing</source>
+        <target state="new">Editing</target>
+        <note>key: editing</note>
+      </trans-unit>
       <trans-unit id="750bead6705b295c7b7d66c27b2768c1b9329ed5" resname="editing_details">
         <source><![CDATA[
                         <span class="ez-details-items__connector">Editing:</span>

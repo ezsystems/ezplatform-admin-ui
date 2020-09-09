@@ -2,27 +2,25 @@
 
 <!-- Tab name: {{ 'tab.name.hardware'|trans|desc('Hardware') }} -->
 
-<table class="table ez-table--list">
-    <thead>
-        <tr>
-            <th class="ez-table__cell ez-table__cell--header" colspan="2">
-                {{ 'hardware'|trans|desc('Hardware') }}
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ 'cpu'|trans|desc('CPU') }}</td>
-            <td class="ez-table__cell">
-                {{ info.cpuType }}
-                {% if info.cpuSpeed %}
-                    ({{ info.cpuCount }}x{{ info.cpuSpeed }}&nbsp;{{ 'mhz'|trans|desc('mhz') }})
-                {% endif %}
-            </td>
-        </tr>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ 'memory'|trans|desc('Memory') }}</td>
-            <td class="ez-table__cell">{{ info.memorySize|ez_file_size( 1 ) }}</td>
-        </tr>
-    </tbody>
-</table>
+<section class="ez-fieldgroup">
+    <h2 class="ez-fieldgroup__name">{{ 'hardware'|trans|desc('Hardware') }}</h2>
+    <div class="ez-fieldgroup__content">
+        <table class="table ez-table--list ez-table--to-left">
+            <tbody>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ 'cpu'|trans|desc('CPU') }}</td>
+                    <td class="ez-table__cell">
+                        {{ info.cpuType }}
+                        {% if info.cpuSpeed %}
+                            ({{ info.cpuCount }}x{{ info.cpuSpeed }}&nbsp;{{ 'mhz'|trans|desc('mhz') }})
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ 'memory'|trans|desc('Memory') }}</td>
+                    <td class="ez-table__cell">{{ info.memorySize|ez_file_size( 1 ) }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

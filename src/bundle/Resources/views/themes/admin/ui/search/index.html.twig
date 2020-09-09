@@ -22,7 +22,7 @@
 
                 {% if results is defined %}
 
-                    <div class="ez-table-header mt-3 mx-4">
+                    <div class="ez-table-header">
                         <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
                     </div>
 
@@ -44,7 +44,7 @@
                             </ul>
                         </div>
                     {% else %}
-                        <div class="ez-scrollable-table-wrapper mx-4">
+                        <div class="ez-scrollable-table-wrapper">
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -67,15 +67,17 @@
                         </div>
 
                         {% if pager.haveToPaginate %}
-                            <div class="row justify-content-center align-items-center mb-2 ml-4 ez-pagination__spacing">
-                                <span class="ez-pagination__text">
-                                    {{ 'pagination.viewing'|trans({
-                                        '%viewing%': pager.currentPageResults|length,
-                                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
-                                </span>
-                            </div>
-                            <div class="row justify-content-center align-items-center ez-pagination__btn mb-5 mx-4">
-                                {{ pagerfanta(pager, 'ez', {'pageParameter': '[search][page]'}) }}
+                            <div class="ez-pagination">
+                                <div class="row justify-content-center align-items-center ez-pagination__spacing">
+                                    <span class="ez-pagination__text">
+                                        {{ 'pagination.viewing'|trans({
+                                            '%viewing%': pager.currentPageResults|length,
+                                            '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
+                                    </span>
+                                </div>
+                                <div class="row justify-content-center align-items-center ez-pagination__btn mb-5 mx-4">
+                                    {{ pagerfanta(pager, 'ez', {'pageParameter': '[search][page]'}) }}
+                                </div>
                             </div>
                         {% endif %}
                     {% endif %}

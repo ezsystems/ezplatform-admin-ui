@@ -21,11 +21,11 @@
                 <span class="ez-translation__title">{{ 'tab.translations.add.base_language'|trans|desc('Base this translation on an existing translation') }}</span>
                 {{ form_widget(form.base_language, {'attr': {'class': 'ez-translation__language-wrapper'}}) }}
             </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">
+            <div class="modal-footer">
+                {{ form_widget(form.add, {'attr': {'class': 'btn btn-primary ez-btn--create-translation', 'disabled': 'disabled'}}) }}
+                <button type="button" class="ez-btn ez-btn--no-border" data-dismiss="modal">
                     {{ 'tab.translations.add.cancel'|trans|desc('Cancel') }}
                 </button>
-                {{ form_widget(form.add, {'attr': {'class': 'btn btn-primary font-weight-bold ez-btn--create-translation', 'disabled': 'disabled'}}) }}
             </div>
             {{ form_end(form) }}
         </div>

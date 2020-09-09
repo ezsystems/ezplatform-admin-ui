@@ -13,7 +13,7 @@ const ViewSwitcherButton = ({ id, icon, title, onClick, activeView, isDisabled }
     };
     const iconAttrs = {
         name: icon,
-        extraClasses: 'ez-icon--secondary ez-icon--small',
+        extraClasses: 'ez-icon--base-dark ez-icon--small',
     };
 
     if (activeView === id) {

@@ -13,7 +13,7 @@
             <div class="modal-header">
                 <h3 class="modal-title">{{ 'url_wildcard.modal.create.title'|trans|desc('Create a new URL wildcard') }}</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'url_wildcard.modal.create.close'|trans|desc('Close') }}">
-                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
+                    <svg class="ez-icon ez-icon--small" aria-hidden="true">
                         <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
                     </svg>
                 </button>
@@ -29,11 +29,11 @@
                 {{ form_widget(form.forward) }}
                 <div class="ez-modal__info-text">{{ 'url_wildcard.modal.create.redirect.helper'|trans|desc('When checked, the URL displayed will be the URL of the destination. When unchecked, the wildcard will not redirect to the destination and the URL will stay the same.') }}</div>
             </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">
+            <div class="modal-footer">
+                {{ form_widget(form.create, {'attr': {'class': 'btn btn-primary', 'disabled': 'disabled'}}) }}
+                <button type="button" class="ez-btn ez-btn--no-border" data-dismiss="modal">
                     {{ 'url_wildcard.modal.create.cancel'|trans|desc('Cancel') }}
                 </button>
-                {{ form_widget(form.create, {'attr': {'class': 'btn btn-primary font-weight-bold', 'disabled': 'disabled'}}) }}
             </div>
         </div>
         {{ form_end(form) }}

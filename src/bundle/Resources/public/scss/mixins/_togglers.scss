@@ -1,0 +1,46 @@
+@mixin toggler-wrapper {
+    position: relative;
+    display: flex;
+    border: calculateRem(1px) solid $ibexa-color-font-pale;
+    border-radius: $ibexa-border-radius;
+    margin-right: calculateRem(10px);
+    font-size: calculateRem(14px);
+    line-height: 1;
+} 
+
+@mixin toggler-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 0;
+}
+
+@mixin toggler-icon-btn {
+    width: calculateRem(32px);
+    height: calculateRem(32px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 0;
+    padding: 0;
+    border-radius: 0;
+
+    .ez-icon {
+        fill: $ibexa-color-base-dark;
+    }
+}
+
+@mixin toggler-selected-btn {
+    color: $ibexa-color-font-light;
+    background: $ibexa-color-base-dark;
+    transition: transform 0.3s $ez-admin-transition;
+
+    .ez-icon {
+        fill: $ibexa-white;
+    }
+}
+

@@ -1,7 +1,7 @@
 .c-menu-button {
     border: none;
     color: $ez-color-base-medium;
-    border-radius: calculateRem(2px);
+    border-radius: $ibexa-border-radius;
     padding: 0 calculateRem(14px);
     display: flex;
 
@@ -10,11 +10,6 @@
     }
 
     &--selected {
-        background-color: $ez-color-base-medium;
-        color: $ez-white;
-
-        .ez-icon {
-            fill: $ez-white;
-        }
+        @include toggler-selected-btn();
     }
 }

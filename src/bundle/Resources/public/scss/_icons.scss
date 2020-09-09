@@ -34,44 +34,42 @@
     }
 
     &--dark {
-        fill: $ez-black;
+        fill: $ibexa-black;
     }
 
     &--light {
-        fill: $ez-white;
+        fill: $ibexa-white;
+    }
+
+    &--base-dark {
+        fill: $ibexa-color-base-dark;
+    }
+
+    &--primary {
+        fill: $ibexa-color-primary;
     }
 
     &--secondary {
-        fill: $ez-color-secondary;
+        fill: $ibexa-color-primary;
     }
 }
 
 .btn-icon {
     .ez-icon {
-        width: calculateRem(24px);
-        height: calculateRem(24px);
-        fill: $ez-color-primary;
+        width: calculateRem(20px);
+        height: calculateRem(20px);
+        fill: $ibexa-color-primary;
 
         &--secondary {
-            fill: $ez-color-secondary;
+            fill: $ibexa-color-primary;
         }
 
         &--dark {
-            fill: $ez-black;
+            fill: $ibexa-black;
         }
 
         &--copy {
-            fill: $ez-color-base-dark;
-        }
-    }
-}
-
-.ez-field-edit--ezauthor {
-    .btn-icon {
-        .ez-icon {
-            fill: $ez-white;
-            width: calculateRem(16px);
-            height: calculateRem(16px);
+            fill: $ibexa-color-base-dark;
         }
     }
 }
@@ -79,23 +77,7 @@
 .ez-side-menu,
 .ez-context-menu {
     .ez-icon {
-        fill: $white;
-    }
-
-    .ez-sticky-container {
-        .ez-icon {
-            width: calculateRem(28px);
-            height: calculateRem(28px);
-            margin-bottom: calculateRem(3px);
-        }
-    }
-}
-
-.ez-table-header {
-    .ez-icon {
-        width: calculateRem(24px);
-        height: calculateRem(24px);
-        fill: $white;
+        fill: $ibexa-white;
     }
 }
 
@@ -106,51 +88,29 @@
 }
 
 .ez-icon--logo {
-    width: 8rem;
-    height: 7rem;
+    width: calculateRem(128px);
+    height: calculateRem(112px);
     display: block;
     margin: 0 auto;
-}
-
-.ez-field-edit--with-preview {
-    .ez-icon {
-        fill: $ez-white;
-        height: calculateRem(16px);
-        width: calculateRem(16px);
-    }
-}
-
-.ez-field-edit--ezbinaryfile {
-    &.ez-field-edit--with-preview {
-        .ez-field-edit-preview {
-            &__file-icon {
-                .ez-icon {
-                    fill: $ez-color-base-dark;
-                    height: calculateRem(32px);
-                    width: calculateRem(32px);
-                }
-            }
-        }
-    }
 }
 
 .ez-preview__action {
     .ez-icon {
         width: calculateRem(24px);
         height: calculateRem(24px);
-        fill: $ez-color-base-medium;
+        fill: $ibexa-color-base-dark;
     }
 
     &:hover,
     &:focus {
         .ez-icon {
-            fill: $ez-white;
+            fill: $ibexa-white;
         }
     }
 
     &.ez-preview__action--selected {
         .ez-icon {
-            fill: $ez-white;
+            fill: $ibexa-white;
         }
     }
 }
@@ -168,32 +128,32 @@
 
 .ez-btn--select-subtree {
     .ez-icon {
-        margin-right: 0.5rem;
+        margin-right: calculateRem(8px);
     }
 }
 
 .ez-alert--info {
     .ez-icon-warning {
-        fill: $ez-secondary-ground-medium;
+        fill: $ibexa-color-primary;
     }
 }
 
 .ez-modal {
     .modal-header {
         .ez-icon {
-            fill: $ez-black;
+            fill: $ibexa-black;
         }
     }
 }
 
 .ez-btn--content-tree-expanded {
     .ez-icon {
-        fill: $ez-black;
+        fill: $ibexa-black;
     }
 
     &:hover {
         .ez-icon {
-            fill: $ez-white;
+            fill: $ibexa-white;
         }
     }
 }

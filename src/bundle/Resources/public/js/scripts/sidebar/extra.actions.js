@@ -1,10 +1,10 @@
-(function(global, doc) {
+(function (global, doc) {
     const CLASS_HIDDEN = 'ez-extra-actions--hidden';
     const CLASS_EXPANDED = 'ez-context-menu--expanded';
     const CLASS_ACTIVE_BUTTON = 'ez-btn--active-button';
     const CLASS_PREVENT_SHOW = 'ez-extra-actions--prevent-show';
     const btns = [...doc.querySelectorAll('.ez-btn--extra-actions')];
-    const menu = doc.querySelector('.bg-secondary.ez-context-menu');
+    const menu = doc.querySelector('.ez-context-menu');
     const haveHiddenPart = (element) => element.classList.contains(CLASS_HIDDEN) && !element.classList.contains(CLASS_PREVENT_SHOW);
 
     btns.forEach((btn) => {

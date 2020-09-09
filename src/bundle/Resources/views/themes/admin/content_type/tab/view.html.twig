@@ -1,130 +1,127 @@
 {% import "@ezdesign/content_type/macros.html.twig" as macros %}
 
 {% trans_default_domain 'content_type' %}
+{% set current_language = app.request.get('languageCode') ?: language_code %}
 
-<div class="container mt-4 px-4">
+<div class="container ez-container">
     <section class="ez-fieldgroup">
         <h2 class="ez-fieldgroup__name">{{ "content_type.global_properties"|trans|desc("Global properties") }}</h2>
+        {% if languages|length > 1 %}
+            <form class="form-inline justify-content-end mb-4">
+                <select class="form-control ez-location-language-change">
+                    {% for language in languages %}
+                        <option value="{{ path('ezplatform.content_type.view', {
+                            'contentTypeId': content_type.id,
+                            'contentTypeGroupId': content_type_group.id,
+                            'languageCode': language.languageCode,
+                            '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\ContentType\\ViewTab::URI_FRAGMENT'),
+                        }) }}"
+                        {% if current_language == language.languageCode %} selected="selected" {% endif %}
+                        >{{ language.name }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        {% endif %}
+        <div class="ez-fieldgroup__content">
+            <header class="ez-table-header">
+                <div class="ez-table-header__headline">{{ "content_type.content_type"|trans|desc("Content Type") }}</div>
+            </header>
+
+            <table class="ez-table table mb-3">
+                <thead>
+                <tr>
+                    <th>{{ "content_type.name"|trans|desc("Name") }}</th>
+                    <th>{{ "content_type.identifier"|trans|desc("Identifier") }}</th>
+                    <th>{{ "content_type.description"|trans|desc("Description") }}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="ez-table__cell">{{ content_type.names[current_language] }}</td>
+                    <td class="ez-table__cell">{{ content_type.identifier }}</td>
+                    <td class="ez-table__cell">{{ content_type.descriptions[current_language]|default('') }}</td>
+                    <td class="ez-table__cell ez-table__cell--has-action-btns">
+                        {% if can_update %}
+                            {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-2') }}
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="ez-table table ez-table--list">
+                <tbody>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ "content_type.name_schema"|trans|desc("Content name pattern") }}</td>
+                    <td class="ez-table__cell">{{ content_type.nameSchema }}</td>
+                </tr>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ "content_type.url_alias_schema"|trans|desc("URL alias name pattern") }}</td>
+                    <td class="ez-table__cell">{{ content_type.urlAliasSchema }}</td>
+                </tr>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ "content_type.container"|trans|desc("Container") }}</td>
+                    <td class="ez-table__cell">{{ content_type.isContainer ? 'yes'|trans|desc("Yes") : 'no'|trans|desc("No") }}</td>
+                </tr>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ "content_type.default_children_sorting"|trans|desc("Sort children by default by:") }}</td>
+                    <td class="ez-table__cell">
+                        {{ ("content_type.sort_field." ~ content_type.defaultSortField)|trans(domain="content_type") }} / {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="content_type") }}
+                    </td>
+                </tr>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">{{ "content_type.default_sort"|trans|desc("Sort children by default in order:") }}</td>
+                    <td class="ez-table__cell">
+                        {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="content_type") }}
+                    </td>
+                </tr>
+                <tr class="ez-table__row">
+                    <td class="ez-table__cell">
+                        {{ "content_type.default_availability"|trans|desc('Make content available even with missing translations') }}
+                        <p class="small">
+                            {{ "content_type.default_availability.help"|trans|desc("Content of this Content Type will be avalable in the main language even if there is no translation.") }}
+                        </p>
+                    </td>
+                    <td class="ez-table__cell">
+                        {% if content_type.defaultAlwaysAvailable %}
+                            {{ 'content_type.default_availability.available'|trans|desc("Available") }}
+                        {% else %}
+                            {{ 'content_type.default_availability.not_available'|trans|desc("Not available") }}
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>    
+        </div>
     </section>
-    {% set current_language = app.request.get('languageCode') ?: language_code %}
-    {% if languages|length > 1 %}
-        <form class="form-inline justify-content-end mb-4">
-            <select class="form-control ez-location-language-change">
-                {% for language in languages %}
-                    <option value="{{ path('ezplatform.content_type.view', {
-                        'contentTypeId': content_type.id,
-                        'contentTypeGroupId': content_type_group.id,
-                        'languageCode': language.languageCode,
-                        '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\ContentType\\ViewTab::URI_FRAGMENT'),
-                    }) }}"
-                    {% if current_language == language.languageCode %} selected="selected" {% endif %}
-                    >{{ language.name }}</option>
-                {% endfor %}
-            </select>
-        </form>
-    {% endif %}
-</div>
-<section class="container mt-4 px-5">
-    <header class="ez-table__header">
-        <div class="ez-table__headline">{{ "content_type.content_type"|trans|desc("Content Type") }}</div>
-    </header>
 
-    <table class="ez-table table mb-3">
-        <thead>
-        <tr>
-            <th>{{ "content_type.name"|trans|desc("Name") }}</th>
-            <th>{{ "content_type.identifier"|trans|desc("Identifier") }}</th>
-            <th>{{ "content_type.description"|trans|desc("Description") }}</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="ez-table__cell">{{ content_type.names[current_language] }}</td>
-            <td class="ez-table__cell">{{ content_type.identifier }}</td>
-            <td class="ez-table__cell">{{ content_type.descriptions[current_language]|default('') }}</td>
-            <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
-                {% if can_update %}
-                    {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-2') }}
-                {% endif %}
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table class="ez-table table ez-table--list">
-        <tbody>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ "content_type.name_schema"|trans|desc("Content name pattern") }}</td>
-            <td class="ez-table__cell">{{ content_type.nameSchema }}</td>
-        </tr>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ "content_type.url_alias_schema"|trans|desc("URL alias name pattern") }}</td>
-            <td class="ez-table__cell">{{ content_type.urlAliasSchema }}</td>
-        </tr>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ "content_type.container"|trans|desc("Container") }}</td>
-            <td class="ez-table__cell">{{ content_type.isContainer ? 'yes'|trans|desc("Yes") : 'no'|trans|desc("No") }}</td>
-        </tr>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ "content_type.default_children_sorting"|trans|desc("Sort children by default by:") }}</td>
-            <td class="ez-table__cell">
-                {{ ("content_type.sort_field." ~ content_type.defaultSortField)|trans(domain="content_type") }} / {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="content_type") }}
-            </td>
-        </tr>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">{{ "content_type.default_sort"|trans|desc("Sort children by default in order:") }}</td>
-            <td class="ez-table__cell">
-                {{ ("content_type.sort_order." ~ content_type.defaultSortOrder)|trans(domain="content_type") }}
-            </td>
-        </tr>
-        <tr class="ez-table__row">
-            <td class="ez-table__cell">
-                {{ "content_type.default_availability"|trans|desc('Make content available even with missing translations') }}
-                <p class="text-secondary small">
-                    {{ "content_type.default_availability.help"|trans|desc("Content of this Content Type will be avalable in the main language even if there is no translation.") }}
-                </p>
-            </td>
-            <td class="ez-table__cell">
-                {% if content_type.defaultAlwaysAvailable %}
-                    {{ 'content_type.default_availability.available'|trans|desc("Available") }}
-                {% else %}
-                    {{ 'content_type.default_availability.not_available'|trans|desc("Not available") }}
-                {% endif %}
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</section>
-
-<div class="container mt-4 px-4">
     <section class="ez-fieldgroup">
         <h2 class="ez-fieldgroup__name">{{ "content_type.content_field_definitions"|trans|desc("Content Field definitions") }}</h2>
+        <div class="ez-fieldgroup__content">
+            {% for group, field_definitions in field_definitions_by_group %}
+                <header class="ez-table-header">
+                    <div class="ez-table-header__headline">{{ group|capitalize }}</div>
+                </header>
+                <table class="table ez-table">
+                    <thead>
+                    <tr>
+                        <th class="ez-table__cell--field-definitions-head" scope="col">Name</th>
+                        <th class="ez-table__cell--field-definitions-head" scope="col">Identifier</th>
+                        <th class="ez-table__cell--field-definitions-head" scope="col">Type</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for field_definition in field_definitions %}
+                        <tr>
+                            <td class="ez-table__cell" scope="row">{{ field_definition.names[current_language] }}</td>
+                            <td class="ez-table__cell">{{ field_definition.identifier }}</td>
+                            <td class="ez-table__cell">{{ field_definition.fieldTypeIdentifier }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        </div>
     </section>
 </div>
-<section class="container mt-4 px-5">
-    {% for group, field_definitions in field_definitions_by_group %}
-        <header class="ez-table__header">
-            <div class="ez-table__headline">{{ group|capitalize }}</div>
-        </header>
-
-        <table class="table ez-table">
-            <thead>
-            <tr>
-                <th class="ez-table__cell--field-definitions-head" scope="col">Name</th>
-                <th class="ez-table__cell--field-definitions-head" scope="col">Identifier</th>
-                <th class="ez-table__cell--field-definitions-head" scope="col">Type</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for field_definition in field_definitions %}
-                <tr>
-                    <th class="ez-table__cell" scope="row">{{ field_definition.names[current_language] }}</th>
-                    <td class="ez-table__cell">{{ field_definition.identifier }}</td>
-                    <td class="ez-table__cell">{{ field_definition.fieldTypeIdentifier }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% endfor %}
-</section>

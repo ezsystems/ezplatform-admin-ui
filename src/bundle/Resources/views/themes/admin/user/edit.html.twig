@@ -9,7 +9,7 @@
             href="{{ path('_ez_content_view', {'contentId': user.id, 'locationId': user.versionInfo.contentInfo.mainLocationId}) }}"
             title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
         >
-            <svg class="ez-icon ez-icon--small-medium">
+            <svg class="ez-icon ez-icon--small-medium ez-icon--primary">
                 <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
             </svg>
         </a>
@@ -42,7 +42,7 @@
 
 {% block form_fields %}
     <section class="container mt-4 mb-5 px-5">
-        <div class="card ez-card">
+        <div class="card ez-card ez-card--light">
             <div class="card-body">
                 {{ parent() }}
                 {{ form_widget(form.update, {'attr': {'hidden': 'hidden'}}) }}

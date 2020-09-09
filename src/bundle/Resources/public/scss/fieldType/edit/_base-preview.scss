@@ -9,7 +9,7 @@
     .form-control-file,
     .custom-file-input {
         opacity: 0;
-        height: 1px;
+        height: calculateRem(1px);
     }
 
     .custom-file {
@@ -17,92 +17,30 @@
     }
 
     .ez-field-edit__data {
-        border-radius: 0.25rem;
-        border: 2px dashed $ez-color-base-pale;
-        padding: 1rem;
-        text-align: center;
         position: relative;
 
-        .ez-data-source__btn-add,
-        .ez-data-source__btn-select {
-            display: inline-flex;
-            padding: 0.5rem 1.25rem;
-            border-radius: 0.25rem;
-            text-align: center;
-            cursor: pointer;
-            letter-spacing: 0.5px;
-            color: $ez-white;
-            font-size: 1rem;
-            font-weight: 700;
-            border: 1px solid $ez-color-primary;
-            background-color: $ez-color-primary;
-            transition: background 0.3s $ez-admin-transition;
-            align-items: center;
-
-            .ez-icon {
-                margin-top: -2px;
-                margin-right: 0.5rem;
-                width: 1.5rem;
-                height: 1.5rem;
+        .ez-data-source__message {
+            &--main {
+                box-sizing: border-box;
+                cursor: auto;
+                margin-bottom: calculateRem(32px);
             }
-        }
 
-        .ez-data-source__btn-add:hover,
-        .ez-data-source__btn-add:focus,
-        .ez-data-source__btn-select:hover,
-        .ez-data-source__btn-select:focus {
-            background: $ez-color-primary-hover;
-        }
-
-        .ez-data-source__message--main {
-            box-sizing: border-box;
-            cursor: auto;
-            line-height: 60px;
-            margin: 0;
-        }
-
-        .ez-data-source__message--filesize {
-            font-size: 0.75rem;
-            line-height: 60px;
+            &--filesize {
+                color: $ibexa-color-base-dark;
+                margin-top: calculateRem(24px);
+            }
         }
     }
 
     .ez-field-edit-preview {
         display: flex;
         flex-wrap: nowrap;
-        padding: 0 1.25rem;
-        background: $ez-ground-base-medium;
+        padding: 0 calculateRem(16px);
+        background: $ibexa-white;
 
         &__visual {
             flex: 1 1 auto;
-        }
-
-        &__actions {
-            flex: 0 0 64px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        &__action--preview {
-            @include btn-preview-action;
-            background: $ez-color-base-medium;
-            margin-top: 1.25rem;
-
-            &:hover,
-            &:focus {
-                background: darken($ez-color-base-medium, 15%);
-            }
-        }
-
-        &__action--remove {
-            @include btn-preview-action;
-            background: $ez-color-secondary;
-
-            &:hover,
-            &:focus {
-                background: $ez-color-secondary-hover;
-            }
         }
     }
 }

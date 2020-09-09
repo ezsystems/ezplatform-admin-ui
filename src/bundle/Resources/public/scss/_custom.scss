@@ -1,47 +1,81 @@
+@import './public/bundles/ezplatformadminui/scss/functions/calculate.rem';
+
 // eZ transition function
 $ez-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
 $ez-admin-widget-open-transition: all 0.3s ease-in;
 $ez-admin-widget-close-transition: all 0.3s ease-out;
 
-/* eZ colors */
-$ez-color-primary: #f15a10;
+// Ibexa colors
+$ibexa-white: #FFF;
+$ibexa-black: #131C26;
+
+$ibexa-color-primary: #DB0032;
+$ibexa-color-primary-pale: #F3E4E7;
+$ibexa-color-primary-light: #E75476;
+$ibexa-color-deep-black: #222222;
+
+$ibexa-color-base: #E0E0E8;
+$ibexa-color-base-pale: #F5F5F5;
+$ibexa-color-base-light: #F7F7F9;
+$ibexa-color-base-medium: #ECECF1;
+$ibexa-color-base-dark: #878B90;
+$ibexa-color-base-deep:#656565;
+$ibexa-color-base-black: #131C26;
+
+$ibexa-color-font: #131C26;
+$ibexa-color-font-light: #FFF;
+$ibexa-color-font-pale: #878B90;
+$ibexa-color-font-black: #222222;
+$ibexa-color-border-light: #ECDFD1;
+
+$ibexa-color-positive: #00825C;
+$ibexa-color-warning: #F7D000;
+$ibexa-color-danger: #D92D42;
+$ibexa-color-warning-dark: #AA0000;
+$ibexa-color-warning-pale: #FCEAEC;
+
+$ibexa-color-primary-hover: #E75476;
+
+/* eZ colors: These colors are deprecated, please use colors with the "ibexa" prefix */
+$ez-color-primary: $ibexa-color-primary;
 $ez-color-primary-hover: darken($ez-color-primary, 15%);
-$ez-color-secondary: #106d95;
+$ez-color-secondary: $ibexa-color-primary;
 $ez-color-secondary-hover: darken($ez-color-secondary, 15%);
-$ez-color-hyperlink: #0645ad;
+$ez-color-hyperlink: $ibexa-color-primary;
 $ez-color-hyperlink-hover: darken($ez-color-hyperlink, 15%);
-$ez-color-positive: #00825c;
-$ez-color-warning: #f7d000;
-$ez-color-danger: #d92d42;
+$ez-color-positive: $ibexa-color-positive;
+$ez-color-warning: $ibexa-color-warning;
+$ez-color-danger: $ibexa-color-danger;
 $ez-color-danger-hover: darken($ez-color-danger, 15%);
 
-$ez-white: #fff;
-$ez-ground-base-pale: #fafafa;
-$ez-ground-base-light: #f5f5f5;
-$ez-ground-base: #f3f3f3;
-$ez-ground-base-medium: #ededed;
-$ez-ground-base-dark: #e5e3e3;
+$ez-white: $ibexa-white;
+$ez-ground-base-pale: $ibexa-color-base-light;
+$ez-ground-base-light: $ibexa-color-base-pale;
+$ez-ground-base: #F3F3F3;
+$ez-ground-base-medium: $ibexa-white;
+$ez-ground-base-dark: $ibexa-color-base-light;
 $ez-ground-base-dark-hover: darken($ez-ground-base-dark, 15%);
-$ez-color-base-pale: #dbdbdb;
-$ez-color-base-light: #878787;
+$ez-color-base-pale: $ibexa-white;
+$ez-color-base-light: $ibexa-color-base-dark;
 $ez-color-base-light-hover: darken($ez-color-base-light, 15%);
-$ez-color-base-medium: #646464;
+$ez-color-base-medium: $ibexa-color-base-dark;
 $ez-color-base-medium-hover: darken($ez-color-base-medium, 15%);
-$ez-color-base-dark: #555;
-$ez-black: #333;
+$ez-color-base-dark: $ibexa-black;
+$ez-black: $ibexa-black;
 
-$ez-secondary-ground-pale: #e1f5ff;
-$ez-ground-primary: #a8c8d5;
-$ez-secondary-ground: #2b84b1;
-$ez-secondary-ground-medium: #106d95;
-$ez-secondary-ground-dark: #0a5574;
-$ez-ground-primary-inverted-light: #445a64;
-$ez-ground-primary-inverted: #565e63;
+$ez-secondary-ground-pale: $ibexa-color-base;
+$ez-ground-primary: $ibexa-white;
+$ez-secondary-ground: $ibexa-color-primary;
+$ez-secondary-ground-medium: $ibexa-color-primary;
+$ez-secondary-ground-dark: $ibexa-color-primary;
 
-$ez-color-warning-pale: #fceaec;
-$ez-color-warning-dark: #aa0000;
+$ez-ground-primary-inverted-light: #445A64;
+$ez-ground-primary-inverted: $ibexa-color-base;
 
-$ez-alloyeditor-color-hover: #65b6f0;
+$ez-color-warning-pale: $ibexa-color-warning-pale;
+$ez-color-warning-dark: $ibexa-color-warning-dark;
+
+$ez-alloyeditor-color-hover: #65B6F0;
 
 $ez-pagination-bg: transparent;
 $ez-pagination-margin: 0.25rem;
@@ -50,51 +84,51 @@ $ez-pagination-page-link-radius: 50%;
 $ez-pagination-border-radius: 0.3rem;
 
 /* boostrap variables*/
-$white: $ez-white;
-$gray-100: $ez-ground-base-pale;
-$gray-200: $ez-ground-base-light;
-$gray-300: $ez-ground-base;
-$gray-400: $ez-ground-base-medium;
-$gray-500: $ez-ground-base-dark;
-$gray-600: $ez-color-base-pale;
-$gray-700: $ez-color-base-light;
-$gray-800: $ez-color-base-medium;
-$gray-900: $ez-color-base-dark;
-$black: $ez-black;
+$white: $ibexa-white;
+$gray-100: $ibexa-color-base-pale;
+$gray-200: $ibexa-color-base-pale;
+$gray-300: $ibexa-color-base-light;
+$gray-400: $ibexa-color-base-light;
+$gray-500: $ibexa-color-base-medium;
+$gray-600: $ibexa-color-base-medium;
+$gray-700: $ibexa-color-base;
+$gray-800: $ibexa-color-base;
+$gray-900: $ibexa-color-base-dark;
+$black: $ibexa-black;
 
 $grays: (
-    100: $ez-ground-base-pale,
-    200: $ez-ground-base-light,
-    300: $ez-ground-base,
-    400: $ez-ground-base-medium,
-    500: $ez-ground-base-dark,
-    600: $ez-color-base-pale,
-    700: $ez-color-base-light,
-    800: $ez-color-base-medium,
-    900: $ez-color-base-dark
+    100: $ibexa-color-base-pale,
+    200: $ibexa-color-base-pale,
+    300: $ibexa-color-base-light,
+    400: $ibexa-color-base-light,
+    500: $ibexa-color-base-medium,
+    600: $ibexa-color-base-medium,
+    700: $ibexa-color-base,
+    800: $ibexa-color-base,
+    900: $ibexa-color-base-dark
 );
 
-$blue: $ez-color-secondary;
-$red: $ez-color-danger;
-$orange: $ez-color-primary;
-$yellow: $ez-color-warning;
-$green: $ez-color-positive;
-$teal: $ez-ground-primary;
-$pink: #e83e8c !default;
-$indigo: #6610f2 !default;
-$purple: #6f42c1 !default;
-$cyan: #17a2b8 !default;
+$blue: $ibexa-color-primary;
+$red: $ibexa-color-primary;
+$orange: $ibexa-color-primary;
+$yellow: $ibexa-color-warning;
+$green: $ibexa-color-positive;
+$teal: $ibexa-white;
+$pink: #E83E8C !default;
+$indigo: #6610F2 !default;
+$purple: #6F42C1 !default;
+$cyan: #17A2B8 !default;
 
 $colors: (
-    blue: $ez-color-secondary,
-    red: $ez-color-danger,
-    orange: $ez-color-primary,
-    yellow: $ez-color-warning,
-    green: $ez-color-positive,
-    teal: $ez-ground-primary,
-    white: $white,
-    gray: $ez-color-base-light,
-    gray-dark: #e83e8c,
+    blue: $ibexa-color-primary,
+    red: $ibexa-color-primary,
+    orange: $ibexa-color-primary,
+    yellow: $ibexa-color-warning,
+    green: $ibexa-color-positive,
+    teal: $ibexa-white,
+    white: $ibexa-white,
+    gray: $ibexa-color-base-dark,
+    gray-dark: $pink,
     indigo: $indigo,
     purple: $purple,
     pink: $pink,
@@ -102,18 +136,19 @@ $colors: (
 );
 
 $theme-colors: (
-    primary: $ez-color-primary,
-    secondary: $ez-color-secondary,
-    success: $ez-color-positive,
-    warning: $ez-color-warning,
-    danger: $ez-color-danger,
-    light: $ez-ground-base-pale,
-    dark: $ez-color-base-dark,
+    primary: $ibexa-color-primary,
+    secondary: $ibexa-color-primary,
+    success: $ibexa-color-positive,
+    warning: $ibexa-color-warning,
+    danger: $ibexa-color-danger,
+    light: $ibexa-color-base-light,
+    dark: $ibexa-black,
     info: $cyan
 );
 
 // Typography
 $base-font-size: 16px;
+$small-font-size: 0.8rem !default;
 $h1-font-size: 1.75rem !default;
 $h2-font-size: 1.5rem !default;
 $h3-font-size: 1.375rem !default;
@@ -126,22 +161,34 @@ $headings-font-weight: 700;
 // Fonts
 $font-family-sans-serif: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
 
+//Border
+$ibexa-border-radius: calculateRem(2px);
+
 // Tables
+$table-cell-padding: calculateRem(12px) calculateRem(16px);
 $table-bg: $white;
-$table-border-color: $ez-ground-primary;
+$table-border-width: 0;
+$table-hover-bg: $ibexa-color-base-pale;
 
 // Breadcrumbs
-$breadcrumb-bg: $ez-ground-base;
+$breadcrumb-font-size: calculateRem(14px);
+$breadcrumb-padding-y: 0;
+$breadcrumb-padding-x: 0;
+$breadcrumb-item-padding: calculateRem(3px);
+$breadcrumb-bg: transparent;
+$breadcrumb-divider: quote(">");
 
 // Links
-$link-color: $ez-color-hyperlink;
+$link-decoration: underline;
+$link-color: $ibexa-color-font;
+$link-hover-decoration: underline;
+$link-hover-color: $ibexa-color-primary;
 
 // Body
 $body-bg: $ez-ground-base-pale;
 $body-color: $ez-black;
 
 // Pagination
-
 $pagination-color: $ez-black;
 $pagination-bg: $ez-pagination-bg;
 
@@ -157,4 +204,41 @@ $pagination-border-width: 0;
 $pagination-border-color: transparent;
 
 // Modals
-$modal-content-bg: $ez-ground-base-medium;
+$modal-header-padding: calculateRem(16px) calculateRem(24px);
+$modal-header-border-width: 0;
+$modal-content-border-width: 0;
+$modal-content-border-radius: $ibexa-border-radius;
+$modal-inner-padding: calculateRem(24px);
+$modal-footer-padding: calculateRem(16px) calculateRem(24px);
+//Components
+$border-radius: $ibexa-border-radius;
+
+//Cards
+$card-spacer-x: 0;
+
+//Grid
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1470px
+) !default;
+
+//Inputs
+$input-bg: transparent;
+$input-color: $ibexa-color-font;
+$input-border-color: $ibexa-color-base-dark;
+$input-box-shadow: none;
+
+$input-focus-bg: transparent;
+$input-focus-border-color: $ibexa-color-primary;
+$input-focus-color: $ibexa-color-font-pale;
+$input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
+
+//Buttons
+$btn-line-height: calculateRem(16px);
+$btn-font-size: calculateRem(14px);
+$btn-padding-y: calculateRem(8px);
+$btn-padding-x: 1rem;
+$btn-border-width: 0;
+$btn-focus-box-shadow: none;

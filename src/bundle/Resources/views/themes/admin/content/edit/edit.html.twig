@@ -6,79 +6,28 @@
     <meta name="LanguageCode" content="{{ language.languageCode }}"/>
 {% endblock %}
 
+{% block breadcrumbs %}
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
+        { value: content_type.name }
+    ]} %}
+{% endblock %}
+
+{% block page_title %}
+    {% set content_name = content ? content.name : 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') %}
+    {% include '@ezdesign/content/page_title_edit.html.twig' with { 
+        action_name: 'editing'|trans|desc('Editing'),
+        title: content_name,
+        description: content_type.description
+    } %}
+{% endblock %}
+
 {% block details %}
-    <div class="ez-edit-header">
-        <div class="ez-edit-header__content-type-name">
-            {% block close_button %}
-                {% set referrer_location = is_published ? location : parent_location %}
-                <a 
-                    class="ez-content-edit-container__close" 
-                    href="{{ path('_ez_content_view', { 'contentId': referrer_location.contentId, 'locationId': referrer_location.id }) }}"
-                    title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
-                >
-                    <svg class="ez-icon ez-icon--small-medium">
-                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
-                    </svg>
-                </a>
-            {% endblock %}
-            <div class="container px-5">
-                {% set content_name = content ? content.name : 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%') %}
-                <div class="ez-content-item__name">
-                    {{ content_name }}
-                </div>
-            </div>
-        </div>
-        <div class="ez-edit-header__details">
-            <div class="container ez-details-items">
-                {{ 'editing_details'|trans({
-                    '%icon%': ez_content_type_icon(content_type.identifier), 
-                    '%content_type_name%': content_type.name, 
-                    '%language_name%': language.name, 
-                    '%location_name%': parent_location.contentInfo.name})
-                    |desc('
-                        <span class="ez-details-items__connector">Editing:</span>
-                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
-                        <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
-                            <use xlink:href="%icon%"></use>
-                        </svg>
-                        %content_type_name%
-                        </span>
-                        <span class="ez-details-items__connector ez-details-items__connector--small">in</span>
-                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--language">%language_name%</span>
-                        <span class="ez-details-items__connector ez-details-items__connector--small">under</span>
-                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>')
-                    |raw 
-                }}
-                <a class="ez-details-items__toggler ez-details-items__toggler--gray" href="#" title="{{ 'more_info'|trans|desc('More info') }}">?</a>
-            </div>
-            <div class="container ez-details-items ez-details-items--collapsed ez-details-items__author-breadcrumbs">
-                {{ content_type.name }}/
-                {% if creator is not null %}
-                    {{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}/
-                {% endif %}
-                {{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }}/
-                {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
-                {% if is_published == false %}
-                    {{ 'parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
-                {% else %}
-                    {{ 'location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
-                {% endif %}
-            </div>
-        </div>
-        <div class="container px-5 mt-4 ez-content-item__errors-wrapper" hidden>
-            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
-        </div>
-        {# @todo remove if statement once getDescription() bug is resolved in kernel #}
-        {% if content_type.descriptions is not empty %}
-            <div class="small text-muted">{{ content_type.description }}</div>
-        {% endif %}
-    </div>
 {% endblock %}
 
 {% block form_fields %}
-    <section class="container mt-4 px-5 mb-5">
-        <div class="card ez-card">
-            <div class="card-body px-0">
+    <section class="container">
+        <div class="card ez-card ez-card--light">
+            <div class="card-body">
                 {{ parent() }}
                 {{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}
                 {{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}

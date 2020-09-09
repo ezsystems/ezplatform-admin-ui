@@ -91,6 +91,7 @@
                             }
                         }) }}
                         {{ form_row(form_assign_section.section, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+                        
                         {% do form_assign_section.assign.setRendered() %}
                         {{ form_end(form_assign_section) }}
                     {% endif %}
@@ -146,7 +147,7 @@
     ground: 'ground-base'
 } %}
 
-<div class="bg-white p-3 mb-5" data-sort-field="{{ sort_field_clause_map[location.sortField] }}" data-sort-order="{{ location.sortOrder ? 'ascending' : 'descending' }}">
+<div class="bg-white ml-4" data-sort-field="{{ sort_field_clause_map[location.sortField] }}" data-sort-order="{{ location.sortOrder ? 'ascending' : 'descending' }}">
     {{ form_start(form_location_update, {
         'method': 'POST',
         'action': path('ezplatform.location.update'),

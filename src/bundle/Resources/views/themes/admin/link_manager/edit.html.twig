@@ -25,12 +25,12 @@
                 </div>
             </div>
 
-            <div class="container px-0 pb-4 mt-5">
+            <div class="container ez-container">
                 {{ form_start(form) }}
                 {{ form_errors(form) }}
 
                 <section class="container mt-4">
-                    <div class="card ez-card">
+                    <div class="card ez-card ez-card--light">
                         <div class="card-body">
                             {{ form_row(form.url, {'label_attr': {'class': 'ez-label'}}) }}
                         </div>
@@ -40,7 +40,7 @@
                 {{ form_end(form) }}
             </div>
         </div>
-        <div class="pt-4 px-0 bg-secondary ez-context-menu">
+        <div class="ez-context-menu">
             {% set url_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.url_edit.sidebar_right', [], {'url': url}) %}
 
             {{ knp_menu_render(url_create_sidebar_right, {

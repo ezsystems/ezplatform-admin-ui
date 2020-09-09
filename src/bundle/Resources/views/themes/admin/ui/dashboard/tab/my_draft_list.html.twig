@@ -1,7 +1,7 @@
 {% trans_default_domain 'dashboard' %}
 
 {% if data|length %}
-    <table class="ez-table table">
+    <table class="ez-table table table-hover">
         <thead>
             <tr>
                 <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
@@ -19,7 +19,7 @@
             {% if row.isAccessible %}
                 <tr>
                     <td class="ez-table__cell ez-table__cell--has-icon">
-                        <svg class="ez-icon ez-icon--small">
+                        <svg class="ez-icon ez-icon--small-medium ez-icon--base-dark">
                             <use xlink:href="{{ ez_content_type_icon(row.contentType.identifier) }}"></use>
                         </svg>
                     </td>
@@ -32,7 +32,7 @@
                     <td class="ez-table__cell">{{ ez_admin_ui_config.languages.mappings[row.versionInfo.initialLanguageCode].name }}</td>
                     <td class="ez-table__cell">{{ row.versionInfo.versionNo }}</td>
                     <td class="ez-table__cell">{{ row.versionInfo.modificationDate|ez_full_datetime }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
+                    <td class="ez-table__cell ez-table__cell--has-action-btns">
                         <button class="btn btn-icon mx-2 ez-btn--content-draft-edit"
                                 title="{{ 'dashboard.table.draft.edit'|trans|desc('Edit Draft') }}"
                                 data-content-draft-edit-url="{{ path(content_draft_edit_url, {
@@ -71,11 +71,11 @@
     </table>
 
     {% if pager.haveToPaginate %}
-        <div class="row justify-content-center align-items-center mb-2 mt-2 ez-pagination__spacing">
+        <div class="row justify-content-center align-items-center ez-pagination__spacing">
             <span class="ez-pagination__text">
                 {{ 'pagination.viewing'|trans({
                     '%viewing%': pager.currentPageResults|length,
-                    '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                    '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
             </span>
         </div>
         <div class="row justify-content-center align-items-center ez-pagination__btn">

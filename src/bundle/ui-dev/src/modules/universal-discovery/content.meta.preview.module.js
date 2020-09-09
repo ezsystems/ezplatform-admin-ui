@@ -63,7 +63,7 @@ const ContentMetaPreview = () => {
                 onClick={previewContent}
                 data-tooltip-container-selector=".c-udw-tab"
                 title={previewLabel}>
-                <Icon name="view" extraClasses="ez-icon--secondary" />
+                <Icon name="view" extraClasses="ez-icon--small-medium ez-icon--dark" />
             </button>
         ) : null;
         const hasAccess = permissions && permissions.edit.hasAccess;
@@ -92,7 +92,7 @@ const ContentMetaPreview = () => {
                     title={bookmarkLabel}
                     data-placement="left"
                     data-tooltip-container-selector=".c-content-meta-preview">
-                    <Icon name={bookmarkIconName} extraClasses="ez-icon--small ez-icon--secondary" />
+                    <Icon name={bookmarkIconName} extraClasses="ez-icon--small ez-icon--dark" />
                 </button>
             </div>
             {renderActions()}
