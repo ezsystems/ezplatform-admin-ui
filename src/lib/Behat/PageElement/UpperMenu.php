@@ -22,7 +22,7 @@ class UpperMenu extends Element
             'menuButton' => '.ez-main-nav .nav-link',
             'submenuButton' => '.ez-main-sub-nav .nav-link',
             'dashboardLink' => '.navbar-brand',
-            'pendingNotificationsCount' => '.ez-user-menu__avatar-wrapper.n-pending-notifications',
+            'pendingNotificationsCount' => '.ez-user-menu__name-wrapper .n-pending-notifications',
             'userSettingsToggle' => '.ez-user-menu__name-wrapper',
             'userSettingsItem' => '.ez-user-menu__item',
         ];

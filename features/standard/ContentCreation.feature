@@ -18,16 +18,6 @@ Feature: Content items creation
     And there's no "Test Article" "Article" on Sub-items list of root
 
   @javascript @common
-  Scenario: Content creation can be closed
-    When I start creating a new content "Article"
-    And I set content fields
-      | label | value        |
-      | Title | Test Article |
-    And I click on the close button
-    Then I should be on root container page in Content View
-    And there's no "Test Article" "Article" on Sub-items list of root
-
-  @javascript @common
   Scenario: Content can be previewed during creation
     When I start creating a new content "Article"
     And I set content fields

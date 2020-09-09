@@ -47,6 +47,8 @@ class AdminList extends Element
         if ($actualHeader === null) {
             Assert::fail(sprintf('Table header "%s" not found on page', $this->listHeader));
         }
+
+        $this->table->verifyVisibility();
     }
 
     public function clickPlusButton(): void
@@ -70,20 +72,6 @@ class AdminList extends Element
 
     public function isElementOnTheList(string $listElementName): bool
     {
-        $pagination = ElementFactory::createElement($this->context, Pagination::ELEMENT_NAME);
-
-        while (true) {
-            if ($this->table->isElementOnCurrentPage($listElementName)) {
-                return true;
-            }
-
-            if ($pagination->isNextButtonActive()) {
-                $pagination->clickNextButton();
-            } else {
-                break;
-            }
-        }
-
-        return false;
+        return $this->table->isElementInTable($listElementName);
     }
 }

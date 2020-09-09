@@ -15,7 +15,7 @@ abstract class Table extends ItemsList
     {
         parent::__construct($context, $containerLocator);
         $this->fields['tableCell'] = $containerLocator . ' tr:nth-child(%d) td:nth-child(%d)';
-        $this->fields['editButton'] = $containerLocator . ' tr:nth-child(%s) .ez-icon-edit';
+        $this->fields['editButton'] = $containerLocator . ' tr:nth-child(%s) [data-original-title="Edit"]';
         $this->fields['listRow'] = $containerLocator . ' tbody tr';
         $this->fields['horizontalHeaders'] = $containerLocator . ' thead th';
     }

@@ -79,27 +79,31 @@ class AdministrationContext extends BusinessContext
     }
 
     /**
-     * @Then there's :listElementName on :page list
-     * @Then there's :listElementName on :parameter :page list
+     * @Then there's :listElementName on :pageName list
+     * @Then there's :listElementName on :parameter :pageName list
      */
-    public function verifyElementOnTheList(string $listElementName, string $page, ?string $parameter = null): void
+    public function verifyElementOnTheList(string $listElementName, string $pageName, ?string $parameter = null): void
     {
-        $pageElement = PageObjectFactory::createPage($this->browserContext, $page, $parameter);
-        if (!$pageElement->adminList->isElementOnTheList($listElementName)) {
-            Assert::fail(sprintf('Element "%s" is on the %s list.', $listElementName, $page));
-        }
+        $page = PageObjectFactory::createPage($this->browserContext, $pageName, $parameter);
+        $page->verifyIsLoaded();
+        Assert::assertTrue(
+            $page->adminList->isElementOnTheList($listElementName),
+            sprintf('Element "%s" is on the %s list.', $listElementName, $pageName)
+        );
     }
 
     /**
-     * @Then there's no :listElementName on :page list
-     * @Then there's no :listElementName on :parameter :page list
+     * @Then there's no :listElementName on :pageName list
+     * @Then there's no :listElementName on :parameter :pageName list
      */
-    public function verifyElementNotOnTheList(string $listElementName, string $page, string $parameter = null): void
+    public function verifyElementNotOnTheList(string $listElementName, string $pageName, string $parameter = null): void
     {
-        $pageElement = PageObjectFactory::createPage($this->browserContext, $page, $parameter);
-        if ($pageElement->adminList->isElementOnTheList($listElementName)) {
-            Assert::fail(sprintf('Element "%s" is on the %s list.', $listElementName, $page));
-        }
+        $page = PageObjectFactory::createPage($this->browserContext, $pageName, $parameter);
+        $page->verifyIsLoaded();
+        Assert::assertFalse(
+            $page->adminList->isElementOnTheList($listElementName),
+            sprintf('Element "%s" is on the %s list.', $listElementName, $pageName)
+        );
     }
 
     /**
@@ -175,8 +179,9 @@ class AdministrationContext extends BusinessContext
      */
     public function iStartEditingItem(string $itemType, string $itemName, ?string $containerName = null): void
     {
-        PageObjectFactory::createPage($this->browserContext, $this->itemCreateMapping[$itemType], $containerName)
-            ->startEditingItem($itemName);
+        $page = PageObjectFactory::createPage($this->browserContext, $this->itemCreateMapping[$itemType], $containerName);
+        $page->verifyIsLoaded();
+        $page->startEditingItem($itemName);
     }
 
     /**

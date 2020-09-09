@@ -79,7 +79,7 @@ Feature: Content items creation
         | Title | Test Article draft edited2 |
       And I set article main content field to "Test Article draft intro edited2"
       And I click on the close button
-    Then I should be on content container page "Test Article draft" of type "Article" in root path
+    Then I should be on root container page in Content View
 
   @javascript @common
   Scenario: Content edit draft can be saved
@@ -115,6 +115,7 @@ Feature: Content items creation
     Given I navigate to content "Test Article draft edited3" of type "Article" in root path
       And I click on the edit action bar button "Edit"
       And I click on the close button
+      And I navigate to content "Test Article draft edited3" of type "Article"
     When I click on the edit action bar button "Edit"
       And I start editing draft with ID "4" from draft conflict modal
       And I set content fields

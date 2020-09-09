@@ -36,6 +36,9 @@ class RolesPage extends Page
     public function verifyElements(): void
     {
         $this->adminList->verifyVisibility();
+        $this->context->waitUntil($this->defaultTimeout, function () {
+            return $this->adminList->table->getItemCount() > 0;
+        });
     }
 
     public function verifyItemAttribute(string $label, string $value, string $itemName): void
