@@ -76,7 +76,7 @@
             <tbody>
             {% for role in pager.currentPageResults %}
                 <tr>
-                    <td class="">
+                    <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_delete %}
                             {{ form_widget(form_roles_delete.roles[role.id], { attr: { "class": "ez-input ez-input--checkbox" } }) }}
                         {% else %}
