@@ -19,7 +19,6 @@ class ContentTypePicker extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'contentTypeSelector' => '.form-check-label',
             'filterInput' => '.ez-instant-filter__input',
             'filteredItem' => '.ez-instant-filter__group-item:not([hidden])',
             'headerSelector' => '.ez-extra-actions--create .ez-extra-actions__header',
@@ -30,7 +29,7 @@ class ContentTypePicker extends Element
     {
         $this->context->findElement($this->fields['filterInput'])->setValue($contentTypeName);
         $this->context->waitUntilElementIsVisible($this->fields['filteredItem']);
-        $this->context->getElementByText($contentTypeName, $this->fields['contentTypeSelector'])->click();
+        $this->context->getElementByText($contentTypeName, $this->fields['filteredItem'])->click();
     }
 
     public function verifyVisibility(): void
