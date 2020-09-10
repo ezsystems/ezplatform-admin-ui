@@ -20,6 +20,7 @@
             const dataMaxSize = +this.inputField.dataset.maxFileSize;
 
             this.maxFileSize = parseInt(dataMaxSize, 10);
+            this.showPreviewEventName = 'ez-base:show-preview';
         }
 
         /**
@@ -269,6 +270,8 @@
             this.inputField.addEventListener('change', this.handleInputChange, false);
             window.addEventListener('drop', this.preventDefaultAction, false);
             window.addEventListener('dragover', this.preventDefaultAction, false);
+
+            this.fieldContainer.addEventListener(this.showPreviewEventName, () => this.showPreview());
 
             this.initializeDropZone();
             this.initializePreview();

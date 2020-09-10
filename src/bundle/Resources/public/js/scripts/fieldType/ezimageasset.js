@@ -10,6 +10,11 @@
     const imageAssetMapping = eZ.adminUiConfig.imageAssetMapping;
 
     class EzImageAssetPreviewField extends eZ.BasePreviewField {
+        constructor(props) {
+            super(props);
+
+            this.showPreviewEventName = 'ez-image-asset:show-preview';
+        }
         /**
          * Creates a new Image Asset
          *
