@@ -38,6 +38,12 @@ class TestLogProvider
 
     public function getBrowserLogs(): array
     {
+        $driver = $this->session->getDriver();
+
+        if (!$this->session->isStarted() || !($driver instanceof Selenium2Driver)) {
+            return [];
+        }
+
         if ($this->hasCachedLogs()) {
             $logs = $this->getCachedLogs();
             $this->clearCachedLogs();
@@ -45,16 +51,11 @@ class TestLogProvider
             return $logs;
         }
 
-        $driver = $this->session->getDriver();
-        if ($driver instanceof Selenium2Driver) {
-            $logs = $driver->getWebDriverSession()->log(LogType::BROWSER) ?? [];
-            $parsedLogs = $this->parseBrowserLogs($logs);
-            $this->cacheLogs($parsedLogs);
+        $logs = $driver->getWebDriverSession()->log(LogType::BROWSER) ?? [];
+        $parsedLogs = $this->parseBrowserLogs($logs);
+        $this->cacheLogs($parsedLogs);
 
-            return $parsedLogs;
-        }
-
-        return [];
+        return $parsedLogs;
     }
 
     public function getApplicationLogs(): array
