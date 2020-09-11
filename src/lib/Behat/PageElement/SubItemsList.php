@@ -46,4 +46,9 @@ class SubItemsList extends Element
         $this->table->sortBy($columnName, $ascending);
         $this->verifyVisibility();
     }
+
+    public function canBeSorted(): bool
+    {
+        return $this->table->canBeSorted();
+    }
 }

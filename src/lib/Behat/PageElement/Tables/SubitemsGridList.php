@@ -22,4 +22,9 @@ class SubitemsGridList extends ItemsList
     {
         $this->context->getElementByText($name, $this->fields['listElement'])->click();
     }
+
+    public function canBeSorted(): bool
+    {
+        return false;
+    }
 }
