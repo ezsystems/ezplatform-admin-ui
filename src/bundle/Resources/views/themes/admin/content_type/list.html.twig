@@ -86,7 +86,6 @@
                 <td class="ez-table__cell">{{ content_type.id }}</td>
                 <td class="ez-table__cell">{{ content_type.modificationDate|ez_full_datetime }}</td>
                 <td class="ez-table__cell ez-table__cell--has-action-btns">
-                <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                     {% if can_create %}
                         {{ macros.content_type_copy(content_type, content_type_group, 'btn btn-icon mx-2', content_type_copy_forms) }}
                     {% endif %}
