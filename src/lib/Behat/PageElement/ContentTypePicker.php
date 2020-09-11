@@ -19,15 +19,20 @@ class ContentTypePicker extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'filterInput' => '.ez-instant-filter__input',
-            'filteredItem' => '.ez-instant-filter__group-item:not([hidden])',
+            'filterInput' => '.ez-extra-actions__section-content--content-type .ez-instant-filter__input',
+            'filteredItem' => '.ez-extra-actions__section-content--content-type .ez-instant-filter__group-item:not([hidden])',
             'headerSelector' => '.ez-extra-actions--create .ez-extra-actions__header',
         ];
     }
 
     public function select(string $contentTypeName): void
     {
+        $countBeforeFiltering = $this->getDisplayedItemsCount();
         $this->context->findElement($this->fields['filterInput'])->setValue($contentTypeName);
+
+        $this->context->waitUntil($this->defaultTimeout, function () use ($countBeforeFiltering) {
+            return $this->getDisplayedItemsCount() < $countBeforeFiltering;
+        });
         $this->context->waitUntilElementIsVisible($this->fields['filteredItem']);
         $this->context->getElementByText($contentTypeName, $this->fields['filteredItem'])->click();
     }
@@ -39,5 +44,16 @@ class ContentTypePicker extends Element
         });
 
         Assert::assertEquals('Create content', $this->context->findElement($this->fields['headerSelector'])->getText());
+
+        $this->context->waitUntil($this->defaultTimeout, function () {
+            $this->context->findElement($this->fields['filterInput'])->setValue('');
+
+            return  $this->context->findElement($this->fields['filterInput'])->getValue() === '';
+        });
+    }
+
+    protected function getDisplayedItemsCount(): int
+    {
+        return count($this->context->findAllElements($this->fields['filteredItem']));
     }
 }
