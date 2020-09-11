@@ -15,6 +15,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
@@ -394,26 +395,48 @@ class ContentTypeController extends Controller
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
-    public function copyAction(ContentTypeGroup $group, ContentType $contentType): Response
+    public function copyAction(Request $request, ContentTypeGroup $group, ContentType $contentType): Response
     {
         $this->denyAccessUnlessGranted(new Attribute('class', 'create'));
 
-        try {
-            $this->contentTypeService->copyContentType($contentType);
+        $contentTypeService = $this->contentTypeService;
+        $notificationHandler = $this->notificationHandler;
 
-            $this->notificationHandler->success(
-                /** @Desc("Content Type '%name%' copied.") */
-                'content_type.copy.success',
-                ['%name%' => $contentType->getName()],
-                'content_type'
-            );
-        } catch (UnauthorizedException $exception) {
-            $this->notificationHandler->error(
-                /** @Desc("Content Type '%name%' cannot be copied.") */
-                'content_type.copy.error',
-                ['%name%' => $contentType->getName()],
-                'content_type'
-            );
+        $copyData = new ContentTypeCopyData($contentType, $group);
+
+        $form = $this->contentTypeFormFactory->contentTypeCopy($copyData);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ContentTypeCopyData $data) use ($contentTypeService, $notificationHandler) {
+                $contentType = $data->getContentType();
+
+                try {
+                    $contentTypeService->copyContentType($contentType);
+
+                    $notificationHandler->success(
+                    /** @Desc("Content Type '%name%' copied.") */
+                        'content_type.copy.success',
+                        ['%name%' => $contentType->getName()],
+                        'content_type'
+                    );
+                } catch (UnauthorizedException $exception) {
+                    $notificationHandler->error(
+                    /** @Desc("Content Type '%name%' cannot be copied.") */
+                        'content_type.copy.error',
+                        ['%name%' => $contentType->getName()],
+                        'content_type'
+                    );
+                }
+
+                return $this->redirectToRoute('ezplatform.content_type_group.view', [
+                    'contentTypeGroupId' => $data->getContentTypeGroup()->id,
+                ]);
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
         return $this->redirectToRoute('ezplatform.content_type_group.view', [
