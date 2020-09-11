@@ -23,6 +23,8 @@ class SubItemsTable extends Table
         $this->fields['listElement'] = $this->fields['list'] . ' .c-table-view-item__link';
         $this->fields['nthListElement'] = $this->fields['list'] . ' tr:nth-child(%d) .c-table-view-item__link';
         $this->fields['listElementType'] = $this->fields['list'] . ' tr:nth-child(%d) .c-table-view-item__cell--content-type';
+        $this->fields['sortingOrderAscending'] = '.c-table-view__cell--sorted-asc';
+        $this->fields['sortingOrderDescending'] = '.c-table-view__cell--sorted-desc';
         $this->fields['editButton'] = $this->fields['list'] . ' .c-table-view-item__btn--edit';
         $this->fields['noItems'] = $this->fields['list'] . ' .c-no-items';
     }
@@ -39,6 +41,23 @@ class SubItemsTable extends Table
         );
 
         return $this->getCellValue($rowPosition, $columnPosition);
+    }
+
+    public function sortBy(string $columnName, bool $ascending): void
+    {
+        $this->context->getElementByText($columnName, $this->fields['horizontalHeaders'])->click();
+
+        $isSortedAscending = $this->context->isElementVisible(sprintf('%s%s', $this->fields['horizontalHeaders'], $this->fields['sortingOrderAscending']));
+
+        if ($ascending !== $isSortedAscending) {
+            $this->context->getElementByText($columnName, $this->fields['horizontalHeaders'])->click();
+        }
+
+        $verificationSelector = $ascending ?
+                                sprintf('%s%s', $this->fields['horizontalHeaders'], $this->fields['sortingOrderAscending']) :
+                                sprintf('%s%s', $this->fields['horizontalHeaders'], $this->fields['sortingOrderDescending']);
+
+        $this->context->waitUntilElementIsVisible($verificationSelector);
     }
 
     /**
