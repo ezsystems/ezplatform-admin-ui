@@ -89,6 +89,7 @@ class ContentItemPage extends Page
     public function goToSubItem(string $contentName, string $contentType): void
     {
         $parentContentPage = PageObjectFactory::createPage($this->context, self::PAGE_NAME, null);
+        $parentContentPage->subItemList->sortBy('Modified', false);
         $parentContentPage->subItemList->table->clickListElement($contentName, $contentType);
 
         $contentPage = PageObjectFactory::createPage($this->context, self::PAGE_NAME, $contentName);
