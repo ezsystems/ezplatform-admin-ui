@@ -159,4 +159,9 @@ class SubItemsTable extends Table
 
         return $tableHash;
     }
+
+    public function canBeSorted(): bool
+    {
+        return true;
+    }
 }
