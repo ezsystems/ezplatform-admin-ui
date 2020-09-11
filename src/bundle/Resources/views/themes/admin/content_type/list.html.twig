@@ -88,7 +88,7 @@
                 <td class="ez-table__cell ez-table__cell--has-action-btns">
                 <td class="ez-table__cell ez-table__cell--has-action-btns text-right">
                     {% if can_create %}
-                        {{ macros.content_type_copy(content_type, content_type_group, 'btn btn-icon mx-2') }}
+                        {{ macros.content_type_copy(content_type, content_type_group, 'btn btn-icon mx-2', content_type_copy_forms) }}
                     {% endif %}
                     {% if can_update %}
                         {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-2') }}

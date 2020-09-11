@@ -34,7 +34,6 @@ class ContentTypeCopyType extends AbstractType
                 'copy',
                 SubmitType::class,
                 [
-                    'attr' => ['hidden' => true],
                     'label' => /** @Desc("Create") */ 'content_type.copy.copy',
                 ]
             );
