@@ -36,4 +36,10 @@ class SubItemsList extends Element
     {
         $this->context->waitUntilElementIsVisible($this->fields['list']);
     }
+
+    public function sortBy(string $columnName, bool $ascending): void
+    {
+        $this->table->sortBy($columnName, $ascending);
+        $this->verifyVisibility();
+    }
 }
