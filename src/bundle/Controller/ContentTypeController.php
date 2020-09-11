@@ -154,7 +154,6 @@ class ContentTypeController extends Controller
             $contentTypeCopyForms[$type->id] = $this->contentTypeFormFactory->contentTypeCopy($copyData, null, ['action' => $url])->createView();
         }
 
-
         return $this->render('@ezdesign/content_type/list.html.twig', [
             'content_type_group' => $group,
             'pager' => $pagerfanta,
@@ -425,14 +424,14 @@ class ContentTypeController extends Controller
                     $contentTypeService->copyContentType($contentType);
 
                     $notificationHandler->success(
-                    /** @Desc("Content Type '%name%' copied.") */
+                        /** @Desc("Content Type '%name%' copied.") */
                         'content_type.copy.success',
                         ['%name%' => $contentType->getName()],
                         'content_type'
                     );
                 } catch (UnauthorizedException $exception) {
                     $notificationHandler->error(
-                    /** @Desc("Content Type '%name%' cannot be copied.") */
+                        /** @Desc("Content Type '%name%' cannot be copied.") */
                         'content_type.copy.error',
                         ['%name%' => $contentType->getName()],
                         'content_type'
