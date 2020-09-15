@@ -114,14 +114,14 @@ class SystemUrlRedirectProcessor implements EventSubscriberInterface
             return;
         }
 
-        $params = $this->router->match($response->getTargetUrl());
-
-        if (!in_array('locationId', $params)) {
+        if (!$event->hasPayload('content')) {
             return;
         }
 
+        $locationId = $event->getPayload('content')->versionInfo->contentInfo->mainLocationId;
+
         $url = $this->router->generate(
-            '_ezpublishLocation', ['locationId' => $params['locationId']]
+            '_ezpublishLocation', ['locationId' => $locationId]
         );
 
         $event->setResponse(new RedirectResponse($url));
