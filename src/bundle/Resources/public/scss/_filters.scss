@@ -23,6 +23,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-column-gap: 10%;
+        grid-row-gap: calculateRem(32px);
     }
 
     &__item {
@@ -141,7 +142,7 @@
         border-radius: $ibexa-border-radius;
         transition: all 0.2s ease-in;
         pointer-events: none;
-    
+
         &--visible {
             height: calculateRem(40px);
             opacity: 1;
