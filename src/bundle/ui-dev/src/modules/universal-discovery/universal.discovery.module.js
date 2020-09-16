@@ -162,7 +162,11 @@ const UniversalDiscoveryModule = (props) => {
             return;
         }
 
-        loadLocationsWithPermissions({ locationIds: props.selectedLocations.join(',') }, addPermissionsToSelectedLocations);
+        findLocationsById({ ...restInfo, id: props.selectedLocations.join(',') }, (locations) => {
+            const mappedLocation = locations.map((location) => ({ location }));
+
+            dispatchSelectedLocationsAction({ type: 'REPLACE_SELECTED_LOCATIONS', locations: mappedLocation });
+        });
     }, [props.selectedLocations]);
 
     useEffect(() => {
