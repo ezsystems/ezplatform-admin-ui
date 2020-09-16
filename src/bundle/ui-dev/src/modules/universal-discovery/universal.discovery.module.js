@@ -162,7 +162,15 @@ const UniversalDiscoveryModule = (props) => {
             return;
         }
 
-        loadLocationsWithPermissions({ locationIds: props.selectedLocations.join(',') }, addPermissionsToSelectedLocations);
+        findLocationsById({ ...restInfo, id: props.selectedLocations.join(',') }, (locations) => {
+            const mappedLocation = props.selectedLocations.map((locationId) => {
+                const location = locations.find((location) => location.id === parseInt(locationId, 10));
+
+                return { location };
+            });
+
+            dispatchSelectedLocationsAction({ type: 'REPLACE_SELECTED_LOCATIONS', locations: mappedLocation });
+        });
     }, [props.selectedLocations]);
 
     useEffect(() => {
