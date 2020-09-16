@@ -163,7 +163,11 @@ const UniversalDiscoveryModule = (props) => {
         }
 
         findLocationsById({ ...restInfo, id: props.selectedLocations.join(',') }, (locations) => {
-            const mappedLocation = locations.map((location) => ({ location }));
+            const mappedLocation = props.selectedLocations.map((locationId) => {
+                const location = locations.find((location) => location.id === parseInt(locationId, 10));
+
+                return { location };
+            });
 
             dispatchSelectedLocationsAction({ type: 'REPLACE_SELECTED_LOCATIONS', locations: mappedLocation });
         });
