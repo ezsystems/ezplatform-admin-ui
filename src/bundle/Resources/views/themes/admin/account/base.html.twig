@@ -13,11 +13,11 @@
                     <div class="ez-login__support-wrapper">
                         <h2 class="ez-login__support-headline">{{ 'base.need_assistance'|trans|desc('Need assistance or support?') }}</h2>
                         <span class="ez-login__support-content">{{ 'base.visit_support'|trans({
-                                '%ez_forum_link%': '<a class="ez-link ez-link--light" href="http://ibexa.co/support">http://ibexa.co/support</a>', 
+                                '%ez_forum_link%': '<a class="ez-link ez-link--light" href="http://ibexa.co/support">http://ibexa.co/support</a>',
                                 '%ez_contact_link%': '<a class="ez-link ez-link--light" href="http://ibexa.co/contact_us">http://ibexa.co/contact_us</a>'
                               })| desc('Visit our support forums at %ez_forum_link%<br/>or our official channels found at %ez_contact_link%')|raw }}</span>
                     </div>
-                    <div class="ez-login__application-version">Version 3.2 LTS</div>
+                    <div class="ez-login__application-version">Version 3.2</div>
                 </div>
                 <div class="col-7 ez-login__actions-col">
                     <img class="ez-login__logo" src="{{ asset('/bundles/ezplatformadminui/img/ibexa-logo.svg') }}" alt="ibexa" />
@@ -25,8 +25,8 @@
                         {%- block content -%} {%- endblock content -%}
                     </div>
                     <div class="ez-login__copright">
-                        {{ 'base.footer_copyright'|trans({ 
-                                    '%current_year%': "now"|date("Y") 
+                        {{ 'base.footer_copyright'|trans({
+                                    '%current_year%': "now"|date("Y")
                         }) |desc('Copyright &#169; IBEXA 1999-%current_year%')|raw }}
                     </div>
                 </div>
