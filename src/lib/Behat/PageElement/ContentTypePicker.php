@@ -60,13 +60,13 @@ class ContentTypePicker extends Element
 
     public function isContentTypeVisible(string $contentTypeName): bool
     {
-        return $this->context->getElementByText($contentTypeName, $this->fields['contentTypeSelector']) !== null;
+        return $this->context->getElementByText($contentTypeName, $this->fields['filteredItem']) !== null;
     }
 
     public function getDisplayedContentTypes(): array
     {
         return array_map(function (NodeElement $element) {
             return $element->getText();
-        }, $this->context->findAllElements($this->fields['contentTypeSelector']));
+        }, $this->context->findAllElements($this->fields['filteredItem']));
     }
 }
