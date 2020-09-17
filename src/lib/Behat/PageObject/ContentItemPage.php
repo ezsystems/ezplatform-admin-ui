@@ -53,15 +53,20 @@ class ContentItemPage extends Page
      *
      * @param string $contentType
      */
-    public function startCreatingContent(string $contentType): ContentUpdateItemPage
+    public function startCreatingContent(string $contentTypeName): ContentUpdateItemPage
     {
         $this->rightMenu->clickButton('Create');
 
         $contentTypePicker = ElementFactory::createElement($this->context, ContentTypePicker::ELEMENT_NAME);
         $contentTypePicker->verifyVisibility();
-        $contentTypePicker->select($contentType);
 
-        $contentUpdatePage = PageObjectFactory::createPage($this->context, ContentUpdateItemPage::PAGE_NAME, $contentType);
+        if (!$contentTypePicker->isContentTypeVisible($contentTypeName)) {
+            $this->handleMissingContentType($contentTypeName);
+        }
+
+        ElementFactory::createElement($this->context, ContentTypePicker::ELEMENT_NAME)->select($contentTypeName);
+
+        $contentUpdatePage = PageObjectFactory::createPage($this->context, ContentUpdateItemPage::PAGE_NAME, $contentTypeName);
         $contentUpdatePage->verifyIsLoaded();
 
         return $contentUpdatePage;
@@ -124,5 +129,33 @@ class ContentItemPage extends Page
         $pageTitle = $this->pageTitle ?? $this->getPageTitle();
 
         return $pageTitle === 'Media';
+    }
+
+    protected function handleMissingContentType(string $contentTypeName): void
+    {
+        $contentTypePicker = ElementFactory::createElement($this->context, ContentTypePicker::ELEMENT_NAME);
+        $displayedContentTypesBeforeReload = $contentTypePicker->getDisplayedContentTypes();
+
+        $this->context->getSession()->reload();
+
+        $rightMenu = ElementFactory::createElement($this->context, RightMenu::ELEMENT_NAME);
+        $rightMenu->clickButton('Create');
+
+        $contentTypePicker = ElementFactory::createElement($this->context, ContentTypePicker::ELEMENT_NAME);
+        $displayedContentTypesAfterReload = $contentTypePicker->getDisplayedContentTypes();
+
+        $this->printContentTypes('Content Types before reload:', $displayedContentTypesBeforeReload);
+        $this->printContentTypes('Content Types after reload:', $displayedContentTypesAfterReload);
+
+        Assert::fail(sprintf('Content Type: %s was not detected the first time', $contentTypeName));
+    }
+
+    protected function printContentTypes(string $initiaMessage, array $contentTypes): void
+    {
+        foreach ($contentTypes as $contentType) {
+            $initiaMessage .= PHP_EOL . $contentType;
+        }
+
+        echo $initiaMessage;
     }
 }

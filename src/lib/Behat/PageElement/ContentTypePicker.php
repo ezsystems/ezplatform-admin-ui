@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Behat\PageElement;
 
+use Behat\Mink\Element\NodeElement;
 use EzSystems\Behat\Browser\Context\BrowserContext;
 use EzSystems\Behat\Browser\Element\Element;
 use PHPUnit\Framework\Assert;
@@ -55,5 +56,17 @@ class ContentTypePicker extends Element
     protected function getDisplayedItemsCount(): int
     {
         return count($this->context->findAllElements($this->fields['filteredItem']));
+    }
+
+    public function isContentTypeVisible(string $contentTypeName): bool
+    {
+        return $this->context->getElementByText($contentTypeName, $this->fields['contentTypeSelector']) !== null;
+    }
+
+    public function getDisplayedContentTypes(): array
+    {
+        return array_map(function (NodeElement $element) {
+            return $element->getText();
+        }, $this->context->findAllElements($this->fields['contentTypeSelector']));
     }
 }
