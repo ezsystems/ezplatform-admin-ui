@@ -207,7 +207,7 @@
                                         <td class="ez-table__cell">{{ trash_item.contentType.name }}</td>
                                         <td class="ez-table__cell">
                                             {{ trash_item.creator is not empty
-                                                ? trash_item.creator.login :
+                                                ? ez_content_name(trash_item.creator.content) :
                                                 'trash.item.deleted_user'|trans|desc('Deleted user')
                                             }}
                                         </td>
