@@ -51,15 +51,15 @@
         <target state="new">Reset your password</target>
         <note>key: authentication.reset_your_password</note>
       </trans-unit>
+      <trans-unit id="21689a7153c422f3a4d27fa44d04d6708842a194" resname="authentication.reset_your_password.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: authentication.reset_your_password.cancel</note>
+      </trans-unit>
       <trans-unit id="daab336a9cb12d2d04146c55228268227cf1017a" resname="authentication.sign_in">
         <source>Sign in</source>
         <target state="new">Sign in</target>
         <note>key: authentication.sign_in</note>
-      </trans-unit>
-      <trans-unit id="8785f4abdfdf72fe9001fe0553c6e3a582cfcc08" resname="authentication.submit">
-        <source>Login</source>
-        <target state="new">Login</target>
-        <note>key: authentication.submit</note>
       </trans-unit>
       <trans-unit id="9143793289ea0e20c3dc9f752d43cc727f2dba01" resname="authentication.username">
         <source>Username</source>
@@ -80,11 +80,6 @@
         <source>Need assistance or support?</source>
         <target state="new">Need assistance or support?</target>
         <note>key: base.need_assistance</note>
-      </trans-unit>
-      <trans-unit id="d51e30462e1babe35fd4fc6bcbbe6faf5e065b32" resname="base.platform_by_ibexa">
-        <source>platform by Ibexa</source>
-        <target state="new">platform by Ibexa</target>
-        <note>key: base.platform_by_ibexa</note>
       </trans-unit>
       <trans-unit id="b5305384fa0fd949ec756891f50f093fd26dd06c" resname="base.sign_in">
         <source>Sign in to IBEXA DXP</source>
@@ -186,11 +181,6 @@
         <target state="new"><![CDATA[Please contact your Administrator to request access to this content or modify your profile.<br/>Otherwise, go back to <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></target>
         <note>key: error.page.403.actions</note>
       </trans-unit>
-      <trans-unit id="2532cb9ce6fdf46258c107f3d20888c506115ef6" resname="error.page.403.message">
-        <source><![CDATA[Error 403: you don't have permissions to access this page.<br/>Contact your Administrator to request access to this content.]]></source>
-        <target state="new"><![CDATA[Error 403: you don't have permissions to access this page.<br/>Contact your Administrator to request access to this content.]]></target>
-        <note>key: error.page.403.message</note>
-      </trans-unit>
       <trans-unit id="d0b5337e551b64f59973449bbdcf7914c2102a6c" resname="error.page.403.sub_title">
         <source>Not possible to retrieve or access this page.</source>
         <target state="new">Not possible to retrieve or access this page.</target>
@@ -210,11 +200,6 @@
         <source><![CDATA[The page you requested was not found.<br/> It might have been deleted or it is temporarily unavailable.]]></source>
         <target state="new"><![CDATA[The page you requested was not found.<br/> It might have been deleted or it is temporarily unavailable.]]></target>
         <note>key: error.page.404.message</note>
-      </trans-unit>
-      <trans-unit id="7596368af317fe78b955e2a3f63c7586900bcd76" resname="error.page.404.messagea">
-        <source>The page you requested was not found. It might have been deleted or it is temporarily unavailable.</source>
-        <target state="new">The page you requested was not found. It might have been deleted or it is temporarily unavailable.</target>
-        <note>key: error.page.404.messagea</note>
       </trans-unit>
       <trans-unit id="ffa7f20226d38a989f6c931264bd4cf485b435e6" resname="error.page.404.sub_title">
         <source>You probably weren't expecting to land here.</source>
@@ -348,11 +333,6 @@
         <source>From date - to date</source>
         <target state="new">From date - to date</target>
         <note>key: search.date.range</note>
-      </trans-unit>
-      <trans-unit id="03d6d5922fd2012e155e50306eaf98e2dfeb21c6" resname="search.section.any">
-        <source>Any section</source>
-        <target state="new">Any section</target>
-        <note>key: search.section.any</note>
       </trans-unit>
       <trans-unit id="9567771350aff93580f743089937b0c8fe31058e" resname="section.assign,content">
         <source>Assign Content</source>

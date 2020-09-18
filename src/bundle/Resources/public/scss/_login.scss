@@ -15,7 +15,7 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        background-image: url("/bundles/ezplatformadminui/img/login-background.jpg");
+        background-image: url('/bundles/ezplatformadminui/img/login-background.jpg');
     }
 
     &__support-wrapper {
@@ -26,7 +26,7 @@
     &__support-headline {
         font-weight: 600;
         font-size: calculateRem(24px);
-        margin-bottom: calculateRem(24px)
+        margin-bottom: calculateRem(24px);
     }
 
     &__support-content {
@@ -117,6 +117,10 @@
         &--sign-in,
         &--reset-password {
             padding: calculateRem(10px) calculateRem(80px);
+        }
+
+        &--cancel {
+            padding: calculateRem(10px) calculateRem(24px);
         }
     }
 
