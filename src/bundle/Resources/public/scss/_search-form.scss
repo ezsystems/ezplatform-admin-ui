@@ -13,6 +13,14 @@
         display: inline-block;
     }
 
+    .input-group-btn {
+        display: flex;
+
+        .ez-btn {
+            margin-left: calculateRem(8px);
+        }
+    }
+
     .form-group {
         margin-bottom: calculateRem(32px);
     }

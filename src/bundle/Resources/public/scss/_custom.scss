@@ -107,7 +107,7 @@ $grays: (
     600: $ibexa-color-base-medium,
     700: $ibexa-color-base,
     800: $ibexa-color-base,
-    900: $ibexa-color-base-dark
+    900: $ibexa-color-base-dark,
 );
 
 $blue: $ibexa-color-primary;
@@ -134,7 +134,7 @@ $colors: (
     indigo: $indigo,
     purple: $purple,
     pink: $pink,
-    cyan: $cyan
+    cyan: $cyan,
 );
 
 $theme-colors: (
@@ -145,7 +145,7 @@ $theme-colors: (
     danger: $ibexa-color-danger,
     light: $ibexa-color-base-light,
     dark: $ibexa-black,
-    info: $cyan
+    info: $cyan,
 );
 
 // Typography
@@ -226,7 +226,7 @@ $container-max-widths: (
     sm: 540px,
     md: 720px,
     lg: 960px,
-    xl: 1470px
+    xl: 1470px,
 ) !default;
 
 //Inputs
@@ -242,8 +242,8 @@ $input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75
 
 //Buttons
 $btn-line-height: calculateRem(16px);
-$btn-font-size: calculateRem(14px);
-$btn-padding-y: calculateRem(8px);
+$btn-font-size: calculateRem(15px);
+$btn-padding-y: calculateRem(11px);
 $btn-padding-x: 1rem;
 $btn-border-width: 0;
 $btn-focus-box-shadow: none;
