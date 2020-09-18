@@ -1,0 +1,24 @@
+.ez-search-form {
+    &__icon {
+        display: flex;
+        align-items: center;
+        padding-right: calculateRem(8px);
+    }
+
+    &__input-wrapper {
+        width: 50%;
+    }
+
+    &__language-wrapper {
+        display: inline-block;
+    }
+
+    .form-group {
+        margin-bottom: calculateRem(32px);
+    }
+
+    .ez-filters {
+        padding-top: calculateRem(32px);
+        border-top: calculateRem(1px) solid $ibexa-color-base;
+    }
+}

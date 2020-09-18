@@ -4,9 +4,6 @@
     transition: all 0.2s $ez-admin-transition;
     flex-wrap: wrap;
     position: relative;
-    margin: calculateRem(20px) 0;
-    padding: calculateRem(24px) calculateRem(24px);
-    background: $ibexa-white;
 
     &--collapsed {
         margin-top: calculateRem(10px);
@@ -17,12 +14,12 @@
     }
 
     &__row {
-        padding: 0 calculateRem(16px) calculateRem(32px);
+        padding: 0 0 calculateRem(32px);
         margin-bottom: calculateRem(32px);
         border-bottom: calculateRem(1px) solid $ibexa-color-base;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-column-gap: 10%;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-column-gap: 5%;
         grid-row-gap: calculateRem(32px);
     }
 
