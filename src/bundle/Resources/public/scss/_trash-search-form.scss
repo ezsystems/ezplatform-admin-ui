@@ -5,15 +5,19 @@
         display: flex;
         justify-content: space-between;
     }
-    
+
     &__item {
         display: inline-block;
         width: calculateRem(258px);
 
+        & + & {
+            margin-left: calculateRem(16px);
+        }
+
         &--creator {
             position: relative;
 
-            .ez-trash-search-form  {
+            .ez-trash-search-form {
                 &__input-wrapper {
                     position: relative;
                 }
@@ -57,12 +61,12 @@
         transform: scaleY(1);
         transform-origin: top center;
         transition: transform 0.2s $ez-admin-transition;
-    
+
         &--hidden {
             transform: scaleY(0);
         }
     }
-    
+
     &__user-item {
         padding: calculateRem(8px) calculateRem(16px);
         cursor: pointer;
@@ -73,7 +77,7 @@
             display: block;
         }
     }
-   
+
     .ez-btn--reset-creator {
         display: none;
         position: absolute;
@@ -90,7 +94,7 @@
         border-radius: calculateRem(4px);
         transition: all 0.2s ease-in;
         pointer-events: none;
-    
+
         &--visible {
             height: calculateRem(40px);
             opacity: 1;

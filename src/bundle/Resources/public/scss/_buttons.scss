@@ -103,6 +103,10 @@
         border-radius: 0;
         text-decoration: none;
         line-height: calculateRem(18px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
         &:hover,
         &:focus {
@@ -126,7 +130,7 @@
         display: block;
         width: calculateRem(24px);
         height: calculateRem(24px);
-        margin: calculateRem(12px) auto calculateRem(5px);
+        margin: 0 auto calculateRem(5px);
     }
 }
 
