@@ -4,7 +4,7 @@
     &__header {
         display: flex;
         justify-content: space-between;
-        background-color: $ibexa-white;;
+        background-color: $ibexa-white;
         align-items: center;
         padding: 0 calculateRem(20px);
         min-height: calculateRem(50px);
@@ -35,8 +35,7 @@
 
     &__sort-column {
         position: relative;
-        display: block;
-        color: $ibexa-black;
+        cursor: pointer;
 
         &:hover {
             text-decoration: none;
@@ -48,7 +47,7 @@
             width: 0;
             height: 0;
             top: calculateRem(9px);
-            right: calculateRem(-7px);
+            right: calculateRem(-10px);
         }
 
         &--asc:after {
@@ -115,7 +114,7 @@
             padding: calculateRem(12px) calculateRem(16px);
             background-color: $ibexa-white;
             font-style: italic;
-            color: $ibexa-black;;
+            color: $ibexa-black;
         }
 
         &--limitation {
@@ -135,6 +134,7 @@
     justify-content: space-between;
     align-items: center;
     padding: calculateRem(16px) calculateRem(8px) calculateRem(16px);
+    background-color: $ibexa-white;
 
     &__headline {
         font-size: calculateRem(16px);
