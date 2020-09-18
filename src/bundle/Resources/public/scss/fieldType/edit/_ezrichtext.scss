@@ -5,10 +5,10 @@
         }
 
         &__richtext {
-            min-height: calculateRem(400px);
+            min-height: calculateRem(100px);
             border-radius: $ibexa-border-radius $ibexa-border-radius 0 0;
             border-color: $ibexa-color-base-dark;
-            border-width: calculateRem(1px) calculateRem(1px) 0 calculateRem(1px); 
+            border-width: calculateRem(1px) calculateRem(1px) 0 calculateRem(1px);
         }
 
         .ez-richtext-tools {
@@ -16,7 +16,7 @@
             align-items: center;
             height: calculateRem(40px);
             border: calculateRem(1px) solid $ibexa-color-base-dark;
-            border-width: 0 calculateRem(1px) calculateRem(1px) calculateRem(1px); 
+            border-width: 0 calculateRem(1px) calculateRem(1px) calculateRem(1px);
         }
 
         .ez-elements-path,
