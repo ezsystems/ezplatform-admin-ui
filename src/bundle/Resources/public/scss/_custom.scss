@@ -194,8 +194,11 @@ $body-color: $ez-black;
 $pagination-color: $ez-black;
 $pagination-bg: $ez-pagination-bg;
 
+$pagination-padding-y: calculateRem(4px);
+$pagination-padding-x: calculateRem(10px);
+
 $pagination-active-color: $ez-black;
-$pagination-active-bg: $ez-white;
+$pagination-active-bg: $ibexa-color-base;
 $pagination-active-border-color: transparent;
 
 $pagination-disabled-color: $ez-black;
