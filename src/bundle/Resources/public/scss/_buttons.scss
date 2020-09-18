@@ -2,12 +2,12 @@
 
 .ez-btn {
     display: inline-block;
-    padding: calculateRem(8px) calculateRem(16px);
+    padding: calculateRem(11px) calculateRem(16px);
     outline: none;
     border: none;
     border-radius: $ibexa-border-radius;
     text-decoration: none;
-    font-size: calculateRem(14px);
+    font-size: calculateRem(15px);
     line-height: calculateRem(16px);
     transition: all 0.2s $ez-admin-transition;
 
