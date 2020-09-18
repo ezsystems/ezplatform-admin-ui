@@ -10,7 +10,9 @@
             {{ form_row(form_forgot_user_password.email, {'attr': {'class': 'form-control ez-login__input'}}) }}
         </fieldset>
         {{ form_widget(form_forgot_user_password.reset, {'attr': {'class': 'btn btn-primary ez-login__btn--reset-password'}}) }}
-
+        <a href="{{ path('login') }}" class="btn ez-btn--secondary ez-login__btn--cancel">
+            {{ 'authentication.reset_your_password.cancel'|trans|desc('Cancel') }}
+        </a>
         {{ form_end(form_forgot_user_password) }}
     {% endif %}
 {%- endblock content -%}
