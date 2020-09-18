@@ -112,7 +112,6 @@
             }
         }
 
-
         &.is-disabled {
             opacity: 0.5;
         }
@@ -127,7 +126,6 @@
 
     .ez-data-source__btn--clear-input {
         position: absolute;
-        z-index: 2;
         top: 50%;
         right: calculateRem(4px);
         transform: translate(0, -50%);
@@ -143,14 +141,14 @@
         outline: none;
 
         .ez-icon {
-            fill: $ibexa-color-base-light;
+            fill: $ibexa-color-base-dark;
             transition: fill 0.3s $ez-admin-transition;
         }
 
         &:hover,
         &:focus {
             .ez-icon {
-                fill: $ibexa-white;
+                fill: $ibexa-color-base-deep;
             }
         }
     }
