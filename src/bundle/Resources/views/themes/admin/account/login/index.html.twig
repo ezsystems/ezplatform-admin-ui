@@ -13,30 +13,32 @@
                 <div class="ez-login__input-label-wrapper">
                     <label class="ez-login__input-label" for="username">{{ 'authentication.username'|trans|desc('Username') }}</label>
                 </div>
-                <input 
-                    type="text" 
-                    id="username" 
-                    class="form-control ez-login__input ez-login__input--username" 
-                    name="_username" 
-                    value="{{ last_username }}" 
-                    required="required" 
-                    autofocus="autofocus" 
+                <input
+                    type="text"
+                    id="username"
+                    class="form-control ez-login__input ez-login__input--username"
+                    name="_username"
+                    value="{{ last_username }}"
+                    required="required"
+                    autofocus="autofocus"
                     autocomplete="on"
+                    tabindex="1"
                 />
             </div>
             <div class="form-group{% if error %} has-error{% endif %} position-relative">
                 <div class="ez-login__input-label-wrapper">
                     <label class="ez-login__input-label" for="password">{{ 'authentication.password'|trans|desc('Password') }}</label>
-                    <a href="{{ path('ezplatform.user.forgot_password') }}">{{ 'authentication.forgot_password'|trans|desc('Forgot password?') }}</a>
+                    <a href="{{ path('ezplatform.user.forgot_password') }}" tabindex="4">{{ 'authentication.forgot_password'|trans|desc('Forgot password?') }}</a>
                 </div>
-                <input 
-                    type="password" 
-                    id="password" 
-                    class="form-control ez-login__input ez-login__input--password" 
-                    name="_password" 
+                <input
+                    type="password"
+                    id="password"
+                    class="form-control ez-login__input ez-login__input--password"
+                    name="_password"
                     required="required"
+                    tabindex="2"
                 />
-                <button type="button" class="ez-login__password-visibility-toggler">
+                <button type="button" class="ez-login__password-visibility-toggler" tabindex="5">
                     <svg class="ez-icon ez-icon--medium ez-icon--dark ez-icon--view">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg#view') }}"></use>
                     </svg>
@@ -48,7 +50,7 @@
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}" />
 
-            <button type="submit" class="btn btn-primary ez-login__btn ez-login__btn--sign-in">{{ 'authentication.sign_in'|trans|desc('Sign in') }}</button>
+            <button type="submit" class="btn btn-primary ez-login__btn ez-login__btn--sign-in" tabindex="3">{{ 'authentication.sign_in'|trans|desc('Sign in') }}</button>
         </fieldset>
     </form>
 
