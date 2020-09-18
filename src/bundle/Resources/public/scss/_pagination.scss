@@ -11,9 +11,28 @@
     margin-bottom: calculateRem(16px);
 }
 
-.page-item.prev, .page-item.next {
+.page-link {
+    border-radius: 50%;
+}
+
+.page-item {
+    padding: calculateRem(8px) calculateRem(4px);
+}
+
+.page-item.prev,
+.page-item.next {
+    padding: 0;
+    margin: 0 calculateRem(8px);
+
+    .page-link {
+        background-color: $ibexa-color-primary;
+        color: $ibexa-color-font-light;
+        border-radius: calculateRem(2px);
+        padding: calculateRem(12px) calculateRem(20px);
+    }
+
     &.disabled .page-link {
-        opacity: .3;
+        opacity: 0.3;
         cursor: not-allowed;
     }
 }
