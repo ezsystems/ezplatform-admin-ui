@@ -3,6 +3,10 @@
 
     .c-menu-button {
         @include toggler-icon-btn();
+
+        &--selected {
+            @include toggler-selected-btn();
+        }
     }
 
     &--disabled {
