@@ -247,8 +247,8 @@
             </svg>
             {{ field.value.fileName }}
             {{ field.value.fileSize|ez_file_size( 1 ) }}
-            <a download href="{{ path( route_reference.getRoute(), route_reference.getParams() ) }}">
-                <svg class="ez-icon ez-icon--download">
+            <a class="btn btn-icon ml-4" download href="{{ path( route_reference.getRoute(), route_reference.getParams() ) }}">
+                <svg class="ez-icon ez-icon--download ez-icon--small-medium">
                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#download"></use>
                 </svg>
             </a>
