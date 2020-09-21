@@ -29,6 +29,7 @@
             &--filesize {
                 color: $ibexa-color-base-dark;
                 margin-top: calculateRem(24px);
+                font-size: calculateRem(14px);
             }
         }
     }
