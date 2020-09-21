@@ -95,7 +95,7 @@
 
 .ez-side-menu,
 .ez-context-menu {
-    .btn:not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm):not(.ez-btn--workflow-apply) {
+    .ez-sticky-container > .btn {
         width: calculateRem(80px);
         height: calculateRem(80px);
         padding: calculateRem(2px);
@@ -110,9 +110,14 @@
 
         &:hover,
         &:focus {
+            color: $ibexa-color-primary;
             box-shadow: none;
             background: $ibexa-white;
             outline: none;
+
+            .ez-icon {
+                fill: $ibexa-color-primary;
+            }
         }
 
         &:first-child {
@@ -134,21 +139,8 @@
     }
 }
 
-.ez-context-menu {
-    .btn:not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm):not(.ez-btn--workflow-apply) {
-        &:hover,
-        &:focus {
-            color: $ibexa-color-primary;
-
-            .ez-icon {
-                fill: $ibexa-color-primary;
-            }
-        }
-    }
-}
-
 .ez-side-menu {
-    .btn {
+    .ez-sticky-container > .btn {
         &:focus,
         &:hover {
             color: $ibexa-black;
@@ -158,6 +150,8 @@
             }
         }
     }
+
+    
 }
 
 .ez-context-menu {
