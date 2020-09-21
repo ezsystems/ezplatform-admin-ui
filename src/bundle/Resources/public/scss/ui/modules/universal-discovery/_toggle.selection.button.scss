@@ -3,7 +3,7 @@
     border-radius: 50%;
     background: $ibexa-color-base-dark;
     height: calculateRem(16px);
-    width: calculateRem(16px);
+    min-width: calculateRem(16px);
     padding: 0;
     display: flex;
     justify-content: center;
