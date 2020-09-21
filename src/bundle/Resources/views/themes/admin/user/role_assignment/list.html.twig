@@ -5,7 +5,7 @@
 <section class="container ez-container">
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'role_assignment.view.list.header'|trans|desc('Users and Groups') }}</div>
-        <div>
+        <div class="ez-table-header__tools">
             {% if can_assign %}
                 <a
                     href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}"

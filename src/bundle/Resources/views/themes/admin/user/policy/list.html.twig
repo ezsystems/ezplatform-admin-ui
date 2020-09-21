@@ -5,7 +5,7 @@
 <section class="container ez-container">
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'policy.view.list.title.count'|trans({'%count%': role.policies|length})|desc('Policies (%count%)') }}</div>
-        <div>
+        <div class="ez-table-header__tools">
             {% if can_update %}
                 <a
                     title="{{ 'policy.view.list.action.add'|trans|desc('Add a new Policy') }}"
