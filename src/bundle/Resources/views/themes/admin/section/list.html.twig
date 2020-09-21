@@ -25,7 +25,7 @@
     <section class="container ez-container">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'section.list.title'|trans|desc('Sections') }}</div>
-            <div>
+            <div class="ez-table-header__tools">
                 {% if can_add %}
                     <a
                         title="{{ 'section.new'|trans|desc('Create a new Section') }}"
@@ -82,9 +82,9 @@
                     <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_edit %}
                             {{ form_widget(form_sections_delete.sections[section.id], {
-                                    "attr": { "class": "ez-input ez-input--checkbox" }, 
+                                    "attr": { "class": "ez-input ez-input--checkbox" },
                                     "disabled": not deletable[section.id]
-                                }) 
+                                })
                             }}
                         {% else %}
                             {% do form_sections_delete.sections.setRendered %}

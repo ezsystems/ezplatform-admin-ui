@@ -6,7 +6,7 @@
     <section class="container ez-container">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">{{ 'object_state.view.list.title'|trans({'%count%': object_states|length})|desc('Object states (%count%)') }}</div>
-            <div>
+            <div class="ez-table-header__tools">
                 {% if can_administrate %}
                     <a
                         title="{{ 'object_state.new'|trans|desc('Create a new Object state') }}"

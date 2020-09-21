@@ -7,7 +7,7 @@
 <section class="container ez-container">
     <div class="ez-table-header">
         <div class="ez-table-header__headline">{{ 'content_type.view.list.title'|trans({ '%identifier%': content_type_group.identifier })|desc('Content Types in \'%identifier%\'') }}</div>
-        <div>
+        <div class="ez-table-header__tools">
             {% if can_create %}
                 <a
                     href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}"

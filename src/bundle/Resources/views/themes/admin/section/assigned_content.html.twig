@@ -9,7 +9,7 @@
                 '%name%': section.name,
                 '%count%': pagerfanta.nbResults
             } )|desc('Content items in \'%name%\' (%count%)') }}
-        </div>
+        </div class="ez-table-header__tools">
         {% if can_assign %}
             {{ form_start(form_section_content_assign, {
                 'action': path("ezplatform.section.assign_content", {"sectionId": section.id}),
