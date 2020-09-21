@@ -150,9 +150,11 @@
             display: none;
         }
 
-        button {
-            &[type='submit'] {
-                display: none;
+        .form-group {
+            button.btn {
+                &[type='submit'] {
+                    display: none;
+                }
             }
         }
     }
