@@ -22,8 +22,8 @@
         appearance: none;
         position: relative;
         display: inline-block;
-        width: calculateRem(16px);
-        height: calculateRem(16px);
+        min-width: calculateRem(16px);
+        min-height: calculateRem(16px);
         background-color: $ibexa-white;
         border-radius: $ibexa-border-radius;
         border: calculateRem(1px) solid $ibexa-color-base-dark;
