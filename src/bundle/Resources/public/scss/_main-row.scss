@@ -5,9 +5,9 @@
     .ez-side-menu,
     .ez-context-menu {
         flex: 0 0 calculateRem(80px);
-        
+
         &--expanded {
-            z-index: 1200;
+            z-index: 1000;
         }
     }
 
