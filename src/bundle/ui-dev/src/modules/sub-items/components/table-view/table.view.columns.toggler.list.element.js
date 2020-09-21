@@ -5,7 +5,7 @@ const TableViewColumnsTogglerListElement = ({ label, isColumnVisible, toggleColu
     return (
         <li className="c-table-view-columns-toggler-list-element" onClick={() => toggleColumnVisibility(columnKey)}>
             <div className="form-check form-check-inline">
-                <input className="form-check-input" type="checkbox" checked={isColumnVisible} readOnly={true} />
+                <input className="form-check-input ez-input ez-input--checkbox" type="checkbox" checked={isColumnVisible} readOnly={true} />
                 <label className="c-table-view-columns-toggler-list-element__label form-check-label">{label}</label>
             </div>
         </li>

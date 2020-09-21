@@ -113,15 +113,15 @@
         &--name {
             position: sticky;
             z-index: 1;
-            left: calculateRem(74px);
+            left: calculateRem(78px);
             padding-left: 0;
             background: $ibexa-white;
         }
 
         &--actions {
-            position: sticky;
+            position: absolute;
             right: 0;
-            height: calculateRem(43px);
+            height: calculateRem(44px);
             width: calculateRem(70px);
             padding: 0;
             background: $ibexa-white;
@@ -129,7 +129,7 @@
     }
 
     &__label {
-        color: $ez-color-base-light;
+        color: $ibexa-color-base-dark;
         font-weight: normal;
         position: relative;
         display: inline-block;

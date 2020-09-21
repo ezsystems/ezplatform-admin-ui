@@ -5,3 +5,7 @@
 @mixin container-box-shadow-left {
     box-shadow: calculateRem(-12px) 0 calculateRem(12px) calculateRem(-12px) rgba(34,34,34,0.25);
 }
+
+@mixin container-box-shadow {
+    box-shadow: 0 0 calculateRem(12px) calculateRem(-4px) rgba(34,34,34,0.25);
+}
