@@ -17,7 +17,7 @@
 
     &__remove-btn {
         position: absolute;
-        top: calc(50% - #{calculateRem(8px)});
+        top: calc(50% - #{calculateRem(12px)});
         right: calculateRem(6px);
         cursor: pointer;
         border: 0;
