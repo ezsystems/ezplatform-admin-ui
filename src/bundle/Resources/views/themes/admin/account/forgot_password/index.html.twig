@@ -3,7 +3,10 @@
 {% form_theme form_forgot_user_password '@ezdesign/account/form_fields.html.twig'  %}
 
 {%- block content -%}
-    <h2 class="ez-login__header">{{ 'authentication.reset_your_password'|trans|desc('Reset your password') }}</h2>
+    <h2 class="ez-login__actions-headline">{{ 'authentication.reset_your_password'|trans|desc('Reset your password') }}</h2>
+    {% if reason is defined and reason == userForgotPasswordReasonMigration %}
+        <p>{{ 'ezplatform.forgot_password.reset_your_password.reason.migration'|trans|desc('Your password has expired, change it!') }}</p>
+    {% endif %}
     {% if form_forgot_user_password is defined %}
         {{ form_start(form_forgot_user_password, {'attr': {'class': 'ez-form-validate'}}) }}
         <fieldset>
