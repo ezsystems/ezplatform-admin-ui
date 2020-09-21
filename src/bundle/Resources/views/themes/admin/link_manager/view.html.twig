@@ -23,7 +23,7 @@
 {% block body_class %}ez-link-manager-view{% endblock %}
 
 {%- block content -%}
-    <section class="container mt-5">
+    <section class="container ez-container mt-5">
         <table class="ez-table table ez-table--list">
             <thead>
                 <tr>
@@ -72,7 +72,7 @@
         </table>
     </section>
 
-    <section class="container mt-5">
+    <section class="container ez-container mt-5">
         <div class="ez-table-header">
             <div class="ez-table-header__headline">
                 {{ 'url.tab.usages'|trans({'%count%': usages.nbResults })|desc('Content item(s) using this URL') }}

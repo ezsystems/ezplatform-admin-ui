@@ -259,3 +259,15 @@
         margin-bottom: 0;
     }
 }
+
+.ez-link-manager-view {
+    .ez-table__row {
+        .ez-table__cell {
+            &--has-action-btns {
+                display: flex;
+                justify-content: space-between;
+                width: auto;
+            }
+        }
+    }
+}
