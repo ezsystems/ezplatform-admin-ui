@@ -232,8 +232,8 @@
         <note>key: ezauthor.action.delete</note>
       </trans-unit>
       <trans-unit id="8c3f0606ebb870dd8113cca42da7510414c5a0a8" resname="ezplatform.forgot_password.reset_your_password.reason.migration">
-        <source>Your password has expired, change it!</source>
-        <target state="new">Your password has expired, change it!</target>
+        <source>Your password has expired, change it.</source>
+        <target state="new">Your password has expired, change it.</target>
         <note>key: ezplatform.forgot_password.reset_your_password.reason.migration</note>
       </trans-unit>
       <trans-unit id="f73d03811ba3033d6b44986d55ca728c5a88b168" resname="ezplatform.forgot_user_password.contact_administrator">
