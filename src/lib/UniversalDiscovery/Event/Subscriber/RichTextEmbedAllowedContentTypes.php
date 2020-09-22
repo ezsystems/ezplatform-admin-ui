@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
 {
     /** @var string[] */
-    private $restrictedContentTypesIdentifiers;
+    private $allowedContentTypesIdentifiers;
 
     /**
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
@@ -33,7 +33,7 @@ class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
         PermissionCheckerInterface $permissionChecker,
         ContentTypeService $contentTypeService
     ) {
-        $this->restrictedContentTypesIdentifiers = $this->getRestrictedContentTypesIdentifiers(
+        $this->allowedContentTypesIdentifiers = $this->getAllowedContentTypesIdentifiers(
             $permissionResolver,
             $permissionChecker,
             $contentTypeService
@@ -47,7 +47,7 @@ class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    private function getRestrictedContentTypesIdentifiers(
+    private function getAllowedContentTypesIdentifiers(
         PermissionResolver $permissionResolver,
         PermissionCheckerInterface $permissionChecker,
         ContentTypeService $contentTypeService
@@ -91,7 +91,7 @@ class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
             return;
         }
 
-        $config['allowed_content_types'] = !empty($this->restrictedContentTypesIdentifiers) ? $this->restrictedContentTypesIdentifier : null;
+        $config['allowed_content_types'] = !empty($this->allowedContentTypesIdentifiers) ? $this->restrictedContentTypesIdentifier : null;
 
         $event->setConfig($config);
     }
