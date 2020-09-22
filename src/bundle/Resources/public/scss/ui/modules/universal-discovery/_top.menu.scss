@@ -4,6 +4,7 @@
     height: calculateRem(64px);
 
     &__cancel-btn-wrapper {
+        margin-left: calculateRem(16px);
         margin-right: calculateRem(36px);
     }
 
