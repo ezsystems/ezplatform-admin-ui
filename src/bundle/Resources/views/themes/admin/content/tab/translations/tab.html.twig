@@ -4,7 +4,7 @@
 
 {% import _self as tab %}
 {% set can_translate = can_translate is defined ? can_translate : true %}
-<div class="container ez-container">
+<section>
     {% if can_translate %}
         {{ form_start(form_translation_remove, {
             'action': form_translation_remove_action|default(path('ezplatform.translation.remove')),
@@ -63,7 +63,7 @@
     {% if main_translation_switch %}
         {{ form(form_main_translation_update, {'action': path('ezplatform.content.update_main_translation')})}}
     {% endif %}
-</div>
+</section>
 {% macro table_header_tools(form_translation_remove, can_translate) %}
     {% if can_translate %}
         <button type="button" class="btn btn-icon ez-btn--prevented ez-btn--add-translation" data-toggle="modal" data-target="#add-translation-modal"
