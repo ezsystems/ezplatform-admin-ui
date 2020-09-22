@@ -12,14 +12,10 @@
             {{ parent() }}
         {% endblock left_sidebar %}
         
-        <div class="container ml-0">
-            <div class="ez-header mt-3">
-                <div class="container">
-                    {% include '@ezdesign/ui/page_title.html.twig' with { title: 'bookmark.headline'|trans|desc('Bookmarks'), icon_name: 'bookmark-manager' } %}
-                </div>
-            </div>
+        <div class="px-0 ez-content-container">
+            <section class="container mt-5">
+                {% include '@ezdesign/ui/page_title.html.twig' with { title: 'bookmark.headline'|trans|desc('Bookmarks'), icon_name: 'bookmark-manager' } %}
 
-            <div class="container ez-content-container">
                 {{ form_start(form_remove, {
                     'action': path('ezplatform.bookmark.remove'),
                     'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#bookmark_remove_remove' }
@@ -110,7 +106,7 @@
                         {{ pagerfanta(pager, 'ez') }}
                     </div>
                 {% endif %}
-            </div>
+            </section>
         </div>
 
         {{ form_start(form_edit, {
