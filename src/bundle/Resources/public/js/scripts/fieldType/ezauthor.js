@@ -117,6 +117,8 @@
 
             this.reinit();
             this.updateDisabledState(authorNode);
+            eZ.helpers.tooltips.parse(node);
+            eZ.helpers.tooltips.hideAll();
         }
 
         /**
