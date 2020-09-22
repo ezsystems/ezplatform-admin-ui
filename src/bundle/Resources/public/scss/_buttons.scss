@@ -123,13 +123,13 @@
             border-bottom-left-radius: $ibexa-border-radius;
             border-bottom-right-radius: $ibexa-border-radius;
         }
-    }
 
-    .ez-icon {
-        display: block;
-        width: calculateRem(24px);
-        height: calculateRem(24px);
-        margin: 0 auto calculateRem(5px);
+        .ez-icon {
+            display: block;
+            width: calculateRem(24px);
+            height: calculateRem(24px);
+            margin: 0 auto calculateRem(5px);
+        }
     }
 }
 
@@ -153,7 +153,7 @@
         &:hover {
             color: $ibexa-black;
             background: $ibexa-white;
-            
+
             .ez-icon {
                 fill: $ibexa-black;
             }

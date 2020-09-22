@@ -151,8 +151,10 @@ select {
     top: calculateRem(16px);
     height: 100vh;
 
-    .ez-icon {
-        margin-bottom: calculateRem(3px);
+    > .btn {
+        .ez-icon {
+            margin-bottom: calculateRem(3px);
+        }
     }
 }
 
