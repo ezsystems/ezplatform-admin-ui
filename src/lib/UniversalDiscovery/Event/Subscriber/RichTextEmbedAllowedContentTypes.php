@@ -65,7 +65,7 @@ class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
 
         $restrictedContentTypes = $contentTypeService->loadContentTypeList($restrictedContentTypesIds);
 
-        return array_values(array_map(function (ContentType $contentType): string {
+        return array_values(array_map(static function (ContentType $contentType): string {
             return $contentType->identifier;
         }, (array)$restrictedContentTypes));
     }
