@@ -95,7 +95,7 @@
 
 .ez-side-menu,
 .ez-context-menu {
-    .btn:not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm) {
+    .ez-sticky-container > .btn {
         width: calculateRem(80px);
         height: calculateRem(80px);
         padding: calculateRem(2px);
@@ -111,7 +111,6 @@
         &:hover,
         &:focus {
             box-shadow: none;
-            background: $ibexa-white;
             outline: none;
         }
 
@@ -135,10 +134,11 @@
 }
 
 .ez-context-menu {
-    .btn:not(.ez-btn--confirm-send-to-trash):not(.ez-btn--hide-confirm) {
-        &:hover,
-        &:focus {
+    .ez-sticky-container > .btn {
+        &:focus,
+        &:hover {
             color: $ibexa-color-primary;
+            background: $ibexa-white;
 
             .ez-icon {
                 fill: $ibexa-color-primary;
@@ -148,11 +148,12 @@
 }
 
 .ez-side-menu {
-    .btn {
+    .ez-sticky-container > .btn {
         &:focus,
         &:hover {
             color: $ibexa-black;
-
+            background: $ibexa-white;
+            
             .ez-icon {
                 fill: $ibexa-black;
             }
