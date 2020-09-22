@@ -110,14 +110,8 @@
 
         &:hover,
         &:focus {
-            color: $ibexa-color-primary;
             box-shadow: none;
-            background: $ibexa-white;
             outline: none;
-
-            .ez-icon {
-                fill: $ibexa-color-primary;
-            }
         }
 
         &:first-child {
@@ -139,12 +133,27 @@
     }
 }
 
+.ez-context-menu {
+    .ez-sticky-container > .btn {
+        &:focus,
+        &:hover {
+            color: $ibexa-color-primary;
+            background: $ibexa-white;
+
+            .ez-icon {
+                fill: $ibexa-color-primary;
+            }
+        }
+    }
+}
+
 .ez-side-menu {
     .ez-sticky-container > .btn {
         &:focus,
         &:hover {
             color: $ibexa-black;
-
+            background: $ibexa-white;
+            
             .ez-icon {
                 fill: $ibexa-black;
             }
