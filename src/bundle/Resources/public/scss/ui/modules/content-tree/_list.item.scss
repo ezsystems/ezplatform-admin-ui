@@ -181,7 +181,7 @@ $list-item-height: calculateRem(20px);
                         &:hover,
                         &:focus {
                             &:before {
-                                border-color: transparent transparent transparent $ibexa-white;
+                                border-color: transparent transparent transparent $ibexa-color-primary;
                             }
                         }
                     }
@@ -197,7 +197,7 @@ $list-item-height: calculateRem(20px);
                         &:hover,
                         &:focus {
                             &:before {
-                                border-color: $ibexa-white transparent transparent transparent;
+                                border-color: $ibexa-color-primary transparent transparent transparent;
                             }
                         }
                     }
