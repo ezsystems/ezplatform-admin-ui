@@ -155,10 +155,10 @@
         }) }}
 
     {{ form_label(form_location_update.sort_field, 'tab.details.sub_items_listing_by.order_by'|trans|desc('Order by')) }}
-    {{ form_widget(form_location_update.sort_field, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+    {{ form_widget(form_location_update.sort_field, { 'attr': {'class': 'ez-form-autosubmit ml-2'} }) }}
 
     {{ form_label(form_location_update.sort_order, 'tab.details.sub_items_listing_by.in'|trans|desc('in')) }}
-    {{ form_widget(form_location_update.sort_order, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+    {{ form_widget(form_location_update.sort_order, { 'attr': {'class': 'ez-form-autosubmit ml-2'} }) }}
 
     {% do form_location_update.update.setRendered() %}
     {{ form_end(form_location_update) }}
