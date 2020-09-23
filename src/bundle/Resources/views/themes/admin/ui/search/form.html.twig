@@ -32,7 +32,7 @@
         {% for content_type in form.content_types.vars.data %}
             {{ include('@ezdesign/ui/search_tag.html.twig', {
                 'content': content_type.name,
-                'title': "#{'search.content.type'|trans|desc('Content Type:')} #{content_type.name}",
+                'title': "#{'search.content.type'|trans|desc('Content Type')}: #{content_type.name}",
                 'target_selector': "#search_content_types_#{content_type.identifier}",
                 'btn_class': "ez-tag__remove-btn--content-types",
             }) }}
@@ -42,7 +42,7 @@
     {% if form.section is defined and form.section.vars.data is not empty %}
         {{ include('@ezdesign/ui/search_tag.html.twig', {
             'content': form.section.vars.data.name,
-            'title': "#{'search.section'|trans|desc('Section:')} #{form.section.vars.data.name}",
+            'title': "#{'search.section'|trans|desc('Section')}: #{form.section.vars.data.name}",
             'btn_class': "ez-tag__remove-btn--section",
         }) }}
     {% endif %}
@@ -60,7 +60,7 @@
 
         {{ include('@ezdesign/ui/search_tag.html.twig', {
             'content': content_breadcrumbs,
-            'title':  "#{'search.subtree'|trans|desc('Subtree:')} #{content_breadcrumbs}",
+            'title':  "#{'search.subtree'|trans|desc('Subtree')}: #{content_breadcrumbs}",
             'btn_class': "ez-tag__remove-btn--subtree",
         }) }}
     {% endif %}
@@ -70,7 +70,7 @@
         {% set end_date = form.vars.value.lastModified.end_date|ez_short_date %}
 
         {{ include('@ezdesign/ui/search_tag.html.twig', {
-            'content': "#{'search.last.modified'|trans|desc('Last modified:')} #{start_date} - #{end_date}",
+            'content': "#{'search.last.modified'|trans|desc('Last modified')}: #{start_date} - #{end_date}",
             'btn_class': "ez-tag__remove-btn--last-modified",
         }) }}
     {% endif %}
@@ -80,7 +80,7 @@
         {% set end_date = form.vars.value.created.end_date|ez_short_date %}
 
         {{ include('@ezdesign/ui/search_tag.html.twig', {
-            'content': "#{'search.created'|trans|desc('Created:')} #{start_date} - #{end_date}",
+            'content': "#{'search.created'|trans|desc('Created')}: #{start_date} - #{end_date}",
             'btn_class': "ez-tag__remove-btn--last-created",
         }) }}
     {% endif %}
@@ -88,7 +88,7 @@
     {% if form.creator.vars.data is not empty %}
         {{ include('@ezdesign/ui/search_tag.html.twig', {
             'content': form.creator.vars.data.name,
-            'title': "#{'search.creator'|trans|desc('Creator:')} #{form.creator.vars.data.name}",
+            'title': "#{'search.creator'|trans|desc('Creator')}: #{form.creator.vars.data.name}",
             'btn_class': "ez-tag__remove-btn--creator",
         }) }}
     {% endif %}
@@ -97,7 +97,7 @@
 <div class="ez-filters ez-filters--collapsed">
     <div class="ez-filters__row">
         <div class="ez-filters__item ez-filters__item--content-type">
-            <label class="ez-label">{{ 'search.content.type'|trans|desc('Content Type:') }}</label>
+            <label class="ez-label">{{ 'search.content.type'|trans|desc('Content Type') }}</label>
             <select class="form-control ez-filters__select ez-filters__select--content-type" hidden>
                 <option class="ez-filters__option ez-filters__option--hidden" data-default="{{ 'search.any.content.type'|trans|desc('Any Content Type') }}" value="">{{ 'search.any.content.type'|trans|desc('Any Content Type') }}</option>
             </select>
@@ -107,12 +107,12 @@
     <div class="ez-filters__row">
         {% if form.section is defined %}
             <div class="ez-filters__item ez-filters__item--section">
-                <label class="ez-label">{{ 'search.section'|trans|desc('Section:') }}</label>
+                <label class="ez-label">{{ 'search.section'|trans|desc('Section') }}</label>
                 {{ form_widget(form.section, {'attr': {'class': 'ez-filters__select'}}) }}
             </div>
         {% endif %}
         <div class="ez-filters__item ez-filters__item--subtree">
-            <label class="ez-label">{{ 'search.subtree'|trans|desc('Subtree:') }}</label>
+            <label class="ez-label">{{ 'search.subtree'|trans|desc('Subtree') }}</label>
             <div>
                 <button class="ez-btn ez-btn--secondary ez-btn--udw-select-location"
                     type="button"
@@ -137,17 +137,17 @@
     </div>
     <div class="ez-filters__row">
         <div class="ez-filters__item ez-filters__item--modified">
-            <label class="ez-label">{{ 'search.last.modified'|trans|desc('Last modified:') }}</label>
+            <label class="ez-label">{{ 'search.last.modified'|trans|desc('Last modified') }}</label>
             {{ form_widget(form.last_modified_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-filters__range-wrapper--select-modified-range'}}) }}
             {{ form_errors(form.last_modified_select) }}
         </div>
         <div class="ez-filters__item ez-filters__item--created">
-            <label class="ez-label">{{ 'search.created'|trans|desc('Created:') }}</label>
+            <label class="ez-label">{{ 'search.created'|trans|desc('Created') }}</label>
             {{ form_widget(form.created_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-filters__range-wrapper--select-created-range'}}) }}
             {{ form_errors(form.created_select) }}
         </div>
         <div class="ez-filters__item ez-filters__item--creator">
-            <label class="ez-label">{{ 'search.creator'|trans|desc('Creator:') }}</label>
+            <label class="ez-label">{{ 'search.creator'|trans|desc('Creator') }}</label>
             {% set creator = form.vars.data.creator %}
             <div class="ez-filters__input-wrapper">
                 <input type="text"

@@ -19,10 +19,9 @@
             <section class="container ez-container mt-5">
                 {% include '@ezdesign/ui/search/form.html.twig' with { form: form } %}
             </section>
-            <section class="container ez-container mt-4">
 
-                {% if results is defined %}
-
+            {% if results is defined %}
+                <section class="container ez-container mt-4">
                     <div class="ez-table-header">
                         <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
                     </div>
@@ -91,8 +90,8 @@
                     }) }}
                     {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
                     {{ form_end(form_edit) }}
-                {% endif %}
-            </section>
+                </section>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

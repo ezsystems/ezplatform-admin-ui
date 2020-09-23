@@ -145,21 +145,26 @@ const Search = ({ itemsPerPage }) => {
                         value={searchText}
                     />
                 </div>
-                <div className="c-search__selector-wrapper">
-                    <select className="form-control c-search__select-language" onChange={updateSelectedLanguage} value={selectedLanguage}>
-                        {languages.map((language) => {
-                            if (!language.enabled) {
-                                return null;
-                            }
+                {languages.length > 1 ? (
+                    <div className="c-search__selector-wrapper">
+                        <select
+                            className="form-control c-search__select-language"
+                            onChange={updateSelectedLanguage}
+                            value={selectedLanguage}>
+                            {languages.map((language) => {
+                                if (!language.enabled) {
+                                    return null;
+                                }
 
-                            return (
-                                <option key={language.id} value={language.languageCode} onChange={updateSelectedLanguage}>
-                                    {language.name}
-                                </option>
-                            );
-                        })}
-                    </select>
-                </div>
+                                return (
+                                    <option key={language.id} value={language.languageCode} onChange={updateSelectedLanguage}>
+                                        {language.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </div>
+                ) : null}
                 <button className="c-search__search-btn btn btn-primary" onClick={search.bind(this, 0)}>
                     {searchLabel}
                 </button>
