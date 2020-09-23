@@ -16,6 +16,10 @@
     outline: none;
     transition: all 0.2s $ez-admin-transition;
 
+    &:disabled {
+        opacity: 0.3;
+    }
+
     &--checkbox {
         -webkit-appearance: none;
         -moz-appearance: none;
