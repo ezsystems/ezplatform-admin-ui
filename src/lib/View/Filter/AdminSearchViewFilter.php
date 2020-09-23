@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\View\Filter;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewBuilderParametersEvent;
@@ -103,8 +104,13 @@ class AdminSearchViewFilter implements EventSubscriberInterface
         $searchLanguage = null;
 
         if (!empty($search['section'])) {
-            $section = $this->sectionService->loadSection($search['section']);
+            try {
+                $section = $this->sectionService->loadSection((int)$search['section']);
+            } catch (NotFoundException $e) {
+                $section = null;
+            }
         }
+
         if (!empty($search['content_types']) && \is_array($search['content_types'])) {
             foreach ($search['content_types'] as $identifier) {
                 $contentTypes[] = $this->contentTypeService->loadContentTypeByIdentifier($identifier);
