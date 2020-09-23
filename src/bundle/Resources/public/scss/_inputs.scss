@@ -49,6 +49,19 @@
             border: calculateRem(1px) solid $ibexa-color-primary;
             background-color: $ibexa-color-primary;
         }
+
+        &:indeterminate {
+            border: calculateRem(1px) solid $ibexa-color-primary;
+            background-color: $ibexa-color-primary;
+
+            &:after {
+                border: none;
+                background-color: $ibexa-white;
+                height: calculateRem(1px);
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
     }
 
     &--radio {
