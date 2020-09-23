@@ -8,6 +8,7 @@
     }
 
     &__title {
+        margin-bottom: calculateRem(4px);
         font-size: calculateRem(26px);
     }
 

@@ -14,6 +14,12 @@
     <div class="ez-content-edit-page-title {{ class is defined ? class }}">
         <div class="ez-content-edit-page-title__action">{{ action_name }}</div>
         <div class="ez-content-edit-page-title__title">{{ title }}</div>
-        <div class="ez-content-edit-page-title__description">{{ description }}</div>
+        <div class="ez-content-edit-page-title__description">
+            {{ 'editing_details'|trans({
+                '%language_name%': language_name,
+                '%location_name%': location_name})
+                |desc('<b>in</b> %language_name% <b>under</b> %location_name%')|raw
+            }}
+        </div>
     </div>
 {% endif %}
