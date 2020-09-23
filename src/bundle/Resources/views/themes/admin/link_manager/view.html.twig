@@ -4,6 +4,7 @@
 
 {%- block breadcrumbs -%}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
         { value: 'url.breadcrumb.list'|trans|desc('URL management'), url: path('ezplatform.url_management') },
         { value: 'url.breadcrumb.detail'|trans|desc('Link details') }
     ]} %}
@@ -23,7 +24,7 @@
 {% block body_class %}ez-link-manager-view{% endblock %}
 
 {%- block content -%}
-    <section class="container ez-container mt-5">
+    <section class="container ez-container">
         <table class="ez-table table ez-table--list">
             <thead>
                 <tr>
