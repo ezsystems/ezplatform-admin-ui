@@ -10,6 +10,7 @@
     {% include '@ezdesign/content/page_title_edit.html.twig' with { 
         action_name: 'creating'|trans|desc('Creating'),
         title: 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%'),
+        description: content_type.description
     } %}
 {% endblock %}
 
