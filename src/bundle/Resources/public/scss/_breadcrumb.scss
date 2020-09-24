@@ -9,16 +9,22 @@
 
     .breadcrumb-item {
         cursor: not-allowed;
+        color: $ibexa-color-font-pale;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: calculateRem(300px);
         
-        &::before,
-        &.active,
+        &::before {
+            color: $ibexa-color-font;
+        }
+
         &__link {
-            color: $ibexa-color-base-dark;
-            text-decoration: none;
+            color: $ibexa-color-font;
+            
+            &:hover {
+                color: $ibexa-color-primary;
+            }
         }
     }
 }
