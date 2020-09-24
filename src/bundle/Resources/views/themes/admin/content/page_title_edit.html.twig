@@ -29,7 +29,7 @@
         </div>
 
         {% if content is defined %}
-            <button class="ez-content-edit-page-title__toggler" href="#">?</button>
+            <button class="ez-content-edit-page-title__toggler">?</button>
             <div class="ez-content-edit-page-title__details ez-content-edit-page-title__details--collapsed">
                 {% if creator is defined %}
                     {{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}/
