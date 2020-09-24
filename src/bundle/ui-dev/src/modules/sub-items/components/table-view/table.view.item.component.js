@@ -370,7 +370,7 @@ export default class TableViewItemComponent extends PureComponent {
                         className="c-table-view-item__btn c-table-view-item__btn--edit"
                         tabIndex={-1}>
                         <div className="c-table-view-item__btn-inner">
-                            <Icon name="edit" extraClasses="ez-icon--medium" />
+                            <Icon name="edit" extraClasses="ez-icon--small-medium" />
                         </div>
                     </span>
                 </td>

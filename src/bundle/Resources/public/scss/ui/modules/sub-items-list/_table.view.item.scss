@@ -1,13 +1,4 @@
 .c-table-view-item {
-    &__tooltip {
-        top: calculateRem(-5px) !important;
-        left: calculateRem(40px) !important;
-
-        .ez-tooltip__arrow {
-            left: calc(50% - 0.4rem) !important;
-        }
-    }
-
     &__translation {
         display: block;
     }
@@ -169,8 +160,8 @@
     &__btn {
         color: $ez-white;
         border: calculateRem(1px) solid transparent;
-        width: calculateRem(24px);
-        height: calculateRem(24px);
+        width: calculateRem(48px);
+        height: calculateRem(48px);
         transition: background 0.3s $ez-admin-transition;
         cursor: pointer;
 
