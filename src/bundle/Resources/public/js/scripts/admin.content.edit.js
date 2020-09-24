@@ -1,4 +1,4 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const enterKeyCode = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',
