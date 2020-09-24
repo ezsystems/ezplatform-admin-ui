@@ -1,4 +1,4 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const enterKeyCode = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',
@@ -22,8 +22,8 @@
         'url',
     ];
     const form = doc.querySelector('.ez-form-validate');
-    const itemAuthor = doc.querySelector('.ez-details-items__author-breadcrumbs');
-    const itemAuthorToggler = doc.querySelector('.ez-details-items__toggler');
+    const titleDetails = doc.querySelector('.ez-content-edit-page-title__details');
+    const titleDetailsToggler = doc.querySelector('.ez-content-edit-page-title__toggler');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
@@ -114,13 +114,12 @@
         btn.addEventListener('click', clickHandler, false);
     });
 
-    if (itemAuthorToggler) {
-        itemAuthorToggler.addEventListener('click', (event) => {
+    if (titleDetailsToggler) {
+        titleDetailsToggler.addEventListener('click', (event) => {
             event.preventDefault();
             eZ.helpers.tooltips.hideAll();
 
-            itemAuthorToggler.classList.toggle('ez-details-items__toggler--gray');
-            itemAuthor.classList.toggle('ez-details-items--collapsed');
+            titleDetails.classList.toggle('ez-content-edit-page-title__details--collapsed');
         });
     }
 })(window, window.document, window.eZ);

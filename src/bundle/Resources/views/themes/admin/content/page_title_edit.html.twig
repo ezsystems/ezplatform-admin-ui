@@ -14,6 +14,34 @@
     <div class="ez-content-edit-page-title {{ class is defined ? class }}">
         <div class="ez-content-edit-page-title__action">{{ action_name }}</div>
         <div class="ez-content-edit-page-title__title">{{ title }}</div>
-        <div class="ez-content-edit-page-title__description">{{ description }}</div>
+        <div class="ez-content-edit-page-title__description">
+            {% if description is defined %}
+                <div class="my-1">{{ description }}</div>
+            {% endif %}
+
+            <div>
+                {{ 'editing_details'|trans({
+                    '%language_name%': language.name,
+                    '%location_name%': parent_location.contentInfo.name})
+                    |desc('<b>in</b> %language_name% <b>under</b> %location_name%')|raw
+                }}
+            </div>
+        </div>
+
+        {% if content is defined %}
+            <button class="ez-content-edit-page-title__toggler">?</button>
+            <div class="ez-content-edit-page-title__details ez-content-edit-page-title__details--collapsed">
+                {% if creator is defined %}
+                    {{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}/
+                {% endif %}
+                {{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }}/
+                {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
+                {% if is_published == false %}
+                    {{ 'parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
+                {% else %}
+                    {{ 'location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
 {% endif %}

@@ -176,6 +176,11 @@
         <target state="new">Delete</target>
         <note>key: custom_url_alias_add_form.remove</note>
       </trans-unit>
+      <trans-unit id="750bead6705b295c7b7d66c27b2768c1b9329ed5" resname="editing_details">
+        <source><![CDATA[<b>in</b> %language_name% <b>under</b> %location_name%]]></source>
+        <target state="new"><![CDATA[<b>in</b> %language_name% <b>under</b> %location_name%]]></target>
+        <note>key: editing_details</note>
+      </trans-unit>
       <trans-unit id="7cb40cbc703336ab1285e81ebf100b82b05a0e27" resname="error.page.403.actions">
         <source><![CDATA[Please contact your Administrator to request access to this content or modify your profile.<br/>Otherwise, go back to <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></source>
         <target state="new"><![CDATA[Please contact your Administrator to request access to this content or modify your profile.<br/>Otherwise, go back to <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></target>

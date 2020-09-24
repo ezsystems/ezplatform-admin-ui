@@ -2,43 +2,16 @@
 
 {% trans_default_domain 'user_edit' %}
 
-{% block details %}
-    {% block close_button %}
-        <a 
-            class="ez-content-edit-container__close" 
-            href="{{ path('_ez_content_view', {'contentId': user.id, 'locationId': user.versionInfo.contentInfo.mainLocationId}) }}"
-            title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
-        >
-            <svg class="ez-icon ez-icon--small-medium ez-icon--primary">
-                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#discard"></use>
-            </svg>
-        </a>
-    {% endblock %}
 
-    <div class="container mt-5 px-5">
-        <h4 class="ez-content-item-status">{{ 'editing'|trans({'%contentType%': content_type.name})|desc('Editing a(n) %contentType%') }}</h4>
-        <h1>
-            <svg class="ez-icon ez-icon-{{ content_type.identifier }}">
-                <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
-            </svg>
-            {{ user.name }}
-        </h1>
-
-        <div class="small">
-            {{ content_type.name }} /
-            {% if creator is not null %}{{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }} /{% endif %}
-            {{ user.versionInfo.contentInfo.publishedDate|ez_full_datetime }} /
-            {{ 'content_id'|trans({'%contentId%': user.id})|desc('Content ID: %contentId%') }}{% if user.versionInfo.contentInfo.mainLocationId %}, {{ 'location_id'|trans({'%locationId%': user.versionInfo.contentInfo.mainLocationId})|desc('Location ID: %locationId%') }}{% endif %}
-        </div>
-        <div class="ez-content-item__errors-wrapper" hidden>
-            {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
-        </div>
-        {# @todo remove if statement once getDescription() bug is resolved in kernel #}
-        {% if content_type.descriptions is not empty %}
-            <div class="small text-muted">{{ content_type.description }}</div>
-        {% endif %}
-    </div>
+{% block page_title %}
+    {% include '@ezdesign/content/page_title_edit.html.twig' with { 
+        action_name: 'editing'|trans|desc('Editing'),
+        title: content_type.name,
+        description: content_type.description
+    } %}
 {% endblock %}
+
+{% block details %}{% endblock %}
 
 {% block form_fields %}
     <section class="container mt-4 mb-5 px-5">

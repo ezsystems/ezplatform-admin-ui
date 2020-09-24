@@ -7,13 +7,6 @@
 {% endblock %}
 
 {% block page_title %}
-    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { 
-        class: 'breadcrumb--increased-left-margin',
-        items: [
-            { value: 'Structure > Admin / Content types / Content / all TO DO' }
-        ] 
-    } %}
-
     {% include '@ezdesign/content/page_title_edit.html.twig' with { 
         class: 'ez-content-edit-page-title--increased-left-margin',
         action_name: 'creating'|trans|desc('Creating'),
