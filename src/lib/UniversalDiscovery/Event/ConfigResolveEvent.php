@@ -12,16 +12,16 @@ use Symfony\Component\EventDispatcher\Event;
 
 class ConfigResolveEvent extends Event
 {
-    const NAME = 'udw.resolve.config';
+    public const NAME = 'udw.resolve.config';
 
     /** @var string */
     protected $configName;
 
     /** @var array */
-    protected $config;
+    protected $config = [];
 
     /** @var array */
-    protected $context;
+    protected $context = [];
 
     /**
      * @return string
