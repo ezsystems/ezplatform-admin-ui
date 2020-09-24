@@ -7,7 +7,7 @@
 {% set have_actions = (is_draft or is_archived) or custom_actions %}
 
 <div class="ez-scrollable-table-wrapper">
-    <table class="table {% if is_draft and have_to_paginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
+    <table class="table table-hover {% if is_draft and have_to_paginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
         <thead>
         <tr>
             {% if form is defined %}

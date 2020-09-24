@@ -3,6 +3,15 @@
     border-collapse: separate;
     width: 100%;
 
+    &--hoverable {
+        .c-table-view__body {
+            .c-table-view-item:hover {
+                color: $ibexa-black;
+                background-color: $ibexa-color-base-pale;
+            }
+        }
+    }
+
     &__wrapper {
         position: relative;
     }
@@ -147,8 +156,8 @@
     }
 
     &__head {
-        border-top: calculateRem(1px) solid $ibexa-color-base-light; 
-        border-bottom: calculateRem(1px) solid $ibexa-color-base-light; 
+        border-top: calculateRem(1px) solid $ibexa-color-base-light;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base-light;
     }
 
     &__body {

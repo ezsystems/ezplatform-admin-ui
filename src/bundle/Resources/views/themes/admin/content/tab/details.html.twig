@@ -5,7 +5,7 @@
 {% form_theme form_location_update '@ezdesign/ui/form_fields.html.twig' %}
 
 <div class="ez-scrollable-table-wrapper">
-    <table class="table">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>{{ 'tab.details.creator'|trans()|desc('Creator') }}</th>
@@ -46,7 +46,7 @@
 {% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
 
 <div class="ez-scrollable-table-wrapper">
-    <table class="table">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>{{ 'tab.details.content_id'|trans()|desc('Content ID') }}</th>
@@ -70,7 +70,7 @@
     {% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.details.section_details'|trans()|desc('Section details') } %}
 
     <div class="ez-scrollable-table-wrapper">
-        <table class="table">
+        <table class="table table-hover">
             <thead>
             <tr>
                 <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
@@ -105,7 +105,7 @@
 {% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.details.state_details'|trans()|desc('Object state details') } %}
 
 <div class="ez-scrollable-table-wrapper">
-    <table class="table">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>{{ 'tab.details.state_group_name'|trans()|desc('Group name') }}</th>
