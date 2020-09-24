@@ -19,7 +19,7 @@ const ContentTable = ({ count, itemsPerPage, items, activePageIndex, title, onPa
         <div className="c-content-table" ref={refContentTable}>
             <div className="c-content-table__title">{title}</div>
             <div className="c-content-table__items">
-                <table className="table">
+                <table className="table table-hover">
                     <thead>
                         <tr>
                             <th></th>

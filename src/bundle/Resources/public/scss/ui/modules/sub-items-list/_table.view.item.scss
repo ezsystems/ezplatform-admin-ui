@@ -31,7 +31,7 @@
         &:first-child {
             border-left: calculateRem(1px) solid transparent;
         }
-    
+
         &:last-child {
             border-right: calculateRem(1px) solid transparent;
         }
@@ -229,7 +229,7 @@
         cursor: pointer;
         transition: color 0.3s $ez-admin-transition;
         text-decoration: underline;
-        
+
         &:hover,
         &:focus {
             color: $ibexa-color-primary;
@@ -239,8 +239,21 @@
     &--active {
         .c-table-view-item {
             &__cell,
-            &__priority-actions  {
+            &__priority-actions {
                 background: $ibexa-color-base-light;
+            }
+        }
+    }
+}
+
+.c-table-view--hoverable {
+    .c-table-view-item:hover {
+        .c-table-view-item__cell {
+            &--checkbox,
+            &--icon,
+            &--name,
+            &--actions {
+                background-color: $ibexa-color-base-pale;
             }
         }
     }

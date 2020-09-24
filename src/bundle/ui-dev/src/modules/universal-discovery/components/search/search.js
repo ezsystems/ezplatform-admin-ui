@@ -110,7 +110,7 @@ const Search = ({ itemsPerPage }) => {
             return (
                 <div className="c-search__no-results">
                     <div className="c-search__no-results-title">{title}</div>
-                    <table className="table">
+                    <table className="table table-hover">
                         <tbody>
                             <tr>
                                 <td>

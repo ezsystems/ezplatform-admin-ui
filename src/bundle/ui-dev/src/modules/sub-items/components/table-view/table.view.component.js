@@ -254,7 +254,7 @@ export default class TableViewComponent extends Component {
         return (
             <div className="c-table-view__wrapper">
                 <div className="c-table-view__scroller">
-                    <table className="c-table-view">
+                    <table className="c-table-view c-table-view--hoverable">
                         {this.renderHead()}
                         <tbody className="c-table-view__body">{renderedItems}</tbody>
                     </table>
