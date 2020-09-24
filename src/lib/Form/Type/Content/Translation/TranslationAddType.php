@@ -211,7 +211,7 @@ class TranslationAddType extends AbstractType
                 [
                     'required' => true,
                     'multiple' => false,
-                    'expanded' => true,
+                    'expanded' => false,
                     'choice_loader' => new CallbackChoiceLoader(function () use ($contentLanguages, $limitationLanguageCodes) {
                         return $this->loadLanguages(
                             function (Language $language) use ($contentLanguages, $limitationLanguageCodes) {
@@ -232,7 +232,7 @@ class TranslationAddType extends AbstractType
                     'required' => false,
                     'placeholder' => false,
                     'multiple' => false,
-                    'expanded' => true,
+                    'expanded' => false,
                     'choice_loader' => new CallbackChoiceLoader(function () use ($contentLanguages) {
                         return $this->loadLanguages(
                             function (Language $language) use ($contentLanguages) {
