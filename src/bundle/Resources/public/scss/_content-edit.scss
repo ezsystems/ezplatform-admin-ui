@@ -16,6 +16,31 @@
         font-size: calculateRem(14px);
         color: $ibexa-color-base-dark;
     }
+
+    &__details {
+        height: calculateRem(20px);
+        font-size: calculateRem(14px);
+        color: $ibexa-color-base-dark;
+        overflow: hidden;
+        transition: all 0.2s $ez-admin-transition;
+
+        &--collapsed {
+            height: 0;
+        }
+    }
+
+    &__toggler {
+        position: absolute;
+        top: calculateRem(10px);
+        right: 0;
+        text-decoration: none;
+        color: $ibexa-color-base-dark;
+        font-size: calculateRem(16px);
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
 
 .ez-content-item {

@@ -16,10 +16,25 @@
         <div class="ez-content-edit-page-title__title">{{ title }}</div>
         <div class="ez-content-edit-page-title__description">
             {{ 'editing_details'|trans({
-                '%language_name%': language_name,
-                '%location_name%': location_name})
+                '%language_name%': language.name,
+                '%location_name%': parent_location.contentInfo.name})
                 |desc('<b>in</b> %language_name% <b>under</b> %location_name%')|raw
             }}
         </div>
+        {% if content is defined %}
+            <a class="ez-content-edit-page-title__toggler" href="#">?</a>
+            <div class="ez-content-edit-page-title__details ez-content-edit-page-title__details--collapsed">
+                {% if creator is defined %}
+                    {{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}/
+                {% endif %}
+                {{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }}/
+                {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
+                {% if is_published == false %}
+                    {{ 'parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
+                {% else %}
+                    {{ 'location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
 {% endif %}
