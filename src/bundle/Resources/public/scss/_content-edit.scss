@@ -36,7 +36,8 @@
         text-decoration: none;
         color: $ibexa-color-base-dark;
         font-size: calculateRem(16px);
-
+        border: none;
+        
         &:hover {
             text-decoration: none;
         }

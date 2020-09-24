@@ -18,7 +18,7 @@
             {% if description is defined %}
                 <div class="my-1">{{ description }}</div>
             {% endif %}
-            
+
             <div>
                 {{ 'editing_details'|trans({
                     '%language_name%': language.name,
@@ -29,7 +29,7 @@
         </div>
 
         {% if content is defined %}
-            <a class="ez-content-edit-page-title__toggler" href="#">?</a>
+            <button class="ez-content-edit-page-title__toggler" href="#">?</button>
             <div class="ez-content-edit-page-title__details ez-content-edit-page-title__details--collapsed">
                 {% if creator is defined %}
                     {{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}/
