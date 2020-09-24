@@ -27,18 +27,18 @@
         <note>key: search.clear</note>
       </trans-unit>
       <trans-unit id="52574f2c1d5e0b3ffcd4f105b770e91ae1e519fa" resname="search.content.type">
-        <source>Content Type:</source>
-        <target state="new">Content Type:</target>
+        <source>Content Type</source>
+        <target state="new">Content Type</target>
         <note>key: search.content.type</note>
       </trans-unit>
       <trans-unit id="738c66eb92535505455b34b383f8089fb1bc0479" resname="search.created">
-        <source>Created:</source>
-        <target state="new">Created:</target>
+        <source>Created</source>
+        <target state="new">Created</target>
         <note>key: search.created</note>
       </trans-unit>
       <trans-unit id="a32fe0699ebb4545ab1a39bab0311633c3f92fc3" resname="search.creator">
-        <source>Creator:</source>
-        <target state="new">Creator:</target>
+        <source>Creator</source>
+        <target state="new">Creator</target>
         <note>key: search.creator</note>
       </trans-unit>
       <trans-unit id="3d9f547776de4846ff54fcd1cd173ac5937e5a46" resname="search.creator_input.placeholder">
@@ -67,8 +67,8 @@
         <note>key: search.headline</note>
       </trans-unit>
       <trans-unit id="c2e9df867c114a94918c00f775d3a54d24358dfa" resname="search.last.modified">
-        <source>Last modified:</source>
-        <target state="new">Last modified:</target>
+        <source>Last modified</source>
+        <target state="new">Last modified</target>
         <note>key: search.last.modified</note>
       </trans-unit>
       <trans-unit id="2d007a8d9fc080db790dc5c45c12dd369d144fbe" resname="search.last_month">
@@ -107,8 +107,8 @@
         <note>key: search.perform</note>
       </trans-unit>
       <trans-unit id="34cd11448c2016e5c0a098947eb3e2aef01a9ac5" resname="search.section">
-        <source>Section:</source>
-        <target state="new">Section:</target>
+        <source>Section</source>
+        <target state="new">Section</target>
         <note>key: search.section</note>
       </trans-unit>
       <trans-unit id="1ac4d5da88d06451590cade73ec7e2c4a8b98c2e" resname="search.select_content">
@@ -117,8 +117,8 @@
         <note>key: search.select_content</note>
       </trans-unit>
       <trans-unit id="b484be9d33f5cd9961f4ddd89c628f2cbca2a6a1" resname="search.subtree">
-        <source>Subtree:</source>
-        <target state="new">Subtree:</target>
+        <source>Subtree</source>
+        <target state="new">Subtree</target>
         <note>key: search.subtree</note>
       </trans-unit>
       <trans-unit id="777cc1ef279096d5a978aa3553e9434d828f8248" resname="search.tips.check_spelling">

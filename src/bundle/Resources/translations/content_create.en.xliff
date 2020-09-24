@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="ad4e9a4e42b99d945f972bab5a2eff694d283793" resname="creating">
+        <source>Creating</source>
+        <target state="new">Creating</target>
+        <note>key: creating</note>
+      </trans-unit>
       <trans-unit id="0f727a5b08f9dd958453e3fe685f22bb9a55a877" resname="creating_details">
         <source><![CDATA[
                         <span class="ez-details-items__connector">Creating:</span>
