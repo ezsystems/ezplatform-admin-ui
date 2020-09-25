@@ -91,10 +91,12 @@
             </script>
             <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
         {% endif %}
-        <title>{% block title %}eZ Platform{% endblock %}</title>
+        <title>{% block title %}Ibexa DXP{% endblock %}</title>
         {{ encore_entry_link_tags('ezplatform-admin-ui-layout-css', null, 'ezplatform') }}
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('bundles/ezplatformadminui/img/favicon-16x16.png') }}" />
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bundles/ezplatformadminui/img/favicon-32x32.png') }}" />
         {{ ez_render_component_group('stylesheet-head') }}
         {{ ez_render_component_group('script-head') }}
 
