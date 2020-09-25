@@ -210,14 +210,14 @@ class PermissionChecker implements PermissionCheckerInterface
 
     public function getContentUpdateLimitations(Location $location): LookupLimitationResult
     {
-        $contentUpdateStruct = $this->contentService->newContentUpdateStruct();
+        $contentInfo = $location->getContentInfo();
 
         $versionBuilder = new VersionBuilder();
         $versionBuilder->translateToAnyLanguageOf($this->getActiveLanguageCodes());
         $versionBuilder->createFromAnyContentTypeOf($this->getContentTypeIds());
 
         return $this->permissionResolver->lookupLimitations('content', 'edit',
-            $contentUpdateStruct,
+            $contentInfo,
             [$versionBuilder->build(), $location],
             [Limitation::CONTENTTYPE, Limitation::LANGUAGE]
         );
