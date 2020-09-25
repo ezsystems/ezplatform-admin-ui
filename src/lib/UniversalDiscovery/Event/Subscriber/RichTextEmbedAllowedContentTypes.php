@@ -10,74 +10,60 @@ namespace EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
+final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
 {
-    /** @var string[] */
-    private $allowedContentTypesIdentifiers;
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
 
-    /**
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     */
+    /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
+    private $permissionChecker;
+
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
+    private $contentTypeService;
+
+    /** @var string[]|null */
+    private $allowedContentTypesIdentifiers = null;
+
     public function __construct(
         PermissionResolver $permissionResolver,
         PermissionCheckerInterface $permissionChecker,
         ContentTypeService $contentTypeService
     ) {
-        $this->allowedContentTypesIdentifiers = $this->getAllowedContentTypesIdentifiers(
-            $permissionResolver,
-            $permissionChecker,
-            $contentTypeService
-        );
+        $this->permissionResolver = $permissionResolver;
+        $this->permissionChecker = $permissionChecker;
+        $this->contentTypeService = $contentTypeService;
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface $permissionChecker
-     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    private function getAllowedContentTypesIdentifiers(
-        PermissionResolver $permissionResolver,
-        PermissionCheckerInterface $permissionChecker,
-        ContentTypeService $contentTypeService
-    ): array {
-        $access = $permissionResolver->hasAccess('content', 'read');
+    private function getAllowedContentTypesIdentifiers(): array
+    {
+        $access = $this->permissionResolver->hasAccess('content', 'read');
         if (!\is_array($access)) {
             return [];
         }
 
-        $restrictedContentTypesIds = $permissionChecker->getRestrictions($access, ContentTypeLimitation::class);
-
+        $restrictedContentTypesIds = $this->permissionChecker->getRestrictions($access, ContentTypeLimitation::class);
         if (empty($restrictedContentTypesIds)) {
             return [];
         }
 
-        $restrictedContentTypes = $contentTypeService->loadContentTypeList($restrictedContentTypesIds);
+        $allowedContentTypesIdentifiers = [];
 
-        return array_values(
-            array_map(
-                static function (ContentType $contentType): string {
-                    return $contentType->identifier;
-                },
-                iterator_to_array($restrictedContentTypes)
-            )
-        );
+        $restrictedContentTypes = $this->contentTypeService->loadContentTypeList($restrictedContentTypesIds);
+        foreach ($restrictedContentTypes as $contentType) {
+            $allowedContentTypesIdentifiers[] = $contentType->identifier;
+        }
+
+        return $allowedContentTypesIdentifiers;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -85,9 +71,6 @@ class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent $event
-     */
     public function onUdwConfigResolve(ConfigResolveEvent $event): void
     {
         $config = $event->getConfig();
@@ -96,7 +79,11 @@ class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
             return;
         }
 
-        $config['allowed_content_types'] = !empty($this->allowedContentTypesIdentifiers) ? $this->restrictedContentTypesIdentifier : null;
+        if ($this->allowedContentTypesIdentifiers === null) {
+            $this->allowedContentTypesIdentifiers = $this->getAllowedContentTypesIdentifiers();
+        }
+
+        $config['allowed_content_types'] = !empty($this->allowedContentTypesIdentifiers) ? $this->allowedContentTypesIdentifiers : null;
 
         $event->setConfig($config);
     }
