@@ -59,7 +59,7 @@
         "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
     },
     "extra": {
-        "_ezplatform_branch_for_behat_tests": "fix/EZP-31462-handle-users-with-unsupported-password-hash-types",
+        "_ezplatform_branch_for_behat_tests": "3.1",
         "branch-alias": {
             "dev-tmp_ci_branch": "2.1.x-dev",
             "dev-master": "2.1.x-dev"
