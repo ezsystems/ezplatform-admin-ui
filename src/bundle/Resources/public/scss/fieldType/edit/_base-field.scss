@@ -1,8 +1,4 @@
 .ez-field-edit {
-    &__label-wrapper {
-        padding-top: calculateRem(8px);
-    }
-
     &__label {
         @include label-required();
     }
@@ -64,7 +60,6 @@
 
 .ez-content-edit {
     .ez-field-edit {
-        display: flex;
         padding: calculateRem(24px) 0;
         border-bottom: calculateRem(1px) solid $ibexa-color-base;
 
@@ -87,5 +82,5 @@
         &__data {
             flex: 0 0 calc(100% - #{calculateRem(200px)});
         }
-    }        
+    }
 }
