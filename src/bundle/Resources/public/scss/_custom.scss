@@ -144,7 +144,7 @@ $theme-colors: (
     warning: $ibexa-color-warning,
     danger: $ibexa-color-danger,
     light: $ibexa-color-base-light,
-    dark: $ibexa-black,
+    dark: $ibexa-color-base-deep,
     info: $cyan,
 );
 
@@ -209,12 +209,16 @@ $pagination-border-width: 0;
 $pagination-border-color: transparent;
 
 // Modals
-$modal-header-padding: calculateRem(16px) calculateRem(24px);
-$modal-header-border-width: 0;
+$modal-header-padding-y: calculateRem(24px);
+$modal-header-padding-x: 0;
+$modal-header-border-width: calculateRem(1px);
+$modal-header-border-color: $ibexa-color-base-medium;
+$modal-title-font-size: calculateRem(20px);
 $modal-content-border-width: 0;
 $modal-content-border-radius: $ibexa-border-radius;
-$modal-inner-padding: calculateRem(24px);
-$modal-footer-padding: calculateRem(16px) calculateRem(24px);
+$modal-inner-padding: calculateRem(24px) 0;
+$modal-footer-padding: calculateRem(24px) 0;
+$modal-footer-border-width: 0;
 //Components
 $border-radius: $ibexa-border-radius;
 

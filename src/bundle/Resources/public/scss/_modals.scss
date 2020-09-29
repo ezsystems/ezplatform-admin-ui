@@ -3,11 +3,15 @@
         @include modal-main();
     }
 
+    .modal-content {
+        @include modal-content();
+    }
+
     .modal-header {
         @include modal-header();
 
         .modal-title {
-            margin-right: calculateRem(30px);
+            @include modal-title();
         }
 
         .close {
@@ -23,17 +27,34 @@
         @include modal-footer();
     }
 
+    &--table-content {
+        .modal-header {
+            border-width: 0;
+        }        
+
+        .modal-body {
+            padding-top: 0;
+        }
+    }
+
+    &--no-header {
+        .close {
+            @include close-button();
+
+            top: calculateRem(22px);
+            right: calculateRem(18px);
+        }
+
+        .modal-body {
+            padding-bottom: 0;
+            margin-right: calculateRem(36px);
+        }
+    }
+
     &--wide {
         .modal-dialog {
             max-width: calculateRem(800px); 
             width: calculateRem(800px);       
-        }
-    }
-
-    &--notice {
-        .modal-header,
-        .modal-footer {
-            background: $ibexa-white;
         }
     }
 }

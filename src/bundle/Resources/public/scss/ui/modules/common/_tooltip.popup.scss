@@ -13,10 +13,6 @@
         @include close-button();
     }
 
-    &__content {
-        padding: $modal-inner-padding;
-    }
-
     &__footer {
         @include modal-footer();
     }

@@ -21,21 +21,18 @@
             </div>
             <div class="modal-body">
                 <div class="ez-modal-body__main">
-                    <p class="ez-modal-body__main-content">
-                        {% set number = conflicted_drafts|length %}
-                        {% if number == 1 %}
-                            {{ 'draft.conflict.number.one'|trans|desc('There is already one draft for this Content item.') }}
-                        {% else %}
-                            {{ 'draft.conflict.number.multiple'|trans({ '%number%': number })|desc('There are already %number% drafts for this Content item.') }}
-                        {% endif %}
-                    </p>
-                    <p class="ez-modal-body__main-content">
-                        {% if content_is_user %}
-                            {{ 'draft.conflict.choice_content_is_user'|trans({})|desc('You can edit any of your existing draft(s)') }}
-                        {% else %}
-                            {{ 'draft.conflict.choice'|trans({})|desc('You can either edit any of your existing draft(s) or add a new one.') }}
-                        {% endif %}
-                    </p>
+                    {% set number = conflicted_drafts|length %}
+                    {% if number == 1 %}
+                        {{ 'draft.conflict.number.one'|trans|desc('There is already one draft for this Content item.') }}
+                    {% else %}
+                        {{ 'draft.conflict.number.multiple'|trans({ '%number%': number })|desc('There are already %number% drafts for this Content item.') }}
+                    {% endif %}
+                    <br/>
+                    {% if content_is_user %}
+                        {{ 'draft.conflict.choice_content_is_user'|trans({})|desc('You can edit any of your existing draft(s)') }}
+                    {% else %}
+                        {{ 'draft.conflict.choice'|trans({})|desc('You can either edit any of your existing draft(s) or add a new one.') }}
+                    {% endif %}
                 </div>
                 {% set show_add_draft_button = (not content_is_user) %}
                 {% include '@ezdesign/ui/table_header.html.twig' with { header_text: null, tools: version_modal_draft_conflict.table_header_tools(show_add_draft_button) } %}

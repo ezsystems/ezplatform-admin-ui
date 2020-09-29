@@ -83,15 +83,23 @@ class Popup extends Component {
         return (
             <div className={'modal-header c-popup__header'}>
                 {this.renderHeadline()}
-                <button
-                    type="button"
-                    className="close c-popup__btn--close"
-                    data-dismiss="modal"
-                    aria-label={closeBtnLabel}
-                    onClick={this.props.onClose}>
-                    <Icon name="discard" extraClasses="ez-icon--small" />
-                </button>
+                {this.renderCloseButton()}
             </div>
+        );
+    }
+
+    renderCloseButton() {
+        const closeBtnLabel = Translator.trans(/*@Desc("Close")*/ 'popup.close.label', {}, 'universal_discovery_widget');
+
+        return (
+            <button
+                type="button"
+                className="close c-popup__btn--close"
+                data-dismiss="modal"
+                aria-label={closeBtnLabel}
+                onClick={this.props.onClose}>
+                <Icon name="discard" extraClasses="ez-icon--small" />
+            </button>
         );
     }
 
@@ -154,7 +162,7 @@ class Popup extends Component {
             <div {...modalAttrs}>
                 <div className={`modal-dialog c-popup__dialog ${MODAL_SIZE_CLASS[size]}`} role="dialog">
                     <div className="modal-content c-popup__content">
-                        {this.renderHeader()}
+                        {noHeader ? this.renderCloseButton() : this.renderHeader()}
                         <div className="modal-body c-popup__body">{this.props.children}</div>
                         {this.renderFooter()}
                     </div>
@@ -185,7 +193,7 @@ Popup.defaultProps = {
     hasFocus: true,
     size: 'large',
     noHeader: false,
-    onConfigIframeLoad: () => {},
+    onConfigIframeLoad: () => { },
 };
 
 export default Popup;
