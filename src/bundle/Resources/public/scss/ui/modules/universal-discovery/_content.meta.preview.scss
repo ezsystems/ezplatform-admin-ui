@@ -41,7 +41,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: calculateRem(42px);
+        margin-bottom: calculateRem(21px);
     }
 
     &__toggle-bookmark-button {
@@ -63,7 +63,7 @@
     &__actions {
         display: flex;
         justify-content: space-between;
-        margin-bottom: calculateRem(42px);
+        margin-bottom: calculateRem(21px);
     }
 
     &__edit-button,
