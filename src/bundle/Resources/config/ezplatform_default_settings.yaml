@@ -63,7 +63,6 @@ parameters:
     ezsettings.admin_group.user_edit.templates.update: '@@ezdesign/user/edit.html.twig'
     ezsettings.admin_group.user_edit.templates.create: '@@ezdesign/user/create.html.twig'
 
-
     # Content Tree Module
     ezsettings.admin_group.content_tree_module.load_more_limit: 30
     ezsettings.admin_group.content_tree_module.children_load_max_limit: 200
@@ -72,3 +71,6 @@ parameters:
     ezsettings.admin_group.content_tree_module.ignored_content_types: []
     ezsettings.admin_group.content_tree_module.tree_root_location_id: ~
 
+    # Autosave
+    ezsettings.admin_group.autosave.enabled: true
+    ezsettings.admin_group.autosave.interval: 60

@@ -8,16 +8,6 @@ Feature: Content items creation
     And I go to "Content structure" in "Content" tab
 
   @javascript @common
-  Scenario: Content creation can be cancelled
-    When I start creating a new content "Article"
-    And I set content fields
-      | label | value        |
-      | Title | Test Article |
-    And I click on the edit action bar button "Cancel"
-    Then I should be on root container page in Content View
-    And there's no "Test Article" "Article" on Sub-items list of root
-
-  @javascript @common
   Scenario: Content can be previewed during creation
     When I start creating a new content "Article"
     And I set content fields

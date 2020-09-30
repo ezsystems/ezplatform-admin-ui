@@ -258,10 +258,10 @@ class PreviewFormProcessorTest extends TestCase
         $urlGenerator
             ->expects(self::once())
             ->method('generate')
-            ->with('ezplatform.content.create_no_draft', [
+            ->with('ezplatform.content.create.proxy', [
                 'parentLocationId' => '234',
                 'contentTypeIdentifier' => $contentDraft->id,
-                'language' => $languageCode,
+                'languageCode' => $languageCode,
             ])
             ->willReturn($url);
 

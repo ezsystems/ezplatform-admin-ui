@@ -54,10 +54,10 @@ class NavigationContext extends BusinessContext
     }
 
     /**
-     * @Then I should be on :pageName page
-     * @Then I should be on :pageName :itemName page
+     * @Then /^I should be on "?([^\"]*)"? page$/
+     * @Then /^I should be on "?([^\"]*)"? "([^\"]*)" page$/
      */
-    public function iAmOnPage(string $pageName, string $itemName = null): void
+    public function iAmOnPage(string $pageName, string $itemName = ''): void
     {
         $page = PageObjectFactory::createPage($this->browserContext, $pageName, $itemName);
         $page->verifyIsLoaded();

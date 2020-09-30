@@ -56,6 +56,11 @@
         <target state="new">More</target>
         <note>key: content.view.more.label</note>
       </trans-unit>
+      <trans-unit id="fab6f6efafaeec371aaa8302c82362846d2b8f69" resname="content_edit.last_saved">
+        <source>Last saved draft was on %date%</source>
+        <target state="new">Last saved draft was on %date%</target>
+        <note>key: content_edit.last_saved</note>
+      </trans-unit>
       <trans-unit id="583285bb674e4f29b273ceb4b19dc700e44c4130" resname="tooltip.close_label">
         <source>Close</source>
         <target state="new">Close</target>
