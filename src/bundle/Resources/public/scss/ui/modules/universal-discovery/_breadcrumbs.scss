@@ -89,7 +89,20 @@
             .c-breadcrumbs__list-item-text {
                 cursor: not-allowed;
                 color: $ibexa-color-font-pale;
+                text-decoration: none;
+
+                &:hover {
+                    color: $ibexa-color-font-pale;
+                }
             }
+        }
+    }
+
+    &__list-item-text {
+        text-decoration: underline;
+
+        &:hover {
+            color: $ibexa-color-primary;
         }
     }
 
