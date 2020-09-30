@@ -13,8 +13,6 @@
     }
 
     &__name {
-        display: flex;
-        align-items: center;
         width: calculateRem(180px);
         height: calculateRem(54px);
         padding: calculateRem(5px);
@@ -23,12 +21,11 @@
         border-bottom-left-radius: $ibexa-border-radius;
         border-bottom-right-radius: $ibexa-border-radius;
         background: $ibexa-white;
-    }
-
-    &__name-text {
-        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 
     &__preview {
