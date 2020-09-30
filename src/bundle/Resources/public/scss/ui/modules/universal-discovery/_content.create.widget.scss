@@ -81,8 +81,13 @@
         cursor: pointer;
         padding-left: calculateRem(12px);
 
+        &--selected,
         &:hover {
             color: $ibexa-color-primary;
+
+            .ez-icon {
+                fill: $ibexa-color-primary;
+            }
         }
     }
 
