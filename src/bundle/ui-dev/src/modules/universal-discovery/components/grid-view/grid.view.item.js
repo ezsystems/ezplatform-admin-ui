@@ -73,7 +73,7 @@ const GridViewItem = ({ location, version }) => {
                     contentTypeIconPath={contentTypesMap[location.ContentInfo.Content.ContentType._href].thumbnail}
                 />
             </div>
-            <div className="c-grid-item__name">{location.ContentInfo.Content.TranslatedName}</div>
+            <div className="c-grid-item__name"><span className="c-grid-item__name-text">{location.ContentInfo.Content.TranslatedName}</span></div>
             {renderToggleSelectionButton()}
         </div>
     );
