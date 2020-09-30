@@ -146,31 +146,6 @@
         <target state="new">In Trash</target>
         <note>key: content.in_trash</note>
       </trans-unit>
-      <trans-unit id="59412354ccb004dfd8d1706f3cdf80b8bf0cd17f" resname="content_edit.autosave.failed.message">
-        <source>Autosave failed</source>
-        <target state="new">Autosave failed</target>
-        <note>key: content_edit.autosave.failed.message</note>
-      </trans-unit>
-      <trans-unit id="07b56fa9149c034a5b2f562d77e094e381618b22" resname="content_edit.autosave.message">
-        <source>Autosave is on.</source>
-        <target state="new">Autosave is on.</target>
-        <note>key: content_edit.autosave.message</note>
-      </trans-unit>
-      <trans-unit id="03c443069130cc7109d26c2da9d32a61244027c7" resname="content_edit.autosave.retry.message">
-        <source>please try to save manually.</source>
-        <target state="new">please try to save manually.</target>
-        <note>key: content_edit.autosave.retry.message</note>
-      </trans-unit>
-      <trans-unit id="981b80169382e4098ccd7589e5060c9d71cd4c96" resname="content_edit.autosave.saving.message">
-        <source>Saving...</source>
-        <target state="new">Saving...</target>
-        <note>key: content_edit.autosave.saving.message</note>
-      </trans-unit>
-      <trans-unit id="2eacfa88c4dede61a3c65a98dc06f8060f7f09fc" resname="content_edit.autosave.turn_of.message">
-        <source>You can turn autosave off in your user settings</source>
-        <target state="new">You can turn autosave off in your user settings</target>
-        <note>key: content_edit.autosave.turn_of.message</note>
-      </trans-unit>
       <trans-unit id="5626938e64bdad8be0c090d0018c868960859d0a" resname="content_type.breadcrumb.view">
         <source>%identifier%</source>
         <target state="new">%identifier%</target>
@@ -200,11 +175,6 @@
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: custom_url_alias_add_form.remove</note>
-      </trans-unit>
-      <trans-unit id="750bead6705b295c7b7d66c27b2768c1b9329ed5" resname="editing_details">
-        <source><![CDATA[<b>in</b> %language_name% <b>under</b> %location_name%]]></source>
-        <target state="new"><![CDATA[<b>in</b> %language_name% <b>under</b> %location_name%]]></target>
-        <note>key: editing_details</note>
       </trans-unit>
       <trans-unit id="7cb40cbc703336ab1285e81ebf100b82b05a0e27" resname="error.page.403.actions">
         <source><![CDATA[Please contact your Administrator to request access to this content or modify your profile.<br/>Otherwise, go back to <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></source>
