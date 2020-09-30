@@ -3,6 +3,14 @@
         position: relative;
 
         .ez-custom-dropdown {
+            &__wrapper {
+                max-width: calculateRem(550px);
+            }
+
+            &__selection-info {
+                width: 100%;
+            }
+
             &__items {
                 max-height: calculateRem(300px);
                 overflow-y: auto;
