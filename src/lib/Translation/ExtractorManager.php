@@ -45,7 +45,7 @@ class ExtractorManager extends JMSExtractorManager implements ExtractorInterface
                 throw new InvalidArgumentException(sprintf('There is no extractor with alias "%s". Available extractors: %s', $alias, $this->customExtractors ? implode(', ', array_keys($this->customExtractors)) : '# none #'));
             }
 
-            $this->enabledExtractors = $this->customExtractors[$alias];
+            $this->enabledExtractors[$alias] = $this->customExtractors[$alias];
         }
     }
 
