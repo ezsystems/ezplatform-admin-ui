@@ -3,6 +3,8 @@
 namespace EzSystems\EzPlatformAdminUi\Translation;
 
 use JMS\TranslationBundle\Exception\InvalidArgumentException;
+use JMS\TranslationBundle\Logger\LoggerAwareInterface;
+use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileExtractor;
 use JMS\TranslationBundle\Translation\ExtractorInterface;
 use JMS\TranslationBundle\Translation\ExtractorManager as JMSExtractorManager;
@@ -19,8 +21,11 @@ class ExtractorManager extends JMSExtractorManager implements ExtractorInterface
     /** @var \JMS\TranslationBundle\Translation\ExtractorInterface[] */
     private $customExtractors;
 
-    /** @var string[] */
+    /** @var \JMS\TranslationBundle\Translation\ExtractorInterface[] */
     private $enabledExtractors = [];
+
+    /** @var string[] */
+    private $directories = [];
 
     public function __construct(
         FileExtractor $fileExtractor,
@@ -36,6 +41,44 @@ class ExtractorManager extends JMSExtractorManager implements ExtractorInterface
 
     public function setLogger(LoggerInterface $logger): void
     {
+        $this->logger = $logger;
+        $this->fileExtractor->setLogger($logger);
+
+        foreach ($this->customExtractors as $extractor) {
+            if (!$extractor instanceof LoggerAwareInterface) {
+                continue;
+            }
+
+            $extractor->setLogger($logger);
+        }
+    }
+
+    public function setDirectories(array $directories): void
+    {
+        $this->directories = [];
+
+        foreach ($directories as $dir) {
+            $this->addDirectory($dir);
+        }
+    }
+
+    public function addDirectory($directory): void
+    {
+        if (!is_dir($directory)) {
+            throw new InvalidArgumentException(sprintf('The directory "%s" does not exist.', $directory));
+        }
+
+        $this->directories[] = $directory;
+    }
+
+    public function setExcludedDirs(array $dirs): void
+    {
+        $this->fileExtractor->setExcludedDirs($dirs);
+    }
+
+    public function setExcludedNames(array $names): void
+    {
+        $this->fileExtractor->setExcludedNames($names);
     }
 
     public function setEnabledExtractors(array $aliases): void
@@ -51,14 +94,17 @@ class ExtractorManager extends JMSExtractorManager implements ExtractorInterface
 
     public function extract()
     {
-        $jmsExtractor = new JMSExtractorManager(
-            $this->fileExtractor,
-            $this->logger
-        );
+        $catalogue = new MessageCatalogue();
 
-        $catalogue = $jmsExtractor->extract();
+        foreach ($this->directories as $directory) {
+            $this->logger->info(sprintf('Extracting messages from directory : %s', $directory));
+            $this->fileExtractor->setDirectory($directory);
+            $catalogue->merge($this->fileExtractor->extract());
+        }
 
-        foreach ($this->enabledExtractors as $customExtractor) {
+        foreach ($this->enabledExtractors as $alias => $customExtractor) {
+            $this->logger->info(sprintf('Extracting messages with custom extractor : %s', $alias));
+
             $catalogue->merge(
                 $customExtractor instanceof CustomExtractorInterface
                     ? $customExtractor->extract($catalogue)
