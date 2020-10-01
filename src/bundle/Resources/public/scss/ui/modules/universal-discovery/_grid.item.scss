@@ -13,9 +13,7 @@
     }
 
     &__name {
-        display: flex;
-        align-items: center;
-        width: calculateRem(248px);
+        width: calculateRem(180px);
         height: calculateRem(54px);
         padding: calculateRem(5px);
         color: $ibexa-color-font;
@@ -23,11 +21,16 @@
         border-bottom-left-radius: $ibexa-border-radius;
         border-bottom-right-radius: $ibexa-border-radius;
         background: $ibexa-white;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 
     &__preview {
-        width: calculateRem(248px);
-        height: calculateRem(248px);
+        width: calculateRem(180px);
+        height: calculateRem(180px);
         background-color: rgba($ibexa-color-base, 0.23);
         border-top-left-radius: $ibexa-border-radius;
         border-top-right-radius: $ibexa-border-radius;
