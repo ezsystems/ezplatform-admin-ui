@@ -7,24 +7,14 @@
 
     .modal-header {
         .modal-title {
-            font-size: calculateRem(16px);
-            font-weight: bold;
-
             &::after {
                 content: attr(data-notifications-total);
             }
         }
-
-        .close {
-            padding: calculateRem(16px);
-            outline: none;
-        }
     }
 
     .modal-body {
-        padding: 2rem;
-        background-color: $ibexa-white;
-        border-radius: 0 0 0.25rem 0.25rem;
+        padding-top: 0;
     }
 
     .table {

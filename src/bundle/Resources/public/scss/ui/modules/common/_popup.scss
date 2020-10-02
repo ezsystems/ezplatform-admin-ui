@@ -1,58 +1,48 @@
 .c-popup {
     &__content {
-        width: 100%;
-        height: 100%;
-    }
-
-    & &__btn--close {
-        @include close-button();
+        @include modal-content();
     }
 
     &__header {
         @include modal-header();
     }
 
-    &__body {
-        padding: calculateRem(16px) 0;
+    &__btn--close {
+        @include close-button();
+    }
 
-        .modal-body {
-            padding: 0;
-        }
+    &__body {
+        @include modal-body();
     }
 
     &__footer {
         @include modal-footer();
     }
 
-
     &__headline {
         max-width: calc(100% - #{calculateRem(56px)});
     }
 
     &__title {
-        line-height: 1;
-        display: block;
-        font-size: calculateRem(24px);
+        @include modal-title();
     }
 
     &__subtitle {
-        display: inline-block;
-        color: #646464;
-        font-size: calculateRem(14px);
-        font-weight: 400;
-        position: relative;
-        top: -calculateRem(4px);
-        left: calculateRem(1px);
+        @include modal-subtitle();
     }
 
     &--no-header {
         .c-popup {
-            &__header {
-                background: $ibexa-white;
+            &__btn--close {
+                @include close-button();
+
+                top: calculateRem(22px);
+                right: calculateRem(18px);
             }
-            
-            &__footer {
-                background: $ibexa-white;
+
+            &__body {
+                padding-bottom: 0;
+                margin-right: calculateRem(36px);
             }
         }
     }

@@ -28,9 +28,9 @@ const TooltipPopupComponent = (props) => {
         maxHeight === INITIAL_HEIGHT
             ? {}
             : {
-                  maxHeight,
-                  overflowY: 'scroll',
-              };
+                maxHeight,
+                overflowY: 'scroll',
+            };
     const closeLabel = Translator.trans(/*@Desc("Close")*/ 'tooltip.close_label', {}, 'content');
     return (
         <div {...attrs}>
@@ -49,7 +49,7 @@ const TooltipPopupComponent = (props) => {
                 {props.children}
             </div>
             <div className="c-tooltip-popup__footer">
-                <button class="ez-btn ez-btn--no-border" onClick={props.onClose}>
+                <button class="btn btn-dark" onClick={props.onClose}>
                     {closeLabel}
                 </button>
             </div>
@@ -65,7 +65,7 @@ TooltipPopupComponent.propTypes = {
 };
 
 TooltipPopupComponent.defaultProps = {
-    onClose: () => {},
+    onClose: () => { },
 };
 
 export default TooltipPopupComponent;

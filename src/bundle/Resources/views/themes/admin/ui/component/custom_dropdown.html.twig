@@ -1,0 +1,34 @@
+<div class="ez-custom-dropdown__wrapper {{ class|default('') }}" data-source-selector="{{ source_selector|default('') }}">
+    <ul class="ez-custom-dropdown__selection-info">
+        {% if value is defined %}
+            {% for choice in choices %}
+                {% if choice is selectedchoice(value) %}
+                    <li class="ez-custom-dropdown__selected-item" data-value="{{ choice.value }}">
+                        {{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
+                        <span class="ez-custom-dropdown__remove-selection"></span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <ul class="ez-custom-dropdown__items ez-custom-dropdown__items--hidden">
+        {% if placeholder is defined %}
+            {% set label = placeholder %}
+
+            {% if placeholder != '' %}
+                {% if translation_domain is same as(false) %}
+                    {% set label = placeholder %}
+                {% else %}
+                    {% set label = placeholder|trans({}, translation_domain) %}
+                {% endif %}
+            {% endif %}
+
+            <li data-value="" class="ez-custom-dropdown__item"{% if required is defined and value is empty %} selected="selected"{% endif %}>{{ label }}</li>
+        {% endif %}
+        {% for choice in choices %}
+            <li data-value="{{ choice.value }}" class="ez-custom-dropdown__item">
+                {{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>

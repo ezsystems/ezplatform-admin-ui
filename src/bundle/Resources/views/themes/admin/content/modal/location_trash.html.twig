@@ -1,15 +1,14 @@
 {% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
 
-<div class="modal fade ez-modal ez-modal--notice ez-modal--send-to-trash ez-modal--trash-location" id="trash-location-modal" tabindex="-1" role="dialog">
+<div class="modal fade ez-modal ez-modal--no-header ez-modal--send-to-trash ez-modal--trash-location" id="trash-location-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" title="{{ 'trash.modal.close'|trans|desc('Close') }}">
-                    <svg class="ez-icon ez-icon--small-medium" aria-hidden="true">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
-                    </svg>
-                </button>
-            </div>
+            <button type="button" class="close" data-dismiss="modal" title="{{ 'trash.modal.close'|trans|desc('Close') }}">
+                <svg class="ez-icon ez-icon--small-medium" aria-hidden="true">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#discard"></use>
+                </svg>
+            </button>
+
             {{ form_start(form, {'action': path('ezplatform.location.trash')}) }}
             <div class="modal-body">
                 {{ 'trash.modal.message'|trans|desc('Are you sure you want to send this Content item to Trash?') }}
@@ -43,7 +42,7 @@
                 {{ form_widget(form.trash,
                     {'attr': {'class': 'btn-primary disabled ez-btn ez-btn--confirm-send-to-trash', 'disabled': true}})
                 }}
-                <button type="button" class="ez-btn ez-btn--no-border" data-dismiss="modal">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">
                     {{ 'trash.form.cancel'|trans|desc('Cancel') }}
                 </button>
             </div>
