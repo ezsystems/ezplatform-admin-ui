@@ -100,7 +100,7 @@
         transform: scaleY(1);
         transform-origin: top center;
         transition: transform 0.2s $ez-admin-transition;
-        width: 100%;
+        width: 50%;
         background: $ibexa-white;
         border: calculateRem(1px) solid $ibexa-color-base-dark;
         color: $ibexa-color-font;
