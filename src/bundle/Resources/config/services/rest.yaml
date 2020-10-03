@@ -38,7 +38,6 @@ services:
       tags:
           - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Root }
 
-  # RequestMatcher for JWT
-  EzSystems\EzPlatformAdminUi\REST\Security\AdminRESTRequestMatcher:
+  EzSystems\EzPlatformAdminUi\REST\Security\NonAdminRESTRequestMatcher:
       arguments:
           $siteAccessGroups: '%ezpublish.siteaccess.groups%'
