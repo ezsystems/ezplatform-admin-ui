@@ -12,6 +12,7 @@ use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
 use EzSystems\EzPlatformAdminUi\UI\Service\TabService;
+use InvalidArgumentException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -51,7 +52,7 @@ class ConditionalTabSubscriber implements EventSubscriberInterface
         $parameters = $tabGroupEvent->getParameters();
         try {
             $tabs = $this->tabService->getTabGroup($tabGroupIdentifier)->getTabs();
-        } catch (\InvalidArgumentException $invalidArgumentException) {
+        } catch (InvalidArgumentException $e) {
             $tabs = [];
         }
 
