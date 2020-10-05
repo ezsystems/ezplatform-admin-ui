@@ -20,7 +20,7 @@
             <span>
                 {{ 'dashboard.ez_version.release_not_determined'|trans
                 |desc("The system could not find your <code>composer.lock</code> file. It's needed to determine information about
-                    your eZ installation. It is recommended to keep it during project development to make sure the same package versions are
+                    your Ibexa installation. It is recommended to keep it during project development to make sure the same package versions are
                     used across all environments.")
                 |raw }}
             </span>
@@ -39,7 +39,7 @@
                     {{ 'dashboard.ez_version.non_stable_packages'|trans({'%stability%': ez.stability})|desc("Your setup is running with @%stability% composer packages. This is not recommended except when testing updates or during development.") }}
                 {% endif %}
                 {% if ez.isEnterpise %}
-                    {{ 'dashboard.ez_version.non_stable_ee'|trans({'%support_url%': urls['support']})|desc("If you need assistance, don't hesitate to <a target=\"_blank\" href=\"%support_url%\">get in touch with eZ support</a>.")|raw }}
+                    {{ 'dashboard.ez_version.non_stable_ee'|trans({'%support_url%': urls['support']})|desc("If you need assistance, don't hesitate to <a target=\"_blank\" href=\"%support_url%\">get in touch with Ibexa support</a>.")|raw }}
                 {% endif %}
             </span>
         </div>
@@ -74,7 +74,7 @@
                     |raw }}
         {% endif %}
                     {{ 'dashboard.ez_version.trial_contact'|trans({'%contact_url%': urls['contact'], '%install_ee%': urls['install_ee']})
-                    |desc("<a target=\"_blank\" href=\"%contact_url%\">Contact eZ or its partner(s)</a> to purchase a subscription
+                    |desc("<a target=\"_blank\" href=\"%contact_url%\">Contact Ibexa or its partner(s)</a> to purchase a subscription
                         and follow the <a target=\"_blank\" href=\"%install_ee%\">online documentation</a> to configure composer.json 'repositories' url for 'bul' instead of 'ttl'.")
                     |raw }}
                 </span>
@@ -103,7 +103,7 @@
                             '%support_service_url%': urls['support_service'],
                             '%service_life_url%': urls['service_life']
                         })
-                        |desc("Tip: If you upgrade to eZ Platform Enterprise you'll get access to:
+                        |desc("Tip: If you upgrade to Ibexa DXP you'll get access to:
                             <a target=\"_blank\" href=\"%license_url%\">A business friendly license</a>,
                             <a target=\"_blank\" href=\"%ee_product_url%\">several productivity features</a>,
                             <a target=\"_blank\" href=\"%support_service_url%\">professional support</a> and a
