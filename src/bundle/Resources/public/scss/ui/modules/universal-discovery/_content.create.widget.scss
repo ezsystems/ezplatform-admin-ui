@@ -84,6 +84,10 @@
         &:hover {
             color: $ibexa-color-primary;
         }
+
+        &--selected {
+            background: $ibexa-color-base-pale;
+        }
     }
 
     &__group-item-icon {
