@@ -2,6 +2,7 @@
     const SELECTOR_FIELD = '.ez-field-edit--ezimageasset';
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const SELECTOR_INPUT_DESTINATION_CONTENT_ID = '.ez-data-source__destination-content-id';
+    const SELECTOR_INPUT_SOURCE_ID = '.ez-data-source__destination-source-id';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const showErrorNotification = eZ.helpers.notification.showErrorNotification;
@@ -209,6 +210,7 @@
             super.resetInputField();
 
             this.inputDestinationContentId.value = '';
+            this.inputSourcetId.value = '';
         }
 
         /**
@@ -222,6 +224,7 @@
             this.btnSelect = this.fieldContainer.querySelector('.ez-data-source__btn-select');
             this.btnSelect.addEventListener('click', this.openUDW.bind(this), false);
             this.inputDestinationContentId = this.fieldContainer.querySelector(SELECTOR_INPUT_DESTINATION_CONTENT_ID);
+            this.inputSourcetId = this.fieldContainer.querySelector(SELECTOR_INPUT_SOURCE_ID);
         }
     }
 
