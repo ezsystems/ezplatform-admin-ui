@@ -15,15 +15,16 @@
             </div>
             <div class="modal-body">
                 <span class="ez-modal--custom-url-alias__label required">{{ 'tab.urls.add.path'|trans|desc('URL') }}</span>
-                {{ form_widget(form.path) }}
+                {{ form_widget(form.path, {attr: { class: 'mb-3' }}) }}
 
                 <span class="ez-modal--custom-url-alias__label">{{ 'tab.urls.add.language'|trans|desc('Language') }}</span>
-                {{ form_widget(form.language) }}
+                {{ form_widget(form.language, {attr: { class: 'mb-3' }}) }}
 
                 <span class="ez-modal--custom-url-alias__label">{{ 'tab.urls.add.redirect'|trans|desc('Redirect to alias destination') }}</span>
                 {{ form_widget(form.redirect) }}
+                
                 <div class="ez-modal--custom-url-alias__info-text">{{ 'tab.urls.add.redirect.helper.checked'|trans|desc('When checked, the alias will redirect to the destination using an HTTP 301 response.') }}</div>
-                <div class="ez-modal--custom-url-alias__info-text">{{ 'tab.urls.add.redirect.helper.unchecked'|trans|desc('When unchecked, the alias will not redirect to the destination and the URL will stay the same.') }}</div>
+                <div class="ez-modal--custom-url-alias__info-text mb-4">{{ 'tab.urls.add.redirect.helper.unchecked'|trans|desc('When unchecked, the alias will not redirect to the destination and the URL will stay the same.') }}</div>
 
                 <span class="ez-modal--custom-url-alias__label">{{ 'tab.urls.add.site_root'|trans|desc('Place at the site root') }}</span>
                 {{ form_widget(form.site_root) }}
