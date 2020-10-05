@@ -1,45 +1,60 @@
 .ez-notifications-container {
     position: fixed;
     bottom: 0;
-    width: 100%;
-    line-height: 2.25;
+    left: 1%;
+    width: 98%;
     z-index: 50000;
 
     .alert {
-        padding: 0.125rem 5.5rem;
-        margin-bottom: 0;
+        padding: calculateRem(16px);
+        margin-bottom: calculateRem(2px);
         border-radius: 0;
         transition: opacity 0.3s $ez-admin-transition;
-        padding-right: 10rem;
+        padding-right: calculateRem(160px);
+        background-color: $ibexa-black;
+        color: $ibexa-white;
+        display: flex;
+        align-items: start;
+        border: none;
+
+        .ez-badge {
+            margin-right: calculateRem(16px);
+            margin-top: calculateRem(4px);
+            text-transform: capitalize;
+        }
 
         .close {
             opacity: 1;
-            padding-top: 0.25rem;
-            margin-right: 5.5rem;
             cursor: pointer;
         }
 
+        &-info {
+            .ez-badge {
+                background-color: $ibexa-color-info;
+            }
+        }
+
         &-success {
-            background-color: $ez-color-positive;
-            border-color: $ez-color-positive;
-            color: $ez-white;
+            .ez-badge {
+                background-color: $ibexa-color-positive;
+            }
         }
 
         &-warning {
-            background-color: $ez-color-warning;
-            border-color: $ez-color-warning;
-            color: $ez-black;
+            .ez-badge {
+                background-color: $ibexa-color-warning;
+            }
         }
 
         &-danger {
-            background-color: $ez-color-danger;
-            border-color: $ez-color-danger;
-            color: $ez-white;
+            .ez-badge {
+                background-color: $ibexa-color-danger;
+            }
         }
     }
 
     a.ez-notification-btn {
         cursor: pointer;
-        color: $ez-color-hyperlink;
+        color: $ibexa-color-primary;
     }
 }

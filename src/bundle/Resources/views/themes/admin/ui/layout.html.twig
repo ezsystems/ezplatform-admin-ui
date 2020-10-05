@@ -151,7 +151,8 @@
             data-notifications="{{ app.flashes|json_encode() }}"
             data-template="{{ include('@ezdesign/ui/notification.html.twig', {
                 label: '{{ label }}',
-                message: '{{ message }}'
+                message: '{{ message }}',
+                badge: '{{ badge }}'
             })|e('html_attr')  }}"></div>
         <div class="ez-modal-wrapper"></div>
 

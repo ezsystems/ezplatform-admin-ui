@@ -14,7 +14,10 @@
             finalMessage = finalMessage.replace(`{{ ${placeholder} }}`, rawText);
         });
 
-        const notification = template.replace('{{ label }}', templateLabel).replace('{{ message }}', finalMessage);
+        const notification = template
+            .replace('{{ label }}', templateLabel)
+            .replace('{{ message }}', finalMessage)
+            .replace('{{ badge }}', label);
 
         container.insertAdjacentHTML('beforeend', notification);
 
