@@ -102,6 +102,13 @@
     <div {% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
         <div{% with { attr: label_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
             {% with { 'compound': false } %}{{- block('form_label') }}{% endwith %}
+            {% if field_type_descriptions[fieldtype.vars.languageCode] is defined and field_type_descriptions[fieldtype.vars.languageCode] != '' %}
+                <span class="ez-field-edit__icon-wrapper" title="{{ field_type_descriptions[fieldtype.vars.languageCode] }}">
+                    <svg class="ez-icon ez-icon--small">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#information"></use>
+                    </svg>
+                </span>
+            {% endif %}
             {{ block('form_errors') }}
         </div>
 
@@ -109,11 +116,6 @@
             {{ widget_container_block|raw }}
         {% else %}
             <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
-                {% if field_type_descriptions[fieldtype.vars.languageCode] is defined and field_type_descriptions[fieldtype.vars.languageCode] != '' %}
-                    <div class="ez-data-description">
-                        {{ field_type_descriptions[fieldtype.vars.languageCode] }}
-                    </div>
-                {% endif %}
                 <div class="ez-data-source">
                     {{- form_widget(form, {'attr': attr}) -}}
                 </div>
