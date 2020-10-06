@@ -11,15 +11,14 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Event\Subscriber;
 use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
-use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Service\TabService;
+use InvalidArgumentException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Reorders tabs according to their Order value (Tabs implementing OrderedTabInterface).
- * Tabs without order specified are pushed to the end of the group.
+ * Evaluates if tabs should be visible (Tabs implementing ConditionalTabInterface).
  *
- * @see OrderedTabInterface
+ * @see ConditionalTabInterface
  */
 class ConditionalTabSubscriber implements EventSubscriberInterface
 {
@@ -51,7 +50,11 @@ class ConditionalTabSubscriber implements EventSubscriberInterface
         $tabGroup = $tabGroupEvent->getData();
         $tabGroupIdentifier = $tabGroupEvent->getData()->getIdentifier();
         $parameters = $tabGroupEvent->getParameters();
-        $tabs = $this->tabService->getTabGroup($tabGroupIdentifier)->getTabs();
+        try {
+            $tabs = $this->tabService->getTabGroup($tabGroupIdentifier)->getTabs();
+        } catch (InvalidArgumentException $e) {
+            $tabs = [];
+        }
 
         foreach ($tabs as $tab) {
             if (!$tab instanceof ConditionalTabInterface || $tab->evaluate($parameters)) {
