@@ -185,7 +185,7 @@ class TranslationAddType extends AbstractType
                 [
                     'required' => true,
                     'multiple' => false,
-                    'expanded' => true,
+                    'expanded' => false,
                     'choice_loader' => new AvailableTranslationLanguageChoiceLoader($this->languageService, $contentLanguages),
                     'choice_value' => 'languageCode',
                     'choice_label' => 'name',
@@ -198,7 +198,7 @@ class TranslationAddType extends AbstractType
                     'required' => false,
                     'placeholder' => false,
                     'multiple' => false,
-                    'expanded' => true,
+                    'expanded' => false,
                     'choice_loader' => new BaseTranslationLanguageChoiceLoader($this->languageService, $contentLanguages),
                     'choice_value' => 'languageCode',
                     'choice_label' => 'name',

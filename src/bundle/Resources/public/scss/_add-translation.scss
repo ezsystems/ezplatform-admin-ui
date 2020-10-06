@@ -1,5 +1,8 @@
 .ez-translation {
-    .ez-custom-dropdown__selection-info {
-        width: 60%;
+    .ez-custom-dropdown {
+        &__selection-info,
+        &__items {
+            width: 60%;
+        }
     }
 }
