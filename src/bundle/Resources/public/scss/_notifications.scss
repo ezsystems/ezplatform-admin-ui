@@ -5,6 +5,11 @@
     width: 98%;
     z-index: 50000;
 
+    &__message {
+        display: flex;
+        align-self: center;
+    }
+
     .alert {
         padding: calculateRem(16px);
         margin-bottom: calculateRem(2px);
