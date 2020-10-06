@@ -61,7 +61,7 @@
                 {% endif %}
                 {{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }}/
                 {{ 'content.details.content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
-                {% if is_published == false %}
+                {% if is_published is defined and is_published == false %}
                     {{ 'content.details.parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
                 {% else %}
                     {{ 'content.details.location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
