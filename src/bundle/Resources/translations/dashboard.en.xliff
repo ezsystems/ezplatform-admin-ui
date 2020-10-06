@@ -44,8 +44,8 @@
         <note>key: dashboard.ez_version.end_of_life_upgrade</note>
       </trans-unit>
       <trans-unit id="59967d79ef1f521fd483dbb057f15bc756b80423" resname="dashboard.ez_version.non_stable_ee">
-        <source><![CDATA[If you need assistance, don't hesitate to <a target="_blank" href="%support_url%">get in touch with eZ support</a>.]]></source>
-        <target state="new"><![CDATA[If you need assistance, don't hesitate to <a target="_blank" href="%support_url%">get in touch with eZ support</a>.]]></target>
+        <source><![CDATA[If you need assistance, don't hesitate to <a target="_blank" href="%support_url%">get in touch with Ibexa support</a>.]]></source>
+        <target state="new"><![CDATA[If you need assistance, don't hesitate to <a target="_blank" href="%support_url%">get in touch with Ibexa support</a>.]]></target>
         <note>key: dashboard.ez_version.non_stable_ee</note>
       </trans-unit>
       <trans-unit id="b6fb485c551af76b514c1ed339cc2607146b7ebe" resname="dashboard.ez_version.non_stable_packages">
@@ -55,15 +55,15 @@
       </trans-unit>
       <trans-unit id="c1fb5ba9fd547e30a49a4e1895822e69cd4a9dbc" resname="dashboard.ez_version.release_not_determined">
         <source><![CDATA[The system could not find your <code>composer.lock</code> file. It's needed to determine information about
-            your eZ install, and recommended to be kept on project development to make sure same package versions are used across all environments.]]></source>
+            your Ibexa install, and recommended to be kept on project development to make sure same package versions are used across all environments.]]></source>
         <target state="new"><![CDATA[The system could not find your <code>composer.lock</code> file. It's needed to determine information about
-            your eZ install, and recommended to be kept on project development to make sure same package versions are used across all environments.]]></target>
+            your Ibexa install, and recommended to be kept on project development to make sure same package versions are used across all environments.]]></target>
         <note>key: dashboard.ez_version.release_not_determined</note>
       </trans-unit>
       <trans-unit id="d2da7429d16bd8443b6f2368319e64d6e537dfd6" resname="dashboard.ez_version.trial_contact">
-        <source><![CDATA[<a target="_blank" href="%contact_url%">Contact eZ or its partner(s)</a> to purchase a subscription
+        <source><![CDATA[<a target="_blank" href="%contact_url%">Contact Ibexa or its partner(s)</a> to purchase a subscription
                 and follow the <a target="_blank" href="%install_ee%">online documentation</a> to configure composer.json 'repositories' url for 'bul' instead of 'ttl'.]]></source>
-        <target state="new"><![CDATA[<a target="_blank" href="%contact_url%">Contact eZ or its partner(s)</a> to purchase a subscription
+        <target state="new"><![CDATA[<a target="_blank" href="%contact_url%">Contact Ibexa or its partner(s)</a> to purchase a subscription
                 and follow the <a target="_blank" href="%install_ee%">online documentation</a> to configure composer.json 'repositories' url for 'bul' instead of 'ttl'.]]></target>
         <note>key: dashboard.ez_version.trial_contact</note>
       </trans-unit>
