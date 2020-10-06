@@ -123,7 +123,9 @@
 
     .ez-card__header {
         line-height: calculateRem(40px);
-        padding: 0 calculateRem(20px);
+        padding: calculateRem(12px) calculateRem(20px);
+        border-top: calculateRem(1px) solid $ibexa-color-base;
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
         display: flex;
 
         .form-check-label {
@@ -140,7 +142,7 @@
             padding: 0;
             cursor: pointer;
             background: $ibexa-white;
-            transition: background .3s $ez-admin-transition;
+            transition: background 0.3s $ez-admin-transition;
             display: flex;
             align-items: center;
             justify-content: center;
