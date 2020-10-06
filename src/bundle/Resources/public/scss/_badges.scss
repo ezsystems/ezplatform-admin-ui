@@ -7,4 +7,60 @@
         font-size: calculateRem(14px);
         font-weight: 400;
     }
+
+    &--round {
+        padding: calculateRem(8px) calculateRem(16px);
+        border-radius: calculateRem(40px);
+    }
+
+    &--icon {
+        font-weight: normal;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $ibexa-white;
+        border: calculateRem(1px) solid $ibexa-color-base-dark;
+
+        &:hover {
+            background-color: $ibexa-color-base-medium;
+        }
+
+        .ez-icon {
+            border-radius: 50%;
+            padding: calculateRem(3px);
+            margin-left: calculateRem(8px);
+        }
+
+        &.badge {
+            &:hover,
+            &:focus {
+                background-color: $ibexa-color-base-medium;
+                box-shadow: none;
+            }
+        }
+
+        &.badge-info {
+            .ez-icon {
+                background-color: $ibexa-color-info;
+            }
+        }
+
+        &.badge-success {
+            .ez-icon {
+                background-color: $ibexa-color-positive;
+            }
+        }
+
+        &.badge-warning {
+            .ez-icon {
+                background-color: $ibexa-color-warning;
+            }
+        }
+
+        &.badge-danger {
+            .ez-icon {
+                background-color: $ibexa-color-danger;
+            }
+        }
+    }
 }

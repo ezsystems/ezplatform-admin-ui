@@ -24,6 +24,7 @@ class Notification extends Element
         parent::__construct($context);
         $this->fields = [
             'alert' => '.ez-notifications-container .alert.show',
+            'alertMessage' => '.ez-notifications-container .alert.show span:nth-of-type(2)',
             'successAlert' => 'alert-success',
             'failureAlert' => 'alert-danger',
             'closeAlert' => 'button.close',
@@ -65,7 +66,7 @@ class Notification extends Element
         $this->setAlertElement();
 
         try {
-            return $this->notificationElement->getText();
+            return $this->context->findElement($this->fields['alertMessage'])->getText();
         } catch (\Exception $e) {
             Assert::fail('Notification alert not found, no message can be fetched.');
         }

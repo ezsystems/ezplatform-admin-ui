@@ -8,4 +8,44 @@
         fill: currentColor;
         vertical-align: middle;
     }
+
+    &--icon {
+        background-color: $ibexa-white;
+        border-color: $ibexa-white;
+        color: $ibexa-color-font;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .ez-icon {
+            border-radius: 50%;
+            padding: calculateRem(3px);
+            margin-left: calculateRem(8px);
+            margin-right: calculateRem(24px);
+        }
+
+        &.alert-info {
+            .ez-icon {
+                background-color: $ibexa-color-info;
+            }
+        }
+
+        &.alert-success {
+            .ez-icon {
+                background-color: $ibexa-color-positive;
+            }
+        }
+
+        &.alert-warning {
+            .ez-icon {
+                background-color: $ibexa-color-warning;
+            }
+        }
+
+        &.alert-danger {
+            .ez-icon {
+                background-color: $ibexa-color-danger;
+            }
+        }
+    }
 }
