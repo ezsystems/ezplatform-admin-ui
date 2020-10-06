@@ -7,7 +7,8 @@
     {% include '@ezdesign/content/page_title_edit.html.twig' with { 
         action_name: 'editing'|trans|desc('Editing'),
         title: content_type.name,
-        description: content_type.description
+        description: content_type.description,
+        content: user.content
     } %}
 {% endblock %}
 
