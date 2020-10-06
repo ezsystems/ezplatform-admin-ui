@@ -1,3 +1,5 @@
+{% trans_default_domain 'content' %}
+
 {% block close_button %}
     {% if without_close_button is not defined or without_close_button != true %}
         <a
@@ -22,15 +24,15 @@
             <div class="ez-content-edit-page-title__content-info">
                 <span
                         class="ez-content-edit-page-title__autosave-wrapper ez-content-edit-page-title__autosave-wrapper--not-saved"
-                        title="{{ 'content_edit.autosave.turn_of.message'|trans()|desc('You can turn autosave off in your user settings') }}">
+                        title="{{ 'content.autosave.turn_of.message'|trans()|desc('You can turn autosave off in your user settings') }}">
                     <span class="ez-content-edit-page-title__autosave-result">
                         <svg class="ez-icon ez-icon ez-icon--small-medium ez-icon--autosave">
                             <use xlink:href="{{ asset('/bundles/ezplatformadminui/img/ez-icons.svg#autosave') }}"></use>
                         </svg>
                         <span class="ez-content-edit-page-title__autosave-info">{{ 'content_edit.autosave.message'|trans()|desc('Autosave is on.') }} </span>
                         <span class="ez-content-edit-page-title__autosave-failed">
-                            <span class="ez-content-edit-page-title__autosave-failed-marked">{{ 'content_edit.autosave.failed.message'|trans()|desc('Autosave failed') }}</span>,
-                            <span>{{ 'content_edit.autosave.retry.message'|trans()|desc('please try to save manually.') }}</span>
+                            <span class="ez-content-edit-page-title__autosave-failed-marked">{{ 'content.autosave.failed.message'|trans()|desc('Autosave failed') }}</span>,
+                            <span>{{ 'content.autosave.retry.message'|trans()|desc('please try to save manually.') }}</span>
                         </span>
                         <span class="ez-content-edit-page-title__autosave-last-saved"></span>
                     </span>
@@ -55,14 +57,14 @@
             <button class="ez-content-edit-page-title__toggler">?</button>
             <div class="ez-content-edit-page-title__details ez-content-edit-page-title__details--collapsed">
                 {% if creator is defined %}
-                    {{ 'created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}/
+                    {{ 'content.details.created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}/
                 {% endif %}
                 {{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }}/
-                {{ 'content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
+                {{ 'content.details.content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }},
                 {% if is_published == false %}
-                    {{ 'parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
+                    {{ 'content.details.parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
                 {% else %}
-                    {{ 'location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
+                    {{ 'content.details.location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
                 {% endif %}
             </div>
         {% endif %}
