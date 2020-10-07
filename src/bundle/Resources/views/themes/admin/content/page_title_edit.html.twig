@@ -4,7 +4,7 @@
     {% if without_close_button is not defined or without_close_button != true %}
         <a
             class="ez-content-edit-container__close"
-            href="{{ path('_ez_content_view', { 'contentId': parent_location.contentId, 'locationId': parent_location.id}) }}"
+            href="{{ path('_ez_content_view', { 'contentId': max(parent_location.contentId, 1), 'locationId': max(parent_location.id, 2)}) }}"
             title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
         >
             <svg class="ez-icon ez-icon--small-medium ez-icon--primary">
