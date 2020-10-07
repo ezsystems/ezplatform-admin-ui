@@ -6,7 +6,6 @@
     z-index: 50000;
 
     &__message {
-        display: flex;
         align-self: center;
     }
 
@@ -21,6 +20,10 @@
         display: flex;
         align-items: start;
         border: none;
+
+        a {
+            color: $ibexa-white;
+        }
 
         .ez-badge {
             margin-right: calculateRem(16px);
