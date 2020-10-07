@@ -3,7 +3,7 @@
     border-bottom: calculateRem(1px) solid $ibexa-color-base;
     border-top-left-radius: $ibexa-border-radius;
     border-top-right-radius: $ibexa-border-radius;
-    
+
     .nav-item {
         margin-bottom: calculateRem(-1px);
     }
@@ -14,7 +14,7 @@
         color: $ibexa-black;
         border-radius: 0;
         text-decoration: none;
-        
+
         &:hover {
             @include nav-item-active-hover;
             color: $ibexa-color-primary;
@@ -46,7 +46,7 @@
                     width: calculateRem(2px);
                     position: absolute;
                     top: 50%;
-                    right: calculateRem(16px);
+                    right: calculateRem(12px);
                     background-color: $ibexa-black;
                 }
 
@@ -104,7 +104,7 @@
             }
         }
     }
-    
+
     &--menu-second-level {
         width: 100%;
         border: none;
@@ -113,7 +113,6 @@
             margin-left: 0;
         }
     }
-
 }
 
 .ez-tab-content {

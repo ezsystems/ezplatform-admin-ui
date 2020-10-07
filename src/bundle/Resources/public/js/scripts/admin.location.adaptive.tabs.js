@@ -1,4 +1,4 @@
-(function (global, doc, $, Translator) {
+(function(global, doc, $, Translator) {
     const OFFSET_ROUNDING_COMPENSATOR = 0.5;
     const TABS_SELECTOR = '.ez-tabs';
     const copyTabs = () => {
@@ -18,9 +18,9 @@
     };
     const adaptTabs = () => {
         doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-            const primaryTabs = [...primaryTabsList.querySelectorAll('.ez-tabs__tab')];
-            const primaryTabsLinks = [...primaryTabsList.querySelectorAll('.ez-tabs__tab .nav-link')];
-            const moreTab = primaryTabsList.querySelector('.ez-tabs__tab--more');
+            const primaryTabs = [...primaryTabsList.querySelectorAll(':scope > .ez-tabs__tab')];
+            const primaryTabsLinks = [...primaryTabsList.querySelectorAll(':scope > .ez-tabs__tab .nav-link')];
+            const moreTab = primaryTabsList.querySelector(':scope > .ez-tabs__tab--more');
 
             if (moreTab) {
                 const secondaryTabs = [...moreTab.querySelectorAll('.ez-tabs__tab')];
