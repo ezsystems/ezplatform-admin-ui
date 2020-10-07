@@ -10,7 +10,6 @@
         contentTypeCopyForm.action = formAction;
 
         contentTypeCopyForm.submit();
-        console.log(contentTypeCopyForm);
     };
 
     copyButtons.forEach((copyButton) => copyButton.addEventListener('click', copyContentType, false));
