@@ -18,7 +18,7 @@
             <div class="modal-footer">
                 {{ form_start(form, {'action': path('ezplatform.user.delete')}) }}
                 {{ form_widget(form.delete, {'attr': {'class': 'btn btn-primary'}}) }}
-                <button type="button" class="btn btn-dark" data-dismiss="modal">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     {{ 'delete.form.cancel'|trans|desc('Cancel') }}
                 </button>
                 {{ form_end(form) }}

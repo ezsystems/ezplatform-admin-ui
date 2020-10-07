@@ -140,12 +140,12 @@ $colors: (
 
 $theme-colors: (
     primary: $ibexa-color-primary,
-    secondary: $ibexa-color-primary,
+    secondary: $ibexa-color-base-deep,
     success: $ibexa-color-positive,
     warning: $ibexa-color-warning,
     danger: $ibexa-color-danger,
     light: $ibexa-color-base-light,
-    dark: $ibexa-color-base-deep,
+    dark: $ibexa-color-base-black,
     info: $cyan
 );
 
