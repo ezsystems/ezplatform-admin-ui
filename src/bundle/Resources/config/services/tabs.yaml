@@ -1,7 +1,6 @@
 imports:
     - { resource: tabs/locationview.yaml }
     - { resource: tabs/content_type.yaml }
-    - { resource: tabs/systeminfo.yaml }
     - { resource: tabs/url_management.yaml }
 
 services:

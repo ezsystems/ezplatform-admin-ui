@@ -6,15 +6,15 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\EventListener;
 
-use EzSystems\EzPlatformAdminUi\EventListener\SystemInfoTabGroupListener;
-use EzSystems\EzPlatformAdminUi\Tab\SystemInfo\SystemInfoTab;
+use EzSystems\EzSupportTools\EventListener\SystemInfoTabGroupListener;
+use EzSystems\EzSupportTools\Tab\SystemInfo\SystemInfoTab;
 use EzSystems\EzPlatformAdminUi\Tab\TabGroup;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use PHPUnit\Framework\TestCase;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
-use EzSystems\EzPlatformAdminUi\Tab\SystemInfo\TabFactory;
+use EzSystems\EzSupportTools\Tab\SystemInfo\TabFactory;
 use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
 use EzSystems\EzSupportToolsBundle\SystemInfo\SystemInfoCollectorRegistry;
 use PHPUnit\Framework\MockObject\MockObject;

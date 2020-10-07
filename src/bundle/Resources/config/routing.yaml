@@ -8,20 +8,6 @@ ezplatform.dashboard:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\DashboardController::dashboardAction'
 
 #
-# System Information
-#
-
-ezplatform.systeminfo:
-    path: /systeminfo
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\SystemInfoController::infoAction'
-
-ezplatform.systeminfo.php:
-    path: /systeminfo/phpinfo
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\SystemInfoController::phpinfoAction'
-
-#
 # Section
 #
 
@@ -536,13 +522,6 @@ ezplatform.content.create:
     methods: ['POST']
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentController::createAction'
-
-ezplatform.content.create.proxy:
-    path: /content/create/proxy/{contentTypeIdentifier}/{languageCode}/{parentLocationId}
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentController::proxyCreateAction'
-    options:
-        expose: true
 
 ezplatform.content.preview:
     path: /content/{contentId}/preview/{versionNo}/{languageCode}/{locationId}
