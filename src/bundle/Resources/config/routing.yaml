@@ -349,6 +349,8 @@ ezplatform.content_type.edit:
 ezplatform.content_type.copy:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/copy
     methods: ['GET', 'POST']
+    options:
+        expose: true
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController::copyAction'
     requirements:

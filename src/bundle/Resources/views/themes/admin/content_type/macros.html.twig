@@ -15,16 +15,16 @@
     </a>
 {% endmacro %}
 
-{% macro content_type_copy(content_type, content_type_group, class_name, content_type_copy_forms) %}
-    {% if content_type_copy_forms[content_type.id] is defined %}
-        {% set form = content_type_copy_forms[content_type.id] %}
-        {{ form_start(form) }}
-            <button title="{{ 'content_type.action.copy'|trans|desc('Copy') }}" type="submit" name="{{ form.copy.vars.full_name }}" {% if class_name %}class="{{ class_name }}"{% endif %}>
-                <svg class="ez-icon ez-icon-copy ez-icon--secondary">
-                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#copy"></use>
-                </svg>
-                {% do form.copy.setRendered %}
-            </button>
-        {{ form_end(form) }}
-    {% endif %}
+{% macro content_type_copy(content_type, content_type_group, class_name) %}
+    <button
+        title="{{ 'content_type.action.copy'|trans|desc('Copy') }}"
+        type="button"
+        data-content-type-id="{{ content_type.id }}"
+        data-content-type-identifier="{{ content_type.identifier }}"
+        data-content-type-group-id="{{ content_type_group.id }}"
+        {% if class_name %}class="{{ class_name }}"{% endif %}>
+        <svg class="ez-icon ez-icon-copy">
+            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#copy"></use>
+        </svg>
+    </button>
 {% endmacro %}

@@ -142,17 +142,12 @@ class ContentTypeController extends Controller
             new ContentTypesDeleteData($this->getContentTypesNumbers($types))
         );
 
-        $contentTypeCopyForms = [];
         foreach ($types as $type) {
             $deletableTypes[$type->id] = !$this->contentTypeService->isContentTypeUsed($type);
-
-            $url = $this->generateUrl('ezplatform.content_type.copy', [
-                'contentTypeId' => $type->id,
-                'contentTypeGroupId' => $group->id,
-            ]);
-            $copyData = new ContentTypeCopyData($type, $group);
-            $contentTypeCopyForms[$type->id] = $this->contentTypeFormFactory->contentTypeCopy($copyData, null, ['action' => $url])->createView();
         }
+
+        $copyData = new ContentTypeCopyData(null, $group);
+        $contentTypeCopyForm = $this->contentTypeFormFactory->contentTypeCopy($copyData, null)->createView();
 
         return $this->render('@ezdesign/content_type/list.html.twig', [
             'content_type_group' => $group,
@@ -164,7 +159,7 @@ class ContentTypeController extends Controller
             'can_create' => $this->isGranted(new Attribute('class', 'create')),
             'can_update' => $this->isGranted(new Attribute('class', 'update')),
             'can_delete' => $this->isGranted(new Attribute('class', 'delete')),
-            'content_type_copy_forms' => $contentTypeCopyForms,
+            'content_type_copy_form' => $contentTypeCopyForm,
         ]);
     }
 

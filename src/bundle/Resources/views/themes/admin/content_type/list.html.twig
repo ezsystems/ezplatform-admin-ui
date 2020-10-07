@@ -87,7 +87,7 @@
                 <td class="ez-table__cell">{{ content_type.modificationDate|ez_full_datetime }}</td>
                 <td class="ez-table__cell ez-table__cell--has-action-btns">
                     {% if can_create %}
-                        {{ macros.content_type_copy(content_type, content_type_group, 'btn btn-icon mx-2', content_type_copy_forms) }}
+                        {{ macros.content_type_copy(content_type, content_type_group, 'btn btn-icon mx-2 ez-btn--copy-content-type') }}
                     {% endif %}
                     {% if can_update %}
                         {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-2') }}
@@ -98,6 +98,9 @@
         </tbody>
     </table>
     {{ form_end(form_content_types_delete) }}
+
+    {{ form_start(content_type_copy_form, { 'attr': {'hidden': 'hidden'}}) }}
+    {{ form_end(content_type_copy_form) }}
 
     {% if pager.haveToPaginate %}
         <div class="row justify-content-center align-items-center ez-pagination__spacing">
