@@ -33,7 +33,7 @@
         "jms/translation-bundle": "^1.5",
         "ezsystems/ezplatform-kernel": "^1.2@dev",
         "ezsystems/ezplatform-content-forms": "^1.0@dev",
-        "ezsystems/ez-support-tools": "dev-ezp-32002-move-sysinfo-to-support-tools",
+        "ezsystems/ez-support-tools": "dev-ezp-32002-move-sysinfo-to-support-tools as 2.0.x-dev",
         "ezsystems/ezplatform-design-engine": "^3.0@dev",
         "ezsystems/ezplatform-user": "^2.0@dev",
         "ezsystems/ezplatform-richtext": "^2.0@dev",
