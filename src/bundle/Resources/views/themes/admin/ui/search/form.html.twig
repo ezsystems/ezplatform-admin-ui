@@ -22,7 +22,7 @@
                 {{ form_widget(form.search_language, {'attr': {'class': 'ez-search-form__language-selector'}}) }}
             </div>
             <button type="submit" class="ez-btn ez-btn--primary ez-btn--search">{{ 'search.perform'|trans|desc('Search') }}</button>
-            <button type="button" class="ez-btn ez-btn--secondary ez-btn--filter">{{ 'search.filters'|trans|desc('Filters') }}</button>
+            <button type="button" class="btn btn-secondary ez-btn--filter">{{ 'search.filters'|trans|desc('Filters') }}</button>
         </span>
     </div>
 </div>
@@ -114,7 +114,7 @@
         <div class="ez-filters__item ez-filters__item--subtree">
             <label class="ez-label">{{ 'search.subtree'|trans|desc('Subtree') }}</label>
             <div>
-                <button class="ez-btn ez-btn--secondary ez-btn--udw-select-location"
+                <button class="ez-btn btn btn-secondary ez-btn--udw-select-location"
                     type="button"
                     {% if form.subtree.vars.value is not empty %} hidden {% endif %}
                     data-universal-discovery-title="{{'search.udw.select_content'|trans|desc('Select Content')}}"
@@ -166,7 +166,7 @@
     </div>
     <div class="ez-filters__btns">
         <button type="submit" class="ez-btn ez-btn--primary ez-btn-apply" disabled>{{ 'search.apply'|trans|desc('Apply') }}</button>
-        <button class="ez-btn ez-btn--secondary ez-btn-clear">{{ 'search.clear'|trans|desc('Clear') }}</button>
+        <button class="btn btn-secondary ez-btn-clear">{{ 'search.clear'|trans|desc('Clear') }}</button>
     </div>
 </div>
 {{ form_widget(form.last_modified, {'attr': {'hidden': 'hidden'}}) }}

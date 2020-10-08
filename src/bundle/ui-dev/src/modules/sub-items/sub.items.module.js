@@ -841,7 +841,7 @@ export default class SubItemsModule extends Component {
                 <button onClick={this.onBulkDeletePopupConfirm} type="button" className="btn btn-primary btn--trigger">
                     {confirmLabel}
                 </button>
-                <button onClick={this.closeBulkDeletePopup} type="button" className="btn btn-dark" data-dismiss="modal">
+                <button onClick={this.closeBulkDeletePopup} type="button" className="btn btn-secondary" data-dismiss="modal">
                     {cancelLabel}
                 </button>
             </Fragment>
@@ -857,7 +857,7 @@ export default class SubItemsModule extends Component {
                 <button onClick={this.onBulkHidePopupConfirm} type="button" className="btn btn-primary btn--trigger">
                     {confirmLabel}
                 </button>
-                <button onClick={this.closeBulkHidePopup} type="button" className="btn btn-dark" data-dismiss="modal">
+                <button onClick={this.closeBulkHidePopup} type="button" className="btn btn-secondary" data-dismiss="modal">
                     {cancelLabel}
                 </button>
             </Fragment>
@@ -873,7 +873,7 @@ export default class SubItemsModule extends Component {
                 <button onClick={this.onBulkUnhidePopupConfirm} type="button" className="btn btn-primary btn--trigger">
                     {confirmLabel}
                 </button>
-                <button onClick={this.closeBulkUnhidePopup} type="button" className="btn btn-dark" data-dismiss="modal">
+                <button onClick={this.closeBulkUnhidePopup} type="button" className="btn btn-secondary" data-dismiss="modal">
                     {cancelLabel}
                 </button>
             </Fragment>
