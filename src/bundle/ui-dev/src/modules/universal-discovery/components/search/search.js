@@ -169,7 +169,7 @@ const Search = ({ itemsPerPage }) => {
                     {searchLabel}
                 </button>
                 <div className="c-search__filters-btn-wrapper">
-                    <button className="c-search__toggle-filters-btn ez-btn ez-btn--secondary" onClick={toggleFiltersCollapsed}>
+                    <button className="c-search__toggle-filters-btn btn btn-secondary" onClick={toggleFiltersCollapsed}>
                         {filtersLabel}
                     </button>
                 </div>
