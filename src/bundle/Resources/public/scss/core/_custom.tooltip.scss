@@ -56,4 +56,39 @@
         font-size: calculateRem(14px);
         line-height: calculateRem(15px);
     }
+
+    &--ground-dark {
+        .ez-tooltip {
+            &__inner {
+                color: $ez-white;
+                background-color: $ibexa-color-ground-dark;
+            }
+        }
+
+        &.ez-tooltip {
+            &.bs-tooltip-top .ez-tooltip__arrow {
+                &::before {
+                    border-top-color: $ibexa-color-ground-dark;
+                }
+            }
+
+            &.bs-tooltip-right .ez-tooltip__arrow {
+                &::before {
+                    border-right-color: $ibexa-color-ground-dark;
+                }
+            }
+
+            &.bs-tooltip-bottom .ez-tooltip__arrow {
+                &::before {
+                    border-bottom-color: $ibexa-color-ground-dark;
+                }
+            }
+
+            &.bs-tooltip-left .ez-tooltip__arrow {
+                &::before {
+                    border-left-color: $ibexa-color-ground-dark;
+                }
+            }
+        }
+    }
 }
