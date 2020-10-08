@@ -35,7 +35,7 @@
                 selector: '.ez-data-source__input--ezcountry',
                 eventName: EVENT_VALUE_CHANGED,
                 callback: 'validateInput',
-                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                errorNodeSelectors: ['.ez-data-source'],
                 invalidStateSelectors: [SELECTOR_SELECTED],
             },
         ],

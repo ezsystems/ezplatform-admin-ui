@@ -1,4 +1,6 @@
 .ez-field-edit {
+    position: relative;
+
     &__label {
         @include label-required();
     }
@@ -50,30 +52,34 @@
         .ez-field-edit__label {
             color: $ibexa-color-warning-dark;
         }
-
-        .ez-field-edit__data {
-            @include exclamation-mark-error();
-        }
     }
 
     &__error {
-        display: inline-block;
+        display: flex;
         font-size: calculateRem(14px);
         font-style: normal;
-        margin-left: calculateRem(8px);
-        color: $ibexa-color-warning-dark;
+        color: $ibexa-color-primary;
+        align-items: center;
+        box-sizing: border-box;
+        
+        &:before {
+            content: '!';
+            font-size: calculateRem(12px);
+            display: flex;
+            width: calculateRem(14px);
+            height: calculateRem(14px);
+            color: $ibexa-white;
+            background: $ibexa-color-primary;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            margin-right: calculateRem(5px);
+        }
     }
 
     .ez-data-source__input {
         &.is-invalid {
-            border-color: $ibexa-color-danger;
-            background: $ibexa-color-warning-pale;
-        }
-    }
-
-    .ez-data-source__label {
-        &.is-invalid {
-            color: $ibexa-color-danger;
+            @include input-invalid;
         }
     }
 }

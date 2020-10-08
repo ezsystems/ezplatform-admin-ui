@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezfloat';
 
     class EzFloatValidator extends eZ.BaseFieldValidator {
@@ -47,7 +47,7 @@
                 selector: '.ez-field-edit--ezfloat input',
                 eventName: 'blur',
                 callback: 'validateFloat',
-                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                errorNodeSelectors: ['.ez-data-source'],
             },
         ],
     });

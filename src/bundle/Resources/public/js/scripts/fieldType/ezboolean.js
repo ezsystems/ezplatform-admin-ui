@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezboolean';
 
     class EzBooleanValidator extends eZ.BaseFieldValidator {
@@ -43,7 +43,7 @@
                 selector: '.ez-field-edit--ezboolean input',
                 eventName: 'change',
                 callback: 'validateInput',
-                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                errorNodeSelectors: ['.ez-data-source'],
             },
             {
                 isValueValidator: false,

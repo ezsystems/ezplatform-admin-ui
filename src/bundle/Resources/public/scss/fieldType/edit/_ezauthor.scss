@@ -7,12 +7,6 @@
         }
     }
 
-    .ez-data-source__input-wrapper {
-        .form-control {
-            margin-bottom: 0;
-        }
-    }
-
     .ez-data-source__actions {
         display: flex;
         align-items: center;
@@ -28,32 +22,9 @@
     }
 
     &.is-invalid {
-        .ez-data-source__field {
-            &.is-invalid {
-                color: $ibexa-color-warning-dark;
-            }
-        }
-
         .ez-field-edit__data {
             &:before {
                 display: none;
-            }
-        }
-
-        .ez-data-source__author {
-            position: relative;
-
-            &.is-invalid {
-                &:before {
-                    content: '!';
-                    position: absolute;
-                    top: calculateRem(-5px);
-                    left: calculateRem(-10px);
-                    width: calculateRem(10px);
-                    color: $ibexa-color-danger;
-                    text-align: center;
-                    font-size: calculateRem(24px);
-                }
             }
         }
     }

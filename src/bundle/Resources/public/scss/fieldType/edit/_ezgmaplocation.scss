@@ -45,14 +45,14 @@
         }
 
         &__field--latitude {
-            @include map-invalid-input();
+            @include map-input-invalid();
 
             grid-area: side2;
             margin-bottom: calculateRem(15px);
         }
 
         &__field--longitude {
-            @include map-invalid-input();
+            @include map-input-invalid();
 
             grid-area: side3;
             margin-bottom: calculateRem(70px);

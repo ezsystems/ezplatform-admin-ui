@@ -13,7 +13,7 @@
     &__selection-info {
         list-style: none;
         padding-left: 0;
-        margin: 0;
+        margin: 0 0 calculateRem(10px) 0;
         width: 50%;
         padding: 0 calculateRem(16px) calculateRem(6px) calculateRem(8px);
         border: calculateRem(1px) solid $ibexa-color-base-dark;
@@ -53,8 +53,7 @@
         }
 
         &.is-invalid {
-            border-color: $ibexa-color-warning-dark;
-            background: $ibexa-color-warning-pale;
+            @include input-invalid();
         }
     }
 
@@ -150,14 +149,6 @@
 
         &:last-child {
             margin-bottom: 0;
-        }
-    }
-
-    &.is-invalid {
-        .ez-custom-dropdown {
-            &__selection-info {
-                border-color: $ibexa-color-warning-dark;
-            }
         }
     }
 }

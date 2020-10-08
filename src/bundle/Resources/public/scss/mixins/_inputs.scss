@@ -3,7 +3,8 @@
     box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
 }
 
-@mixin input-invalid-text {
-    border-bottom-color: $ibexa-color-primary;
-    border-bottom-width: calculateRem(3px);
+@mixin input-invalid {
+    background: $ibexa-white;
+    border-width: calculateRem(1px) calculateRem(1px) calculateRem(1px) calculateRem(3px);
+    border-color: $ibexa-color-base-dark $ibexa-color-base-dark $ibexa-color-base-dark $ibexa-color-primary;
 }

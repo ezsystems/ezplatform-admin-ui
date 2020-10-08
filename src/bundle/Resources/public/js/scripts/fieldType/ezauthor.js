@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const SELECTOR_REMOVE_AUTHOR = '.ez-btn--remove-author';
     const SELECTOR_AUTHOR = '.ez-data-source__author';
     const SELECTOR_FIELD = '.ez-field-edit--ezauthor';
@@ -195,7 +195,7 @@
                     `${SELECTOR_FIELD_NAME} .ez-data-source__input`,
                     `${SELECTOR_FIELD_NAME} .ez-data-source__label`,
                 ],
-                errorNodeSelectors: [`${SELECTOR_FIELD_NAME} .ez-data-source__label-wrapper`],
+                errorNodeSelectors: [`${SELECTOR_FIELD_NAME}`],
             },
             {
                 selector: `.ez-data-source__author ${SELECTOR_FIELD_EMAIL} .ez-data-source__input`,
@@ -206,7 +206,7 @@
                     `${SELECTOR_FIELD_EMAIL} .ez-data-source__input`,
                     `${SELECTOR_FIELD_EMAIL} .ez-data-source__label`,
                 ],
-                errorNodeSelectors: [`${SELECTOR_FIELD_EMAIL} .ez-data-source__label-wrapper`],
+                errorNodeSelectors: [`${SELECTOR_FIELD_EMAIL}`],
             },
             {
                 isValueValidator: false,

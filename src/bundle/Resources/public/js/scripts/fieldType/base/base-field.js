@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     class BaseFieldValidator {
         constructor(config) {
             this.classInvalid = config.classInvalid;
@@ -105,7 +105,7 @@
          * @memberof BaseFieldValidator
          */
         createErrorNode(message) {
-            const errorNode = doc.createElement('em');
+            const errorNode = doc.createElement('div');
 
             errorNode.classList.add('ez-field-edit__error');
             errorNode.innerHTML = message;
@@ -155,6 +155,8 @@
             const nodes = this.findErrorContainers(container, input, config.errorNodeSelectors);
             const existingErrorSelectors = config.errorNodeSelectors.map((selector) => `${selector} .ez-field-edit__error`);
             const existingErrorNodes = this.findExistingErrorNodes(container, input, existingErrorSelectors);
+
+            console.log('nodes:', nodes, 'selector: ', existingErrorSelectors, 'kontener: ', container);
 
             existingErrorNodes.forEach((el) => el.remove());
 

@@ -157,7 +157,7 @@
 
     .flatpickr-input {
         &.is-invalid.form-control[readonly] {
-            background: $ibexa-color-warning-pale;
+            @include input-invalid(); 
         }
     }
 }
@@ -194,7 +194,7 @@
     }
 }
 
-@mixin map-invalid-input() {
+@mixin map-input-invalid() {
     &.is-invalid {
         .ez-data-source__label {
             color: $ibexa-color-danger;
