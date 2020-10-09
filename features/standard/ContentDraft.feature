@@ -115,7 +115,6 @@ Feature: Content items creation
     Given I navigate to content "Test Article draft edited3" of type "Article" in root path
       And I click on the edit action bar button "Edit"
       And I click on the close button
-      And I navigate to content "Test Article draft edited3" of type "Article"
     When I click on the edit action bar button "Edit"
       And I start editing draft with ID "4" from draft conflict modal
       And I set content fields
