@@ -79,7 +79,7 @@ Feature: Content items creation
         | Title | Test Article draft edited2 |
       And I set article main content field to "Test Article draft intro edited2"
       And I click on the close button
-    Then I should be on root container page in Content View
+    Then I should be on content container page "Test Article draft" of type "Article" in root path
 
   @javascript @common
   Scenario: Content edit draft can be saved
