@@ -63,7 +63,10 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.relation.default.location.js'),
         ])
-        .addEntry('ezplatform-admin-ui-content-type-list-js', [path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js')])
+        .addEntry('ezplatform-admin-ui-content-type-list-js', [
+            path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.copy.js'),
+        ])
         .addEntry('ezplatform-admin-ui-content-type-view-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.location.change.language.js'),
             path.resolve(__dirname, '../public/js/scripts/sidebar/extra.actions.js'),

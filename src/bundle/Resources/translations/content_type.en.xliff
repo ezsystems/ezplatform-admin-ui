@@ -116,6 +116,21 @@
         <target state="new">Draft of Content Type '%name%' already exists and is locked by '%userContentName%'</target>
         <note>key: content_type.edit.error.already_exists</note>
       </trans-unit>
+      <trans-unit id="d637ca9df10c942896a6246a184726c077faf8f2" resname="content_type.copy.success">
+        <source>Content Type '%name%' successfully copied.</source>
+        <target state="new">Content Type '%name%' successfully copied.</target>
+        <note>key: content_type.copy.success</note>
+      </trans-unit>
+      <trans-unit id="cb9acf98480c87ed1b05d0007bcfe2a44cfadf61" resname="content_type.copy.error">
+        <source>Error occoured while copying the '%name%' Content Type.</source>
+        <target state="new">Error occoured while copying the '%name%' Content Type.</target>
+        <note>key: content_type.copy.error</note>
+      </trans-unit>
+      <trans-unit id="af74f7c5362aaee985bf8cda3dd75fc80751ce51" resname="content_type.action.copy">
+        <source>Copy</source>
+        <target state="new">Copy</target>
+        <note>key: content_type.action.copy</note>
+      </trans-unit>
       <trans-unit id="f0338ef34826caa021c41ff85413e48601af30b7" resname="content_type.edit.select_language">
         <source>Select a language:</source>
         <target state="new">Select a language:</target>

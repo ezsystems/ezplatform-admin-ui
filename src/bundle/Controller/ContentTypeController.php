@@ -15,6 +15,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
@@ -31,6 +32,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use eZ\Publish\API\Repository\Exceptions\BadStateException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
@@ -144,6 +146,9 @@ class ContentTypeController extends Controller
             $deletableTypes[$type->id] = !$this->contentTypeService->isContentTypeUsed($type);
         }
 
+        $copyData = new ContentTypeCopyData(null, $group);
+        $contentTypeCopyForm = $this->contentTypeFormFactory->contentTypeCopy($copyData, null)->createView();
+
         return $this->render('@ezdesign/content_type/list.html.twig', [
             'content_type_group' => $group,
             'pager' => $pagerfanta,
@@ -154,6 +159,7 @@ class ContentTypeController extends Controller
             'can_create' => $this->isGranted(new Attribute('class', 'create')),
             'can_update' => $this->isGranted(new Attribute('class', 'update')),
             'can_delete' => $this->isGranted(new Attribute('class', 'delete')),
+            'content_type_copy_form' => $contentTypeCopyForm,
         ]);
     }
 
@@ -381,6 +387,63 @@ class ContentTypeController extends Controller
 
         return $this->redirectToRoute('ezplatform.content_type.update', [
             'contentTypeId' => $contentTypeDraft->id,
+            'contentTypeGroupId' => $group->id,
+        ]);
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    public function copyAction(Request $request, ContentTypeGroup $group, ContentType $contentType): Response
+    {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'create'));
+
+        $contentTypeService = $this->contentTypeService;
+        $notificationHandler = $this->notificationHandler;
+
+        $copyData = new ContentTypeCopyData($contentType, $group);
+
+        $form = $this->contentTypeFormFactory->contentTypeCopy($copyData);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $result = $this->submitHandler->handle($form, function (ContentTypeCopyData $data) use ($contentTypeService, $notificationHandler) {
+                $contentType = $data->getContentType();
+
+                try {
+                    $contentTypeService->copyContentType($contentType);
+
+                    $notificationHandler->success(
+                        /** @Desc("Content Type '%name%' copied.") */
+                        'content_type.copy.success',
+                        ['%name%' => $contentType->getName()],
+                        'content_type'
+                    );
+                } catch (UnauthorizedException $exception) {
+                    $notificationHandler->error(
+                        /** @Desc("Content Type '%name%' cannot be copied.") */
+                        'content_type.copy.error',
+                        ['%name%' => $contentType->getName()],
+                        'content_type'
+                    );
+                }
+
+                return $this->redirectToRoute('ezplatform.content_type_group.view', [
+                    'contentTypeGroupId' => $data->getContentTypeGroup()->id,
+                ]);
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+        }
+
+        return $this->redirectToRoute('ezplatform.content_type_group.view', [
             'contentTypeGroupId' => $group->id,
         ]);
     }
