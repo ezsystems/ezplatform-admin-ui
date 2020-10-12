@@ -80,12 +80,13 @@
 .ez-side-menu,
 .ez-context-menu {
     .ez-sticky-container > .btn {
-        width: calculateRem(80px);
+        width: 100%;
         height: calculateRem(80px);
-        padding: calculateRem(2px);
+        padding: calculateRem(2px) calculateRem(4px);
         border: 0;
         border-radius: 0;
         text-decoration: none;
+        font-size: calculateRem(13px);
         line-height: calculateRem(18px);
         display: flex;
         flex-direction: column;
