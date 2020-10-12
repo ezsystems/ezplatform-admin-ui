@@ -10,6 +10,10 @@
         description: content_type.description,
         content: user.content
     } %}
+
+    <div class="ez-content-item__errors-wrapper" hidden>
+        {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
+    </div>
 {% endblock %}
 
 {% block details %}{% endblock %}

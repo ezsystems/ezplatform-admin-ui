@@ -1,5 +1,6 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezemail';
+    const SELECTOR_ERROR_NODE = '.ez-data-source';
 
     class EzEmailValidator extends eZ.BaseFieldValidator {
         /**
@@ -37,7 +38,7 @@
                 selector: '.ez-field-edit--ezemail input',
                 eventName: 'blur',
                 callback: 'validateInput',
-                errorNodeSelectors: ['.ez-data-source'],
+                errorNodeSelectors: [SELECTOR_ERROR_NODE],
             },
         ],
     });

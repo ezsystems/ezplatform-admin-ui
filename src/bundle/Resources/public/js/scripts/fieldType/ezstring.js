@@ -1,5 +1,7 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezstring';
+    const SELECTOR_ERROR_NODE = '.ez-data-source';
+    const SELECTOR_SOURCE_INPUT = '.ez-data-source__input';
 
     class EzStringValidator extends eZ.BaseFieldValidator {
         /**
@@ -39,8 +41,8 @@
                 selector: '.ez-field-edit--ezstring input',
                 eventName: 'blur',
                 callback: 'validateInput',
-                errorNodeSelectors: ['.ez-data-source'],
-                invalidStateSelectors: ['.ez-data-source__input'],
+                errorNodeSelectors: [SELECTOR_ERROR_NODE],
+                invalidStateSelectors: [SELECTOR_SOURCE_INPUT],
             },
         ],
     });

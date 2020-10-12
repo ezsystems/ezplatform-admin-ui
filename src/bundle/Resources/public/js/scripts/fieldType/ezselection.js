@@ -1,7 +1,8 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezselection';
     const SELECTOR_SELECTED = '.ez-custom-dropdown__selection-info';
     const SELECTOR_SOURCE_INPUT = '.ez-data-source__input';
+    const SELECTOR_ERROR_NODE = '.ez-data-source';
     const EVENT_VALUE_CHANGED = 'valueChanged';
 
     class EzSelectionValidator extends eZ.BaseFieldValidator {
@@ -36,7 +37,7 @@
                 selector: '.ez-data-source__input--selection',
                 eventName: EVENT_VALUE_CHANGED,
                 callback: 'validateInput',
-                errorNodeSelectors: ['.ez-data-source'],
+                errorNodeSelectors: [SELECTOR_ERROR_NODE],
                 invalidStateSelectors: [SELECTOR_SELECTED],
             },
         ],

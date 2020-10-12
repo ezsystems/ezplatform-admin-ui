@@ -11,7 +11,7 @@
         }
 
         &.is-invalid {
-            background: $ibexa-color-warning-pale;
+            @include input-invalid();
         }
     }
 

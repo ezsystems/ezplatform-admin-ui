@@ -38,6 +38,11 @@ form:not(.form-inline) {
     }
 }
 
+.ez-break-line {
+    flex-basis: 100%;
+    height: 0;
+}
+
 .ez-form-inline {
     display: flex;
     flex-flow: row wrap;

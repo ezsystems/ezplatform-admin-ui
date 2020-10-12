@@ -1,15 +1,12 @@
 .ez-field-edit--ezobjectrelation,
 .ez-field-edit--ezobjectrelationlist {
-    .ez-field-edit {
-        &__label-wrapper {
-            flex-direction: column;
-            align-items: flex-start;
-        }
+    .ez-field-edit__error {
+        @include error-under-label();
     }
 
     &.is-invalid {
         .ez-relations__cta {
-            border-left: calculateRem(3px) solid $ibexa-color-primary;
+            @include area-invalid();
         }
     }
 

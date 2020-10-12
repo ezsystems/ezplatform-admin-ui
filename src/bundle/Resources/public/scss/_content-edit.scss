@@ -113,9 +113,8 @@
 }
 
 .ez-content-item__errors-wrapper {
-    font-style: italic;
-    color: $ibexa-color-warning-dark;
-    font-size: calculateRem(16px);
+    color: $ibexa-color-primary;
+    font-size: calculateRem(14px);
 }
 
 .ez-header--content-edit {

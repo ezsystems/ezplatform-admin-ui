@@ -1,7 +1,8 @@
-(function (global, doc, eZ, flatpickr) {
+(function(global, doc, eZ, flatpickr) {
     const SELECTOR_FIELD = '.ez-field-edit--eztime';
     const SELECTOR_INPUT = '.ez-data-source__input:not(.flatpickr-input)';
     const SELECTOR_FLATPICKR_INPUT = '.flatpickr-input';
+    const SELECTOR_ERROR_NODE = '.ez-data-source'
     const EVENT_VALUE_CHANGED = 'valueChanged';
 
     class EzTimeValidator extends eZ.BaseFieldValidator {
@@ -41,14 +42,14 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_INPUT}`,
                 eventName: EVENT_VALUE_CHANGED,
                 callback: 'validateInput',
-                errorNodeSelectors: ['.ez-data-source'],
+                errorNodeSelectors: [SELECTOR_ERROR_NODE],
                 invalidStateSelectors: [SELECTOR_FLATPICKR_INPUT],
             },
             {
                 selector: `${SELECTOR_FIELD} ${SELECTOR_FLATPICKR_INPUT}`,
                 eventName: 'blur',
                 callback: 'validateInput',
-                errorNodeSelectors: ['.ez-data-source'],
+                errorNodeSelectors: [SELECTOR_ERROR_NODE],
                 invalidStateSelectors: [SELECTOR_FLATPICKR_INPUT],
             },
         ],

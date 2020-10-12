@@ -1,5 +1,6 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezinteger';
+    const SELECTOR_ERROR_NODE = '.ez-data-source'
 
     class EzIntegerValidator extends eZ.BaseFieldValidator {
         /**
@@ -47,7 +48,7 @@
                 selector: '.ez-field-edit--ezinteger input',
                 eventName: 'blur',
                 callback: 'validateInteger',
-                errorNodeSelectors: ['.ez-data-source'],
+                errorNodeSelectors: [SELECTOR_ERROR_NODE],
             },
         ],
     });

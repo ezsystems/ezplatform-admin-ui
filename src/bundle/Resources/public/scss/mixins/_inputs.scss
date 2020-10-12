@@ -8,3 +8,15 @@
     border-width: calculateRem(1px) calculateRem(1px) calculateRem(1px) calculateRem(3px);
     border-color: $ibexa-color-base-dark $ibexa-color-base-dark $ibexa-color-base-dark $ibexa-color-primary;
 }
+
+@mixin area-invalid {
+    border-left: calculateRem(3px) solid $ibexa-color-primary;
+}
+
+@mixin error-under-input {
+    margin: calculateRem(-7px) 0 0 calculateRem(2px);
+}
+
+@mixin error-under-label {
+    margin: 0 0 calculateRem(10px) calculateRem(2px);
+}

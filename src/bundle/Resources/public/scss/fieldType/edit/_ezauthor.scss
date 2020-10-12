@@ -1,31 +1,18 @@
 .ez-field-edit--ezauthor {
     .ez-data-source__author {
         padding: calculateRem(16px) calculateRem(16px) calculateRem(20px) calculateRem(16px);
-
-        &.form-row {
-            align-items: flex-end;
-        }
     }
 
     .ez-data-source__actions {
         display: flex;
-        align-items: center;
 
         button {
-            margin: 0 calculateRem(6px);
+            margin: calculateRem(33px) calculateRem(6px) 0;
             height: calculateRem(40px);
             width: calculateRem(40px);
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-    }
-
-    &.is-invalid {
-        .ez-field-edit__data {
-            &:before {
-                display: none;
-            }
         }
     }
 }
