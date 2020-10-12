@@ -1,0 +1,5 @@
+.ez-field-edit--ezform {
+    .ez-field-edit__error {
+        @include error-under-label();
+    }
+}

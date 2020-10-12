@@ -105,7 +105,7 @@
          * @memberof BaseFieldValidator
          */
         createErrorNode(message) {
-            const errorNode = doc.createElement('div');
+            const errorNode = doc.createElement('em');
 
             errorNode.classList.add('ez-field-edit__error');
             errorNode.innerHTML = message;

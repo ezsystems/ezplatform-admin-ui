@@ -320,8 +320,6 @@
         }
     }
 
-
-
     const validator = new EzGMapLocationValidator({
         classInvalid: 'is-invalid',
         fieldSelector: SELECTOR_FIELD,
