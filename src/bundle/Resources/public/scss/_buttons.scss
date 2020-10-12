@@ -118,34 +118,6 @@
 }
 
 .ez-context-menu {
-    .ez-sticky-container > .btn {
-        &:focus,
-        &:hover {
-            color: $ibexa-color-primary;
-            background: $ibexa-white;
-
-            .ez-icon {
-                fill: $ibexa-color-primary;
-            }
-        }
-    }
-}
-
-.ez-side-menu {
-    .ez-sticky-container > .btn {
-        &:focus,
-        &:hover {
-            color: $ibexa-black;
-            background: $ibexa-white;
-
-            .ez-icon {
-                fill: $ibexa-black;
-            }
-        }
-    }
-}
-
-.ez-context-menu {
     .btn.disabled,
     .btn[disabled] {
         opacity: 1;
