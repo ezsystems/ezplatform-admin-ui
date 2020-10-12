@@ -234,3 +234,13 @@
         />
     </div>
 {%- endblock -%}
+
+{% block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <em class="ez-block-config__error">{{ error.message }}</em>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors %}
+
+{% block form_label_errors %}{% endblock form_label_errors %}

@@ -48,27 +48,6 @@
 
     &__error {
         @include error-under-input();
-
-        display: flex;
-        font-size: calculateRem(14px);
-        font-style: normal;
-        color: $ibexa-color-primary;
-        align-items: center;
-        box-sizing: border-box;
-
-        &:before {
-            content: '!';
-            font-size: calculateRem(12px);
-            display: flex;
-            width: calculateRem(14px);
-            height: calculateRem(14px);
-            color: $ibexa-white;
-            background: $ibexa-color-primary;
-            border-radius: 50%;
-            justify-content: center;
-            align-items: center;
-            margin-right: calculateRem(5px);
-        }
     }
 
     .ez-data-source__input {
