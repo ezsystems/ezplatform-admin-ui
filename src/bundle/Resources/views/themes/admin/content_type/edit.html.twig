@@ -56,7 +56,7 @@
                 <div class="form-inline">
                     <div class="ez-card__field-control mr-2">
                     {{ form_widget(form.fieldTypeSelection, {'attr': {'class': 'ez-field-selection'}}) }}
-                    {{ form_widget(form.addFieldDefinition, {'attr': {'class': 'btn btn-primary'}}) }}
+                    {{ form_widget(form.addFieldDefinition, {'attr': {'class': 'btn btn-secondary'}}) }}
                     </div>
 
                     <button type="button"
@@ -78,13 +78,9 @@
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}
 
-                    <div class="card ez-card ez-card--toggle-group mb-3 ez-card--collapsed">
-                        <div id="field-definition-{{ value.identifier }}" class="ez-card__header px-0">
+                    <div class="card ez-card ez-card--toggle-group ez-card--collapsed">
+                        <div id="field-definition-{{ value.identifier }}" class="ez-card__header">
                             {% set name = value.names[language_code] ?? value.names[content_type.mainLanguageCode]  %}
-                            {{ form_widget(field_definition.selected, {
-                                'label': '%s (%s)'|format(name, value.fieldTypeIdentifier),
-                                'attr': {'class': 'ez-input ez-input--checkbox mr-1'}
-                            }) }}
                             <button class="ez-card__body-display-toggler btn">
                                 <svg class="ez-icon ez-icon--medium ez-icon--caret-down" aria-hidden="true">
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#caret-down"></use>
@@ -93,6 +89,10 @@
                                     <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#caret-next"></use>
                                 </svg>
                             </button>
+                            {{ form_widget(field_definition.selected, {
+                                'label': '%s (%s)'|format(name, value.fieldTypeIdentifier),
+                                'attr': {'class': 'ez-input ez-input--checkbox mr-1'}
+                            }) }}
                         </div>
 
                         <div class="ez-card__body">

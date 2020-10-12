@@ -41,8 +41,8 @@
             align-items: center;
             color: $ibexa-color-font;
             border-bottom: calculateRem(1px) solid $ibexa-color-base;
-            padding: calculateRem(24px) calculateRem(8px);
-            font-weight: normal;
+            padding: calculateRem(24px);
+            font-weight: bold;
         }
 
         .form-inline {
@@ -63,7 +63,7 @@
         padding: calculateRem(8px);
 
         &--incresed-margin {
-            margin: calculateRem(24px);
+            margin: calculateRem(32px) calculateRem(16px);
         }
     }
 
@@ -99,68 +99,99 @@
     background: $ibexa-white;
 
     &.ez-card--collapsed {
-        .ez-card__body {
-            max-height: 0;
-            overflow: hidden;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
+        .ez-card {
+            &__header {
+                &:hover {
+                    background: $ibexa-color-base-light;
+                }
+            }
 
-        .ez-card__body-display-toggler {
-            .ez-icon--caret-down {
-                display: none;
+            &__body {
+                max-height: 0;
+                overflow: hidden;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            &__body-display-toggler {
+                .ez-icon--caret-down {
+                    display: none;
+                }
             }
         }
     }
 
     &:not(.ez-card--collapsed) {
-        .ez-card__body-display-toggler {
-            .ez-icon--caret-next {
-                display: none;
+        .ez-card {
+            &__header {
+                background-color: $ibexa-color-base-medium;
+                font-weight: bold;
+            }
+
+            &__body {
+                background: $ibexa-color-base-light;
+            }
+
+            &__body-display-toggler {
+                .ez-icon--caret-next {
+                    display: none;
+                }
             }
         }
     }
 
-    .ez-card__header {
-        line-height: calculateRem(40px);
-        padding: calculateRem(12px) calculateRem(20px);
-        border-top: calculateRem(1px) solid $ibexa-color-base;
-        border-bottom: calculateRem(1px) solid $ibexa-color-base;
-        display: flex;
+    .ez-card {
+        &__header {
+            line-height: calculateRem(40px);
+            padding: calculateRem(12px) calculateRem(8px);
+            display: flex;
 
-        .form-check-label {
-            margin-bottom: 0;
-            font-weight: 700;
-            color: $ibexa-black;
-            font-size: calculateRem(16px);
+            .form-check {
+                display: flex;
+                align-items: center;
+            }
+
+            .form-check-input {
+                margin-top: 0;
+            }
+
+            .form-check-label {
+                margin-left: calculateRem(8px);
+                margin-bottom: 0;
+                color: $ibexa-black;
+                font-size: calculateRem(16px);
+            }
+
+            .ez-card__body-display-toggler {
+                margin: calculateRem(4px) calculateRem(4px) calculateRem(4px) 0;
+                height: calculateRem(32px);
+                width: calculateRem(32px);
+                padding: 0;
+                cursor: pointer;
+                transition: background 0.3s $ez-admin-transition;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+
+                .ez-icon {
+                    fill: $ibexa-black;
+                }
+            }
         }
 
-        .ez-card__body-display-toggler {
-            margin: calculateRem(4px) 0 calculateRem(4px) auto;
-            height: calculateRem(32px);
-            width: calculateRem(32px);
-            padding: 0;
-            cursor: pointer;
-            background: $ibexa-white;
-            transition: background 0.3s $ez-admin-transition;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        &__body {
+            padding: calculateRem(24px) calculateRem(40px);
+        }
+    }
 
-            &:hover {
-                background: darken($ibexa-white, 15%);
-                outline: none;
-                box-shadow: none;
-            }
-
-            &:focus {
-                outline: none;
-                box-shadow: none;
-            }
-
-            .ez-icon {
-                fill: $ibexa-black;
-            }
+    & + & {
+        .ez-card__header {
+            border-top: calculateRem(1px) solid $ibexa-color-base;
         }
     }
 }
