@@ -40,6 +40,8 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class ContentOnTheFlyController extends Controller
 {
+    private const AUTOSAVE_ACTION_NAME = 'autosave';
+
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
@@ -289,11 +291,11 @@ class ContentOnTheFlyController extends Controller
         if ($form->isSubmitted() && $form->isValid() && null !== $form->getClickedButton()) {
             $actionName = $form->getClickedButton()->getName();
 
-            $actionDispatcher = $actionName === 'autosave'
+            $actionDispatcher = $actionName === self::AUTOSAVE_ACTION_NAME
                 ? $this->contentActionDispatcher
                 : $this->createContentActionDispatcher;
 
-            if (empty($location)) {
+            if (!$location instanceof Location) {
                 $contentInfo = $this->contentService->loadContentInfo($content->id);
 
                 if (!empty($contentInfo->mainLocationId)) {
@@ -304,14 +306,14 @@ class ContentOnTheFlyController extends Controller
             $actionDispatcher->dispatchFormAction(
                 $form,
                 $form->getData(),
-                $form->getClickedButton()->getName(),
+                $actionName,
                 ['referrerLocation' => $location]
             );
 
             if ($actionDispatcher->getResponse()) {
                 $view = new EditContentOnTheFlySuccessView('@ezdesign/ui/on_the_fly/content_edit_response.html.twig');
                 $view->addParameters([
-                    'locationId' => empty($location) ? null : $location->id,
+                    'locationId' => $location instanceof Location ? $location->id : null,
                 ]);
 
                 return $view;
