@@ -26,14 +26,19 @@ class ContentProxyCreateEvent extends Event
     /** @var int */
     protected $parentLocationId;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Event\Options */
+    protected $options;
+
     public function __construct(
         ContentType $contentType,
         string $languageCode,
-        int $parentLocationId
+        int $parentLocationId,
+        Options $options
     ) {
         $this->contentType = $contentType;
         $this->languageCode = $languageCode;
         $this->parentLocationId = $parentLocationId;
+        $this->options = $options;
     }
 
     public function getContentType(): ContentType
@@ -49,6 +54,11 @@ class ContentProxyCreateEvent extends Event
     public function getParentLocationId(): int
     {
         return $this->parentLocationId;
+    }
+
+    public function getOptions(): Options
+    {
+        return $this->options;
     }
 
     public function getResponse(): ?Response
