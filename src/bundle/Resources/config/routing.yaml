@@ -8,20 +8,6 @@ ezplatform.dashboard:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\DashboardController::dashboardAction'
 
 #
-# System Information
-#
-
-ezplatform.systeminfo:
-    path: /systeminfo
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\SystemInfoController::infoAction'
-
-ezplatform.systeminfo.php:
-    path: /systeminfo/phpinfo
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\SystemInfoController::phpinfoAction'
-
-#
 # Section
 #
 

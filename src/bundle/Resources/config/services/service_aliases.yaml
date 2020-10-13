@@ -23,8 +23,5 @@ services:
     # Repository Forms
     EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType: '@ezplatform.content_forms.policy.limitation.form'
 
-    # Support Tools
-    EzSystems\EzSupportToolsBundle\SystemInfo\SystemInfoCollectorRegistry: '@support_tools.system_info.collector_registry'
-
     # Symfony
     Symfony\Contracts\Translation\TranslatorInterface: '@translator'
