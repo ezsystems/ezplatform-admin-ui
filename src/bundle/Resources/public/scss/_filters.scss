@@ -100,6 +100,11 @@
 
     &__btns {
         padding-top: calculateRem(16px);
+        display: flex;
+
+        .btn-secondary:not(:first-child) {
+            margin-left: calculateRem(8px);
+        }
     }
 
     &__option--hidden {
