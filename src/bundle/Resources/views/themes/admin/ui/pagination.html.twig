@@ -6,6 +6,6 @@
         }}
     </div>
     <div class="ez-pagination__navigation">
-        {{ pagerfanta(pager, 'ez', paginaton_params) }}
+        {{ pagerfanta(pager, 'ez', paginaton_params|default({})) }}
     </div>
 </div>

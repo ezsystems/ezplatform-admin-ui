@@ -122,6 +122,11 @@
                         {% endif %}
                         </tbody>
                     </table>
+                    {% if pager.haveToPaginate %}
+                        {{  include('@ezdesign/ui/pagination.html.twig', {
+                                'pager': pager
+                        }) }}
+                    {% endif %}
                 </div>
                 {{ form_widget(form_remove.remove, {
                     'attr': {
@@ -129,20 +134,6 @@
                     }
                 }) }}
                 {{ form_end(form_remove) }}
-
-                {% if pager.haveToPaginate %}
-                    <div class="row justify-content-center align-items-center ez-pagination__spacing">
-                        <span class="ez-pagination__text">
-                            {{ 'pagination.viewing'|trans({
-                                '%viewing%': pager.currentPageResults|length,
-                                '%total%': pager.nbResults
-                            }, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
-                        </span>
-                    </div>
-                    <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
-                        {{ pagerfanta(pager, 'ez') }}
-                    </div>
-                {% endif %}
             </div>
         </div>
     </div>

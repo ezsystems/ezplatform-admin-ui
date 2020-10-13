@@ -192,17 +192,22 @@ $body-bg: $ez-ground-base-pale;
 $body-color: $ez-black;
 
 // Pagination
-$pagination-color: $ez-black;
-$pagination-bg: $ez-pagination-bg;
+$pagination-color: $ibexa-color-font;
+$pagination-bg: $ibexa-white;
 
-$pagination-padding-y: calculateRem(4px);
-$pagination-padding-x: calculateRem(10px);
+$pagination-padding-y: 0;
+$pagination-padding-x: 0;
 
-$pagination-active-color: $ez-black;
+$pagination-active-color: $ibexa-color-font;
 $pagination-active-bg: $ibexa-color-base;
 $pagination-active-border-color: transparent;
 
-$pagination-disabled-color: $ez-black;
+$pagination-hover-color: $ibexa-color-font;
+$pagination-hover-bg: $ibexa-color-base;
+$pagination-hover-border-width: 0;
+$pagination-hover-border-color: transparent;
+
+$pagination-disabled-color: $ibexa-color-font-pale;
 $pagination-disabled-bg: transparent;
 $pagination-disabled-border-color: transparent;
 
