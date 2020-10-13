@@ -5,6 +5,7 @@
     border-top-right-radius: $ibexa-border-radius;
 
     .nav-item {
+        position: relative;
         margin-bottom: calculateRem(-1px);
     }
 

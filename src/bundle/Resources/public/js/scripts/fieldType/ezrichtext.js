@@ -1,6 +1,7 @@
 (function(global, doc, eZ, React, ReactDOM) {
     const SELECTOR_FIELD = '.ez-field-edit--ezrichtext';
     const SELECTOR_INPUT = '.ez-data-source__richtext';
+    const SELECTOR_ERROR_NODE = '.ez-field-edit__label-wrapper';
     const selectContent = (config) => {
         const udwContainer = document.querySelector('#react-udw');
         const confirmHandler = (items) => {
@@ -70,13 +71,13 @@
                     selector: SELECTOR_INPUT,
                     eventName: 'input',
                     callback: 'validateInput',
-                    errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                    errorNodeSelectors: [SELECTOR_ERROR_NODE],
                 },
                 {
                     selector: SELECTOR_INPUT,
                     eventName: 'blur',
                     callback: 'validateInput',
-                    errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                    errorNodeSelectors: [SELECTOR_ERROR_NODE],
                 },
             ],
         });

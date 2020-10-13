@@ -1,6 +1,6 @@
 .form-control {
     &--is-invalid {
-        @include input-invalid-text;
+        @include input-invalid;
     }
 }
 

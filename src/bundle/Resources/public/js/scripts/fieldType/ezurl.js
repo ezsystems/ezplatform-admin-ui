@@ -3,6 +3,7 @@
     const SELECTOR_FIELD_LINK = '.ez-data-source__field--link';
     const SELECTOR_LINK_INPUT = `${SELECTOR_FIELD_LINK} .ez-data-source__input`;
     const SELECTOR_LABEL = '.ez-data-source__label';
+    const SELECTOR_ERROR_NODE = '.ez-data-source'
 
     class EzUrlValidator extends eZ.BaseFieldValidator {
         validateUrl(event) {
@@ -30,7 +31,7 @@
                 eventName: 'blur',
                 callback: 'validateUrl',
                 invalidStateSelectors: [SELECTOR_LINK_INPUT, `${SELECTOR_FIELD_LINK} ${SELECTOR_LABEL}`],
-                errorNodeSelectors: [`${SELECTOR_FIELD_LINK} .ez-data-source__label-wrapper`],
+                errorNodeSelectors: [SELECTOR_ERROR_NODE],
             },
         ],
     });

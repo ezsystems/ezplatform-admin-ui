@@ -3,7 +3,48 @@
     box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
 }
 
-@mixin input-invalid-text {
-    border-bottom-color: $ibexa-color-primary;
-    border-bottom-width: calculateRem(3px);
+@mixin input-invalid {
+    background: $ibexa-white;
+    border-width: calculateRem(1px) calculateRem(1px) calculateRem(1px) calculateRem(3px);
+    border-color: $ibexa-color-base-dark $ibexa-color-base-dark $ibexa-color-base-dark $ibexa-color-primary;
+}
+
+@mixin area-invalid {
+    border-left: calculateRem(3px) solid $ibexa-color-primary;
+}
+
+@mixin error-input {
+    display: flex;
+    font-size: calculateRem(14px);
+    font-style: normal;
+    color: $ibexa-color-primary;
+    align-items: center;
+    box-sizing: border-box;
+
+    &:before {
+        content: '!';
+        font-size: calculateRem(12px);
+        display: flex;
+        width: calculateRem(14px);
+        height: calculateRem(14px);
+        color: $ibexa-white;
+        background: $ibexa-color-primary;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        margin-right: calculateRem(5px);
+    }
+}
+
+@mixin error-under-input {
+    @include error-input();
+
+    margin: calculateRem(-7px) 0 0 calculateRem(2px);
+}
+
+@mixin error-under-label {
+    @include error-input();
+
+    flex-basis: 100%;
+    margin: 0 0 calculateRem(10px) calculateRem(2px);
 }

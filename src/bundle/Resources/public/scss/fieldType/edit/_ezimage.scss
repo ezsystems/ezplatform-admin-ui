@@ -1,4 +1,8 @@
 .ez-field-edit--ezimage {
+    .ez-field-edit__error {
+        @include error-under-label();
+    }
+
     .ez-field-edit-preview {
         &__media-wrapper {
             position: relative;
@@ -57,6 +61,10 @@
     }
 
     &.is-invalid {
+        .ez-data-source {
+            @include area-invalid();
+        }
+
         .ez-field-edit-preview {
             position: relative;
 
@@ -71,24 +79,6 @@
                 text-align: center;
                 border-top-left-radius: $ibexa-border-radius;
                 border-bottom-left-radius: $ibexa-border-radius;
-            }
-        }
-    }
-
-    .ez-data-source__field--alternativeText {
-        &.is-invalid {
-            .ez-data-source__label-wrapper,
-            .ez-data-source__label-wrapper .ez-field-edit__label {
-                color: $ez-color-danger;
-            }
-
-            .ez-field-edit__error {
-                margin-left: 8px;
-                display: inline-block;
-            }
-
-            .ez-data-source__input {
-                background: $ez-color-warning-pale;
             }
         }
     }

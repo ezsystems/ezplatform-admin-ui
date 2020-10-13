@@ -1,4 +1,14 @@
 .ez-field-edit--ezbinaryfile {
+    .ez-field-edit__error {
+        @include error-under-label();
+    }
+
+    &.is-invalid {
+        .ez-data-source {
+            @include area-invalid();
+        }
+    }
+
     &.ez-field-edit--with-preview {
         .ez-field-edit-preview {
             padding-left: 0;

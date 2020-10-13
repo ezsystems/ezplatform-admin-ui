@@ -1,5 +1,15 @@
 .ez-field-edit--ezobjectrelation,
 .ez-field-edit--ezobjectrelationlist {
+    .ez-field-edit__error {
+        @include error-under-label();
+    }
+
+    &.is-invalid {
+        .ez-relations__cta {
+            @include area-invalid();
+        }
+    }
+
     .ez-relations {
         &__cta {
             width: 100%;

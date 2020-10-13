@@ -1,4 +1,8 @@
 .ez-field-edit--ezmedia {
+    .ez-field-edit__error {
+        @include error-under-label();
+    }
+
     .ez-field-edit-preview {
         &__media-wrapper {
             position: relative;
@@ -132,6 +136,10 @@
     }
 
     &.is-invalid {
+        .ez-data-source {
+            @include area-invalid();
+        }
+
         .ez-field-edit-preview {
             position: relative;
 

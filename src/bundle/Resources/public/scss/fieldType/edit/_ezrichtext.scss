@@ -1,4 +1,17 @@
 .ez-field-edit--ezrichtext {
+    .ez-field-edit__error {
+        @include error-under-label();
+    }
+
+    &.is-invalid {
+        .ez-data-source {
+            &__richtext,
+            .ez-richtext-tools {
+                border-left: calculateRem(3px) solid $ibexa-color-primary;
+            }
+        }
+    }
+
     .ez-data-source {
         &__input {
             display: none;
@@ -9,6 +22,10 @@
             border-radius: $ibexa-border-radius $ibexa-border-radius 0 0;
             border-color: $ibexa-color-base-dark;
             border-width: calculateRem(1px) calculateRem(1px) 0 calculateRem(1px);
+
+            &.is-invalid {
+                background: $ibexa-white;
+            }
         }
 
         .ez-richtext-tools {

@@ -8,6 +8,10 @@
         title: 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%'),
         description: content_type.description
     } %}
+
+    <div class="ez-content-item__errors-wrapper" hidden>
+        {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
+    </div>
 {% endblock %}
 
 {% block details %}{% endblock %}

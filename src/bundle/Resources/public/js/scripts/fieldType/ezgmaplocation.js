@@ -6,6 +6,9 @@
     const SELECTOR_LAT_INPUT = '.ez-data-source__field--latitude .ez-data-source__input';
     const SELECTOR_LON_INPUT = '.ez-data-source__field--longitude .ez-data-source__input';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
+    const SELECTOR_ADDRESS_ERROR_NODE = '.ez-data-source__field--address'
+    const SELECTOR_LAT_ERROR_NODE = '.ez-data-source__field--latitude';
+    const SELECTOR_LON_ERROR_NODE = '.ez-data-source__field--longitude';
     const EVENT_BLUR = 'blur';
     const EVENT_KEYUP = 'keyup';
     const EVENT_CANCEL_ERRORS = 'ez-cancel-errors';
@@ -297,55 +300,21 @@
                 return;
             }
 
-            const isLongitudeField = config.callback === VALIDATE_LONGITUDE;
-            const isLatitudeField = config.callback === VALIDATE_LATITUDE;
-            const areNotCoordFields = !isLongitudeField && !isLatitudeField;
-            const isInvalidLatCoordField = isLatitudeField && validationResult.isError;
-            const isInvalidLonCoordField = isLongitudeField && validationResult.isError;
-            let coordFieldsValidationResults = [];
-            let coordFieldInvalidStateSelectors = [];
+            this.toggleInvalidState(validationResult.isError, config, event.target);
+            this.toggleErrorMessage(validationResult, config, event.target);
 
-            if (areNotCoordFields || isInvalidLatCoordField || isInvalidLonCoordField) {
-                const coordFieldsData = this.buildCoordFieldsValidationHash([
-                    this.validateLongitudeOnDemand(),
-                    this.validateLatitudeOnDemand(),
-                ]);
+            if (validationResult.isError) {
+                const errorMessage = Translator.trans(
+                    /* @Desc("Area below need correction") */ 'ezmaplocation.create.message.error',
+                    {},
+                    'fieldtypes_edit'
+                )
+                const allFieldsResult = { isError: true, errorMessage: errorMessage };
 
-                coordFieldsValidationResults = coordFieldsData.validationResults;
-                coordFieldInvalidStateSelectors = coordFieldsData.invalidStateSelectors;
-            } else if (isLongitudeField && !validationResult.isError) {
-                const coordFieldsData = this.buildCoordFieldsValidationHash([this.validateLatitudeOnDemand()]);
-
-                coordFieldsValidationResults = coordFieldsData.validationResults;
-                coordFieldInvalidStateSelectors = coordFieldsData.invalidStateSelectors;
-            } else if (isLatitudeField && !validationResult.isError) {
-                const coordFieldsData = this.buildCoordFieldsValidationHash([this.validateLongitudeOnDemand()]);
-
-                coordFieldsValidationResults = coordFieldsData.validationResults;
-                coordFieldInvalidStateSelectors = coordFieldsData.invalidStateSelectors;
-            } else {
-                this.toggleInvalidState(validationResult.isError, config, event.target);
-                this.toggleErrorMessage(validationResult, config, event.target);
-
-                return validationResult;
+                config.errorNodeSelectors = [SELECTOR_LABEL_WRAPPER];
+                this.toggleInvalidState(true, config, event.target);
+                this.toggleErrorMessage(allFieldsResult, config, event.target);
             }
-
-            const coordFieldsWithError = coordFieldsValidationResults.filter((field) => field.isError);
-            const isCoordFieldError = !!coordFieldsWithError.length;
-            const isError = validationResult.isError || isCoordFieldError;
-            const allFieldsResult = { isError, errorMessage: coordFieldsWithError.map((field) => field.errorMessage).join('<br/>') };
-
-            config.errorNodeSelectors = [SELECTOR_LABEL_WRAPPER];
-            config.invalidStateSelectors = coordFieldInvalidStateSelectors;
-
-            this.toggleInvalidState(isError, config, event.target);
-            this.toggleErrorMessage(allFieldsResult, config, event.target);
-
-            const container = this.getFieldTypeContainer(doc);
-            const addressInputConfig = this.eventsMap.find((eventConfig) => eventConfig.callback === VALIDATE_ADDRESS);
-            const addressInput = container.querySelector(addressInputConfig.selector);
-
-            addressInput.classList.remove(this.classInvalid);
 
             return validationResult;
         }
@@ -373,14 +342,14 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
                 eventName: 'checkValidity',
                 callback: VALIDATE_ADDRESS,
-                errorNodeSelectors: ['.ez-data-source__field--address .ez-data-source__label-wrapper'],
+                errorNodeSelectors: [SELECTOR_ADDRESS_ERROR_NODE],
             },
             {
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
                 positionType: POSITION_TYPE_LONGITUDE,
                 eventName: EVENT_BLUR,
                 callback: VALIDATE_LONGITUDE,
-                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                errorNodeSelectors: [SELECTOR_LON_ERROR_NODE],
                 invalidStateSelectors: [SELECTOR_LON_FIELD],
             },
             {
@@ -388,7 +357,7 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
                 eventName: EVENT_KEYUP,
                 callback: 'validateLongitudeOnEnter',
-                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                errorNodeSelectors: [SELECTOR_LON_ERROR_NODE],
                 invalidStateSelectors: [SELECTOR_LON_FIELD],
             },
             {
@@ -396,7 +365,7 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
                 eventName: EVENT_CANCEL_ERRORS,
                 callback: 'cancelErrors',
-                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                errorNodeSelectors: [SELECTOR_LON_ERROR_NODE],
                 invalidStateSelectors: [SELECTOR_LON_FIELD],
             },
             {
@@ -404,7 +373,7 @@
                 positionType: POSITION_TYPE_LATITUDE,
                 eventName: EVENT_BLUR,
                 callback: VALIDATE_LATITUDE,
-                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                errorNodeSelectors: [SELECTOR_LAT_ERROR_NODE],
                 invalidStateSelectors: [SELECTOR_LAT_FIELD],
             },
             {
@@ -412,7 +381,7 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
                 eventName: EVENT_KEYUP,
                 callback: 'validateLatitudeOnEnter',
-                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                errorNodeSelectors: [SELECTOR_LAT_ERROR_NODE],
                 invalidStateSelectors: [SELECTOR_LAT_FIELD],
             },
             {
@@ -420,7 +389,7 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
                 eventName: EVENT_CANCEL_ERRORS,
                 callback: 'cancelErrors',
-                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                errorNodeSelectors: [SELECTOR_LAT_ERROR_NODE],
                 invalidStateSelectors: [SELECTOR_LAT_FIELD],
             },
         ],

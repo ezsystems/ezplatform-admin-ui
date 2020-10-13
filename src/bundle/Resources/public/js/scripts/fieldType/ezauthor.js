@@ -195,7 +195,7 @@
                     `${SELECTOR_FIELD_NAME} .ez-data-source__input`,
                     `${SELECTOR_FIELD_NAME} .ez-data-source__label`,
                 ],
-                errorNodeSelectors: [`${SELECTOR_FIELD_NAME} .ez-data-source__label-wrapper`],
+                errorNodeSelectors: [SELECTOR_FIELD_NAME],
             },
             {
                 selector: `.ez-data-source__author ${SELECTOR_FIELD_EMAIL} .ez-data-source__input`,
@@ -206,7 +206,7 @@
                     `${SELECTOR_FIELD_EMAIL} .ez-data-source__input`,
                     `${SELECTOR_FIELD_EMAIL} .ez-data-source__label`,
                 ],
-                errorNodeSelectors: [`${SELECTOR_FIELD_EMAIL} .ez-data-source__label-wrapper`],
+                errorNodeSelectors: [SELECTOR_FIELD_EMAIL],
             },
             {
                 isValueValidator: false,

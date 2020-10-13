@@ -1,4 +1,14 @@
 .ez-field-edit--ezimageasset {
+    .ez-field-edit__error {
+        @include error-under-label();
+    }
+
+    &.is-invalid {
+        .ez-data-source {
+            @include area-invalid();
+        }
+    }
+
     .ez-field-edit-preview {
         &__media-wrapper {
             position: relative;
@@ -59,26 +69,6 @@
     .ez-data-source {
         padding: calculateRem(16px) calculateRem(30px);
         background: $ibexa-color-base-light;
-    }
-
-    &.is-invalid {
-        .ez-field-edit-preview {
-            position: relative;
-
-            &:before {
-                content: '!';
-                position: absolute;
-                top: 0;
-                left: calculateRem(-20px);
-                width: calculateRem(20px);
-                background: $ibexa-color-primary;
-                color: $ibexa-white;
-                text-align: center;
-                font-size: calculateRem(24px);
-                border-top-left-radius: calculateRem(5px);
-                border-bottom-left-radius: calculateRem(5px);
-            }
-        }
     }
 
     .ez-field-edit-spinner {

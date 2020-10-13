@@ -6,6 +6,7 @@
     &__label-wrapper {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
     }
 
     &__icon-wrapper {
@@ -45,35 +46,13 @@
         pointer-events: none;
     }
 
-    &.is-invalid {
-        .ez-field-edit__label-wrapper,
-        .ez-field-edit__label {
-            color: $ibexa-color-warning-dark;
-        }
-
-        .ez-field-edit__data {
-            @include exclamation-mark-error();
-        }
-    }
-
     &__error {
-        display: inline-block;
-        font-size: calculateRem(14px);
-        font-style: normal;
-        margin-left: calculateRem(8px);
-        color: $ibexa-color-warning-dark;
+        @include error-under-input();
     }
 
     .ez-data-source__input {
         &.is-invalid {
-            border-color: $ibexa-color-danger;
-            background: $ibexa-color-warning-pale;
-        }
-    }
-
-    .ez-data-source__label {
-        &.is-invalid {
-            color: $ibexa-color-danger;
+            @include input-invalid;
         }
     }
 }

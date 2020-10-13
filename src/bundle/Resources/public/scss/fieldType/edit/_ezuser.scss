@@ -16,4 +16,8 @@
             display: none;
         }
     }
+
+    .ez-field-edit__error {
+        margin-bottom: calculateRem(8px);
+    }
 }

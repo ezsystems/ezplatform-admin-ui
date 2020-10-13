@@ -1,4 +1,8 @@
 .ez-field-edit--ezgmaplocation {
+    .ez-field-edit__error {
+        @include error-under-label();
+    }
+
     .ez-data-source {
         display: grid;
         grid-template-columns: calculateRem(520px) calculateRem(16px) calculateRem(220px);
@@ -28,6 +32,10 @@
             .ez-data-source__input {
                 margin-bottom: 0;
             }
+
+            .ez-field-edit__error {
+                margin-bottom: calculateRem(10px);
+            }
         }
 
         &__locate-me {
@@ -45,14 +53,14 @@
         }
 
         &__field--latitude {
-            @include map-invalid-input();
+            @include input-invalid();
 
             grid-area: side2;
             margin-bottom: calculateRem(15px);
         }
 
         &__field--longitude {
-            @include map-invalid-input();
+            @include input-invalid();
 
             grid-area: side3;
             margin-bottom: calculateRem(70px);

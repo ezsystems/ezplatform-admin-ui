@@ -54,11 +54,6 @@
         {{ block(preview_block_name) }}
     </div>
     <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
-         {% if field_type_descriptions[fieldtype.vars.languageCode] is defined and field_type_descriptions[fieldtype.vars.languageCode] != '' %}
-            <div class="ez-data-description">
-                {{ field_type_descriptions[fieldtype.vars.languageCode] }}
-            </div>
-        {% endif %}
         <div class="ez-data-source">
             {{ block('binary_base_widget') }}
         </div>

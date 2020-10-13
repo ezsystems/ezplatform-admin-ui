@@ -1,7 +1,7 @@
 (function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezkeyword';
-    const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const SELECTOR_TAGGIFY = '.ez-data-source__taggify';
+    const SELECTOR_ERROR_NODE = '.ez-data-source'
     const CLASS_TAGGIFY_FOCUS = 'ez-data-source__taggify--focused';
 
     class EzKeywordValidator extends eZ.BaseFieldValidator {
@@ -54,14 +54,14 @@
                     selector: `${SELECTOR_FIELD} .taggify__input`,
                     eventName: 'blur',
                     callback: 'validateKeywords',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: [SELECTOR_ERROR_NODE],
                     invalidStateSelectors: [SELECTOR_TAGGIFY],
                 },
                 {
                     selector: `${SELECTOR_FIELD} .ez-data-source__input.form-control`,
                     eventName: 'change',
                     callback: 'validateKeywords',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: [SELECTOR_ERROR_NODE],
                     invalidStateSelectors: [SELECTOR_TAGGIFY],
                 },
             ],
