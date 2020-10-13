@@ -21,12 +21,12 @@
     }
 
     &__cancel-button {
-        background-color: $ez-color-base-medium;
-        color: $ez-white;
+        background-color: $ibexa-color-base-dark;
+        color: $ibexa-white;
         margin-right: calculateRem(16px);
 
         &:hover {
-            color: $ez-white;
+            color: $ibexa-white;
         }
     }
 

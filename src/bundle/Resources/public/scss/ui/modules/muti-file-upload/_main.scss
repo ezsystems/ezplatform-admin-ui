@@ -11,9 +11,9 @@
         text-align: center;
         cursor: pointer;
         letter-spacing: calculateRem(0.5px);
-        color: $ez-white;
+        color: $ibexa-white;
         font-size: calculateRem(14px);
-        transition: background 0.3s $ez-admin-transition;
+        transition: background 0.3s $ibexa-admin-transition;
         align-items: center;
         height: calculateRem(32px);
         width: calculateRem(32px);
@@ -23,7 +23,7 @@
         &:hover,
         &:focus {
             .ez-icon {
-                fill: $ez-color-primary;
+                fill: $ibexa-color-primary;
             }
         }
 

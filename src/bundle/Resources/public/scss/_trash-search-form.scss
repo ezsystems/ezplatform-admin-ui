@@ -30,7 +30,7 @@
                     &:disabled {
                         cursor: auto;
                         background-color: $ibexa-white;
-                        color: $ez-black;
+                        color: $ibexa-black;
                         padding-right: calculateRem(32px);
                         text-overflow: ellipsis;
 
@@ -60,7 +60,7 @@
         overflow: auto;
         transform: scaleY(1);
         transform-origin: top center;
-        transition: transform 0.2s $ez-admin-transition;
+        transition: transform 0.2s $ibexa-admin-transition;
 
         &--hidden {
             transform: scaleY(0);
@@ -89,7 +89,7 @@
         height: 0;
         opacity: 0;
         margin-top: calculateRem(8px);
-        background: $ez-white;
+        background: $ibexa-white;
         border: calculateRem(1px) solid $ibexa-white;
         border-radius: calculateRem(4px);
         transition: all 0.2s ease-in;

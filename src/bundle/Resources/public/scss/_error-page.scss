@@ -1,23 +1,23 @@
 .error-page-wrapper {
     width: 100vw;
     height: 100vh;
-    background: $ez-white;
-    
+    background: $ibexa-white;
+
     .error-page {
         height: 100vh;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        
+
         &__title {
             text-align: center;
             font-size: calculateRem(58px);
         }
 
         &__messages {
-           display: flex;
-           flex-direction: column;
-           align-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         &__message {
@@ -43,7 +43,7 @@
     }
 
     &__link {
-        color: #0058BA;
+        color: #0058ba;
         text-decoration: none;
     }
 }

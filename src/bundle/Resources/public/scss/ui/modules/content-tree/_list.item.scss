@@ -28,7 +28,7 @@ $list-item-height: calculateRem(20px);
         align-items: center;
         background: none;
         text-decoration: none;
-        
+
         &:hover,
         &:focus {
             text-decoration: none;
@@ -54,7 +54,7 @@ $list-item-height: calculateRem(20px);
             height: 0;
             border-style: solid;
             border-width: calculateRem(3px) 0 calculateRem(3px) calculateRem(6px);
-            border-color: transparent transparent transparent $ez-black;
+            border-color: transparent transparent transparent $ibexa-black;
             display: inline-block;
             position: absolute;
             top: 50%;
@@ -67,8 +67,7 @@ $list-item-height: calculateRem(20px);
             border: none;
             outline: none;
         }
-+
-        &--light {
+        + &--light {
             &:before {
                 border-color: transparent transparent transparent $ibexa-white;
             }
@@ -83,11 +82,11 @@ $list-item-height: calculateRem(20px);
         color: $ibexa-black;
         border: calculateRem(1px) solid $ibexa-black;
         margin-left: calculateRem(26px);
-        transition: background 0.3s $ez-admin-transition, color 0.3s $ez-admin-transition;
+        transition: background 0.3s $ibexa-admin-transition, color 0.3s $ibexa-admin-transition;
         font-size: calculateRem(12px);
 
         &:focus {
-            box-shadow: 0 0 0 calculateRem(3px) rgba($ez-black, 0.25);
+            box-shadow: 0 0 0 calculateRem(3px) rgba($ibexa-black, 0.25);
         }
 
         &:hover {

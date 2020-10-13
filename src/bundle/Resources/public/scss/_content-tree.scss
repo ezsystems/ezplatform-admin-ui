@@ -12,16 +12,16 @@
         top: calculateRem(8px);
         flex: 0 0 auto;
         max-width: 0;
-        background: $ez-white;
+        background: $ibexa-white;
         color: inherit;
         transform: scaleX(0);
         transform-origin: left;
 
         &--animate {
-            transition: $ez-admin-widget-close-transition;
+            transition: $ibexa-admin-widget-close-transition;
 
             &.ez-content-tree-container--expanded {
-                transition: $ez-admin-widget-open-transition;
+                transition: $ibexa-admin-widget-open-transition;
             }
         }
 

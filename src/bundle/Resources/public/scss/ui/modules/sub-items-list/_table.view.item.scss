@@ -158,11 +158,11 @@
     }
 
     &__btn {
-        color: $ez-white;
+        color: $ibexa-white;
         border: calculateRem(1px) solid transparent;
         width: calculateRem(48px);
         height: calculateRem(48px);
-        transition: background 0.3s $ez-admin-transition;
+        transition: background 0.3s $ibexa-admin-transition;
         cursor: pointer;
 
         &--submit {
@@ -174,7 +174,7 @@
 
         &--submit:hover,
         &--submit:focus {
-            background: $ez-color-secondary-hover;
+            background: $ibexa-color-primary-hover;
         }
 
         &--cancel {
@@ -185,7 +185,7 @@
 
         &--cancel:hover,
         &--cancel:focus {
-            background: $ez-color-base-medium-hover;
+            background: darken($ibexa-color-base-dark, 15%);
         }
 
         &--edit {
@@ -218,7 +218,7 @@
         display: inline-block;
         color: $ibexa-color-font;
         cursor: pointer;
-        transition: color 0.3s $ez-admin-transition;
+        transition: color 0.3s $ibexa-admin-transition;
         text-decoration: underline;
 
         &:hover,

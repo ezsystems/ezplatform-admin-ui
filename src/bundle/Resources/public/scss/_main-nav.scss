@@ -3,7 +3,7 @@
     padding: 0;
     background-color: $ibexa-white;
     border-bottom: calculateRem(1px) solid $ibexa-color-border-light;
-    
+
     > .container-fluid {
         padding-right: 0;
     }
@@ -24,7 +24,7 @@
             padding: calculateRem(17px) calculateRem(24px);
             color: $ibexa-black;
             font-size: calculateRem(14px);
-            transition: all 0.3s $ez-admin-transition;
+            transition: all 0.3s $ibexa-admin-transition;
 
             .ez-icon {
                 margin-right: calculateRem(8px);
@@ -33,7 +33,7 @@
             &:hover,
             &.active {
                 border-bottom-color: transparent;
-                color: $ibexa-color-primary
+                color: $ibexa-color-primary;
             }
         }
     }

@@ -1,6 +1,6 @@
 .ez-custom-tag {
     max-width: 50%;
-    border: calculateRem(1px) solid $ez-color-primary;
+    border: calculateRem(1px) solid $ibexa-color-primary;
     margin: calculateRem(16px) 0;
     border-radius: calculateRem(5px);
 
@@ -22,8 +22,8 @@
         }
 
         &-btns {
-            background-color: $ez-white;
-            border: calculateRem(2px) solid $ez-color-secondary;
+            background-color: $ibexa-white;
+            border: calculateRem(2px) solid $ibexa-color-primary;
             border-radius: calculateRem(5px);
             display: flex;
             padding: calculateRem(2px);
@@ -35,7 +35,7 @@
             padding: calculateRem(6px) calculateRem(8px);
 
             .ez-icon {
-                fill: $ez-color-secondary;
+                fill: $ibexa-color-primary;
             }
         }
     }
@@ -59,10 +59,10 @@
 
         & > .ez-custom-tag__header {
             .ez-custom-tag__header-btn--attributes {
-                background-color: $ez-color-secondary;
+                background-color: $ibexa-color-primary;
 
                 .ez-icon {
-                    fill: $ez-white;
+                    fill: $ibexa-white;
                 }
             }
         }
@@ -88,10 +88,10 @@
 
         & > .ez-custom-tag__header {
             .ez-custom-tag__header-btn--content {
-                background-color: $ez-color-secondary;
+                background-color: $ibexa-color-primary;
 
                 .ez-icon {
-                    fill: $ez-white;
+                    fill: $ibexa-white;
                 }
             }
         }
@@ -106,13 +106,13 @@
             margin-left: auto;
             margin-right: 0;
         }
-    
+
         &[data-ezalign='left'] {
             float: none;
             margin-left: 0;
             margin-right: auto;
         }
-    
+
         &[data-ezalign='center'] {
             text-align: inherit;
             margin-left: auto;

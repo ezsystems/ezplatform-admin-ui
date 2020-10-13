@@ -1,7 +1,7 @@
 .ez-search-criteria-tags {
     transform: scaleY(1);
     transform-origin: top center;
-    transition: all 0.2s $ez-admin-transition;
+    transition: all 0.2s $ibexa-admin-transition;
 
     &--collapsed {
         transform: scaleY(0);

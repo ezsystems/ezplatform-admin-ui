@@ -26,18 +26,18 @@
                 width: 40px;
                 line-height: 40px;
                 cursor: pointer;
-                transition: background 0.3s $ez-admin-transition;
+                transition: background 0.3s $ibexa-admin-transition;
                 text-align: center;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 display: block;
                 margin-top: 0;
-                background: $ez-color-base-medium;
+                background: $ibexa-color-base-dark;
 
                 &:hover,
                 &:focus {
-                    background: darken($ez-color-base-medium, 15%);
+                    background: darken($ibexa-color-base-dark, 15%);
                 }
             }
         }

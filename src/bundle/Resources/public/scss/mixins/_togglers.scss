@@ -6,7 +6,7 @@
     margin-right: calculateRem(10px);
     font-size: calculateRem(14px);
     line-height: 1;
-} 
+}
 
 @mixin toggler-btn {
     display: flex;
@@ -37,10 +37,9 @@
 @mixin toggler-selected-btn {
     color: $ibexa-color-font-light;
     background: $ibexa-color-base-dark;
-    transition: transform 0.3s $ez-admin-transition;
+    transition: transform 0.3s $ibexa-admin-transition;
 
     .ez-icon {
         fill: $ibexa-white;
     }
 }
-
