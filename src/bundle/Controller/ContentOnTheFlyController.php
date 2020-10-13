@@ -22,6 +22,8 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
+use EzSystems\EzPlatformAdminUi\Event\ContentProxyCreateEvent;
+use EzSystems\EzPlatformAdminUi\Event\Options;
 use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\View\CreateContentOnTheFlyView;
@@ -29,13 +31,17 @@ use EzSystems\EzPlatformAdminUi\View\EditContentOnTheFlyView;
 use EzSystems\EzPlatformAdminUi\View\EditContentOnTheFlySuccessView;
 use EzSystems\EzPlatformContentForms\Data\Mapper\ContentCreateMapper;
 use EzSystems\EzPlatformContentForms\Data\Mapper\ContentUpdateMapper;
+use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use EzSystems\EzPlatformContentForms\Form\Type\Content\ContentEditType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class ContentOnTheFlyController extends Controller
 {
+    private const AUTOSAVE_ACTION_NAME = 'autosave';
+
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
@@ -60,6 +66,12 @@ class ContentOnTheFlyController extends Controller
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
+    /** @var \Symfony\Contracts\EventDispatcher\EventDispatcherInterface */
+    private $eventDispatcher;
+
+    /** @var \EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface */
+    private $contentActionDispatcher;
+
     public function __construct(
         ContentService $contentService,
         LanguageService $languageService,
@@ -68,7 +80,9 @@ class ContentOnTheFlyController extends Controller
         PermissionResolver $permissionResolver,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
         CreateContentOnTheFlyDispatcher $createContentActionDispatcher,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        EventDispatcherInterface $eventDispatcher,
+        ActionDispatcherInterface $contentActionDispatcher
     ) {
         $this->contentService = $contentService;
         $this->locationService = $locationService;
@@ -78,6 +92,8 @@ class ContentOnTheFlyController extends Controller
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->createContentActionDispatcher = $createContentActionDispatcher;
         $this->configResolver = $configResolver;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->contentActionDispatcher = $contentActionDispatcher;
     }
 
     /**
@@ -152,6 +168,22 @@ class ContentOnTheFlyController extends Controller
             ]);
         }
 
+        /** @var \EzSystems\EzPlatformAdminUi\Event\ContentProxyCreateEvent $event */
+        $event = $this->eventDispatcher->dispatch(
+            new ContentProxyCreateEvent(
+                $contentType,
+                $languageCode,
+                $parentLocation->id,
+                new Options([
+                    'isOnTheFly' => true,
+                ])
+            )
+        );
+
+        if ($event->hasResponse()) {
+            return $event->getResponse();
+        }
+
         $language = $this->languageService->loadLanguage($languageCode);
 
         $data = (new ContentCreateMapper())->mapToFormData($contentType, [
@@ -198,11 +230,15 @@ class ContentOnTheFlyController extends Controller
         string $languageCode,
         int $contentId,
         int $versionNo,
-        int $locationId
+        ?int $locationId
     ) {
         $content = $this->contentService->loadContent($contentId, [$languageCode], $versionNo);
         $versionInfo = $content->getVersionInfo();
-        $location = $this->locationService->loadLocation($locationId);
+
+        $location = null;
+        if (!empty($locationId)) {
+            $location = $this->locationService->loadLocation($locationId);
+        }
 
         $contentType = $this->contentTypeService->loadContentType(
             $content->contentInfo->contentTypeId,
@@ -253,17 +289,31 @@ class ContentOnTheFlyController extends Controller
         }
 
         if ($form->isSubmitted() && $form->isValid() && null !== $form->getClickedButton()) {
-            $this->createContentActionDispatcher->dispatchFormAction(
+            $actionName = $form->getClickedButton()->getName();
+
+            $actionDispatcher = $actionName === self::AUTOSAVE_ACTION_NAME
+                ? $this->contentActionDispatcher
+                : $this->createContentActionDispatcher;
+
+            if (!$location instanceof Location) {
+                $contentInfo = $this->contentService->loadContentInfo($content->id);
+
+                if (!empty($contentInfo->mainLocationId)) {
+                    $location = $this->locationService->loadLocation($contentInfo->mainLocationId);
+                }
+            }
+
+            $actionDispatcher->dispatchFormAction(
                 $form,
                 $form->getData(),
-                $form->getClickedButton()->getName(),
+                $actionName,
                 ['referrerLocation' => $location]
             );
 
-            if ($this->createContentActionDispatcher->getResponse()) {
+            if ($actionDispatcher->getResponse()) {
                 $view = new EditContentOnTheFlySuccessView('@ezdesign/ui/on_the_fly/content_edit_response.html.twig');
                 $view->addParameters([
-                    'locationId' => $location->id,
+                    'locationId' => $location instanceof Location ? $location->id : null,
                 ]);
 
                 return $view;
@@ -287,7 +337,7 @@ class ContentOnTheFlyController extends Controller
     private function buildEditView(
         Content $content,
         Language $language,
-        Location $location,
+        ?Location $location,
         FormInterface $form,
         ContentType $contentType
     ): EditContentOnTheFlyView {

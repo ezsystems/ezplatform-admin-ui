@@ -71,13 +71,24 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
             []
         );
 
-        $response = new RedirectResponse(
-            $this->router->generate('ezplatform.content.draft.edit', [
-                'contentId' => $contentDraft->id,
-                'versionNo' => $contentDraft->getVersionInfo()->versionNo,
-                'language' => $event->getLanguageCode(),
-            ])
-        );
+        if (!$event->getOptions()->get('isOnTheFly', false)) {
+            $response = new RedirectResponse(
+                $this->router->generate('ezplatform.content.draft.edit', [
+                    'contentId' => $contentDraft->id,
+                    'versionNo' => $contentDraft->getVersionInfo()->versionNo,
+                    'language' => $event->getLanguageCode(),
+                ])
+            );
+        } else {
+            $response = new RedirectResponse(
+                $this->router->generate('ezplatform.content_on_the_fly.edit', [
+                    'contentId' => $contentDraft->id,
+                    'versionNo' => $contentDraft->getVersionInfo()->versionNo,
+                    'languageCode' => $event->getLanguageCode(),
+                    'locationId' => $contentDraft->contentInfo->mainLocationId,
+                ])
+            );
+        }
 
         $event->setResponse($response);
     }
