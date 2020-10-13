@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl;
 
 use eZ\Publish\API\Repository\LanguageService;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener;
+use EzSystems\EzPlatformAdminUi\Form\EventListener\AddSiteAccessFieldBasedOnContentListener;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
@@ -36,22 +37,28 @@ class CustomUrlAddType extends AbstractType
     /** @var \EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener */
     private $checkboxIfRootLocationListener;
 
+    /** @var \EzSystems\EzPlatformAdminUi\Form\EventListener\AddSiteAccessFieldBasedOnContentListener */
+    private $addSiteAccessFieldBasedOnContentListener;
+
     /**
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener
      * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener $buildPathFromRootListener
      * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener
+     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\AddSiteAccessFieldBasedOnContentListener $addSiteAccessFieldBasedOnContentListener
      */
     public function __construct(
         LanguageService $languageService,
         AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener,
         BuildPathFromRootListener $buildPathFromRootListener,
-        DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener
+        DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener,
+        AddSiteAccessFieldBasedOnContentListener $addSiteAccessFieldBasedOnContentListener
     ) {
         $this->languageService = $languageService;
         $this->addLanguageFieldBasedOnContentListener = $addLanguageFieldBasedOnContentListener;
         $this->buildPathFromRootListener = $buildPathFromRootListener;
         $this->checkboxIfRootLocationListener = $checkboxIfRootLocationListener;
+        $this->addSiteAccessFieldBasedOnContentListener = $addSiteAccessFieldBasedOnContentListener;
     }
 
     /**
@@ -98,6 +105,15 @@ class CustomUrlAddType extends AbstractType
                 ]
             )
             ->add(
+                'root_location_id',
+                ChoiceType::class,
+                [
+                    'multiple' => false,
+                    'required' => false,
+                    'choices' => [],
+                ]
+            )
+            ->add(
                 'add',
                 SubmitType::class,
                 [
@@ -107,6 +123,10 @@ class CustomUrlAddType extends AbstractType
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [
             $this->addLanguageFieldBasedOnContentListener,
+            'onPreSetData',
+        ]);
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, [
+            $this->addSiteAccessFieldBasedOnContentListener,
             'onPreSetData',
         ]);
         $builder->addEventListener(FormEvents::PRE_SUBMIT, [

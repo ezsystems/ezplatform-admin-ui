@@ -28,18 +28,23 @@ class CustomUrlAddData
     /** @var bool */
     private $siteRoot;
 
+    /** @var int|null */
+    private $rootLocationId;
+
     public function __construct(
         ?Location $location = null,
         ?string $path = null,
         ?Language $language = null,
         bool $redirect = true,
-        bool $siteRoot = true
+        bool $siteRoot = true,
+        ?int $rootLocationId = null
     ) {
         $this->location = $location;
         $this->path = $path;
         $this->language = $language;
         $this->redirect = $redirect;
         $this->siteRoot = $siteRoot;
+        $this->$rootLocationId = $rootLocationId;
     }
 
     /**
@@ -138,6 +143,18 @@ class CustomUrlAddData
     public function setSiteRoot(bool $siteRoot): self
     {
         $this->siteRoot = $siteRoot;
+
+        return $this;
+    }
+
+    public function getRootLocationId(): ?int
+    {
+        return $this->rootLocationId;
+    }
+
+    public function setRootLocationId(?int $rootLocationId): self
+    {
+        $this->rootLocationId = $rootLocationId;
 
         return $this;
     }

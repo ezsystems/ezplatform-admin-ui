@@ -44,10 +44,19 @@ class BuildPathFromRootListener
             if (1 >= $location->depth) {
                 return;
             }
-            $parentLocation = $this->locationService->loadLocation($location->parentLocationId);
-            $urlAlias = $this->urlAliasService->reverseLookup($parentLocation);
-            $data['path'] = $urlAlias->path . '/' . $data['path'];
+            $data['path'] = $this->createPathBasedOnParentLocation($location->parentLocationId, $data['path']);
+            $event->setData($data);
+        } elseif (isset($data['site_root']) && true === (bool)$data['site_root'] && !empty($data['root_location_id'])) {
+            $data['path'] = $this->createPathBasedOnParentLocation((int)$data['root_location_id'], $data['path']);
             $event->setData($data);
         }
+    }
+
+    private function createPathBasedOnParentLocation(int $locationId, string $path): string
+    {
+        $parentLocation = $this->locationService->loadLocation($locationId);
+        $urlAlias = $this->urlAliasService->reverseLookup($parentLocation);
+
+        return $urlAlias->path . '/' . $path;
     }
 }

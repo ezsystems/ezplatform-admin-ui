@@ -17,7 +17,7 @@ class AdminSiteaccessPreviewVoter extends AbstractSiteaccessPreviewVoter
     {
         $locationIds = [];
         $locationIds[] = $this->configResolver->getParameter(
-            'location_ids.content_structure',
+            'content.tree_root.location_id',
             null,
             $siteaccess
         );
