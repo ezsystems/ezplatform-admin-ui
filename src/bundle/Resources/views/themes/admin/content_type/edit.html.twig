@@ -28,7 +28,7 @@
     {% if is_translation %}
         {% include '@ezdesign/content_type/part/nontranslatable_fields_disabled.html.twig' %}
     {% endif %}
-    <section>
+    <section class="container ez-container mb-4">
         <div class="card ez-card ez-card--light">
             <div class="ez-card__header ez-card__header--section-title">
                 {{ 'content_type.view.edit.global_properties'|trans|desc('Global properties') }}

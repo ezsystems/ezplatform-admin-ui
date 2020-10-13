@@ -19,17 +19,18 @@
 
 {% block form %}
     {% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
-    {{ form_start(form) }}
-    {{ form_widget(form.identifier, {'attr': {'hidden': 'hidden'}}) }}
-    <div class="ez-table-header ground-base">
-        <div class="ez-table-header__headline">{{ user_setting.name }}</div>
-    </div>
-    <div class="bg-white p-4">
-        {{ form_row(form.value) }}
-    </div>
-    {{ form_widget(form.update, {'attr': {'hidden': 'hidden'}}) }}
-    {{ form_end(form) }}
-
+    <section class="container ez-container">
+        {{ form_start(form) }}
+        {{ form_widget(form.identifier, {'attr': {'hidden': 'hidden'}}) }}
+        <div class="ez-table-header ground-base">
+            <div class="ez-table-header__headline">{{ user_setting.name }}</div>
+        </div>
+        <div class="bg-white p-4">
+            {{ form_row(form.value) }}
+        </div>
+        {{ form_widget(form.update, {'attr': {'hidden': 'hidden'}}) }}
+        {{ form_end(form) }}
+    </section>
 {% endblock %}
 
 {% block right_sidebar %}
