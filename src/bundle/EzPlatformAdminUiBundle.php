@@ -11,7 +11,6 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\FieldTypeForm
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\LimitationFormMapperPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\LimitationValueMapperPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SecurityLoginPass;
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SystemInfoTabGroupPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ViewBuilderRegistryPass;
@@ -48,7 +47,6 @@ class EzPlatformAdminUiBundle extends Bundle
     {
         $container->addCompilerPass(new TabPass());
         $container->addCompilerPass(new UiConfigProviderPass());
-        $container->addCompilerPass(new SystemInfoTabGroupPass());
         $container->addCompilerPass(new ComponentPass());
         $container->addCompilerPass(new SecurityLoginPass());
         $container->addCompilerPass(new ViewBuilderRegistryPass());
