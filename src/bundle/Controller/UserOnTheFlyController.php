@@ -253,7 +253,7 @@ class UserOnTheFlyController extends Controller
     private function buildEditView(
         Content $content,
         Language $language,
-        Location $location,
+        ?Location $location,
         FormInterface $form,
         ContentType $contentType
     ): EditUserOnTheFlyView {

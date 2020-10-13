@@ -708,6 +708,7 @@ ezplatform.content_on_the_fly.edit:
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentOnTheFlyController::editContentAction'
+        locationId: ~
     options:
         expose: true
 

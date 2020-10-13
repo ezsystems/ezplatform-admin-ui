@@ -21,6 +21,7 @@ use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Event\ContentProxyCreateEvent;
+use EzSystems\EzPlatformAdminUi\Event\Options;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
@@ -181,7 +182,8 @@ class ContentController extends Controller
             new ContentProxyCreateEvent(
                 $contentType,
                 $languageCode,
-                $parentLocationId
+                $parentLocationId,
+                new Options()
             )
         );
 
