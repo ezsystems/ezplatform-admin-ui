@@ -58,7 +58,7 @@
 
     &__content-type-list {
         overflow: auto;
-        max-height: calculateRem(500px);
+        max-height: calc(100vh - #{calculateRem(500px)});
     }
 
     &__group {
