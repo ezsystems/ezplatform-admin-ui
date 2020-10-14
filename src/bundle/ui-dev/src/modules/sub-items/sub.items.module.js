@@ -1223,8 +1223,10 @@ export default class SubItemsModule extends Component {
                     {this.renderListView()}
                     {this.renderNoItems()}
                 </div>
-                {this.renderPaginationInfo()}
-                {this.renderPagination()}
+                <div className="m-sub-items__pagination-container">
+                    {this.renderPaginationInfo()}
+                    {this.renderPagination()}
+                </div>
                 {this.renderUdw()}
                 {this.renderDeleteConfirmationPopup()}
                 {this.renderHideConfirmationPopup()}

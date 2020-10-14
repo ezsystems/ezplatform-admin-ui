@@ -245,16 +245,12 @@
                 {{ form_end(form_trash_item_delete, { 'render_rest': false }) }}
 
                 {% if pager.haveToPaginate %}
-                    <div class="row justify-content-center align-items-center ez-pagination__spacing">
-                        <span class="ez-pagination__text">
-                            {{ 'pagination.viewing'|trans({
-                                '%viewing%': pager.currentPageResults|length,
-                                '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
-                        </span>
-                    </div>
-                    <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
-                        {{ pagerfanta(pager, 'ez', {'pageParameter': '[trash_search][page]'}) }}
-                    </div>
+                    {% include '@ezdesign/ui/pagination.html.twig' with {
+                        'pager': pager,
+                        'paginaton_params' : {
+                            'pageParameter': '[trash_search][page]'
+                        }
+                    } %}
                 {% endif %}
                 {% include '@ezdesign/trash/modal/empty_trash_confirmation.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
             </section>

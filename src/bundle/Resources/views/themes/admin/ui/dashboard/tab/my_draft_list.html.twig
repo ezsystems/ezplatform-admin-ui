@@ -71,20 +71,14 @@
     </table>
 
     {% if pager.haveToPaginate %}
-        <div class="ez-pagination">
-            <div class="ez-pagination__text">
-                {{ 'pagination.viewing'|trans({
-                    '%viewing%': pager.currentPageResults|length,
-                    '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
-            </div>
-            <div class="ez-pagination__navigation">
-                {{ pagerfanta(pager, 'ez', pager_options|merge({
-                    'routeParams': {
-                        '_fragment': 'ez-tab-dashboard-my-my-drafts'
-                    }
-                })) }}
-            </div>
-        </div>
+        {% include '@ezdesign/ui/pagination.html.twig' with {
+            'pager': pager,
+            'paginaton_params' : pager_options|merge({
+                'routeParams': {
+                    '_fragment': 'ez-tab-dashboard-my-my-drafts'
+                }
+            })
+        } %}
     {% endif %}
 {% else %}
     <p class="ez-table-no-content mb-0 py-0">{{ 'dashboard.tab.my_drafts.empty'|trans|desc('No content. Drafts you create will show up here') }}</p>

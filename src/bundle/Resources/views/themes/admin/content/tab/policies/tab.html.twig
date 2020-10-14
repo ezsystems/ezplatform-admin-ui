@@ -13,14 +13,14 @@
 {% endif %}
 
 {% if policies_pager.haveToPaginate %}
-    {{  include('@ezdesign/content/tab/pagination.html.twig', {
-            'pager': policies_pager,
-            'paginaton_params': {
-                'routeName': policies_pagination_params.route_name,
-                'routeParams': policies_pagination_params.route_params|merge({
-                    '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\PoliciesTab::URI_FRAGMENT'),
-                }),
-                'pageParameter': '[page][policy]'
-            }
-    }) }}
+    {% include '@ezdesign/ui/pagination.html.twig' with {
+        'pager': policies_pager,
+        'paginaton_params': {
+            'routeName': policies_pagination_params.route_name,
+            'routeParams': policies_pagination_params.route_params|merge({
+                '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\PoliciesTab::URI_FRAGMENT'),
+            }),
+            'pageParameter': '[page][policy]'
+        }
+    } %}
 {% endif %}

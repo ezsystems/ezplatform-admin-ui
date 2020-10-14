@@ -101,9 +101,9 @@
                 {{ form_end(form_remove) }}
 
                 {% if pager.haveToPaginate %}
-                    {{  include('@ezdesign/ui/pagination.html.twig', {
-                            'pager': pager
-                    }) }}
+                    {% include '@ezdesign/ui/pagination.html.twig' with {
+                        'pager': pager
+                    } %}
                 {% endif %}
             </section>
         </div>

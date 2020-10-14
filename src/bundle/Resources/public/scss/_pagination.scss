@@ -1,16 +1,9 @@
 .ez-pagination {
-    display: flex;
-    justify-content: space-between;
+    @include pagination-main-container();
     padding: calculateRem(24px) calculateRem(16px);
-    background: $ibexa-white;
 
     &__text {
-        color: $ibexa-color-font-pale;
-        font-size: calculateRem(14px);
-
-        strong {
-            color: $ibexa-color-font;
-        }
+        @include pagination-info();
     }
 
     &__btns {
@@ -23,52 +16,15 @@
         }
 
         .page-link {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: calculateRem(25px);
-            height: calculateRem(25px);
-            border-radius: 50%;
+            @include pagination-link();
         }
 
         .page-item.prev {
-            .page-link {
-                justify-content: flex-end;
-                padding-right: calculateRem(10px);
-
-                &:before {
-                    content: '';
-                    position: absolute;
-                    left: calculateRem(9px);
-                    top: calculateRem(9px);
-                    display: block;
-                    border-right: calculateRem(2px) solid $ibexa-black;
-                    border-bottom: calculateRem(2px) solid $ibexa-black;
-                    width: calculateRem(8px);
-                    height: calculateRem(8px);
-                    transform: rotate(135deg);
-                }
-            }
+            @include pagination-prev-btn();
         }
 
         .page-item.next {
-            .page-link {
-                justify-content: flex-start;
-                padding-left: calculateRem(10px);
-
-                &:after {
-                    content: '';
-                    position: absolute;
-                    right: calculateRem(9px);
-                    top: calculateRem(9px);
-                    display: block;
-                    border-right: calculateRem(2px) solid $ibexa-black;
-                    border-bottom: calculateRem(2px) solid $ibexa-black;
-                    width: calculateRem(8px);
-                    height: calculateRem(8px);
-                    transform: rotate(-45deg);
-                }
-            }
+            @include pagination-next-btn();
         }
 
         .page-item.prev,
@@ -85,6 +41,5 @@
                 border-radius: 0;
             }
         }
-
     }
 }
