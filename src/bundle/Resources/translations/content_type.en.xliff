@@ -87,13 +87,13 @@
         <note>key: content_type.default_sort</note>
       </trans-unit>
       <trans-unit id="b29f5d9c32e10776ec9fd36c35c4aefc96732cb2" resname="content_type.default_sort_field">
-        <source>Sort children by default by:</source>
-        <target state="new">Sort children by default by:</target>
+        <source>Sort children by default by</source>
+        <target state="new">Sort children by default by</target>
         <note>key: content_type.default_sort_field</note>
       </trans-unit>
       <trans-unit id="7a67ffefca1339a9e4c5224d773378c2e5f6f378" resname="content_type.default_sort_order">
-        <source>Sort children by default in order:</source>
-        <target state="new">Sort children by default in order:</target>
+        <source>Sort children by default in order</source>
+        <target state="new">Sort children by default in order</target>
         <note>key: content_type.default_sort_order</note>
       </trans-unit>
       <trans-unit id="be2f64eb4557a3af16a2f32f5e0185c591d3ca8f" resname="content_type.delete">

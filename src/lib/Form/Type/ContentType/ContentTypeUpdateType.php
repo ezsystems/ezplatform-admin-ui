@@ -90,11 +90,11 @@ class ContentTypeUpdateType extends AbstractType
                 'disabled' => $isTranslation,
             ])
             ->add('defaultSortField', SortFieldChoiceType::class, [
-                'label' => /** @Desc("Sort children by default by:") */ 'content_type.default_sort_field',
+                'label' => /** @Desc("Sort children by default by") */ 'content_type.default_sort_field',
                 'disabled' => $isTranslation,
             ])
             ->add('defaultSortOrder', SortOrderChoiceType::class, [
-                'label' => /** @Desc("Sort children by default in order:") */ 'content_type.default_sort_order',
+                'label' => /** @Desc("Sort children by default in order") */ 'content_type.default_sort_order',
                 'disabled' => $isTranslation,
             ])
             ->add('defaultAlwaysAvailable', CheckboxType::class, [
