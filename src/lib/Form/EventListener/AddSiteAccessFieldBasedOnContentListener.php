@@ -36,7 +36,7 @@ class AddSiteAccessFieldBasedOnContentListener
         $this->configResolver = $configResolver;
     }
 
-    public function onPreSetData(FormEvent $event)
+    public function onPreSetData(FormEvent $event): void
     {
         /** @var CustomUrlAddData $data */
         $data = $event->getData();
