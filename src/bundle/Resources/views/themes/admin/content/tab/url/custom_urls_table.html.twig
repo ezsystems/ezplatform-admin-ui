@@ -16,30 +16,40 @@
         </tr>
         </thead>
         <tbody>
-        {% for custom_url in custom_urls_pager.currentPageResults %}
-            <tr>
-                <td class="ez-table__cell ez-table__cell--has-checkbox">
-                    {% if can_edit_custom_url %}
-                        {{ form_widget(form_custom_url_remove.url_aliases[custom_url.id]) }}
-                    {% else %}
-                        {% do form_custom_url_remove.url_aliases.setRendered %}
-                    {% endif %}
-                </td>
-                <td class="ez-table__cell">{{ custom_url.path }}</td>
-                <td class="ez-table__cell">
-                    {% for language_code in custom_url.languageCodes %}
-                        {{ ez_admin_ui_config.languages.mappings[language_code].name }}<br>
-                    {% endfor %}
-                </td>
-                <td class="ez-table__cell">
-                    {% if custom_url.forward %}
-                        {{ 'tab.urls.type.redirect'|trans|desc('Redirect') }}
-                    {% else %}
-                        {{ 'tab.urls.type.direct'|trans|desc('Direct') }}
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
+            {% if custom_urls_pager.currentPageResults is not empty %}
+                {% for custom_url in custom_urls_pager.currentPageResults %}
+                    <tr>
+                        <td class="ez-table__cell ez-table__cell--has-checkbox">
+                            {% if can_edit_custom_url %}
+                                {{ form_widget(form_custom_url_remove.url_aliases[custom_url.id]) }}
+                            {% else %}
+                                {% do form_custom_url_remove.url_aliases.setRendered %}
+                            {% endif %}
+                        </td>
+                        <td class="ez-table__cell">{{ custom_url.path }}</td>
+                        <td class="ez-table__cell">
+                            {% for language_code in custom_url.languageCodes %}
+                                {{ ez_admin_ui_config.languages.mappings[language_code].name }}<br>
+                            {% endfor %}
+                        </td>
+                        <td class="ez-table__cell">
+                            {% if custom_url.forward %}
+                                {{ 'tab.urls.type.redirect'|trans|desc('Redirect') }}
+                            {% else %}
+                                {{ 'tab.urls.type.direct'|trans|desc('Direct') }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td class="ez-table__cell ez-table__cell--no-content" colspan="4">
+                        <p class="ez-table-no-content mb-0 py-0">
+                            {{ 'tab.urls.no_custom_urls'|trans|desc('This Content item has no custom URL aliases.') }}
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 </div>

@@ -2,15 +2,9 @@
 {% import _self as tab %}
 {% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.roles.roles'|trans|desc('Roles') } %}
 
-{% if roles_pager.currentPageResults is not empty %}
-    {{  include('@ezdesign/content/tab/roles/table.html.twig', {
-            'roles_pager': roles_pager,
-    }) }}
-{% else %}
-    <p class="ez-table-no-content">
-        {{ 'tab.roles.no_roles'|trans|desc('This Content item has no Roles.') }}
-    </p>
-{% endif %}
+{{  include('@ezdesign/content/tab/roles/table.html.twig', {
+        'roles_pager': roles_pager,
+}) }}
 
 {% if roles_pager.haveToPaginate %}
     {% include '@ezdesign/ui/pagination.html.twig' with {
