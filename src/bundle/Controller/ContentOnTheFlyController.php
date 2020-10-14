@@ -295,20 +295,20 @@ class ContentOnTheFlyController extends Controller
                 ? $this->contentActionDispatcher
                 : $this->createContentActionDispatcher;
 
-            if (!$location instanceof Location) {
-                $contentInfo = $this->contentService->loadContentInfo($content->id);
-
-                if (!empty($contentInfo->mainLocationId)) {
-                    $location = $this->locationService->loadLocation($contentInfo->mainLocationId);
-                }
-            }
-
             $actionDispatcher->dispatchFormAction(
                 $form,
                 $form->getData(),
                 $actionName,
                 ['referrerLocation' => $location]
             );
+
+            if (!$location instanceof Location) {
+                $contentInfo = $this->contentService->loadContentInfo($content->id);
+
+                if (null !== $contentInfo->mainLocationId) {
+                    $location = $this->locationService->loadLocation($contentInfo->mainLocationId);
+                }
+            }
 
             if ($actionDispatcher->getResponse()) {
                 $view = new EditContentOnTheFlySuccessView('@ezdesign/ui/on_the_fly/content_edit_response.html.twig');
