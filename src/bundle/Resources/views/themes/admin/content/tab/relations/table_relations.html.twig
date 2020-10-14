@@ -12,29 +12,39 @@
         </tr>
         </thead>
         <tbody>
-        {% for relation in relations %}
-            {% set destination = relation.destinationContentInfo %}
-            <tr>
-                <td>
-                    {% if destination.mainLocationId is not null %}
-                        <a href="{{ path('_ez_content_view',
-                            { 'contentId': destination.id, 'locationId': relation.resolvedDestinationLocation.id }) }}"
-                        >
-                            {{ ez_content_name(destination) }}
-                        </a>
-                    {% else %}
-                        {{ ez_content_name(destination) }}
-                    {% endif %}
-                </td>
-                <td>{{ content_types[destination.contentTypeId].name }}</td>
-                <td>
-                    {{ macros.relation_type(relation) }}
-                    {% if (relation.relationFieldDefinitionName) %}
-                        ({{ relation.relationFieldDefinitionName }})
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
+            {% if relations is not empty %}
+                {% for relation in relations %}
+                    {% set destination = relation.destinationContentInfo %}
+                    <tr>
+                        <td>
+                            {% if destination.mainLocationId is not null %}
+                                <a href="{{ path('_ez_content_view',
+                                    { 'contentId': destination.id, 'locationId': relation.resolvedDestinationLocation.id }) }}"
+                                >
+                                    {{ ez_content_name(destination) }}
+                                </a>
+                            {% else %}
+                                {{ ez_content_name(destination) }}
+                            {% endif %}
+                        </td>
+                        <td>{{ content_types[destination.contentTypeId].name }}</td>
+                        <td>
+                            {{ macros.relation_type(relation) }}
+                            {% if (relation.relationFieldDefinitionName) %}
+                                ({{ relation.relationFieldDefinitionName }})
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td class="ez-table__cell ez-table__cell--no-content" colspan="3">
+                        <p class="ez-table-no-content mb-0 py-0">
+                            {{ 'tab.relations.no_relations'|trans()|desc('This Content item has no related content.') }}
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 </div>

@@ -9,14 +9,24 @@
         </tr>
         </thead>
         <tbody>
-        {% for system_url in system_urls_pager.currentPageResults %}
-            <tr>
-                <td>{{ system_url.path }}</td>
-                <td>
-                    {% for language_code in system_url.languageCodes %}{{ ez_admin_ui_config.languages.mappings[language_code].name }}<br>{% endfor %}
-                </td>
-            </tr>
-        {% endfor %}
+            {% if system_urls_pager.currentPageResults is not empty %}
+                {% for system_url in system_urls_pager.currentPageResults %}
+                    <tr>
+                        <td>{{ system_url.path }}</td>
+                        <td>
+                            {% for language_code in system_url.languageCodes %}{{ ez_admin_ui_config.languages.mappings[language_code].name }}<br>{% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td class="ez-table__cell ez-table__cell--no-content" colspan="2">
+                        <p class="ez-table-no-content mb-0 py-0">
+                            {{ 'tab.urls.no_system_urls'|trans|desc('This Content item has no system URLs.') }}
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 </div>

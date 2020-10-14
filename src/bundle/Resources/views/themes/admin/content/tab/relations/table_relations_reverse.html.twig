@@ -12,43 +12,53 @@
         </tr>
         </thead>
         <tbody>
-        {% for relation in relations %}
-            {% if relation.isAccessible %}
-                {% set source = relation.sourceContentInfo %}
-                <tr>
-                    <td>
-                        {% if source.mainLocationId is not null %}
-                            <a href="{{ path('_ez_content_view',
-                                { 'contentId': source.id, 'locationId': relation.resolvedSourceLocation.id }) }}"
-                            >
-                                {{ ez_content_name(source) }}
-                            </a>
-                        {% else %}
-                            {{ ez_content_name(source) }}
-                        {% endif %}
-                    </td>
-                    <td>{{ content_types[source.contentTypeId].name }}</td>
-                    <td>
-                        {{ macros.relation_type(relation) }}
-                        {% if (relation.relationFieldDefinitionName) %}
-                            ({{ relation.relationFieldDefinitionName }})
-                        {% endif %}
-                    </td>
-                </tr>
+            {% if relations is not empty %}
+                {% for relation in relations %}
+                    {% if relation.isAccessible %}
+                        {% set source = relation.sourceContentInfo %}
+                        <tr>
+                            <td>
+                                {% if source.mainLocationId is not null %}
+                                    <a href="{{ path('_ez_content_view',
+                                        { 'contentId': source.id, 'locationId': relation.resolvedSourceLocation.id }) }}"
+                                    >
+                                        {{ ez_content_name(source) }}
+                                    </a>
+                                {% else %}
+                                    {{ ez_content_name(source) }}
+                                {% endif %}
+                            </td>
+                            <td>{{ content_types[source.contentTypeId].name }}</td>
+                            <td>
+                                {{ macros.relation_type(relation) }}
+                                {% if (relation.relationFieldDefinitionName) %}
+                                    ({{ relation.relationFieldDefinitionName }})
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td class="table__cell ez-table__cell--has-text-info" colspan="8">
+                                {{
+                                    'dashboard.table.relation.unauthorized'|trans({
+                                        '%module%': relation.unauthorizedRelation.module,
+                                        '%function%': relation.unauthorizedRelation.function,
+                                        '%contentId%': relation.unauthorizedRelation.payload.contentId,
+                                    })|desc('You do not have the \'%function%\' \'%module%\' permission for content ID: %contentId%')
+                                }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
             {% else %}
                 <tr>
-                    <td class="table__cell ez-table__cell--has-text-info" colspan="8">
-                        {{
-                            'dashboard.table.relation.unauthorized'|trans({
-                                '%module%': relation.unauthorizedRelation.module,
-                                '%function%': relation.unauthorizedRelation.function,
-                                '%contentId%': relation.unauthorizedRelation.payload.contentId,
-                            })|desc('You do not have the \'%function%\' \'%module%\' permission for content ID: %contentId%')
-                        }}
+                    <td class="ez-table__cell ez-table__cell--no-content" colspan="3">
+                        <p class="ez-table-no-content mb-0 py-0">
+                            {{ 'tab.relations.no_reverse_relations'|trans()|desc('This Content item has no reverse Relations.') }}
+                        </p>
                     </td>
                 </tr>
             {% endif %}
-        {% endfor %}
         </tbody>
     </table>
 </div>

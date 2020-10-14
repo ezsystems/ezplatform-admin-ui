@@ -5,17 +5,12 @@
     tools: tab.table_header_tools(form_custom_url_remove, can_edit_custom_url)
 } %}
 
-{% if custom_urls_pager.currentPageResults is not empty %}
-    {{  include('@ezdesign/content/tab/url/custom_urls_table.html.twig', {
-            'custom_urls_pager': custom_urls_pager,
-            'form_custom_url_remove': form_custom_url_remove,
-            'can_edit_custom_url': can_edit_custom_url,
-    }) }}
-{% else %}
-    <p class="ez-table-no-content">
-        {{ 'tab.urls.no_custom_urls'|trans|desc('This Content item has no custom URL aliases.') }}
-    </p>
-{% endif %}
+{{  include('@ezdesign/content/tab/url/custom_urls_table.html.twig', {
+        'custom_urls_pager': custom_urls_pager,
+        'form_custom_url_remove': form_custom_url_remove,
+        'can_edit_custom_url': can_edit_custom_url,
+}) }}
+
 {% if custom_urls_pager.haveToPaginate %}
     {% include '@ezdesign/ui/pagination.html.twig' with {
         'pager': custom_urls_pager,
@@ -32,15 +27,9 @@
 
 {% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.urls.system.title'|trans|desc('System URL') } %}
 
-{% if system_urls_pager.currentPageResults is not empty %}
-    {{  include('@ezdesign/content/tab/url/system_urls_table.html.twig', {
-            'system_urls_pager': system_urls_pager,
-    }) }}
-{% else %}
-    <p class="ez-table-no-content">
-        {{ 'tab.urls.no_system_urls'|trans|desc('This Content item has no system URLs.') }}
-    </p>
-{% endif %}
+{{  include('@ezdesign/content/tab/url/system_urls_table.html.twig', {
+        'system_urls_pager': system_urls_pager,
+}) }}
 
 {% if system_urls_pager.haveToPaginate %}
     {% include '@ezdesign/ui/pagination.html.twig' with {
