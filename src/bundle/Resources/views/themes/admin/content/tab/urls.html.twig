@@ -16,19 +16,18 @@
         {{ 'tab.urls.no_custom_urls'|trans|desc('This Content item has no custom URL aliases.') }}
     </p>
 {% endif %}
-
 {% if custom_urls_pager.haveToPaginate %}
-    {{  include('@ezdesign/content/tab/pagination.html.twig', {
-            'pager': custom_urls_pager,
-            'paginaton_params': {
-                'routeName': custom_urls_pagination_params.route_name,
-                'routeParams': custom_urls_pagination_params.route_params|merge({
-                    '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
-                    'page[system_url]': system_urls_pagination_params.page
-                }),
-                'pageParameter': '[page][custom_url]'
-            }
-    }) }}
+    {% include '@ezdesign/ui/pagination.html.twig' with {
+        'pager': custom_urls_pager,
+        'paginaton_params': {
+            'routeName': custom_urls_pagination_params.route_name,
+            'routeParams': custom_urls_pagination_params.route_params|merge({
+                '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
+                'page[system_url]': system_urls_pagination_params.page
+            }),
+            'pageParameter': '[page][custom_url]'
+        }
+    } %}
 {% endif %}
 
 {% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.urls.system.title'|trans|desc('System URL') } %}
@@ -44,7 +43,7 @@
 {% endif %}
 
 {% if system_urls_pager.haveToPaginate %}
-    {{  include('@ezdesign/content/tab/pagination.html.twig', {
+    {% include '@ezdesign/ui/pagination.html.twig' with {
         'pager': system_urls_pager,
         'paginaton_params': {
             'routeName': system_urls_pagination_params.route_name,
@@ -54,7 +53,7 @@
             }),
             'pageParameter': '[page][system_url]'
         }
-    }) }}
+    } %}
 {% endif %}
 
 {% if can_edit_custom_url %}

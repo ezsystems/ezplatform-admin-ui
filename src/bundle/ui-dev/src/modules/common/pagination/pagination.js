@@ -76,7 +76,7 @@ const Pagination = ({ totalCount, itemsPerPage, proximity, activePageIndex, onPa
     });
 
     return (
-        <ul className="c-pagination pagination row justify-content-center">
+        <ul className="c-pagination pagination">
             <PaginationButton
                 pageIndex={previousPage}
                 label={backLabel}

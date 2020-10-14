@@ -38,6 +38,6 @@ class EzPagerfantaTemplate extends TwitterBootstrap4Template
             'pagination'
         );
 
-        $this->setOptions(['prev_message' => $prevMessage, 'next_message' => $nextMessage, 'css_container_class' => 'pagination ez-pagination']);
+        $this->setOptions(['prev_message' => $prevMessage, 'next_message' => $nextMessage, 'css_container_class' => 'pagination ez-pagination__btns']);
     }
 }
