@@ -98,6 +98,32 @@ class ListItem extends Component {
         return subitems.length < totalSubitemsCount;
     }
 
+    renderIcon() {
+        const { contentTypeIdentifier, selected, locationId } = this.props;
+        const iconAttrs = {
+            extraClasses: `ez-icon--small ez-icon--${selected ? 'primary' : 'dark'}`,
+        };
+
+        if (!this.state.isLoading || this.props.subitems.length) {
+            if (locationId === 1) {
+                iconAttrs.customPath = eZ.helpers.contentType.getContentTypeIconUrl('folder');
+            } else {
+                iconAttrs.customPath =
+                    eZ.helpers.contentType.getContentTypeIconUrl(contentTypeIdentifier) ||
+                    eZ.helpers.contentType.getContentTypeIconUrl('file');
+            }
+        } else {
+            iconAttrs.name = 'spinner';
+            iconAttrs.extraClasses = `${iconAttrs.extraClasses} ez-spin`;
+        }
+
+        return (
+            <span className="c-list-item__icon">
+                <Icon {...iconAttrs} />
+            </span>
+        );
+    }
+
     renderLoadMoreBtn() {
         const { subitems, subitemsLimit } = this.props;
         const subitemsLimitReached = subitems.length >= subitemsLimit;
@@ -159,7 +185,7 @@ class ListItem extends Component {
             <div className="c-list-item__label">
                 <span {...togglerAttrs} />
                 <a className="c-list-item__link" href={href} onClick={onClick}>
-                    {name}
+                    {this.renderIcon()} {name}
                 </a>
                 {this.sortedActions.map((action) => {
                     const Component = action.component;
