@@ -30,20 +30,16 @@
                     } %}
 
                     {% if draft_pager.haveToPaginate %}
-                        <div class="row justify-content-center align-items-center ez-pagination__spacing">
-                            <span class="ez-pagination__text">
-                                {{ 'pagination.viewing'|trans({ '%viewing%': draft_pager.currentPageResults|length, '%total%': draft_pager.nbResults }, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
-                            </span>
-                        </div>
-                        <div class="row justify-content-center align-items-center ez-pagination__btn mb-4">
-                            {{ pagerfanta(draft_pager, 'ez', {
+                        {% include '@ezdesign/ui/pagination.html.twig' with {
+                            'pager': draft_pager,
+                            'paginaton_params' : {
                                 'routeName': draft_pagination_params.route_name,
                                 'routeParams': draft_pagination_params.route_params|merge({
                                     '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\VersionsTab::URI_FRAGMENT'),
                                 }),
                                 'pageParameter': '[page][version_draft]'
-                            }) }}
-                        </div>
+                            }
+                        } %}
                     {% endif %}
                 {% endblock %}
                 {{ form_end(form_version_remove_draft) }}

@@ -125,16 +125,9 @@
         {{ form_end(form_sections_delete) }}
 
         {% if pager.haveToPaginate %}
-            <div class="row justify-content-center align-items-center ez-pagination__spacing">
-                <span class="ez-pagination__text">
-                    {{ 'section.viewing'|trans({
-                    '%viewing%': pager.currentPageResults|length,
-                    '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% items')|raw }}
-                </span>
-            </div>
-            <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
-                {{ pagerfanta(pager, 'ez') }}
-            </div>
+            {% include '@ezdesign/ui/pagination.html.twig' with {
+                'pager': pager
+            } %}
         {% endif %}
 
         {{ form_start(form_section_content_assign, {

@@ -29,23 +29,16 @@
             </p>
         {% endif %}
         {% if reverse_relation_pager.haveToPaginate %}
-            <div class="row justify-content-center align-items-center ez-pagination__spacing">
-                    <span class="ez-pagination__text">
-                        {{ 'pagination.viewing'|trans({
-                            '%viewing%': reverse_relation_pager.currentPageResults|length,
-                            '%total%': reverse_relation_pager.nbResults
-                        }, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
-                    </span>
-            </div>
-            <div class="row justify-content-center align-items-center ez-pagination__btn mb-4">
-                {{ pagerfanta(reverse_relation_pager, 'ez', {
+            {% include '@ezdesign/ui/pagination.html.twig' with {
+                'pager': reverse_relation_pager,
+                'paginaton_params': {
                     'routeName': reverse_relation_pagination_params.route_name,
                     'routeParams': reverse_relation_pagination_params.route_params|merge({
                         '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\RelationsTab::URI_FRAGMENT'),
                     }),
                     'pageParameter': '[page][reverse_relation]'
-                }) }}
-            </div>
+                }
+            } %}
         {% endif %}
     {% endif %}
 </section>
