@@ -2,15 +2,9 @@
 {% import _self as tab %}
 {% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.policies.policies'|trans|desc('Policies') } %}
 
-{% if policies_pager.currentPageResults is not empty %}
-    {{  include('@ezdesign/content/tab/policies/table.html.twig', {
-            'policies_pager': policies_pager,
-    }) }}
-{% else %}
-    <p class="ez-table-no-content">
-        {{ 'tab.policies.no_policies'|trans|desc('This Content item has no Policies.') }}
-    </p>
-{% endif %}
+{{  include('@ezdesign/content/tab/policies/table.html.twig', {
+        'policies_pager': policies_pager,
+}) }}
 
 {% if policies_pager.haveToPaginate %}
     {% include '@ezdesign/ui/pagination.html.twig' with {
