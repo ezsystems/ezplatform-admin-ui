@@ -170,6 +170,11 @@
         &:last-child {
             margin-bottom: 0;
         }
+
+        .ez-input {
+            margin-right: calculateRem(5px);
+            margin-bottom: calculateRem(-2px);
+        }
     }
 
     &.is-invalid {
