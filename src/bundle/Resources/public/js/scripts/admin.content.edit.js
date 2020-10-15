@@ -22,8 +22,6 @@
         'url',
     ];
     const form = doc.querySelector('.ez-form-validate');
-    const titleDetails = doc.querySelector('.ez-content-edit-page-title__details');
-    const titleDetailsToggler = doc.querySelector('.ez-content-edit-page-title__toggler');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
@@ -156,13 +154,4 @@
         btn.dataset.isFormValid = 0;
         btn.addEventListener('click', clickHandler, false);
     });
-
-    if (titleDetailsToggler) {
-        titleDetailsToggler.addEventListener('click', (event) => {
-            event.preventDefault();
-            eZ.helpers.tooltips.hideAll();
-
-            titleDetails.classList.toggle('ez-content-edit-page-title__details--collapsed');
-        });
-    }
 })(window, window.document, window.eZ, window.Translator);

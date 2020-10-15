@@ -92,8 +92,8 @@
         <note>key: content.view.more.label</note>
       </trans-unit>
       <trans-unit id="07b56fa9149c034a5b2f562d77e094e381618b22" resname="content_edit.autosave.message">
-        <source>Autosave is on.</source>
-        <target state="new">Autosave is on.</target>
+        <source><![CDATA[<b>Autosave</b> is on.]]></source>
+        <target state="new"><![CDATA[<b>Autosave</b> is on.]]></target>
         <note>key: content_edit.autosave.message</note>
       </trans-unit>
       <trans-unit id="fab6f6efafaeec371aaa8302c82362846d2b8f69" resname="content_edit.last_saved">
