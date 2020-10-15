@@ -50,7 +50,7 @@
     }
 
     &--secondary {
-        fill: $ibexa-color-primary;
+        fill: $ibexa-black;
     }
 }
 
@@ -61,7 +61,7 @@
         fill: $ibexa-color-primary;
 
         &--secondary {
-            fill: $ibexa-color-primary;
+            fill: $ibexa-black;
         }
 
         &--dark {
@@ -74,6 +74,14 @@
 
         &--copy {
             fill: $ibexa-color-base-dark;
+        }
+    }
+
+    &:hover {
+        .ez-icon {
+            &--secondary {
+                fill: $ibexa-color-primary;
+            }
         }
     }
 }

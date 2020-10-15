@@ -8,7 +8,7 @@
             title="{{ title }}"
             data-content-id="{{ contentId }}"
             data-language-code="{{ language.languageCode }}">
-        <svg class="ez-icon ez-icon-edit">
+        <svg class="ez-icon ez-icon--secondary ez-icon-edit">
             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
         </svg>
     </button>
@@ -16,7 +16,7 @@
     {% set top_offset = top_offset is defined ? top_offset : 120 %}
     <div class="ez-translation-selector">
         <button class="btn btn-icon mx-2 ez-btn ez-btn--translations-list-toggler" title="{{ title }}">
-            <svg class="ez-icon ez-icon-edit">
+            <svg class="ez-icon ez-icon--secondary ez-icon-edit">
                 <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
             </svg>
         </button>

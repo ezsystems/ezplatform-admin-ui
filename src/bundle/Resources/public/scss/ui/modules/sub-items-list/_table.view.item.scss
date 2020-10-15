@@ -202,13 +202,13 @@
             }
 
             .ez-icon {
-                fill: $ibexa-color-primary;
+                fill: $ibexa-black;
             }
 
             &:hover,
             &:focus {
                 .ez-icon {
-                    fill: $ez-color-primary-hover;
+                    fill: $ibexa-color-primary;
                 }
             }
         }
