@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const CLASS_CUSTOM_DROPDOWN = 'ez-custom-dropdown';
     const CLASS_CUSTOM_DROPDOWN_ITEM = 'ez-custom-dropdown__item';
     const CLASS_ITEMS_HIDDEN = 'ez-custom-dropdown__items--hidden';
@@ -106,8 +106,6 @@
                 }
             }
 
-
-
             if (
                 !selected &&
                 this.hasDefaultSelection &&
@@ -188,6 +186,7 @@
         fitItems() {
             let itemsWidth = 0;
             let numberOfOverflowItems = 0;
+            const restrictedAreaItemsContainer = 120;
             const selectedItemsContainer = this.container.querySelector(SELECTOR_SELECTION_INFO);
             const selectedItems = this.container.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LABEL);
             const selectedItemsOverflow = this.container.querySelector(SELECTOR_OVERFLOW_ITEM_INFO);
@@ -197,13 +196,13 @@
                 selectedItems.forEach(item => {
                     itemsWidth += item.offsetWidth;
 
-                    if (itemsWidth > (selectedItemsContainer.offsetWidth - 120)) {
+                    if (itemsWidth > (selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer)) {
                         numberOfOverflowItems++;
                         item.hidden = true;
                     }
                 });
 
-                if (numberOfOverflowItems !== 0) {
+                if (numberOfOverflowItems) {
                     selectedItemsOverflow.hidden = false;
                     selectedItemsOverflow.innerHTML = numberOfOverflowItems;
                 } else {
