@@ -16,8 +16,8 @@
             {{ parent() }}
         {% endblock left_sidebar %}
 
-        <div class="container ml-0">
-            <div class="ez-header mt-3">
+        <div class="container ez-content-container">
+            <div class="ez-header mt-5">
                 <div class="container">
                     {% include '@ezdesign/ui/page_title.html.twig' with {
                         title: 'drafts.list'|trans|desc('Drafts'),
@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div class="container ez-content-container">
+            <div class="container ez-container">
                 {{ form_start(form_remove, {
                     'action': path('ezplatform.content_draft.remove'),
                     'attr': {
