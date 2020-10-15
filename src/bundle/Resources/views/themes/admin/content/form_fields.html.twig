@@ -104,8 +104,8 @@
             {% with { 'compound': false } %}{{- block('form_label') }}{% endwith %}
             {% if field_type_descriptions[fieldtype.vars.languageCode] is defined and field_type_descriptions[fieldtype.vars.languageCode] != '' %}
                 <span class="ez-field-edit__icon-wrapper" title="{{ field_type_descriptions[fieldtype.vars.languageCode] }}">
-                    <svg class="ez-icon ez-icon--small">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#information"></use>
+                    <svg class="ez-icon ez-icon--medium">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#system-information"></use>
                     </svg>
                 </span>
             {% endif %}

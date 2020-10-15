@@ -1,6 +1,21 @@
 .ez-content-edit-page-title {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
     &--increased-left-margin {
         margin-left: calculateRem(55px);
+    }
+
+    &__main-data {
+        max-width: calculateRem(1000px);
+    }
+
+    &__aditional-data {
+        display: flex;
+        align-items: flex-end;
+        max-width: calculateRem(380px);
+        margin-left: calculateRem(170px);
     }
 
     &__action {
@@ -8,38 +23,36 @@
     }
 
     &__title {
+        display: flex;
+        align-items: center;
         margin-bottom: calculateRem(4px);
         font-size: calculateRem(26px);
     }
 
-    &__description {
-        font-size: calculateRem(14px);
-        color: $ibexa-color-base-dark;
-    }
+    &__icon-wrapper {
+        display: inline-flex;
+        width: calculateRem(24px);
+        height: calculateRem(24px);
+        justify-content: center;
+        margin-left: calculateRem(8px);
 
-    &__details {
-        height: calculateRem(20px);
-        font-size: calculateRem(14px);
-        color: $ibexa-color-base-dark;
-        overflow: hidden;
-        transition: all 0.2s $ez-admin-transition;
-
-        &--collapsed {
-            height: 0;
+        .ez-icon {
+            fill: $ibexa-color-base-dark;
         }
     }
 
-    &__toggler {
-        position: absolute;
-        top: calculateRem(10px);
-        right: 0;
-        color: $ibexa-color-base-dark;
-        border: none;
+    &__description,
+    &__location,
+    &__aditional-data {
+        color: $ibexa-color-font-pale;
+        font-size: calculateRem(14px);
+    }
+
+    &__content-info {
+        margin-left: calculateRem(10px);
     }
 
     &__autosave-wrapper {
-        font-size: calculateRem(14px);
-
         &--not-saved {
             .ez-content-edit-page-title {
                 &__autosave-failed,

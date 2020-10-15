@@ -10,8 +10,6 @@
     }
 
     &__icon-wrapper {
-        border: calculateRem(2px) solid $ibexa-color-base-dark;
-        border-radius: 50%;
         width: calculateRem(24px);
         height: calculateRem(24px);
         display: inline-flex;
