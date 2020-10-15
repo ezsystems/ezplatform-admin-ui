@@ -65,9 +65,9 @@
     &__selected-overflow-number {
         position: absolute;
         right: calculateRem(25px);
-        top: calculateRem(8px);
+        top: calculateRem(6px);
         width: calculateRem(32px);
-        height: calculateRem(23px);
+        height: calculateRem(25px);
         background: $ibexa-color-base;
         border-radius: $ibexa-border-radius;
         border: calculateRem(1px) solid $ibexa-color-base-dark;

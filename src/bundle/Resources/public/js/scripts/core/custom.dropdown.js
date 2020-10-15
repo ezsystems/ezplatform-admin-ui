@@ -1,4 +1,4 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const CLASS_CUSTOM_DROPDOWN = 'ez-custom-dropdown';
     const CLASS_CUSTOM_DROPDOWN_ITEM = 'ez-custom-dropdown__item';
     const CLASS_ITEMS_HIDDEN = 'ez-custom-dropdown__items--hidden';
