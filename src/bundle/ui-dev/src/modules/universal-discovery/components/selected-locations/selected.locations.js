@@ -52,7 +52,7 @@ const SelectedLocations = () => {
                 onClick={toggleExpanded}
                 title={togglerLabel}
                 data-tooltip-container-selector=".c-udw-tab">
-                <Icon name={iconName} extraClasses="ez-icon--medium" />
+                <Icon name={iconName} extraClasses="ez-icon--small" />
             </button>
         );
     };
@@ -72,7 +72,7 @@ const SelectedLocations = () => {
                     onClick={() => onConfirm()}
                     title={confirmSelectionLabel}
                     data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="checkmark" extraClasses="ez-icon--small-medium ez-icon--base-dark" />
+                    <Icon name="checkmark" extraClasses="ez-icon--small-medium ez-icon--dark" />
                 </button>
                 <button
                     type="button"
