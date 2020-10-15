@@ -25,7 +25,7 @@
         }
 
         .table &--has-icon {
-            padding: 0;
+            width: calculateRem(52px);
         }
 
         .table &--after-icon {
