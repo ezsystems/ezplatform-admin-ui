@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const CLASS_CUSTOM_DROPDOWN = 'ez-custom-dropdown';
     const CLASS_CUSTOM_DROPDOWN_ITEM = 'ez-custom-dropdown__item';
     const CLASS_ITEMS_HIDDEN = 'ez-custom-dropdown__items--hidden';
@@ -9,6 +9,7 @@
     const SELECTOR_SELECTED_ITEM_IN_LABEL = '.ez-custom-dropdown__selected-item';
     const SELECTOR_SELECTED_ITEM_IN_LIST = '.ez-custom-dropdown__item--selected';
     const SELECTOR_SELECTION_INFO = '.ez-custom-dropdown__selection-info';
+    const SELECTOR_OVERFLOW_ITEM_INFO = '.ez-custom-dropdown__selected-overflow-number';
     const SELECTOR_PLACEHOLDER = '[data-value=""]';
     const EVENT_VALUE_CHANGED = 'valueChanged';
     const ITEMS_LIST_MAX_HEIGHT = 300;
@@ -27,7 +28,6 @@
                     {{label}}<span class="${CLASS_REMOVE_SELECTION}"></span>
             </li>`;
             this.canSelectOnlyOne = !config.sourceInput.multiple;
-
             this.createSelectedItem = this.createSelectedItem.bind(this);
             this.selectFirstItem = this.selectFirstItem.bind(this);
             this.clearCurrentSelection = this.clearCurrentSelection.bind(this);
@@ -46,13 +46,15 @@
         selectFirstItem() {
             const items = this.itemsContainer.querySelectorAll(`${SELECTOR_ITEM}`);
             const firstItem = items[0];
+            const label = firstItem.querySelector('.ez-custom-dropdown__item-label').innerHTML;
 
             items.forEach((item) => item.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
             firstItem.classList.add(CLASS_ITEM_SELECTED_IN_LIST);
+            firstItem.querySelector('.ez-input').checked = true;
 
             this.container
                 .querySelector(SELECTOR_SELECTION_INFO)
-                .insertAdjacentHTML('beforeend', this.createSelectedItem(firstItem.dataset.value, firstItem.innerHTML));
+                .insertAdjacentHTML('beforeend', this.createSelectedItem(firstItem.dataset.value, label));
         }
 
         clearCurrentSelection() {
@@ -78,6 +80,7 @@
 
             if (value) {
                 this.sourceInput.querySelector(`[value="${value}"]`).selected = selected;
+                element.querySelector('.ez-input').checked = selected;
             }
 
             this.itemsContainer.querySelector(`[data-value="${value}"]`).classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
@@ -86,6 +89,7 @@
 
             if (selected && value) {
                 const placeholder = selectedItemsList.querySelector(SELECTOR_PLACEHOLDER);
+                const label = element.querySelector('.ez-custom-dropdown__item-label').innerHTML;
 
                 if (placeholder) {
                     placeholder.remove();
@@ -93,7 +97,7 @@
                     this.itemsContainer.querySelector(SELECTOR_PLACEHOLDER).classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
                 }
 
-                selectedItemsList.insertAdjacentHTML('beforeend', this.createSelectedItem(value, element.innerHTML));
+                selectedItemsList.insertAdjacentHTML('beforeend', this.createSelectedItem(value, label));
             } else {
                 const valueNode = selectedItemsList.querySelector(`[data-value="${value}"]`);
 
@@ -101,6 +105,8 @@
                     valueNode.remove();
                 }
             }
+
+
 
             if (
                 !selected &&
@@ -110,6 +116,7 @@
                 this.selectFirstItem();
             }
 
+            this.fitItems();
             this.fireValueChangedEvent();
         }
 
@@ -157,8 +164,10 @@
         deselectOption(option) {
             const value = option.dataset.value;
             const optionSelect = this.sourceInput.querySelector(`[value="${value}"]`);
+            const itemSelected = this.itemsContainer.querySelector(`[data-value="${value}"]`);
 
-            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
+            itemSelected.classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
+            itemSelected.querySelector('.ez-input').checked = false
 
             if (optionSelect) {
                 optionSelect.selected = false;
@@ -172,7 +181,35 @@
                 this.selectFirstItem();
             }
 
+            this.fitItems();
             this.fireValueChangedEvent();
+        }
+
+        fitItems() {
+            let itemsWidth = 0;
+            let numberOfOverflowItems = 0;
+            const selectedItemsContainer = this.container.querySelector(SELECTOR_SELECTION_INFO);
+            const selectedItems = this.container.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LABEL);
+            const selectedItemsOverflow = this.container.querySelector(SELECTOR_OVERFLOW_ITEM_INFO);
+
+            if (selectedItemsOverflow) {
+                selectedItems.forEach(item => { item.hidden = false; })
+                selectedItems.forEach(item => {
+                    itemsWidth += item.offsetWidth;
+
+                    if (itemsWidth > (selectedItemsContainer.offsetWidth - 120)) {
+                        numberOfOverflowItems++;
+                        item.hidden = true;
+                    }
+                });
+
+                if (numberOfOverflowItems !== 0) {
+                    selectedItemsOverflow.hidden = false;
+                    selectedItemsOverflow.innerHTML = numberOfOverflowItems;
+                } else {
+                    selectedItemsOverflow.hidden = true;
+                }
+            }
         }
 
         init() {
@@ -185,6 +222,7 @@
             }
 
             this.hideOptions();
+            this.fitItems();
 
             this.container.querySelector(SELECTOR_SELECTION_INFO).onclick = this.onInputClick;
             this.itemsContainer

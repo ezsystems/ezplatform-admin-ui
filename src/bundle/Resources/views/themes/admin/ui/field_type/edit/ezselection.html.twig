@@ -19,9 +19,16 @@
             {%- endif -%}
             {% for choice in choices %}
                 <li data-value="{{ choice.value }}" class="ez-custom-dropdown__item{% if choice is selectedchoice(value) %} ez-custom-dropdown__item--selected{% endif %}">
-                    {{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
+                    {% if multiple %}
+                        <input type="checkbox" name="{{ id }}-checkbox" class="ez-input ez-input--checkbox" {% if choice is selectedchoice(value) %}checked{% endif %} />
+                    {% else %}
+                        <input type="radio" name="{{ id }}-radio" class="ez-input ez-input--radio" {% if choice is selectedchoice(value) %}checked{% endif %} />
+                    {% endif %}
+
+                    <span class="ez-custom-dropdown__item-label">{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</span>
                 </li>
             {% endfor %}
         </ul>
+        <div class="ez-custom-dropdown__selected-overflow-number" hidden></div>
     </div>
 {%- endblock -%}

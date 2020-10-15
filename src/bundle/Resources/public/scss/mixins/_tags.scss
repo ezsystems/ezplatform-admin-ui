@@ -6,6 +6,7 @@
     margin-top: calculateRem(4px);
     padding: calculateRem(1px) calculateRem(25px) calculateRem(1px) calculateRem(8px);
     background: $ibexa-color-base;
+    border: calculateRem(1px) solid $ibexa-color-base-dark;
     border-radius: $ibexa-border-radius;
     color: $ibexa-color-font;
     font-size: calculateRem(14px);

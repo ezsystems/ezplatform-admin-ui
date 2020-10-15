@@ -62,6 +62,31 @@
         @include tag;
     }
 
+    &__selected-overflow-number {
+        position: absolute;
+        right: calculateRem(25px);
+        top: calculateRem(8px);
+        width: calculateRem(32px);
+        height: calculateRem(23px);
+        background: $ibexa-color-base;
+        border-radius: $ibexa-border-radius;
+        border: calculateRem(1px) solid $ibexa-color-base-dark;
+        color: $ibexa-color-font;
+        font-size: calculateRem(14px);
+        font-weight: normal;
+        text-align: center;
+        line-height: calculateRem(24px);
+
+        &:before {
+            content: '...';
+            position: absolute;
+            left: calculateRem(-20px);
+            display: block;
+            width: calculateRem(20px);
+            height: calculateRem(23px);
+        }
+    }
+
     &__remove-selection {
         display: inherit;
         position: absolute;
@@ -125,14 +150,8 @@
         transition: background 0.2s $ez-admin-transition;
 
         &:hover {
-            background: $ibexa-color-base;
-        }
-
-        &--selected,
-        &--selected:hover,
-        &--selected[disabled],
-        &--selected[disabled]:hover {
-            background: $ibexa-color-base;
+            color: $ibexa-color-primary;
+            cursor: pointer;
         }
 
         &[disabled] {
