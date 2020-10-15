@@ -10,27 +10,6 @@
 
     class EzMediaValidator extends eZ.BaseFileFieldValidator {
         /**
-         * Updates the state of checkbox indicator.
-         *
-         * @method updateState
-         * @param {Event} event
-         * @memberof EzMediaValidator
-         */
-        updateState(event) {
-            const checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
-
-            if (!checkbox) {
-                return;
-            }
-
-            const label = event.currentTarget.querySelector('.ez-data-source__label');
-            const methodName = checkbox.checked ? 'remove' : 'add';
-
-            label.classList[methodName]('is-checked');
-            checkbox.checked = !checkbox.checked;
-        }
-
-        /**
          * Validates the dimensions inputs
          *
          * @method validateDimensions
@@ -159,12 +138,6 @@
                     eventName: 'change',
                     callback: 'validateInput',
                     errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
-                },
-                {
-                    isValueValidator: false,
-                    selector: `${SELECTOR_INFO_WRAPPER}`,
-                    eventName: 'click',
-                    callback: 'updateState',
                 },
                 {
                     isValueValidator: false,
