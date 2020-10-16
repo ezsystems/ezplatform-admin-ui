@@ -57,24 +57,30 @@
     &--no-border {
         color: $ibexa-color-primary;
     }
-}
 
-.ez-btn {
     &--action-icon {
         .ez-icon {
             fill: $ibexa-color-base-dark;
         }
     }
+
+    &--add-translation {
+        .ez-icon {
+            margin-right: 0;
+        }
+    }
+
+    &__label {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 }
+
 
 .btn-icon {
     padding: 0;
-}
-
-.ez-btn--add-translation {
-    .ez-icon {
-        margin-right: 0;
-    }
 }
 
 .ez-side-menu,
