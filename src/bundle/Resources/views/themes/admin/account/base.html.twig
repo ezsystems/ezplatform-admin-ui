@@ -11,13 +11,12 @@
             <div class="row ez-login">
                 <div class="col-5 ez-login__image-col">
                     <div class="ez-login__support-wrapper">
-                        <h2 class="ez-login__support-headline">{{ 'base.need_assistance'|trans|desc('Need assistance or support?') }}</h2>
+                        <h2 class="ez-login__support-headline">{{ 'base.need_assistance'|trans|desc('Get to know Ibexa DXP') }}</h2>
                         <span class="ez-login__support-content">{{ 'base.visit_support'|trans({
-                                '%ez_forum_link%': '<a class="ez-link ez-link--light" href="https://support.ibexa.co/login">https://support.ibexa.co</a>',
+                                '%ez_documentation_link%': '<a class="ez-link ez-link--light" href="https://ezplatform.com/documentation-center">https://ezplatform.com/documentation-center</a>',
                                 '%ez_contact_link%': '<a class="ez-link ez-link--light" href="https://www.ibexa.co/about-ibexa/contact-us">https://www.ibexa.co/about-ibexa/contact-us</a>'
-                              })| desc('Visit our support forums at %ez_forum_link%<br/>or our official channels found at %ez_contact_link%')|raw }}</span>
+                              })| desc('Visit the official documentation %ez_documentation_link%<br/>or get in touch with us: %ez_contact_link%')|raw }}</span>
                     </div>
-                    <div class="ez-login__application-version">Version 3.2</div>
                 </div>
                 <div class="col-7 ez-login__actions-col">
                     <img class="ez-login__logo" src="{{ asset('/bundles/ezplatformadminui/img/ibexa-logo.svg') }}" alt="ibexa" />

@@ -33,15 +33,6 @@
         font-size: calculateRem(16px);
     }
 
-    &__application-version {
-        position: absolute;
-        bottom: calculateRem(15px);
-        right: calculateRem(25px);
-        color: $ibexa-white;
-        font-size: calculateRem(14px);
-        text-align: right;
-    }
-
     &__actions-col {
         display: flex;
         flex-direction: column;
