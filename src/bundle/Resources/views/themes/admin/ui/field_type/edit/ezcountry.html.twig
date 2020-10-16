@@ -19,7 +19,8 @@
             {%- endif -%}
             {% for choice in choices %}
                 <li data-value="{{ choice.value }}" class="ez-custom-dropdown__item{% if choice is selectedchoice(value) %} ez-custom-dropdown__item--selected{% endif %}">
-                    {{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
+                    <input type="radio" name="{{ id }}-radio" class="ez-input ez-input--radio" {% if choice is selectedchoice(value) %}checked{% endif %} />
+                    <span class="ez-custom-dropdown__item-label">{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</span>
                 </li>
             {% endfor %}
         </ul>
