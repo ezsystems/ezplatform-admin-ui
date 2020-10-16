@@ -1,7 +1,7 @@
 .ez-filters {
     transform: scaleY(1);
     transform-origin: top center;
-    transition: all 0.2s $ez-admin-transition;
+    transition: all 0.2s $ibexa-admin-transition;
     flex-wrap: wrap;
     position: relative;
 
@@ -124,7 +124,7 @@
         overflow: auto;
         transform: scaleY(1);
         transform-origin: top center;
-        transition: transform 0.2s $ez-admin-transition;
+        transition: transform 0.2s $ibexa-admin-transition;
 
         &--hidden {
             transform: scaleY(0);

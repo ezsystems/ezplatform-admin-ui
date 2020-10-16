@@ -30,7 +30,7 @@
         }
 
         tr {
-            background-color: $ez-white;
+            background-color: $ibexa-white;
             cursor: pointer;
 
             td {
@@ -53,7 +53,7 @@
     }
 
     &__item--read {
-        color: $ez-color-base-light;
+        color: $ibexa-color-base-dark;
 
         .type__icon {
             @include type-icon-read;
@@ -102,7 +102,7 @@
 
                 + .description__read-more {
                     display: inline;
-                    color: $ez-color-hyperlink;
+                    color: $ibexa-color-primary;
                     cursor: pointer;
                 }
             }

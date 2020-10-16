@@ -71,14 +71,14 @@
 
         &--edit {
             fill: $ibexa-color-primary;
-            transition: all 0.3s $ez-admin-transition;
+            transition: all 0.3s $ibexa-admin-transition;
             width: calculateRem(20px);
             height: calculateRem(20px);
         }
 
         &--edit:hover,
         &--edit:focus {
-            fill: $ez-color-primary-hover;
+            fill: $ibexa-color-primary-hover;
         }
 
         &--delete {
@@ -87,7 +87,7 @@
 
         &--delete:hover,
         &--delete:focus {
-            fill: $ez-color-danger-hover;
+            fill: darken($ibexa-color-danger, 15%);
         }
 
         &--abort {
@@ -96,7 +96,7 @@
 
         &--abort:hover,
         &--abort:focus {
-            fill: $ez-color-base-light-hover;
+            fill: darken($ibexa-color-base-dark, 15%);
         }
     }
 

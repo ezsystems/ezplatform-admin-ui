@@ -34,8 +34,8 @@
             margin-bottom: calculateRem(12px);
             background: $ibexa-color-primary;
             border: none;
-            outline: none;  
-            
+            outline: none;
+
             .ez-icon {
                 fill: $ibexa-white;
             }
@@ -69,7 +69,7 @@
             position: relative;
 
             &:before {
-                content : '!';
+                content: '!';
                 position: absolute;
                 top: 0;
                 left: calculateRem(-20px);
