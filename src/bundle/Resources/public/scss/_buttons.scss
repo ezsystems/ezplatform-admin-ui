@@ -124,6 +124,12 @@
     }
 }
 
+.ez-side-menu {
+    .btn-dark:hover {
+        background-color: lighten($ibexa-color-base-black, 7.5%);
+    }
+}
+
 .ez-context-menu {
     .btn.disabled,
     .btn[disabled] {
