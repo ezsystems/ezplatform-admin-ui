@@ -65,6 +65,7 @@
         &__item {
             width: 100%;
             padding-left: calculateRem(28px);
+            padding-right: calculateRem(28px);
             cursor: pointer;
             font-size: calculateRem(14px);
             color: $ibexa-color-font;
@@ -74,6 +75,11 @@
                     color: $ibexa-color-font;
                     text-decoration: none;
                 }
+            }
+
+            .nav-link {
+                white-space: normal;
+                word-break: break-word;
             }
 
             &:first-child {
