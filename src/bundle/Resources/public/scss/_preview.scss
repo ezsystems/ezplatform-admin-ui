@@ -22,13 +22,13 @@
                     height: calculateRem(40px);
                     line-height: calculateRem(38px);
                     text-align: center;
-                    
-                    &:hover{
-                        background: $ez-color-base-light;
+
+                    &:hover {
+                        background: $ibexa-color-base-dark;
                         border-radius: 50%;
-            
+
                         .ez-icon {
-                            fill: $ez-white;
+                            fill: $ibexa-white;
                         }
                     }
                 }
@@ -40,9 +40,9 @@
                 align-items: center;
                 max-width: calculateRem(118px);
                 height: calculateRem(44px);
-                border: calculateRem(2px) solid $ez-color-base-medium;
+                border: calculateRem(2px) solid $ibexa-color-base-dark;
                 border-radius: calculateRem(4px);
-                background: $ez-white;
+                background: $ibexa-white;
                 flex-basis: 9.5%;
                 margin-right: calculateRem(32px);
             }
@@ -60,7 +60,7 @@
             &-label {
                 display: inline-block;
                 margin-right: calculateRem(8px);
-                color: $ez-color-base-medium;
+                color: $ibexa-color-base-dark;
                 font-size: calculateRem(14px);
             }
 
@@ -87,16 +87,16 @@
                 cursor: pointer;
                 border-radius: calculateRem(4px);
                 background: none;
-                transition: background 0.2s $ez-admin-transition;
+                transition: background 0.2s $ibexa-admin-transition;
 
                 &:hover,
                 &:focus {
-                    background-color: darken($ez-color-base-medium, 15%);
+                    background-color: darken($ibexa-color-base-dark, 15%);
                     outline: none;
                 }
 
                 &.ez-preview__action--selected {
-                    background-color: $ez-color-base-medium;
+                    background-color: $ibexa-color-base-dark;
                 }
             }
         }
@@ -108,7 +108,7 @@
             height: calc(100vh - 45px);
             display: block;
             margin: 0 auto;
-            transition: all 0.2s $ez-admin-transition;
+            transition: all 0.2s $ibexa-admin-transition;
         }
 
         &--tablet {

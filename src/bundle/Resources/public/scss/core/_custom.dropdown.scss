@@ -98,7 +98,7 @@
         top: calc(100% - #{calculateRem(1px)});
         transform: scaleY(1);
         transform-origin: top center;
-        transition: transform 0.2s $ez-admin-transition;
+        transition: transform 0.2s $ibexa-admin-transition;
         width: 50%;
         background: $ibexa-white;
         border: calculateRem(1px) solid $ibexa-color-base-dark;
@@ -121,7 +121,7 @@
         margin: calculateRem(2px) 0;
         padding: calculateRem(8px) calculateRem(16px);
         min-height: calculateRem(30px);
-        transition: background 0.2s $ez-admin-transition;
+        transition: background 0.2s $ibexa-admin-transition;
 
         &:hover {
             background: $ibexa-color-base;

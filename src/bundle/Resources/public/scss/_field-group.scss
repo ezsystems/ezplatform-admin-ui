@@ -57,7 +57,7 @@
             height: calculateRem(7px);
             border-right: calculateRem(2px) solid $ibexa-black;
             border-bottom: calculateRem(2px) solid $ibexa-black;
-            transition: all 0.3s $ez-admin-transition;
+            transition: all 0.3s $ibexa-admin-transition;
             transform: rotate(-135deg);
         }
 
@@ -80,7 +80,6 @@
     .ez-content-field {
         display: flex;
         border-top: calculateRem(1px) solid $ibexa-color-base;
-
 
         .ez-content-field-name {
             flex: 0 0 calculateRem(160px);

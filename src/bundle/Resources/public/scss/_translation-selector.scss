@@ -4,11 +4,11 @@
         position: fixed;
         opacity: 1;
         text-align: left;
-        background-color: $ez-white;
-        border: calculateRem(16px) solid $ez-white;
+        background-color: $ibexa-white;
+        border: calculateRem(16px) solid $ibexa-white;
         width: calculateRem(360px);
         padding: calculateRem(9px);
-        box-shadow: calculateRem(-4px) calculateRem(4px) calculateRem(6px) 0 rgba($ez-color-base-light, 0.35);
+        box-shadow: calculateRem(-4px) calculateRem(4px) calculateRem(6px) 0 rgba($ibexa-color-base-dark, 0.35);
         border-radius: calculateRem(4px);
         top: calculateRem(100px);
         right: 0;
@@ -26,11 +26,11 @@
     }
 
     &__title {
-        color: $ez-color-secondary;
+        color: $ibexa-color-primary;
         font-size: calculateRem(16px);
         line-height: 2;
         font-weight: bold;
-        border-bottom: calculateRem(1px) solid $ez-color-secondary;
+        border-bottom: calculateRem(1px) solid $ibexa-color-primary;
         margin-bottom: calculateRem(15px);
     }
 
@@ -41,15 +41,15 @@
         overflow: auto;
 
         .ez-btn--content-edit {
-            background-color: $ez-white;
+            background-color: $ibexa-white;
             padding: calculateRem(9px) calculateRem(24px);
             text-align: left;
-            box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba($ez-black, 0.1);
+            box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba($ibexa-black, 0.1);
             margin-bottom: calculateRem(8px);
 
             &:hover,
             &:focus {
-                background: $ez-secondary-ground-pale;
+                background: $ibexa-color-base;
                 font-weight: 700;
                 text-decoration: none;
             }

@@ -1,9 +1,9 @@
 @import './public/bundles/ezplatformadminui/scss/functions/calculate.rem';
 
-// eZ transition function
-$ez-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
-$ez-admin-widget-open-transition: all 0.3s ease-in;
-$ez-admin-widget-close-transition: all 0.3s ease-out;
+// Ibexa transition function
+$ibexa-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
+$ibexa-admin-widget-open-transition: all 0.3s ease-in;
+$ibexa-admin-widget-close-transition: all 0.3s ease-out;
 
 // Ibexa colors
 $ibexa-white: #fff;
@@ -39,9 +39,13 @@ $ibexa-color-warning-pale: #fceaec;
 
 $ibexa-color-primary-hover: #e75476;
 
-/* eZ colors: These colors are deprecated, please use colors with the "ibexa" prefix */
+/* eZ variables: These variables are deprecated, please use variables with the "ibexa" prefix */
+$ez-admin-transition: $ibexa-admin-transition;
+$ez-admin-widget-open-transition: $ibexa-admin-widget-open-transition;
+$ez-admin-widget-close-transition: $ibexa-admin-widget-close-transition;
+
 $ez-color-primary: $ibexa-color-primary;
-$ez-color-primary-hover: darken($ez-color-primary, 15%);
+$ez-color-primary-hover: darken($ibexa-color-primary, 15%);
 $ez-color-secondary: $ibexa-color-primary;
 $ez-color-secondary-hover: darken($ez-color-secondary, 15%);
 $ez-color-hyperlink: $ibexa-color-primary;
@@ -49,20 +53,20 @@ $ez-color-hyperlink-hover: darken($ez-color-hyperlink, 15%);
 $ez-color-positive: $ibexa-color-positive;
 $ez-color-warning: $ibexa-color-warning;
 $ez-color-danger: $ibexa-color-danger;
-$ez-color-danger-hover: darken($ez-color-danger, 15%);
+$ez-color-danger-hover: darken($ibexa-color-danger, 15%);
 
 $ez-white: $ibexa-white;
 $ez-ground-base-pale: $ibexa-color-base-light;
 $ez-ground-base-light: $ibexa-color-base-pale;
-$ez-ground-base: #f3f3f3;
+$ez-ground-base: $ibexa-color-base-pale;
 $ez-ground-base-medium: $ibexa-white;
 $ez-ground-base-dark: $ibexa-color-base-light;
-$ez-ground-base-dark-hover: darken($ez-ground-base-dark, 15%);
+$ez-ground-base-dark-hover: darken($ibexa-color-base-light, 15%);
 $ez-color-base-pale: $ibexa-white;
 $ez-color-base-light: $ibexa-color-base-dark;
-$ez-color-base-light-hover: darken($ez-color-base-light, 15%);
+$ez-color-base-light-hover: darken($ibexa-color-base-dark, 15%);
 $ez-color-base-medium: $ibexa-color-base-dark;
-$ez-color-base-medium-hover: darken($ez-color-base-medium, 15%);
+$ez-color-base-medium-hover: darken($ibexa-color-base-dark, 15%);
 $ez-color-base-dark: $ibexa-black;
 $ez-black: $ibexa-black;
 
@@ -108,7 +112,7 @@ $grays: (
     600: $ibexa-color-base-medium,
     700: $ibexa-color-base,
     800: $ibexa-color-base,
-    900: $ibexa-color-base-dark
+    900: $ibexa-color-base-dark,
 );
 
 $blue: $ibexa-color-primary;
@@ -135,7 +139,7 @@ $colors: (
     indigo: $indigo,
     purple: $purple,
     pink: $pink,
-    cyan: $cyan
+    cyan: $cyan,
 );
 
 $theme-colors: (
@@ -146,7 +150,7 @@ $theme-colors: (
     danger: $ibexa-color-danger,
     light: $ibexa-color-base-light,
     dark: $ibexa-color-base-black,
-    info: $cyan
+    info: $cyan,
 );
 
 // Typography
@@ -188,8 +192,8 @@ $link-hover-decoration: underline;
 $link-hover-color: $ibexa-color-primary;
 
 // Body
-$body-bg: $ez-ground-base-pale;
-$body-color: $ez-black;
+$body-bg: $ibexa-color-base-light;
+$body-color: $ibexa-black;
 
 // Pagination
 $pagination-color: $ibexa-color-font;
@@ -236,7 +240,7 @@ $container-max-widths: (
     sm: 540px,
     md: 720px,
     lg: 960px,
-    xl: 1470px
+    xl: 1470px,
 ) !default;
 
 //Inputs

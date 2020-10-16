@@ -9,7 +9,7 @@
     .ez-selection__item {
         display: inline-block;
         padding: calculateRem(8px) calculateRem(16px);
-        background: $ez-ground-primary;
+        background: $ibexa-white;
         border-radius: calculateRem(4px);
         margin: calculateRem(4px);
         min-height: calculateRem(40px);
@@ -19,7 +19,7 @@
 .ez-field-preview--ezselection-single {
     display: inline-block;
     padding: calculateRem(8px) calculateRem(16px);
-    background: $ez-ground-primary;
+    background: $ibexa-white;
     border-radius: calculateRem(4px);
     margin: calculateRem(4px);
 }

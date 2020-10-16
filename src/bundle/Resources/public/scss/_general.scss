@@ -9,7 +9,7 @@ body {
 }
 
 a {
-    transition: color 0.3s $ez-admin-transition;
+    transition: color 0.3s $ibexa-admin-transition;
 }
 
 button {
@@ -54,7 +54,7 @@ img {
 .btn {
     white-space: normal;
     cursor: pointer;
-    transition: opacity 0.3s $ez-admin-transition, background 0.3s $ez-admin-transition;
+    transition: opacity 0.3s $ibexa-admin-transition, background 0.3s $ibexa-admin-transition;
 }
 
 .ezrichtext-field {

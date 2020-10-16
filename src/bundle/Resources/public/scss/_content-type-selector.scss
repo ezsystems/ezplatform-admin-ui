@@ -37,7 +37,6 @@
             position: absolute;
             top: 40%;
             left: calculateRem(-16px);
-           
 
             border-left: calculateRem(4px) solid transparent;
             border-right: calculateRem(4px) solid transparent;
@@ -53,7 +52,7 @@
         #{$selector}__list {
             transform: scaleY(1);
             transform-origin: top center;
-            transition: all 0.2s $ez-admin-transition;
+            transition: all 0.2s $ibexa-admin-transition;
         }
 
         &--collapsed {

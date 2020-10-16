@@ -36,14 +36,14 @@
 
     &__columns-toggler-panel {
         border-radius: calculateRem(4px);
-        background: $ez-white;
+        background: $ibexa-white;
         position: absolute;
         z-index: 10;
         padding: calculateRem(4px) calculateRem(14px);
         top: calculateRem(36px);
         right: calculateRem(17px);
         font-weight: normal;
-        box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba($ez-black, 0.45);
+        box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba($ibexa-black, 0.45);
     }
 
     &__columns-toggler-list {
@@ -100,7 +100,7 @@
             .c-table-view__label:after {
                 border-left: calculateRem(3px) solid transparent;
                 border-right: calculateRem(3px) solid transparent;
-                border-bottom: calculateRem(5px) solid $ez-black;
+                border-bottom: calculateRem(5px) solid $ibexa-black;
             }
         }
 
@@ -108,7 +108,7 @@
             .c-table-view__label:after {
                 border-left: calculateRem(3px) solid transparent;
                 border-right: calculateRem(3px) solid transparent;
-                border-top: calculateRem(5px) solid $ez-black;
+                border-top: calculateRem(5px) solid $ibexa-black;
             }
         }
 

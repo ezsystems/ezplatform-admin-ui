@@ -14,7 +14,7 @@
     h2 {
         &.text-muted {
             font-size: 1.125rem;
-            color: $ez-color-base-light;
+            color: $ibexa-color-base-dark;
         }
     }
 }
@@ -28,7 +28,7 @@
 
         h2 {
             font-size: calculateRem(16px);
-            font-weight: normal;;
+            font-weight: normal;
             color: $ibexa-color-primary;
         }
     }
