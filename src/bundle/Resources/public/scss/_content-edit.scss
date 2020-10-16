@@ -129,6 +129,7 @@
 .ez-content-item__errors-wrapper {
     color: $ibexa-color-danger;
     font-size: calculateRem(14px);
+    padding: 0 calculateRem(6px);
 }
 
 .ez-header--content-edit {
