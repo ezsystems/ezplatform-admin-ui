@@ -6,8 +6,7 @@
 {% set subtree_selected = form.subtree.vars.value is not empty %}
 
 {{ form_start(form, {'attr': {'class': 'ez-search-form'}}) }}
-<div class="form-group">
-    <label class="ez-label">{{ 'search.headline'|trans|desc('Search') }}</label>
+<div class="form-group mt-4">
     <div class="input-group">
         <div class="ez-search-form__icon">
             <svg class="ez-icon ez-icon--medium">
