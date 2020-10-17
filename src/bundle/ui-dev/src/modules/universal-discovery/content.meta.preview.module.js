@@ -59,11 +59,11 @@ const ContentMetaPreview = () => {
     const renderActions = () => {
         const previewButton = allowRedirects ? (
             <button
-                className="c-content-meta-preview__preview-button btn"
+                className="c-content-meta-preview__preview-button btn btn-icon"
                 onClick={previewContent}
                 data-tooltip-container-selector=".c-udw-tab"
                 title={previewLabel}>
-                <Icon name="view" extraClasses="ez-icon--small-medium ez-icon--dark" />
+                <Icon name="view" extraClasses="ez-icon--small-medium ez-icon--secondary" />
             </button>
         ) : null;
         const hasAccess = permissions && permissions.edit.hasAccess;
