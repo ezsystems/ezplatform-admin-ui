@@ -30,7 +30,6 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
     /* Main Menu / Admin */
     const ITEM_ADMIN = 'main_admin';
-    const ITEM_ADMIN__SYSTEMINFO = 'main__admin__systeminfo';
     const ITEM_ADMIN__SECTIONS = 'main__admin__sections';
     const ITEM_ADMIN__ROLES = 'main__admin__roles';
     const ITEM_ADMIN__LANGUAGES = 'main__admin__languages';
@@ -40,12 +39,6 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     const ITEM_ADMIN__URL_MANAGEMENT = 'main__admin__url_management';
 
     public const ITEM_ADMIN_OPTIONS = [
-        self::ITEM_ADMIN__SYSTEMINFO => [
-            'route' => 'ezplatform.systeminfo',
-            'extras' => [
-                'orderNumber' => 10,
-            ],
-        ],
         self::ITEM_ADMIN__SECTIONS => [
             'route' => 'ezplatform.section.list',
             'extras' => [
@@ -230,13 +223,6 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     {
         $menuItems = [];
 
-        if ($this->permissionResolver->hasAccess('setup', 'system_info')) {
-            $menuItems[self::ITEM_ADMIN__SYSTEMINFO] = $this->createMenuItem(
-                self::ITEM_ADMIN__SYSTEMINFO,
-                self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__SYSTEMINFO]
-            );
-        }
-
         if ($this->permissionResolver->hasAccess('section', 'view') !== false) {
             $menuItems[self::ITEM_ADMIN__SECTIONS] = $this->createMenuItem(
                 self::ITEM_ADMIN__SECTIONS,
@@ -303,7 +289,6 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             (new Message(self::ITEM_CONTENT__CONTENT_STRUCTURE, 'menu'))->setDesc('Content structure'),
             (new Message(self::ITEM_CONTENT__MEDIA, 'menu'))->setDesc('Media'),
             (new Message(self::ITEM_ADMIN, 'menu'))->setDesc('Admin'),
-            (new Message(self::ITEM_ADMIN__SYSTEMINFO, 'menu'))->setDesc('System Information'),
             (new Message(self::ITEM_ADMIN__SECTIONS, 'menu'))->setDesc('Sections'),
             (new Message(self::ITEM_ADMIN__ROLES, 'menu'))->setDesc('Roles'),
             (new Message(self::ITEM_ADMIN__LANGUAGES, 'menu'))->setDesc('Languages'),
