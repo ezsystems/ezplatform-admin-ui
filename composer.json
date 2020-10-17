@@ -52,8 +52,7 @@
         "phpunit/phpunit": "^8.1",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
         "ezsystems/doctrine-dbal-schema": "^1.0@dev",
-        "ezsystems/ezplatform-code-style": "^0.1.0",
-        "ezsystems/ez-support-tools": "dev-ezp-32038-sys-info-tab-moved as 2.2.x-dev"
+        "ezsystems/ezplatform-code-style": "^0.1.0"
     },
     "scripts": {
         "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
