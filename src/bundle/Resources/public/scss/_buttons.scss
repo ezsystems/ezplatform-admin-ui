@@ -78,7 +78,6 @@
     }
 }
 
-
 .btn-icon {
     padding: 0;
 }
@@ -131,8 +130,8 @@
 }
 
 .ez-context-menu {
-    .btn.disabled,
-    .btn[disabled] {
+    .ez-sticky-container > .btn.disabled,
+    .ez-sticky-container > .btn[disabled] {
         opacity: 1;
         color: rgba($ibexa-white, 0.5);
 
