@@ -8,13 +8,13 @@
 
     &__wrapper {
         position: relative;
+        max-width: calculateRem(680px);
     }
 
     &__selection-info {
         list-style: none;
         padding-left: 0;
         margin: 0 0 calculateRem(10px) 0;
-        width: 50%;
         padding: 0 calculateRem(16px) calculateRem(6px) calculateRem(8px);
         border: calculateRem(1px) solid $ibexa-color-base-dark;
         border-radius: $ibexa-border-radius;
@@ -59,6 +59,12 @@
 
     &__selected-item {
         @include tag;
+
+        display: inline-block;
+        max-width: calculateRem(380px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__selected-overflow-number {
