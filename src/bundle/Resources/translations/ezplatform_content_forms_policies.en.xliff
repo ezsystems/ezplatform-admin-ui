@@ -71,6 +71,11 @@
         <target>Section</target>
         <note>key: policy.limitation.identifier.section</note>
       </trans-unit>
+      <trans-unit id="659face270db8822838d3efd32b3a9b72a6dc5f6" resname="policy.limitation.identifier.segmentgroup">
+        <source>SegmentGroup</source>
+        <target>SegmentGroup</target>
+        <note>key: policy.limitation.identifier.segmentgroup</note>
+      </trans-unit>
       <trans-unit id="548bc922c693c8259cbfd3354451a3035e2fa6f6" resname="policy.limitation.identifier.siteaccess">
         <source>SiteAccess</source>
         <target>SiteAccess</target>

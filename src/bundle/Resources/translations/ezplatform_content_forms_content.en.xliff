@@ -51,6 +51,11 @@
         <target state="new">Player settings</target>
         <note>key: content.field_type.ezmedia.player_settings</note>
       </trans-unit>
+      <trans-unit id="c15c1fb87393dc433715e52ccded62d91f8743a2" resname="ezbinaryfile.action.download">
+        <source>Download</source>
+        <target state="new">Download</target>
+        <note>key: ezbinaryfile.action.download</note>
+      </trans-unit>
       <trans-unit id="b244ed2b3b30d53cd73ea9d25c21c7d938e97973" resname="ezbinaryfile.action.preview">
         <source>Preview</source>
         <target state="new">Preview</target>
