@@ -194,8 +194,7 @@
         const dropdown = new eZ.core.CustomDropdown({
             container,
             sourceInput,
-            itemsContainer: container.querySelector(SELECTOR_ITEMS),
-            hasDefaultSelection: true,
+            itemsContainer: container.querySelector(SELECTOR_ITEMS)
         });
 
         dropdown.init();
