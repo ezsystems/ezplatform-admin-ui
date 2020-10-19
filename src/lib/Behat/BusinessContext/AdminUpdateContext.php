@@ -63,16 +63,4 @@ class AdminUpdateContext extends BusinessContext
         $updateItemPage->adminUpdateForm->expandFieldDefinition($containerName);
         $updateItemPage->adminUpdateForm->fillFieldWithValue($field, $value, $containerName);
     }
-
-    /**
-     * @When I select options from :selectName
-     */
-    public function iSelectOptionsFrom(string $selectName, TableNode $options): void
-    {
-        $optionsHash = $options->getHash();
-        $this->browserContext->selectOption($selectName, $optionsHash[0]['option']);
-        for ($i = 1; $i < count($optionsHash); ++$i) {
-            $this->browserContext->additionallySelectOption($selectName, $optionsHash[$i]['option']);
-        }
-    }
 }

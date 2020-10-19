@@ -145,9 +145,9 @@ Feature: Roles management
     When I start creating new "Policy" in "Test Role edited"
       And I select policy "Content / Read"
       And I click on the edit action bar button "Create"
-      And I select options from "Content Type"
+      And I select limitation for "Content Type"
         | option  |
-        | File |
+        | File    |
       And I click on the edit action bar button "Update"
     Then I should be on "Role" "Test Role edited" page
       And there is a policy "Content/Read" with "Content Type: File" limitation on the "Test Role edited" policies list
@@ -169,12 +169,14 @@ Feature: Roles management
     Given there's "Test Role edited" on "Roles" list
       And I go to "Test Role edited" "Role" page
     When I start editing "Policy" "Content" from "Test Role edited"
-      And I select options from "Content Type"
+      And I select limitation for "Content Type"
         | option  |
         | Article |
         | Folder  |
       And I select subtree limitation "Users/Anonymous Users" for policy through UDW
-      And I select "Lock:Locked" from "State"
+      And I select limitation for "State"
+        | option      |
+        | Lock:Locked |
       And I click on the edit action bar button "Update"
     Then I should be on "Role" "Test Role edited" page
       And there are policies on the "Test Role edited" policies list
