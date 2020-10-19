@@ -21,7 +21,7 @@ class SearchPage extends Page
         parent::__construct($context);
         $this->route = '/search';
         $this->pageTitle = 'Search';
-        $this->pageTitleLocator = '.ez-search-form > .form-group .ez-label';
+        $this->pageTitleLocator = '.ez-page-title .ez-page-title__content-name';
         $this->fields = [
             'inputField' => '.ez-search-form #search_query',
             'buttonSearch' => '.ez-btn--search',
