@@ -25,7 +25,7 @@
             <div class="ez-content-edit-page-title__title">
                 {{ title }}
 
-                {% if description is defined and description %}
+                {% if description is defined and description and title is not empty  %}
                     <div class="ez-content-edit-page-title__icon-wrapper" title="{{ description }}">
                         <svg class="ez-icon ez-icon--medium">
                             <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#system-information"></use>
@@ -63,7 +63,7 @@
                 {% endif %}
             </div>
         </div>
-        
+
         <div class="ez-content-edit-page-title__aditional-data">
             {% if content is defined %}
                 <div class="ez-content-edit-page-title__details">
@@ -72,7 +72,7 @@
                     {% endif %}
                     <div>{{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }}</div>
                     <div>
-                        {{ 'content.details.content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }} | 
+                        {{ 'content.details.content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }} |
                         {% if is_published is defined and is_published == false %}
                             {{ 'content.details.parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
                         {% else %}
