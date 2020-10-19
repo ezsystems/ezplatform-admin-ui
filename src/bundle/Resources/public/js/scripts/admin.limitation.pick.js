@@ -2,6 +2,9 @@
     const SELECTOR_LOCATION_LIMITATION_BTN = '.ez-pick-location-limitation-button';
     const SELECTOR_EZ_TAG = '.ez-tag';
     const IDS_SEPARATOR = ',';
+    const SELECTOR_CUSTOM_DROPDOWN_CONTAINER = '.update-policy__action-wrapper';
+    const SELECTOR_SOURCE_INPUT = '.update-policy__source-input';
+    const SELECTOR_ITEMS = '.ez-custom-dropdown__items';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const udwContainer = doc.getElementById('react-udw');
@@ -184,5 +187,17 @@
 
         tags.forEach(attachTagEventHandlers.bind(null, limitationBtn));
         limitationBtn.addEventListener('click', openUDW, false);
+    });
+
+    doc.querySelectorAll(SELECTOR_CUSTOM_DROPDOWN_CONTAINER).forEach((container) => {
+        const sourceInput = container.querySelector(SELECTOR_SOURCE_INPUT);
+        const dropdown = new eZ.core.CustomDropdown({
+            container,
+            sourceInput,
+            itemsContainer: container.querySelector(SELECTOR_ITEMS),
+            hasDefaultSelection: true,
+        });
+
+        dropdown.init();
     });
 })(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator);

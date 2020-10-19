@@ -1,3 +1,21 @@
-{{ form_label(form.limitationValues) }}
-{{ form_errors(form.limitationValues) }}
-{{ form_widget(form.limitationValues) }}
+<div class="update-policy update-policy--action form-group">
+    <div class="update-policy__action-wrapper ez-custom-dropdown">
+        {{ form_label(form.limitationValues) }}
+        {{ form_widget(form.limitationValues, {
+            attr: {
+                class: 'update-policy__source-input',
+                hidden: true
+            }
+        }) }}
+
+        {% include '@ezdesign/ui/component/custom_dropdown.html.twig' with {
+            choices: form.limitationValues.vars.choices,
+            value: form.limitationValues.vars.value,
+            source_selector: '.update-policy__source-input',
+            multiple: form.limitationValues.vars.multiple,
+            choice_translation_domain: false
+        } %}
+
+        {{ form_errors(form.limitationValues) }}
+    </div>
+</div>
