@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc) {
     const CLASS_HIDDEN = 'ez-extra-actions--hidden';
     const CLASS_EXPANDED = 'ez-context-menu--expanded';
     const CLASS_ACTIVE_BUTTON = 'ez-btn--active-button';
@@ -19,7 +19,7 @@
                 const methodNameMenu = isHidden ? 'add' : 'remove';
                 const focusElement = actions.querySelector(btn.dataset.focusElement);
                 const detectClickOutside = (event) => {
-                    const isNotButton = event.target !== btn || !btn.contains(event.target);
+                    const isNotButton = !btn.contains(event.target);
                     const shouldCollapseMenu = !btns.includes(event.target);
                     const isNotExtraActions = !event.target.closest('.ez-extra-actions');
                     const isNotCalendar = !event.target.closest('.flatpickr-calendar');
