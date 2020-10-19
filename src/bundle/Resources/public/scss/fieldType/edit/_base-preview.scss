@@ -40,6 +40,12 @@
         padding: 0 calculateRem(16px);
         background: $ibexa-white;
 
+        &__actions {
+            .btn {
+                margin: 0 calculateRem(5px);
+            }
+        }
+
         &__visual {
             flex: 1 1 auto;
         }

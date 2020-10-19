@@ -31,6 +31,11 @@
         <target state="new">Remove translation</target>
         <note>key: content_translation_remove_form.remove</note>
       </trans-unit>
+      <trans-unit id="2c32d3b89f20704d8a78092c617310a52b22008c" resname="content_type.copy.copy">
+        <source>Create</source>
+        <target state="new">Create</target>
+        <note>key: content_type.copy.copy</note>
+      </trans-unit>
       <trans-unit id="4c29e9392116163c51f0e3d4d0c08ff96717f695" resname="content_type_groups_delete_form.delete">
         <source>Delete Content Type groups</source>
         <target state="new">Delete Content Type groups</target>
@@ -405,6 +410,71 @@
         <source>Section / View</source>
         <target>Section / View</target>
         <note>key: role.policy.section.view</note>
+      </trans-unit>
+      <trans-unit id="fe14b67513fcea11ed2cef38a90d5c4cf91aa532" resname="role.policy.segment">
+        <source>Segment</source>
+        <target>Segment</target>
+        <note>key: role.policy.segment</note>
+      </trans-unit>
+      <trans-unit id="3939393469a4421bacb5ed2e75f992f6837240ab" resname="role.policy.segment.all_functions">
+        <source>Segment / All functions</source>
+        <target>Segment / All functions</target>
+        <note>key: role.policy.segment.all_functions</note>
+      </trans-unit>
+      <trans-unit id="6b9aadd7750a5f4b5331660d42c358959335b826" resname="role.policy.segment.assign_to_user">
+        <source>Segment / Assign to user</source>
+        <target>Segment / Assign to user</target>
+        <note>key: role.policy.segment.assign_to_user</note>
+      </trans-unit>
+      <trans-unit id="09a0c2388423585b64a6703b275eca4bb2e92777" resname="role.policy.segment.create">
+        <source>Segment / Create</source>
+        <target>Segment / Create</target>
+        <note>key: role.policy.segment.create</note>
+      </trans-unit>
+      <trans-unit id="506b3e8dca9edee470906099f4e5e766e47e1506" resname="role.policy.segment.read">
+        <source>Segment / Read</source>
+        <target>Segment / Read</target>
+        <note>key: role.policy.segment.read</note>
+      </trans-unit>
+      <trans-unit id="9cc5de1950915f9efcff2fcd8f7180eb7071c5cb" resname="role.policy.segment.remove">
+        <source>Segment / Remove</source>
+        <target>Segment / Remove</target>
+        <note>key: role.policy.segment.remove</note>
+      </trans-unit>
+      <trans-unit id="0c055076bc059993f1e44092473b7006ae34df96" resname="role.policy.segment.update">
+        <source>Segment / Update</source>
+        <target>Segment / Update</target>
+        <note>key: role.policy.segment.update</note>
+      </trans-unit>
+      <trans-unit id="80900cd56c795ae32bc19af548c92ec378d7df63" resname="role.policy.segment_group">
+        <source>Segment group</source>
+        <target>Segment group</target>
+        <note>key: role.policy.segment_group</note>
+      </trans-unit>
+      <trans-unit id="f9cfe551c8bc01921b694a54d0038e93e289d38f" resname="role.policy.segment_group.all_functions">
+        <source>Segment group / All functions</source>
+        <target>Segment group / All functions</target>
+        <note>key: role.policy.segment_group.all_functions</note>
+      </trans-unit>
+      <trans-unit id="6540ac8a8b75f8b8865aba1ef496c7cf25230a2b" resname="role.policy.segment_group.create">
+        <source>Segment group / Create</source>
+        <target>Segment group / Create</target>
+        <note>key: role.policy.segment_group.create</note>
+      </trans-unit>
+      <trans-unit id="20ec96c7e8a543e6db46087e1bdf8d57536fa87f" resname="role.policy.segment_group.read">
+        <source>Segment group / Read</source>
+        <target>Segment group / Read</target>
+        <note>key: role.policy.segment_group.read</note>
+      </trans-unit>
+      <trans-unit id="7d82357527b29fc05f07816c1eaf134a07896df0" resname="role.policy.segment_group.remove">
+        <source>Segment group / Remove</source>
+        <target>Segment group / Remove</target>
+        <note>key: role.policy.segment_group.remove</note>
+      </trans-unit>
+      <trans-unit id="85913834465cd211b38d0d8b21e6828f94b38df3" resname="role.policy.segment_group.update">
+        <source>Segment group / Update</source>
+        <target>Segment group / Update</target>
+        <note>key: role.policy.segment_group.update</note>
       </trans-unit>
       <trans-unit id="33092ebd51699d4d3f598b8488e7bc5969038bff" resname="role.policy.setup">
         <source>Setup</source>

@@ -6,6 +6,11 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="7caaa79d36b0520845802cfa3f7ebcc94318115b" resname="content_type.action.copy">
+        <source>Copy</source>
+        <target state="new">Copy</target>
+        <note>key: content_type.action.copy</note>
+      </trans-unit>
       <trans-unit id="779646634b8d89b40f5abaa2ccd6107b300bf429" resname="content_type.action.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
@@ -45,6 +50,16 @@
         <source>Content Type</source>
         <target state="new">Content Type</target>
         <note>key: content_type.content_type</note>
+      </trans-unit>
+      <trans-unit id="e7a6e28719e705ca85e715114370d15deee0cd59" resname="content_type.copy.error">
+        <source>Error occoured while copying the '%name%' Content Type.</source>
+        <target state="new">Error occoured while copying the '%name%' Content Type.</target>
+        <note>key: content_type.copy.error</note>
+      </trans-unit>
+      <trans-unit id="31674753c7d944af06b98387a96ce93f36f6adb4" resname="content_type.copy.success">
+        <source>Content Type '%name%' successfully copied.</source>
+        <target state="new">Content Type '%name%' successfully copied.</target>
+        <note>key: content_type.copy.success</note>
       </trans-unit>
       <trans-unit id="529a1012c7fe5ca6fafdb5d070ac8ececfe94af6" resname="content_type.create">
         <source>Create a Content Type</source>
@@ -115,21 +130,6 @@
         <source>Draft of Content Type '%name%' already exists and is locked by '%userContentName%'</source>
         <target state="new">Draft of Content Type '%name%' already exists and is locked by '%userContentName%'</target>
         <note>key: content_type.edit.error.already_exists</note>
-      </trans-unit>
-      <trans-unit id="d637ca9df10c942896a6246a184726c077faf8f2" resname="content_type.copy.success">
-        <source>Content Type '%name%' successfully copied.</source>
-        <target state="new">Content Type '%name%' successfully copied.</target>
-        <note>key: content_type.copy.success</note>
-      </trans-unit>
-      <trans-unit id="cb9acf98480c87ed1b05d0007bcfe2a44cfadf61" resname="content_type.copy.error">
-        <source>Error occoured while copying the '%name%' Content Type.</source>
-        <target state="new">Error occoured while copying the '%name%' Content Type.</target>
-        <note>key: content_type.copy.error</note>
-      </trans-unit>
-      <trans-unit id="af74f7c5362aaee985bf8cda3dd75fc80751ce51" resname="content_type.action.copy">
-        <source>Copy</source>
-        <target state="new">Copy</target>
-        <note>key: content_type.action.copy</note>
       </trans-unit>
       <trans-unit id="f0338ef34826caa021c41ff85413e48601af30b7" resname="content_type.edit.select_language">
         <source>Select a language:</source>
