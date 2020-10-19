@@ -87,8 +87,8 @@
         <note>key: base.sign_in</note>
       </trans-unit>
       <trans-unit id="34e898c4a61c4925b523416b0c7ecd9574d8e48b" resname="base.visit_support">
-        <source><![CDATA[Visit the official documentation %ez_documentation_link%<br/>or get in touch with us: %ez_contact_link%']]></source>
-        <target state="new"><![CDATA[Visit the official documentation %ez_documentation_link%<br/>or get in touch with us: %ez_contact_link%']]></target>
+        <source><![CDATA[Visit the official documentation %ez_documentation_link%<br/>or get in touch with us: %ez_contact_link%]]></source>
+        <target state="new"><![CDATA[Visit the official documentation %ez_documentation_link%<br/>or get in touch with us: %ez_contact_link%]]></target>
         <note>key: base.visit_support</note>
       </trans-unit>
       <trans-unit id="d21d07085caa55b0fee2fc054a6878bbdb24ae78" resname="breadcrumb.admin">
