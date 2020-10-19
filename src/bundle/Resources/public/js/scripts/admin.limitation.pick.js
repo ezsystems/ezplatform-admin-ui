@@ -2,8 +2,8 @@
     const SELECTOR_LOCATION_LIMITATION_BTN = '.ez-pick-location-limitation-button';
     const SELECTOR_EZ_TAG = '.ez-tag';
     const IDS_SEPARATOR = ',';
-    const SELECTOR_CUSTOM_DROPDOWN_CONTAINER = '.update-policy__action-wrapper';
-    const SELECTOR_SOURCE_INPUT = '.update-policy__source-input';
+    const SELECTOR_CUSTOM_DROPDOWN_CONTAINER = '.ez-update-policy__action-wrapper';
+    const SELECTOR_SOURCE_INPUT = '.ez-update-policy__source-input';
     const SELECTOR_ITEMS = '.ez-custom-dropdown__items';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
