@@ -6,6 +6,7 @@
         border: 0;
         fill: currentColor;
         vertical-align: middle;
+        border-radius: $ibexa-border-radius;
 
         .ez-icon {
             margin-right: calculateRem(12px);
