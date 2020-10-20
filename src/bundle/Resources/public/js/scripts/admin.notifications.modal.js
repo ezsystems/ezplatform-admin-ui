@@ -104,7 +104,7 @@
         userName.dataset.count = notificationsInfo.pending;
         userName.classList.toggle('n-pending-notifications', pendingNotificationsExist);
 
-        doc.querySelector('.ez-user-menu__item--notifications').dataset.count = `${notificationsInfo.pending}`;
+        doc.querySelector('.ez-user-menu__item--notifications').dataset.count = notificationsInfo.pending;
     };
     const setPendingNotificationCount = (notificationsInfo) => {
         updatePendingNotificationsView(notificationsInfo);
