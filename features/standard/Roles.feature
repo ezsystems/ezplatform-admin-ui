@@ -145,6 +145,7 @@ Feature: Roles management
     When I start creating new "Policy" in "Test Role edited"
       And I select policy "Content / Read"
       And I click on the edit action bar button "Create"
+      And success notification that "Now you can set Limitations for the Policy." appears
       And I select limitation for "Content Type"
         | option  |
         | File    |
