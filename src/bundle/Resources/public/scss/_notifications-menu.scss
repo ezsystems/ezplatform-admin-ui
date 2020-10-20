@@ -1,22 +1,20 @@
 .ez-main-nav {
     .ez-user-menu {
-        &__name-wrapper {
-            .n-pending-notifications {
-                position: relative;
+        .n-pending-notifications {
+            position: relative;
 
-                &:before {
-                    content: '';
-                    width: calculateRem(8px);
-                    height: calculateRem(8px);
-                    border-radius: 50%;
-                    background: $ibexa-color-primary;
-                    position: absolute;
-                    top: calculateRem(18px);
-                    left: calculateRem(-15px);
-                }
+            &:before {
+                content: '';
+                width: calculateRem(8px);
+                height: calculateRem(8px);
+                border-radius: 50%;
+                background: $ibexa-color-primary;
+                position: absolute;
+                top: calculateRem(15px);
+                left: calculateRem(18px);
             }
         }
-
+        
         &__item {
             &--notifications {
                 position: relative;
@@ -28,13 +26,13 @@
                     top: 48%;
                     transform: translateY(-50%);
                     font-size: calculateRem(14px);
-                    color: $ibexa-black;
-                }
-
-                &:hover {
-                    &:after {
-                        color: $ibexa-color-font;
-                    }
+                    width: calculateRem(20px);
+                    height: calculateRem(20px);
+                    background: $ibexa-color-primary;
+                    border-radius: 50%;
+                    color: $ibexa-white;
+                    text-align: center;
+                    line-height: calculateRem(20px);
                 }
             }
         }

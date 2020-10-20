@@ -8,9 +8,8 @@
             display: flex;
             height: calculateRem(58px);
             width: calculateRem(200px);
-            padding: calculateRem(8px) calculateRem(24px) calculateRem(8px) calculateRem(8px);
+            padding: calculateRem(8px) calculateRem(24px) calculateRem(8px) calculateRem(16px);
             user-select: none;
-            justify-content: flex-end;
             transition: all $ibexa-admin-transition;
 
             &:before {
