@@ -48,11 +48,11 @@ const SelectedLocations = () => {
             <button
                 ref={refTogglerButton}
                 type="button"
-                className="c-selected-locations__toggle-button"
+                className="c-selected-locations__toggle-button btn btn-icon"
                 onClick={toggleExpanded}
                 title={togglerLabel}
                 data-tooltip-container-selector=".c-udw-tab">
-                <Icon name={iconName} extraClasses="ez-icon--small" />
+                <Icon name={iconName} extraClasses="ez-icon--small ez-icon--secondary" />
             </button>
         );
     };
@@ -68,19 +68,19 @@ const SelectedLocations = () => {
             <Fragment>
                 <button
                     type="button"
-                    className="c-selected-locations__confirm-button"
+                    className="c-selected-locations__confirm-button btn btn-icon"
                     onClick={() => onConfirm()}
                     title={confirmSelectionLabel}
                     data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="checkmark" extraClasses="ez-icon--small-medium ez-icon--dark" />
+                    <Icon name="checkmark" extraClasses="ez-icon--small-medium ez-icon--secondary" />
                 </button>
                 <button
                     type="button"
-                    className="c-selected-locations__clear-selection-button"
+                    className="c-selected-locations__clear-selection-button btn btn-icon"
                     onClick={clearSelection}
                     title={clearAllLabel}
                     data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="trash" extraClasses="ez-icon--small-medium ez-icon--dark" />
+                    <Icon name="trash" extraClasses="ez-icon--small-medium ez-icon--secondary" />
                 </button>
             </Fragment>
         );
