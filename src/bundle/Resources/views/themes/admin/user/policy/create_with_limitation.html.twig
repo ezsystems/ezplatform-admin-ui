@@ -22,28 +22,21 @@
 
 {% block form %}
     {{ form_start(form) }}
-    <section class="container ez-container">
-        <div class="card ez-card ez-card--light">
-            <div class="ez-card__header ml-0">
-                <h5>{{ 'policy.add.policy.title'|trans|desc('Adding Policy of type:') }}</h5>
-            </div>
-            <div class="ez-card__body">
-                {{ form.vars.value.module|capitalize ~ ' / ' ~ form.vars.value.function|capitalize }}
-                {{ form_widget(form.policy, {"attr": {"hidden": "hidden"}}) }}
-            </div>
-        </div>
+    <div class="container ez-container">
+        <section class="ez-fieldgroup">
+            <h2 class="ez-fieldgroup__name mb-3"><b>{{ 'policy.add.policy.title'|trans|desc('Adding Policy of type:') }}</b> {{ form.vars.value.module|capitalize ~ ' / ' ~ form.vars.value.function|capitalize }}</h2>
+        </section>
 
-        <div class="card ez-adminsection-edit ez-card ez-card--light">
-            <div class="card-header">
-                <h2>{{ 'policy.view.limitations.title'|trans|desc('Edit Limitations') }}</h2>
-            </div>
-            <div class="card-body">
+        <section class="ez-fieldgroup">
+            <div class="ez-fieldgroup__content">
+                {{ form_widget(form.policy, {"attr": {"hidden": "hidden"}}) }}
+
                 {% for limitation_form in form.limitations %}
                     {{ include(limitation_form.vars.template, {form: limitation_form}, with_context = false) }}
                 {% endfor %}
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     {{ form_widget(form.save, {"attr": {"hidden": "hidden"}}) }}
 

@@ -190,4 +190,19 @@ class RolesContext extends BusinessContext
 
         $udw->confirm();
     }
+
+    /**
+     * @When I select limitation for :selectName
+     */
+    public function iSelectOptionsFrom(string $selectName, TableNode $options): void
+    {
+        $updatePage = PageObjectFactory::createPage($this->browserContext, AdminUpdateItemPage::PAGE_NAME, '');
+        $values = [];
+
+        foreach ($options->getHash() as $option) {
+            $values[] = $option['option'];
+        }
+
+        $updatePage->selectLimitationValues($selectName, $values);
+    }
 }
