@@ -120,12 +120,26 @@
             height: calculateRem(24px);
             margin: 0 auto calculateRem(5px);
         }
+
+        &.ez-btn--active-button {
+            &:hover {
+                @extend .ez-btn--active-button;
+            }
+        }
     }
 }
 
 .ez-side-menu {
-    .btn-dark:hover {
-        background-color: lighten($ibexa-color-base-black, 7.5%);
+    .btn-dark {
+        &:hover {
+            background-color: lighten($ibexa-color-base-black, 7.5%);
+        }
+
+        &.ez-btn--content-tree-expanded {
+            &:hover {
+                @extend .ez-btn--content-tree-expanded;
+            }
+        }
     }
 }
 
