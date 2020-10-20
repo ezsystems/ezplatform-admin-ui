@@ -28,13 +28,13 @@
                     top: 48%;
                     transform: translateY(-50%);
                     font-size: calculateRem(14px);
-                    color: $ibexa-black;
-                }
-
-                &:hover {
-                    &:after {
-                        color: $ibexa-color-font;
-                    }
+                    width: calculateRem(20px);
+                    height: calculateRem(20px);
+                    background: $ibexa-color-primary;
+                    border-radius: 50%;
+                    color: $ibexa-white;
+                    text-align: center;
+                    line-height: calculateRem(20px);
                 }
             }
         }
