@@ -23,15 +23,15 @@
 {% block form %}
     {{ form_start(form) }}
     <section class="ez-fieldgroup">
-        <h2 class="ez-fieldgroup__name">{{ 'policy.view.policy.title'|trans|desc('Editing Policy of type:') }}</h2>
-        <div class="ez-fieldgroup__content">
+        <h2 class="ez-fieldgroup__name">
+            <b>{{ 'policy.view.policy.title'|trans|desc('Policy type:') }}</b>
             {{ policy.module|capitalize ~ ' / ' ~ policy.function|capitalize }}
-            {% do form.policy.setRendered %}
-        </div>
+        </h2>
+        {% do form.policy.setRendered %}
     </section>
 
-    <section class="ez-fieldgroup mt-3">
-        <h2 class="ez-fieldgroup__name">{{ 'policy.view.limitations.title'|trans|desc('Edit Limitations') }}</h2>
+    <section class="ez-fieldgroup">
+        <h2 class="ez-fieldgroup__name"><b>{{ 'policy.view.limitations.title'|trans|desc('Edit Limitations') }}</b></h2>
         <div class="ez-fieldgroup__content">
             {% for limitation_form in form.limitations %}
                 {{ include(limitation_form.vars.template, {form: limitation_form}, with_context = false) }}

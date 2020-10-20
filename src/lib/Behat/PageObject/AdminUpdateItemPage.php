@@ -36,6 +36,12 @@ class AdminUpdateItemPage extends Page
         $this->adminUpdateForm = ElementFactory::createElement($this->context, AdminUpdateForm::ELEMENT_NAME);
         $this->rightMenu = ElementFactory::createElement($this->context, RightMenu::ELEMENT_NAME);
         $this->pageTitle = 'Editing';
+        $this->fields = [
+            'limitationField' => '.ez-update-policy__action-wrapper',
+            'limitationDropdown' => '.ez-custom-dropdown__selection-info',
+            'limitationDropdownOption' => 'ul:not(.ez-custom-dropdown__items--hidden) .ez-custom-dropdown__item',
+            'limitationDropdownOptionRemove' => '.ez-custom-dropdown__remove-selection',
+        ];
     }
 
     public function verifyElements(): void
@@ -51,5 +57,31 @@ class AdminUpdateItemPage extends Page
             $this->getPageTitle(),
             'Wrong page title.'
         );
+    }
+
+    public function selectLimitationValues(string $selectName, array $values): void
+    {
+        try {
+            $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ez-label');
+            $currentlySelectedElements = $this->context->findAllElements($this->fields['limitationDropdownOptionRemove'], $baseElement);
+
+            for ($i = 0; $i < count($currentlySelectedElements); ++$i) {
+                $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ez-label');
+                $currentlySelectedElement = $this->context->findElement($this->fields['limitationDropdownOptionRemove'], $this->defaultTimeout, $baseElement);
+                $currentlySelectedElement->click();
+            }
+        } catch (\Exception $e) {
+            // no need to remove current selection
+        }
+
+        $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ez-label');
+        $baseElement->find('css', $this->fields['limitationDropdown'])->click();
+
+        foreach ($values as $value) {
+            $this->context->getElementByText($value, $this->fields['limitationDropdownOption'])->click();
+        }
+
+        $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ez-label');
+        $baseElement->find('css', $this->fields['limitationDropdown'])->click();
     }
 }
