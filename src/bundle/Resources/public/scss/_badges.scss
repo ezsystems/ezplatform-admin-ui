@@ -20,6 +20,7 @@
         align-items: center;
         background-color: $ibexa-white;
         border: calculateRem(1px) solid $ibexa-color-base;
+        color: $ibexa-color-font;
 
         &:hover {
             background-color: $ibexa-color-base-medium;
