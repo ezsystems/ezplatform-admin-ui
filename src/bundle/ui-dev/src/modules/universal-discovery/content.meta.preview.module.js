@@ -87,12 +87,12 @@ const ContentMetaPreview = () => {
             <div className="c-content-meta-preview__header">
                 <span className="c-content-meta-preview__content-name">{location.ContentInfo.Content.TranslatedName}</span>
                 <button
-                    className="c-content-meta-preview__toggle-bookmark-button"
+                    className="c-content-meta-preview__toggle-bookmark-button btn btn-icon"
                     onClick={toggleBookmarked}
                     title={bookmarkLabel}
                     data-placement="left"
                     data-tooltip-container-selector=".c-content-meta-preview">
-                    <Icon name={bookmarkIconName} extraClasses="ez-icon--small ez-icon--dark" />
+                    <Icon name={bookmarkIconName} extraClasses="ez-icon--small ez-icon--secondary" />
                 </button>
             </div>
             {renderActions()}
