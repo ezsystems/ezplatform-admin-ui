@@ -8,8 +8,13 @@
             }
         }) }}
 
+        {% set choices = [] %}
+        {% for choice in form.limitationValues.vars.choices %}
+            {% set choices = choices|merge(choice.choices is defined ? choice.choices : [choice]) %}
+        {% endfor %}
+
         {% include '@ezdesign/ui/component/custom_dropdown.html.twig' with {
-            choices: form.limitationValues.vars.choices,
+            choices: choices,
             value: form.limitationValues.vars.value,
             source_selector: '.ez-update-policy__source-input',
             multiple: form.limitationValues.vars.multiple,
