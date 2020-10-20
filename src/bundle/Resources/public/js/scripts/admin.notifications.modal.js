@@ -1,4 +1,4 @@
-(function(global, doc, eZ, Translator) {
+(function (global, doc, eZ, Translator) {
     let currentPageLink = null;
     let getNotificationsStatusErrorShowed = false;
     let lastFailedCountFetchNotificationNode = null;
@@ -99,10 +99,10 @@
     };
     const updatePendingNotificationsView = (notificationsInfo) => {
         const pendingNotificationsExist = notificationsInfo.pending;
-        const notificationNode = doc.querySelector('.ez-user-menu__item--notifications');
+        const userName = doc.querySelector('.ez-user-menu__name');
 
-        notificationNode.dataset.count = notificationsInfo.pending;
-        notificationNode.classList.toggle('n-pending-notifications', pendingNotificationsExist);
+        userName.dataset.count = notificationsInfo.pending;
+        userName.classList.toggle('n-pending-notifications', pendingNotificationsExist);
 
         doc.querySelector('.ez-user-menu__item--notifications').dataset.count = `${notificationsInfo.pending}`;
     };

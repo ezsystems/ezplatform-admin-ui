@@ -1,20 +1,22 @@
 .ez-main-nav {
     .ez-user-menu {
-        .n-pending-notifications {
-            position: relative;
+        &__name-wrapper {
+            .n-pending-notifications {
+                position: relative;
 
-            &:before {
-                content: '';
-                width: calculateRem(8px);
-                height: calculateRem(8px);
-                border-radius: 50%;
-                background: $ibexa-color-primary;
-                position: absolute;
-                top: calculateRem(15px);
-                left: calculateRem(18px);
+                &:before {
+                    content: '';
+                    width: calculateRem(8px);
+                    height: calculateRem(8px);
+                    border-radius: 50%;
+                    background: $ibexa-color-primary;
+                    position: absolute;
+                    top: calculateRem(18px);
+                    left: calculateRem(-15px);
+                }
             }
         }
-        
+
         &__item {
             &--notifications {
                 position: relative;
