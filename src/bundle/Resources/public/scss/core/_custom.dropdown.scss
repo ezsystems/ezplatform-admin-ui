@@ -59,6 +59,12 @@
 
     &__selected-item {
         @include tag;
+
+        display: inline-block;
+        max-width: calculateRem(380px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__selected-overflow-number {
