@@ -8,10 +8,10 @@
             }
         }) }}
 
-        {% set choices = [] %}
-        {% for choice in form.limitationValues.vars.choices %}
-            {% set choices = choices|merge(choice.choices is defined ? choice.choices : [choice]) %}
-        {% endfor %}
+        {% set choices = form.limitationValues.vars.choices
+            | map(choice => choice.choices is defined ? choice.choices : [choice])
+            | reduce((carry, choices) => carry|merge(choices), []) 
+        %}
 
         {% include '@ezdesign/ui/component/custom_dropdown.html.twig' with {
             choices: choices,
