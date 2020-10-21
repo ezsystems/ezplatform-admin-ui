@@ -27,6 +27,7 @@ class UniversalDiscoveryController extends Controller
 
     public function locationsAction(Request $request)
     {
+        sleep(4);
         return new JsonResponse(
             $this->provider->getLocations(
                 explode(

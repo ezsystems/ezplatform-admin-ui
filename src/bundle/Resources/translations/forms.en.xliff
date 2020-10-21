@@ -446,6 +446,11 @@
         <target>Segment / Update</target>
         <note>key: role.policy.segment.update</note>
       </trans-unit>
+      <trans-unit id="c105a8689a3c11e6c3cc7840662eab1832989141" resname="role.policy.segment.view_user_segment_list">
+        <source>Segment / View user segment list</source>
+        <target>Segment / View user segment list</target>
+        <note>key: role.policy.segment.view_user_segment_list</note>
+      </trans-unit>
       <trans-unit id="80900cd56c795ae32bc19af548c92ec378d7df63" resname="role.policy.segment_group">
         <source>Segment group</source>
         <target>Segment group</target>

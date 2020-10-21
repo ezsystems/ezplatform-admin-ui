@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="112px" height="110px" viewBox="0 0 112 110" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 3</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.858824 0 0 0 0 0.000000 0 0 0 0 0.196078 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+        <linearGradient x1="103.271314%" y1="-14.3355032%" x2="35.1816857%" y2="65.4601583%" id="linearGradient-2">
+            <stop stop-color="#E9551D" offset="0%"></stop>
+            <stop stop-color="#E61850" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Welcome-Screen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Welcome_screen" transform="translate(-891.000000, -218.000000)">
+            <g id="Group-3" transform="translate(897.000000, 221.000000)">
+                <g filter="url(#filter-1)" id="Group" stroke-linecap="round" stroke-linejoin="round">
+                    <g transform="translate(33.000000, 0.000000)" id="file-copyright-r" stroke-width="5">
+                        <path d="M32.9684211,84.6 L65.9368421,84.6 C67.9599483,84.6 69.6,82.9531865 69.6,80.9217391 L69.6,21.9776087 C69.6,9.83971058 59.8006914,0 47.7126316,0 L3.66315789,0 C1.64005165,0 0,1.64681349 0,3.67826087 L0,29.426087" id="Shape" stroke="url(#linearGradient-2)"></path>
+                        <path d="M51.2842105,0.29426087 L51.2842105,14.7130435 C51.2842105,16.7444909 52.9242622,18.3913043 54.9473684,18.3913043 L69.3069474,18.3913043" id="Shape" stroke="#000000"></path>
+                    </g>
+                </g>
+                <path d="M29.5,36.4098301 L63.045085,103.5 L-4.04508497,103.5 L29.5,36.4098301 Z" id="Triangle" stroke="#AE1164" stroke-width="5" fill="#FFFFFF" stroke-linejoin="round"></path>
+                <text id="!" font-family="NewPeninimMT, New Peninim MT" font-size="36.6" font-weight="normal" fill="#AE1164">
+                    <tspan x="24.8807129" y="89">!</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
