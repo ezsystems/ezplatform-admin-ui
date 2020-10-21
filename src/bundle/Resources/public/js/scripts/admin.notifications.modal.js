@@ -179,8 +179,7 @@
 
     const notificationsTable = modal.querySelector(SELECTOR_TABLE);
     currentPageLink = notificationsTable.dataset.notifications;
-    let interval = Number.parseInt(notificationsTable.dataset.notificationsCountInterval);
-    if (!interval) { interval = INTERVAL; }
+    const interval = Number.parseInt(notificationsTable.dataset.notificationsCountInterval) || INTERVAL;
 
     modal.querySelectorAll(SELECTOR_MODAL_RESULTS).forEach((link) => link.addEventListener('click', handleModalResultsClick, false));
 
