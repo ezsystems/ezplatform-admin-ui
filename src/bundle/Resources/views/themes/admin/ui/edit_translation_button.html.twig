@@ -9,7 +9,7 @@
             data-content-id="{{ contentId }}"
             data-language-code="{{ language.languageCode }}">
         <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+            <use xlink:href="{{ ez_icon_path('edit') }}"></use>
         </svg>
     </button>
 {% else %}
@@ -17,7 +17,7 @@
     <div class="ez-translation-selector">
         <button class="btn btn-icon mx-2 ez-btn ez-btn--translations-list-toggler" title="{{ title }}">
             <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                <use xlink:href="{{ ez_icon_path('edit') }}"></use>
             </svg>
         </button>
         <div class="ez-translation-selector__list-wrapper ez-translation-selector__list-wrapper--hidden" data-top-offset={{ top_offset }}>

@@ -6,7 +6,7 @@
         <label class="ez-translation__label">
             {{ parent() }}
             <svg class="ez-icon">
-                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#checkmark"></use>
+                <use xlink:href="{{ ez_icon_path('checkmark') }}"></use>
             </svg>
             {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
         </label>

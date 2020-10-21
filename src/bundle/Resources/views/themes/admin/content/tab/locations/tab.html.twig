@@ -39,10 +39,10 @@
                             <label class="ez-checkbox-icon {{ not location.explicitlyHidden ? 'is-checked' }}{% if not can_hide[location.id] %} disabled{% endif %}"
                                    title="{{ 'tab.locations.visibility'|trans|desc('Visibility') }}">
                                 <svg class="ez-icon ez-icon-view">
-                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view"></use>
+                                    <use xlink:href="{{ ez_icon_path('view') }}"></use>
                                 </svg>
                                 <svg class="ez-icon ez-icon-view-hide">
-                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#view-hide"></use>
+                                    <use xlink:href="{{ ez_icon_path('view-hide') }}"></use>
                                 </svg>
                                 <input
                                     class="ez-checkbox-icon__checkbox"
@@ -93,7 +93,7 @@
             title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}"
             {{ not can_add ? 'disabled' }}>
         <svg class="ez-icon ez-icon-create">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+            <use xlink:href="{{ ez_icon_path('create') }}"></use>
         </svg>
     </button>
 
@@ -107,7 +107,7 @@
             data-target="#{{ modal_data_target }}"
             title="{{ 'tab.locations.action.delete'|trans|desc('Delete Location') }}">
         <svg class="ez-icon ez-icon-trash">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
         </svg>
     </button>
     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {

@@ -86,7 +86,7 @@ eZ.addConfig(
             id: 'bookmarks',
             component: BookmarksTabModule,
             label: Translator.trans(/*@Desc("Bookmarks")*/ 'bookmarks.label', {}, 'universal_discovery_widget'),
-            icon: '/bundles/ezplatformadminui/img/ez-icons.svg#bookmark',
+            icon: window.eZ.helpers.icon.getIconPath('bookmark'),
         },
     ],
     true
