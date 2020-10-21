@@ -4,12 +4,12 @@
     
     .ez-error-page {
         width: 100%;
-        height: 60vh;
 
         &__logo-link {
             display: inline-block;
             max-width: calculateRem(88px);
             max-height: calculateRem(24px);
+            margin-top: calculateRem(15px);
         }
 
         &__logo-image {
@@ -42,63 +42,16 @@
                 font-weight: bold;
                 margin-bottom: 0;
             }
+
+            &--actions {
+                margin-top: calculateRem(80px);
+            }
         }
 
         &--top-section {
+            height: calculateRem(500px);
             background-color: $ibexa-white;
             background-image: url('/bundles/ezplatformadminui/img/errors/background.png');
         }
     }
 }
-
-// .error-page-wrapper {
-//     width: 100vw;
-//     height: 100vh;
-//     background-color: $ibexa-white;
-//     background-image: url('/bundles/ezplatformadminui/img/errors/background.png');
-
-
-//     .error-page {
-//         height: 100vh;
-//         flex-direction: column;
-//         align-items: center;
-//         justify-content: center;
-
-//         &__title {
-//             text-align: center;
-//             font-size: calculateRem(58px);
-//         }
-
-//         &__messages {
-//             display: flex;
-//             flex-direction: column;
-//             align-items: center;
-//         }
-
-//         &__message {
-//             text-align: center;
-//             font-size: calculateRem(16px);
-
-//             &--title {
-//                 margin: calculateRem(70px) auto;
-//                 font-size: calculateRem(45px);
-//             }
-
-//             &--content {
-//                 max-width: calculateRem(630px);
-//             }
-
-//             &--actions {
-//                 max-width: calculateRem(700px);
-//                 margin-top: calculateRem(40px);
-//                 font-size: calculateRem(21px);
-//                 line-height: calculateRem(38px);
-//             }
-//         }
-//     }
-
-//     &__link {
-//         color: #0058ba;
-//         text-decoration: none;
-//     }
-// }
