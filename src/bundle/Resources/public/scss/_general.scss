@@ -183,3 +183,9 @@ select {
     padding: calculateRem(16px);
     background: $ibexa-white;
 }
+
+.ez-error-site {
+    .ez-main-container {
+        padding: 0;
+    }
+}
