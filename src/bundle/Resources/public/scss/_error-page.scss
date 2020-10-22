@@ -1,7 +1,7 @@
 .ez-error-page-wrapper {
     width: 100%;
     height: 100vh;
-    
+
     .ez-error-page {
         width: 100%;
 
@@ -24,9 +24,18 @@
             flex-direction: column;
         }
 
+        &__icon-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         &__icon {
             margin-top: calculateRem(100px);
             margin-bottom: calculateRem(20px);
+            width: calculateRem(112px);
+            height: calculateRem(110px);
+            fill: $ibexa-color-danger;
         }
 
         &__title {

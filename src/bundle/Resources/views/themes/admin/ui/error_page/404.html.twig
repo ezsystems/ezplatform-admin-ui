@@ -6,18 +6,17 @@
     {% endif %}
 {% endblock %}
 
-{% block body_class %}ez-has-no-sidebars{% endblock %}
+{% block body_class %}ez-has-no-sidebars ez-error-site{% endblock %}
 
 {% block content %}
     <div class="ez-error-page-wrapper">
         <div class="ez-error-page ez-error-page--top-section">
-            <a href="{{ url('ezplatform.dashboard') }}" class="ez-error-page__logo-link">
-                <img class="ez-error-page__logo-image" src="/bundles/ezplatformadminui/img/ibexa-logo.svg" alt="Ibexa" />
-            </a>
             <div class="ez-error-page__messages-container">
-                <svg class="ez-error-page__icon">
-                    <use xlink:href="{{ ez_icon_path('error-icon') }}"></use>
-                </svg>
+                <div class="ez-error-page__icon-wrapper">
+                    <svg class="ez-error-page__icon">
+                        <use xlink:href="{{ ez_icon_path('error-icon') }}"></use>
+                    </svg>
+                </div>
                 <h2 class="ez-error-page__title">{{ 'error.page.404.title'|trans|desc('Page not found') }}</h2>
                 <p class="ez-error-page__message ez-error-page__message--title">{{ 'error.page.404.sub_title'|trans|raw|desc('You probably weren\'t expecting to land here.') }}</p>
                 <p class="ez-error-page__message ez-error-page__message--content">{{ 'error.page.404.message'|trans|raw|desc('The page you requested was not found.<br/> It might have been deleted or it is temporarily unavailable.') }}</p>
