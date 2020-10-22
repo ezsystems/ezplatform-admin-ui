@@ -30,7 +30,7 @@ eZ.addConfig(
             id: 'browse',
             component: BrowseTabModule,
             label: Translator.trans(/*@Desc("Browse")*/ 'browse.label', {}, 'universal_discovery_widget'),
-            icon: '/bundles/ezplatformadminui/img/ez-icons.svg#browse',
+            icon: window.eZ.helpers.icon.getIconPath('browse'),
         },
     ],
     true

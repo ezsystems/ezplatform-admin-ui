@@ -58,7 +58,7 @@
                                 >
                                 <button class="btn btn-icon ez-btn--reset-creator">
                                     <svg class="ez-icon ez-icon--secondary ez-icon--medium ez-icon--reset">
-                                        <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>
+                                        <use xlink:href="{{ ez_icon_path('circle-close') }}"></use>
                                     </svg>
                                 </button>
                             </div>
@@ -121,7 +121,7 @@
                                 data-target="#{{ modal_data_target }}"
                                 title="{{ 'trash.delete'|trans|desc('Delete') }}">
                                 <svg class="ez-icon ez-icon-trash">
-                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                                    <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                                 </svg>
                             </button>
                             {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {

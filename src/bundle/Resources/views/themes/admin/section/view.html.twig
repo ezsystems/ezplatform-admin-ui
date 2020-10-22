@@ -32,7 +32,7 @@
                         {{ modalDataAttributes }}
                         title="{{ 'section.action.delete'|trans|desc('Delete Section') }}">
                         <svg class="ez-icon">
-                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
                     {% if deletable %}
@@ -62,7 +62,7 @@
                         title="{{ 'section.edit'|trans|desc('Edit') }}"
                         class="btn btn-icon mx-2">
                         <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                            <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                         </svg>
                     </a>
                 {% endif %}

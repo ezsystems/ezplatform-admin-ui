@@ -18,7 +18,7 @@
                             {% if not can_create_content %}disabled{% endif %}
                         >
                             <svg class="ez-icon ez-icon--small-medium ez-icon--primary ez-icon-create">
-                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                                <use xlink:href="{{ ez_icon_path('create') }}"></use>
                             </svg>
                             <span>{{ 'dashboard.create'|trans|desc('Create') }}</span>
                         </button>

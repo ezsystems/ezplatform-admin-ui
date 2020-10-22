@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Icon = (props) => {
-    const linkHref = props.customPath ? props.customPath : `/bundles/ezplatformadminui/img/ez-icons.svg#${props.name}`;
+    const linkHref = props.customPath ? props.customPath : window.eZ.helpers.icon.getIconPath(props.name);
     let className = 'ez-icon';
 
     if (props.extraClasses) {

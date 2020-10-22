@@ -80,7 +80,7 @@
                                title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}"
                                {% if edit_draft_disabled %}disabled{% endif %}>
                                 <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                    <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </a>
                         {% elseif is_draft %}
@@ -96,7 +96,7 @@
                                     class="btn btn-icon mx-2 ez-btn--content-draft-edit"
                                     title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}">
                                 <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                    <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </button>
                         {% endif %}
@@ -107,7 +107,7 @@
                                     data-version-no="{{ version.versionNo }}"
                                     data-language-code="{{ version.initialLanguageCode }}">
                                 <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#archive-restore"></use>
+                                    <use xlink:href="{{ ez_icon_path('archive-restore') }}"></use>
                                 </svg>
                             </button>
                         {% endif %}

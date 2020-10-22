@@ -91,7 +91,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 $this->createMenuItem(self::ITEM_BOOKMARK, [
                     'route' => 'ezplatform.bookmark.list',
                     'extras' => [
-                        'icon_url' => '/bundles/ezplatformadminui/img/ez-icons.svg#bookmark-manager',
+                        'icon_url' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#bookmark-manager',
                         'orderNumber' => 20,
                     ], ])
             );
@@ -101,7 +101,7 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     $this->createMenuItem(self::ITEM_DRAFTS, [
                         'route' => 'ezplatform.content_draft.list',
                         'extras' => [
-                            'icon_url' => '/bundles/ezplatformadminui/img/ez-icons.svg#content-draft',
+                            'icon_url' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#content-draft',
                             'orderNumber' => 30,
                         ],
                     ])
@@ -112,14 +112,14 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 $this->createMenuItem(self::ITEM_USER_SETTINGS, [
                     'route' => 'ezplatform.user_settings.list',
                     'extras' => [
-                        'icon_url' => '/bundles/ezplatformadminui/img/ez-icons.svg#user',
+                        'icon_url' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#user',
                         'orderNumber' => 50,
                     ], ])
             );
 
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout', 'extras' => [
-                    'icon_url' => '/bundles/ezplatformadminui/img/ez-icons.svg#logout',
+                    'icon_url' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#logout',
                     'orderNumber' => 60,
                 ]])
             );

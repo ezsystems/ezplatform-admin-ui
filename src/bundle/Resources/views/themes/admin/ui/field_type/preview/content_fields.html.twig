@@ -243,13 +243,13 @@
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezbinaryfile')|trim}) %}
         <div {{ block( 'field_attributes' ) }}>
             <svg class="ez-icon ez-icon--file">
-                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#file"></use>
+                <use xlink:href="{{ ez_icon_path('file') }}"></use>
             </svg>
             {{ field.value.fileName }}
             {{ field.value.fileSize|ez_file_size( 1 ) }}
             <a class="btn btn-icon ml-4" download href="{{ path( route_reference.getRoute(), route_reference.getParams() ) }}">
                 <svg class="ez-icon ez-icon--download ez-icon--small-medium">
-                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#download"></use>
+                    <use xlink:href="{{ ez_icon_path('download') }}"></use>
                 </svg>
             </a>
         </div>
@@ -444,7 +444,7 @@
     <div class="ez-field-preview__actions-wrapper">
         <a class="ez-field-preview__action ez-field-preview__action--preview" href="{{ field.value.uri }}" target="_blank">
             <svg class="ez-icon ez-icon--medium ez-icon--light">
-                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
+                <use xlink:href="{{ ez_icon_path('open-newtab') }}"></use>
             </svg>
         </a>
     </div>

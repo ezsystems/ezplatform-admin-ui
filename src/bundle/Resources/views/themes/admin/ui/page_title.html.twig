@@ -9,7 +9,7 @@
             <h4 class="ez-page-title__content-type-name">
                 {% if icon_name is defined%}
                     <svg class="ez-icon ez-icon--small ez-icon--base-dark ez-icon-{{ icon_name }}">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ icon_name }}"></use>
+                        <use xlink:href="{{ ez_icon_path(icon_name) }}"></use>
                     </svg>
                 {% elseif content_type_identifier is defined %}
                     <svg class="ez-icon ez-icon--small ez-icon--base-dark ez-icon-{{ content_type_identifier }}">

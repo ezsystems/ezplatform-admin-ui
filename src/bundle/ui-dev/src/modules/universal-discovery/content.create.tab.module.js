@@ -122,7 +122,7 @@ eZ.addConfig(
             id: 'content-create',
             component: ContentCreateTabModule,
             label: Translator.trans(/*@Desc("Content create")*/ 'content_create.label', {}, 'universal_discovery_widget'),
-            icon: '/bundles/ezplatformadminui/img/ez-icons.svg#search',
+            icon: window.eZ.helpers.icon.getIconPath('search'),
             isHiddenOnList: true,
         },
     ],
