@@ -5,15 +5,23 @@
 {% block body_class %}ez-has-no-sidebars{% endblock %}
 
 {% block content %}
-<div class="row error-page-wrapper">
-    <div class="container">
-        <div class="row error-page">
-            <h2 class="error-page__title">{{ 'error.page.403.title'|trans|desc('You don\'t have permission') }}</h2>
-            <div class="error-page__messages">                                                                                                      
-                <p class="error-page__message error-page__message--title">{{ 'error.page.403.sub_title'|trans|raw|desc('Not possible to retrieve or access this page.') }}</p>
-                <p class="error-page__message error-page__message--actions">{{ 'error.page.403.actions'|trans({ '%dashboard%': path('ezplatform.dashboard'), '%search%': path('ezplatform.search') })|raw|desc('Please contact your Administrator to request access to this content or modify your profile.<br/>Otherwise, go back to <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.') }}</p>
+    <div class="ez-error-page-wrapper">
+        <div class="ez-error-page ez-error-page--top-section">
+            <a href="{{ url('ezplatform.dashboard') }}" class="ez-error-page__logo-link">
+                <img class="ez-error-page__logo-image" src="/bundles/ezplatformadminui/img/ibexa-logo.svg" alt="Ibexa" />
+            </a>
+            <div class="ez-error-page__messages-container">
+                <svg class="ez-error-page__icon">
+                    <use xlink:href="{{ ez_icon_path('error-icon') }}"></use>
+                </svg>
+                <h2 class="ez-error-page__title">{{ 'error.page.403.title'|trans|desc('You don\'t have permission') }}</h2>
+                <p class="ez-error-page__message ez-error-page__message--title">{{ 'error.page.403.sub_title'|trans|raw|desc('Not possible to retrieve or access this page.') }}</p>
             </div>
         </div>
+        <div class="ez-error-page ez-error-page--bottom-section">
+            <p class="ez-error-page__message ez-error-page__message--actions">{{ 'error.page.403.actions'|trans({ '%dashboard%': path('ezplatform.dashboard'), '%search%': path('ezplatform.search') })|raw|desc('Please contact your Administrator to request access to this content or modify your profile.<br/>Otherwise, go back to <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.') }}</p>
+        </div>
     </div>
-</div>
 {% endblock %}
+
+

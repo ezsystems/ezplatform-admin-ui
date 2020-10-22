@@ -212,8 +212,8 @@
         <note>key: error.page.404.title</note>
       </trans-unit>
       <trans-unit id="a599d59a63814826906caa9842f0b3c33db24d09" resname="error.page.default.actions">
-        <source><![CDATA[Contact your Administrator and inform them about the time the error occurred, the URL in your browser window, and anything related that you think may have caused the error.<br/>You can also go back or try to reload the application.]]></source>
-        <target state="new"><![CDATA[Contact your Administrator and inform them about the time the error occurred, the URL in your browser window, and anything related that you think may have caused the error.<br/>You can also go back or try to reload the application.]]></target>
+        <source><![CDATA[<b>Contact your Administrator and inform them about</b><br/> the time the error occurred, the URL in your browser window, and anything related<br/>that you think may have caused the error.<br/>You can also go back or try to reload the application.]]></source>
+        <target state="new"><![CDATA[<b>Contact your Administrator and inform them about</b><br/> the time the error occurred, the URL in your browser window, and anything related<br/>that you think may have caused the error.<br/>You can also go back or try to reload the application.]]></target>
         <note>key: error.page.default.actions</note>
       </trans-unit>
       <trans-unit id="8338c190462d420926edf71e8d4cddcae710d361" resname="error.page.default.message">
