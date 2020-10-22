@@ -1,49 +1,57 @@
-.error-page-wrapper {
-    width: 100vw;
+.ez-error-page-wrapper {
+    width: 100%;
     height: 100vh;
-    background: $ibexa-white;
+    
+    .ez-error-page {
+        width: 100%;
 
-    .error-page {
-        height: 100vh;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        &__logo-link {
+            display: inline-block;
+            max-width: calculateRem(88px);
+            max-height: calculateRem(24px);
+            margin-top: calculateRem(15px);
+        }
+
+        &__logo-image {
+            display: inline-block;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        &__messages-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__icon {
+            margin-top: calculateRem(100px);
+            margin-bottom: calculateRem(20px);
+        }
 
         &__title {
             text-align: center;
-            font-size: calculateRem(58px);
-        }
-
-        &__messages {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-size: calculateRem(32px);
+            margin-bottom: calculateRem(32px);
         }
 
         &__message {
             text-align: center;
-            font-size: calculateRem(16px);
 
             &--title {
-                margin: calculateRem(70px) auto;
-                font-size: calculateRem(45px);
-            }
-
-            &--content {
-                max-width: calculateRem(630px);
+                font-weight: bold;
+                margin-bottom: 0;
             }
 
             &--actions {
-                max-width: calculateRem(700px);
-                margin-top: calculateRem(40px);
-                font-size: calculateRem(21px);
-                line-height: calculateRem(38px);
+                margin-top: calculateRem(80px);
             }
         }
-    }
 
-    &__link {
-        color: #0058ba;
-        text-decoration: none;
+        &--top-section {
+            height: calculateRem(500px);
+            background-color: $ibexa-white;
+            background-image: url('/bundles/ezplatformadminui/img/errors/background.png');
+        }
     }
 }
