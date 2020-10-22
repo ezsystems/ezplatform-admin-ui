@@ -42,7 +42,7 @@
                            class="btn btn-icon mx-2 float-right"
                            title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
                             <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                             </svg>
                         </a>
                     </td>
@@ -111,7 +111,7 @@
                                         data-content-id="{{ content.id }}"
                                         data-language-code="{{ content.mainLanguageCode }}">
                                     <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                        <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                     </svg>
                                 </button>
                             {% endif %}

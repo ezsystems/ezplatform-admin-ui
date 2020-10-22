@@ -12,7 +12,7 @@
                     href="{{ path('ezplatform.policy.create', {roleId: role.id}) }}"
                     class="btn btn-icon">
                     <svg class="ez-icon ez-icon-create">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                        <use xlink:href="{{ ez_icon_path('create') }}"></use>
                     </svg>
                 </a>
                 {% set modal_data_target = 'delete-policies-modal' %}
@@ -25,7 +25,7 @@
                     data-target="#{{ modal_data_target }}"
                     title="{{ 'policy.view.list.action.delete'|trans|desc('Delete Policy') }}">
                     <svg class="ez-icon ez-icon-trash">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                     </svg>
                 </button>
                 {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
@@ -97,7 +97,7 @@
                             href="{{ path('ezplatform.policy.update', { roleId: role.id, policyId: policy.id }) }}"
                             class="btn btn-icon mx-2{{ not is_editable[policy.id] ? ' disabled' : '' }}">
                             <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                             </svg>
                         </a>
                     {% endif %}

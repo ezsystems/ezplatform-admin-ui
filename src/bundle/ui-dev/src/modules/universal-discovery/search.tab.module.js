@@ -29,7 +29,7 @@ eZ.addConfig(
             id: 'search',
             component: SearchTabModule,
             label: Translator.trans(/*@Desc("Search")*/ 'search.label', {}, 'universal_discovery_widget'),
-            icon: '/bundles/ezplatformadminui/img/ez-icons.svg#search',
+            icon: window.eZ.helpers.icon.getIconPath('search'),
         },
     ],
     true

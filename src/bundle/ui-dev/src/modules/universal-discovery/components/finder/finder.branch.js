@@ -87,7 +87,7 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
         const contentName = selectedLocation ? selectedLocation.location.ContentInfo.Content.TranslatedName : '';
         const iconPath = locationData.location
             ? contentTypesMap[locationData.location.ContentInfo.Content.ContentType._href].thumbnail
-            : '/bundles/ezplatformadminui/img/ez-icons.svg#folder';
+            : window.eZ.helpers.icon.getIconPath('folder');
 
         return (
             <div className="c-finder-branch__info-wrapper">

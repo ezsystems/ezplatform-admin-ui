@@ -33,7 +33,7 @@
                         class="btn btn-icon"
                     >
                         <svg class="ez-icon ez-icon-create">
-                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#create"></use>
+                            <use xlink:href="{{ ez_icon_path('create') }}"></use>
                         </svg>
                     </a>
                 {% endif %}
@@ -49,7 +49,7 @@
                         title="{{ 'section.delete'|trans|desc('Delete Section') }}"
                     >
                         <svg class="ez-icon ez-icon-trash">
-                            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
                     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
@@ -104,7 +104,7 @@
                                 data-udw-config="{{ ez_udw_config('multiple', {'type': 'section_assign'}) }}"
                                 class="btn btn-icon mx-3">
                                 <svg class="ez-icon ez-icon-relations ez-icon--secondary btn--open-udw">
-                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-section"></use>
+                                    <use xlink:href="{{ ez_icon_path('assign-section') }}"></use>
                                 </svg>
                             </a>
                         {% endif %}
@@ -113,7 +113,7 @@
                                href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
                                class="btn btn-icon mx-2">
                                 <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#edit"></use>
+                                    <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </a>
                         {% endif %}

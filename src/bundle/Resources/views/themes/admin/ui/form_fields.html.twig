@@ -87,7 +87,7 @@
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore'|trans({},'trash')|desc('Restore') }}">
         <svg class="ez-icon">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#restore"></use>
+            <use xlink:href="{{ ez_icon_path('restore') }}"></use>
         </svg>
         {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
     </button>
@@ -107,7 +107,7 @@
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore_new_location'|trans({},'trash')|desc("Restore in a new Location") }}">
         <svg class="ez-icon">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#restore-parent"></use>
+            <use xlink:href="{{ ez_icon_path('restore-parent') }}"></use>
         </svg>
         {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
     </button>
@@ -132,7 +132,7 @@
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{ title|default('') }}">
         <svg class="ez-icon">
-            <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#{{ icon|default('') }}"></use>
+            <use xlink:href="{{ ez_icon_path(icon|default('')) }}"></use>
         </svg>
     </button>
 {%- endblock table_header_tool_btn -%}
@@ -154,7 +154,7 @@
         <input type="text" class="ez-picker__input form-control" readonly="readonly">
         <button type="button" class="ez-picker__btn--clear-input">
             <svg class="ez-icon ez-icon--medium">
-                <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#circle-close"></use>
+                <use xlink:href="{{ ez_icon_path('circle-close') }}"></use>
             </svg>
         </button>
         {% set attr = attr|merge({ 'hidden': true, 'class': 'ez-picker__form-input' }) %}

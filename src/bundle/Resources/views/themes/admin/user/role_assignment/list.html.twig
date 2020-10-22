@@ -12,7 +12,7 @@
                     title="{{ 'role_assignment.view.list.action.add'|trans|desc('Assign to Users/Groups') }}"
                     class="btn btn-icon">
                     <svg class="ez-icon ez-icon-relations ez-icon--secondary">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#assign-user"></use>
+                        <use xlink:href="{{ ez_icon_path('assign-user') }}"></use>
                     </svg>
 
                 </a>
@@ -26,7 +26,7 @@
                     data-target="#{{ modal_data_target }}"
                     title="{{ 'role_assignment.view.list.action.delete'|trans|desc('Unassign') }}">
                     <svg class="ez-icon ez-icon-trash">
-                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                        <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                     </svg>
                 </button>
                 {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {

@@ -20,7 +20,7 @@
 {% block ezplatform_fieldtype_ezimageasset_widget_container %}
     <div class="ez-field-edit-spinner">
         <svg class="ez-icon ez-spin">
-            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#spinner"></use>
+            <use xlink:href="{{ ez_icon_path('spinner') }}"></use>
         </svg>
     </div>
     <div{% with { attr: preview_attr } %}{{ block('attributes') }}{% endwith %}>
@@ -87,7 +87,7 @@
                         title="{{ 'fieldtype.ezimageasset.delete'|trans|desc('Delete image') }}"
                     >
                         <svg class="ez-icon ez-icon--small-medium">
-                            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#trash"></use>
+                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
                     <a 
@@ -97,7 +97,7 @@
                         target="_blank"
                     >
                         <svg class="ez-icon ez-icon--small-medium">
-                            <use xlink:href="/bundles/ezplatformadminui/img/ez-icons.svg#open-newtab"></use>
+                            <use xlink:href="{{ ez_icon_path('open-newtab') }}"></use>
                         </svg>
                     </a>
                 </div>
