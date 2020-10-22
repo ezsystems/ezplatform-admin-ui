@@ -11,7 +11,9 @@
                 <img class="ez-error-page__logo-image" src="/bundles/ezplatformadminui/img/ibexa-logo.svg" alt="Ibexa" />
             </a>
             <div class="ez-error-page__messages-container">
-                <img class="ez-error-page__icon" src="/bundles/ezplatformadminui/img/errors/error-icon.svg" />
+                <svg class="ez-error-page__icon">
+                    <use xlink:href="{{ ez_icon_path('error-icon') }}"></use>
+                </svg>
                 <h2 class="ez-error-page__title">{{ 'error.page.403.title'|trans|desc('You don\'t have permission') }}</h2>
                 <p class="ez-error-page__message ez-error-page__message--title">{{ 'error.page.403.sub_title'|trans|raw|desc('Not possible to retrieve or access this page.') }}</p>
             </div>
