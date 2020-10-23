@@ -15,12 +15,18 @@ const TopMenu = ({ actionsDisabledMap }) => {
             return actionB.priority - actionA.priority;
         });
     }, []);
+    const backTitle = Translator.trans(/*@Desc("Back")*/ 'back.label', {}, 'universal_discovery_widget');
 
     return (
         <div className="c-top-menu">
             <span className="c-top-menu__cancel-btn-wrapper">
-                <button className="c-top-menu__cancel-btn" type="button" onClick={cancelUDW}>
-                    <Icon name="caret-back" extraClasses="ez-icon--dark ez-icon--small" />
+                <button
+                    className="c-top-menu__cancel-btn btn btn-icon"
+                    type="button"
+                    onClick={cancelUDW}
+                    title={backTitle}
+                    data-tooltip-container-selector=".c-top-menu__cancel-btn-wrapper">
+                    <Icon name="caret-back" extraClasses="ez-icon--secondary ez-icon--small" />
                 </button>
             </span>
             <span className="c-top-menu__title-wrapper">{title}</span>

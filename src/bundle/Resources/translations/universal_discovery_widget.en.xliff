@@ -11,6 +11,11 @@
         <target state="new">Select Location</target>
         <note>key: add_location.title</note>
       </trans-unit>
+      <trans-unit id="ee801b1c241922c073d22e35c766bb8c48c45fcb" resname="back.label">
+        <source>Back</source>
+        <target state="new">Back</target>
+        <note>key: back.label</note>
+      </trans-unit>
       <trans-unit id="c88355e5be31353761adbfb5bd8dd3f4c6a61a27" resname="bookmarks.label">
         <source>Bookmarks</source>
         <target state="new">Bookmarks</target>
