@@ -130,7 +130,7 @@
         transform: scaleY(1);
         transform-origin: top center;
         transition: transform 0.2s $ibexa-admin-transition;
-        width: 50%;
+        max-width: calculateRem(500px);
         background: $ibexa-white;
         border: calculateRem(1px) solid $ibexa-color-base-dark;
         color: $ibexa-color-font;
