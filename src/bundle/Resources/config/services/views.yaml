@@ -13,6 +13,8 @@ services:
             $viewConfigurator: '@ezpublish.view.configurator'
             $viewParametersInjector: '@ezpublish.view.view_parameters.injector.dispatcher'
             $contentActionDispatcher: '@ezplatform.content_forms.action_dispatcher.content'
+        tags:
+            - { name: ibexa.view_builder }
 
     EzSystems\EzPlatformAdminUi\View\Provider\ContentTranslateView\Configured:
         arguments:
