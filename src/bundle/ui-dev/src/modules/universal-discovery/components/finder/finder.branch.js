@@ -112,6 +112,7 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
             <Fragment>
                 <div className="c-finder-branch__items-wrapper" onScroll={loadMore} style={{ width }}>
                     {renderLoadingSpinner()}
+
                     {subitems.map(({ location }) => (
                         <FinderLeaf key={location.id} location={location} />
                     ))}
@@ -133,14 +134,16 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
     }
 
     useEffect(() => {
-        if (isLoading || !loadedLocations.subitems) {
-            return;
+        if (loadedLocations.subitems) {
+            const data = { ...locationData, ...loadedLocations, subitems: [...locationData.subitems, ...loadedLocations.subitems] };
+
+            dispatchLoadedLocationsAction({ type: 'UPDATE_LOCATIONS', data });
         }
-
-        const data = { ...locationData, ...loadedLocations, subitems: [...locationData.subitems, ...loadedLocations.subitems] };
-
-        dispatchLoadedLocationsAction({ type: 'UPDATE_LOCATIONS', data });
     }, [loadedLocations, dispatchLoadedLocationsAction, isLoading]);
+
+    if (!subitems.length && !collapsed && !isLoading) {
+        return null;
+    }
 
     const className = createCssClassNames({
         'c-finder-branch': true,
