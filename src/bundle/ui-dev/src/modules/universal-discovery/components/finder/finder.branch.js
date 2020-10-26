@@ -120,7 +120,6 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
             </Fragment>
         );
     };
-
     const renderLoadingSpinner = () => {
         if (!isLoading) {
             return;
