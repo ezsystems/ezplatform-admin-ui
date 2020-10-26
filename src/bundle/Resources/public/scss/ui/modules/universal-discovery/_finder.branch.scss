@@ -62,4 +62,11 @@
         top: 0;
         right: 0;
     }
+
+    &__loading-spinner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: calculateRem(50px);
+    }
 }
