@@ -108,7 +108,6 @@ class CustomUrlAddType extends AbstractType
                 'root_location_id',
                 ChoiceType::class,
                 [
-                    'multiple' => false,
                     'required' => false,
                     'choices' => [],
                 ]

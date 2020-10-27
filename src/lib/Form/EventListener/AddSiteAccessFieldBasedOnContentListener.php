@@ -48,7 +48,6 @@ class AddSiteAccessFieldBasedOnContentListener
             'root_location_id',
             ChoiceType::class,
             [
-                'multiple' => false,
                 'required' => false,
                 'choice_loader' => new CallbackChoiceLoader($this->getCallableData($location)),
             ]
@@ -57,11 +56,20 @@ class AddSiteAccessFieldBasedOnContentListener
 
     protected function getCallableData(?Location $location): callable
     {
-        return function () use ($location) {
+        return function () use ($location): array {
             return $this->loadSiteAccesses($location);
         };
     }
 
+    /**
+     * Provides data in format:
+     * [
+     *     site_access => location_id,
+     *     ...
+     * ].
+     *
+     * @return int[]
+     */
     private function loadSiteAccesses(?Location $location): array
     {
         $siteAccesses = $location instanceof Location
