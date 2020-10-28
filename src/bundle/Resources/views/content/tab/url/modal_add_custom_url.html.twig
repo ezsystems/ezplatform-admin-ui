@@ -36,11 +36,11 @@
                     {% endif %}
                 </div>
 
-                <span class="ez-modal--custom-url-alias__label">{{ 'tab.urls.add.site_access'|trans|desc('Site access') }}</span>
+                <span class="ez-modal--custom-url-alias__label">{{ 'tab.urls.add.site_access'|trans|desc('SiteAccess') }}</span>
                 {{ form_widget(form.root_location_id) }}
-                <div class="ez-modal--custom-url-alias__info-text">{{ 'tab.urls.add.root_location_id.helper'|trans|desc("Will only work with 'place at the site root' option.") }}</div>
+                <div class="ez-modal--custom-url-alias__info-text">{{ 'tab.urls.add.root_location_id.helper'|trans|desc("Will only work when 'Place at the site root' is enabled.") }}</div>
                 <div class="ez-modal--custom-url-alias__info-text">
-                    {{ 'tab.urls.add.root_location_id.helper_secondary'|trans|desc("Leaving this choice empty will result in alias being placed at main root location.") }}
+                    {{ 'tab.urls.add.root_location_id.helper_secondary'|trans|desc("If you leave this empty, the alias will be placed at main root Location.") }}
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
