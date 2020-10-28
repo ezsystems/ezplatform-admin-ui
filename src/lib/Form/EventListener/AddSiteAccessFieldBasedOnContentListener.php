@@ -16,7 +16,7 @@ use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormEvent;
 
-class AddSiteAccessFieldBasedOnContentListener
+final class AddSiteAccessFieldBasedOnContentListener
 {
     /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver */
     private $nonAdminSiteaccessResolver;
@@ -54,7 +54,7 @@ class AddSiteAccessFieldBasedOnContentListener
         );
     }
 
-    protected function getCallableData(?Location $location): callable
+    private function getCallableData(?Location $location): callable
     {
         return function () use ($location): array {
             return $this->loadSiteAccesses($location);

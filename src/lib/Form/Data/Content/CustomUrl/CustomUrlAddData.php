@@ -44,7 +44,7 @@ class CustomUrlAddData
         $this->language = $language;
         $this->redirect = $redirect;
         $this->siteRoot = $siteRoot;
-        $this->$rootLocationId = $rootLocationId;
+        $this->rootLocationId = $rootLocationId;
     }
 
     /**
