@@ -111,6 +111,8 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
         return (
             <Fragment>
                 <div className="c-finder-branch__items-wrapper" onScroll={loadMore} style={{ width }}>
+                    {renderLoadingSpinner()}
+
                     {subitems.map(({ location }) => (
                         <FinderLeaf key={location.id} location={location} />
                     ))}
@@ -119,18 +121,27 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
             </Fragment>
         );
     };
-
-    useEffect(() => {
-        if (isLoading || !loadedLocations.subitems) {
+    const renderLoadingSpinner = () => {
+        if (!isLoading) {
             return;
         }
 
-        const data = { ...locationData, ...loadedLocations, subitems: [...locationData.subitems, ...loadedLocations.subitems] };
+        return (
+            <div className="c-finder-branch__loading-spinner">
+                <Icon name="spinner" extraClasses="ez-icon--medium ez-spin" />
+            </div>
+        );
+    }
 
-        dispatchLoadedLocationsAction({ type: 'UPDATE_LOCATIONS', data });
+    useEffect(() => {
+        if (loadedLocations.subitems) {
+            const data = { ...locationData, ...loadedLocations, subitems: [...locationData.subitems, ...loadedLocations.subitems] };
+
+            dispatchLoadedLocationsAction({ type: 'UPDATE_LOCATIONS', data });
+        }
     }, [loadedLocations, dispatchLoadedLocationsAction, isLoading]);
 
-    if (!subitems.length && !collapsed) {
+    if (!subitems.length && !collapsed && !isLoading) {
         return null;
     }
 
