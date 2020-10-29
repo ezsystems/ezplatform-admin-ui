@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Form\EventListener;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -24,10 +23,6 @@ final class AddSiteAccessFieldBasedOnContentListener
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver $nonAdminSiteaccessResolver
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
-     */
     public function __construct(
         NonAdminSiteaccessResolver $nonAdminSiteaccessResolver,
         ConfigResolverInterface $configResolver
@@ -38,7 +33,7 @@ final class AddSiteAccessFieldBasedOnContentListener
 
     public function onPreSetData(FormEvent $event): void
     {
-        /** @var CustomUrlAddData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData $data */
         $data = $event->getData();
         $location = $data->getLocation();
 
