@@ -9,11 +9,13 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl;
 
 use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener;
-use EzSystems\EzPlatformAdminUi\Form\EventListener\AddSiteAccessFieldBasedOnContentListener;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\SiteAccessChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
+use EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -37,28 +39,26 @@ class CustomUrlAddType extends AbstractType
     /** @var \EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener */
     private $checkboxIfRootLocationListener;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Form\EventListener\AddSiteAccessFieldBasedOnContentListener */
-    private $addSiteAccessFieldBasedOnContentListener;
+    /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver */
+    private $nonAdminSiteaccessResolver;
 
-    /**
-     * @param \eZ\Publish\API\Repository\LanguageService $languageService
-     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener
-     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener $buildPathFromRootListener
-     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener
-     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\AddSiteAccessFieldBasedOnContentListener $addSiteAccessFieldBasedOnContentListener
-     */
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
+
     public function __construct(
         LanguageService $languageService,
         AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener,
         BuildPathFromRootListener $buildPathFromRootListener,
         DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener,
-        AddSiteAccessFieldBasedOnContentListener $addSiteAccessFieldBasedOnContentListener
+        NonAdminSiteaccessResolver $nonAdminSiteaccessResolver,
+        ConfigResolverInterface $configResolver
     ) {
         $this->languageService = $languageService;
         $this->addLanguageFieldBasedOnContentListener = $addLanguageFieldBasedOnContentListener;
         $this->buildPathFromRootListener = $buildPathFromRootListener;
         $this->checkboxIfRootLocationListener = $checkboxIfRootLocationListener;
-        $this->addSiteAccessFieldBasedOnContentListener = $addSiteAccessFieldBasedOnContentListener;
+        $this->nonAdminSiteaccessResolver = $nonAdminSiteaccessResolver;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -67,6 +67,8 @@ class CustomUrlAddType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $location = $options['data']->getLocation();
+
         $builder
             ->add(
                 'location',
@@ -109,7 +111,11 @@ class CustomUrlAddType extends AbstractType
                 ChoiceType::class,
                 [
                     'required' => false,
-                    'choices' => [],
+                    'choice_loader' => new SiteAccessChoiceLoader(
+                        $this->nonAdminSiteaccessResolver,
+                        $this->configResolver,
+                        $location
+                    ),
                 ]
             )
             ->add(
@@ -122,10 +128,6 @@ class CustomUrlAddType extends AbstractType
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [
             $this->addLanguageFieldBasedOnContentListener,
-            'onPreSetData',
-        ]);
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, [
-            $this->addSiteAccessFieldBasedOnContentListener,
             'onPreSetData',
         ]);
         $builder->addEventListener(FormEvents::PRE_SUBMIT, [
