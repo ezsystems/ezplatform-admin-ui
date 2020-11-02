@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class CustomUrlAddDataTest extends TestCase
 {
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $location = new Location(['id' => 2]);
         $language = new Language(['languageCode' => 'eng-GB']);

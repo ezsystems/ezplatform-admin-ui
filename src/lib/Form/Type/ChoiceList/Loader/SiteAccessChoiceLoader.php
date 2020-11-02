@@ -65,9 +65,6 @@ class SiteAccessChoiceLoader implements ChoiceLoaderInterface
         return $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadChoiceList($value = null)
     {
         $choices = $this->getChoiceList();
@@ -75,9 +72,6 @@ class SiteAccessChoiceLoader implements ChoiceLoaderInterface
         return new ArrayChoiceList($choices, $value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadChoicesForValues(array $values, $value = null)
     {
         // Optimize
@@ -89,9 +83,6 @@ class SiteAccessChoiceLoader implements ChoiceLoaderInterface
         return $this->loadChoiceList($value)->getChoicesForValues($values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadValuesForChoices(array $choices, $value = null)
     {
         // Optimize
