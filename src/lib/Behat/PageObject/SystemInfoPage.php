@@ -20,11 +20,6 @@ class SystemInfoPage extends Page
     public const PAGE_NAME = 'System Information';
 
     /**
-     * @var AdminList[]
-     */
-    public $adminLists;
-
-    /**
      * @var NavLinkTabs
      */
     public $navLinkTabs;
@@ -37,9 +32,6 @@ class SystemInfoPage extends Page
     public function __construct(BrowserContext $context)
     {
         parent::__construct($context);
-        $this->adminLists['Packages'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Packages', SimpleTable::ELEMENT_NAME, '.ez-main-container .tab-pane.active');
-        $this->adminLists['Bundles'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Bundles', SimpleTable::ELEMENT_NAME, '.ez-main-container .tab-pane.active');
-        $this->systemInfoTable = ElementFactory::createElement($context, SystemInfoTable::ELEMENT_NAME, '.ez-main-container .active .ez-fieldgroup:nth-of-type(1)');
         $this->navLinkTabs = ElementFactory::createElement($context, NavLinkTabs::ELEMENT_NAME);
         $this->siteAccess = 'admin';
         $this->route = '/systeminfo';
@@ -50,18 +42,20 @@ class SystemInfoPage extends Page
     public function verifyElements(): void
     {
         $this->navLinkTabs->verifyVisibility();
-        $this->adminLists['Packages']->verifyVisibility();
+        $this->verifySystemInfoTable('Product');
     }
 
     public function verifySystemInfoTable(string $tabName): void
     {
-        $this->systemInfoTable->verifyHeader($tabName);
+        $systemInfoTable = ElementFactory::createElement($this->context, SystemInfoTable::ELEMENT_NAME, '.ez-main-container .active .ez-fieldgroup:nth-of-type(1)');
+        $systemInfoTable->verifyHeader($tabName);
     }
 
     public function verifySystemInfoRecords(string $tableName, array $records): void
     {
-        $this->adminLists[$tableName]->verifyVisibility();
-        $tableHash = $this->adminLists[$tableName]->table->getTableHash();
+        $tab = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, $tableName, SimpleTable::ELEMENT_NAME, '.ez-main-container .tab-pane.active');
+        $tab->verifyVisibility();
+        $tableHash = $tab->table->getTableHash();
 
         foreach ($records as $desiredRecord) {
             $found = false;
