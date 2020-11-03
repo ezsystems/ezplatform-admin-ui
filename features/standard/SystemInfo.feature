@@ -1,3 +1,4 @@
+@systemInformation
 Feature: System info verification
   As an administrator
   In order to customize my eZ installation
