@@ -1,3 +1,4 @@
+@systemInformation
 Feature: System info verification
   As an administrator
   In order to customize my eZ installation
@@ -6,6 +7,11 @@ Feature: System info verification
   Background:
     Given I am logged as "admin"
       And I go to "System Information" in "Admin" tab
+
+  @javascript @common
+  Scenario: Check My Ibexa Information
+    When I go to "My Ibexa" tab in System Information
+    Then I see "Product" system information table
 
   @javascript @common
   Scenario: Check Composer System Information
