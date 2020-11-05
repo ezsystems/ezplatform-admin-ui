@@ -71,6 +71,36 @@
         <target state="new">in 1 second|in %count% seconds</target>
         <note>key: diff.in.year</note>
       </trans-unit>
+      <trans-unit id="2be7d1806c256f914b7451252c1d296346de0a03" resname="interval.format.days">
+        <source>1 day|%count% days</source>
+        <target state="new">1 day|%count% days</target>
+        <note>key: interval.format.days</note>
+      </trans-unit>
+      <trans-unit id="503ce7acdefad28e853f8ad5ecd796a8d4606b10" resname="interval.format.hours">
+        <source>1 hour|%count% hours</source>
+        <target state="new">1 hour|%count% hours</target>
+        <note>key: interval.format.hours</note>
+      </trans-unit>
+      <trans-unit id="b750144898737792d14f52d60c5516e9914be0af" resname="interval.format.minutes">
+        <source>1 minute|%count% minutes</source>
+        <target state="new">1 minute|%count% minutes</target>
+        <note>key: interval.format.minutes</note>
+      </trans-unit>
+      <trans-unit id="63d7fb24b0d482fb88797a437884606e988557fe" resname="interval.format.months">
+        <source>1 month|%count% months</source>
+        <target state="new">1 month|%count% months</target>
+        <note>key: interval.format.months</note>
+      </trans-unit>
+      <trans-unit id="9f20c9da2ac282bd80ccce255fee64c00913ee94" resname="interval.format.seconds">
+        <source>1 second|%count% seconds</source>
+        <target state="new">1 second|%count% seconds</target>
+        <note>key: interval.format.seconds</note>
+      </trans-unit>
+      <trans-unit id="bdf61f7e2d4eeddf834a9fe4a96a8b95bbc05fca" resname="interval.format.years">
+        <source>1 year|%count% years</source>
+        <target state="new">1 year|%count% years</target>
+        <note>key: interval.format.years</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
