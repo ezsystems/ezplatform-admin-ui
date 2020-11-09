@@ -52,6 +52,7 @@ class IsWithinCopySubtreeLimit extends AbstractSpecification
 
         $query = new LocationQuery([
             'filter' => new Criterion\Subtree($item->pathString),
+            'limit' => 0,
         ]);
 
         $searchResults = $this->searchService->findLocations($query);
