@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
@@ -19,19 +18,14 @@ class SiteAccessChoiceLoader implements ChoiceLoaderInterface
     /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver */
     private $nonAdminSiteaccessResolver;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
-    private $configResolver;
-
     /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
     private $location;
 
     public function __construct(
         NonAdminSiteaccessResolver $nonAdminSiteaccessResolver,
-        ConfigResolverInterface $configResolver,
         ?Location $location = null
     ) {
         $this->nonAdminSiteaccessResolver = $nonAdminSiteaccessResolver;
-        $this->configResolver = $configResolver;
         $this->location = $location;
     }
 
@@ -50,16 +44,9 @@ class SiteAccessChoiceLoader implements ChoiceLoaderInterface
             ? $this->nonAdminSiteaccessResolver->getSiteaccesses()
             : $this->nonAdminSiteaccessResolver->getSiteaccessesForLocation($this->location);
 
-        $parameterName = 'content.tree_root.location_id';
-        $defaultTreeRootLocationId = $this->configResolver->getParameter($parameterName);
-
         $data = [];
         foreach ($siteAccesses as $siteAccess) {
-            $treeRootLocationId = $this->configResolver->hasParameter($parameterName, null, $siteAccess)
-                ? $this->configResolver->getParameter($parameterName, null, $siteAccess)
-                : $defaultTreeRootLocationId;
-
-            $data[$siteAccess] = $treeRootLocationId;
+            $data[$siteAccess] = $siteAccess;
         }
 
         return $data;

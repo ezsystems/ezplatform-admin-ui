@@ -20,13 +20,13 @@ class CustomUrlAddDataTest extends TestCase
         $location = new Location(['id' => 2]);
         $language = new Language(['languageCode' => 'eng-GB']);
         $path = '/test';
-        $rootLocationId = 52;
+        $siteAccess = 'site3';
 
-        $data = new CustomUrlAddData($location, $path, $language, false, true, $rootLocationId);
+        $data = new CustomUrlAddData($location, $path, $language, false, true, $siteAccess);
 
         $this->assertSame($location, $data->getLocation());
         $this->assertSame($language, $data->getLanguage());
         $this->assertSame($path, $data->getPath());
-        $this->assertSame($rootLocationId, $data->getRootLocationId());
+        $this->assertSame($siteAccess, $data->getSiteAccess());
     }
 }

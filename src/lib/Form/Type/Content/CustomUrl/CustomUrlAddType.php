@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl;
 
 use eZ\Publish\API\Repository\LanguageService;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener;
@@ -42,23 +41,18 @@ class CustomUrlAddType extends AbstractType
     /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver */
     private $nonAdminSiteaccessResolver;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
-    private $configResolver;
-
     public function __construct(
         LanguageService $languageService,
         AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener,
         BuildPathFromRootListener $buildPathFromRootListener,
         DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener,
-        NonAdminSiteaccessResolver $nonAdminSiteaccessResolver,
-        ConfigResolverInterface $configResolver
+        NonAdminSiteaccessResolver $nonAdminSiteaccessResolver
     ) {
         $this->languageService = $languageService;
         $this->addLanguageFieldBasedOnContentListener = $addLanguageFieldBasedOnContentListener;
         $this->buildPathFromRootListener = $buildPathFromRootListener;
         $this->checkboxIfRootLocationListener = $checkboxIfRootLocationListener;
         $this->nonAdminSiteaccessResolver = $nonAdminSiteaccessResolver;
-        $this->configResolver = $configResolver;
     }
 
     /**
@@ -107,13 +101,12 @@ class CustomUrlAddType extends AbstractType
                 ]
             )
             ->add(
-                'root_location_id',
+                'site_access',
                 ChoiceType::class,
                 [
                     'required' => false,
                     'choice_loader' => new SiteAccessChoiceLoader(
                         $this->nonAdminSiteaccessResolver,
-                        $this->configResolver,
                         $location
                     ),
                 ]

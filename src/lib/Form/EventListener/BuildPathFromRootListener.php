@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\EventListener;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\URLAliasService;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Form\FormEvent;
 
 class BuildPathFromRootListener
@@ -20,14 +21,17 @@ class BuildPathFromRootListener
     /** @var \eZ\Publish\API\Repository\URLAliasService */
     private $urlAliasService;
 
-    /**
-     * @param \eZ\Publish\API\Repository\LocationService $locationService
-     * @param \eZ\Publish\API\Repository\URLAliasService $urlAliasService
-     */
-    public function __construct(LocationService $locationService, URLAliasService $urlAliasService)
-    {
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
+
+    public function __construct(
+        LocationService $locationService,
+        URLAliasService $urlAliasService,
+        ConfigResolverInterface $configResolver
+    ) {
         $this->locationService = $locationService;
         $this->urlAliasService = $urlAliasService;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -46,8 +50,14 @@ class BuildPathFromRootListener
             }
             $data['path'] = $this->createPathBasedOnParentLocation($location->parentLocationId, $data['path']);
             $event->setData($data);
-        } elseif (isset($data['site_root']) && true === (bool)$data['site_root'] && !empty($data['root_location_id'])) {
-            $data['path'] = $this->createPathBasedOnParentLocation((int)$data['root_location_id'], $data['path']);
+        } elseif (isset($data['site_root']) && true === (bool)$data['site_root'] && !empty($data['site_access'])) {
+            $parameterName = 'content.tree_root.location_id';
+            $defaultTreeRootLocationId = $this->configResolver->getParameter($parameterName);
+            $treeRootLocationId = $this->configResolver->hasParameter($parameterName, null, $data['site_access'])
+                ? $this->configResolver->getParameter($parameterName, null, $data['site_access'])
+                : $defaultTreeRootLocationId;
+
+            $data['path'] = $this->createPathBasedOnParentLocation((int)$treeRootLocationId, $data['path']);
             $event->setData($data);
         }
     }
