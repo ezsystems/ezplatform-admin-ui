@@ -24,14 +24,11 @@
             toggleButtonState();
         };
         const toggleSiteAccessSelect = (event) => {
-            const checkbox = event.target;
-            const isChecked = checkbox.checked;
-
+            const isChecked = event.target.checked;
             const siteAccessSelect = modal.querySelector('[name="custom_url_add[site_access]"]');
-
-            isChecked
-                ? siteAccessSelect.removeAttribute('disabled')
-                : siteAccessSelect.setAttribute('disabled', true)
+            const methodName = isChecked ? 'removeAttribute' : 'setAttribute';
+            
+            siteAccessSelect[methodName]('disabled', true);
         };
 
         input.addEventListener('input', toggleButtonState, false);
