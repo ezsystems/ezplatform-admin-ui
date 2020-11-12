@@ -36,6 +36,12 @@
                         {{ 'tab.urls.add.site_root.helper.no_parent_name'|trans|desc('When unchecked, the alias will be placed under the parent of this Location') }}
                     {% endif %}
                 </div>
+
+                <span class="ez-modal--custom-url-alias__label">{{ 'tab.urls.add.site_access'|trans|desc('SiteAccess') }}</span>
+                {{ form_widget(form.site_access) }}
+                <div class="ez-modal--custom-url-alias__info-text">
+                    {{ 'tab.urls.add.root_location_id.helper_secondary'|trans|desc("If you leave this empty, the alias will be placed at main root Location.") }}
+                </div>
             </div>
             <div class="modal-footer">
                 {{ form_widget(form.add, {'attr': {'class': 'btn btn-primary', 'disabled': 'disabled'}}) }}
