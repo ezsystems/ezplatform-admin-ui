@@ -12,7 +12,9 @@ use eZ\Publish\API\Repository\LanguageService;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener;
 use EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener;
+use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\SiteAccessChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
+use EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -36,22 +38,21 @@ class CustomUrlAddType extends AbstractType
     /** @var \EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener */
     private $checkboxIfRootLocationListener;
 
-    /**
-     * @param \eZ\Publish\API\Repository\LanguageService $languageService
-     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener
-     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener $buildPathFromRootListener
-     * @param \EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener
-     */
+    /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver */
+    private $nonAdminSiteaccessResolver;
+
     public function __construct(
         LanguageService $languageService,
         AddLanguageFieldBasedOnContentListener $addLanguageFieldBasedOnContentListener,
         BuildPathFromRootListener $buildPathFromRootListener,
-        DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener
+        DisableSiteRootCheckboxIfRootLocationListener $checkboxIfRootLocationListener,
+        NonAdminSiteaccessResolver $nonAdminSiteaccessResolver
     ) {
         $this->languageService = $languageService;
         $this->addLanguageFieldBasedOnContentListener = $addLanguageFieldBasedOnContentListener;
         $this->buildPathFromRootListener = $buildPathFromRootListener;
         $this->checkboxIfRootLocationListener = $checkboxIfRootLocationListener;
+        $this->nonAdminSiteaccessResolver = $nonAdminSiteaccessResolver;
     }
 
     /**
@@ -60,6 +61,8 @@ class CustomUrlAddType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $location = $options['data']->getLocation();
+
         $builder
             ->add(
                 'location',
@@ -95,6 +98,17 @@ class CustomUrlAddType extends AbstractType
                 [
                     'required' => false,
                     'label' => false,
+                ]
+            )
+            ->add(
+                'site_access',
+                ChoiceType::class,
+                [
+                    'required' => false,
+                    'choice_loader' => new SiteAccessChoiceLoader(
+                        $this->nonAdminSiteaccessResolver,
+                        $location
+                    ),
                 ]
             )
             ->add(
