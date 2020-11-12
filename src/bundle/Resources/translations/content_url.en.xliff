@@ -46,6 +46,16 @@
         <target state="new">When unchecked, the alias will not redirect to the destination and the URL will stay the same.</target>
         <note>key: tab.urls.add.redirect.helper.unchecked</note>
       </trans-unit>
+      <trans-unit id="c1277a6823f4d281355e706e54cd723b5ed4adf7" resname="tab.urls.add.root_location_id.helper_secondary">
+        <source>If you leave this empty, the alias will be placed at main root Location.</source>
+        <target state="new">If you leave this empty, the alias will be placed at main root Location.</target>
+        <note>key: tab.urls.add.root_location_id.helper_secondary</note>
+      </trans-unit>
+      <trans-unit id="f933f01aef7b171904b5c0b1ed4327413828f96f" resname="tab.urls.add.site_access">
+        <source>SiteAccess</source>
+        <target state="new">SiteAccess</target>
+        <note>key: tab.urls.add.site_access</note>
+      </trans-unit>
       <trans-unit id="9ef990fca45f612ab2d3af7b21968803d76d5d77" resname="tab.urls.add.site_root">
         <source>Place at the site root</source>
         <target state="new">Place at the site root</target>
