@@ -110,3 +110,9 @@ services:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'locations' }
+
+    EzSystems\EzPlatformAdminUi\UI\Config\Provider\IconPaths:
+        arguments:
+            $configResolver: '@ezpublish.config.resolver'
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'iconPaths' }
