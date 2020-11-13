@@ -42,6 +42,14 @@ class ContentViewContext extends BusinessContext
     }
 
     /**
+     * @Given I start creating a new user
+     */
+    public function startCreatingUser(): void
+    {
+        PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, '')->startCreatingUser();
+    }
+
+    /**
      * @Given I start editing the current content
      * @Given I start editing the current content in :language language
      */

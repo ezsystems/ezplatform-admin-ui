@@ -74,7 +74,7 @@ abstract class Page
     public function verifyRoute(): void
     {
         $this->context->waitUntil($this->defaultTimeout, function () {
-            return false !== strpos($this->context->getSession()->getCurrentUrl(), $this->route);
+            return false !== strpos($this->getCurrentRoute(), $this->route);
         });
     }
 
@@ -100,5 +100,15 @@ abstract class Page
     public function getPageTitle(): string
     {
         return $this->context->findElement($this->pageTitleLocator)->getText();
+    }
+
+    /**
+     * Gets the route URL text displayed in AdminUI page.
+     *
+     * @return string
+     */
+    protected function getCurrentRoute(): string
+    {
+        return $this->context->getSession()->getCurrentUrl();
     }
 }

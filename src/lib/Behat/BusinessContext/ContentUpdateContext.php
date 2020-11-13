@@ -12,6 +12,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\ContentUpdateForm;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentUpdateItemPage;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\PageObjectFactory;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\UserCreationPage;
 
 class ContentUpdateContext extends BusinessContext
 {
@@ -23,6 +24,19 @@ class ContentUpdateContext extends BusinessContext
         $updateItemPage = PageObjectFactory::createPage($this->utilityContext, ContentUpdateItemPage::PAGE_NAME, '');
         $hash = $table->getHash();
         foreach ($hash as $row) {
+            $values = $this->filterOutNonEmptyValues($row);
+            $updateItemPage->contentUpdateForm->fillFieldWithValue($row['label'], $values);
+        }
+    }
+
+    /**
+     * @When I set content fields for user
+     */
+    public function iSetFieldsForUser(TableNode $table): void
+    {
+        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, UserCreationPage::PAGE_NAME, '');
+        $updateItemPage->verifyIsLoaded();
+        foreach ($table->getHash() as $row) {
             $values = $this->filterOutNonEmptyValues($row);
             $updateItemPage->contentUpdateForm->fillFieldWithValue($row['label'], $values);
         }
