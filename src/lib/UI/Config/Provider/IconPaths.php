@@ -17,7 +17,7 @@ use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 final class IconPaths implements ProviderInterface
 {
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
-    protected $configResolver;
+    private $configResolver;
 
     public function __construct(ConfigResolverInterface $configResolver)
     {
