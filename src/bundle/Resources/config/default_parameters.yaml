@@ -1,38 +1,38 @@
 parameters:
     ezsettings.admin_group.content_type.about:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#about'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#about'
     ezsettings.admin_group.content_type.article:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#article'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#article'
     ezsettings.admin_group.content_type.blog:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#blog'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#blog'
     ezsettings.admin_group.content_type.blog_post:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#blog_post'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#blog_post'
     ezsettings.admin_group.content_type.folder:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#folder'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#folder'
     ezsettings.admin_group.content_type.form:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#form'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#form'
     ezsettings.admin_group.content_type.place:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#place'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#place'
     ezsettings.admin_group.content_type.product:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#product'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#product'
     ezsettings.admin_group.content_type.field:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#field'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#field'
     ezsettings.admin_group.content_type.user:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#user'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#user'
     ezsettings.admin_group.content_type.user_group:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#user_group'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#user_group'
     ezsettings.admin_group.content_type.file:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#file'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
     ezsettings.admin_group.content_type.gallery:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#gallery'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#gallery'
     ezsettings.admin_group.content_type.image:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#image'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#image'
     ezsettings.admin_group.content_type.video:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#video'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#video'
     ezsettings.admin_group.content_type.landing_page:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#landing_page'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#landing_page'
     ezsettings.admin_group.content_type.default-config:
-        thumbnail: '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#file'
+        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
 
     ezplatform.content_view.tabs.default_template: '@@ezdesign/ui/tab/default.html.twig'
 
