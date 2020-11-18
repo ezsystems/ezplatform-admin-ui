@@ -35,12 +35,6 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /**
-     * @param MenuItemFactory $factory
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     */
     public function __construct(
         MenuItemFactory $factory,
         EventDispatcherInterface $eventDispatcher,
@@ -91,7 +85,6 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 $this->createMenuItem(self::ITEM_BOOKMARK, [
                     'route' => 'ezplatform.bookmark.list',
                     'extras' => [
-                        'icon_url' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#bookmark-manager',
                         'orderNumber' => 20,
                     ], ])
             );
@@ -101,7 +94,6 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                     $this->createMenuItem(self::ITEM_DRAFTS, [
                         'route' => 'ezplatform.content_draft.list',
                         'extras' => [
-                            'icon_url' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#content-draft',
                             'orderNumber' => 30,
                         ],
                     ])
@@ -112,14 +104,12 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
                 $this->createMenuItem(self::ITEM_USER_SETTINGS, [
                     'route' => 'ezplatform.user_settings.list',
                     'extras' => [
-                        'icon_url' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#user',
                         'orderNumber' => 50,
                     ], ])
             );
 
             $menu->addChild(
                 $this->createMenuItem(self::ITEM_LOGOUT, ['route' => 'logout', 'extras' => [
-                    'icon_url' => '/bundles/ezplatformadminuiassets/vendors/webalys/streamlineicons/all-icons.svg#logout',
                     'orderNumber' => 60,
                 ]])
             );
