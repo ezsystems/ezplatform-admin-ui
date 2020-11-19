@@ -250,7 +250,15 @@ class ContentViewParameterSupplier
         $hasAccess = $this->permissionResolver->hasAccess('content', 'create');
         $defaultContentTypeIdentifiers = array_column($this->contentTypeMappings->getConfig()['defaultMappings'], 'contentTypeIdentifier');
         $defaultContentTypeIdentifiers[] = $this->contentTypeMappings->getConfig()['fallbackContentType']['contentTypeIdentifier'];
-        $contentTypeIdentifiers = array_unique($defaultContentTypeIdentifiers);
+        $locationMappingsContentTypeIdentifiers = [];
+        foreach ($this->contentTypeMappings->getConfig()['locationMappings'] as $locationIdentifier => $locationConfiguration) {
+            if ($location->getContent()->getContentType()->identifier == $locationConfiguration['contentTypeIdentifier']) {
+                foreach ($locationConfiguration['mappings'] as $mappingGroup) {
+                    $locationMappingsContentTypeIdentifiers[] = $mappingGroup['contentTypeIdentifier'];
+                }
+            }
+        }
+        $contentTypeIdentifiers = array_unique(array_merge($defaultContentTypeIdentifiers, $locationMappingsContentTypeIdentifiers));
 
         if (\is_bool($hasAccess)) {
             foreach ($contentTypeIdentifiers as $contentTypeIdentifier) {
