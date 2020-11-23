@@ -160,7 +160,7 @@
         }
 
         onOptionClick({ target }) {
-            const option = target.closest(`.${CLASS_CUSTOM_DROPDOWN_ITEM}`);
+            const option = target.closest(SELECTOR_ITEM);
 
             return this.onSelect(option, !option.classList.contains(CLASS_ITEM_SELECTED_IN_LIST));
         }
