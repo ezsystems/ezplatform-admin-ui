@@ -59,7 +59,9 @@
 
         clearCurrentSelection() {
             this.sourceInput.querySelectorAll('option').forEach((option) => (option.selected = false));
-            this.itemsContainer.querySelectorAll(SELECTOR_ITEM).forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
+            this.itemsContainer
+                .querySelectorAll(SELECTOR_ITEM)
+                .forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
             this.container.querySelector(SELECTOR_SELECTION_INFO).innerHTML = '';
         }
 
@@ -83,7 +85,9 @@
                 element.querySelector('.ez-input').checked = selected;
             }
 
-            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
+            this.itemsContainer
+                .querySelector(`[data-value="${value}"]`)
+                .classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
 
             const selectedItemsList = this.container.querySelector(SELECTOR_SELECTION_INFO);
 
@@ -94,7 +98,9 @@
                 if (placeholder) {
                     placeholder.remove();
 
-                    this.itemsContainer.querySelector(SELECTOR_PLACEHOLDER).classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
+                    this.itemsContainer
+                        .querySelector(SELECTOR_PLACEHOLDER)
+                        .classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
                 }
 
                 selectedItemsList.insertAdjacentHTML('beforeend', this.createSelectedItem(value, label));
@@ -154,7 +160,7 @@
         }
 
         onOptionClick({ target }) {
-            const option = target.classList.contains(CLASS_CUSTOM_DROPDOWN_ITEM) ? target : target.closest(SELECTOR_ITEM);
+            const option = target.closest(SELECTOR_ITEM);
 
             return this.onSelect(option, !option.classList.contains(CLASS_ITEM_SELECTED_IN_LIST));
         }
@@ -165,7 +171,7 @@
             const itemSelected = this.itemsContainer.querySelector(`[data-value="${value}"]`);
 
             itemSelected.classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
-            itemSelected.querySelector('.ez-input').checked = false
+            itemSelected.querySelector('.ez-input').checked = false;
 
             if (optionSelect) {
                 optionSelect.selected = false;
@@ -173,7 +179,10 @@
 
             option.remove();
 
-            if (!this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length && this.hasDefaultSelection) {
+            if (
+                !this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length &&
+                this.hasDefaultSelection
+            ) {
                 this.hideOptions();
                 this.clearCurrentSelection();
                 this.selectFirstItem();
@@ -192,11 +201,13 @@
             const selectedItemsOverflow = this.container.querySelector(SELECTOR_OVERFLOW_ITEM_INFO);
 
             if (selectedItemsOverflow) {
-                selectedItems.forEach(item => { item.hidden = false; })
-                selectedItems.forEach(item => {
+                selectedItems.forEach((item) => {
+                    item.hidden = false;
+                });
+                selectedItems.forEach((item) => {
                     itemsWidth += item.offsetWidth;
 
-                    if (itemsWidth > (selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer)) {
+                    if (itemsWidth > selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer) {
                         numberOfOverflowItems++;
                         item.hidden = true;
                     }
