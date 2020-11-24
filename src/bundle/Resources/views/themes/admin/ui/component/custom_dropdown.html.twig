@@ -26,7 +26,7 @@
             <li data-value="" class="ez-custom-dropdown__item"{% if required is defined and value is empty %} selected="selected"{% endif %}>{{ label }}</li>
         {% endif %}
         {% for choice in choices %}
-            <li data-value="{{ choice.value }}" class="ez-custom-dropdown__item">
+            <li data-value="{{ choice.value }}" class="ez-custom-dropdown__item {% if choice is selectedchoice(value) %}ez-custom-dropdown__item--selected{% endif %}">
                 {% if multiple is defined and multiple %}
                     <input type="checkbox" name="{{ source_selector }}-checkbox" class="ez-input ez-input--checkbox" {% if choice is selectedchoice(value) %}checked{% endif %} />
                 {% else %}
