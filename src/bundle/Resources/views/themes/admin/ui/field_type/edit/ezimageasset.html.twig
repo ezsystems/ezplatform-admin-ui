@@ -38,8 +38,8 @@
         {{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag your files to the browser window or select them') }}
     </div>
     <button class="btn ez-data-source__btn-add btn-secondary">{{ 'fieldtype.ezimageasset.upload.label'|trans|desc('Upload image') }}</button>
-    <button 
-        class="btn ez-data-source__btn-select btn-secondary" 
+    <button
+        class="btn ez-data-source__btn-select btn-secondary"
         data-udw-config="{{ ez_udw_config('image_asset', {}) }}"
     >
         {{ 'fieldtype.ezimageasset.select.label'|trans|desc('Select from your Repository') }}
@@ -81,8 +81,8 @@
         <div class="ez-field-edit-preview__visual">
             <div class="ez-field-edit-preview__media-wrapper">
                 <div class="ez-field-edit-preview__actions">
-                    <button 
-                        type="button" 
+                    <button
+                        type="button"
                         class="ez-field-edit-preview__action--remove"
                         title="{{ 'fieldtype.ezimageasset.delete'|trans|desc('Delete image') }}"
                     >
@@ -90,8 +90,8 @@
                             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
-                    <a 
-                        class="ez-field-edit-preview__action--preview" 
+                    <a
+                        class="ez-field-edit-preview__action--preview"
                         href="{{ destination_content_url }}"
                         title="{{ 'fieldtype.ezimageasset.open'|trans|desc('Open') }}"
                         target="_blank"
@@ -100,6 +100,7 @@
                             <use xlink:href="{{ ez_icon_path('open-newtab') }}"></use>
                         </svg>
                     </a>
+                    {{ ez_render_component_group('image-edit-actions-after') }}
                 </div>
                 <img
                     class="ez-field-edit-preview__media {{ image_uri ? '' : 'd-none' }}"
