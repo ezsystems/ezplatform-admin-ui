@@ -10,6 +10,10 @@ services:
         tags:
             - { name: twig.extension }
 
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FormatIntervalExtension:
+        tags:
+            - { name: twig.extension }
+
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\LimitationValueRenderingExtension:
         arguments:
             - '@EzSystems\EzPlatformAdminUi\Limitation\Templating\LimitationBlockRenderer'
