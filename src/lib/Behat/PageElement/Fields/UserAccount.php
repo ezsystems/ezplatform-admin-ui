@@ -17,18 +17,32 @@ class UserAccount extends EzFieldElement
     public function __construct(UtilityContext $context, string $locator, string $label)
     {
         parent::__construct($context, $locator, $label);
-        $this->fields['username'] = '#ezrepoforms_user_create_fieldsData_field_value_username';
-        $this->fields['password'] = '#ezrepoforms_user_create_fieldsData_field_value_password_first';
-        $this->fields['confirmPassword'] = '#ezrepoforms_user_create_fieldsData_field_value_password_second';
-        $this->fields['email'] = '#ezrepoforms_user_create_fieldsData_field_value_email';
+        $this->fields['firstname'] = '#ezrepoforms_user_create_fieldsData_first_name_value,#ezrepoforms_user_update_fieldsData_first_name_value';
+        $this->fields['lastname'] = '#ezrepoforms_user_create_fieldsData_last_name_value,#ezrepoforms_user_update_fieldsData_last_name_value';
+        $this->fields['username'] = '#ezrepoforms_user_create_fieldsData_user_account_value_username,#ezrepoforms_user_update_fieldsData_user_account_value_username';
+        $this->fields['password'] = '#ezrepoforms_user_create_fieldsData_user_account_value_password_first,#ezrepoforms_user_update_fieldsData_user_account_value_password_first';
+        $this->fields['confirmPassword'] = '#ezrepoforms_user_create_fieldsData_user_account_value_password_second,#ezrepoforms_user_update_fieldsData_user_account_value_password_second';
+        $this->fields['email'] = '#ezrepoforms_user_create_fieldsData_user_account_value_email,#ezrepoforms_user_update_fieldsData_user_account_value_email';
+        $this->fields['buttonEnabled'] = '#ezrepoforms_user_create_fieldsData_user_account_value_enabled,#ezrepoforms_user_update_fieldsData_user_account_value_enabled';
     }
 
     public function setValue(array $parameters): void
     {
-        $this->setSpecificFieldValue('username', $parameters['username']);
-        $this->setSpecificFieldValue('password', $parameters['password']);
-        $this->setSpecificFieldValue('confirmPassword', $parameters['password']);
-        $this->setSpecificFieldValue('email', $parameters['email']);
+        $this->setSpecificFieldValue('username', $parameters['Username']);
+        $this->setSpecificFieldValue('password', $parameters['Password']);
+        $this->setSpecificFieldValue('confirmPassword', $parameters['Confirm password']);
+        $this->setSpecificFieldValue('email', $parameters['Email']);
+        $this->setEnabledField(true);
+    }
+
+    private function setEnabledField(bool $enabled)
+    {
+        $fieldInput = $this->context->findElement(
+            sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['buttonEnabled']));
+        $isCurrentlyEnabled = $fieldInput->hasClass('is-checked');
+        if ($isCurrentlyEnabled !== $enabled) {
+            $fieldInput->click();
+        }
     }
 
     public function setSpecificFieldValue(string $fieldName, string $value): void
@@ -78,10 +92,12 @@ class UserAccount extends EzFieldElement
 
     public function verifyValueInItemView(array $values): void
     {
-        Assert::assertEquals(
-            $values['value'],
-            $this->context->findElement($this->fields['fieldContainer'])->getText(),
-            'Field has wrong value'
-        );
+        $actualUsername = $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], 'tr:nth-of-type(1) td:nth-of-type(2)'))->getText();
+        $actualEmail = $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], 'tr:nth-of-type(2) td:nth-of-type(2)'))->getText();
+        $actualEnabled = $this->context->findElement(sprintf('%s %s', $this->fields['fieldContainer'], 'tr:nth-of-type(3) td:nth-of-type(2)'))->getText();
+
+        Assert::assertEquals($values['Username'], $actualUsername, sprintf('Expected: %s Actual: %s', $values['Username'], $actualUsername));
+        Assert::assertEquals($values['Email'], $actualEmail, sprintf('Expected: %s Actual: %s', $values['Email'], $actualEmail));
+        Assert::assertEquals($values['Enabled'], $actualEnabled, sprintf('Expected: %s Actual: %s', $values['Enabled'], $actualEnabled));
     }
 }
