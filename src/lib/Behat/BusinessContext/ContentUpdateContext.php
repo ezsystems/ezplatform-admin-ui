@@ -14,6 +14,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\Fields\NonEditableField;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\ContentUpdateForm;
 use EzSystems\EzPlatformAdminUi\Behat\PageObject\ContentUpdateItemPage;
 use PHPUnit\Framework\Assert;
+use EzSystems\EzPlatformAdminUi\Behat\PageObject\UserCreationPage;
 
 class ContentUpdateContext extends BusinessContext
 {
@@ -38,6 +39,19 @@ class ContentUpdateContext extends BusinessContext
         $updateItemPage = PageObjectFactory::createPage($this->browserContext, ContentUpdateItemPage::PAGE_NAME, '');
         $field = $updateItemPage->contentUpdateForm->getField($fieldName);
         Assert::assertEquals(NonEditableField::EXPECTED_NON_EDITABLE_TEXT, $field->getValue()[0]);
+    }
+
+    /**
+     * @When I set content fields for user
+     */
+    public function iSetFieldsForUser(TableNode $table): void
+    {
+        $updateItemPage = PageObjectFactory::createPage($this->browserContext, UserCreationPage::PAGE_NAME, '');
+        $updateItemPage->verifyIsLoaded();
+        foreach ($table->getHash() as $row) {
+            $values = $this->filterOutNonEmptyValues($row);
+            $updateItemPage->contentUpdateForm->fillFieldWithValue($row['label'], $values);
+        }
     }
 
     /**
