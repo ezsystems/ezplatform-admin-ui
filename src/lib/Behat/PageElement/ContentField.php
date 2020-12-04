@@ -60,6 +60,10 @@ class ContentField extends Element
             return 'ezboolean';
         }
 
+        if ($fieldClass === 'ez-scrollable-table-wrapper mb-0') {
+            return 'ezuser';
+        }
+
         preg_match($this::FIELD_TYPE_CLASS_REGEX, $fieldClass, $matches);
         $matchedValue = explode('-', $matches[0])[0];
 
