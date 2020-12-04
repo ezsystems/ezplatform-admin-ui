@@ -72,6 +72,14 @@ class ContentItemPage extends Page
         return $contentUpdatePage;
     }
 
+    public function startCreatingUser(): void
+    {
+        $this->rightMenu->clickButton('Create');
+        $contentTypePicker = ElementFactory::createElement($this->context, ContentTypePicker::ELEMENT_NAME);
+        $contentTypePicker->verifyVisibility();
+        $contentTypePicker->select('User');
+    }
+
     public function verifyElements(): void
     {
         $this->rightMenu->verifyVisibility();

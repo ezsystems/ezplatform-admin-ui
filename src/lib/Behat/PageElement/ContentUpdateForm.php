@@ -24,7 +24,7 @@ class ContentUpdateForm extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'formElement' => '[name=ezplatform_content_forms_content_edit]',
+            'formElement' => '[name=ezplatform_content_forms_content_edit],[name=ezplatform_content_forms_user_create],[name=ezplatform_content_forms_user_update]',
             'closeButton' => '.ez-content-edit-container__close',
             'fieldLabel' => '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ez-card > .card-body > div > div > legend',
             'nthField' => '.ez-card .card-body > div > div:nth-of-type(%s)',
@@ -55,7 +55,9 @@ class ContentUpdateForm extends Element
 
     public function getField(string $fieldName): EzFieldElement
     {
-        $fieldPosition = $this->context->getElementPositionByText($fieldName, $this->fields['formElement'] . ' ' . $this->fields['fieldLabel']);
+        $formElement = $this->context->findElement($this->fields['formElement']);
+        $fieldPosition = $this->context->getElementPositionByText($fieldName, $this->fields['fieldLabel'], null, $formElement);
+
         if ($fieldPosition === 0) {
             Assert::fail(sprintf('Field %s not found.', $fieldName));
         }
