@@ -33,7 +33,7 @@ class UserCreationPage extends Page
         parent::__construct($context);
         $this->contentUpdateForm = ElementFactory::createElement($this->context, ContentUpdateForm::ELEMENT_NAME);
         $this->rightMenu = ElementFactory::createElement($this->context, RightMenu::ELEMENT_NAME);
-        $this->pageTitleLocator = '.ez-content-item-status';
+        $this->pageTitleLocator = '.ez-content-edit-page-title__title';
     }
 
     public function verifyElements(): void
@@ -44,7 +44,7 @@ class UserCreationPage extends Page
 
     public function verifyTitle(): void
     {
-        $expectedPageTitles = ['Creating a(n) User', 'Editing a(n) User'];
+        $expectedPageTitles = ['New User', 'User'];
         Assert::assertContains($this->getPageTitle(), $expectedPageTitles);
     }
 
