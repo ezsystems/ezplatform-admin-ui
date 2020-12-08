@@ -45,7 +45,7 @@ class ContentField extends Element
 
     private function getFieldType(string $fieldClass): string
     {
-        if (strpos($fieldClass, 'ez-table') !== false) {
+        if (strpos($fieldClass, 'ez-scrollable-table-wrapper') !== false) {
             return 'ezmatrix';
         }
 
