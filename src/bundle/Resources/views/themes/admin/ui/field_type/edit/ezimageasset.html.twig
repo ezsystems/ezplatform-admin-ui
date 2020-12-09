@@ -77,6 +77,7 @@
     {% set destination_content_url = destination_content_url ?? '//:0' %}
     {% set destination_content_name = destination_content_name ?? '' %}
     {% set image_uri = image_uri ?? '' %}
+    {% set additional_data = additional_data ?? null %}
 
     {% if destination_content is defined and destination_content is not null %}
         {% set destination_content_name = ez_content_name(destination_content) %}
@@ -90,7 +91,7 @@
     {% endif %}
 
     <div class="ez-field-edit-preview">
-        <div class="ez-field-edit-preview__visual" data-additional-data="{{ additional_data|json_encode() }}">
+        <div class="ez-field-edit-preview__visual" data-additional-data="{{ additional_data is not null ? additional_data|json_encode(): '{}' }}">
             <div class="ez-field-edit-preview__media-wrapper">
                 <div class="ez-field-edit-preview__actions">
                     <button
