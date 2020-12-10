@@ -16,6 +16,7 @@
 
         &__map {
             grid-area: map;
+            z-index: 0;
         }
 
         &__field--address {

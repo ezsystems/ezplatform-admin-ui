@@ -52,16 +52,16 @@ class ContentField extends Element
 
     private function getFieldTypeIdentifier(string $fieldClass): string
     {
-        if (strpos($fieldClass, 'ez-table') !== false) {
+        if ($fieldClass === 'ez-scrollable-table-wrapper mb-0') {
+            return 'ezuser';
+        }
+
+        if (strpos($fieldClass, 'ez-scrollable-table-wrapper') !== false) {
             return 'ezmatrix';
         }
 
         if ($fieldClass === '') {
             return 'ezboolean';
-        }
-
-        if ($fieldClass === 'ez-scrollable-table-wrapper mb-0') {
-            return 'ezuser';
         }
 
         preg_match($this::FIELD_TYPE_CLASS_REGEX, $fieldClass, $matches);
