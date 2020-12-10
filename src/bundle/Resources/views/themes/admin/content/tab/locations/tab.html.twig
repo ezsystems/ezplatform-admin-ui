@@ -32,7 +32,7 @@
                             {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'class': 'ez-input ez-input--checkbox', 'disabled': not location.canDelete}}) }}
                         </td>
                         <td class="ez-table__cell">
-                            {% include '@ezdesign/ui/location_path.html.twig' with {'locations': location.pathLocations} %}
+                            {% include '@ezdesign/ui/location_path.html.twig' with {'locations': location.pathLocations, 'link_last_element': true} %}
                         </td>
                         <td class="ez-table__cell">{{ location.childCount }}</td>
                         <td class="ez-table__cell">
