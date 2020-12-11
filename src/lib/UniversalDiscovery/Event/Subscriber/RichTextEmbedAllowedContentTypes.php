@@ -65,7 +65,6 @@ final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
             ? array_intersect($contentTypesAllowedViaConfig, $allowedContentTypesIdentifiers)
             : $allowedContentTypesIdentifiers;
 
-        //hacky, but as of now null or empty array means UDW allows all Content Types, which shouldn't be the case
         return empty($allowedContentTypesIdentifiers) ? [null] : array_values($allowedContentTypesIdentifiers);
     }
 
