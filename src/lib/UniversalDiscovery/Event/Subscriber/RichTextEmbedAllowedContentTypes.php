@@ -45,13 +45,13 @@ final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
     private function getAllowedContentTypesIdentifiers(array $contentTypesAllowedViaConfig): ?array
     {
         $access = $this->permissionResolver->hasAccess('content', 'read');
-        if (!\is_array($access)) {
-            return count($contentTypesAllowedViaConfig) ? $contentTypesAllowedViaConfig : null;
+        if (!\is_array($access) && $access) {
+            return $contentTypesAllowedViaConfig ?: null;
         }
 
         $restrictedContentTypesIds = $this->permissionChecker->getRestrictions($access, ContentTypeLimitation::class);
         if (empty($restrictedContentTypesIds)) {
-            return count($contentTypesAllowedViaConfig) ? $contentTypesAllowedViaConfig : null;
+            return $contentTypesAllowedViaConfig ?: null;
         }
 
         $allowedContentTypesIdentifiers = [];
@@ -66,7 +66,7 @@ final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
             : $allowedContentTypesIdentifiers;
 
         //hacky, but as of now null or empty array means UDW allows all Content Types, which shouldn't be the case
-        return empty($allowedContentTypesIdentifiers) ? [microtime()] : array_values($allowedContentTypesIdentifiers);
+        return empty($allowedContentTypesIdentifiers) ? [null] : array_values($allowedContentTypesIdentifiers);
     }
 
     public static function getSubscribedEvents(): array
