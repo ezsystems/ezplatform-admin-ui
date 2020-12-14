@@ -45,8 +45,8 @@ final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
     private function getAllowedContentTypesIdentifiers(array $contentTypesAllowedViaConfig): ?array
     {
         $access = $this->permissionResolver->hasAccess('content', 'read');
-        if (!\is_array($access) && $access) {
-            return $contentTypesAllowedViaConfig ?: null;
+        if (!\is_array($access)) {
+            return $access ? ($contentTypesAllowedViaConfig ?: null) : [null];
         }
 
         $restrictedContentTypesIds = $this->permissionChecker->getRestrictions($access, ContentTypeLimitation::class);
@@ -87,7 +87,7 @@ final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
             $this->allowedContentTypesIdentifiers = $this->getAllowedContentTypesIdentifiers($config['allowed_content_types'] ?? []);
         }
 
-        $config['allowed_content_types'] = $this->allowedContentTypesIdentifiers ?: null;
+        $config['allowed_content_types'] = $this->allowedContentTypesIdentifiers;
 
         $event->setConfig($config);
     }
