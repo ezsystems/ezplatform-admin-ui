@@ -67,7 +67,7 @@
         <div class="ez-content-edit-page-title__aditional-data">
             {% if content is defined %}
                 <div class="ez-content-edit-page-title__details">
-                    {% if creator is defined %}
+                    {% if creator is defined and creator is not empty %}
                         <div>{{ 'content.details.created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}</div>
                     {% endif %}
                     <div>{{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }}</div>
