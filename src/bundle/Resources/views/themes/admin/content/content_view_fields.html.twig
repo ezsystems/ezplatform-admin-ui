@@ -25,7 +25,7 @@
                                             {% if ez_field_is_empty(content, field_definition.identifier) and field_definition.fieldTypeIdentifier is not same as('ezboolean') %}
                                                 <em>{{ 'fieldview.field.empty'|trans({}, 'fieldview')|desc('This field is empty') }}</em>
                                             {% else %}
-                                                {{ ez_render_field(content, field_definition.identifier) }}
+                                                {{ ez_render_field(content, field_definition.identifier, {location: location}) }}
                                             {% endif %}
                                         </div>
                                     </div>
