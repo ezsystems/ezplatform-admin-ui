@@ -77,7 +77,7 @@
         }
     }
 
-    &:hover {
+    &:not([disabled]):hover {
         .ez-icon {
             &--secondary {
                 fill: $ibexa-color-primary;
