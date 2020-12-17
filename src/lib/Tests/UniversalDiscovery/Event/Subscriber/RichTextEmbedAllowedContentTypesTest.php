@@ -64,12 +64,9 @@ final class RichTextEmbedAllowedContentTypesTest extends TestCase
         $this->assertEquals([], $event->getConfig());
     }
 
-    /**
-     * @dataProvider dataProviderForUdwConfigResolveWhenThereIsNoContentReadLimitations
-     */
-    public function testUdwConfigResolveWhenThereIsNoContentReadLimitations(bool $hasAccess): void
+    public function testUdwConfigResolveWhenThereIsNoContentReadLimitations(): void
     {
-        $this->permissionResolver->method('hasAccess')->with('content', 'read')->willReturn($hasAccess);
+        $this->permissionResolver->method('hasAccess')->with('content', 'read')->willReturn(true);
         $this->permissionChecker->expects($this->never())->method('getRestrictions');
         $this->contentTypeService->expects($this->never())->method('loadContentTypeList');
 
@@ -78,12 +75,15 @@ final class RichTextEmbedAllowedContentTypesTest extends TestCase
         ]);
     }
 
-    public function dataProviderForUdwConfigResolveWhenThereIsNoContentReadLimitations(): iterable
+    public function testUdwConfigResolveWhenThereIsNoContentReadLimitationsAndNoAccess(): void
     {
-        return [
-            ['hasAccess' => false],
-            ['hasAccess' => true],
-        ];
+        $this->permissionResolver->method('hasAccess')->with('content', 'read')->willReturn(false);
+        $this->permissionChecker->expects($this->never())->method('getRestrictions');
+        $this->contentTypeService->expects($this->never())->method('loadContentTypeList');
+
+        $this->assertConfigurationResolvingResult([
+            'allowed_content_types' => [null],
+        ]);
     }
 
     public function testUdwConfigResolveWhenThereAreContentReadLimitations(): void
