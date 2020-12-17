@@ -42,16 +42,16 @@ final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
     /**
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    private function getAllowedContentTypesIdentifiers(): array
+    private function getAllowedContentTypesIdentifiers(array $contentTypesAllowedViaConfig): ?array
     {
         $access = $this->permissionResolver->hasAccess('content', 'read');
         if (!\is_array($access)) {
-            return [];
+            return $access ? ($contentTypesAllowedViaConfig ?: null) : [null];
         }
 
         $restrictedContentTypesIds = $this->permissionChecker->getRestrictions($access, ContentTypeLimitation::class);
         if (empty($restrictedContentTypesIds)) {
-            return [];
+            return $contentTypesAllowedViaConfig ?: null;
         }
 
         $allowedContentTypesIdentifiers = [];
@@ -61,7 +61,11 @@ final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
             $allowedContentTypesIdentifiers[] = $contentType->identifier;
         }
 
-        return $allowedContentTypesIdentifiers;
+        $allowedContentTypesIdentifiers = count($contentTypesAllowedViaConfig)
+            ? array_intersect($contentTypesAllowedViaConfig, $allowedContentTypesIdentifiers)
+            : $allowedContentTypesIdentifiers;
+
+        return empty($allowedContentTypesIdentifiers) ? [null] : array_values($allowedContentTypesIdentifiers);
     }
 
     public static function getSubscribedEvents(): array
@@ -80,10 +84,10 @@ final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
         }
 
         if ($this->allowedContentTypesIdentifiers === null) {
-            $this->allowedContentTypesIdentifiers = $this->getAllowedContentTypesIdentifiers();
+            $this->allowedContentTypesIdentifiers = $this->getAllowedContentTypesIdentifiers($config['allowed_content_types'] ?? []);
         }
 
-        $config['allowed_content_types'] = !empty($this->allowedContentTypesIdentifiers) ? $this->allowedContentTypesIdentifiers : null;
+        $config['allowed_content_types'] = $this->allowedContentTypesIdentifiers;
 
         $event->setConfig($config);
     }
