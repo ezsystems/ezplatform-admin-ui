@@ -17,8 +17,8 @@
         <note>key: ezimageasset.create.message.success</note>
       </trans-unit>
       <trans-unit id="d10ad93186c93b5a79a7aa921eb874b7df716935" resname="ezmaplocation.create.message.error">
-        <source>Area below need correction</source>
-        <target state="new">Area below need correction</target>
+        <source>Area below needs correction</source>
+        <target state="new">Area below needs correction</target>
         <note>key: ezmaplocation.create.message.error</note>
       </trans-unit>
     </body>
