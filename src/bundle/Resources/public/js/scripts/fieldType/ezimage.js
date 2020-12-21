@@ -1,4 +1,4 @@
-(function (global) {
+(function(global) {
     const SELECTOR_FIELD = '.ez-field-edit--ezimage';
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
@@ -16,7 +16,7 @@
         getImageUrl(file, callback) {
             const reader = new FileReader();
 
-            reader.onload = event => callback(event.target.result);
+            reader.onload = (event) => callback(event.target.result);
             reader.readAsDataURL(file);
         }
 
@@ -35,7 +35,7 @@
             const files = [].slice.call(event.target.files);
             const fileSize = this.formatFileSize(files[0].size);
 
-            this.getImageUrl(files[0], url => image.setAttribute('src', url));
+            this.getImageUrl(files[0], (url) => image.setAttribute('src', url));
 
             nameContainer.innerHTML = files[0].name;
             nameContainer.title = files[0].name;
@@ -48,6 +48,15 @@
     }
 
     class EzImageFieldValidator extends global.eZ.BaseFileFieldValidator {
+        toggleInvalidState(isError, config, input) {
+            super.toggleInvalidState(isError, config, input);
+
+            const container = input.closest('.ez-field-edit--ezimage');
+            const method = !!container.querySelector(`.${this.classInvalid}`) ? 'add' : 'remove';
+
+            container.classList[method](this.classInvalid);
+        }
+
         /**
          * Validates the alternative text input
          *
@@ -59,7 +68,7 @@
         validateAltInput(event) {
             const isRequired = event.target.required;
             const isEmpty = !event.target.value;
-            const isError = (isEmpty && isRequired);
+            const isError = isEmpty && isRequired;
             const label = event.target.closest(SELECTOR_ALT_WRAPPER).querySelector('.ez-data-source__label').innerHTML;
             const result = { isError };
 
@@ -71,7 +80,7 @@
         }
     }
 
-    [...document.querySelectorAll(SELECTOR_FIELD)].forEach(fieldContainer => {
+    [...document.querySelectorAll(SELECTOR_FIELD)].forEach((fieldContainer) => {
         const validator = new EzImageFieldValidator({
             classInvalid: 'is-invalid',
             fieldContainer,
@@ -103,19 +112,17 @@
                     callback: 'cancelErrors',
                     invalidStateSelectors: ['.ez-data-source__field--alternativeText'],
                     errorNodeSelectors: [`${SELECTOR_ALT_WRAPPER} .ez-data-source__label-wrapper`],
-                }
+                },
             ],
         });
         const previewField = new EzImageFilePreviewField({
             validator,
             fieldContainer,
-            fileTypeAccept: fieldContainer.querySelector(SELECTOR_INPUT_FILE).accept
+            fileTypeAccept: fieldContainer.querySelector(SELECTOR_INPUT_FILE).accept,
         });
 
         previewField.init();
 
-        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-            [...global.eZ.fieldTypeValidators, validator] :
-            [validator];
-    })
+        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
+    });
 })(window);
