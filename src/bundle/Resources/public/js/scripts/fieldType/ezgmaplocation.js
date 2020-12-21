@@ -6,7 +6,7 @@
     const SELECTOR_LAT_INPUT = '.ez-data-source__field--latitude .ez-data-source__input';
     const SELECTOR_LON_INPUT = '.ez-data-source__field--longitude .ez-data-source__input';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
-    const SELECTOR_ADDRESS_ERROR_NODE = '.ez-data-source__field--address'
+    const SELECTOR_ADDRESS_ERROR_NODE = '.ez-data-source__field--address';
     const SELECTOR_LAT_ERROR_NODE = '.ez-data-source__field--latitude';
     const SELECTOR_LON_ERROR_NODE = '.ez-data-source__field--longitude';
     const EVENT_BLUR = 'blur';
@@ -305,10 +305,10 @@
 
             if (validationResult.isError) {
                 const errorMessage = Translator.trans(
-                    /* @Desc("Area below need correction") */ 'ezmaplocation.create.message.error',
+                    /* @Desc("Area below needs correction") */ 'ezmaplocation.create.message.error',
                     {},
                     'fieldtypes_edit'
-                )
+                );
                 const allFieldsResult = { isError: true, errorMessage: errorMessage };
 
                 config.errorNodeSelectors = [SELECTOR_LABEL_WRAPPER];
