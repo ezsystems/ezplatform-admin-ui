@@ -1,11 +1,13 @@
 {% trans_default_domain 'content_edit_component_preview_unavailable' %}
 
-<section class="container mt-3 px-5">
-    <div class="alert alert-info ez-alert ez-alert--info" role="alert">
-        <svg class="ez-icon ez-icon--small ez-icon-warning">
-            <use xlink:href="{{ ez_icon_path('warning') }}"></use>
-        </svg>
+<section class="container mt-3">
+    <div class="px-3">
+        <div class="alert alert-info ez-alert ez-alert--info" role="alert">
+            <svg class="ez-icon ez-icon--small ez-icon-warning">
+                <use xlink:href="{{ ez_icon_path('warning') }}"></use>
+            </svg>
 
-        {{ 'preview_unavailable'|trans|desc('You cannot preview this translation because there is no site available for this language. Contact your Administrator.') }}
+            {{ 'preview_unavailable'|trans|desc('You cannot preview this translation because there is no site available for this language. Contact your Administrator.') }}
+        </div>
     </div>
 </section>
