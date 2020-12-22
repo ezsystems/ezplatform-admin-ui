@@ -13,6 +13,7 @@
 
             &__items {
                 max-height: calculateRem(300px);
+                max-width: calculateRem(550px);
                 overflow-y: auto;
                 width: 100%;
             }
