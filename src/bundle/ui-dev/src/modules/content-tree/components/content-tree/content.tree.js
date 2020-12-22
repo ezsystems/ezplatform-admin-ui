@@ -13,10 +13,12 @@ export default class ContentTree extends Component {
         this.addWidthChangeListener = this.addWidthChangeListener.bind(this);
         this.handleResizeEnd = this.handleResizeEnd.bind(this);
         this._refTreeContainer = React.createRef();
+        this.scrollTimeout = null;
+        this.scrollPositionSet = false;
 
         this.state = {
             resizeStartPositionX: 0,
-            containerWidth: 0,
+            containerWidth: this.getConfig('width'),
             resizedContainerWidth: 0,
             isResizing: false,
         };
@@ -26,10 +28,46 @@ export default class ContentTree extends Component {
         this.clearDocumentResizingListeners();
     }
 
+    componentDidMount() {
+        this.containerSrollRef.addEventListener('scroll', (event) => {
+            clearTimeout(this.scrollTimeout);
+
+            this.scrollTimeout = setTimeout(
+                (scrollTop) => {
+                    this.saveConfig('scrollTop', scrollTop);
+                },
+                50,
+                event.currentTarget.scrollTop
+            );
+        });
+    }
+
     componentDidUpdate(prevState) {
         if (this.state.containerWidth !== prevState.containerWidth) {
+            this.saveConfig('width', this.state.containerWidth);
+
             document.body.dispatchEvent(new CustomEvent('ez-content-tree-resized'));
         }
+
+        if (this.props.items.length && !this.scrollPositionSet) {
+            this.scrollPositionSet = true;
+
+            this.containerSrollRef.scrollTo(0, this.getConfig('scrollTop'));
+        }
+    }
+
+    saveConfig(id, value) {
+        const data = JSON.parse(window.localStorage.getItem('ez-content-tree-config') || '{}');
+
+        data[id] = value;
+
+        window.localStorage.setItem('ez-content-tree-config', JSON.stringify(data));
+    }
+
+    getConfig(id) {
+        const data = JSON.parse(window.localStorage.getItem('ez-content-tree-config') || '{}');
+
+        return data[id];
     }
 
     changeContainerWidth({ clientX }) {
@@ -78,13 +116,8 @@ export default class ContentTree extends Component {
     }
 
     renderList() {
-        const { items } = this.props;
-
-        if (!items || !items.length) {
-            return;
-        }
-
         const {
+            items,
             loadMoreSubitems,
             currentLocationId,
             onClickItem,
@@ -108,8 +141,8 @@ export default class ContentTree extends Component {
         };
 
         return (
-            <div className="m-tree__scrollable-wrapper">
-                <List {...attrs} />
+            <div className="m-tree__scrollable-wrapper" ref={(ref) => (this.containerSrollRef = ref)}>
+                {!items || !items.length ? null : <List {...attrs} />}
             </div>
         );
     }
