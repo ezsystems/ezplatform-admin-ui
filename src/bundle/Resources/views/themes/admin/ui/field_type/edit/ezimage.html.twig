@@ -35,7 +35,13 @@
                             <use xlink:href="{{ ez_icon_path('open-newtab') }}"></use>
                         </svg>
                     </a>
-                    {{ ez_render_component_group('image-edit-actions-after') }}
+                    {{ ez_render_component_group(
+                        'image-edit-actions-after',
+                        {
+                            'fieldDefinitionIdentifier' : form.parent.vars.value.fieldDefinition.identifier,
+                            'contentId' : app.request.get('contentId')
+                        }
+                    ) }}
                 </div>
                 <img
                     class="ez-field-edit-preview__media"
