@@ -352,7 +352,7 @@ export default class ContentTreeModule extends Component {
     }
 
     render() {
-        const { onClickItem, subitemsLimit, subitemsLoadLimit, treeMaxDepth } = this.props;
+        const { onClickItem, subitemsLimit, subitemsLoadLimit, treeMaxDepth, userId } = this.props;
         const attrs = {
             items: this.items,
             currentLocationId: this.getCurrentLocationId(),
@@ -363,6 +363,7 @@ export default class ContentTreeModule extends Component {
             afterItemToggle: this.updateSubtreeAfterItemToggle,
             onCollapseAllItems: this.handleCollapseAllItems,
             onClickItem,
+            userId,
         };
 
         return <ContentTree {...attrs} />;
@@ -398,6 +399,6 @@ ContentTreeModule.defaultProps = {
     subitemsLimit: window.eZ.adminUiConfig.contentTree.childrenLoadMaxLimit,
     subitemsLoadLimit: window.eZ.adminUiConfig.contentTree.loadMoreLimit,
     treeMaxDepth: window.eZ.adminUiConfig.contentTree.treeMaxDepth,
-    afterItemToggle: () => { },
+    afterItemToggle: () => {},
     sort: {},
 };
