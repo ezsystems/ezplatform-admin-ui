@@ -29,9 +29,9 @@ Feature: System info verification
         | ezsystems/ezplatform-content-forms      |
 
   @javascript @common
-  Scenario: Check Database System Information
-    When I go to "Database" tab in System Information
-    Then I see "Database" system information table
+  Scenario: Check Repository System Information
+    When I go to "Repository" tab in System Information
+    Then I see "Repository" system information table
 
   @javascript @common
   Scenario: Check Hardware System Information
