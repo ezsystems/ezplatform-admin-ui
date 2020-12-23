@@ -57,8 +57,8 @@ export default class ContentTree extends Component {
     }
 
     saveConfig(id, value) {
+        const { userId } = this.props;
         const data = JSON.parse(window.localStorage.getItem('ez-content-tree-state') || '{}');
-        const userId = window.eZ.helpers.user.getId();
 
         if (!data[userId]) {
             data[userId] = {};
@@ -70,8 +70,8 @@ export default class ContentTree extends Component {
     }
 
     getConfig(id) {
+        const { userId } = this.props;
         const data = JSON.parse(window.localStorage.getItem('ez-content-tree-state') || '{}');
-        const userId = window.eZ.helpers.user.getId();
 
         return data[userId]?.[id];
     }
@@ -197,4 +197,5 @@ ContentTree.propTypes = {
     afterItemToggle: PropTypes.func.isRequired,
     onCollapseAllItems: PropTypes.func.isRequired,
     onClickItem: PropTypes.func,
+    userId: PropTypes.number.isRequired,
 };
