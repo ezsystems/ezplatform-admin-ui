@@ -14,7 +14,7 @@ export default class ContentTree extends Component {
         this.handleResizeEnd = this.handleResizeEnd.bind(this);
         this._refTreeContainer = React.createRef();
         this.scrollTimeout = null;
-        this.scrollPositionSet = false;
+        this.scrollPositionRestored = false;
 
         this.state = {
             resizeStartPositionX: 0,
@@ -29,10 +29,10 @@ export default class ContentTree extends Component {
     }
 
     componentDidMount() {
-        this.containerSrollRef.addEventListener('scroll', (event) => {
-            clearTimeout(this.scrollTimeout);
+        this.containerScrollRef.addEventListener('scroll', (event) => {
+            window.clearTimeout(this.scrollTimeout);
 
-            this.scrollTimeout = setTimeout(
+            this.scrollTimeout = window.setTimeout(
                 (scrollTop) => {
                     this.saveConfig('scrollTop', scrollTop);
                 },
@@ -49,25 +49,31 @@ export default class ContentTree extends Component {
             document.body.dispatchEvent(new CustomEvent('ez-content-tree-resized'));
         }
 
-        if (this.props.items.length && !this.scrollPositionSet) {
-            this.scrollPositionSet = true;
+        if (this.props.items && this.props.items.length && !this.scrollPositionRestored) {
+            this.scrollPositionRestored = true;
 
-            this.containerSrollRef.scrollTo(0, this.getConfig('scrollTop'));
+            this.containerScrollRef.scrollTo(0, this.getConfig('scrollTop'));
         }
     }
 
     saveConfig(id, value) {
-        const data = JSON.parse(window.localStorage.getItem('ez-content-tree-config') || '{}');
+        const data = JSON.parse(window.localStorage.getItem('ez-content-tree-state') || '{}');
+        const userId = window.eZ.helpers.user.getId();
 
-        data[id] = value;
+        if (!data[userId]) {
+            data[userId] = {};
+        }
 
-        window.localStorage.setItem('ez-content-tree-config', JSON.stringify(data));
+        data[userId][id] = value;
+
+        window.localStorage.setItem('ez-content-tree-state', JSON.stringify(data));
     }
 
     getConfig(id) {
-        const data = JSON.parse(window.localStorage.getItem('ez-content-tree-config') || '{}');
+        const data = JSON.parse(window.localStorage.getItem('ez-content-tree-state') || '{}');
+        const userId = window.eZ.helpers.user.getId();
 
-        return data[id];
+        return data[userId]?.[id];
     }
 
     changeContainerWidth({ clientX }) {
@@ -141,7 +147,7 @@ export default class ContentTree extends Component {
         };
 
         return (
-            <div className="m-tree__scrollable-wrapper" ref={(ref) => (this.containerSrollRef = ref)}>
+            <div className="m-tree__scrollable-wrapper" ref={(ref) => (this.containerScrollRef = ref)}>
                 {!items || !items.length ? null : <List {...attrs} />}
             </div>
         );
