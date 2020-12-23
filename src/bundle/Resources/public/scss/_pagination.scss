@@ -21,10 +21,18 @@
 
         .page-item.prev {
             @include pagination-prev-btn();
+
+            .page-link {
+                padding-left: calculateRem(20px);
+            }
         }
 
         .page-item.next {
             @include pagination-next-btn();
+
+            .page-link {
+                padding-right: calculateRem(20px);
+            }
         }
 
         .page-item.prev,
@@ -37,7 +45,7 @@
             }
 
             .page-link {
-                width: calculateRem(60px);
+                width: initial;
                 border-radius: 0;
             }
         }

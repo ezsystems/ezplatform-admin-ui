@@ -83,10 +83,18 @@
 
             .c-pagination-button.prev {
                 @include pagination-prev-btn();
+
+                .page-link {
+                    padding-left: calculateRem(20px);
+                }
             }
 
             .c-pagination-button.next {
                 @include pagination-next-btn();
+
+                .page-link {
+                    padding-right: calculateRem(20px);
+                }
             }
 
             .c-pagination-button.prev,
@@ -99,7 +107,7 @@
                 }
 
                 .page-link {
-                    width: calculateRem(60px);
+                    width: initial;
                     border-radius: 0;
                 }
             }
