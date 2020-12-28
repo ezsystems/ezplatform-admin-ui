@@ -6,6 +6,12 @@
         color: $ibexa-color-primary;
     }
 
+    &--hover-dark {
+        &:hover {
+            color: $ibexa-black;
+        }
+    }
+
     &--light {
         color: $ibexa-white;
     }
