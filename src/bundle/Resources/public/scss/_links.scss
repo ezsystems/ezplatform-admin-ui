@@ -6,6 +6,13 @@
         color: $ibexa-color-primary;
     }
 
+    &--no-hover-color {
+        &:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+
     &--light {
         color: $ibexa-white;
     }
