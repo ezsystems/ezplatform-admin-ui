@@ -126,6 +126,7 @@
          */
         updateData(destinationContentId, destinationContentName, destinationLocationId, image) {
             const preview = this.fieldContainer.querySelector('.ez-field-edit__preview');
+            const previewVisual = preview.querySelector('.ez-field-edit-preview__visual');
             const previewImg = preview.querySelector('.ez-field-edit-preview__media');
             const previewAlt = preview.querySelector('.ez-field-edit-preview__image-alt input');
             const previewActionPreview = preview.querySelector('.ez-field-edit-preview__action--preview');
@@ -134,7 +135,9 @@
                 contentId: destinationContentId,
                 locationId: destinationLocationId,
             });
+            const additionalData = Array.isArray(image.additionalData) ? '{}' : JSON.stringify(image.additionalData);
 
+            previewVisual.setAttribute('data-additional-data', additionalData);
             previewImg.setAttribute('src', image ? image.uri : '//:0');
             previewImg.classList.toggle('d-none', image === null);
             previewAlt.value = image.alternativeText;

@@ -90,8 +90,10 @@
         {% set additional_data = ez_field_value(destination_content, ez_content_field_identifier_image_asset()).additionalData %}
     {% endif %}
 
+    {% set has_additional_data = additional_data is not null and additional_data is not empty %}
+
     <div class="ez-field-edit-preview">
-        <div class="ez-field-edit-preview__visual" data-additional-data="{{ additional_data is not null ? additional_data|json_encode(): '{}' }}">
+        <div class="ez-field-edit-preview__visual" data-additional-data="{{ has_additional_data ? additional_data|json_encode(): '{}' }}">
             <div class="ez-field-edit-preview__media-wrapper">
                 <div class="ez-field-edit-preview__actions">
                     <button
