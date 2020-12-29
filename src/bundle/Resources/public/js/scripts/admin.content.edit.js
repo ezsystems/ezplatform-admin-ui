@@ -47,6 +47,15 @@
 
         fields.forEach((field) => field.removeAttribute('tabindex'));
         invalidFields.forEach((field) => field.setAttribute('tabindex', '-1'));
+
+        invalidTab = invalidFields[0].closest('.tab-pane');
+
+        if (invalidTab) {
+            const invalidTabLink = doc.querySelector(`a[href="#${invalidTab.id}"]`);
+
+            invalidTabLink.click();
+        }
+
         invalidFields[0].focus();
 
         doc.querySelector('.ez-content-item__errors-wrapper').removeAttribute('hidden');
@@ -98,8 +107,7 @@
     };
 
     const isAutosaveEnabled = () => {
-        return eZ.adminUiConfig.autosave.enabled
-            && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
+        return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
     };
 
     if (isAutosaveEnabled()) {
