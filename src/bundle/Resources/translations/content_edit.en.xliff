@@ -6,11 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="20aa73aab64b5a0de7eafb3f7e8f6a765199f873" resname="autosave">
-        <source>Autosave</source>
-        <target state="new">Autosave</target>
-        <note>key: autosave</note>
-      </trans-unit>
       <trans-unit id="cd6fb4cd7385ecdb31009da852c23fb5038b9c72" resname="content.draft_saved.success">
         <source>Content draft saved.</source>
         <target state="new">Content draft saved.</target>
@@ -26,16 +21,6 @@
         <target state="new">Content published.</target>
         <note>key: content.published.success</note>
       </trans-unit>
-      <trans-unit id="6a2083913f3647b44f205204e369f764e83233b1" resname="content_id">
-        <source>Content ID: %contentId%</source>
-        <target state="new">Content ID: %contentId%</target>
-        <note>key: content_id</note>
-      </trans-unit>
-      <trans-unit id="71a8aeb31196db647608ffe1789be9400d61451d" resname="created_by">
-        <source>Created by %name%</source>
-        <target state="new">Created by %name%</target>
-        <note>key: created_by</note>
-      </trans-unit>
       <trans-unit id="f34946beab1da2af6535a8e4a88145e9557de0aa" resname="editing">
         <source>Editing</source>
         <target state="new">Editing</target>
@@ -50,26 +35,6 @@
         <source>Translating the %fieldName% Field is disabled. See Content Type definition for details.</source>
         <target state="new">Translating the %fieldName% Field is disabled. See Content Type definition for details.</target>
         <note>key: fieldtype.translation_is_disabled</note>
-      </trans-unit>
-      <trans-unit id="876d7bdba03c72251ec4c2dc827fc54af7889091" resname="location_id">
-        <source>Location ID: %locationId%</source>
-        <target state="new">Location ID: %locationId%</target>
-        <note>key: location_id</note>
-      </trans-unit>
-      <trans-unit id="b50bb4a4a1f5081a047f89673318ef4e24fd1fdb" resname="more_info">
-        <source>More info</source>
-        <target state="new">More info</target>
-        <note>key: more_info</note>
-      </trans-unit>
-      <trans-unit id="32d50c07b2eacd6fa72742ff1c1f5963c26a251d" resname="new_content_item">
-        <source>New %contentType%</source>
-        <target state="new">New %contentType%</target>
-        <note>key: new_content_item</note>
-      </trans-unit>
-      <trans-unit id="cce4ced380a283ffdecf364aeb5312ee001e6601" resname="parent_location_id">
-        <source>Parent Location ID: %locationId%</source>
-        <target state="new">Parent Location ID: %locationId%</target>
-        <note>key: parent_location_id</note>
       </trans-unit>
     </body>
   </file>

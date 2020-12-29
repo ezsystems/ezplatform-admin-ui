@@ -11,38 +11,6 @@
         <target state="new">Creating</target>
         <note>key: creating</note>
       </trans-unit>
-      <trans-unit id="0f727a5b08f9dd958453e3fe685f22bb9a55a877" resname="creating_details">
-        <source><![CDATA[
-                        <span class="ez-details-items__connector">Creating:</span>
-                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
-                        <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
-                            <use xlink:href="%icon%"></use>
-                        </svg>
-                        %content_type_name%
-                        </span>
-                        <span class="ez-details-items__connector ez-details-items__connector--small">in</span>
-                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--language">%language_name%</span>
-                        <span class="ez-details-items__connector ez-details-items__connector--small">under</span>
-                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>]]></source>
-        <target state="new"><![CDATA[
-                        <span class="ez-details-items__connector">Creating:</span>
-                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--content-type">
-                        <svg class="ez-icon ez-icon--small ez-icon-%identifier%">
-                            <use xlink:href="%icon%"></use>
-                        </svg>
-                        %content_type_name%
-                        </span>
-                        <span class="ez-details-items__connector ez-details-items__connector--small">in</span>
-                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--language">%language_name%</span>
-                        <span class="ez-details-items__connector ez-details-items__connector--small">under</span>
-                        <span class="ez-badge ez-badge--small ez-details-items__pill ez-details-items__pill--location">%location_name%</span>]]></target>
-        <note>key: creating_details</note>
-      </trans-unit>
-      <trans-unit id="9f3b1a45a0ce10a940f96bdba73bba914cc78bb6" resname="list.title">
-        <source>User Settings</source>
-        <target state="new">User Settings</target>
-        <note>key: list.title</note>
-      </trans-unit>
       <trans-unit id="32d50c07b2eacd6fa72742ff1c1f5963c26a251d" resname="new_content_item">
         <source>New %contentType%</source>
         <target state="new">New %contentType%</target>

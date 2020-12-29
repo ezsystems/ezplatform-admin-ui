@@ -11,11 +11,6 @@
         <target state="new">Locate me</target>
         <note>key: content.field_type.ezgmaplocation.locate_me</note>
       </trans-unit>
-      <trans-unit id="aad076367e603aee68bb8577f35436abfb369136" resname="content.field_type.ezgmaplocation.set_current_location">
-        <source>Use current location</source>
-        <target state="new">Use current location</target>
-        <note>key: content.field_type.ezgmaplocation.set_current_location</note>
-      </trans-unit>
       <trans-unit id="6a6094a8406a207e85ac5523d0fa582b0e62b45e" resname="content.field_type.ezimage.delete">
         <source>Delete image</source>
         <target state="new">Delete image</target>
@@ -55,11 +50,6 @@
         <source>Download</source>
         <target state="new">Download</target>
         <note>key: ezbinaryfile.action.download</note>
-      </trans-unit>
-      <trans-unit id="b244ed2b3b30d53cd73ea9d25c21c7d938e97973" resname="ezbinaryfile.action.preview">
-        <source>Preview</source>
-        <target state="new">Preview</target>
-        <note>key: ezbinaryfile.action.preview</note>
       </trans-unit>
       <trans-unit id="936018db97b7f60296d65482bc41f138e787b5c9" resname="ezbinaryfile.action.remove">
         <source>Remove</source>

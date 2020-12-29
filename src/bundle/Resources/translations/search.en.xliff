@@ -61,11 +61,6 @@
         <target state="new">Search results (%total%)</target>
         <note>key: search.header</note>
       </trans-unit>
-      <trans-unit id="1d83218940b91b2cc81ae9d0a694682f6cb04813" resname="search.headline">
-        <source>Search</source>
-        <target state="new">Search</target>
-        <note>key: search.headline</note>
-      </trans-unit>
       <trans-unit id="c2e9df867c114a94918c00f775d3a54d24358dfa" resname="search.last.modified">
         <source>Last modified</source>
         <target state="new">Last modified</target>
