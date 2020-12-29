@@ -66,6 +66,11 @@
         <target>Owner of Parent</target>
         <note>key: policy.limitation.identifier.parentowner</note>
       </trans-unit>
+      <trans-unit id="1b6a38d05e399ed640e6497fcd79ac31e4aafd73" resname="policy.limitation.identifier.personalizationaccess">
+        <source>PersonalizationAccess</source>
+        <target>PersonalizationAccess</target>
+        <note>key: policy.limitation.identifier.personalizationaccess</note>
+      </trans-unit>
       <trans-unit id="bb77b27363dad566197a200290f0f0b18baa4705" resname="policy.limitation.identifier.section">
         <source>Section</source>
         <target>Section</target>

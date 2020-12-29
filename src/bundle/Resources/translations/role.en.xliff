@@ -261,11 +261,6 @@
         <target state="new">Role "%identifier%"</target>
         <note>key: role.view.view.title</note>
       </trans-unit>
-      <trans-unit id="84f19e53b432c72daaf803a5cbb9bf10d763b5e4" resname="role.viewing">
-        <source><![CDATA[Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items]]></source>
-        <target state="new"><![CDATA[Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items]]></target>
-        <note>key: role.viewing</note>
-      </trans-unit>
       <trans-unit id="e7ff6be9f5a7368f2493f29eacfa1ee321d9c383" resname="role_assignment.view.add.panel.limitations.title">
         <source>Limitations</source>
         <target state="new">Limitations</target>

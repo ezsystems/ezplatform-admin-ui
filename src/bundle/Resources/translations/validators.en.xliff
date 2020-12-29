@@ -16,11 +16,6 @@
         <target state="new">Content Type identifier may only contain letters from "a" to "z", numbers and underscores.</target>
         <note>key: ez.content_type.identifier.pattern</note>
       </trans-unit>
-      <trans-unit id="e03cdf7df4e43a891269e0bbe734e7bab5cc61eb" resname="ez.content_type.identifier.unique">
-        <source>The Content Type identifier "%identifier%" is used by another Content Type. Enter a unique identifier.</source>
-        <target>The Content Type identifier "%identifier%" is used by another Content Type. Enter a unique identifier.</target>
-        <note>key: ez.content_type.identifier.unique</note>
-      </trans-unit>
       <trans-unit id="7ecfa6bd2c1993d18d067f3abe3acebeb9c2458c" resname="ez.content_type.names">
         <source>Content Type name cannot be blank and cannot be longer than 255 characters.</source>
         <target state="new">Content Type name cannot be blank and cannot be longer than 255 characters.</target>
@@ -31,11 +26,6 @@
         <target state="new">Field definition description cannot be longer than 255 characters.</target>
         <note>key: ez.field_definition.descriptions</note>
       </trans-unit>
-      <trans-unit id="3c8e362f900d886ce75b34d0fd952128612a2b12" resname="ez.field_definition.identifier.unique">
-        <source>The Field definition identifier "%identifier%" is used by another Field definition. Enter a unique identifier.</source>
-        <target>The Field definition identifier "%identifier%" is used by another Field definition. Enter a unique identifier..</target>
-        <note>key: ez.field_definition.identifier.unique</note>
-      </trans-unit>
       <trans-unit id="0f7d936836760a506042c4d25cd38c5a30c3d9de" resname="ez.field_definition.names">
         <source>Field definition name cannot be blank cannot be longer than 255 characters.</source>
         <target state="new">Field definition name cannot be blank cannot be longer than 255 characters.</target>
@@ -45,11 +35,6 @@
         <source>Section identifier may only contain letters from "a" to "z", numbers and underscores.</source>
         <target state="new">Section identifier may only contain letters from "a" to "z", numbers and underscores.</target>
         <note>key: ez.section.identifier.format</note>
-      </trans-unit>
-      <trans-unit id="0727f822c8bebb99cd8a75ec16d4008c74d30b24" resname="ezplatform.change_user_password.not_match">
-        <source>Incorrect current password.</source>
-        <target state="new">Incorrect current password.</target>
-        <note>key: ezplatform.change_user_password.not_match</note>
       </trans-unit>
       <trans-unit id="54d912b0089483cfd533714e50262851b6d1421a" resname="ezplatform.change_user_password.passwords_must_match">
         <source>Passwords do not match.</source>

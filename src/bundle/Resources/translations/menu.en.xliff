@@ -181,11 +181,6 @@
         <target state="new">Sections</target>
         <note>key: main__admin__sections</note>
       </trans-unit>
-      <trans-unit id="2cc622305036d330c00683520df433ef82f60c9a" resname="main__admin__systeminfo">
-        <source>System Information</source>
-        <target state="new">System Information</target>
-        <note>key: main__admin__systeminfo</note>
-      </trans-unit>
       <trans-unit id="82375ef2c63989a07c692f526407d75316414dff" resname="main__admin__url_management">
         <source>URL Management</source>
         <target state="new">URL Management</target>

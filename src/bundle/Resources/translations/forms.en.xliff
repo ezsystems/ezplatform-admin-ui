@@ -351,6 +351,26 @@
         <target>Content / View embed</target>
         <note>key: role.policy.content.view_embed</note>
       </trans-unit>
+      <trans-unit id="15c3ffad9d90e7d492d275a9ea05ecdcdedaace5" resname="role.policy.personalization">
+        <source>Personalization</source>
+        <target>Personalization</target>
+        <note>key: role.policy.personalization</note>
+      </trans-unit>
+      <trans-unit id="8adcce777544fc53bd13ae39edf718d764867cc2" resname="role.policy.personalization.all_functions">
+        <source>Personalization / All functions</source>
+        <target>Personalization / All functions</target>
+        <note>key: role.policy.personalization.all_functions</note>
+      </trans-unit>
+      <trans-unit id="47b6be1f552d856d8dbea0a9956632d310887e11" resname="role.policy.personalization.edit">
+        <source>Personalization / Edit</source>
+        <target>Personalization / Edit</target>
+        <note>key: role.policy.personalization.edit</note>
+      </trans-unit>
+      <trans-unit id="bef74c3cccc66abd5825c05aa8f58b020270197f" resname="role.policy.personalization.view">
+        <source>Personalization / View</source>
+        <target>Personalization / View</target>
+        <note>key: role.policy.personalization.view</note>
+      </trans-unit>
       <trans-unit id="6ff0bcc1b70d0dbde113af7649393f667612cace" resname="role.policy.role">
         <source>Role</source>
         <target>Role</target>
@@ -480,6 +500,31 @@
         <source>Segment group / Update</source>
         <target>Segment group / Update</target>
         <note>key: role.policy.segment_group.update</note>
+      </trans-unit>
+      <trans-unit id="5f165ef2e938f6710b56e2e8ee416414e430b77c" resname="role.policy.setting">
+        <source>Setting</source>
+        <target>Setting</target>
+        <note>key: role.policy.setting</note>
+      </trans-unit>
+      <trans-unit id="8775d52b987252ee1ad0867fe4f9e23dec668b5b" resname="role.policy.setting.all_functions">
+        <source>Setting / All functions</source>
+        <target>Setting / All functions</target>
+        <note>key: role.policy.setting.all_functions</note>
+      </trans-unit>
+      <trans-unit id="686f427740ca0cf4df247266b8a1300d747cf3a4" resname="role.policy.setting.create">
+        <source>Setting / Create</source>
+        <target>Setting / Create</target>
+        <note>key: role.policy.setting.create</note>
+      </trans-unit>
+      <trans-unit id="d41141e8fa3c214bc546a6925304c15ee9a28022" resname="role.policy.setting.remove">
+        <source>Setting / Remove</source>
+        <target>Setting / Remove</target>
+        <note>key: role.policy.setting.remove</note>
+      </trans-unit>
+      <trans-unit id="14fa9c5afba9d51072c6a66dede46535b718f77e" resname="role.policy.setting.update">
+        <source>Setting / Update</source>
+        <target>Setting / Update</target>
+        <note>key: role.policy.setting.update</note>
       </trans-unit>
       <trans-unit id="33092ebd51699d4d3f598b8488e7bc5969038bff" resname="role.policy.setup">
         <source>Setup</source>
@@ -890,11 +935,6 @@
         <source>Name of a new role</source>
         <target state="new">Name of a new role</target>
         <note>key: role_copy.name</note>
-      </trans-unit>
-      <trans-unit id="679976c86325b8db98d8b9027a3feea9ad7070c9" resname="role_copy.save">
-        <source>Copy</source>
-        <target state="new">Copy</target>
-        <note>key: role_copy.save</note>
       </trans-unit>
       <trans-unit id="e36e86d3568ccc02a097560444b35c69c469c531" resname="role_create.name">
         <source>Name</source>

@@ -121,11 +121,6 @@
         <target state="new">Language "%language%"</target>
         <note>key: language.view.title.identifier</note>
       </trans-unit>
-      <trans-unit id="a46aeb190cbc586a29c72689dfc5d88a3e21d2f9" resname="language.viewing">
-        <source><![CDATA[Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items]]></source>
-        <target state="new"><![CDATA[Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items]]></target>
-        <note>key: language.viewing</note>
-      </trans-unit>
     </body>
   </file>
 </xliff>
