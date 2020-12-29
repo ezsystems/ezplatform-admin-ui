@@ -5,6 +5,8 @@
     <p class="ez-login__actions-subheadline">{{ 'base.enter_credentials'|trans|desc('Enter your login credentials below.') }}</p>
 
     {% block login_form %}
+        {{ ez_render_component_group('login-form-before') }}
+
         <form action="{{ path( 'login_check' ) }}" method="post" role="form">
             <fieldset>
                 {% block login_form_errors %}
@@ -63,6 +65,8 @@
                 {% endblock %}
             </fieldset>
         </form>
+
+        {{ ez_render_component_group('login-form-after') }}
     {% endblock %}
 
     {{ encore_entry_script_tags('ezplatform-admin-ui-login-js', null, 'ezplatform') }}
