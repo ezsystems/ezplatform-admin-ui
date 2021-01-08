@@ -59,9 +59,7 @@
 
         clearCurrentSelection() {
             this.sourceInput.querySelectorAll('option').forEach((option) => (option.selected = false));
-            this.itemsContainer
-                .querySelectorAll(SELECTOR_ITEM)
-                .forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
+            this.itemsContainer.querySelectorAll(SELECTOR_ITEM).forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
             this.container.querySelector(SELECTOR_SELECTION_INFO).innerHTML = '';
         }
 
@@ -85,9 +83,7 @@
                 element.querySelector('.ez-input').checked = selected;
             }
 
-            this.itemsContainer
-                .querySelector(`[data-value="${value}"]`)
-                .classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
+            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
 
             const selectedItemsList = this.container.querySelector(SELECTOR_SELECTION_INFO);
 
@@ -98,9 +94,7 @@
                 if (placeholder) {
                     placeholder.remove();
 
-                    this.itemsContainer
-                        .querySelector(SELECTOR_PLACEHOLDER)
-                        .classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
+                    this.itemsContainer.querySelector(SELECTOR_PLACEHOLDER).classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
                 }
 
                 selectedItemsList.insertAdjacentHTML('beforeend', this.createSelectedItem(value, label));
@@ -146,6 +140,8 @@
 
             const isListHidden = this.itemsContainer.classList.contains(CLASS_ITEMS_HIDDEN);
             const bodyMethodName = isListHidden ? 'addEventListener' : 'removeEventListener';
+            const itemsContainerHeight =
+                document.documentElement.getBoundingClientRect().height - this.itemsContainer.getBoundingClientRect().top - 16;
 
             if (isListHidden) {
                 const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -155,6 +151,7 @@
                 this.itemsContainer.classList[itemsListMethodName](CLASS_ITEMS_POSITION_TOP);
             }
 
+            this.itemsContainer.style['max-height'] = `${itemsContainerHeight}px`;
             this.itemsContainer.classList.toggle(CLASS_ITEMS_HIDDEN);
             doc.body[bodyMethodName]('click', this.onClickOutside, false);
         }
@@ -179,10 +176,7 @@
 
             option.remove();
 
-            if (
-                !this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length &&
-                this.hasDefaultSelection
-            ) {
+            if (!this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length && this.hasDefaultSelection) {
                 this.hideOptions();
                 this.clearCurrentSelection();
                 this.selectFirstItem();
