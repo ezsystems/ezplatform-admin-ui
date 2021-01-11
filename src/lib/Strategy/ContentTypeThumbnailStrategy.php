@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Strategy;
 
 use eZ\Publish\API\Repository\Values\Content\Thumbnail;
+use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\SPI\Repository\Strategy\ContentThumbnail\ThumbnailStrategy;
 use EzSystems\EzPlatformAdminUi\Exception\ContentTypeIconNotFoundException;
@@ -29,7 +30,8 @@ final class ContentTypeThumbnailStrategy implements ThumbnailStrategy
 
     public function getThumbnail(
         ContentType $contentType,
-        array $fields
+        array $fields,
+        ?VersionInfo $versionInfo = null
     ): ?Thumbnail {
         try {
             $contentTypeIcon = $this->contentTypeIconResolver->getContentTypeIcon($contentType->identifier);
