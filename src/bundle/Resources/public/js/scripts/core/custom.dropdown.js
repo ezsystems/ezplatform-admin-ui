@@ -195,7 +195,7 @@
                 selectedItems.forEach((item) => {
                     item.hidden = false;
                 });
-                selectedItems.forEach((item, key) => {
+                selectedItems.forEach((item, index) => {
                     itemsWidth += item.offsetWidth;
 
                     if (key !== 0 && itemsWidth > selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer) {
