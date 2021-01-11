@@ -198,7 +198,7 @@
                 selectedItems.forEach((item, index) => {
                     itemsWidth += item.offsetWidth;
 
-                    if (key !== 0 && itemsWidth > selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer) {
+                    if (index !== 0 && itemsWidth > selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer) {
                         numberOfOverflowItems++;
                         item.hidden = true;
                     }
