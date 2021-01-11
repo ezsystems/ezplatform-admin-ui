@@ -131,6 +131,18 @@
             this.sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
         }
 
+        getItemsContainerHeight(isItemsContainerTop) {
+            const DROPDOWN_MARGIN = 16;
+
+            if (isItemsContainerTop) {
+                return this.container.querySelector(SELECTOR_SELECTION_INFO).getBoundingClientRect().top - DROPDOWN_MARGIN;
+            }
+
+            return (
+                document.documentElement.getBoundingClientRect().height - this.itemsContainer.getBoundingClientRect().top - DROPDOWN_MARGIN
+            );
+        }
+
         onInputClick(event) {
             if (event.target.classList.contains(CLASS_REMOVE_SELECTION)) {
                 this.deselectOption(event.target.closest(SELECTOR_SELECTED_ITEM_IN_LABEL));
@@ -140,18 +152,17 @@
 
             const isListHidden = this.itemsContainer.classList.contains(CLASS_ITEMS_HIDDEN);
             const bodyMethodName = isListHidden ? 'addEventListener' : 'removeEventListener';
-            const itemsContainerHeight =
-                document.documentElement.getBoundingClientRect().height - this.itemsContainer.getBoundingClientRect().top - 16;
 
             if (isListHidden) {
                 const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
                 const { top } = this.itemsContainer.getBoundingClientRect();
-                const itemsListMethodName = top + ITEMS_LIST_MAX_HEIGHT > viewportHeight ? 'add' : 'remove';
+                const isItemsContainerTop = top + ITEMS_LIST_MAX_HEIGHT > viewportHeight;
+                const itemsListMethodName = isItemsContainerTop ? 'add' : 'remove';
 
+                this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(isItemsContainerTop)}px`;
                 this.itemsContainer.classList[itemsListMethodName](CLASS_ITEMS_POSITION_TOP);
             }
 
-            this.itemsContainer.style['max-height'] = `${itemsContainerHeight}px`;
             this.itemsContainer.classList.toggle(CLASS_ITEMS_HIDDEN);
             doc.body[bodyMethodName]('click', this.onClickOutside, false);
         }
