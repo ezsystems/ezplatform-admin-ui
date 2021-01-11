@@ -1,6 +1,6 @@
 (function(global, doc, eZ) {
     const CLASS_CUSTOM_DROPDOWN = 'ez-custom-dropdown';
-    const CLASS_CUSTOM_DROPDOWN_ITEM = 'ez-custom-dropdown__item';
+    const CLASS_CUSTOM_DROPDOWN_OVERFLOW = 'ez-custom-dropdown--overflow';
     const CLASS_ITEMS_HIDDEN = 'ez-custom-dropdown__items--hidden';
     const CLASS_ITEMS_POSITION_TOP = 'ez-custom-dropdown__items--position-top';
     const CLASS_REMOVE_SELECTION = 'ez-custom-dropdown__remove-selection';
@@ -59,9 +59,7 @@
 
         clearCurrentSelection() {
             this.sourceInput.querySelectorAll('option').forEach((option) => (option.selected = false));
-            this.itemsContainer
-                .querySelectorAll(SELECTOR_ITEM)
-                .forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
+            this.itemsContainer.querySelectorAll(SELECTOR_ITEM).forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
             this.container.querySelector(SELECTOR_SELECTION_INFO).innerHTML = '';
         }
 
@@ -85,9 +83,7 @@
                 element.querySelector('.ez-input').checked = selected;
             }
 
-            this.itemsContainer
-                .querySelector(`[data-value="${value}"]`)
-                .classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
+            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
 
             const selectedItemsList = this.container.querySelector(SELECTOR_SELECTION_INFO);
 
@@ -98,9 +94,7 @@
                 if (placeholder) {
                     placeholder.remove();
 
-                    this.itemsContainer
-                        .querySelector(SELECTOR_PLACEHOLDER)
-                        .classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
+                    this.itemsContainer.querySelector(SELECTOR_PLACEHOLDER).classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
                 }
 
                 selectedItemsList.insertAdjacentHTML('beforeend', this.createSelectedItem(value, label));
@@ -179,10 +173,7 @@
 
             option.remove();
 
-            if (
-                !this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length &&
-                this.hasDefaultSelection
-            ) {
+            if (!this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length && this.hasDefaultSelection) {
                 this.hideOptions();
                 this.clearCurrentSelection();
                 this.selectFirstItem();
@@ -204,10 +195,10 @@
                 selectedItems.forEach((item) => {
                     item.hidden = false;
                 });
-                selectedItems.forEach((item) => {
+                selectedItems.forEach((item, key) => {
                     itemsWidth += item.offsetWidth;
 
-                    if (itemsWidth > selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer) {
+                    if (key !== 0 && itemsWidth > selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer) {
                         numberOfOverflowItems++;
                         item.hidden = true;
                     }
@@ -216,8 +207,10 @@
                 if (numberOfOverflowItems) {
                     selectedItemsOverflow.hidden = false;
                     selectedItemsOverflow.innerHTML = numberOfOverflowItems;
+                    this.container.classList.add(CLASS_CUSTOM_DROPDOWN_OVERFLOW);
                 } else {
                     selectedItemsOverflow.hidden = true;
+                    this.container.classList.remove(CLASS_CUSTOM_DROPDOWN_OVERFLOW);
                 }
             }
         }
