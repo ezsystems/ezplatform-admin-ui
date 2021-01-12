@@ -59,9 +59,7 @@
 
         clearCurrentSelection() {
             this.sourceInput.querySelectorAll('option').forEach((option) => (option.selected = false));
-            this.itemsContainer
-                .querySelectorAll(SELECTOR_ITEM)
-                .forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
+            this.itemsContainer.querySelectorAll(SELECTOR_ITEM).forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
             this.container.querySelector(SELECTOR_SELECTION_INFO).innerHTML = '';
         }
 
@@ -85,9 +83,7 @@
                 element.querySelector('.ez-input').checked = selected;
             }
 
-            this.itemsContainer
-                .querySelector(`[data-value="${value}"]`)
-                .classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
+            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
 
             const selectedItemsList = this.container.querySelector(SELECTOR_SELECTION_INFO);
 
@@ -98,9 +94,7 @@
                 if (placeholder) {
                     placeholder.remove();
 
-                    this.itemsContainer
-                        .querySelector(SELECTOR_PLACEHOLDER)
-                        .classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
+                    this.itemsContainer.querySelector(SELECTOR_PLACEHOLDER).classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
                 }
 
                 selectedItemsList.insertAdjacentHTML('beforeend', this.createSelectedItem(value, label));
@@ -137,6 +131,18 @@
             this.sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
         }
 
+        getItemsContainerHeight(isItemsContainerTop) {
+            const DROPDOWN_MARGIN = 16;
+
+            if (isItemsContainerTop) {
+                return this.container.querySelector(SELECTOR_SELECTION_INFO).getBoundingClientRect().top - DROPDOWN_MARGIN;
+            }
+
+            return (
+                document.documentElement.getBoundingClientRect().height - this.itemsContainer.getBoundingClientRect().top - DROPDOWN_MARGIN
+            );
+        }
+
         onInputClick(event) {
             if (event.target.classList.contains(CLASS_REMOVE_SELECTION)) {
                 this.deselectOption(event.target.closest(SELECTOR_SELECTED_ITEM_IN_LABEL));
@@ -150,8 +156,10 @@
             if (isListHidden) {
                 const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
                 const { top } = this.itemsContainer.getBoundingClientRect();
-                const itemsListMethodName = top + ITEMS_LIST_MAX_HEIGHT > viewportHeight ? 'add' : 'remove';
+                const isItemsContainerTop = top + ITEMS_LIST_MAX_HEIGHT > viewportHeight;
+                const itemsListMethodName = isItemsContainerTop ? 'add' : 'remove';
 
+                this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(isItemsContainerTop)}px`;
                 this.itemsContainer.classList[itemsListMethodName](CLASS_ITEMS_POSITION_TOP);
             }
 
@@ -179,10 +187,7 @@
 
             option.remove();
 
-            if (
-                !this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length &&
-                this.hasDefaultSelection
-            ) {
+            if (!this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length && this.hasDefaultSelection) {
                 this.hideOptions();
                 this.clearCurrentSelection();
                 this.selectFirstItem();

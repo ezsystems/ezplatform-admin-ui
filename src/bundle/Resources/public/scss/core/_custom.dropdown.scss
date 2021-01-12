@@ -136,6 +136,7 @@
         color: $ibexa-color-font;
         z-index: 2;
         border-radius: 0 0 $ibexa-border-radius $ibexa-border-radius;
+        overflow-y: auto;
 
         &--hidden {
             transform: scaleY(0);
