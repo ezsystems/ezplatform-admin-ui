@@ -182,4 +182,10 @@
             margin-bottom: calculateRem(-2px);
         }
     }
+
+    &--overflow {
+        .ez-custom-dropdown__selected-item {
+            max-width: calc(100% - #{calculateRem(96px)});
+        }
+    }
 }

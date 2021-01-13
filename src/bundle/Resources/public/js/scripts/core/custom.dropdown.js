@@ -1,6 +1,6 @@
 (function(global, doc, eZ) {
     const CLASS_CUSTOM_DROPDOWN = 'ez-custom-dropdown';
-    const CLASS_CUSTOM_DROPDOWN_ITEM = 'ez-custom-dropdown__item';
+    const CLASS_CUSTOM_DROPDOWN_OVERFLOW = 'ez-custom-dropdown--overflow';
     const CLASS_ITEMS_HIDDEN = 'ez-custom-dropdown__items--hidden';
     const CLASS_ITEMS_POSITION_TOP = 'ez-custom-dropdown__items--position-top';
     const CLASS_REMOVE_SELECTION = 'ez-custom-dropdown__remove-selection';
@@ -209,10 +209,10 @@
                 selectedItems.forEach((item) => {
                     item.hidden = false;
                 });
-                selectedItems.forEach((item) => {
+                selectedItems.forEach((item, index) => {
                     itemsWidth += item.offsetWidth;
 
-                    if (itemsWidth > selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer) {
+                    if (index !== 0 && itemsWidth > selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer) {
                         numberOfOverflowItems++;
                         item.hidden = true;
                     }
@@ -221,8 +221,10 @@
                 if (numberOfOverflowItems) {
                     selectedItemsOverflow.hidden = false;
                     selectedItemsOverflow.innerHTML = numberOfOverflowItems;
+                    this.container.classList.add(CLASS_CUSTOM_DROPDOWN_OVERFLOW);
                 } else {
                     selectedItemsOverflow.hidden = true;
+                    this.container.classList.remove(CLASS_CUSTOM_DROPDOWN_OVERFLOW);
                 }
             }
         }
