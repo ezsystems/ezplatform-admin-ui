@@ -65,4 +65,11 @@
         background-color: $ibexa-color-base-light;
         cursor: not-allowed;
     }
+
+    .c-thumbnail {
+        img {
+            max-width: calculateRem(180px);
+            max-height: calculateRem(180px);
+        }
+    }
 }
