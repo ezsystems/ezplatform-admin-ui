@@ -41,11 +41,13 @@
             </div>
         </div>
         <div class="ez-context-menu">
-            {% set url_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.url_edit.sidebar_right', [], {'url': url}) %}
+            <div class="ez-sticky-container">
+                {% set url_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.url_edit.sidebar_right', [], {'url': url}) %}
 
-            {{ knp_menu_render(url_create_sidebar_right, {
-                'template': '@ezdesign/ui/menu/sidebar_right.html.twig'
-            }) }}
+                {{ knp_menu_render(url_create_sidebar_right, {
+                    'template': '@ezdesign/ui/menu/sidebar_right.html.twig'
+                }) }}
+            </div>
         </div>
     </div>
 {%- endblock -%}
