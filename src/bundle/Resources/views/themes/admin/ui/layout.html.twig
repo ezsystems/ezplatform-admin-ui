@@ -130,6 +130,7 @@
                 </div>
             </div>
         {% endblock %}
+
         <div class="container-fluid ez-main-container">
             {% block content %}
 
@@ -148,6 +149,11 @@
 
             {% endblock content %}
         </div>
+
+        {% block footer %}
+            {% include '@ezdesign/ui/footer.html.twig' %}
+        {% endblock %}
+
         <div
             class="ez-notifications-container"
             data-notifications="{{ app.flashes|json_encode() }}"

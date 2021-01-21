@@ -106,6 +106,7 @@
                     } %}
                 {% endif %}
             </section>
+            {% include '@ezdesign/ui/footer.html.twig' %}
         </div>
 
         {{ form_start(form_edit, {
@@ -116,6 +117,8 @@
         {{ form_end(form_edit) }}
     </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}
 
 {% block react_modules %}
     {{ encore_entry_script_tags('ezplatform-admin-ui-content-tree-js', null, 'ezplatform') }}

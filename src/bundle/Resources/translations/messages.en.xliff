@@ -304,6 +304,26 @@
         <target state="new"><![CDATA[Your password has been changed. You can <a href="%login%">log in</a> to eZ Platform.]]></target>
         <note>key: ezplatform.reset_user_password.success</note>
       </trans-unit>
+      <trans-unit id="b469507c15ca085ba9753f60ab835f68cda9c725" resname="footer.copyright">
+        <source><![CDATA[Copyright &copy; %year% Ibexa. All right reserved]]></source>
+        <target state="new"><![CDATA[Copyright &copy; %year% Ibexa. All right reserved]]></target>
+        <note>key: footer.copyright</note>
+      </trans-unit>
+      <trans-unit id="9108451fc15edd434efe02a84ea849c334073272" resname="footer.ibexa_documentation">
+        <source>Documentation</source>
+        <target state="new">Documentation</target>
+        <note>key: footer.ibexa_documentation</note>
+      </trans-unit>
+      <trans-unit id="98ec0f718367b011625843a7ebdd12e8185c53ce" resname="footer.ibexa_dxp">
+        <source>Ibexa DXP</source>
+        <target state="new">Ibexa DXP</target>
+        <note>key: footer.ibexa_dxp</note>
+      </trans-unit>
+      <trans-unit id="d62f840248f2507f4299133fe259bc4c091f31a8" resname="footer.ibexa_support">
+        <source>Support</source>
+        <target state="new">Support</target>
+        <note>key: footer.ibexa_support</note>
+      </trans-unit>
       <trans-unit id="5cf420af18fd4a8d856fd30bc13aea5039369f9b" resname="form.cancel">
         <source>Cancel</source>
         <target state="new">Cancel</target>

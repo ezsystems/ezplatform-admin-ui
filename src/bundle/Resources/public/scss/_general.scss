@@ -1,11 +1,12 @@
 html {
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
     font-size: $base-font-size;
 }
 
 body {
-    height: 100%;
+    position: relative;
+    min-height: 100vh;
 }
 
 a {
@@ -80,7 +81,7 @@ img {
 
 .ez-login-view {
     .ez-main-container {
-        height: 100%;
+        height: 100vh;
     }
 }
 
@@ -143,6 +144,25 @@ select {
 .ez-trash-list-view,
 .ez-bookmark-list-view {
     background-color: $ibexa-color-base-pale;
+}
+
+.ez-info-view,
+.ez-section-list-view,
+.ez-section-view,
+.ez-role-list-view,
+.ez-role-view,
+.ez-language-list-view,
+.ez-language-view,
+.ez-content-type-group-list-view,
+.ez-content-type-view,
+.ez-object-state-group-list-view,
+.ez-object-state-group-view,
+.ez-workflow-list-view,
+.ez-url-management,
+.ez-segment-group-list-view,
+.ez-segmentation-group-view,
+.ez-user-settings-list-view {
+    padding-bottom: calculateRem(65px);
 }
 
 .ez-sticky-container {

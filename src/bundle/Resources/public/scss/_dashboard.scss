@@ -1,4 +1,6 @@
 .ez-dashboard {
+    padding-bottom: calculateRem(65px);
+
     &__header {
         display: grid;
         grid-template-columns: auto calculateRem(120px);
