@@ -1,3 +1,7 @@
+.ez-has-full-width-footer {
+    padding-bottom: calculateRem(65px);
+}
+
 .ez-footer {
     position: absolute;
     bottom: 0;
