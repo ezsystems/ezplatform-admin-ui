@@ -4,7 +4,7 @@
 
 {% form_theme form_remove '@ezdesign/ui/form_fields.html.twig' %}
 
-{% block body_class %}ez-bookmark-list-view ez-has-two-sidebars{% endblock %}
+{% block body_class %}ez-bookmark-list-view ez-has-two-sidebars ez-has-full-width-footer{% endblock %}
 
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
@@ -106,7 +106,6 @@
                     } %}
                 {% endif %}
             </section>
-            {% include '@ezdesign/ui/footer.html.twig' %}
         </div>
 
         {{ form_start(form_edit, {
@@ -117,8 +116,6 @@
         {{ form_end(form_edit) }}
     </div>
 {% endblock %}
-
-{% block footer %}{% endblock %}
 
 {% block react_modules %}
     {{ encore_entry_script_tags('ezplatform-admin-ui-content-tree-js', null, 'ezplatform') }}

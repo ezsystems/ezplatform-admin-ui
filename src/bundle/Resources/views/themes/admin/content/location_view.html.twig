@@ -13,7 +13,7 @@
 {% endif %}
 {% form_theme form_content_create '@ezdesign/ui/form_fields.html.twig' %}
 
-{% block body_class %}ez-content-view ez-has-two-sidebars{% endblock %}
+{% block body_class %}ez-content-view ez-has-two-sidebars ez-has-full-width-footer{% endblock %}
 
 {% block content %}
     <div id="ez-mfu"
@@ -106,8 +106,6 @@
                     {% endif %}
                 </div>
             </div>
-
-            {% include '@ezdesign/ui/footer.html.twig' %}
         </div>
         <div class="ez-context-menu">
             <div class="ez-sticky-container">
@@ -141,8 +139,6 @@
     {% endif %}
 
 {% endblock %}
-
-{% block footer %}{% endblock %}
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('ezplatform-admin-ui-location-view-css', null, 'ezplatform') }}
