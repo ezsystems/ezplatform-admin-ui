@@ -49,15 +49,6 @@
     }
 
     class EzImageFieldValidator extends eZ.BaseFileFieldValidator {
-        toggleInvalidState(isError, config, input) {
-            super.toggleInvalidState(isError, config, input);
-
-            const container = input.closest('.ez-field-edit--ezimage');
-            const method = !!container.querySelector(`.${this.classInvalid}`) ? 'add' : 'remove';
-
-            container.classList[method](this.classInvalid);
-        }
-
         /**
          * Validates the alternative text input
          *
