@@ -3,7 +3,7 @@
 {% trans_default_domain 'content_type' %}
 {% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
 
-{% block body_class %}ez-admin-edit{% endblock %}
+{% block body_class %}ez-admin-edit ez-has-full-width-footer{% endblock %}
 
 {% block breadcrumbs_admin %}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
