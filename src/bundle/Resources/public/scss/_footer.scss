@@ -18,6 +18,7 @@
 
     &__brand-img {
         margin-right: calculateRem(16px);
+        max-width: calculateRem(32px);
     }
 
     &__link {
