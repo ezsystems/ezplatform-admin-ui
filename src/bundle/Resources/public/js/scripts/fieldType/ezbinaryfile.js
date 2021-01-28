@@ -1,6 +1,7 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezbinaryfile';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
+    const SELECTOR_FILESIZE_NOTICE = '.ez-data-source__message--filesize';
 
     class EzBinaryFilePreviewField extends eZ.BasePreviewField {
         /**
@@ -33,14 +34,14 @@
                     selector: `input[type="file"]`,
                     eventName: 'change',
                     callback: 'validateInput',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: [ SELECTOR_LABEL_WRAPPER ],
                 },
                 {
                     isValueValidator: false,
                     selector: `input[type="file"]`,
                     eventName: 'ez-invalid-file-size',
-                    callback: 'showFileSizeError',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    callback: 'showFileSizeNotice',
+                    errorNodeSelectors: [ SELECTOR_FILESIZE_NOTICE ],
                 },
             ],
         });
@@ -51,6 +52,6 @@
 
         previewField.init();
 
-        eZ.addConfig('fieldTypeValidators', [validator], true);
+        eZ.addConfig('fieldTypeValidators', [ validator ], true);
     });
 })(window, window.document, window.eZ);

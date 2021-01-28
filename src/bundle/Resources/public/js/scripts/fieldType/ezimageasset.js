@@ -3,6 +3,7 @@
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const SELECTOR_INPUT_DESTINATION_CONTENT_ID = '.ez-data-source__destination-content-id';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
+    const SELECTOR_FILESIZE_NOTICE = '.ez-data-source__message--filesize';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const showErrorNotification = eZ.helpers.notification.showErrorNotification;
     const showSuccessNotification = eZ.helpers.notification.showSuccessNotification;
@@ -174,7 +175,7 @@
                     onConfirm,
                     onCancel,
                     title,
-                    allowedContentTypes: [imageAssetMapping['contentTypeIdentifier']],
+                    allowedContentTypes: [ imageAssetMapping['contentTypeIdentifier'] ],
                     ...config,
                 }),
                 udwContainer
@@ -239,14 +240,14 @@
                     selector: `${SELECTOR_INPUT_FILE}`,
                     eventName: 'change',
                     callback: 'validateInput',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: [ SELECTOR_LABEL_WRAPPER ],
                 },
                 {
                     isValueValidator: false,
                     selector: `${SELECTOR_INPUT_FILE}`,
                     eventName: 'ez-invalid-file-size',
-                    callback: 'showFileSizeError',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    callback: 'showFileSizeNotice',
+                    errorNodeSelectors: [ SELECTOR_FILESIZE_NOTICE ],
                 },
             ],
         });
@@ -259,6 +260,6 @@
 
         previewField.init();
 
-        eZ.addConfig('fieldTypeValidators', [validator], true);
+        eZ.addConfig('fieldTypeValidators', [ validator ], true);
     });
 })(window, window.document, window.eZ, window.React, window.ReactDOM, window.Translator, window.Routing);

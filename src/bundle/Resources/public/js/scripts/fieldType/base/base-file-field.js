@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function(global, doc, eZ, Translator) {
     const SELECTOR_FIELD_LABEL = '.ez-field-edit__label-wrapper .ez-field-edit__label';
 
     class BaseFileFieldValidator extends eZ.BaseFieldValidator {
@@ -36,11 +36,12 @@
         /**
          * Displays an error message: file size exceeds maximum value
          *
-         * @method showFileSizeError
+         * @method showFileSizeNotice
          * @returns {Object}
          */
-        showFileSizeError() {
+        showFileSizeNotice() {
             const label = this.fieldContainer.querySelector(SELECTOR_FIELD_LABEL).innerHTML;
+
             const result = {
                 isError: true,
                 errorMessage: eZ.errors.invalidFileSize.replace('{fieldName}', label),
@@ -51,4 +52,4 @@
     }
 
     eZ.addConfig('BaseFileFieldValidator', BaseFileFieldValidator);
-})(window, window.document, window.eZ);
+})(window, window.document, window.eZ, window.Translator);

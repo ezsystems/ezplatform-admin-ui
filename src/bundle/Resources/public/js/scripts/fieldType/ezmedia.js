@@ -7,6 +7,7 @@
     const SELECTOR_MEDIA_WRAPPER = '.ez-field-edit-preview__media-wrapper';
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const CLASS_MEDIA_WRAPPER_LOADING = 'ez-field-edit-preview__media-wrapper--loading';
+    const SELECTOR_FILESIZE_NOTICE = '.ez-data-source__message--filesize';
 
     class EzMediaValidator extends eZ.BaseFileFieldValidator {
         /**
@@ -137,20 +138,20 @@
                     selector: SELECTOR_INPUT_FILE,
                     eventName: 'change',
                     callback: 'validateInput',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: [ SELECTOR_LABEL_WRAPPER ],
                 },
                 {
                     isValueValidator: false,
                     selector: SELECTOR_INPUT_FILE,
                     eventName: 'ez-invalid-file-size',
-                    callback: 'showFileSizeError',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    callback: 'showFileSizeNotice',
+                    errorNodeSelectors: [ SELECTOR_FILESIZE_NOTICE ],
                 },
                 {
                     selector: '.ez-field-edit-preview__dimensions .form-control',
                     eventName: 'blur',
                     callback: 'validateDimensions',
-                    errorNodeSelectors: [`${SELECTOR_INFO_WRAPPER} .ez-field-edit-preview__label-wrapper`],
+                    errorNodeSelectors: [ `${SELECTOR_INFO_WRAPPER} .ez-field-edit-preview__label-wrapper` ],
                 },
             ],
         });
@@ -162,6 +163,6 @@
 
         previewField.init();
 
-        eZ.addConfig('fieldTypeValidators', [validator], true);
+        eZ.addConfig('fieldTypeValidators', [ validator ], true);
     });
 })(window, window.document, window.eZ);
