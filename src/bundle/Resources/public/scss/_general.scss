@@ -1,11 +1,12 @@
 html {
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
     font-size: $base-font-size;
 }
 
 body {
-    height: 100%;
+    position: relative;
+    min-height: 100vh;
 }
 
 a {
@@ -80,7 +81,7 @@ img {
 
 .ez-login-view {
     .ez-main-container {
-        height: 100%;
+        height: 100vh;
     }
 }
 

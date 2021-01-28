@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.089" y1="0.218" x2="0.914" y2="0.784" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ea571c"/>
+      <stop offset="0.186" stop-color="#e95026"/>
+      <stop offset="0.537" stop-color="#e83e3a"/>
+      <stop offset="1" stop-color="#e61850"/>
+    </linearGradient>
+    <clipPath id="clip-Responsive_mark">
+      <rect width="512" height="512"/>
+    </clipPath>
+  </defs>
+  <g id="Responsive_mark" data-name="Responsive mark" clip-path="url(#clip-Responsive_mark)">
+    <g id="Group_2" data-name="Group 2" transform="translate(56 56.158)">
+      <circle id="Ellipse_12" data-name="Ellipse 12" cx="200" cy="200" r="200" transform="translate(0 0)" fill="url(#linear-gradient)"/>
+      <path id="Path_7" data-name="Path 7" d="M313.617,18.762H265.794L199.359,85.669,184.618,71.7,160.706,95.776l14.741,13.974-36.414,36.673-.027-.022c-9.66,8.04-28.273,19.09-41.762,19.09a55.244,55.244,0,0,1-22.969-5.023s92.6-94.58,98.526-100.552l-5.048-5.331C147.817,33.794,120.872,19.53,96.563,19.53c-49.435,0-89.655,40.506-89.655,90.291s40.221,90.291,89.655,90.291c23.122,0,43.385-7.777,68.554-31.852l34.236-34.424L261.6,196.559h47.823l-86.159-86.8ZM41.286,109.141c0-31.073,25.1-56.355,55.958-56.355a55.182,55.182,0,0,1,30.125,8.928l-77.212,77.76A56.265,56.265,0,0,1,41.286,109.141Z" transform="translate(39.977 90.118)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

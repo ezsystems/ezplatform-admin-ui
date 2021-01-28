@@ -1,0 +1,11 @@
+<div class="ez-footer">
+    <div class="ez-footer__brand-container">
+        <img class="ez-footer__brand-img" src="{{ asset('bundles/ezplatformadminui/img/ibexa-wordmark.svg') }}" alt="{{ 'footer.ibexa_dxp'|trans|desc('Ibexa DXP') }}" /> 
+        <span class="ez-footer__brand-text">{{ 'footer.copyright'|trans({'%year%': "now"|date('Y')})|desc('Copyright &copy; %year% Ibexa. All right reserved')|raw }}</span>
+    </div>
+    <div class="ez-footer__links-container">
+        <a class="ez-footer__link" target="_blank" href="https://www.ibexa.co/products">{{ 'footer.ibexa_dxp'|trans|desc('Ibexa DXP') }}</a>
+        <a class="ez-footer__link" target="_blank" href="https://support.ibexa.co/">{{ 'footer.ibexa_support'|trans|desc('Support') }}</a>
+        <a class="ez-footer__link" target="_blank" href="https://doc.ibexa.co/">{{ 'footer.ibexa_documentation'|trans|desc('Documentation') }}</a>
+    </div>
+</div>
