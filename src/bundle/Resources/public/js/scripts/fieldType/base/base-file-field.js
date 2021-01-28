@@ -27,10 +27,14 @@
             }
 
             if (!isEmpty && maxFileSize > 0 && input.files[0] && input.files[0].size > maxFileSize) {
-                result = this.showFileSizeError();
+                result = this.validateFileSize(event);
             }
 
             return result;
+        }
+
+        validateFileSize(event) {
+            return this.showFileSizeError();
         }
 
         /**
