@@ -27,7 +27,7 @@
             }
 
             if (!isEmpty && maxFileSize > 0 && input.files[0] && input.files[0].size > maxFileSize) {
-                result = this.showFileSizeError();
+                input.dispatchEvent(new CustomEvent('ez-invalid-file-size'));
             }
 
             return result;
