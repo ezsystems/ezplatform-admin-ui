@@ -46,7 +46,6 @@
          */
         showFileSizeError() {
             const label = this.fieldContainer.querySelector(SELECTOR_FIELD_LABEL).innerHTML;
-
             const result = {
                 isError: true,
                 errorMessage: global.eZ.errors.invalidFileSize.replace('{fieldName}', label),

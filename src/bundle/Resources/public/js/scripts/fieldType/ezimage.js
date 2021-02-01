@@ -56,7 +56,7 @@
                 isError: false,
             };
         }
-        
+
         /**
          * Validates the alternative text input
          *
@@ -80,7 +80,7 @@
         }
     }
 
-    [...document.querySelectorAll(SELECTOR_FIELD) ].forEach((fieldContainer) => {
+    [...document.querySelectorAll(SELECTOR_FIELD)].forEach((fieldContainer) => {
         const validator = new EzImageFieldValidator({
             classInvalid: 'is-invalid',
             fieldContainer,
