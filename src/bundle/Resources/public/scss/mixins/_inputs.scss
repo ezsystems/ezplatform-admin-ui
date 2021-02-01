@@ -1,6 +1,3 @@
-@import './public/bundles/ezplatformadminui/scss/_custom.scss';
-@import './public/bundles/ezplatformadminui/scss/functions/calculate.rem.scss';
-
 @mixin input-active {
     border-color: $ibexa-color-primary;
     box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
