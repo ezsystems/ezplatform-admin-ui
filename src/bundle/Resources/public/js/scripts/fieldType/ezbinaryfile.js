@@ -63,5 +63,5 @@
         previewField.init();
 
         eZ.addConfig('fieldTypeValidators', [validator], true);
-    });
+    })
 })(window, window.document, window.eZ);

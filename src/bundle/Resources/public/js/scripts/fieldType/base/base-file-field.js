@@ -40,7 +40,7 @@
         /**
          * Displays an error message: file size exceeds maximum value
          *
-         * @method showFileSizeError
+         * @method showFileSizeNotice
          * @returns {Object}
          */
         showFileSizeError() {
