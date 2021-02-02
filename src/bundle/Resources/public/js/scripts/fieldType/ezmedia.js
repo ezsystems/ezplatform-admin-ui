@@ -7,8 +7,17 @@
     const SELECTOR_MEDIA_WRAPPER = '.ez-field-edit-preview__media-wrapper';
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const CLASS_MEDIA_WRAPPER_LOADING = 'ez-field-edit-preview__media-wrapper--loading';
+    const SELECTOR_FILESIZE_NOTICE = '.ez-data-source__message--filesize';
 
     class EzMediaValidator extends eZ.BaseFileFieldValidator {
+        validateFileSize(event) {
+            event.currentTarget.dispatchEvent(new CustomEvent('ez-invalid-file-size'));
+
+            return {
+                isError: false,
+            };
+        }
+
         /**
          * Validates the dimensions inputs
          *
@@ -144,7 +153,7 @@
                     selector: SELECTOR_INPUT_FILE,
                     eventName: 'ez-invalid-file-size',
                     callback: 'showFileSizeError',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: [SELECTOR_FILESIZE_NOTICE],
                 },
                 {
                     selector: '.ez-field-edit-preview__dimensions .form-control',
