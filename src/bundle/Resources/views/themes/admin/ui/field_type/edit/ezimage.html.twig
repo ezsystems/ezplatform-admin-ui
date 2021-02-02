@@ -56,7 +56,7 @@
             <div class="ez-field-edit-preview__image-alt">
                 {{ form_row(form.alternativeText) }}
             </div>
-            {{ form_widget(form.additionalData) }}
+            {{ form_widget(form.additionalData, {attr: {class: 'ez-field-edit-preview__additional-data'}}) }}
         </div>
     </div>
 {% endblock %}
