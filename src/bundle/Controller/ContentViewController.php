@@ -371,7 +371,8 @@ class ContentViewController extends Controller
                     $this->permissionResolver,
                     $contentInfo,
                     $this->lookupLimitationsTransformer,
-                    $languageCodes
+                    $languageCodes,
+                    $this->locationService
                 ),
             ]
         );
