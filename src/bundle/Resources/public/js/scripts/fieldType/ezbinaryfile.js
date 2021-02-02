@@ -1,6 +1,7 @@
-(function (global) {
+(function(global) {
     const SELECTOR_FIELD = '.ez-field-edit--ezbinaryfile';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
+    const SELECTOR_FILESIZE_NOTICE = '.ez-data-source__message--filesize';
 
     class EzBinaryFilePreviewField extends global.eZ.BasePreviewField {
         /**
@@ -50,8 +51,18 @@
         }
     }
 
-    [...document.querySelectorAll(SELECTOR_FIELD)].forEach(fieldContainer => {
-        const validator = new global.eZ.BaseFileFieldValidator({
+    class EzBinaryFileFieldValidator extends global.eZ.BaseFileFieldValidator {
+        validateFileSize(event) {
+            event.currentTarget.dispatchEvent(new CustomEvent('invalidFileSize'));
+
+            return {
+                isError: false,
+            };
+        }
+    }
+
+    [...document.querySelectorAll(SELECTOR_FIELD)].forEach((fieldContainer) => {
+        const validator = new EzBinaryFileFieldValidator({
             classInvalid: 'is-invalid',
             fieldContainer,
             eventsMap: [
@@ -66,19 +77,17 @@
                     selector: `input[type="file"]`,
                     eventName: 'invalidFileSize',
                     callback: 'showFileSizeError',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: [SELECTOR_FILESIZE_NOTICE],
                 },
             ],
         });
         const previewField = new EzBinaryFilePreviewField({
             validator,
-            fieldContainer
+            fieldContainer,
         });
 
         previewField.init();
 
-        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ?
-            [...global.eZ.fieldTypeValidators, validator] :
-            [validator];
-    })
+        global.eZ.fieldTypeValidators = global.eZ.fieldTypeValidators ? [...global.eZ.fieldTypeValidators, validator] : [validator];
+    });
 })(window);

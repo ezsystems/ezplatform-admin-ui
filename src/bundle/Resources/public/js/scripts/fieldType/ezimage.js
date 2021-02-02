@@ -4,6 +4,7 @@
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
     const SELECTOR_ALT_WRAPPER = '.ez-field-edit-preview__image-alt';
     const SELECTOR_INPUT_ALT = '.ez-field-edit-preview__image-alt .ez-data-source__input';
+    const SELECTOR_FILESIZE_NOTICE = '.ez-data-source__message--filesize';
 
     class EzImageFilePreviewField extends global.eZ.BasePreviewField {
         /**
@@ -48,13 +49,12 @@
     }
 
     class EzImageFieldValidator extends global.eZ.BaseFileFieldValidator {
-        toggleInvalidState(isError, config, input) {
-            super.toggleInvalidState(isError, config, input);
+        validateFileSize(event) {
+            event.currentTarget.dispatchEvent(new CustomEvent('invalidFileSize'));
 
-            const container = input.closest('.ez-field-edit--ezimage');
-            const method = !!container.querySelector(`.${this.classInvalid}`) ? 'add' : 'remove';
-
-            container.classList[method](this.classInvalid);
+            return {
+                isError: false,
+            };
         }
 
         /**
@@ -103,7 +103,7 @@
                     selector: `${SELECTOR_INPUT_FILE}`,
                     eventName: 'invalidFileSize',
                     callback: 'showFileSizeError',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: [SELECTOR_FILESIZE_NOTICE],
                 },
                 {
                     isValueValidator: false,

@@ -3,6 +3,7 @@
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
     const SELECTOR_INPUT_DESTINATION_CONTENT_ID = '.ez-data-source__destination-content-id';
     const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
+    const SELECTOR_FILESIZE_NOTICE = '.ez-data-source__message--filesize';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const showErrorNotification = eZ.helpers.notification.showErrorNotification;
@@ -242,7 +243,15 @@
         }
     }
 
-    class EzImageAssetFieldValidator extends eZ.BaseFileFieldValidator {}
+    class EzImageAssetFieldValidator extends eZ.BaseFileFieldValidator {
+        validateFileSize(event) {
+            event.currentTarget.dispatchEvent(new CustomEvent('invalidFileSize'));
+
+            return {
+                isError: false,
+            };
+        }
+    }
 
     doc.querySelectorAll(SELECTOR_FIELD).forEach((fieldContainer) => {
         const validator = new EzImageAssetFieldValidator({
@@ -260,7 +269,7 @@
                     selector: `${SELECTOR_INPUT_FILE}`,
                     eventName: 'invalidFileSize',
                     callback: 'showFileSizeError',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: [SELECTOR_FILESIZE_NOTICE],
                 },
             ],
         });
