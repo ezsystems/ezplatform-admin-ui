@@ -6,8 +6,7 @@
     const SELECTOR_ALT_WRAPPER = '.ez-field-edit-preview__image-alt';
     const SELECTOR_INPUT_ALT = '.ez-field-edit-preview__image-alt .ez-data-source__input';
     const EVENT_CANCEL_ERROR = 'ez-cancel-errors';
-    const SELECTOR_FILESIZE_NOTICE = '.ez-data-source__message--filesize';
-    
+
     class EzImageFilePreviewField extends eZ.BasePreviewField {
         /**
          * Gets a temporary image URL
