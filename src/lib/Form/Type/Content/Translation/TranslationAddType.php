@@ -199,7 +199,7 @@ class TranslationAddType extends AbstractType
                 $contentInfo,
                 [
                     (new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build(),
-                    $this->locationService->loadLocation($contentInfo->mainLocationId)
+                    $this->locationService->loadLocation($contentInfo->mainLocationId),
                 ],
                 [Limitation::LANGUAGE]
             );

@@ -85,7 +85,7 @@ class ContentEditTranslationChoiceLoader extends BaseChoiceLoader
                 $this->contentInfo,
                 [
                     (new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build(),
-                    $this->locationService->loadLocation($this->contentInfo->mainLocationId)
+                    $this->locationService->loadLocation($this->contentInfo->mainLocationId),
                 ],
                 [Limitation::LANGUAGE]
             );
