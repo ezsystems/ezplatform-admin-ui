@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Siteaccess;
 
+use eZ\Bundle\EzPublishCoreBundle\ApiLoader\RepositoryConfigurationProvider;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 
 abstract class AbstractSiteaccessPreviewVoter implements SiteaccessPreviewVoterInterface
@@ -15,13 +16,15 @@ abstract class AbstractSiteaccessPreviewVoter implements SiteaccessPreviewVoterI
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     protected $configResolver;
 
-    /**
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
-     */
+    /** @var \eZ\Bundle\EzPublishCoreBundle\ApiLoader\RepositoryConfigurationProvider */
+    protected $repositoryConfigurationProvider;
+
     public function __construct(
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        RepositoryConfigurationProvider $repositoryConfigurationProvider
     ) {
         $this->configResolver = $configResolver;
+        $this->repositoryConfigurationProvider = $repositoryConfigurationProvider;
     }
 
     /**
@@ -43,7 +46,15 @@ abstract class AbstractSiteaccessPreviewVoter implements SiteaccessPreviewVoterI
             null,
             $siteaccess
         );
-        if (!in_array($languageCode, $siteaccessLanguages)) {
+        $siteaccessRepository = $this->configResolver->getParameter(
+            'repository',
+            null,
+            $siteaccess
+        );
+        $siteaccessRepository = $siteaccessRepository ?: $this->repositoryConfigurationProvider->pullDefaultRepository();
+        $currentRepository = $this->repositoryConfigurationProvider->getRepositoryConfig()['alias'];
+
+        if (!in_array($languageCode, $siteaccessLanguages) || $siteaccessRepository !== $currentRepository) {
             return false;
         }
 
