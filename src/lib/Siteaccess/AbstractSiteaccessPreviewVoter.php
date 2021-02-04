@@ -54,7 +54,7 @@ abstract class AbstractSiteaccessPreviewVoter implements SiteaccessPreviewVoterI
         $siteaccessRepository = $siteaccessRepository ?: $this->repositoryConfigurationProvider->pullDefaultRepository();
         $currentRepository = $this->repositoryConfigurationProvider->getRepositoryConfig()['alias'];
 
-        if (!in_array($languageCode, $siteaccessLanguages) || $siteaccessRepository !== $currentRepository) {
+        if (!in_array($languageCode, $siteaccessLanguages, true) || $siteaccessRepository !== $currentRepository) {
             return false;
         }
 
