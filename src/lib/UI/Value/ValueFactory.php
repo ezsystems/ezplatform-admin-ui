@@ -32,6 +32,7 @@ use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\Repository\LocationResolver\LocationResolver;
+use eZ\Publish\SPI\Limitation\Target;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
 use EzSystems\EzPlatformAdminUi\Specification\UserExists;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
@@ -232,6 +233,9 @@ class ValueFactory
      */
     public function createLocation(Location $location): UIValue\Content\Location
     {
+        $translations = $location->getContent()->getVersionInfo()->languageCodes;
+        $target = (new Target\Version())->deleteTranslations($translations);
+
         return new UIValue\Content\Location($location, [
             'childCount' => $this->locationService->getLocationChildCount($location),
             'pathLocations' => $this->pathService->loadPathLocations($location),
@@ -239,7 +243,7 @@ class ValueFactory
                 'content', 'manage_locations', $location->getContentInfo()
             ),
             'userCanRemove' => $this->permissionResolver->canUser(
-                'content', 'remove', $location->getContentInfo(), [$location]
+                'content', 'remove', $location->getContentInfo(), [$location, $target]
             ),
             'userCanEdit' => $this->permissionResolver->canUser(
                 'content', 'edit', $location->getContentInfo(), [$location]
