@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 
 class AdminSiteaccessPreviewVoterTest extends TestCase
 {
-    public const LANGUAGE_CODE = 'eng-GB';
+    private const LANGUAGE_CODE = 'eng-GB';
 
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
