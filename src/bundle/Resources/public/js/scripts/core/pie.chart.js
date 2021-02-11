@@ -10,7 +10,7 @@
             return this.type;
         }
 
-        legendOptions(chart) {
+        getLegendOptions(chart) {
             const { backgroundColor } = chart.data.datasets[0];
             const { legendCheckboxTemplate } = this.legendContainer.dataset;
             const fragment = doc.createDocumentFragment();

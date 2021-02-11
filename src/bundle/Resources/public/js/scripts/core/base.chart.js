@@ -1,4 +1,8 @@
 (function(global, doc, eZ, Chart) {
+    const IBEXA_WHITE = '#fff';
+    const IBEXA_COLOR_BASE = '#e0e0e8';
+    const IBEXA_COLOR_BASE_DARK = '#878b90';
+
     class BaseChart {
         constructor(data) {
             this.setData(data);
@@ -22,20 +26,26 @@
                 checkbox.style.backgroundColor = checkedColor;
                 checkbox.style.borderColor = checkedColor;
             } else {
-                checkbox.style.backgroundColor = '#fff';
-                checkbox.style.borderColor = '#878b90';
+                checkbox.style.backgroundColor = IBEXA_WHITE;
+                checkbox.style.borderColor = IBEXA_COLOR_BASE_DARK;
             }
         }
 
         setLegendCheckboxes() {}
 
-        getChartType() {}
+        getType() {}
 
         getSummaryValue() {}
 
         getSummaryName(value) {
             return value.name;
         }
+
+        getLayoutOptions() {}
+
+        getScaleOptions() {}
+
+        getLegendOptions(chart) {}
 
         updateSummary() {}
 
@@ -64,12 +74,6 @@
             }
         }
 
-        layoutOptions() {}
-
-        scaleOptions() {}
-
-        legendOptions(chart) {}
-
         render() {
             this.chart = new Chart(this.canvas.getContext('2d'), {
                 type: this.getType(),
@@ -80,7 +84,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    layout: this.layoutOptions(),
+                    layout: this.getLayoutOptions(),
                     elements: {
                         point: {
                             radius: 2,
@@ -89,7 +93,7 @@
                             tension: 0,
                         },
                     },
-                    legendCallback: (chart) => this.legendOptions(chart),
+                    legendCallback: (chart) => this.getLegendOptions(chart),
                     legend: {
                         display: false,
                     },
@@ -98,15 +102,15 @@
                         mode: 'nearest',
                         cornerRadius: 4,
                         borderWidth: 1,
-                        borderColor: '#e0e0e8',
+                        borderColor: IBEXA_COLOR_BASE,
                         titleFontStyle: 'light',
-                        titleFontColor: '#878b90',
+                        titleFontColor: IBEXA_COLOR_BASE_DARK,
                         xPadding: 12,
                         yPadding: 12,
-                        backgroundColor: '#fff',
+                        backgroundColor: IBEXA_WHITE,
                         callbacks: {
                             labelTextColor: (tooltipItem, chart) => {
-                                return '#878b90';
+                                return IBEXA_COLOR_BASE_DARK;
                             },
                         },
                     },
@@ -120,7 +124,7 @@
                             chartNode.classList[chartMethod]('ez-chart--no-data');
                         },
                     },
-                    scales: this.scaleOptions(),
+                    scales: this.getScaleOptions(),
                 },
             });
 

@@ -22,26 +22,7 @@
             }
         }
 
-        setLegendCheckboxes() {
-            this.legendContainer.innerHTML = '';
-            this.legendContainer.appendChild(this.chart.generateLegend());
-
-            this.legendContainer.querySelectorAll('.ez-input--legend-checkbox').forEach((legendCheckbox) => {
-                this.setCheckboxBackground(legendCheckbox);
-
-                legendCheckbox.addEventListener('change', (event) => {
-                    const { datasetIndex } = event.currentTarget.dataset;
-                    const dataset = this.chart.data.datasets[datasetIndex];
-
-                    dataset.hidden = !dataset.hidden;
-
-                    this.setCheckboxBackground(event.currentTarget);
-                    this.chart.update();
-                });
-            });
-        }
-
-        scaleOptions() {
+        getScaleOptions() {
             return {
                 xAxes: [
                     {
@@ -78,7 +59,7 @@
             };
         }
 
-        legendOptions(chart) {
+        getLegendOptions(chart) {
             const { legendCheckboxTemplate } = this.legendContainer.dataset;
             const fragment = doc.createDocumentFragment();
 
@@ -99,6 +80,25 @@
             });
 
             return fragment;
+        }
+
+        setLegendCheckboxes() {
+            this.legendContainer.innerHTML = '';
+            this.legendContainer.appendChild(this.chart.generateLegend());
+
+            this.legendContainer.querySelectorAll('.ez-input--legend-checkbox').forEach((legendCheckbox) => {
+                this.setCheckboxBackground(legendCheckbox);
+
+                legendCheckbox.addEventListener('change', (event) => {
+                    const { datasetIndex } = event.currentTarget.dataset;
+                    const dataset = this.chart.data.datasets[datasetIndex];
+
+                    dataset.hidden = !dataset.hidden;
+
+                    this.setCheckboxBackground(event.currentTarget);
+                    this.chart.update();
+                });
+            });
         }
     }
 
