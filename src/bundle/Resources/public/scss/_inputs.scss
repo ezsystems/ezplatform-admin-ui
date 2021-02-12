@@ -69,24 +69,6 @@
     }
 
     &--radio {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        position: relative;
-        display: inline-block;
-        width: calculateRem(16px);
-        height: calculateRem(16px);
-        background-color: $ibexa-white;
-        border-radius: calculateRem(16px);
-        border: calculateRem(1px) solid $ibexa-color-base-dark;
-
-        &:active {
-            @include input-active;
-        }
-
-        &:checked {
-            border: calculateRem(1px) solid $ibexa-color-primary;
-            box-shadow: inset 0 0 0 calculateRem(4px) $ibexa-color-primary;
-        }
+        @include radio-input;
     }
 }
