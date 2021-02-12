@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Siteaccess;
 
+use eZ\Bundle\EzPublishCoreBundle\ApiLoader\RepositoryConfigurationProvider;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 
 abstract class AbstractSiteaccessPreviewVoter implements SiteaccessPreviewVoterInterface
@@ -15,13 +16,15 @@ abstract class AbstractSiteaccessPreviewVoter implements SiteaccessPreviewVoterI
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     protected $configResolver;
 
-    /**
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
-     */
+    /** @var \eZ\Bundle\EzPublishCoreBundle\ApiLoader\RepositoryConfigurationProvider */
+    protected $repositoryConfigurationProvider;
+
     public function __construct(
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        RepositoryConfigurationProvider $repositoryConfigurationProvider
     ) {
         $this->configResolver = $configResolver;
+        $this->repositoryConfigurationProvider = $repositoryConfigurationProvider;
     }
 
     /**
@@ -38,12 +41,17 @@ abstract class AbstractSiteaccessPreviewVoter implements SiteaccessPreviewVoterI
             return false;
         }
 
+        if (!$this->validateRepositoryMatch($siteaccess)) {
+            return false;
+        }
+
         $siteaccessLanguages = $this->configResolver->getParameter(
             'languages',
             null,
             $siteaccess
         );
-        if (!in_array($languageCode, $siteaccessLanguages)) {
+
+        if (!in_array($languageCode, $siteaccessLanguages, true)) {
             return false;
         }
 
@@ -56,6 +64,21 @@ abstract class AbstractSiteaccessPreviewVoter implements SiteaccessPreviewVoterI
         }
 
         return true;
+    }
+
+    protected function validateRepositoryMatch(string $siteaccess): bool
+    {
+        $siteaccessRepository = $this->configResolver->getParameter(
+            'repository',
+            null,
+            $siteaccess
+        );
+
+        // If SA does not have a repository configured we should obtain the default one, which is used as a fallback.
+        $siteaccessRepository = $siteaccessRepository ?: $this->repositoryConfigurationProvider->getDefaultRepositoryAlias();
+        $currentRepository = $this->repositoryConfigurationProvider->getCurrentRepositoryAlias();
+
+        return $siteaccessRepository === $currentRepository;
     }
 
     /**
