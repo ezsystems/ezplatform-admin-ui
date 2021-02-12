@@ -20,4 +20,6 @@ services:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
 
     EzSystems\EzPlatformAdminUi\Siteaccess\AdminSiteaccessPreviewVoter:
+        arguments:
+            $repositoryConfigurationProvider: '@ezpublish.api.repository_configuration_provider'
         tags: ['ezplatform.admin_ui.siteaccess_preview_voter']
