@@ -197,7 +197,10 @@ class TranslationAddType extends AbstractType
                 'content',
                 'edit',
                 $contentInfo,
-                [(new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build()],
+                [
+                    (new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build(),
+                    $this->locationService->loadLocation($contentInfo->mainLocationId),
+                ],
                 [Limitation::LANGUAGE]
             );
 
