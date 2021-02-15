@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
@@ -33,6 +34,9 @@ class ContentEditTranslationChoiceLoader extends BaseChoiceLoader
     /** @var \EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer */
     private $lookupLimitationsTransformer;
 
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
+
     /**
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
@@ -45,13 +49,15 @@ class ContentEditTranslationChoiceLoader extends BaseChoiceLoader
         PermissionResolver $permissionResolver,
         ?ContentInfo $contentInfo,
         LookupLimitationsTransformer $lookupLimitationsTransformer,
-        array $languageCodes
+        array $languageCodes,
+        LocationService $locationService
     ) {
         $this->languageService = $languageService;
         $this->permissionResolver = $permissionResolver;
         $this->contentInfo = $contentInfo;
         $this->languageCodes = $languageCodes;
         $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -77,7 +83,10 @@ class ContentEditTranslationChoiceLoader extends BaseChoiceLoader
                 'content',
                 'edit',
                 $this->contentInfo,
-                [(new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build()],
+                [
+                    (new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build(),
+                    $this->locationService->loadLocation($this->contentInfo->mainLocationId),
+                ],
                 [Limitation::LANGUAGE]
             );
 

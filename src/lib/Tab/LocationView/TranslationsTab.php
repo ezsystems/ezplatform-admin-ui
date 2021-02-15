@@ -132,7 +132,7 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
             'content',
             'edit',
             $location->getContentInfo(),
-            [(new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build()]
+            [(new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build(), $location]
         );
 
         $viewParameters = [
