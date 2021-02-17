@@ -1,0 +1,47 @@
+<div 
+    class="ez-chart ez-chart--{{ chart_id }} {% block chart_class %}{% endblock %}"
+    data-chart-data="{{ data|default({})|json_encode() }}"
+>
+    {% block chart_header %}
+        <div class="ez-chart__header {% block header_class %}{% endblock %}">
+            {% block header %}
+                <div class="ez-chart__title">{% block title %}{% endblock %}</div>
+                <div class="ez-chart__time-range">{% block time_range %}{% endblock %}</div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {% block chart_body %}
+        <div class="ez-chart__body">
+            {% block message %}
+                <div class="ez-chart__message">
+                    <svg class="ez-icon ez-icon--extra-large ez-icon--secondary">
+                        <use width="64" height="64" xlink:href="{{ ez_icon_path('error-icon') }}"></use>
+                    </svg>
+                    {{ 'dashboard.charts.no_data'|trans|desc('No data collected<br/> for the selected period')|raw }}
+                </div>
+            {% endblock %}
+
+            {% block canvas %}
+                <canvas class="ez-chart__canvas ez-chart__canvas--{{ chart_id }}"></canvas>
+            {% endblock %}
+
+            {% block legend %}
+                <div
+                    class="ez-chart__legend ez-chart__legend--{{ chart_id }}"
+                    data-legend-checkbox-template={{ include('@ezdesign/ui/chart/legend_checkbox.html.twig', {
+                        'checked_color' : '{{ checked_color }}',
+                        'label': '{{ label }}',
+                        'dataset_index': '{{ dataset_index }}'
+                    })|e('html_attr') }}
+                ></div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {% block chart_summary %}
+        <div class="ez-chart__summary ez-chart__summary--{{ chart_id }} {% block chart_summary_class %}{% endblock %}">
+            {% block summary %}{% endblock %}
+        </div>
+    {% endblock %}
+</div>
