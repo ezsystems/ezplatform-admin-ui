@@ -133,14 +133,19 @@
 
         getItemsContainerHeight(isItemsContainerTop) {
             const DROPDOWN_MARGIN = 16;
+            const MODAL_SELECTOR = '.modal[aria-modal=true]';
+            const documentElementHeight = document.documentElement.getBoundingClientRect().height;
+            const itemsContainerHeight = this.itemsContainer.getBoundingClientRect().top;
 
             if (isItemsContainerTop) {
                 return this.container.querySelector(SELECTOR_SELECTION_INFO).getBoundingClientRect().top - DROPDOWN_MARGIN;
             }
 
-            return (
-                document.documentElement.getBoundingClientRect().height - this.itemsContainer.getBoundingClientRect().top - DROPDOWN_MARGIN
-            );
+            if (this.itemsContainer.closest(MODAL_SELECTOR)) {
+                return itemsContainerHeight - DROPDOWN_MARGIN;
+            }
+
+            return documentElementHeight - itemsContainerHeight - DROPDOWN_MARGIN;
         }
 
         onInputClick(event) {
