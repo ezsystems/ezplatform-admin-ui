@@ -494,7 +494,7 @@ class LocationController extends Controller
 
                 foreach ($data->getLocations() as $locationId => $selected) {
                     $location = $this->locationService->loadLocation($locationId);
-                    $this->locationService->deleteLocation($location);
+                    $this->trashService->trash($location);
 
                     $this->notificationHandler->success(
                         $this->translator->trans(
