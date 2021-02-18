@@ -5,9 +5,9 @@ php:
 
 env:
   global:
-    - EZPLATFORM_REPO="https://github.com/ezsystems/ezplatform.git"
     - APP_ENV=behat
     - APP_DEBUG=1
+    - PROJECT_VERSION=^3.3.x-dev
 
 cache:
   directories:
@@ -31,12 +31,12 @@ matrix:
     - name: "Admin-UI tests on Clean P"
       env:
         - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
-        - BEHAT_OPTS="--profile=adminui --suite=adminui --tags=~@broken"
+        - BEHAT_OPTS="--profile=adminui --suite=adminui --tags=~@broken -c=behat_ibexa_oss.yaml"
     - name: "Admin UI tests using different personas"
       env:
         - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
-        - SETUP_BEHAT_OPTS="--profile=setup --suite=personas"
-        - BEHAT_OPTS="--profile=adminui --suite=personas"
+        - SETUP_BEHAT_OPTS="--profile=setup --suite=personas -c=behat_ibexa_oss.yaml"
+        - BEHAT_OPTS="--profile=adminui --suite=personas -c=behat_ibexa_oss.yaml"
 
 notifications:
   slack:
@@ -55,18 +55,17 @@ before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 install:
-  # Install packages if needed
-  - if [ "${CHECK_CS}" == "1" -o "${PHPUNIT_CONFIG}" != "" ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
+  - travis_retry composer install --prefer-dist --no-interaction
   # Prepare whole environment if needed
-  - if [ "${BEHAT_OPTS}" != "" ]; then ./.travis/prepare_ezplatform.sh ${INSTALL_EZ_INSTALL_TYPE}; fi
+  - if [ "${BEHAT_OPTS}" != "" ]; then ./vendor/bin/prepare_project_edition.sh oss ${PROJECT_VERSION} ${COMPOSE_FILE} ; fi
 
 before_script:
-   - if [ "${SETUP_BEHAT_OPTS}" != "" ] ; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat $SETUP_BEHAT_OPTS" ; fi
+   - if [ "${SETUP_BEHAT_OPTS}" != "" ] ; then cd "${HOME}/build/project"; docker-compose exec --user www-data app sh -c "vendor/bin/ezbehat $SETUP_BEHAT_OPTS" ; fi
 
 script:
-  - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/php-cs-fixer fix -v --dry-run --show-progress=estimating ; fi
+  - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/check_cs.sh ; fi
   - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
-  - if [ "${BEHAT_OPTS}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat ${BEHAT_OPTS}" ; fi
+  - if [ "${BEHAT_OPTS}" != "" ]; then cd "${HOME}/build/project"; docker-compose exec --user www-data app sh -c "vendor/bin/ezbehat ${BEHAT_OPTS}" ; fi
 
 after_failure:
   # Will show us the last bit of the log of container's main processes
@@ -77,4 +76,4 @@ after_failure:
   - docker ps -s
 
 after_script:
-  - if [ "${BEHAT_OPTS}" != "" ] ; then bin/ezreport ; fi
+  - if [ "${BEHAT_OPTS}" != "" ] ; then vendor/bin/ezreport ; fi
