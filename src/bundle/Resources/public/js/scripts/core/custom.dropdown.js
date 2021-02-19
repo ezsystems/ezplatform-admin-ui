@@ -131,21 +131,21 @@
             this.sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
         }
 
-        getItemsContainerHeight(isItemsContainerTop) {
+        getItemsContainerHeight(isItemsContainerAbove) {
             const DROPDOWN_MARGIN = 16;
-            const MODAL_SELECTOR = '.modal[aria-modal=true]';
+            const SELECTOR_MODAL = '.modal[aria-modal=true]';
             const documentElementHeight = document.documentElement.getBoundingClientRect().height;
-            const itemsContainerHeight = this.itemsContainer.getBoundingClientRect().top;
+            const itemsContainerTop = this.itemsContainer.getBoundingClientRect().top;
 
-            if (isItemsContainerTop) {
+            if (isItemsContainerAbove) {
                 return this.container.querySelector(SELECTOR_SELECTION_INFO).getBoundingClientRect().top - DROPDOWN_MARGIN;
             }
 
-            if (this.itemsContainer.closest(MODAL_SELECTOR)) {
-                return itemsContainerHeight - DROPDOWN_MARGIN;
+            if (this.itemsContainer.closest(SELECTOR_MODAL)) {
+                return itemsContainerTop - DROPDOWN_MARGIN;
             }
 
-            return documentElementHeight - itemsContainerHeight - DROPDOWN_MARGIN;
+            return documentElementHeight - itemsContainerTop - DROPDOWN_MARGIN;
         }
 
         onInputClick(event) {
@@ -161,10 +161,10 @@
             if (isListHidden) {
                 const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
                 const { top } = this.itemsContainer.getBoundingClientRect();
-                const isItemsContainerTop = top + ITEMS_LIST_MAX_HEIGHT > viewportHeight;
-                const itemsListMethodName = isItemsContainerTop ? 'add' : 'remove';
+                const isItemsContainerAbove = top + ITEMS_LIST_MAX_HEIGHT > viewportHeight;
+                const itemsListMethodName = isItemsContainerAbove ? 'add' : 'remove';
 
-                this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(isItemsContainerTop)}px`;
+                this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(isItemsContainerAbove)}px`;
                 this.itemsContainer.classList[itemsListMethodName](CLASS_ITEMS_POSITION_TOP);
             }
 
