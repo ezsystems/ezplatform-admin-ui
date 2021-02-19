@@ -1,0 +1,33 @@
+<div 
+    class="ez-chart ez-chart--{{ chart_id }} {% block chart_class %}{% endblock %}"
+    data-chart-data="{{ data|default({})|json_encode() }}"
+>
+    {% block chart_header %}
+        <div class="ez-chart__header {% block header_class %}{% endblock %}">
+            {% block header %}
+                <div class="ez-chart__title">{% block title %}{% endblock %}</div>
+                <div class="ez-chart__time-range">{% block time_range %}{% endblock %}</div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {% block chart_body %}
+        <div class="ez-chart__body">
+            {% block message %}
+                <div class="ez-chart__message">
+                    <svg class="ez-icon ez-icon--extra-large ez-icon--secondary">
+                        <use width="64" height="64" xlink:href="{{ ez_icon_path('error-icon') }}"></use>
+                    </svg>
+                    {{ 'dashboard.charts.no_data'|trans|desc('No data collected<br/> for the selected period')|raw }}
+                </div>
+            {% endblock %}
+
+            {% block canvas %}
+                <canvas class="ez-chart__canvas ez-chart__canvas--{{ chart_id }}"></canvas>
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {% block chart_footer %}
+    {% endblock %}
+</div>
