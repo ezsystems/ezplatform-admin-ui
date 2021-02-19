@@ -55,35 +55,4 @@
         max-height: calculateRem(350px);
         width: 100%
     }
-
-    &__legend {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding: calculateRem(16px) calculateRem(2px) 0 calculateRem(4px);
-    }
-
-    &__legend-checkbox-label {
-        display: flex;
-        height: calculateRem(20px);
-        align-items: center;
-        margin-right: calculateRem(15px);
-        font-size: calculateRem(14px);
-
-        .ez-input {
-            margin-right: calculateRem(4px);
-
-            &--legend-checkbox {
-                width: calculateRem(16px);
-                height: calculateRem(16px);
-            }
-        }
-    }
-
-    &__summary {
-        display: flex;
-        height: auto;
-        min-height: calculateRem(50px);
-        padding: calculateRem(16px);
-    }
 }

@@ -12,34 +12,9 @@
         setData(data) {
             this.datasets = data.datasets;
             this.labels = data.labels;
-
-            if (data.summary) {
-                this.summary = data.summary;
-            }
         }
-
-        setCheckboxBackground(checkbox) {
-            const { checkedColor } = checkbox.dataset;
-            const { checked } = checkbox;
-
-            if (checked) {
-                checkbox.style.backgroundColor = checkedColor;
-                checkbox.style.borderColor = checkedColor;
-            } else {
-                checkbox.style.backgroundColor = IBEXA_WHITE;
-                checkbox.style.borderColor = IBEXA_COLOR_BASE_DARK;
-            }
-        }
-
-        setLegendCheckboxes() {}
 
         getType() {}
-
-        getSummaryValue() {}
-
-        getSummaryName(value) {
-            return value.name;
-        }
 
         getLayoutOptions() {}
 
@@ -47,7 +22,7 @@
 
         getLegendOptions(chart) {}
 
-        updateSummary() {}
+        callbackAfterRender() {}
 
         updateChartMessageDisplay() {
             const chartBody = this.chart.canvas.closest('.ez-chart__body');
@@ -64,14 +39,7 @@
             this.chart.update();
 
             this.updateChartMessageDisplay();
-
-            if (this.legendContainer) {
-                this.setLegendCheckboxes();
-            }
-
-            if (this.summaryContainer) {
-                this.updateSummary();
-            }
+            this.callbackAfterRender();
         }
 
         render() {
@@ -129,14 +97,7 @@
             });
 
             this.updateChartMessageDisplay();
-
-            if (this.legendContainer) {
-                this.setLegendCheckboxes();
-            }
-
-            if (this.summaryContainer) {
-                this.updateSummary();
-            }
+            this.callbackAfterRender();
         }
     }
 

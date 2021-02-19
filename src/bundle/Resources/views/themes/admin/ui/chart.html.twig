@@ -25,23 +25,9 @@
             {% block canvas %}
                 <canvas class="ez-chart__canvas ez-chart__canvas--{{ chart_id }}"></canvas>
             {% endblock %}
-
-            {% block legend %}
-                <div
-                    class="ez-chart__legend ez-chart__legend--{{ chart_id }}"
-                    data-legend-checkbox-template={{ include('@ezdesign/ui/chart/legend_checkbox.html.twig', {
-                        'checked_color' : '{{ checked_color }}',
-                        'label': '{{ label }}',
-                        'dataset_index': '{{ dataset_index }}'
-                    })|e('html_attr') }}
-                ></div>
-            {% endblock %}
         </div>
     {% endblock %}
 
-    {% block chart_summary %}
-        <div class="ez-chart__summary ez-chart__summary--{{ chart_id }} {% block chart_summary_class %}{% endblock %}">
-            {% block summary %}{% endblock %}
-        </div>
+    {% block chart_footer %}
     {% endblock %}
 </div>
