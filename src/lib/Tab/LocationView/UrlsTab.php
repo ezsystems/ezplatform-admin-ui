@@ -138,7 +138,7 @@ class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
             $customUrlPagerfanta->getNbPages()));
 
         $systemUrlPagerfanta = new Pagerfanta(
-            new ArrayAdapter($this->urlAliasService->listLocationAliases($location, false))
+            new ArrayAdapter($this->urlAliasService->listLocationAliases($location, false, null, true))
         );
 
         $systemUrlPagerfanta->setMaxPerPage($systemUrlsPaginationParams['limit']);
