@@ -47,6 +47,7 @@
         "twig/string-extra": "^3.0"
     },
     "require-dev": {
+        "ibexa/ci-scripts": "^0.1@dev",
         "behat/behat": "^3.5",
         "friendsofphp/php-cs-fixer": "^2.16.0",
         "phpunit/phpunit": "^8.1",
@@ -58,9 +59,7 @@
         "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
     },
     "extra": {
-        "_ezplatform_branch_for_behat_tests": "master",
         "branch-alias": {
-            "dev-tmp_ci_branch": "2.3.x-dev",
             "dev-master": "2.3.x-dev"
         }
     }
