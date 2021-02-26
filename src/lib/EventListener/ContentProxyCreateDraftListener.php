@@ -110,7 +110,7 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
         $content = $this->contentService->loadContent(
             $event->getContentId(),
             [
-                $event->getFromLanguageCode()
+                $event->getFromLanguageCode(),
             ]
         );
 
@@ -143,11 +143,11 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
     {
         $contentType = $content->getContentType();
 
-        $translatableFields = array_filter($content->getFields(), static function(Field $field) use ($contentType): bool {
+        $translatableFields = array_filter($content->getFields(), static function (Field $field) use ($contentType): bool {
             return $contentType->getFieldDefinition($field->fieldDefIdentifier)->isTranslatable;
         });
 
-        return array_map(static function(Field $field) use ($languageCode): Field {
+        return array_map(static function (Field $field) use ($languageCode): Field {
             return new Field([
                 'value' => $field->value,
                 'fieldDefIdentifier' => $field->fieldDefIdentifier,

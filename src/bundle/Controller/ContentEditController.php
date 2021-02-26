@@ -45,7 +45,7 @@ class ContentEditController extends Controller
         return $this->redirectToRoute('ezplatform.content.translate', [
             'contentId' => $contentId,
             'fromLanguageCode' => $fromLanguageCode,
-            'toLanguageCode' => $toLanguageCode
+            'toLanguageCode' => $toLanguageCode,
         ]);
     }
 
