@@ -22,7 +22,7 @@ final class ContentProxyTranslateEvent extends Event
     /** @var int */
     private $contentId;
 
-    /** @var string */
+    /** @var string|null */
     private $fromLanguageCode;
 
     /** @var string */
@@ -33,7 +33,7 @@ final class ContentProxyTranslateEvent extends Event
 
     public function __construct(
         int $contentId,
-        string $fromLanguageCode,
+        ?string $fromLanguageCode,
         string $toLanguageCode,
         ?Options $options = null
     ) {
@@ -48,7 +48,7 @@ final class ContentProxyTranslateEvent extends Event
         return $this->contentId;
     }
 
-    public function getFromLanguageCode(): string
+    public function getFromLanguageCode(): ?string
     {
         return $this->fromLanguageCode;
     }
