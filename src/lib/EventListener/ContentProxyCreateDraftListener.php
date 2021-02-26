@@ -54,7 +54,7 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
         ];
     }
 
-    public function create(ContentProxyCreateEvent $event)
+    public function create(ContentProxyCreateEvent $event): void
     {
         $isAutosaveEnabled = $this->userSettingService->getUserSetting('autosave')->value === AutosaveSetting::ENABLED_OPTION;
 
