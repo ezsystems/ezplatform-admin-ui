@@ -46,11 +46,12 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            ContentProxyCreateEvent::class => 'createDraft',
+            ContentProxyCreateEvent::class => 'create',
+            ContentProxyTranslateEvent::class => 'translate',
         ];
     }
 
-    public function createDraft(ContentProxyCreateEvent $event)
+    public function create(ContentProxyCreateEvent $event)
     {
         $isAutosaveEnabled = $this->userSettingService->getUserSetting('autosave')->value === AutosaveSetting::ENABLED_OPTION;
 
@@ -91,5 +92,63 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
         }
 
         $event->setResponse($response);
+    }
+
+    public function translate(ContentProxyTranslateEvent $event): void
+    {
+        $isAutosaveEnabled = $this->userSettingService->getUserSetting('autosave')->value === AutosaveSetting::ENABLED_OPTION;
+
+        if (!$isAutosaveEnabled) {
+            return;
+        }
+
+        $content = $this->contentService->loadContent(
+            $event->getContentId(),
+            [
+                $event->getFromLanguageCode()
+            ]
+        );
+
+        $toLanguageCode = $event->getToLanguageCode();
+
+        $contentUpdateStruct = $this->contentService->newContentUpdateStruct();
+        $contentUpdateStruct->initialLanguageCode = $toLanguageCode;
+        $contentUpdateStruct->fields = $this->getTranslatedContentFields($content, $toLanguageCode);
+
+        $contentDraft = $this->contentService->createContentDraft($content->contentInfo);
+
+        $this->contentService->updateContent(
+            $contentDraft->getVersionInfo(),
+            $contentUpdateStruct,
+            []
+        );
+
+        $response = new RedirectResponse(
+            $this->router->generate('ezplatform.content.draft.edit', [
+                'contentId' => $contentDraft->id,
+                'versionNo' => $contentDraft->getVersionInfo()->versionNo,
+                'language' => $toLanguageCode,
+            ])
+        );
+
+        $event->setResponse($response);
+    }
+
+    private function getTranslatedContentFields(Content $content, string $languageCode): array
+    {
+        $contentType = $content->getContentType();
+
+        $translatableFields = array_filter($content->getFields(), static function(Field $field) use ($contentType): bool {
+            return $contentType->getFieldDefinition($field->fieldDefIdentifier)->isTranslatable;
+        });
+
+        return array_map(static function(Field $field) use ($languageCode): Field {
+            return new Field([
+                'value' => $field->value,
+                'fieldDefIdentifier' => $field->fieldDefIdentifier,
+                'fieldTypeIdentifier' => $field->fieldTypeIdentifier,
+                'languageCode' => $languageCode,
+            ]);
+        }, $translatableFields);
     }
 }
