@@ -75,6 +75,6 @@ final class ContentProxyTranslateEvent extends Event
 
     public function hasResponse(): bool
     {
-        return !empty($this->response);
+        return isset($this->response);
     }
 }
