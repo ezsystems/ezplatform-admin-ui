@@ -12,33 +12,36 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class ContentProxyCreateEvent extends Event
+/**
+ * @internal
+ */
+final class ContentProxyCreateEvent extends Event
 {
     /** @var \Symfony\Component\HttpFoundation\Response|null */
-    protected $response;
+    private $response;
 
     /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType */
-    protected $contentType;
+    private $contentType;
 
     /** @var string */
-    protected $languageCode;
+    private $languageCode;
 
     /** @var int */
-    protected $parentLocationId;
+    private $parentLocationId;
 
     /** @var \EzSystems\EzPlatformAdminUi\Event\Options */
-    protected $options;
+    private $options;
 
     public function __construct(
         ContentType $contentType,
         string $languageCode,
         int $parentLocationId,
-        Options $options
+        ?Options $options = null
     ) {
         $this->contentType = $contentType;
         $this->languageCode = $languageCode;
         $this->parentLocationId = $parentLocationId;
-        $this->options = $options;
+        $this->options = $options ?? new Options();
     }
 
     public function getContentType(): ContentType

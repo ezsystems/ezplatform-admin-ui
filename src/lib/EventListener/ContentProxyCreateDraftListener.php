@@ -10,7 +10,10 @@ namespace EzSystems\EzPlatformAdminUi\EventListener;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\Field;
 use EzSystems\EzPlatformAdminUi\Event\ContentProxyCreateEvent;
+use EzSystems\EzPlatformAdminUi\Event\ContentProxyTranslateEvent;
 use EzSystems\EzPlatformAdminUi\UserSetting\Autosave as AutosaveSetting;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -59,34 +62,36 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
             return;
         }
 
-        $createContentTypeStuct = $this->contentService->newContentCreateStruct(
+        $options = $event->getOptions();
+
+        $createContentStruct = $this->contentService->newContentCreateStruct(
             $event->getContentType(),
             $event->getLanguageCode()
         );
 
         $contentDraft = $this->contentService->createContent(
-            $createContentTypeStuct,
+            $createContentStruct,
             [
                 $this->locationService->newLocationCreateStruct($event->getParentLocationId()),
             ],
             []
         );
 
-        if (!$event->getOptions()->get('isOnTheFly', false)) {
-            $response = new RedirectResponse(
-                $this->router->generate('ezplatform.content.draft.edit', [
-                    'contentId' => $contentDraft->id,
-                    'versionNo' => $contentDraft->getVersionInfo()->versionNo,
-                    'language' => $event->getLanguageCode(),
-                ])
-            );
-        } else {
+        if ($options->get('isOnTheFly', false)) {
             $response = new RedirectResponse(
                 $this->router->generate('ezplatform.content_on_the_fly.edit', [
                     'contentId' => $contentDraft->id,
                     'versionNo' => $contentDraft->getVersionInfo()->versionNo,
                     'languageCode' => $event->getLanguageCode(),
                     'locationId' => $contentDraft->contentInfo->mainLocationId,
+                ])
+            );
+        } else {
+            $response = new RedirectResponse(
+                $this->router->generate('ezplatform.content.draft.edit', [
+                    'contentId' => $contentDraft->id,
+                    'versionNo' => $contentDraft->getVersionInfo()->versionNo,
+                    'language' => $event->getLanguageCode(),
                 ])
             );
         }
