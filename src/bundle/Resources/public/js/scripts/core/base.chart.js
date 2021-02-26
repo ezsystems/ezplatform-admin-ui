@@ -2,6 +2,8 @@
     const IBEXA_WHITE = '#fff';
     const IBEXA_COLOR_BASE = '#e0e0e8';
     const IBEXA_COLOR_BASE_DARK = '#878b90';
+    const MIN_ANGLE_TO_SHOW_DATA_LABEL = 0.1;
+    const BOX_HEIGHT = 10;
     const defaultOptions = {
         responsive: true,
         maintainAspectRatio: false,
@@ -20,76 +22,72 @@
             yPadding: 12,
             backgroundColor: IBEXA_WHITE,
             callbacks: {
-                labelTextColor: (tooltipItem, chart) => {
+                labelTextColor: () => {
                     return IBEXA_COLOR_BASE_DARK;
                 },
             },
         },
     };
-    const calculateCords = (ctxElement) => {
-        const centerAngle = ctxElement.startAngle + (ctxElement.endAngle - ctxElement.startAngle) / 2;
-        const rangeFromCenter = (ctxElement.outerRadius - ctxElement.innerRadius) / 2 + ctxElement.innerRadius;
-        const x = ctxElement.x + Math.cos(centerAngle) * rangeFromCenter;
-        const y = ctxElement.y + Math.sin(centerAngle) * rangeFromCenter;
-
-        return { x, y };
-    };
     const dataLabelPlugin = {
-        beforeRender: function(chart) {
-            if (chart.config.options.showDataLabel) {
-                chart.pluginTooltips = [];
+        calculateCords: (ctxElement) => {
+            const { startAngle, endAngle, outerRadius, innerRadius, x, y } = ctxElement;
+            const diffAngle = endAngle - startAngle;
+            const centerAngle = startAngle + diffAngle / 2;
+            const rangeFromCenter = (outerRadius - innerRadius) / 2 + innerRadius;
+            const xPos = x + Math.cos(centerAngle) * rangeFromCenter;
+            const yPos = y + Math.sin(centerAngle) * rangeFromCenter;
 
-                chart.config.data.datasets.forEach(function(dataset, i) {
-                    chart.getDatasetMeta(i).data.forEach(function(sector, j) {
-                        chart.pluginTooltips.push(
-                            new Chart.Tooltip(
+            return { xPos, yPos, startAngle, endAngle, diffAngle };
+        },
+        beforeRender: (chart) => {
+            if (chart.config.options.showDataLabel) {
+                const { datasets } = chart.config.data;
+                const pluginTooltips = [];
+
+                datasets.forEach((dataset, i) => {
+                    pluginTooltips.push(
+                        chart.getDatasetMeta(i).data.map((activeSector, j) => {
+                            return new Chart.Tooltip(
                                 {
-                                    _chart: chart.chart,
-                                    _chartInstance: chart,
-                                    _data: chart.data,
+                                    dataValue: chart.data.datasets[i].data[j],
                                     _options: chart.options.tooltips,
-                                    _active: [sector],
+                                    _active: activeSector,
                                 },
                                 chart
-                            )
-                        );
-                    });
+                            );
+                        })
+                    );
                 });
+
+                chart.pluginTooltips = pluginTooltips;
             }
         },
-        afterDraw: function(chart, easing) {
+        afterDraw: (chart) => {
             if (chart.config.options.showDataLabel) {
-                const minAngelToShowDataLabel = 0.1;
+                chart.pluginTooltips.forEach((pluginTooltip) => {
+                    pluginTooltip.forEach((tooltipData) => {
+                        const { hidden } = tooltipData._active;
+                        const cords = dataLabelPlugin.calculateCords(tooltipData._active._view);
 
-                Chart.helpers.each(chart.pluginTooltips, function(tooltip, i) {
-                    const ctxActiveDataset = tooltip._active[0];
-                    const { startAngle, endAngle, x, y } = ctxActiveDataset._model;
-                    const ctxActiveDatasetAngel = endAngle - startAngle;
+                        if (!hidden && cords.diffAngle >= MIN_ANGLE_TO_SHOW_DATA_LABEL) {
+                            const textCords = chart.ctx.measureText(tooltipData.dataValue);
+                            const boxWidth = textCords.width * 1.5;
 
-                    if (!ctxActiveDataset.hidden && ctxActiveDatasetAngel >= minAngelToShowDataLabel) {
-                        const dataset = tooltip._data.datasets[0];
-                        const textCords = chart.ctx.measureText(dataset.data[i]);
-                        const boxWidth = textCords.width * 1.5;
-                        const boxHeight = 10;
-                        const cornerRadius = 5;
-                        const cords = calculateCords(ctxActiveDataset._model);
+                            tooltipData.initialize();
+                            tooltipData._options.caretPadding = 20;
+                            tooltipData.update();
 
-                        tooltip.initialize();
-                        tooltip._options.caretPadding = 20;
-                        tooltip.update();
-
-                        chart.ctx.textAlign = 'center';
-                        chart.ctx.textBaseline = 'middle';
-                        chart.ctx.font = 'normal 12px';
-                        chart.ctx.fillStyle = '#fff';
-                        chart.ctx.fillText(dataset.data[i], cords.x, cords.y);
-
-                        chart.ctx.lineJoin = 'round';
-                        chart.ctx.lineWidth = boxHeight;
-                        chart.ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-
-                        chart.ctx.strokeRect(cords.x - boxWidth / 2, cords.y - boxHeight / 2, boxWidth, boxHeight);
-                    }
+                            chart.ctx.textAlign = 'center';
+                            chart.ctx.textBaseline = 'middle';
+                            chart.ctx.font = 'normal 12px';
+                            chart.ctx.fillStyle = IBEXA_WHITE;
+                            chart.ctx.fillText(tooltipData.dataValue, cords.xPos, cords.yPos);
+                            chart.ctx.lineJoin = 'round';
+                            chart.ctx.lineWidth = BOX_HEIGHT;
+                            chart.ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                            chart.ctx.strokeRect(cords.xPos - boxWidth / 2, cords.yPos - BOX_HEIGHT / 2, boxWidth, BOX_HEIGHT);
+                        }
+                    });
                 });
             }
         },
@@ -111,10 +109,8 @@
             this.options = {
                 ...defaultOptions,
                 ...options,
-                ...{
-                    animation: {
-                        onComplete: (animation) => this.onCompleteAnimationCallback(animation),
-                    },
+                animation: {
+                    onComplete: (animation) => this.onCompleteAnimationCallback(animation),
                 },
             };
         }

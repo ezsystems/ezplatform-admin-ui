@@ -17,6 +17,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/core/base.chart.js'),
     path.resolve(__dirname, '../public/js/scripts/core/line.chart.js'),
     path.resolve(__dirname, '../public/js/scripts/core/pie.chart.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/doughnut.chart.js'),
     path.resolve(__dirname, '../public/js/scripts/core/custom.dropdown.js'),
     path.resolve(__dirname, '../public/js/scripts/core/custom.tooltip.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.notifications.js'),
