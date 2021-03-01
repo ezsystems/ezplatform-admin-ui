@@ -42,24 +42,19 @@
         beforeRender: (chart) => {
             if (chart.config.options.showDataLabel) {
                 const { datasets } = chart.config.data;
-                const pluginTooltips = [];
 
-                datasets.forEach((dataset, i) => {
-                    pluginTooltips.push(
-                        chart.getDatasetMeta(i).data.map((activeSector, j) => {
-                            return new Chart.Tooltip(
-                                {
-                                    dataValue: chart.data.datasets[i].data[j],
-                                    _options: chart.options.tooltips,
-                                    _active: activeSector,
-                                },
-                                chart
-                            );
-                        })
-                    );
+                chart.pluginTooltips = datasets.map((dataset, datasetsIndex) => {
+                    return chart.getDatasetMeta(datasetsIndex).data.map((activeSector, activeSectorIndex) => {
+                        return new Chart.Tooltip(
+                            {
+                                dataValue: chart.data.datasets[datasetsIndex].data[activeSectorIndex],
+                                _options: chart.options.tooltips,
+                                _active: activeSector,
+                            },
+                            chart
+                        );
+                    });
                 });
-
-                chart.pluginTooltips = pluginTooltips;
             }
         },
         afterDraw: (chart) => {
@@ -108,10 +103,10 @@
         setOptions(options) {
             this.options = {
                 ...defaultOptions,
-                ...options,
                 animation: {
                     onComplete: (animation) => this.onCompleteAnimationCallback(animation),
                 },
+                ...options,
             };
         }
 
