@@ -17,17 +17,11 @@ class ImageAssetAllowedContentTypes implements EventSubscriberInterface
     /** @var \eZ\Publish\Core\FieldType\ImageAsset\AssetMapper */
     private $assetMapper;
 
-    /**
-     * @param \eZ\Publish\Core\FieldType\ImageAsset\AssetMapper $assetMapper
-     */
     public function __construct(AssetMapper $assetMapper)
     {
         $this->assetMapper = $assetMapper;
     }
 
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -35,9 +29,6 @@ class ImageAssetAllowedContentTypes implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent $event
-     */
     public function onUdwConfigResolve(ConfigResolveEvent $event): void
     {
         if ($event->getConfigName() !== 'image_asset') {
