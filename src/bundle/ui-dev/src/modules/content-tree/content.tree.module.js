@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
 import ContentTree from './components/content-tree/content.tree';
 import { loadLocationItems, loadSubtree } from './services/content.tree.service';
+import { INSERT_AFTER } from '../../../../../../../../ibexa/tree-builder/src/bundle/Resources/public/js/tree.builder.module';
 
 const KEY_CONTENT_TREE_SUBTREE = 'ez-content-tree-subtrees';
 
@@ -370,7 +371,196 @@ export default class ContentTreeModule extends Component {
     }
 }
 
+const TreeBuilderModule = (props) => {
+    const [mockedTree, setMockedTree] = useState({
+        id: 0,
+        name: 'Root',
+        isRootItem: true,
+        total: 3,
+        children: [
+            {
+                id: 1,
+                name: 'Jeden',
+                total: 20,
+                children: [
+                    {
+                        id: 11,
+                        name: 'Jedenaście',
+                    },
+                    {
+                        id: 12,
+                        name: 'Dwanaście',
+                    },
+                    {
+                        id: 13,
+                        name: 'Trzynaście',
+                    },
+                ],
+            },
+            {
+                id: 2,
+                name: 'Dwa',
+                total: 0,
+                children: [],
+            },
+            {
+                id: 3,
+                name: 'Trzy',
+                total: 3,
+                children: [
+                    {
+                        id: 31,
+                        name: 'Trzydzieści jeden',
+                        total: 2,
+                        children: [
+                            {
+                                id: 311,
+                                name: 'Trzysta jedenaście',
+                            },
+                            {
+                                id: 312,
+                                name: 'Trzysta dwanaście',
+                            },
+                        ],
+                    },
+                    {
+                        id: 32,
+                        name: 'Trzydzieści dwa',
+                        isInvisible: true,
+                        total: 0,
+                    },
+                    {
+                        id: 33,
+                        name: 'Trzydzieści trzy',
+                        total: 1,
+                        children: [
+                            {
+                                id: 331,
+                                name: 'Trzysta trzydzieści jeden',
+                                total: 1,
+                                children: [
+                                    {
+                                        id: 3311,
+                                        name: 'Trzy tysiące trzysta jedenaście',
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    });
+    const findHelper = (element, id) => {
+        if (element.id === id) {
+            throw element;
+        } else if (element.children) {
+            element.children.forEach((el) => findHelper(el, id));
+        }
+    };
+    const findParentHelper = (element, id) => {
+        if (element.children) {
+            if (element.children.find((el) => el.id === id)) {
+                throw element;
+            }
+            element.children.forEach((el) => findParentHelper(el, id));
+        }
+    };
+    const loadMoreSubitems = ({ item }) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const newTree = JSON.parse(JSON.stringify(mockedTree));
+                let element;
+                try {
+                    findHelper(newTree, item.id);
+                } catch (e) {
+                    element = e;
+                }
+                element.children = [...element.children, ...element.children].slice(0, element.total);
+                setMockedTree(newTree);
+                resolve();
+            }, 500);
+        });
+    };
+    const isSelected = (data) => {
+        return data.id === 1;
+    };
+    const moveElement = ({ data, parent, insertIndex }) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const newTree = JSON.parse(JSON.stringify(mockedTree));
+                let parentElement;
+                let movedElement;
+                let parentMovedElement;
+                try {
+                    findHelper(newTree, parent.id);
+                } catch (e) {
+                    parentElement = e;
+                }
+                try {
+                    findHelper(newTree, data.id);
+                } catch (e) {
+                    movedElement = e;
+                }
+                try {
+                    findParentHelper(newTree, data.id);
+                } catch (e) {
+                    parentMovedElement = e;
+                }
+                parentElement.children.splice(insertIndex, 0, movedElement);
+                const movedIndex = parentMovedElement.children.findIndex((el) => el.id === data.id);
+                parentMovedElement.children.splice(movedIndex, 1);
+                setMockedTree(newTree);
+                resolve();
+            }, 500);
+        });
+    };
+    const customItemClass = (data) => {
+        const { children, total, isInvisible, isRootItem } = data;
+        const itemClassName = 't-list-item';
+        let className = '';
+        if (children && children.length < total) {
+            className += ` ${itemClassName}--can-load-more`;
+        }
+        if (isInvisible) {
+            className += ` ${itemClassName}--is-hidden`;
+        }
+        if (isRootItem) {
+            className += ` ${itemClassName}--is-root-item`;
+        }
+        return className;
+    };
+
+    return (
+        <eZ.modules.TreeBuilder
+            tree={mockedTree}
+            getSubitems={(data) => data.children}
+            getLabel={(data) => data.name}
+            getTotal={(data) => data.total}
+            getId={(data) => data.id}
+            isSelected={isSelected}
+            loadMoreSubitems={loadMoreSubitems}
+            moveElement={moveElement}
+            customItemClass={customItemClass}
+            subitemsLimit={10}
+            treeDepthLimit={4}
+            moduleId="taxonomyTree"
+            moduleName="Taxonomy tree"
+            // dragDisabled={true}
+        />
+    );
+};
+
+window.ibexa = {
+    treeBuilder: {
+        taxonomyTree: {
+            actions: [],
+        },
+    },
+};
+
 eZ.addConfig('modules.ContentTree', ContentTreeModule);
+eZ.addConfig('modules.ContentTree', TreeBuilderModule);
 
 ContentTreeModule.propTypes = {
     rootLocationId: PropTypes.number.isRequired,
