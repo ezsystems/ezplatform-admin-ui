@@ -172,7 +172,6 @@
                     onConfirm,
                     onCancel,
                     title,
-                    allowedContentTypes: [imageAssetMapping['contentTypeIdentifier']],
                     ...config,
                 }),
                 udwContainer
