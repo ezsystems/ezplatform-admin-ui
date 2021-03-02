@@ -12,7 +12,7 @@ use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use eZ\Publish\Core\FieldType\ImageAsset\AssetMapper;
 
-class ImageAssetAllowedContentTypes implements EventSubscriberInterface
+final class ImageAssetAllowedContentTypes implements EventSubscriberInterface
 {
     /** @var \eZ\Publish\Core\FieldType\ImageAsset\AssetMapper */
     private $assetMapper;
