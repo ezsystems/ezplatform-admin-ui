@@ -2,7 +2,6 @@ import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
 import ContentTree from './components/content-tree/content.tree';
 import { loadLocationItems, loadSubtree } from './services/content.tree.service';
-import { INSERT_AFTER } from '../../../../../../../../ibexa/tree-builder/src/bundle/Resources/public/js/tree.builder.module';
 
 const KEY_CONTENT_TREE_SUBTREE = 'ez-content-tree-subtrees';
 
