@@ -1,7 +1,5 @@
 .ez-chart {
     max-height: calculateRem(1000px);
-    border: calculateRem(1px) solid $ibexa-color-base-medium;
-    border-radius: $ibexa-border-radius;
 
     &--no-data {
         .ez-chart {
@@ -28,7 +26,7 @@
         position: absolute;
         z-index: 1;
         top: calc(50% - 150px);
-        left: calc(50% - 190px);
+        left: calc(50% - 200px);
         display: flex;
         flex-direction: column;
         justify-content: center;
