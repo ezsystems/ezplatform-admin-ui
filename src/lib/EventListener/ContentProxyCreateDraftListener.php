@@ -111,7 +111,7 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
             $event->getContentId(),
             $event->getFromLanguageCode() === null
                 ? [$event->getFromLanguageCode()]
-                :  null
+                : null
         );
 
         $toLanguageCode = $event->getToLanguageCode();
