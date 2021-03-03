@@ -17,11 +17,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PolicyChoiceType extends AbstractType
 {
-    const MESSAGE_DOMAIN = 'forms';
-    const MESSAGE_ID_PREFIX = 'role.policy.';
-    const ALL_MODULES = 'all_modules';
-    const ALL_FUNCTIONS = 'all_functions';
-    const ALL_MODULES_ALL_FUNCTIONS = 'all_modules_all_functions';
+    private const MESSAGE_DOMAIN = 'forms';
+    private const MESSAGE_ID_PREFIX = 'role.policy.';
+    private const ALL_MODULES = 'all_modules';
+    private const ALL_FUNCTIONS = 'all_functions';
+    private const ALL_MODULES_ALL_FUNCTIONS = 'all_modules_all_functions';
 
     /** @var array */
     private $policyChoices;
