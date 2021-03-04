@@ -23,14 +23,6 @@
                 }
             }
         },
-        layout: {
-            padding: {
-                top: 25,
-                right: 15,
-                bottom: 25,
-                left: 15,
-            },
-        },
         elements: {
             arc: {
                 borderWidth: 0,

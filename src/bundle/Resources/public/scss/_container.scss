@@ -1,0 +1,37 @@
+.ez-container {
+    padding: calculateRem(16px) calculateRem(32px);
+    background-color: $ibexa-white;
+
+    &--shadow {
+        box-shadow: calculateRem(5px) calculateRem(5px) calculateRem(15px) calculateRem(5px) rgba(0,0,0,0.05);
+    }
+
+    &--bordered {
+        border-radius: calculateRem(5px);
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        margin-bottom: calculateRem(4px);
+    }
+
+    &__header-title {
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 500;
+        font-size: calculateRem(18px);
+    }
+
+    &__tooltip {
+        margin-left: calculateRem(5px);
+    }
+
+    &__sub-header {
+        color: $ibexa-color-font-pale;
+        font-size: calculateRem(14px);
+    }
+
+    &__body {
+        margin-top: calculateRem(16px);
+    }
+}
