@@ -21,6 +21,7 @@ use Ibexa\Platform\Search\View\SearchViewFilter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RouterInterface;
 
 class AdminSearchViewFilter implements EventSubscriberInterface
 {
@@ -42,13 +43,17 @@ class AdminSearchViewFilter implements EventSubscriberInterface
     /** @var \Ibexa\Platform\Search\View\SearchViewFilter */
     private $innerFilter;
 
+    /** @var \Symfony\Component\Routing\RouterInterface */
+    private $router;
+
     public function __construct(
         ConfigResolverInterface $configResolver,
         FormFactoryInterface $formFactory,
         SectionService $sectionService,
         ContentTypeService $contentTypeService,
         array $siteAccessGroups,
-        SearchViewFilter $innerFilter
+        SearchViewFilter $innerFilter,
+        RouterInterface $router
     ) {
         $this->configResolver = $configResolver;
         $this->formFactory = $formFactory;
@@ -56,6 +61,7 @@ class AdminSearchViewFilter implements EventSubscriberInterface
         $this->contentTypeService = $contentTypeService;
         $this->siteAccessGroups = $siteAccessGroups;
         $this->innerFilter = $innerFilter;
+        $this->router = $router;
     }
 
     public static function getSubscribedEvents()
@@ -134,6 +140,7 @@ class AdminSearchViewFilter implements EventSubscriberInterface
             [
                 'method' => Request::METHOD_GET,
                 'csrf_protection' => false,
+                'action' => $this->router->generate('ezplatform.search'),
             ]
         );
 
