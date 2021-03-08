@@ -56,5 +56,6 @@ services:
             $contentTypeService: '@ezpublish.api.service.content_type'
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
             $innerFilter: '@EzSystems\EzPlatformAdminUi\View\Filter\AdminSearchViewFilter.inner'
+            $urlGenerator: '@router'
         tags:
             - { name: kernel.event_subscriber }
