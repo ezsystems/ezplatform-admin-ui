@@ -91,10 +91,23 @@ final class ContentProxyCreateDraftListenerTest extends TestCase
                 ])
             );
 
+        $contentInfo = $this->createMock(ContentInfo::class);
+
+        $content = $this->createMock(Content::class);
+        $content
+            ->method('__get')
+            ->will($this->returnCallback(static function($argument) use ($contentInfo) {
+                if ($argument === 'contentInfo') {
+                    return $contentInfo;
+                }
+
+                return null;
+            }));
+
         $contentService = $this->createMock(ContentService::class);
         $contentService
             ->method('createContent')
-            ->willReturn($this->createMock(Content::class));
+            ->willReturn($content);
 
         $router = $this->createMock(RouterInterface::class);
         $router
