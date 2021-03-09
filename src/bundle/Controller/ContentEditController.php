@@ -6,11 +6,49 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use EzSystems\EzPlatformAdminUi\Event\ContentProxyTranslateEvent;
 use EzSystems\EzPlatformAdminUi\View\ContentTranslateSuccessView;
 use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class ContentEditController extends Controller
 {
+    /** @var \Symfony\Contracts\EventDispatcher\EventDispatcherInterface */
+    private $eventDispatcher;
+
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher
+    ) {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    public function proxyTranslateAction(
+        int $contentId,
+        ?string $fromLanguageCode,
+        string $toLanguageCode
+    ): Response {
+        /** @var \EzSystems\EzPlatformAdminUi\Event\ContentProxyTranslateEvent $event */
+        $event = $this->eventDispatcher->dispatch(
+            new ContentProxyTranslateEvent(
+                $contentId,
+                $fromLanguageCode,
+                $toLanguageCode
+            )
+        );
+
+        if ($event->hasResponse()) {
+            return $event->getResponse();
+        }
+
+        // Fallback to "translate"
+        return $this->redirectToRoute('ezplatform.content.translate', [
+            'contentId' => $contentId,
+            'fromLanguageCode' => $fromLanguageCode,
+            'toLanguageCode' => $toLanguageCode,
+        ]);
+    }
+
     /**
      * @param \EzSystems\EzPlatformAdminUi\View\ContentTranslateView $view
      *
