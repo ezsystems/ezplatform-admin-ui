@@ -555,6 +555,13 @@ ezplatform.content.translate:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::translateAction'
         fromLanguageCode: ~
 
+ezplatform.content.translate.proxy:
+    path: /content/{contentId}/translate/proxy/{toLanguageCode}/{fromLanguageCode}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::proxyTranslateAction'
+        fromLanguageCode: ~
+
 ezplatform.content.check_edit_permission:
     path: /content/{contentId}/check-edit-permission/{languageCode}
     options:

@@ -8,55 +8,54 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Event;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * @internal
  */
-final class ContentProxyCreateEvent extends Event
+final class ContentProxyTranslateEvent extends Event
 {
     /** @var \Symfony\Component\HttpFoundation\Response|null */
     private $response;
 
-    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType */
-    private $contentType;
+    /** @var int */
+    private $contentId;
+
+    /** @var string|null */
+    private $fromLanguageCode;
 
     /** @var string */
-    private $languageCode;
-
-    /** @var int */
-    private $parentLocationId;
+    private $toLanguageCode;
 
     /** @var \EzSystems\EzPlatformAdminUi\Event\Options */
     private $options;
 
     public function __construct(
-        ContentType $contentType,
-        string $languageCode,
-        int $parentLocationId,
+        int $contentId,
+        ?string $fromLanguageCode,
+        string $toLanguageCode,
         ?Options $options = null
     ) {
-        $this->contentType = $contentType;
-        $this->languageCode = $languageCode;
-        $this->parentLocationId = $parentLocationId;
+        $this->contentId = $contentId;
+        $this->fromLanguageCode = $fromLanguageCode;
+        $this->toLanguageCode = $toLanguageCode;
         $this->options = $options ?? new Options();
     }
 
-    public function getContentType(): ContentType
+    public function getContentId(): int
     {
-        return $this->contentType;
+        return $this->contentId;
     }
 
-    public function getLanguageCode(): string
+    public function getFromLanguageCode(): ?string
     {
-        return $this->languageCode;
+        return $this->fromLanguageCode;
     }
 
-    public function getParentLocationId(): int
+    public function getToLanguageCode(): string
     {
-        return $this->parentLocationId;
+        return $this->toLanguageCode;
     }
 
     public function getOptions(): Options
@@ -76,6 +75,6 @@ final class ContentProxyCreateEvent extends Event
 
     public function hasResponse(): bool
     {
-        return !empty($this->response);
+        return isset($this->response);
     }
 }
