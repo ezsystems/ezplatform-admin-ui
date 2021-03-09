@@ -15,7 +15,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 /**
  * @internal
  */
-final class ContentProxyCreateEvent extends Event
+class ContentProxyCreateEvent extends Event
 {
     /** @var \Symfony\Component\HttpFoundation\Response|null */
     private $response;
