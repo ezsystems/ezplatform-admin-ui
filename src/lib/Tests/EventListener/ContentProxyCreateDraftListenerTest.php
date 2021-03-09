@@ -76,7 +76,7 @@ final class ContentProxyCreateDraftListenerTest extends TestCase
 
         $eventDispatcher->dispatch($createEvent);
 
-        $this->assertEquals(new RedirectResponse('redirect_test_url'), $createEvent->getResponse());
+        self::assertEquals(new RedirectResponse('redirect_test_url'), $createEvent->getResponse());
     }
 
     public function testCreateContentOnTheFlyAutosaveEnabled(): void
