@@ -19,9 +19,6 @@ export default class EzConfigTableBase extends EzConfgiFixedBase {
             'eztableremove',
             ...config.extraButtons[this.name],
         ];
-
-        this.getArrowBoxClasses = AlloyEditor.SelectionGetArrowBoxClasses.table;
-        this.setPosition = AlloyEditor.SelectionSetPosition.table;
     }
 
     getConfigName() {
