@@ -80,14 +80,27 @@ export default class EzConfigBase {
         const path = editor.elementPath();
         let block = path.block;
 
-        if (!block || isWidgetElement) {
+        if (isWidgetElement) {
             const inlineCustomTag = path.elements.find((element) => element.$.dataset.ezelement === 'eztemplateinline');
 
             block = inlineCustomTag || targetElement;
         }
 
+        if (!block ) {
+            block = path.lastElement;
+        }
+
         if (block.is('li')) {
             block = block.getParent();
+        }
+
+        if (block.is('td') || block.is('th')) {
+            for (let parent of block.getParents()) {
+                if (parent.getName() === 'table') {
+                    block = parent;
+                    break;
+                }
+            }
         }
 
         return block;

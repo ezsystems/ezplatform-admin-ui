@@ -1,6 +1,6 @@
 import AlloyEditor from 'alloyeditor';
 
-export default class EzConfigTableBase {
+export default class EzConfgiFixedBase {
     constructor(config) {
         this.name = this.getConfigName();
 
@@ -16,12 +16,13 @@ export default class EzConfigTableBase {
             'eztableremove',
             ...config.extraButtons[this.name],
         ];
-
-        this.getArrowBoxClasses = AlloyEditor.SelectionGetArrowBoxClasses.table;
-        this.setPosition = AlloyEditor.SelectionSetPosition.table;
     }
 
     getConfigName() {
         return '';
+    }
+
+    getArrowBoxClasses() {
+        return 'ae-toolbar-floating';
     }
 }

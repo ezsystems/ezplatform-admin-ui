@@ -10,8 +10,9 @@ export default class EzConfgiFixedBase extends EzConfigBase {
         const editorRect = editor.element.getClientRect();
         const toolbarHeight = toolbar ? toolbar.getBoundingClientRect().height : 0;
         const shouldBeFixed = editorRect.top - toolbarHeight - 2 * TOOLBAR_OFFSET < 0;
+        const header = document.querySelector('.ez-edit-header__content-type-name');
         const top = shouldBeFixed
-            ? TOOLBAR_OFFSET
+            ? TOOLBAR_OFFSET + (header ? header.offsetHeight : 0)
             : editorRect.top + editor.element.getWindow().getScrollPosition().y - toolbarHeight - TOOLBAR_OFFSET;
 
         if (toolbar) {
