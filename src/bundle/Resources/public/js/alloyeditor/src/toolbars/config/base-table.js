@@ -1,4 +1,3 @@
-import AlloyEditor from 'alloyeditor';
 import EzConfgiFixedBase from './base-fixed';
 
 export default class EzConfigTableBase extends EzConfgiFixedBase {
