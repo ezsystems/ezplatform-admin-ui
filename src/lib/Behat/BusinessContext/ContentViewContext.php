@@ -264,6 +264,10 @@ class ContentViewContext extends BusinessContext
 
         $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $explodedPath[$pathSize - 1]);
 
+        if ($contentItemPage->subItemList->canBeSorted()) {
+            $contentItemPage->subItemList->sortBy('Modified', false);
+        }
+
         Assert::assertTrue(
             $contentItemPage->subItemList->table->isElementInTable($contentName),
             sprintf('%s "%s" shouldn\'t be on %s Sub-items list', $contentType, $contentName, $explodedPath[$pathSize - 1])
