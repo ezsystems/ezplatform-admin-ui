@@ -266,6 +266,7 @@ class ContentViewContext extends BusinessContext
         $pathSize = count($explodedPath);
 
         $contentItemPage = PageObjectFactory::createPage($this->utilityContext, ContentItemPage::PAGE_NAME, $explodedPath[$pathSize - 1]);
+        $contentItemPage->subItemList->sortBy('Modified', false);
 
         Assert::assertTrue(
             $contentItemPage->subItemList->table->isElementInTable($contentName),
