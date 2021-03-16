@@ -1,4 +1,4 @@
-(function (global, doc, React, ReactDOM, eZ, localStorage) {
+(function(global, doc, React, ReactDOM, eZ, localStorage) {
     const KEY_CONTENT_TREE_EXPANDED = 'ez-content-tree-expanded';
     const CLASS_CONTENT_TREE_EXPANDED = 'ez-content-tree-container--expanded';
     const CLASS_CONTENT_TREE_ANIMATE = 'ez-content-tree-container--animate';
@@ -56,7 +56,7 @@
         React.createElement(eZ.modules.ContentTree, {
             userId,
             currentLocationPath,
-            rootLocationId: treeRootLocationId,
+            rootLocationId: parseInt(treeRootLocationId, 10),
             restInfo: { token, siteaccess },
         }),
         contentTreeWrapper
