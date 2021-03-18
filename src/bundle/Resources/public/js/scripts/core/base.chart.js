@@ -44,9 +44,13 @@
                 const { datasets } = chart.config.data;
 
                 chart.pluginTooltips = datasets.map((dataset, datasetsIndex) => {
+                    const dataSum = dataset.data.reduce((total, element) => {
+                        return total + element;
+                    });
                     return chart.getDatasetMeta(datasetsIndex).data.map((activeSector, activeSectorIndex) => {
                         return new Chart.Tooltip(
                             {
+                                dataSum,
                                 dataValue: chart.data.datasets[datasetsIndex].data[activeSectorIndex],
                                 _options: chart.options.tooltips,
                                 _active: activeSector,
@@ -65,8 +69,14 @@
                         const cords = dataLabelPlugin.calculateCords(tooltipData._active._view);
 
                         if (!hidden && cords.diffAngle >= MIN_ANGLE_TO_SHOW_DATA_LABEL) {
-                            const textCords = chart.ctx.measureText(tooltipData.dataValue);
-                            const boxWidth = textCords.width * 1.5;
+                            let displayValue = tooltipData.dataValue;
+
+                            if (chart.config.options.dataLabelPercentValue) {
+                                displayValue = `${(tooltipData.dataValue / tooltipData.dataSum * 100).toFixed(1)}%`;
+                            }
+
+                            const textCords = chart.ctx.measureText(displayValue);
+                            const boxWidth = textCords.width * 1.2;
 
                             tooltipData.initialize();
                             tooltipData._options.caretPadding = 20;
@@ -76,7 +86,7 @@
                             chart.ctx.textBaseline = 'middle';
                             chart.ctx.font = 'normal 12px';
                             chart.ctx.fillStyle = IBEXA_WHITE;
-                            chart.ctx.fillText(tooltipData.dataValue, cords.xPos, cords.yPos);
+                            chart.ctx.fillText(displayValue, cords.xPos, cords.yPos);
                             chart.ctx.lineJoin = 'round';
                             chart.ctx.lineWidth = BOX_HEIGHT;
                             chart.ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
