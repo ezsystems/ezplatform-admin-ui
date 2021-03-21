@@ -51,7 +51,7 @@
                                     {% if not can_hide[location.id] %} disabled="disabled"{% endif %}
                                     value="{{ location.id }}"/>
                             </label>
-                            {% if location.invisible or location.hidden %}
+                            {% if location.invisible %}
                                 <span class="ml-2">
                                     {{ 'tab.locations.hidden_content_or_superior'|trans()|desc('Content or superior is hidden') }}
                                 </span>
