@@ -63,6 +63,7 @@
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-body">
+                        {# 'is_location_visible': location.invisible - param deprecated since EZP-32395 #}
                         {{ ez_platform_tabs('location-view', {
                             'content': content,
                             'location': location,
@@ -73,7 +74,7 @@
                             'system_urls_pagination_params': system_urls_pagination_params,
                             'roles_pagination_params': roles_pagination_params,
                             'policies_pagination_params': policies_pagination_params,
-                            'is_location_visible': is_location_visible,
+                            'is_location_visible': location.invisible,
                         }, '@ezdesign/parts/tab/locationview.html.twig') }}
 
                         {% if contentType.isContainer %}
