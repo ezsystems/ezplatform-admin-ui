@@ -60,7 +60,7 @@ class SubmitHandler
      * Handles business logic exceptions (NotificationHandler:error).
      *
      * @param FormInterface $form
-     * @param callable(mixed):array $handler
+     * @param callable(mixed):?Response $handler
      *
      * @return Response|null
      */
@@ -104,7 +104,7 @@ class SubmitHandler
      * Handles business logic exceptions (JsonResponse(['errors'=> [...], Response::ERROR_STATUS_CODE])).
      *
      * @param FormInterface $form
-     * @param callable(mixed):array $handler
+     * @param callable(mixed):?Response $handler
      *
      * @return JsonResponse
      */
