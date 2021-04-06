@@ -901,94 +901,6 @@ class FormFactory
     }
 
     /**
-     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
-     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::changeUserPassword.
-     *
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData $data
-     * @param string|null $name
-     * @param \eZ\Publish\API\Repository\Values\User\User|null $user
-     *
-     * @return FormInterface
-     *
-     * @throws InvalidOptionsException
-     */
-    public function changeUserPassword(
-        UserPasswordChangeData $data = null,
-        ?string $name = null,
-        ?User $user = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordChangeType::class);
-
-        return $this->formFactory->createNamed($name, UserPasswordChangeType::class, $data, [
-            'user' => $user,
-        ]);
-    }
-
-    /**
-     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
-     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPassword.
-     *
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
-     */
-    public function forgotUserPassword(
-        UserPasswordForgotData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordForgotType::class);
-
-        return $this->formFactory->createNamed($name, UserPasswordForgotType::class, $data);
-    }
-
-    /**
-     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
-     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPassword.
-     *
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotWithLoginData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
-     */
-    public function forgotUserPasswordWithLogin(
-        UserPasswordForgotWithLoginData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordForgotWithLoginType::class);
-
-        return $this->formFactory->createNamed($name, UserPasswordForgotWithLoginType::class, $data);
-    }
-
-    /**
-     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
-     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::resetUserPassword.
-     *
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData $data
-     * @param string|null $name
-     * @param \eZ\Publish\API\Repository\Values\User\User|null $user
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
-     */
-    public function resetUserPassword(
-        UserPasswordResetData $data = null,
-        ?string $name = null,
-        ?User $user = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordResetType::class);
-
-        return $this->formFactory->createNamed($name, UserPasswordResetType::class, $data, [
-            'user' => $user,
-        ]);
-    }
-
-    /**
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData|null $data
      * @param string|null $name
      *
@@ -1112,31 +1024,6 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(BookmarkRemoveType::class);
 
         return $this->formFactory->createNamed($name, BookmarkRemoveType::class, $data);
-    }
-
-    /**
-     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
-     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::updateUserSetting.
-     *
-     * @param string $userSettingIdentifier
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\Setting\UserSettingUpdateData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function updateUserSetting(
-        string $userSettingIdentifier,
-        UserSettingUpdateData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserSettingUpdateType::class);
-
-        return $this->formFactory->createNamed(
-            $name,
-            UserSettingUpdateType::class,
-            $data,
-            ['user_setting_identifier' => $userSettingIdentifier]
-        );
     }
 
     /**
