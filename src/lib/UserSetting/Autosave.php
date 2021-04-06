@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UserSetting;
 
-use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
-use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
+use Ibexa\Contracts\User\UserSetting\FormMapperInterface;
+use Ibexa\Contracts\User\UserSetting\ValueDefinitionInterface;
 use JMS\TranslationBundle\Annotation\Desc;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;

@@ -31,6 +31,7 @@ imports:
     - { resource: services/twig.yaml }
     - { resource: services/on_the_fly.yaml }
     - { resource: services/autosave.yaml }
+    - { resource: services/user.yaml }
 
 services:
     _defaults:

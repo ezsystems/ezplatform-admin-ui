@@ -8,9 +8,10 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Notification;
 
+use EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class TranslatableNotificationHandler implements TranslatableNotificationHandlerInterface
+final class TranslatableNotificationHandler implements TranslatableNotificationHandlerInterface, ActionResultHandler
 {
     /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     private $notificationHandler;
