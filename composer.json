@@ -14,6 +14,7 @@
     },
     "require": {
         "php": "^7.3",
+        "ext-json": "*",
         "symfony/http-foundation": "^5.0",
         "symfony/security-core": "^5.0",
         "symfony/security-http": "^5.0",

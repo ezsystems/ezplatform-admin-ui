@@ -162,7 +162,6 @@ class ContentViewController extends Controller
             $this->supplyPathLocations($view);
             $this->subitemsContentViewParameterSupplier->supply($view);
             $this->supplyContentActionForms($view);
-            $this->supplyIsLocationInvisible($view);
             $this->supplyContentReverseRelations($view);
             $this->supplyContentTreeParameters($view);
         }
@@ -522,23 +521,5 @@ class ContentViewController extends Controller
         );
 
         $view->addParameters(['content_has_reverse_relations' => \count($relations) > 0]);
-    }
-
-    /**
-     * @param \eZ\Publish\Core\MVC\Symfony\View\ContentView $view
-     */
-    private function supplyIsLocationInvisible(ContentView $view)
-    {
-        $location = $view->getLocation();
-        $parentLocation = $this->permissionResolver->sudo(
-            function (Repository $repository) use ($location) {
-                return $repository->getLocationService()->loadLocation($location->parentLocationId);
-            },
-            $this->repository
-        );
-        $isLocationVisible = !($parentLocation->hidden || $parentLocation->invisible);
-
-        // Location is invisible when parent location is not visible.
-        $view->addParameters(['is_location_visible' => $isLocationVisible]);
     }
 }
