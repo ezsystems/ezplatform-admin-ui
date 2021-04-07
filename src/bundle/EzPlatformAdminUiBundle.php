@@ -13,6 +13,7 @@ use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\LimitationVal
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\SecurityLoginPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass;
+use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UserBundlePass;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -51,6 +52,7 @@ class EzPlatformAdminUiBundle extends Bundle
         $container->addCompilerPass(new LimitationFormMapperPass());
         $container->addCompilerPass(new LimitationValueMapperPass());
         $container->addCompilerPass(new FieldTypeFormMapperDispatcherPass());
+        $container->addCompilerPass(new UserBundlePass());
     }
 
     /**
