@@ -86,7 +86,7 @@
                         'system_urls_pagination_params': system_urls_pagination_params,
                         'roles_pagination_params': roles_pagination_params,
                         'policies_pagination_params': policies_pagination_params,
-                        'is_location_visible': location.invisible,
+                        'is_location_visible': not location.invisible,
                     }) }}
 
                     {% if content_type.isContainer %}
