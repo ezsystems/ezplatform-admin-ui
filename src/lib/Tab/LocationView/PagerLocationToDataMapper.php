@@ -32,8 +32,8 @@ class PagerLocationToDataMapper
     public function map(Pagerfanta $pager): array
     {
         $locations = [];
-        foreach($pager as $location) {
-            $locations[]  = $location;
+        foreach ($pager as $location) {
+            $locations[] = $location;
         }
 
         $data = array_map(
