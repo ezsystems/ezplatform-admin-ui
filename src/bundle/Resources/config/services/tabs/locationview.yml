@@ -5,7 +5,7 @@ services:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: true
         tags:
-            - { name: ezplatform.tab, group: location-view }1
+            - { name: ezplatform.tab, group: location-view }
 
     EzSystems\EzPlatformAdminUi\Tab\LocationView\PagerLocationToDataMapper:
         autowire: true
