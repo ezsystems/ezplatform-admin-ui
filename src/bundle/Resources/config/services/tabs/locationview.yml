@@ -1,8 +1,21 @@
 services:
     EzSystems\EzPlatformAdminUi\Tab\LocationView\:
         resource: "../../../lib/Tab/LocationView/*"
+        exclude: '../../../lib/Tab/LocationView/PagerLocationToDataMapper.php'
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: true
+        tags:
+            - { name: ezplatform.tab, group: location-view }1
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\PagerLocationToDataMapper:
+        autowire: true
+        public: false
+
+    EzSystems\EzPlatformAdminUi\Tab\LocationView\LocationsTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        public: true
+        arguments:
+            $defaultPaginationLimit: '$pagination.location_limit$'
         tags:
             - { name: ezplatform.tab, group: location-view }
 

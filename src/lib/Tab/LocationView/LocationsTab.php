@@ -8,18 +8,24 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
+use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\Content\LocationQuery;
+use eZ\Publish\Core\Pagination\Pagerfanta\LocationSearchAdapter;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use eZ\Publish\API\Repository\Values\Content\Query;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -28,6 +34,7 @@ use eZ\Publish\API\Repository\PermissionResolver;
 class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-location-view-locations';
+    private const PAGINATION_PARAM_NAME = 'locationstab-page';
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     protected $datasetFactory;
@@ -41,6 +48,18 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;
 
+    /** @var \Symfony\Component\HttpFoundation\RequestStack */
+    private $requestStack;
+
+    /** @var \eZ\Publish\API\Repository\SearchService */
+    protected $searchService;
+
+    /** @var \EzSystems\EzPlatformAdminUi\Tab\LocationView\PagerLocationToDataMapper  */
+    protected $pagerLocationToDataMapper;
+
+    /** @var int */
+    private $defaultPaginationLimit;
+
     /**
      * @param \Twig\Environment $twig
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
@@ -49,6 +68,10 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \eZ\Publish\API\Repository\SearchService $searchService
+     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+     * @param \EzSystems\EzPlatformAdminUi\Tab\LocationView\PagerLocationToDataMapper $pagerLocationToDataMapper
+     * @param int $defaultPaginationLimit
      */
     public function __construct(
         Environment $twig,
@@ -57,7 +80,11 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         FormFactory $formFactory,
         UrlGeneratorInterface $urlGenerator,
         PermissionResolver $permissionResolver,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        SearchService $searchService,
+        RequestStack $requestStack,
+        PagerLocationToDataMapper $pagerLocationToDataMapper,
+        int $defaultPaginationLimit
     ) {
         parent::__construct($twig, $translator, $eventDispatcher);
 
@@ -65,6 +92,10 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
         $this->permissionResolver = $permissionResolver;
+        $this->requestStack = $requestStack;
+        $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->searchService = $searchService;
+        $this->pagerLocationToDataMapper = $pagerLocationToDataMapper;
     }
 
     /**
@@ -112,12 +143,27 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         $versionInfo = $content->getVersionInfo();
         $contentInfo = $versionInfo->getContentInfo();
         $locations = [];
+        $pagination = null;
 
         if ($contentInfo->published) {
-            $locationsDataset = $this->datasetFactory->locations();
-            $locationsDataset->load($contentInfo);
+            $currentPage = $this->requestStack->getCurrentRequest()->query->getInt(
+                self::PAGINATION_PARAM_NAME, 1
+            );
 
-            $locations = $locationsDataset->getLocations();
+            $locationQuery = new LocationQuery([
+                'filter' => new Query\Criterion\ContentId($contentInfo->id),
+            ]);
+
+            $pagination = new Pagerfanta(
+                new LocationSearchAdapter(
+                    $locationQuery,
+                    $this->searchService
+                )
+            );
+
+            $pagination->setMaxPerPage($this->defaultPaginationLimit);
+            $pagination->setCurrentPage(min(max($currentPage, 1), $pagination->getNbPages()));
+            $locations = $this->pagerLocationToDataMapper->map($pagination);
         }
 
         $formLocationAdd = $this->createLocationAddForm($location);
@@ -142,6 +188,10 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         }
 
         $viewParameters = [
+            'pager' => $pagination,
+            'pager_options' => [
+                'pageParameter' => '[' . self::PAGINATION_PARAM_NAME . ']',
+            ],
             'locations' => $locations,
             'form_content_location_add' => $formLocationAdd->createView(),
             'form_content_location_remove' => $formLocationRemove->createView(),
