@@ -8,15 +8,14 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
-use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 use EzSystems\EzPlatformAdminUi\UI\Value;
 use Pagerfanta\Pagerfanta;
 
-class PagerLocationToDataMapper
+final class PagerLocationToDataMapper
 {
-    /** @var ValueFactory */
-    protected $valueFactory;
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory */
+    private $valueFactory;
 
     public function __construct(
         ValueFactory $valueFactory
@@ -25,9 +24,7 @@ class PagerLocationToDataMapper
     }
 
     /**
-     * @param \Pagerfanta\Pagerfanta $pager
-     *
-     * @return array
+     * @return Value\Content\Location[]
      */
     public function map(Pagerfanta $pager): array
     {
@@ -40,17 +37,16 @@ class PagerLocationToDataMapper
             [$this->valueFactory, 'createLocation'],
             $locations
         );
-        $data = $this->prioritizeMainLocation($data);
 
-        return $data;
+        return $this->prioritizeMainLocation($data);
     }
 
     /**
-     * @param Location[] $locations
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $locations
      *
      * @return Value\Content\Location[]
      */
-    protected function prioritizeMainLocation(array $locations): array
+    private function prioritizeMainLocation(array $locations): array
     {
         foreach ($locations as $key => $location) {
             if ($location->main) {

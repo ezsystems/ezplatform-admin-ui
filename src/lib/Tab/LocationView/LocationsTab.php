@@ -52,10 +52,10 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     private $requestStack;
 
     /** @var \eZ\Publish\API\Repository\SearchService */
-    protected $searchService;
+    private $searchService;
 
     /** @var \EzSystems\EzPlatformAdminUi\Tab\LocationView\PagerLocationToDataMapper */
-    protected $pagerLocationToDataMapper;
+    private $pagerLocationToDataMapper;
 
     /** @var int */
     private $defaultPaginationLimit;
