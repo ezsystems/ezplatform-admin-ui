@@ -21,7 +21,8 @@ use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
-use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use EzSystems\EzPlatformAdminUi\UI\Value\Content\Location\Mapper;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
@@ -34,10 +35,7 @@ use eZ\Publish\API\Repository\PermissionResolver;
 class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
     const URI_FRAGMENT = 'ez-tab-location-view-locations';
-    private const PAGINATION_PARAM_NAME = 'locationstab-page';
-
-    /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
-    protected $datasetFactory;
+    private const PAGINATION_PARAM_NAME = 'locations-tab-page';
 
     /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     protected $formFactory;
@@ -54,48 +52,45 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Tab\LocationView\PagerLocationToDataMapper */
-    private $pagerLocationToDataMapper;
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Value\Content\Location\Mapper */
+    private $locationToUILocationMapper;
 
-    /** @var int */
-    private $defaultPaginationLimit;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
     /**
      * @param \Twig\Environment $twig
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @param \EzSystems\EzPlatformAdminUi\Tab\LocationView\PagerLocationToDataMapper $pagerLocationToDataMapper
-     * @param int $defaultPaginationLimit
+     * @param \EzSystems\EzPlatformAdminUi\UI\Value\Content\Location\Mapper$locationToUILocationMapper
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
      */
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
-        DatasetFactory $datasetFactory,
         FormFactory $formFactory,
         UrlGeneratorInterface $urlGenerator,
         PermissionResolver $permissionResolver,
         EventDispatcherInterface $eventDispatcher,
         SearchService $searchService,
         RequestStack $requestStack,
-        PagerLocationToDataMapper $pagerLocationToDataMapper,
-        int $defaultPaginationLimit
+        Mapper $locationToUILocationMapper,
+        ConfigResolverInterface $configResolver
     ) {
         parent::__construct($twig, $translator, $eventDispatcher);
 
-        $this->datasetFactory = $datasetFactory;
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
         $this->permissionResolver = $permissionResolver;
         $this->requestStack = $requestStack;
-        $this->defaultPaginationLimit = $defaultPaginationLimit;
+        $this->configResolver = $configResolver;
         $this->searchService = $searchService;
-        $this->pagerLocationToDataMapper = $pagerLocationToDataMapper;
+        $this->locationToUILocationMapper = $locationToUILocationMapper;
     }
 
     /**
@@ -144,6 +139,7 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         $contentInfo = $versionInfo->getContentInfo();
         $locations = [];
         $pagination = null;
+        $defaultPaginationLimit = $this->configResolver->getParameter('pagination.location_limit');
 
         if ($contentInfo->published) {
             $currentPage = $this->requestStack->getCurrentRequest()->query->getInt(
@@ -161,9 +157,13 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
                 )
             );
 
-            $pagination->setMaxPerPage($this->defaultPaginationLimit);
-            $pagination->setCurrentPage(min(max($currentPage, 1), $pagination->getNbPages()));
-            $locations = $this->pagerLocationToDataMapper->map($pagination);
+            $pagination->setMaxPerPage($defaultPaginationLimit);
+            $pagination->setCurrentPage(max($currentPage, 1));
+            $locationsArray = [];
+            foreach ($pagination as $location) {
+                $locationsArray[] = $location;
+            }
+            $locations = $this->locationToUILocationMapper->map($locationsArray);
         }
 
         $formLocationAdd = $this->createLocationAddForm($location);
@@ -190,7 +190,7 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         $viewParameters = [
             'pager' => $pagination,
             'pager_options' => [
-                'pageParameter' => '[' . self::PAGINATION_PARAM_NAME . ']',
+                'pageParameter' => sprintf('[%s]', self::PAGINATION_PARAM_NAME),
             ],
             'locations' => $locations,
             'form_content_location_add' => $formLocationAdd->createView(),

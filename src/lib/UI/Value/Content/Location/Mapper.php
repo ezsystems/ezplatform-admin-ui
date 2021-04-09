@@ -6,13 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
+namespace EzSystems\EzPlatformAdminUi\UI\Value\Content\Location;
 
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 use EzSystems\EzPlatformAdminUi\UI\Value;
-use Pagerfanta\Pagerfanta;
 
-final class PagerLocationToDataMapper
+final class Mapper
 {
     /** @var \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory */
     private $valueFactory;
@@ -24,15 +23,12 @@ final class PagerLocationToDataMapper
     }
 
     /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $locations
+     *
      * @return Value\Content\Location[]
      */
-    public function map(Pagerfanta $pager): array
+    public function map(array $locations): array
     {
-        $locations = [];
-        foreach ($pager as $location) {
-            $locations[] = $location;
-        }
-
         $data = array_map(
             [$this->valueFactory, 'createLocation'],
             $locations
