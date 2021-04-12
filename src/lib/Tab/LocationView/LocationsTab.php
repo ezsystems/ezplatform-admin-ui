@@ -159,10 +159,7 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
 
             $pagination->setMaxPerPage($defaultPaginationLimit);
             $pagination->setCurrentPage(max($currentPage, 1));
-            $locationsArray = [];
-            foreach ($pagination as $location) {
-                $locationsArray[] = $location;
-            }
+            $locationsArray = iterator_to_array($pagination);
             $locations = $this->locationToUILocationMapper->map($locationsArray);
         }
 
