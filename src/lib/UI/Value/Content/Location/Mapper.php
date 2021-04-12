@@ -44,12 +44,11 @@ final class Mapper
      */
     private function prioritizeMainLocation(array $locations): array
     {
-        foreach ($locations as $key => $location) {
-            if ($location->main) {
-                unset($locations[$key]);
-                array_unshift($locations, $location);
-                break;
-            }
+        $key = array_search(true, array_column($locations, 'main'));
+        if ($key !== false) {
+            $location = $locations[$key];
+            unset($locations[$key]);
+            array_unshift($locations, $location);
         }
 
         return $locations;
