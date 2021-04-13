@@ -23,14 +23,13 @@
         outline: none;
 
         .ez-icon {
-            fill: $ibexa-color-base-light;
             transition: fill 0.3s $ibexa-admin-transition;
         }
 
         &:hover,
         &:focus {
             .ez-icon {
-                fill: $ibexa-white;
+                fill: $ibexa-color-base-dark;
             }
         }
     }
