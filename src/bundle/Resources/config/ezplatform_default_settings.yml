@@ -24,6 +24,7 @@ parameters:
     ezsettings.default.pagination.notification_limit: 5
     ezsettings.admin_group.pagination.user_settings_limit: 10
     ezsettings.default.pagination.content_draft_limit: 10
+    ezsettings.default.pagination.location_limit: 10
 
     # Security
     ezsettings.default.security.token_interval_spec: PT1H
