@@ -63,6 +63,8 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Service\:
         resource: '../../../lib/UI/Service'
 
+    EzSystems\EzPlatformAdminUi\UI\Value\Content\Location\Mapper: ~
+
     EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory:
         lazy: true
         tags:
