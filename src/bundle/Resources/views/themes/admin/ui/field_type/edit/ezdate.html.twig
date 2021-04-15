@@ -7,7 +7,7 @@
             </svg>
         </button>
     </div>
-    {% set action_type = app.request.attributes.get('_route') is same as('ezplatform.content.draft.edit') ? 'edit' : 'create' %}
+    {% set action_type = isEditView ? 'edit' : 'create' %}
     {% set attr = attr|merge({'class': 'ez-data-source__input', 'hidden': 'hidden', 'data-action-type': action_type}) %}
     {{ block('form_widget') }}
 {% endblock %}
