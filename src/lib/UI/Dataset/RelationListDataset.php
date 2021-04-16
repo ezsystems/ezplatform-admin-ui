@@ -54,6 +54,10 @@ final class RelationListDataset
             $this->contentService->loadRelations($versionInfo)
         );
 
+        $this->relations = array_filter($this->relations, function (Relation $relation) {
+            return $relation->sourceFieldDefinitionIdentifier !== null;
+        });
+
         return $this;
     }
 

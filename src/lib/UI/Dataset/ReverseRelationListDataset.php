@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\RelationList\Item\RelationListItem;
 use eZ\Publish\API\Repository\Values\Content\RelationList\RelationListItemInterface;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
@@ -54,6 +55,10 @@ final class ReverseRelationListDataset
             $offset,
             $limit
         )->items;
+
+        $reverseRelationListItems = array_filter($reverseRelationListItems, function (RelationListItem $relation) {
+            return $relation->getRelation()->sourceFieldDefinitionIdentifier !== null;
+        });
 
         $this->reverseRelations = array_map(
             function (RelationListItemInterface $relationListItem) use ($content) {
