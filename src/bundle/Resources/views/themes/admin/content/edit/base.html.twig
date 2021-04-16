@@ -26,8 +26,9 @@
                     {% if grouped_fields is defined and grouped_fields|length > 1 %}
                         <ul class="nav nav-tabs ez-nav-tabs--content-edit ez-tabs" role="tablist">
                             {% for key, group in grouped_fields %}
-                                <li role="presentation" class="nav-item ez-tabs__nav-item" id="item-{{ key }}">
-                                    <a href="#{{ key }}" class="nav-link {{ loop.first ? 'active' }}" role="tab" data-toggle="tab">
+                                {% set sanitized_key = key|slug %}
+                                <li role="presentation" class="nav-item ez-tabs__nav-item" id="item-{{ sanitized_key }}">
+                                    <a href="#{{ sanitized_key }}" class="nav-link {{ loop.first ? 'active' }}" role="tab" data-toggle="tab">
                                         {{ key|capitalize }}
                                     </a>
                                     {% include '@ezdesign/ui/component/warning_icon.html.twig' %}
@@ -37,7 +38,8 @@
 
                         <div class="tab-content px-3">
                             {% for key, group in grouped_fields %}
-                                <div role="tabpanel" class="tab-pane {{ loop.first ? 'active' }}" id="{{ key }}">
+                                {% set sanitized_key = key|slug %}
+                                <div role="tabpanel" class="tab-pane {{ loop.first ? 'active' }}" id="{{ sanitized_key }}">
                                     {% for field in group %}
                                         {% set formField = form.fieldsData[field] %}
                                         
