@@ -14,32 +14,26 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use JMS\TranslationBundle\Model\Message;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class UserMenuListener implements EventSubscriberInterface, TranslationContainerInterface
+/**
+ * @internal
+ */
+final class UserMenuListener implements EventSubscriberInterface, TranslationContainerInterface
 {
     public const ITEM_CHANGE_PASSWORD = 'user__change_password';
 
     /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
     private $tokenStorage;
 
-    /**
-     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
-     */
     public function __construct(TokenStorageInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
     }
 
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents(): array
     {
         return [ConfigureMenuEvent::USER_MENU => 'onUserMenuConfigure'];
     }
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent $event
-     */
     public function onUserMenuConfigure(ConfigureMenuEvent $event): void
     {
         $menu = $event->getMenu();
