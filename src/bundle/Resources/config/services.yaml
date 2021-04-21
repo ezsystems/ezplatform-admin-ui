@@ -71,7 +71,7 @@ services:
         tags:
             - { name: form.type }
 
-    EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
+    EzSystems\EzPlatformAdminUi\Form\SubmitHandler:
         decorates: EzSystems\EzPlatformUser\Form\BaseSubmitHandler
 
     EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler: ~
