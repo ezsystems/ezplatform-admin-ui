@@ -45,9 +45,11 @@ class ContentHaveUniqueRelation extends AbstractSpecification
 
         foreach ($relations as $relation) {
             if (Relation::ASSET === $relation->type) {
-                $relationsFromAssetSide = $this->contentService->loadReverseRelations($relation->destinationContentInfo);
+                $relationsFromAssetSide = $this->contentService->countReverseRelations(
+                    $relation->destinationContentInfo
+                );
 
-                if (count($relationsFromAssetSide) > 1) {
+                if ($relationsFromAssetSide > 1) {
                     return false;
                 }
             }
