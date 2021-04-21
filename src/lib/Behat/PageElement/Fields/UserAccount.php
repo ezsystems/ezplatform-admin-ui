@@ -35,7 +35,7 @@ class UserAccount extends EzFieldElement
         $this->setEnabledField(true);
     }
 
-    private function setEnabledField(bool $enabled)
+    public function setEnabledField(bool $enabled)
     {
         $fieldInput = $this->context->findElement(
             sprintf('%s %s', $this->fields['fieldContainer'], $this->fields['buttonEnabled']));
