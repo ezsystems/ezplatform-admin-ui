@@ -52,7 +52,6 @@ class EzPlatformAdminUiBundle extends Bundle
         $container->addCompilerPass(new LimitationFormMapperPass());
         $container->addCompilerPass(new LimitationValueMapperPass());
         $container->addCompilerPass(new FieldTypeFormMapperDispatcherPass());
-        $container->addCompilerPass(new UserBundlePass());
     }
 
     /**
