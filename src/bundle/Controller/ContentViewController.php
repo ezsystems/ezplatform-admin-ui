@@ -513,13 +513,14 @@ class ContentViewController extends Controller
     private function supplyContentReverseRelations(ContentView $view): void
     {
         $contentInfo = $view->getLocation()->getContentInfo();
-        $relations = $this->permissionResolver->sudo(
-            function (Repository $repository) use ($contentInfo) {
-                return $repository->getContentService()->loadReverseRelations($contentInfo);
+
+        $hasReverseRelations = $this->permissionResolver->sudo(
+            static function (Repository $repository) use ($contentInfo): bool {
+                return $repository->getContentService()->countReverseRelations($contentInfo) > 0;
             },
             $this->repository
         );
 
-        $view->addParameters(['content_has_reverse_relations' => \count($relations) > 0]);
+        $view->addParameters(['content_has_reverse_relations' => $hasReverseRelations]);
     }
 }
