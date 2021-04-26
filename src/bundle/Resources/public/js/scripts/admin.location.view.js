@@ -7,6 +7,7 @@
     const sortContainer = doc.querySelector('[data-sort-field][data-sort-order]');
     const sortField = sortContainer.getAttribute('data-sort-field');
     const sortOrder = sortContainer.getAttribute('data-sort-order');
+    const contentName = doc.querySelector('.ez-sil').dataset.contentName;
     const mfuAttrs = {
         adminUiConfig: Object.assign({}, eZ.adminUiConfig, {
             token,
@@ -118,6 +119,35 @@
 
         $(SELECTOR_MODAL_BULK_ACTION_FAIL).modal('show');
     };
+    const refreshTrashModal = (event) => {
+        const { numberOfSubitems } = event.detail;
+        const sendToTrashModal = document.querySelector('.ez-modal--trash-location');
+        const modalBody = sendToTrashModal.querySelector('.modal-body');
+        const modalSendToTrashButton = sendToTrashModal.querySelector('.modal-footer .ez-modal-button--send-to-trash');
+
+        if (numberOfSubitems) {
+            const message = Translator.trans(
+                /*@Desc("Sending '%content_name%' and its %children_count% Content item(s) to Trash will also send the sub-items of this Location to Trash.")*/ 'trash_container.modal.message_main',
+                {
+                    content_name: contentName,
+                    children_count: numberOfSubitems,
+                },
+                'content'
+            );
+
+            modalBody.querySelector('.ez-modal__option-description').innerHTML = message;
+        } else {
+            const message = Translator.trans(
+                /*@Desc("Are you sure you want to send this Content item to Trash?")*/ 'trash.modal.message',
+                {},
+                'content'
+            );
+
+            modalBody.innerHTML = message;
+            modalSendToTrashButton.toggleAttribute('disabled', false);
+            modalSendToTrashButton.classList.toggle('disabled', false);
+        }
+    };
 
     listContainers.forEach((container) => {
         const subItemsList = JSON.parse(container.dataset.items).SubitemsList;
@@ -166,4 +196,5 @@
             container
         );
     });
+    doc.body.addEventListener('ez-trash-modal-refresh', refreshTrashModal, false);
 })(window, window.document, window.jQuery, window.React, window.ReactDOM, window.eZ, window.Routing, window.Translator);
