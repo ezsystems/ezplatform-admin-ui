@@ -44,7 +44,7 @@
                     {{ 'trash.form.cancel'|trans|desc('Cancel') }}
                 </button>
                 {{ form_widget(form.trash,
-                    {'attr': {'class': 'btn-danger font-weight-bold disabled', 'disabled': true}})
+                    {'attr': {'class': 'btn-danger font-weight-bold disabled ez-modal-button ez-modal-button--send-to-trash', 'disabled': true}})
                 }}
             </div>
             {{ form_end(form) }}
