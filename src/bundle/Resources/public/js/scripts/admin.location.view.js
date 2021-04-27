@@ -144,8 +144,8 @@
             );
 
             modalBody.innerHTML = message;
-            modalSendToTrashButton.toggleAttribute('disabled', false);
-            modalSendToTrashButton.classList.toggle('disabled', false);
+            modalSendToTrashButton.removeAttribute('disabled');
+            modalSendToTrashButton.classList.remove('disabled');
         }
     };
 
