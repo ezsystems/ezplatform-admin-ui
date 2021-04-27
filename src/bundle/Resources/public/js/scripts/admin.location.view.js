@@ -7,7 +7,6 @@
     const sortContainer = doc.querySelector('[data-sort-field][data-sort-order]');
     const sortField = sortContainer.getAttribute('data-sort-field');
     const sortOrder = sortContainer.getAttribute('data-sort-order');
-    const contentName = doc.querySelector('.ez-sil').dataset.contentName;
     const mfuAttrs = {
         adminUiConfig: Object.assign({}, eZ.adminUiConfig, {
             token,
@@ -124,6 +123,7 @@
         const sendToTrashModal = document.querySelector('.ez-modal--trash-location');
         const modalBody = sendToTrashModal.querySelector('.modal-body');
         const modalSendToTrashButton = sendToTrashModal.querySelector('.modal-footer .ez-modal-button--send-to-trash');
+        const { contentName } = sendToTrashModal.dataset;
 
         if (numberOfSubitems) {
             const message = Translator.trans(

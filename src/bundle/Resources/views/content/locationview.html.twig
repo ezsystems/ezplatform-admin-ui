@@ -84,7 +84,6 @@
                                 <h2 class="ez-fieldgroup__name">{{ 'content.view.subitems'|trans|desc('Sub-items') }}</h2>
                                 <div class="ez-sil"
                                     data-location="{{ location.id }}"
-                                    data-content-name="{{ content.name }}"
                                     data-mfu-create-permissions-config="{{ subitems_module.content_create_permissions_for_mfu|json_encode() }}"
                                     data-items="{{ subitems_module.items }}"
                                     data-content-types="{{ subitems_module.content_type_info_list }}"
@@ -113,7 +112,10 @@
                 </div>
             </div>
             {%  if form_location_trash is defined and form_user_delete is not defined %}
-                {% include '@ezdesign/content/modal_location_trash.html.twig' with {'form': form_location_trash} only %}
+                {% include '@ezdesign/content/modal_location_trash.html.twig' with {
+                    'form': form_location_trash,
+                    'content_name': ez_content_name(content)
+                } only %}
             {% endif %}
             {%  if form_user_delete is defined %}
                 {% include '@ezdesign/content/modal_user_delete.html.twig' with {'form': form_user_delete} only %}
