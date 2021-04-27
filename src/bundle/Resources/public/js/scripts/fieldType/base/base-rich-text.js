@@ -1,5 +1,7 @@
 (function(global) {
     const eZ = (global.eZ = global.eZ || {});
+    const TABLE_TAG_NAME = 'table';
+    const SVG_TAG_NAME = 'svg';
     const HTML_NODE = 1;
     const TEXT_NODE = 3;
     const notInitializeElements = ['strong', 'em', 'u', 'sup', 'sub', 's'];
@@ -170,8 +172,14 @@
 
         clearAnchor(element) {
             const icon = element.querySelector('.ez-icon--anchor');
+            const elementPreviousSibling = element.previousSibling;
+            const isTableWithAnchor =
+                element.tagName.toLowerCase() === TABLE_TAG_NAME &&
+                elementPreviousSibling.tagName.toLowerCase() === SVG_TAG_NAME;
 
-            if (icon) {
+            if (isTableWithAnchor) {
+                elementPreviousSibling.remove();
+            } else if (icon) {
                 icon.remove();
             } else {
                 element.classList.remove('ez-has-anchor');
