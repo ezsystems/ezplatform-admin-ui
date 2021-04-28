@@ -6,6 +6,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\UI\Module\ContentTree\NodeFactory:
         arguments:
+            $contentService: '@ezpublish.api.service.content'
             $translationHelper: '@ezpublish.translation_helper'
             $configResolver: '@ezpublish.config.resolver'
 
