@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Module\ContentTree;
 
+use ArrayObject;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
 use eZ\Publish\API\Repository\SearchService;
@@ -45,12 +46,6 @@ final class NodeFactory
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo[] */
-    private $contentInfoList;
-
-    /** @var \eZ\Publish\API\Repository\Values\Content\Content[] */
-    private $contentByIds = [];
-
     public function __construct(
         ContentService $contentService,
         SearchService $searchService,
@@ -76,12 +71,10 @@ final class NodeFactory
         ?string $sortClause = null,
         string $sortOrder = Query::SORT_ASC
     ): Node {
-        $node = $this->buildNode($location, $loadSubtreeRequestNode, $loadChildren, $depth, $sortClause, $sortOrder);
-        $contentList = $this->contentService->loadContentListByContentInfo($this->contentInfoList);
-        foreach ($contentList as $content) {
-            $this->contentByIds[$content->id] = $content;
-        }
-        $this->supplyTranslatedContentName($node);
+        $contentInfoList = new ArrayObject();
+        $node = $this->buildNode($location, $loadSubtreeRequestNode, $loadChildren, $depth, $sortClause, $sortOrder, $contentInfoList);
+        $contentById = $this->contentService->loadContentListByContentInfo((array) $contentInfoList);
+        $this->supplyTranslatedContentName($node, $contentById);
 
         return $node;
     }
@@ -231,6 +224,8 @@ final class NodeFactory
     }
 
     /**
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo[] $contentInfoList
+     *
      * @return \EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
@@ -243,12 +238,13 @@ final class NodeFactory
         bool $loadChildren = false,
         int $depth = 0,
         ?string $sortClause = null,
-        string $sortOrder = Query::SORT_ASC
+        string $sortOrder = Query::SORT_ASC,
+        ArrayObject $contentInfoList = null
     ): Node {
         $contentInfo = $location->getContentInfo();
         $contentId = $location->contentId;
         if (!isset($this->contentInfoList[$contentId])) {
-            $this->contentInfoList[$contentId] = $contentInfo;
+            $contentInfoList[$contentId] = $contentInfo;
         }
 
         // Top Level Location (id = 1) does not have a Content Type
@@ -276,7 +272,10 @@ final class NodeFactory
                     $childLocation,
                     $childLoadSubtreeRequestNode,
                     null !== $childLoadSubtreeRequestNode,
-                    $depth + 1
+                    $depth + 1,
+                    null,
+                    Query::SORT_ASC,
+                    $contentInfoList
                 );
             }
         } else {
@@ -302,12 +301,13 @@ final class NodeFactory
 
     /**
      * @param \EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node $node
+     * @param \eZ\Publish\API\Repository\Values\Content\Content[] $contentById
      */
-    private function supplyTranslatedContentName(Node $node): void
+    private function supplyTranslatedContentName(Node $node, array $contentById): void
     {
-        $node->name = $this->translationHelper->getTranslatedContentName($this->contentByIds[$node->contentId]);
+        $node->name = $this->translationHelper->getTranslatedContentName($contentById[$node->contentId]);
         foreach ($node->children as $child) {
-            $this->supplyTranslatedContentName($child);
+            $this->supplyTranslatedContentName($child, $contentById);
         }
     }
 }
