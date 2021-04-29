@@ -71,9 +71,9 @@ final class NodeFactory
         ?string $sortClause = null,
         string $sortOrder = Query::SORT_ASC
     ): Node {
-        $contentInfoList = new ArrayObject();
-        $node = $this->buildNode($location, $contentInfoList, $loadSubtreeRequestNode, $loadChildren, $depth, $sortClause, $sortOrder);
-        $contentById = $this->contentService->loadContentListByContentInfo((array) $contentInfoList);
+        $uninitializedContentInfoList = [];
+        $node = $this->buildNode($location, $uninitializedContentInfoList, $loadSubtreeRequestNode, $loadChildren, $depth, $sortClause, $sortOrder);
+        $contentById = $this->contentService->loadContentListByContentInfo($uninitializedContentInfoList);
         $this->supplyTranslatedContentName($node, $contentById);
 
         return $node;
@@ -224,7 +224,7 @@ final class NodeFactory
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo[] $contentInfoList
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo[] $uninitializedContentInfoList
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
@@ -232,7 +232,7 @@ final class NodeFactory
      */
     private function buildNode(
         Location $location,
-        ArrayObject $contentInfoList,
+        array &$uninitializedContentInfoList,
         ?LoadSubtreeRequestNode $loadSubtreeRequestNode = null,
         bool $loadChildren = false,
         int $depth = 0,
@@ -241,8 +241,8 @@ final class NodeFactory
     ): Node {
         $contentInfo = $location->getContentInfo();
         $contentId = $location->contentId;
-        if (!isset($this->contentInfoList[$contentId])) {
-            $contentInfoList[$contentId] = $contentInfo;
+        if (!isset($uninitializedContentInfoList[$contentId])) {
+            $uninitializedContentInfoList[$contentId] = $contentInfo;
         }
 
         // Top Level Location (id = 1) does not have a Content Type
@@ -268,7 +268,7 @@ final class NodeFactory
 
                 $children[] = $this->buildNode(
                     $childLocation,
-                    $contentInfoList,
+                    $uninitializedContentInfoList,
                     $childLoadSubtreeRequestNode,
                     null !== $childLoadSubtreeRequestNode,
                     $depth + 1,
