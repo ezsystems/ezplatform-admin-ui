@@ -43,7 +43,7 @@
             this.options = {
                 ...defaultOptions,
                 animation: {
-                    onComplete: (animation) => this.onCompleteAnimationCallback(animation),
+                    onComplete: this.onCompleteAnimationCallback,
                 },
                 ...options,
             };
@@ -62,9 +62,8 @@
         updateChartMessageDisplay() {
             const chartBody = this.chart.canvas.closest('.ez-chart__body');
             const chartMessagesNode = chartBody.querySelector('.ez-chart__message');
-            const chartMessageMethod = this.chart.config.data.datasets.length ? 'add' : 'remove';
 
-            chartMessagesNode.classList[chartMessageMethod]('d-none');
+            chartMessagesNode.classList.toggle('d-none', this.chart.config.data.datasets.length);
         }
 
         updateChart() {

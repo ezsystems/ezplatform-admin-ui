@@ -20,13 +20,10 @@
                         maxRotation: 0,
                         autoSkip: false,
                         callback: (value, index, labels) => {
-                            let labelsInterval = 1;
+                            const labelsInterval = Math.max(Math.ceil(labels.length / MAX_NUMBER_OF_LABELS), 1);
+                            const shouldDisplayLabel = !(index % labelsInterval);
 
-                            if (labels.length) {
-                                labelsInterval = Math.ceil(labels.length / MAX_NUMBER_OF_LABELS);
-                            }
-
-                            return index % labelsInterval ? null : value;
+                            return shouldDisplayLabel ? value : null;
                         },
                     },
                 },
@@ -68,11 +65,7 @@
         setData(data) {
             super.setData(data);
 
-            if (this.labels.length) {
-                this.labelsInterval = Math.ceil(this.labels.length / MAX_NUMBER_OF_LABELS);
-            } else {
-                this.labelsInterval = 1;
-            }
+            this.labelsInterval = Math.max(Math.ceil(this.labels.length / MAX_NUMBER_OF_LABELS), 1);
         }
     }
 
