@@ -256,7 +256,7 @@ final class NodeFactory
             : 0;
 
         $children = [];
-        if ($depth < $this->getSetting('tree_max_depth') && $loadChildren) {
+        if ($loadChildren && $depth < $this->getSetting('tree_max_depth')) {
             $searchResult = $this->findSubitems($location, $limit, $offset, $sortClause, $sortOrder);
             $totalChildrenCount = $searchResult->totalCount;
 
