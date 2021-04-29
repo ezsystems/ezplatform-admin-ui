@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Module\ContentTree;
 
-use ArrayObject;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
 use eZ\Publish\API\Repository\SearchService;
