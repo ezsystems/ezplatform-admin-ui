@@ -36,7 +36,7 @@ const FinderLeaf = ({ location }) => {
         }
 
         setMarkedLocationId(location.id);
-        dispatchLoadedLocationsAction({ type: 'CUT_LOCATIONS', locationId: markedLocationId });
+        dispatchLoadedLocationsAction({ type: 'CUT_LOCATIONS', locationId: location.id });
         dispatchLoadedLocationsAction({ type: 'UPDATE_LOCATIONS', data: { parentLocationId: location.id, subitems: [] } });
 
         if (!multiple && !isNotSelectable) {
