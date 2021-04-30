@@ -55,7 +55,7 @@
 
         getScaleOptions() {}
 
-        getLegendOptions(chart) {}
+        getLegendOptions() {}
 
         callbackAfterRender() {}
 
