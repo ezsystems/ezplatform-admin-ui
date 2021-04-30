@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Module\ContentTree;
 
+use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -32,6 +33,9 @@ final class NodeFactory
         'ContentName' => SortClause\ContentName::class,
     ];
 
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
     /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
@@ -42,10 +46,12 @@ final class NodeFactory
     private $configResolver;
 
     public function __construct(
+        ContentService $contentService,
         SearchService $searchService,
         TranslationHelper $translationHelper,
         ConfigResolverInterface $configResolver
     ) {
+        $this->contentService = $contentService;
         $this->searchService = $searchService;
         $this->translationHelper = $translationHelper;
         $this->configResolver = $configResolver;
@@ -64,52 +70,12 @@ final class NodeFactory
         ?string $sortClause = null,
         string $sortOrder = Query::SORT_ASC
     ): Node {
-        $content = $location->getContent();
+        $uninitializedContentInfoList = [];
+        $node = $this->buildNode($location, $uninitializedContentInfoList, $loadSubtreeRequestNode, $loadChildren, $depth, $sortClause, $sortOrder);
+        $contentById = $this->contentService->loadContentListByContentInfo($uninitializedContentInfoList);
+        $this->supplyTranslatedContentName($node, $contentById);
 
-        // Top Level Location (id = 1) does not have a Content Type
-        $contentType = $location->depth > 0
-            ? $content->getContentType()
-            : null;
-
-        $limit = $this->resolveLoadLimit($loadSubtreeRequestNode);
-        $offset = null !== $loadSubtreeRequestNode
-            ? $loadSubtreeRequestNode->offset
-            : 0;
-
-        $children = [];
-        if ($depth < $this->getSetting('tree_max_depth') && $loadChildren) {
-            $searchResult = $this->findSubitems($location, $limit, $offset, $sortClause, $sortOrder);
-            $totalChildrenCount = $searchResult->totalCount;
-
-            /** @var \eZ\Publish\API\Repository\Values\Content\Location $childLocation */
-            foreach (array_column($searchResult->searchHits, 'valueObject') as $childLocation) {
-                $childLoadSubtreeRequestNode = null !== $loadSubtreeRequestNode
-                    ? $this->findChild($childLocation->id, $loadSubtreeRequestNode)
-                    : null;
-
-                $children[] = $this->createNode(
-                    $childLocation,
-                    $childLoadSubtreeRequestNode,
-                    null !== $childLoadSubtreeRequestNode,
-                    $depth + 1
-                );
-            }
-        } else {
-            $totalChildrenCount = $this->countSubitems($location);
-        }
-
-        return new Node(
-            $depth,
-            $location->id,
-            $location->contentId,
-            $this->translationHelper->getTranslatedContentName($content),
-            $contentType ? $contentType->identifier : '',
-            $contentType ? $contentType->isContainer : true,
-            $location->invisible || $location->hidden,
-            $limit,
-            $totalChildrenCount,
-            $children
-        );
+        return $node;
     }
 
     /**
@@ -253,6 +219,91 @@ final class NodeFactory
             return $parentLocation->getSortClauses();
         } catch (NotImplementedException $e) {
             return []; // rely on storage engine default sorting
+        }
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo[] $uninitializedContentInfoList
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     */
+    private function buildNode(
+        Location $location,
+        array &$uninitializedContentInfoList,
+        ?LoadSubtreeRequestNode $loadSubtreeRequestNode = null,
+        bool $loadChildren = false,
+        int $depth = 0,
+        ?string $sortClause = null,
+        string $sortOrder = Query::SORT_ASC
+    ): Node {
+        $contentInfo = $location->getContentInfo();
+        $contentId = $location->contentId;
+        if (!isset($uninitializedContentInfoList[$contentId])) {
+            $uninitializedContentInfoList[$contentId] = $contentInfo;
+        }
+
+        // Top Level Location (id = 1) does not have a Content Type
+        $contentType = $location->depth > 0
+            ? $contentInfo->getContentType()
+            : null;
+
+        $limit = $this->resolveLoadLimit($loadSubtreeRequestNode);
+        $offset = null !== $loadSubtreeRequestNode
+            ? $loadSubtreeRequestNode->offset
+            : 0;
+
+        $children = [];
+        if ($loadChildren && $depth < $this->getSetting('tree_max_depth')) {
+            $searchResult = $this->findSubitems($location, $limit, $offset, $sortClause, $sortOrder);
+            $totalChildrenCount = $searchResult->totalCount;
+
+            /** @var \eZ\Publish\API\Repository\Values\Content\Location $childLocation */
+            foreach (array_column($searchResult->searchHits, 'valueObject') as $childLocation) {
+                $childLoadSubtreeRequestNode = null !== $loadSubtreeRequestNode
+                    ? $this->findChild($childLocation->id, $loadSubtreeRequestNode)
+                    : null;
+
+                $children[] = $this->buildNode(
+                    $childLocation,
+                    $uninitializedContentInfoList,
+                    $childLoadSubtreeRequestNode,
+                    null !== $childLoadSubtreeRequestNode,
+                    $depth + 1,
+                    null,
+                    Query::SORT_ASC
+                );
+            }
+        } else {
+            $totalChildrenCount = 0;
+            if ($contentType && $contentType->isContainer) {
+                $totalChildrenCount = $this->countSubitems($location);
+            }
+        }
+
+        return new Node(
+            $depth,
+            $location->id,
+            $location->contentId,
+            '', // node name will be provided later by `supplyTranslatedContentName` method
+            $contentType ? $contentType->identifier : '',
+            $contentType ? $contentType->isContainer : true,
+            $location->invisible || $location->hidden,
+            $limit,
+            $totalChildrenCount,
+            $children
+        );
+    }
+
+    /**
+     * @param \eZ\Publish\API\Repository\Values\Content\Content[] $contentById
+     */
+    private function supplyTranslatedContentName(Node $node, array $contentById): void
+    {
+        $node->name = $this->translationHelper->getTranslatedContentName($contentById[$node->contentId]);
+        foreach ($node->children as $child) {
+            $this->supplyTranslatedContentName($child, $contentById);
         }
     }
 }
