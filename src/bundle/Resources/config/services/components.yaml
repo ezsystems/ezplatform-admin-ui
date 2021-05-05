@@ -36,5 +36,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\Component\Renderer\DefaultRenderer:
         public: false
+        calls:
+            - setRenderer: ['@EzSystems\EzPlatformAdminUi\Component\Renderer\RendererInterface']
 
     EzSystems\EzPlatformAdminUi\Component\Renderer\RendererInterface: '@EzSystems\EzPlatformAdminUi\Component\Renderer\DefaultRenderer'
