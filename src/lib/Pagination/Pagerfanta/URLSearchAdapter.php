@@ -56,6 +56,7 @@ class URLSearchAdapter implements AdapterInterface
         $query = clone $this->query;
         $query->offset = $offset;
         $query->limit = $length;
+        $query->performCount = false;
 
         return $this->urlService->findUrls($query)->items;
     }
