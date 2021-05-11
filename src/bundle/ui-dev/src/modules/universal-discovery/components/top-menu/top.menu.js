@@ -21,12 +21,12 @@ const TopMenu = ({ actionsDisabledMap }) => {
         <div className="c-top-menu">
             <span className="c-top-menu__cancel-btn-wrapper">
                 <button
-                    className="c-top-menu__cancel-btn btn btn-icon"
+                    className="c-top-menu__cancel-btn btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     type="button"
                     onClick={cancelUDW}
                     title={backTitle}
                     data-tooltip-container-selector=".c-top-menu__cancel-btn-wrapper">
-                    <Icon name="caret-back" extraClasses="ez-icon--secondary ez-icon--small" />
+                    <Icon name="caret-back" extraClasses="ez-icon--small" />
                 </button>
             </span>
             <span className="c-top-menu__title-wrapper">{title}</span>

@@ -24,7 +24,7 @@ class SearchPage extends Page
         $this->pageTitleLocator = '.ez-page-title .ez-page-title__content-name';
         $this->fields = [
             'inputField' => '.ez-search-form #search_query',
-            'buttonSearch' => '.ez-btn--search',
+            'buttonSearch' => '.ibexa-btn--search',
         ];
     }
 

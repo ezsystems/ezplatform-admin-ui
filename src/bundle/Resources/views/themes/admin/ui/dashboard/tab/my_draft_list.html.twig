@@ -33,7 +33,7 @@
                         <td class="ez-table__cell">{{ row.versionInfo.versionNo }}</td>
                         <td class="ez-table__cell">{{ row.versionInfo.modificationDate|ez_full_datetime }}</td>
                         <td class="ez-table__cell ez-table__cell--has-action-btns">
-                            <button class="btn btn-icon mx-2 ez-btn--content-draft-edit"
+                            <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--content-draft-edit"
                                     title="{{ 'dashboard.table.draft.edit'|trans|desc('Edit Draft') }}"
                                     data-content-draft-edit-url="{{ path(content_draft_edit_url, {
                                         'contentId': row.versionInfo.contentInfo.id,
@@ -47,7 +47,7 @@
                                     }) }}"
                                     data-content-id="{{ row.versionInfo.contentInfo.id }}"
                                     data-language-code="{{ row.versionInfo.initialLanguageCode }}">
-                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
+                                <svg class="ez-icon ez-icon--small ez-icon-edit">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </button>

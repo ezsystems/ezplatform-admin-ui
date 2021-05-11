@@ -1,5 +1,5 @@
 (function(global, doc, eZ) {
-    const SELECTOR_REMOVE_AUTHOR = '.ez-btn--remove-author';
+    const SELECTOR_REMOVE_AUTHOR = '.ibexa-btn--remove-author';
     const SELECTOR_AUTHOR = '.ez-data-source__author';
     const SELECTOR_FIELD = '.ez-field-edit--ezauthor';
     const SELECTOR_LABEL = '.ez-data-source__label';
@@ -216,7 +216,7 @@
             },
             {
                 isValueValidator: false,
-                selector: '.ez-btn--add-author',
+                selector: '.ibexa-btn--add-author',
                 eventName: 'click',
                 callback: 'addItem',
             },

@@ -68,7 +68,7 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
                 self::ITEM__UPDATE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => '#user_password_change_change',
                     ],
                     'extras' => ['icon' => 'publish'],

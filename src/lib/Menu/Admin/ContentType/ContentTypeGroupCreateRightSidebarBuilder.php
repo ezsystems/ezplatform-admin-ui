@@ -68,7 +68,7 @@ class ContentTypeGroupCreateRightSidebarBuilder extends AbstractBuilder implemen
                 self::ITEM__CREATE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => '#content_type_group_create_create',
                     ],
                     'extras' => ['icon' => 'publish'],

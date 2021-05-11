@@ -40,7 +40,7 @@
         });
     };
 
-    doc.querySelector('.ez-btn--select-subtree').addEventListener('click', selectSubtree, false);
+    doc.querySelector('.ibexa-btn--select-subtree').addEventListener('click', selectSubtree, false);
     limitationsRadio.forEach((radio) => radio.addEventListener('change', toggleDisabledState, false));
 
     const addContentToInput = (selectBtn, selectedItems) => {

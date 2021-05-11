@@ -80,7 +80,7 @@ const Filters = ({ isCollapsed, search }) => {
         }
 
         return (
-            <button className="btn btn-secondary ez-btn--udw-select-location" type="button" onClick={openUdw}>
+            <button className="btn ibexa-btn ibexa-btn--secondary ibexa-btn--udw-select-location" type="button" onClick={openUdw}>
                 Select content
             </button>
         );
@@ -144,10 +144,10 @@ const Filters = ({ isCollapsed, search }) => {
                 </div>
             </div>
             <div className="ez-filters__btns">
-                <button type="submit" className="btn btn-primary ez-btn-apply" onClick={makeSearch} disabled={!isApplyButtonEnabled}>
+                <button type="submit" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--apply" onClick={makeSearch} disabled={!isApplyButtonEnabled}>
                     {applyLabel}
                 </button>
-                <button className="ez-btn ez-btn--no-border" onClick={clearFilters}>
+                <button className="btn ibexa-btn ibexa-btn--ghost" onClick={clearFilters}>
                     {clearLabel}
                 </button>
             </div>

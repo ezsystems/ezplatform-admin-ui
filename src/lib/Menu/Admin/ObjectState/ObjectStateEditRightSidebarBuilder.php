@@ -57,7 +57,7 @@ class ObjectStateEditRightSidebarBuilder extends AbstractBuilder implements Tran
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#%s', $saveId),
                     ],
                     'extras' => ['icon' => 'save'],

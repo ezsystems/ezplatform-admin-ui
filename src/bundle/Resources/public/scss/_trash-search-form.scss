@@ -73,12 +73,12 @@
     }
 
     &__input {
-        &:disabled + .ez-btn--reset-creator {
+        &:disabled + .ibexa-btn--reset-creator {
             display: block;
         }
     }
 
-    .ez-btn--reset-creator {
+    .ibexa-btn--reset-creator {
         display: none;
         position: absolute;
         right: calculateRem(5px);

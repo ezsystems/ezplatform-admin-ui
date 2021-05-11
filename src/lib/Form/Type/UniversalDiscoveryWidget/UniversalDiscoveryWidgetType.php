@@ -60,7 +60,7 @@ class UniversalDiscoveryWidgetType extends AbstractType
             $selectContentButtonView->vars['attr']['class'] = '';
         }
 
-        $selectContentButtonView->vars['attr']['class'] = trim($selectContentButtonView->vars['attr']['class'] . ' btn--open-udw');
+        $selectContentButtonView->vars['attr']['class'] = trim($selectContentButtonView->vars['attr']['class'] . ' ibexa-btn--open-udw');
     }
 
     public function configureOptions(OptionsResolver $resolver)

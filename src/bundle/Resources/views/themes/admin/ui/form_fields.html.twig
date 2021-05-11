@@ -91,7 +91,7 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore'|trans({},'trash')|desc('Restore') }}">
-        <svg class="ez-icon">
+        <svg class="ez-icon ez-icon--small">
             <use xlink:href="{{ ez_icon_path('restore') }}"></use>
         </svg>
         {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
@@ -111,7 +111,7 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore_new_location'|trans({},'trash')|desc("Restore in a new Location") }}">
-        <svg class="ez-icon">
+        <svg class="ez-icon ez-icon--small">
             <use xlink:href="{{ ez_icon_path('restore-parent') }}"></use>
         </svg>
         {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
@@ -136,7 +136,7 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{ title|default('') }}">
-        <svg class="ez-icon">
+        <svg class="ez-icon ez-icon--small">
             <use xlink:href="{{ ez_icon_path(icon|default('')) }}"></use>
         </svg>
     </button>

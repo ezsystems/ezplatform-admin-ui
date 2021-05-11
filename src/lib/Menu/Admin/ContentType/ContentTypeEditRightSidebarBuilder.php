@@ -72,7 +72,7 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['publishContentType']->vars['id']),
                     ],
                     'extras' => ['icon' => 'save'],
@@ -82,7 +82,7 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                 self::ITEM__CANCEL,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['removeDraft']->vars['id']),
                     ],
                     'extras' => ['icon' => 'circle-close'],

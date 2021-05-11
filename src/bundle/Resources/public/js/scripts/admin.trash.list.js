@@ -14,10 +14,10 @@
     const sortDirection = doc.querySelector('#trash_search_sort_direction');
     const creatorInput = doc.querySelector('.ez-trash-search-form__item--creator .ez-trash-search-form__input');
     const usersList = doc.querySelector('.ez-trash-search-form__item--creator .ez-trash-search-form__user-list');
-    const resetCreatorBtn = doc.querySelector('.ez-btn--reset-creator');
+    const resetCreatorBtn = doc.querySelector('.ibexa-btn--reset-creator');
     const searchCreatorInput = doc.querySelector('#trash_search_creator');
     const sortableColumns = doc.querySelectorAll('.ez-table__sort-column');
-    const btns = doc.querySelectorAll('.btn--open-udw');
+    const btns = doc.querySelectorAll('.ibexa-btn--open-udw');
     const udwContainer = doc.getElementById('react-udw');
     const autoSendNodes = doc.querySelectorAll('.ez-trash-search-form__item--auto-send');
     const errorMessage = Translator.trans(/*@Desc("Cannot fetch user list")*/ 'trash.user_list.error', {}, 'trash_ui');

@@ -56,7 +56,7 @@ class PolicyCreateRightSidebarBuilder extends AbstractBuilder implements Transla
                 self::ITEM__CREATE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => '#policy_create_save',
                     ],
                     'extras' => ['icon' => 'publish'],

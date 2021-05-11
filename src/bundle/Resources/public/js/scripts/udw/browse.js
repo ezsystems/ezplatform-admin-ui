@@ -1,5 +1,5 @@
 (function(global, doc, eZ, React, ReactDOM, Translator, Routing) {
-    const btns = doc.querySelectorAll('.btn--udw-browse');
+    const btns = doc.querySelectorAll('.ibexa-btn--udw-browse');
     const udwContainer = doc.getElementById('react-udw');
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {

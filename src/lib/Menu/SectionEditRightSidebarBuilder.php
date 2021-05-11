@@ -70,7 +70,7 @@ class SectionEditRightSidebarBuilder extends AbstractBuilder implements Translat
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#update-section-%d_update', $section->id),
                     ],
                     'extras' => ['icon' => 'save'],

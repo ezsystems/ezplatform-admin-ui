@@ -51,7 +51,7 @@ class URLEditRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#url-update', $url->id),
                     ],
                     'extras' => ['icon' => 'save'],

@@ -10,7 +10,7 @@
                     'placeholder': 'url.search.placeholder'|trans,
                 }}) }}
 
-                <button class="btn btn-primary ml-2">
+                <button class="btn ibexa-btn ibexa-btn--primary ml-2">
                     {{ 'url.search'|trans|desc("Search") }}
                 </button>
             </div>
@@ -57,8 +57,8 @@
                     <td class="ez-table__cell">{{ url.modified|ez_full_datetime }}</td>
                     <td class="ez-table__cell ez-table__cell--has-action-btns">
                         {% if can_edit %}
-                            <a href="{{ edit_url }}" class="btn btn-icon mx-2" title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
-                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
+                            <a href="{{ edit_url }}" class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2" title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
+                                <svg class="ez-icon ez-icon--small ez-icon-edit">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </a>

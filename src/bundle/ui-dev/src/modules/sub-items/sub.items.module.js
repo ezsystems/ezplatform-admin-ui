@@ -840,10 +840,10 @@ export default class SubItemsModule extends Component {
 
         return (
             <Fragment>
-                <button onClick={this.onBulkDeletePopupConfirm} type="button" className="btn btn-primary btn--trigger">
+                <button onClick={this.onBulkDeletePopupConfirm} type="button" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger">
                     {confirmLabel}
                 </button>
-                <button onClick={this.closeBulkDeletePopup} type="button" className="btn btn-secondary" data-dismiss="modal">
+                <button onClick={this.closeBulkDeletePopup} type="button" className="btn ibexa-btn ibexa-btn--secondary" data-dismiss="modal">
                     {cancelLabel}
                 </button>
             </Fragment>
@@ -856,10 +856,10 @@ export default class SubItemsModule extends Component {
 
         return (
             <Fragment>
-                <button onClick={this.onBulkHidePopupConfirm} type="button" className="btn btn-primary btn--trigger">
+                <button onClick={this.onBulkHidePopupConfirm} type="button" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger">
                     {confirmLabel}
                 </button>
-                <button onClick={this.closeBulkHidePopup} type="button" className="btn btn-secondary" data-dismiss="modal">
+                <button onClick={this.closeBulkHidePopup} type="button" className="btn ibexa-btn ibexa-btn--secondary" data-dismiss="modal">
                     {cancelLabel}
                 </button>
             </Fragment>
@@ -872,10 +872,10 @@ export default class SubItemsModule extends Component {
 
         return (
             <Fragment>
-                <button onClick={this.onBulkUnhidePopupConfirm} type="button" className="btn btn-primary btn--trigger">
+                <button onClick={this.onBulkUnhidePopupConfirm} type="button" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger">
                     {confirmLabel}
                 </button>
-                <button onClick={this.closeBulkUnhidePopup} type="button" className="btn btn-secondary" data-dismiss="modal">
+                <button onClick={this.closeBulkUnhidePopup} type="button" className="btn ibexa-btn ibexa-btn--secondary" data-dismiss="modal">
                     {cancelLabel}
                 </button>
             </Fragment>

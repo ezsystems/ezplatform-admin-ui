@@ -1,5 +1,5 @@
 (function(global, doc) {
-    const editButton = doc.querySelector('.ez-btn--edit');
+    const editButton = doc.querySelector('.ibexa-btn--edit');
     const languageRadioOption = doc.querySelector('.ez-extra-actions--edit.ez-extra-actions--prevent-show [type="radio"]');
 
     if (!languageRadioOption) {

@@ -1,5 +1,5 @@
 (function(global, doc, eZ, React, ReactDOM, Translator, Routing) {
-    const btns = doc.querySelectorAll('.ez-btn--cotf-create');
+    const btns = doc.querySelectorAll('.ibexa-btn--cotf-create');
     const udwContainer = doc.getElementById('react-udw');
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (items) => {

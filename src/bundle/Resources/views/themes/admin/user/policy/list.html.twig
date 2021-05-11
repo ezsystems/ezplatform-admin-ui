@@ -10,8 +10,8 @@
                 <a
                     title="{{ 'policy.view.list.action.add'|trans|desc('Add a new Policy') }}"
                     href="{{ path('ezplatform.policy.create', {roleId: role.id}) }}"
-                    class="btn btn-icon">
-                    <svg class="ez-icon ez-icon-create">
+                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
+                    <svg class="ez-icon ez-icon--small ez-icon-create">
                         <use xlink:href="{{ ez_icon_path('create') }}"></use>
                     </svg>
                 </a>
@@ -19,12 +19,12 @@
                 <button
                     id="delete-policies"
                     type="button"
-                    class="btn btn-icon"
+                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     disabled
                     data-toggle="modal"
                     data-target="#{{ modal_data_target }}"
                     title="{{ 'policy.view.list.action.delete'|trans|desc('Delete Policy') }}">
-                    <svg class="ez-icon ez-icon-trash">
+                    <svg class="ez-icon ez-icon--small ez-icon-trash">
                         <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                     </svg>
                 </button>
@@ -95,8 +95,8 @@
                         <a
                             title="{{ 'policy.view.list.panel.policies.action.edit'|trans|desc('Edit') }}"
                             href="{{ path('ezplatform.policy.update', { roleId: role.id, policyId: policy.id }) }}"
-                            class="btn btn-icon mx-2{{ not is_editable[policy.id] ? ' disabled' : '' }}">
-                            <svg class="ez-icon ez-icon--secondary ez-icon-edit">
+                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2{{ not is_editable[policy.id] ? ' disabled' : '' }}">
+                            <svg class="ez-icon ez-icon--small ez-icon-edit">
                                 <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                             </svg>
                         </a>

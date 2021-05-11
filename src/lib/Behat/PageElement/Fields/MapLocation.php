@@ -24,7 +24,7 @@ class MapLocation extends EzFieldElement
         $this->fields['latitude'] = '#ezplatform_content_forms_content_edit_fieldsData_ezgmaplocation_value_latitude';
         $this->fields['longitude'] = '#ezplatform_content_forms_content_edit_fieldsData_ezgmaplocation_value_longitude';
         $this->fields['address'] = '#ezplatform_content_forms_content_edit_fieldsData_ezgmaplocation_value_address';
-        $this->fields['searchButton'] = '.btn--search-by-address';
+        $this->fields['searchButton'] = '.ibexa-btn--search-by-address';
     }
 
     public function setValue(array $parameters): void

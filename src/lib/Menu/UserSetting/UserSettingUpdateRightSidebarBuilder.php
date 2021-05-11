@@ -66,7 +66,7 @@ class UserSettingUpdateRightSidebarBuilder extends AbstractBuilder implements Tr
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => '#user_setting_update_update',
                     ],
                     'extras' => ['icon' => 'save'],

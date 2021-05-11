@@ -29,9 +29,9 @@
                     <a
                         title="{{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type group') }}"
                         href="{{ path('ezplatform.content_type_group.create') }}"
-                        class="btn btn-icon"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     >
-                        <svg class="ez-icon ez-icon-create">
+                        <svg class="ez-icon ez-icon--small ez-icon-create">
                             <use xlink:href="{{ ez_icon_path('create') }}"></use>
                         </svg>
                     </a>
@@ -41,13 +41,13 @@
                     <button
                         id="delete-content-type-groups"
                         type="button"
-                        class="btn btn-icon"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
                         title="{{ 'content_type_group.view.list.action.delete'|trans|desc('Delete Content Type group(s)') }}"
                     >
-                        <svg class="ez-icon ez-icon-trash">
+                        <svg class="ez-icon ez-icon--small ez-icon-trash">
                             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
@@ -101,8 +101,8 @@
                             <a
                                 title="{{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}"
                                 href="{{ edit_url }}"
-                                class="btn btn-icon mx-2">
-                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
+                                <svg class="ez-icon ez-icon--small ez-icon-edit">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </a>

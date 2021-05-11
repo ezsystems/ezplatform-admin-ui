@@ -143,7 +143,7 @@ class ListItem extends Component {
         }
 
         return (
-            <button type="button" className="c-list-item__load-more-btn btn ez-btn" onClick={this.loadMoreSubitems}>
+            <button type="button" className="c-list-item__load-more-btn btn ibexa-btn" onClick={this.loadMoreSubitems}>
                 {loadingSpinner} {btnLabel}
             </button>
         );

@@ -60,7 +60,7 @@ class PolicyEditRightSidebarBuilder extends AbstractBuilder implements Translati
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#%s', $saveId),
                     ],
                     'extras' => ['icon' => 'publish'],

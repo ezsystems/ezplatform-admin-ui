@@ -20,7 +20,7 @@ class Matrix extends EzFieldElement
         parent::__construct($context, $locator, $label);
         $this->fields['matrixCellSelectorFormat'] = '[name="ezplatform_content_forms_content_edit[fieldsData][ezmatrix][value][entries][%d][%s]"]';
         $this->fields['row'] = '.ez-table__matrix-entry';
-        $this->fields['addRowButton'] = '.ez-btn--add-matrix-entry';
+        $this->fields['addRowButton'] = '.ibexa-btn--add-matrix-entry';
         $this->fields['viewModeTableHeaders'] = '.ez-content-field-value thead th';
         $this->fields['viewModeTableRow'] = '.ez-content-field-value tbody tr';
         $this->fields['editModeTableHeaders'] = '.ez-table thead th[data-identifier]';

@@ -35,7 +35,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
     const ITEM__PREVIEW = 'content_edit__sidebar_right__preview';
     const ITEM__CANCEL = 'content_edit__sidebar_right__cancel';
 
-    const BTN_TRIGGER_CLASS = 'btn--trigger';
+    const BTN_TRIGGER_CLASS = 'ibexa-btn--trigger';
     const BTN_DISABLED_ATTR = ['disabled' => 'disabled'];
 
     /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver */

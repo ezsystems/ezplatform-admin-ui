@@ -61,7 +61,7 @@ final class URLWildcardEditRightSidebarBuilder extends AbstractBuilder implement
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => $options['submit_selector'],
                     ],
                     'extras' => ['icon' => 'save'],

@@ -28,10 +28,10 @@
                     {% set modalDataAttributes = deletable ? 'data-toggle=modal data-target=#delete-section-modal' : '' %}
                     <button
                         type="button"
-                        class="btn btn-icon {% if not deletable %}disabled{% endif %}"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text {% if not deletable %}disabled{% endif %}"
                         {{ modalDataAttributes }}
                         title="{{ 'section.action.delete'|trans|desc('Delete Section') }}">
-                        <svg class="ez-icon">
+                        <svg class="ez-icon ez-icon--small">
                             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
@@ -60,8 +60,8 @@
                     <a
                         href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
                         title="{{ 'section.edit'|trans|desc('Edit') }}"
-                        class="btn btn-icon mx-2">
-                        <svg class="ez-icon ez-icon--secondary ez-icon-edit">
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
+                        <svg class="ez-icon ez-icon--small ez-icon-edit">
                             <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                         </svg>
                     </a>

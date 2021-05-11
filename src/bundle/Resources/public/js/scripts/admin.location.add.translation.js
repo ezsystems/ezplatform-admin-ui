@@ -16,7 +16,7 @@
             'valueChanged',
             (event) => {
                 const modal = event.target.closest(SELECTOR_MODAL);
-                const buttonCreate = modal.querySelector('.ez-btn--create-translation');
+                const buttonCreate = modal.querySelector('.ibexa-btn--create-translation');
                 const method = event.target.value ? 'removeAttribute' : 'setAttribute';
 
                 buttonCreate[method]('disabled', true);
