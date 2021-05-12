@@ -100,7 +100,7 @@
             if (actionType === 'create') {
                 defaultDate.setTime(new Date().getTime());
             } else if (actionType === 'edit') {
-                defaultDate.setTime(defaultDate.getTime() + defaultDate.getTimezoneOffset() * 60 * 1000);
+                defaultDate.setTime(defaultDate.getTime());
             }
 
             updateInputValue(sourceInput, [defaultDate]);
