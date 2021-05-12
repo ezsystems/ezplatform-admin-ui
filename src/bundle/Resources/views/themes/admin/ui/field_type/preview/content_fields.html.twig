@@ -81,7 +81,7 @@
 {% block ezdate_field %}
 {% apply spaceless %}
     {% if not ez_field_is_empty( content, field ) %}
-        {% set field_value = field.value.date|ez_full_date('UTC') %}
+        {% set field_value = field.value.date|ez_full_date %}
         {{ block( 'simple_block_field' ) }}
     {% endif %}
 {% endapply %}
