@@ -11,6 +11,38 @@
         button.disabled = true;
         button.classList.add('disabled');
     };
+    const refreshTrashModal = (event) => {
+        const { numberOfSubitems } = event.detail;
+        const sendToTrashModal = document.querySelector('.ez-modal--trash-location');
+        const modalBody = sendToTrashModal.querySelector('.modal-body');
+        const modalSendToTrashButton = sendToTrashModal.querySelector('.modal-footer .ez-modal-button--send-to-trash');
+        const { contentName } = sendToTrashModal.dataset;
+
+        if (numberOfSubitems) {
+            const message = Translator.trans(
+                /*@Desc("Sending '%content_name%' and its %children_count% Content item(s) to Trash will also send the sub-items of this Location to Trash.")*/ 'trash_container.modal.message_main',
+                {
+                    content_name: contentName,
+                    children_count: numberOfSubitems,
+                },
+                'content'
+            );
+
+            modalBody.querySelector('.ez-modal__option-description').innerHTML = message;
+        } else {
+            const message = Translator.trans(
+                /*@Desc("Are you sure you want to send this Content item to Trash?")*/ 'trash.modal.message',
+                {},
+                'content'
+            );
+
+            modalBody.innerHTML = message;
+            modalSendToTrashButton.removeAttribute('disabled');
+            modalSendToTrashButton.classList.remove('disabled');
+        }
+    };
+
+    doc.body.addEventListener('ez-trash-modal-refresh', refreshTrashModal, false);
 
     if (!confirmCheckbox) {
         enableButton(submitButton);

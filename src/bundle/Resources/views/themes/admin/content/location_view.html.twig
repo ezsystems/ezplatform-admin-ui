@@ -124,7 +124,10 @@
                 </div>
             </div>
             {%  if form_location_trash is defined and form_user_delete is not defined %}
-                {% include '@ezdesign/content/modal/location_trash.html.twig' with {'form': form_location_trash} only %}
+                {% include '@ezdesign/content/modal/location_trash.html.twig' with {
+                    'form': form_location_trash,
+                    'content_name': ez_content_name(content)
+                } only %}
             {% endif %}
             {%  if form_user_delete is defined %}
                 {% include '@ezdesign/content/modal/user_delete.html.twig' with {'form': form_user_delete} only %}
