@@ -354,6 +354,7 @@ export default class SubItemsModule extends Component {
         this.updateTotalCountState(totalCount - movedItems.length);
         this.deselectAllItems();
         this.discardActivePageItems();
+        this.updateTrashModal();
 
         this.toggleBulkOperationStatusState(false);
 
@@ -403,7 +404,7 @@ export default class SubItemsModule extends Component {
                 ),
             };
 
-            window.eZ.helpers.notification.showSuccessNotification(message, () => { }, rawPlaceholdersMap);
+            window.eZ.helpers.notification.showSuccessNotification(message, () => {}, rawPlaceholdersMap);
         }
     }
 
@@ -549,7 +550,7 @@ export default class SubItemsModule extends Component {
                 ),
             };
 
-            window.eZ.helpers.notification.showSuccessNotification(message, () => { }, rawPlaceholdersMap);
+            window.eZ.helpers.notification.showSuccessNotification(message, () => {}, rawPlaceholdersMap);
         }
     }
 
@@ -652,6 +653,7 @@ export default class SubItemsModule extends Component {
         this.updateTotalCountState(totalCount - deletedItems.length);
         this.deselectAllItems();
         this.discardActivePageItems();
+        this.updateTrashModal();
 
         this.toggleBulkOperationStatusState(false);
 
@@ -946,7 +948,8 @@ export default class SubItemsModule extends Component {
                 isLoading={false}
                 size="medium"
                 footerChildren={this.renderDeleteConfirmationPopupFooter(selectionInfo)}
-                noHeader={true}>
+                noHeader={true}
+            >
                 <div className="m-sub-items__confirmation-modal-body">{confirmationMessage}</div>
             </Popup>,
             this.bulkActionModalContainer
@@ -974,7 +977,8 @@ export default class SubItemsModule extends Component {
                 isLoading={false}
                 size="medium"
                 footerChildren={this.renderHideConfirmationPopupFooter()}
-                noHeader={true}>
+                noHeader={true}
+            >
                 <div className="m-sub-items__confirmation-modal-body">{confirmationMessage}</div>
             </Popup>,
             this.bulkActionModalContainer
@@ -1002,7 +1006,8 @@ export default class SubItemsModule extends Component {
                 isLoading={false}
                 size="medium"
                 footerChildren={this.renderUnhideConfirmationPopupFooter()}
-                noHeader={true}>
+                noHeader={true}
+            >
                 <div className="m-sub-items__confirmation-modal-body">{confirmationMessage}</div>
             </Popup>,
             this.bulkActionModalContainer
@@ -1177,6 +1182,16 @@ export default class SubItemsModule extends Component {
                 sortOrder={sortOrder}
                 languageContainerSelector={this.props.languageContainerSelector}
             />
+        );
+    }
+
+    updateTrashModal() {
+        document.body.dispatchEvent(
+            new CustomEvent('ez-trash-modal-refresh', {
+                detail: {
+                    numberOfSubitems: this.state.totalCount,
+                },
+            })
         );
     }
 

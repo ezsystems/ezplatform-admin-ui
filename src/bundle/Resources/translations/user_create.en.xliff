@@ -11,16 +11,6 @@
         <target state="new">Creating</target>
         <note>key: Create</note>
       </trans-unit>
-      <trans-unit id="ad4e9a4e42b99d945f972bab5a2eff694d283793" resname="creating">
-        <source>Creating a(n) %contentType%</source>
-        <target state="new">Creating a(n) %contentType%</target>
-        <note>key: creating</note>
-      </trans-unit>
-      <trans-unit id="256aa0fda9b1de1a73ee0b7106b95efada81b5d6" resname="group_id">
-        <source>Group ID: %groupId%</source>
-        <target state="new">Group ID: %groupId%</target>
-        <note>key: group_id</note>
-      </trans-unit>
       <trans-unit id="32d50c07b2eacd6fa72742ff1c1f5963c26a251d" resname="new_content_item">
         <source>New %contentType%</source>
         <target state="new">New %contentType%</target>

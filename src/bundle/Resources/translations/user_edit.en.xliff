@@ -6,25 +6,10 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="6a2083913f3647b44f205204e369f764e83233b1" resname="content_id">
-        <source>Content ID: %contentId%</source>
-        <target state="new">Content ID: %contentId%</target>
-        <note>key: content_id</note>
-      </trans-unit>
-      <trans-unit id="71a8aeb31196db647608ffe1789be9400d61451d" resname="created_by">
-        <source>Created by %name%</source>
-        <target state="new">Created by %name%</target>
-        <note>key: created_by</note>
-      </trans-unit>
       <trans-unit id="f34946beab1da2af6535a8e4a88145e9557de0aa" resname="editing">
         <source>Editing</source>
         <target state="new">Editing</target>
         <note>key: editing</note>
-      </trans-unit>
-      <trans-unit id="876d7bdba03c72251ec4c2dc827fc54af7889091" resname="location_id">
-        <source>Location ID: %locationId%</source>
-        <target state="new">Location ID: %locationId%</target>
-        <note>key: location_id</note>
       </trans-unit>
     </body>
   </file>
