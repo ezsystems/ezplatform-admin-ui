@@ -5,6 +5,8 @@ on:
     tags:
       - 'v*'
       - '!v*-alpha*'
+      - '!v*-beta*'
+      - '!v*-rc*'
 
 jobs:  
   release:
@@ -24,10 +26,9 @@ jobs:
 
       - name: Generate changelog
         id: changelog
-        uses: ibexa/changelog-generator-action@v2
+        uses: ibexa/changelog-generator-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          jira_token: ${{ secrets.JIRA_TOKEN }}
           currentTag: ${{ env.BUILD_TAG }}
           previousTag: ${{ steps.prevrelease.outputs.previousTag }}
 
