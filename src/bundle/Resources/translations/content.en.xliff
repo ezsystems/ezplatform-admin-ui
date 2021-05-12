@@ -116,6 +116,16 @@
         <target state="new">Exit</target>
         <note>key: tooltip.exit_label</note>
       </trans-unit>
+      <trans-unit id="2720e3018fc8b1158cb728b1d5dc377ef7293b57" resname="trash.modal.message">
+        <source>Are you sure you want to send this Content item to Trash?</source>
+        <target state="new">Are you sure you want to send this Content item to Trash?</target>
+        <note>key: trash.modal.message</note>
+      </trans-unit>
+      <trans-unit id="1e6a1d97cca01a288e47d2d14479274b90e6c6c1" resname="trash_container.modal.message_main">
+        <source>Sending '%content_name%' and its %children_count% Content item(s) to Trash will also send the sub-items of this Location to Trash.</source>
+        <target state="new">Sending '%content_name%' and its %children_count% Content item(s) to Trash will also send the sub-items of this Location to Trash.</target>
+        <note>key: trash_container.modal.message_main</note>
+      </trans-unit>
       <trans-unit id="4492a79e25635e7612f98971e02b4d0e6a408394" resname="user.delete.success">
         <source>User with login '%login%' deleted.</source>
         <target state="new">User with login '%login%' deleted.</target>

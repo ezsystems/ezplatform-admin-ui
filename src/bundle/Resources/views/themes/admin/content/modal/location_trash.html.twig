@@ -1,6 +1,12 @@
 {% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
 
-<div class="modal fade ez-modal ez-modal--no-header ez-modal--send-to-trash ez-modal--trash-location" id="trash-location-modal" tabindex="-1" role="dialog">
+<div
+    class="modal fade ez-modal ez-modal--send-to-trash ez-modal--trash-location"
+    id="trash-location-modal"
+    tabindex="-1"
+    role="dialog"
+    data-content-name="{{ content_name|default('') }}"
+>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" title="{{ 'trash.modal.close'|trans|desc('Close') }}">
@@ -40,7 +46,7 @@
             </div>
             <div class="modal-footer">
                 {{ form_widget(form.trash,
-                    {'attr': {'class': 'btn-primary disabled ez-btn ez-btn--confirm-send-to-trash', 'disabled': true}})
+                    {'attr': {'class': 'btn-danger font-weight-bold disabled ez-modal-button ez-modal-button--send-to-trash', 'disabled': true}})
                 }}
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     {{ 'trash.form.cancel'|trans|desc('Cancel') }}
