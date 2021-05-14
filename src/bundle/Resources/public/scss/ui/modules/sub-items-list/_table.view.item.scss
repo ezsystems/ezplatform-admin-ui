@@ -99,6 +99,7 @@
 
     &__priority-wrapper {
         position: relative;
+        min-width: calculateRem(140px);
 
         &--focused {
             .ez-input {
@@ -113,7 +114,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        right: calculateRem(-57px);
+        right: 0;
         top: 0;
         width: calculateRem(62px);
         height: calculateRem(44px);
