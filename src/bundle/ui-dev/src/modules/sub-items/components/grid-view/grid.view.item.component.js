@@ -18,6 +18,7 @@ const GridViewItemComponent = ({ item, generateLink }) => {
         );
     } else {
         const { uri, alternativeText } = content._thumbnail;
+
         image = <img className={imageClassName} src={uri} alt={alternativeText} />;
         contentTypeIcon = (
             <div className="c-grid-view-item__content-type">
