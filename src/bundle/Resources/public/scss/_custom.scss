@@ -28,6 +28,10 @@ $ez-color-base-medium-hover: darken($ez-color-base-medium, 15%);
 $ez-color-base-dark: #555;
 $ez-black: #333;
 
+$ez-color-font-danger: #d92d42;
+$ez-color-font-pale: #878b90;
+$ez-color-base: #e0e0e8;
+
 $ez-secondary-ground-pale: #e1f5ff;
 $ez-ground-primary: #a8c8d5;
 $ez-secondary-ground: #2b84b1;
@@ -156,3 +160,6 @@ $pagination-border-color: transparent;
 
 // Modals
 $modal-content-bg: $ez-ground-base-medium;
+
+//Border
+$ez-border-radius: calculateRem(10px);
