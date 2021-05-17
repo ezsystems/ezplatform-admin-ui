@@ -15,6 +15,7 @@ use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\UI\Action\EventDispatcherInterface;
 use EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMappingDispatcher;
 use EzSystems\EzPlatformAdminUi\UI\Action\UiActionEventInterface;
+use EzSystems\EzPlatformUser\Form\SubmitHandler as UserActionsSubmitHandler;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Exception;
 
-class SubmitHandler
+class SubmitHandler implements UserActionsSubmitHandler
 {
     /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     protected $notificationHandler;

@@ -179,6 +179,11 @@ services:
         tags:
             - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: reorderMenuItems, priority: -50 }
 
+    ezplatform.adminui.listener.user_menu.reorder_by_order_number:
+        class: EzSystems\EzPlatformAdminUi\Menu\Listener\ReorderByOrderNumberListener
+        tags:
+            - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.user_menu, method: reorderMenuItems, priority: -50 }
+
     EzSystems\EzPlatformAdminUi\Menu\ContentTypeRightSidebarBuilder:
         public: true
         tags:

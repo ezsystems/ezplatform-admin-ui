@@ -31,6 +31,7 @@ imports:
     - { resource: services/twig.yaml }
     - { resource: services/on_the_fly.yaml }
     - { resource: services/autosave.yaml }
+    - { resource: services/user.yaml }
 
 services:
     _defaults:
@@ -70,8 +71,12 @@ services:
         tags:
             - { name: form.type }
 
+    EzSystems\EzPlatformAdminUi\Form\SubmitHandler:
+        decorates: EzSystems\EzPlatformUser\Form\BaseSubmitHandler
+
     EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler: ~
-    EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandler: ~
+    EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandler:
+        decorates: EzSystems\EzPlatformUser\ExceptionHandler\NullActionResultHandler
 
     EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler'
     EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface: '@EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandler'

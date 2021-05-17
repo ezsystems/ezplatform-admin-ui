@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Factory;
 
-use eZ\Publish\API\Repository\Values\User\User;
 use EzSystems\EzPlatformAdminUi\Form\Data\Bookmark\BookmarkRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
@@ -60,13 +59,8 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\User\Setting\UserSettingUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
-use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData;
-use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotData;
-use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotWithLoginData;
-use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Type\Bookmark\BookmarkRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlAddType;
@@ -120,13 +114,8 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType;
 use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardUpdateType;
-use EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserEditType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordForgotType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordForgotWithLoginType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordResetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType;
 use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLListData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLUpdateData;
@@ -901,94 +890,6 @@ class FormFactory
     }
 
     /**
-     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
-     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::changeUserPassword.
-     *
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordChangeData $data
-     * @param string|null $name
-     * @param \eZ\Publish\API\Repository\Values\User\User|null $user
-     *
-     * @return FormInterface
-     *
-     * @throws InvalidOptionsException
-     */
-    public function changeUserPassword(
-        UserPasswordChangeData $data = null,
-        ?string $name = null,
-        ?User $user = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordChangeType::class);
-
-        return $this->formFactory->createNamed($name, UserPasswordChangeType::class, $data, [
-            'user' => $user,
-        ]);
-    }
-
-    /**
-     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
-     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPassword.
-     *
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
-     */
-    public function forgotUserPassword(
-        UserPasswordForgotData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordForgotType::class);
-
-        return $this->formFactory->createNamed($name, UserPasswordForgotType::class, $data);
-    }
-
-    /**
-     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
-     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::forgotUserPassword.
-     *
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordForgotWithLoginData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
-     */
-    public function forgotUserPasswordWithLogin(
-        UserPasswordForgotWithLoginData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordForgotWithLoginType::class);
-
-        return $this->formFactory->createNamed($name, UserPasswordForgotWithLoginType::class, $data);
-    }
-
-    /**
-     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
-     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::resetUserPassword.
-     *
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData $data
-     * @param string|null $name
-     * @param \eZ\Publish\API\Repository\Values\User\User|null $user
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
-     */
-    public function resetUserPassword(
-        UserPasswordResetData $data = null,
-        ?string $name = null,
-        ?User $user = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserPasswordResetType::class);
-
-        return $this->formFactory->createNamed($name, UserPasswordResetType::class, $data, [
-            'user' => $user,
-        ]);
-    }
-
-    /**
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData|null $data
      * @param string|null $name
      *
@@ -1112,31 +1013,6 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(BookmarkRemoveType::class);
 
         return $this->formFactory->createNamed($name, BookmarkRemoveType::class, $data);
-    }
-
-    /**
-     * @deprecated Since eZ Platform 3.0.2 method moved to EzPlatformUser Bundle. Use it instead.
-     * @see \EzSystems\EzPlatformUser\Form\Factory\FormFactory::updateUserSetting.
-     *
-     * @param string $userSettingIdentifier
-     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\Setting\UserSettingUpdateData $data
-     * @param string|null $name
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function updateUserSetting(
-        string $userSettingIdentifier,
-        UserSettingUpdateData $data = null,
-        ?string $name = null
-    ): FormInterface {
-        $name = $name ?: StringUtil::fqcnToBlockPrefix(UserSettingUpdateType::class);
-
-        return $this->formFactory->createNamed(
-            $name,
-            UserSettingUpdateType::class,
-            $data,
-            ['user_setting_identifier' => $userSettingIdentifier]
-        );
     }
 
     /**
