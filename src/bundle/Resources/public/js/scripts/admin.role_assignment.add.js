@@ -14,12 +14,16 @@
         event.preventDefault();
 
         const config = JSON.parse(event.currentTarget.dataset.udwConfig);
+        const { inputSelector } = event.currentTarget.dataset;
+        const selectedLocations = doc.querySelector(inputSelector).value;
+        const selectedLocationsIds = selectedLocations ? selectedLocations.split(',') : [];
 
         ReactDOM.render(
             React.createElement(eZ.modules.UniversalDiscovery, {
                 onConfirm: selectSubtreeConfirm.bind(this),
                 onCancel: closeUDW,
                 multiple: true,
+                selectedLocations: selectedLocationsIds,
                 ...config,
             }),
             udwContainer
