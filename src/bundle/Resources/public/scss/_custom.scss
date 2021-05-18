@@ -355,10 +355,7 @@ $btn-border-width: 0;
 $btn-focus-box-shadow: none;
 
 // Ibexa fonts
-$ibexa-text-font-size: calculateRem(18px);
-$ibexa-text-font-size-medium: calculateRem(16px);
-$ibexa-text-font-size-small: calculateRem(14px);
-
-$ibexa-label-font-size: calculateRem(16px);
-$ibexa-label-font-size-medium: calculateRem(14px);
-$ibexa-label-font-size-small: calculateRem(12px);
+$ibexa-text-font-size-large: calculateRem(18px);
+$ibexa-text-font-size: calculateRem(16px);
+$ibexa-text-font-size-medium: calculateRem(14px);
+$ibexa-text-font-size-small: calculateRem(12px);
