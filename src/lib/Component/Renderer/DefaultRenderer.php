@@ -16,14 +16,24 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DefaultRenderer implements RendererInterface
 {
+    /** @var \EzSystems\EzPlatformAdminUi\Component\Registry */
     protected $registry;
 
+    /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
     protected $eventDispatcher;
+
+    /** @var \EzSystems\EzPlatformAdminUi\Component\Renderer\RendererInterface */
+    protected $renderer;
 
     public function __construct(Registry $registry, EventDispatcherInterface $eventDispatcher)
     {
         $this->registry = $registry;
         $this->eventDispatcher = $eventDispatcher;
+    }
+
+    public function setRenderer(RendererInterface $renderer): void
+    {
+        $this->renderer = $renderer;
     }
 
     public function renderGroup(string $groupName, array $parameters = []): array
@@ -38,7 +48,7 @@ class DefaultRenderer implements RendererInterface
 
         $rendered = [];
         foreach ($components as $id => $component) {
-            $rendered[] = $this->renderSingle($id, $groupName, $parameters);
+            $rendered[] = $this->renderer->renderSingle($id, $groupName, $parameters);
         }
 
         return $rendered;

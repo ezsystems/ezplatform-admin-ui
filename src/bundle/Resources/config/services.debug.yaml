@@ -1,0 +1,7 @@
+services:
+    EzSystems\EzPlatformAdminUi\Component\Renderer\TraceableRenderer:
+        decorates: EzSystems\EzPlatformAdminUi\Component\Renderer\RendererInterface
+        public: false
+        arguments:
+            - '@.inner'
+            - '@debug.stopwatch'

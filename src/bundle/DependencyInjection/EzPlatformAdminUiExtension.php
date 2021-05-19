@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Yaml\Yaml;
 
 class EzPlatformAdminUiExtension extends Extension implements PrependExtensionInterface
@@ -39,6 +40,8 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         if ($environment === 'behat') {
             $loader->load('services/feature_contexts.yaml');
         }
+
+        $this->registerDebugConfiguration($container, $loader);
     }
 
     /**
@@ -142,5 +145,14 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
                 ],
             ],
         ]);
+    }
+
+    private function registerDebugConfiguration(ContainerBuilder $container, YamlFileLoader $loader): void
+    {
+        $debug = $container->getParameter('kernel.debug');
+
+        if ($debug && class_exists(Stopwatch::class)) {
+            $loader->load('services.debug.yaml');
+        }
     }
 }
