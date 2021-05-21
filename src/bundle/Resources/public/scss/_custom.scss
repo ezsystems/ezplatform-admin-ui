@@ -6,39 +6,129 @@ $ibexa-admin-widget-open-transition: all 0.3s ease-in;
 $ibexa-admin-widget-close-transition: all 0.3s ease-out;
 
 // Ibexa colors
-$ibexa-white: #fff;
-$ibexa-black: #131c26;
-
 $ibexa-color-primary: #ae1164;
-$ibexa-color-primary-pale: #f3e4e7;
-$ibexa-color-primary-light: #e75476;
-$ibexa-color-deep-black: #222222;
+$ibexa-color-primary-500: #b7397c;
+$ibexa-color-primary-400: #ce70a2;
+$ibexa-color-primary-300: #de9fc1;
+$ibexa-color-primary-200: #eecfe0;
+$ibexa-color-primary-100: #f6e7ef;
 
-$ibexa-color-base: #e0e0e8;
-$ibexa-color-base-pale: #f5f5f5;
-$ibexa-color-base-light: #f7f7f9;
-$ibexa-color-base-medium: #ececf1;
-$ibexa-color-base-dark: #878b90;
-$ibexa-color-base-deep: #656565;
-$ibexa-color-base-black: #131c26;
+$ibexa-color-danger: #db0032;
+$ibexa-color-danger-500: #db2c54;
+$ibexa-color-danger-400: #e96684;
+$ibexa-color-danger-300: #f099ad;
+$ibexa-color-danger-200: #f7ccd6;
+$ibexa-color-danger-100: #fbe5ea;
 
-$ibexa-color-ground-dark: #004d5d;
+$ibexa-color-warning: #ff4713;
+$ibexa-color-warning-500: #f7633a;
+$ibexa-color-warning-400: #ff9071;
+$ibexa-color-warning-300: #ffb5a0;
+$ibexa-color-warning-200: #ffdacf;
+$ibexa-color-warning-100: #ffece7;
 
-$ibexa-color-font: #131c26;
-$ibexa-color-font-light: #fff;
-$ibexa-color-font-pale: #878b90;
-$ibexa-color-font-black: #222222;
-$ibexa-color-font-danger: #d92d42;
-$ibexa-color-border-light: #ecdfd1;
+$ibexa-color-success: #00a42b;
+$ibexa-color-success-500: #33b655;
+$ibexa-color-success-400: #66c880;
+$ibexa-color-success-300: #99dbaa;
+$ibexa-color-success-200: #ccedd5;
+$ibexa-color-success-100: #e5f5e9;
 
-$ibexa-color-info: #47bedb;
-$ibexa-color-positive: #00825c;
-$ibexa-color-warning: #f7d000;
-$ibexa-color-danger: #d92d42;
-$ibexa-color-warning-dark: #aa0000;
-$ibexa-color-warning-pale: #fceaec;
+$ibexa-color-info: #4191ff;
+$ibexa-color-info-500: #619eff;
+$ibexa-color-info-400: #8dbdff;
+$ibexa-color-info-300: #b3d3ff;
+$ibexa-color-info-200: #d9e9ff;
+$ibexa-color-info-100: #ecf4ff;
 
-$ibexa-color-primary-hover: #e75476;
+$ibexa-color-black: #000000;
+$ibexa-color-black-500: #2c2c2c;
+$ibexa-color-black-400: #666666;
+$ibexa-color-black-300: #999999;
+$ibexa-color-black-200: #cccccc;
+$ibexa-color-black-100: #e5e5e5;
+
+$ibexa-color-dark: #131c26;
+$ibexa-color-dark-500: #3b424a;
+$ibexa-color-dark-400: #71767c;
+$ibexa-color-dark-300: #a0a4a8;
+$ibexa-color-dark-200: #cfd1d3;
+$ibexa-color-dark-100: #e7e8e9;
+
+$ibexa-color-light: #e0e0e8;
+$ibexa-color-light-500: #e6e6ed;
+$ibexa-color-light-400: #ececf1;
+$ibexa-color-light-300: #f3f3f6;
+$ibexa-color-light-200: #f9f9fa;
+$ibexa-color-light-100: #fbfbfc;
+
+$ibexa-color-white: #ffffff;
+
+$ibexa-color-accent-soft: #ecdfd1;
+$ibexa-color-accent-soft-500: #f0e5da;
+$ibexa-color-accent-soft-400: #f4ece3;
+$ibexa-color-accent-soft-300: #f7f2ed;
+$ibexa-color-accent-soft-200: #fbf9f6;
+$ibexa-color-accent-soft-100: #fbf9f6;
+
+$ibexa-color-accent: #fcae42;
+$ibexa-color-accent-500: #f4b65f;
+$ibexa-color-accent-400: #fdce8d;
+$ibexa-color-accent-300: #fddeb3;
+$ibexa-color-accent-200: #feeed9;
+$ibexa-color-accent-100: #fff7ec;
+
+$ibexa-color-accent-strong: #f18a6b;
+$ibexa-color-accent-strong-500: #eb9980;
+$ibexa-color-accent-strong-400: #f6b8a6;
+$ibexa-color-accent-strong-300: #f9d0c3;
+$ibexa-color-accent-strong-200: #fce7e1;
+$ibexa-color-accent-strong-100: #fdf3f0;
+
+$ibexa-color-complementary: #47bedb;
+$ibexa-color-complementary-500: #63c3da;
+$ibexa-color-complementary-400: #90d8e9;
+$ibexa-color-complementary-300: #b5e5f0;
+$ibexa-color-complementary-200: #daf2f7;
+$ibexa-color-complementary-100: #ecf8fb;
+
+$ibexa-color-complementary-strong: #004d5d;
+$ibexa-color-complementary-strong-500: #2b6875;
+$ibexa-color-complementary-strong-400: #66949d;
+$ibexa-color-complementary-strong-300: #99b7be;
+$ibexa-color-complementary-strong-200: #ccdbde;
+$ibexa-color-complementary-strong-100: #e5edee;
+
+/* TODO: below $ibexa-color* variables should be removed in 4.0 */
+$ibexa-white: $ibexa-color-white;
+$ibexa-black: $ibexa-color-dark;
+
+$ibexa-color-primary-pale: $ibexa-color-primary-100;
+$ibexa-color-primary-light: $ibexa-color-primary-500;
+$ibexa-color-deep-black: $ibexa-color-black-500;
+
+$ibexa-color-base: $ibexa-color-light;
+$ibexa-color-base-pale: $ibexa-color-light-300;
+$ibexa-color-base-light: $ibexa-color-light-200;
+$ibexa-color-base-medium: $ibexa-color-light-500;
+$ibexa-color-base-dark: $ibexa-color-dark-300;
+$ibexa-color-base-deep: $ibexa-color-dark-400;
+$ibexa-color-base-black: $ibexa-color-dark;
+
+$ibexa-color-ground-dark: $ibexa-color-complementary-strong;
+
+$ibexa-color-font: $ibexa-color-dark;
+$ibexa-color-font-light: $ibexa-color-white;
+$ibexa-color-font-pale: $ibexa-color-dark-300;
+$ibexa-color-font-black: $ibexa-color-black-500;
+$ibexa-color-font-danger: $ibexa-color-danger;
+$ibexa-color-border-light: $ibexa-color-accent-200;
+
+$ibexa-color-positive: $ibexa-color-success;
+$ibexa-color-warning-dark: darken($ibexa-color-warning, 20%);
+$ibexa-color-warning-pale: $ibexa-color-warning-100;
+
+$ibexa-color-primary-hover: $ibexa-color-primary-500;
 
 /* eZ variables: These variables are deprecated, please use variables with the "ibexa" prefix */
 $ez-admin-transition: $ibexa-admin-transition;
@@ -77,13 +167,13 @@ $ez-secondary-ground: $ibexa-color-primary;
 $ez-secondary-ground-medium: $ibexa-color-primary;
 $ez-secondary-ground-dark: $ibexa-color-primary;
 
-$ez-ground-primary-inverted-light: #445a64;
+$ez-ground-primary-inverted-light: $ibexa-color-complementary-strong;
 $ez-ground-primary-inverted: $ibexa-color-base;
 
 $ez-color-warning-pale: $ibexa-color-warning-pale;
 $ez-color-warning-dark: $ibexa-color-warning-dark;
 
-$ez-alloyeditor-color-hover: #65b6f0;
+$ez-alloyeditor-color-hover: $ibexa-color-info-400;
 
 $ez-pagination-bg: transparent;
 $ez-pagination-margin: 0.25rem;
@@ -156,15 +246,16 @@ $theme-colors: (
 
 // Typography
 $base-font-size: 16px;
-$small-font-size: 0.8rem !default;
-$h1-font-size: 1.75rem !default;
-$h2-font-size: 1.5rem !default;
-$h3-font-size: 1.375rem !default;
-$h4-font-size: 1.25rem !default;
-$h5-font-size: 1.125rem !default;
-$h6-font-size: 1.0625rem !default;
+$small-font-size: caluclateRem(14px) !default;
+$h1-font-size: calculateRem(28px) !default;
+$h2-font-size: calculateRem(22px) !default;
+$h3-font-size: calculateRem(18px) !default;
+$h4-font-size: calculateRem(16px) !default;
+$h5-font-size: calculateRem(14px) !default;
+$h6-font-size: calculateRem(12px) !default;
 
 $headings-font-weight: 700;
+$headings-font-family: 'Work Sans SemiBold', sans-serif;
 
 // Fonts
 $font-family-sans-serif: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
@@ -262,3 +353,9 @@ $btn-padding-y: calculateRem(11px);
 $btn-padding-x: 1rem;
 $btn-border-width: 0;
 $btn-focus-box-shadow: none;
+
+// Ibexa fonts
+$ibexa-text-font-size-large: calculateRem(18px);
+$ibexa-text-font-size: calculateRem(16px);
+$ibexa-text-font-size-medium: calculateRem(14px);
+$ibexa-text-font-size-small: calculateRem(12px);
