@@ -61,6 +61,11 @@
         <target state="new">Hardware</target>
         <note>key: hardware</note>
       </trans-unit>
+      <trans-unit id="5a3d301a871855ae4b3809c19b76fcccdb65b8ce" resname="invalid.system_unable_to_fetch">
+        <source>System was unable to fetch corresponding data</source>
+        <target state="new">System was unable to fetch corresponding data</target>
+        <note>key: invalid.system_unable_to_fetch</note>
+      </trans-unit>
       <trans-unit id="81c5d49be9505089d8d248ea96f6d077fd0ab9bd" resname="memory">
         <source>Memory</source>
         <target state="new">Memory</target>
