@@ -305,6 +305,7 @@ final class NodeFactory
         if ($node->contentId !== self::TOP_NODE_CONTENT_ID) {
             $node->name = $this->translationHelper->getTranslatedContentName($contentById[$node->contentId]);
         }
+        
         foreach ($node->children as $child) {
             $this->supplyTranslatedContentName($child, $contentById);
         }
