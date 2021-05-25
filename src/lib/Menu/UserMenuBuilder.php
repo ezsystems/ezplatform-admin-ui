@@ -76,10 +76,6 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         $token = $this->tokenStorage->getToken();
         if (null !== $token && is_object($token->getUser())) {
             $menu->addChild(
-                $this->createMenuItem(self::ITEM_CHANGE_PASSWORD, ['route' => 'ezplatform.user_profile.change_password'])
-            );
-
-            $menu->addChild(
                 $this->createMenuItem(self::ITEM_USER_SETTINGS, ['route' => 'ezplatform.user_settings.list'])
             );
 
