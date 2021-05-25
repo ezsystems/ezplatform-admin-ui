@@ -8,11 +8,12 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\EventListener;
 
+use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\UserService;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use JMS\TranslationBundle\Model\Message;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @internal
@@ -21,12 +22,18 @@ final class UserMenuListener implements EventSubscriberInterface, TranslationCon
 {
     public const ITEM_CHANGE_PASSWORD = 'user__change_password';
 
-    /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
-    private $tokenStorage;
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
 
-    public function __construct(TokenStorageInterface $tokenStorage)
-    {
-        $this->tokenStorage = $tokenStorage;
+    /** @var \eZ\Publish\API\Repository\UserService */
+    private $userService;
+
+    public function __construct(
+        PermissionResolver $permissionResolver,
+        UserService $userService
+    ) {
+        $this->permissionResolver = $permissionResolver;
+        $this->userService = $userService;
     }
 
     public static function getSubscribedEvents(): array
@@ -37,9 +44,11 @@ final class UserMenuListener implements EventSubscriberInterface, TranslationCon
     public function onUserMenuConfigure(ConfigureMenuEvent $event): void
     {
         $menu = $event->getMenu();
-        $token = $this->tokenStorage->getToken();
 
-        if (null !== $token && \is_object($token->getUser())) {
+        $currentUserId = $this->permissionResolver->getCurrentUserReference()->getUserId();
+        $currentUser = $this->userService->loadUser($currentUserId);
+
+        if ($this->permissionResolver->canUser('user', 'password', $currentUser, [$currentUser])) {
             $menu->addChild(
                 self::ITEM_CHANGE_PASSWORD,
                 [
