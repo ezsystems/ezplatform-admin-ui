@@ -58,6 +58,7 @@ export const loadLocation = ({ token, siteaccess }, { locationId = 2, limit = 10
                                 _thumbnail {
                                     uri
                                     alternativeText
+                                    mimeType
                                 }
                                 _name
                                 _info {

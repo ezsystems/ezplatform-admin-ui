@@ -10,19 +10,19 @@ const GridViewItemComponent = ({ item, generateLink }) => {
     let image = null;
     let contentTypeIcon = null;
 
-    if (content._thumbnail) {
+    if (content._thumbnail === null || content._thumbnail.mimeType === 'image/svg+xml') {
+        image = (
+            <div className={`${imageClassName} ${imageClassName}--none`}>
+                <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--extra-large" />
+            </div>
+        );
+    } else {
         const { uri, alternativeText } = content._thumbnail;
 
         image = <img className={imageClassName} src={uri} alt={alternativeText} />;
         contentTypeIcon = (
             <div className="c-grid-view-item__content-type">
                 <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--small" />
-            </div>
-        );
-    } else {
-        image = (
-            <div className={`${imageClassName} ${imageClassName}--none`}>
-                <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--extra-large" />
             </div>
         );
     }
