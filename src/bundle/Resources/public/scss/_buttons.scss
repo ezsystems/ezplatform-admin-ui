@@ -59,7 +59,7 @@
         }
     }
 
-    &--teriary {
+    &--tertiary {
         color: $ibexa-color-dark;
         fill: $ibexa-color-dark;
         background-color: $ibexa-color-white;
@@ -110,10 +110,10 @@
             color: $ibexa-color-white;
             fill: $ibexa-color-white;
             box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-dark;
-        }
 
-        &:hover:focus {
-            box-shadow: $ibexa-btn-focus-box-shadow, $ibexa-btn-hover-box-shadow-dark;
+            &:focus {
+                box-shadow: $ibexa-btn-focus-box-shadow, $ibexa-btn-hover-box-shadow-dark;
+            }
         }
 
         &:disabled {
