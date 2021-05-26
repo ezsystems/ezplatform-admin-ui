@@ -3,9 +3,33 @@
     const CLASS_EXPANDED = 'ez-context-menu--expanded';
     const CLASS_ACTIVE_BUTTON = 'ez-btn--active-button';
     const CLASS_PREVENT_SHOW = 'ez-extra-actions--prevent-show';
+    const ACTIONS_CONTAINER_MARGIN = 8;
+    const RESIZE_AND_SCROLL_TIMEOUT = 50;
     const btns = [...doc.querySelectorAll('.ez-btn--extra-actions')];
     const menu = doc.querySelector('.ez-context-menu');
+    const footer = doc.querySelector('.ez-footer');
+    let resizeAndScrollTimeout;
     const haveHiddenPart = (element) => element.classList.contains(CLASS_HIDDEN) && !element.classList.contains(CLASS_PREVENT_SHOW);
+    const setContainerHeight = () => {
+        const container = doc.querySelector('.ez-extra-actions:not(.ez-extra-actions--hidden)');
+        const bottomPosition = Math.min(footer.getBoundingClientRect().top, global.innerHeight);
+        const containerHeight = bottomPosition - container.getBoundingClientRect().top - ACTIONS_CONTAINER_MARGIN;
+
+        container.style.height = `${containerHeight}px`;
+    };
+    const setHeightOnScrollAndResize = () => {
+        clearTimeout(resizeAndScrollTimeout);
+
+        resizeAndScrollTimeout = setTimeout(setContainerHeight, RESIZE_AND_SCROLL_TIMEOUT);
+    };
+    const setHeightOnResizeAndScroll = () => {
+        global.addEventListener('scroll', setHeightOnScrollAndResize, false);
+        global.addEventListener('resize', setHeightOnScrollAndResize, false);
+    };
+    const resetHeightOnResizeAndScroll = () => {
+        global.removeEventListener('scroll', setHeightOnScrollAndResize, false);
+        global.removeEventListener('resize', setHeightOnScrollAndResize, false);
+    };
 
     btns.forEach((btn) => {
         btn.addEventListener(
@@ -33,6 +57,7 @@
                         }
 
                         doc.body.removeEventListener('click', detectClickOutside, false);
+                        resetHeightOnResizeAndScroll();
                     }
                 };
 
@@ -42,8 +67,10 @@
 
                 if (!actions.classList.contains(CLASS_HIDDEN)) {
                     doc.body.addEventListener('click', detectClickOutside, false);
+                    setHeightOnResizeAndScroll();
                 } else {
                     doc.body.removeEventListener('click', detectClickOutside);
+                    resetHeightOnResizeAndScroll();
                 }
 
                 if (focusElement) {
