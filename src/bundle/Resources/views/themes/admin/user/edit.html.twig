@@ -2,18 +2,19 @@
 
 {% trans_default_domain 'user_edit' %}
 
+{% block header %}
+    {% set user_content_edit_menu = knp_menu_get('ezplatform_admin_ui.menu.user_edit.sidebar_right', [], {
+        'user': user,
+        'content_type': content_type,
+    }) %}
 
-{% block page_title %}
-    {% include '@ezdesign/content/page_title_edit.html.twig' with { 
+    {% include '@ezdesign/content/edit/content_header.html.twig' with {
         action_name: 'editing'|trans|desc('Editing'),
         title: content_type.name,
         description: content_type.description,
-        content: user.content
+        content: user.content,
+        buttons_render: knp_menu_render(user_content_edit_menu, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
     } %}
-
-    <div class="ez-content-item__errors-wrapper" hidden>
-        {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
-    </div>
 {% endblock %}
 
 {% block details %}{% endblock %}
@@ -28,11 +29,6 @@
             </div>
         </div>
     </section>
-{% endblock %}
-
-{% block right_sidebar %}
-    {% set user_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.user_edit.sidebar_right', [], {'user': user, 'content_type': content_type}) %}
-    {{ knp_menu_render(user_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
 {% block form_before %}

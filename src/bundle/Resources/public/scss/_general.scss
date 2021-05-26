@@ -160,8 +160,15 @@ select {
 .ez-section-view,
 .ez-section-list-view,
 .ez-trash-list-view,
-.ez-bookmark-list-view {
+.ez-bookmark-list-view,
+.ez-object-state-group-list-view,
+.ez-workflow-list-view,
+.ez-segment-group-list-view {
     background-color: $ibexa-color-base-pale;
+
+    .ibexa-main-container  {
+        background-color: $ibexa-color-base-pale;
+    }
 }
 
 .ez-sticky-container {

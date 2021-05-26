@@ -50,7 +50,7 @@ class SectionPage extends Page
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, '', SimpleTable::ELEMENT_NAME);
         $this->dialogs['Section information'] = ElementFactory::createElement($this->context, Dialog::ELEMENT_NAME);
         $this->pageTitle = sprintf('Section: %s', $sectionName);
-        $this->pageTitleLocator = '.ez-header h1';
+        $this->pageTitleLocator = '.ez-page-title h1';
     }
 
     /**

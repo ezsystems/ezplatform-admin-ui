@@ -1,4 +1,4 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const OFFSET_ROUNDING_COMPENSATOR = 0.5;
 
     class AdaptiveItems {

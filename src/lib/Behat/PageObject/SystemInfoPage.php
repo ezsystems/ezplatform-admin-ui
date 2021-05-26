@@ -36,7 +36,7 @@ class SystemInfoPage extends Page
         $this->siteAccess = 'admin';
         $this->route = '/systeminfo';
         $this->pageTitle = self::PAGE_NAME;
-        $this->pageTitleLocator = '.ez-header h1';
+        $this->pageTitleLocator = '.ez-page-title h1';
     }
 
     public function verifyElements(): void
@@ -47,13 +47,13 @@ class SystemInfoPage extends Page
 
     public function verifySystemInfoTable(string $tabName): void
     {
-        $systemInfoTable = ElementFactory::createElement($this->context, SystemInfoTable::ELEMENT_NAME, '.ez-main-container .active .ez-fieldgroup:nth-of-type(1)');
+        $systemInfoTable = ElementFactory::createElement($this->context, SystemInfoTable::ELEMENT_NAME, '.ibexa-main-container .active .ez-fieldgroup:nth-of-type(1)');
         $systemInfoTable->verifyHeader($tabName);
     }
 
     public function verifySystemInfoRecords(string $tableName, array $records): void
     {
-        $tab = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, $tableName, SimpleTable::ELEMENT_NAME, '.ez-main-container .tab-pane.active');
+        $tab = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, $tableName, SimpleTable::ELEMENT_NAME, '.ibexa-main-container .tab-pane.active');
         $tab->verifyVisibility();
         $tableHash = $tab->table->getTableHash();
 

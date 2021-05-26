@@ -111,6 +111,36 @@
         <target state="new">words</target>
         <note>key: character_counter.words</note>
       </trans-unit>
+      <trans-unit id="deaae5ae4af921bf70119d74a79b4482b896e74e" resname="content.autosave.failed.message">
+        <source>Autosave failed</source>
+        <target state="new">Autosave failed</target>
+        <note>key: content.autosave.failed.message</note>
+      </trans-unit>
+      <trans-unit id="d5ff5360463d166a9b190aaade8acd1973875f97" resname="content.autosave.turn_of.message">
+        <source>You can turn autosave off in your user settings</source>
+        <target state="new">You can turn autosave off in your user settings</target>
+        <note>key: content.autosave.turn_of.message</note>
+      </trans-unit>
+      <trans-unit id="21e7545fc420d95a59a713437d9dc28d85d82ceb" resname="content.details.content_id">
+        <source>Content ID: %contentId%</source>
+        <target state="new">Content ID: %contentId%</target>
+        <note>key: content.details.content_id</note>
+      </trans-unit>
+      <trans-unit id="fbf8f503b8af11a779316ffa7e12085401212748" resname="content.details.created_by">
+        <source>Created by %name%</source>
+        <target state="new">Created by %name%</target>
+        <note>key: content.details.created_by</note>
+      </trans-unit>
+      <trans-unit id="b703ce905c39239f607ffa395acf83d2dd6046f0" resname="content.details.location_id">
+        <source>Location ID: %locationId%</source>
+        <target state="new">Location ID: %locationId%</target>
+        <note>key: content.details.location_id</note>
+      </trans-unit>
+      <trans-unit id="fc543140fe88431b31013a20fbceef4ecf9e7430" resname="content.details.parent_location_id">
+        <source>Parent Location ID: %locationId%</source>
+        <target state="new">Parent Location ID: %locationId%</target>
+        <note>key: content.details.parent_location_id</note>
+      </trans-unit>
       <trans-unit id="e136be672df8eb27dc4eb2f1ce0650096090bf81" resname="content.hidden.message">
         <source>You don't have permissions to view this Content item (contentID: %contentId%).</source>
         <target state="new">You don't have permissions to view this Content item (contentID: %contentId%).</target>
@@ -146,6 +176,16 @@
         <target state="new">In Trash</target>
         <note>key: content.in_trash</note>
       </trans-unit>
+      <trans-unit id="17902a810b001125a6fdddfc50f5d54b7af25a18" resname="content_edit.autosave.status_off">
+        <source>Autosave is off</source>
+        <target state="new">Autosave is off</target>
+        <note>key: content_edit.autosave.status_off</note>
+      </trans-unit>
+      <trans-unit id="7d4060085cf1c6987792edf17988afb4571fd850" resname="content_edit.autosave.status_on">
+        <source>Autosave is on</source>
+        <target state="new">Autosave is on</target>
+        <note>key: content_edit.autosave.status_on</note>
+      </trans-unit>
       <trans-unit id="5626938e64bdad8be0c090d0018c868960859d0a" resname="content_type.breadcrumb.view">
         <source>%identifier%</source>
         <target state="new">%identifier%</target>
@@ -175,6 +215,11 @@
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: custom_url_alias_add_form.remove</note>
+      </trans-unit>
+      <trans-unit id="3b2d2efac582e8c8d6eccb40d4499ecf9ee21f95" resname="dashboard.charts.no_data">
+        <source><![CDATA[No data collected<br/> for the selected period]]></source>
+        <target state="new"><![CDATA[No data collected<br/> for the selected period]]></target>
+        <note>key: dashboard.charts.no_data</note>
       </trans-unit>
       <trans-unit id="7cb40cbc703336ab1285e81ebf100b82b05a0e27" resname="error.page.403.actions">
         <source><![CDATA[Please contact your Administrator to request access to this content or modify your profile.<br/>Otherwise, go back to <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></source>

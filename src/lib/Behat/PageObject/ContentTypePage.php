@@ -67,7 +67,7 @@ class ContentTypePage extends Page
             $this->contentFieldDefinitionsListLocator
         );
         $this->pageTitle = $contentTypeName;
-        $this->pageTitleLocator = '.ez-header h1';
+        $this->pageTitleLocator = '.ez-page-title h1';
     }
 
     public function verifyElements(): void

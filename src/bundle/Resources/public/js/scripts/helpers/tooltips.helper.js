@@ -38,14 +38,15 @@
                 };
                 const extraClasses = tooltipNode.dataset.extraClasses || '';
                 const placement = tooltipNode.dataset.placement || 'bottom';
-                const container = tooltipNode.dataset.tooltipContainerSelector ?
-                    tooltipNode.closest(tooltipNode.dataset.tooltipContainerSelector) :
-                    'body';
+                const container = tooltipNode.dataset.tooltipContainerSelector
+                    ? tooltipNode.closest(tooltipNode.dataset.tooltipContainerSelector)
+                    : 'body';
 
                 $(tooltipNode).tooltip({
                     delay,
                     placement,
                     container,
+                    html: true,
                     template: `<div class="tooltip ez-tooltip ${extraClasses}">
                                     <div class="arrow ez-tooltip__arrow"></div>
                                     <div class="tooltip-inner ez-tooltip__inner"></div>

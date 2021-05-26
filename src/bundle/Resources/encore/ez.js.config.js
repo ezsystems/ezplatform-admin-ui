@@ -31,6 +31,8 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.notifications.modal.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.location.add.translation.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.form.autosubmit.js'),
+    path.resolve(__dirname, '../public/js/scripts/admin.anchor.navigation'),
+    path.resolve(__dirname, '../public/js/scripts/admin.context.menu'),
 ];
 const fieldTypes = [];
 
@@ -92,9 +94,7 @@ module.exports = (Encore) => {
         ])
         .addEntry('ezplatform-admin-ui-policy-edit-js', [path.resolve(__dirname, '../public/js/scripts/admin.limitation.pick.js')])
         .addEntry('ezplatform-admin-ui-role-list-js', [path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js')])
-        .addEntry('ezplatform-admin-ui-role-view-js', [
-            path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
-        ])
+        .addEntry('ezplatform-admin-ui-role-view-js', [path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js')])
         .addEntry('ezplatform-admin-ui-role-assignment-create-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.role_assignment.add.js'),
         ])

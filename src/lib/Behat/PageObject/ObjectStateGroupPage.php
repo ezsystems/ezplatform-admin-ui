@@ -44,7 +44,7 @@ class ObjectStateGroupPage extends Page
         $this->adminLists['Object states'] = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, 'Object states', LinkedListTable::ELEMENT_NAME, $this->secondListContainerLocator);
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, '', SimpleTable::ELEMENT_NAME);
         $this->pageTitle = sprintf('Object state group: %s', $objectStateGroupName);
-        $this->pageTitleLocator = '.ez-header h1';
+        $this->pageTitleLocator = '.ez-page-title h1';
     }
 
     /**

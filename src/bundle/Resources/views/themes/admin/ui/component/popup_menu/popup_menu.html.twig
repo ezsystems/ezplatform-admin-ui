@@ -6,10 +6,19 @@
 >
     {% block items %}
         {% for item in items %}
+            {% set label = item.label %}
+
+            {% if item.extras and item.extras.translation_domain %}
+                {% set label = label|trans(item.extra('translation_params', {}), item.extras.translation_domain) %}
+            {% endif %}
+
             {{ include('@ezdesign/ui/component/popup_menu/popup_menu_item.html.twig', {
-                'label': item.label,
+                'label': label,
                 'class': item.class|default(''),
-            })|e('html_attr') }}
-        {% endfor %}
-    {% endblock items %}
+				'attributes': {
+					'data-related-button-id': item.name|default('') ~ '-tab',
+				},
+            }) }}
+		{% endfor %}
+	{% endblock items %}
 </ul>

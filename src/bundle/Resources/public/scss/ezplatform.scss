@@ -1,3 +1,4 @@
+@import 'fonts';
 @import 'custom';
 @import 'functions/calculate.rem';
 @import 'animations';
@@ -78,7 +79,6 @@
 @import 'notifications-menu';
 @import 'notifications-modal';
 @import 'admin.section-view';
-@import 'main-row';
 @import 'content-tree';
 @import 'flatpickr';
 @import 'warning-icon';
@@ -86,4 +86,10 @@
 @import 'inputs';
 @import 'links';
 @import 'footer';
+@import 'popup-menu';
+@import 'main-container';
+@import 'context-menu';
+@import 'anchor-navigation';
+@import 'autosave';
+@import 'side-menu';
 @import 'popup-menu';

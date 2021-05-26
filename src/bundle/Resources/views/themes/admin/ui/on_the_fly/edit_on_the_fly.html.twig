@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block page_title %}
-    {% include '@ezdesign/content/page_title_edit.html.twig' with {
+    {% include '@ezdesign/content/edit/content_header.html.twig' with {
         class: 'ez-content-edit-page-title--increased-left-margin',
         action_name: 'editing'|trans|desc('Editing'),
         title: content.name,

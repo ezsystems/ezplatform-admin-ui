@@ -1,5 +1,6 @@
 (function(global, doc, eZ, Translator) {
-    const enterKeyCode = 13;
+    const SCROLL_POSITION_TO_FIT = 50;
+    const ENTER_KEY_CODE = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',
         'color',
@@ -30,35 +31,33 @@
 
         return result;
     };
-    const getInvalidTabs = (validator) => {
-        return validator.fieldsToValidate.reduce((invalidTabs, field) => {
-            const tabPane = field.item.closest('.tab-pane');
+    const getInvalidSections = (validator) => {
+        return validator.fieldsToValidate.reduce((invalidSections, field) => {
+            const section = field.item.closest('.ibexa-anchor-navigation-sections__section');
 
-            if (tabPane && field.item.classList.contains('is-invalid')) {
-                invalidTabs.add(tabPane.id);
+            if (section && field.item.classList.contains('is-invalid')) {
+                invalidSections.add(section.dataset.anchorSectionId);
             }
 
-            return invalidTabs;
+            return invalidSections;
         }, new Set());
     };
     const fields = doc.querySelectorAll('.ez-field-edit');
     const focusOnFirstError = () => {
         const invalidFields = doc.querySelectorAll('.ez-field-edit.is-invalid');
+        const invalidSection = invalidFields[0].closest('.ibexa-anchor-navigation-sections__section');
 
         fields.forEach((field) => field.removeAttribute('tabindex'));
         invalidFields.forEach((field) => field.setAttribute('tabindex', '-1'));
 
-        invalidTab = invalidFields[0].closest('.tab-pane');
+        if (invalidSection) {
+            const { anchorSectionId } = invalidSection.dataset;
+            const invalidButton = doc.querySelector(`[data-anchor-target-section="${anchorSectionId}"`);
 
-        if (invalidTab) {
-            const invalidTabLink = doc.querySelector(`a[href="#${invalidTab.id}"]`);
-
-            invalidTabLink.click();
+            invalidButton.click();
         }
 
         invalidFields[0].focus();
-
-        doc.querySelector('.ez-content-item__errors-wrapper').removeAttribute('hidden');
     };
     const clickHandler = (event) => {
         const btn = event.currentTarget;
@@ -72,7 +71,7 @@
         const validators = eZ.fieldTypeValidators;
         const validationResults = validators.map(getValidationResults);
         const isFormValid = validationResults.every((result) => result.isValid);
-        const invalidTabs = validators.map(getInvalidTabs);
+        const invalidSections = validators.map(getInvalidSections);
 
         if (isFormValid) {
             btn.dataset.isFormValid = 1;
@@ -80,38 +79,56 @@
             // the following line breaks the flow so it's possible to fire click event on a button again.
             window.setTimeout(() => btn.click(), 0);
         } else {
-            btn.dataset.validatorsWithErrors = Array.from(
-                validationResults
-                    .filter((result) => !result.isValid)
-                    .reduce((total, result) => {
-                        total.add(result.validatorName);
+            const allValidatorsWithErrors = validationResults.filter((result) => !result.isValid).map((result) => result.validatorName);
 
-                        return total;
-                    }, new Set())
-            ).join();
-
+            btn.dataset.validatorsWithErrors = [...new Set(allValidatorsWithErrors)].join();
             fields.forEach((field) => field.removeAttribute('id'));
 
-            doc.querySelectorAll('.ibexa-tabs__nav-item').forEach((navItem) => {
-                navItem.classList.remove('ibexa-tabs__tab--invalid');
+            doc.querySelectorAll('.ibexa-anchor-navigation-menu__btn').forEach((btn) => {
+                btn.classList.remove('ibexa-anchor-navigation-menu__btn--invalid');
             });
 
-            invalidTabs.forEach((invalidInputs) => {
-                invalidInputs.forEach((invalidInputKey) => {
-                    doc.querySelector(`#item-${invalidInputKey}`).classList.add('ibexa-tabs__tab--invalid');
+            invalidSections.forEach((sections) => {
+                sections.forEach((invalidSectionId) => {
+                    doc.querySelector(`[data-anchor-target-section='${invalidSectionId}']`).classList.add(
+                        'ibexa-anchor-navigation-menu__btn--invalid'
+                    );
                 });
             });
 
             focusOnFirstError();
         }
     };
-
     const isAutosaveEnabled = () => {
         return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
     };
+    const fitHeader = (event) => {
+        const { scrollTop } = event.currentTarget;
+        const headerNode = doc.querySelector('.ibexa-content-edit-header');
+        const contentNode = doc.querySelector('.ibexa-content-edit-content');
+        const shouldHeaderBeSlim = scrollTop > SCROLL_POSITION_TO_FIT;
+
+        headerNode.classList.toggle('ibexa-content-edit-header--slim', shouldHeaderBeSlim);
+        contentNode.classList.toggle('ibexa-content-edit-content--wide', shouldHeaderBeSlim);
+    };
+    const fitSections = () => {
+        const contentColumn = doc.querySelector('.ibexa-main-container__content-column');
+        const lastSection = doc.querySelector('.ibexa-anchor-navigation-sections .ibexa-anchor-navigation-sections__section:last-child');
+
+        if (lastSection && lastSection.offsetHeight) {
+            const lastSectionHeight = lastSection.offsetHeight;
+            const headerHeight = doc.querySelector('.ibexa-content-edit-header').offsetHeight;
+            const contentColumnBodyHeight = contentColumn.offsetHeight - headerHeight;
+            const heightDiff = contentColumnBodyHeight - lastSectionHeight;
+
+            if (heightDiff > 0) {
+                lastSection.style.paddingBottom = `${heightDiff}px`;
+            }
+        }
+    };
 
     if (isAutosaveEnabled()) {
-        const autosaveWrapper = doc.querySelector('.ez-content-edit-page-title__autosave-wrapper');
+        const autosaveWrapper = doc.querySelector('.ibexa-autosave');
         const AUTOSAVE_SUBMIT_BUTTON_NAME = 'ezplatform_content_forms_content_edit[autosave]';
         let lastSuccessfulAutosave = null;
 
@@ -125,15 +142,15 @@
                 .then(() => {
                     lastSuccessfulAutosave = eZ.helpers.timezone.formatFullDateTime(new Date());
 
-                    autosaveWrapper.classList.remove('ez-content-edit-page-title__autosave-wrapper--failed');
-                    autosaveWrapper.classList.add('ez-content-edit-page-title__autosave-wrapper--saved');
+                    autosaveWrapper.classList.remove('ibexa-autosave--failed');
+                    autosaveWrapper.classList.add('ibexa-autosave--saved');
                 })
                 .catch(() => {
-                    autosaveWrapper.classList.remove('ez-content-edit-page-title__autosave-wrapper--saved');
-                    autosaveWrapper.classList.add('ez-content-edit-page-title__autosave-wrapper--failed');
+                    autosaveWrapper.classList.remove('ibexa-autosave--saved');
+                    autosaveWrapper.classList.add('ibexa-autosave--failed');
                 })
                 .finally(() => {
-                    autosaveWrapper.classList.remove('ez-content-edit-page-title__autosave-wrapper--not-saved');
+                    autosaveWrapper.classList.remove('ibexa-autosave--not-saved');
 
                     if (lastSuccessfulAutosave) {
                         const lastSavedText = Translator.trans(
@@ -141,8 +158,7 @@
                             { date: lastSuccessfulAutosave },
                             'content'
                         );
-
-                        autosaveWrapper.querySelector('.ez-content-edit-page-title__autosave-last-saved').innerHTML = lastSavedText;
+                        autosaveWrapper.querySelector('.ibexa-autosave__last-saved').innerHTML = lastSavedText;
                     }
                 });
         }, eZ.adminUiConfig.autosave.interval);
@@ -153,7 +169,7 @@
         const keyCode = event.charCode || event.keyCode || 0;
         const activeElementType = typeof doc.activeElement.type !== 'undefined' ? doc.activeElement.type.toLowerCase() : '';
 
-        if (keyCode === enterKeyCode && inputTypeToPreventSubmit.includes(activeElementType)) {
+        if (keyCode === ENTER_KEY_CODE && inputTypeToPreventSubmit.includes(activeElementType)) {
             event.preventDefault();
         }
     };
@@ -162,4 +178,7 @@
         btn.dataset.isFormValid = 0;
         btn.addEventListener('click', clickHandler, false);
     });
+
+    doc.querySelector('.ibexa-content-edit-content').addEventListener('scroll', fitHeader, false);
+    fitSections();
 })(window, window.document, window.eZ, window.Translator);

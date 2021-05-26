@@ -4,6 +4,8 @@
 
 {% block body_class %}ez-role-view ez-has-full-width-footer{% endblock %}
 
+{% block side_column %}{% endblock %}
+
 {% block breadcrumbs %}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
         { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
@@ -12,7 +14,7 @@
     ]} %}
 {% endblock %}
 
-{% block page_title %}
+{% block header %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'role.view.view.title'|trans({'%identifier%': role.identifier})|desc('Role "%identifier%"'),
         icon_name: 'roles'

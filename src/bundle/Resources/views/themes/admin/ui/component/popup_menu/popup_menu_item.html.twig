@@ -1,3 +1,5 @@
-<li class="ibexa-popup-menu__item {{ class|default('') }}">
-    {{ label }}
+{% import "@ezdesign/ui/component/macros.html.twig" as macros %}
+
+<li class="ibexa-popup-menu__item {{ class|default('') }}" {{ macros.attributes(attributes|default({})) }}>
+	{{ label }}
 </li>

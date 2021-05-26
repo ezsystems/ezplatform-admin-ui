@@ -123,32 +123,23 @@
         {% block navigation %}
             {% include '@ezdesign/ui/menu/top_navigation.html.twig' %}
         {% endblock %}
-        {% block header %}
-            <div class="container-fluid ez-header {% block header_class %}{% endblock %}">
-                <div class="container">
-                    {% block breadcrumbs %}{% endblock %}
-                    {% block page_title %}{% endblock %}
+
+        <div class="ibexa-main-container {% block main_container_class %}{% endblock %}">
+            {% block side_column %}
+                <div class="ibexa-main-container__side-column">
+                    {% block left_sidebar %}{% endblock %}
                 </div>
-            </div>
-        {% endblock %}
+            {% endblock %}
 
-        <div class="container-fluid ez-main-container">
-            {% block content %}
-
-                {% block left_sidebar %}
-                    <div class="ez-side-menu">
-                        <div class="ez-sticky-container">
-                            {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@ezdesign/ui/menu/sidebar_left.html.twig'}) }}
-                        </div>
+            {% block content_column %}
+                <div class="ibexa-main-container__content-column">
+                    <div class="container">
+                        {% block breadcrumbs %}{% endblock %}
+                        {% block header %}{% endblock %}
+                        {% block content %}{% endblock %}
                     </div>
-                    <div class="ez-content-tree-container"
-                        data-tree-root-location-id="{{ content_tree_module_root|default(ez_admin_ui_config['contentTree']['treeRootLocationId']) }}"
-                        data-current-location-path="{{ location_path|default('') }}">
-                        <div class="ez-content-tree-container__wrapper"></div>
-                    </div>
-                {% endblock left_sidebar %}
-
-            {% endblock content %}
+                </div>
+            {% endblock %}
         </div>
 
         {% block footer %}

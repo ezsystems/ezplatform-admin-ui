@@ -20,7 +20,7 @@ class LeftMenu extends Element
         parent::__construct($context);
         $this->fields = [
             'buttonSelector' => '.ez-sticky-container .btn',
-            'menuSelector' => '.ez-side-menu',
+            'menuSelector' => '.ibexa-side-menu',
         ];
     }
 

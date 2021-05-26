@@ -1,139 +1,147 @@
-.ez-content-edit-page-title {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    padding: 0 calculateRem(6px);
-
-    &--increased-left-margin {
-        margin-left: calculateRem(55px);
+.ibexa-content-edit-sidebar {
+    &__header {
+        height: calculateRem(87px);
+        padding: calculateRem(17px) 0 0 calculateRem(17px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
     }
 
-    &__main-data {
-        max-width: calculateRem(1000px);
+    &__body {
+        height: calc(100% - #{calculateRem(87px)});
+        overflow: auto;
     }
 
-    &__aditional-data {
+    &__back {
+        font-weight: 600;
+    }
+}
+
+.ibexa-content-edit-header {
+    height: calculateRem(241px);
+    background-color: $ibexa-color-white;
+    box-shadow: $ibexa-edit-header-box-shadow;
+    border-width: calculateRem(1px) calculateRem(1px) 0 calculateRem(1px);
+    border-style: solid;
+    border-color: $ibexa-color-light-400;
+    border-top-left-radius: $ibexa-border-radius;
+    border-top-right-radius: $ibexa-border-radius;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+    &__row {
+        &--top {
+            height: calculateRem(85px);
+        }
+
+        &--bottom {
+            height: calculateRem(154px);
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+    }
+
+    &__column {
+        position: static;
+
+        &--left {
+            padding-left: 0;
+            border-bottom: calculateRem(1px) solid $ibexa-color-light;
+
+            .ibexa-label {
+                margin-bottom: 0;
+                color: $ibexa-color-dark-400;
+            }
+        }
+
+        &--right {
+            .ibexa-autosave {
+                position: absolute;
+                top: calculateRem(96px);
+                right: calculateRem(64px);
+            }
+        }
+    }
+
+    &__context-actions {
         display: flex;
-        align-items: flex-end;
-        max-width: calculateRem(380px);
-        margin-left: calculateRem(170px);
+        position: absolute;
+        top: calculateRem(36px);
+        right: calculateRem(64px);
+        width: 45%;
     }
 
-    &__action {
-        font-weight: bold;
-    }
-
-    &__title {
+    &__tooltip {
         display: flex;
         align-items: center;
-        margin-bottom: calculateRem(4px);
-        font-size: calculateRem(26px);
+        margin-left: calculateRem(-24px);
     }
 
-    &__icon-wrapper {
-        display: inline-flex;
-        width: calculateRem(24px);
-        height: calculateRem(24px);
-        justify-content: center;
-        margin-left: calculateRem(8px);
-
-        .ibexa-icon {
-            fill: $ibexa-color-base-dark;
-        }
+    &__action-name,
+    &__location {
+        opacity: 1;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
     }
 
-    &__description,
-    &__location,
-    &__aditional-data {
-        color: $ibexa-color-font-pale;
-        font-size: calculateRem(14px);
+    &__separate-div {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: calculateRem(1px);
+        background: $ibexa-color-light;
+        transform: scaleX(0);
+        transition-duration: $ibexa-admin-transition-duration;
     }
 
-    &__content-info {
-        margin-left: calculateRem(10px);
+    .ibexa-autosave {
+        opacity: 1;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
     }
 
-    &__autosave-wrapper {
-        &--not-saved {
-            .ez-content-edit-page-title {
-                &__autosave-failed,
-                &__autosave-last-saved {
-                    display: none;
+    &--slim {
+        height: calculateRem(86px);
+
+        .ibexa-content-edit-header {
+            &__row {
+                &--top {
+                    height: calculateRem(85px);
                 }
+
+                &--bottom {
+                    height: calculateRem(85px);
+                    margin-top: calculateRem(-85px);
+                }
+            }
+
+            &__column {
+                &--left {
+                    border-bottom: none;
+                }
+            }
+
+            &__action-name,
+            &__location {
+                opacity: 0;
+                height: 0;
+            }
+
+            &__separate-div {
+                transform: scaleX(1);
             }
         }
 
-        &--saved {
-            .ez-content-edit-page-title {
-                &__autosave-failed {
-                    display: none;
-                }
-            }
-        }
-
-        &--failed {
-            .ez-content-edit-page-title {
-                &__autosave-info {
-                    display: none;
-                }
-
-                &__autosave-failed-marked {
-                    color: $ibexa-color-danger;
-                }
-            }
-
-            .ibexa-icon {
-                fill: $ibexa-color-danger;
-            }
+        .ibexa-autosave {
+            opacity: 0;
+            height: 0;
         }
     }
 }
 
-.ez-content-item {
-    &__title {
-        display: flex;
-    }
-
-    &__name {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        padding-left: calculateRem(2px);
-    }
-}
-
-.ez-content-item-status {
-    font-size: calculateRem(16px);
-    color: $ibexa-color-base-dark;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.ez-content-edit-container {
+.ibexa-content-edit-content {
     position: relative;
-    width: calc(100% - #{calculateRem(80px)});
-    margin-left: calculateRem(80px);
-
-    &__close {
-        position: fixed;
-        top: calculateRem(5px);
-        left: calculateRem(5px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: calculateRem(30px);
-        height: calculateRem(30px);
-    }
-}
-
-.ez-content-item__errors-wrapper {
-    color: $ibexa-color-danger;
-    font-size: calculateRem(14px);
-    padding: 0 calculateRem(6px);
-}
-
-.ez-header--content-edit {
-    .breadcrumb {
-        margin-bottom: 0;
-    }
+    padding-top: calculateRem(42px);
+    min-height: calc(100vh - #{calculateRem(273px)});
+    overflow-y: auto;
+    border-bottom-left-radius: $ibexa-border-radius;
+    border-width: 0 calculateRem(1px) calculateRem(1px);
+    border-style: solid;
+    border-color: $ibexa-color-light-400;
+    background-color: $ibexa-color-white;
+    box-shadow: $ibexa-edit-content-box-shadow;
 }
