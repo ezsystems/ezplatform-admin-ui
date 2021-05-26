@@ -1,0 +1,53 @@
+.ibexa-side-menu {
+    flex: 0 0 calculateRem(80px);
+
+    &--expanded {
+        z-index: 1000;
+    }
+
+    .ibexa-icon {
+        fill: $ibexa-white;
+    }
+
+    .ez-sticky-container > .btn {
+        width: 100%;
+        height: calculateRem(80px);
+        padding: calculateRem(2px) calculateRem(4px);
+        border: 0;
+        border-radius: 0;
+        text-decoration: none;
+        font-size: calculateRem(13px);
+        line-height: calculateRem(18px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &:hover,
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        &:first-child {
+            border-top-left-radius: $ibexa-border-radius;
+            border-top-right-radius: $ibexa-border-radius;
+        }
+
+        &:last-child {
+            border-bottom-left-radius: $ibexa-border-radius;
+            border-bottom-right-radius: $ibexa-border-radius;
+        }
+
+        .ibexa-icon {
+            display: block;
+            width: calculateRem(24px);
+            height: calculateRem(24px);
+            margin: 0 auto calculateRem(5px);
+        }
+    }
+
+    .ez-sticky-container {
+        max-width: calculateRem(90px);
+    }
+}

@@ -33,7 +33,7 @@ class UserCreationPage extends Page
         parent::__construct($context);
         $this->contentUpdateForm = ElementFactory::createElement($this->context, ContentUpdateForm::ELEMENT_NAME);
         $this->rightMenu = ElementFactory::createElement($this->context, RightMenu::ELEMENT_NAME);
-        $this->pageTitleLocator = '.ez-content-edit-page-title__title';
+        $this->pageTitleLocator = '.ibexa-content-edit-header__column h1';
     }
 
     public function verifyElements(): void

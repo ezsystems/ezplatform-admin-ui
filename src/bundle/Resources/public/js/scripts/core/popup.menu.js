@@ -1,13 +1,12 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const CLASS_POPUP_MENU_HIDDEN = 'ibexa-popup-menu--hidden';
-
     class PopupMenu {
         constructor(config) {
             this.popupMenuElement = config.popupMenuElement;
             this.triggerElement = config.triggerElement;
             this.onItemClick = config.onItemClick;
-            this.position = config.position;
-
+            this.position = config.position || (() => {});
+            
             this.handleToggle = this.handleToggle.bind(this);
             this.handleClickOutsidePopupMenu = this.handleClickOutsidePopupMenu.bind(this);
 

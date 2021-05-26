@@ -2,13 +2,13 @@
 
 {% trans_default_domain 'trash' %}
 
-{% block page_title %}{% endblock %}
-
 {% form_theme form_trash_item_restore '@ezdesign/ui/form_fields.html.twig' %}
 {% form_theme form_trash_item_delete '@ezdesign/ui/form_fields.html.twig' %}
 {% form_theme form_search '@ezdesign/ui/form_fields.html.twig' %}
 
 {% block body_class %}ez-trash-list-view ez-has-two-sidebars ez-has-full-width-footer{% endblock %}
+
+{% block side_column %}{% endblock %}
 
 {% block content %}
     {%  set trashSearchParams = app.request.get('trash_search') %}

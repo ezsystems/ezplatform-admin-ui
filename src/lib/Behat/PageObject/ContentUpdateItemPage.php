@@ -35,7 +35,7 @@ class ContentUpdateItemPage extends Page
         $this->route = '/content';
         $this->contentUpdateForm = ElementFactory::createElement($this->context, ContentUpdateForm::ELEMENT_NAME);
         $this->rightMenu = ElementFactory::createElement($this->context, RightMenu::ELEMENT_NAME);
-        $this->pageTitleLocator = '.ez-content-edit-page-title__title';
+        $this->pageTitleLocator = '.ibexa-content-edit-header__column h1';
         $this->pageTitle = $contentItemName;
     }
 

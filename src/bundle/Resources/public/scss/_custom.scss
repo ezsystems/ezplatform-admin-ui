@@ -2,7 +2,7 @@
 
 // Ibexa transition function
 $ibexa-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
-$ibexa-admin-transition-duration: 0.2s;
+$ibexa-admin-transition-duration: 0.4s;
 $ibexa-admin-widget-open-transition: all 0.3s ease-in;
 $ibexa-admin-widget-close-transition: all 0.3s ease-out;
 
@@ -365,6 +365,10 @@ $ibexa-text-font-size-small: calculateRem(12px);
 $ibexa-btn-focus-box-shadow: 0 0 0 calculateRem(3px) rgba($ibexa-color-primary, 0.2);
 $ibexa-btn-hover-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-danger, 0.2);
 $ibexa-btn-hover-box-shadow-dark: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-dark, 0.2);
+$ibexa-edit-header-box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.15);
+$ibexa-edit-content-box-shadow: calculateRem(4px) calculateRem(35px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.15);
+$ibexa-anchor-btn-hover-box-shadow: 0 0 calculateRem(14px) 0 rgba($ibexa-color-black, 0.05);
+$ibexa-context-menu-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-info, 0.15);
 
 // Ibexa gradients
 $ibexa-gradient-danger-primary: linear-gradient(to right, $ibexa-color-danger 0%, $ibexa-color-primary 100%);

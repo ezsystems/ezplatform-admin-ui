@@ -28,7 +28,7 @@ class ChangePasswordPage extends Page
         $this->rightMenu = ElementFactory::createElement($this->context, RightMenu::ELEMENT_NAME);
         $this->siteAccess = 'admin';
         $this->route = '/user/change-password';
-        $this->pageTitleLocator = '.ez-header h1';
+        $this->pageTitleLocator = '.ez-page-title h1';
         $this->fields = [
             'oldPassword' => '#user_password_change_oldPassword',
             'newPassword' => '#user_password_change_newPassword_first',

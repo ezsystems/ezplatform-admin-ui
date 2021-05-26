@@ -36,12 +36,12 @@
             'click',
             () => {
                 const actions = doc.querySelector(`.ez-extra-actions[data-actions="${btn.dataset.actions}"]`);
-
                 const isHidden = haveHiddenPart(actions);
                 const methodNameButton = isHidden ? 'add' : 'remove';
                 const methodNameContainer = isHidden ? 'remove' : 'add';
                 const methodNameMenu = isHidden ? 'add' : 'remove';
                 const focusElement = actions.querySelector(btn.dataset.focusElement);
+                const relatedNodeTrigger = doc.querySelector(`[data-related-button-id="${btn.id}"]`);
                 const detectClickOutside = (event) => {
                     const isNotButton = !btn.contains(event.target);
                     const shouldCollapseMenu = !btns.includes(event.target);
@@ -52,7 +52,7 @@
                         btn.classList.remove(CLASS_ACTIVE_BUTTON);
                         actions.classList.add(CLASS_HIDDEN);
 
-                        if (shouldCollapseMenu) {
+                        if (menu && shouldCollapseMenu) {
                             menu.classList.remove(CLASS_EXPANDED);
                         }
 
@@ -63,14 +63,23 @@
 
                 btn.classList[methodNameButton](CLASS_ACTIVE_BUTTON);
                 actions.classList[methodNameContainer](CLASS_HIDDEN);
-                menu.classList[methodNameMenu](CLASS_EXPANDED);
+
+                if (menu) {
+                    menu.classList[methodNameMenu](CLASS_EXPANDED);
+                }
 
                 if (!actions.classList.contains(CLASS_HIDDEN)) {
-                    doc.body.addEventListener('click', detectClickOutside, false);
+                    if (!relatedNodeTrigger) {
+                        doc.body.addEventListener('click', detectClickOutside, false);
+                    }
+
                     setContainerHeight();
                     addContainerHeightListeners();
                 } else {
-                    doc.body.removeEventListener('click', detectClickOutside);
+                    if (!relatedNodeTrigger) {
+                        doc.body.removeEventListener('click', detectClickOutside);
+                    }
+
                     removeContainerHeightListeners();
                 }
 

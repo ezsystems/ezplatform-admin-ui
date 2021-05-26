@@ -1,97 +1,129 @@
 {% extends view_base_layout is defined ? view_base_layout : '@ezdesign/ui/layout.html.twig' %}
 
+{% set extra_main_class = 'ibexa-main-container--edit-content' %}
+{% set grouped_fields = grouped_fields|default([]) %}
 {% set default_form_templates = ez_admin_ui_config.contentEditFormTemplates %}
 {% set form_templates = form_templates is defined ? default_form_templates|merge(form_templates) : default_form_templates %}
 
 {% trans_default_domain 'content_edit' %}
 {% form_theme form with form_templates %}
 
-{% block body_class %}ez-standalone-page ez-content-edit{% endblock %}
-{% block header_class %}ez-header--content-edit{% endblock %}
+{% if grouped_fields|length < 2 %}
+    {% set extra_main_class = extra_main_class ~ ' ibexa-main-container--without-grouped-fields' %}
+{% endif %}
+
+{% block main_container_class %}{{ extra_main_class }}{% endblock %}
 {% block navigation %}{% endblock %}
 
-{% block content %}
-    <div class="row align-items-stretch ez-main-row ez-main-row--edit">
-        {% block left_sidebar %}{% endblock left_sidebar %}
 
-        <div class="ez-content-edit-container">
-            {% block details %}{% endblock %}
+{% block left_sidebar %}
+    <div class="ibexa-content-edit-sidebar">
+        <div class="ibexa-content-edit-sidebar__header">
+            {% if without_close_button is not defined or without_close_button != true %}
+                {% set referrer_location = content is defined and is_published ? location : parent_location %}
+                
+                <a
+                    class="btn ibexa-btn ibexa-btn--ghost ibexa-content-edit-sidebar__back"
+                    href="{{ path('_ez_content_view', { 'contentId': referrer_location.contentId, 'locationId': referrer_location.id }) }}"
+                    title="{{ 'edit.close'|trans|desc('Close') }}"
+                >
+                    <svg class="ibexa-icon ibexa-icon--small">
+                        <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
+                    </svg>
+                    {{ "edit.close"|trans|desc('Close') }}
+                </a>
+            {% endif %}
+        </div>
+        
+        <div class="ibexa-content-edit-sidebar__body">
+            {% if grouped_fields|length > 1 %}
+                <ul class="ibexa-anchor-navigation-menu">
+                    {% for key, group in grouped_fields %}
+                        {% set sanitized_key = key|slug %}
 
-            {% block form_before %}{% endblock %}
+                        <li class="ibexa-anchor-navigation-menu__item">
+                            <button
+                                class="ibexa-anchor-navigation-menu__btn {% if loop.first %}ibexa-anchor-navigation-menu__btn--active{% endif %}" 
+                                data-anchor-target-section-id="#{{ sanitized_key }}"
+                            >
+                                {{ key }}
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
 
-            {% block form %}
-                {{ form_start(form, {'attr': {'class': 'ez-form-validate'}}) }}
+{% block content_column %}
+    <div class="ibexa-main-container__content-column">
+        {% block header %}{% endblock %}
+        {% block content %}
+            <div class="ibexa-content-edit-content">
+                <div class="container">
+                    {% block form_before %}{% endblock %}
 
-                {% block form_fields %}
-                    {% if grouped_fields is defined and grouped_fields|length > 1 %}
-                        {% set tabs_to_show = [] %}
-                        {% for key, group in grouped_fields %}
-                            {% set sanitized_key = key|slug %}
-                            {% set tabs_to_show = tabs_to_show|merge([{ 
-                                id: sanitized_key,
-                                label: key|capitalize,
-                                active: loop.first,
-                            }]) %}
-                        {% endfor %}
-                        {% embed '@ezdesign/ui/component/tab/tabs.html.twig' with { tabs: tabs_to_show } %}
-                            {% block tab_content %}
-                                {% for key, group in grouped_fields %}
-                                    {% set sanitized_key = key|slug %}
-                                    {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with { id: sanitized_key, active: loop.first } %}
-                                        {% block content %}
-                                            {% for field in group %}
-                                                {% set formField = form.fieldsData[field] %}
-                                                
-                                                {% if not formField.rendered %}
-                                                    {% if formField.value is defined %}
-                                                        {{- form_widget(formField) -}}
+                    {% block form %}
+                        {{ form_start(form, {'attr': {'class': 'ez-form-validate'}}) }}
+                            {% block form_fields %}
+                                {% if grouped_fields|length > 1 %}
+                                    <div class="ibexa-anchor-navigation-sections">
+                                        {% for key, group in grouped_fields %}
+                                            {% set sanitized_key = key|slug %}
+
+                                            <div 
+                                                data-anchor-section-id="#{{ sanitized_key }}"
+                                                class="row ibexa-anchor-navigation-sections__section {{ loop.first ? 'ibexa-anchor-navigation-sections__section--active' }}"
+                                            >
+                                                <div class="offset-1 col-6">
+                                                    {% for field in group %}
+                                                        {% set formField = form.fieldsData[field] %}
+                                                        
+                                                        {% if not formField.rendered %}
+                                                            {% if formField.value is defined %}
+                                                                {{- form_widget(formField) -}}
+                                                            {% else %}
+                                                                <div class="ez-field-edit ez-field-edit--eznoneditable">
+                                                                    {{- form_label(formField) -}}
+                                                                    <p class="non-editable">
+                                                                        {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
+                                                                    </p>
+                                                                    {% do formField.setRendered() %}
+                                                                </div>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <div class="row">
+                                        <div class="offset-1 col-6 p-0">
+                                            {% for field in form.fieldsData %}
+                                                {% if not field.rendered %}
+                                                    {% if field.value is defined %}
+                                                        {{- form_widget(field) -}}
                                                     {% else %}
                                                         <div class="ez-field-edit ez-field-edit--eznoneditable">
-                                                            {{- form_label(formField) -}}
+                                                            {{- form_label(field) -}}
                                                             <p class="non-editable">
                                                                 {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
                                                             </p>
-                                                            {% do formField.setRendered() %}
+                                                            {% do field.setRendered() %}
                                                         </div>
                                                     {% endif %}
                                                 {% endif %}
-                                            {% endfor %}
-                                        {% endblock %}
-                                    {% endembed %}
-                                {% endfor %}
-                            {% endblock %}
-                        {% endembed %}
-                    {% else %}
-                        <div class="px-3">
-                            {% for field in form.fieldsData %}
-                                {% if not field.rendered %}
-                                    {% if field.value is defined %}
-                                        {{- form_widget(field) -}}
-                                    {% else %}
-                                        <div class="ez-field-edit ez-field-edit--eznoneditable">
-                                            {{- form_label(field) -}}
-                                            <p class="non-editable">
-                                                {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
-                                            </p>
-                                            {% do field.setRendered() %}
+                                            {%- endfor %}
                                         </div>
-                                    {% endif %}
+                                    </div>
                                 {% endif %}
-                            {%- endfor %}
-                        </div>
-                    {% endif %}
-                {% endblock %}
+                            {% endblock %}
+                        {{ form_end(form) }}
+                    {% endblock %}
 
-                {{ form_end(form) }}
-            {% endblock %}
-
-            {% block form_after %}{% endblock %}
-        </div>
-
-        {% block right_sidebar_wrapper %}
-            <div class="ez-context-menu">
-                <div class="ez-sticky-container">
-                    {% block right_sidebar %}{% endblock %}
+                    {% block form_after %}{% endblock %}
                 </div>
             </div>
         {% endblock %}

@@ -6,45 +6,10 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="deaae5ae4af921bf70119d74a79b4482b896e74e" resname="content.autosave.failed.message">
-        <source>Autosave failed</source>
-        <target state="new">Autosave failed</target>
-        <note>key: content.autosave.failed.message</note>
-      </trans-unit>
-      <trans-unit id="6ab7bf20071dda168e69186c4b3e44bd89424e4b" resname="content.autosave.retry.message">
-        <source>please try to save manually.</source>
-        <target state="new">please try to save manually.</target>
-        <note>key: content.autosave.retry.message</note>
-      </trans-unit>
-      <trans-unit id="d5ff5360463d166a9b190aaade8acd1973875f97" resname="content.autosave.turn_of.message">
-        <source>You can turn autosave off in your user settings</source>
-        <target state="new">You can turn autosave off in your user settings</target>
-        <note>key: content.autosave.turn_of.message</note>
-      </trans-unit>
       <trans-unit id="8343cec7024fb459d738278aca82b39710b89c50" resname="content.create_draft.success">
         <source>Created a new draft for '%name%'.</source>
         <target state="new">Created a new draft for '%name%'.</target>
         <note>key: content.create_draft.success</note>
-      </trans-unit>
-      <trans-unit id="21e7545fc420d95a59a713437d9dc28d85d82ceb" resname="content.details.content_id">
-        <source>Content ID: %contentId%</source>
-        <target state="new">Content ID: %contentId%</target>
-        <note>key: content.details.content_id</note>
-      </trans-unit>
-      <trans-unit id="fbf8f503b8af11a779316ffa7e12085401212748" resname="content.details.created_by">
-        <source>Created by %name%</source>
-        <target state="new">Created by %name%</target>
-        <note>key: content.details.created_by</note>
-      </trans-unit>
-      <trans-unit id="b703ce905c39239f607ffa395acf83d2dd6046f0" resname="content.details.location_id">
-        <source>Location ID: %locationId%</source>
-        <target state="new">Location ID: %locationId%</target>
-        <note>key: content.details.location_id</note>
-      </trans-unit>
-      <trans-unit id="fc543140fe88431b31013a20fbceef4ecf9e7430" resname="content.details.parent_location_id">
-        <source>Parent Location ID: %locationId%</source>
-        <target state="new">Parent Location ID: %locationId%</target>
-        <note>key: content.details.parent_location_id</note>
       </trans-unit>
       <trans-unit id="1ea2690f8ebd8fc99115a6f94ac56b8b93e46afe" resname="content.draft.conflict.error">
         <source>Cannot check if the draft has conflicts with other drafts. %error%.</source>
@@ -91,19 +56,14 @@
         <target state="new">More</target>
         <note>key: content.view.more.label</note>
       </trans-unit>
-      <trans-unit id="07b56fa9149c034a5b2f562d77e094e381618b22" resname="content_edit.autosave.message">
-        <source><![CDATA[<b>Autosave</b> is on.]]></source>
-        <target state="new"><![CDATA[<b>Autosave</b> is on.]]></target>
-        <note>key: content_edit.autosave.message</note>
-      </trans-unit>
       <trans-unit id="fab6f6efafaeec371aaa8302c82362846d2b8f69" resname="content_edit.last_saved">
         <source>Last saved draft was on %date%</source>
         <target state="new">Last saved draft was on %date%</target>
         <note>key: content_edit.last_saved</note>
       </trans-unit>
       <trans-unit id="750bead6705b295c7b7d66c27b2768c1b9329ed5" resname="editing_details">
-        <source><![CDATA[<b>in</b> %language_name% <b>under</b> %location_name%]]></source>
-        <target state="new"><![CDATA[<b>in</b> %language_name% <b>under</b> %location_name%]]></target>
+        <source>under %location_name%</source>
+        <target state="new">under %location_name%</target>
         <note>key: editing_details</note>
       </trans-unit>
       <trans-unit id="583285bb674e4f29b273ceb4b19dc700e44c4130" resname="tooltip.close_label">

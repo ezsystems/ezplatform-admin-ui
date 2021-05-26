@@ -29,7 +29,7 @@ class ContentTypeGroupsPage extends Page
         $this->route = '/contenttypegroup/list';
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, self::PAGE_NAME, LinkedListTable::ELEMENT_NAME);
         $this->pageTitle = self::PAGE_NAME;
-        $this->pageTitleLocator = '.ez-header h1';
+        $this->pageTitleLocator = '.ez-page-title h1';
     }
 
     /**
