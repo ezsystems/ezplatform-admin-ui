@@ -24,7 +24,7 @@ class DraftConflictDialog extends Element
         parent::__construct($context);
         $this->fields = [
             'dialog' => '.ez-modal--version-draft-conflict.show',
-            'addDraft' => '.ez-btn--add-draft',
+            'addDraft' => '.ibexa-btn--add-draft',
         ];
         $this->draftConflictTable = ElementFactory::createElement($context, DraftConflictTable::ELEMENT_NAME, $this->fields['dialog']);
     }

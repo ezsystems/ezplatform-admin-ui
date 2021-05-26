@@ -34,14 +34,14 @@
 
             wrapper.innerHTML = modalHtml;
 
-            const addDraftButton = wrapper.querySelector('.ez-btn--add-draft');
+            const addDraftButton = wrapper.querySelector('.ibexa-btn--add-draft');
 
             if (addDraftButton) {
                 addDraftButton.addEventListener('click', addDraft, false);
             }
 
             wrapper
-                .querySelectorAll('.ez-btn--prevented')
+                .querySelectorAll('.ibexa-btn--prevented')
                 .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
             $('#version-draft-conflict-modal').modal('show');
         };
@@ -73,5 +73,5 @@
             .catch(showErrorNotification);
     };
 
-    doc.querySelectorAll('.ez-btn--content-edit').forEach((button) => button.addEventListener('click', editVersion, false));
+    doc.querySelectorAll('.ibexa-btn--content-edit').forEach((button) => button.addEventListener('click', editVersion, false));
 })(window, window.document, window.jQuery, window.eZ, window.Translator, window.Routing);

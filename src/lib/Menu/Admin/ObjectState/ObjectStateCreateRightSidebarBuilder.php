@@ -56,7 +56,7 @@ class ObjectStateCreateRightSidebarBuilder extends AbstractBuilder implements Tr
                 self::ITEM__CREATE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => '#object_state_create_create',
                     ],
                     'extras' => ['icon' => 'publish'],

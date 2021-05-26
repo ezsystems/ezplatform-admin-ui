@@ -33,9 +33,9 @@
                     <a
                         title="{{ 'role.view.list.action.add'|trans|desc('Create a Role') }}"
                         href="{{ path('ezplatform.role.create') }}"
-                        class="btn btn-icon"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     >
-                        <svg class="ez-icon ez-icon-create">
+                        <svg class="ez-icon ez-icon--small ez-icon-create">
                             <use xlink:href="{{ ez_icon_path('create') }}"></use>
                         </svg>
                     </a>
@@ -45,13 +45,13 @@
                     <button
                         id="delete-roles"
                         type="button"
-                        class="btn btn-icon"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
                         title="{{ 'role.view.list.action.delete'|trans|desc('Delete Role') }}"
                     >
-                        <svg class="ez-icon ez-icon-trash">
+                        <svg class="ez-icon ez-icon--small ez-icon-trash">
                             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
@@ -94,8 +94,8 @@
                             <a
                                 title="{{ 'role.view.list.action.assign_to_users_or_groups'|trans|desc('Assign to Users/Groups') }}"
                                 href="{{ path('ezplatform.role_assignment.create', { roleId: role.id }) }}"
-                                class="btn btn-icon">
-                                <svg class="ez-icon ez-icon--secondary">
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
+                                <svg class="ez-icon ez-icon--small">
                                     <use xlink:href="{{ ez_icon_path('assign-user') }}"></use>
                                 </svg>
                             </a>
@@ -104,8 +104,8 @@
                             <a
                                 title="{{ 'role.view.list.action.copy'|trans|desc('Copy') }}"
                                 href="{{ path('ezplatform.role.copy', { roleId: role.id }) }}"
-                                class="btn btn-icon">
-                                <svg class="ez-icon ez-icon--secondary">
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
+                                <svg class="ez-icon ez-icon--small">
                                     <use xlink:href="{{ ez_icon_path('copy') }}"></use>
                                 </svg>
                             </a>
@@ -114,8 +114,8 @@
                             <a
                                 title="{{ 'role.view.list.action.edit'|trans|desc('Edit') }}"
                                 href="{{ path('ezplatform.role.update', { roleId: role.id }) }}"
-                                class="btn btn-icon">
-                                <svg class="ez-icon ez-icon--secondary">
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
+                                <svg class="ez-icon ez-icon--small">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </a>

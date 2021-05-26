@@ -31,9 +31,9 @@
                     <a
                         title="{{ 'language.new'|trans|desc('Create a new language') }}"
                         href="{{ path('ezplatform.language.create') }}"
-                        class="btn btn-icon"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     >
-                        <svg class="ez-icon ez-icon-create">
+                        <svg class="ez-icon ez-icon--small ez-icon-create">
                             <use xlink:href="{{ ez_icon_path('create') }}"></use>
                         </svg>
                     </a>
@@ -41,13 +41,13 @@
                     <button
                         id="delete-languages"
                         type="button"
-                        class="btn btn-icon"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
                         title="{{ 'language.delete'|trans|desc('Delete language') }}"
                     >
-                        <svg class="ez-icon ez-icon-trash">
+                        <svg class="ez-icon ez-icon--small ez-icon-trash">
                             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
@@ -101,8 +101,8 @@
                             <a
                                 title="{{ 'language.edit'|trans|desc('Edit') }}"
                                 href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
-                                class="btn btn-icon mx-2">
-                                <svg class="ez-icon ez-icon--secondary">
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
+                                <svg class="ez-icon ez-icon--small">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </a>

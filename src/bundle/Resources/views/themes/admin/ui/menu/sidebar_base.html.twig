@@ -8,7 +8,7 @@
 
 {% block item -%}
     {%- if item.displayed -%}
-        {%- set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' ' ~ default_classes|default('btn btn-secondary btn-block'))|trim}) -%}
+        {%- set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' ' ~ default_classes|default('btn ibexa-btn ibexa-btn--secondary btn-block'))|trim}) -%}
         {%- set attributes = attributes|merge({'id': item.name ~ '-tab'}) -%}
 
         {%- if item.uri is not empty %}
@@ -48,5 +48,5 @@
             <use xlink:href="{{ icon_path }}"></use>
         </svg>
     {% endif %}
-    <span class="ez-btn__label">{{ parent() }}</span>
+    <span class="ibexa-btn__label">{{ parent() }}</span>
 {% endblock %}

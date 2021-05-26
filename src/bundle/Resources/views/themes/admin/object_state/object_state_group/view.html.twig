@@ -44,8 +44,8 @@
                         {% if can_administrate %}
                             <a title="{{ 'object_state_group.view.list.action.edit'|trans|desc('Edit') }}"
                                href="{{ path('ezplatform.object_state.group.update', {'objectStateGroupId': object_state_group.id}) }}"
-                               class="btn btn-icon mx-2">
-                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
+                               class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
+                                <svg class="ez-icon ez-icon--small ez-icon-edit">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </a>

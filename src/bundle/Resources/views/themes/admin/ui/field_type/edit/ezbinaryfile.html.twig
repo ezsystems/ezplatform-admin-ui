@@ -15,14 +15,14 @@
             <div class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</div>
         </div>
         <div class="ez-field-edit-preview__actions">
-            <a class="ez-field-edit-preview__action--preview btn btn-icon" href="{{ form.parent.vars.value.value.uri }}"
+            <a class="ez-field-edit-preview__action--preview btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text" href="{{ form.parent.vars.value.value.uri }}"
                title="{{ 'ezbinaryfile.action.download'|trans|desc('Download') }}" download>
-                <svg class="ez-icon ez-icon--small-medium">
+                <svg class="ez-icon ez-icon--small">
                     <use xlink:href="{{ ez_icon_path('download') }}"></use>
                 </svg>
             </a>
-            <button type="button" class="ez-field-edit-preview__action--remove btn btn-icon" title="{{ 'ezbinaryfile.action.remove'|trans|desc('Remove') }}">
-                <svg class="ez-icon ez-icon--small-medium">
+            <button type="button" class="ez-field-edit-preview__action--remove btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text" title="{{ 'ezbinaryfile.action.remove'|trans|desc('Remove') }}">
+                <svg class="ez-icon ez-icon--small">
                     <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                 </svg>
             </button>

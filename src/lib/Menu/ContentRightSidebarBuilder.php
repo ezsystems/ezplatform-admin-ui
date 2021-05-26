@@ -144,7 +144,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         );
 
         $createAttributes = [
-            'class' => 'ez-btn--extra-actions ez-btn--create',
+            'class' => 'ibexa-btn--extra-actions ibexa-btn--create',
             'data-actions' => 'create',
             'data-focus-element' => '.ez-instant-filter__input',
         ];
@@ -153,7 +153,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'data-target' => '#trash-location-modal',
         ];
         $copySubtreeAttributes = [
-            'class' => 'ez-btn--udw-copy-subtree',
+            'class' => 'ibexa-btn--udw-copy-subtree',
             'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
             'data-root-location' => $startingLocationId,
         ];
@@ -191,7 +191,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 [
                     'extras' => ['icon' => 'move', 'orderNumber' => 30],
                     'attributes' => [
-                        'class' => 'btn--udw-move',
+                        'class' => 'ibexa-btn--udw-move',
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                         'data-root-location' => $startingLocationId,
                     ],
@@ -205,7 +205,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     [
                         'extras' => ['icon' => 'copy', 'orderNumber' => 40],
                         'attributes' => [
-                            'class' => 'btn--udw-copy',
+                            'class' => 'ibexa-btn--udw-copy',
                             'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
                             'data-root-location' => $startingLocationId,
                         ],
@@ -292,11 +292,11 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     private function addEditMenuItem(ItemInterface $menu, bool $contentIsUser, bool $canEdit): void
     {
         $editAttributes = [
-            'class' => 'ez-btn--extra-actions ez-btn--edit',
+            'class' => 'ibexa-btn--extra-actions ibexa-btn--edit',
             'data-actions' => 'edit',
         ];
         $editUserAttributes = [
-            'class' => 'ez-btn--extra-actions ez-btn--edit-user',
+            'class' => 'ibexa-btn--extra-actions ibexa-btn--edit-user',
             'data-actions' => 'edit-user',
         ];
 
@@ -338,7 +338,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 [
                     'extras' => ['icon' => 'reveal', 'orderNumber' => 60],
                     'attributes' => [
-                        'class' => 'ez-btn--reveal',
+                        'class' => 'ibexa-btn--reveal',
                         'data-actions' => 'reveal',
                     ],
                 ]
@@ -357,7 +357,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 [
                     'extras' => ['icon' => 'hide', 'orderNumber' => 60],
                     'attributes' => [
-                        'class' => 'ez-btn--hide',
+                        'class' => 'ibexa-btn--hide',
                         'data-actions' => 'hide',
                     ],
                 ]

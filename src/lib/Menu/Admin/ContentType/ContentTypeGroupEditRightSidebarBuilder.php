@@ -70,7 +70,7 @@ class ContentTypeGroupEditRightSidebarBuilder extends AbstractBuilder implements
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#%s', $saveId),
                     ],
                     'extras' => ['icon' => 'save'],

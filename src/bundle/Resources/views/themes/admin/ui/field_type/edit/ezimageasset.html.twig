@@ -60,11 +60,11 @@
 {% endblock %}
 
 {% block ezimageasset_source_buttons %}
-    <button class="btn ez-data-source__btn-add btn-secondary">
+    <button class="btn ibexa-btn ibexa-btn--secondary ez-data-source__btn-add">
         {{ 'fieldtype.ezimageasset.upload.label'|trans|desc('Upload image') }}
     </button>
     <button
-        class="btn ez-data-source__btn-select btn-secondary"
+        class="btn ibexa-btn ibexa-btn--secondary ez-data-source__btn-select"
         data-udw-config="{{ ez_udw_config('image_asset', {}) }}"
     >
         {{ 'fieldtype.ezimageasset.select.label'|trans|desc('Select from your Repository') }}

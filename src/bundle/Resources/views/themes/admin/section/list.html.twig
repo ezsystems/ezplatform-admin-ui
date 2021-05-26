@@ -30,9 +30,9 @@
                     <a
                         title="{{ 'section.new'|trans|desc('Create a new Section') }}"
                         href="{{ path('ezplatform.section.create') }}"
-                        class="btn btn-icon"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     >
-                        <svg class="ez-icon ez-icon-create">
+                        <svg class="ez-icon ez-icon--small ez-icon-create">
                             <use xlink:href="{{ ez_icon_path('create') }}"></use>
                         </svg>
                     </a>
@@ -42,13 +42,13 @@
                     <button
                         id="delete-sections"
                         type="button"
-                        class="btn btn-icon"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                         disabled
                         data-toggle="modal"
                         data-target="#{{ modal_data_target }}"
                         title="{{ 'section.delete'|trans|desc('Delete Section') }}"
                     >
-                        <svg class="ez-icon ez-icon-trash">
+                        <svg class="ez-icon ez-icon--small ez-icon-trash">
                             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
@@ -102,8 +102,8 @@
                                 data-section-id="{{ section.id }}"
                                 data-form-action="{{ path("ezplatform.section.assign_content", {"sectionId": section.id}) }}"
                                 data-udw-config="{{ ez_udw_config('multiple', {'type': 'section_assign'}) }}"
-                                class="btn btn-icon mx-3">
-                                <svg class="ez-icon ez-icon-relations ez-icon--secondary btn--open-udw">
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-3">
+                                <svg class="ez-icon ez-icon-relations ez-icon--small ibexa-btn--open-udw">
                                     <use xlink:href="{{ ez_icon_path('assign-section') }}"></use>
                                 </svg>
                             </a>
@@ -111,8 +111,8 @@
                         {% if can_edit %}
                             <a title="{{ 'section.edit'|trans|desc('Edit') }}"
                                href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
-                               class="btn btn-icon mx-2">
-                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
+                               class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
+                                <svg class="ez-icon ez-icon--small ez-icon-edit">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </a>

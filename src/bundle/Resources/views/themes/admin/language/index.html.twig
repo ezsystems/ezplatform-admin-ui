@@ -36,11 +36,11 @@
                     {{ form_widget(deleteForm.language) }}
                     <button
                         type="button"
-                        class="btn btn-icon"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                         data-toggle="modal"
                         title="{{ 'language.delete'|trans|desc('Delete language') }}"
                         data-target="#delete-language-modal">
-                        <svg class="ez-icon">
+                        <svg class="ez-icon ez-icon--small">
                             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
@@ -78,9 +78,9 @@
                         {% if can_administrate %}
                             <a
                                 href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
-                                class="btn btn-icon mx-2"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2"
                                 title="{{ 'language.edit'|trans|desc('Edit') }}">
-                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
+                                <svg class="ez-icon ez-icon--small ez-icon-edit">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </a>

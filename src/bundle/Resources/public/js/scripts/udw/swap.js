@@ -1,5 +1,5 @@
 (function(global, doc, eZ, React, ReactDOM, Translator) {
-    const btns = doc.querySelectorAll('.btn--udw-swap');
+    const btns = doc.querySelectorAll('.ibexa-btn--udw-swap');
     const form = doc.querySelector('form[name="location_swap"]');
     const input = form.querySelector('#location_swap_new_location');
     const udwContainer = doc.getElementById('react-udw');

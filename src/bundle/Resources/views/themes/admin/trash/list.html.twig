@@ -56,8 +56,8 @@
                                     placeholder="{{ 'search.creator_input.placeholder'|trans|desc('Type creator\'s name') }}"
                                     {{ creatorExists ? 'disabled'  }}
                                 >
-                                <button class="btn btn-icon ez-btn--reset-creator">
-                                    <svg class="ez-icon ez-icon--secondary ez-icon--medium ez-icon--reset">
+                                <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--reset-creator">
+                                    <svg class="ez-icon ez-icon--small ez-icon--reset">
                                         <use xlink:href="{{ ez_icon_path('circle-close') }}"></use>
                                     </svg>
                                 </button>
@@ -98,14 +98,14 @@
                             {% set restore_under_new_parent_button_attr = form_trash_item_restore.location.select_content.vars.attr|merge({
                                 'attr': {
                                     'data-udw-config': ez_udw_config('single_container', {}),
-                                    'class': (form_trash_item_restore.location.select_content.vars.attr.class|default('') ~ ' btn btn-icon')|trim,
+                                    'class': (form_trash_item_restore.location.select_content.vars.attr.class|default('') ~ ' btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text')|trim,
                                     'disabled': true
                                 }
                             }) %}
                             {{ form_widget(form_trash_item_restore.location.select_content, restore_under_new_parent_button_attr) }}
                             {{ form_widget(form_trash_item_restore.location.location) }}
                             {% do form_trash_item_restore.location.setRendered %}
-                            {{ form_widget(form_trash_item_restore.restore, {'attr': {'class': 'btn btn-icon', 'disabled': true}}) }}
+                            {{ form_widget(form_trash_item_restore.restore, {'attr': {'class': 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text', 'disabled': true}}) }}
                         {% else %}
                             {% do form_trash_item_restore.location.setRendered %}
                             {% do form_trash_item_restore.restore.setRendered %}
@@ -115,12 +115,12 @@
                             <button
                                 id="delete-trash-items"
                                 type="button"
-                                class="btn btn-icon"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                                 disabled
                                 data-toggle="modal"
                                 data-target="#{{ modal_data_target }}"
                                 title="{{ 'trash.delete'|trans|desc('Delete') }}">
-                                <svg class="ez-icon ez-icon-trash">
+                                <svg class="ez-icon ez-icon--small ez-icon-trash">
                                     <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                                 </svg>
                             </button>

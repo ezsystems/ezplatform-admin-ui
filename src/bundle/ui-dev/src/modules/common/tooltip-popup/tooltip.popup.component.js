@@ -49,7 +49,7 @@ const TooltipPopupComponent = (props) => {
                 {props.children}
             </div>
             <div className="c-tooltip-popup__footer">
-                <button class="btn btn-secondary" onClick={props.onClose}>
+                <button class="btn ibexa-btn ibexa-btn--secondary" onClick={props.onClose}>
                     {closeLabel}
                 </button>
             </div>

@@ -51,7 +51,7 @@ class UserCreateRightSidebarBuilder extends AbstractBuilder implements Translati
                 self::ITEM__CREATE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => '#ezplatform_content_forms_user_create_create',
                     ],
                     'extras' => ['icon' => 'publish'],
@@ -61,7 +61,7 @@ class UserCreateRightSidebarBuilder extends AbstractBuilder implements Translati
                 self::ITEM__CANCEL,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => '#ezplatform_content_forms_user_create_cancel',
                     ],
                     'extras' => ['icon' => 'circle-close'],

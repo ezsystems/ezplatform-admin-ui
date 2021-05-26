@@ -57,7 +57,7 @@ class RolePage extends Page
         $this->pageTitle = sprintf('Role "%s"', $roleName);
         $this->pageTitleLocator = '.ez-header h1';
         $this->fields = [
-            'assignButton' => '.btn-secondary',
+            'assignButton' => '.ibexa-btn .ibexa-btn--secondary',
         ];
     }
 

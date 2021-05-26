@@ -56,16 +56,16 @@
                 <div class="form-inline">
                     <div class="ez-card__field-control mr-2">
                     {{ form_widget(form.fieldTypeSelection, {'attr': {'class': 'ez-field-selection'}}) }}
-                    {{ form_widget(form.addFieldDefinition, {'attr': {'class': 'btn btn-secondary'}}) }}
+                    {{ form_widget(form.addFieldDefinition, {'attr': {'class': 'btn ibexa-btn ibexa-btn--secondary'}}) }}
                     </div>
 
                     <button type="button"
                             title="{{ 'content_type.view.edit.content_field_definition.delete'|trans|desc('Delete Field definition(s)') }}"
-                            class="btn btn-icon"
+                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                             data-toggle="modal"
                             data-target="#delete-content-type-modal"
                             {% if form.addFieldDefinition.vars.disabled %} disabled {% endif %}>
-                        <svg class="ez-icon ez-icon--medium ez-icon--light">
+                        <svg class="ez-icon ez-icon--small ez-icon--light">
                             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>

@@ -12,9 +12,9 @@
                 <a
                     href="{{ path('ezplatform.content_type.add', {contentTypeGroupId: content_type_group.id}) }}"
                     title="{{ 'content_type.view.list.action.add'|trans|desc('Create a Content Type') }}"
-                    class="btn btn-icon"
+                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                 >
-                    <svg class="ez-icon ez-icon-create">
+                    <svg class="ez-icon ez-icon--small ez-icon-create">
                         <use xlink:href="{{ ez_icon_path('create') }}"></use>
                     </svg>
                 </a>
@@ -24,13 +24,13 @@
                 <button
                     id="delete-content-types"
                     type="button"
-                    class="btn btn-icon"
+                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     disabled
                     data-toggle="modal"
                     data-target="#{{ modal_data_target }}"
                     title="{{ 'content_type.view.list.action.delete'|trans|desc('Delete Content Type') }}"
                 >
-                    <svg class="ez-icon ez-icon-trash">
+                    <svg class="ez-icon ez-icon--small ez-icon-trash">
                         <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                     </svg>
                 </button>
@@ -87,10 +87,10 @@
                 <td class="ez-table__cell">{{ content_type.modificationDate|ez_full_datetime }}</td>
                 <td class="ez-table__cell ez-table__cell--has-action-btns">
                     {% if can_create %}
-                        {{ macros.content_type_copy(content_type, content_type_group, 'btn btn-icon mx-2 ez-btn--copy-content-type') }}
+                        {{ macros.content_type_copy(content_type, content_type_group, 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--copy-content-type') }}
                     {% endif %}
                     {% if can_update %}
-                        {{ macros.content_type_edit(content_type, content_type_group, 'btn btn-icon mx-2') }}
+                        {{ macros.content_type_edit(content_type, content_type_group, 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2') }}
                     {% endif %}
                 </td>
             </tr>

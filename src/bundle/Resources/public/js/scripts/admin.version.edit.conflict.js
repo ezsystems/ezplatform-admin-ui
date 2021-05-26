@@ -44,5 +44,5 @@
             .catch(showErrorNotification);
     };
 
-    doc.querySelectorAll('.ez-btn--content-draft-edit').forEach((button) => button.addEventListener('click', editVersion, false));
+    doc.querySelectorAll('.ibexa-btn--content-draft-edit').forEach((button) => button.addEventListener('click', editVersion, false));
 })(window, window.document, window.jQuery, window.eZ, window.Translator, window.Routing);

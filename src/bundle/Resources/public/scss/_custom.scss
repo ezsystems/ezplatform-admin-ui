@@ -2,6 +2,7 @@
 
 // Ibexa transition function
 $ibexa-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
+$ibexa-admin-transition-duration: 0.2s;
 $ibexa-admin-widget-open-transition: all 0.3s ease-in;
 $ibexa-admin-widget-close-transition: all 0.3s ease-out;
 
@@ -261,7 +262,7 @@ $headings-font-family: 'Work Sans SemiBold', sans-serif;
 $font-family-sans-serif: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
 
 //Border
-$ibexa-border-radius: calculateRem(2px);
+$ibexa-border-radius: calculateRem(10px);
 
 // Tables
 $table-cell-padding: calculateRem(12px) calculateRem(16px);
@@ -359,3 +360,11 @@ $ibexa-text-font-size-large: calculateRem(18px);
 $ibexa-text-font-size: calculateRem(16px);
 $ibexa-text-font-size-medium: calculateRem(14px);
 $ibexa-text-font-size-small: calculateRem(12px);
+
+// Ibexa shadows
+$ibexa-btn-focus-box-shadow: 0 0 0 calculateRem(3px) rgba($ibexa-color-primary, 0.2);
+$ibexa-btn-hover-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-danger, 0.2);
+$ibexa-btn-hover-box-shadow-dark: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-dark, 0.2);
+
+// Ibexa gradients
+$ibexa-gradient-danger-primary: linear-gradient(to right, $ibexa-color-danger 0%, $ibexa-color-primary 100%);

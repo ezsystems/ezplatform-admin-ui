@@ -27,14 +27,14 @@
         doc.body.dispatchEvent(event);
     };
     const attachModalListeners = (wrapper) => {
-        const addDraftButton = wrapper.querySelector('.ez-btn--add-draft');
+        const addDraftButton = wrapper.querySelector('.ibexa-btn--add-draft');
 
         if (addDraftButton) {
             addDraftButton.addEventListener('click', addDraft, false);
         }
 
         wrapper
-            .querySelectorAll('.ez-btn--prevented')
+            .querySelectorAll('.ibexa-btn--prevented')
             .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
 
         $('#version-draft-conflict-modal')

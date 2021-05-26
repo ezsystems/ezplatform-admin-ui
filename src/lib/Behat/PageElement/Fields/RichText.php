@@ -27,17 +27,17 @@ class RichText extends EzFieldElement
         parent::__construct($context, $locator, $label);
         $this->fields['fieldInput'] = '.ez-data-source__richtext';
         $this->fields['textarea'] = $this->fields['fieldContainer'] . ' textarea';
-        $this->fields['embedInlineButton'] = '.ez-btn-ae--embed-inline';
-        $this->fields['embedButton'] = '.ez-btn-ae--embed';
+        $this->fields['embedInlineButton'] = '.ibexa-btn-ae--embed-inline';
+        $this->fields['embedButton'] = '.ibexa-btn-ae--embed';
         $this->fields['addButton'] = '.ae-button-add';
         $this->fields['embedTitle'] = '.cke_widget_ezembed .ez-embed-content__title';
         $this->fields['embedInlineTitle'] = '.cke_widget_ezembedinline .ez-embed-content__title';
-        $this->fields['unorderedListButton'] = '.ez-btn-ae--unordered-list';
+        $this->fields['unorderedListButton'] = '.ibexa-btn-ae--unordered-list';
         $this->fields['unorderedListElement'] = '.ez-data-source__richtext ul li';
         $this->fields['styleDropdown'] = '.ae-toolbar-element';
         $this->fields['blockStyle'] = '.ae-listbox li %s';
-        $this->fields['moveButton'] = '.ez-btn-ae--move-%s';
-        $this->fields['toolbarButton'] = '.ae-toolbar .ez-btn-ae';
+        $this->fields['moveButton'] = '.ibexa-btn-ae--move-%s';
+        $this->fields['toolbarButton'] = '.ae-toolbar .ibexa-btn-ae';
     }
 
     public function setValue(array $parameters): void

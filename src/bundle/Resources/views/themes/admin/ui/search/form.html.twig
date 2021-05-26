@@ -20,8 +20,10 @@
             <div class="ez-search-form__language-wrapper" {% if form.search_language.vars.choices|length == 1 %} hidden {% endif %}>
                 {{ form_widget(form.search_language, {'attr': {'class': 'ez-search-form__language-selector'}}) }}
             </div>
-            <button type="submit" class="ez-btn ez-btn--primary ez-btn--search">{{ 'search.perform'|trans|desc('Search') }}</button>
-            <button type="button" class="btn btn-secondary ez-btn ez-btn--filter">{{ 'search.filters'|trans|desc('Filters') }}</button>
+            <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--search">{{ 'search.perform'|trans|desc('Search') }}</button>
+            <button type="button" class="btn ibexa-btn ibexa-btn--tertiary ibexa-btn--filter">{{ 'search.filters'|trans|desc('Filters') }}</button>
+            <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--small">{{ 'search.perform'|trans|desc('Search') }}</button>
+            <button type="submit" class="btn ibexa-btn ibexa-btn--dark ibexa-btn--small">{{ 'search.perform'|trans|desc('Search') }}</button>
         </span>
     </div>
 </div>
@@ -113,7 +115,7 @@
         <div class="ez-filters__item ez-filters__item--subtree">
             <label class="ez-label">{{ 'search.subtree'|trans|desc('Subtree') }}</label>
             <div>
-                <button class="ez-btn btn btn-secondary ez-btn--udw-select-location"
+                <button class="btn ibexa-btn ibexa-btn--secondary ibexa-btn--udw-select-location"
                     type="button"
                     {% if form.subtree.vars.value is not empty %} hidden {% endif %}
                     data-universal-discovery-title="{{'search.udw.select_content'|trans|desc('Select Content')}}"
@@ -164,8 +166,8 @@
         </div>
     </div>
     <div class="ez-filters__btns">
-        <button type="submit" class="ez-btn ez-btn--primary ez-btn-apply" disabled>{{ 'search.apply'|trans|desc('Apply') }}</button>
-        <button class="btn btn-secondary ez-btn-clear">{{ 'search.clear'|trans|desc('Clear') }}</button>
+        <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--apply" disabled>{{ 'search.apply'|trans|desc('Apply') }}</button>
+        <button class="btn ibexa-btn ibexa-btn--secondary ibexa-btn--clear">{{ 'search.clear'|trans|desc('Clear') }}</button>
     </div>
 </div>
 {{ form_widget(form.last_modified, {'attr': {'hidden': 'hidden'}}) }}

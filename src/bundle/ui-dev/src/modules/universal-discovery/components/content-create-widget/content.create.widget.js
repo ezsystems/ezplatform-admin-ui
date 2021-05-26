@@ -160,10 +160,10 @@ const ContentCreateWidget = () => {
                 </div>
             </div>
             <div className="c-content-create__confirm-wrapper">
-                <button className="c-content-create__confirm-button btn btn-primary" onClick={createContent} disabled={isConfirmDisabled}>
+                <button className="c-content-create__confirm-button btn ibexa-btn ibexa-btn--primary" onClick={createContent} disabled={isConfirmDisabled}>
                     {createLabel}
                 </button>
-                <button className="ez-btn ez-btn--no-border" onClick={close}>
+                <button className="btn ibexa-btn ibexa-btn--ghost" onClick={close}>
                     {cancelLabel}
                 </button>
             </div>

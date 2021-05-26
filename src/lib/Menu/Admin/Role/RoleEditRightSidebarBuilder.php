@@ -72,7 +72,7 @@ class RoleEditRightSidebarBuilder extends AbstractBuilder implements Translation
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#update-role-%d_save', $role->id),
                     ],
                     'extras' => ['icon' => 'save'],

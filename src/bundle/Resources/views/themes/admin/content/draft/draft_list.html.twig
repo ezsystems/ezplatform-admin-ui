@@ -85,7 +85,7 @@
                                         <td class="ez-table__cell">{{ row.versionInfo.versionNo }}</td>
                                         <td class="ez-table__cell">{{ row.versionInfo.modificationDate|ez_full_datetime }}</td>
                                         <td class="ez-table__cell ez-table__cell--has-action-btns">
-                                            <button class="btn btn-icon mx-2 ez-btn--content-draft-edit"
+                                            <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--content-draft-edit"
                                                     title="{{ 'drafts.list.action.edit'|trans|desc('Edit draft') }}"
                                                     data-content-id="{{ row.versionInfo.contentInfo.id }}"
                                                     data-language-code="{{ row.versionInfo.initialLanguageCode }}"
@@ -99,7 +99,7 @@
                                                         'versionNo': row.versionInfo.versionNo,
                                                         'languageCode': row.versionInfo.initialLanguageCode
                                                     }) }}">
-                                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
+                                                <svg class="ez-icon ez-icon--small ez-icon-edit">
                                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                                 </svg>
                                             </button>
@@ -156,13 +156,13 @@
     <button
         id="confirm-{{ form.remove.vars.id }}"
         type="button"
-        class="btn btn-icon"
+        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
         disabled
         data-toggle="modal"
         data-target="#{{ modal_data_target }}"
         title="{{ 'drafts.list.action.remove.confirmation.title'|trans|desc('Delete selected draft(s)') }}"
     >
-        <svg class="ez-icon ez-icon-trash">
+        <svg class="ez-icon ez-icon--small ez-icon-trash">
             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
         </svg>
     </button>

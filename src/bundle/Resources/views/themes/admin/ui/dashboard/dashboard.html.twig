@@ -13,11 +13,11 @@
                     <h1 class="py-3">{{ 'my.dashboard'|trans|desc('My dashboard') }}</h1>
                     <div class="ez-dashboard__create">
                         <button
-                            class="btn btn-link ez-btn--cotf-create"
+                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--cotf-create"
                             data-udw-config="{{ ez_udw_config('create', {'type': 'content_create'}) }}"
                             {% if not can_create_content %}disabled{% endif %}
                         >
-                            <svg class="ez-icon ez-icon--small-medium ez-icon--primary ez-icon-create">
+                            <svg class="ez-icon ez-icon--small ez-icon-create">
                                 <use xlink:href="{{ ez_icon_path('create') }}"></use>
                             </svg>
                             <span>{{ 'dashboard.create'|trans|desc('Create') }}</span>

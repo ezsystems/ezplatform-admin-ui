@@ -10,7 +10,7 @@
     {{ 'tab.locations.swap_with_another'|trans()|desc('Swap the Content item at this Location with another') }}
     {{ form_widget(form.swap, {'attr': {
         'disabled': not can_swap,
-        'class': 'btn btn-secondary btn--udw-swap ml-5',
+        'class': 'btn ibexa-btn ibexa-btn--secondary ibexa-btn--udw-swap ml-5',
         'data-udw-config': ez_udw_config('single_container', {})
     }}) }}
     {{ form_widget(form.current_location) }}

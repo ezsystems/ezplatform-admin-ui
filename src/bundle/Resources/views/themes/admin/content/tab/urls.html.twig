@@ -55,11 +55,11 @@
 {% macro table_header_tools(form_custom_url_remove, can_edit_custom_url) %}
     {% if can_edit_custom_url %}
         <button
-            class="btn btn-icon ez-btn--prevented"
+            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--prevented"
             data-toggle="modal"
             data-target="#ez-modal--custom-url-alias"
             title="{{ 'tab.urls.action.add'|trans|desc('Add a custom URL alias') }}">
-            <svg class="ez-icon ez-icon-create">
+            <svg class="ez-icon ez-icon--small ez-icon-create">
                 <use xlink:href="{{ ez_icon_path('create') }}"></use>
             </svg>
         </button>
@@ -68,12 +68,12 @@
         <button
             id="delete-custom-urls"
             type="button"
-            class="btn btn-icon"
+            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
             disabled
             data-toggle="modal"
             data-target="#{{ modal_data_target }}"
             title="{{ 'tab.urls.action.delete'|trans|desc('Delete custom URL alias') }}">
-            <svg class="ez-icon ez-icon-trash">
+            <svg class="ez-icon ez-icon--small ez-icon-trash">
                 <use xlink:href="{{ ez_icon_path('trash') }}"></use>
             </svg>
         </button>
