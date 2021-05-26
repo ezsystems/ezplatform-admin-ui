@@ -30,7 +30,7 @@ const ViewSwitcher = ({ isDisabled }) => {
                         onClick={onClick}
                         isDisabled={isDisabled}
                         title={view.tooltipLabel}>
-                        <Icon name={view.icon} extraClasses="ez-icon--small-medium" />
+                        <Icon name={view.icon} extraClasses="ibexa-icon--small-medium" />
                     </MenuButton>
                 );
             })}

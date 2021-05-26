@@ -79,7 +79,7 @@
                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text {% if edit_draft_disabled %}ibexa-btn--prevented{% endif %}"
                                title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}"
                                {% if edit_draft_disabled %}disabled{% endif %}>
-                                <svg class="ez-icon ez-icon--small ez-icon-edit">
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </a>
@@ -95,7 +95,7 @@
                                     data-language-code="{{ version.initialLanguageCode }}"
                                     class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--content-draft-edit"
                                     title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}">
-                                <svg class="ez-icon ez-icon--small ez-icon-edit">
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                 </svg>
                             </button>
@@ -106,7 +106,7 @@
                                     data-content-id="{{ version.contentInfo.id }}"
                                     data-version-no="{{ version.versionNo }}"
                                     data-language-code="{{ version.initialLanguageCode }}">
-                                <svg class="ez-icon ez-icon--small ez-icon-edit">
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
                                     <use xlink:href="{{ ez_icon_path('archive-restore') }}"></use>
                                 </svg>
                             </button>

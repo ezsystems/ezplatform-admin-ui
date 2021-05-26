@@ -52,7 +52,7 @@ const SelectedLocations = () => {
                 onClick={toggleExpanded}
                 title={togglerLabel}
                 data-tooltip-container-selector=".c-udw-tab">
-                <Icon name={iconName} extraClasses="ez-icon--small" />
+                <Icon name={iconName} extraClasses="ibexa-icon--small" />
             </button>
         );
     };
@@ -72,7 +72,7 @@ const SelectedLocations = () => {
                     onClick={() => onConfirm()}
                     title={confirmSelectionLabel}
                     data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="checkmark" extraClasses="ez-icon--small" />
+                    <Icon name="checkmark" extraClasses="ibexa-icon--small" />
                 </button>
                 <button
                     type="button"
@@ -80,7 +80,7 @@ const SelectedLocations = () => {
                     onClick={clearSelection}
                     title={clearAllLabel}
                     data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="trash" extraClasses="ez-icon--small" />
+                    <Icon name="trash" extraClasses="ibexa-icon--small" />
                 </button>
             </Fragment>
         );

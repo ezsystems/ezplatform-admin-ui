@@ -63,7 +63,7 @@ const ContentMetaPreview = () => {
                 onClick={previewContent}
                 data-tooltip-container-selector=".c-udw-tab"
                 title={previewLabel}>
-                <Icon name="view" extraClasses="ez-icon--small" />
+                <Icon name="view" extraClasses="ibexa-icon--small" />
             </button>
         ) : null;
         const hasAccess = permissions && permissions.edit.hasAccess;
@@ -82,7 +82,7 @@ const ContentMetaPreview = () => {
     return (
         <div className="c-content-meta-preview" ref={refContentMetaPreview}>
             <div className="c-content-meta-preview__preview">
-                <Thumbnail thumbnailData={version.Thumbnail} iconExtraClasses="ez-icon--extra-large" />
+                <Thumbnail thumbnailData={version.Thumbnail} iconExtraClasses="ibexa-icon--extra-large" />
             </div>
             <div className="c-content-meta-preview__header">
                 <span className="c-content-meta-preview__content-name">{location.ContentInfo.Content.TranslatedName}</span>
@@ -92,7 +92,7 @@ const ContentMetaPreview = () => {
                     title={bookmarkLabel}
                     data-placement="left"
                     data-tooltip-container-selector=".c-content-meta-preview">
-                    <Icon name={bookmarkIconName} extraClasses="ez-icon--small" />
+                    <Icon name={bookmarkIconName} extraClasses="ibexa-icon--small" />
                 </button>
             </div>
             {renderActions()}

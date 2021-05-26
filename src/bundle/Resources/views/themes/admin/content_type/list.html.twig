@@ -14,7 +14,7 @@
                     title="{{ 'content_type.view.list.action.add'|trans|desc('Create a Content Type') }}"
                     class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                 >
-                    <svg class="ez-icon ez-icon--small ez-icon-create">
+                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
                         <use xlink:href="{{ ez_icon_path('create') }}"></use>
                     </svg>
                 </a>
@@ -30,7 +30,7 @@
                     data-target="#{{ modal_data_target }}"
                     title="{{ 'content_type.view.list.action.delete'|trans|desc('Delete Content Type') }}"
                 >
-                    <svg class="ez-icon ez-icon--small ez-icon-trash">
+                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
                         <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                     </svg>
                 </button>
@@ -70,7 +70,7 @@
                     {% endif %}
                 </td>
                 <td class="ez-table__cell ez-table__cell--has-icon">
-                    <svg class="ez-icon ez-icon--small">
+                    <svg class="ibexa-icon ibexa-icon--small">
                         <use xlink:href="{{ ez_content_type_icon(content_type.identifier) }}"></use>
                     </svg>
                 </td>

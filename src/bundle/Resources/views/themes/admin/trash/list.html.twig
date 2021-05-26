@@ -57,7 +57,7 @@
                                     {{ creatorExists ? 'disabled'  }}
                                 >
                                 <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--reset-creator">
-                                    <svg class="ez-icon ez-icon--small ez-icon--reset">
+                                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--reset">
                                         <use xlink:href="{{ ez_icon_path('circle-close') }}"></use>
                                     </svg>
                                 </button>
@@ -120,7 +120,7 @@
                                 data-toggle="modal"
                                 data-target="#{{ modal_data_target }}"
                                 title="{{ 'trash.delete'|trans|desc('Delete') }}">
-                                <svg class="ez-icon ez-icon--small ez-icon-trash">
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
                                     <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                                 </svg>
                             </button>
@@ -199,7 +199,7 @@
                                         }}) }}
                                     </td>
                                     <td class="ez-table__cell ez-table__cell--has-icon">
-                                        <svg class="ez-icon ez-icon--small">
+                                        <svg class="ibexa-icon ibexa-icon--small">
                                             <use xlink:href="{{ ez_content_type_icon(trash_item.contentType.identifier) }}"></use>
                                         </svg>
                                     </td>

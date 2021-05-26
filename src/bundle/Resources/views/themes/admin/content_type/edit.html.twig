@@ -65,7 +65,7 @@
                             data-toggle="modal"
                             data-target="#delete-content-type-modal"
                             {% if form.addFieldDefinition.vars.disabled %} disabled {% endif %}>
-                        <svg class="ez-icon ez-icon--small ez-icon--light">
+                        <svg class="ibexa-icon ibexa-icon--small">
                             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
                         </svg>
                     </button>
@@ -82,10 +82,10 @@
                         <div id="field-definition-{{ value.identifier }}" class="ez-card__header">
                             {% set name = value.names[language_code] ?? value.names[content_type.mainLanguageCode]  %}
                             <button class="ez-card__body-display-toggler btn">
-                                <svg class="ez-icon ez-icon--small ez-icon--caret-down" aria-hidden="true">
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--caret-down" aria-hidden="true">
                                     <use xlink:href="{{ ez_icon_path('caret-down') }}"></use>
                                 </svg>
-                                <svg class="ez-icon ez-icon--small ez-icon--caret-next" aria-hidden="true">
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--caret-next" aria-hidden="true">
                                     <use xlink:href="{{ ez_icon_path('caret-next') }}"></use>
                                 </svg>
                             </button>

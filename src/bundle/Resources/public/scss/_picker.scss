@@ -22,13 +22,13 @@
         cursor: pointer;
         outline: none;
 
-        .ez-icon {
+        .ibexa-icon {
             transition: fill 0.3s $ibexa-admin-transition;
         }
 
         &:hover,
         &:focus {
-            .ez-icon {
+            .ibexa-icon {
                 fill: $ibexa-color-base-dark;
             }
         }

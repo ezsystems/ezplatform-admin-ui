@@ -27,7 +27,7 @@ const ActionButton = (props) => {
 
     return (
         <button {...attrs}>
-            <Icon name={type} extraClasses="ez-icon--base-dark ez-icon--medium" />
+            <Icon name={type} extraClasses="ibexa-icon--base-dark ibexa-icon--medium" />
         </button>
     );
 };

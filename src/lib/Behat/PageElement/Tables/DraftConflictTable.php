@@ -17,7 +17,7 @@ class DraftConflictTable extends Table
     {
         parent::__construct($context, $containerLocator);
         $this->fields['listElement'] = $this->fields['list'] . ' tbody td:nth-child(1)';
-        $this->fields['editButton'] = $this->fields['list'] . ' tr:nth-child(%s) .ez-icon-edit';
+        $this->fields['editButton'] = $this->fields['list'] . ' tr:nth-child(%s) .ibexa-icon--edit';
     }
 
     public function getTableCellValue(string $header, ?string $secondHeader = null): string

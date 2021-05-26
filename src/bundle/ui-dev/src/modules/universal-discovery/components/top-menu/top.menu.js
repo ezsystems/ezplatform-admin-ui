@@ -26,7 +26,7 @@ const TopMenu = ({ actionsDisabledMap }) => {
                     onClick={cancelUDW}
                     title={backTitle}
                     data-tooltip-container-selector=".c-top-menu__cancel-btn-wrapper">
-                    <Icon name="caret-back" extraClasses="ez-icon--small" />
+                    <Icon name="caret-back" extraClasses="ibexa-icon--small" />
                 </button>
             </span>
             <span className="c-top-menu__title-wrapper">{title}</span>

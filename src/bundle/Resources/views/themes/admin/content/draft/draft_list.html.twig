@@ -71,7 +71,7 @@
                                             {{ form_widget(form_remove.versions[row.versionId ~ ''], { attr: { class: "ez-input ez-input--checkbox" } }) }}
                                         </td>
                                         <td class="ez-table__cell ez-table__cell--has-icon">
-                                            <svg class="ez-icon ez-icon--small">
+                                            <svg class="ibexa-icon ibexa-icon--small">
                                                 <use xlink:href="{{ ez_content_type_icon(row.contentType.identifier) }}"></use>
                                             </svg>
                                         </td>
@@ -99,7 +99,7 @@
                                                         'versionNo': row.versionInfo.versionNo,
                                                         'languageCode': row.versionInfo.initialLanguageCode
                                                     }) }}">
-                                                <svg class="ez-icon ez-icon--small ez-icon-edit">
+                                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
                                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                                 </svg>
                                             </button>
@@ -162,7 +162,7 @@
         data-target="#{{ modal_data_target }}"
         title="{{ 'drafts.list.action.remove.confirmation.title'|trans|desc('Delete selected draft(s)') }}"
     >
-        <svg class="ez-icon ez-icon--small ez-icon-trash">
+        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
         </svg>
     </button>

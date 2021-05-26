@@ -98,7 +98,7 @@ class Popup extends Component {
                 data-dismiss="modal"
                 aria-label={closeBtnLabel}
                 onClick={this.props.onClose}>
-                <Icon name="discard" extraClasses="ez-icon--small" />
+                <Icon name="discard" extraClasses="ibexa-icon--small" />
             </button>
         );
     }

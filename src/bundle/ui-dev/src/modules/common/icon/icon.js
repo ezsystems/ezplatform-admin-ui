@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Icon = (props) => {
     const linkHref = props.customPath ? props.customPath : window.eZ.helpers.icon.getIconPath(props.name);
-    let className = 'ez-icon';
+    let className = 'ibexa-icon';
 
     if (props.extraClasses) {
         className = `${className} ${props.extraClasses}`;

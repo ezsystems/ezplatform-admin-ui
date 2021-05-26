@@ -45,7 +45,7 @@ const BookmarksList = ({ setBookmarkedLocationMarked, itemsPerPage }) => {
 
         return (
             <div className="c-bookmarks-list__spinner-wrapper">
-                <Icon name="spinner" extraClasses="m-sub-items__spinner ez-icon--medium ez-spin" />
+                <Icon name="spinner" extraClasses="m-sub-items__spinner ibexa-icon--medium ibexa-spin" />
             </div>
         );
     };
@@ -91,7 +91,7 @@ const BookmarksList = ({ setBookmarkedLocationMarked, itemsPerPage }) => {
 
                 return (
                     <div key={bookmark.id} className={className} onClick={markLocation}>
-                        <Icon extraClasses="ez-icon--small" customPath={contentTypeInfo.thumbnail} />
+                        <Icon extraClasses="ibexa-icon--small" customPath={contentTypeInfo.thumbnail} />
                         <span className="c-bookmarks-list__item-name">{bookmark.ContentInfo.Content.TranslatedName}</span>
                     </div>
                 );

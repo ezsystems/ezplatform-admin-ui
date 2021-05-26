@@ -55,7 +55,7 @@
                                 <tr>
                                     <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form_remove.bookmarks[bookmark.id], { "attr": { "class": "ez-input ez-input--checkbox" } }) }}</td>
                                     <td class="ez-table__cell ez-table__cell--has-icon">
-                                        <svg class="ez-icon ez-icon--small">
+                                        <svg class="ibexa-icon ibexa-icon--small">
                                             <use xlink:href="{{ ez_content_type_icon(bookmark.contentType.identifier) }}"></use>
                                         </svg>
                                     </td>
@@ -86,7 +86,7 @@
                                             title="{{ 'bookmark.list.content.edit'|trans|desc('Edit content') }}"
                                             data-content-id="{{ bookmark.contentInfo.id }}"
                                             data-language-code="{{ bookmark.contentInfo.mainLanguageCode }}">
-                                            <svg class="ez-icon ez-icon--small ez-icon-edit">
+                                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
                                                 <use xlink:href="{{ ez_icon_path('edit') }}"></use>
                                             </svg>
                                         </button>

@@ -13,12 +13,12 @@ const ViewSwitcherButton = ({ id, icon, title, onClick, activeView, isDisabled }
     };
     const iconAttrs = {
         name: icon,
-        extraClasses: 'ez-icon--base-dark ez-icon--small',
+        extraClasses: 'ibexa-icon--base-dark ibexa-icon--small',
     };
 
     if (activeView === id) {
         attrs.className = `${baseClassName} ${baseClassName}--active`;
-        iconAttrs.extraClasses = 'ez-icon--light ez-icon--small';
+        iconAttrs.extraClasses = 'ibexa-icon--light ibexa-icon--small';
     }
 
     if (isDisabled) {

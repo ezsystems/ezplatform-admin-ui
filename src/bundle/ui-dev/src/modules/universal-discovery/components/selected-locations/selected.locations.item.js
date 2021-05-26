@@ -57,7 +57,7 @@ const SelectedLocationsItem = ({ location, permissions }) => {
                     onClick={removeFromSelection}
                     title={clearLabel}
                     data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="trash" extraClasses="ez-icon--small" />
+                    <Icon name="trash" extraClasses="ibexa-icon--small" />
                 </button>
             </div>
         </div>

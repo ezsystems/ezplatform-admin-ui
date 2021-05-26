@@ -42,7 +42,7 @@ const PureToggleSelectionButton = ({ isSelected, toggleSelection }) => {
             onClick={toggleSelection}
             title={toggleSelectionLabel}
             data-tooltip-container-selector=".c-udw-tab">
-            <Icon name={iconName} extraClasses="ez-icon--small" />
+            <Icon name={iconName} extraClasses="ibexa-icon--small" />
         </button>
     );
 };

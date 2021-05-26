@@ -38,10 +38,10 @@
                         <td class="ez-table__cell">
                             <label class="ez-checkbox-icon {{ not location.explicitlyHidden ? 'is-checked' }}{% if not can_hide[location.id] %} disabled{% endif %}"
                                    title="{{ 'tab.locations.visibility'|trans|desc('Visibility') }}">
-                                <svg class="ez-icon ez-icon-view">
+                                <svg class="ibexa-icon ibexa-icon--view">
                                     <use xlink:href="{{ ez_icon_path('view') }}"></use>
                                 </svg>
-                                <svg class="ez-icon ez-icon-view-hide">
+                                <svg class="ibexa-icon ibexa-icon--view-hide">
                                     <use xlink:href="{{ ez_icon_path('view-hide') }}"></use>
                                 </svg>
                                 <input
@@ -109,7 +109,7 @@
             class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--udw-add"
             title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}"
             {{ not can_add ? 'disabled' }}>
-        <svg class="ez-icon ez-icon--small ez-icon-create">
+        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
             <use xlink:href="{{ ez_icon_path('create') }}"></use>
         </svg>
     </button>
@@ -123,7 +123,7 @@
             data-toggle="modal"
             data-target="#{{ modal_data_target }}"
             title="{{ 'tab.locations.action.delete'|trans|desc('Delete Location') }}">
-        <svg class="ez-icon ez-icon--small ez-icon-trash">
+        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
             <use xlink:href="{{ ez_icon_path('trash') }}"></use>
         </svg>
     </button>

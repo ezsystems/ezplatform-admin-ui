@@ -67,7 +67,7 @@ const FinderLeaf = ({ location }) => {
             <span className="c-finder-leaf__name">
                 <span className="c-finder-leaf__icon-wrapper">
                     <Icon
-                        extraClasses="ez-icon--small ez-icon--base-dark"
+                        extraClasses="ibexa-icon--small ibexa-icon--base-dark"
                         customPath={contentTypesMap[location.ContentInfo.Content.ContentType._href].thumbnail}
                     />
                 </span>
