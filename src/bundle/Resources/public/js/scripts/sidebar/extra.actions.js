@@ -8,7 +8,7 @@
     const btns = [...doc.querySelectorAll('.ez-btn--extra-actions')];
     const menu = doc.querySelector('.ez-context-menu');
     const footer = doc.querySelector('.ez-footer');
-    let resizeAndScrollTimeout;
+    let containerHeightTimeout;
     const haveHiddenPart = (element) => element.classList.contains(CLASS_HIDDEN) && !element.classList.contains(CLASS_PREVENT_SHOW);
     const setContainerHeight = () => {
         const container = doc.querySelector('.ez-extra-actions:not(.ez-extra-actions--hidden)');
@@ -17,18 +17,18 @@
 
         container.style.height = `${containerHeight}px`;
     };
-    const setHeightOnScrollAndResize = () => {
-        clearTimeout(resizeAndScrollTimeout);
+    const setContainerHeightTimeout = () => {
+        clearTimeout(containerHeightTimeout);
 
-        resizeAndScrollTimeout = setTimeout(setContainerHeight, RESIZE_AND_SCROLL_TIMEOUT);
+        containerHeightTimeout = setTimeout(setContainerHeight, RESIZE_AND_SCROLL_TIMEOUT);
     };
-    const setHeightOnResizeAndScroll = () => {
-        global.addEventListener('scroll', setHeightOnScrollAndResize, false);
-        global.addEventListener('resize', setHeightOnScrollAndResize, false);
+    const addContainerHeightListeners = () => {
+        global.addEventListener('scroll', setContainerHeightTimeout, false);
+        global.addEventListener('resize', setContainerHeightTimeout, false);
     };
-    const resetHeightOnResizeAndScroll = () => {
-        global.removeEventListener('scroll', setHeightOnScrollAndResize, false);
-        global.removeEventListener('resize', setHeightOnScrollAndResize, false);
+    const removeContainerHeightListeners = () => {
+        global.removeEventListener('scroll', setContainerHeightTimeout, false);
+        global.removeEventListener('resize', setContainerHeightTimeout, false);
     };
 
     btns.forEach((btn) => {
@@ -67,10 +67,10 @@
 
                 if (!actions.classList.contains(CLASS_HIDDEN)) {
                     doc.body.addEventListener('click', detectClickOutside, false);
-                    setHeightOnResizeAndScroll();
+                    addContainerHeightListeners();
                 } else {
                     doc.body.removeEventListener('click', detectClickOutside);
-                    resetHeightOnResizeAndScroll();
+                    removeContainerHeightListeners();
                 }
 
                 if (focusElement) {
