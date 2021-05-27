@@ -28,6 +28,7 @@ use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node;
  */
 final class NodeFactory
 {
+    private const TOP_NODE_CONTENT_ID = 0;
     private const SORT_CLAUSE_MAP = [
         'DatePublished' => SortClause\DatePublished::class,
         'ContentName' => SortClause\ContentName::class,
@@ -301,7 +302,10 @@ final class NodeFactory
      */
     private function supplyTranslatedContentName(Node $node, array $contentById): void
     {
-        $node->name = $this->translationHelper->getTranslatedContentName($contentById[$node->contentId]);
+        if ($node->contentId !== self::TOP_NODE_CONTENT_ID) {
+            $node->name = $this->translationHelper->getTranslatedContentName($contentById[$node->contentId]);
+        }
+
         foreach ($node->children as $child) {
             $this->supplyTranslatedContentName($child, $contentById);
         }
