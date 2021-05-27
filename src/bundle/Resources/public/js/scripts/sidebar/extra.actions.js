@@ -57,7 +57,7 @@
                         }
 
                         doc.body.removeEventListener('click', detectClickOutside, false);
-                        resetHeightOnResizeAndScroll();
+                        removeContainerHeightListeners();
                     }
                 };
 
