@@ -36,7 +36,7 @@
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     >
                         <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
-                            <use xlink:href="{{ ez_icon_path('create') }}"></use>
+                            <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
                         </svg>
                     </a>
                 {% endif %}
@@ -52,7 +52,7 @@
                         title="{{ 'role.view.list.action.delete'|trans|desc('Delete Role') }}"
                     >
                         <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
-                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                         </svg>
                     </button>
                     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
@@ -96,7 +96,7 @@
                                 href="{{ path('ezplatform.role_assignment.create', { roleId: role.id }) }}"
                                 class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
                                 <svg class="ibexa-icon ibexa-icon--small">
-                                    <use xlink:href="{{ ez_icon_path('assign-user') }}"></use>
+                                    <use xlink:href="{{ ibexa_icon_path('assign-user') }}"></use>
                                 </svg>
                             </a>
                         {% endif %}
@@ -106,7 +106,7 @@
                                 href="{{ path('ezplatform.role.copy', { roleId: role.id }) }}"
                                 class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
                                 <svg class="ibexa-icon ibexa-icon--small">
-                                    <use xlink:href="{{ ez_icon_path('copy') }}"></use>
+                                    <use xlink:href="{{ ibexa_icon_path('copy') }}"></use>
                                 </svg>
                             </a>
                         {% endif %}
@@ -116,7 +116,7 @@
                                 href="{{ path('ezplatform.role.update', { roleId: role.id }) }}"
                                 class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
                                 <svg class="ibexa-icon ibexa-icon--small">
-                                    <use xlink:href="{{ ez_icon_path('edit') }}"></use>
+                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                                 </svg>
                             </a>
                         {% endif %}

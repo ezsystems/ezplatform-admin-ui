@@ -7,7 +7,7 @@
 {% block _ezplatform_content_forms_contenttype_update_removeFieldDefinition_widget %}
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
         <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--light">
-            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
         </svg>
     </button>
 {% endblock %}
@@ -73,10 +73,10 @@
                         <div id="field-definition-{{ value.identifier }}" class="ez-card__header ez-card__header--secondary">
                             <button class="ez-card__body-display-toggler btn">
                                 <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--caret-down" aria-hidden="true">
-                                    <use xlink:href="{{ ez_icon_path('caret-down') }}"></use>
+                                    <use xlink:href="{{ ibexa_icon_path('caret-down') }}"></use>
                                 </svg>
                                 <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--caret-next" aria-hidden="true">
-                                    <use xlink:href="{{ ez_icon_path('caret-next') }}"></use>
+                                    <use xlink:href="{{ ibexa_icon_path('caret-next') }}"></use>
                                 </svg>
                             </button>
                             {{ form_widget(field_definition.selected, {

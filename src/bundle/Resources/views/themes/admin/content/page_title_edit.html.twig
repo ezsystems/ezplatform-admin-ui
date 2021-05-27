@@ -9,7 +9,7 @@
             title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
         >
             <svg class="ibexa-icon ibexa-icon--small ibexa-icon--primary">
-                <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+                <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
             </svg>
         </a>
     {% endif %}
@@ -28,7 +28,7 @@
                 {% if description is defined and description and title is not empty  %}
                     <div class="ez-content-edit-page-title__icon-wrapper" title="{{ description }}">
                         <svg class="ibexa-icon ibexa-icon--medium">
-                            <use xlink:href="{{ ez_icon_path('system-information') }}"></use>
+                            <use xlink:href="{{ ibexa_icon_path('system-information') }}"></use>
                         </svg>
                     </div>
                 {% endif %}
@@ -49,7 +49,7 @@
                         >
                             <span class="ez-content-edit-page-title__autosave-result">
                                 <svg class="ibexa-icon ibexa-icon ibexa-icon--small-medium ibexa-icon--autosave">
-                                    <use xlink:href="{{ ez_icon_path('autosave') }}"></use>
+                                    <use xlink:href="{{ ibexa_icon_path('autosave') }}"></use>
                                 </svg>
                                 <span class="ez-content-edit-page-title__autosave-info">{{ 'content_edit.autosave.message'|trans()|desc('<b>Autosave</b> is on.')|raw }} </span>
                                 <span class="ez-content-edit-page-title__autosave-failed">

@@ -9,7 +9,7 @@
             <h4 class="ez-page-title__content-type-name">
                 {% if icon_name is defined%}
                     <svg class="ibexa-icon ibexa-icon--small ibexa-icon--base-dark ibexa-icon--{{ icon_name }}">
-                        <use xlink:href="{{ ez_icon_path(icon_name) }}"></use>
+                        <use xlink:href="{{ ibexa_icon_path(icon_name) }}"></use>
                     </svg>
                 {% elseif content_type_identifier is defined %}
                     <svg class="ibexa-icon ibexa-icon--small ibexa-icon--base-dark ibexa-icon--{{ content_type_identifier }}">

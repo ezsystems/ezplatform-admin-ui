@@ -34,7 +34,7 @@
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     >
                         <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
-                            <use xlink:href="{{ ez_icon_path('create') }}"></use>
+                            <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
                         </svg>
                     </a>
                     {% set modal_data_target = 'delete-languages-modal' %}
@@ -48,7 +48,7 @@
                         title="{{ 'language.delete'|trans|desc('Delete language') }}"
                     >
                         <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
-                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                         </svg>
                     </button>
                     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
@@ -103,7 +103,7 @@
                                 href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
                                 class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
                                 <svg class="ibexa-icon ibexa-icon--small">
-                                    <use xlink:href="{{ ez_icon_path('edit') }}"></use>
+                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                                 </svg>
                             </a>
                         {% endif %}

@@ -69,7 +69,7 @@
         <button type="button" class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--prevented ibexa-btn--add-translation" data-toggle="modal" data-target="#add-translation-modal"
                 title="{{ 'tab.translations.action.add'|trans|desc('Add translation') }}">
             <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
-                <use xlink:href="{{ ez_icon_path('create') }}"></use>
+                <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
             </svg>
         </button>
 
@@ -77,7 +77,7 @@
         <button type="button" id="delete-translations" type="button" class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text" disabled data-toggle="modal"
                 data-target="#{{ modal_data_target }}" title="{{ 'tab.translations.action.delete'|trans|desc('Delete Translation') }}">
             <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
-                <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
             </svg>
         </button>
         {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {

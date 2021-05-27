@@ -14,7 +14,7 @@
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     >
                         <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
-                            <use xlink:href="{{ ez_icon_path('create') }}"></use>
+                            <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
                         </svg>
                     </a>
 
@@ -29,7 +29,7 @@
                         title="{{ 'object_state.delete.bulk_delete.submit'|trans|desc('Delete Object state') }}"
                     >
                         <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
-                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                         </svg>
                     </button>
                     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
@@ -82,7 +82,7 @@
                                     href="{{ path('ezplatform.object_state.state.update', {'objectStateId': object_state.id}) }}"
                                     class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
                                     <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
-                                        <use xlink:href="{{ ez_icon_path('edit') }}"></use>
+                                        <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                                     </svg>
                                 </a>
                             {% endif %}

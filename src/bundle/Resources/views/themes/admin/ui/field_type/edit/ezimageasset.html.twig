@@ -23,7 +23,7 @@
 {% block ezplatform_fieldtype_ezimageasset_widget_container %}
     <div class="ez-field-edit-spinner">
         <svg class="ibexa-icon ibexa-spin">
-            <use xlink:href="{{ ez_icon_path('spinner') }}"></use>
+            <use xlink:href="{{ ibexa_icon_path('spinner') }}"></use>
         </svg>
     </div>
     <div{% with { attr: preview_attr } %}{{ block('attributes') }}{% endwith %}>
@@ -102,7 +102,7 @@
                         title="{{ 'fieldtype.ezimageasset.delete'|trans|desc('Delete image') }}"
                     >
                         <svg class="ibexa-icon ibexa-icon--small-medium">
-                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                         </svg>
                     </button>
                     <a
@@ -112,7 +112,7 @@
                         target="_blank"
                     >
                         <svg class="ibexa-icon ibexa-icon--small-medium">
-                            <use xlink:href="{{ ez_icon_path('open-newtab') }}"></use>
+                            <use xlink:href="{{ ibexa_icon_path('open-newtab') }}"></use>
                         </svg>
                     </a>
                     {{ ez_render_component_group(
