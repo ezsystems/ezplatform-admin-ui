@@ -1,0 +1,16 @@
+{% trans_default_domain "systeminfo" %}
+
+<table class="table ez-table--list">
+    <thead>
+    <tr>
+        <th class="ez-table__cell ez-table__cell--header" colspan="2">{{ 'invalid.system_unable_to_fetch'|trans|desc('System was unable to fetch corresponding data') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr class="ez-table__row">
+            <td class="ez-table__cell" colspan="2">
+                {{ info.errorMessage }}
+            </td>
+        </tr>
+    </tbody>
+</table>
