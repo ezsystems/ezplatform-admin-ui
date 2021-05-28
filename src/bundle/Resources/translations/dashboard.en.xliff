@@ -54,9 +54,9 @@
         <note>key: dashboard.ez_version.non_stable_packages</note>
       </trans-unit>
       <trans-unit id="c1fb5ba9fd547e30a49a4e1895822e69cd4a9dbc" resname="dashboard.ez_version.release_not_determined">
-        <source><![CDATA[The system could not find your <code>composer.lock</code> file. It's needed to determine information about
+        <source><![CDATA[The system could not find your <code>composer.lock</code> or <code>composer.json</code> file, or the files are invalid. They are needed to determine information about
             your Ibexa install, and recommended to be kept on project development to make sure same package versions are used across all environments.]]></source>
-        <target state="new"><![CDATA[The system could not find your <code>composer.lock</code> file. It's needed to determine information about
+        <target state="new"><![CDATA[The system could not find your <code>composer.lock</code> or <code>composer.json</code> file, or the files are invalid. They are needed to determine information about
             your Ibexa install, and recommended to be kept on project development to make sure same package versions are used across all environments.]]></target>
         <note>key: dashboard.ez_version.release_not_determined</note>
       </trans-unit>
