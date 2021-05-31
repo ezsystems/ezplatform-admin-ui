@@ -147,6 +147,16 @@ class NavigationContext extends BusinessContext
     }
 
     /**
+     * @Given I go to change my password
+     * @Given I go to change my password in user preferences
+     */
+    public function iGoToChangeMyPassword()
+    {
+        $upperMenu = ElementFactory::createElement($this->utilityContext, UpperMenu::ELEMENT_NAME);
+        $upperMenu->chooseFromUserDropdown('Change password');
+    }
+
+    /**
      * @Then I should be redirected to root in default view
      */
     public function iShouldBeRedirectedToRootInDefaultView(): void
