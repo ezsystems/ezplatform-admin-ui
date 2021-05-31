@@ -152,7 +152,7 @@ class NavigationContext extends BusinessContext
      */
     public function iGoToChangeMyPassword()
     {
-        $upperMenu = ElementFactory::createElement($this->utilityContext, UpperMenu::ELEMENT_NAME);
+        $upperMenu = ElementFactory::createElement($this->browserContext, UpperMenu::ELEMENT_NAME);
         $upperMenu->chooseFromUserDropdown('Change password');
     }
 

@@ -16,7 +16,7 @@ class UserPreferencesContext extends BusinessContext
      */
     public function iChangePassword($oldPassword, $newPassword): void
     {
-        $passwordPage = PageObjectFactory::createPage($this->utilityContext, ChangePasswordPage::PAGE_NAME);
+        $passwordPage = PageObjectFactory::createPage($this->browserContext, ChangePasswordPage::PAGE_NAME);
         $passwordPage->verifyIsLoaded();
         $passwordPage->setOldPassword($oldPassword);
         $passwordPage->setNewPassword($newPassword);
