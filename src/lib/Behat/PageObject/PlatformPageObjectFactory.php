@@ -65,6 +65,8 @@ class PlatformPageObjectFactory extends PageObjectFactory
                 return new SearchPage($context);
             case UserCreationPage::PAGE_NAME:
                 return new UserCreationPage($context);
+            case ChangePasswordPage::PAGE_NAME:
+                return new ChangePasswordPage($context);
             default:
                 throw new \InvalidArgumentException(sprintf('Unrecognised page name: %s', $pageName));
         }
