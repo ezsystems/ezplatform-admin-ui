@@ -67,6 +67,7 @@
 
                 if (!actions.classList.contains(CLASS_HIDDEN)) {
                     doc.body.addEventListener('click', detectClickOutside, false);
+                    setContainerHeight();
                     addContainerHeightListeners();
                 } else {
                     doc.body.removeEventListener('click', detectClickOutside);
