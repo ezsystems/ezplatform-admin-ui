@@ -99,9 +99,8 @@ class UniversalDiscoveryProvider implements Provider
         $locationPath = $this->getRelativeLocationPath($rootLocationId, $location->path);
         $locationPathCount = count($locationPath);
 
+        $locationPathLast = $locationPathCount - 1;
         if ($locationPathCount > self::COLUMNS_NUMBER) {
-            $locationPathLast = $locationPathCount - 1;
-
             $columnLocations = [
                 $locationPath[0], // First
                 $locationPath[$locationPathLast - 2],
@@ -112,6 +111,12 @@ class UniversalDiscoveryProvider implements Provider
             $columnLocations = $locationPath;
         }
 
+        if ($locationPathCount > 0) {
+            $columnLocationIdBefore = (int) $locationPath[$locationPathLast - 1];
+        } else {
+            $columnLocationIdBefore = (int) $locationPath[0];
+        }
+
         $columns = [];
         foreach ($columnLocations as $columnLocationId) {
             $columnLocationId = (int)$columnLocationId;
@@ -119,11 +124,30 @@ class UniversalDiscoveryProvider implements Provider
                 ? $this->getRestFormat($this->locationService->loadLocation($columnLocationId))
                 : null;
 
+            $subItems = $this->getSubitemLocations($columnLocationId, 0, $limit, $sortClause);
+            $locations = $subItems['locations'];
+
+            $index = array_search($locationId, array_map(static function ($location) {
+                return $location['Location']['id'];
+            }, $locations));
+
+            if ($index !== false) {
+                unset($locations[$index]);
+                $locations = array_values($locations);
+            }
+
+            if ($columnLocationId === $columnLocationIdBefore) {
+                array_unshift($locations, $this->getRestFormat($location));
+            }
+
+            $subItems['locations'] = $locations;
+
             $columns[$columnLocationId] = [
                 'location' => $columnLocation,
-                'subitems' => $this->getSubitemLocations($columnLocationId, 0, $limit, $sortClause),
+                'subitems' => $subItems,
             ];
         }
+
 
         $columns[$locationId] = $gridView
             ? $this->getLocationGridViewData($locationId, 0, $limit, $sortClause)
