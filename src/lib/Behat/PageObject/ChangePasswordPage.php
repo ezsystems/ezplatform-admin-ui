@@ -8,7 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Behat\PageObject;
 
 use EzSystems\Behat\Browser\Context\BrowserContext;
 use EzSystems\Behat\Browser\Page\Page;
-use EzSystems\EzPlatformAdminUi\Behat\PageElement\ElementFactory;
+use EzSystems\Behat\Browser\Factory\ElementFactory;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
 use PHPUnit\Framework\Assert;
 
