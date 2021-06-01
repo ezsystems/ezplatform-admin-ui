@@ -148,7 +148,6 @@ class UniversalDiscoveryProvider implements Provider
             ];
         }
 
-
         $columns[$locationId] = $gridView
             ? $this->getLocationGridViewData($locationId, 0, $limit, $sortClause)
             : $this->getLocationData($locationId, 0, $limit, $sortClause);
