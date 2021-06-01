@@ -111,11 +111,8 @@ class UniversalDiscoveryProvider implements Provider
             $columnLocations = $locationPath;
         }
 
-        if ($locationPathCount > 0) {
-            $columnLocationIdBefore = (int) $locationPath[$locationPathLast - 1];
-        } else {
-            $columnLocationIdBefore = (int) $locationPath[0];
-        }
+        $locationPathIndex = $locationPathCount > 0 ? $locationPathLast - 1 : 0;
+        $columnLocationIdBefore = (int) $locationPath[$locationPathIndex];
 
         $columns = [];
         foreach ($columnLocations as $columnLocationId) {
