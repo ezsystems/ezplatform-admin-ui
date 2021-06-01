@@ -48,7 +48,7 @@
         "twig/string-extra": "^3.0"
     },
     "require-dev": {
-        "ibexa/ci-scripts": "^0.1@dev",
+        "ibexa/ci-scripts": "dev-use-branch-aliases-for-testing-packages as 0.1.x-dev",
         "behat/behat": "^3.5",
         "friendsofphp/php-cs-fixer": "^2.16.0",
         "phpunit/phpunit": "^8.1",
