@@ -124,7 +124,7 @@ class UniversalDiscoveryProvider implements Provider
             $subItems = $this->getSubitemLocations($columnLocationId, 0, $limit, $sortClause);
             $locations = $subItems['locations'];
 
-            $index = array_search($locationId, array_map(static function (Location $location) {
+            $index = array_search($locationId, array_map(static function (array $location) {
                 return $location['Location']['id'];
             }, $locations));
 
