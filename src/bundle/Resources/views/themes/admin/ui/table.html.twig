@@ -1,0 +1,22 @@
+{% block header %}
+    <div class="ez-table-header">
+        <div class="ez-table-header__headline">
+            {% block headline %}{% endblock %}
+        </div>
+
+        <div class="ez-table-header__tools">
+            {% block actions %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block table %}
+    <table class="table table-hover ez-table">
+        <thead>
+        {% block thead %}{% endblock %}
+        </thead>
+        <tbody>
+        {% block tbody %}{% endblock %}
+        </tbody>
+    </table>
+{% endblock %}

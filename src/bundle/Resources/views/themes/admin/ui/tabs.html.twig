@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs ez-tabs">
+    {% for tab in tabs %}
+        <li class="nav-item ez-tabs__tab ez-tabs__tab--primary">
+            <a id="ez-tab-label-{{ tab.id }}" href="#ez-tab-{{ tab.id }}" data-toggle="tab" class="nav-link {% if loop.first %}active{% endif %}">
+                {{ tab.label }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+<div class="tab-content ez-tab-content">
+    {% block tab_content %}{% endblock %}
+</div>
