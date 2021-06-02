@@ -112,7 +112,7 @@ class UniversalDiscoveryProvider implements Provider
         }
 
         $locationPathIndex = $locationPathCount > 0 ? $locationPathLast - 1 : 0;
-        $columnLocationIdBefore = (int) $locationPath[$locationPathIndex];
+        $lastColumnLocationId = (int) $locationPath[$locationPathIndex];
 
         $columns = [];
         foreach ($columnLocations as $columnLocationId) {
@@ -124,7 +124,7 @@ class UniversalDiscoveryProvider implements Provider
             $subItems = $this->getSubitemLocations($columnLocationId, 0, $limit, $sortClause);
             $locations = $subItems['locations'];
 
-            $index = array_search($locationId, array_map(static function ($location) {
+            $index = array_search($locationId, array_map(static function (Location $location) {
                 return $location['Location']['id'];
             }, $locations));
 
@@ -133,7 +133,7 @@ class UniversalDiscoveryProvider implements Provider
                 $locations = array_values($locations);
             }
 
-            if ($columnLocationId === $columnLocationIdBefore) {
+            if ($columnLocationId === $lastColumnLocationId) {
                 array_unshift($locations, $this->getRestFormat($location));
             }
 
