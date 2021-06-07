@@ -42,7 +42,7 @@
             border: none;
             outline: none;  
             
-            .ez-icon {
+            .ibexa-icon {
                 fill: $ibexa-white;
             }
         }
@@ -80,7 +80,7 @@
         transform: translate(-50%, -50%);
         display: none;
 
-        .ez-icon {
+        .ibexa-icon {
             width: calculateRem(32px);
             height: calculateRem(32px);
             fill: $ibexa-black;

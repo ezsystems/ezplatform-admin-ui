@@ -35,7 +35,7 @@
             </div>
         {%- else -%}
             <div class="ez-instant-filter__group-item">
-                <svg class="ez-icon ez-icon--small">
+                <svg class="ibexa-icon ibexa-icon--small">
                     <use xlink:href="{{ ez_content_type_icon(choice.value) }}"></use>
                 </svg>
                 {{ form_widget(form[choice.value]) }}
@@ -91,8 +91,8 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore'|trans({},'trash')|desc('Restore') }}">
-        <svg class="ez-icon ez-icon--small">
-            <use xlink:href="{{ ez_icon_path('restore') }}"></use>
+        <svg class="ibexa-icon ibexa-icon--small">
+            <use xlink:href="{{ ibexa_icon_path('restore') }}"></use>
         </svg>
         {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
     </button>
@@ -111,8 +111,8 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore_new_location'|trans({},'trash')|desc("Restore in a new Location") }}">
-        <svg class="ez-icon ez-icon--small">
-            <use xlink:href="{{ ez_icon_path('restore-parent') }}"></use>
+        <svg class="ibexa-icon ibexa-icon--small">
+            <use xlink:href="{{ ibexa_icon_path('restore-parent') }}"></use>
         </svg>
         {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
     </button>
@@ -136,8 +136,8 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{ title|default('') }}">
-        <svg class="ez-icon ez-icon--small">
-            <use xlink:href="{{ ez_icon_path(icon|default('')) }}"></use>
+        <svg class="ibexa-icon ibexa-icon--small">
+            <use xlink:href="{{ ibexa_icon_path(icon|default('')) }}"></use>
         </svg>
     </button>
 {%- endblock table_header_tool_btn -%}
@@ -158,8 +158,8 @@
     <div class="ez-picker">
         <input type="text" class="ez-picker__input form-control" readonly="readonly">
         <button type="button" class="ez-picker__btn--clear-input">
-            <svg class="ez-icon ez-icon--medium">
-                <use xlink:href="{{ ez_icon_path('circle-close') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--medium">
+                <use xlink:href="{{ ibexa_icon_path('circle-close') }}"></use>
             </svg>
         </button>
         {% set attr = attr|merge({ 'hidden': true, 'class': 'ez-picker__form-input' }) %}

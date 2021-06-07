@@ -21,7 +21,7 @@
     const creatorInput = doc.querySelector('.ez-filters__item--creator .ez-filters__input');
     const searchCreatorInput = doc.querySelector('#search_creator');
     const usersList = doc.querySelector('.ez-filters__item--creator .ez-filters__user-list');
-    const resetCreatorBtn = doc.querySelector('.ez-filters__item--creator .ez-icon--reset');
+    const resetCreatorBtn = doc.querySelector('.ez-filters__item--creator .ibexa-icon--reset');
     const listGroupsTitle = doc.querySelectorAll('.ez-content-type-selector__group-title');
     const contentTypeCheckboxes = doc.querySelectorAll('.ez-content-type-selector__item [type="checkbox"]');
     const subtreeInput = doc.querySelector('#search_subtree');

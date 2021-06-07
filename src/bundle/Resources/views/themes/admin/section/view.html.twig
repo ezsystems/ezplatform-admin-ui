@@ -31,8 +31,8 @@
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text {% if not deletable %}disabled{% endif %}"
                         {{ modalDataAttributes }}
                         title="{{ 'section.action.delete'|trans|desc('Delete Section') }}">
-                        <svg class="ez-icon ez-icon--small">
-                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                         </svg>
                     </button>
                     {% if deletable %}
@@ -61,8 +61,8 @@
                         href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
                         title="{{ 'section.edit'|trans|desc('Edit') }}"
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
-                        <svg class="ez-icon ez-icon--small ez-icon-edit">
-                            <use xlink:href="{{ ez_icon_path('edit') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                            <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                         </svg>
                     </a>
                 {% endif %}

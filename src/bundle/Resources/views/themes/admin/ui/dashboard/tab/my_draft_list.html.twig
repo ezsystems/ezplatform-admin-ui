@@ -19,7 +19,7 @@
                 {% if row.isAccessible %}
                     <tr>
                         <td class="ez-table__cell ez-table__cell--has-icon">
-                            <svg class="ez-icon ez-icon--small-medium ez-icon--base-dark">
+                            <svg class="ibexa-icon ibexa-icon--small-medium ibexa-icon--base-dark">
                                 <use xlink:href="{{ ez_content_type_icon(row.contentType.identifier) }}"></use>
                             </svg>
                         </td>
@@ -47,8 +47,8 @@
                                     }) }}"
                                     data-content-id="{{ row.versionInfo.contentInfo.id }}"
                                     data-language-code="{{ row.versionInfo.initialLanguageCode }}">
-                                <svg class="ez-icon ez-icon--small ez-icon-edit">
-                                    <use xlink:href="{{ ez_icon_path('edit') }}"></use>
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                                 </svg>
                             </button>
                         </td>

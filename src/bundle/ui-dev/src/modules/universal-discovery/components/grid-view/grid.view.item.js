@@ -69,7 +69,7 @@ const GridViewItem = ({ location, version }) => {
             <div className="c-grid-item__preview">
                 <Thumbnail
                     thumbnailData={version.Thumbnail}
-                    iconExtraClasses="ez-icon--extra-large"
+                    iconExtraClasses="ibexa-icon--extra-large"
                     contentTypeIconPath={contentTypesMap[location.ContentInfo.Content.ContentType._href].thumbnail}
                 />
             </div>

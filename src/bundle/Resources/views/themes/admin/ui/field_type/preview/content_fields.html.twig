@@ -242,14 +242,14 @@
         } ) %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezbinaryfile')|trim}) %}
         <div {{ block( 'field_attributes' ) }}>
-            <svg class="ez-icon ez-icon--file">
-                <use xlink:href="{{ ez_icon_path('file') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--file">
+                <use xlink:href="{{ ibexa_icon_path('file') }}"></use>
             </svg>
             {{ field.value.fileName }}
             {{ field.value.fileSize|ez_file_size( 1 ) }}
             <a class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ml-4" download href="{{ path( route_reference.getRoute(), route_reference.getParams() ) }}">
-                <svg class="ez-icon ez-icon--small ez-icon--download">
-                    <use xlink:href="{{ ez_icon_path('download') }}"></use>
+                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--download">
+                    <use xlink:href="{{ ibexa_icon_path('download') }}"></use>
                 </svg>
             </a>
         </div>
@@ -443,8 +443,8 @@
     </div>
     <div class="ez-field-preview__actions-wrapper">
         <a class="ez-field-preview__action ez-field-preview__action--preview" href="{{ field.value.uri }}" target="_blank">
-            <svg class="ez-icon ez-icon--medium ez-icon--light">
-                <use xlink:href="{{ ez_icon_path('open-newtab') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--light">
+                <use xlink:href="{{ ibexa_icon_path('open-newtab') }}"></use>
             </svg>
         </a>
     </div>

@@ -111,7 +111,7 @@ const ContentEditButton = ({ version, location, isDisabled }) => {
                 onClick={toggleTranslationSelectorVisibility}
                 data-tooltip-container-selector=".c-udw-tab"
                 title={editLabel}>
-                <Icon name="edit" extraClasses="ez-icon--small" />
+                <Icon name="edit" extraClasses="ibexa-icon--small" />
             </button>
             {renderTranslationSelector()}
         </div>

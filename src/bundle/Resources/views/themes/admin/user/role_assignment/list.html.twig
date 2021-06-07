@@ -11,8 +11,8 @@
                     href="{{ path('ezplatform.role_assignment.create', {roleId: role.id}) }}"
                     title="{{ 'role_assignment.view.list.action.add'|trans|desc('Assign to Users/Groups') }}"
                     class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
-                    <svg class="ez-icon ez-icon--small ez-icon-relations">
-                        <use xlink:href="{{ ez_icon_path('assign-user') }}"></use>
+                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--relations">
+                        <use xlink:href="{{ ibexa_icon_path('assign-user') }}"></use>
                     </svg>
 
                 </a>
@@ -25,8 +25,8 @@
                     data-toggle="modal"
                     data-target="#{{ modal_data_target }}"
                     title="{{ 'role_assignment.view.list.action.delete'|trans|desc('Unassign') }}">
-                    <svg class="ez-icon ez-icon--small ez-icon-trash">
-                        <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+                        <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                     </svg>
                 </button>
                 {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {

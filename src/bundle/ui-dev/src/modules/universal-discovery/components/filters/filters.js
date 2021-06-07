@@ -94,7 +94,7 @@ const Filters = ({ isCollapsed, search }) => {
             <div className="ez-tag">
                 <div className="ez-tag__content">{subtreeBreadcrumbs}</div>
                 <button type="button" className="ez-tag__remove-btn" onClick={clearSelectedSubree}>
-                    <Icon name="discard" extraClasses="ez-icon--small ez-icon--dark" />
+                    <Icon name="discard" extraClasses="ibexa-icon--small ibexa-icon--dark" />
                 </button>
             </div>
         );

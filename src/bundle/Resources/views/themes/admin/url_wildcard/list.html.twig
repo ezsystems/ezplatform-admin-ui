@@ -10,8 +10,8 @@
 <section class="container mt-4">
     {% if not url_wildcards_enabled %}
         <div class="ez-alert ez-alert--info mb-4">
-            <svg class="ez-icon ez-icon--small">
-                <use xlink:href="{{ ez_icon_path('warning') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--small">
+                <use xlink:href="{{ ibexa_icon_path('warning') }}"></use>
             </svg>
             {{ 'url_wildcard.disabled'|trans|desc('URL wildcards are disabled. Contact your Administrator.') }}
         </div>
@@ -30,8 +30,8 @@
                 data-toggle="modal"
                 data-target="#{{ modal_create_data_target }}"
                 title="{{ 'url_wildcard.list.action.create'|trans|desc('Create a URL wildcard') }}">
-                <svg class="ez-icon ez-icon--small ez-icon-create">
-                    <use xlink:href="{{ ez_icon_path('create') }}"></use>
+                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                    <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
                 </svg>
             </button>
             {% set modal_delete_data_target = 'delete-wildcards-modal' %}
@@ -43,8 +43,8 @@
                 data-toggle="modal"
                 data-target="#{{ modal_delete_data_target }}"
                 title="{{ 'url_wildcard.list.action.delete'|trans|desc('Delete URL wildcards') }}">
-                <svg class="ez-icon ez-icon--small ez-icon-trash">
-                    <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+                    <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                 </svg>
             </button>
         </div>
@@ -94,14 +94,14 @@
                             <td class="ez-table__cell ez-table__cell--has-action-btns">
                                 {% if can_manage %}
                                     <a href="{{ edit_url }}" class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2" title="{{ 'url_wildcard.action.edit'|trans|desc('Edit URL wildcard') }}">
-                                        <svg class="ez-icon ez-icon--small ez-icon-edit">
-                                            <use xlink:href="{{ ez_icon_path('edit') }}"></use>
+                                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                            <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                                         </svg>
                                     </a>
                                 {% else %}
                                     <span class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2" disabled>
-                                        <svg class="ez-icon ez-icon--small ez-icon-edit">
-                                            <use xlink:href="{{ ez_icon_path('edit') }}"></use>
+                                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                            <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                                         </svg>
                                     </span>
                                 {% endif %}

@@ -229,7 +229,7 @@ export default class MultiFileUploadModule extends Component {
 
         return (
             <button {...attrs}>
-                <Icon name="upload" extraClasses="ez-icon--base-dark ez-icon--small-medium" />
+                <Icon name="upload" extraClasses="ibexa-icon--base-dark ibexa-icon--small-medium" />
             </button>
         );
     }

@@ -82,7 +82,7 @@ const ContentTableItem = ({ location }) => {
     return (
         <tr className={className} onClick={markLocation}>
             <td className="c-content-table-item__icon-wrapper">
-                <Icon extraClasses="ez-icon--small" customPath={contentTypeInfo.thumbnail} />
+                <Icon extraClasses="ibexa-icon--small" customPath={contentTypeInfo.thumbnail} />
             </td>
             <td>{location.ContentInfo.Content.TranslatedName}</td>
             <td>{formatShortDateTime(new Date(location.ContentInfo.Content.lastModificationDate))}</td>

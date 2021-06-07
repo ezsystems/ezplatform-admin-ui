@@ -60,7 +60,7 @@
             height: calculateRem(47px);
             background: $ibexa-white;
 
-            .ez-icon {
+            .ibexa-icon {
                 fill: $ibexa-color-base-dark;
             }
         }
@@ -202,13 +202,13 @@
                 align-items: center;
             }
 
-            .ez-icon {
+            .ibexa-icon {
                 fill: $ibexa-black;
             }
 
             &:hover,
             &:focus {
-                .ez-icon {
+                .ibexa-icon {
                     fill: $ibexa-color-primary;
                 }
             }

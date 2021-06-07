@@ -6,8 +6,8 @@
 
 {% block _ezplatform_content_forms_contenttype_update_removeFieldDefinition_widget %}
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
-        <svg class="ez-icon ez-icon--medium ez-icon--light">
-            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+        <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--light">
+            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
         </svg>
     </button>
 {% endblock %}
@@ -72,11 +72,11 @@
                     <div class="card ez-card ez-card--toggle-group ez-card--collapsed">
                         <div id="field-definition-{{ value.identifier }}" class="ez-card__header ez-card__header--secondary">
                             <button class="ez-card__body-display-toggler btn">
-                                <svg class="ez-icon ez-icon--medium ez-icon--caret-down" aria-hidden="true">
-                                    <use xlink:href="{{ ez_icon_path('caret-down') }}"></use>
+                                <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--caret-down" aria-hidden="true">
+                                    <use xlink:href="{{ ibexa_icon_path('caret-down') }}"></use>
                                 </svg>
-                                <svg class="ez-icon ez-icon--medium ez-icon--caret-next" aria-hidden="true">
-                                    <use xlink:href="{{ ez_icon_path('caret-next') }}"></use>
+                                <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--caret-next" aria-hidden="true">
+                                    <use xlink:href="{{ ibexa_icon_path('caret-next') }}"></use>
                                 </svg>
                             </button>
                             {{ form_widget(field_definition.selected, {

@@ -1,7 +1,7 @@
 (function (global, doc) {
     const passwordInputNode = doc.querySelector('.ez-login__input--password');
-    const viewIconNode = doc.querySelector('.ez-login__password-visibility-toggler .ez-icon--view');
-    const viewHideIconNode = doc.querySelector('.ez-login__password-visibility-toggler .ez-icon--view-hide');
+    const viewIconNode = doc.querySelector('.ez-login__password-visibility-toggler .ibexa-icon--view');
+    const viewHideIconNode = doc.querySelector('.ez-login__password-visibility-toggler .ibexa-icon--view-hide');
 
     doc.querySelector('.ez-login__password-visibility-toggler').addEventListener('click', (event) => {
         if (passwordInputNode) {

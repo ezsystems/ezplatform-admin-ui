@@ -200,10 +200,10 @@ export default class TableViewItemComponent extends PureComponent {
                 </div>
                 <div className="c-table-view-item__priority-actions" {...innerWrapperAttrs}>
                     <button type="button" className="c-table-view-item__btn c-table-view-item__btn--submit" onClick={this.handleSubmit}>
-                        <Icon name="checkmark" extraClasses="ez-icon--small ez-icon--light" />
+                        <Icon name="checkmark" extraClasses="ibexa-icon--small ibexa-icon--light" />
                     </button>
                     <button type="button" className="c-table-view-item__btn c-table-view-item__btn--cancel" onClick={this.handleCancel}>
-                        <Icon name="discard" extraClasses="ez-icon--small ez-icon--light" />
+                        <Icon name="discard" extraClasses="ibexa-icon--small ibexa-icon--light" />
                     </button>
                 </div>
             </div>
@@ -359,7 +359,7 @@ export default class TableViewItemComponent extends PureComponent {
                     />
                 </td>
                 <td className="c-table-view-item__cell c-table-view-item__cell--icon">
-                    <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--small-medium" />
+                    <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--small-medium" />
                 </td>
                 {this.renderBasicColumns()}
                 <td className="c-table-view-item__cell c-table-view-item__cell--actions">
@@ -370,7 +370,7 @@ export default class TableViewItemComponent extends PureComponent {
                         className="c-table-view-item__btn c-table-view-item__btn--edit"
                         tabIndex={-1}>
                         <div className="c-table-view-item__btn-inner">
-                            <Icon name="edit" extraClasses="ez-icon--small-medium" />
+                            <Icon name="edit" extraClasses="ibexa-icon--small-medium" />
                         </div>
                     </span>
                 </td>

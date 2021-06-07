@@ -34,7 +34,7 @@
         transition: all 0.2s $ibexa-admin-transition;
     }
 
-    .ez-icon {
+    .ibexa-icon {
         fill: $color;
         height: calculateRem(20px);
         width: calculateRem(20px);
@@ -45,7 +45,7 @@
         }
     }
 
-    .ez-icon + .ez-icon {
+    .ibexa-icon + .ibexa-icon {
         fill: $ibexa-white;
     }
 
@@ -54,11 +54,11 @@
             transform: translate(0, -50%);
         }
 
-        .ez-icon {
+        .ibexa-icon {
             fill: $ibexa-white;
         }
 
-        .ez-icon + .ez-icon {
+        .ibexa-icon + .ibexa-icon {
             fill: $color;
         }
     }
@@ -145,14 +145,14 @@
         cursor: pointer;
         outline: none;
 
-        .ez-icon {
+        .ibexa-icon {
             fill: $ibexa-color-base-dark;
             transition: fill 0.3s $ibexa-admin-transition;
         }
 
         &:hover,
         &:focus {
-            .ez-icon {
+            .ibexa-icon {
                 fill: $ibexa-color-base-deep;
             }
         }
@@ -191,7 +191,7 @@
     justify-content: center;
     align-items: center;
 
-    .ez-icon {
+    .ibexa-icon {
         height: calculateRem(24px);
         width: calculateRem(24px);
     }

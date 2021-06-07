@@ -97,7 +97,7 @@ img {
     z-index: 0;
 }
 
-.ez-spin {
+.ibexa-spin {
     animation: spin 1.75s linear infinite;
 }
 
@@ -152,7 +152,7 @@ select {
     top: calculateRem(16px);
 
     > .btn {
-        .ez-icon {
+        .ibexa-icon {
             margin-bottom: calculateRem(3px);
         }
     }

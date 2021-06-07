@@ -21,9 +21,9 @@ class PreviewNav extends Element
             'previewNav' => '.ez-preview__nav',
             'backToEdit' => '.ez-preview__nav .ez-preview__item--back a',
             'title' => '.ez-preview__nav .ez-preview__item--description',
-            'desktop' => '.ez-preview__nav .ez-preview__item--actions .ez-icon-desktop',
-            'tablet' => '.ez-preview__nav .ez-preview__item--actions .ez-icon-tablet',
-            'mobile' => '.ez-preview__nav .ez-preview__item--actions .ez-icon-mobile',
+            'desktop' => '.ez-preview__nav .ez-preview__item--actions .ibexa-icon--desktop',
+            'tablet' => '.ez-preview__nav .ez-preview__item--actions .ibexa-icon--tablet',
+            'mobile' => '.ez-preview__nav .ez-preview__item--actions .ibexa-icon--mobile',
             'selectedView' => '.ez-preview__action--selected',
         ];
     }

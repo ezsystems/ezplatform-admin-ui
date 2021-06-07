@@ -8,8 +8,8 @@
             href="{{ path('_ez_content_view', { 'contentId': referrer_location.contentId, 'locationId': referrer_location.id }) }}"
             title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
         >
-            <svg class="ez-icon ez-icon--small ez-icon--primary">
-                <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--primary">
+                <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
             </svg>
         </a>
     {% endif %}
@@ -27,8 +27,8 @@
 
                 {% if description is defined and description and title is not empty  %}
                     <div class="ez-content-edit-page-title__icon-wrapper" title="{{ description }}">
-                        <svg class="ez-icon ez-icon--medium">
-                            <use xlink:href="{{ ez_icon_path('system-information') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--medium">
+                            <use xlink:href="{{ ibexa_icon_path('system-information') }}"></use>
                         </svg>
                     </div>
                 {% endif %}
@@ -48,8 +48,8 @@
                             title="{{ 'content.autosave.turn_of.message'|trans()|desc('You can turn autosave off in your user settings') }}"
                         >
                             <span class="ez-content-edit-page-title__autosave-result">
-                                <svg class="ez-icon ez-icon ez-icon--small-medium ez-icon--autosave">
-                                    <use xlink:href="{{ ez_icon_path('autosave') }}"></use>
+                                <svg class="ibexa-icon ibexa-icon ibexa-icon--small-medium ibexa-icon--autosave">
+                                    <use xlink:href="{{ ibexa_icon_path('autosave') }}"></use>
                                 </svg>
                                 <span class="ez-content-edit-page-title__autosave-info">{{ 'content_edit.autosave.message'|trans()|desc('<b>Autosave</b> is on.')|raw }} </span>
                                 <span class="ez-content-edit-page-title__autosave-failed">

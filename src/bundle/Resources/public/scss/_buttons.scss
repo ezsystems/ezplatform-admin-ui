@@ -149,7 +149,7 @@
     }
 
     &--add-translation {
-        .ez-icon {
+        .ibexa-icon {
             margin-right: 0;
         }
     }
@@ -161,12 +161,12 @@
         overflow: hidden;
     }
 
-    .ez-icon {
+    .ibexa-icon {
         margin-right: calculateRem(12px);
     }
 
     &--no-text {
-        .ez-icon {
+        .ibexa-icon {
             margin-right: 0;
         }
     }
@@ -204,7 +204,7 @@
             border-bottom-right-radius: $ibexa-border-radius;
         }
 
-        .ez-icon {
+        .ibexa-icon {
             display: block;
             width: calculateRem(24px);
             height: calculateRem(24px);
@@ -225,7 +225,7 @@
         opacity: 1;
         color: rgba($ibexa-white, 0.5);
 
-        .ez-icon {
+        .ibexa-icon {
             opacity: 0.5;
         }
     }
@@ -272,7 +272,7 @@
     color: $ibexa-color-primary;
     border-color: $ibexa-white;
 
-    .ez-icon {
+    .ibexa-icon {
         fill: $ibexa-color-primary;
     }
 }

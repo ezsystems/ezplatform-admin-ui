@@ -32,8 +32,8 @@ class AdminList extends Element
         $this->fields = [
             'list' => $containerLocator,
             'listHeader' => '.ez-table-header .ez-table-header__headline, header .ez-table__headline, header h5',
-            'plusButton' => '.ez-icon-create',
-            'trashButton' => '.ez-icon-trash,button[data-original-title^="Delete"]',
+            'plusButton' => '.ibexa-icon--create',
+            'trashButton' => '.ibexa-icon--trash,button[data-original-title^="Delete"]',
             'mainAssignButton' => '.ez-table-header [data-original-title^=Assign]',
             'paginationNextButton' => '.ez-pagination a.page-link[rel="next"]',
         ];

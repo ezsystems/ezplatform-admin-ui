@@ -16,8 +16,8 @@
                     href="{{ url('ezplatform.content.draft.edit', {'contentId': content.id, 'versionNo': version_no, 'language': language_code, 'locationId': is_published ? location.id : null}) }}"
                     title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
                 >
-                    <svg class="ez-icon ez-icon--small-medium">
-                        <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+                    <svg class="ibexa-icon ibexa-icon--small-medium">
+                        <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                     </svg>
                 </a>
             </div>
@@ -27,18 +27,18 @@
             </div>
             <div class="ez-preview__item ez-preview__item--actions">
                 <button data-preview-mode="desktop" class="ez-preview__action ez-preview__action--selected">
-                    <svg class="ez-icon ez-icon-desktop">
-                        <use xlink:href="{{ ez_icon_path('view-desktop') }}"></use>
+                    <svg class="ibexa-icon ibexa-icon--desktop">
+                        <use xlink:href="{{ ibexa_icon_path('view-desktop') }}"></use>
                     </svg>
                 </button>
                 <button data-preview-mode="tablet" class="ez-preview__action">
-                    <svg class="ez-icon ez-icon-tablet">
-                        <use xlink:href="{{ ez_icon_path('view-tablet') }}"></use>
+                    <svg class="ibexa-icon ibexa-icon--tablet">
+                        <use xlink:href="{{ ibexa_icon_path('view-tablet') }}"></use>
                     </svg>
                 </button>
                 <button data-preview-mode="mobile" class="ez-preview__action">
-                    <svg class="ez-icon ez-icon-mobile">
-                        <use xlink:href="{{ ez_icon_path('view-mobile') }}"></use>
+                    <svg class="ibexa-icon ibexa-icon--mobile">
+                        <use xlink:href="{{ ibexa_icon_path('view-mobile') }}"></use>
                     </svg>
                 </button>
             </div>

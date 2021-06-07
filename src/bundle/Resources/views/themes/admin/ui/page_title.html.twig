@@ -8,11 +8,11 @@
         {% if content_type_name is defined %}
             <h4 class="ez-page-title__content-type-name">
                 {% if icon_name is defined%}
-                    <svg class="ez-icon ez-icon--small ez-icon--base-dark ez-icon-{{ icon_name }}">
-                        <use xlink:href="{{ ez_icon_path(icon_name) }}"></use>
+                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--base-dark ibexa-icon--{{ icon_name }}">
+                        <use xlink:href="{{ ibexa_icon_path(icon_name) }}"></use>
                     </svg>
                 {% elseif content_type_identifier is defined %}
-                    <svg class="ez-icon ez-icon--small ez-icon--base-dark ez-icon-{{ content_type_identifier }}">
+                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--base-dark ibexa-icon--{{ content_type_identifier }}">
                         <use xlink:href="{{ ez_content_type_icon(content_type_identifier) }}"></use>
                     </svg>
                 {% endif %}

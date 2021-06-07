@@ -40,8 +40,8 @@
                         data-toggle="modal"
                         title="{{ 'language.delete'|trans|desc('Delete language') }}"
                         data-target="#delete-language-modal">
-                        <svg class="ez-icon ez-icon--small">
-                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                         </svg>
                     </button>
 
@@ -80,8 +80,8 @@
                                 href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
                                 class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2"
                                 title="{{ 'language.edit'|trans|desc('Edit') }}">
-                                <svg class="ez-icon ez-icon--small ez-icon-edit">
-                                    <use xlink:href="{{ ez_icon_path('edit') }}"></use>
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                                 </svg>
                             </a>
                         {% endif %}
