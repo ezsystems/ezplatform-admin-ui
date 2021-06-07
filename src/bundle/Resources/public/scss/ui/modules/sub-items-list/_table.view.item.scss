@@ -217,15 +217,7 @@
 
     &__link {
         display: inline-block;
-        color: $ibexa-color-font;
         cursor: pointer;
-        transition: color 0.3s $ibexa-admin-transition;
-        text-decoration: underline;
-
-        &:hover,
-        &:focus {
-            color: $ibexa-color-primary;
-        }
     }
 
     &--active {
