@@ -271,3 +271,313 @@
         }
     }
 }
+
+.ibexa-tabs {
+    // background-color: red; //transparent;
+    // border-bottom: calculateRem(1px) solid $ibexa-color-base;
+    // border-top-left-radius: $ibexa-border-radius; // TODO: delete ???
+    // border-top-right-radius: $ibexa-border-radius;
+    border: 0;
+
+    .nav-item {
+        position: relative;
+        margin-bottom: calculateRem(-1px);
+    }
+
+    .nav-link {
+        margin-left: calculateRem(16px);
+        padding: calculateRem(14px) calculateRem(8px);
+        color: $ibexa-black;
+        border-radius: 0;
+        text-decoration: none;
+        border-top-right-radius: 50px; // so the tab is not clickable where it is transparent
+                                        // radius should be good enough approximation of tab shape
+
+        // &:hover {
+        //     @include nav-item-active-hover;
+        //     color: $ibexa-color-primary;
+        // }
+
+        // &.active {
+        //     @include nav-item-active-hover;
+        //     color: $ibexa-black;
+        // }
+    }
+
+    &--hidden {
+        display: none;
+    }
+
+    &__tab {
+        height: 47px;
+        display: flex;
+        align-items: center;
+        // border: 1px solid #e0e0e0;
+        // margin-right: 36px;
+        // background-color: #fff;
+        // border-radius: 10px 0 0 0;
+        // border-bottom-width: 0;
+        // background-color: #f3f3f6;
+        background-color: transparent;
+        font-size: 14px;
+        // border-color: #f3f3f6;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        margin-left: -3px;
+
+        &:first-of-type {
+            margin-left: 0;
+        }
+
+        &::before {
+            content: '';
+
+            position: absolute;
+            right: 43px;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            margin-bottom: 1px; // TODO: do we need this ???
+            border: 1px solid #e0e0e0;
+            border-radius: 10px 0 0 0;
+            border-bottom-width: 0;
+            border-right-width: 0;
+            background-color: #f3f3f6;
+            border-color: #f3f3f6;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+
+        &::after {
+            content: '';
+            // TODO: what about blank space before svg was loaded? Should it be preloaded in header? or something???
+            background-image: url(/bundles/ezplatformadminui/img/tab_corner_inactive.svg);
+            width: 43px;
+            position: absolute;
+            // right: -43px;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin-bottom: 1px;
+            transition: background-image $ibexa-admin-transition-duration $ibexa-admin-transition;
+            z-index: 2;
+        }
+
+        &--active {
+            &::before {
+                background-color: #fff;
+                border: 1px solid #e0e0e8;
+                border-bottom-width: 0;
+                border-right-width: 0;
+                z-index: 3;
+                margin-bottom: -0.1px;
+            }
+
+            &::after {
+                background-image: url(/bundles/ezplatformadminui/img/tab_corner_1.svg);
+                z-index: 3;
+                margin-bottom: -0.1px;
+            }
+        }
+
+
+        ///////////////////
+        //////////////////
+        &--hidden {
+            display: none;
+        }
+
+        &--more {
+            cursor: pointer;
+
+            > .nav-link {
+                position: relative;
+                height: 100%;
+                padding-right: calculateRem(32px);
+
+                &:before,
+                &:after {
+                    content: '';
+                    height: calculateRem(10px);
+                    width: calculateRem(2px);
+                    position: absolute;
+                    top: 50%;
+                    right: calculateRem(12px);
+                    background-color: $ibexa-black;
+                }
+
+                &:before {
+                    transform: translate(#{calculateRem(3px)}, -50%) rotate(-135deg);
+                }
+
+                &:after {
+                    transform: translate(#{calculateRem(-3px)}, -50%) rotate(135deg);
+                }
+            }
+        }
+
+        &--expanded {
+            .nav-link {
+                background-color: $ibexa-white;
+                border-color: $ibexa-white;
+                color: $ibexa-black;
+            }
+        }
+    }
+
+    &__link {
+        &.nav-link,
+        &.nav-link.active {
+            color: $ibexa-black;
+            background: transparent;
+            // background-color: $ibexa-white;
+            border-width: 0;
+            padding: 0;
+            // height: auto;
+            // margin-left: 24px;
+            // margin-right: -4px;
+            z-index: 4; // TODO: do we need this ???
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+            padding-right: 40px;
+            margin-right: 3px;
+            padding-left: 24px;
+            margin-left: 0;
+            height: 47px;
+            display: flex;
+            align-items: center;
+
+            // &::before {
+            //     // content: '';
+            //     content: url(/bundles/ezplatformadminui/img/tab_corner_top.svg);
+            //     // background-image: url(/bundles/ezplatformadminui/img/tab_corner_top.svg);
+            //     pointer-events: none;
+            //     position: absolute;
+            //     right: 0;
+            //     // left: 0;
+            //     top: 0;
+            //     bottom: 0;
+            //     z-index: 5;
+            // }
+        }
+
+        &.nav-link.active {
+            // background-color: $ibexa-white;
+        }
+
+        &--active {
+            height: 59px;  // ??
+            border-bottom-width: 0;
+        }
+    }
+}
+
+// .ibexa-tabs {
+//     background-color: $ibexa-white;
+//     border-bottom: calculateRem(1px) solid $ibexa-color-base;
+//     border-top-left-radius: $ibexa-border-radius;
+//     border-top-right-radius: $ibexa-border-radius;
+
+//     .nav-item {
+//         position: relative;
+//         margin-bottom: calculateRem(-1px);
+//     }
+
+//     .nav-link {
+//         margin-left: calculateRem(16px);
+//         padding: calculateRem(14px) calculateRem(8px);
+//         color: $ibexa-black;
+//         border-radius: 0;
+//         text-decoration: none;
+
+//         // &:hover {
+//         //     @include nav-item-active-hover;
+//         //     color: $ibexa-color-primary;
+//         // }
+
+//         // &.active {
+//         //     @include nav-item-active-hover;
+//         //     color: $ibexa-black;
+//         // }
+//     }
+
+//     &__tab {
+//         height: 47px;
+//         display: flex;
+//         align-items: center;
+//         // border: 1px solid #e0e0e0;
+//         margin-right: 36px;
+//         // background-color: #fff;
+//         // border-radius: 10px 0 0 0;
+//         // border-bottom-width: 0;
+//         // background-color: #f3f3f6;
+//         background-color: transparent;
+//         font-size: 14px;
+//         // border-color: #f3f3f6;
+//         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+//         &::after {
+//             content: '';
+//             // TODO: what about blank space before svg was loaded? Should it be preloaded in header? or something???
+//             background-image: url(/bundles/ezplatformadminui/img/tab_corner_inactive.svg);
+//             width: 43px;
+//             position: absolute;
+//             right: -43px;
+//             top: -1px;
+//             bottom: -1px;
+//             margin-bottom: 1px;
+//             transition: background-image $ibexa-admin-transition-duration $ibexa-admin-transition;
+//         }
+
+//         &::before {
+//             content: '';
+
+//             position: absolute;
+//             right: 43px;
+//             left: 0;
+//             top: 0;
+//             bottom: 0;
+//             margin-bottom: 1px;
+//             border: 1px solid #e0e0e0;
+//             background-color: #fff;
+//             border-radius: 10px 0 0 0;
+//             border-bottom-width: 0;
+//             background-color: #f3f3f6;
+//             border-color: #f3f3f6;
+//             transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+//         }
+
+//         &--active {
+//             background-color: #fff;
+//             border: 1px solid #e0e0e8;
+//             border-bottom-width: 0;
+//             z-index: 1;
+
+//             &::after {
+//                 background-image: url(/bundles/ezplatformadminui/img/tab_corner_1.svg);
+//             }
+//         }
+//     }
+
+//     &__link {
+//         &.nav-link,
+//         &.nav-link.active {
+//             color: $ibexa-black;
+//             // background-color: $ibexa-white;
+//             border-width: 0;
+//             padding: 0;
+//             height: auto;
+//             margin-left: 24px;
+//             margin-right: -4px;
+//             z-index: 1;
+//             transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+//         }
+
+//         &.nav-link.active {
+//             background-color: $ibexa-white;
+//         }
+
+//         &--active {
+//             height: 59px;
+//             border-bottom-width: 0;
+//         }
+//     }
+// }

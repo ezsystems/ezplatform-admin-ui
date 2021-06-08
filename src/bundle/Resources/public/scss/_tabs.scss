@@ -122,3 +122,19 @@
         background: $ibexa-white;
     }
 }
+
+.ibexa-tab-content {
+    border: 1px solid #e0e0e8;
+    padding: 0;
+    margin-right: 15px;
+    margin-left: 15px;
+    border-radius: 0 10px 10px 10px;
+    overflow: hidden;
+    width: calc(100% - 30px);
+    box-shadow: 4px 22px 47px 0 rgba($ibexa-color-info, 0.1);
+    margin-bottom: 80px;
+
+    &__pane {
+
+    }
+}
