@@ -71,6 +71,28 @@
 
     updateContentTreeWrapperHeight();
 
+    let transitionCount = 0;
+    let transitionEventIntervalId = null;
+    const dispatchContentTreeResizeEvent = () => doc.body.dispatchEvent(new CustomEvent('ez-content-tree-resized'));
+    const handleContainerTransitionStart = () => {
+        if (transitionCount == 0) {
+            transitionEventIntervalId = setInterval(dispatchContentTreeResizeEvent, 30);
+        }
+
+        transitionCount += 1;
+    };
+    const handleContainerTransitionStop = () => {
+        transitionCount -= 1;
+
+        if (transitionCount == 0) {
+            clearInterval(transitionEventIntervalId);
+            dispatchContentTreeResizeEvent();
+        }
+    };
+    contentTreeContainer.addEventListener('transitionstart', handleContainerTransitionStart, false);
+    contentTreeContainer.addEventListener('transitioncancel', handleContainerTransitionStop, false);
+    contentTreeContainer.addEventListener('transitionend', handleContainerTransitionStop, false);
+
     doc.addEventListener('scroll', handleViewportChange, { capture: false, passive: true });
     window.addEventListener('resize', handleViewportChange, { capture: false, passive: true });
 })(window, window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);
