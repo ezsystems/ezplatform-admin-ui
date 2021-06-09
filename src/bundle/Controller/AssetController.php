@@ -84,7 +84,7 @@ class AssetController extends Controller
                             'path' => $file->getRealPath(),
                             'fileSize' => $file->getSize(),
                             'fileName' => $file->getClientOriginalName(),
-                            'alternativeText' => null,
+                            'alternativeText' => $file->getClientOriginalName(),
                         ]),
                         $data->getLanguageCode()
                     );
