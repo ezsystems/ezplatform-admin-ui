@@ -4,12 +4,34 @@
             {% for tab in tabs %}
                 {% set id = group ~ '-' ~ tab.identifier %}
                 {% set active = loop.first %}
-                <li class="nav-item ibexa-tabs__tab ez-tabs__tab--primary {% if active %}ibexa-tabs__tab--active{% endif %}">
-                    <a class="nav-link{% if active %} active{% endif %} ibexa-tabs__link{% if active %} ibexa-tabs__link--active{% endif %}" id="ez-tab-label-{{ group }}"
+                <li class="nav-item ibexa-tabs__tab {% if active %}ibexa-tabs__tab--active{% endif %}"
+                    data-link-id="{{ id }}"
+                >
+                    <a class="nav-link{% if active %} active{% endif %} ibexa-tabs__link{% if active %} ibexa-tabs__link--active{% endif %}" 
+                        id="{{ id }}"
                         data-toggle="tab" href="#ez-tab-{{ id }}" role="tab" aria-controls="ez-tab-{{ id }}"
                         aria-expanded="{{ active }}">{{ tab.name }}</a>
                 </li>
+                
             {% endfor %}
+
+            <li class="nav-item ibexa-tabs__tab ibexa-tabs__tab--more"
+                data-item-template="{{ include('@ezdesign/ui/component/context_menu/context_menu_item.html.twig', {
+                        'label': '{{ label }}',
+                    })|e('html_attr') }}"
+            >
+                <a class="nav-link ibexa-tabs__link" role="button">
+                    <svg class="ibexa-icon ibexa-icon--small">
+                        <use xlink:href="/bundles/ibexaplatformicons/img/all-icons.svg#options"></use>
+                    </svg>
+                </a>
+                {{ include('@ezdesign/ui/component/context_menu/context_menu.html.twig', {
+                    'class': 'ibexa-tabs__context-menu ibexa-tabs__context-menu--hidden',
+                    'items': [],
+                }) }}
+            </li>
+
+            
         </ul>
     </div>
 </div>

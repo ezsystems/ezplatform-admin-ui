@@ -272,12 +272,45 @@
     }
 }
 
+.ibexa-context-menu {
+    position: absolute;
+    top: 47px;
+    right: 0;
+    padding: 5px 16px 5px 9px;
+    background: #fff;
+    z-index: 10;
+    border: 1px solid #e0e0e8;
+    border-radius: 10px;
+    background-color: $ibexa-white;
+    box-shadow: 4px 22px 67px 0 rgba($ibexa-color-info, 0.1);
+    font-size: 14px;
+
+    &__item {
+        height: 35px;
+        border-radius: 10px;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        min-width: 150px;
+
+        &:hover {
+            background-color: #f3f3f6;
+        }
+
+        &--hidden {
+            display: none;
+        }
+    }
+}
+
 .ibexa-tabs {
     // background-color: red; //transparent;
     // border-bottom: calculateRem(1px) solid $ibexa-color-base;
     // border-top-left-radius: $ibexa-border-radius; // TODO: delete ???
     // border-top-right-radius: $ibexa-border-radius;
     border: 0;
+    user-select: none;
 
     .nav-item {
         position: relative;
@@ -291,7 +324,7 @@
         border-radius: 0;
         text-decoration: none;
         border-top-right-radius: 50px; // so the tab is not clickable where it is transparent
-                                        // radius should be good enough approximation of tab shape
+        // radius should be good enough approximation of tab shape
 
         // &:hover {
         //     @include nav-item-active-hover;
@@ -378,7 +411,6 @@
             }
         }
 
-
         ///////////////////
         //////////////////
         &--hidden {
@@ -393,24 +425,24 @@
                 height: 100%;
                 padding-right: calculateRem(32px);
 
-                &:before,
-                &:after {
-                    content: '';
-                    height: calculateRem(10px);
-                    width: calculateRem(2px);
-                    position: absolute;
-                    top: 50%;
-                    right: calculateRem(12px);
-                    background-color: $ibexa-black;
-                }
+                // &:before,
+                // &:after {
+                //     content: '';
+                //     height: calculateRem(10px);
+                //     width: calculateRem(2px);
+                //     position: absolute;
+                //     top: 50%;
+                //     right: calculateRem(12px);
+                //     background-color: $ibexa-black;
+                // }
 
-                &:before {
-                    transform: translate(#{calculateRem(3px)}, -50%) rotate(-135deg);
-                }
+                // &:before {
+                //     transform: translate(#{calculateRem(3px)}, -50%) rotate(-135deg);
+                // }
 
-                &:after {
-                    transform: translate(#{calculateRem(-3px)}, -50%) rotate(135deg);
-                }
+                // &:after {
+                //     transform: translate(#{calculateRem(-3px)}, -50%) rotate(135deg);
+                // }
             }
         }
 
@@ -464,8 +496,14 @@
         }
 
         &--active {
-            height: 59px;  // ??
+            height: 59px; // ??
             border-bottom-width: 0;
+        }
+    }
+
+    &__context-menu {
+        &--hidden {
+            display: none;
         }
     }
 }
