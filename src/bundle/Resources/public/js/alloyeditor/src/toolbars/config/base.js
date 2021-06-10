@@ -39,18 +39,16 @@ export default class EzConfigBase {
 
             const range = document.createRange();
             const scrollLeft = parseInt(block.$.scrollLeft, 10);
+            const blockLeftMargin = block.$.offsetLeft;
+            const blockWidth = block.$.offsetWidth;
+            const toolbarWidth = document.querySelector('.ae-toolbar-floating').offsetWidth;
+            const maxLeft = blockWidth - toolbarWidth;
+
             range.selectNodeContents(positionReference.$);
             left = range.getBoundingClientRect().left + scrollLeft;
 
-            if (window.frameElement) {
-                const blockLeftMargin = block.$.offsetLeft;
-                const blockWidth = block.$.offsetWidth;
-                const toolbarWidth = document.querySelector('.ae-toolbar-floating').offsetWidth;
-                const maxLeft = blockWidth - toolbarWidth;
-
-                if (left > maxLeft) {
-                    left = maxLeft + blockLeftMargin;
-                }
+            if (left > maxLeft) {
+                left = maxLeft + blockLeftMargin;
             }
 
             if (empty) {
