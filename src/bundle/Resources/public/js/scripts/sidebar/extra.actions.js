@@ -7,13 +7,11 @@
     const RESIZE_AND_SCROLL_TIMEOUT = 50;
     const btns = [...doc.querySelectorAll('.ez-btn--extra-actions')];
     const menu = doc.querySelector('.ez-context-menu');
-    const footer = doc.querySelector('.ez-footer');
     let containerHeightTimeout;
     const haveHiddenPart = (element) => element.classList.contains(CLASS_HIDDEN) && !element.classList.contains(CLASS_PREVENT_SHOW);
     const setContainerHeight = () => {
         const container = doc.querySelector('.ez-extra-actions:not(.ez-extra-actions--hidden)');
-        const bottomPosition = Math.min(footer.getBoundingClientRect().top, global.innerHeight);
-        const containerHeight = bottomPosition - container.getBoundingClientRect().top - ACTIONS_CONTAINER_MARGIN;
+        const containerHeight = global.innerHeight - container.getBoundingClientRect().top - ACTIONS_CONTAINER_MARGIN;
 
         container.style.height = `${containerHeight}px`;
     };
@@ -67,6 +65,7 @@
 
                 if (!actions.classList.contains(CLASS_HIDDEN)) {
                     doc.body.addEventListener('click', detectClickOutside, false);
+                    setContainerHeight();
                     addContainerHeightListeners();
                 } else {
                     doc.body.removeEventListener('click', detectClickOutside);
