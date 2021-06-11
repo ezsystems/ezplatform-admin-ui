@@ -31,7 +31,7 @@ const ContentCreateWidget = () => {
             selectedLocation.permissions.create.restrictedLanguageCodes.includes(language.languageCode);
         const isAllowedLanguage = !allowedLanguages || allowedLanguages.includes(language.languageCode);
 
-        return userHasPermission && isAllowedLanguage;
+        return userHasPermission && isAllowedLanguage && language.enabled;
     });
     const [filterQuery, setFilterQuery] = useState('');
     const firstLanguageCode = filteredLanguages.length ? filteredLanguages[0].languageCode : '';
