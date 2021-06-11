@@ -1,6 +1,7 @@
 <div class="ez-header">
     <div class="container">
-        <ul class="nav nav-tabs ibexa-tabs" role="tablist" id="ez-tab-list-{{ group }}">
+    <div class="ibexa-tabs">
+        <ul class="nav nav-tabs ibexa-tabs__list" role="tablist" id="ez-tab-list-{{ group }}">
             {% for tab in tabs %}
                 {% set id = group ~ '-' ~ tab.identifier %}
                 {% set active = loop.first %}
@@ -30,9 +31,11 @@
                     'items': [],
                 }) }}
             </li>
-
-            
         </ul>
+        <div class="ibexa-tabs__toggler">
+            Hide
+        </div>
+    </div>
     </div>
 </div>
 <div class="tab-content container ibexa-tab-content" id="ez-tab-list-content-{{ group }}">

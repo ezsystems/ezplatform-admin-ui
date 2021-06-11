@@ -1,10 +1,13 @@
 (function (global, doc, $, Translator) {
     const OFFSET_ROUNDING_COMPENSATOR = 0.5;
     const TABS_SELECTOR = '.ibexa-tabs';
+    const SELECTOR_TABS_LIST = '.ibexa-tabs__list';
+    const SELECTOR_TAB_MORE = '.ibexa-tabs__tab--more';
     const copyTabs = () => {
         doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabs) => {
-            const tabs = primaryTabs.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)');
-            const tabMore = primaryTabs.querySelector(':scope > .ibexa-tabs__tab--more');
+            const tabsList = primaryTabs.querySelector(SELECTOR_TABS_LIST);
+            const tabs = tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)');
+            const tabMore = tabsList.querySelector(':scope > .ibexa-tabs__tab--more');
             const contextMenu = tabMore.querySelector('.ibexa-context-menu');
             const tabTemplate = tabMore.dataset.itemTemplate;
             const fragment = doc.createDocumentFragment();
@@ -29,11 +32,10 @@
     };
     const adaptTabs = () => {
         doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-            const primaryTabs = [...primaryTabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)')];
-            const primaryTabsLinks = [
-                ...primaryTabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more) .nav-link'),
-            ];
-            const moreTab = primaryTabsList.querySelector(':scope > .ibexa-tabs__tab--more');
+            const tabsList = primaryTabsList.querySelector(SELECTOR_TABS_LIST);
+            const primaryTabs = [...tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)')];
+            const primaryTabsLinks = [...tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more) .nav-link')];
+            const moreTab = tabsList.querySelector(':scope > .ibexa-tabs__tab--more');
 
             if (moreTab) {
                 [moreTab, ...primaryTabs].forEach((tab) => tab.classList.remove('ibexa-tabs__tab--hidden'));
@@ -43,7 +45,7 @@
                 const activePrimaryTab = activePrimaryTabLink ? activePrimaryTabLink.closest('.ibexa-tabs__tab') : null;
                 const activePrimaryTabWidth = activePrimaryTab ? activePrimaryTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR : 0;
                 const moreTabWidth = moreTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
-                const maxTotalWidth = primaryTabsList.offsetWidth - OFFSET_ROUNDING_COMPENSATOR;
+                const maxTotalWidth = tabsList.offsetWidth - OFFSET_ROUNDING_COMPENSATOR;
                 const hiddenPrimaryTabsIds = [];
                 let currentWidth = moreTabWidth + activePrimaryTabWidth;
 
@@ -84,10 +86,11 @@
     };
     const handleClickOutsideSecondaryMenu = (event) => {
         doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-            const moreTab = primaryTabsList.querySelector('.ibexa-tabs__tab--more');
+            const tabsList = primaryTabsList.querySelector(SELECTOR_TABS_LIST);
+            const moreTab = tabsList.querySelector('.ibexa-tabs__tab--more');
 
             if (moreTab) {
-                const popupMenu = moreTab.querySelector('.ibexa-tabs__context-menu')
+                const popupMenu = moreTab.querySelector('.ibexa-tabs__context-menu');
                 const isPopupMenuExpanded = !popupMenu.classList.contains('ibexa-tabs__context-menu--hidden');
                 const isClickInsideMoreTab = event.target.closest('.ibexa-tabs__tab--more');
                 // const secondaryTabsList = moreTab.querySelector('.ibexa-tabs--secondary');
@@ -101,17 +104,31 @@
             }
         });
     };
-    const handleTabClick = (event, otherTabsLinks) => {
-        const clickedTabLink = event.currentTarget;
-        const otherTabLinkToShow = otherTabsLinks.find((otherTabLink) => otherTabLink.href === clickedTabLink.href);
+    const toggleContainer = (event) => {
+        const toggler = event.target;
+        const header = toggler.closest('.ez-header');
+        const headerContainer = header.parentElement;
+        const tabContent = headerContainer.querySelector('.ibexa-tab-content');
+        const isTabContentRolledUp = toggler.classList.contains('ibexa-tabs__toggler--rolled-up');
 
-        if (!otherTabLinkToShow) {
-            return;
-        }
-
-        $(otherTabLinkToShow).tab('show');
-        adaptTabs();
+        toggler.classList.toggle('ibexa-tabs__toggler--rolled-up');
+        tabContent.style.height = isTabContentRolledUp ? 'auto' : '0px';
     };
+
+    doc.querySelectorAll('.ibexa-tabs__toggler').forEach((toggler) => {
+        toggler.addEventListener('click', toggleContainer);
+    });
+    // const handleTabClick = (event, otherTabsLinks) => {
+    //     const clickedTabLink = event.currentTarget;
+    //     const otherTabLinkToShow = otherTabsLinks.find((otherTabLink) => otherTabLink.href === clickedTabLink.href);
+
+    //     if (!otherTabLinkToShow) {
+    //         return;
+    //     }
+
+    //     $(otherTabLinkToShow).tab('show');
+    //     adaptTabs();
+    // };
 
     copyTabs();
     adaptTabs();
@@ -119,10 +136,11 @@
     doc.addEventListener('click', handleClickOutsideSecondaryMenu);
 
     doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-        const moreTab = primaryTabsList.querySelector('.ibexa-tabs__tab--more');
+        const tabsList = primaryTabsList.querySelector(SELECTOR_TABS_LIST);
+        const moreTab = tabsList.querySelector('.ibexa-tabs__tab--more');
 
         if (moreTab) {
-            const moreTabLink = primaryTabsList.querySelector('.ibexa-tabs__tab--more .nav-link');
+            const moreTabLink = tabsList.querySelector('.ibexa-tabs__tab--more .nav-link');
             const contextMenu = moreTab.querySelector('.ibexa-tabs__context-menu');
 
             moreTabLink.addEventListener('click', () => {
@@ -133,24 +151,25 @@
     });
 
     doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-        const moreTab = primaryTabsList.querySelector('.ibexa-tabs__tab--more');
+        const tabsList = primaryTabsList.querySelector(SELECTOR_TABS_LIST);
+        const moreTab = tabsList.querySelector('.ibexa-tabs__tab--more');
 
         if (moreTab) {
-            const moreTabLink = primaryTabsList.querySelector('.ibexa-tabs__tab--more .nav-link');
+            const moreTabLink = tabsList.querySelector('.ibexa-tabs__tab--more .nav-link');
             const popupMenu = moreTab.querySelector('.ibexa-tabs__context-menu');
 
-            const popupMenuItems = popupMenu.querySelectorAll('.ibexa-context-menu__item')
+            const popupMenuItems = popupMenu.querySelectorAll('.ibexa-context-menu__item');
 
             popupMenuItems.forEach((popupMenuItem) => {
                 popupMenuItem.addEventListener('click', () => {
-                    const tabLinkId = popupMenuItem.dataset.tabLinkId
-                    const tabToShow = primaryTabsList.querySelector(`.ibexa-tabs__link#${tabLinkId}`);
+                    const tabLinkId = popupMenuItem.dataset.tabLinkId;
+                    const tabToShow = tabsList.querySelector(`.ibexa-tabs__link#${tabLinkId}`);
 
-                    popupMenu.classList.add('ibexa-tabs__context-menu--hidden')
-                    $(tabToShow).tab('show')
-                    adaptTabs()
-                })
-            })
+                    popupMenu.classList.add('ibexa-tabs__context-menu--hidden');
+                    $(tabToShow).tab('show');
+                    adaptTabs();
+                });
+            });
 
             // moreTabLink.addEventListener('click', () => {
             //     // moreTab.classList.toggle('ibexa-tabs__tab--expanded');
@@ -160,8 +179,9 @@
     });
 
     doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-        const moreTab = primaryTabsList.querySelector('.ibexa-tabs__tab--more');
-        const primaryTabsLinks = [...primaryTabsList.querySelectorAll('.ibexa-tabs__link:not(.ibexa-tabs__tab--more)')];
+        const tabsList = primaryTabsList.querySelector(SELECTOR_TABS_LIST);
+        const moreTab = tabsList.querySelector('.ibexa-tabs__tab--more');
+        const primaryTabsLinks = [...tabsList.querySelectorAll('.ibexa-tabs__link:not(.ibexa-tabs__tab--more)')];
 
         if (moreTab) {
             // const secondaryTabsList = moreTab.querySelector('.ibexa-tabs--secondary');

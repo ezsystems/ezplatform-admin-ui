@@ -309,7 +309,8 @@
     // border-bottom: calculateRem(1px) solid $ibexa-color-base;
     // border-top-left-radius: $ibexa-border-radius; // TODO: delete ???
     // border-top-right-radius: $ibexa-border-radius;
-    border: 0;
+    display: flex;
+    justify-content: space-between;
     user-select: none;
 
     .nav-item {
@@ -323,7 +324,7 @@
         color: $ibexa-black;
         border-radius: 0;
         text-decoration: none;
-        border-top-right-radius: 50px; // so the tab is not clickable where it is transparent
+        border-top-right-radius: 35px; // so the tab is not clickable where it is transparent
         // radius should be good enough approximation of tab shape
 
         // &:hover {
@@ -339,6 +340,39 @@
 
     &--hidden {
         display: none;
+    }
+
+    &__list {
+        border: 0;
+    }
+
+    &__toggler {
+        position: relative;
+        padding-top: 20px;
+        padding-right: 15px;
+        color: $ibexa-color-dark;
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: 21px;
+        text-align: right;
+        cursor: pointer;
+
+        &::after {
+            position: absolute;
+            bottom: 13px;
+            right: 0px;
+            content: '';
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #000;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+
+        &--rolled-up {
+            &::after {
+                transform: rotate(180deg);
+            }
+        }
     }
 
     &__tab {
