@@ -1,6 +1,12 @@
 .ez-header {
+    padding: 0;
+    margin-right: 15px;
+    margin-left: 15px;
+
     .container {
-    	position: relative;
+        margin: 0;
+        padding: 0;
+        position: relative;
     }
 
     &--light {

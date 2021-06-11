@@ -5,13 +5,13 @@
         doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabs) => {
             const tabs = primaryTabs.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)');
             const tabMore = primaryTabs.querySelector(':scope > .ibexa-tabs__tab--more');
-            const contextMenu = tabMore.querySelector('.ibexa-context-menu')
+            const contextMenu = tabMore.querySelector('.ibexa-context-menu');
             const tabTemplate = tabMore.dataset.itemTemplate;
             const fragment = doc.createDocumentFragment();
 
             tabs.forEach((tab) => {
                 const tabLink = tab.querySelector('.ibexa-tabs__link');
-                const tabLinkLabel = tabLink.textContent
+                const tabLinkLabel = tabLink.textContent;
                 const container = doc.createElement('ul');
                 const renderedItem = tabTemplate.replace('{{ label }}', tabLinkLabel);
 
@@ -19,13 +19,12 @@
 
                 const contextMenuItem = container.querySelector('li');
 
-                contextMenuItem.dataset.tabId = tabLink.id
+                contextMenuItem.dataset.tabId = tabLink.id;
                 fragment.append(contextMenuItem);
             });
 
             contextMenu.innerHTML = '';
             contextMenu.append(fragment);
-
 
             // const moreLabel = Translator.trans(/*@Desc("More")*/ 'content.view.more.label', {}, 'content');
 
@@ -50,11 +49,15 @@
     const adaptTabs = () => {
         doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
             const primaryTabs = [...primaryTabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)')];
-            const primaryTabsLinks = [...primaryTabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more) .nav-link')];
+            const primaryTabsLinks = [
+                ...primaryTabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more) .nav-link'),
+            ];
             const moreTab = primaryTabsList.querySelector(':scope > .ibexa-tabs__tab--more');
 
-            console.log(moreTab)
+            console.log(moreTab);
             if (moreTab) {
+                [moreTab, ...primaryTabs].forEach((tab) => tab.classList.remove('ibexa-tabs__tab--hidden'));
+
                 const contextMenuItems = [...moreTab.querySelectorAll('.ibexa-context-menu__item')];
                 const activePrimaryTabLink = primaryTabsLinks.find((tabLink) => tabLink.classList.contains('active'));
                 const activePrimaryTab = activePrimaryTabLink ? activePrimaryTabLink.closest('.ibexa-tabs__tab') : null;
@@ -64,8 +67,7 @@
                 const hiddenPrimaryTabsIds = [];
                 let currentWidth = moreTabWidth + activePrimaryTabWidth;
 
-                primaryTabs.forEach((tab) => tab.classList.remove('ibexa-tabs__tab--hidden'));
-                // moreTab.classList.remove('ibexa-tabs__tab--hidden');
+                // [moreTab, ...primaryTabs].forEach((tab) => tab.classList.remove('ibexa-tabs__tab--hidden'));
 
                 for (let i = 0; i < primaryTabs.length; i++) {
                     const tab = primaryTabs[i];
@@ -77,14 +79,29 @@
 
                     const isLastTab = i === primaryTabs.length - 1;
                     const allPreviousTabsVisible = hiddenPrimaryTabsIds.length === 0;
-                    const isTabNarrowerThanMoreTab = tab.offsetWidth < moreTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
+                    const fitsInsteadOfMoreTab =
+                        tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR < maxTotalWidth - currentWidth + moreTabWidth;
 
-                    if (isLastTab && allPreviousTabsVisible && isTabNarrowerThanMoreTab) {
+                    
+                    console.log(
+                        tab.children[0].text,
+                        moreTab.offsetWidth,
+                        tab.offsetWidth,
+                        global.getComputedStyle(moreTab).display,
+                        global.getComputedStyle(tab).display,
+                        'tot:',
+                        currentWidth + tab.offsetWidth,
+                        'max:',
+                        maxTotalWidth
+                    );
+
+                    if (isLastTab && allPreviousTabsVisible && fitsInsteadOfMoreTab) {
                         break;
                     }
-                    if (currentWidth + tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR > maxTotalWidth) {
+                    if (tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR > maxTotalWidth - currentWidth) {
                         hiddenPrimaryTabsIds.push(tab.dataset.linkId);
                     }
+                    console.log(tab.children[0].text, ' miesci sie bo ', tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR , ' < ', maxTotalWidth - currentWidth)
 
                     currentWidth += tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
                 }
