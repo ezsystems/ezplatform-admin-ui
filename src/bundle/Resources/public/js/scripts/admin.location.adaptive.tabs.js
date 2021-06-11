@@ -19,31 +19,12 @@
 
                 const contextMenuItem = container.querySelector('li');
 
-                contextMenuItem.dataset.tabId = tabLink.id;
+                contextMenuItem.dataset.tabLinkId = tabLink.id;
                 fragment.append(contextMenuItem);
             });
 
             contextMenu.innerHTML = '';
             contextMenu.append(fragment);
-
-            // const moreLabel = Translator.trans(/*@Desc("More")*/ 'content.view.more.label', {}, 'content');
-
-            // const tabMore = primaryTabs.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)');
-            // console.log(tabMore);
-
-            // primaryTabs.insertAdjacentHTML(
-            //     'beforeend',
-            //     `<li class="nav-item ibexa-tabs__tab ibexa-tabs__tab--more">
-            //         <a class="nav-link" id="ez-tab-label--more" role="tab">
-            //         <svg class="ibexa-icon ibexa-icon--small">
-            //             <use xlink:href="/bundles/ibexaplatformicons/img/all-icons.svg#options"></use>
-            //         </svg>
-            //         </a>
-            //         <ul class="nav nav-tabs ibexa-tabs ibexa-tabs--hidden ibexa-tabs--secondary" role="tablist">
-            //             ${primaryTabs.innerHTML}
-            //         </ul>
-            //     </li>`
-            // );
         });
     };
     const adaptTabs = () => {
@@ -54,7 +35,6 @@
             ];
             const moreTab = primaryTabsList.querySelector(':scope > .ibexa-tabs__tab--more');
 
-            console.log(moreTab);
             if (moreTab) {
                 [moreTab, ...primaryTabs].forEach((tab) => tab.classList.remove('ibexa-tabs__tab--hidden'));
 
@@ -66,8 +46,6 @@
                 const maxTotalWidth = primaryTabsList.offsetWidth - OFFSET_ROUNDING_COMPENSATOR;
                 const hiddenPrimaryTabsIds = [];
                 let currentWidth = moreTabWidth + activePrimaryTabWidth;
-
-                // [moreTab, ...primaryTabs].forEach((tab) => tab.classList.remove('ibexa-tabs__tab--hidden'));
 
                 for (let i = 0; i < primaryTabs.length; i++) {
                     const tab = primaryTabs[i];
@@ -82,26 +60,13 @@
                     const fitsInsteadOfMoreTab =
                         tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR < maxTotalWidth - currentWidth + moreTabWidth;
 
-                    
-                    console.log(
-                        tab.children[0].text,
-                        moreTab.offsetWidth,
-                        tab.offsetWidth,
-                        global.getComputedStyle(moreTab).display,
-                        global.getComputedStyle(tab).display,
-                        'tot:',
-                        currentWidth + tab.offsetWidth,
-                        'max:',
-                        maxTotalWidth
-                    );
-
                     if (isLastTab && allPreviousTabsVisible && fitsInsteadOfMoreTab) {
                         break;
                     }
+
                     if (tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR > maxTotalWidth - currentWidth) {
                         hiddenPrimaryTabsIds.push(tab.dataset.linkId);
                     }
-                    console.log(tab.children[0].text, ' miesci sie bo ', tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR , ' < ', maxTotalWidth - currentWidth)
 
                     currentWidth += tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
                 }
@@ -110,7 +75,7 @@
                     tab.classList.toggle('ibexa-tabs__tab--hidden', hiddenPrimaryTabsIds.includes(tab.dataset.linkId));
                 });
                 contextMenuItems.forEach((item) => {
-                    item.classList.toggle('ibexa-context-menu__item--hidden', !hiddenPrimaryTabsIds.includes(item.dataset.tabId));
+                    item.classList.toggle('ibexa-context-menu__item--hidden', !hiddenPrimaryTabsIds.includes(item.dataset.tabLinkId));
                 });
 
                 moreTab.classList.toggle('ibexa-tabs__tab--hidden', !hiddenPrimaryTabsIds.length);
@@ -122,16 +87,17 @@
             const moreTab = primaryTabsList.querySelector('.ibexa-tabs__tab--more');
 
             if (moreTab) {
-                const isSecondaryMenuExpanded = moreTab.classList.contains('ibexa-tabs__tab--expanded');
+                const popupMenu = moreTab.querySelector('.ibexa-tabs__context-menu')
+                const isPopupMenuExpanded = !popupMenu.classList.contains('ibexa-tabs__context-menu--hidden');
                 const isClickInsideMoreTab = event.target.closest('.ibexa-tabs__tab--more');
-                const secondaryTabsList = moreTab.querySelector('.ibexa-tabs--secondary');
+                // const secondaryTabsList = moreTab.querySelector('.ibexa-tabs--secondary');
 
-                if (!isSecondaryMenuExpanded || isClickInsideMoreTab) {
+                if (!isPopupMenuExpanded || isClickInsideMoreTab) {
                     return;
                 }
 
-                moreTab.classList.remove('ibexa-tabs__tab--expanded');
-                secondaryTabsList.classList.add('ibexa-tabs--hidden');
+                popupMenu.classList.add('ibexa-tabs__context-menu--hidden');
+                // secondaryTabsList.classList.add('ibexa-tabs--hidden');
             }
         });
     };
@@ -160,36 +126,64 @@
             const contextMenu = moreTab.querySelector('.ibexa-tabs__context-menu');
 
             moreTabLink.addEventListener('click', () => {
-                moreTab.classList.toggle('ibexa-tabs__tab--expanded');
+                // moreTab.classList.toggle('ibexa-tabs__tab--expanded');
                 contextMenu.classList.toggle('ibexa-tabs__context-menu--hidden');
             });
         }
     });
 
-    // doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-    //     const moreTab = primaryTabsList.querySelector('.ibexa-tabs__tab--more');
-    //     const primaryTabsLinks = [...primaryTabsList.querySelectorAll('.ibexa-tabs__tab .nav-link')];
+    doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
+        const moreTab = primaryTabsList.querySelector('.ibexa-tabs__tab--more');
 
-    //     if (moreTab) {
-    //         const secondaryTabsList = moreTab.querySelector('.ibexa-tabs--secondary');
-    //         const secondaryTabsLinks = [...secondaryTabsList.querySelectorAll('.ibexa-tabs__tab .nav-link')];
+        if (moreTab) {
+            const moreTabLink = primaryTabsList.querySelector('.ibexa-tabs__tab--more .nav-link');
+            const popupMenu = moreTab.querySelector('.ibexa-tabs__context-menu');
 
-    //         primaryTabsLinks.forEach((tabLink) => {
-    //             $(tabLink).on('shown.bs.tab', (event) => {
-    //                 handleTabClick(event, secondaryTabsLinks);
-    //             });
-    //         });
+            const popupMenuItems = popupMenu.querySelectorAll('.ibexa-context-menu__item')
 
-    //         secondaryTabsLinks.forEach((tabLink) => {
-    //             tabLink.addEventListener('click', (event) => {
-    //                 handleTabClick(event, primaryTabsLinks);
+            popupMenuItems.forEach((popupMenuItem) => {
+                popupMenuItem.addEventListener('click', () => {
+                    const tabLinkId = popupMenuItem.dataset.tabLinkId
+                    const tabToShow = primaryTabsList.querySelector(`.ibexa-tabs__link#${tabLinkId}`);
 
-    //                 moreTab.classList.toggle('ibexa-tabs__tab--expanded', false);
-    //                 secondaryTabsList.classList.toggle('ibexa-tabs--hidden', true);
-    //             });
-    //         });
-    //     }
-    // });
+                    popupMenu.classList.add('ibexa-tabs__context-menu--hidden')
+                    $(tabToShow).tab('show')
+                    adaptTabs()
+                })
+            })
+
+            // moreTabLink.addEventListener('click', () => {
+            //     // moreTab.classList.toggle('ibexa-tabs__tab--expanded');
+            //     popupMenu.classList.toggle('ibexa-tabs__context-menu--hidden');
+            // });
+        }
+    });
+
+    doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
+        const moreTab = primaryTabsList.querySelector('.ibexa-tabs__tab--more');
+        const primaryTabsLinks = [...primaryTabsList.querySelectorAll('.ibexa-tabs__link:not(.ibexa-tabs__tab--more)')];
+
+        if (moreTab) {
+            // const secondaryTabsList = moreTab.querySelector('.ibexa-tabs--secondary');
+            // const secondaryTabsLinks = [...secondaryTabsList.querySelectorAll('.ibexa-tabs__tab .nav-link')];
+
+            primaryTabsLinks.forEach((tabLink) => {
+                $(tabLink).on('shown.bs.tab', (event) => {
+                    // handleTabClick(event, secondaryTabsLinks);
+                    adaptTabs();
+                });
+            });
+
+            // secondaryTabsLinks.forEach((tabLink) => {
+            //     tabLink.addEventListener('click', (event) => {
+            //         handleTabClick(event, primaryTabsLinks);
+
+            //         moreTab.classList.toggle('ibexa-tabs__tab--expanded', false);
+            //         secondaryTabsList.classList.toggle('ibexa-tabs--hidden', true);
+            //     });
+            // });
+        }
+    });
 
     document.body.addEventListener('ez-content-tree-resized', adaptTabs);
     window.addEventListener('resize', adaptTabs);
