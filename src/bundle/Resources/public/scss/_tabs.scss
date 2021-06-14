@@ -124,19 +124,13 @@
 }
 
 .ibexa-tab-content {
-    border: 1px solid #e0e0e8;
+    width: calc(100% - #{calculateRem(30px)});
     padding: 0;
-    margin-right: 15px;
-    margin-left: 15px;
-    border-radius: 0 10px 10px 10px;
+    margin: 0 calculateRem(15px) calculateRem(80px) calculateRem(15px);
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: 0 calculateRem(10px) calculateRem(10px) calculateRem(10px);
     overflow: hidden;
-    width: calc(100% - 30px);
-    box-shadow: 4px 22px 47px 0 rgba($ibexa-color-info, 0.1);
-    margin-bottom: 80px;
-
-    &__pane {
-
-    }
+    box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.1);
 }
 
 .ibexa-tabs {
@@ -213,7 +207,7 @@
             left: 0;
             top: 0;
             bottom: 0;
-            margin-bottom: calculateRem(1px); // TODO: do we need this ???
+            margin-bottom: calculateRem(1px);
             border: calculateRem(1px) solid $ibexa-color-light;
             border-radius: $ibexa-border-radius 0 0 0;
             border-bottom-width: 0;
@@ -279,6 +273,11 @@
     }
 
     &__popup-menu {
+        position: absolute;
+        top: calculateRem(47px);
+        right: 0;
+        z-index: 10;
+
         &--hidden {
             display: none;
         }
