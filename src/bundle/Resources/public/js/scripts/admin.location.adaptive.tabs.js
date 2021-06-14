@@ -8,7 +8,7 @@
             const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
             const tabs = tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)');
             const tabMore = tabsList.querySelector(':scope > .ibexa-tabs__tab--more');
-            const contextMenu = tabMore.querySelector('.ibexa-context-menu');
+            const popupMenu = tabMore.querySelector('.ibexa-popup-menu');
             const tabTemplate = tabMore.dataset.itemTemplate;
             const fragment = doc.createDocumentFragment();
 
@@ -20,14 +20,14 @@
 
                 container.insertAdjacentHTML('beforeend', renderedItem);
 
-                const contextMenuItem = container.querySelector('li');
+                const popupMenuItem = container.querySelector('li');
 
-                contextMenuItem.dataset.tabLinkId = tabLink.id;
-                fragment.append(contextMenuItem);
+                popupMenuItem.dataset.tabLinkId = tabLink.id;
+                fragment.append(popupMenuItem);
             });
 
-            contextMenu.innerHTML = '';
-            contextMenu.append(fragment);
+            popupMenu.innerHTML = '';
+            popupMenu.append(fragment);
         });
     };
     const adaptTabs = () => {
@@ -40,7 +40,7 @@
             if (tabMore) {
                 [tabMore, ...tabs].forEach((tab) => tab.classList.remove('ibexa-tabs__tab--hidden'));
 
-                const contextMenuItems = [...tabMore.querySelectorAll('.ibexa-context-menu__item')];
+                const popupMenuItems = [...tabMore.querySelectorAll('.ibexa-popup-menu__item')];
                 const activeTabLink = tabsLinks.find((tabLink) => tabLink.classList.contains('active'));
                 const activeTab = activeTabLink ? activeTabLink.closest('.ibexa-tabs__tab') : null;
                 const activeTabWidth = activeTab ? activeTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR : 0;
@@ -76,8 +76,8 @@
                 tabs.forEach((tab) => {
                     tab.classList.toggle('ibexa-tabs__tab--hidden', hiddenPrimaryTabsIds.includes(tab.dataset.linkId));
                 });
-                contextMenuItems.forEach((item) => {
-                    item.classList.toggle('ibexa-context-menu__item--hidden', !hiddenPrimaryTabsIds.includes(item.dataset.tabLinkId));
+                popupMenuItems.forEach((item) => {
+                    item.classList.toggle('ibexa-popup-menu__item--hidden', !hiddenPrimaryTabsIds.includes(item.dataset.tabLinkId));
                 });
 
                 tabMore.classList.toggle('ibexa-tabs__tab--hidden', !hiddenPrimaryTabsIds.length);
@@ -90,15 +90,15 @@
             const tabMore = tabsList.querySelector('.ibexa-tabs__tab--more');
 
             if (tabMore) {
-                const popupMenu = tabMore.querySelector('.ibexa-tabs__context-menu');
-                const isPopupMenuExpanded = !popupMenu.classList.contains('ibexa-tabs__context-menu--hidden');
+                const popupMenu = tabMore.querySelector('.ibexa-tabs__popup-menu');
+                const isPopupMenuExpanded = !popupMenu.classList.contains('ibexa-tabs__popup-menu--hidden');
                 const isClickInsideTabMore = event.target.closest('.ibexa-tabs__tab--more');
 
                 if (!isPopupMenuExpanded || isClickInsideTabMore) {
                     return;
                 }
 
-                popupMenu.classList.add('ibexa-tabs__context-menu--hidden');
+                popupMenu.classList.add('ibexa-tabs__popup-menu--hidden');
             }
         });
     };
@@ -128,20 +128,20 @@
 
         if (moreTab) {
             const tabMoreLink = tabsList.querySelector('.ibexa-tabs__tab--more .nav-link');
-            const popupMenu = moreTab.querySelector('.ibexa-tabs__context-menu');
+            const popupMenu = moreTab.querySelector('.ibexa-tabs__popup-menu');
 
             tabMoreLink.addEventListener('click', () => {
-                popupMenu.classList.toggle('ibexa-tabs__context-menu--hidden');
+                popupMenu.classList.toggle('ibexa-tabs__popup-menu--hidden');
             });
 
-            const popupMenuItems = popupMenu.querySelectorAll('.ibexa-context-menu__item');
+            const popupMenuItems = popupMenu.querySelectorAll('.ibexa-popup-menu__item');
 
             popupMenuItems.forEach((popupMenuItem) => {
                 popupMenuItem.addEventListener('click', () => {
                     const tabLinkId = popupMenuItem.dataset.tabLinkId;
                     const tabToShow = tabsList.querySelector(`.ibexa-tabs__link#${tabLinkId}`);
 
-                    popupMenu.classList.add('ibexa-tabs__context-menu--hidden');
+                    popupMenu.classList.add('ibexa-tabs__popup-menu--hidden');
                     $(tabToShow).tab('show');
                     adaptTabs();
                 });
