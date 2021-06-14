@@ -1,13 +1,16 @@
 (function (global, doc, $) {
     const TABS_SELECTOR = '.ibexa-tabs';
     const SELECTOR_TABS_LIST = '.ibexa-tabs__list';
+    const SELECTOR_TAB_MORE = '.ibexa-tabs__tab--more';
+    const SELECTOR_POPUP_MENU = '.ibexa-tabs__popup-menu';
+    const CLASS_POPUP_MENU_HIDDEN = 'ibexa-tabs__popup-menu--hidden';
     const allAdaptiveItems = [];
     const copyTabs = () => {
         doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
             const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
             const tabs = tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)');
             const tabMore = tabsList.querySelector(':scope > .ibexa-tabs__tab--more');
-            const popupMenu = tabMore.querySelector('.ibexa-popup-menu');
+            const popupMenu = tabMore.querySelector(SELECTOR_POPUP_MENU);
             const tabTemplate = tabMore.dataset.itemTemplate;
             const fragment = doc.createDocumentFragment();
 
@@ -37,18 +40,18 @@
     const handleClickOutsidePopupMenu = (event) => {
         doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
             const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
-            const tabMore = tabsList.querySelector('.ibexa-tabs__tab--more');
+            const tabMore = tabsList.querySelector(SELECTOR_TAB_MORE);
 
             if (tabMore) {
-                const popupMenu = tabMore.querySelector('.ibexa-tabs__popup-menu');
-                const isPopupMenuExpanded = !popupMenu.classList.contains('ibexa-tabs__popup-menu--hidden');
-                const isClickInsideTabMore = event.target.closest('.ibexa-tabs__tab--more');
+                const popupMenu = tabMore.querySelector(SELECTOR_POPUP_MENU);
+                const isPopupMenuExpanded = !popupMenu.classList.contains(CLASS_POPUP_MENU_HIDDEN);
+                const isClickInsideTabMore = event.target.closest(SELECTOR_TAB_MORE);
 
                 if (!isPopupMenuExpanded || isClickInsideTabMore) {
                     return;
                 }
 
-                popupMenu.classList.add('ibexa-tabs__popup-menu--hidden');
+                popupMenu.classList.add(CLASS_POPUP_MENU_HIDDEN);
             }
         });
     };
@@ -73,14 +76,14 @@
 
     doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
         const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
-        const moreTab = tabsList.querySelector('.ibexa-tabs__tab--more');
+        const tabMore = tabsList.querySelector(SELECTOR_TAB_MORE);
 
-        if (moreTab) {
+        if (tabMore) {
             const tabMoreLink = tabsList.querySelector('.ibexa-tabs__tab--more .nav-link');
-            const popupMenu = moreTab.querySelector('.ibexa-tabs__popup-menu');
+            const popupMenu = tabMore.querySelector(SELECTOR_POPUP_MENU);
 
             tabMoreLink.addEventListener('click', () => {
-                popupMenu.classList.toggle('ibexa-tabs__popup-menu--hidden');
+                popupMenu.classList.toggle(CLASS_POPUP_MENU_HIDDEN);
             });
 
             const popupMenuItems = popupMenu.querySelectorAll('.ibexa-popup-menu__item');
@@ -90,7 +93,7 @@
                     const tabLinkId = popupMenuItem.dataset.tabLinkId;
                     const tabToShow = tabsList.querySelector(`.ibexa-tabs__link#${tabLinkId}`);
 
-                    popupMenu.classList.add('ibexa-tabs__popup-menu--hidden');
+                    popupMenu.classList.add(CLASS_POPUP_MENU_HIDDEN);
                     $(tabToShow).tab('show');
                 });
             });
@@ -99,7 +102,7 @@
 
     doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
         const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
-        const tabMore = tabsList.querySelector('.ibexa-tabs__tab--more');
+        const tabMore = tabsList.querySelector(SELECTOR_TAB_MORE);
 
         if (tabMore) {
             const tabs = [...tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)')];
@@ -117,8 +120,8 @@
 
                     return activeTab;
                 },
-                onAdapted: (visibleTabs, hiddenTabs) => {
-                    const hiddenTabsLinksIds = [...hiddenTabs].map((tab) => tab.dataset.linkId);
+                onAdapted: (visibleTabsWithoutSelector, hiddenTabsWithoutSelector) => {
+                    const hiddenTabsLinksIds = [...hiddenTabsWithoutSelector].map((tab) => tab.dataset.linkId);
 
                     popupMenuItems.forEach((popupMenuItem) => {
                         popupMenuItem.classList.toggle(

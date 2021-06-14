@@ -19,7 +19,7 @@
             const activeItemWidth = activeItem ? activeItem.offsetWidth + OFFSET_ROUNDING_COMPENSATOR : 0;
             const selectorWidth = this.selectorItem.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
             const maxTotalWidth = this.container.offsetWidth - OFFSET_ROUNDING_COMPENSATOR;
-            const hiddenItems = new Set();
+            const hiddenItemsWithoutSelector = new Set();
             let currentWidth = selectorWidth + activeItemWidth;
 
             for (let i = 0; i < this.items.length; i++) {
@@ -30,7 +30,7 @@
                 }
 
                 const isLastItem = i === this.items.length - 1;
-                const allPreviousItemsVisible = hiddenItems.size === 0;
+                const allPreviousItemsVisible = hiddenItemsWithoutSelector.size === 0;
                 const fitsInsteadOfSelector = item.offsetWidth + OFFSET_ROUNDING_COMPENSATOR < maxTotalWidth - currentWidth + selectorWidth;
 
                 if (isLastItem && allPreviousItemsVisible && fitsInsteadOfSelector) {
@@ -38,20 +38,20 @@
                 }
 
                 if (item.offsetWidth + OFFSET_ROUNDING_COMPENSATOR > maxTotalWidth - currentWidth) {
-                    hiddenItems.add(item);
+                    hiddenItemsWithoutSelector.add(item);
                 }
 
                 currentWidth += item.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
             }
 
             this.items.forEach((item) => {
-                item.classList.toggle(this.itemHiddenClass, hiddenItems.has(item));
+                item.classList.toggle(this.itemHiddenClass, hiddenItemsWithoutSelector.has(item));
             });
-            this.selectorItem.classList.toggle(this.itemHiddenClass, !hiddenItems.size);
+            this.selectorItem.classList.toggle(this.itemHiddenClass, !hiddenItemsWithoutSelector.size);
 
-            const visibleItems = new Set([...this.items].filter((item) => !hiddenItems.has(item)));
+            const visibleItemsWithoutSelector = new Set([...this.items].filter((item) => !hiddenItemsWithoutSelector.has(item)));
 
-            this.onAdapted?.(visibleItems, hiddenItems);
+            this.onAdapted?.(visibleItemsWithoutSelector, hiddenItemsWithoutSelector);
         }
     }
 
