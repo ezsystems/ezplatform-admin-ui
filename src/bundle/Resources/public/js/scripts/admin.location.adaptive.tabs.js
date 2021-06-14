@@ -1,8 +1,7 @@
-(function (global, doc, $, Translator) {
-    const OFFSET_ROUNDING_COMPENSATOR = 0.5;
+(function (global, doc, $) {
     const TABS_SELECTOR = '.ibexa-tabs';
     const SELECTOR_TABS_LIST = '.ibexa-tabs__list';
-    const SELECTOR_TAB_MORE = '.ibexa-tabs__tab--more';
+    const allAdaptiveItems = [];
     const copyTabs = () => {
         doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
             const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
@@ -30,58 +29,9 @@
             popupMenu.append(fragment);
         });
     };
-    const adaptTabs = () => {
-        doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
-            const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
-            const tabs = [...tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)')];
-            const tabsLinks = [...tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more) .nav-link')];
-            const tabMore = tabsList.querySelector(':scope > .ibexa-tabs__tab--more');
-
-            if (tabMore) {
-                [tabMore, ...tabs].forEach((tab) => tab.classList.remove('ibexa-tabs__tab--hidden'));
-
-                const popupMenuItems = [...tabMore.querySelectorAll('.ibexa-popup-menu__item')];
-                const activeTabLink = tabsLinks.find((tabLink) => tabLink.classList.contains('active'));
-                const activeTab = activeTabLink ? activeTabLink.closest('.ibexa-tabs__tab') : null;
-                const activeTabWidth = activeTab ? activeTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR : 0;
-                const tabMoreWidth = tabMore.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
-                const maxTotalWidth = tabsList.offsetWidth - OFFSET_ROUNDING_COMPENSATOR;
-                const hiddenPrimaryTabsIds = [];
-                let currentWidth = tabMoreWidth + activeTabWidth;
-
-                for (let i = 0; i < tabs.length; i++) {
-                    const tab = tabs[i];
-                    const tabLink = tab.querySelector('.nav-link');
-
-                    if (tabLink === activeTabLink) {
-                        continue;
-                    }
-
-                    const isLastTab = i === tabs.length - 1;
-                    const allPreviousTabsVisible = hiddenPrimaryTabsIds.length === 0;
-                    const fitsInsteadOfMoreTab =
-                        tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR < maxTotalWidth - currentWidth + tabMoreWidth;
-
-                    if (isLastTab && allPreviousTabsVisible && fitsInsteadOfMoreTab) {
-                        break;
-                    }
-
-                    if (tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR > maxTotalWidth - currentWidth) {
-                        hiddenPrimaryTabsIds.push(tab.dataset.linkId);
-                    }
-
-                    currentWidth += tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
-                }
-
-                tabs.forEach((tab) => {
-                    tab.classList.toggle('ibexa-tabs__tab--hidden', hiddenPrimaryTabsIds.includes(tab.dataset.linkId));
-                });
-                popupMenuItems.forEach((item) => {
-                    item.classList.toggle('ibexa-popup-menu__item--hidden', !hiddenPrimaryTabsIds.includes(item.dataset.tabLinkId));
-                });
-
-                tabMore.classList.toggle('ibexa-tabs__tab--hidden', !hiddenPrimaryTabsIds.length);
-            }
+    const adaptAlltabs = () => {
+        allAdaptiveItems.forEach((adaptiveItems) => {
+            adaptiveItems.adapt();
         });
     };
     const handleClickOutsidePopupMenu = (event) => {
@@ -113,12 +63,11 @@
         tabContent.style.height = isTabContentRolledUp ? 'auto' : '0px';
     };
 
+    copyTabs();
+
     doc.querySelectorAll('.ibexa-tabs__toggler').forEach((toggler) => {
         toggler.addEventListener('click', toggleContainer);
     });
-
-    copyTabs();
-    adaptTabs();
 
     doc.addEventListener('click', handleClickOutsidePopupMenu);
 
@@ -143,7 +92,6 @@
 
                     popupMenu.classList.add('ibexa-tabs__popup-menu--hidden');
                     $(tabToShow).tab('show');
-                    adaptTabs();
                 });
             });
         }
@@ -152,17 +100,46 @@
     doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
         const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
         const tabMore = tabsList.querySelector('.ibexa-tabs__tab--more');
-        const tabsLinks = [...tabsList.querySelectorAll('.ibexa-tabs__link:not(.ibexa-tabs__tab--more)')];
 
         if (tabMore) {
+            const tabs = [...tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)')];
+            const tabsLinks = [...tabsList.querySelectorAll('.ibexa-tabs__link:not(.ibexa-tabs__tab--more)')];
+            const popupMenuItems = [...tabMore.querySelectorAll('.ibexa-popup-menu__item')];
+
+            const adaptiveItems = new eZ.core.AdaptiveItems({
+                items: tabs,
+                selectorItem: tabMore,
+                itemHiddenClass: 'ibexa-tabs__tab--hidden',
+                container: tabsList,
+                getActiveItem: () => {
+                    const activeTabLink = tabsLinks.find((tabLink) => tabLink.classList.contains('active'));
+                    const activeTab = activeTabLink ? activeTabLink.closest('.ibexa-tabs__tab') : null;
+
+                    return activeTab;
+                },
+                onAdapted: (visibleTabs, hiddenTabs) => {
+                    const hiddenTabsLinksIds = [...hiddenTabs].map((tab) => tab.dataset.linkId);
+
+                    popupMenuItems.forEach((popupMenuItem) => {
+                        popupMenuItem.classList.toggle(
+                            'ibexa-popup-menu__item--hidden',
+                            !hiddenTabsLinksIds.includes(popupMenuItem.dataset.tabLinkId)
+                        );
+                    });
+                },
+            });
+
+            allAdaptiveItems.push(adaptiveItems);
+            adaptiveItems.adapt();
+
             tabsLinks.forEach((tabLink) => {
                 $(tabLink).on('shown.bs.tab', () => {
-                    adaptTabs();
+                    adaptiveItems.adapt();
                 });
             });
         }
     });
 
-    document.body.addEventListener('ez-content-tree-resized', adaptTabs);
-    window.addEventListener('resize', adaptTabs);
-})(window, window.document, window.jQuery, window.Translator);
+    document.body.addEventListener('ez-content-tree-resized', adaptAlltabs);
+    window.addEventListener('resize', adaptAlltabs);
+})(window, window.document, window.jQuery);

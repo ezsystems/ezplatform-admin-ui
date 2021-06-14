@@ -19,6 +19,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/core/base.chart.js'),
     path.resolve(__dirname, '../public/js/scripts/core/line.chart.js'),
     path.resolve(__dirname, '../public/js/scripts/core/pie.chart.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/adaptive.items.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.notifications.js'),
     path.resolve(__dirname, '../public/js/scripts/button.trigger.js'),
     path.resolve(__dirname, '../public/js/scripts/button.prevent.default.js'),

@@ -13,25 +13,30 @@
         title: 'list.title'|trans|desc('User Settings'),
         icon_name: 'user'
     } %}
-    <ul class="nav nav-tabs ez-nav-tabs--role px-4 ez-tabs" role="tablist">
-        <li role="presentation" class="nav-item">
-            <a href="#my-preferences" class="nav-link active" role="tab" data-toggle="tab">
-                {{ 'section.my_preferences'|trans|desc('My Preferences') }}
-            </a>
-        </li>
-        <li role="presentation" class="nav-item">
-            <a href="#my-account-settings" class="nav-link" role="tab" data-toggle="tab">
-                {{ 'section.my_account_settings'|trans|desc('My Account Settings') }}
-            </a>
-        </li>
-    </ul>
+    <div class="ibexa-tabs">
+        <ul class="nav nav-tabs ez-nav-tabs--role px-4 ibexa-tabs__list" role="tablist">
+            <li role="presentation" class="nav-item ibexa-tabs__tab ibexa-tabs__tab--active">
+                <a href="#my-preferences" class="nav-link active ibexa-tabs__link" role="tab" data-toggle="tab">
+                    {{ 'section.my_preferences'|trans|desc('My Preferences') }}
+                </a>
+            </li>
+            <li role="presentation" class="nav-item ibexa-tabs__tab">
+                <a href="#my-account-settings" class="nav-link ibexa-tabs__link" role="tab" data-toggle="tab">
+                    {{ 'section.my_account_settings'|trans|desc('My Account Settings') }}
+                </a>
+            </li>
+        </ul>
+        <div class="ibexa-tabs__toggler">
+            {{ 'dashboard.location.tabs.hide'|trans|desc('Hide') }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block body_class %}ez-user-settings-list-view ez-has-full-width-footer{% endblock %}
 
 {% block content %}
-    <section class="container tab-content">
-        <div role="tabpanel" class="tab-pane active" id="my-preferences">
+    <section class="container tab-content ibexa-tab-content">
+        <div role="tabpanel" class="tab-pane ibexa-tab-content__pane active" id="my-preferences">
 
             {% for user_setting in pager %}
                 <div class="ez-table-header">
