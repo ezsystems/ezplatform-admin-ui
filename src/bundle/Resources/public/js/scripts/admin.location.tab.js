@@ -4,11 +4,11 @@
     const SELECTOR_TAB_ACTIVE = '.ibexa-tabs__tab--active';
     const CLASS_TAB_ACTIVE = 'ibexa-tabs__tab--active';
     const switchActiveTabs = (currentTab, previousTab) => {
-        currentTab.classList.add(CLASS_TAB_ACTIVE);
-
         if (previousTab) {
             previousTab.classList.remove(CLASS_TAB_ACTIVE);
         }
+
+        currentTab.classList.add(CLASS_TAB_ACTIVE);
     };
     const changeHashForPageReload = (event) => {
         const { target, relatedTarget } = event;
@@ -20,7 +20,12 @@
     };
     const setActiveHashTab = () => {
         const activeHashTabLink = doc.querySelector(`.ibexa-tabs a[href="#${global.location.hash.split('#')[1]}"]`);
-        const activeHashTab = activeHashTabLink.closest(SELECTOR_TAB)
+
+        if (!activeHashTabLink) {
+            return;
+        }
+
+        const activeHashTab = activeHashTabLink.closest(SELECTOR_TAB);
         const parentTabs = activeHashTab.closest(SELECTOR_TABS);
         const currentActiveTab = parentTabs.querySelector(SELECTOR_TAB_ACTIVE);
 
