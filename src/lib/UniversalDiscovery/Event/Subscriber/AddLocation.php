@@ -11,7 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AddLocation implements EventSubscriberInterface
+final class AddLocation implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array
     {
