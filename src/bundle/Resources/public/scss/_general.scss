@@ -11,6 +11,24 @@ body {
 
 a {
     transition: color 0.3s $ibexa-admin-transition;
+
+    &:visited {
+        color: $ibexa-color-complementary-strong;
+    }
+
+    &[disabled] {
+        color: $ibexa-color-dark-300;
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+        color: $ibexa-color-primary;
+    }
+
+    &:focus {
+        outline: none;
+    }
 }
 
 button {
