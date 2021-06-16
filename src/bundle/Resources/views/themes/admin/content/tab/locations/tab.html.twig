@@ -105,7 +105,7 @@
 
 {% macro table_header_tools(form_add, form_remove, can_add) %}
     <button
-            data-udw-config="{{ ez_udw_config('single', {}) }}"
+            data-udw-config="{{ ez_udw_config('add_location', {}) }}"
             class="btn btn-icon btn--udw-add"
             title="{{ 'tab.locations.action.add'|trans|desc('Add Location') }}"
             {{ not can_add ? 'disabled' }}>
