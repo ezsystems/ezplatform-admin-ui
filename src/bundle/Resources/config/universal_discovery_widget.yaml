@@ -72,3 +72,5 @@ system:
                 multiple_user_group:
                     multiple: true
                     allowed_content_types: ['user_group']
+                add_location:
+                    multiple: false
