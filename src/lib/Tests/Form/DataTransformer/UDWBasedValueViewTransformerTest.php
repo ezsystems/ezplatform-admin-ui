@@ -92,7 +92,7 @@ class UDWBasedValueViewTransformerTest extends TestCase
                 $this->createMock(NotFoundException::class)
             );
 
-        self::assertNull($this->transformer->transform(['/1/2/54']));
+        self::assertEmpty($this->transformer->transform(['/1/2/54']));
     }
 
     public function testReverseTransformThrowsTransformationFailedException(): void
@@ -100,7 +100,6 @@ class UDWBasedValueViewTransformerTest extends TestCase
         $this->expectException(TransformationFailedException::class);
 
         $this->locationService
-            ->expects($this->any())
             ->method('loadLocation')
             ->willThrowException(
                 $this->createMock(UnauthorizedException::class)
