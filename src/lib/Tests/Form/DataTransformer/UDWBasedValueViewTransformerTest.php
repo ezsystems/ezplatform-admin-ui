@@ -84,29 +84,28 @@ class UDWBasedValueViewTransformerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider dataProviderForReverseTransformThrowsTransformationFailedException
-     */
-    public function testReverseTransformThrowsTransformationFailedException(string $exceptionClass)
+    public function testTransformWithDeletedLocation(): void
+    {
+        $this->locationService
+            ->method('loadLocation')
+            ->willThrowException(
+                $this->createMock(NotFoundException::class)
+            );
+
+        self::assertEmpty($this->transformer->transform(['/1/2/54']));
+    }
+
+    public function testReverseTransformThrowsTransformationFailedException(): void
     {
         $this->expectException(TransformationFailedException::class);
 
         $this->locationService
-            ->expects($this->any())
             ->method('loadLocation')
             ->willThrowException(
-                $this->createMock($exceptionClass)
+                $this->createMock(UnauthorizedException::class)
             );
 
         $this->transformer->reverseTransform('54,56,58');
-    }
-
-    public function dataProviderForReverseTransformThrowsTransformationFailedException(): array
-    {
-        return [
-            [NotFoundException::class],
-            [UnauthorizedException::class],
-        ];
     }
 
     private function createLocation($id): Location
