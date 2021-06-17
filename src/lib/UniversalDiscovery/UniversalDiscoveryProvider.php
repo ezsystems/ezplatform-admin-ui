@@ -99,9 +99,8 @@ class UniversalDiscoveryProvider implements Provider
         $locationPath = $this->getRelativeLocationPath($rootLocationId, $location->path);
         $locationPathCount = count($locationPath);
 
+        $locationPathLast = $locationPathCount - 1;
         if ($locationPathCount > self::COLUMNS_NUMBER) {
-            $locationPathLast = $locationPathCount - 1;
-
             $columnLocations = [
                 $locationPath[0], // First
                 $locationPath[$locationPathLast - 2],
@@ -112,6 +111,9 @@ class UniversalDiscoveryProvider implements Provider
             $columnLocations = $locationPath;
         }
 
+        $locationPathIndex = $locationPathCount > 0 ? $locationPathLast - 1 : 0;
+        $lastColumnLocationId = (int) $locationPath[$locationPathIndex];
+
         $columns = [];
         foreach ($columnLocations as $columnLocationId) {
             $columnLocationId = (int)$columnLocationId;
@@ -119,9 +121,15 @@ class UniversalDiscoveryProvider implements Provider
                 ? $this->getRestFormat($this->locationService->loadLocation($columnLocationId))
                 : null;
 
+            $subItems = $this->getSubitemLocations($columnLocationId, 0, $limit, $sortClause);
+            $isLastColumnLocationId = $columnLocationId === $lastColumnLocationId;
+            $locations = $this->moveSelectedLocationOnTop($location, $subItems['locations'], $isLastColumnLocationId);
+
+            $subItems['locations'] = $locations;
+
             $columns[$columnLocationId] = [
                 'location' => $columnLocation,
-                'subitems' => $this->getSubitemLocations($columnLocationId, 0, $limit, $sortClause),
+                'subitems' => $subItems,
             ];
         }
 
@@ -342,5 +350,24 @@ class UniversalDiscoveryProvider implements Provider
         }
 
         return array_slice($locationIds, $index);
+    }
+
+    private function moveSelectedLocationOnTop(Location $location, array $locations, bool $isLastColumnLocationId): array
+    {
+        $index = array_search($location->id, array_map(static function (array $location) {
+            return $location['Location']['id'];
+        }, $locations));
+
+        // Location is on the list, remove because we add location on top
+        if ($index !== false) {
+            unset($locations[$index]);
+            $locations = array_values($locations);
+        }
+
+        if ($isLastColumnLocationId) {
+            array_unshift($locations, $this->getRestFormat($location));
+        }
+
+        return $locations;
     }
 }
