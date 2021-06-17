@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Limitation\Templating;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Exception\MissingLimitationBlockException;
@@ -44,7 +45,7 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
         try {
             $blockName = $this->getValueBlockName($limitation);
             $parameters = $this->getValueBlockParameters($limitation, $parameters);
-        } catch (ValueMapperNotFoundException $exception) {
+        } catch (ValueMapperNotFoundException | NotFoundException $exception) {
             $blockName = self::LIMITATION_VALUE_BLOCK_NAME_FALLBACK;
             $parameters = $this->getValueFallbackBlockParameters($limitation, $parameters);
         }

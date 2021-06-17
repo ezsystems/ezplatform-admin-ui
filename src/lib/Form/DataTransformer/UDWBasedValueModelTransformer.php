@@ -49,7 +49,9 @@ class UDWBasedValueModelTransformer implements DataTransformerInterface
                     $this->extractLocationIdFromPath($path)
                 );
             }, $value);
-        } catch (NotFoundException | UnauthorizedException $e) {
+        } catch (NotFoundException $e) {
+            return null;
+        } catch (UnauthorizedException $e) {
             throw new TransformationFailedException($e->getMessage(), $e->getCode(), $e);
         }
     }
