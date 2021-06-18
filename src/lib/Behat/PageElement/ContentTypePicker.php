@@ -32,7 +32,7 @@ class ContentTypePicker extends Element
         $this->context->findElement($this->fields['filterInput'])->setValue($contentTypeName);
 
         $this->context->waitUntil($this->defaultTimeout, function () use ($countBeforeFiltering) {
-            return $this->getDisplayedItemsCount() < $countBeforeFiltering;
+            return $countBeforeFiltering === 1 || $this->getDisplayedItemsCount() < $countBeforeFiltering;
         });
         $this->context->waitUntilElementIsVisible($this->fields['filteredItem']);
         $this->context->getElementByText($contentTypeName, $this->fields['filteredItem'])->click();
