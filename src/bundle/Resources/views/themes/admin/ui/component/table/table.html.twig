@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block table %}
-    <table class="table table-hover ez-table">
+    <table class="table table-hover table-striped ez-table {{ table_class|default('') }}">
         <thead>
         {% block thead %}{% endblock %}
         </thead>
