@@ -140,6 +140,11 @@ class ContentItemPage extends Page
         $this->context->getElementByText($tabName, '#ez-tab-list-location-view .ez-tabs__tab')->click();
     }
 
+    public function addLocation(): void
+    {
+        $this->context->findElement('#ez-tab-location-view-locations .ez-table-header__tools .btn--udw-add')->click();
+    }
+
     private function hasGridViewEnabledByDefault(): bool
     {
         $pageTitle = $this->pageTitle ?? $this->getPageTitle();

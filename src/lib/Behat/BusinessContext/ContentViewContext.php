@@ -302,4 +302,13 @@ class ContentViewContext extends BusinessContext
         $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $item);
         $contentItemPage->switchToTab($tab);
     }
+
+    /**
+     * @Given I click on Add Location (button) of item :item
+     */
+    public function iClickAddLocationButton($item): void
+    {
+        $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $item);
+        $contentItemPage->addLocation();
+    }
 }
