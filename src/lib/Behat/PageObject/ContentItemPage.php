@@ -132,6 +132,14 @@ class ContentItemPage extends Page
         }
     }
 
+    /**
+     * @param string $tabName
+     */
+    public function switchToTab(string $tabName): void
+    {
+        $this->context->getElementByText($tabName, '#ez-tab-list-location-view .ez-tabs__tab')->click();
+    }
+
     private function hasGridViewEnabledByDefault(): bool
     {
         $pageTitle = $this->pageTitle ?? $this->getPageTitle();
