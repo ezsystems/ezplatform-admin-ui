@@ -293,4 +293,13 @@ class ContentViewContext extends BusinessContext
         $dialog = ElementFactory::createElement($this->browserContext, Dialog::ELEMENT_NAME);
         $dialog->confirm();
     }
+
+    /**
+     * @Given I go to :tab tab (in Content structure) of item :item
+     */
+    public function iGoToTab($tab, $item): void
+    {
+        $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $item);
+        $contentItemPage->switchToTab($tab);
+    }
 }
