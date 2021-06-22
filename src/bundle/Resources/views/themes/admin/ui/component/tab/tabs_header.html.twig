@@ -2,13 +2,15 @@
     <div class="container">
         <div class="ibexa-tabs">
             <ul class="nav nav-tabs ibexa-tabs__list" role="tablist">
-                {% for tab in tabs %}
-                    <li class="nav-item ibexa-tabs__tab {% if tab == active_tab %}ibexa-tabs__tab--active{% endif %}">
-                        <a id="ibexa-tab-label-{{ tab.id }}" href="#ibexa-tab-{{ tab.id }}" data-toggle="tab" class="nav-link ibexa-tabs__link {% if tab == active_tab %}active{% endif %}">
-                            {{ tab.label }}
-                        </a>
-                    </li>
-                {% endfor %}
+                {% block tabs_list %}
+                    {% for tab in tabs %}
+                        <li class="nav-item ibexa-tabs__tab {% if tab == active_tab %}ibexa-tabs__tab--active{% endif %}">
+                            <a id="ibexa-tab-label-{{ tab.id }}" href="#ibexa-tab-{{ tab.id }}" data-toggle="tab" class="nav-link ibexa-tabs__link {% if tab == active_tab %}active{% endif %}">
+                                {{ tab.label }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% endblock %}
                 {% if include_tab_more|default(false) %}
                     <li class="nav-item ibexa-tabs__tab ibexa-tabs__tab--more"
                         data-item-template="{{ include('@ezdesign/ui/component/popup_menu/popup_menu_item.html.twig', {
