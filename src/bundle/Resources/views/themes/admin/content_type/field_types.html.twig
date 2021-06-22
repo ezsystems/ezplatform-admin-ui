@@ -84,6 +84,10 @@
     <div class="ezimage-validator max-file-size{% if group_class is not empty %} {{ group_class }}{% endif %}">
         {{- form_row(form.maxSize, {'label_attr': {'class': 'ez-label'}}) -}}
     </div>
+
+    <div class="ezimage-validator is-alternative-text-required"{% if group_class is not empty %} {{ group_class }}{% endif %}>
+        {{ form_row(form.isAlternativeTextRequired, {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'ez-label'}}) }}
+    </div>
 {% endblock %}
 
 {% block ezinteger_field_definition_edit %}
