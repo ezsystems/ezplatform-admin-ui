@@ -8,6 +8,7 @@
 {% include '@ezdesign/ui/component/tab/tabs_header.html.twig' with {
     tabs: tabs,
     active_tab: active_tab,
+    hide_toggler: hide_toggler|default(false),
     include_tab_more: include_tab_more|default(false),
 } %}
 

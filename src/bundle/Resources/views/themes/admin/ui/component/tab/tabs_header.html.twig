@@ -32,14 +32,16 @@
                     'items': [],
                 }) }}
             {% endif %}
-            <div class="ibexa-tabs__toggler">
-                <span class="ibexa-tabs__toggler-show">
-                    {{ 'ui.component.tab.tabs.show'|trans|desc('Show') }}
-                </span>
-                <span class="ibexa-tabs__toggler-hide">
-                    {{ 'ui.component.tab.tabs.show'|trans|desc('Hide') }}
-                </span>
-            </div>
+            {% if not hide_toggler|default(false) %}
+                <div class="ibexa-tabs__toggler">
+                    <span class="ibexa-tabs__toggler-show">
+                        {{ 'ui.component.tab.tabs.show'|trans|desc('Show') }}
+                    </span>
+                    <span class="ibexa-tabs__toggler-hide">
+                        {{ 'ui.component.tab.tabs.show'|trans|desc('Hide') }}
+                    </span>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>
