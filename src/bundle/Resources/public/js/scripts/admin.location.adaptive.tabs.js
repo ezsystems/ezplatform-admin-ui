@@ -90,7 +90,7 @@
         const isTabContentRolledUp = toggler.classList.contains('ibexa-tabs__toggler--rolled-up');
 
         toggler.classList.toggle('ibexa-tabs__toggler--rolled-up');
-        tabContent.style.height = isTabContentRolledUp ? 'auto' : '0px';
+        tabContent.style.height = isTabContentRolledUp ? '' : '0px';
     };
 
     copyTabs();

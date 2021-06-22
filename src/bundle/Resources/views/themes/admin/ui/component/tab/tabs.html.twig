@@ -8,7 +8,7 @@
 {% include '@ezdesign/ui/component/tab/tabs_header.html.twig' with {
     tabs: tabs,
     active_tab: active_tab,
-    include_tab_more: include_tab_more,
+    include_tab_more: include_tab_more|default(false),
 } %}
 
 <div class="tab-content ibexa-tab-content {{ tab_content_class|default('') }}" {{ html.attributes(tab_content_attributes|default({})) }}>
