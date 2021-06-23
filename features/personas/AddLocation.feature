@@ -15,3 +15,4 @@ Feature: Verify that an Editor with Content Type limitation on conten/create pol
     And I should be on content item page "NewArticle" of type "Article" in root path
     And I go to "Locations" tab in Content structure of item "NewArticle"
     And I click on Add Location button of item "NewArticle"
+    And I select "Destination" location for item "NewArticle"

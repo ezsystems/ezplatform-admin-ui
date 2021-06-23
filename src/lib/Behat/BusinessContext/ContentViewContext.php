@@ -311,4 +311,13 @@ class ContentViewContext extends BusinessContext
         $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $item);
         $contentItemPage->addLocation();
     }
+
+    /**
+     * @Given I select :location location for item :item
+     */
+    public function iSelectLocationForItem($location, $item): void
+    {
+        $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $item);
+        $contentItemPage->addContentFromUDW($location);
+    }
 }

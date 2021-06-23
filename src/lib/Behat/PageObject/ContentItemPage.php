@@ -17,6 +17,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\SubItemsList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
 use PHPUnit\Framework\Assert;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 
 class ContentItemPage extends Page
 {
@@ -143,6 +144,16 @@ class ContentItemPage extends Page
     public function addLocation(): void
     {
         $this->context->findElement('#ez-tab-location-view-locations .ez-table-header__tools .btn--udw-add')->click();
+    }
+
+    /**
+     * @param $location
+     */
+    public function addContentFromUDW($location): void
+    {
+        $udw = ElementFactory::createElement($this->context, UniversalDiscoveryWidget::ELEMENT_NAME);
+        $udw->selectContent('Ibexa Digital Experience Platform/' . $location);
+        $udw->confirm();
     }
 
     private function hasGridViewEnabledByDefault(): bool
