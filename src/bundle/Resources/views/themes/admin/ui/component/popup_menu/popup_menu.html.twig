@@ -1,8 +1,10 @@
 <ul class="ibexa-popup-menu {{ class|default('') }}">
-    {% for item in items %}
-        {{ include('@ezdesign/ui/component/popup_menu/popup_menu_item.html.twig', {
-            'label': item.label,
-            'class': item.class|default(''),
-        })|e('html_attr') }}
-    {% endfor %}
+    {% block items %}
+        {% for item in items %}
+            {{ include('@ezdesign/ui/component/popup_menu/popup_menu_item.html.twig', {
+                'label': item.label,
+                'class': item.class|default(''),
+            })|e('html_attr') }}
+        {% endfor %}
+    {% endblock items %}
 </ul>

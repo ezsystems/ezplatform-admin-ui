@@ -18,8 +18,8 @@ class NavLinkTabs extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'activeNavLink' => '.ez-tabs .active',
-            'navLink' => '.ez-tabs .nav-link',
+            'activeNavLink' => '.ibexa-tabs .active',
+            'navLink' => '.ibexa-tabs .nav-link',
         ];
     }
 

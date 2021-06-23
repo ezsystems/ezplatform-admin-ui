@@ -92,13 +92,13 @@
 
             fields.forEach((field) => field.removeAttribute('id'));
 
-            doc.querySelectorAll('.ez-tabs__nav-item').forEach((navItem) => {
-                navItem.classList.remove('ez-tabs__nav-item--invalid');
+            doc.querySelectorAll('.ibexa-tabs__nav-item').forEach((navItem) => {
+                navItem.classList.remove('ibexa-tabs__tab--invalid');
             });
 
             invalidTabs.forEach((invalidInputs) => {
                 invalidInputs.forEach((invalidInputKey) => {
-                    doc.querySelector(`#item-${invalidInputKey}`).classList.add('ez-tabs__nav-item--invalid');
+                    doc.querySelector(`#item-${invalidInputKey}`).classList.add('ibexa-tabs__tab--invalid');
                 });
             });
 
