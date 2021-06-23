@@ -31,12 +31,29 @@ matrix:
     - name: "Admin-UI tests on Clean P"
       env:
         - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
-        - BEHAT_OPTS="--profile=adminui --suite=adminui --tags=~@broken -c=behat_ibexa_oss.yaml"
+        - BEHAT_OPTS="--profile=browser --suite=admin-ui --tags=~@broken -c=behat_ibexa_oss.yaml"
     - name: "Admin UI tests using different personas"
       env:
         - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
         - SETUP_BEHAT_OPTS="--profile=setup --suite=personas -c=behat_ibexa_oss.yaml"
-        - BEHAT_OPTS="--profile=adminui --suite=personas -c=behat_ibexa_oss.yaml"
+        - BEHAT_OPTS="--profile=browser --suite=personas -c=behat_ibexa_oss.yaml"
+    # Nightly or triggered jobs
+    - if: type in (cron) OR commit_message =~ /(Run regression)/
+      name: "[PHP 7.4/PostgreSQL/Varnish/Redis/Multirepository] Ibexa OSS regression suite"
+      env:
+        - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/db-postgresql.yml:doc/docker/varnish.yml:doc/docker/redis.yml:doc/docker/selenium.yml"
+        - SETUP_BEHAT_OPTS="--profile=regression --suite=setup-oss -c=behat_ibexa_oss.yaml"
+        - BEHAT_OPTS="--profile=regression --suite=oss --tags=~@broken -c=behat_ibexa_oss.yaml"
+        - MULTIREPOSITORY=1
+        - WEB_HOST="http://varnish"
+        - PHP_IMAGE=ezsystems/php:7.4-v2-node12
+    - if: type != pull_request OR commit_message =~ /(Run regression)/
+      name: "[PHP 7.3/Multirepository] Ibexa OSS regression suite"
+      env: 
+        - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
+        - SETUP_BEHAT_OPTS="--profile=regression --suite=setup-oss -c=behat_ibexa_oss.yaml"
+        - BEHAT_OPTS="--profile=regression --suite=oss --tags=~@broken -c=behat_ibexa_oss.yaml"
+        - MULTIREPOSITORY=1    
 
 notifications:
   slack:

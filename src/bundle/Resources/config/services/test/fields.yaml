@@ -1,0 +1,61 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  _instanceof:
+    Ibexa\AdminUi\Behat\Component\Fields\FieldTypeComponentInterface:
+      tags: [ 'ibexa.testing.browser.component.field_type' ]
+
+  Ibexa\AdminUi\Behat\Component\Fields\TextLine: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Selection: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\MapLocation: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Authors: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Checkbox: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Country: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Date: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\DateAndTime: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\ContentQuery: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\EmailAddress: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\File: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\FloatField: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Image: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\ImageAsset: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Integer: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\ISBN: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Keywords: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\TextBlock: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\URL: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Time: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\RichText: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Matrix: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\Media: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\ContentRelationMultiple: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\ContentRelationSingle: ~
+
+  Ibexa\AdminUi\Behat\Component\Fields\User: ~

@@ -1,91 +1,95 @@
+@IbexaOSS @IbexaContent @IbexaExperience @IbexaCommerce
 Feature: Content types management
   As an administrator
   In order to customize my eZ installation
   I want to manage my Content types.
 
   Background:
-    Given I am logged as "admin"
-      And I go to "Content Types" in "Admin" tab
-      And I go to "Content" "Content Type group" page
+    Given I am logged as admin
 
-  @javascript @common
+  @javascript
   Scenario: Changes can be discarded while creating Content Type
-    When I start creating new "Content Type" in "Content"
+    Given I'm on Content Type Page for "Content" group
+    When I create a new Content Type
       And I set fields
       | label      | value                     |
       | Name       | Test Content Type         |
       | Identifier | TestContentTypeIdentifier |
       And I click on the edit action bar button "Discard changes"
-    Then I should be on "Content Type group" "Content" page
-      And there's no "Test Content Type" on "Content" "Content Type group" list
+    Then I should be on Content Type group page for "Content" group
+      And there's no "Test Content Type" on Content Types list
 
-  @javascript @common
+  @javascript
   Scenario: New Content Type can be added to Content Type group
-    When I start creating new "Content Type" in "Content"
+    Given I'm on Content Type Page for "Content" group
+    When I create a new Content Type
       And I set fields
         | label                | value                     |
         | Name                 | Test Content Type         |
         | Identifier           | TestContentTypeIdentifier |
         | Content name pattern | <name>                    |
       And I add field "Country" to Content Type definition
-      And I set "Name" in "Country" to "CountryField"
+      And I set "Name" to "Country field" for "Country" field
       And I click on the edit action bar button "Save"
     Then notification that "Content Type" "Test Content Type" is updated appears
-      And I should be on "Content Type" "Test Content Type" page
+    Then I should be on Content Type page for "Test Content Type"
       And Content Type has proper Global properties
         | label                | value                     |
         | Name                 | Test Content Type         |
         | Identifier           | TestContentTypeIdentifier |
         | Content name pattern | <name>                    |
       And Content Type "Test Content Type" has proper fields
-        | fieldName      | fieldType |
-        | CountryField   | ezcountry |
+        | fieldName       | fieldType |
+        | Country field   | ezcountry |
 
-  @javascript @common
-  Scenario: I can navigate to Content Type group through breadcrumb
-    Given I go to "Test Content Type" "Content Type" page from "Content"
-    When I click on "Content" on breadcrumb
-    Then I should be on "Content Type group" "Content" page
-
-  @javascript @common
+  @javascript @APIUser:admin
   Scenario: Changes can be discarded while editing Content type
-    Given there's "Test Content Type" on "Content" "Content Type group" list
-    When I start editing "Content Type" "Test Content Type" from "Content"
+    Given I create a "TestDiscard CT" Content Type in "Content" with "testdiscard" identifier
+      | Field Type  | Name        | Identifier          | Required | Searchable | Translatable | Settings       |
+      | Text line   | Name        | name	            | no      | yes	      | yes          |                  |
+    And I'm on Content Type Page for "Content" group
+    And there's a "TestDiscard CT" on Content Types list
+    When I start editing Content Type "TestDiscard CT"
       And I set fields
         | label | value                    |
         | Name  | Test Content Type edited |
       And I click on the edit action bar button "Discard changes"
-    Then I should be on "Content Type group" "Content" page
-      And there's "Test Content Type" on "Content" "Content Type group" list
-      And there's no "Test Content Type edited" on "Content" "Content Type group" list
+    Then I should be on Content Type group page for "Content" group
+      And there's a "TestDiscard CT" on Content Types list
+      And there's no "Test Content Type edited" on Content Types list
 
-  @javascript @common
+  @javascript @APIUser:admin
   Scenario: New Field can be added while editing Content Type
-    Given there's "Test Content Type" on "Content" "Content Type group" list
-    When I start editing "Content Type" "Test Content Type" from "Content"
+    Given I create a "TestEdit CT" Content Type in "Content" with "testedit" identifier
+      | Field Type  | Name        | Identifier          | Required | Searchable | Translatable | Settings       |
+      | Text line   | Name        | name	            | no      | yes	      | yes          |                  |
+    And I'm on Content Type Page for "Content" group
+    When I start editing Content Type "TestEdit CT"
       And I set fields
         | label | value                    |
         | Name  | Test Content Type edited |
       And I add field "Date" to Content Type definition
-      And I set "Name" in "Date" to "DateField"
+    And I set "Name" to "DateField" for "Date" field
       And I click on the edit action bar button "Save"
-    Then notification that "Content Type" "Test Content Type edited" is updated appears
-      And I should be on "Content Type" "Test Content Type edited" page
+    Then success notification that "Content Type 'Test Content Type edited' updated." appears
+    Then I should be on Content Type page for "Test Content Type edited"
       And Content Type has proper Global properties
         | label                | value                     |
         | Name                 | Test Content Type edited  |
-        | Identifier           | TestContentTypeIdentifier |
+        | Identifier           | testedit                  |
         | Content name pattern | <name>                    |
       And Content Type "Test Content Type" has proper fields
         | fieldName      | fieldType |
-        | CountryField   | ezcountry |
+        | Name           | ezstring  |
         | DateField      | ezdate    |
 
-  @javascript @common
+  @javascript @APIUser:admin
   Scenario: Content type can be deleted from Content Type group
-    Given there's "Test Content Type edited" on "Content" "Content Type group" list
-    When I delete "Content Type" from "Content"
-      | item                     |
-      | Test Content Type edited |
-    Then notification that "Content Type" "Test Content Type edited" is deleted appears
-      And there's no "Test Content Type edited" on "Content" "Content Type group" list
+    Given I create a "TestDelete CT" Content Type in "Content" with "testdelete" identifier
+      | Field Type  | Name        | Identifier          | Required | Searchable | Translatable | Settings       |
+      | Text line   | Name        | name	            | no      | yes	      | yes          |                  |
+    And I'm on Content Type Page for "Content" group
+    And there's a "TestDiscard CT" on Content Types list
+    When I delete "TestDelete CT" Content Type
+    Then success notification that "Content Type 'TestDelete CT' deleted." appears
+    And there's no "TestDelete CT" on Content Types list

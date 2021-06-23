@@ -1,0 +1,57 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Ibexa\AdminUi\Behat\Page\AdminUpdateItemPage: ~
+
+  Ibexa\AdminUi\Behat\Page\ContentUpdateItemPage:
+    arguments:
+      $fieldTypeComponents: !tagged_iterator ibexa.testing.browser.component.field_type
+
+  Ibexa\AdminUi\Behat\Page\UserUpdatePage:
+    arguments:
+      $fieldTypeComponents: !tagged_iterator ibexa.testing.browser.component.field_type
+
+  Ibexa\AdminUi\Behat\Page\ObjectStateGroupsPage: ~
+
+  Ibexa\AdminUi\Behat\Page\SearchPage: ~
+
+  Ibexa\AdminUi\Behat\Page\ContentPreviewPage: ~
+
+  Ibexa\AdminUi\Behat\Page\ContentViewPage: ~
+
+  Ibexa\AdminUi\Behat\Page\ObjectStatePage: ~
+
+  Ibexa\AdminUi\Behat\Page\SectionPage: ~
+
+  Ibexa\AdminUi\Behat\Page\ContentTypeGroupPage: ~
+
+  Ibexa\AdminUi\Behat\Page\DashboardPage: ~
+
+  Ibexa\AdminUi\Behat\Page\SectionsPage: ~
+
+  Ibexa\AdminUi\Behat\Page\ContentTypeGroupsPage: ~
+
+  Ibexa\AdminUi\Behat\Page\LanguagePage: ~
+
+  Ibexa\AdminUi\Behat\Page\RolePage: ~
+
+  Ibexa\AdminUi\Behat\Page\SystemInfoPage: ~
+
+  Ibexa\AdminUi\Behat\Page\ContentTypePage: ~
+
+  Ibexa\AdminUi\Behat\Page\LanguagesPage: ~
+
+  Ibexa\AdminUi\Behat\Page\RoleUpdatePage: ~
+
+  Ibexa\AdminUi\Behat\Page\TrashPage: ~
+
+  Ibexa\AdminUi\Behat\Page\ContentTypeUpdatePage: ~
+
+  Ibexa\AdminUi\Behat\Page\ObjectStateGroupPage: ~
+
+  Ibexa\AdminUi\Behat\Page\RolesPage: ~
+
+  Ibexa\AdminUi\Behat\Page\ChangePasswordPage: ~

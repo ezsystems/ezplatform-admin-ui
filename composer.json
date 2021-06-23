@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
           "EzSystems\\EzPlatformAdminUiBundle\\": "src/bundle/",
-          "EzSystems\\EzPlatformAdminUi\\": "src/lib/"
+          "EzSystems\\EzPlatformAdminUi\\": "src/lib/",
+          "Ibexa\\AdminUi\\": "src/lib/"
         }
     },
     "autoload-dev": {
@@ -49,7 +50,7 @@
     },
     "require-dev": {
         "ibexa/ci-scripts": "^0.1@dev",
-        "behat/behat": "^3.5",
+        "ezsystems/behatbundle": "^8.3@dev",
         "friendsofphp/php-cs-fixer": "^2.16.0",
         "phpunit/phpunit": "^8.1",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
