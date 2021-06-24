@@ -66,9 +66,12 @@
          * @memberof EzStringValidator
          */
         validateAltInput(event) {
-            const isRequired = event.target.required;
+            const fileField = this.fieldContainer.querySelector(SELECTOR_INPUT_FILE);
+            const dataContainer = this.fieldContainer.querySelector('.ez-field-edit__data');
+            const isFileFieldEmpty = fileField.files && !fileField.files.length && dataContainer && !dataContainer.hasAttribute('hidden');
+            const isRequired = event.target.dataset.isRequired;
             const isEmpty = !event.target.value;
-            const isError = isEmpty && isRequired;
+            const isError = isEmpty && isRequired && !isFileFieldEmpty;
             const label = event.target.closest(SELECTOR_ALT_WRAPPER).querySelector('.ez-data-source__label').innerHTML;
             const result = { isError };
 
