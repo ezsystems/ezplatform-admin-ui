@@ -19,16 +19,20 @@
         text-decoration: none;
     }
 
+    &:disabled {
+        opacity: 0.3;
+    }
+
     &--primary {
         color: $ibexa-white;
         background-color: $ibexa-color-primary;
 
-        &:hover {
+        &:hover:not(:disabled) {
             color: $ibexa-white;
-            background-color: $ibexa-color-primary-light;
+            background-color: darken($ibexa-color-primary, 7.5%);
         }
 
-        &:active {
+        &:active:not(:disabled) {
             background-color: $ibexa-color-primary-light;
             box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-primary;
         }
@@ -45,8 +49,13 @@
         }
 
         &:active {
+            color: $ibexa-white;
             background-color: $ibexa-color-base-dark;
             box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-base-dark;
+
+            .ez-icon {
+                fill: $ibexa-white;
+            }
         }
 
         .ez-icon {
