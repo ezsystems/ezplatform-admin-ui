@@ -217,7 +217,7 @@
         border-bottom: calculateRem(1px) solid $ibexa-color-light;
         outline: none;
         font-size: calculateRem(14px);
-        transition: all 3s $ibexa-admin-transition;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
         margin-left: calculateRem(-3px);
 
         &:first-of-type {
