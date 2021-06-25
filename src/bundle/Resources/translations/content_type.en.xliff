@@ -636,6 +636,11 @@
         <target state="new">Maximum file size (MB)</target>
         <note>key: field_definition.ezimage.max_file_size</note>
       </trans-unit>
+      <trans-unit id="d2474547af649be4af884989e0af3e003125291e" resname="field_definition.ezimage.is_alternative_text_required">
+        <source>Alternative text is required</source>
+        <target state="new">Alternative text is required</target>
+        <note>key: field_definition.ezimage.is_alternative_text_required</note>
+      </trans-unit>
       <trans-unit id="8a95f664895f9c72e5ca52ea43908ad3d54c8966" resname="field_definition.ezinteger.default_value">
         <source>Default value</source>
         <target state="new">Default value</target>

@@ -142,12 +142,18 @@ const prepareStruct = ({ parentInfo, config, languageCode }, data) => {
         .then((response) => response.json())
         .catch(() => window.eZ.helpers.notification.showErrorNotification('Cannot get content type by identifier'))
         .then((response) => {
+            const fileValue = {
+                fileName: data.file.name,
+                data: data.fileReader.result.replace(/^.*;base64,/, ''),
+            };
+
+            if (data.file.type.startsWith('image/')) {
+                fileValue.alternativeText = data.file.name;
+            }
+
             const fields = [
                 { fieldDefinitionIdentifier: mapping.nameFieldIdentifier, fieldValue: data.file.name },
-                {
-                    fieldDefinitionIdentifier: mapping.contentFieldIdentifier,
-                    fieldValue: { fileName: data.file.name, data: data.fileReader.result.replace(/^.*;base64,/, '') },
-                },
+                { fieldDefinitionIdentifier: mapping.contentFieldIdentifier, fieldValue: fileValue },
             ];
 
             const struct = {
