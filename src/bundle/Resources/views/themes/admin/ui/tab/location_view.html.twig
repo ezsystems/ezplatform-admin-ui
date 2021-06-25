@@ -1,12 +1,9 @@
-{% set tabs_to_show = [] %}
-{% for tab in tabs %}
-    {% set tabs_to_show = tabs_to_show|merge([{ 
-        id: group ~ '-' ~ tab.identifier,
-        label: tab.name,
-        content: tab.view,
-        active: loop.first,
-    }]) %}
-{% endfor %}
+{% set tabs_to_show = tabs|map((tab, index) => { 
+    id: group ~ '-' ~ tab.identifier,
+    label: tab.name,
+    content: tab.view,
+    active: index == 0,
+}) %}}
 {% include '@ezdesign/ui/component/tab/tabs.html.twig' with { 
     tabs: tabs_to_show,
     include_tab_more: true,
