@@ -150,8 +150,6 @@
         color: $ibexa-black;
         border-radius: 0;
         text-decoration: none;
-        border-top-right-radius: calculateRem(35px); // so the tab is *not* clickable where it is transparent
-        // border takes more space than real shape for user ease of use
     }
 
     &--hidden {
@@ -208,6 +206,27 @@
         }
     }
 
+    &__tab-corner {
+        width: calculateRem(43px);
+        height: calculateRem(50px);
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin-top: calculateRem(-1px);
+        z-index: 2;
+
+        .ibexa-svg-tab-corner-border {
+            stroke: $ibexa-color-light-300;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+
+        .ibexa-svg-tab-corner-inside {
+            fill: $ibexa-color-light-300;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+    }
+
     &__tab {
         height: calculateRem(48px);
         display: flex;
@@ -241,28 +260,15 @@
             transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
         }
 
-        &::after {
-            content: '';
-            background-image: url(/bundles/ezplatformadminui/img/tab_corner_inactive.svg);
-            width: calculateRem(43px);
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            margin-bottom: calculateRem(1px);
-            transition: background-image $ibexa-admin-transition-duration $ibexa-admin-transition;
-            z-index: 2;
-        }
-
         &:hover:not([disabled]) {
-            z-index: 3;
-
             &::before {
                 border-color: $ibexa-color-dark;
             }
 
-            &::after {
-                background-image: url(/bundles/ezplatformadminui/img/tab_corner_inactive_hover.svg);
+            .ibexa-tabs__tab-corner {
+                .ibexa-svg-tab-corner-border {
+                    stroke: $ibexa-color-dark;
+                }
             }
         }
 
@@ -291,14 +297,25 @@
                 margin-bottom: -0.1px;
             }
 
-            &::after {
-                background-image: url(/bundles/ezplatformadminui/img/tab_corner_active.svg);
-                margin-bottom: -0.1px;
+            &:hover:not([disabled]) {
+                &::before {
+                    border-color: $ibexa-color-light;
+                }
+
+                .ibexa-tabs__tab-corner {
+                    .ibexa-svg-tab-corner-border {
+                        stroke: $ibexa-color-light;
+                    }
+                }
             }
 
-            &:hover:not([disabled]) {
-                &::after {
-                    background-image: url(/bundles/ezplatformadminui/img/tab_corner_active_hover.svg);
+            .ibexa-tabs__tab-corner {
+                .ibexa-svg-tab-corner-border {
+                    stroke: $ibexa-color-light;
+                }
+
+                .ibexa-svg-tab-corner-inside {
+                    fill: $ibexa-white;
                 }
             }
         }
