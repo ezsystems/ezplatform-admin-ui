@@ -10,6 +10,7 @@ use eZ\Publish\API\Repository\FieldTypeService;
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
 use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
 use EzSystems\EzPlatformContentForms\ConfigResolver\MaxUploadSize;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Exception\AccessException;
@@ -44,6 +45,12 @@ class ImageFormMapper implements FieldDefinitionFormMapperInterface
                     'min' => 0,
                     'max' => $this->maxUploadSize->get(MaxUploadSize::MEGABYTES),
                 ],
+                'disabled' => $isTranslation,
+            ])
+            ->add('isAlternativeTextRequired', CheckboxType::class, [
+                'required' => false,
+                'property_path' => 'validatorConfiguration[AlternativeTextValidator][required]',
+                'label' => /** @Desc("Alternative text is required") */ 'field_definition.ezimage.is_alternative_text_required',
                 'disabled' => $isTranslation,
             ]);
     }

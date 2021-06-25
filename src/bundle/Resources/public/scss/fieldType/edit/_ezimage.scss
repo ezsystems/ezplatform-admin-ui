@@ -91,4 +91,10 @@
             margin-top: calculateRem(24px);
         }
     }
+
+    .ez-data-source__field--alternativeText {
+        .ez-data-source__label {
+            @include label-required();
+        }
+    }
 }
