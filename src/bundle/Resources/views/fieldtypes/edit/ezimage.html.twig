@@ -25,7 +25,11 @@
                 <span class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</span>
             </div>
             <div class="ez-field-edit-preview__image-alt">
-                {{ form_row(form.alternativeText) }}
+                {% set alternative_text_label_class = form.vars.is_alternative_text_required ? 'required' : '' %}
+                {{ form_row(form.alternativeText, {
+                    attr: { 'data-is-required': form.vars.is_alternative_text_required },
+                    label_attr: { 'class': alternative_text_label_class }
+                }) }}
             </div>
         </div>
         <div class="ez-field-edit-preview__actions">
