@@ -5,7 +5,7 @@
     const SELECTOR_POPUP_MENU = '.ibexa-tabs__popup-menu';
     const CLASS_POPUP_MENU_HIDDEN = 'ibexa-tabs__popup-menu--hidden';
     const allAdaptiveItems = [];
-    let frame = null;
+    let animationFrame = null;
     const copyTabs = () => {
         doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
             const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
@@ -58,11 +58,11 @@
         });
     };
     const handleTabsConainterChange = () => {
-        if (frame) {
-            cancelAnimationFrame(frame);
+        if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
         }
 
-        frame = requestAnimationFrame(adaptTabsAndPopupMenu);
+        animationFrame = requestAnimationFrame(adaptTabsAndPopupMenu);
     };
     const handleClickOutsidePopupMenu = (event) => {
         doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {

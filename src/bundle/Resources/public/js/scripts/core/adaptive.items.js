@@ -8,7 +8,6 @@
             this.itemHiddenClass = config.itemHiddenClass;
             this.container = config.container;
             this.getActiveItem = config.getActiveItem;
-
             this.onAdapted = config.onAdapted;
         }
 

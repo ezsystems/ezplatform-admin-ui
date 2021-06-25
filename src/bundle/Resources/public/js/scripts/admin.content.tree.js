@@ -89,6 +89,7 @@
             dispatchContentTreeResizeEvent();
         }
     };
+
     contentTreeContainer.addEventListener('transitionstart', handleContainerTransitionStart, false);
     contentTreeContainer.addEventListener('transitioncancel', handleContainerTransitionStop, false);
     contentTreeContainer.addEventListener('transitionend', handleContainerTransitionStop, false);
