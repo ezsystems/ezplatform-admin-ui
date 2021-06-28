@@ -310,6 +310,7 @@
 
             &::after {
                 border-color: $ibexa-color-white;
+                right: calculateRem(2px);
             }
 
             &:hover:not([disabled]) {
