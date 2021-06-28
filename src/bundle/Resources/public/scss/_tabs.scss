@@ -260,6 +260,17 @@
             transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
         }
 
+        &::after {
+            content: '';
+            width: calculateRem(44px);
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            border-bottom: calculateRem(1px) solid $ibexa-color-light;
+            z-index: 3;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+
         &:hover:not([disabled]) {
             &::before {
                 border-color: $ibexa-color-dark;
@@ -295,6 +306,10 @@
                 border-right-width: 0;
                 z-index: 2;
                 margin-bottom: -0.1px;
+            }
+
+            &::after {
+                border-color: $ibexa-color-white;
             }
 
             &:hover:not([disabled]) {
