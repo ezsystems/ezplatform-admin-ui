@@ -12,7 +12,7 @@
     const haveHiddenPart = (element) => element.classList.contains(CLASS_HIDDEN) && !element.classList.contains(CLASS_PREVENT_SHOW);
     const setContainerHeight = () => {
         const container = doc.querySelector('.ez-extra-actions:not(.ez-extra-actions--hidden)');
-        const bottomPosition = Math.min(footer.getBoundingClientRect().top, global.innerHeight);
+        const bottomPosition = footer ? Math.min(footer.getBoundingClientRect().top, global.innerHeight) : global.innerHeight;
         const containerHeight = bottomPosition - container.getBoundingClientRect().top - ACTIONS_CONTAINER_MARGIN;
 
         container.style.height = `${containerHeight}px`;
