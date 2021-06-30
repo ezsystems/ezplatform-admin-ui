@@ -362,12 +362,6 @@
     }
 
     &__popup-menu {
-        position: absolute;
         top: calculateRem(35px);
-        z-index: 10;
-
-        &--hidden {
-            display: none;
-        }
     }
 }

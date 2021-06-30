@@ -1,4 +1,9 @@
-<ul class="ibexa-popup-menu {{ class|default('') }}">
+<ul class="ibexa-popup-menu ibexa-popup-menu--hidden {{ class|default('') }}"
+    data-item-template="{{ include('@ezdesign/ui/component/popup_menu/popup_menu_item.html.twig', {
+        'class': '',
+        'label': '{{ label }}',
+    })|e('html_attr') }}"
+>
     {% block items %}
         {% for item in items %}
             {{ include('@ezdesign/ui/component/popup_menu/popup_menu_item.html.twig', {

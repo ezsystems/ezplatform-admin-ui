@@ -5,6 +5,12 @@
     border-radius: $ibexa-border-radius;
     box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(67px) 0 rgba($ibexa-color-info, 0.2);
     font-size: calculateRem(14px);
+    position: absolute;
+    z-index: 10;
+
+    &--hidden {
+        display: none;
+    }
 
     &__item {
         display: flex;
