@@ -135,12 +135,12 @@ class ContentItemPage extends Page
 
     public function switchToTab(string $tabName): void
     {
-        $this->context->getElementByText($tabName, '#ez-tab-list-location-view .ez-tabs__tab')->click();
+        $this->context->getElementByText($tabName, '#ibexa-tab-label-location-view-locations')->click();
     }
 
     public function addLocation(string $newLocationPath): void
     {
-        $this->context->findElement('#ez-tab-location-view-locations .ez-table-header__tools .btn--udw-add')->click();
+        $this->context->findElement('#ibexa-tab-location-view-locations .ez-table-header__tools .ibexa-btn--udw-add')->click();
         $udw = ElementFactory::createElement($this->context, UniversalDiscoveryWidget::ELEMENT_NAME);
         $udw->verifyVisibility();
         $udw->selectContent($newLocationPath);
