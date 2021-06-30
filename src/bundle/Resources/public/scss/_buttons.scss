@@ -27,12 +27,20 @@
         color: $ibexa-white;
         background-color: $ibexa-color-primary;
 
-        &:hover:not(:disabled) {
+        &:disabled,
+        &.disabled {
+            opacity: 1;
+            background-color: $ibexa-color-base;
+            color: $ibexa-color-base-dark;
+            fill: $ibexa-color-base-dark;
+        }
+
+        &:hover:not(:disabled):not(.disabled) {
             color: $ibexa-white;
             background-color: darken($ibexa-color-primary, 7.5%);
         }
 
-        &:active:not(:disabled) {
+        &:active:not(:disabled):not(.disabled) {
             background-color: $ibexa-color-primary-light;
             box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-primary;
         }
@@ -167,6 +175,14 @@
 .btn.disabled,
 .btn[disabled] {
     opacity: 0.3;
+}
+
+.btn.btn-primary.disabled,
+.btn.btn-primary[disabled] {
+    opacity: 1;
+    background-color: $ibexa-color-base;
+    color: $ibexa-color-base-dark;
+    fill: $ibexa-color-base-dark;
 }
 
 .ez-btn--select-subtree {
