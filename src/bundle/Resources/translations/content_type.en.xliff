@@ -52,8 +52,8 @@
         <note>key: content_type.content_type</note>
       </trans-unit>
       <trans-unit id="e7a6e28719e705ca85e715114370d15deee0cd59" resname="content_type.copy.error">
-        <source>Error occoured while copying the '%name%' Content Type.</source>
-        <target state="new">Error occoured while copying the '%name%' Content Type.</target>
+        <source>Content Type '%name%' cannot be copied.</source>
+        <target state="new">Content Type '%name%' cannot be copied.</target>
         <note>key: content_type.copy.error</note>
       </trans-unit>
       <trans-unit id="31674753c7d944af06b98387a96ce93f36f6adb4" resname="content_type.copy.success">
