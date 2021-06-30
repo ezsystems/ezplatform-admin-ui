@@ -304,20 +304,12 @@ class ContentViewContext extends BusinessContext
     }
 
     /**
-     * @Given I click on Add Location (button) of item :item
+     * @Given I add a new Location to item :itemName under :newLocationPath
      */
-    public function iClickAddLocationButton($item): void
+    public function iAddNewLocation($itemName, $newLocationPath): void
     {
-        $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $item);
-        $contentItemPage->addLocation();
-    }
-
-    /**
-     * @Given I select :location location for item :item
-     */
-    public function iSelectLocationForItem($location, $item): void
-    {
-        $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $item);
-        $contentItemPage->addContentFromUDW($location);
+        $newLocationPath = $this->argumentParser->replaceRootKeyword($newLocationPath);
+        $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $itemName);
+        $contentItemPage->addLocation($newLocationPath);
     }
 }

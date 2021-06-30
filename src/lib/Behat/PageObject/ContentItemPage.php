@@ -133,26 +133,17 @@ class ContentItemPage extends Page
         }
     }
 
-    /**
-     * @param string $tabName
-     */
     public function switchToTab(string $tabName): void
     {
         $this->context->getElementByText($tabName, '#ez-tab-list-location-view .ez-tabs__tab')->click();
     }
 
-    public function addLocation(): void
+    public function addLocation(string $newLocationPath): void
     {
         $this->context->findElement('#ez-tab-location-view-locations .ez-table-header__tools .btn--udw-add')->click();
-    }
-
-    /**
-     * @param $location
-     */
-    public function addContentFromUDW($location): void
-    {
         $udw = ElementFactory::createElement($this->context, UniversalDiscoveryWidget::ELEMENT_NAME);
-        $udw->selectContent('Ibexa Digital Experience Platform/' . $location);
+        $udw->verifyVisibility();
+        $udw->selectContent($newLocationPath);
         $udw->confirm();
     }
 
