@@ -1,5 +1,5 @@
 @javascript @addLocation
-Feature: Verify that an Editor with Content Type limitation on conten/create policy can add location
+Feature: Verify that an Editor with Content Type limitation on content/create policy can add location
 
   Scenario: I can add location
     Given I open Login page
@@ -7,6 +7,5 @@ Feature: Verify that an Editor with Content Type limitation on conten/create pol
     And I go to "Content structure" in "Content" tab
     And I navigate to content "NewArticle" of type "Article" in root
     When I go to "Locations" tab in Content structure of item "NewArticle"
-    And I click on Add Location button of item "NewArticle"
-    And I select "Destination" location for item "NewArticle"
+    And I add a new Location to item "NewArticle" under "root/Destination"
     Then I navigate to content "NewArticle" of type "Article" in "root/Destination"
