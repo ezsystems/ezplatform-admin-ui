@@ -28,7 +28,7 @@
                     continue;
                 }
 
-                const lastItem = this.items[this.items.length - 1]
+                const lastItem = this.items[this.items.length - 1];
                 const isLastNonactiveItem = lastItem === activeItem ? i === this.items.length - 2 : i === this.items.length - 1;
                 const allPreviousItemsVisible = hiddenItemsWithoutSelector.size === 0;
                 const fitsInsteadOfSelector = item.offsetWidth + OFFSET_ROUNDING_COMPENSATOR < maxTotalWidth - currentWidth + selectorWidth;
