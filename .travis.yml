@@ -56,17 +56,19 @@ before_install:
 
 install:
   # Install packages if needed
-  - if [ "${CHECK_CS}" == "1" -o "${PHPUNIT_CONFIG}" != "" ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
+#  - if [ "${CHECK_CS}" == "1" -o "${PHPUNIT_CONFIG}" != "" ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
   # Prepare whole environment if needed
-  - if [ "${BEHAT_OPTS}" != "" ]; then ./.travis/prepare_ezplatform.sh ${INSTALL_EZ_INSTALL_TYPE}; fi
+#  - if [ "${BEHAT_OPTS}" != "" ]; then
+  - ./.travis/prepare_ezplatform.sh ${INSTALL_EZ_INSTALL_TYPE}
 
 before_script:
    - if [ "${SETUP_BEHAT_OPTS}" != "" ] ; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat $SETUP_BEHAT_OPTS" ; fi
 
 script:
-  - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/php-cs-fixer fix -v --dry-run --show-progress=estimating ; fi
-  - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
-  - if [ "${BEHAT_OPTS}" != "" ]; then cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat ${BEHAT_OPTS}" ; fi
+#  - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/php-cs-fixer fix -v --dry-run --show-progress=estimating ; fi
+#  - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
+#  - if [ "${BEHAT_OPTS}" != "" ]; then
+  - cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat ${BEHAT_OPTS}" #; fi
 
 after_failure:
   # Will show us the last bit of the log of container's main processes

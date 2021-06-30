@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - '[0-9]+.[0-9]+'
+  pull_request: ~
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: "ubuntu-20.04"
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php:
+          - '7.3'
+          - '7.4'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          extensions: pdo_sqlite, gd
+          tools: cs2pr
+
+      - uses: "ramsey/composer-install@v1"
+        with:
+          dependency-versions: "highest"
+          composer-options: "--prefer-dist --no-progress"
+
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Run code style check
+        run: composer run-script check-cs -- --format=checkstyle | cs2pr
+
+      - name: Run test suite
+        run: composer run-script --timeout=600 test
