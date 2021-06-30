@@ -13,89 +13,90 @@
         title: 'list.title'|trans|desc('User Settings'),
         icon_name: 'user'
     } %}
-    <ul class="nav nav-tabs ez-nav-tabs--role px-4 ez-tabs" role="tablist">
-        <li role="presentation" class="nav-item">
-            <a href="#my-preferences" class="nav-link active" role="tab" data-toggle="tab">
-                {{ 'section.my_preferences'|trans|desc('My Preferences') }}
-            </a>
-        </li>
-        <li role="presentation" class="nav-item">
-            <a href="#my-account-settings" class="nav-link" role="tab" data-toggle="tab">
-                {{ 'section.my_account_settings'|trans|desc('My Account Settings') }}
-            </a>
-        </li>
-    </ul>
 {% endblock %}
 
 {% block body_class %}ez-user-settings-list-view ez-has-full-width-footer{% endblock %}
 
 {% block content %}
-    <section class="container tab-content">
-        <div role="tabpanel" class="tab-pane active" id="my-preferences">
+    {% embed '@ezdesign/ui/component/tab/tabs.html.twig' with {
+        tabs: [
+          { id: 'my-preferences', label: 'section.my_preferences'|trans|desc('My Preferences'), active: true },
+          { id: 'my-account-settings', label: 'section.my_account_settings'|trans|desc('My Account Settings') },
+        ]
+    } %}
+        {% block tab_content %}
+            {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with { id: 'my-preferences', active: true } %}
+                {% block content %}
+                    {% for user_setting in pager %}
+                        <div class="ez-table-header">
+                            <div class="ez-table-header__headline">{{ user_setting.name }}</div>
+                        </div>
 
-            {% for user_setting in pager %}
-                <div class="ez-table-header">
-                    <div class="ez-table-header__headline">{{ user_setting.name }}</div>
-                </div>
+                        <table class="table table-hover mb-3">
+                            {% if user_setting.description is not empty %}
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">{{ user_setting.description }}</th>
+                                    </tr>
+                                </thead>
+                            {% endif %}
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        {{ value_definitions[user_setting.identifier].getDisplayValue(user_setting.value)|raw }}
+                                    </td>
+                                    <td class="text-right">
+                                        <a
+                                            title="{{ 'list.action.edit'|trans|desc('Edit') }}"
+                                            href="{{ path('ezplatform.user_settings.update', { 'identifier': user_setting.identifier }) }}"
+                                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-3">
+                                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                                <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    {% endfor %}
 
-                <table class="table table-hover mb-3">
-                    {% if user_setting.description is not empty %}
-                        <thead>
-                            <tr>
-                                <th colspan="2">{{ user_setting.description }}</th>
-                            </tr>
-                        </thead>
+                    {% if pager.haveToPaginate %}
+                        {% include '@ezdesign/ui/pagination.html.twig' with {
+                            'pager': pager
+                        } %}
                     {% endif %}
-                    <tbody>
+                {% endblock %}
+            {% endembed %}
+            {% embed '@ezdesign/ui/component//tab_pane.html.twig' with { id: 'my-account-settings' } %}
+                {% block content %}
+                    <div class="ez-table-header">
+                        <div class="ez-table-header__headline">{{ 'my_account_settings.password.title'|trans|desc('Password') }}</div>
+                    </div>
+
+                    <table class="table table-hover mb-3">
+                        <tbody>
                         <tr>
                             <td>
-                                {{ value_definitions[user_setting.identifier].getDisplayValue(user_setting.value)|raw }}
+                                {{ 'my_account_settings.password.description'|trans|desc('Current password') }}
                             </td>
                             <td class="text-right">
-                                <a
-                                    title="{{ 'list.action.edit'|trans|desc('Edit') }}"
-                                    href="{{ path('ezplatform.user_settings.update', { 'identifier': user_setting.identifier }) }}"
-                                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-3">
+                                <a title="{{ 'my_account_settings.password.action.edit'|trans|desc('Edit') }}"
+                                href="{{ path('ezplatform.user_profile.change_password') }}"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-3">
                                     <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
                                         <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                                     </svg>
                                 </a>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
 
-            {% if pager.haveToPaginate %}
-                {% include '@ezdesign/ui/pagination.html.twig' with {
-                    'pager': pager
-                } %}
-            {% endif %}
-        </div>
-        <div role="tabpanel" class="tab-pane" id="my-account-settings">
-            <div class="ez-table-header">
-                <div class="ez-table-header__headline">{{ 'my_account_settings.password.title'|trans|desc('Password') }}</div>
-            </div>
-
-            <table class="table table-hover mb-3">
-                <tbody>
-                <tr>
-                    <td>
-                        {{ 'my_account_settings.password.description'|trans|desc('Current password') }}
-                    </td>
-                    <td class="text-right">
-                        <a title="{{ 'my_account_settings.password.action.edit'|trans|desc('Edit') }}"
-                           href="{{ path('ezplatform.user_profile.change_password') }}"
-                           class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-3">
-                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
-                                <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
-                            </svg>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </section>
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-tabs-js', null, 'ezplatform') }}
 {% endblock %}

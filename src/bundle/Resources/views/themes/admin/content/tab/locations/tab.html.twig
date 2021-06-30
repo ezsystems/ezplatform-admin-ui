@@ -81,13 +81,13 @@
                 <span class="ez-pagination__text">
                     {{ 'pagination.viewing'|trans({
                         '%viewing%': pager.currentPageResults|length,
-                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing <strong>%viewing%</strong> out of <strong>%total%</strong> items')|raw }}
+                        '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw }}
                 </span>
         </div>
         <div class="row justify-content-center align-items-center ez-pagination__btn mb-5">
             {{ pagerfanta(pager, 'ez', pager_options|merge({
                 'routeParams': {
-                    '_fragment': 'ez-tab-location-view-locations'
+                    '_fragment': 'ibexa-tab-location-view-locations'
                 }
             })) }}
         </div>

@@ -20,7 +20,7 @@ use Twig\Environment;
 
 class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
 {
-    public const URI_FRAGMENT = 'ez-tab-link-manager-url-wildcards';
+    public const URI_FRAGMENT = 'ibexa-tab-link-manager-url-wildcards';
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;

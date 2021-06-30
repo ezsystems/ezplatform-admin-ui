@@ -1,0 +1,27 @@
+.ibexa-popup-menu {
+    padding: calculateRem(8px);
+    background: $ibexa-color-white;
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: $ibexa-border-radius;
+    box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(67px) 0 rgba($ibexa-color-info, 0.2);
+    font-size: calculateRem(14px);
+
+    &__item {
+        display: flex;
+        align-items: center;
+        height: calculateRem(35px);
+        padding: calculateRem(20px);
+        min-width: calculateRem(150px);
+        border-radius: $ibexa-border-radius;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $ibexa-color-light-300;
+        }
+
+        &--hidden {
+            display: none;
+        }
+    }
+}

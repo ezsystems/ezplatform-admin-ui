@@ -19,6 +19,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/core/base.chart.js'),
     path.resolve(__dirname, '../public/js/scripts/core/line.chart.js'),
     path.resolve(__dirname, '../public/js/scripts/core/pie.chart.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/adaptive.items.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.notifications.js'),
     path.resolve(__dirname, '../public/js/scripts/button.trigger.js'),
     path.resolve(__dirname, '../public/js/scripts/button.prevent.default.js'),
@@ -92,7 +93,6 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-role-list-js', [path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js')])
         .addEntry('ezplatform-admin-ui-role-view-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
         ])
         .addEntry('ezplatform-admin-ui-role-assignment-create-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.role_assignment.add.js'),
@@ -119,8 +119,6 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.location.change.language.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.view.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.location.adaptive.tabs.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.visibility.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.update.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.tooglecontentpreview.js'),
@@ -168,7 +166,6 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-change-user-password-js', [path.resolve(__dirname, '../public/js/scripts/user_password.change.js')])
         .addEntry('ezplatform-admin-ui-content-edit-parts-js', [
             path.resolve('./vendor/ezsystems/ezplatform-admin-ui-assets/Resources/public/vendors/leaflet/dist/leaflet.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-field.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-file-field.js'),
@@ -215,12 +212,15 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../../ui-dev/src/modules/content-tree/content.tree.module.js'),
         ])
         .addEntry('ezplatform-admin-ui-url-management-js', [
-            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.url.wildcards.create.js'),
         ])
         .addEntry('ezplatform-admin-ui-url-management-update-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.url.wildcards.update.js'),
         ])
-        .addEntry('ezplatform-admin-ui-login-js', [path.resolve(__dirname, '../public/js/scripts/login.js')]);
+        .addEntry('ezplatform-admin-ui-login-js', [path.resolve(__dirname, '../public/js/scripts/login.js')])
+        .addEntry('ezplatform-admin-ui-tabs-js', [
+            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.location.adaptive.tabs.js'),
+        ]);
 };

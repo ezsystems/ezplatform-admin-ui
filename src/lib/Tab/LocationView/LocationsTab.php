@@ -34,7 +34,7 @@ use eZ\Publish\API\Repository\PermissionResolver;
 
 class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
-    const URI_FRAGMENT = 'ez-tab-location-view-locations';
+    const URI_FRAGMENT = 'ibexa-tab-location-view-locations';
     private const PAGINATION_PARAM_NAME = 'locations-tab-page';
 
     /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */

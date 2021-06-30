@@ -1,147 +1,184 @@
-(function(global, doc, $, Translator) {
-    const OFFSET_ROUNDING_COMPENSATOR = 0.5;
-    const TABS_SELECTOR = '.ez-tabs';
+(function (global, doc, $, eZ) {
+    const TABS_SELECTOR = '.ibexa-tabs';
+    const SELECTOR_TABS_LIST = '.ibexa-tabs__list';
+    const SELECTOR_TAB_MORE = '.ibexa-tabs__tab--more';
+    const SELECTOR_POPUP_MENU = '.ibexa-tabs__popup-menu';
+    const CLASS_POPUP_MENU_HIDDEN = 'ibexa-tabs__popup-menu--hidden';
+    const allAdaptiveItems = [];
+    let animationFrame = null;
     const copyTabs = () => {
-        doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabs) => {
-            const moreLabel = Translator.trans(/*@Desc("More")*/ 'content.view.more.label', {}, 'content');
+        doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
+            const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
+            const tabs = tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)');
+            const tabMore = tabsList.querySelector(':scope > .ibexa-tabs__tab--more');
 
-            primaryTabs.insertAdjacentHTML(
-                'beforeend',
-                `<li class="nav-item ez-tabs__tab ez-tabs__tab--more">
-                <a class="nav-link" id="ez-tab-label--more" role="tab">${moreLabel}</a>
-                <ul class="nav nav-tabs ez-tabs ez-tabs--hidden ez-tabs--secondary" role="tablist">
-                    ${primaryTabs.innerHTML}
-                </ul>
-            </li>`
-            );
+            if (!tabMore) {
+                return;
+            }
+
+            const popupMenu = tabsContainer.querySelector(SELECTOR_POPUP_MENU);
+            const tabTemplate = tabMore.dataset.itemTemplate;
+            const fragment = doc.createDocumentFragment();
+
+            tabs.forEach((tab) => {
+                const tabLink = tab.querySelector('.ibexa-tabs__link');
+                const tabLinkLabel = tabLink.textContent;
+                const container = doc.createElement('ul');
+                const renderedItem = tabTemplate.replace('{{ label }}', tabLinkLabel);
+
+                container.insertAdjacentHTML('beforeend', renderedItem);
+
+                const popupMenuItem = container.querySelector('li');
+
+                popupMenuItem.dataset.tabLinkId = tabLink.id;
+                fragment.append(popupMenuItem);
+            });
+
+            popupMenu.innerHTML = '';
+            popupMenu.append(fragment);
         });
+    };
+    const adaptTabsAndPopupMenu = () => {
+        adaptTabs();
+        positionPopupMenu();
     };
     const adaptTabs = () => {
-        doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-            const primaryTabs = [...primaryTabsList.querySelectorAll(':scope > .ez-tabs__tab')];
-            const primaryTabsLinks = [...primaryTabsList.querySelectorAll(':scope > .ez-tabs__tab .nav-link')];
-            const moreTab = primaryTabsList.querySelector(':scope > .ez-tabs__tab--more');
-
-            if (moreTab) {
-                const secondaryTabs = [...moreTab.querySelectorAll('.ez-tabs__tab')];
-                const activePrimaryTabLink = primaryTabsLinks.find((tabLink) => tabLink.classList.contains('active'));
-                const activePrimaryTab = activePrimaryTabLink ? activePrimaryTabLink.closest('.ez-tabs__tab') : null;
-                const activePrimaryTabWidth = activePrimaryTab ? activePrimaryTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR : 0;
-                const moreTabWidth = moreTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
-                const maxTotalWidth = primaryTabsList.offsetWidth - OFFSET_ROUNDING_COMPENSATOR;
-                const hiddenPrimaryTabs = [];
-                let currentWidth = moreTabWidth + activePrimaryTabWidth;
-
-                primaryTabs.forEach((tab) => tab.classList.remove('ez-tabs__tab--hidden'));
-                moreTab.classList.remove('ez-tabs__tab--hidden');
-
-                for (let i = 0; i < primaryTabs.length; i++) {
-                    const tab = primaryTabs[i];
-                    const tabLink = tab.querySelector('.nav-link');
-
-                    if (tabLink === activePrimaryTabLink) {
-                        continue;
-                    }
-
-                    const isLastTab = i === primaryTabs.length - 1;
-                    const allPreviousTabsVisible = hiddenPrimaryTabs.length === 0;
-                    const isTabNarrowerThanMoreTab = tab.offsetWidth < moreTab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
-
-                    if (isLastTab && allPreviousTabsVisible && isTabNarrowerThanMoreTab) {
-                        break;
-                    }
-                    if (currentWidth + tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR > maxTotalWidth) {
-                        hiddenPrimaryTabs.push(i);
-                    }
-
-                    currentWidth += tab.offsetWidth + OFFSET_ROUNDING_COMPENSATOR;
-                }
-
-                primaryTabs.forEach((tab, index) => {
-                    tab.classList.toggle('ez-tabs__tab--hidden', hiddenPrimaryTabs.includes(index));
-                });
-                secondaryTabs.forEach((tab, index) => {
-                    tab.classList.toggle('ez-tabs__tab--hidden', !hiddenPrimaryTabs.includes(index));
-                });
-
-                moreTab.classList.toggle('ez-tabs__tab--hidden', !hiddenPrimaryTabs.length);
-            }
+        allAdaptiveItems.forEach((adaptiveItems) => {
+            adaptiveItems.adapt();
         });
     };
-    const handleClickOutsideSecondaryMenu = (event) => {
-        doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-            const moreTab = primaryTabsList.querySelector('.ez-tabs__tab--more');
+    const positionPopupMenu = () => {
+        doc.querySelectorAll('.ibexa-tabs__popup-menu:not(.ibexa-tabs__popup-menu--hidden)').forEach((popupMenu) => {
+            const tabsContainer = popupMenu.parentElement;
+            const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
+            const tabMore = tabsList.querySelector(':scope > .ibexa-tabs__tab--more');
+            const popupMenuAbsoluteLeft = tabMore.offsetLeft + tabsList.offsetLeft - popupMenu.offsetWidth + tabMore.offsetWidth + 20;
 
-            if (moreTab) {
-                const isSecondaryMenuExpanded = moreTab.classList.contains('ez-tabs__tab--expanded');
-                const isClickInsideMoreTab = event.target.closest('.ez-tabs__tab--more');
-                const secondaryTabsList = moreTab.querySelector('.ez-tabs--secondary');
+            popupMenu.style.left = `${popupMenuAbsoluteLeft}px`;
+        });
+    };
+    const handleTabsConainterChange = () => {
+        if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
+        }
 
-                if (!isSecondaryMenuExpanded || isClickInsideMoreTab) {
+        animationFrame = requestAnimationFrame(adaptTabsAndPopupMenu);
+    };
+    const handleClickOutsidePopupMenu = (event) => {
+        doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
+            const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
+            const tabMore = tabsList.querySelector(SELECTOR_TAB_MORE);
+
+            if (tabMore) {
+                const popupMenu = tabsContainer.querySelector(SELECTOR_POPUP_MENU);
+                const isPopupMenuExpanded = !popupMenu.classList.contains(CLASS_POPUP_MENU_HIDDEN);
+                const isClickInsideTabMore = event.target.closest(SELECTOR_TAB_MORE);
+
+                if (!isPopupMenuExpanded || isClickInsideTabMore) {
                     return;
                 }
 
-                moreTab.classList.remove('ez-tabs__tab--expanded');
-                secondaryTabsList.classList.add('ez-tabs--hidden');
+                popupMenu.classList.add(CLASS_POPUP_MENU_HIDDEN);
             }
         });
     };
-    const handleTabClick = (event, otherTabsLinks) => {
-        const clickedTabLink = event.currentTarget;
-        const otherTabLinkToShow = otherTabsLinks.find((otherTabLink) => otherTabLink.href === clickedTabLink.href);
+    const toggleContainer = (event) => {
+        const toggler = event.target;
+        const header = toggler.closest('.ez-header');
+        const headerContainer = header.parentElement;
+        const tabContent = headerContainer.querySelector('.ibexa-tab-content');
+        const isTabContentRolledUp = toggler.classList.contains('ibexa-tabs__toggler--rolled-up');
 
-        if (!otherTabLinkToShow) {
-            return;
-        }
-
-        $(otherTabLinkToShow).tab('show');
-        adaptTabs();
+        toggler.classList.toggle('ibexa-tabs__toggler--rolled-up');
+        tabContent.style.height = isTabContentRolledUp ? '' : '0px';
     };
 
     copyTabs();
-    adaptTabs();
 
-    doc.addEventListener('click', handleClickOutsideSecondaryMenu);
-
-    doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-        const moreTab = primaryTabsList.querySelector('.ez-tabs__tab--more');
-
-        if (moreTab) {
-            const moreTabLink = primaryTabsList.querySelector('.ez-tabs__tab--more .nav-link');
-            const secondaryTabsList = moreTab.querySelector('.ez-tabs--secondary');
-
-            moreTabLink.addEventListener('click', () => {
-                moreTab.classList.toggle('ez-tabs__tab--expanded');
-                secondaryTabsList.classList.toggle('ez-tabs--hidden');
-            });
-        }
+    doc.querySelectorAll('.ibexa-tabs__toggler').forEach((toggler) => {
+        toggler.addEventListener('click', toggleContainer, false);
     });
 
-    doc.querySelectorAll(TABS_SELECTOR).forEach((primaryTabsList) => {
-        const moreTab = primaryTabsList.querySelector('.ez-tabs__tab--more');
-        const primaryTabsLinks = [...primaryTabsList.querySelectorAll('.ez-tabs__tab .nav-link')];
+    doc.addEventListener('click', handleClickOutsidePopupMenu, false);
 
-        if (moreTab) {
-            const secondaryTabsList = moreTab.querySelector('.ez-tabs--secondary');
-            const secondaryTabsLinks = [...secondaryTabsList.querySelectorAll('.ez-tabs__tab .nav-link')];
+    doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
+        const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
+        const tabMore = tabsList.querySelector(SELECTOR_TAB_MORE);
 
-            primaryTabsLinks.forEach((tabLink) => {
-                $(tabLink).on('shown.bs.tab', (event) => {
-                    handleTabClick(event, secondaryTabsLinks);
-                });
+        if (tabMore) {
+            const tabMoreLink = tabsList.querySelector('.ibexa-tabs__tab--more .nav-link');
+            const popupMenu = tabsContainer.querySelector(SELECTOR_POPUP_MENU);
+
+            tabMoreLink.addEventListener('click', () => {
+                popupMenu.classList.toggle(CLASS_POPUP_MENU_HIDDEN);
+                positionPopupMenu(popupMenu);
             });
 
-            secondaryTabsLinks.forEach((tabLink) => {
-                tabLink.addEventListener('click', (event) => {
-                    handleTabClick(event, primaryTabsLinks);
+            const popupMenuItems = popupMenu.querySelectorAll('.ibexa-popup-menu__item');
 
-                    moreTab.classList.toggle('ez-tabs__tab--expanded', false);
-                    secondaryTabsList.classList.toggle('ez-tabs--hidden', true);
+            popupMenuItems.forEach((popupMenuItem) => {
+                popupMenuItem.addEventListener('click', () => {
+                    const tabLinkId = popupMenuItem.dataset.tabLinkId;
+                    const tabToShow = tabsList.querySelector(`.ibexa-tabs__link#${tabLinkId}`);
+
+                    popupMenu.classList.add(CLASS_POPUP_MENU_HIDDEN);
+                    $(tabToShow).tab('show');
                 });
             });
         }
     });
 
-    document.body.addEventListener('ez-content-tree-resized', adaptTabs);
-    window.addEventListener('resize', adaptTabs);
-})(window, window.document, window.jQuery, window.Translator);
+    doc.querySelectorAll(TABS_SELECTOR).forEach((tabsContainer) => {
+        const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
+        const tabMore = tabsList.querySelector(SELECTOR_TAB_MORE);
+
+        if (tabMore) {
+            const tabs = [...tabsList.querySelectorAll(':scope > .ibexa-tabs__tab:not(.ibexa-tabs__tab--more)')];
+            const tabsLinks = [...tabsList.querySelectorAll('.ibexa-tabs__link:not(.ibexa-tabs__tab--more)')];
+            const popupMenuItems = [...tabsContainer.querySelectorAll('.ibexa-popup-menu__item')];
+
+            const adaptiveItems = new eZ.core.AdaptiveItems({
+                items: tabs,
+                selectorItem: tabMore,
+                itemHiddenClass: 'ibexa-tabs__tab--hidden',
+                container: tabsList,
+                getActiveItem: () => {
+                    const activeTabLink = tabsLinks.find((tabLink) => tabLink.classList.contains('active'));
+                    const activeTab = activeTabLink ? activeTabLink.closest('.ibexa-tabs__tab') : null;
+
+                    return activeTab;
+                },
+                onAdapted: (visibleTabsWithoutSelector, hiddenTabsWithoutSelector) => {
+                    const hiddenTabsLinksIds = [...hiddenTabsWithoutSelector].map((tab) => tab.querySelector('.ibexa-tabs__link').id);
+
+                    popupMenuItems.forEach((popupMenuItem) => {
+                        popupMenuItem.classList.toggle(
+                            'ibexa-popup-menu__item--hidden',
+                            !hiddenTabsLinksIds.includes(popupMenuItem.dataset.tabLinkId)
+                        );
+                    });
+                },
+            });
+
+            allAdaptiveItems.push(adaptiveItems);
+            adaptiveItems.adapt();
+
+            tabsLinks.forEach((tabLink) => {
+                $(tabLink).on('shown.bs.tab', () => {
+                    adaptiveItems.adapt();
+                });
+            });
+        }
+    });
+
+    doc.querySelectorAll('.ibexa-tabs__link').forEach((tabLink) => {
+        const tab = tabLink.parentElement;
+
+        tabLink.addEventListener('focus', () => {
+            tab.focus();
+        });
+    });
+
+    doc.body.addEventListener('ez-content-tree-resized', handleTabsConainterChange, false);
+    window.addEventListener('resize', handleTabsConainterChange, false);
+})(window, window.document, window.jQuery, window.eZ);

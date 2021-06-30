@@ -311,7 +311,7 @@ class ContentController extends Controller
                 return new RedirectResponse($this->generateUrl('_ez_content_view', [
                     'contentId' => $contentInfo->id,
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => 'ez-tab-location-view-locations',
+                    '_fragment' => 'ibexa-tab-location-view-locations',
                 ]));
             });
 
@@ -328,7 +328,7 @@ class ContentController extends Controller
             return new RedirectResponse($this->generateUrl('_ez_content_view', [
                 'contentId' => $contentInfo->id,
                 'locationId' => $contentInfo->mainLocationId,
-                '_fragment' => 'ez-tab-location-view-locations',
+                '_fragment' => 'ibexa-tab-location-view-locations',
             ]));
         }
 
@@ -415,7 +415,7 @@ class ContentController extends Controller
                 return new RedirectResponse($this->generateUrl('_ez_content_view', [
                     'contentId' => $contentInfo->id,
                     'locationId' => $contentInfo->mainLocationId,
-                    '_fragment' => 'ez-tab-location-view-translations',
+                    '_fragment' => 'ibexa-tab-location-view-translations',
                 ]));
             });
             if ($result instanceof Response) {
@@ -429,7 +429,7 @@ class ContentController extends Controller
             return new RedirectResponse($this->generateUrl('_ez_content_view', [
                 'contentId' => $contentInfo->id,
                 'locationId' => $contentInfo->mainLocationId,
-                '_fragment' => 'ez-tab-location-view-translations',
+                '_fragment' => 'ibexa-tab-location-view-translations',
             ]));
         }
 

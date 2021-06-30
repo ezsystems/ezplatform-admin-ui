@@ -24,42 +24,43 @@
 
                 {% block form_fields %}
                     {% if grouped_fields is defined and grouped_fields|length > 1 %}
-                        <ul class="nav nav-tabs ez-nav-tabs--content-edit ez-tabs" role="tablist">
-                            {% for key, group in grouped_fields %}
-                                {% set sanitized_key = key|slug %}
-                                <li role="presentation" class="nav-item ez-tabs__nav-item" id="item-{{ sanitized_key }}">
-                                    <a href="#{{ sanitized_key }}" class="nav-link {{ loop.first ? 'active' }}" role="tab" data-toggle="tab">
-                                        {{ key|capitalize }}
-                                    </a>
-                                    {% include '@ezdesign/ui/component/warning_icon.html.twig' %}
-                                </li>
-                            {% endfor %}
-                        </ul>
-
-                        <div class="tab-content px-3">
-                            {% for key, group in grouped_fields %}
-                                {% set sanitized_key = key|slug %}
-                                <div role="tabpanel" class="tab-pane {{ loop.first ? 'active' }}" id="{{ sanitized_key }}">
-                                    {% for field in group %}
-                                        {% set formField = form.fieldsData[field] %}
-                                        
-                                        {% if not formField.rendered %}
-                                            {% if formField.value is defined %}
-                                                {{- form_widget(formField) -}}
-                                            {% else %}
-                                                <div class="ez-field-edit ez-field-edit--eznoneditable">
-                                                    {{- form_label(formField) -}}
-                                                    <p class="non-editable">
-                                                        {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
-                                                    </p>
-                                                    {% do formField.setRendered() %}
-                                                </div>
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            {% endfor %}
-                        </div>
+                        {% set tabs_to_show = [] %}
+                        {% for key, group in grouped_fields %}
+                            {% set sanitized_key = key|slug %}
+                            {% set tabs_to_show = tabs_to_show|merge([{ 
+                                id: sanitized_key,
+                                label: key|capitalize,
+                                active: loop.first,
+                            }]) %}
+                        {% endfor %}
+                        {% embed '@ezdesign/ui/component/tab/tabs.html.twig' with { tabs: tabs_to_show } %}
+                            {% block tab_content %}
+                                {% for key, group in grouped_fields %}
+                                    {% set sanitized_key = key|slug %}
+                                    {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with { id: sanitized_key, active: loop.first } %}
+                                        {% block content %}
+                                            {% for field in group %}
+                                                {% set formField = form.fieldsData[field] %}
+                                                
+                                                {% if not formField.rendered %}
+                                                    {% if formField.value is defined %}
+                                                        {{- form_widget(formField) -}}
+                                                    {% else %}
+                                                        <div class="ez-field-edit ez-field-edit--eznoneditable">
+                                                            {{- form_label(formField) -}}
+                                                            <p class="non-editable">
+                                                                {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
+                                                            </p>
+                                                            {% do formField.setRendered() %}
+                                                        </div>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endblock %}
+                                    {% endembed %}
+                                {% endfor %}
+                            {% endblock %}
+                        {% endembed %}
                     {% else %}
                         <div class="px-3">
                             {% for field in form.fieldsData %}
@@ -101,6 +102,7 @@
 
 {% block javascripts %}
     {% include '@ezdesign/content/edit/javascripts.html.twig' %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-tabs-js', null, 'ezplatform') }}
 {% endblock %}
 
 {% block stylesheets %}

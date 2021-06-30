@@ -32,7 +32,7 @@ use Twig\Environment;
 
 class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
-    const URI_FRAGMENT = 'ez-tab-location-view-translations';
+    const URI_FRAGMENT = 'ibexa-tab-location-view-translations';
 
     /** @var DatasetFactory */
     protected $datasetFactory;

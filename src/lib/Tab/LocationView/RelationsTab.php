@@ -24,7 +24,7 @@ use Twig\Environment;
 
 class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
 {
-    public const URI_FRAGMENT = 'ez-tab-location-view-relations';
+    public const URI_FRAGMENT = 'ibexa-tab-location-view-relations';
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     protected $permissionResolver;

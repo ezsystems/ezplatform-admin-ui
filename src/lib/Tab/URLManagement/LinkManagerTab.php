@@ -30,7 +30,7 @@ use Twig\Environment;
 
 class LinkManagerTab extends AbstractTab implements OrderedTabInterface, ConditionalTabInterface
 {
-    public const URI_FRAGMENT = 'ez-tab-link-manager-link-manager';
+    public const URI_FRAGMENT = 'ibexa-tab-link-manager-link-manager';
     private const DEFAULT_MAX_PER_PAGE = 10;
 
     /** @var \eZ\Publish\API\Repository\URLService */

@@ -5,21 +5,14 @@
     {% set active_tab = tabs|first %}
 {% endif %}
 
-<div class="ez-header">
-    <div class="container">
-        <ul class="nav nav-tabs ez-tabs" role="tablist">
-            {% for tab in tabs %}
-                <li class="nav-item ez-tabs__tab ez-tabs__tab--primary">
-                    <a id="ez-tab-label-{{ tab.id }}" href="#ez-tab-{{ tab.id }}" data-toggle="tab" class="nav-link {% if tab == active_tab %}active{% endif %}">
-                        {{ tab.label }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+{% include '@ezdesign/ui/component/tab/tabs_header.html.twig' with {
+    tabs: tabs,
+    active_tab: active_tab,
+    hide_toggler: hide_toggler|default(false),
+    include_tab_more: include_tab_more|default(false),
+} %}
 
-<div class="tab-content ez-tab-content {{ tab_content_class|default('') }}" {{ html.attributes(tab_content_attributes|default({})) }}>
+<div class="tab-content ibexa-tab-content {{ tab_content_class|default('') }}" {{ html.attributes(tab_content_attributes|default({})) }}>
     {% block tab_content %}
         {% for tab in tabs %}
             {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with tab|merge({ active: tab == active_tab }) %}
