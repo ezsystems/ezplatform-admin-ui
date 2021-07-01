@@ -1,9 +1,0 @@
-module1:
-    function1: { Limitation1: true }
-    function2: { Limitation2: true, Limitation3: true }
-    function3: { Limitation1: true, Limitation2: true }
-    function4: ~
-
-module2:
-    function1: ~
-    function2: { Limitation4: false, Limitation5: true }
