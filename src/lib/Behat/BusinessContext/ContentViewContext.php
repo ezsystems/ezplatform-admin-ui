@@ -293,4 +293,23 @@ class ContentViewContext extends BusinessContext
         $dialog = ElementFactory::createElement($this->browserContext, Dialog::ELEMENT_NAME);
         $dialog->confirm();
     }
+
+    /**
+     * @Given I go to :tab tab (in Content structure) of item :item
+     */
+    public function iGoToTab($tab, $item): void
+    {
+        $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $item);
+        $contentItemPage->switchToTab($tab);
+    }
+
+    /**
+     * @Given I add a new Location to item :itemName under :newLocationPath
+     */
+    public function iAddNewLocation($itemName, $newLocationPath): void
+    {
+        $newLocationPath = $this->argumentParser->replaceRootKeyword($newLocationPath);
+        $contentItemPage = PageObjectFactory::createPage($this->browserContext, ContentItemPage::PAGE_NAME, $itemName);
+        $contentItemPage->addLocation($newLocationPath);
+    }
 }

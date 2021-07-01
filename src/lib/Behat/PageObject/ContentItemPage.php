@@ -17,6 +17,7 @@ use EzSystems\EzPlatformAdminUi\Behat\PageElement\RightMenu;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\SubItemsList;
 use EzSystems\EzPlatformAdminUi\Behat\PageElement\UpperMenu;
 use PHPUnit\Framework\Assert;
+use EzSystems\EzPlatformAdminUi\Behat\PageElement\UniversalDiscoveryWidget;
 
 class ContentItemPage extends Page
 {
@@ -130,6 +131,20 @@ class ContentItemPage extends Page
                 $contentPage->subItemList->table->clickListElement($pathArray[$i]);
             }
         }
+    }
+
+    public function switchToTab(string $tabName): void
+    {
+        $this->context->getElementByText($tabName, '#ez-tab-list-location-view .ez-tabs__tab')->click();
+    }
+
+    public function addLocation(string $newLocationPath): void
+    {
+        $this->context->findElement('#ez-tab-location-view-locations .ez-table-header__tools .btn--udw-add')->click();
+        $udw = ElementFactory::createElement($this->context, UniversalDiscoveryWidget::ELEMENT_NAME);
+        $udw->verifyVisibility();
+        $udw->selectContent($newLocationPath);
+        $udw->confirm();
     }
 
     private function hasGridViewEnabledByDefault(): bool
