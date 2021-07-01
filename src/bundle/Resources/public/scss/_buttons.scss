@@ -72,13 +72,17 @@
             }
         }
 
+        &:focus {
+            box-shadow: inset 0 0 0 calculateRem(1px) $ibexa-color-base-dark;
+        }
+
         &:disabled,
         &.disabled {
             opacity: 0.3;
             color: $ibexa-color-base-dark;
             background-color: transparent;
             fill: $ibexa-color-base-dark;
-            box-shadow: none;
+            box-shadow: inset 0 0 0 calculateRem(1px) $ibexa-color-base-dark;
         }
 
         .ez-icon {
