@@ -49,6 +49,7 @@ class FormatIntervalExtension extends AbstractExtension implements TranslationCo
         foreach (self::INTERVAL_PARTS as $part => $name) {
             if ($interval->$part > 0) {
                 $parts[] = $this->translator->trans(
+                    /** @ignore */
                     sprintf('interval.format.%s', $name),
                     ['%count%' => $interval->$part],
                     'time_diff'
