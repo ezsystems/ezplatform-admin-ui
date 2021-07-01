@@ -185,6 +185,14 @@
     fill: $ibexa-color-base-dark;
 }
 
+.btn.btn-secondary.disabled,
+.btn.btn-secondary[disabled] {
+    opacity: 1;
+    background-color: rgba($ibexa-color-base-deep, 0.3);
+    color: $ibexa-color-base-dark;
+    fill: $ibexa-color-base-dark;
+}
+
 .ez-btn--select-subtree {
     display: inline-flex;
     align-items: center;
