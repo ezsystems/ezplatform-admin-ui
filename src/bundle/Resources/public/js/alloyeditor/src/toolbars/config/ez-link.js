@@ -3,7 +3,12 @@ import AlloyEditor from 'alloyeditor';
 export default class EzLinkConfig {
     constructor(config) {
         this.name = 'link';
-        this.buttons = ['ezlinkedit', ...config.extraButtons[this.name]];
+
+        this.buttons = [
+            'ezlinkedit',
+            config.attributes[this.name] || config.classes[this.name] ? `${this.name}edit` : '',
+            ...config.extraButtons[this.name]
+        ];
 
         this.test = AlloyEditor.SelectionTest.link;
     }
