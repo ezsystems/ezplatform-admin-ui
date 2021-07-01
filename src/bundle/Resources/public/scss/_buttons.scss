@@ -19,30 +19,35 @@
         text-decoration: none;
     }
 
-    &:disabled {
-        opacity: 0.3;
-    }
-
     &--primary {
         color: $ibexa-white;
         background-color: $ibexa-color-primary;
 
-        &:disabled,
-        &.disabled {
-            opacity: 1;
-            background-color: $ibexa-color-base;
-            color: $ibexa-color-base-dark;
-            fill: $ibexa-color-base-dark;
-        }
-
-        &:hover:not(:disabled):not(.disabled) {
+        &:hover {
             color: $ibexa-white;
             background-color: darken($ibexa-color-primary, 7.5%);
         }
 
-        &:active:not(:disabled):not(.disabled) {
-            background-color: $ibexa-color-primary-light;
-            box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-primary;
+        &:active {
+            background-color: darken($ibexa-color-primary, 7.5%);
+        }
+
+        &:focus {
+            background-color: darken($ibexa-color-primary, 7.5%);
+            box-shadow: 0 0 0 calculateRem(4px) rgba($ibexa-color-primary, 0.5);
+        }
+
+        &.btn:disabled,
+        &.btn.disabled {
+            opacity: 1;
+        }
+
+        &:disabled,
+        &.disabled {
+            background-color: $ibexa-color-base;
+            color: $ibexa-color-base-dark;
+            fill: $ibexa-color-base-dark;
+            box-shadow: none;
         }
     }
 
@@ -58,12 +63,22 @@
 
         &:active {
             color: $ibexa-white;
+            fill: $ibexa-white;
             background-color: $ibexa-color-base-dark;
             box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-base-dark;
 
             .ez-icon {
-                fill: $ibexa-white;
+                fill: inherit;
             }
+        }
+
+        &:disabled,
+        &.disabled {
+            opacity: 0.3;
+            color: $ibexa-color-base-dark;
+            background-color: transparent;
+            fill: $ibexa-color-base-dark;
+            box-shadow: none;
         }
 
         .ez-icon {
