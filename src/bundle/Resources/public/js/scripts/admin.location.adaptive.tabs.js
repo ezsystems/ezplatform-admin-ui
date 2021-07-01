@@ -3,24 +3,14 @@
     const SELECTOR_TABS_LIST = '.ibexa-tabs__list';
     const SELECTOR_TAB_MORE = '.ibexa-tabs__tab--more';
     const allAdaptiveItems = [];
+    const allPopupMenus = [];
     let animationFrame = null;
     const adaptTabsAndPopupMenu = () => {
-        adaptTabs();
-        positionPopupMenu();
-    };
-    const adaptTabs = () => {
         allAdaptiveItems.forEach((adaptiveItems) => {
             adaptiveItems.adapt();
         });
-    };
-    const positionPopupMenu = () => {
-        doc.querySelectorAll('.ibexa-tabs__popup-menu:not(.ibexa-popup-menu--hidden)').forEach((popupMenu) => {
-            const tabsContainer = popupMenu.parentElement;
-            const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
-            const tabMore = tabsList.querySelector(':scope > .ibexa-tabs__tab--more');
-            const popupMenuAbsoluteLeft = tabMore.offsetLeft + tabsList.offsetLeft - popupMenu.offsetWidth + tabMore.offsetWidth + 20;
-
-            popupMenu.style.left = `${popupMenuAbsoluteLeft}px`;
+        allPopupMenus.forEach((popupMenu) => {
+            popupMenu.adapt();
         });
     };
     const handleTabsConainterChange = () => {
@@ -55,7 +45,7 @@
             const popupMenuElement = tabsContainer.querySelector('.ibexa-popup-menu');
 
             const popupMenu = new eZ.core.PopupMenu({
-                popupMenuElement: popupMenuElement,
+                popupMenuElement,
                 triggerElement: tabMore,
                 onItemClick: (event) => {
                     const itemElement = event.target;
@@ -64,17 +54,14 @@
 
                     $(tabToShow).tab('show');
                 },
-                onMenuToggle: () => {
-                    positionPopupMenu(popupMenu);
-                },
-                possition: (popupMenuElement) => {
+                position: (popupMenuElement) => {
                     const tabsContainer = popupMenuElement.parentElement;
                     const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
                     const tabMore = tabsList.querySelector('.ibexa-tabs__tab--more');
-                    const popupMenuAbsoluteLeft =
+                    const popupMenuLeftPosition =
                         tabMore.offsetLeft + tabsList.offsetLeft - popupMenuElement.offsetWidth + tabMore.offsetWidth + 20;
 
-                    popupMenuElement.style.left = `${popupMenuAbsoluteLeft}px`;
+                    popupMenuElement.style.left = `${popupMenuLeftPosition}px`;
                 },
             });
 
@@ -90,6 +77,9 @@
             popupMenu.generateItems(popupItemsToGenerate, (itemElement, item) => {
                 itemElement.dataset.tabLinkId = item.tabLinkId;
             });
+
+            allPopupMenus.push(popupMenu);
+            popupMenu.adapt();
 
             const adaptiveItems = new eZ.core.AdaptiveItems({
                 itemHiddenClass: 'ibexa-tabs__tab--hidden',
