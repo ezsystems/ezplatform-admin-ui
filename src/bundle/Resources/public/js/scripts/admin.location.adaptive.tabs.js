@@ -54,10 +54,7 @@
 
                     $(tabToShow).tab('show');
                 },
-                position: (popupMenuElement) => {
-                    const tabsContainer = popupMenuElement.parentElement;
-                    const tabsList = tabsContainer.querySelector(SELECTOR_TABS_LIST);
-                    const tabMore = tabsList.querySelector('.ibexa-tabs__tab--more');
+                position: () => {
                     const popupMenuLeftPosition =
                         tabMore.offsetLeft + tabsList.offsetLeft - popupMenuElement.offsetWidth + tabMore.offsetWidth + 20;
 
