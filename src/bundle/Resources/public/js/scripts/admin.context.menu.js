@@ -5,7 +5,6 @@
         const menuButtons = [...adapatItemsContainer.querySelectorAll('.ibexa-context-menu__item > .ibexa-btn:not(.ibexa-btn--more)')];
         const popupMenuElement = adapatItemsContainer.querySelector('.ibexa-popup-menu');
         const showPopupButton = adapatItemsContainer.querySelector('.ibexa-btn--more');
-        const popupMenuItems = [...adapatItemsContainer.querySelectorAll('.ibexa-popup-menu__item')];
         const adaptiveItems = new eZ.core.AdaptiveItems({
             items: [...adapatItemsContainer.querySelectorAll('.ibexa-context-menu__item:not(.ibexa-context-menu__item--more)')],
             selectorItem: adapatItemsContainer.querySelector('.ibexa-context-menu__item--more'),
@@ -17,12 +16,7 @@
             onAdapted: (visibleItems, hiddenItems) => {
                 const hiddenButtonsIds = [...hiddenItems].map((item) => item.querySelector('.ibexa-btn').id);
 
-                popupMenuItems.forEach((popupMenuItem) => {
-                    popupMenuItem.classList.toggle(
-                        'ibexa-popup-menu__item--hidden',
-                        !hiddenButtonsIds.includes(popupMenuItem.dataset.relatedButtonId)
-                    );
-                });
+                popupMenu.toggleItems((popupMenuItem) => !hiddenButtonsIds.includes(popupMenuItem.dataset.relatedButtonId));
             },
         });
         const popupMenu = new eZ.core.PopupMenu({
