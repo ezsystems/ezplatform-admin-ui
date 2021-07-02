@@ -1,7 +1,7 @@
 <div class="ez-header">
     <div class="container">
         <div class="ibexa-tabs">
-            <ul class="nav nav-tabs ibexa-tabs__list" role="tablist">
+            <ul class="nav nav-tabs ibexa-tabs__list ibexa-adaptive-items" role="tablist">
                 {% block tabs_list %}
                     {% for tab in tabs %}
                         {% include '@ezdesign/ui/component/tab/tabs_tab.html.twig' with {
@@ -12,7 +12,7 @@
                     {% endfor %}
                 {% endblock %}
                 {% if include_tab_more|default(false) %}
-                    <li class="nav-item ibexa-tabs__tab ibexa-tabs__tab--more"
+                    <li class="nav-item ibexa-tabs__tab ibexa-tabs__tab--more ibexa-adaptive-items__item  ibexa-adaptive-items__item--selector"
                         data-item-template="{{ include('@ezdesign/ui/component/popup_menu/popup_menu_item.html.twig', {
                                 'label': '{{ label }}',
                             })|e('html_attr') }}"
@@ -29,17 +29,17 @@
             </ul>
             {% if include_tab_more|default(false) %}
                 {{ include('@ezdesign/ui/component/popup_menu/popup_menu.html.twig', {
-                    'class': 'ibexa-tabs__popup-menu ibexa-tabs__popup-menu--hidden',
+                    'class': 'ibexa-tabs__popup-menu',
                     'items': [],
                 }) }}
             {% endif %}
             {% if not hide_toggler|default(false) %}
                 <div class="ibexa-tabs__toggler">
                     <span class="ibexa-tabs__toggler-show">
-                        {{ 'ui.component.tab.tabs.show'|trans|desc('Show') }}
+                        {{ 'ui.component.tab.tabs_toggler.show'|trans|desc('Show') }}
                     </span>
                     <span class="ibexa-tabs__toggler-hide">
-                        {{ 'ui.component.tab.tabs.show'|trans|desc('Hide') }}
+                        {{ 'ui.component.tab.tabs_toggler.hide'|trans|desc('Hide') }}
                     </span>
                 </div>
             {% endif %}

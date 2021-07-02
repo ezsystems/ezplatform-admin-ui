@@ -3,10 +3,12 @@
 
     class AdaptiveItems {
         constructor(config) {
-            this.items = config.items;
-            this.selectorItem = config.selectorItem;
-            this.itemHiddenClass = config.itemHiddenClass;
             this.container = config.container;
+            this.items =
+                config.items ||
+                this.container.querySelectorAll(':scope > .ibexa-adaptive-items__item:not(.ibexa-adaptive-items__item--selector)');
+            this.selectorItem = config.selectorItem || this.container.querySelector(':scope > .ibexa-adaptive-items__item--selector');
+            this.itemHiddenClass = config.itemHiddenClass;
             this.getActiveItem = config.getActiveItem;
             this.onAdapted = config.onAdapted;
         }
