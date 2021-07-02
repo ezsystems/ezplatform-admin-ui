@@ -19,7 +19,7 @@ class RightMenu extends Element
     {
         parent::__construct($context);
         $this->fields = [
-            'menuButton' => '.ibexa-context-menu .ibexa-btn',
+            'menuButton' => '.ibexa-context-menu .ibexa-btn, .ez-context-menu .btn', // TO DO: set one selector after redesign
         ];
     }
 
