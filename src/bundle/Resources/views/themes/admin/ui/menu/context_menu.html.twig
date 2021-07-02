@@ -7,15 +7,18 @@
 		{% endfor %}
 
 		<li class="ibexa-context-menu__item ibexa-context-menu__item--more">
-			<button class="ibexa-btn ibexa-btn--secondary ibexa-btn--no-text ibexa-btn--more" data-target-selector=".ibexa-context-menu__popup-buttons">
+			<button 
+				class="ibexa-btn ibexa-btn--secondary ibexa-btn--no-text ibexa-btn--more" 
+				{# data-target-selector=".ibexa-context-menu__popup-buttons" #}
+
+			>
 				<svg class="ibexa-icon ibexa-icon--small">
 					<use xlink:href="{{ ibexa_icon_path('options') }}"></use>
 				</svg>
 			</button>
 
 			{{ include('@ezdesign/ui/component/popup_menu/popup_menu.html.twig', {
-				'class': 'ibexa-popup-menu ibexa-popup-menu--hidden',
-				'items': item,
+				'items': [],
 			}) }}
 		</li>
 	</ul>

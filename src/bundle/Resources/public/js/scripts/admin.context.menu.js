@@ -1,8 +1,10 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const adapatItemsContainer = doc.querySelector('.ibexa-context-menu');
 
     if (adapatItemsContainer) {
-        const itemsTrigger = adapatItemsContainer.querySelectorAll('[data-related-button-id]');
+        const menuButtons = [...adapatItemsContainer.querySelectorAll('.ibexa-context-menu__item > .ibexa-btn:not(.ibexa-btn--more)')];
+        const popupMenuElement = adapatItemsContainer.querySelector('.ibexa-popup-menu');
+        const showPopupButton = adapatItemsContainer.querySelector('.ibexa-btn--more');
         const popupMenuItems = [...adapatItemsContainer.querySelectorAll('.ibexa-popup-menu__item')];
         const adaptiveItems = new eZ.core.AdaptiveItems({
             items: [...adapatItemsContainer.querySelectorAll('.ibexa-context-menu__item:not(.ibexa-context-menu__item--more)')],
@@ -23,25 +25,35 @@
                 });
             },
         });
-        const togglePopup = () => {
-            const popup = doc.querySelector('.ibexa-context-menu .ibexa-popup-menu');
+        const popupMenu = new eZ.core.PopupMenu({
+            popupMenuElement,
+            triggerElement: showPopupButton,
+            onItemClick: (event) => {
+                const { relatedButtonId } = event.currentTarget.dataset;
+                const button = doc.getElementById(relatedButtonId);
 
-            popup.classList.toggle('ibexa-popup-menu--hidden');
-        };
-        const triggerContextMenuClick = (event) => {
-            const { relatedButtonId } = event.currentTarget.dataset;
-            const button = doc.getElementById(relatedButtonId);
+                button.click();
+            },
+            position: () => {
+                popupMenuElement.style.right = 0;
+            },
+        });
 
-            button.click();
-        };
+        const popupItemsToGenerate = [...menuButtons].map((button) => {
+            const relatedButtonId = button.id;
+            const label = button.querySelector('.ez-btn__label').textContent;
+
+            return {
+                label,
+                relatedButtonId,
+            };
+        });
+
+        popupMenu.generateItems(popupItemsToGenerate, (itemElement, item) => {
+            itemElement.dataset.relatedButtonId = item.relatedButtonId;
+        });
 
         adaptiveItems.adapt();
-
-        doc.querySelector('.ibexa-context-menu .ibexa-btn--more').addEventListener('click', togglePopup, false);
-
-        itemsTrigger.forEach((itemTrigger) => {
-            itemTrigger.addEventListener('click', triggerContextMenuClick, false);
-        });
 
         global.addEventListener('resize', () => adaptiveItems.adapt(), false);
     }

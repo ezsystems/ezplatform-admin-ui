@@ -61,8 +61,7 @@ class ContentUpdateForm extends Element
         if ($fieldPosition === 0) {
             Assert::fail(sprintf('Field %s not found.', $fieldName));
         }
-        echo 'Field';
-die($fieldPosition);
+
         $fieldLocator = sprintf($this->fields['nthField'], $fieldPosition);
 
         $isEditable = !$this->context->findElement($fieldLocator)->hasClass($this->fields['noneditableFieldClass']);
