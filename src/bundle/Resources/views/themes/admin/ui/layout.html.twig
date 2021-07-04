@@ -120,30 +120,48 @@
     <body class="{% block body_class %}{% endblock %}">
         <div id="react-udw" data-filter-subtree-udw-config="{{ ez_udw_config('single_container', {}) }}"></div>
 
-        {% block navigation %}
-            {% include '@ezdesign/ui/menu/top_navigation.html.twig' %}
+        {% block header_row %}
+            <div class="ibexa-main-header">
+                <div class="ibexa-main-header__brand-column">
+                    <a class="ibexa-main-header__brand" href="{{ url('ezplatform.dashboard') }}">
+                        <img class="ibexa-main-header__brand-image" src="/bundles/ezplatformadminui/img/ibexa-logo.svg" alt="Ibexa" />
+                    </a>
+                </div>
+                <div class="ibexa-main-header__search-column">
+                    <input class="ibexa-main-header__search form-control" type="text" />
+                </div>
+                <div class="ibexa-main-header__user-menu-column">
+                    {{ knp_menu_render('ezplatform_admin_ui.menu.user', {
+                        'depth': 1,
+                        'template': '@ezdesign/ui/menu/user.html.twig'
+                    }) }}
+                </div>
+            </div>
         {% endblock %}
 
-        <div class="ibexa-main-container {% block main_container_class %}{% endblock %}">
-            {% block side_column %}
-                <div class="ibexa-main-container__side-column">
-                    {% block left_sidebar %}{% endblock %}
-                </div>
-            {% endblock %}
+        {# {% block navigation %}
+            {% include '@ezdesign/ui/menu/top_navigation.html.twig' %}
+        {% endblock %} #}
 
-            {% block content_column %}
-                <div class="ibexa-main-container__content-column">
-                    <div class="container">
-                        {% block breadcrumbs %}{% endblock %}
-                        {% block header %}{% endblock %}
-                        {% block content %}{% endblock %}
+        {% block main_row %}
+            <div class="ibexa-main-container {% block main_container_class %}{% endblock %}">
+                {% block side_column %}
+                    <div class="ibexa-main-container__side-column">
+                        {% block left_sidebar %}{% endblock %}
                     </div>
-                </div>
-            {% endblock %}
-        </div>
+                {% endblock %}
 
-        {% block footer %}
-            {% include '@ezdesign/ui/footer.html.twig' %}
+                {% block content_column %}
+                    <div class="ibexa-main-container__content-column">
+                        <div class="container">
+                            {% block header %}
+                                
+                            {% endblock %}
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
         {% endblock %}
 
         <div

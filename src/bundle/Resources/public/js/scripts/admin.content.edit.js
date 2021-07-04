@@ -84,8 +84,8 @@
             btn.dataset.validatorsWithErrors = [...new Set(allValidatorsWithErrors)].join();
             fields.forEach((field) => field.removeAttribute('id'));
 
-            doc.querySelectorAll('.ibexa-anchor-navigation-menu__btn').forEach((btn) => {
-                btn.classList.remove('ibexa-anchor-navigation-menu__btn--invalid');
+            doc.querySelectorAll('.ibexa-anchor-navigation-menu__btn').forEach((anchorBtn) => {
+                anchorBtn.classList.remove('ibexa-anchor-navigation-menu__btn--invalid');
             });
 
             invalidSections.forEach((sections) => {

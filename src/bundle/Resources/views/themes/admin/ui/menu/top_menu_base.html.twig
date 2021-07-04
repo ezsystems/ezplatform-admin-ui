@@ -3,13 +3,11 @@
 {% block item %}
     {% if item.displayed %}
         {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
-        {%- set classes = classes|merge(['nav-item', 'ez-tabs__tab']) %}
-        {%- if item.actsLikeFirst %}
-            {%- set classes = classes|merge([options.firstClass]) %}
-        {%- endif %}
-        {%- if item.actsLikeLast %}
-            {%- set classes = classes|merge([options.lastClass]) %}
-        {%- endif %}
+        {%- set classes = classes|merge(['ibexa-main-menu__item']) %}
+        
+        {%- if item.extras.separate is defined and item.extras.separate -%}
+            {%- set classes = classes|merge(['ibexa-main-menu__item--separator']) -%}
+        {%- endif -%}
 
         {% if item.hasChildren and options.depth is not same as(0) %}
             {% if options.branch_class is not empty and item.displayChildren %}
@@ -20,11 +18,17 @@
         {%- endif %}
 
         {%- set attributes = item.attributes %}
+
         {%- if classes is not empty %}
             {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
         {%- endif %}
-        {# displaying the item #}
+        
         {% import 'knp_menu.html.twig' as knp_menu %}
+        
+        {%- if item.extras.separate is defined and item.extras.separate -%}
+            <li class="ibexa-main-menu__separator ibexa-main-menu__separator--top"></li>
+        {%- endif -%}
+
         <li{{ knp_menu.attributes(attributes) }}>
             {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
                 {{ block('linkElement') }}
@@ -32,6 +36,11 @@
                 {{ block('spanElement') }}
             {%- endif %}
         </li>
+        
+        {%- if item.extras.separate is defined and item.extras.separate -%}
+            <li class="ibexa-main-menu__separator ibexa-main-menu__separator--bottom"></li>
+        {%- endif -%}
+
         {%- if item.extras.template is defined -%}
             {% include(item.extras.template)  %}
         {%- endif -%}

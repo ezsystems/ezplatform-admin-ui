@@ -87,7 +87,7 @@
 
     &--ghost {
         color: $ibexa-color-dark;
-        fill: $ibexa-color-dark;
+            fill: $ibexa-color-dark;
 
         &:hover {
             color: $ibexa-color-primary;
@@ -126,6 +126,19 @@
             background-color: $ibexa-color-light;
             border-color: $ibexa-color-light;
             box-shadow: none;
+        }
+    }
+
+    &--neon-info {
+        border-radius: $ibexa-border-radius;
+
+        .ibexa-icon {
+            fill: $ibexa-color-info;
+        }
+
+        &:hover {
+            border-color: $ibexa-color-info;
+            box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-info;
         }
     }
 

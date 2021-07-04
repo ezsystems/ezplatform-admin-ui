@@ -16,18 +16,27 @@
         display: flex;
         align-items: center;
         height: calculateRem(35px);
-        padding: calculateRem(20px);
         min-width: calculateRem(150px);
-        border-radius: $ibexa-border-radius;
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
-        cursor: pointer;
-
-        &:hover {
-            background-color: $ibexa-color-light-300;
-        }
 
         &--hidden {
             display: none;
+        }
+    }
+
+    &__item-action {
+        display: block;
+        width: 100%;
+        padding: calculateRem(9px) calculateRem(15px);
+        color: $ibexa-color-black;
+        text-decoration: none;
+        border-radius: $ibexa-border-radius;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+        &:hover {
+            background-color: $ibexa-color-light-300;
+            color: $ibexa-color-black;
+            text-decoration: none;
         }
     }
 }

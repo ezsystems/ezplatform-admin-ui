@@ -1,4 +1,4 @@
-(function (global, doc) {
+(function(global, doc) {
     const CLASS_HIDDEN = 'ez-extra-actions--hidden';
     const CLASS_EXPANDED = 'ez-context-menu--expanded';
     const CLASS_ACTIVE_BUTTON = 'ibexa-btn--active-button';
@@ -79,6 +79,7 @@
                     if (!relatedNodeTrigger) {
                         doc.body.removeEventListener('click', detectClickOutside);
                     }
+
                     removeContainerHeightListeners();
                 }
 

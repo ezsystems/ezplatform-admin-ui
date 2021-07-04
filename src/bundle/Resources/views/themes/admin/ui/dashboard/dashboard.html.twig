@@ -2,12 +2,18 @@
 
 {% trans_default_domain 'dashboard' %}
 
-{% block body_class %}ez-dashboard ez-has-full-width-footer{% endblock %}
+{% block body_class %}ibexa-dashboard{% endblock %}
 
-{% block side_column %}{% endblock %}
+{% block header %}
+    {% include '@ezdesign/ui/content_header.html.twig' %}
+{% endblock %}
+
+{% block left_sidebar %}
+    aaa
+{% endblock %}
 
 {% block content %}
-    <div class="row align-items-stretch ez-main-row ez-dashboard-row">
+    {# <div class="row align-items-stretch ez-main-row ez-dashboard-row">
         {% block left_sidebar %}{% endblock left_sidebar %}
         <div class="ez-content-container">
             <div class="container-fluid ez-header ez-header--light">
@@ -38,7 +44,7 @@
         {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
         {{ form_end(form_edit) }}
     </div>
-    {% include '@ezdesign/content/modal/version_conflict.html.twig' %}
+    {% include '@ezdesign/content/modal/version_conflict.html.twig' %} #}
 {% endblock %}
 
 {% block javascripts %}

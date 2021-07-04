@@ -74,6 +74,8 @@
      * @method onGetNotificationsStatusFailure
      */
     const onGetNotificationsStatusFailure = (error) => {
+        return;
+        
         if (lastFailedCountFetchNotificationNode && doc.contains(lastFailedCountFetchNotificationNode)) {
             return;
         }

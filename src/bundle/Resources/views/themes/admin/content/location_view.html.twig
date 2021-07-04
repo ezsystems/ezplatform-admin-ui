@@ -3,29 +3,66 @@
 {% extends "@ezdesign/ui/layout.html.twig" %}
 
 {% trans_default_domain 'locationview' %}
+
 {% form_theme form_location_copy '@ezdesign/ui/form/flat_widgets.html.twig' %}
 {% form_theme form_location_move '@ezdesign/ui/form/flat_widgets.html.twig' %}
+
 {% if form_content_edit is defined %}
     {% form_theme form_content_edit '@ezdesign/ui/form_fields.html.twig' %}
 {% endif %}
+
 {% if form_user_edit is defined %}
     {% form_theme form_user_edit '@ezdesign/ui/form_fields.html.twig' %}
 {% endif %}
+
 {% form_theme form_content_create '@ezdesign/ui/form_fields.html.twig' %}
 
-{% block body_class %}ez-content-view ez-has-full-width-footer{% endblock %}
-
 {% block left_sidebar %}
-    <div class="ibexa-side-menu">
+    {% set main_menu_context = {
+        'location': location ?? null,
+        'content': content ?? null
+    } %}
+
+    {% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], main_menu_context) %}
+        <nav class="ibexa-main-menu">
+            <div class="ibexa-main-menu__navbar">
+                {{ knp_menu_render(main_menu, {
+                    'depth': 1,
+                    'template': '@ezdesign/ui/menu/main.html.twig',
+                    'currentClass': 'active',
+                    'ancestorClass': 'active'
+                }) }}
+            </div>
+            <div class="ibexa-main-menu__navbar ibexa-main-menu__navbar--second-level ibexa-main-menu__navbar--collapsed">
+                {{ knp_menu_render(main_menu, {
+                    'depth': 2,
+                    'template': '@ezdesign/ui/menu/main_2nd_level.html.twig',
+                    'currentClass': 'active',
+                    'ancestorClass': 'active'
+                }) }}
+                <a href="xxx">aaaa</a>
+            </div>
+        </nav>
+    {# {{ knp_menu_render(main_menu, {
+        'depth': 2,
+        'template': '@ezdesign/ui/menu/top_menu_2nd_level.html.twig',
+        'currentClass': 'active',
+        'ancestorClass': 'active'
+    }) }} #}
+    {# {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@ezdesign/ui/menu/sidebar_left.html.twig'}) }} #}
+
+
+{# xxxxx #}
+    {# <div class="ibexa-side-menu">
         <div class="ez-sticky-container">
-            {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@ezdesign/ui/menu/sidebar_left.html.twig'}) }}
+            
         </div>
     </div>
     <div class="ez-content-tree-container"
         data-tree-root-location-id="{{ content_tree_module_root|default(ez_admin_ui_config['contentTree']['treeRootLocationId']) }}"
         data-current-location-path="{{ location_path|default('') }}">
         <div class="ez-content-tree-container__wrapper"></div>
-    </div>
+    </div> #}
 {% endblock %}
 
 {% block content %}
@@ -117,7 +154,7 @@
                 </div>
             </div>
         </div>
-        <div class="ez-context-menu">
+        {# <div class="ez-context-menu">
             <div class="ez-sticky-container">
                 {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': content_type}) %}
                 {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
@@ -145,7 +182,7 @@
             {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
             {{ form(form_location_copy_subtree, {'action': path('ezplatform.location.copy_subtree')}) }}
             {{ form(form_content_visibility_update, {'action': path('ezplatform.content.update_visibility')}) }}
-        </div>
+        </div> #}
     </div>
     {% if content_has_reverse_relations and not location.contentInfo.isHidden %}
         {% include '@ezdesign/content/modal/hide_confirmation.html.twig' %}

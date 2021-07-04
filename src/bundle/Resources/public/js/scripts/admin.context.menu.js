@@ -1,4 +1,4 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const adapatItemsContainer = doc.querySelector('.ibexa-context-menu');
 
     if (adapatItemsContainer) {
@@ -32,7 +32,6 @@
                 popupMenuElement.style.right = 0;
             },
         });
-
         const popupItemsToGenerate = [...menuButtons].map((button) => {
             const relatedButtonId = button.id;
             const label = button.querySelector('.ez-btn__label').textContent;

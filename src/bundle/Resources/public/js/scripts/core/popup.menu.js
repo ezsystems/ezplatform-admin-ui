@@ -1,12 +1,12 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const CLASS_POPUP_MENU_HIDDEN = 'ibexa-popup-menu--hidden';
-
     class PopupMenu {
         constructor(config) {
             this.popupMenuElement = config.popupMenuElement;
             this.triggerElement = config.triggerElement;
             this.onItemClick = config.onItemClick;
             this.position = config.position;
+            this.popupHiddenClass = config.popupHiddenClass || CLASS_POPUP_MENU_HIDDEN;
 
             this.handleToggle = this.handleToggle.bind(this);
             this.handleClickOutsidePopupMenu = this.handleClickOutsidePopupMenu.bind(this);
@@ -30,7 +30,7 @@
                 processAfterCreated(popupMenuItem, item);
 
                 popupMenuItem.addEventListener('click', (event) => {
-                    this.popupMenuElement.classList.add(CLASS_POPUP_MENU_HIDDEN);
+                    this.popupMenuElement.classList.add(this.popupHiddenClass);
                     this.onItemClick(event);
                 });
 
@@ -54,23 +54,23 @@
         }
 
         handleToggle() {
-            this.popupMenuElement.classList.toggle(CLASS_POPUP_MENU_HIDDEN);
+            this.popupMenuElement.classList.toggle(this.popupHiddenClass);
             this.adapt();
         }
 
         handleClickOutsidePopupMenu(event) {
-            const isPopupMenuExpanded = !this.popupMenuElement.classList.contains(CLASS_POPUP_MENU_HIDDEN);
+            const isPopupMenuExpanded = !this.popupMenuElement.classList.contains(this.popupHiddenClass);
             const isClickInsideParentElement = this.triggerElement.contains(event.target);
 
             if (!isPopupMenuExpanded || isClickInsideParentElement) {
                 return;
             }
 
-            this.popupMenuElement.classList.add(CLASS_POPUP_MENU_HIDDEN);
+            this.popupMenuElement.classList.add(this.popupHiddenClass);
         }
 
         adapt() {
-            const isHidden = this.popupMenuElement.classList.contains(CLASS_POPUP_MENU_HIDDEN);
+            const isHidden = this.popupMenuElement.classList.contains(this.popupHiddenClass);
 
             if (isHidden) {
                 return;

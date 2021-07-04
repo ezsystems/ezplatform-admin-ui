@@ -3,6 +3,7 @@
 {% block root %}
     {% set list_attributes = item.childrenAttributes %}
     {% set current_item = item %}
+
     <div class="tab-content w-100">
         {% for child in current_item.children %}
             <div role="tabpanel"
@@ -10,7 +11,7 @@
                  id="{{ child.name }}">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav ez-tabs ez-tabs--menu-second-level">
+                        <ul>
                             {% for item in child.children %}
                                 {{ block('item') }}
                             {% endfor %}
