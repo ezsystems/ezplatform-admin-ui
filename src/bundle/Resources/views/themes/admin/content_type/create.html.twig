@@ -81,7 +81,7 @@
                             </button>
                             {{ form_widget(field_definition.selected, {
                                 'label': '%s (%s)' | format(value.names[language_code], value.fieldTypeIdentifier),
-                                'attr': {'class': 'ez-input ez-input--checkbox mr-1'}
+                                'attr': {'class': 'mr-1'}
                             }) }}
                         </div>
 
@@ -90,9 +90,9 @@
                             {{ form_row(field_definition.identifier, {'label_attr': {'class': 'ez-label'}}) }}
                             {{ form_row(field_definition.position, {'label_attr': {'class': 'ez-label'}}) }}
                             {{ form_row(field_definition.description, {'label_attr': {'class': 'ez-label'}}) }}
-                            {{ form_row(field_definition.isRequired, {'label_attr': {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'ez-label'}}}) }}
-                            {{ form_row(field_definition.isSearchable, {'label_attr': {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'ez-label'}}}) }}
-                            {{ form_row(field_definition.isTranslatable, {'label_attr': {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'ez-label'}}}) }}
+                            {{ form_row(field_definition.isRequired, {'label_attr': {'label_attr': {'class': 'ez-label'}}}) }}
+                            {{ form_row(field_definition.isSearchable, {'label_attr': {'label_attr': {'class': 'ez-label'}}}) }}
+                            {{ form_row(field_definition.isTranslatable, {'label_attr': {'label_attr': {'class': 'ez-label'}}}) }}
                             {{ form_row(field_definition.fieldGroup, {'label_attr': {'class': 'ez-label'}}) }}
 
                             {# Field type specific fields below #}

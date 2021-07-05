@@ -231,7 +231,7 @@ export default class TableViewComponent extends Component {
                             checked={anyLocationSelected}
                             onClick={this.selectAll} // We need onClick, because MS Edge does not trigger onChange when checkbox has indeterminate state. (ref: https://stackoverflow.com/a/33529024/5766602)
                             onChange={() => {}} // Dummy callback to not trigger React warning as we cannot use onChange on MS Edge
-                            class="ez-input ez-input--checkbox ez-input--no-select-border"
+                            class="ibexa-input ibexa-input--checkbox"
                         />
                     </th>
                     <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--icon`} />

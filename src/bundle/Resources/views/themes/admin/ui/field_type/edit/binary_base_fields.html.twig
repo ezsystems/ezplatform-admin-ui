@@ -2,7 +2,7 @@
     <div class="ez-field-edit-preview__info ez-field-edit-preview__info--{{ name }}">
         <div class="ez-field-edit-preview__input-wrapper">
             <span class="ez-data-source__label-text">{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</span>
-            <input class="ez-input ez-input--checkbox" type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %}>
+            <input class="ibexa-input ibexa-input--checkbox" type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %}>
         </div>
     </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% trans_default_domain 'locationview' %}
 {% import _self as tab %}
 {% form_theme form_content_location_add '@ezdesign/ui/form/flat_widgets.html.twig' %}
-{% form_theme form_content_location_remove '@ezdesign/ui/form/flat_widgets.html.twig' %}
+{% form_theme form_content_location_remove with ['@ezdesign/ui/form/flat_widgets.html.twig', '@ezdesign/ui/form_fields.html.twig'] %}
 
 <section>
     {{ form(form_content_location_add, {'action': path('ezplatform.location.add')}) }}
@@ -29,7 +29,7 @@
                 {% for location in locations %}
                     <tr>
                         <td class="ez-table__cell ez-table__cell--has-checkbox">
-                            {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'class': 'ez-input ez-input--checkbox', 'disabled': not location.canDelete}}) }}
+                            {{ form_widget(form_content_location_remove.locations[location.id], {'attr': {'disabled': not location.canDelete}}) }}
                         </td>
                         <td class="ez-table__cell">
                             {% include '@ezdesign/ui/location_path.html.twig' with {'locations': location.pathLocations, 'link_last_element': true} %}
@@ -61,7 +61,7 @@
                         <td class="ez-table__cell"></td>
                         <td class="ez-table__cell">
                             <input
-                                class="ez-input ez-input--radio"
+                                class="ibexa-input ibexa-input--radio"
                                 type="radio"
                                 {{ location.main ? 'checked' }}
                                 {{ not location.canEdit ? 'disabled' }}

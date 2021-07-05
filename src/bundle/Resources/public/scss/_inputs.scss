@@ -5,32 +5,42 @@
 }
 
 .form-check-inline {
-    .ez-input {
-        &--checkbox {
-            position: relative;
-        }
+    .ibexa-input {
+        position: relative;
     }
 }
 
-.ez-input {
+.ibexa-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    display: inline-block;
     outline: none;
     transition: all 0.2s $ibexa-admin-transition;
+    border: calculateRem(1px) solid $ibexa-color-dark-300;
+    background-color: $ibexa-white;
+
+    &:hover {
+        border-color: $ibexa-color-primary;
+        cursor: pointer;
+    }
+
+    &:active,
+    &:focus {
+        border-color: $ibexa-color-primary;
+        box-shadow: 0 0 calculateRem(3px) 0 rgba($ibexa-color-primary, 0.75);
+    }
 
     &:disabled {
-        opacity: 0.3;
+        cursor: default;
+        border-color: $ibexa-color-dark-200;
     }
 
     &--checkbox {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        position: relative;
-        display: inline-block;
-        min-width: calculateRem(16px);
-        min-height: calculateRem(16px);
-        background-color: $ibexa-white;
-        border-radius: $ibexa-border-radius;
-        border: calculateRem(1px) solid $ibexa-color-base-dark;
+        width: calculateRem(16px);
+        height: calculateRem(16px);
+        border-radius: calculateRem(2px);
 
         &:after {
             content: ' ';
@@ -40,26 +50,41 @@
             display: block;
             width: calculateRem(8px);
             height: calculateRem(5px);
-            border-left: calculateRem(1.5px) solid $ibexa-white;
-            border-bottom: calculateRem(1.5px) solid $ibexa-white;
+            border-left: calculateRem(1.5px) solid transparent;
+            border-bottom: calculateRem(1.5px) solid transparent;
             transform: rotate(-45deg);
         }
 
-        &:active {
-            @include input-active;
+        &:disabled {
+            background-color: $ibexa-color-light;
         }
 
+        &:active,
         &:checked {
-            border: calculateRem(1px) solid $ibexa-color-primary;
+            border-color: $ibexa-color-primary;
             background-color: $ibexa-color-primary;
+
+            &:disabled {
+                border-color: $ibexa-color-primary-300;
+                background-color: $ibexa-color-primary-300;
+            }
+
+            &:after {
+                border-color: $ibexa-white;
+            }
         }
 
         &:indeterminate {
-            border: calculateRem(1px) solid $ibexa-color-primary;
+            border-color: $ibexa-color-primary;
             background-color: $ibexa-color-primary;
 
+            &:disabled {
+                border-color: $ibexa-color-primary-300;
+                background-color: $ibexa-color-primary-300;
+            }
+
             &:after {
-                border: none;
+                border-color: $ibexa-white;
                 background-color: $ibexa-white;
                 height: calculateRem(1px);
                 top: 50%;
@@ -69,6 +94,33 @@
     }
 
     &--radio {
-        @include radio-input;
+        width: calculateRem(16px);
+        height: calculateRem(16px);
+        border-radius: calculateRem(8px);
+
+        &:checked {
+            box-shadow: inset 0 0 0 calculateRem(4px) $ibexa-color-primary;
+
+            &:disabled {
+                border-color: $ibexa-color-primary-300;
+                box-shadow: inset 0 0 0 calculateRem(4px) $ibexa-color-primary-300;
+            }
+
+            &:active,
+            &:focus {
+                &:after {
+                    content: ' ';
+                    position: absolute;
+                    display: block;
+                    left: calculateRem(-1px);
+                    top: calculateRem(-1px);
+                    width: calculateRem(16px);
+                    height: calculateRem(16px);
+                    border-radius: calculateRem(8px);
+                    background: transparent;
+                    box-shadow: 0 0 calculateRem(3px) 0 rgba($ibexa-color-primary, 0.75);
+                }
+            }
+        }
     }
 }

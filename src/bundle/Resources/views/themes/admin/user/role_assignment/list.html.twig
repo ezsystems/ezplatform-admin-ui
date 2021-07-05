@@ -54,7 +54,7 @@
             <tr>
                 <td class="ez-table__cell ez-table__cell--has-checkbox">
                     {% if can_assign %}
-                        {{ form_widget(form_role_assignments_delete.role_assignments[role_assignment.id], {'attr': {'class': 'ez-input ez-input--checkbox'}}) }}
+                        {{ form_widget(form_role_assignments_delete.role_assignments[role_assignment.id]) }}
                     {% else %}
                         {% do form_role_assignments_delete.role_assignments.setRendered %}
                     {% endif %}

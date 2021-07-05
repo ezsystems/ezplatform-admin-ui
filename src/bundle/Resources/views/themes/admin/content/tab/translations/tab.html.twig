@@ -1,6 +1,6 @@
 {% trans_default_domain 'locationview' %}
 
-{% form_theme form_translation_remove '@ezdesign/ui/form/flat_widgets.html.twig' %}
+{% form_theme form_translation_remove with ['@ezdesign/ui/form/flat_widgets.html.twig', '@ezdesign/ui/form_fields.html.twig'] %}
 
 {% import _self as tab %}
 {% set can_translate = can_translate is defined ? can_translate : true %}
@@ -32,7 +32,7 @@
                     <tr>
                         <td class="ez-table__cell ez-table__cell--has-checkbox">
                             {% if can_translate %}
-                                {{ form_widget(form_translation_remove.language_codes[translation.languageCode], {'attr': {'class': 'ez-input ez-input--checkbox', 'disabled': not translation.canDelete}}) }}
+                                {{ form_widget(form_translation_remove.language_codes[translation.languageCode], {'attr': {'disabled': not translation.canDelete}}) }}
                             {% endif %}
                         </td>
                         <td class="ez-table__cell">{{ translation.name }}</td>
@@ -40,7 +40,7 @@
                         {% if main_translation_switch %}
                             <td class="ez-table__cell">
                                 <input
-                                    class="ez-input ez-input--radio"
+                                    class="ibexa-input ibexa-input--radio"
                                     type="radio"
                                     {{ translation.main ? 'checked' }}
                                     {{ not translation.canEdit ? 'disabled' }}
