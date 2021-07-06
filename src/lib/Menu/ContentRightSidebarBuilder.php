@@ -16,6 +16,8 @@ use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\API\Repository\Values\User\Limitation\LanguageLimitation;
+use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
@@ -177,7 +179,12 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $location->getContentInfo(),
             [$location, $target]
         );
-
+        $canHide = $this->permissionResolver->canUser(
+            'content',
+            'hide',
+            $content,
+            [$target]
+        );
         $createAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--create',
             'data-actions' => 'create',
@@ -194,6 +201,21 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 'universal_discovery_widget_module.default_location_id'
             ),
         ];
+        $moveAttributes = [
+            'class' => 'btn--udw-move',
+            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
+            'data-root-location' => $this->configResolver->getParameter(
+                'universal_discovery_widget_module.default_location_id'
+            ),
+        ];
+        $copyAttributes = [
+            'class' => 'btn--udw-copy',
+            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
+            'data-root-location' => $this->configResolver->getParameter(
+                'universal_discovery_widget_module.default_location_id'
+            ),
+        ];
+        $canCreateAnywhere = $this->canCreateAnywhere($content);
 
         $copyLimit = $this->configResolver->getParameter(
             'subtree_operations.copy_subtree.limit'
@@ -225,13 +247,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 self::ITEM__MOVE,
                 [
                     'extras' => ['icon' => 'move'],
-                    'attributes' => [
-                        'class' => 'btn--udw-move',
-                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-                        'data-root-location' => $this->configResolver->getParameter(
-                            'universal_discovery_widget_module.default_location_id'
-                        ),
-                    ],
+                    'attributes' => $canCreateAnywhere
+                        ? $moveAttributes
+                        : array_merge($moveAttributes, ['disabled' => 'disabled']),
                 ]
             )
         );
@@ -241,13 +259,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__COPY,
                     [
                         'extras' => ['icon' => 'copy'],
-                        'attributes' => [
-                            'class' => 'btn--udw-copy',
-                            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-                            'data-root-location' => $this->configResolver->getParameter(
-                                'universal_discovery_widget_module.default_location_id'
-                            ),
-                        ],
+                        'attributes' => $canCreateAnywhere
+                            ? $copyAttributes
+                            : array_merge($copyAttributes, ['disabled' => 'disabled']),
                     ]
                 )
             );
@@ -257,7 +271,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__COPY_SUBTREE,
                     [
                         'extras' => ['icon' => 'copy-subtree'],
-                        'attributes' => $canCopySubtree
+                        'attributes' => $canCopySubtree && $canCreateAnywhere
                             ? $copySubtreeAttributes
                             : array_merge($copySubtreeAttributes, ['disabled' => 'disabled']),
                     ]
@@ -266,9 +280,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         }
 
         if ($content->getVersionInfo()->getContentInfo()->isHidden) {
-            $this->addRevealMenuItem($menu);
+            $this->addRevealMenuItem($menu, $canHide);
         } else {
-            $this->addHideMenuItem($menu);
+            $this->addHideMenuItem($menu, $canHide);
         }
 
         if ($contentIsUser && $canDelete) {
@@ -369,17 +383,21 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /**
      * @param \Knp\Menu\ItemInterface $menu
      */
-    private function addRevealMenuItem(ItemInterface $menu): void
+    private function addRevealMenuItem(ItemInterface $menu, bool $canHide): void
     {
+        $attributes = [
+            'data-actions' => 'reveal',
+            'class' => 'ez-btn--reveal',
+        ];
+
         $menu->addChild(
             $this->createMenuItem(
                 self::ITEM__REVEAL,
                 [
                     'extras' => ['icon' => 'reveal'],
-                    'attributes' => [
-                        'data-actions' => 'reveal',
-                        'class' => 'ez-btn--reveal',
-                    ],
+                    'attributes' => $canHide
+                        ? $attributes
+                        : array_merge($attributes, ['disabled' => 'disabled']),
                 ]
             )
         );
@@ -388,19 +406,70 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /**
      * @param \Knp\Menu\ItemInterface $menu
      */
-    private function addHideMenuItem(ItemInterface $menu): void
+    private function addHideMenuItem(ItemInterface $menu, bool $canHide): void
     {
+        $attributes = [
+            'data-actions' => 'hide',
+            'class' => 'ez-btn--hide',
+        ];
+
         $menu->addChild(
             $this->createMenuItem(
                 self::ITEM__HIDE,
                 [
                     'extras' => ['icon' => 'hide'],
-                    'attributes' => [
-                        'data-actions' => 'hide',
-                        'class' => 'ez-btn--hide',
-                    ],
+                    'attributes' => $canHide
+                        ? $attributes
+                        : array_merge($attributes, ['disabled' => 'disabled']),
                 ]
             )
         );
+    }
+
+    private function canCreateAnywhere(Content $content): bool
+    {
+        $createPolicies = $this->permissionResolver->hasAccess(
+            'content',
+            'create'
+        );
+
+        if (!$createPolicies) {
+            return false;
+        }
+
+        foreach ($createPolicies as $createPolicy) {
+            $sectionId = $content->contentInfo->sectionId;
+            if (
+                !empty($createPolicy['limitation']) &&
+                $createPolicy['limitation'] instanceof SectionLimitation &&
+                !in_array($sectionId, $createPolicy['limitation']->limitationValues)
+            ) {
+                return false;
+            }
+
+            if (empty($createPolicy['policies'])) {
+                return true;
+            }
+
+            foreach ($createPolicy['policies'] as $policy) {
+                foreach ($policy->limitations as $limitation) {
+                    if ($limitation instanceof SectionLimitation && !in_array($sectionId, $limitation->limitationValues)) {
+                        return false;
+                    }
+
+                    if ($limitation instanceof ContentType && !in_array($content->getContentType()->id, $limitation->limitationValues)) {
+                        return false;
+                    }
+
+                    $commonArray = \array_intersect($content->getVersionInfo()->languageCodes, $limitation->limitationValues);
+
+                    if ($limitation instanceof LanguageLimitation && \count($commonArray) === 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }
