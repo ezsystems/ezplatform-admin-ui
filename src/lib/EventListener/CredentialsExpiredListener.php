@@ -44,7 +44,8 @@ final class CredentialsExpiredListener implements EventSubscriberInterface
 
     public function onPreContentView(PreContentViewEvent $event): void
     {
-        if (!$this->isAdminSiteAccess($this->requestStack->getCurrentRequest())) {
+        $currentRequest = $this->requestStack->getCurrentRequest();
+        if ($currentRequest === null || !$this->isAdminSiteAccess($currentRequest)) {
             return;
         }
 
