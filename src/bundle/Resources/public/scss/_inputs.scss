@@ -11,13 +11,10 @@
 }
 
 .ibexa-input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     position: relative;
     display: inline-block;
     outline: none;
-    transition: all 0.2s $ibexa-admin-transition;
+    transition: all 0.2s $ibexa-admin-transition-duration;
     border: calculateRem(1px) solid $ibexa-color-dark-300;
     background-color: $ibexa-white;
 
@@ -35,6 +32,13 @@
     &:disabled {
         cursor: default;
         border-color: $ibexa-color-dark-200;
+    }
+
+    &--checkbox,
+    &--radio {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
     }
 
     &--checkbox {
