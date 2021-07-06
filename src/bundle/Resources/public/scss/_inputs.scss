@@ -14,7 +14,7 @@
     position: relative;
     display: inline-block;
     outline: none;
-    transition: all 0.2s $ibexa-admin-transition-duration;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
     border: calculateRem(1px) solid $ibexa-color-dark-300;
     background-color: $ibexa-white;
 
