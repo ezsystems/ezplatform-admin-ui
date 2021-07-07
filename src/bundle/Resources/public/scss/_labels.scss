@@ -1,15 +1,33 @@
 .ibexa-label {
-    font-size: $ibexa-text-font-size;
-    line-height: calculateRem(24px);
-    letter-spacing: calculateRem(0.12px);
+    @include label-required();
+    @include ibexa-font-sans-serif();
 
-    &--medium {
-        font-size: $ibexa-text-font-size-medium;
+    font-size: $ibexa-text-font-size-small;
+    color: $ibexa-color-dark-400;
+    line-height: calculateRem(18px);
+    margin-top: calculateRem(20px);
+    margin-bottom: calculateRem(8px);
+    padding-top: 0;
+    padding-bottom: 0;
+
+    &--checkbox-radio {
+        font-size: calculateRem(14px);
         line-height: calculateRem(21px);
-    }
+        color: $ibexa-color-dark;
+        margin: calculateRem(10px) 0 calculateRem(9px);
 
-    &--small {
-        font-size: $ibexa-text-font-size-small;
-        line-height: calculateRem(18px);
+        &.required {
+            &:after {
+                content: '';
+            }
+        }
+    }
+}
+
+.form-check-inline {
+    .ibexa-label {
+        &--checkbox-radio {
+            margin: 0;
+        }
     }
 }

@@ -27,9 +27,9 @@
     <section>
         <div class="card ibexa-card ibexa-card--light">
             <div class="card-body ibexa-card__body">
-                {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
-                {{ form_row(form.languageCode, {'label_attr': {'class': 'ez-label'}}) }}
-                {{ form_row(form.enabled, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+                {{ form_row(form.name, {'attr': {'autofocus': 'autofocus'}}) }}
+                {{ form_row(form.languageCode) }}
+                {{ form_row(form.enabled, {'label_attr': {'class': 'checkbox-inline'}}) }}
             </div>
         </div>
     </section>

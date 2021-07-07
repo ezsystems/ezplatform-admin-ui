@@ -79,7 +79,7 @@ class RoleUpdatePage extends AdminUpdateItemPage
                 new VisibleCSSLocator('limitationDropdown', '.ez-custom-dropdown__selection-info'),
                 new VisibleCSSLocator('limitationDropdownOption', 'ul:not(.ez-custom-dropdown__items--hidden) .ez-custom-dropdown__item'),
                 new VisibleCSSLocator('limitationDropdownOptionRemove', '.ez-custom-dropdown__remove-selection'),
-                new VisibleCSSLocator('labelSelector', '.ez-label'),
+                new VisibleCSSLocator('labelSelector', '.ibexa-label'),
                 new VisibleCSSLocator('policyAssignmentSelect', '#role_assignment_create_sections'),
                 new VisibleCSSLocator('newPolicySelectList', '#policy_create_policy'),
             ]

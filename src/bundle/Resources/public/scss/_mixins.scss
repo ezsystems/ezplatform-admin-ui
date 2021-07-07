@@ -8,6 +8,7 @@
 @import 'mixins/modals';
 @import 'mixins/togglers';
 @import 'mixins/pagination';
+@import 'mixins/font';
 
 @mixin checkbox-icon($color: $ibexa-color-primary) {
     border: calculateRem(1px) solid $color;
@@ -116,13 +117,9 @@
 }
 
 @mixin label-required() {
-    &:after {
-        content: ': ';
-    }
-
     &.required {
         &:after {
-            content: '*: ';
+            content: '* ';
         }
     }
 }

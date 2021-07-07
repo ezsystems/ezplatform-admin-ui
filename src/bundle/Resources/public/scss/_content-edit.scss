@@ -43,11 +43,6 @@
         &--left {
             padding-left: 0;
             border-bottom: calculateRem(1px) solid $ibexa-color-light;
-
-            .ibexa-label {
-                margin-bottom: 0;
-                color: $ibexa-color-dark-400;
-            }
         }
 
         &--right {
@@ -70,6 +65,15 @@
     &__tooltip {
         display: flex;
         align-items: center;
+    }
+
+    &__action-name {
+        @include ibexa-font-sans-serif();
+
+        font-size: $ibexa-text-font-size-small;
+        line-height: calculateRem(18px);
+        margin-bottom: 0;
+        color: $ibexa-color-dark-400;
     }
 
     &__action-name,

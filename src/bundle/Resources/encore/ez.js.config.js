@@ -34,6 +34,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.anchor.navigation'),
     path.resolve(__dirname, '../public/js/scripts/admin.context.menu'),
     path.resolve(__dirname, '../public/js/scripts/sidebar/main.menu.js'),
+    path.resolve(__dirname, '../public/js/scripts/admin.input.text.js'),
 ];
 const fieldTypes = [];
 
