@@ -170,9 +170,10 @@
 
     const notificationsTable = modal.querySelector(SELECTOR_TABLE);
     currentPageLink = notificationsTable.dataset.notifications;
+    const interval = Number.parseInt(notificationsTable.dataset.notificationsCountInterval, 10) || INTERVAL;
 
     modal.querySelectorAll(SELECTOR_MODAL_RESULTS).forEach((link) => link.addEventListener('click', handleModalResultsClick, false));
 
     getNotificationsStatus();
-    global.setInterval(getNotificationsStatus, INTERVAL);
+    global.setInterval(getNotificationsStatus, interval);
 })(window, window.document, window.eZ, window.Translator);

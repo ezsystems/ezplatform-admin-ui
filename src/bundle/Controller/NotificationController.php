@@ -107,6 +107,7 @@ class NotificationController extends Controller
             'page' => $page,
             'pagination' => $pagination,
             'notifications' => $notifications,
+            'notifications_count_interval' => $this->configResolver->getParameter('notifications.count.interval'),
             'pager' => $pagerfanta,
         ])->getContent());
     }
