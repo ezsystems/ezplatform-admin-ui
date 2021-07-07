@@ -433,8 +433,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'create'
         );
 
-        if (!$createPolicies) {
-            return false;
+        if (is_bool($createPolicies)) {
+            return $createPolicies;
         }
 
         foreach ($createPolicies as $createPolicy) {
