@@ -52,7 +52,7 @@
         height: calculateRem(16px);
         border-radius: calculateRem(2px);
 
-        &:after {
+        &::after {
             content: ' ';
             position: absolute;
             top: calculateRem(2.5px);
@@ -78,7 +78,7 @@
                 background-color: $ibexa-color-primary-300;
             }
 
-            &:after {
+            &::after {
                 border-color: $ibexa-white;
             }
         }
@@ -92,7 +92,7 @@
                 background-color: $ibexa-color-primary-300;
             }
 
-            &:after {
+            &::after {
                 border-color: $ibexa-white;
                 background-color: $ibexa-white;
                 height: calculateRem(1px);
@@ -116,7 +116,7 @@
             }
 
             &:focus {
-                &:after {
+                &::after {
                     content: ' ';
                     position: absolute;
                     display: block;
