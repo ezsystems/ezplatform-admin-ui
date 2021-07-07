@@ -20,17 +20,19 @@
 
     &:hover {
         border-color: $ibexa-color-primary;
-        cursor: pointer;
     }
 
-    &:active,
+    &:active {
+        border-color: $ibexa-color-dark;
+    }
+
     &:focus {
         border-color: $ibexa-color-primary;
         box-shadow: 0 0 calculateRem(3px) 0 rgba($ibexa-color-primary, 0.75);
     }
 
     &:disabled {
-        cursor: default;
+        cursor: not-allowed;
         border-color: $ibexa-color-dark-200;
     }
 
@@ -39,6 +41,10 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &--checkbox {
@@ -63,7 +69,6 @@
             background-color: $ibexa-color-light;
         }
 
-        &:active,
         &:checked {
             border-color: $ibexa-color-primary;
             background-color: $ibexa-color-primary;
@@ -110,7 +115,6 @@
                 box-shadow: inset 0 0 0 calculateRem(4px) $ibexa-color-primary-300;
             }
 
-            &:active,
             &:focus {
                 &:after {
                     content: ' ';
