@@ -62,11 +62,11 @@ class AdminUpdateItemPage extends Page
     public function selectLimitationValues(string $selectName, array $values): void
     {
         try {
-            $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ez-label');
+            $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ibexa-label');
             $currentlySelectedElements = $this->context->findAllElements($this->fields['limitationDropdownOptionRemove'], $baseElement);
 
             for ($i = 0; $i < count($currentlySelectedElements); ++$i) {
-                $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ez-label');
+                $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ibexa-label');
                 $currentlySelectedElement = $this->context->findElement($this->fields['limitationDropdownOptionRemove'], $this->defaultTimeout, $baseElement);
                 $currentlySelectedElement->click();
             }
@@ -74,14 +74,14 @@ class AdminUpdateItemPage extends Page
             // no need to remove current selection
         }
 
-        $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ez-label');
+        $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ibexa-label');
         $baseElement->find('css', $this->fields['limitationDropdown'])->click();
 
         foreach ($values as $value) {
             $this->context->getElementByText($value, $this->fields['limitationDropdownOption'])->click();
         }
 
-        $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ez-label');
+        $baseElement = $this->context->getElementByText($selectName, $this->fields['limitationField'], '.ibexa-label');
         $baseElement->find('css', $this->fields['limitationDropdown'])->click();
     }
 }

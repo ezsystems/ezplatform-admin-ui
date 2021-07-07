@@ -108,3 +108,35 @@ form:not(.form-inline) {
 .ez-content-create[readonly] {
     pointer-events: none;
 }
+
+.ibexa-form-error {
+    display: flex;
+    font-family: $font-family-sans-serif;
+    font-size: calculateRem(12px);
+    font-style: normal;
+    color: $ibexa-color-danger;
+    letter-spacing: 0.12px;
+    line-height: calculateRem(18px);
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: calculateRem(4px);
+
+    &__icon {
+        fill: $ibexa-color-danger;
+        margin-right: calculateRem(4px);
+    }
+}
+
+.ibexa-form-help {
+    display: flex;
+    font-family: $font-family-sans-serif;
+    font-size: calculateRem(12px);
+    color: $ibexa-color-dark-400;
+    letter-spacing: 0.12px;
+    line-height: calculateRem(18px);
+
+    &__icon {
+        fill: $ibexa-color-dark-400;
+        margin-right: calculateRem(4px);
+    }
+}

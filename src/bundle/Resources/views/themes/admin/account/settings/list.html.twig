@@ -70,7 +70,7 @@
                     {% endif %}
                 {% endblock %}
             {% endembed %}
-            {% embed '@ezdesign/ui/component//tab_pane.html.twig' with { id: 'my-account-settings' } %}
+            {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with { id: 'my-account-settings' } %}
                 {% block content %}
                     <div class="ez-table-header">
                         <div class="ez-table-header__headline">{{ 'my_account_settings.password.title'|trans|desc('Password') }}</div>

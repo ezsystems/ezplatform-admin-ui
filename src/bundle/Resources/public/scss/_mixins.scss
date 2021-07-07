@@ -166,13 +166,9 @@
 }
 
 @mixin label-required() {
-    &:after {
-        content: ': ';
-    }
-
     &.required {
         &:after {
-            content: '*: ';
+            content: '* ';
         }
     }
 }
