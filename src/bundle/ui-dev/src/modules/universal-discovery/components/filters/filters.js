@@ -117,13 +117,13 @@ const Filters = ({ isCollapsed, search }) => {
         <div className={wrapperClassName}>
             <div className="ez-filters__row">
                 <div className="ez-filters__item ez-filters__item--content-type">
-                    <label className="ez-label">{contentTypeLabel}</label>
+                    <label className="ibexa-label">{contentTypeLabel}</label>
                     <ContentTypeSelector />
                 </div>
             </div>
             <div className="ez-filters__row">
                 <div className="ez-filters__item ez-filters__item--section">
-                    <label className="ez-label">{sectionLabel}</label>
+                    <label className="ibexa-label">{sectionLabel}</label>
                     <select className="ez-filters__select form-control" onChange={updateSection} value={selectedSection}>
                         <option value={''}>{anySectionLabel}</option>
                         {Object.entries(window.eZ.adminUiConfig.sections).map(([sectionIdentifier, sectionName]) => {
@@ -136,7 +136,7 @@ const Filters = ({ isCollapsed, search }) => {
                     </select>
                 </div>
                 <div className="ez-filters__item ez-filters__item--subtree">
-                    <label className="ez-label">{subtreeLabel}:</label>
+                    <label className="ibexa-label">{subtreeLabel}:</label>
                     <div>
                         {renderSelectContentButton()}
                         {renderSubtreeBreadcrumbs()}
