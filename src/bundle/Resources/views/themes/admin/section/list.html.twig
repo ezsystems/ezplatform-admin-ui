@@ -82,10 +82,8 @@
                     <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_edit %}
                             {{ form_widget(form_sections_delete.sections[section.id], {
-                                    "attr": { "class": "ez-input ez-input--checkbox" },
-                                    "disabled": not deletable[section.id]
-                                })
-                            }}
+                                "disabled": not deletable[section.id]
+                            }) }}
                         {% else %}
                             {% do form_sections_delete.sections.setRendered %}
                         {% endif %}

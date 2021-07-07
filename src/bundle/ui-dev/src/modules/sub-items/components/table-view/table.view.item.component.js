@@ -339,7 +339,7 @@ export default class TableViewItemComponent extends PureComponent {
     }
 
     componentDidMount() {
-        eZ.helpers.table.parseCheckbox('.c-table-view-item__cell .ez-input--checkbox', 'c-table-view-item--active');
+        eZ.helpers.table.parseCheckbox('.c-table-view-item__cell .ibexa-input--checkbox', 'c-table-view-item--active');
     }
 
     render() {
@@ -353,7 +353,7 @@ export default class TableViewItemComponent extends PureComponent {
                 <td className="c-table-view-item__cell c-table-view-item__cell--checkbox">
                     <input
                         type="checkbox"
-                        class="ez-input ez-input--checkbox"
+                        class="ibexa-input ibexa-input--checkbox"
                         checked={isSelected}
                         onChange={this.onSelectCheckboxChange}
                     />

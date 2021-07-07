@@ -50,7 +50,7 @@
 
             items.forEach((item) => item.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
             firstItem.classList.add(CLASS_ITEM_SELECTED_IN_LIST);
-            firstItem.querySelector('.ez-input').checked = true;
+            firstItem.querySelector('.ibexa-input').checked = true;
 
             this.container
                 .querySelector(SELECTOR_SELECTION_INFO)
@@ -80,7 +80,7 @@
 
             if (value) {
                 this.sourceInput.querySelector(`[value="${value}"]`).selected = selected;
-                element.querySelector('.ez-input').checked = selected;
+                element.querySelector('.ibexa-input').checked = selected;
             }
 
             this.itemsContainer.querySelector(`[data-value="${value}"]`).classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
@@ -184,7 +184,7 @@
             const itemSelected = this.itemsContainer.querySelector(`[data-value="${value}"]`);
 
             itemSelected.classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
-            itemSelected.querySelector('.ez-input').checked = false;
+            itemSelected.querySelector('.ibexa-input').checked = false;
 
             if (optionSelect) {
                 optionSelect.selected = false;

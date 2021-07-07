@@ -100,13 +100,6 @@
     &__priority-wrapper {
         position: relative;
         min-width: calculateRem(140px);
-
-        &--focused {
-            .ez-input {
-                border-radius: $ibexa-border-radius;
-                border: calculateRem(2px) solid $ibexa-color-primary;
-            }
-        }
     }
 
     &__priority-actions {

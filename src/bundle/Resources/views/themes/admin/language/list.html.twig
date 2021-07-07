@@ -80,7 +80,7 @@
                 <tr>
                     <td class="ez-table__cell ez-table__cell--has-checkbox">
                         {% if can_administrate %}
-                            {{ form_widget(form_languages_delete.languages[language.id], { attr: { "class": "ez-input ez-input--checkbox" }  }) }}
+                            {{ form_widget(form_languages_delete.languages[language.id]) }}
                         {% else %}
                             {% do form_languages_delete.languages.setRendered %}
                         {% endif %}
@@ -92,7 +92,7 @@
                         <input
                             type="checkbox"
                             title="{{ language.enabled ? 'language.enabled'|trans|desc('Enabled')  : 'language.disabled'|trans|desc('Disabled')  }}"
-                            class="ez-input ez-input--checkbox"
+                            class="ibexa-input ibexa-input--checkbox"
                             disabled
                             {% if language.enabled %}checked{% endif %}>
                     </td>

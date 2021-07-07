@@ -53,7 +53,7 @@
                             {% for bookmark in pager.currentPageResults %}
                                 {% set content_name = ez_content_name(bookmark.contentInfo) %}
                                 <tr>
-                                    <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form_remove.bookmarks[bookmark.id], { "attr": { "class": "ez-input ez-input--checkbox" } }) }}</td>
+                                    <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form_remove.bookmarks[bookmark.id]) }}</td>
                                     <td class="ez-table__cell ez-table__cell--has-icon">
                                         <svg class="ibexa-icon ibexa-icon--small">
                                             <use xlink:href="{{ ez_content_type_icon(bookmark.contentType.identifier) }}"></use>

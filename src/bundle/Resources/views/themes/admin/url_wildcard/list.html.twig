@@ -1,5 +1,7 @@
 {% trans_default_domain "ezplatform_url_wildcard" %}
 
+{% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
+
 {%
     set wildcard_types = {
         0: 'url_wildcard.type.forward'|trans|desc('Forward'),
