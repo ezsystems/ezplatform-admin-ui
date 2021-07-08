@@ -184,6 +184,7 @@
     .ez-sticky-container > .btn[disabled] {
         opacity: 1;
         color: rgba($ibexa-white, 0.5);
+        background-color: $ibexa-color-primary;
 
         .ez-icon {
             opacity: 0.5;
