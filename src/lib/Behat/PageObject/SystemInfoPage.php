@@ -36,7 +36,7 @@ class SystemInfoPage extends Page
         $this->siteAccess = 'admin';
         $this->route = '/systeminfo';
         $this->pageTitle = self::PAGE_NAME;
-        $this->pageTitleLocator = '.breadcrumb-item.active';
+        $this->pageTitleLocator = '.ez-page-title h1';
     }
 
     public function verifyElements(): void
