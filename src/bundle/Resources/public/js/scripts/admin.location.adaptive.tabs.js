@@ -10,7 +10,7 @@
             adaptiveItems.adapt();
         });
         allPopupMenus.forEach((popupMenu) => {
-            popupMenu.adapt();
+            popupMenu.updatePosition();
         });
     };
     const handleTabsConainterChange = () => {
@@ -76,7 +76,7 @@
             });
 
             allPopupMenus.push(popupMenu);
-            popupMenu.adapt();
+            popupMenu.updatePosition();
 
             const adaptiveItems = new eZ.core.AdaptiveItems({
                 itemHiddenClass: 'ibexa-tabs__tab--hidden',

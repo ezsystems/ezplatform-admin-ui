@@ -12,7 +12,7 @@
         />
         <div class="ibexa-header-user-menu__notice-dot"></div>
         <button class="ibexa-header-user-menu__name">{{ user.name }}</button>
-        {% do item.setChildrenAttribute('class', 'ibexa-popup-menu ibexa-popup-menu--hidden') %}
+        {% do item.setChildrenAttribute('class', 'ibexa-header-user-menu__popup-menu ibexa-popup-menu ibexa-popup-menu--hidden') %}
     </div>
 
     {{ parent() }}

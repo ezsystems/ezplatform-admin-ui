@@ -5,7 +5,7 @@
             this.popupMenuElement = config.popupMenuElement;
             this.triggerElement = config.triggerElement;
             this.onItemClick = config.onItemClick;
-            this.position = config.position;
+            this.position = config.position || (() => {});
             this.popupHiddenClass = config.popupHiddenClass || CLASS_POPUP_MENU_HIDDEN;
 
             this.handleToggle = this.handleToggle.bind(this);
@@ -54,8 +54,9 @@
         }
 
         handleToggle() {
+            console.log(this.popupMenuElement)
             this.popupMenuElement.classList.toggle(this.popupHiddenClass);
-            this.adapt();
+            this.updatePosition();
         }
 
         handleClickOutsidePopupMenu(event) {
@@ -69,7 +70,7 @@
             this.popupMenuElement.classList.add(this.popupHiddenClass);
         }
 
-        adapt() {
+        updatePosition() {
             const isHidden = this.popupMenuElement.classList.contains(this.popupHiddenClass);
 
             if (isHidden) {

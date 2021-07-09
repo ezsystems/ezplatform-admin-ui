@@ -4,7 +4,6 @@
     border: calculateRem(1px) solid $ibexa-color-light;
     border-radius: $ibexa-border-radius;
     box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(67px) 0 rgba($ibexa-color-info, 0.2);
-    font-size: calculateRem(14px);
     position: absolute;
     z-index: 10;
 
@@ -15,7 +14,7 @@
     &__item {
         display: flex;
         align-items: center;
-        height: calculateRem(35px);
+        height: calculateRem(40px);
         min-width: calculateRem(150px);
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
@@ -24,11 +23,12 @@
         }
     }
 
-    &__item-action {
+    a.ibexa-popup-menu__item-action {
         display: block;
         width: 100%;
         padding: calculateRem(9px) calculateRem(15px);
         color: $ibexa-color-black;
+        font-size: calculateRem(14px);
         text-decoration: none;
         border-radius: $ibexa-border-radius;
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;

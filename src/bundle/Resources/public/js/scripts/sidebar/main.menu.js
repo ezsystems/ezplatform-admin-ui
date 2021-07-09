@@ -1,4 +1,5 @@
 (function(global, doc) {
+    const allPopups = [];
     const toggleMenu = (event) => {
         const { toggleTargetSelector } = event.currentTarget.dataset;
 
@@ -13,6 +14,10 @@
 
         doc.querySelector(toggleTargetSelector).classList.toggle('ibexa-main-menu__navbar--hover-toggler');
     }
+    const fitSideMenu = (event) => {
+        // const diff = HEADER_HEIGHT
+        // console.log(event.currentTarget.scrollY)
+    }
 
     doc.querySelectorAll('.ibexa-main-menu__toggler').forEach(button => {
         button.addEventListener('click', toggleMenu, false);
@@ -21,15 +26,18 @@
     })
 
     doc.querySelectorAll('.ibexa-main-menu__tooltip-trigger').forEach(button => {
-        const popupNode = doc.querySelector(button.dataset.popupTargetSelector)
+        // const { popupTargetSelector } = button.dataset;
+        // const popupNode = doc.querySelector(popupTargetSelector)
 
-        new eZ.core.PopupMenu({
-            popupMenuElement: popupNode,
-            triggerElement: button,
-            popupHiddenClass: 'ibexa-main-menu__popup--hidden',
-            position: () => {
-                popupMenuElement.style.right = 0;
-            },
-        });
+        // allPopups[popupTargetSelector] = new eZ.core.PopupMenu({
+        //     popupMenuElement: popupNode,
+        //     triggerElement: button,
+        //     popupHiddenClass: 'ibexa-main-menu__popup--hidden',
+        //     position: () => {
+        //         popupMenuElement.style.right = 0;
+        //     },
+        // });
     })
+
+    global.addEventListener('scroll', fitSideMenu, false);
 })(window, window.document);

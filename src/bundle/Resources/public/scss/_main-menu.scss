@@ -1,11 +1,10 @@
 .ibexa-main-menu {
-    position: sticky;
-    min-height: 100%;
     display: flex;
-
+    height: calc(100vh - #{calculateRem(72px)});
+    
     &__navbar {
         width: calculateRem(72px);
-        height: calc(100vh - #{calculateRem(80px)});
+        height: 100%;
         overflow: hidden;
         background-color: $ibexa-color-dark;
         transition: all $ibexa-admin-transition-duration;

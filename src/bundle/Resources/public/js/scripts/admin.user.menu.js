@@ -1,18 +1,12 @@
 (function(global, doc) {
-    console.log('aaaaaaaaaa')
-    const userMenuTrigger = doc.querySelector('.ibexa-header-user-menu__name');
-
+    const userMenuContainer = doc.querySelector('.ibexa-main-header__user-menu-column');
+    const triggerElement = userMenuContainer.querySelector('.ibexa-header-user-menu__name');
+    const popupMenuElement = userMenuContainer.querySelector('.ibexa-popup-menu');
+    
     const popupMenu = new eZ.core.PopupMenu({
-        triggerElement: userMenuTrigger,
-        onItemClick: (event) => {
-            const { relatedButtonId } = event.currentTarget.dataset;
-            const button = doc.getElementById(relatedButtonId);
-
-            button.click();
-        },
-        position: () => {},
+        triggerElement,
+        popupMenuElement,
     });
-
 
     // const CLASS_HIDDEN = 'ez-user-menu__items--hidden';
     // const SELECTOR_MENU_ITEMS = '.ez-user-menu__items';
