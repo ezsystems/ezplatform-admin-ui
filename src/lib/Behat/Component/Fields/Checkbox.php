@@ -57,9 +57,9 @@ class Checkbox extends FieldTypeComponent
     public function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('fieldInput', '.ez-data-source__indicator'),
-            new VisibleCSSLocator('checkbox', '.ez-data-source__label'),
-            new VisibleCSSLocator('checked', 'is-checked'),
+            new VisibleCSSLocator('fieldInput', '.ibexa-toggle__indicator'),
+            new VisibleCSSLocator('checkbox', '.ibexa-toggle__switcher'),
+            new VisibleCSSLocator('checked', 'ibexa-toggle--is-checked'),
         ];
     }
 }
