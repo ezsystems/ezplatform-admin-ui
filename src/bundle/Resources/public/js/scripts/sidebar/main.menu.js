@@ -1,4 +1,5 @@
 (function(global, doc) {
+    const POPUP_MENU_LEFT_OFFSET = 16; 
     const allPopups = [];
     const toggleMenu = (event) => {
         const { toggleTargetSelector } = event.currentTarget.dataset;
@@ -26,17 +27,21 @@
     })
 
     doc.querySelectorAll('.ibexa-main-menu__tooltip-trigger').forEach(button => {
-        // const { popupTargetSelector } = button.dataset;
-        // const popupNode = doc.querySelector(popupTargetSelector)
+        const { popupTargetSelector } = button.dataset;
+        const popupNode = doc.querySelector(popupTargetSelector);
 
-        // allPopups[popupTargetSelector] = new eZ.core.PopupMenu({
-        //     popupMenuElement: popupNode,
-        //     triggerElement: button,
-        //     popupHiddenClass: 'ibexa-main-menu__popup--hidden',
-        //     position: () => {
-        //         popupMenuElement.style.right = 0;
-        //     },
-        // });
+        allPopups.push(
+            new eZ.core.PopupMenu({
+                popupMenuElement: popupNode,
+                triggerElement: button,
+                position: () => {
+                    const { top, left, width } = button.getBoundingClientRect();
+
+                    popupNode.style.top = `${top}px`;
+                    popupNode.style.left = `${left  + width + POPUP_MENU_LEFT_OFFSET}px`;
+                },
+            })
+        );
     })
 
     global.addEventListener('scroll', fitSideMenu, false);

@@ -1,8 +1,39 @@
 {% extends '@KnpMenu/menu.html.twig' %}
+{% import 'knp_menu.html.twig' as knp_menu %}
+
+{% block popupItem %}
+    {% if item.displayed %}
+        {% set node_attributes = {
+            'class': 'ibexa-popup-menu__item',
+        } %}
+
+        <li {{ knp_menu.attributes(node_attributes) }}>
+            {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
+                {{ block('popupLinkElement') }}
+            {%- else %}
+                {{ block('popupSpanElement') }}
+            {%- endif %}
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block popupLinkElement %}
+    {% set link_attributes = {
+        'href': item.uri,
+        'class': 'ibexa-popup-menu__item-action'
+    } %}
+
+    <a {{ knp_menu.attributes(link_attributes) }}>{{ block('label') }}</a>
+{% endblock %}
+
+{% block popupSpanElement %}
+    {{ block('label') }}
+{% endblock %}
 
 {% block item %}
     {% if item.displayed %}
         {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+        
         {%- set classes = classes|merge(['ibexa-main-menu__item']) %}
         
         {%- if item.extras.separate is defined and item.extras.separate -%}

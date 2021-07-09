@@ -6,6 +6,9 @@
     const popupMenu = new eZ.core.PopupMenu({
         triggerElement,
         popupMenuElement,
+        position: () => {
+            console.log('position')
+        }
     });
 
     // const CLASS_HIDDEN = 'ez-user-menu__items--hidden';

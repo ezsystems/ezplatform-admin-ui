@@ -16,7 +16,7 @@
             border-left: calculateRem(1px) solid rgba($ibexa-color-info, 0.4);
             border-right: calculateRem(4px) solid $ibexa-color-dark;
 
-            .ibexa-main-menu__item--tooltip-trigger {
+            .ibexa-main-menu__item--popup-container {
                 display: none;
             }
 
@@ -26,7 +26,7 @@
                 .ibexa-main-menu__item {
                     display: none;
 
-                    &--tooltip-trigger {
+                    &--popup-container {
                         display: block;
                     }
                 }

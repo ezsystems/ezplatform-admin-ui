@@ -1,4 +1,4 @@
-{% extends '@ezdesign/ui/menu/top_menu_base.html.twig' %}
+{% extends '@ezdesign/ui/menu/main_base.html.twig' %}
 
 {% block root %}
     {% set list_attributes = item.childrenAttributes %}
@@ -11,8 +11,7 @@
                     {% for item in child.children %}
                         {{ block('item') }}
                     {% endfor %}
-
-                    <li class="ibexa-main-menu__item ibexa-main-menu__item--tooltip-trigger">
+                    <li class="ibexa-main-menu__item ibexa-main-menu__item--popup-container">
                         <button 
                             class="ibexa-main-menu__tooltip-trigger ibexa-btn ibexa-btn--small ibexa-btn--no-text ibexa-btn--neon-info"
                             data-popup-target-selector="#{{ child.name }}-popup"
@@ -22,9 +21,9 @@
                             </svg>
                         </button>
 
-                        <ul id="{{ child.name }}-popup" class="ibexa-main-menu__popup ibexa-main-menu__popup--hidden">
+                        <ul id="{{ child.name }}-popup" class="ibexa-popup-menu ibexa-popup-menu--info-neon ibexa-popup-menu--hidden">
                             {% for item in child.children %}
-                                {{ block('item') }}
+                                {{ block('popupItem') }}
                             {% endfor %}
                         </ul>
                     </li>

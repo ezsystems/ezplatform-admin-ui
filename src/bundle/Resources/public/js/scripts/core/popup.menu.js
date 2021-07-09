@@ -11,7 +11,7 @@
             this.handleToggle = this.handleToggle.bind(this);
             this.handleClickOutsidePopupMenu = this.handleClickOutsidePopupMenu.bind(this);
 
-            doc.addEventListener('click', this.handleToggle, false);
+            this.triggerElement.addEventListener('click', this.handleToggle, false);
             doc.addEventListener('click', this.handleClickOutsidePopupMenu, false);
         }
 
