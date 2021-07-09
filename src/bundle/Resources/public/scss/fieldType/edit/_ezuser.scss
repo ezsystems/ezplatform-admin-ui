@@ -7,16 +7,6 @@
         }
     }
 
-    .ez-data-source {
-        &__input-wrapper {
-            @include checkbox-switcher();
-        }
-
-        &__label:after {
-            display: none;
-        }
-    }
-
     .ez-field-edit__error {
         margin-bottom: calculateRem(8px);
     }

@@ -18,10 +18,9 @@
          * @memberof EzUserValidator
          */
         updateState(event) {
-            const methodName = event.currentTarget.checked ? 'add' : 'remove';
-            const label = event.currentTarget.closest(SELECTOR_LABEL);
-
-            label.classList[methodName]('is-checked');
+            // const methodName = event.currentTarget.checked ? 'add' : 'remove';
+            // const label = event.currentTarget.closest(SELECTOR_LABEL);
+            // label.classList[methodName]('is-checked');
         }
 
         /**

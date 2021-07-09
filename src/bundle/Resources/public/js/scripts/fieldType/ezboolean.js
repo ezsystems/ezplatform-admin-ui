@@ -30,9 +30,8 @@
          * @memberof EzBooleanValidator
          */
         updateState(event) {
-            const methodName = event.target.checked ? 'add' : 'remove';
-
-            event.target.closest('.ez-data-source__label').classList[methodName]('is-checked');
+            // const methodName = event.target.checked ? 'add' : 'remove';
+            // event.target.closest('.ez-data-source__label').classList[methodName]('is-checked');
         }
     }
 
