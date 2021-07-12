@@ -3,94 +3,104 @@ Feature: Roles management
   In order to customize my eZ installation
   I want to manage users Roles.
 
-  Background:
-    Given I am logged as "admin"
-      And I go to "Roles" in "Admin" tab
-
   @javascript @common
   Scenario: Changes can be discarded while creating Role
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
     When I start creating new "Role"
-      And I set fields
-        | label | value     |
-        | Name  | Test Role |
-      And I click on the edit action bar button "Discard changes"
+    And I set fields
+      | label | value     |
+      | Name  | Test Role |
+    And I click on the edit action bar button "Discard changes"
     Then I should be on "Roles" page
-      And there's no "Test Role" on "Roles" list
+    And there's no "Test Role" on "Roles" list
 
   @javascript @common
   Scenario: New Role can be created
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
     When I start creating new "Role"
-      And I set fields
-        | label | value     |
-        | Name  | Test Role |
-      And I click on the edit action bar button "Create"
+    And I set fields
+      | label | value     |
+      | Name  | Test Role |
+    And I click on the edit action bar button "Create"
     Then I should be on "Role" "Test Role" page
-      And "Policies" list in "Role" "Test Role" is empty
-      And "Assignments" list in "Role" "Test Role" is empty
+    And "Policies" list in "Role" "Test Role" is empty
+    And "Assignments" list in "Role" "Test Role" is empty
 
   @javascript @common
   Scenario: I can navigate to Roles through breadcrumb
-    Given I go to "Test Role" "Role" page
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And I go to "Test Role" "Role" page
     When I click on "Roles" on breadcrumb
     Then I should be on "Roles" page
 
   @javascript @common
   Scenario: Changes can be discarded while editing Role
-    Given there's "Test Role" on "Roles" list
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role" on "Roles" list
     When I start editing "Role" "Test Role"
-      And I set fields
-        | label | value            |
-        | Name  | Test Role edited |
-      And I click on the edit action bar button "Discard changes"
+    And I set fields
+      | label | value            |
+      | Name  | Test Role edited |
+    And I click on the edit action bar button "Discard changes"
     Then I should be on "Roles" page
-      And there's "Test Role" on "Roles" list
-      And there's no "Test Role edited" on "Roles" list
+    And there's "Test Role" on "Roles" list
+    And there's no "Test Role edited" on "Roles" list
 
   @javascript @common
   Scenario: Role can be edited
-    Given there's "Test Role" on "Roles" list
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role" on "Roles" list
     When I start editing "Role" "Test Role"
-      And I set fields
-        | label | value            |
-        | Name  | Test Role edited |
-      And I click on the edit action bar button "Save"
+    And I set fields
+      | label | value            |
+      | Name  | Test Role edited |
+    And I click on the edit action bar button "Save"
     Then I should be on "Role" "Test Role edited" page
-      And "Policies" list in "Role" "Test Role" is empty
-      And "Assignments" list in "Role" "Test Role" is empty
+    And "Policies" list in "Role" "Test Role" is empty
+    And "Assignments" list in "Role" "Test Role" is empty
 
   @javascript @common
   Scenario: User assignation can be discarded
-    Given there's "Test Role edited" on "Roles" list
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page
-      And I assign users to role
-        | path                                         |
-        | Users/Administrator users/Administrator User |
-      And I assign groups to role
-        | path          |
-        | Users/Editors |
-        | Users         |
-      And I select "Media" from Sections as role assignment limitation
-      And I click on the edit action bar button "Discard changes"
+    And I assign users to role
+      | path                                         |
+      | Users/Administrator users/Administrator User |
+    And I assign groups to role
+      | path          |
+      | Users/Editors |
+      | Users         |
+    And I select "Media" from Sections as role assignment limitation
+    And I click on the edit action bar button "Discard changes"
     Then I should be on "Role" "Test Role edited" page
-      And "Policies" list in "Role" "Test Role edited" is empty
-      And "Assignments" list in "Role" "Test Role edited" is empty
+    And "Policies" list in "Role" "Test Role edited" is empty
+    And "Assignments" list in "Role" "Test Role edited" is empty
 
   @javascript @common
   Scenario: User can be assigned to role from the Roles list
-    Given there's "Test Role edited" on "Roles" list
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role edited" on "Roles" list
     When I start assigning to "Test Role edited" from "Roles" page
-      And I assign users to role
-        | path                                         |
-        | Users/Anonymous Users/Anonymous User         |
-        | Users/Administrator users/Administrator User |
-      And I assign groups to role
-        | path          |
-        | Users/Editors |
-      And I select limitation "Media/Images" for assignment through UDW
-      And I click on the edit action bar button "Save"
+    And I assign users to role
+      | path                                         |
+      | Users/Anonymous Users/Anonymous User         |
+      | Users/Administrator users/Administrator User |
+    And I assign groups to role
+      | path          |
+      | Users/Editors |
+    And I select limitation "Media/Images" for assignment through UDW
+    And I click on the edit action bar button "Save"
     Then I should be on "Role" "Test Role edited" page
-      And "Policies" list in "Role" "Test Role edited" is empty
-      And there are assignments on the "Test Role edited" assignments list
+    And "Policies" list in "Role" "Test Role edited" is empty
+    And there are assignments on the "Test Role edited" assignments list
       | user/group          | limitation                         |
       | Administrator User  | Subtree of Location: /Media/Images |
       | Anonymous User      | Subtree of Location: /Media/Images |
@@ -98,16 +108,18 @@ Feature: Roles management
 
   @javascript @common
   Scenario: User can be assigned to role from the Role details view
-    Given there's "Test Role edited" on "Roles" list
-      And I go to "Test Role edited" "Role" page
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role edited" on "Roles" list
+    And I go to "Test Role edited" "Role" page
     When I start assigning users and groups to "Test Role edited" from role page
-      And I assign groups to role
-        | path  |
-        | Users |
+    And I assign groups to role
+      | path  |
+      | Users |
     And I click on the edit action bar button "Save"
     Then I should be on "Role" "Test Role edited" page
-      And "Policies" list in "Role" "Test Role edited" is empty
-      And there are assignments on the "Test Role edited" assignments list
+    And "Policies" list in "Role" "Test Role edited" is empty
+    And there are assignments on the "Test Role edited" assignments list
       | user/group          | limitation                         |
       | Administrator User  | Subtree of Location: /Media/Images |
       | Editors             | Subtree of Location: /Media/Images |
@@ -116,90 +128,120 @@ Feature: Roles management
 
   @javascript @common
   Scenario: Assignment can be deleted from role
-    Given there's "Test Role edited" on "Roles" list
-      And I go to "Test Role edited" "Role" page
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role edited" on "Roles" list
+    And I go to "Test Role edited" "Role" page
     When I delete assignment from "Test Role edited" role
       | item                |
       | Administrator User  |
       | Editors             |
       | Users	            |
     Then I should be on "Role" "Test Role edited" page
-      And "Policies" list in "Role" "Test Role edited" is empty
-      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+    And "Policies" list in "Role" "Test Role edited" is empty
+    And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Adding policy can be discarded
-    Given there's "Test Role edited" on "Roles" list
-      And I go to "Test Role edited" "Role" page
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role edited" on "Roles" list
+    And I go to "Test Role edited" "Role" page
     When I start creating new "Policy" in "Test Role edited"
-      And I select policy "Content Type / All functions"
-      And I click on the edit action bar button "Discard changes"
+    And I select policy "Content Type / All functions"
+    And I click on the edit action bar button "Discard changes"
     Then I should be on "Role" "Test Role edited" page
-      And "Policies" list in "Role" "Test Role edited" is empty
-      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+    And "Policies" list in "Role" "Test Role edited" is empty
+    And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Policies can be added to role
-    Given there's "Test Role edited" on "Roles" list
-      And I go to "Test Role edited" "Role" page
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role edited" on "Roles" list
+    And I go to "Test Role edited" "Role" page
     When I start creating new "Policy" in "Test Role edited"
-      And I select policy "Content / Read"
-      And I click on the edit action bar button "Create"
-      And I select options from "Content Type"
-        | option  |
-        | File |
-      And I click on the edit action bar button "Update"
+    And I select policy "Content / Read"
+    And I click on the edit action bar button "Create"
+    And I select options from "Content Type"
+      | option |
+      | File   |
+    And I click on the edit action bar button "Update"
     Then I should be on "Role" "Test Role edited" page
-      And there is a policy "Content/Read" with "Content Type: File" limitation on the "Test Role edited" policies list
-      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+    And there is a policy "Content/Read" with "Content Type: File" limitation on the "Test Role edited" policies list
+    And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Policies without limitations can be added to role
-    Given there's "Test Role edited" on "Roles" list
-      And I go to "Test Role edited" "Role" page
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role edited" on "Roles" list
+    And I go to "Test Role edited" "Role" page
     When I start creating new "Policy" in "Test Role edited"
-      And I select policy "User / Password"
-      And I click on the edit action bar button "Create"
+    And I select policy "User / Password"
+    And I click on the edit action bar button "Create"
     Then I should be on "Role" "Test Role edited" page
-      And there is a policy "User/Password" with "None" limitation on the "Test Role edited" policies list
-      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+    And there is a policy "User/Password" with "None" limitation on the "Test Role edited" policies list
+    And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Policies can be edited
-    Given there's "Test Role edited" on "Roles" list
-      And I go to "Test Role edited" "Role" page
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role edited" on "Roles" list
+    And I go to "Test Role edited" "Role" page
     When I start editing "Policy" "Content" from "Test Role edited"
-      And I select options from "Content Type"
-        | option  |
-        | Article |
-        | Folder  |
-      And I select subtree limitation "Users/Anonymous Users" for policy through UDW
-      And I select "Lock:Locked" from "State"
-      And I click on the edit action bar button "Update"
+    And I select options from "Content Type"
+      | option  |
+      | Article |
+      | Folder  |
+    And I select subtree limitation "Users/Anonymous Users" for policy through UDW
+    And I select "Lock:Locked" from "State"
+    And I click on the edit action bar button "Update"
     Then I should be on "Role" "Test Role edited" page
-      And there are policies on the "Test Role edited" policies list
+    And there are policies on the "Test Role edited" policies list
       | policy       | limitation                                  |
       | Content/Read | Content Type: Article, Folder               |
       | Content/Read | Subtree of Location: /Users/Anonymous Users |
       | Content/Read | State: Lock:Locked                          |
-      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+    And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Policy can be deleted
-    Given there's "Test Role edited" on "Roles" list
-      And I go to "Test Role edited" "Role" page
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role edited" on "Roles" list
+    And I go to "Test Role edited" "Role" page
     When I delete policy from "Test Role edited" role
       | item     |
       | Content  |
     Then notification that "Policies in role" "Test Role edited" is removed appears
-      And there is no policy "Content/Read" with "Content Type: File" limitation on the "Test Role edited" policies list
-      And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
+    And there is no policy "Content/Read" with "Content Type: File" limitation on the "Test Role edited" policies list
+    And there is an assignment "Subtree of Location: /Media/Images" for "Anonymous User" on the "Test Role edited" assignments list
 
   @javascript @common
   Scenario: Role can be deleted
-    Given there's "Test Role edited" on "Roles" list
+    Given I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And there's "Test Role edited" on "Roles" list
     When I delete "Role"
       | item             |
       | Test Role edited |
     Then notification that "Role" "Test Role edited" is removed appears
-      And there's no "Test Role edited" on "Roles" list
+    And there's no "Test Role edited" on "Roles" list
+
+  @javascript @common
+  Scenario: I can access role that has limitation to deleted location
+    Given I am using the API as "admin"
+    And I create "folder" Content items in root in "eng-GB"
+      | name            | short_name      |
+      | DeletedLocation | DeletedLocation |
+    And I create a role "DeletedLocationRole"
+    And I add policy "content" "read" to "DeletedLocationRole" with limitations
+      | limitationType | limitationValue  |
+      | Location       | /DeletedLocation |
+    And I send "/DeletedLocation" to the Trash
+    When I am logged as "admin"
+    And I go to "Roles" in "Admin" tab
+    And I go to "DeletedLocationRole" "Role" page
+    Then I should be on "Role" "DeletedLocationRole" page

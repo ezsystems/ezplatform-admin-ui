@@ -37,6 +37,8 @@ adminui:
                 - EzSystems\BehatBundle\Context\Object\ContentContext
                 - EzSystems\BehatBundle\Context\Object\ContentTypeContext
                 - EzSystems\BehatBundle\Context\Api\TestContext
+                - EzSystems\BehatBundle\Context\Object\RoleContext
+                - EzSystems\BehatBundle\Context\Object\TrashContext
 
         adminuimodules:
             paths:
