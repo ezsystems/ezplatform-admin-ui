@@ -38,7 +38,7 @@
         event.currentTarget.closest('.ibexa-toggle').classList.remove('ibexa-toggle--is-focused');
     };
 
-    toggleFields.forEach((toggleField) => toggleField.addEventListener('click', toggleState));
-    toggleInputs.forEach((toggleInput) => toggleInput.addEventListener('focus', addFocus));
-    toggleInputs.forEach((toggleInput) => toggleInput.addEventListener('blur', removeFocus));
+    toggleFields.forEach((toggleField) => toggleField.addEventListener('click', toggleState, false));
+    toggleInputs.forEach((toggleInput) => toggleInput.addEventListener('focus', addFocus, false));
+    toggleInputs.forEach((toggleInput) => toggleInput.addEventListener('blur', removeFocus, false));
 })(window, window.document);

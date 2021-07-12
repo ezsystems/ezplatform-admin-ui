@@ -149,7 +149,7 @@
 
     &__input {
         opacity: 0;
-        height: 1px;
+        height: calculateRem(1px);
         overflow: hidden;
     }
 
