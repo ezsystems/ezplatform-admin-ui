@@ -48,7 +48,11 @@
 
         &:hover,
         &:focus {
-            background-color: $ibexa-color-primary-200;
+            color: $ibexa-color-primary;
+        }
+
+        &:hover {
+             background-color: $ibexa-color-primary-200;
         }
 
         &:disabled {
@@ -172,7 +176,7 @@
     }
 }
 
-.ez-side-menu,
+.ibexa-side-menu,
 .ez-context-menu {
     .ez-sticky-container > .btn {
         width: 100%;

@@ -33,7 +33,7 @@ class LanguagePage extends Page
         $this->siteAccess = 'admin';
         $this->route = '/language/view';
         $this->pageTitle = sprintf('Language "%s"', $languageName);
-        $this->pageTitleLocator = '.ez-header h1';
+        $this->pageTitleLocator = '.ez-page-title h1';
     }
 
     public function verifyElements(): void

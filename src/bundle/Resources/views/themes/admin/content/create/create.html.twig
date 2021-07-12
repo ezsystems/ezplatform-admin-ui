@@ -6,16 +6,20 @@
     <meta name="LanguageCode" content="{{ language.languageCode }}"/>
 {% endblock %}
 
-{% block page_title %}
-    {% include '@ezdesign/content/page_title_edit.html.twig' with { 
+{% block header %}
+    {% set content_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_create.sidebar_right', [], {
+        'parent_location': parent_location,
+        'content_type': content_type,
+        'language': language,
+        'content_create_struct': content_create_struct
+    }) %}
+
+    {% include '@ezdesign/content/edit/content_header.html.twig' with {
         action_name: 'creating'|trans|desc('Creating'),
         title: 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%'),
-        description: content_type.description
+        description: content_type.description,
+        buttons_render: knp_menu_render(content_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
     } %}
-
-    <div class="ez-content-item__errors-wrapper" hidden>
-        {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
-    </div>
 {% endblock %}
 
 {% block details %}{% endblock %}
@@ -31,16 +35,6 @@
             </div>
         </div>
     </section>
-{% endblock %}
-
-{% block right_sidebar %}
-    {% set content_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_create.sidebar_right', [], {
-        'parent_location': parent_location,
-        'content_type': content_type,
-        'language': language,
-        'content_create_struct': content_create_struct
-    }) %}
-    {{ knp_menu_render(content_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
 {% block form_before %}

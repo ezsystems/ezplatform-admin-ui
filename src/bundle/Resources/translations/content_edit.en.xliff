@@ -21,15 +21,15 @@
         <target state="new">Content published.</target>
         <note>key: content.published.success</note>
       </trans-unit>
+      <trans-unit id="54b9cd13b122fd8532e1cad6bb12ef92103e9594" resname="edit.close">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: edit.close</note>
+      </trans-unit>
       <trans-unit id="f34946beab1da2af6535a8e4a88145e9557de0aa" resname="editing">
         <source>Editing</source>
         <target state="new">Editing</target>
         <note>key: editing</note>
-      </trans-unit>
-      <trans-unit id="669edeb37bec7cf4ec99288b90b02ba65e84b4cf" resname="errors.in.the.form">
-        <source>Cannot save the form. Check required Fields or validation errors.</source>
-        <target state="new">Cannot save the form. Check required Fields or validation errors.</target>
-        <note>key: errors.in.the.form</note>
       </trans-unit>
       <trans-unit id="009667fab56f0bec66634f009a75ffd9425f2987" resname="fieldtype.translation_is_disabled">
         <source>Translating the %fieldName% Field is disabled. See Content Type definition for details.</source>

@@ -30,7 +30,7 @@ class SectionsPage extends Page
         $this->siteAccess = 'admin';
         $this->route = '/section/list';
         $this->pageTitle = self::PAGE_NAME;
-        $this->pageTitleLocator = '.ez-header h1';
+        $this->pageTitleLocator = '.ez-page-title h1';
     }
 
     public function verifyElements(): void

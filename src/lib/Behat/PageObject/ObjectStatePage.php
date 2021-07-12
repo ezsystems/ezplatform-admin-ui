@@ -33,7 +33,7 @@ class ObjectStatePage extends Page
         $this->siteAccess = 'admin';
         $this->route = '/state/state';
         $this->pageTitle = sprintf('Object state: %s', $objectStateName);
-        $this->pageTitleLocator = '.ez-header h1';
+        $this->pageTitleLocator = '.ez-page-title h1';
     }
 
     public function verifyElements(): void

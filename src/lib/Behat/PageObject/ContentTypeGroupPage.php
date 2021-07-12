@@ -32,7 +32,7 @@ class ContentTypeGroupPage extends Page
         $this->groupName = $groupName;
         $this->adminList = ElementFactory::createElement($this->context, AdminList::ELEMENT_NAME, sprintf('Content Types in \'%s\'', $this->groupName), IconLinkedListTable::ELEMENT_NAME);
         $this->pageTitle = $groupName;
-        $this->pageTitleLocator = '.ez-header h1';
+        $this->pageTitleLocator = '.ez-page-title h1';
     }
 
     /**

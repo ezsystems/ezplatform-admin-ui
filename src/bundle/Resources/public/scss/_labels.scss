@@ -1,18 +1,15 @@
-.ez-label {
-    @include label-required();
-    margin-bottom: calculateRem(8px);
-    color: $ibexa-color-font-pale;
+.ibexa-label {
+    font-size: $ibexa-text-font-size;
+    line-height: calculateRem(24px);
+    letter-spacing: calculateRem(0.12px);
 
-    &.checkbox-inline,
-    &.form-check-label {
-        margin-bottom: .0625rem;
-
-        &:after {
-            content: '';
-        }
+    &--medium {
+        font-size: $ibexa-text-font-size-medium;
+        line-height: calculateRem(21px);
     }
 
-    &.form-check-label:not(.checkbox-inline) {
-        font-weight: 400;
+    &--small {
+        font-size: $ibexa-text-font-size-small;
+        line-height: calculateRem(18px);
     }
 }

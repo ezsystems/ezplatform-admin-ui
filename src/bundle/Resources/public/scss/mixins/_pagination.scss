@@ -1,12 +1,12 @@
 @mixin pagination-main-container {
     display: flex;
-    justify-content: space-between;
     background: $ibexa-white;
 }
 
 @mixin pagination-info {
     color: $ibexa-color-font-pale;
     font-size: calculateRem(14px);
+    margin-right: calculateRem(24px);
 
     strong {
         color: $ibexa-color-font;

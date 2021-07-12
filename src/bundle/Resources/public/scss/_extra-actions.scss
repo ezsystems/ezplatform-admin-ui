@@ -165,7 +165,7 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: 0;
+        right: 0;
         z-index: 2;
         transform: translate(calc(-100%), 0) scaleX(1);
         transform-origin: right center;
@@ -174,6 +174,15 @@
         &--hidden {
             transform: translate(calc(-100%), 0) scaleX(0);
             transition: $ibexa-admin-widget-close-transition;
+        }
+    }
+}
+
+// TODO: remove when redesigning !!
+.ibexa-main-container {
+    &--edit-content {
+        .ez-extra-actions {
+            top: calculateRem(52px);
         }
     }
 }

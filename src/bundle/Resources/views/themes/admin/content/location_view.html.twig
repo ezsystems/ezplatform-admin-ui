@@ -13,7 +13,20 @@
 {% endif %}
 {% form_theme form_content_create '@ezdesign/ui/form_fields.html.twig' %}
 
-{% block body_class %}ez-content-view ez-has-two-sidebars ez-has-full-width-footer{% endblock %}
+{% block body_class %}ez-content-view ez-has-full-width-footer{% endblock %}
+
+{% block left_sidebar %}
+    <div class="ibexa-side-menu">
+        <div class="ez-sticky-container">
+            {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@ezdesign/ui/menu/sidebar_left.html.twig'}) }}
+        </div>
+    </div>
+    <div class="ez-content-tree-container"
+        data-tree-root-location-id="{{ content_tree_module_root|default(ez_admin_ui_config['contentTree']['treeRootLocationId']) }}"
+        data-current-location-path="{{ location_path|default('') }}">
+        <div class="ez-content-tree-container__wrapper"></div>
+    </div>
+{% endblock %}
 
 {% block content %}
     <div id="ez-mfu"
@@ -24,10 +37,6 @@
         data-current-language="{{ app.request.get('languageCode') ?: content.prioritizedFieldLanguageCode }}"></div>
 
     <div class="row align-items-stretch ez-main-row">
-        {% block left_sidebar %}
-            {{ parent() }}
-        {% endblock left_sidebar %}
-
         <div class="px-0 ez-content-container">
             <div class="ez-header">
                 <div class="container">

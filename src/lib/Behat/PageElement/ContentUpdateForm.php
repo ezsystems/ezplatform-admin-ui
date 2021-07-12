@@ -25,9 +25,9 @@ class ContentUpdateForm extends Element
         parent::__construct($context);
         $this->fields = [
             'formElement' => '[name=ezplatform_content_forms_content_edit],[name=ezplatform_content_forms_user_create],[name=ezplatform_content_forms_user_update]',
-            'closeButton' => '.ez-content-edit-container__close',
-            'fieldLabel' => '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ez-card > .card-body > div > div > legend',
-            'nthField' => '.ez-card .card-body > div > div:nth-of-type(%s)',
+            'closeButton' => '.ez-content-edit-container__close, .ibexa-content-edit-sidebar__header .ibexa-content-edit-sidebar__back',  // TODO: Set one selector after redesign
+            'fieldLabel' => '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ez-card > .card-body > div > div > legend, .ez-field-edit--eznoneditable > legend.col-form-label',
+            'nthField' => '.ez-card .card-body > div > div > div:nth-of-type(%s)',
             'noneditableFieldClass' => 'ez-field-edit--eznoneditable',
             'fieldOfType' => '.ez-field-edit--%s',
         ];
