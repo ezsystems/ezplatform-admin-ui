@@ -42,7 +42,7 @@
     &--text {
         @include ibexa-font-sans-serif();
 
-        font-size: $ibexa-text-font-size-small;
+        font-size: $ibexa-text-font-size-medium;
         color: $ibexa-color-dark;
         line-height: calculateRem(21px);
         height: calculateRem(48px);
