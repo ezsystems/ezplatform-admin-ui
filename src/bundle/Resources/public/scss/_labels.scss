@@ -1,10 +1,9 @@
 .ibexa-label {
     @include label-required();
+    @include ibexa-font-sans-serif();
 
-    font-family: $font-family-sans-serif;
     font-size: calculateRem(12px);
     color: $ibexa-color-dark-400;
-    letter-spacing: 0.12px;
     line-height: calculateRem(18px);
     margin-top: calculateRem(20px);
     margin-bottom: calculateRem(8px);

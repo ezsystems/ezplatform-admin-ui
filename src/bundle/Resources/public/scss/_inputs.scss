@@ -40,10 +40,10 @@
     }
 
     &--text {
-        font-family: $font-family-sans-serif;
+        @include ibexa-font-sans-serif();
+
         font-size: $small-font-size;
         color: $ibexa-color-dark;
-        letter-spacing: 0.12px;
         line-height: calculateRem(21px);
         height: calculateRem(48px);
         padding-right: calculateRem(36px);
@@ -205,11 +205,11 @@
         height: calculateRem(24px);
         padding: 0;
         fill: $ibexa-color-dark;
+    }
 
-        .ibexa-icon {
-            width: calculateRem(8px);
-            height: calculateRem(8px);
-        }
+    &__clear-btn-icon {
+        width: calculateRem(8px);
+        height: calculateRem(8px);
     }
 }
 
