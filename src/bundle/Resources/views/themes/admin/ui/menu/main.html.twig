@@ -14,7 +14,7 @@
 
 {% block linkElement %}
     {% import 'knp_menu.html.twig' as knp_menu %}
-    
+
     {% set classes = [
         'ibexa-main-menu__item-action',
         ((matcher.isCurrent(item) ? options.currentClass)),
@@ -24,9 +24,19 @@
     {% set link_attributes = item.linkAttributes|merge({
         'href': item.uri, 
         'aria-controls': item.name, 
-        'class': classes|join(' ')
+        'class': classes|join(' '),
     }) %}
-    
+
+    {# {% if item.extras.tooltip.class is defined %}
+        {% set link_attributes = link_attributes|merge({
+            'data-tooltip-extra-class': item.extras.tooltip.class,
+        }) %}
+    {% endif %} #}
+
+    {# {% set link_attributes = link_attributes|merge({
+        'data-extra-class': item.attributes['tooltip-class'], 
+    }) %} #}
+
     <a{{ knp_menu.attributes(link_attributes) }}>
         {{ block('label') }}
     </a>

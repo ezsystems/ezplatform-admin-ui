@@ -60,8 +60,8 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
                     'attributes' => [
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => '#role_copy_copy',
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
+                        'data-tooltip-extra-classes' => 'ibexa-tooltip--medium',
+                        'data-tooltip-placement' => 'left',
                         'title' => $this->translator->trans(
 /** @Ignore */ self::ITEM__SAVE,
                             [],
@@ -75,8 +75,8 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
                 self::ITEM__CANCEL,
                 [
                     'attributes' => [
-                        'data-extra-classes' => 'ez-tooltip--medium',
-                        'data-placement' => 'left',
+                        'data-tooltip-extra-classes' => 'ibexa-tooltip--medium',
+                        'data-tooltip-placement' => 'left',
                         'title' => $this->translator->trans(
 /** @Ignore */ self::ITEM__CANCEL,
                             [],

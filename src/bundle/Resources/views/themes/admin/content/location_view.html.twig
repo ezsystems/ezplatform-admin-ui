@@ -25,7 +25,7 @@
 
     {% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], main_menu_context) %}
         <nav class="ibexa-main-menu">
-            <div class="ibexa-main-menu__navbar">
+            <div class="ibexa-main-menu__navbar ibexa-main-menu__navbar--first-level">
                 {{ knp_menu_render(main_menu, {
                     'depth': 1,
                     'template': '@ezdesign/ui/menu/main.html.twig',

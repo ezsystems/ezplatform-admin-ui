@@ -1,4 +1,4 @@
-.ez-tooltip {
+.ibexa-tooltip {
     z-index: 1500;
 
     &.show {
@@ -38,55 +38,84 @@
     }
 
     &__inner {
-        padding: calulateRem(4px) calcuateRem(10px);
-        max-width: calculateRem(250px);
+        padding: calulateRem(8px) calcuateRem(16px);
+        max-width: calculateRem(300px);
         border: calculateRem(1px) solid $ibexa-color-base-light;
-        border-radius: calculateRem(4px);
+        border-radius: $ibexa-border-radius;
         background-color: $ibexa-white;
         color: $ibexa-color-font;
-        font-size: calculateRem(11px);
-        font-weight: 700;
+        font-size: $ibexa-text-font-size-medium;
         text-align: left;
-        line-height: calculateRem(14px);
+        line-height: calculateRem(21px);
         box-shadow: 0 calculateRem(4px) calculateRem(6px) rgba(135, 135, 135, 0.35);
     }
 
-    &--medium &__inner {
-        padding: calculateRem(8px) calculateRem(16px);
-        font-size: calculateRem(14px);
-        line-height: calculateRem(15px);
-    }
-
     &--ground-dark {
-        .ez-tooltip {
+        .ibexa-tooltip {
             &__inner {
                 color: $ibexa-white;
                 background-color: $ibexa-color-ground-dark;
             }
         }
 
-        &.ez-tooltip {
-            &.bs-tooltip-top .ez-tooltip__arrow {
+        &.ibexa-tooltip {
+            &.bs-tooltip-top .ibexa-tooltip__arrow {
                 &::before {
                     border-top-color: $ibexa-color-ground-dark;
                 }
             }
 
-            &.bs-tooltip-right .ez-tooltip__arrow {
+            &.bs-tooltip-right .ibexa-tooltip__arrow {
                 &::before {
                     border-right-color: $ibexa-color-ground-dark;
                 }
             }
 
-            &.bs-tooltip-bottom .ez-tooltip__arrow {
+            &.bs-tooltip-bottom .ibexa-tooltip__arrow {
                 &::before {
                     border-bottom-color: $ibexa-color-ground-dark;
                 }
             }
 
-            &.bs-tooltip-left .ez-tooltip__arrow {
+            &.bs-tooltip-left .ibexa-tooltip__arrow {
                 &::before {
                     border-left-color: $ibexa-color-ground-dark;
+                }
+            }
+        }
+    }
+
+    &--info-neon {
+        .ibexa-tooltip {
+            &__inner {
+                color: $ibexa-color-dark;
+                background-color: $ibexa-color-info;
+                border-color: transparent;
+            }
+        }
+
+        &.ibexa-tooltip {
+            &.bs-tooltip-top .ibexa-tooltip__arrow {
+                &::before {
+                    border-top-color: $ibexa-color-info;
+                }
+            }
+
+            &.bs-tooltip-right .ibexa-tooltip__arrow {
+                &::before {
+                    border-right-color: $ibexa-color-info;
+                }
+            }
+
+            &.bs-tooltip-bottom .ibexa-tooltip__arrow {
+                &::before {
+                    border-bottom-color: $ibexa-color-info;
+                }
+            }
+
+            &.bs-tooltip-left .ibexa-tooltip__arrow {
+                &::before {
+                    border-left-color: $ibexa-color-info;
                 }
             }
         }

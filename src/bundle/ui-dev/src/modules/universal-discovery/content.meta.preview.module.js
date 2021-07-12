@@ -90,7 +90,7 @@ const ContentMetaPreview = () => {
                     className="c-content-meta-preview__toggle-bookmark-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     onClick={toggleBookmarked}
                     title={bookmarkLabel}
-                    data-placement="left"
+                    data-tooltip-placement="left"
                     data-tooltip-container-selector=".c-content-meta-preview">
                     <Icon name={bookmarkIconName} extraClasses="ibexa-icon--small" />
                 </button>

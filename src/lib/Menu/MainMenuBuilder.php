@@ -170,14 +170,22 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
         $menu->addChild($this->factory->createItem(self::ITEM_DASHBOARD, [ 
                 'route' => 'ezplatform.dashboard',
+                'attributes' => [
+                    'data-tooltip-placement' => 'right',
+                    'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
+                ],
                 'extras' => [
                     'icon' => 'dashboard',
-                    'orderNumber' => 20
+                    'orderNumber' => 20,
                 ]
             ] 
         ));
         
-        $menu->addChild($this->factory->createItem(self::ITEM_CONTENT, [ 
+        $menu->addChild($this->factory->createItem(self::ITEM_CONTENT, [
+                'attributes' => [
+                    'data-tooltip-placement' => 'right',
+                    'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
+                ],
                 'extras' => [
                     'icon' => 'relations',
                     'orderNumber' => 40
