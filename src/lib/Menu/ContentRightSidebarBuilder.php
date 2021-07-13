@@ -8,14 +8,12 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
-use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\LanguageLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
@@ -57,20 +55,11 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    private $contentTypeService;
-
     /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
     /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
     private $udwExtension;
-
-    /** @var \eZ\Publish\API\Repository\ContentService */
-    private $contentService;
-
-    /** @var \eZ\Publish\API\Repository\LocationService */
-    private $locationService;
 
     /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
     private $permissionChecker;
@@ -100,11 +89,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver,
         ConfigResolverInterface $configResolver,
-        ContentTypeService $contentTypeService,
         SearchService $searchService,
         UniversalDiscoveryExtension $udwExtension,
-        ContentService $contentService,
-        LocationService $locationService,
         PermissionCheckerInterface $permissionChecker,
         array $userContentTypeIdentifier,
         array $userGroupContentTypeIdentifier
@@ -113,11 +99,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
-        $this->contentTypeService = $contentTypeService;
         $this->searchService = $searchService;
         $this->udwExtension = $udwExtension;
-        $this->contentService = $contentService;
-        $this->locationService = $locationService;
         $this->permissionChecker = $permissionChecker;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
         $this->userGroupContentTypeIdentifier = $userGroupContentTypeIdentifier;
@@ -440,9 +423,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         foreach ($createPolicies as $createPolicy) {
             $sectionId = $content->contentInfo->sectionId;
             if (
-                !empty($createPolicy['limitation']) &&
-                $createPolicy['limitation'] instanceof SectionLimitation &&
-                !in_array($sectionId, $createPolicy['limitation']->limitationValues)
+                !empty($createPolicy['limitation'])
+                && $createPolicy['limitation'] instanceof SectionLimitation
+                && !in_array($sectionId, $createPolicy['limitation']->limitationValues)
             ) {
                 return false;
             }
@@ -457,7 +440,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                         return false;
                     }
 
-                    if ($limitation instanceof ContentType && !in_array($content->getContentType()->id, $limitation->limitationValues)) {
+                    if ($limitation instanceof ContentTypeLimitation && !in_array($content->getContentType()->id, $limitation->limitationValues)) {
                         return false;
                     }
 
