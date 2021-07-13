@@ -1,9 +1,9 @@
 (function (global, doc, $, eZ) {
-    const textInputClearBtns = doc.querySelectorAll('.ibexa-input-wrapper__clear-btn');
+    const textInputClearBtns = doc.querySelectorAll('.ibexa-input-text-wrapper__clear-btn');
     const textInputsInvalid = doc.querySelectorAll('.ibexa-input--text.is-invalid');
     const textInputsInvalidOriginalValuesMap = new Map();
     const clearText = (event) => {
-        const inputWrapper = event.target.closest('.ibexa-input-wrapper');
+        const inputWrapper = event.target.closest('.ibexa-input-text-wrapper');
         const textInput = inputWrapper.querySelector('.ibexa-input--text');
 
         textInput.value = '';
