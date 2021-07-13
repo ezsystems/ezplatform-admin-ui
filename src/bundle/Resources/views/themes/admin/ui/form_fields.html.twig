@@ -182,6 +182,11 @@
     </div>
 {%- endblock -%}
 
+{% block textarea_widget -%}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input ibexa-input--textarea')|trim}) %}
+    {{- parent() -}}
+{%- endblock textarea_widget %}
+
 {%- block richtext_widget -%}
     {% set attr = attr|merge({ 'hidden': true }) %}
 
