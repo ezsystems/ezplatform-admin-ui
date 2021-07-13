@@ -181,7 +181,7 @@
 {%- endblock -%}
 
 {% block textarea_widget -%}
-    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input--textarea')|trim}) %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input ibexa-input--textarea')|trim}) %}
     {{- parent() -}}
 {%- endblock textarea_widget %}
 
