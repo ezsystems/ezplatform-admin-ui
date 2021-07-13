@@ -15,7 +15,7 @@ use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\AdminUi\Behat\Component\Dialog;
 use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
-use PHPUnit\Framework\Assert;
+use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 
 class ObjectStateGroupPage extends Page
 {
@@ -107,10 +107,11 @@ class ObjectStateGroupPage extends Page
 
     public function verifyIsLoaded(): void
     {
-        Assert::assertEquals(
-            sprintf('Object state group: %s', $this->expectedObjectStateGroupName),
-            $this->getHTMLPage()->find($this->getLocator('pageTitle'))->getText()
-        );
+        $this->getHTMLPage()
+            ->setTimeout(3)
+            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('objectStatesTable')))
+            ->find($this->getLocator('pageTitle'))
+            ->assert()->textEquals(sprintf('Object state group: %s', $this->expectedObjectStateGroupName));
     }
 
     public function getName(): string
@@ -122,8 +123,8 @@ class ObjectStateGroupPage extends Page
     {
         return [
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
-            new VisibleCSSLocator('propertiesTable', '.ez-container:nth-of-type(1)'),
-            new VisibleCSSLocator('objectStatesTable', '.ez-container:nth-of-type(2)'),
+            new VisibleCSSLocator('propertiesTable', '.ez-container > .ez-table'),
+            new VisibleCSSLocator('objectStatesTable', '[name="object_states_delete"]'),
             new VisibleCSSLocator('createButton', '.ibexa-icon--create'),
             new VisibleCSSLocator('deleteButton', '.ibexa-icon--trash'),
         ];
