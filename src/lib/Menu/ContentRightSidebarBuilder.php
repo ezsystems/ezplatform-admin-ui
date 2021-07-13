@@ -430,11 +430,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 return false;
             }
 
-            if (empty($createPolicy['policies'])) {
-                return true;
-            }
-
-            foreach ($createPolicy['policies'] as $policy) {
+            foreach ($createPolicy['policies'] ?? [] as $policy) {
                 foreach ($policy->limitations as $limitation) {
                     if ($limitation instanceof SectionLimitation && !in_array($sectionId, $limitation->limitationValues)) {
                         return false;
