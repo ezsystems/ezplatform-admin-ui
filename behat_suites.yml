@@ -1,96 +1,51 @@
-# This file is meant to be imported from ezplatform's behat.yml.dist.
-# All path are relative to the root ezplatform directory.
-default:
+browser:
     extensions:
         Behat\MinkExtension:
             files_path: '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/src/lib/Behat/TestFiles/'
-
-adminui:
     suites:
-        adminui:
+        admin-ui:
             paths:
               - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard'
             filters:
-                tags: "@common,~@broken"
-            contexts:
+                tags: "~@broken"
+            contexts: 
                 - EzSystems\Behat\API\Context\ContentTypeContext
                 - EzSystems\Behat\API\Context\ContentContext
                 - EzSystems\Behat\API\Context\TestContext
-                - EzSystems\Behat\Browser\Context\BrowserContext
-                - EzSystems\Behat\Browser\Context\Hooks
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AdministrationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentViewContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AdminUpdateContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentUpdateContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentPreviewContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\LeftMenuContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\TrashContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentTypeContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RolesContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SystemInfoContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SectionsContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ObjectStatesContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\SearchContext
-
-        adminuimodules:
-            paths:
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentTypeFields.feature'
-            filters:
-                tags: "@common,~@broken"
-            contexts:
-                - EzSystems\Behat\API\Context\ContentTypeContext
-                - EzSystems\Behat\API\Context\ContentContext
-                - EzSystems\Behat\API\Context\TestContext
-                - EzSystems\Behat\Browser\Context\BrowserContext
-                - EzSystems\Behat\Browser\Context\Hooks
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentViewContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentUpdateContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
-
-        richtext:
-            paths:
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentCreation.feature'
-                - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/standard/ContentDraft.feature'
-            filters:
-                tags: "@common,~@broken"
-            contexts:
-                - EzSystems\Behat\Browser\Context\BrowserContext
-                - EzSystems\Behat\Browser\Context\Hooks
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentViewContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentUpdateContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentPreviewContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\TrashContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\DashboardContext
+                - EzSystems\Behat\API\Context\TrashContext
+                - Ibexa\Behat\Browser\Context\DebuggingContext
+                - Ibexa\Behat\Browser\Context\AuthenticationContext
+                - Ibexa\AdminUi\Behat\BrowserContext\NavigationContext
+                - Ibexa\AdminUi\Behat\BrowserContext\RightMenuContext
+                - Ibexa\AdminUi\Behat\BrowserContext\UDWContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentViewContext
+                - Ibexa\AdminUi\Behat\BrowserContext\AdminUpdateContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentUpdateContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentPreviewContext
+                - Ibexa\AdminUi\Behat\BrowserContext\NotificationContext
+                - Ibexa\AdminUi\Behat\BrowserContext\TrashContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentTypeContext
+                - Ibexa\AdminUi\Behat\BrowserContext\RolesContext
+                - Ibexa\AdminUi\Behat\BrowserContext\SystemInfoContext
+                - Ibexa\AdminUi\Behat\BrowserContext\SectionsContext
+                - Ibexa\AdminUi\Behat\BrowserContext\LanguageContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ObjectStatesContext
+                - Ibexa\AdminUi\Behat\BrowserContext\DashboardContext
+                - Ibexa\AdminUi\Behat\BrowserContext\SearchContext
 
         personas:
             paths:
                 - '%paths.base%/vendor/ezsystems/ezplatform-admin-ui/features/personas'
             contexts:
-                - EzSystems\Behat\Browser\Context\BrowserContext
-                - EzSystems\Behat\Browser\Context\Hooks
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\AuthenticationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NavigationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentViewContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentUpdateContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\ContentPreviewContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\RightMenuContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\LeftMenuContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\NotificationContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\TrashContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UDWContext
-                - EzSystems\EzPlatformAdminUi\Behat\BusinessContext\UserPreferencesContext
+                - Ibexa\Behat\Browser\Context\DebuggingContext
+                - Ibexa\Behat\Browser\Context\AuthenticationContext
+                - Ibexa\AdminUi\Behat\BrowserContext\NavigationContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentViewContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentUpdateContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentPreviewContext
+                - Ibexa\AdminUi\Behat\BrowserContext\RightMenuContext
+                - Ibexa\AdminUi\Behat\BrowserContext\LeftMenuContext
+                - Ibexa\AdminUi\Behat\BrowserContext\NotificationContext
+                - Ibexa\AdminUi\Behat\BrowserContext\TrashContext
+                - Ibexa\AdminUi\Behat\BrowserContext\UDWContext
+                - Ibexa\AdminUi\Behat\BrowserContext\UserPreferencesContext
