@@ -1,0 +1,49 @@
+imports:
+  - { resource: services/test/fields.yaml }
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Ibexa\AdminUi\Behat\Component\DateAndTimePopup: ~
+
+  Ibexa\AdminUi\Behat\Component\Notification: ~
+
+  Ibexa\AdminUi\Behat\Component\Breadcrumb: ~
+
+  Ibexa\AdminUi\Behat\Component\Dialog: ~
+
+  Ibexa\AdminUi\Behat\Component\Pagination: ~
+
+  Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget: ~
+
+  Ibexa\AdminUi\Behat\Component\ContentItemAdminPreview:
+    arguments:
+      $fieldTypeComponents: !tagged_iterator ibexa.testing.browser.component.field_type
+
+  Ibexa\AdminUi\Behat\Component\DraftConflictDialog: ~
+
+  Ibexa\AdminUi\Behat\Component\UpperMenu: ~
+
+  Ibexa\AdminUi\Behat\Component\RightMenu: ~
+
+  Ibexa\AdminUi\Behat\Component\UserNotificationPopup: ~
+
+  Ibexa\AdminUi\Behat\Component\ContentTypePicker: ~
+
+  Ibexa\AdminUi\Behat\Component\LanguagePicker: ~
+
+  Ibexa\AdminUi\Behat\Component\SubItemsList: ~
+
+  Ibexa\AdminUi\Behat\Component\LeftMenu: ~
+
+  Ibexa\AdminUi\Behat\Component\TableNavigationTab: ~
+
+  Ibexa\AdminUi\Behat\Component\Table\TableBuilder:
+    shared: false
+
+  Ibexa\AdminUi\Behat\Component\Table\TableRowFactory: ~
+
+  Ibexa\AdminUi\Behat\Component\Table\SubitemsGrid: ~

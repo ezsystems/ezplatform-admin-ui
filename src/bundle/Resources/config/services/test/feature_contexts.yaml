@@ -1,0 +1,47 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Ibexa\AdminUi\Behat\BrowserContext\AdminUpdateContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\ContentViewContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\ObjectStatesContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\SystemInfoContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\AdministrationContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\DashboardContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\RightMenuContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\TrashContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\ContentPreviewContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\LeftMenuContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\RolesContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\UDWContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\ContentTypeContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\NavigationContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\SearchContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\UserNotificationContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\ContentUpdateContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\NotificationContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\SectionsContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\LanguageContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\UserPreferencesContext: ~

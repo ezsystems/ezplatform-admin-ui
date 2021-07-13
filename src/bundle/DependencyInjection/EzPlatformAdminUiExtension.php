@@ -19,7 +19,7 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
     /**
      * Loads a specific configuration.
      *
-     * @param array $configs An array of configuration values
+     * @param array            $configs   An array of configuration values
      * @param ContainerBuilder $container A ContainerBuilder instance
      *
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
@@ -35,16 +35,16 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $loader->load('services.yaml');
         $loader->load('role.yaml');
 
-        $environment = $container->getParameter('kernel.environment');
-        if ($environment === 'behat') {
-            $loader->load('services/feature_contexts.yaml');
+        $shouldLoadTestServices = $this->shouldLoadTesttServices($container);
+        if ($shouldLoadTestServices) {
+            $loader->load('services/test/feature_contexts.yaml');
+            $loader->load('services/test/pages.yaml');
+            $loader->load('services/test/components.yaml');
         }
     }
 
     /**
      * Allow an extension to prepend the extension configurations.
-     *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function prepend(ContainerBuilder $container)
     {
@@ -57,9 +57,6 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $this->prependJMSTranslation($container);
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     private function prependViews(ContainerBuilder $container): void
     {
         $configFile = __DIR__ . '/../Resources/config/views.yaml';
@@ -68,9 +65,6 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $container->addResource(new FileResource($configFile));
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     private function prependImageVariations(ContainerBuilder $container)
     {
         $imageConfigFile = __DIR__ . '/../Resources/config/image_variations.yaml';
@@ -79,9 +73,6 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $container->addResource(new FileResource($imageConfigFile));
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     private function prependUniversalDiscoveryWidget(ContainerBuilder $container)
     {
         $udwConfigFile = __DIR__ . '/../Resources/config/universal_discovery_widget.yaml';
@@ -90,9 +81,6 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $container->addResource(new FileResource($udwConfigFile));
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     private function prependEzDesignConfiguration(ContainerBuilder $container)
     {
         $eZDesignConfigFile = __DIR__ . '/../Resources/config/ezdesign.yaml';
@@ -102,9 +90,6 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $container->addResource(new FileResource($eZDesignConfigFile));
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     private function prependAdminUiFormsConfiguration(ContainerBuilder $container)
     {
         $adminUiFormsConfigFile = __DIR__ . '/../Resources/config/admin_ui_forms.yaml';
@@ -113,9 +98,6 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $container->addResource(new FileResource($adminUiFormsConfigFile));
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     private function prependBazingaJsTranslationConfiguration(ContainerBuilder $container)
     {
         $configFile = __DIR__ . '/../Resources/config/bazinga_js_translation.yaml';
@@ -124,9 +106,6 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
         $container->addResource(new FileResource($configFile));
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     private function prependJMSTranslation(ContainerBuilder $container): void
     {
         $container->prependExtensionConfig('jms_translation', [
@@ -142,5 +121,11 @@ class EzPlatformAdminUiExtension extends Extension implements PrependExtensionIn
                 ],
             ],
         ]);
+    }
+
+    private function shouldLoadTesttServices(ContainerBuilder $container): bool
+    {
+        return $container->hasParameter('ibexa.testing.browser.enabled')
+            && true === $container->getParameter('ibexa.testing.browser.enabled');
     }
 }
