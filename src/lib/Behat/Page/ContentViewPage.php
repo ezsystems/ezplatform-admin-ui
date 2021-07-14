@@ -216,7 +216,7 @@ class ContentViewPage extends Page
     {
         $this->getHTMLPage()->find($this->getLocator('mainContainer'))->assert()->isVisible();
         $this->rightMenu->verifyIsLoaded();
-        Assert::assertContains(
+        Assert::assertStringContainsString(
             $this->expectedContentName,
             $this->breadcrumb->getBreadcrumb(),
             'Breadcrumb shows invalid path'

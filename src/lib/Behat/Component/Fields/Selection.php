@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component\Fields;
 
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
-use Ibexa\Behat\Browser\Locator\CssLocatorBuilder;
+use Ibexa\Behat\Browser\Locator\CSSLocatorBuilder;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 
 class Selection extends FieldTypeComponent
