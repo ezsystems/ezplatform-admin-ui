@@ -2,8 +2,8 @@
 
 {% block form_label -%}
     {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ibexa-label')|trim}) -%}
-    {%- set is_not_only_errors = label is not same as(false) -%}
-    {% if is_not_only_errors -%}
+    {%- set is_only_errors = label is same as(false) -%}
+    {% if not is_only_errors -%}
         {{ parent() }}
     {%- endif -%}
 {%- endblock form_label %}
@@ -255,8 +255,7 @@
 
 {% block form_errors -%}
     {%- if errors|length > 0 -%}
-        {%- set form_errors_attr = form_errors_attr|default({}) -%}
-        {%- set form_errors_attr = form_errors_attr|merge({class: (form_errors_attr.class|default('') ~ ' ibexa-form-error')|trim}) -%}
+        {%- set form_errors_attr = form_errors_attr|default({})|merge({class: (form_errors_attr.class|default('') ~ ' ibexa-form-error')|trim}) -%}
         {%- for error in errors -%}
             <em {% with { attr: form_errors_attr } %}{{ block('attributes') }}{% endwith %}>
                 <svg class="ibexa-icon ibexa-icon--small ibexa-form-error__icon">
@@ -271,7 +270,7 @@
 {% block form_label_errors %}{% endblock form_label_errors %}
 
 {%- block form_widget_simple -%}
-    {%- set is_text_input = type is not defined or type is empty or type == 'text' -%}
+    {%- set is_text_input = type|default('text') == 'text' -%}
     {%- if is_text_input -%}
         {%- set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input ibexa-input--text')|trim}) -%}
         {%- set empty_placeholder_for_hiding_clear_btn_with_css = ' ' -%}
@@ -292,7 +291,6 @@
 {% block form_help -%}
     {%- if help is not empty -%}
         {%- set help_attr = help_attr|merge({class: (help_attr.class|default('') ~ ' ibexa-form-help')|trim}) -%}
-        {%- set help_attr = help_attr|merge({class: (help_attr.class|default('') ~ ' form-text text-muted')|trim}) -%}
         <small id="{{ id }}_help"{% with { attr: help_attr } %}{{ block('attributes') }}{% endwith %}>
             <svg class="ibexa-icon ibexa-icon--small ibexa-form-help__icon">
                 <use xlink:href="{{ ibexa_icon_path('system-information') }}"></use>

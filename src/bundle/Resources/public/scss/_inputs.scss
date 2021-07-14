@@ -87,14 +87,13 @@
 
     &--checkbox,
     &--radio {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
         position: relative;
         display: inline-block;
         vertical-align: middle;
         margin-top: 0;
-
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
 
         &:hover {
             cursor: pointer;
