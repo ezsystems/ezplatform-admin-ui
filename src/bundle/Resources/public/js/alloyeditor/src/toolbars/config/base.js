@@ -41,7 +41,7 @@ export default class EzConfigBase {
             const scrollLeft = parseInt(block.$.scrollLeft, 10);
             const blockLeftMargin = block.$.offsetLeft;
             const blockWidth = block.$.offsetWidth;
-            const toolbarWidth = document.querySelector('.ae-toolbar-floating').offsetWidth;
+            const toolbarWidth = document.querySelector('.ae-toolbar-styles').offsetWidth;
             const maxLeft = blockWidth - toolbarWidth;
 
             range.selectNodeContents(positionReference.$);
