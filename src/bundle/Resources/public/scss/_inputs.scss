@@ -39,14 +39,13 @@
         border-color: $ibexa-color-dark-200;
     }
 
-    &--text {
+    &--text,
+    &--textarea {
         @include ibexa-font-sans-serif();
 
         font-size: $ibexa-text-font-size-medium;
         color: $ibexa-color-dark;
         line-height: calculateRem(21px);
-        height: calculateRem(48px);
-        padding-right: calculateRem(36px);
         border: calculateRem(1px) solid $ibexa-color-dark-200;
         border-radius: $ibexa-border-radius;
         position: relative;
@@ -77,12 +76,24 @@
             border-color: $ibexa-color-danger;
             background-color: $ibexa-color-danger-100;
         }
+    }
+
+    &--text {
+        height: calculateRem(48px);
+        padding-right: calculateRem(36px);
 
         &.ibexa-input--small {
             height: calculateRem(32px);
             padding-top: 0;
             padding-bottom: 0;
         }
+    }
+
+    &--textarea {
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition, box-shadow 0s; // Chrome does not render box-shadow properly with transition
+        width: calculateRem(288px);
+        height: calculateRem(120px);
+        padding: calculateRem(10px) calculateRem(16px);
     }
 
     &--checkbox,
