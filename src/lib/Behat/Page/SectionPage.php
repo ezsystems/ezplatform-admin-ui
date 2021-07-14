@@ -15,7 +15,7 @@ use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\AdminUi\Behat\Component\Dialog;
 use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
-use PHPUnit\Framework\Assert;
+use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 
 class SectionPage extends Page
 {
@@ -125,10 +125,11 @@ class SectionPage extends Page
 
     public function verifyIsLoaded(): void
     {
-        Assert::assertEquals(
-            sprintf('Section: %s', $this->expectedSectionName),
-            $this->getHTMLPage()->find($this->getLocator('pageTitle'))->getText()
-        );
+        $this->getHTMLPage()
+            ->setTimeout(3)
+            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('contentItemsTable')))
+            ->find($this->getLocator('pageTitle'))
+            ->assert()->textEquals(sprintf('Section: %s', $this->expectedSectionName));
     }
 
     public function getName(): string
@@ -140,9 +141,9 @@ class SectionPage extends Page
     {
         return [
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
-            new VisibleCSSLocator('contentItemsTable', '.ez-container:nth-of-type(2)'),
+            new VisibleCSSLocator('contentItemsTable', '.ez-container ~ .ez-container'),
             new VisibleCSSLocator('assignButton', '#section_content_assign_locations_select_content'),
-            new VisibleCSSLocator('sectionInfoTable', '.ez-container:nth-of-type(1)'),
+            new VisibleCSSLocator('sectionInfoTable', '.ez-container > .ez-table'),
             new VisibleCSSLocator('deleteButton', 'button[data-original-title="Delete Section"]'),
         ];
     }

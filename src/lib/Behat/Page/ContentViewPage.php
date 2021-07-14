@@ -276,7 +276,7 @@ class ContentViewPage extends Page
         return [
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
             new VisibleCSSLocator('contentType', '.ez-page-title h4'),
-            new VisibleCSSLocator('mainContainer', '#ez-tab-list-content-location-view'),
+            new VisibleCSSLocator('mainContainer', '.ibexa-tab-content #ibexa-tab-location-view-content'),
             new VisibleCSSLocator('tab', '#ibexa-tab-label-location-view-locations'),
             new VisibleCSSLocator('addLocationButton', '#ibexa-tab-location-view-locations .ez-table-header__tools .ibexa-btn--udw-add'),
         ];
