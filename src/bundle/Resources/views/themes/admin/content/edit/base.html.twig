@@ -10,11 +10,12 @@
 
 {% if grouped_fields|length < 2 %}
     {% set extra_main_class = extra_main_class ~ ' ibexa-main-container--without-grouped-fields' %}
+{% else %}
+    {% set extra_main_class = extra_main_class ~ ' ibexa-main-container--with-grouped-fields' %}
 {% endif %}
 
 {% block main_container_class %}{{ extra_main_class }}{% endblock %}
-{% block navigation %}{% endblock %}
-
+{% block header_row %}{% endblock %}
 
 {% block left_sidebar %}
     <div class="ibexa-content-edit-sidebar">

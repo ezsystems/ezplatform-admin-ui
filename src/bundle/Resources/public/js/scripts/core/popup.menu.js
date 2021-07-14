@@ -10,7 +10,7 @@
             this.handleToggle = this.handleToggle.bind(this);
             this.handleClickOutsidePopupMenu = this.handleClickOutsidePopupMenu.bind(this);
 
-            doc.addEventListener('click', this.handleToggle, false);
+            this.triggerElement.addEventListener('click', this.handleToggle, false);
             doc.addEventListener('click', this.handleClickOutsidePopupMenu, false);
         }
 
@@ -54,7 +54,7 @@
 
         handleToggle() {
             this.popupMenuElement.classList.toggle(CLASS_POPUP_MENU_HIDDEN);
-            this.adapt();
+            this.updatePosition();
         }
 
         handleClickOutsidePopupMenu(event) {
@@ -68,7 +68,7 @@
             this.popupMenuElement.classList.add(CLASS_POPUP_MENU_HIDDEN);
         }
 
-        adapt() {
+        updatePosition() {
             const isHidden = this.popupMenuElement.classList.contains(CLASS_POPUP_MENU_HIDDEN);
 
             if (isHidden) {

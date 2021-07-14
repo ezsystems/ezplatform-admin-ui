@@ -143,6 +143,10 @@ select {
     }
 }
 
+.ez-content-view .ez-content-container {
+    margin-right: calculateRem(80px); //Please delete after redsign context menu on content view
+}
+
 .ez-info-view,
 .ez-content-view,
 .ez-content-type-view,
