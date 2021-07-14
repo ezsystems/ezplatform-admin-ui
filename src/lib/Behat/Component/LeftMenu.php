@@ -24,16 +24,11 @@ class LeftMenu extends Component
         $this->getHTMLPage()->find($this->getLocator('menuSelector'))->assert()->isVisible();
     }
 
-    public function browse(): void
-    {
-        $this->clickButton('Browse');
-    }
-
     protected function specifyLocators(): array
     {
         return [
             new VisibleCSSLocator('buttonSelector', '.ez-sticky-container .btn'),
-            new VisibleCSSLocator('menuSelector', '.ibexa-side-menu'),
+            new VisibleCSSLocator('menuSelector', '.ibexa-main-menu'),
         ];
     }
 }

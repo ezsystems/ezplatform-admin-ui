@@ -90,19 +90,6 @@ class ContentViewContext implements Context
     }
 
     /**
-     * @Given I open UDW and go to :itemPath
-     */
-    public function iOpenUDWAndGoTo(string $itemPath): void
-    {
-        $this->leftMenu->verifyIsLoaded();
-        $this->leftMenu->browse();
-
-        $this->universalDiscoveryWidget->verifyIsLoaded();
-        $this->universalDiscoveryWidget->selectContent($this->argumentParser->replaceRootKeyword($itemPath));
-        $this->universalDiscoveryWidget->openPreview();
-    }
-
-    /**
      * @Then there's a :itemName :itemType on Subitems list
      */
     public function verifyThereIsItemInSubItemList(string $itemName, string $itemType): void

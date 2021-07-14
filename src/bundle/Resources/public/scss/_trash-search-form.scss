@@ -4,6 +4,7 @@
     &__inputs-group {
         display: flex;
         justify-content: space-between;
+        flex-flow: wrap;
     }
 
     &__item {

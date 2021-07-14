@@ -53,12 +53,12 @@ class UpperMenu extends Component
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('menuButton', '.ez-main-nav .nav-link'),
-            new VisibleCSSLocator('submenuButton', '.ez-main-sub-nav .nav-link'),
+            new VisibleCSSLocator('menuButton', '.ibexa-main-menu__navbar--first-level .ibexa-main-menu__item-action'),
+            new VisibleCSSLocator('submenuButton', '.ibexa-main-menu__navbar--second-level .ibexa-main-menu__item-action'),
             new VisibleCSSLocator('dashboardLink', '.navbar-brand'),
-            new VisibleCSSLocator('pendingNotificationsCount', '.ez-user-menu__name-wrapper .n-pending-notifications'),
-            new VisibleCSSLocator('userSettingsToggle', '.ez-user-menu__name-wrapper'),
-            new VisibleCSSLocator('userSettingsItem', '.ez-user-menu__item'),
+            new VisibleCSSLocator('pendingNotificationsCount', '.ibexa-header-user-menu .n-pending-notifications'),
+            new VisibleCSSLocator('userSettingsToggle', '.ibexa-header-user-menu'),
+            new VisibleCSSLocator('userSettingsItem', '.ibexa-popup-menu__item'),
         ];
     }
 }

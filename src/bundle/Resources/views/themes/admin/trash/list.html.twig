@@ -6,18 +6,12 @@
 {% form_theme form_trash_item_delete '@ezdesign/ui/form_fields.html.twig' %}
 {% form_theme form_search '@ezdesign/ui/form_fields.html.twig' %}
 
-{% block body_class %}ez-trash-list-view ez-has-two-sidebars ez-has-full-width-footer{% endblock %}
-
-{% block side_column %}{% endblock %}
+{% block body_class %}ez-trash-list-view ez-has-two-sidebars{% endblock %}
 
 {% block content %}
     {%  set trashSearchParams = app.request.get('trash_search') %}
 
     <div class="row align-items-stretch ez-main-row">
-        {% block left_sidebar %}
-            {{ parent() }}
-        {% endblock left_sidebar %}
-
         <div class="container ez-content-container">
             <div class="ez-header mt-5">
                 <div class="container">
