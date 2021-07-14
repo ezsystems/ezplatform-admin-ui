@@ -1,68 +1,126 @@
 .ibexa-main-menu {
+    position: relative;
     display: flex;
-    height: calc(100vh - #{calculateRem(72px)});
+    height: 100%;
+    min-height: calc(100vh - #{calculateRem(72px)});
+    background-color: $ibexa-color-black;
     
     &__navbar {
-        width: calculateRem(72px);
+        position: relative;
+        z-index: 10;
+        width: 100%;
         height: 100%;
         overflow: hidden;
-        background-color: $ibexa-color-dark;
         transition: all $ibexa-admin-transition-duration;
+        
+        &--first-level {
+            width: calculateRem(276px);
+            background-color: $ibexa-color-dark;
+
+            .ibexa-main-menu {
+                &__items-list {
+                    width: calculateRem(276px);
+                }
+            }
+        }
 
         &--second-level {
-            width: calc(100% - #{calculateRem(72px)});
-            padding-left: calculateRem(4px);
-            background-color: rgba($ibexa-color-dark, 0.95);
-            border-left: calculateRem(1px) solid rgba($ibexa-color-info, 0.4);
-            border-right: calculateRem(4px) solid $ibexa-color-dark;
+            width: calculateRem(220px);
+            max-width: calculateRem(270px);
+            background-color: rgba($ibexa-color-dark, 0.8);
+            border-right: calculateRem(4px) solid transparent;
+            border-left: calculateRem(1px) solid $ibexa-color-info-800;
 
-            .ibexa-main-menu__item--popup-container {
-                display: none;
-            }
-
-            &.ibexa-main-menu__navbar--collapsed {
-                width: calculateRem(44px);
-
-                .ibexa-main-menu__item {
-                    display: none;
-
-                    &--popup-container {
-                        display: block;
-                    }
+            .ibexa-main-menu {
+                &__items-list {
+                    height: calc(100vh - #{calculateRem(110px)});
+                    width: calculateRem(220px);
                 }
+    
+                &__toggler-container {
+                    width: inherit;
+                    position: fixed;
+                    bottom: 0;
+                }
+            }
+        }
+        
+        &--hidden {
+            @include hidden-main-menu-node;
+        }
+
+        &--collapsed {
+            .ibexa-main-menu__item-text-column {
+                @include hidden-main-menu-node;
             }
         }
 
         &--hover-toggler {
             border-right-color: $ibexa-color-info;
         }
+
+        &--first-level#{&}--collapsed {
+            width: calculateRem(72px);
+
+            .ibexa-main-menu {
+                &__items-list {
+                    width: calculateRem(72px);
+                }
+            }
+        }
+
+        &--second-level#{&}--collapsed {
+            width: calculateRem(40px);
+
+            .ibexa-main-menu {
+                &__item {
+                    @include hidden-main-menu-node;
+
+                    &--popup-container {
+                        @include main-menu-item;
+                    }
+                }
+                
+                &__items-list {
+                    width: calculateRem(40px);
+                }
+            }
+        }
     }
 
     &__items-list {
+        position: fixed;
         display: flex;
         flex-direction: column;
         flex: 1;
         align-items: center;
-        height: 100%;
+        width: inherit;
         margin: 0;
         padding: 0;
+        list-style: none;
+        transition: all $ibexa-admin-transition-duration;
     }
 
     &__item {
-        width: 100%;
-        height: calculateRem(48px);
-        margin: calculateRem(8px) 0;
+        @include main-menu-item;
+
+        &--popup-container {
+            @include hidden-main-menu-node;
+
+            height: 0;
+        }
+
+        .ibexa-popup-menu {
+            width: calculateRem(250px);
+            top: calculateRem(32px);
+            left: calculateRem(24px);
+        }
     }
 
     &__separator {
         width: 100%;
         height: calculateRem(1px);
-        background: rgba($ibexa-color-info, 0.4);
-
-        &--top {
-            margin-top: auto;
-            justify-self: flex-end;
-        }
+        background: $ibexa-color-info-800;
 
         &--bottom {
             width: calc(100% - #{calculateRem(24px)});            
@@ -77,10 +135,11 @@
         border-radius: $ibexa-border-radius;
         border: calculateRem(2px) solid transparent;
         text-decoration: none;
+        transition: all $ibexa-admin-transition-duration;
 
         &.active {
             color: $ibexa-color-info;
-            background-color: rgba($ibexa-color-info, 0.4);
+            background-color: $ibexa-color-info-800;
             
 
             .ibexa-main-menu {
@@ -95,7 +154,7 @@
         }
 
         &:focus {
-            border-color: rgba($ibexa-color-info, 0.4);
+            border-color: $ibexa-color-info-800;
         }
 
         &:hover {
@@ -119,12 +178,6 @@
             align-items: center;
             color: $ibexa-color-white;
             text-decoration: none;
-            
-            .ibexa-main-menu {
-                &__item-text-column {
-                    display: flex;
-                }
-            }
         }
     }
 
@@ -141,48 +194,44 @@
     }
 
     &__item-text-column {
-        display: none;
-        width: auto;
+        width: inherit;
         height: calculateRem(44px);
-        padding: 0 calculateRem(12px);
+        padding: calculateRem(10px);
+        opacity: 1;
         color: $ibexa-color-white;
         text-decoration: none;
         align-items: center;
         overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
+        transition: all $ibexa-admin-transition-duration;
     }
 
     &__tab-content {
-        height: calc(100% - #{calculateRem(48px)});
+        height: calc(100vh - #{calculateRem(120px)});
         overflow-y: auto;
+    }
+
+    &__tooltip-trigger {
+        height: calculateRem(44px);
+        justify-content: center;
+        align-items: center;
     }
 
     &__toggler-container {
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        width: inherit;
         height: calculateRem(48px);
+        margin-top: auto;
     }
 
     &__toggler {
-        margin-right: calculateRem(4px);
-        padding: 5px;
-    }
-
-    &--only-first-level {
-        .ibexa-main-menu {
-            &__navbar {
-                width: calculateRem(276px);
-
-                &--second-level {
-                    width: 0;
-                    display: none;
-                }
-            }
-
-            &__item-text-column {
-                display: flex;
-            }
-        }
+        height: calculateRem(44px);
+        margin-right: calculateRem(6px);
+        padding: calculateRem(5px);
+        justify-content: center;
+        align-items: center;
     }
 }

@@ -41,14 +41,20 @@
     }
 
     &--info-neon {
-        background-color: rgba($ibexa-color-dark, 0.95);
-
+        background-color: $ibexa-color-dark;
+        border-color: $ibexa-color-info-800;
+        
         a.ibexa-popup-menu__item-action {
             color: $ibexa-color-white;
 
             &:hover {
                 color: $ibexa-color-info;
-                background-color: rgba($ibexa-color-info, 0.4);
+                background-color: $ibexa-color-dark;
+            }
+
+            &--current {
+                color: $ibexa-color-info;
+                background-color: $ibexa-color-info-800;
             }
         }
     }

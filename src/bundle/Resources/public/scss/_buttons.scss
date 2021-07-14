@@ -140,6 +140,10 @@
             border-color: $ibexa-color-info;
             box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-info;
         }
+
+        &:focus {
+            box-shadow: none;
+        }
     }
 
     &--small {

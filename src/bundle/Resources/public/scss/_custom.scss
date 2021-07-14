@@ -8,6 +8,10 @@ $ibexa-admin-widget-close-transition: all 0.3s ease-out;
 
 // Ibexa colors
 $ibexa-color-primary: #ae1164;
+$ibexa-color-primary-900: #230314;
+$ibexa-color-primary-800: #460728;
+$ibexa-color-primary-700: #780c45;
+$ibexa-color-primary-600: #8b0e50;
 $ibexa-color-primary-500: #b7397c;
 $ibexa-color-primary-400: #ce70a2;
 $ibexa-color-primary-300: #de9fc1;
@@ -15,6 +19,10 @@ $ibexa-color-primary-200: #eecfe0;
 $ibexa-color-primary-100: #f6e7ef;
 
 $ibexa-color-danger: #db0032;
+$ibexa-color-danger-900: #2c000a;
+$ibexa-color-danger-800: #580014;
+$ibexa-color-danger-700: #990023;
+$ibexa-color-danger-600: #af0028;
 $ibexa-color-danger-500: #db2c54;
 $ibexa-color-danger-400: #e96684;
 $ibexa-color-danger-300: #f099ad;
@@ -22,6 +30,10 @@ $ibexa-color-danger-200: #f7ccd6;
 $ibexa-color-danger-100: #fbe5ea;
 
 $ibexa-color-warning: #ff4713;
+$ibexa-color-warning-900: #330e04;
+$ibexa-color-warning-800: #661c08;
+$ibexa-color-warning-700: #992b0b;
+$ibexa-color-warning-600: #cc390f;
 $ibexa-color-warning-500: #f7633a;
 $ibexa-color-warning-400: #ff9071;
 $ibexa-color-warning-300: #ffb5a0;
@@ -29,6 +41,10 @@ $ibexa-color-warning-200: #ffdacf;
 $ibexa-color-warning-100: #ffece7;
 
 $ibexa-color-success: #00a42b;
+$ibexa-color-success-900: #002109;
+$ibexa-color-success-800: #004211;
+$ibexa-color-success-700: #00621a;
+$ibexa-color-success-600: #008322;
 $ibexa-color-success-500: #33b655;
 $ibexa-color-success-400: #66c880;
 $ibexa-color-success-300: #99dbaa;
@@ -36,6 +52,10 @@ $ibexa-color-success-200: #ccedd5;
 $ibexa-color-success-100: #e5f5e9;
 
 $ibexa-color-info: #4191ff;
+$ibexa-color-info-900: #0d1d33;
+$ibexa-color-info-800: #1a3a66;
+$ibexa-color-info-700: #275799;
+$ibexa-color-info-600: #3474cc;
 $ibexa-color-info-500: #619eff;
 $ibexa-color-info-400: #8dbdff;
 $ibexa-color-info-300: #b3d3ff;
@@ -43,6 +63,10 @@ $ibexa-color-info-200: #d9e9ff;
 $ibexa-color-info-100: #ecf4ff;
 
 $ibexa-color-black: #000000;
+$ibexa-color-black-900: #040608;
+$ibexa-color-black-800: #080b0f;
+$ibexa-color-black-700: #0b1117;
+$ibexa-color-black-600: #0f161e;
 $ibexa-color-black-500: #2c2c2c;
 $ibexa-color-black-400: #666666;
 $ibexa-color-black-300: #999999;
@@ -57,6 +81,10 @@ $ibexa-color-dark-200: #cfd1d3;
 $ibexa-color-dark-100: #e7e8e9;
 
 $ibexa-color-light: #e0e0e8;
+$ibexa-color-light-900: #2d2d2e;
+$ibexa-color-light-800: #5a5a5d;
+$ibexa-color-light-700: #86868b;
+$ibexa-color-light-600: #b3b3ba;
 $ibexa-color-light-500: #e6e6ed;
 $ibexa-color-light-400: #ececf1;
 $ibexa-color-light-300: #f3f3f6;
@@ -64,8 +92,17 @@ $ibexa-color-light-200: #f9f9fa;
 $ibexa-color-light-100: #fbfbfc;
 
 $ibexa-color-white: #ffffff;
+$ibexa-color-white-900: #333333;
+$ibexa-color-white-800: #666666;
+$ibexa-color-white-700: #999999;
+$ibexa-color-white-600: #cccccc;
+
 
 $ibexa-color-accent-soft: #ecdfd1;
+$ibexa-color-accent-soft-900: #2F2D2A;
+$ibexa-color-accent-soft-800: #5E5954;
+$ibexa-color-accent-soft-700: #8E867D;
+$ibexa-color-accent-soft-600: #BDB2A7;
 $ibexa-color-accent-soft-500: #f0e5da;
 $ibexa-color-accent-soft-400: #f4ece3;
 $ibexa-color-accent-soft-300: #f7f2ed;
@@ -73,6 +110,10 @@ $ibexa-color-accent-soft-200: #fbf9f6;
 $ibexa-color-accent-soft-100: #fbf9f6;
 
 $ibexa-color-accent: #fcae42;
+$ibexa-color-accent-900: #32230d;
+$ibexa-color-accent-800: #65461a;
+$ibexa-color-accent-700: #976828;
+$ibexa-color-accent-600: #ca8b35;
 $ibexa-color-accent-500: #f4b65f;
 $ibexa-color-accent-400: #fdce8d;
 $ibexa-color-accent-300: #fddeb3;
@@ -80,6 +121,10 @@ $ibexa-color-accent-200: #feeed9;
 $ibexa-color-accent-100: #fff7ec;
 
 $ibexa-color-accent-strong: #f18a6b;
+$ibexa-color-accent-strong-900: #301c15;
+$ibexa-color-accent-strong-800: #60372b;
+$ibexa-color-accent-strong-700: #915340;
+$ibexa-color-accent-strong-600: #c16e56;
 $ibexa-color-accent-strong-500: #eb9980;
 $ibexa-color-accent-strong-400: #f6b8a6;
 $ibexa-color-accent-strong-300: #f9d0c3;
@@ -87,6 +132,10 @@ $ibexa-color-accent-strong-200: #fce7e1;
 $ibexa-color-accent-strong-100: #fdf3f0;
 
 $ibexa-color-complementary: #47bedb;
+$ibexa-color-complementary-900: #0e262c;
+$ibexa-color-complementary-800: #1c4c58;
+$ibexa-color-complementary-700: #2b7283;
+$ibexa-color-complementary-600: #2e7a8c;
 $ibexa-color-complementary-500: #63c3da;
 $ibexa-color-complementary-400: #90d8e9;
 $ibexa-color-complementary-300: #b5e5f0;
@@ -94,6 +143,10 @@ $ibexa-color-complementary-200: #daf2f7;
 $ibexa-color-complementary-100: #ecf8fb;
 
 $ibexa-color-complementary-strong: #004d5d;
+$ibexa-color-complementary-strong-900: #000f13;
+$ibexa-color-complementary-strong-800: #001f25;
+$ibexa-color-complementary-strong-700: #002e38;
+$ibexa-color-complementary-strong-600: #003e4a;
 $ibexa-color-complementary-strong-500: #2b6875;
 $ibexa-color-complementary-strong-400: #66949d;
 $ibexa-color-complementary-strong-300: #99b7be;

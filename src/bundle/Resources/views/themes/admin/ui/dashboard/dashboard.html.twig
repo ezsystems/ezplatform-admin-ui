@@ -9,12 +9,35 @@
 {% endblock %}
 
 {% block left_sidebar %}
-    aaa
+    {% set main_menu_context = {
+        'location': location ?? null,
+        'content': content ?? null
+    } %}
+
+    {% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], main_menu_context) %}
+
+    <nav class="ibexa-main-menu ibexa-main-menu">
+        <div class="ibexa-main-menu__navbar ibexa-main-menu__navbar--first-level">
+            {{ knp_menu_render(main_menu, {
+                'depth': 1,
+                'template': '@ezdesign/ui/menu/main.html.twig',
+                'currentClass': 'active',
+                'ancestorClass': 'active'
+            }) }}
+        </div>
+        <div class="ibexa-main-menu__navbar ibexa-main-menu__navbar--second-level ibexa-main-menu__navbar--hidden">
+            {{ knp_menu_render(main_menu, {
+                'depth': 2,
+                'template': '@ezdesign/ui/menu/main_2nd_level.html.twig',
+                'currentClass': 'active',
+                'ancestorClass': 'active'
+            }) }}
+        </div>
+    </nav>
 {% endblock %}
 
 {% block content %}
-    {# <div class="row align-items-stretch ez-main-row ez-dashboard-row">
-        {% block left_sidebar %}{% endblock left_sidebar %}
+    <div class="row align-items-stretch ez-main-row ez-dashboard-row">
         <div class="ez-content-container">
             <div class="container-fluid ez-header ez-header--light">
                 <div class="container ez-dashboard__header">
@@ -44,7 +67,7 @@
         {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
         {{ form_end(form_edit) }}
     </div>
-    {% include '@ezdesign/content/modal/version_conflict.html.twig' %} #}
+    {% include '@ezdesign/content/modal/version_conflict.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}

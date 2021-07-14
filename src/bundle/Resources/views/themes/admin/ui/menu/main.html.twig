@@ -27,16 +27,6 @@
         'class': classes|join(' '),
     }) %}
 
-    {# {% if item.extras.tooltip.class is defined %}
-        {% set link_attributes = link_attributes|merge({
-            'data-tooltip-extra-class': item.extras.tooltip.class,
-        }) %}
-    {% endif %} #}
-
-    {# {% set link_attributes = link_attributes|merge({
-        'data-extra-class': item.attributes['tooltip-class'], 
-    }) %} #}
-
     <a{{ knp_menu.attributes(link_attributes) }}>
         {{ block('label') }}
     </a>

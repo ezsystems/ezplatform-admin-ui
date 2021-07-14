@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const CLASS_POPUP_MENU_HIDDEN = 'ibexa-popup-menu--hidden';
     class PopupMenu {
         constructor(config) {
@@ -54,8 +54,9 @@
         }
 
         handleToggle() {
-            console.log(this.popupMenuElement)
+            console.log('sjow', this.popupMenuElement);
             this.popupMenuElement.classList.toggle(this.popupHiddenClass);
+            console.log(this.popupMenuElement);
             this.updatePosition();
         }
 

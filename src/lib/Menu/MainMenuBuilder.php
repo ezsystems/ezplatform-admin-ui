@@ -194,6 +194,10 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         ));
         
         $menu->addChild($this->factory->createItem(self::ITEM_ADMIN, [
+                'attributes' => [
+                    'data-tooltip-placement' => 'right',
+                    'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
+                ],
                 'extras' => [
                     'separate'=> true,
                     'bottom_item'=> true,
@@ -209,6 +213,10 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
         $menu->addChild($this->factory->createItem(self::ITEM_BOOKMARKS, [ 
                 'route' => 'ezplatform.bookmark.list',
+                'attributes' => [
+                    'data-tooltip-placement' => 'right',
+                    'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
+                ],
                 'extras' => [
                     'bottom_item'=> true,
                     'icon' => 'bookmark',
@@ -219,6 +227,10 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
         $menu->addChild($this->factory->createItem(self::ITEM_TRASH, [ 
                 'route' => 'ezplatform.trash.list',
+                'attributes' => [
+                    'data-tooltip-placement' => 'right',
+                    'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
+                ],
                 'extras' => [
                     'bottom_item'=> true,
                     'icon' => 'trash',

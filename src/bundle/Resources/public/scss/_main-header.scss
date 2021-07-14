@@ -3,6 +3,7 @@
     justify-content: space-between;
     padding: calculateRem(12px) calculateRem(21px);
     background: $ibexa-color-dark;
+    border-bottom: calculateRem(1px) solid rgba($ibexa-color-info, 0.4);
 
     &__brand-column {
         flex: 1;

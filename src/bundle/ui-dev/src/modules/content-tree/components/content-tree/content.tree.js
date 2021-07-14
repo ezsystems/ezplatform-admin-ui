@@ -122,16 +122,8 @@ export default class ContentTree extends Component {
     }
 
     renderList() {
-        const {
-            items,
-            loadMoreSubitems,
-            currentLocationId,
-            onClickItem,
-            subitemsLoadLimit,
-            subitemsLimit,
-            treeMaxDepth,
-            afterItemToggle,
-        } = this.props;
+        const { items, loadMoreSubitems, currentLocationId, onClickItem, subitemsLoadLimit, subitemsLimit, treeMaxDepth, afterItemToggle } =
+            this.props;
 
         const attrs = {
             items,

@@ -18,9 +18,14 @@
 {% endblock %}
 
 {% block popupLinkElement %}
+    {% set classes = [
+        'ibexa-popup-menu__item-action',
+        ((matcher.isCurrent(item) ? 'ibexa-popup-menu__item-action--current')),
+    ] %}
+
     {% set link_attributes = {
         'href': item.uri,
-        'class': 'ibexa-popup-menu__item-action'
+        'class': classes|join(' '),
     } %}
 
     <a {{ knp_menu.attributes(link_attributes) }}>{{ block('label') }}</a>
@@ -56,6 +61,17 @@
         {% import 'knp_menu.html.twig' as knp_menu %}
         
         {%- if item.extras.separate is defined and item.extras.separate -%}
+            <li class="ibexa-main-menu__toggler-container">
+                <button 
+                    class="ibexa-main-menu__toggler ibexa-btn ibexa-btn--small ibexa-btn--no-text ibexa-btn--neon-info"
+                    data-toggle-target-selector=".ibexa-main-menu__navbar--first-level"
+                    data-toggler-level="1"
+                >
+                    <svg class="ibexa-icon ibexa-icon--small">
+                        <use xlink:href="{{ ibexa_icon_path('caret-back') }}"></use>
+                    </svg>
+                </button>
+            </li>
             <li class="ibexa-main-menu__separator ibexa-main-menu__separator--top"></li>
         {%- endif -%}
 
