@@ -33,6 +33,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.form.autosubmit.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.anchor.navigation'),
     path.resolve(__dirname, '../public/js/scripts/admin.context.menu'),
+    path.resolve(__dirname, '../public/js/scripts/admin.input.text.js'),
 ];
 const fieldTypes = [];
 

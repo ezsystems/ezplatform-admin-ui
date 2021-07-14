@@ -166,13 +166,9 @@
 }
 
 @mixin label-required() {
-    &:after {
-        content: ': ';
-    }
-
     &.required {
         &:after {
-            content: '*: ';
+            content: '* ';
         }
     }
 }
@@ -232,4 +228,9 @@
     border-right-color: $ibexa-white;
     border-bottom-color: $ibexa-color-primary;
     border-left-color: $ibexa-white;
+}
+
+@mixin ibexa-font-sans-serif() {
+    font-family: $font-family-sans-serif;
+    letter-spacing: calculateRem(0.12px);
 }

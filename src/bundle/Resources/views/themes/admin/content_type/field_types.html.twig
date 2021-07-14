@@ -10,117 +10,117 @@
 {# @var form \Symfony\Component\Form\FormView #}
 {% block ezauthor_field_definition_edit %}
     <div class="ezauthor-settings default-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultAuthor, {'label_attr': {'class': 'radio-inline ez-label'}}) -}}
+        {{- form_row(form.defaultAuthor, {'label_attr': {'class': 'radio-inline'}}) -}}
     </div>
 {% endblock %}
 
 {% block ezbinaryfile_field_definition_edit %}
     <div class="ezbinaryfile-validator max-file-size{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.maxSize, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.maxSize) -}}
     </div>
 {% endblock %}
 
 {% block ezboolean_field_definition_edit %}
     <div class="ezboolean-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultValue, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        {{- form_row(form.defaultValue, {'label_attr': {'class': 'checkbox-inline'}}) -}}
     </div>
 {% endblock %}
 
 {% block ezcountry_field_definition_edit %}
     <div class="ezcountry-settings is-multiple{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.isMultiple, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        {{- form_row(form.isMultiple, {'label_attr': {'class': 'checkbox-inline'}}) -}}
     </div>
 
     <div class="ezcountry-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultValue, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.defaultValue) -}}
     </div>
 {% endblock %}
 
 {% block ezdate_field_definition_edit %}
     <div class="ezdate-settings default-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultType, {'label_attr': {'class': 'radio-inline ez-label'}}) -}}
+        {{- form_row(form.defaultType, {'label_attr': {'class': 'radio-inline'}}) -}}
     </div>
 {% endblock %}
 
 {% block ezdatetime_field_definition_edit %}
     <div class="ezdatetime-settings use-seconds{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.useSeconds, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        {{- form_row(form.useSeconds, {'label_attr': {'class': 'checkbox-inline'}}) -}}
     </div>
 
     <div class="ezdatetime-settings default-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultType, {'label_attr': {'class': 'radio-inline ez-label'}}) -}}
+        {{- form_row(form.defaultType, {'label_attr': {'class': 'radio-inline'}}) -}}
     </div>
 
     <div class="ezdatetime-settings date-interval{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.dateInterval, {'label_attr': {'class': 'col-form-group ez-label'}}) -}}
+        {{- form_row(form.dateInterval, {'label_attr': {'class': 'col-form-group'}}) -}}
     </div>
 {% endblock %}
 
 {% block eztime_field_definition_edit %}
     <div class="eztime-settings use-seconds{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.useSeconds, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        {{- form_row(form.useSeconds, {'label_attr': {'class': 'checkbox-inline'}}) -}}
     </div>
 
     <div class="eztime-settings default-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultType, {'label_attr': {'class': 'radio-inline ez-label'}}) -}}
+        {{- form_row(form.defaultType, {'label_attr': {'class': 'radio-inline'}}) -}}
     </div>
 {% endblock %}
 
 {% block ezfloat_field_definition_edit %}
     <div class="ezfloat-validator min-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.minValue, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.minValue) -}}
     </div>
 
     <div class="ezfloat-validator max-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.maxValue, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.maxValue) -}}
     </div>
 
     <div class="ezfloat-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultValue, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.defaultValue) -}}
     </div>
 {% endblock %}
 
 {% block ezimage_field_definition_edit %}
     <div class="ezimage-validator max-file-size{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.maxSize, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.maxSize) -}}
     </div>
 
     <div class="ezimage-validator is-alternative-text-required"{% if group_class is not empty %} {{ group_class }}{% endif %}>
-        {{ form_row(form.isAlternativeTextRequired, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+        {{ form_row(form.isAlternativeTextRequired, {'label_attr': {'class': 'checkbox-inline'}}) }}
     </div>
 {% endblock %}
 
 {% block ezinteger_field_definition_edit %}
     <div class="ezinteger-validator min-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.minValue, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.minValue) -}}
     </div>
 
     <div class="ezinteger-validator max-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.maxValue, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.maxValue) -}}
     </div>
 
     <div class="ezinteger-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultValue, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.defaultValue) -}}
     </div>
 {% endblock %}
 
 {% block ezisbn_field_definition_edit %}
     <div class="ezisbn-settings is-isbn13{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.isISBN13, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        {{- form_row(form.isISBN13, {'label_attr': {'class': 'checkbox-inline'}}) -}}
     </div>
 
     <div class="ezisbn-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultValue, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.defaultValue) -}}
     </div>
 {% endblock %}
 
 {% block ezmedia_field_definition_edit %}
     <div class="ezmedia-validator max-file-size{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.maxSize, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.maxSize) -}}
     </div>
 
     <div class="ezmedia-settings media-type{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.mediaType, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.mediaType) -}}
     </div>
 {% endblock %}
 
@@ -151,7 +151,7 @@
     </div>
 
     <div class="ezobjectrelationlist-settings selection-content-types mt-1">
-        {{- form_row(form.selectionContentTypes, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.selectionContentTypes) -}}
     </div>
 {% endblock %}
 
@@ -183,27 +183,27 @@
     </div>
 
     <div class="ezobjectrelationlist-settings selection-content-types mt-1">
-        {{- form_row(form.selectionContentTypes, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.selectionContentTypes) -}}
     </div>
 
     <div class="ezobjectrelationlist-settings selection-limit">
-        {{- form_row(form.selectionLimit, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.selectionLimit) -}}
     </div>
 {% endblock %}
 
 {% block ezpage_field_definition_edit %}
     <div class="ezpage-settings default-layout{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultLayout, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.defaultLayout) -}}
     </div>
 {% endblock %}
 
 {% block ezselection_field_definition_edit %}
     <div class="ezselection-settings is-multiple{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.isMultiple, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+        {{- form_row(form.isMultiple, {'label_attr': {'class': 'checkbox-inline'}}) -}}
     </div>
 
     <div class="ezselection-settings options{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{ form_label(form.options, 'Options', {'label_attr': {'class': 'ez-label'}}) }}
+        {{ form_label(form.options, 'Options') }}
         {{ form_errors(form.options) }}
         <ul
             class="ezselection-settings-option-list ez-selection-table list-unstyled"
@@ -247,56 +247,56 @@
 
 {% block ezstring_field_definition_edit %}
     <div class="ezstring-validator min-length{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.minLength, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.minLength) -}}
     </div>
 
     <div class="ezstring-validator max-length{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.maxLength, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.maxLength) -}}
     </div>
 
     <div class="ezstring-default-value{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.defaultValue, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.defaultValue) -}}
     </div>
 {% endblock %}
 
 {% block eztext_field_definition_edit %}
     <div class="eztext-settings text-rows{% if group_class is not empty %} {{ group_class }}{% endif %}">
-        {{- form_row(form.textRows, {'label_attr': {'class': 'ez-label'}}) -}}
+        {{- form_row(form.textRows) -}}
     </div>
 {% endblock %}
 
 {% block ezuser_field_definition_edit %}
     <div class="ez-field ez-field--user ez-user">
         <div class="ez-user__settings {% if group_class is not empty %} {{ group_class }}{% endif %}">
-            {{- form_row(form.requireAtLeastOneUpperCaseCharacter, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+            {{- form_row(form.requireAtLeastOneUpperCaseCharacter, {'label_attr': {'class': 'checkbox-inline'}}) -}}
         </div>
 
         <div class="ez-user__settings {% if group_class is not empty %} {{ group_class }}{% endif %}">
-            {{- form_row(form.requireAtLeastOneLowerCaseCharacter, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+            {{- form_row(form.requireAtLeastOneLowerCaseCharacter, {'label_attr': {'class': 'checkbox-inline'}}) -}}
         </div>
 
         <div class="ez-user__settings {% if group_class is not empty %} {{ group_class }}{% endif %}">
-            {{- form_row(form.requireAtLeastOneNumericCharacter, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+            {{- form_row(form.requireAtLeastOneNumericCharacter, {'label_attr': {'class': 'checkbox-inline'}}) -}}
         </div>
 
         <div class="ez-user__settings {% if group_class is not empty %} {{ group_class }}{% endif %}">
-            {{- form_row(form.requireAtLeastOneNonAlphanumericCharacter, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+            {{- form_row(form.requireAtLeastOneNonAlphanumericCharacter, {'label_attr': {'class': 'checkbox-inline'}}) -}}
         </div>
 
         <div class="ez-user__settings text-rows{% if group_class is not empty %} {{ group_class }}{% endif %}">
-            {{- form_row(form.minLength, {'label_attr': {'class': 'ez-label'}}) -}}
+            {{- form_row(form.minLength) -}}
         </div>
 
         <div class="ez-user__settings text-rows{% if group_class is not empty %} {{ group_class }}{% endif %}">
-            {{- form_row(form.passwordTTL, {'label_attr': {'class': 'ez-label'}}) -}}
+            {{- form_row(form.passwordTTL) -}}
         </div>
 
         <div class="ez-user__settings text-rows{% if group_class is not empty %} {{ group_class }}{% endif %}">
-            {{- form_row(form.passwordTTLWarning, {'label_attr': {'class': 'ez-label'}}) -}}
+            {{- form_row(form.passwordTTLWarning) -}}
         </div>
 
         <div class="ez-user__settings {% if group_class is not empty %} {{ group_class }}{% endif %}">
-            {{- form_row(form.requireNewPassword, {'label_attr': {'class': 'checkbox-inline ez-label'}}) -}}
+            {{- form_row(form.requireNewPassword, {'label_attr': {'class': 'checkbox-inline'}}) -}}
         </div>
     </div>
 {% endblock %}
