@@ -162,7 +162,7 @@
         position: absolute;
         top: calculateRem(3px);
         left: 0;
-        transition: all 0.3s $ibexa-admin-transition;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
         transform: translateX(calculateRem(3px));
         cursor: pointer;
         z-index: 1;
