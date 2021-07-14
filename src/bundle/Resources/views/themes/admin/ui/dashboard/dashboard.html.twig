@@ -2,13 +2,43 @@
 
 {% trans_default_domain 'dashboard' %}
 
-{% block body_class %}ez-dashboard ez-has-full-width-footer{% endblock %}
+{% block body_class %}ibexa-dashboard{% endblock %}
 
-{% block side_column %}{% endblock %}
+{% block header %}
+    {% block breadcrumbs %}{% endblock %}
+    {% block context_action %}{% endblock %}
+{% endblock %}
+
+{% block left_sidebar %}
+    {% set main_menu_context = {
+        'location': location ?? null,
+        'content': content ?? null
+    } %}
+
+    {% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], main_menu_context) %}
+
+    <nav class="ibexa-main-menu ibexa-main-menu">
+        <div class="ibexa-main-menu__navbar ibexa-main-menu__navbar--first-level">
+            {{ knp_menu_render(main_menu, {
+                'depth': 1,
+                'template': '@ezdesign/ui/menu/main.html.twig',
+                'currentClass': 'active',
+                'ancestorClass': 'active'
+            }) }}
+        </div>
+        <div class="ibexa-main-menu__navbar ibexa-main-menu__navbar--second-level ibexa-main-menu__navbar--hidden">
+            {{ knp_menu_render(main_menu, {
+                'depth': 2,
+                'template': '@ezdesign/ui/menu/main_2nd_level.html.twig',
+                'currentClass': 'active',
+                'ancestorClass': 'active'
+            }) }}
+        </div>
+    </nav>
+{% endblock %}
 
 {% block content %}
     <div class="row align-items-stretch ez-main-row ez-dashboard-row">
-        {% block left_sidebar %}{% endblock left_sidebar %}
         <div class="ez-content-container">
             <div class="container-fluid ez-header ez-header--light">
                 <div class="container ez-dashboard__header">
