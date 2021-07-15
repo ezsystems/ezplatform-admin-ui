@@ -1,6 +1,4 @@
 .ez-field-edit--ezboolean {
-    @include checkbox-switcher();
-
     .ez-data-source__label:after {
         display: none;
     }

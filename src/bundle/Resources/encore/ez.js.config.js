@@ -174,6 +174,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/multi-input-field.js'),
             ...fieldTypes,
             path.resolve(__dirname, '../public/js/scripts/sidebar/extra.actions.js'),
+            path.resolve(__dirname, '../public/js/scripts/toggle.button.state.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-settings-datetime-format-update-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.settings.datetimeformat.update.js'),
@@ -215,9 +216,10 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-url-management-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.url.wildcards.create.js'),
+            path.resolve(__dirname, '../public/js/scripts/toggle.button.state.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-url-management-update-js', [
-            path.resolve(__dirname, '../public/js/scripts/admin.url.wildcards.update.js'),
+            path.resolve(__dirname, '../public/js/scripts/toggle.button.state.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-login-js', [path.resolve(__dirname, '../public/js/scripts/login.js')])
         .addEntry('ezplatform-admin-ui-tabs-js', [

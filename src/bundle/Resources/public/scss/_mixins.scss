@@ -73,56 +73,6 @@
     }
 }
 
-@mixin checkbox-switcher($size: 2.5rem) {
-    $labelHeight: calc(#{$size} - #{calculateRem(16px)});
-    $indicatorOffsetLeft: calc(#{$size} / 10);
-    $indicatorOffsetRight: calc(calc(#{$size} / 2) - #{$indicatorOffsetLeft});
-
-    .ez-data-source__label {
-        position: relative;
-        width: $size;
-        height: $labelHeight;
-        background-color: transparent;
-        border-radius: calculateRem(24px);
-        cursor: pointer;
-        border: calculateRem(1px) solid $ibexa-color-base-dark;
-
-        input {
-            opacity: 0;
-            height: 1px;
-        }
-
-        .ez-data-source__indicator {
-            width: calc(#{$size} - #{calculateRem(24px)});
-            height: calc(#{$size} - #{calculateRem(24px)});
-            display: block;
-            background-color: $ibexa-color-base-dark;
-            border-radius: 50%;
-            position: absolute;
-            top: calculateRem(3px);
-            left: 0;
-            transition: all 0.3s $ibexa-admin-transition;
-            transform: translateX($indicatorOffsetLeft);
-            cursor: pointer;
-            z-index: 1;
-        }
-
-        &.is-checked {
-            background-color: transparent;
-            border: calculateRem(1px) solid $ibexa-color-primary;
-
-            .ez-data-source__indicator {
-                transform: translateX($indicatorOffsetRight);
-                background-color: $ibexa-color-primary;
-            }
-        }
-
-        &.is-disabled {
-            opacity: 0.5;
-        }
-    }
-}
-
 @mixin datetime-field() {
     .ez-data-source__input-wrapper {
         max-width: 30ch;
