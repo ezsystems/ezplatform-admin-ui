@@ -61,12 +61,12 @@
         resizeStartPositionX = clientX;
         secondMenuLevelCurrentWidth = secondLevelMenuNode.getBoundingClientRect().width;
 
-        window.document.addEventListener('mousemove', changeNavbarWidth, false);
-        window.document.addEventListener('mouseup', removeResizeListeners, false);
+        doc.addEventListener('mousemove', changeNavbarWidth, false);
+        doc.addEventListener('mouseup', removeResizeListeners, false);
     };
     const removeResizeListeners = () => {
-        window.document.removeEventListener('mousemove', changeNavbarWidth, false);
-        window.document.removeEventListener('mouseup', removeResizeListeners, false);
+        doc.removeEventListener('mousemove', changeNavbarWidth, false);
+        doc.removeEventListener('mouseup', removeResizeListeners, false);
     };
     const changeNavbarWidth = ({ clientX }) => {
         let newMenuLevelWidth = 0;
