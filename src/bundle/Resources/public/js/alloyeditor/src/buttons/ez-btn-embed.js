@@ -15,6 +15,8 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
      * @return {Boolean} True if the command is disabled, false otherwise.
      */
     isDisabled() {
+        console.warn('[DEPRECATED] EzBtnEmbed.isDisabled method is deprecated');
+        console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
         return !this.props.editor.get('nativeEditor').ezembed.canBeAdded();
     }
 
@@ -55,13 +57,11 @@ export default class EzBtnEmbed extends EzEmbedDiscoverContentButton {
      */
     render() {
         const css = 'ae-button ez-btn-ae ez-btn-ae--embed ' + this.getStateClasses();
-        const disabled = this.isDisabled();
         const label = Translator.trans(/*@Desc("Embed")*/ 'embed_btn.label', {}, 'alloy_editor');
 
         return (
             <button
                 className={css}
-                disabled={disabled}
                 onClick={this.chooseContent.bind(this)}
                 tabIndex={this.props.tabIndex}
                 title={label}>

@@ -19,9 +19,9 @@ import embedBaseDefinition from '../widgets/ez-embed-base';
         init: function(editor) {
             editor.ezembed = {
                 canBeAdded: () => {
-                    const path = editor.elementPath();
-
-                    return !path || path.contains('table', true) === null;
+                    console.warn('[DEPRECATED] canBeAdded method is deprecated');
+                    console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
+                    return true;
                 },
             };
 

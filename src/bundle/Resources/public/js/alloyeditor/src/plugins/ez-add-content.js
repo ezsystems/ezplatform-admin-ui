@@ -59,7 +59,14 @@
 
         if (elementPath && elementPath.block) {
             const elements = elementPath.elements;
-            const insertIndex = !elementPath.contains(isCustomTag, true) ? elements.length - 2 : 0;
+            const insideTableCell = elementPath.blockLimit && elementPath.blockLimit.getName() === 'td';
+            const insideCustomTag = elementPath.contains(isCustomTag, true);
+            const insideListItem = elementPath.lastElement.getName() == 'li';
+            let insertIndex = insideTableCell || insideCustomTag || insideListItem ? 0 : elements.length - 2;
+
+            if (elementPath.lastElement.getName() == 'li') {
+                insertIndex++;
+            }
 
             element.insertAfter(elements[insertIndex]);
         } else if (editor.widgets && editor.widgets.focused) {
