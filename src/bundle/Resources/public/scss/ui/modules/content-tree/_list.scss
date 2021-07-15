@@ -13,8 +13,16 @@
 
 .m-tree__scrollable-wrapper {
     > .c-list {
-        display: table;
-        width: 100%;
-        padding: 0;
+        display: none;
+    }
+}
+
+.ez-content-tree-container--expanded {
+    .m-tree__scrollable-wrapper {
+        > .c-list {
+            display: table;
+            width: 100%;
+            padding: 0;
+        }
     }
 }

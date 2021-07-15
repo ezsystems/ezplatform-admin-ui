@@ -9,13 +9,17 @@
 
     .ez-content-tree-container {
         position: relative;
-        top: calculateRem(8px);
+        top: 0;
         flex: 0 0 auto;
-        max-width: 0;
+        width: 72px;
         background: $ibexa-white;
         color: inherit;
-        transform: scaleX(0);
-        transform-origin: left;
+        // transform: scaleX(0.1);
+        // transform-origin: left;
+
+        .c-list {
+            dispaly: none;
+        }
 
         &--animate {
             transition: $ibexa-admin-widget-close-transition;
@@ -26,10 +30,14 @@
         }
 
         &--expanded {
-            transform-origin: left;
-            transform: scaleX(1);
+            // transform-origin: left;
+            // transform: scaleX(1);
             display: initial;
-            max-width: 10vw;
+            width: 15vw;
+
+            .c-list {
+                dispaly: block;
+            }
         }
 
         &__wrapper {

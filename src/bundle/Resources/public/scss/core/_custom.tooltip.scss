@@ -1,4 +1,4 @@
-.ez-tooltip {
+.ibexa-tooltip {
     z-index: 1500;
 
     &.show {
@@ -38,16 +38,15 @@
     }
 
     &__inner {
-        padding: calulateRem(4px) calcuateRem(10px);
-        max-width: calculateRem(250px);
+        padding: calulateRem(8px) calcuateRem(20px);
+        max-width: calculateRem(300px);
         border: calculateRem(1px) solid $ibexa-color-base-light;
-        border-radius: calculateRem(4px);
-        background-color: $ibexa-white;
-        color: $ibexa-color-font;
-        font-size: calculateRem(11px);
-        font-weight: 700;
+        border-radius: $ibexa-border-radius;
+        background-color: $ibexa-color-white;
+        color: $ibexa-color-dark;
+        font-size: $ibexa-text-font-size-medium;
         text-align: left;
-        line-height: calculateRem(14px);
+        line-height: calculateRem(21px);
         box-shadow: 0 calculateRem(4px) calculateRem(6px) rgba(135, 135, 135, 0.35);
     }
 
@@ -87,6 +86,42 @@
             &.bs-tooltip-left .ez-tooltip__arrow {
                 &::before {
                     border-left-color: $ibexa-color-ground-dark;
+                }
+            }
+        }
+    }
+
+    &--info-neon {
+        .ibexa-tooltip {
+            &__inner {
+                color: $ibexa-color-dark;
+                background-color: $ibexa-color-info;
+                border-color: transparent;
+            }
+        }
+
+        &.ibexa-tooltip {
+            &.bs-tooltip-top .ibexa-tooltip__arrow {
+                &::before {
+                    border-top-color: $ibexa-color-info;
+                }
+            }
+
+            &.bs-tooltip-right .ibexa-tooltip__arrow {
+                &::before {
+                    border-right-color: $ibexa-color-info;
+                }
+            }
+
+            &.bs-tooltip-bottom .ibexa-tooltip__arrow {
+                &::before {
+                    border-bottom-color: $ibexa-color-info;
+                }
+            }
+
+            &.bs-tooltip-left .ibexa-tooltip__arrow {
+                &::before {
+                    border-left-color: $ibexa-color-info;
                 }
             }
         }
