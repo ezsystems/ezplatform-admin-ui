@@ -33,12 +33,6 @@
                 callback: 'validateInput',
                 errorNodeSelectors: [SELECTOR_ERROR_NODE],
             },
-            {
-                isValueValidator: false,
-                selector: '.ez-field-edit--ezboolean input',
-                eventName: 'change',
-                callback: 'updateState',
-            },
         ],
     });
 

@@ -125,12 +125,6 @@
                 invalidStateSelectors: [`${SELECTOR_FIELD_EMAIL} ${SELECTOR_LABEL}`],
                 errorNodeSelectors: [SELECTOR_FIELD_EMAIL],
             },
-            {
-                isValueValidator: false,
-                selector: `.ez-data-source__input[type="checkbox"]`,
-                eventName: 'change',
-                callback: 'updateState',
-            },
         ],
     });
 
