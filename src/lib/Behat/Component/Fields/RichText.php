@@ -80,7 +80,7 @@ class RichText extends FieldTypeComponent
 
         $selector = CSSLocatorBuilder::base($this->getLocator('fieldInput'))->withDescendant(new VisibleCSSLocator('style', $style))->build();
 
-        Assert::assertContains(
+        Assert::assertStringContainsString(
             sprintf('%s%s</%s>', $value, '<br>', $style),
             $this->getHTMLPage()->find($selector)->getOuterHtml()
         );

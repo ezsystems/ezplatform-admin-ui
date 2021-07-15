@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component\Fields;
 
 use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
-use Ibexa\Behat\Browser\Locator\CssLocatorBuilder;
+use Ibexa\Behat\Browser\Locator\CSSLocatorBuilder;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 
 abstract class NonEditableField extends FieldTypeComponent
