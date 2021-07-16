@@ -8,7 +8,7 @@ on:
   pull_request: ~
 
 env:
-  COMPOSER_ROOT_VERSION: 1.5.x-dev
+  COMPOSER_ROOT_VERSION: 2.3.x-dev
 
 jobs:
   tests:
