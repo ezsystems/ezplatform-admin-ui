@@ -32,6 +32,7 @@ browser:
                 - Ibexa\AdminUi\Behat\BrowserContext\ObjectStatesContext
                 - Ibexa\AdminUi\Behat\BrowserContext\DashboardContext
                 - Ibexa\AdminUi\Behat\BrowserContext\SearchContext
+                - EzSystems\Behat\API\Context\RoleContext
 
         personas:
             paths:
