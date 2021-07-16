@@ -37,6 +37,7 @@ class Time extends FieldTypeComponent
 
         $time = explode(':', $parameters['value']);
 
+        $this->dateAndTimePopup->verifyIsLoaded();
         $this->dateAndTimePopup->setTime((int)$time[0], (int)$time[1]);
 
         // This click is closing the date and time picker, to finally ensure that value is set up.

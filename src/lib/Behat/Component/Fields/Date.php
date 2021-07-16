@@ -34,6 +34,8 @@ class Date extends FieldTypeComponent
             ->build();
 
         $this->getHTMLPage()->find($fieldSelector)->click();
+
+        $this->dateAndTimePopup->verifyIsLoaded();
         $this->dateAndTimePopup->setDate(date_create($parameters['value']), self::DATE_FORMAT);
     }
 
