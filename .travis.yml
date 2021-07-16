@@ -41,6 +41,7 @@ matrix:
         - SETUP_BEHAT_OPTS="--profile=regression --suite=setup-oss -c=behat_ibexa_oss.yaml --mode=standard"
         - BEHAT_OPTS="--profile=regression --suite=oss --tags=~@broken -c=behat_ibexa_oss.yaml"
         - MULTIREPOSITORY=1
+    - if: type in (cron) OR commit_message =~ /(Run regression)/
       name: "[PHP 7.3/Multirepository] Ibexa OSS regression suite"
       env: 
         - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
@@ -65,6 +66,7 @@ before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 install:
+  - composer install
   - ./vendor/bin/prepare_project_edition.sh oss ${PROJECT_VERSION} ${COMPOSE_FILE}
 
 before_script:
