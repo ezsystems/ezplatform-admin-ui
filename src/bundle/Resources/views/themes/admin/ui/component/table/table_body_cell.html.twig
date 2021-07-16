@@ -1,0 +1,21 @@
+{% import "@ezdesign/ui/component/macros.html.twig" as html %}
+
+<td 
+    class="ibexa-table__cell
+        {%- if has_checkbox|default(false) %} ibexa-table__cell--has-checkbox{% endif -%}
+        {%- if has_action_btns|default(false) %} ibexa-table__cell--has-action-btns{% endif -%}
+        {%- if has_icon|default(false) %} ibexa-table__cell--has-icon{% endif -%}
+        {%- if is_close_left|default(false) %} ibexa-table__cell--close-left {% endif %}
+        {{ class|default('') -}}"
+    {{ html.attributes(attr|default({})) }}
+>
+    {% block content %}
+        {% if has_action_btns|default(false) %}
+            <div class="ibexa-table__cell-btns-wrapper">
+                {{ content|raw }}
+            </div>
+        {% else %}
+            {{ content|raw }}
+        {% endif %}
+    {% endblock %}
+</td>

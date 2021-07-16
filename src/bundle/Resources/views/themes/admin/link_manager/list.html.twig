@@ -24,56 +24,59 @@
     </section>
 
     <section class="container">
-        <div class="ez-table-header">
-            <div class="ez-table-header__headline">{{ 'url.list.title'|trans({ '%count%': urls.count })|desc('Links (%count%)') }}</div>
-        </div>
-        <table class="ez-table table table-hover">
-            <thead>
-                <tr>
-                    <th>{{ 'url.label.address'|trans }}</th>
-                    <th>{{ 'url.label.status'|trans }}</th>
-                    <th>{{ 'url.label.last_checked'|trans }}</th>
-                    <th>{{ 'url.label.modified'|trans }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for url in urls %}
-                {% set edit_url = path('ezplatform.link_manager.edit', {urlId: url.id}) %}
-                {% set view_url = path('ezplatform.link_manager.view', {urlId: url.id}) %}
-                <tr>
-                    <td class="ez-table__cell">
-                                <a href="{{ view_url }}">{{ url.url|u.truncate(50) }}</a>
-                        (<a href="{{ url.url }}" target="_blank">{{ 'url.open'|trans }}</a>)
-                    </td>
-                    <td class="ez-table__cell">{{ url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans }}</td>
-                    <td class="ez-table__cell">
-                        {% if url.lastChecked %}
-                            {{ url.lastChecked|ez_full_datetime }}
-                        {% else %}
-                            Never
-                        {% endif %}
-                    </td>
-                    <td class="ez-table__cell">{{ url.modified|ez_full_datetime }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns">
-                        {% if can_edit %}
-                            <a href="{{ edit_url }}" class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2" title="{{ 'url.action.edit'|trans|desc('Edit URL') }}">
-                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
-                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
-                                </svg>
-                            </a>
-                        {% endif %}
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
-                        <span class="mb-0 py-1 pl-0">{{ 'url.list.no_urls'|trans }}</span>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        {% set body_rows = [] %}
+        {% for url in urls %}
+            {% set body_row_cols = [] %}
+            {% set edit_url = path('ezplatform.link_manager.edit', { urlId: url.id }) %}
+            {% set view_url = path('ezplatform.link_manager.view', { urlId: url.id }) %}
+
+            {% set col_raw %}
+                <a href="{{ view_url }}">{{ url.url|u.truncate(50) }}</a>
+                (<a href="{{ url.url }}" target="_blank">{{ 'url.open'|trans }}</a>)
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                content: col_raw,
+            }]) %}
+
+            {% set body_row_cols = body_row_cols|merge([
+                { content: url.isValid ? 'url.status.valid'|trans : 'url.status.invalid'|trans },
+                { content: url.lastChecked ? url.lastChecked|ez_full_datetime : 'Never' },
+                { content: url.modified|ez_full_datetime },
+            ]) %}
+
+            {% set col_raw %}
+                {% if can_edit %}
+                    <a
+                        href="{{ edit_url }}"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                        title="{{ 'url.action.edit'|trans|desc('Edit URL') }}"
+                    >
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                            <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                has_action_btns: true,
+                content: col_raw,
+            }]) %}
+
+            {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+        {% endfor %}
+
+        {% include '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'url.list.title'|trans({ '%count%': urls.count })|desc('Links (%count%)'),
+            head_cols: [
+                { content: 'url.label.address'|trans },
+                { content: 'url.label.status'|trans },
+                { content: 'url.label.last_checked'|trans },
+                { content: 'url.label.modified'|trans },
+                { },
+            ],
+            body_rows: body_rows,
+            empty_table_info_text: 'url.list.no_urls'|trans,
+        } %}
 
         {% if urls.haveToPaginate %}
             <div class="row justify-content-center align-items-center ez-pagination__spacing mb-5">

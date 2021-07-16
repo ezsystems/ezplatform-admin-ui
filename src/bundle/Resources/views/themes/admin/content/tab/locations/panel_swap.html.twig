@@ -1,9 +1,8 @@
 {% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
 
-{% include '@ezdesign/ui/table_header.html.twig' with {
-    header_text: 'tab.locations.location_content_swap'|trans()|desc('Swap Locations'),
-    ground: 'ground-base'
-} %}
+{% include '@ezdesign/ui/component/table/table_header.html.twig' with {
+    headline: 'tab.locations.location_content_swap'|trans()|desc('Swap Locations'),
+} only %}
 
 {{ form_start(form, {'action': path('ezplatform.location.swap')}) }}
 <div class="bg-white ml-4">

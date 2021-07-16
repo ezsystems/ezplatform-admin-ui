@@ -238,7 +238,7 @@ class ContentViewPage extends Page
             new VisibleCSSLocator('contentType', '.ez-page-title .ibexa-icon-tag'),
             new VisibleCSSLocator('mainContainer', '.ibexa-tab-content #ibexa-tab-location-view-content'),
             new VisibleCSSLocator('tab', '.ez-content-container .ibexa-tabs .ibexa-tabs__link'),
-            new VisibleCSSLocator('addLocationButton', '#ibexa-tab-location-view-locations .ez-table-header__tools .ibexa-btn--udw-add'),
+            new VisibleCSSLocator('addLocationButton', '#ibexa-tab-location-view-locations .ibexa-table-header__actions .ibexa-btn--udw-add'),
         ];
     }
 

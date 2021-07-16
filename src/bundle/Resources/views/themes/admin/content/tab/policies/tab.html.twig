@@ -1,10 +1,75 @@
 {% trans_default_domain 'policy' %}
 {% import _self as tab %}
-{% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.policies.policies'|trans|desc('Policies') } %}
 
-{{  include('@ezdesign/content/tab/policies/table.html.twig', {
-        'policies_pager': policies_pager,
-}) }}
+{% set body_rows = [] %}
+{% if policies_pager.currentPageResults is not empty %}
+    {% for policy in policies_pager.currentPageResults %}
+        {% set body_row_cols = [] %}
+
+        {% set col_raw %}
+            <a href="{{ path('ezplatform.role.view', { roleId: policy.role_assignment.role.id}) }}">
+                {{ policy.role_assignment.role.identifier }}
+            </a>
+        {% endset %}
+        {% set body_row_cols = body_row_cols|merge([{
+            content: col_raw,
+        }]) %}
+
+        {% set col_raw %}
+            {%- if policy.role_assignment.usergroup is defined -%}
+                {{ ez_content_name( policy.role_assignment.usergroup ) }}
+            {%- else -%}
+                {{ ez_content_name( policy.role_assignment.user ) }}
+            {%- endif -%}
+        {% endset %}
+        {% set body_row_cols = body_row_cols|merge([{
+            content: col_raw,
+        }]) %}
+
+        {% set body_row_cols = body_row_cols|merge([
+            { content: ('role.policy.' ~ policy.module)|trans({}, 'forms') },
+            { content: policy.function|capitalize },
+        ]) %}
+
+        {% set col_raw %}
+            {%- if policy.limitations is not empty -%}
+                <ul class="list-unstyled">
+                    {%- for limitation in policy.limitations -%}
+                        <li>
+                            <span
+                                class="font-weight-bold"
+                                title="{{ 'policy.limitation.identifier_tooltip'|trans({'%identifier%': limitation.identifier})|desc('"%identifier%" Limitation') }}"
+                            >
+                                {{ ('policy.limitation.identifier.' ~ limitation.identifier|lower)|trans({'%identifier%': limitation.identifier}, 'ezplatform_content_forms_policies')|desc('%identifier%') }}:
+                            </span>
+                            {{ ez_render_limitation_value(limitation, {'template': '@ezdesign/content/tab/policies/limitation_values.html.twig'}) }}
+                        </li>
+                    {%- endfor -%}
+                </ul>
+            {%- else -%}
+                {{- 'policy.limitation.none'|trans|desc('None') -}}
+            {%- endif -%}
+        {% endset %}
+        {% set body_row_cols = body_row_cols|merge([{
+            content: col_raw,
+        }]) %}
+
+        {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+    {% endfor %}
+{% endif %}
+
+{% include '@ezdesign/ui/component/table/table.html.twig' with {
+    headline: 'tab.policies.policies'|trans|desc('Policies'),
+    head_cols: [
+        { content: 'tab.policies.role'|trans|desc('Role') },
+        { content: 'tab.policies.assignment'|trans|desc('User/Group') },
+        { content: 'tab.policies.module'|trans|desc('Module') },
+        { content: 'tab.policies.function'|trans|desc('Function') },
+        { content: 'tab.policies.limitations'|trans|desc('Limitations') },
+    ],
+    body_rows: body_rows,
+    empty_table_info_text: 'tab.policies.no_policies'|trans|desc('This Content item has no Policies.'),
+} %}
 
 {% if policies_pager.haveToPaginate %}
     {% include '@ezdesign/ui/pagination.html.twig' with {

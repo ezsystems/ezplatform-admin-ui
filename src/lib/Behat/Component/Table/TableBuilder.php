@@ -47,7 +47,7 @@ class TableBuilder
         $this->buildInProgress = true;
 
         $this->locators = new LocatorCollection([
-            new CSSLocator('empty', '.ez-table__cell--no-content,.ez-table-no-content'),
+            new CSSLocator('empty', '.ez-table__empty-table-cell'),
             new CSSLocator('columnHeader', '.ez-table__header-cell,th'),
             new CSSLocator('row', 'tr'),
             new CSSLocator('cell', '.ez-table__cell:nth-of-type(%d),td:nth-of-type(%d)'),

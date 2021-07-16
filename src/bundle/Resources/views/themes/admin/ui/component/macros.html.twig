@@ -2,9 +2,9 @@
     {%- for attrname, attrvalue in attr -%}
         {{- " " -}}
         {%- if attrvalue is same as(true) -%}
-            {{- attrname }}="{{ attrname }}"
+            {{- attrname }}="{{ attrname|e('html_attr') }}"
         {%- elseif attrvalue is not same as(false) -%}
-            {{- attrname }}="{{ attrvalue }}"
+            {{- attrname }}="{{ attrvalue|e('html_attr') }}"
         {%- endif -%}
     {%- endfor -%}
 {%- endmacro -%}

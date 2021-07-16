@@ -11,8 +11,10 @@
 {% endblock %}
 
 {% block message %}
-    <td class="ez-notifications-modal__description">
-        <p class="description__title">{{ 'notification.title'|trans|desc('Title:') }} <span class="description__title__item">{{ title }}</span></p>
-        <p class="description__text description__text--permanently-deleted">{{ 'notification.no_longer_available'|trans|desc('The Content item is no longer available')}}</p>
-    </td>
+    {% embed '@ezdesign/ui/component/table/table_body_cell.html.twig' with { class: 'ez-notifications-modal__description' } %}
+        {% block content %}
+            <p class="description__title">{{ 'notification.title'|trans|desc('Title:') }} <span class="description__title__item">{{ title }}</span></p>
+            <p class="description__text description__text--permanently-deleted">{{ 'notification.no_longer_available'|trans|desc('The Content item is no longer available')}}</p>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

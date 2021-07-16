@@ -1,44 +1,44 @@
 {% trans_default_domain 'role' %}
 
-<div class="ez-scrollable-table-wrapper">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>{{ 'tab.roles.name'|trans|desc('Name') }}</th>
-            <th>{{ 'tab.roles.limitation'|trans|desc('Limitation') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-            {% if roles_pager.currentPageResults is not empty %}
-                {% for role_assignment in roles_pager.currentPageResults %}
-                    <tr>
-                        <td>
-                            <a href="{{ path('ezplatform.role.view', { roleId: role_assignment.role.id}) }}">
-                                {{ role_assignment.role.identifier }}
-                            </a>
-                        </td>
-                        <td>
-                            {%- set limitation = role_assignment.rolelimitation -%}
-                            {%- if limitation -%}
-                                {{ ez_render_limitation_value(limitation, {'template': '@ezdesign/content/tab/roles/limitation_values.html.twig'}) }}
-                                <span title="{{ 'policy.limitation.identifier_tooltip' | trans({'%identifier%': limitation.identifier})|desc('"%identifier%" Limitation') }}">
-                                    ({{ ('policy.limitation.identifier.' ~ limitation.identifier|lower)|trans({'%identifier%': limitation.identifier}, 'ezplatform_content_forms_policies')|desc('%identifier%') }})
-                                </span>
-                            {%- else -%}
-                                {{- 'policy.limitation.none'|trans|desc('None') -}}
-                            {%- endif -%}
-                        </td>
-                    </tr>
-                {% endfor %}
-            {% else %}
-                <tr>
-                    <td class="ez-table__cell ez-table__cell--no-content" colspan="3">
-                        <p class="ez-table-no-content mb-0 py-0">
-                            {{ 'tab.roles.no_roles'|trans|desc('This Content item has no Roles.') }}
-                        </p>
-                    </td>
-                </tr>
-            {% endif %}
-        </tbody>
-    </table>
-</div>
+{% set body_rows = [] %}
+{% if roles_pager.currentPageResults is not empty %}
+    {% for role_assignment in roles_pager.currentPageResults %}
+        {% set body_row_cols = [] %}
+
+        {% set col_raw %}
+            <a href="{{ path('ezplatform.role.view', { roleId: role_assignment.role.id}) }}">
+                {{ role_assignment.role.identifier }}
+            </a>
+        {% endset %}
+        {% set body_row_cols = body_row_cols|merge([{
+            content: col_raw,
+        }]) %}
+
+        {% set col_raw %}
+            {%- set limitation = role_assignment.rolelimitation -%}
+            {%- if limitation -%}
+                {{ ez_render_limitation_value(limitation, {'template': '@ezdesign/content/tab/roles/limitation_values.html.twig'}) }}
+                <span title="{{ 'policy.limitation.identifier_tooltip' | trans({'%identifier%': limitation.identifier})|desc('"%identifier%" Limitation') }}">
+                    ({{ ('policy.limitation.identifier.' ~ limitation.identifier|lower)|trans({'%identifier%': limitation.identifier}, 'ezplatform_content_forms_policies')|desc('%identifier%') }})
+                </span>
+            {%- else -%}
+                {{- 'policy.limitation.none'|trans|desc('None') -}}
+            {%- endif -%}
+        {% endset %}
+        {% set body_row_cols = body_row_cols|merge([{
+            content: col_raw,
+        }]) %}
+
+        {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+    {% endfor %}
+{% endif %}
+
+{% include '@ezdesign/ui/component/table/table.html.twig' with {
+    headline: 'tab.roles.roles'|trans|desc('Roles'),
+    head_cols: [
+        { content: 'tab.roles.name'|trans|desc('Name') },
+        { content: 'tab.roles.limitation'|trans|desc('Limitation') },
+    ],
+    body_rows: body_rows,
+    empty_table_info_text: 'tab.roles.no_roles'|trans|desc('This Content item has no Roles.'),
+} %}

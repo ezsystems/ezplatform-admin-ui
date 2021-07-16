@@ -23,94 +23,127 @@
 
 {% block content %}
     <section class="container ez-container">
-        <div class="ez-table-header">
-            <div class="ez-table-header__headline">{{ 'language.list'|trans|desc('Languages') }}</div>
-            <div class="ez-table-header__tools">
+        {% set body_rows = [] %}
+        {% for language in pager.currentPageResults %}
+            {% set body_row_cols = [] %}
+
+            {% set col_raw %}
+                {% if can_administrate %}
+                    {{ form_widget(form_languages_delete.languages[language.id]) }}
+                {% else %}
+                    {% do form_languages_delete.languages.setRendered %}
+                {% endif %}
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                has_checkbox: true,
+                content: col_raw,
+            }]) %}
+
+            {% set col_raw %}
+                <a href="{{ path( 'ezplatform.language.view', {'languageId': language.id} ) }}">
+                    {{ language.name }}
+                </a>
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                has_icon: true,
+                content: col_raw,
+            }]) %}
+
+            {% set body_row_cols = body_row_cols|merge([
+                { content: language.languageCode },
+                { content: language.id },
+            ]) %}
+
+            {% set col_raw %}
+                <input
+                    type="checkbox"
+                    title="{{ language.enabled ? 'language.enabled'|trans|desc('Enabled')  : 'language.disabled'|trans|desc('Disabled')  }}"
+                    class="ibexa-input ibexa-input--checkbox"
+                    disabled
+                    {% if language.enabled %}checked{% endif %}
+                >
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                content: col_raw,
+            }]) %}
+
+            {% set col_raw %}
                 {% if can_administrate %}
                     <a
-                        title="{{ 'language.new'|trans|desc('Create a new language') }}"
-                        href="{{ path('ezplatform.language.create') }}"
+                        title="{{ 'language.edit'|trans|desc('Edit') }}"
+                        href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     >
-                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
-                            <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                         </svg>
                     </a>
-                    {% set modal_data_target = 'delete-languages-modal' %}
-                    <button
-                        id="delete-languages"
-                        type="button"
-                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                        disabled
-                        data-bs-toggle="modal"
-                        data-bs-target="#{{ modal_data_target }}"
-                        title="{{ 'language.delete'|trans|desc('Delete language') }}"
-                    >
-                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
-                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
-                        </svg>
-                    </button>
-                    {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
-                        'id': modal_data_target,
-                        'message': 'language.modal.message'|trans|desc('Do you want to delete the language(s)?'),
-                        'data_click': '#languages_delete_delete',
-                    }%}
                 {% endif %}
-            </div>
-        </div>
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                has_action_btns: true,
+                content: col_raw,
+            }]) %}
 
-        {{ form_start(form_languages_delete, {
-            'action': path('ezplatform.language.bulk_delete'),
-            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-languages' }
-        }) }}
-        <table class="ez-table table table-hover mb-3">
-            <thead>
-            <tr>
-                <th></th>
-                <th>{{ 'language.name'|trans|desc('Name') }}</th>
-                <th>{{ 'language.code'|trans|desc('Code') }}</th>
-                <th>{{ 'language.id'|trans|desc('ID') }}</th>
-                <th>{{ 'language.enabled'|trans|desc('Enabled') }}</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for language in pager.currentPageResults %}
-                <tr>
-                    <td class="ez-table__cell ez-table__cell--has-checkbox">
-                        {% if can_administrate %}
-                            {{ form_widget(form_languages_delete.languages[language.id]) }}
-                        {% else %}
-                            {% do form_languages_delete.languages.setRendered %}
-                        {% endif %}
-                    </td>
-                    <td class="ez-table__cell"><a href="{{ path( 'ezplatform.language.view', {'languageId': language.id} ) }}">{{ language.name }}</a></td>
-                    <td class="ez-table__cell">{{ language.languageCode }}</td>
-                    <td class="ez-table__cell">{{ language.id }}</td>
-                    <td class="ez-table__cell">
-                        <input
-                            type="checkbox"
-                            title="{{ language.enabled ? 'language.enabled'|trans|desc('Enabled')  : 'language.disabled'|trans|desc('Disabled')  }}"
-                            class="ibexa-input ibexa-input--checkbox"
-                            disabled
-                            {% if language.enabled %}checked{% endif %}>
-                    </td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns">
+            {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+        {% endfor %}
+
+        {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'language.list'|trans|desc('Languages'),
+            head_cols: [
+                { has_checkbox: true },
+                { content: 'language.name'|trans|desc('Name') },
+                { content: 'language.code'|trans|desc('Code') },
+                { content: 'language.id'|trans|desc('ID') },
+                { content: 'language.enabled'|trans|desc('Enabled') },
+                { },
+            ],
+            body_rows: body_rows,
+        } %}
+            {% block header %}
+                {% embed '@ezdesign/ui/component/table/table_header.html.twig' %}
+                    {% block actions %}
                         {% if can_administrate %}
                             <a
-                                title="{{ 'language.edit'|trans|desc('Edit') }}"
-                                href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
-                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
-                                <svg class="ibexa-icon ibexa-icon--small">
-                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                                title="{{ 'language.new'|trans|desc('Create a new language') }}"
+                                href="{{ path('ezplatform.language.create') }}"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                                    <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
                                 </svg>
                             </a>
+                            {% set modal_data_target = 'delete-languages-modal' %}
+                            <button
+                                id="delete-languages"
+                                type="button"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                                disabled
+                                data-bs-toggle="modal"
+                                data-bs-target="#{{ modal_data_target }}"
+                                title="{{ 'language.delete'|trans|desc('Delete language') }}"
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+                                    <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
+                                </svg>
+                            </button>
+                            {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
+                                'id': modal_data_target,
+                                'message': 'language.modal.message'|trans|desc('Do you want to delete the language(s)?'),
+                                'data_click': '#languages_delete_delete',
+                            }%}
                         {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+
+            {% block between_header_and_table %}
+                {{ form_start(form_languages_delete, {
+                    'action': path('ezplatform.language.bulk_delete'),
+                    'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-languages' }
+                }) }}
+            {% endblock %}
+        {% endembed %}
         {{ form_end(form_languages_delete) }}
 
         {% if pager.haveToPaginate %}
