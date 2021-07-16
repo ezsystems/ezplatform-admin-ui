@@ -39,6 +39,7 @@ class DateAndTime extends FieldTypeComponent
 
         $time = explode(':', $parameters['time']);
 
+        $this->dateAndTimePopup->verifyIsLoaded();
         $this->dateAndTimePopup->setDate(date_create($parameters['date']));
         $this->dateAndTimePopup->setTime((int)$time[0], (int)$time[1]);
 
