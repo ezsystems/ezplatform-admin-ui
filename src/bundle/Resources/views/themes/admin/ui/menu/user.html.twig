@@ -7,12 +7,16 @@
     <div class="ibexa-header-user-menu">
         <img 
             class="ibexa-header-user-menu__image" 
-            src="{{ user_image.resource }}" 
+            {# src="{{ user_image.resource }}"  #}
+            src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg"
             alt="{{ user.name }}" 
+            data-toggle="modal" 
+            data-target="#view-notifications"
         />
-        <div class="ibexa-header-user-menu__notice-dot"></div>
+        <button class="ibexa-header-user-menu__notice-dot ibexa-header-user-menu__notice-dot--no-notice"></button>
         <button class="ibexa-header-user-menu__name">{{ user.name }}</button>
         {% do item.setChildrenAttribute('class', 'ibexa-header-user-menu__popup-menu ibexa-popup-menu ibexa-popup-menu--hidden') %}
+        {{ include('@ezdesign/account/notifications/modal.html.twig') }}
     </div>
 
     {{ parent() }}

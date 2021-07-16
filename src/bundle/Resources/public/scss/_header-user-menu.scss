@@ -7,6 +7,10 @@
         max-height: calculateRem(32px);
         border: calculateRem(3px) solid $ibexa-color-black;
         border-radius: 50%;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &__notice-dot {
@@ -16,6 +20,11 @@
         margin-top: calculateRem(8px);
         border-radius: 50%;
         background: $ibexa-color-danger;
+        opacity: 1;
+
+        &--no-notice {
+            opacity: 0;
+        }
     }
 
     &__name {
