@@ -46,7 +46,14 @@ class AdminUpdateItemPage extends Page
 
     public function fillFieldWithValue(string $fieldName, $value): void
     {
-        $this->getField($fieldName)->setValue($value);
+        $field = $this->getField($fieldName);
+        $fieldType = $field->getAttribute('type');
+
+        $this->getHTMLPage()->setTimeout(3)->waitUntil(function () use ($field, $fieldType, $value) {
+            $field->setValue($value);
+
+            return $fieldType !== 'text' || $value === $field->getValue();
+        }, sprintf('Failed to set correct value in input field. Expected: %s. Actual: %s', $value, $field->getValue()));
     }
 
     public function clickButton(string $label): void
