@@ -145,6 +145,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.location.bookmark.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.main.translation.update.js'),
             path.resolve(__dirname, '../public/js/scripts/table.checkbox.js'),
+            path.resolve(__dirname, '../public/js/scripts/sidebar/main.menu.js'),
         ])
         .addEntry('ezplatform-admin-ui-modal-location-trash-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.js')])
         .addEntry('ezplatform-admin-ui-modal-location-trash-container-js', [
@@ -161,6 +162,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
             path.resolve(__dirname, '../public/js/scripts/button.translation.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/table.checkbox.js'),
+            path.resolve(__dirname, '../public/js/scripts/sidebar/main.menu.js'),
         ])
         .addEntry('ezplatform-admin-ui-link-manager-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.linkmanager.list.js')])
         .addEntry('ezplatform-admin-ui-link-manager-view-js', [path.resolve(__dirname, '../public/js/scripts/button.content.edit.js')])
