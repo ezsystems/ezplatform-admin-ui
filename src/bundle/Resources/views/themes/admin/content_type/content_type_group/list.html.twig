@@ -23,9 +23,12 @@
 
 {% block content %}
     <section class="container ez-container">
-        <div class="ez-table-header">
-            <div class="ez-table-header__headline">{{ 'content_type_group.view.list.title'|trans|desc('Content Type groups') }}</div>
-            <div class="ez-table-header__tools">
+        <div class="ibexa-table-header">
+            {# <div class="ibexa-table-header__headline">{{ 'content_type_group.view.list.title'|trans|desc('Content Type groups') }}</div> #}
+            <div class="ibexa-table-header__headline" title="{{ 'content_type_group.view.list.title'|trans|desc('Content Type groups') }}">
+                Content Type groups Content Type groups Content Type groups Content Type groups Content Type groups Content Type groups Content Type groups Content Type groups Content Type groups
+            </div>
+            <div class="ibexa-table-header__tools">
                 {% if can_create %}
                     <a
                         title="{{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type group') }}"
@@ -65,55 +68,218 @@
             'action': path('ezplatform.content_type_group.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-content-type-groups' }
         }) }}
-        <table class="ez-table table table-hover">
+        <table class="ibexa-table table">
             <thead>
                 <tr>
-                    <th></th>
-                    <th>{{ 'content_type_group.view.list.column.identifier'|trans|desc('Name') }}</th>
-                    <th>{{ 'content_type_group.view.list.column.id'|trans|desc('ID') }}</th>
-                    <th>{{ 'content_type_group.view.list.column.content_types_count'|trans|desc('Number of Content Types') }}</th>
-                    <th></th>
+                    <th class="ibexa-table__header-cell">
+                        asd
+                    </th>
+                    <th class="ibexa-table__header-cell ibexa-table__header-cell--checkbox">
+                        <input class="ibexa-input ibexa-input--checkbox ibexa-table__header-cell-checkbox" type="checkbox"> 
+                    </th>
+                    <th class="ibexa-table__header-cell ibexa-table__header-cell--has-icon ibexa-table__header-cell--close-left"></th>
+                    <th class="ibexa-table__header-cell ibexa-table__header-cell--close-left">{{ 'content_type_group.view.list.column.identifier'|trans|desc('Name') }}</th>
+                    <th class="ibexa-table__header-cell">{{ 'content_type_group.view.list.column.id'|trans|desc('ID') }}</th>
+                    <th class="ibexa-table__header-cell">{{ 'content_type_group.view.list.column.content_types_count'|trans|desc('Number of Content Types') }}</th>
+                    <th class="ibexa-table__header-cell"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="ibexa-table__body">
             {% for content_type_group in pager.currentPageResults %}
-                <tr>
-                    <td class="ez-table__cell ez-table__cell--has-checkbox">
+                <tr class="ibexa-table__row">
+                    <td class="ibexa-table__cell">
+                    a
+                    </td>
+                    <td class="ibexa-table__cell ibexa-table__cell--has-checkbox">
                         {% if can_delete %}
-                            {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"disabled": not deletable[content_type_group.id]}) }}
+                            {{ form_widget(form_content_type_groups_delete.content_type_groups[content_type_group.id], {"disabled": not deletable[content_type_group.id] and loop.first}) }}
                         {% else %}
                             {% do form_content_type_groups_delete.content_type_groups.setRendered %}
                         {% endif %}
                     </td>
-                    <td class="ez-table__cell">
+                    <td class="ibexa-table__cell ibexa-table__cell--has-icon ibexa-table__cell--close-left">
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="/bundles/ibexaplatformicons/img/all-icons.svg#user_group"></use>
+                        </svg>
+                    </td>
+                    <td class="ibexa-table__cell ibexa-table__cell--close-left">
                         {% set view_url = path('ezplatform.content_type_group.view', {
                             contentTypeGroupId: content_type_group.id
                         }) %}
 
                         <a href="{{ view_url }}">{{ content_type_group.identifier }}</a>
                     </td>
-                    <td class="ez-table__cell">{{ content_type_group.id }}</td>
-                    <td class="ez-table__cell">{{ content_types_count[content_type_group.id] }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns">
-                        {% if can_update %}
-                            {% set edit_url = path('ezplatform.content_type_group.update', {
-                                contentTypeGroupId: content_type_group.id
-                            }) %}
-                            <a
-                                title="{{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}"
-                                href="{{ edit_url }}"
-                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
-                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
-                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
-                                </svg>
-                            </a>
-                        {% endif %}
+                    {# <td class="ibexa-table__cell">{{ content_type_group.id }}</td>
+                    <td class="ibexa-table__cell">{{ content_types_count[content_type_group.id] }}</td> #}
+                    {# <td class="ibexa-table__cell">
+                        asdf asd das asdf adsf asdf asdf asdf dsaf sdf asdf asdf sdf adsf asdf  asdf asd das asdf adsf asdasdf asd das asdf adsf asdf asdf asdf dsaf sdf asdf asdf sdf adsf asdf  asdf asd das asdf adsf asdf asdf asdf dsaf sdf asdf asdf sdf adsf asdf sadf asdfasdf asdf asdf asdf asdf
+                    </td>
+                    <td class="ibexa-table__cell">
+                        asdf asd das asdf adsf asdf asdf asdf dsaf sdf asdf asdf sdf adsf asdf sadf asdfasdf asdf asdf asdf asdf
+                    </td> #}
+                    <td class="ibexa-table__cell">
+                        asdf asd das asdf adsf asdf asdf 
+                    </td>
+                    <td class="ibexa-table__cell">
+                        asdf asd das asdf adsf 
+                    </td>
+                    <td class="ibexa-table__cell ibexa-table__cell--has-action-btns">
+                        <div class="ibexa-table__cell-btns-wrapper">
+                            {% if can_update %}
+                                {% set edit_url = path('ezplatform.content_type_group.update', {
+                                    contentTypeGroupId: content_type_group.id
+                                }) %}
+                                <a
+                                    title="{{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}"
+                                    href="{{ edit_url }}"
+                                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text">
+                                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                        <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                                    </svg>
+                                </a>
+                                <a
+                                    title="{{ 'content_type_group.view.list.action.edit'|trans|desc('Edit') }}"
+                                    href="{{ edit_url }}"
+                                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text">
+                                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                        <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                                    </svg>
+                                </a>
+                            {% endif %}
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
         {{ form_end(form_content_type_groups_delete) }}
+
+        {# {% include '@ezdesign/ui/component/table/table.html.twig' with { 
+            head_cols: tabs_to_show,
+            include_tab_more: true,
+        } %} #}
+        
+        {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'content_type_group.view.list.title'|trans|desc('Content Type groups'),
+            head_cols: [
+                { content: 'asd' },
+                { has_checkbox: true },
+                { is_icon_column: true },
+                { content: 'content_type_group.view.list.column.identifier'|trans|desc('Name') },
+                { content: 'content_type_group.view.list.column.id'|trans|desc('ID') },
+                { content: 'content_type_group.view.list.column.content_types_count'|trans|desc('Number of Content Types') },
+                { },
+            ],
+            body_rows: [],
+        } %}
+            {% block header %}
+                {% embed '@ezdesign/ui/component/table/table_header.html.twig' %}
+                    {% block actions %}
+                            {% if can_create %}
+                        <a
+                            title="{{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type group') }}"
+                            href="{{ path('ezplatform.content_type_group.create') }}"
+                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                        >
+                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                                <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+                            </svg>
+                        </a>
+                    {% endif %}
+                    {% if can_delete %}
+                        {% set modal_data_target = 'delete-content-type-groups-modal' %}
+                        <button
+                            id="delete-content-type-groups"
+                            type="button"
+                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                            disabled
+                            data-toggle="modal"
+                            data-target="#{{ modal_data_target }}"
+                            title="{{ 'content_type_group.view.list.action.delete'|trans|desc('Delete Content Type group(s)') }}"
+                        >
+                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+                                <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
+                            </svg>
+                        </button>
+                        {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
+                            'id': modal_data_target,
+                            'message': 'content_type_group.modal.message'|trans|desc('Do you want to delete the Content Type group?'),
+                            'data_click': '#content_type_groups_delete_delete',
+                        }%}
+                    {% endif %}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
+
+        {# <div class="ibexa-table-header">
+            <div class="ibexa-table-header__headline" title="{{ 'content_type_group.view.list.title'|trans|desc('Content Type groups') }}">
+                Content Type groups Content Type groups Content Type groups Content Type groups Content Type groups Content Type groups Content Type groups Content Type groups Content Type groups
+            </div>
+            <div class="ibexa-table-header__tools">
+                {% if can_create %}
+                    <a
+                        title="{{ 'content_type_group.view.list.action.add'|trans|desc('Create a Content Type group') }}"
+                        href="{{ path('ezplatform.content_type_group.create') }}"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                    >
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                            <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+                {% if can_delete %}
+                    {% set modal_data_target = 'delete-content-type-groups-modal' %}
+                    <button
+                        id="delete-content-type-groups"
+                        type="button"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                        disabled
+                        data-toggle="modal"
+                        data-target="#{{ modal_data_target }}"
+                        title="{{ 'content_type_group.view.list.action.delete'|trans|desc('Delete Content Type group(s)') }}"
+                    >
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
+                        </svg>
+                    </button>
+                    {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
+                        'id': modal_data_target,
+                        'message': 'content_type_group.modal.message'|trans|desc('Do you want to delete the Content Type group?'),
+                        'data_click': '#content_type_groups_delete_delete',
+                    }%}
+                {% endif %}
+            </div>
+        </div>
+
+        <table class="ibexa-table table">
+            <thead>
+                <tr>
+                    <th class="ibexa-table__header-cell">
+                        asd
+                    </th>
+                    <th class="ibexa-table__header-cell ibexa-table__header-cell--checkbox">
+                        <input class="ibexa-input ibexa-input--checkbox ibexa-table__header-cell-checkbox" type="checkbox"> 
+                    </th>
+                    <th class="ibexa-table__header-cell ibexa-table__header-cell--has-icon ibexa-table__header-cell--close-left"></th>
+                    <th class="ibexa-table__header-cell ibexa-table__header-cell--close-left">{{ 'content_type_group.view.list.column.identifier'|trans|desc('Name') }}</th>
+                    <th class="ibexa-table__header-cell">{{ 'content_type_group.view.list.column.id'|trans|desc('ID') }}</th>
+                    <th class="ibexa-table__header-cell">{{ 'content_type_group.view.list.column.content_types_count'|trans|desc('Number of Content Types') }}</th>
+                    <th class="ibexa-table__header-cell"></th>
+                </tr>
+            </thead>
+            <tbody class="ibexa-table__body">
+                <tr class="ibexa-table__row">
+                    <td class="ibexa-table__empty-table-cell" colspan="7">
+                        <img src="/bundles/ezplatformadminui/img/ibexa-empty-table.svg" alt="You have no items yet" />
+                        <div class="ibexa-table__empty-table-text">
+                            You have no items yet<br>
+                            <strong>Add new one<strong>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table> #}
 
         {% if pager.haveToPaginate %}
             {% include '@ezdesign/ui/pagination.html.twig' with {

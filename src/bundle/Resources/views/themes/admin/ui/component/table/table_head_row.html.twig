@@ -1,0 +1,11 @@
+<tr>
+    {% for head_col in head_cols %}
+        {% include '@ezdesign/ui/component/table/table_head_cell.html.twig' with {
+            has_checkbox: head_col.has_checkbox|default(false),
+            is_icon_column: head_col.is_icon_column|default(false),
+            is_close_left: head_col.is_close_left is defined ? head_col.is_close_left : next_is_close_left|default(false),
+            content: head_col.content|default(''),
+        } %}
+        {% set next_is_close_left = head_col.has_checkbox|default(false) or head_col.is_icon_column|default(false) %}
+    {% endfor %}
+</tr>

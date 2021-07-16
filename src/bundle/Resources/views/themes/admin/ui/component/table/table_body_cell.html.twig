@@ -1,0 +1,18 @@
+<div 
+    class="ibexa-table__header-cell
+        {% if has_checkbox %}ibexa-table__cell--has-checkbox{% endif %}
+        {% if has_action_btns %}ibexa-table__cell--has-action-btns{% endif %}
+        {% if is_icon_column %}ibexa-table__cell--has-icon{% endif %}
+        {% if is_close_left %}ibexa-table__cell--close-left{% endif %}
+        {{ table_head_cell_class|default('') }}"
+>
+    {% block content %}
+        {% if has_action_btns %}
+            <div class="ibexa-table__cell-btns-wrapper">
+                {{ content }}
+            </div>
+        {% else %}
+            {{ content }}
+        {% endif %}
+    {% endblock %}
+</div>

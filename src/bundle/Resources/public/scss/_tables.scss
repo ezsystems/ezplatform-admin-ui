@@ -271,3 +271,248 @@
         }
     }
 }
+
+.ibexa-table {
+    font-family: $font-family-sans-serif;
+    font-size: $ibexa-text-font-size;
+    line-height: calculateRem(24px);
+    border-spacing: 0;
+    background-color: $ibexa-color-white;
+
+    &__row:nth-child(odd) {
+        background-color: $ibexa-color-light-300;
+    }
+
+    &__cell:first-child {
+        border-top-left-radius: $ibexa-border-radius;
+        border-bottom-left-radius: $ibexa-border-radius;
+    }
+
+    &__cell:last-child {
+        border-top-right-radius: $ibexa-border-radius;
+        border-bottom-right-radius: $ibexa-border-radius;
+    }
+
+    &__cell.ibexa-table__cell {
+        vertical-align: middle;
+
+        .form-check {
+            display: flex;
+            height: 16px;
+            width: 16px;
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        background-color: $ibexa-white;
+        align-items: center;
+        padding: 0 calculateRem(20px);
+        min-height: calculateRem(50px);
+        border-radius: calculateRem(4px) calculateRem(4px) 0 0;
+    }
+
+    &__headline {
+        font-size: calculateRem(16px);
+        margin-bottom: 0;
+        font-weight: bold;
+        color: $ibexa-black;
+    }
+
+    &__empty-table-cell {
+        background: $ibexa-color-white;
+        text-align: center;
+        // padding-top: 30px;
+
+        img {
+            margin-bottom: 28px;
+        }
+    }
+
+    &__empty-table-text {
+        @include ibexa-font-sans-serif();
+
+        font-size: $ibexa-text-font-size;
+        line-height: calculateRem(24px);
+
+        strong {
+            font-size: $ibexa-text-font-size-large;
+            line-height: calculateRem(33px);
+            font-weight: 600;
+        }
+    }
+
+    &__header-cell {
+        .table & {
+            @include ibexa-font-sans-serif();
+
+            font-size: $ibexa-text-font-size-small;
+            color: $ibexa-color-dark-400;
+            line-height: calculateRem(18px);
+            vertical-align: middle;
+            border-top: calculateRem(1px) solid $ibexa-color-dark-200;
+            border-bottom: 0;
+            padding-top: calculateRem(18px);
+            padding-bottom: calculateRem(18px);
+        }
+
+        .table &--has-icon {
+            max-width: calculateRem(52px);
+        }
+
+        // .table &--checkbox {
+        //     display: flex;
+        //     align-items: center;
+        // }
+    }
+
+    &__header-cell-checkbox {
+        &.ibexa-input--checkbox {
+            margin-bottom: 0;
+        }
+    }
+
+    &__sort-column {
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: calculateRem(9px);
+            right: calculateRem(-10px);
+        }
+
+        &--asc:after {
+            border-left: calculateRem(3px) solid transparent;
+            border-right: calculateRem(3px) solid transparent;
+            border-bottom: calculateRem(5px) solid $ibexa-black;
+        }
+
+        &--desc::after {
+            border-left: calculateRem(3px) solid transparent;
+            border-right: calculateRem(3px) solid transparent;
+            border-top: calculateRem(5px) solid $ibexa-black;
+        }
+    }
+
+    &__cell {
+        vertical-align: middle;
+
+        &--field-definitions-head {
+            width: calc(100% / 3);
+        }
+
+        // .table &--has-action-btns {
+        //     padding-right: calculateRem(20px);
+        //     text-align: right;
+
+        //     .btn {
+        //         margin: 0 calculateRem(5px);
+        //     }
+        // }
+
+        .table &--has-text-info {
+            padding: calculateRem(16px) calculateRem(8px);
+            text-align: center;
+        }
+
+        &--has-checkbox {
+            width: 5%;
+        }
+
+        .table &--has-icon { // TODO: change to --is-icon-ci
+            // padding: calculateRem(17px) calculateRem(16px) 0 calculateRem(16px);
+            // width: calculateRem(24px);
+            // text-align: right;
+            // padding-right: 0;
+            line-height: 0;
+
+            // .ibexa-icon {
+            //     margin-top: calculateRem(-2px);
+            // }
+        }
+
+        // .table &--close-left {
+        //     padding-left: 0;
+        // }
+
+        .table &--name {
+            max-width: calculateRem(350px);
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        &--no-content {
+            margin-bottom: calculateRem(48px);
+            padding: calculateRem(12px) calculateRem(16px);
+            background-color: $ibexa-white;
+            font-style: italic;
+            color: $ibexa-black;
+        }
+
+        &--limitation {
+            width: 70%;
+        }
+    }
+
+    .table &__cell--close-left,
+    .table &__header-cell--close-left {
+        padding-left: 0;
+    }
+
+    &__cell-btns-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    &__cell-link,
+    &__cell-link:hover {
+        color: $ibexa-color-font;
+        text-decoration: none;
+    }
+}
+
+.ibexa-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: calculateRem(20px);
+    // padding: calculateRem(16px) calculateRem(8px) calculateRem(16px);
+    // background-color: $ibexa-white;
+
+    &__headline {
+        @include ibexa-font-sans-serif();
+
+        font-size: calculateRem(22px);
+        // line-height: calculateRem(36px);
+        color: $ibexa-black;
+        // margin-bottom: 0;
+        font-weight: 600;
+
+        // max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__tools {
+        white-space: nowrap;
+
+        .btn {
+            margin: 0 calculateRem(5px);
+        }
+    }
+
+    &--bordered-bottom {
+        border-bottom: calculateRem(1px) solid $ibexa-color-base;
+    }
+}

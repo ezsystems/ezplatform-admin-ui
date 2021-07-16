@@ -1,0 +1,12 @@
+<tr class="ibexa-table__row">
+    {% for body_col in head_cols %}
+        {% include '@ezdesign/ui/component/body_colsle/table_body_cell.html.twig' with {
+            has_checkbox: body_col.has_checkbox,
+            has_action_btns: body_col.has_action_btns,
+            is_icon_column: body_col.is_icon_column,
+            is_close_left: body_col.is_close_left is defined ? tab.is_close_left : next_is_close_left|default(false),
+            content: body_col.content,
+        } %}
+        {% set next_is_close_left = body_cols.has_checkbox or tab.is_icon_column %}
+    {% endfor %}
+</tr>

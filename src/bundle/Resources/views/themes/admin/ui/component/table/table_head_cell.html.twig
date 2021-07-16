@@ -1,0 +1,15 @@
+
+<th 
+    class="ibexa-table__header-cell
+        {%- if has_checkbox %} ibexa-table__header-cell--checkbox{%- endif -%}
+        {%- if is_icon_column %} ibexa-table__header-cell--has-icon{%- endif -%}
+        {%- if is_close_left %} ibexa-table__header-cell--close-left{%- endif -%}
+        {{- table_head_cell_class|default('') -}}"
+>
+    {%- block content -%}
+        {%- if has_checkbox -%}
+            <input class="ibexa-input ibexa-input--checkbox ibexa-table__header-cell-checkbox" type="checkbox">  
+        {%- endif -%}
+        {{- content -}}
+    {%- endblock -%}
+</th>
