@@ -26,7 +26,8 @@
             width: calculateRem(220px);
             background-color: rgba($ibexa-color-dark, 0.8);
             border-left: calculateRem(1px) solid $ibexa-color-info-800;
-            
+            transition: all $ibexa-admin-transition-duration;
+
             .ibexa-main-menu {
                 &__items-list {
                     width: calculateRem(210px);
@@ -68,6 +69,10 @@
             .ibexa-main-menu__item-text-column {
                 @include hidden-main-menu-node;
             }
+        }
+
+        &--resizing {
+            transition: none;
         }
     }
 

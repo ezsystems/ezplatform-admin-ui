@@ -68,19 +68,6 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
         $token = $this->tokenStorage->getToken();
         if (null !== $token && is_object($token->getUser())) {
-            // $menu->addChild(self::ITEM_NOTIFICATION, [
-            //     'attributes' => [
-            //         'class' => 'ez-user-menu__item--notifications',
-            //         'data-toggle' => 'modal',
-            //         'data-target' => '#view-notifications',
-            //     ],
-            //     'extras' => [
-            //         'translation_domain' => 'notifications',
-            //         'template' => '@ezdesign/account/notifications/modal.html.twig',
-            //         'orderNumber' => 10,
-            //     ],
-            // ]);
-
             if ($this->permissionResolver->hasAccess('content', 'versionread') !== false) {
                 $menu->addChild(
                     $this->createMenuItem(self::ITEM_DRAFTS, [

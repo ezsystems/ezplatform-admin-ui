@@ -11,11 +11,9 @@
         position: relative;
         top: 0;
         flex: 0 0 auto;
-        width: 72px;
+        width: 50px;
         background: $ibexa-white;
         color: inherit;
-        // transform: scaleX(0.1);
-        // transform-origin: left;
 
         .c-list {
             dispaly: none;
@@ -30,13 +28,15 @@
         }
 
         &--expanded {
-            // transform-origin: left;
-            // transform: scaleX(1);
             display: initial;
             width: 15vw;
 
             .c-list {
                 dispaly: block;
+            }
+
+            .ez-content-tree-container__wrapper {
+                opacity: 1;
             }
         }
 
@@ -44,6 +44,8 @@
             position: -webkit-sticky;
             position: sticky;
             top: 0;
+            opacity: 0;
+            overflow: auto;
         }
     }
 

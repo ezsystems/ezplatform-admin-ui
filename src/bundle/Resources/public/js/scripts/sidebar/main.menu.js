@@ -14,6 +14,7 @@
     const showSecondLevelMenu = () => {
         firstLevelMenuNode.classList.add('ibexa-main-menu__navbar--collapsed');
         secondLevelMenuNode.classList.remove('ibexa-main-menu__navbar--hidden');
+
         parseMenuTitles();
     };
     const toggleSecondLevelMenu = () => {
@@ -59,6 +60,7 @@
     };
     const addResizeListeners = ({ clientX }) => {
         resizeStartPositionX = clientX;
+        secondLevelMenuNode.classList.add('ibexa-main-menu__navbar--resizing');
         secondMenuLevelCurrentWidth = secondLevelMenuNode.getBoundingClientRect().width;
 
         doc.addEventListener('mousemove', changeNavbarWidth, false);
@@ -67,6 +69,7 @@
     const removeResizeListeners = () => {
         doc.removeEventListener('mousemove', changeNavbarWidth, false);
         doc.removeEventListener('mouseup', removeResizeListeners, false);
+        secondLevelMenuNode.classList.remove('ibexa-main-menu__navbar--resizing');
     };
     const changeNavbarWidth = ({ clientX }) => {
         let newMenuLevelWidth = 0;

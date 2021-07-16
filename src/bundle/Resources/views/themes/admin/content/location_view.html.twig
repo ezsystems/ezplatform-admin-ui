@@ -13,7 +13,7 @@
 {% endif %}
 {% form_theme form_content_create '@ezdesign/ui/form_fields.html.twig' %}
 
-{% block body_class %}ez-content-view ez-has-full-width-footer{% endblock %}
+{% block body_class %}ez-content-view{% endblock %}
 
 {% block left_sidebar %}
     {% set main_menu_context = {
@@ -39,13 +39,13 @@
                     'ancestorClass': 'active'
                 }) }}
             </div>
-            <div class="ez-content-tree-container ez-content-tree-container--expanded"
+            <div class="ez-content-tree-container"
                 data-tree-root-location-id="{{ content_tree_module_root|default(ez_admin_ui_config['contentTree']['treeRootLocationId']) }}"
                 data-current-location-path="{{ location_path|default('') }}"
             >
                 <button class="ibexa-btn btn ibexa-btn--no-text ibexa-btn--toggle-content-tree">
                     <svg class="ibexa-icon ibexa-icon--small">
-                        <use xlink:href="{{ ibexa_icon_path('caret-back') }}"></use>
+                        <use xlink:href="{{ ibexa_icon_path('caret-next') }}"></use>
                     </svg>
                 </button>
                 <div class="ez-content-tree-container__wrapper"></div>
