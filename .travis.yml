@@ -23,16 +23,6 @@ matrix:
   include:
     # Normal jobs: PR, merge
     - if: type in (pull_request, push) AND commit_message !~ /(Run regression)/
-      name: "Code Style Check"
-      env: CHECK_CS=1
-    - if: type in (pull_request, push) AND commit_message !~ /(Run regression)/
-      name: "Unit tests"
-      env: PHPUNIT_CONFIG='phpunit.xml'
-    - if: type in (pull_request, push) AND commit_message !~ /(Run regression)/
-      name: "Unit tests (PHP 7.4)"
-      env: PHPUNIT_CONFIG='phpunit.xml'
-      php: 7.4
-    - if: type in (pull_request, push) AND commit_message !~ /(Run regression)/
       name: "Admin-UI tests on Clean P"
       env:
         - COMPOSE_FILE="doc/docker/base-dev.yml:doc/docker/selenium.yml"
@@ -75,17 +65,14 @@ before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 install:
-  - travis_retry composer install --prefer-dist --no-interaction
-  # Prepare whole environment if needed
-  - if [ "${BEHAT_OPTS}" != "" ]; then ./vendor/bin/prepare_project_edition.sh oss ${PROJECT_VERSION} ${COMPOSE_FILE} ; fi
+  - ./vendor/bin/prepare_project_edition.sh oss ${PROJECT_VERSION} ${COMPOSE_FILE}
 
 before_script:
    - if [ "${SETUP_BEHAT_OPTS}" != "" ] ; then cd "${HOME}/build/project"; docker-compose exec --user www-data app sh -c "vendor/bin/ezbehat $SETUP_BEHAT_OPTS" ; fi
 
 script:
-  - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/check_cs.sh ; fi
-  - if [ "${PHPUNIT_CONFIG}" != '' ]; then ./vendor/bin/phpunit -c "${PHPUNIT_CONFIG}"; fi
-  - if [ "${BEHAT_OPTS}" != "" ]; then cd "${HOME}/build/project"; docker-compose exec --user www-data app sh -c "vendor/bin/ezbehat ${BEHAT_OPTS}" ; fi
+  - cd "${HOME}/build/project"
+  - docker-compose exec --user www-data app sh -c "vendor/bin/ezbehat ${BEHAT_OPTS}"
 
 after_failure:
   # Will show us the last bit of the log of container's main processes
@@ -96,4 +83,4 @@ after_failure:
   - docker ps -s
 
 after_script:
-  - if [ "${BEHAT_OPTS}" != "" ] ; then vendor/bin/ezreport ; fi
+  - vendor/bin/ezreport

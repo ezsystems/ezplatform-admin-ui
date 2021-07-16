@@ -58,7 +58,9 @@
         "ezsystems/ezplatform-code-style": "^0.1.0"
     },
     "scripts": {
-        "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
+        "fix-cs": "php-cs-fixer fix -v --show-progress=estimating",
+        "check-cs": "php-cs-fixer fix -v --diff --dry-run --show-progress=estimating",
+        "test": "phpunit -c phpunit.xml"
     },
     "extra": {
         "branch-alias": {
