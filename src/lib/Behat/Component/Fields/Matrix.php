@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component\Fields;
 
 use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
-use Ibexa\Behat\Browser\Locator\CssLocatorBuilder;
+use Ibexa\Behat\Browser\Locator\CSSLocatorBuilder;
 use Ibexa\Behat\Browser\Locator\LocatorInterface;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use PHPUnit\Framework\Assert;
@@ -94,7 +94,7 @@ class Matrix extends FieldTypeComponent
 
     private function internalSetValue(int $rowIndex, string $column, $value): void
     {
-        $matrixCellSelector = CssLocatorBuilder::combine(
+        $matrixCellSelector = CSSLocatorBuilder::combine(
             $this->getLocator('matrixCellSelectorFormat')->getSelector(),
             new VisibleCSSLocator('rowIndex', (string) $rowIndex),
             new VisibleCSSLocator('columnIndex', $column),
