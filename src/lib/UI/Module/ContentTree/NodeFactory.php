@@ -221,7 +221,7 @@ final class NodeFactory
 
         $searchQuery = new LocationQuery();
         $searchQuery->filter = new Criterion\ParentLocationId($parentLocationIds);
-        $searchQuery->aggregations[] = new Query\Aggregation\RawTermAggregation('childrens', 'parent_id_id');
+        $searchQuery->aggregations[] = new Query\Aggregation\LocationChildrenTermAggregation('childrens');
         $searchQuery->aggregations[0]->setLimit(count($parentLocationIds));
         $result = $this->searchService->findLocations($searchQuery);
 
@@ -242,7 +242,9 @@ final class NodeFactory
     {
         $resultsAsArray = [];
         foreach ($aggregationResult->getEntries() as $entry) {
-            $resultsAsArray[$entry->getKey()] = $entry->getCount();
+            /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
+            $location = $entry->getKey();
+            $resultsAsArray[$location->id] = $entry->getCount();
         }
 
         return $resultsAsArray;
