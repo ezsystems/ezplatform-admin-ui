@@ -74,7 +74,7 @@ class DashboardPage extends Page
         return [
             new VisibleCSSLocator('tableSelector', '.ez-card'),
             new VisibleCSSLocator('tableTitle', '.ez-card__title'),
-            new VisibleCSSLocator('tableTab', '.ez-tabs .nav-item'),
+            new VisibleCSSLocator('tableTab', '.ibexa-tabs .nav-item'),
             new VisibleCSSLocator('pageTitle', '.ez-header h1'),
             new VisibleCSSLocator('table', '#ibexa-tab-dashboard-my-my-drafts'),
         ];
