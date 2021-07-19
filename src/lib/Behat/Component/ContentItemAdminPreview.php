@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Behat\Component;
 
+use Behat\Mink\Session;
 use Ibexa\Behat\Browser\Component\Component;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
-use Ibexa\Behat\Browser\Locator\CssLocatorBuilder;
-use Behat\Mink\Session;
+use Ibexa\Behat\Browser\Locator\CSSLocatorBuilder;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Traversable;
 
@@ -44,6 +44,20 @@ class ContentItemAdminPreview extends Component
         }
     }
 
+    public function verifyIsLoaded(): void
+    {
+    }
+
+    protected function specifyLocators(): array
+    {
+        return [
+            new VisibleCSSLocator('nthFieldContainer', 'div.ez-content-field:nth-of-type(%s)'),
+            new VisibleCSSLocator('fieldName', '.ez-content-field-name'),
+            new VisibleCSSLocator('fieldValue', '.ez-content-field-value'),
+            new VisibleCSSLocator('fieldValueContainer', ':first-child'),
+        ];
+    }
+
     private function getFieldPosition(string $fieldLabel): int
     {
         $searchText = sprintf('%s:', $fieldLabel);
@@ -60,35 +74,22 @@ class ContentItemAdminPreview extends Component
         }
     }
 
-    public function verifyIsLoaded(): void
-    {
-    }
-
-    protected function specifyLocators(): array
-    {
-        return [
-            new VisibleCSSLocator('nthFieldContainer', 'div.ez-content-field:nth-of-type(%s)'),
-            new VisibleCSSLocator('fieldName', '.ez-content-field-name'),
-            new VisibleCSSLocator('fieldValue', '.ez-content-field-value'),
-            new VisibleCSSLocator('fieldValueContainer', ':first-child'),
-        ];
-    }
-
     private function detectFieldTypeIdentifier(CSSLocator $fieldValueLocator)
     {
         $fieldClass = $this->getHTMLPage()
             ->find(CSSLocatorBuilder::base($fieldValueLocator)->withDescendant($this->getLocator('fieldValueContainer'))->build())
-            ->getAttribute('class');
+            ->getAttribute('class')
+        ;
 
-        if ($fieldClass === 'ez-scrollable-table-wrapper mb-0') {
+        if ('ez-scrollable-table-wrapper mb-0' === $fieldClass) {
             return 'ezuser';
         }
 
-        if (strpos($fieldClass, 'ez-scrollable-table-wrapper') !== false) {
+        if (false !== strpos($fieldClass, 'ez-scrollable-table-wrapper')) {
             return 'ezmatrix';
         }
 
-        if ($fieldClass === '') {
+        if ('' === $fieldClass) {
             return 'ezboolean';
         }
 

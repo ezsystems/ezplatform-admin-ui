@@ -11,7 +11,7 @@ namespace Ibexa\AdminUi\Behat\Component\Fields;
 use Behat\Mink\Session;
 use Ibexa\Behat\Browser\FileUpload\FileUploadHelper;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
-use Ibexa\Behat\Browser\Locator\CssLocatorBuilder;
+use Ibexa\Behat\Browser\Locator\CSSLocatorBuilder;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use PHPUnit\Framework\Assert;
 
@@ -41,7 +41,7 @@ class File extends FieldTypeComponent
     {
         $filename = str_replace('.zip', '', $values['value']);
 
-        Assert::assertContains(
+        Assert::assertStringContainsString(
             $filename,
             $this->getHTMLPage()->find($this->parentLocator)->getText(),
             'Image has wrong file name'
@@ -51,7 +51,7 @@ class File extends FieldTypeComponent
             ->withDescendant($this->getLocator('file'))
             ->build();
 
-        Assert::assertContains(
+        Assert::assertStringContainsString(
             $filename,
             $this->getHTMLPage()->find($fileFieldSelector)->getAttribute('href'),
             'File has wrong href'
