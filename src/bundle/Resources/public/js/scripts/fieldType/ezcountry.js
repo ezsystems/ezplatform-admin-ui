@@ -44,13 +44,4 @@
 
     validator.init();
     eZ.addConfig('fieldTypeValidators', [validator], true);
-    doc.querySelectorAll(SELECTOR_FIELD).forEach((container) => {
-        const dropdown = new eZ.core.CustomDropdown({
-            container,
-            itemsContainer: container.querySelector('.ez-custom-dropdown__items'),
-            sourceInput: container.querySelector(SELECTOR_SOURCE_INPUT),
-        });
-
-        dropdown.init();
-    });
 })(window, window.document, window.eZ);

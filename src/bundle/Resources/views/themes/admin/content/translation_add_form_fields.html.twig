@@ -1,4 +1,4 @@
-{% extends 'form_div_layout.html.twig' %}
+{% extends '@ezdesign/ui/form_fields.html.twig' %}
 
 {% block radio_widget %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-translation__input')|trim}) %}

@@ -1,0 +1,25 @@
+{%- block choice_widget -%}
+    {% set choices = form.vars.choices
+        | map(choice => choice.choices is defined ? choice.choices : [choice])
+        | reduce((carry, choices) => carry|merge(choices), [])
+    %}
+    {% set attr = attr|default({})|merge({
+        'class': (attr.class|default('') ~ ' ibexa-input ibexa-input--select')|trim,
+    }) %}
+    {% set source %}
+        {% if expanded %}
+            {{- block('choice_widget_expanded') -}}
+        {% else %}
+            {{- block('choice_widget_collapsed') -}}
+        {% endif %}
+    {% endset %}
+
+    {% include '@ezdesign/ui/component/custom_dropdown.html.twig' with {
+        source: source,
+        choices: choices,
+        value: form.vars.value,
+        source_selector: '.ez-update-policy__source-input',
+        multiple: form.vars.multiple,
+        choice_translation_domain: false
+    } %}
+{%- endblock choice_widget -%}

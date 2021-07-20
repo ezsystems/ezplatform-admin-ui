@@ -4,22 +4,8 @@
         {{ form_widget(form.limitationValues, {
             attr: {
                 class: 'ez-update-policy__source-input',
-                hidden: true
             }
         }) }}
-
-        {% set choices = form.limitationValues.vars.choices
-            | map(choice => choice.choices is defined ? choice.choices : [choice])
-            | reduce((carry, choices) => carry|merge(choices), []) 
-        %}
-
-        {% include '@ezdesign/ui/component/custom_dropdown.html.twig' with {
-            choices: choices,
-            value: form.limitationValues.vars.value,
-            source_selector: '.ez-update-policy__source-input',
-            multiple: form.limitationValues.vars.multiple,
-            choice_translation_domain: false
-        } %}
 
         {{ form_errors(form.limitationValues) }}
     </div>

@@ -1,33 +1,39 @@
 (function(global, doc, eZ) {
-    const CLASS_CUSTOM_DROPDOWN = 'ez-custom-dropdown';
-    const CLASS_CUSTOM_DROPDOWN_OVERFLOW = 'ez-custom-dropdown--overflow';
-    const CLASS_ITEMS_HIDDEN = 'ez-custom-dropdown__items--hidden';
-    const CLASS_ITEMS_POSITION_TOP = 'ez-custom-dropdown__items--position-top';
-    const CLASS_REMOVE_SELECTION = 'ez-custom-dropdown__remove-selection';
-    const CLASS_ITEM_SELECTED_IN_LIST = 'ez-custom-dropdown__item--selected';
-    const SELECTOR_ITEM = '.ez-custom-dropdown__item';
-    const SELECTOR_SELECTED_ITEM_IN_LABEL = '.ez-custom-dropdown__selected-item';
-    const SELECTOR_SELECTED_ITEM_IN_LIST = '.ez-custom-dropdown__item--selected';
-    const SELECTOR_SELECTION_INFO = '.ez-custom-dropdown__selection-info';
-    const SELECTOR_OVERFLOW_ITEM_INFO = '.ez-custom-dropdown__selected-overflow-number';
-    const SELECTOR_PLACEHOLDER = '[data-value=""]';
+    const CLASS_CUSTOM_DROPDOWN_OVERFLOW = 'ibexa-dropdown--overflow';
+    const CLASS_DROPDOWN_EXPANDED = 'ibexa-dropdown--is-expanded';
+    const CLASS_ITEMS_POSITION_TOP = 'ibexa-dropdown__items--position-top';
+    const CLASS_REMOVE_SELECTION = 'ibexa-dropdown__remove-selection';
+    const CLASS_ITEM_SELECTED_IN_LIST = 'ibexa-dropdown__item--selected';
+    const SELECTOR_ITEM = '.ibexa-dropdown__item';
+    const SELECTOR_CUSTOM_DROPDOWN = '.ibexa-dropdown';
+    const SELECTOR_SOURCE = '.ibexa-dropdown__source .ibexa-input';
+    const SELECTOR_ITEMS_CONTAINER = '.ibexa-dropdown__items';
+    const SELECTOR_SELECTED_ITEM_IN_LABEL = '.ibexa-dropdown__selected-item';
+    const SELECTOR_SELECTED_ITEM_IN_LIST = '.ibexa-dropdown__item--selected';
+    const SELECTOR_SELECTION_INFO = '.ibexa-dropdown__selection-info';
+    const SELECTOR_OVERFLOW_ITEM_INFO = '.ibexa-dropdown__selected-overflow-number';
+    const SELECTOR_PLACEHOLDER = '.ibexa-dropdown__selected-placeholder';
     const EVENT_VALUE_CHANGED = 'valueChanged';
     const ITEMS_LIST_MAX_HEIGHT = 300;
+    const RESTRICTED_AREA_ITEMS_CONTAINER = 190;
 
-    class CustomDropdown {
-        constructor(config) {
-            this.container = config.container;
-            this.sourceInput = config.sourceInput;
-            this.itemsContainer = config.itemsContainer;
+    class Dropdown {
+        constructor(config = {}) {
+            const container = config.container ?? doc.querySelector(SELECTOR_CUSTOM_DROPDOWN);
+            const sourceInput = config.sourceInput ?? container.querySelector(SELECTOR_SOURCE);
+
+            this.container = container;
+            this.sourceInput = sourceInput;
+            this.itemsContainer = config.itemsContainer ?? container.querySelector(SELECTOR_ITEMS_CONTAINER);
             this.hasDefaultSelection = config.hasDefaultSelection || false;
             this.selectedItemTemplate =
                 config.selectedItemTemplate ||
                 `<li
-                class="ez-custom-dropdown__selected-item"
+                class="ibexa-dropdown__selected-item"
                 data-value="{{value}}">
                     {{label}}<span class="${CLASS_REMOVE_SELECTION}"></span>
             </li>`;
-            this.canSelectOnlyOne = !config.sourceInput.multiple;
+            this.canSelectOnlyOne = !sourceInput?.multiple;
             this.createSelectedItem = this.createSelectedItem.bind(this);
             this.selectFirstItem = this.selectFirstItem.bind(this);
             this.clearCurrentSelection = this.clearCurrentSelection.bind(this);
@@ -44,9 +50,9 @@
         }
 
         selectFirstItem() {
-            const items = this.itemsContainer.querySelectorAll(`${SELECTOR_ITEM}`);
+            const items = this.itemsContainer.querySelectorAll(SELECTOR_ITEM);
             const firstItem = items[0];
-            const label = firstItem.querySelector('.ez-custom-dropdown__item-label').innerHTML;
+            const label = firstItem.querySelector('.ibexa-dropdown__item-label').innerHTML;
 
             items.forEach((item) => item.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
             firstItem.classList.add(CLASS_ITEM_SELECTED_IN_LIST);
@@ -58,20 +64,24 @@
         }
 
         clearCurrentSelection() {
+            const placeholder = this.container.querySelector(SELECTOR_PLACEHOLDER).cloneNode();
+            const overflowNumber = this.container.querySelector(SELECTOR_OVERFLOW_ITEM_INFO).cloneNode();
+
             this.sourceInput.querySelectorAll('option').forEach((option) => (option.selected = false));
             this.itemsContainer.querySelectorAll(SELECTOR_ITEM).forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
             this.container.querySelector(SELECTOR_SELECTION_INFO).innerHTML = '';
+            this.container.querySelector(SELECTOR_SELECTION_INFO).append(placeholder);
+            this.container.querySelector(SELECTOR_SELECTION_INFO).append(overflowNumber);
         }
 
         hideOptions() {
             doc.body.removeEventListener('click', this.onClickOutside);
 
-            return this.itemsContainer.classList.add(CLASS_ITEMS_HIDDEN);
+            return this.container.classList.remove(CLASS_DROPDOWN_EXPANDED);
         }
 
         onSelect(element, selected) {
             const value = element.dataset.value;
-            const cssMethodName = selected ? 'add' : 'remove';
 
             if (this.canSelectOnlyOne && selected) {
                 this.hideOptions();
@@ -80,24 +90,22 @@
 
             if (value) {
                 this.sourceInput.querySelector(`[value="${value}"]`).selected = selected;
-                element.querySelector('.ibexa-input').checked = selected;
+
+                if (!this.canSelectOnlyOne) {
+                    element.querySelector('.ibexa-input').checked = selected;
+                }
             }
 
-            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList[cssMethodName](CLASS_ITEM_SELECTED_IN_LIST);
+            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList.toggle(CLASS_ITEM_SELECTED_IN_LIST, selected);
 
             const selectedItemsList = this.container.querySelector(SELECTOR_SELECTION_INFO);
 
             if (selected && value) {
-                const placeholder = selectedItemsList.querySelector(SELECTOR_PLACEHOLDER);
-                const label = element.querySelector('.ez-custom-dropdown__item-label').innerHTML;
+                const label = element.querySelector('.ibexa-dropdown__item-label').innerHTML;
 
-                if (placeholder) {
-                    placeholder.remove();
-
-                    this.itemsContainer.querySelector(SELECTOR_PLACEHOLDER).classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
-                }
-
-                selectedItemsList.insertAdjacentHTML('beforeend', this.createSelectedItem(value, label));
+                selectedItemsList
+                    .querySelector(SELECTOR_PLACEHOLDER)
+                    .insertAdjacentHTML('beforebegin', this.createSelectedItem(value, label));
             } else {
                 const valueNode = selectedItemsList.querySelector(`[data-value="${value}"]`);
 
@@ -155,57 +163,54 @@
                 return;
             }
 
-            const isListHidden = this.itemsContainer.classList.contains(CLASS_ITEMS_HIDDEN);
-            const bodyMethodName = isListHidden ? 'addEventListener' : 'removeEventListener';
+            const isDropdownExpanded = this.container.classList.toggle(CLASS_DROPDOWN_EXPANDED);
+            const bodyMethodName = isDropdownExpanded ? 'addEventListener' : 'removeEventListener';
 
-            if (isListHidden) {
+            if (isDropdownExpanded) {
                 const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
                 const { top } = this.itemsContainer.getBoundingClientRect();
                 const isItemsContainerAbove = top + ITEMS_LIST_MAX_HEIGHT > viewportHeight;
-                const itemsListMethodName = isItemsContainerAbove ? 'add' : 'remove';
 
                 this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(isItemsContainerAbove)}px`;
-                this.itemsContainer.classList[itemsListMethodName](CLASS_ITEMS_POSITION_TOP);
+                this.itemsContainer.classList.toggle(CLASS_ITEMS_POSITION_TOP, isItemsContainerAbove);
             }
 
-            this.itemsContainer.classList.toggle(CLASS_ITEMS_HIDDEN);
             doc.body[bodyMethodName]('click', this.onClickOutside, false);
         }
 
         onOptionClick({ target }) {
             const option = target.closest(SELECTOR_ITEM);
+            const isSelected = this.canSelectOnlyOne || !option.classList.contains(CLASS_ITEM_SELECTED_IN_LIST);
 
-            return this.onSelect(option, !option.classList.contains(CLASS_ITEM_SELECTED_IN_LIST));
+            return this.onSelect(option, isSelected);
         }
 
         deselectOption(option) {
             const value = option.dataset.value;
             const optionSelect = this.sourceInput.querySelector(`[value="${value}"]`);
             const itemSelected = this.itemsContainer.querySelector(`[data-value="${value}"]`);
-
             itemSelected.classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
             itemSelected.querySelector('.ibexa-input').checked = false;
-
             if (optionSelect) {
                 optionSelect.selected = false;
             }
-
             option.remove();
-
             if (!this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length && this.hasDefaultSelection) {
                 this.hideOptions();
                 this.clearCurrentSelection();
                 this.selectFirstItem();
             }
-
             this.fitItems();
             this.fireValueChangedEvent();
         }
 
         fitItems() {
+            if (this.canSelectOnlyOne) {
+                return;
+            }
+
             let itemsWidth = 0;
             let numberOfOverflowItems = 0;
-            const restrictedAreaItemsContainer = 120;
             const selectedItemsContainer = this.container.querySelector(SELECTOR_SELECTION_INFO);
             const selectedItems = this.container.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LABEL);
             const selectedItemsOverflow = this.container.querySelector(SELECTOR_OVERFLOW_ITEM_INFO);
@@ -215,9 +220,15 @@
                     item.hidden = false;
                 });
                 selectedItems.forEach((item, index) => {
+                    const isOverflowNumber = item.classList.contains('ibexa-dropdown__selected-overflow-number');
+
                     itemsWidth += item.offsetWidth;
 
-                    if (index !== 0 && itemsWidth > selectedItemsContainer.offsetWidth - restrictedAreaItemsContainer) {
+                    if (
+                        !isOverflowNumber &&
+                        index !== 0 &&
+                        itemsWidth > selectedItemsContainer.offsetWidth - RESTRICTED_AREA_ITEMS_CONTAINER
+                    ) {
                         numberOfOverflowItems++;
                         item.hidden = true;
                     }
@@ -237,8 +248,6 @@
         init() {
             const isEmpty = !this.container.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LABEL).length;
 
-            this.container.classList.add(CLASS_CUSTOM_DROPDOWN);
-
             if (isEmpty && this.hasDefaultSelection) {
                 this.selectFirstItem();
             }
@@ -253,5 +262,5 @@
         }
     }
 
-    eZ.addConfig('core.CustomDropdown', CustomDropdown);
+    eZ.addConfig('core.Dropdown', Dropdown);
 })(window, window.document, window.eZ);
