@@ -189,17 +189,22 @@
             const value = option.dataset.value;
             const optionSelect = this.sourceInput.querySelector(`[value="${value}"]`);
             const itemSelected = this.itemsContainer.querySelector(`[data-value="${value}"]`);
+
             itemSelected.classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
             itemSelected.querySelector('.ibexa-input').checked = false;
+
             if (optionSelect) {
                 optionSelect.selected = false;
             }
+
             option.remove();
+
             if (!this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length && this.hasDefaultSelection) {
                 this.hideOptions();
                 this.clearCurrentSelection();
                 this.selectFirstItem();
             }
+
             this.fitItems();
             this.fireValueChangedEvent();
         }
