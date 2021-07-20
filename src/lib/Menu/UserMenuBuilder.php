@@ -71,8 +71,8 @@ class UserMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $menu->addChild(self::ITEM_NOTIFICATION, [
                 'attributes' => [
                     'class' => 'ez-user-menu__item--notifications',
-                    'data-toggle' => 'modal',
-                    'data-target' => '#view-notifications',
+                    'data-bs-toggle' => 'modal',
+                    'data-bs-target' => '#view-notifications',
                 ],
                 'extras' => [
                     'translation_domain' => 'notifications',

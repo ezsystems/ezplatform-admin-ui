@@ -95,7 +95,7 @@ class Popup extends Component {
             <button
                 type="button"
                 className="close c-popup__btn--close"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label={closeBtnLabel}
                 onClick={this.props.onClose}>
                 <Icon name="discard" extraClasses="ibexa-icon--small" />
@@ -193,7 +193,7 @@ Popup.defaultProps = {
     hasFocus: true,
     size: 'large',
     noHeader: false,
-    onConfigIframeLoad: () => { },
+    onConfigIframeLoad: () => {},
 };
 
 export default Popup;

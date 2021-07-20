@@ -840,10 +840,17 @@ export default class SubItemsModule extends Component {
 
         return (
             <Fragment>
-                <button onClick={this.onBulkDeletePopupConfirm} type="button" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger">
+                <button
+                    onClick={this.onBulkDeletePopupConfirm}
+                    type="button"
+                    className="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger">
                     {confirmLabel}
                 </button>
-                <button onClick={this.closeBulkDeletePopup} type="button" className="btn ibexa-btn ibexa-btn--secondary" data-dismiss="modal">
+                <button
+                    onClick={this.closeBulkDeletePopup}
+                    type="button"
+                    className="btn ibexa-btn ibexa-btn--secondary"
+                    data-bs-dismiss="modal">
                     {cancelLabel}
                 </button>
             </Fragment>
@@ -859,7 +866,11 @@ export default class SubItemsModule extends Component {
                 <button onClick={this.onBulkHidePopupConfirm} type="button" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger">
                     {confirmLabel}
                 </button>
-                <button onClick={this.closeBulkHidePopup} type="button" className="btn ibexa-btn ibexa-btn--secondary" data-dismiss="modal">
+                <button
+                    onClick={this.closeBulkHidePopup}
+                    type="button"
+                    className="btn ibexa-btn ibexa-btn--secondary"
+                    data-bs-dismiss="modal">
                     {cancelLabel}
                 </button>
             </Fragment>
@@ -872,10 +883,17 @@ export default class SubItemsModule extends Component {
 
         return (
             <Fragment>
-                <button onClick={this.onBulkUnhidePopupConfirm} type="button" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger">
+                <button
+                    onClick={this.onBulkUnhidePopupConfirm}
+                    type="button"
+                    className="btn ibexa-btn ibexa-btn--primary ibexa-btn--trigger">
                     {confirmLabel}
                 </button>
-                <button onClick={this.closeBulkUnhidePopup} type="button" className="btn ibexa-btn ibexa-btn--secondary" data-dismiss="modal">
+                <button
+                    onClick={this.closeBulkUnhidePopup}
+                    type="button"
+                    className="btn ibexa-btn ibexa-btn--secondary"
+                    data-bs-dismiss="modal">
                     {cancelLabel}
                 </button>
             </Fragment>
@@ -948,8 +966,7 @@ export default class SubItemsModule extends Component {
                 isLoading={false}
                 size="medium"
                 footerChildren={this.renderDeleteConfirmationPopupFooter(selectionInfo)}
-                noHeader={true}
-            >
+                noHeader={true}>
                 <div className="m-sub-items__confirmation-modal-body">{confirmationMessage}</div>
             </Popup>,
             this.bulkActionModalContainer
@@ -977,8 +994,7 @@ export default class SubItemsModule extends Component {
                 isLoading={false}
                 size="medium"
                 footerChildren={this.renderHideConfirmationPopupFooter()}
-                noHeader={true}
-            >
+                noHeader={true}>
                 <div className="m-sub-items__confirmation-modal-body">{confirmationMessage}</div>
             </Popup>,
             this.bulkActionModalContainer
@@ -1006,8 +1022,7 @@ export default class SubItemsModule extends Component {
                 isLoading={false}
                 size="medium"
                 footerChildren={this.renderUnhideConfirmationPopupFooter()}
-                noHeader={true}
-            >
+                noHeader={true}>
                 <div className="m-sub-items__confirmation-modal-body">{confirmationMessage}</div>
             </Popup>,
             this.bulkActionModalContainer

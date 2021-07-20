@@ -9,7 +9,7 @@
 >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" title="{{ 'trash.modal.close'|trans|desc('Close') }}">
+            <button type="button" class="close" data-bs-dismiss="modal" title="{{ 'trash.modal.close'|trans|desc('Close') }}">
                 <svg class="ibexa-icon ibexa-icon--small-medium" aria-hidden="true">
                     <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                 </svg>
@@ -48,7 +48,7 @@
                 {{ form_widget(form.trash,
                     {'attr': {'class': 'btn ibexa-btn ibexa-btn--primary disabled ibexa-btn--confirm-send-to-trash', 'disabled': true}})
                 }}
-                <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-dismiss="modal">
+                <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
                     {{ 'trash.form.cancel'|trans|desc('Cancel') }}
                 </button>
             </div>

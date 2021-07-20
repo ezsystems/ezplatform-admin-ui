@@ -78,8 +78,8 @@ class TrashRightSidebarBuilder extends AbstractBuilder implements TranslationCon
         $menu = $this->factory->createItem('root');
 
         $trashEmptyAttributes = [
-            'data-target' => '#confirmEmptyTrash',
-            'data-toggle' => 'modal',
+            'data-bs-target' => '#confirmEmptyTrash',
+            'data-bs-toggle' => 'modal',
         ];
 
         $menu->addChild(
