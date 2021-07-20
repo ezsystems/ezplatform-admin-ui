@@ -14,7 +14,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/helpers/table.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.format.date.js'),
     path.resolve(__dirname, '../public/js/scripts/core/draggable.js'),
-    path.resolve(__dirname, '../public/js/scripts/core/custom.dropdown.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/dropdown.js'),
     path.resolve(__dirname, '../public/js/scripts/core/custom.tooltip.js'),
     path.resolve(__dirname, '../public/js/scripts/core/base.chart.js'),
     path.resolve(__dirname, '../public/js/scripts/core/line.chart.js'),

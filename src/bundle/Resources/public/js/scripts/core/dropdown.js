@@ -1,11 +1,11 @@
 (function(global, doc, eZ) {
-    const CLASS_CUSTOM_DROPDOWN_OVERFLOW = 'ibexa-dropdown--overflow';
+    const CLASS_DROPDOWN_OVERFLOW = 'ibexa-dropdown--overflow';
     const CLASS_DROPDOWN_EXPANDED = 'ibexa-dropdown--is-expanded';
     const CLASS_ITEMS_POSITION_TOP = 'ibexa-dropdown__items--position-top';
     const CLASS_REMOVE_SELECTION = 'ibexa-dropdown__remove-selection';
     const CLASS_ITEM_SELECTED_IN_LIST = 'ibexa-dropdown__item--selected';
     const SELECTOR_ITEM = '.ibexa-dropdown__item';
-    const SELECTOR_CUSTOM_DROPDOWN = '.ibexa-dropdown';
+    const SELECTOR_DROPDOWN = '.ibexa-dropdown';
     const SELECTOR_SOURCE = '.ibexa-dropdown__source .ibexa-input';
     const SELECTOR_ITEMS_CONTAINER = '.ibexa-dropdown__items';
     const SELECTOR_SELECTED_ITEM_IN_LABEL = '.ibexa-dropdown__selected-item';
@@ -19,7 +19,7 @@
 
     class Dropdown {
         constructor(config = {}) {
-            const container = config.container ?? doc.querySelector(SELECTOR_CUSTOM_DROPDOWN);
+            const container = config.container ?? doc.querySelector(SELECTOR_DROPDOWN);
             const sourceInput = config.sourceInput ?? container.querySelector(SELECTOR_SOURCE);
 
             this.container = container;
@@ -237,10 +237,10 @@
                 if (numberOfOverflowItems) {
                     selectedItemsOverflow.hidden = false;
                     selectedItemsOverflow.innerHTML = numberOfOverflowItems;
-                    this.container.classList.add(CLASS_CUSTOM_DROPDOWN_OVERFLOW);
+                    this.container.classList.add(CLASS_DROPDOWN_OVERFLOW);
                 } else {
                     selectedItemsOverflow.hidden = true;
-                    this.container.classList.remove(CLASS_CUSTOM_DROPDOWN_OVERFLOW);
+                    this.container.classList.remove(CLASS_DROPDOWN_OVERFLOW);
                 }
             }
         }
