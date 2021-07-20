@@ -5,7 +5,6 @@
         childList: true,
         subtree: true,
     };
-    const allTooltips = [];
     const observer = new MutationObserver((mutationsList) => {
         if (lastInsertTooltipTarget) {
             mutationsList.forEach((mutation) => {
@@ -52,8 +51,6 @@
                                     <div class="tooltip-inner ez-tooltip__inner"></div>
                                </div>`,
                 });
-
-                allTooltips.push(tooltip);
 
                 tooltipNode.addEventListener('inserted.bs.tooltip', (event) => {
                     lastInsertTooltipTarget = event.currentTarget;

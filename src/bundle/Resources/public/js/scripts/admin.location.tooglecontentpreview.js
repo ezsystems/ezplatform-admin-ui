@@ -16,7 +16,7 @@
     };
 
     doc.querySelectorAll(CONTENT_PREVIEW_COLLAPSE_SELECTOR).forEach((collapsable) => {
-        bootstrapCollapsable = new bootstrap.Collapse(collapsable, {
+        const bootstrapCollapsable = new bootstrap.Collapse(collapsable, {
             toggle: getContentPreviewToggleState(collapsable),
         });
 
