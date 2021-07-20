@@ -19,7 +19,7 @@ class DateAndTimePopup extends Component
 
     private const SETTING_SCRIPT_FORMAT = "document.querySelector('%s %s')._flatpickr.setDate('%s', true, '%s')";
 
-    private const ADD_CALLBACK_TO_DATEPICKER_SCRIPT_FORMAT = 'var fi = document.querySelector(\'%s .flatpickr-input\');
+    private const ADD_CALLBACK_TO_DATEPICKER_SCRIPT_FORMAT = 'var fi = document.querySelector(\'%s .flatpickr-input.active\');
                 const onChangeOld = fi._flatpickr.config.onChange;
                 const onChangeNew = (dates, dateString, flatpickInstance) => {
                 flatpickInstance.input.classList.add("date-set");
@@ -107,7 +107,7 @@ class DateAndTimePopup extends Component
         return [
             new VisibleCSSLocator('calendarSelectorInline', '.flatpickr-calendar.inline'),
             new VisibleCSSLocator('calendarSelector', '.flatpickr-calendar'),
-            new VisibleCSSLocator('flatpickrSelector', '.flatpickr-input'),
+            new VisibleCSSLocator('flatpickrSelector', '.flatpickr-input.active'),
             new VisibleCSSLocator('dateSet', '.date-set'),
             new VisibleCSSLocator('timeOnly', '.flatpickr-calendar.noCalendar'),
         ];
