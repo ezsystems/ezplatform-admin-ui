@@ -2,7 +2,7 @@
     <div class="ibexa-dropdown__source">
         {{ source|default(null)|raw }}
     </div>
-    <div class="ibexa-dropdown__wrapper {{ class|default('') }}" data-source-selector="{{ source_selector|default('') }}">
+    <div class="ibexa-dropdown__wrapper {{ class|default('') }}">
         <ul class="ibexa-dropdown__selection-info">
             {% if value is defined %}
                 {% for choice in choices %}
@@ -35,7 +35,7 @@
             {% for choice in choices %}
                 <li data-value="{{ choice.value }}" class="ibexa-dropdown__item {% if choice is selectedchoice(value) %}ibexa-dropdown__item--selected{% endif %}">
                     {% if multiple is defined and multiple %}
-                        <input type="checkbox" name="{{ source_selector }}-checkbox" class="ibexa-input ibexa-input--checkbox" {% if choice is selectedchoice(value) %}checked{% endif %} />
+                        <input type="checkbox" name="dropdown-checkbox" class="ibexa-input ibexa-input--checkbox" {% if choice is selectedchoice(value) %}checked{% endif %} />
                     {% endif %}
                     <span class="ibexa-dropdown__item-label">{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</span>
                 </li>

@@ -14,11 +14,10 @@
         {% endif %}
     {% endset %}
 
-    {% include '@ezdesign/ui/component/custom_dropdown.html.twig' with {
+    {% include '@ezdesign/ui/component/dropdown.html.twig' with {
         source: source,
         choices: choices,
         value: form.vars.value,
-        source_selector: '.ez-update-policy__source-input',
         multiple: form.vars.multiple,
         choice_translation_domain: false
     } %}
