@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function(global, doc, eZ, bootstrap) {
     const TABS_SELECTOR = '.ibexa-tabs';
     const SELECTOR_TABS_LIST = '.ibexa-tabs__list';
     const SELECTOR_TAB_MORE = '.ibexa-tabs__tab--more';
@@ -115,4 +115,4 @@
 
     doc.body.addEventListener('ez-content-tree-resized', handleTabsConainterChange, false);
     window.addEventListener('resize', handleTabsConainterChange, false);
-})(window, window.document, window.eZ);
+})(window, window.document, window.eZ, window.bootstrap);
