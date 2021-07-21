@@ -37,6 +37,7 @@ class Time extends FieldTypeComponent
 
         $time = explode(':', $parameters['value']);
 
+        $this->dateAndTimePopup->setParentLocator($this->parentLocator);
         $this->dateAndTimePopup->verifyIsLoaded();
         $this->dateAndTimePopup->setTime((int)$time[0], (int)$time[1]);
 
