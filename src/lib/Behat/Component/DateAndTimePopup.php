@@ -19,7 +19,9 @@ class DateAndTimePopup extends Component
 
     private const SETTING_SCRIPT_FORMAT = "document.querySelector('%s %s')._flatpickr.setDate('%s', true, '%s')";
 
-    private const ADD_CALLBACK_TO_DATEPICKER_SCRIPT_FORMAT = 'var fi = document.querySelector(\'%s .flatpickr-input.active\');
+    private const CALENDAR_CONTAINER_CLASSES_SCRIPT = "document.querySelector('%s %s')._flatpickr.calendarContainer.attributes.class.textContent";
+
+    private const ADD_CALLBACK_TO_DATEPICKER_SCRIPT_FORMAT = 'var fi = document.querySelector(\'%s .flatpickr-input\');
                 const onChangeOld = fi._flatpickr.config.onChange;
                 const onChangeNew = (dates, dateString, flatpickInstance) => {
                 flatpickInstance.input.classList.add("date-set");
@@ -67,7 +69,13 @@ class DateAndTimePopup extends Component
 
     public function setTime(int $hour, int $minute): void
     {
-        $isTimeOnly = $this->getHTMLPage()->find($this->parentLocator)->findAll($this->getLocator('timeOnly'))->any();
+        $calendarContainerClassesScript = sprintf(
+            self::CALENDAR_CONTAINER_CLASSES_SCRIPT,
+            $this->parentLocator->getSelector(),
+            $this->getLocator('flatpickrSelector')->getSelector()
+        );
+
+        $isTimeOnly = strpos($this->getSession()->evaluateScript($calendarContainerClassesScript), 'noCalendar') !== false;
 
         if (!$isTimeOnly) {
             // get current date as it's not possible to set time without setting date
@@ -105,11 +113,9 @@ class DateAndTimePopup extends Component
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('calendarSelectorInline', '.flatpickr-calendar.inline'),
             new VisibleCSSLocator('calendarSelector', '.flatpickr-calendar'),
-            new VisibleCSSLocator('flatpickrSelector', '.flatpickr-input.active'),
+            new VisibleCSSLocator('flatpickrSelector', '.flatpickr-input'),
             new VisibleCSSLocator('dateSet', '.date-set'),
-            new VisibleCSSLocator('timeOnly', '.flatpickr-calendar.noCalendar'),
         ];
     }
 }
