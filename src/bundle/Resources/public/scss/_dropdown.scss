@@ -166,8 +166,7 @@
         }
 
         &[disabled] {
-            // TODO: need invision case
-            color: pink;
+            color: $ibexa-color-dark-300;
 
             &:hover {
                 cursor: not-allowed;
