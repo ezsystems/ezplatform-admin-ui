@@ -77,7 +77,6 @@
             eZ.helpers.tooltips.parse(mainMenuNode);
             item.removeAttribute('title');
         });
-
         
         eZ.helpers.tooltips.hideAll();
     };
@@ -90,9 +89,9 @@
         doc.addEventListener('mouseup', removeResizeListeners, false);
     };
     const removeResizeListeners = () => {
+        secondLevelMenuNode.classList.remove('ibexa-main-menu__navbar--resizing');
         doc.removeEventListener('mousemove', triggerSecondLevelChangeWidth, false);
         doc.removeEventListener('mouseup', removeResizeListeners, false);
-        secondLevelMenuNode.classList.remove('ibexa-main-menu__navbar--resizing');
     };
     const triggerSecondLevelChangeWidth = ({ clientX }) => {
         const resizeValue = secondMenuLevelCurrentWidth + (clientX - resizeStartPositionX);
@@ -126,5 +125,5 @@
 
     secondLevelMenuNode.querySelector('.ibexa-main-menu__toggler').addEventListener('click', toggleSecondLevelMenu, false);
     secondLevelMenuNode.querySelector('.ibexa-main-menu__resizer').addEventListener('mousedown', addResizeListeners, false);
-    secondLevelMenuNode.querySelectorAll('.ibexa-main-menu__tooltip-trigger').forEach((button) => parsePopup(button));
+    secondLevelMenuNode.querySelectorAll('.ibexa-main-menu__tooltip-trigger').forEach(parsePopup);
 })(window, window.document, window.eZ, window.localStorage);
