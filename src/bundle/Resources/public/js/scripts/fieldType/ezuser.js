@@ -11,20 +11,6 @@
 
     class EzUserValidator extends eZ.BaseFieldValidator {
         /**
-         * Updates the state of checkbox indicator.
-         *
-         * @method updateState
-         * @param {Event} event
-         * @memberof EzUserValidator
-         */
-        updateState(event) {
-            const methodName = event.currentTarget.checked ? 'add' : 'remove';
-            const label = event.currentTarget.closest(SELECTOR_LABEL);
-
-            label.classList[methodName]('is-checked');
-        }
-
-        /**
          * Validates the input field value
          *
          * @method validateInput
@@ -138,12 +124,6 @@
                 callback: 'validateEmailInput',
                 invalidStateSelectors: [`${SELECTOR_FIELD_EMAIL} ${SELECTOR_LABEL}`],
                 errorNodeSelectors: [SELECTOR_FIELD_EMAIL],
-            },
-            {
-                isValueValidator: false,
-                selector: `.ez-data-source__input[type="checkbox"]`,
-                eventName: 'change',
-                callback: 'updateState',
             },
         ],
     });

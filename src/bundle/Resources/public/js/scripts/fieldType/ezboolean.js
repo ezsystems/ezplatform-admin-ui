@@ -21,19 +21,6 @@
                 errorMessage,
             };
         }
-
-        /**
-         * Updates the state of checkbox indicator.
-         *
-         * @method updateState
-         * @param {Event} event
-         * @memberof EzBooleanValidator
-         */
-        updateState(event) {
-            const methodName = event.target.checked ? 'add' : 'remove';
-
-            event.target.closest('.ez-data-source__label').classList[methodName]('is-checked');
-        }
     }
 
     const validator = new EzBooleanValidator({
@@ -45,12 +32,6 @@
                 eventName: 'change',
                 callback: 'validateInput',
                 errorNodeSelectors: [SELECTOR_ERROR_NODE],
-            },
-            {
-                isValueValidator: false,
-                selector: '.ez-field-edit--ezboolean input',
-                eventName: 'change',
-                callback: 'updateState',
             },
         ],
     });
