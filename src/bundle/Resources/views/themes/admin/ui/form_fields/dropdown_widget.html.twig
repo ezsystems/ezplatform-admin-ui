@@ -1,8 +1,4 @@
 {%- block choice_widget -%}
-    {% set choices = form.vars.choices
-        | map(choice => choice.choices is defined ? choice.choices : [choice])
-        | reduce((carry, choices) => carry|merge(choices), [])
-    %}
     {% set attr = attr|default({})|merge({
         'class': (attr.class|default('') ~ ' ibexa-input ibexa-input--select')|trim,
     }) %}
@@ -19,6 +15,6 @@
         choices: choices,
         value: form.vars.value,
         multiple: form.vars.multiple,
-        choice_translation_domain: false
+        choice_translation_domain: choice_translation_domain|default(false)
     } %}
 {%- endblock choice_widget -%}
