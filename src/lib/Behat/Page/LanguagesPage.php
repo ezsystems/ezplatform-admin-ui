@@ -82,7 +82,7 @@ class LanguagesPage extends Page
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
             new VisibleCSSLocator('listHeader', '.ez-table-header .ez-table-header__headline, header .ez-table__headline, header h5'),
             new VisibleCSSLocator('createButton', '.ibexa-icon--create'),
-            new VisibleCSSLocator('deleteButton', '.ibexa-icon--trash,button[data-original-title^="Delete"]'),
+            new VisibleCSSLocator('deleteButton', '.ibexa-icon--trash,button[data-bs-original-title^="Delete"]'),
         ];
     }
 }

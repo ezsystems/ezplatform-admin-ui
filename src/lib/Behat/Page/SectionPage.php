@@ -144,7 +144,7 @@ class SectionPage extends Page
             new VisibleCSSLocator('contentItemsTable', '.ez-container ~ .ez-container'),
             new VisibleCSSLocator('assignButton', '#section_content_assign_locations_select_content'),
             new VisibleCSSLocator('sectionInfoTable', '.ez-container > .ez-table'),
-            new VisibleCSSLocator('deleteButton', 'button[data-original-title="Delete Section"]'),
+            new VisibleCSSLocator('deleteButton', 'button[data-bs-original-title="Delete Section"]'),
         ];
     }
 }

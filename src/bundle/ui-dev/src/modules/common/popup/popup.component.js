@@ -36,11 +36,7 @@ class Popup extends Component {
                 focus: this.props.hasFocus,
             });
 
-            if (show) {
-                bootstrapModal.show();
-            } else {
-                bootstrapModal.hide();
-            }
+            bootstrapModal.show();
 
             this.attachModalEventHandlers();
         }

@@ -150,10 +150,10 @@ class RolePage extends Page
     public function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('assignUsersButton', '[data-original-title="Assign to Users/Groups"]'),
+            new VisibleCSSLocator('assignUsersButton', '[data-bs-original-title="Assign to Users/Groups"]'),
             new VisibleCSSLocator('deleteAssignmentButton', '#delete-role-assignments'),
             new VisibleCSSLocator('deletePoliciesButton', '#delete-policies'),
-            new VisibleCSSLocator('createPolicyButton', '[data-original-title="Add a new Policy"]'),
+            new VisibleCSSLocator('createPolicyButton', '[data-bs-original-title="Add a new Policy"]'),
             new VisibleCSSLocator('assignmentTable', '[name="role_assignments_delete"]'),
             new VisibleCSSLocator('policiesTable', '[name="policies_delete"]'),
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),

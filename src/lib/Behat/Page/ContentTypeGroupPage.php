@@ -123,7 +123,7 @@ class ContentTypeGroupPage extends Page
             new VisibleCSSLocator('createButton', '.ibexa-icon--create'),
             new VisibleCSSLocator('listHeader', '.ez-table-header .ez-table-header__headline, header .ez-table__headline, header h5'),
             new VisibleCSSLocator('tableContainer', '.ez-container'),
-            new VisibleCSSLocator('deleteButton', '.ibexa-icon--trash,button[data-original-title^="Delete"]'),
+            new VisibleCSSLocator('deleteButton', '.ibexa-icon--trash,button[data-bs-original-title^="Delete"]'),
             new VisibleCSSLocator('tableItem', '.ez-main-container tbody tr'),
         ];
     }
