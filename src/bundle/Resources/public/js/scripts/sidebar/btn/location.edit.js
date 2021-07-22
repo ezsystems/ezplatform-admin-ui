@@ -38,10 +38,12 @@
             .querySelectorAll('.ibexa-btn--prevented')
             .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
 
-        bootstrap.Modal.getOrCreateInstance(conflictModal).show();
+        if (conflictModal) {
+            bootstrap.Modal.getOrCreateInstance(conflictModal).show();
 
-        conflictModal.addEventListener('hidden.bs.modal', onModalHidden);
-        conflictModal.addEventListener('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+            conflictModal.addEventListener('hidden.bs.modal', onModalHidden);
+            conflictModal.addEventListener('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+        }
     };
     const showModal = (modalHtml) => {
         const wrapper = doc.querySelector('.ez-modal-wrapper');

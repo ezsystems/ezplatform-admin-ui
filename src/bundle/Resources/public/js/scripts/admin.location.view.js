@@ -47,9 +47,10 @@
                 .querySelectorAll('.ibexa-btn--prevented')
                 .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
 
-            bootstrap.Modal.getOrCreateInstance(conflictModal).show();
-
-            conflictModal.addEventListener('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+            if (conflictModal) {
+                bootstrap.Modal.getOrCreateInstance(conflictModal).show();
+                conflictModal.addEventListener('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+            }
         };
         const showModal = (modalHtml) => {
             const wrapper = doc.querySelector('.ez-modal-wrapper');
