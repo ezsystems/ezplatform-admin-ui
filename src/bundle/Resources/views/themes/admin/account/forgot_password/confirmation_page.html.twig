@@ -1,12 +1,8 @@
 {% extends '@ezdesign/account/base.html.twig' %}
 
-{%- block login_wrapper -%}
-    ez-login__text-wrapper
-{%- endblock login_wrapper -%}
-
 {%- block content -%}
-    <h2 class="ez-login__actions-headline">{{ 'ezplatform.forgot_user_password.reset_your_password'|trans|desc('Reset your password') }}</h2>
-    <p class="ez-login__actions-subheadline">
+    <h2 class="ibexa-login__actions-headline">{{ 'ezplatform.forgot_user_password.reset_your_password'|trans|desc('Reset your password') }}</h2>
+    <p class="ibexa-login__actions-subheadline">
         {{ 'ezplatform.forgot_user_password.success'|trans|raw
         |desc('<p>An email has been sent to the address you provided with instructions on how to reset your password.</p>
             <p>If the email is slow to arrive, check your spam folders.</p>
