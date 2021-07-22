@@ -77,7 +77,7 @@
     &__password-visibility-toggler {
         position: absolute;
         right: calculateRem(8px);
-        top: calculateRem(36px);
+        bottom: calculateRem(6px);
         z-index: 1;
         margin-left: auto;
         border: none;
