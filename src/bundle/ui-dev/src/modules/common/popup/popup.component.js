@@ -22,7 +22,6 @@ class Popup extends Component {
 
         this.setModalRef = this.setModalRef.bind(this);
         this.onKeyUp = this.onKeyUp.bind(this);
-        this.onModalHidden = this.onModalHidden.bind(this);
 
         this.state = { isVisible: props.isVisible, isLoading: props.isLoading };
     }
@@ -69,12 +68,7 @@ class Popup extends Component {
 
     attachModalEventHandlers() {
         this._refModal.addEventListener('keyup', this.onKeyUp);
-        this._refModal.addEventListener('hidden.bs.modal', this.onModalHidden);
-    }
-
-    onModalHidden(event) {
-        this._refModal.removeEventListener('hidden.bs.modal', this.onModalHidden);
-        this.props.onClose(event);
+        this._refModal.addEventListener('hidden.bs.modal', this.props.onClose);
     }
 
     onKeyUp(event) {
