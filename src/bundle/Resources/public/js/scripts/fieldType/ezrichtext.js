@@ -32,7 +32,7 @@
         constructor(config) {
             super(config);
 
-            this.alloyEditor = config.alloyEditor;
+            this.richtextEditor = config.richtextEditor;
         }
         /**
          * Validates the input
@@ -46,26 +46,25 @@
             const fieldContainer = event.currentTarget.closest(SELECTOR_FIELD);
             const isRequired = fieldContainer.classList.contains('ez-field-edit--required');
             const label = fieldContainer.querySelector('.ez-field-edit__label').innerHTML;
-            const isEmpty = !this.alloyEditor.get('nativeEditor').getData().length;
+            const isEmpty = !this.richtextEditor.getData().length;
             const isError = isRequired && isEmpty;
             const result = { isError };
-
             if (isError) {
                 result.errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
             }
-
             return result;
         }
     }
 
     doc.querySelectorAll(`${SELECTOR_FIELD} ${SELECTOR_INPUT}`).forEach((container) => {
-        const richtext = new eZ.BaseRichText();
-        const alloyEditor = richtext.init(container);
+        const richtextEditor = new eZ.BaseRichText();
+
+        richtextEditor.init(container);
 
         const validator = new EzRichTextValidator({
             classInvalid: 'is-invalid',
             fieldContainer: container.closest(SELECTOR_FIELD),
-            alloyEditor,
+            richtextEditor,
             eventsMap: [
                 {
                     selector: SELECTOR_INPUT,
