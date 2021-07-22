@@ -1,20 +1,3 @@
-.ibexa-content-edit-sidebar {
-    &__header {
-        height: calculateRem(87px);
-        padding: calculateRem(17px) 0 0 calculateRem(17px);
-        border-bottom: calculateRem(1px) solid $ibexa-color-light;
-    }
-
-    &__body {
-        height: calc(100% - #{calculateRem(87px)});
-        overflow: auto;
-    }
-
-    &__back {
-        font-weight: 600;
-    }
-}
-
 .ibexa-content-edit-header {
     height: calculateRem(241px);
     background-color: $ibexa-color-white;

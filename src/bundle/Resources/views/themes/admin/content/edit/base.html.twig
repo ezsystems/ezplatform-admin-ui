@@ -18,43 +18,19 @@
 {% block header_row %}{% endblock %}
 
 {% block left_sidebar %}
-    <div class="ibexa-content-edit-sidebar">
-        <div class="ibexa-content-edit-sidebar__header">
-            {% if without_close_button is not defined or without_close_button != true %}
-                {% set referrer_location = content is defined and is_published ? location : parent_location %}
-                
-                <a
-                    class="btn ibexa-btn ibexa-btn--ghost ibexa-content-edit-sidebar__back"
-                    href="{{ path('_ez_content_view', { 'contentId': referrer_location.contentId, 'locationId': referrer_location.id }) }}"
-                    title="{{ 'edit.close'|trans|desc('Close') }}"
-                >
-                    <svg class="ibexa-icon ibexa-icon--small">
-                        <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
-                    </svg>
-                    {{ "edit.close"|trans|desc('Close') }}
-                </a>
-            {% endif %}
-        </div>
-        
-        <div class="ibexa-content-edit-sidebar__body">
-            {% if grouped_fields|length > 1 %}
-                <ul class="ibexa-anchor-navigation-menu">
-                    {% for key, group in grouped_fields %}
-                        {% set sanitized_key = key|slug %}
+    {% set anchor_params = {
+        items: grouped_fields|keys
+    } %}
 
-                        <li class="ibexa-anchor-navigation-menu__item">
-                            <button
-                                class="ibexa-anchor-navigation-menu__btn {% if loop.first %}ibexa-anchor-navigation-menu__btn--active{% endif %}" 
-                                data-anchor-target-section-id="#{{ sanitized_key }}"
-                            >
-                                {{ key }}
-                            </button>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </div>
-    </div>
+    {% if without_close_button is not defined or without_close_button != true %}
+        {% set referrer_location = content is defined and is_published ? location : parent_location %}
+
+        {% set anchor_params = anchor_params|merge({
+            close_href: path('_ez_content_view', { 'contentId': referrer_location.contentId, 'locationId': referrer_location.id })
+        }) %}
+    {% endif %}
+
+    {% include '@ezdesign/ui/anchor_navigation.html.twig' with anchor_params %}
 {% endblock %}
 
 {% block content_column %}
