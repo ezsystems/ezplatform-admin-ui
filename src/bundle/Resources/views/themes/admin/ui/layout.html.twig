@@ -137,47 +137,49 @@
             </div>
         {% endblock %}
 
-        <div class="ibexa-main-container {% block main_container_class %}{% endblock %}">
-            {% block side_column %}
-                <div class="ibexa-main-container__side-column">
-                    {% block left_sidebar %}
-                        {% set main_menu_context = {
-                            'location': location ?? null,
-                            'content': content ?? null
-                        } %}
-                        {% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], main_menu_context) %}
+        {% block content_row %}
+            <div class="ibexa-main-container {% block main_container_class %}{% endblock %}">
+                {% block side_column %}
+                    <div class="ibexa-main-container__side-column">
+                        {% block left_sidebar %}
+                            {% set main_menu_context = {
+                                'location': location ?? null,
+                                'content': content ?? null
+                            } %}
+                            {% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], main_menu_context) %}
 
-                        <nav class="ibexa-main-menu">
-                            {{ knp_menu_render(main_menu, {
-                                'depth': 1,
-                                'template': '@ezdesign/ui/menu/main.html.twig',
-                                'currentClass': 'active',
-                                'ancestorClass': 'active'
-                            }) }}
-                        
-                            {{ knp_menu_render(main_menu, {
-                                'depth': 2,
-                                'template': '@ezdesign/ui/menu/main_2nd_level.html.twig',
-                                'currentClass': 'active',
-                                'ancestorClass': 'active'
-                            }) }}
+                            <nav class="ibexa-main-menu">
+                                {{ knp_menu_render(main_menu, {
+                                    'depth': 1,
+                                    'template': '@ezdesign/ui/menu/main.html.twig',
+                                    'currentClass': 'active',
+                                    'ancestorClass': 'active'
+                                }) }}
                             
-                            {% block content_tree %}{% endblock %}
-                        </nav>
-                    {% endblock %}
-                </div>
-            {% endblock %}
-
-            {% block content_column %}
-                <div class="ibexa-main-container__content-column">
-                    <div class="container">
-                        {% block breadcrumbs %}{% endblock %}
-                        {% block header %}{% endblock %}
-                        {% block content %}{% endblock %}
+                                {{ knp_menu_render(main_menu, {
+                                    'depth': 2,
+                                    'template': '@ezdesign/ui/menu/main_2nd_level.html.twig',
+                                    'currentClass': 'active',
+                                    'ancestorClass': 'active'
+                                }) }}
+                                
+                                {% block content_tree %}{% endblock %}
+                            </nav>
+                        {% endblock %}
                     </div>
-                </div>
-            {% endblock %}
-        </div>
+                {% endblock %}
+
+                {% block content_column %}
+                    <div class="ibexa-main-container__content-column">
+                        <div class="container">
+                            {% block breadcrumbs %}{% endblock %}
+                            {% block header %}{% endblock %}
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
 
         <div
             class="ez-notifications-container"

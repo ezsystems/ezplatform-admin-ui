@@ -1,43 +1,11 @@
 {% extends view_base_layout is defined ? view_base_layout : '@ezdesign/ui/layout.html.twig' %}
 
-{% set extra_main_class = 'ibexa-main-container--edit-content' %}
-{% set grouped_fields = grouped_fields|default([]) %}
-{% set default_form_templates = ez_admin_ui_config.contentEditFormTemplates %}
-{% set form_templates = form_templates is defined ? default_form_templates|merge(form_templates) : default_form_templates %}
-
-{% trans_default_domain 'content_edit' %}
-{% form_theme form with form_templates %}
-
-{% if grouped_fields|length < 2 %}
-    {% set extra_main_class = extra_main_class ~ ' ibexa-main-container--without-anchor-menu-items' %}
-{% else %}
-    {% set extra_main_class = extra_main_class ~ ' ibexa-main-container--with-anchor-menu-items' %}
-{% endif %}
-
-{% block main_container_class %}{{ extra_main_class }}{% endblock %}
-{% block header_row %}{% endblock %}
-
-{% block left_sidebar %}
-    {% set anchor_params = {
-        items: grouped_fields|keys
-    } %}
-
-    {% if without_close_button is not defined or without_close_button != true %}
-        {% set referrer_location = content is defined and is_published ? location : parent_location %}
-
-        {% set anchor_params = anchor_params|merge({
-            close_href: path('_ez_content_view', { 'contentId': referrer_location.contentId, 'locationId': referrer_location.id })
-        }) %}
-    {% endif %}
-
-    {% include '@ezdesign/ui/anchor_navigation_menu.html.twig' with anchor_params %}
-{% endblock %}
 
 {% block content_column %}
     <div class="ibexa-main-container__content-column">
         {% block header %}{% endblock %}
         {% block content %}
-            <div class="ibexa-content-edit-content">
+            <div class="ibexa-edit-content">
                 <div class="container">
                     {% block form_before %}{% endblock %}
 
@@ -117,3 +85,4 @@
 {% block stylesheets %}
     {% include '@ezdesign/content/edit/stylesheets.html.twig' %}
 {% endblock %}
+

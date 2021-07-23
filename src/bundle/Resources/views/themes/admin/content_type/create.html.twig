@@ -1,28 +1,17 @@
-{% extends "@ezdesign/content_type/base_edit.html.twig" %}
-
-{% trans_default_domain 'content_type' %}
-{% form_theme form _self '@ezdesign/ui/form_fields.html.twig'  %}
+{% extends "@ezdesign/content_type/edit_base.html.twig" %}
 
 {% block header %}
-
-    {# {% set content_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_edit.sidebar_right', [], {
-        'content': content,
-        'content_type': content_type,
-        'location': location,
-        'parent_location': parent_location,
-        'language': language
-    }) %} #}
-
     {% set content_type_create_sidebar_right = knp_menu_get(
         'ezplatform_admin_ui.menu.content_type_create.sidebar_right', [], { 
             'save_id': form.publishContentType.vars.id, 
             'group': content_type_group
     }) %}
 
-    {% include '@ezdesign/content/edit/content_header.html.twig' with {
-        action_name: 'aaaaaaaa',
-        title: 'bbbbb',
-        description: 'ccccccc',
+    {% include '@ezdesign/ui/edit_header.html.twig' with {
+        action_name: 'creating'|trans|desc('Creating'),
+        icon_name: 'content-type',
+        title: 'content_type.breadcrumb.create'|trans|desc('Creating a new Content Type'),
+        show_autosave_status: false,
         buttons_render: knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
     } %}
 
@@ -153,13 +142,12 @@
                 </div>
             </div>
 
-            {{ form_widget(form.saveContentType, { attr: { hidden: 'hidden' }}) }}
-            {{ form_widget(form.publishContentType, { attr: { hidden: 'hidden' }}) }}
+    {{ form_widget(form._token) }}
+    {{ form_end(form, {'render_rest': false }) }}
+{% endblock %}
 
-            {{ form_widget(form._token) }}
-            {{ form_end(form, {'render_rest': false }) }}
-        </div>
-    </div>
+{% block field_definition_form %}
+    drag and drop
 {% endblock %}
 
 {% block javascripts %}

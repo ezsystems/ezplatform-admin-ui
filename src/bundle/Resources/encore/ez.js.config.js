@@ -144,6 +144,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.location.bookmark.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.main.translation.update.js'),
             path.resolve(__dirname, '../public/js/scripts/table.checkbox.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
         ])
         .addEntry('ezplatform-admin-ui-modal-location-trash-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.js')])
         .addEntry('ezplatform-admin-ui-modal-location-trash-container-js', [

@@ -9,6 +9,58 @@
     border-top-right-radius: $ibexa-border-radius;
     transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
+    &__row {
+        &--top {
+            height: calculateRem(85px);
+        }
+
+        &--bottom {
+            height: calculateRem(154px);
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+    }
+
+    &__column {
+        position: static;
+
+        &--left {
+            padding-left: 0;
+            border-bottom: calculateRem(1px) solid $ibexa-color-light;
+
+            .ibexa-label {
+                margin-bottom: 0;
+                color: $ibexa-color-dark-400;
+            }
+        }
+
+        &--right {
+            .ibexa-autosave {
+                position: absolute;
+                top: calculateRem(96px);
+                right: calculateRem(64px);
+            }
+        }
+    }
+
+    &__context-actions {
+        display: flex;
+        position: absolute;
+        top: calculateRem(36px);
+        right: calculateRem(64px);
+        width: 55%;
+    }
+
+    &__tooltip {
+        display: flex;
+        align-items: center;
+    }
+
+    &__action-name,
+    &__location {
+        opacity: 1;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+    }
+
     &__separate-div {
         position: relative;
         z-index: 1;
@@ -19,6 +71,11 @@
         transition-duration: $ibexa-admin-transition-duration;
     }
 
+    .ibexa-autosave {
+        opacity: 1;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+    }
+    
     &--slim {
         height: calculateRem(86px);
     }

@@ -1,0 +1,26 @@
+{% extends '@ezdesign/ui/edit_base.html.twig' %}
+
+{% trans_default_domain 'content_type' %}
+{% form_theme form _self '@ezdesign/ui/form_fields.html.twig'  %}
+
+{% set anchor_params = { items: [
+    'content_type.view.edit.global_properties'|trans|desc('Global properties'),
+    'content_type.view.edit.content_field_definitions'|trans|desc('Field definitions')
+]} %}
+
+{% block main_container_class %}{{ parent() }} ibexa-main-container--with-anchor-menu-items{% endblock %}
+
+{% block content %}
+    <div class="ibexa-edit-content">
+        <div class="container">
+            <div class="row">
+                <div class="col col-8">
+                    {% block form %}{% endblock %}
+                </div>
+                <div class="col col-4">
+                    {% block field_definition_form %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

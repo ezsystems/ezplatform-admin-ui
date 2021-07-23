@@ -1,4 +1,4 @@
-{% extends '@ezdesign/content/edit/base.html.twig' %}
+{% extends '@ezdesign/content/edit_base.html.twig' %}
 
 {% trans_default_domain 'content_edit' %}
 
@@ -15,12 +15,25 @@
         'language': language
     }) %}
 
-    {% include '@ezdesign/content/edit/content_header.html.twig' with {
+    {% include '@ezdesign/ui/edit_header.html.twig' with {
         action_name: 'editing'|trans|desc('Editing'),
         title: content.name,
+        icon_name: 'content-type',
+        show_autosave_status: true,
         description: content_type.description,
+        location_name: 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%'),
         buttons_render: knp_menu_render(content_edit_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
     } %}
+{% endblock %}
+
+{% block form_before %}
+    {{ ez_render_component_group('content-edit-form-before', {
+        'content': content,
+        'content_type': content_type,
+        'location': location,
+        'parent_location': parent_location,
+        'language': language
+    }) }}
 {% endblock %}
 
 {% block form_fields %}
@@ -36,15 +49,6 @@
     </section>
 {% endblock %}
 
-{% block form_before %}
-    {{ ez_render_component_group('content-edit-form-before', {
-        'content': content,
-        'content_type': content_type,
-        'location': location,
-        'parent_location': parent_location,
-        'language': language
-    }) }}
-{% endblock %}
 {% block form_after %}
     {{ ez_render_component_group('content-edit-form-after', {
         'content': content,
@@ -54,3 +58,4 @@
         'language': language
     }) }}
 {% endblock %}
+
