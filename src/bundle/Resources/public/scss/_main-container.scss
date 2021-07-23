@@ -3,7 +3,6 @@
     flex-wrap: nowrap;
     overflow: hidden;
     min-height: calc(100vh - #{calculateRem(200px)});
-    background: $ibexa-color-white;
 
     &__side-column {
         flex: 1;

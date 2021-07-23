@@ -72,8 +72,8 @@ class DashboardPage extends Page
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('tableSelector', '.ez-card'),
-            new VisibleCSSLocator('tableTitle', '.ez-card__title'),
+            new VisibleCSSLocator('tableSelector', '.ibexa-card'),
+            new VisibleCSSLocator('tableTitle', '.ibexa-card__title'),
             new VisibleCSSLocator('tableTab', '.ibexa-tabs .nav-item'),
             new VisibleCSSLocator('pageTitle', '.ez-header h1'),
             new VisibleCSSLocator('table', '#ibexa-tab-dashboard-my-my-drafts'),

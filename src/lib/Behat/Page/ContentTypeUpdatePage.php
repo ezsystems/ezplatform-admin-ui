@@ -55,11 +55,11 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
         return array_merge(parent::specifyLocators(), [
             new VisibleCSSLocator('fieldTypesList', '#ezplatform_content_forms_contenttype_update_fieldTypeSelection'),
             new VisibleCSSLocator('addFieldDefinition', '#ezplatform_content_forms_contenttype_update_addFieldDefinition'),
-            new VisibleCSSLocator('fieldDefinitionContainer', '.ez-card--toggle-group'),
-            new VisibleCSSLocator('fieldDefinitionName', '.ez-card--toggle-group .ez-card__header .form-check-label'),
-            new VisibleCSSLocator('fieldBody', 'ez-card__body'),
-            new VisibleCSSLocator('fieldCollapsed', 'ez-card--collapsed'),
-            new VisibleCSSLocator('fieldDefinitionToggler', '.ez-card__body-display-toggler'),
+            new VisibleCSSLocator('fieldDefinitionContainer', '.ibexa-card--toggle-group'),
+            new VisibleCSSLocator('fieldDefinitionName', '.ibexa-card--toggle-group .ibexa-card__header .form-check-label'),
+            new VisibleCSSLocator('fieldBody', 'ibexa-card__body'),
+            new VisibleCSSLocator('fieldCollapsed', 'ibexa-card--collapsed'),
+            new VisibleCSSLocator('fieldDefinitionToggler', '.ibexa-card__body-display-toggler'),
         ]);
     }
 

@@ -52,7 +52,7 @@
         }
 
         &:hover {
-             background-color: $ibexa-color-primary-200;
+            background-color: $ibexa-color-primary-200;
         }
 
         &:disabled {
@@ -259,11 +259,6 @@
 .ibexa-btn--content-edit {
     background-color: transparent;
     cursor: pointer;
-}
-
-.ibexa-btn--cotf-create {
-    display: flex;
-    align-items: center;
 }
 
 .ibexa-btn--content-tree-expanded {

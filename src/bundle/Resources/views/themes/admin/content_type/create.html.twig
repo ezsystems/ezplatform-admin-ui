@@ -32,11 +32,11 @@
     {{ form_start(form) }}
 
     <section class="container ez-container mb-4">
-        <div class="card ez-card ez-card--light">
-            <div class="ez-card__header ez-card__header--section-title">
+        <div class="card ibexa-card ibexa-card--light">
+            <div class="ibexa-card__header ibexa-card__header--section-title">
                 {{ 'content_type.view.create.global_properties'|trans|desc('Global properties') }}
             </div>
-            <div class="card-body ez-card__body ez-card__body--incresed-margin">
+            <div class="card-body ibexa-card__body ibexa-card__body--incresed-margin">
                 {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
                 {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
                 {{ form_row(form.description, {'label_attr': {'class': 'ez-label'}}) }}
@@ -51,27 +51,27 @@
     </section>
 
     <section class="container ez-container">
-        <div class="card ez-card ez-card--light">
-            <div class="ez-card__header ez-card__header--sticky-top ez-card__header--section-title">
+        <div class="card ibexa-card ibexa-card--light">
+            <div class="ibexa-card__header ibexa-card__header--sticky-top ibexa-card__header--section-title">
                 <div>
                     {{ 'content_type.view.create.content_field_definitions'|trans|desc('Field definitions') }}
                 </div>
                 <div class="form-inline">
-                    <div class="ez-card__field-control mr-2">
+                    <div class="ibexa-card__field-control mr-2">
                     {{ form_widget(form.fieldTypeSelection, {'attr': {'class': 'ez-field-selection'}}) }}
                     {{ form_widget(form.addFieldDefinition, {'attr': {'class': 'btn ibexa-btn ibexa-btn--secondary'}}) }}
                     </div>
                     {{ form_widget(form.removeFieldDefinition, {'attr': {'class': 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text'}}) }}
                 </div>
             </div>
-            <div class="card-body ez-card__body ez-card__body--incresed-margin">
+            <div class="card-body ibexa-card__body ibexa-card__body--incresed-margin">
                 {% set language_code = content_type.mainLanguageCode %}
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}
 
-                    <div class="card ez-card ez-card--toggle-group ez-card--collapsed">
-                        <div id="field-definition-{{ value.identifier }}" class="ez-card__header ez-card__header--secondary">
-                            <button class="ez-card__body-display-toggler btn">
+                    <div class="card ibexa-card ibexa-card--toggle-group ibexa-card--collapsed">
+                        <div id="field-definition-{{ value.identifier }}" class="ibexa-card__header ibexa-card__header--secondary">
+                            <button class="ibexa-card__body-display-toggler btn">
                                 <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--caret-down" aria-hidden="true">
                                     <use xlink:href="{{ ibexa_icon_path('caret-down') }}"></use>
                                 </svg>
@@ -85,7 +85,7 @@
                             }) }}
                         </div>
 
-                        <div class="ez-card__body">
+                        <div class="ibexa-card__body">
                             {{ form_row(field_definition.name, {'label_attr': {'class': 'ez-label'}}) }}
                             {{ form_row(field_definition.identifier, {'label_attr': {'class': 'ez-label'}}) }}
                             {{ form_row(field_definition.position, {'label_attr': {'class': 'ez-label'}}) }}
