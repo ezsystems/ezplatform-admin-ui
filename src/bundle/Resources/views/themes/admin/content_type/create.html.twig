@@ -4,9 +4,7 @@
 {% form_theme form _self '@ezdesign/ui/form_fields.html.twig'  %}
 
 {% block header %}
-    <div class="ibexa-edit-header ibexa-edit-header--slim">
-    
-    </div>
+
     {# {% set content_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_edit.sidebar_right', [], {
         'content': content,
         'content_type': content_type,
@@ -21,15 +19,15 @@
             'group': content_type_group
     }) %}
 
-    {# {% include '@ezdesign/content/edit/content_header.html.twig' with {
+    {% include '@ezdesign/content/edit/content_header.html.twig' with {
         action_name: 'aaaaaaaa',
         title: 'bbbbb',
         description: 'ccccccc',
         buttons_render: knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
-    } %} #}
+    } %}
 
-
-    {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+    {{ dump() }}
+    {# {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }} #}
     {# {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }} #}
 {# 
     <div class="ibexa-content-type-edit-header">

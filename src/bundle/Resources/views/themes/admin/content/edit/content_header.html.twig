@@ -29,9 +29,11 @@
 			<div class="col-5 offset-1 ibexa-content-edit-header__column ibexa-content-edit-header__column--left">
 				<label class="ibexa-label ibexa-label--small ibexa-content-edit-header__action-name">{{ action_name }}</label>
 				<h1>{{ title }}</h1>
-				<div class="ibexa-content-edit-header__location">
-					{{ 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%')|raw }}
-				</div>
+				{% if parent_location is defined %}
+					<div class="ibexa-content-edit-header__location">
+						{{ 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%')|raw }}
+					</div>
+				{% endif %}
 			</div>
 			<div class="col-6 ibexa-content-edit-header__column ibexa-content-edit-header__column--right">
 				{% include '@ezdesign/ui/autosave.html.twig' %}

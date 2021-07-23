@@ -9,6 +9,16 @@
     border-top-right-radius: $ibexa-border-radius;
     transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
+    &__separate-div {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: calculateRem(1px);
+        background: $ibexa-color-light;
+        transform: scaleX(0);
+        transition-duration: $ibexa-admin-transition-duration;
+    }
+
     &--slim {
         height: calculateRem(86px);
     }
