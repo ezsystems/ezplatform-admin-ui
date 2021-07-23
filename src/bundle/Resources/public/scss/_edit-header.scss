@@ -1,0 +1,15 @@
+.ibexa-edit-header {
+    height: calculateRem(241px);
+    background-color: $ibexa-color-white;
+    box-shadow: $ibexa-edit-header-box-shadow;
+    border-width: calculateRem(1px) calculateRem(1px) 0 calculateRem(1px);
+    border-style: solid;
+    border-color: $ibexa-color-light-400;
+    border-top-left-radius: $ibexa-border-radius;
+    border-top-right-radius: $ibexa-border-radius;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+    &--slim {
+        height: calculateRem(86px);
+    }
+}

@@ -1,8 +1,8 @@
-<div class="ibexa-anchor-navigation">
-    <div class="ibexa-anchor-navigation__header">
+<div class="ibexa-anchor-navigation-menu">
+    <div class="ibexa-anchor-navigation-menu__header">
         {% if close_href is defined %}
             <a
-                class="btn ibexa-btn ibexa-btn--ghost ibexa-anchor-navigation__back"
+                class="btn ibexa-btn ibexa-btn--ghost ibexa-anchor-navigation-menu__back"
                 href="{{ close_href }}"
                 title="{{ 'anchor_navigation.close'|trans|desc('Close') }}"
             >
@@ -13,15 +13,15 @@
         {% endif %}
     </div>
     
-    <div class="ibexa-anchor-navigation__body">
+    <div class="ibexa-anchor-navigation-menu__body">
         {% if items|length > 1 %}
-            <ul class="ibexa-anchor-navigation__menu">
+            <ul class="ibexa-anchor-navigation-menu__items">
                 {% for item in items %}
                     {% set sanitized_item = item|slug %}
 
-                    <li class="ibexa-anchor-navigation__item">
+                    <li class="ibexa-anchor-navigation-menu__item">
                         <button
-                            class="ibexa-anchor-navigation__btn {% if loop.first %}ibexa-anchor-navigation__btn--active{% endif %}" 
+                            class="ibexa-anchor-navigation-menu__item-btn {% if loop.first %}ibexa-anchor-navigation-menu__item-btn--active{% endif %}" 
                             data-anchor-target-section-id="#{{ sanitized_item }}"
                         >
                             {{ item }}

@@ -1,9 +1,13 @@
-{% extends "@ezdesign/ui/base.html.twig" %}
+{% extends "@ezdesign/content_type/base_edit.html.twig" %}
 
 {% trans_default_domain 'content_type' %}
 {% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
 
-{% block body_class %}ez-admin-edit{% endblock %}
+{% block content %}
+    aaa
+{% endblock %}
+
+{# {% block body_class %}ez-admin-edit{% endblock %}
 
 {% block breadcrumbs_admin %}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
@@ -135,7 +139,7 @@
 {% block right_sidebar %}
     {% set content_type_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_edit.sidebar_right', [], {'form_view': form, 'content_type': content_type}) %}
     {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
-{% endblock %}
+{% endblock %} #}
 
 {% block javascripts %}
     {{ encore_entry_script_tags('ezplatform-admin-ui-content-type-edit-js', null, 'ezplatform') }}

@@ -1,4 +1,4 @@
-.ibexa-content-edit-header {
+.ibexa-content-type-edit-header {
     height: calculateRem(241px);
     background-color: $ibexa-color-white;
     box-shadow: $ibexa-edit-header-box-shadow;
@@ -115,6 +115,6 @@
     }
 }
 
-.ibexa-content-edit-content {
+.ibexa-content-type-edit-content {
     @include edit-right-side-container;
 }

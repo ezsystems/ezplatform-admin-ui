@@ -1,9 +1,41 @@
 {% extends "@ezdesign/content_type/base_edit.html.twig" %}
 
 {% trans_default_domain 'content_type' %}
-
 {% form_theme form _self '@ezdesign/ui/form_fields.html.twig'  %}
 
+{% block header %}
+    <div class="ibexa-edit-header ibexa-edit-header--slim">
+    
+    </div>
+    {# {% set content_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_edit.sidebar_right', [], {
+        'content': content,
+        'content_type': content_type,
+        'location': location,
+        'parent_location': parent_location,
+        'language': language
+    }) %} #}
+
+    {% set content_type_create_sidebar_right = knp_menu_get(
+        'ezplatform_admin_ui.menu.content_type_create.sidebar_right', [], { 
+            'save_id': form.publishContentType.vars.id, 
+            'group': content_type_group
+    }) %}
+
+    {# {% include '@ezdesign/content/edit/content_header.html.twig' with {
+        action_name: 'aaaaaaaa',
+        title: 'bbbbb',
+        description: 'ccccccc',
+        buttons_render: knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
+    } %} #}
+
+
+    {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+    {# {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }} #}
+{# 
+    <div class="ibexa-content-type-edit-header">
+        <div class="container">
+            a
+        </div>
 
 
 
@@ -53,7 +85,8 @@
                 {{ form_row(form.defaultAlwaysAvailable, {'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
             </div>
         </div>
-    </section>
+    </div> #}
+{% endblock %}
 
     <section class="container ez-container">
         <div class="card ibexa-card ibexa-card--light">
@@ -66,7 +99,6 @@
                     {{ form_widget(form.fieldTypeSelection, {'attr': {'class': 'ez-field-selection'}}) }}
                     {{ form_widget(form.addFieldDefinition, {'attr': {'class': 'btn ibexa-btn ibexa-btn--secondary'}}) }}
                     </div>
-                    {{ form_widget(form.removeFieldDefinition, {'attr': {'class': 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text'}}) }}
                 </div>
             </div>
             <div class="card-body ibexa-card__body ibexa-card__body--incresed-margin">
@@ -119,22 +151,17 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
+
+            {{ form_widget(form.saveContentType, { attr: { hidden: 'hidden' }}) }}
+            {{ form_widget(form.publishContentType, { attr: { hidden: 'hidden' }}) }}
+
+            {{ form_widget(form._token) }}
+            {{ form_end(form, {'render_rest': false }) }}
         </div>
-    </section>
-
-    {{ form_widget(form.saveContentType, { attr: { hidden: 'hidden' }}) }}
-    {{ form_widget(form.publishContentType, { attr: { hidden: 'hidden' }}) }}
-
-    {{ form_widget(form._token) }}
-    {{ form_end(form, {'render_rest': false }) }}
-{% endblock %}
-
-{% block right_sidebar %}
-    {% set content_type_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_create.sidebar_right', [], {'save_id': form.publishContentType.vars.id, 'group': content_type_group}) %}
-    {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
+    </div>
 {% endblock %}
 
 {% block javascripts %}

@@ -9,9 +9,9 @@
 {% form_theme form with form_templates %}
 
 {% if grouped_fields|length < 2 %}
-    {% set extra_main_class = extra_main_class ~ ' ibexa-main-container--without-grouped-fields' %}
+    {% set extra_main_class = extra_main_class ~ ' ibexa-main-container--without-anchor-menu-items' %}
 {% else %}
-    {% set extra_main_class = extra_main_class ~ ' ibexa-main-container--with-grouped-fields' %}
+    {% set extra_main_class = extra_main_class ~ ' ibexa-main-container--with-anchor-menu-items' %}
 {% endif %}
 
 {% block main_container_class %}{{ extra_main_class }}{% endblock %}
@@ -30,7 +30,7 @@
         }) %}
     {% endif %}
 
-    {% include '@ezdesign/ui/anchor_navigation.html.twig' with anchor_params %}
+    {% include '@ezdesign/ui/anchor_navigation_menu.html.twig' with anchor_params %}
 {% endblock %}
 
 {% block content_column %}
