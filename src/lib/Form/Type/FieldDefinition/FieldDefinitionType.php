@@ -9,6 +9,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition;
 use eZ\Publish\API\Repository\FieldTypeService;
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use eZ\Publish\SPI\Repository\Strategy\ContentThumbnail\Field\ThumbnailStrategy;
+use EzSystems\EzPlatformAdminUi\Form\Data\PrototypeFieldDefinitionDataFactory;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\TranslatablePropertyTransformer;
 use EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
@@ -39,11 +40,19 @@ class FieldDefinitionType extends AbstractType
     /** @var \eZ\Publish\SPI\Repository\Strategy\ContentThumbnail\Field\ThumbnailStrategy */
     private $thumbnailStrategy;
 
-    public function __construct(FieldTypeDefinitionFormMapperDispatcherInterface $fieldTypeMapperDispatcher, FieldTypeService $fieldTypeService, ThumbnailStrategy $thumbnailStrategy)
-    {
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Data\PrototypeFieldDefinitionDataFactory */
+    private $prototypeFieldDefinitionDataFactory;
+
+    public function __construct(
+        FieldTypeDefinitionFormMapperDispatcherInterface $fieldTypeMapperDispatcher,
+        FieldTypeService $fieldTypeService,
+        ThumbnailStrategy $thumbnailStrategy,
+        PrototypeFieldDefinitionDataFactory $prototypeFieldDefinitionDataFactory
+    ) {
         $this->fieldTypeMapperDispatcher = $fieldTypeMapperDispatcher;
         $this->fieldTypeService = $fieldTypeService;
         $this->thumbnailStrategy = $thumbnailStrategy;
+        $this->prototypeFieldDefinitionDataFactory = $prototypeFieldDefinitionDataFactory;
     }
 
     public function setGroupsList(FieldsGroupsList $groupsList)
@@ -58,6 +67,7 @@ class FieldDefinitionType extends AbstractType
                 'data_class' => FieldDefinitionData::class,
                 'translation_domain' => 'content_type',
                 'mainLanguageCode' => null,
+                'field_type_identifier' => null,
             ])
             ->setDefined(['mainLanguageCode'])
             ->setAllowedTypes('mainLanguageCode', ['null', 'string'])
@@ -129,13 +139,14 @@ class FieldDefinitionType extends AbstractType
             ]);
 
         // Hook on form generation for specific FieldType needs
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
             /** @var \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData $data */
             $data = $event->getData();
             $form = $event->getForm();
-            $fieldTypeIdentifier = $data->getFieldTypeIdentifier();
+
+            $fieldTypeIdentifier = $data !== null ? $data->getFieldTypeIdentifier() : $options['field_type_identifier'];
             $fieldType = $this->fieldTypeService->getFieldType($fieldTypeIdentifier);
-            $isTranslation = $data->contentTypeData->languageCode !== $data->contentTypeData->mainLanguageCode;
+            $isTranslation = $data !== null ? $data->contentTypeData->languageCode !== $data->contentTypeData->mainLanguageCode : false;
             // isSearchable field should be present only if the FieldType allows it.
             $form->add('isSearchable', CheckboxType::class, [
                 'required' => false,
@@ -148,6 +159,12 @@ class FieldDefinitionType extends AbstractType
                 'label' => 'field_definition.is_thumbnail',
                 'disabled' => $isTranslation || !$this->thumbnailStrategy->hasStrategy($fieldTypeIdentifier),
             ]);
+
+            if ($data === null) {
+                $data = $this->prototypeFieldDefinitionDataFactory->createForFieldType(
+                    $options['field_type_identifier']
+                );
+            }
 
             // Let fieldType mappers do their jobs to complete the form.
             $this->fieldTypeMapperDispatcher->map($form, $data);

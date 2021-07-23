@@ -136,3 +136,7 @@ services:
             $translator: '@translator'
         tags:
             - { name: form.type, alias: EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType }
+
+    EzSystems\EzPlatformAdminUi\Form\Data\PrototypeFieldDefinitionDataFactory:
+        arguments:
+            - '@eZ\Publish\Core\FieldType\FieldTypeRegistry'

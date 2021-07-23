@@ -1,9 +1,17 @@
 {% extends "@ezdesign/ui/base.html.twig" %}
 
 {% trans_default_domain 'content_type' %}
-{% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
+{% form_theme form _self '@ezdesign/ui/form_fields.html.twig' %}
 
 {% block body_class %}ez-admin-edit ez-has-full-width-footer{% endblock %}
+
+{% block field_type_palette_button_widget %}
+    {% set attr = attr|merge({
+        'data-definition-form-prototype': form_row(prototype)
+    }) %}
+
+    {{ block('button_widget') }}
+{% endblock %}
 
 {% block breadcrumbs_admin %}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
@@ -47,6 +55,14 @@
         </div>
     </section>
 
+    <ul class="nav flex-column">
+        {% for field_type_add_btn in form.fieldTypePalette %}
+            <li class="nav-item">
+                {{ form_widget(field_type_add_btn, {'attr': {'class': 'ez-label'}}) }}
+            </li>
+        {% endfor %}
+    </ul>
+
     <section class="container ez-container">
         <div class="card ibexa-card ibexa-card--light">
             <div class="ibexa-card__header ibexa-card__header--sticky-top ibexa-card__header--section-title">
@@ -54,11 +70,6 @@
                     {{ 'content_type.view.edit.content_field_definitions'|trans|desc('Field definitions') }}
                 </div>
                 <div class="form-inline">
-                    <div class="ibexa-card__field-control mr-2">
-                    {{ form_widget(form.fieldTypeSelection, {'attr': {'class': 'ez-field-selection'}}) }}
-                    {{ form_widget(form.addFieldDefinition, {'attr': {'class': 'btn ibexa-btn ibexa-btn--secondary'}}) }}
-                    </div>
-
                     <button type="button"
                             title="{{ 'content_type.view.edit.content_field_definition.delete'|trans|desc('Delete Field definition(s)') }}"
                             class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"

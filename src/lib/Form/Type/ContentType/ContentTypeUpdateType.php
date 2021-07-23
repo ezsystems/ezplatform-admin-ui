@@ -104,13 +104,23 @@ class ContentTypeUpdateType extends AbstractType
             ])
             ->add('fieldDefinitionsData', CollectionType::class, [
                 'entry_type' => FieldDefinitionType::class,
-                'entry_options' => ['languageCode' => $options['languageCode'], 'mainLanguageCode' => $options['mainLanguageCode']],
+                'entry_options' => [
+                    'languageCode' => $options['languageCode'],
+                    'mainLanguageCode' => $options['mainLanguageCode'],
+                ],
                 'label' => /** @Desc("Content Field definitions") */ 'content_type.field_definitions_data',
             ])
             ->add('fieldTypeSelection', FieldTypeChoiceType::class, [
                 'mapped' => false,
                 'label' => /** @Desc("Field Type selection") */ 'content_type.field_type_selection',
                 'disabled' => $isTranslation,
+            ])
+            ->add('fieldTypePalette', FieldTypePaletteType::class, [
+                'mapped' => false,
+                'label' => /** @Desc("Field Type selection") */ 'content_type.field_type_selection',
+                'disabled' => $isTranslation,
+                'language_code' => $options['languageCode'],
+                'main_language_code' => $options['mainLanguageCode'],
             ])
             ->add('addFieldDefinition', SubmitType::class, [
                 'label' => /** @Desc("Add field definition") */ 'content_type.add_field_definition',
