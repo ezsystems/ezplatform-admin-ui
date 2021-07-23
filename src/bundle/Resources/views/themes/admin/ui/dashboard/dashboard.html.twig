@@ -2,17 +2,17 @@
 
 {% trans_default_domain 'dashboard' %}
 
-{% block body_class %}ez-dashboard ez-has-full-width-footer{% endblock %}
+{% block body_class %}ibexa-dashboard ez-has-full-width-footer{% endblock %}
 
 {% block side_column %}{% endblock %}
 
 {% block content %}
-    <div class="row align-items-stretch ez-main-row ez-dashboard-row">
+    <div class="row align-items-stretch ez-main-row ibexa-dashboard-row">
         {% block left_sidebar %}{% endblock left_sidebar %}
         <div class="ez-content-container">
             <div class="container-fluid ez-header ez-header--light">
-                <div class="container ez-dashboard__header">
-                    <div class="ez-dashboard__create">
+                <div class="container ibexa-dashboard__header">
+                    <div class="ibexa-dashboard__create">
                         <button
                             class="btn ibexa-btn ibexa-btn--primary ibexa-btn--cotf-create"
                             data-udw-config="{{ ez_udw_config('create', {'type': 'content_create'}) }}"
