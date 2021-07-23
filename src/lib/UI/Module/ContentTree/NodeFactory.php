@@ -221,7 +221,7 @@ final class NodeFactory
 
         $searchQuery = new LocationQuery();
         $searchQuery->filter = new Criterion\ParentLocationId($parentLocationIds);
-        $searchQuery->aggregations[] = new Query\Aggregation\LocationChildrenTermAggregation('childrens');
+        $searchQuery->aggregations[] = new Query\Aggregation\Location\LocationChildrenTermAggregation('childrens');
         $searchQuery->aggregations[0]->setLimit(count($parentLocationIds));
         $result = $this->searchService->findLocations($searchQuery);
 
