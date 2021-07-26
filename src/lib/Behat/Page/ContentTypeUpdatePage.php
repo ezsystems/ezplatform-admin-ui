@@ -13,9 +13,11 @@ use EzSystems\Behat\API\ContentData\FieldTypeNameConverter;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
+use Ibexa\Behat\Browser\Locator\XPathLocator;
 use Ibexa\Behat\Browser\Routing\Router;
 use Ibexa\AdminUi\Behat\Component\Notification;
 use Ibexa\AdminUi\Behat\Component\RightMenu;
+use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 
 class ContentTypeUpdatePage extends AdminUpdateItemPage
 {
@@ -60,6 +62,10 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             new VisibleCSSLocator('fieldBody', 'ez-card__body'),
             new VisibleCSSLocator('fieldCollapsed', 'ez-card--collapsed'),
             new VisibleCSSLocator('fieldDefinitionToggler', '.ez-card__body-display-toggler'),
+            //ezlandingpage
+            new VisibleCSSLocator('page view','#ezplatform_content_forms_contenttype_update_fieldDefinitionsData_2_editorMode_0'),
+            new VisibleCSSLocator('field view','#ezplatform_content_forms_contenttype_update_fieldDefinitionsData_2_editorMode_1'),
+            new XPathLocator('ezlandingpageFieldDisplayButton','//*[@id="field-definition-page"]/button')
         ]);
     }
 
@@ -85,5 +91,12 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             })
             ->first()
         ;
+    }
+
+    public function selectEditorLaunchMode($view)
+    {
+        $this->getHTMLPage()->setTimeout(3)->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('ezlandingpageFieldDisplayButton')));
+        $this->getHTMLPage()->find($this->getLocator('ezlandingpageFieldDisplayButton'))->click();
+        $this->getHTMLPage()->find($this->getLocator($view))->click();
     }
 }

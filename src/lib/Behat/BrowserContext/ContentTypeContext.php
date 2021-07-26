@@ -129,6 +129,14 @@ class ContentTypeContext implements Context
     }
 
     /**
+     * @When I select :view Editor launch mode in 'ezlandingpage' field
+     */
+    public function iSelectEditorLaunchMode ($view)
+    {
+        $this->contentTypeUpdatePage->selectEditorLaunchMode($view);
+    }
+    
+    /**
      * @When I start editing Content Type :contentTypeName
      */
     public function iStartEditingItem(string $contentTypeName): void
