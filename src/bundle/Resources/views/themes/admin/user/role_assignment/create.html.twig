@@ -23,11 +23,11 @@
 {% block form %}
     {{ form_start(form) }}
         <section>
-            <div class="card ez-card ez-card--light">
-                <div class="ez-card__header ez-card__header--secondary">
+            <div class="card ibexa-card ibexa-card--light">
+                <div class="ibexa-card__header ibexa-card__header--secondary">
                     {{ 'role_assignment.view.add.panel.users_and_groups.title'|trans|desc('Users and Groups') }}
                 </div>
-                <div class="card-body ez-card__body">
+                <div class="card-body ibexa-card__body">
                     {{ form_label(form.users) }}
                     {{ form_errors(form.users) }}
                     {{ form_widget(form.users) }}
@@ -92,11 +92,11 @@
         </section>
 
         <section>
-            <div class="card ez-card ez-card--light">
-                <div class="ez-card__header ez-card__header--secondary">
+            <div class="card ibexa-card ibexa-card--light">
+                <div class="ibexa-card__header ibexa-card__header--secondary">
                     {{ 'role_assignment.view.add.panel.limitations.title'|trans|desc('Limitations') }}
                 </div>
-                <div class="card-body ez-card__body ez-limitations">
+                <div class="card-body ibexa-card__body ez-limitations">
                     {{ form_widget(form.limitation_type.none, {'label': 'limitation_type.none'|trans|desc('No Limitations'), 'attr': {'class': 'ez-limitations__radio'}, 'label_attr': {'class': 'ez-limitations__label radio-inline'}}) }}
                     <div class="ez-limitations__item">
                         {% if not form.limitation_type.section.vars.checked %}
