@@ -129,9 +129,25 @@
         }
     }
 
-    &--neon-info {
-        border-radius: $ibexa-border-radius;
+    &--info {
+        color: $ibexa-color-info;
+        border-color: $ibexa-color-info;
+        
+        .ibexa-icon {
+            fill: $ibexa-color-info;
+        }
 
+        &:hover {
+            // border-color: $ibexa-color-info;
+            // box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-info;
+        }
+
+        &:focus {
+            // box-shadow: none;
+        }
+    }
+
+    &--neon-info {
         .ibexa-icon {
             fill: $ibexa-color-info;
         }

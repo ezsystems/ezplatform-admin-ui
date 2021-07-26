@@ -116,30 +116,40 @@
 }
 
 .ibexa-field-types-available {
+    display: flex;
+    flex-direction: column;
     max-width: calculateRem(340px);
+    max-height: calculateRem(700px);
+    margin-left: calculateRem(24px);
     padding-top: calculateRem(16px);
     overflow: hidden;
     border: calculateRem(1px) solid $ibexa-color-light;
     border-radius: $ibexa-border-radius;
     background-color: $ibexa-color-light-400;
     box-shadow: calculateRem(-4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
     &__header {
         margin: 0;
-        padding: calculateRem(12px) calculateRem(24px);  
+        padding: calculateRem(24px);  
         background: $ibexa-color-white;
         border-bottom: calculateRem(1px) solid $ibexa-color-light;
         
     }
 
-    &__body {
+    &__search-container {
         padding: calculateRem(24px);
-        background-color: $ibexa-color-white;
+        background: $ibexa-color-white;
     }
 
     &__search {
         height: calculateRem(48px);
-        margin-bottom: calculateRem(20px);
+    }
+
+    &__fields {
+        background: $ibexa-color-white;
+        overflow: auto;
+        padding: calculateRem(12px) calculateRem(24px) calculateRem(24px) calculateRem(24px);
     }
 
     &__field {
@@ -147,7 +157,6 @@
         align-items: center;
         margin: calculateRem(8px) 0;
         height: calculateRem(48px);
-
         border: calculateRem(1px) solid $ibexa-color-light;
         border-radius: $ibexa-border-radius;
     }
@@ -166,7 +175,35 @@
     }
 }
 
+.ibexa-content-type-edit-sections {
+    &__section-column {
+        &--field-definitions {
+            min-height: calculateRem(700px);
+            padding: calculateRem(24px);
+            background: $ibexa-color-light-300;
+            border-radius: $ibexa-border-radius;
+        }
+    }
 
+    &__add-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calculateRem(80px);
+        margin-top: calculateRem(24px);
+        border: calculateRem(1px) dashed $ibexa-color-light-600;
+        border-radius: $ibexa-border-radius;
+    }
+
+    &__add-button {
+        min-width: calculateRem(210px);
+        justify-content: center;
+    }
+
+    .ibexa-anchor-navigation-sections__section {
+        margin-bottom: calculateRem(100px);
+    }
+}
 
 .ibexa-content-type-edit-content {
     @include edit-right-side-container;

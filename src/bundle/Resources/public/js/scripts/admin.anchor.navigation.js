@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const scrollOffset = 300;
     const formContainerNode = doc.querySelector('.ibexa-edit-content');
     const allSections = [...doc.querySelectorAll('.ibexa-anchor-navigation-sections__section')];
@@ -49,6 +49,11 @@
 
                 return position > start && position < end;
             });
+
+            if (!activeSection) {
+                return;
+            }
+
             const activeSectionId = activeSection.dataset.anchorSectionId;
 
             showSection(activeSectionId);
