@@ -25,7 +25,6 @@ use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node;
 
-
 /**
  * @internal
  */
@@ -91,11 +90,6 @@ final class NodeFactory
         return $node;
     }
 
-    /**
-     * @param \EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode|null $loadSubtreeRequestNode
-     *
-     * @return int
-     */
     private function resolveLoadLimit(?LoadSubtreeRequestNode $loadSubtreeRequestNode): int
     {
         $limit = $this->getSetting('load_more_limit');
@@ -129,8 +123,6 @@ final class NodeFactory
 
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\Location $parentLocation
-     *
-     * @return \eZ\Publish\API\Repository\Values\Content\LocationQuery
      */
     private function getSearchQuery(int $parentLocationId): LocationQuery
     {
@@ -156,12 +148,6 @@ final class NodeFactory
         return $searchQuery;
     }
 
-    /**
-     * @param int $locationId
-     * @param \EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode $loadSubtreeRequestNode
-     *
-     * @return \EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode|null
-     */
     private function findChild(int $locationId, LoadSubtreeRequestNode $loadSubtreeRequestNode): ?LoadSubtreeRequestNode
     {
         foreach ($loadSubtreeRequestNode->children as $child) {
@@ -174,10 +160,6 @@ final class NodeFactory
     }
 
     /**
-     * @param int $parentLocationId
-     *
-     * @return int
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     private function countSubitems(int $parentLocationId): int
@@ -193,8 +175,6 @@ final class NodeFactory
 
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\Location[] $containerLocations
-     *
-     * @return array
      */
     private function countAggregatedSubitems(array $containerLocations): array
     {
@@ -202,7 +182,7 @@ final class NodeFactory
             return [];
         }
 
-        if (count($containerLocations) > self::MAX_AGGREGATED_LOCATION_IDS) {
+        if (\count($containerLocations) > self::MAX_AGGREGATED_LOCATION_IDS) {
             $containerLocationsChunks = array_chunk($containerLocations, self::MAX_AGGREGATED_LOCATION_IDS);
 
             $result = [];
@@ -218,7 +198,7 @@ final class NodeFactory
         $searchQuery = new LocationQuery();
         $searchQuery->filter = new Criterion\ParentLocationId($parentLocationIds);
         $locationChildrenTermAggregation = new Query\Aggregation\Location\LocationChildrenTermAggregation('childrens');
-        $locationChildrenTermAggregation->setLimit(count($parentLocationIds));
+        $locationChildrenTermAggregation->setLimit(\count($parentLocationIds));
         $searchQuery->aggregations[] = $locationChildrenTermAggregation;
 
         $result = $this->searchService->findLocations($searchQuery);
@@ -231,11 +211,6 @@ final class NodeFactory
         return [];
     }
 
-    /**
-     * @param \eZ\Publish\API\Repository\Values\Content\Search\AggregationResult\TermAggregationResult $aggregationResult
-     *
-     * @return array
-     */
     private function aggregationResultToArray(TermAggregationResult $aggregationResult): array
     {
         $resultsAsArray = [];
@@ -383,8 +358,6 @@ final class NodeFactory
     }
 
     /**
-     * @param array|null $aggregationResult
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     private function supplyChildrenCount(Node $node, array $aggregationResult = null): void
