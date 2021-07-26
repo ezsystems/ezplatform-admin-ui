@@ -46,7 +46,8 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
         $fieldDefinition = $this->getFieldDefinition($fieldName);
 
         if ($fieldDefinition->hasClass($this->getLocator('fieldCollapsed')->getSelector())) {
-            $fieldDefinition->find($this->getLocator('fieldDefinitionToggler'))->click();
+            // TODO: Convert to normal click once this page is redesigned
+            $this->getSession()->executeScript("document.querySelector('.ez-card--toggle-group:last-of-type .ez-card__body-display-toggler').click()");
         }
     }
 
@@ -66,9 +67,9 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
     public function addFieldDefinition(string $fieldName)
     {
         $this->getHTMLPage()->find($this->getLocator('fieldTypesList'))->selectOption($fieldName);
+        sleep(1); // TODO: Remove sleep once this page is redesigned
         $this->getHTMLPage()->find($this->getLocator('addFieldDefinition'))->click();
         $this->getFieldDefinition($fieldName)->assert()->isVisible();
-
         $this->notification->verifyIsLoaded();
         $this->notification->verifyAlertSuccess();
         $this->notification->closeAlert();
