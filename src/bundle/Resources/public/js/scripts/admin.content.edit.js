@@ -1,5 +1,4 @@
 (function(global, doc, eZ, Translator) {
-    const SCROLL_POSITION_TO_FIT = 50;
     const ENTER_KEY_CODE = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',

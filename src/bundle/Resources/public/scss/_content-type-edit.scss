@@ -115,6 +115,59 @@
     }
 }
 
+.ibexa-field-types-available {
+    max-width: calculateRem(340px);
+    padding-top: calculateRem(16px);
+    overflow: hidden;
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: $ibexa-border-radius;
+    background-color: $ibexa-color-light-400;
+    box-shadow: calculateRem(-4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
+
+    &__header {
+        margin: 0;
+        padding: calculateRem(12px) calculateRem(24px);  
+        background: $ibexa-color-white;
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+        
+    }
+
+    &__body {
+        padding: calculateRem(24px);
+        background-color: $ibexa-color-white;
+    }
+
+    &__search {
+        height: calculateRem(48px);
+        margin-bottom: calculateRem(20px);
+    }
+
+    &__field {
+        display: flex;
+        align-items: center;
+        margin: calculateRem(8px) 0;
+        height: calculateRem(48px);
+
+        border: calculateRem(1px) solid $ibexa-color-light;
+        border-radius: $ibexa-border-radius;
+    }
+
+    &__field-drag-icon {
+        fill: $ibexa-color-dark-200;
+        margin: 0 calculateRem(16px);
+    }
+
+    &__field-icon {
+        margin-right: calculateRem(8px);
+    }
+
+    &__field-name {
+        font-weight: 600;
+    }
+}
+
+
+
 .ibexa-content-type-edit-content {
     @include edit-right-side-container;
 }

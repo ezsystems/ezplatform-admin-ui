@@ -63,13 +63,16 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-create-js', [
+            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-edit-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.relation.default.location.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-list-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
@@ -144,7 +147,6 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.location.bookmark.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.main.translation.update.js'),
             path.resolve(__dirname, '../public/js/scripts/table.checkbox.js'),
-            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
         ])
         .addEntry('ezplatform-admin-ui-modal-location-trash-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.js')])
         .addEntry('ezplatform-admin-ui-modal-location-trash-container-js', [
@@ -175,6 +177,7 @@ module.exports = (Encore) => {
             ...fieldTypes,
             path.resolve(__dirname, '../public/js/scripts/sidebar/extra.actions.js'),
             path.resolve(__dirname, '../public/js/scripts/toggle.button.state.toggle.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
         ])
         .addEntry('ezplatform-admin-ui-settings-datetime-format-update-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.settings.datetimeformat.update.js'),

@@ -147,7 +147,25 @@
 {% endblock %}
 
 {% block field_definition_form %}
-    drag and drop
+    <div class="ibexa-field-types-available">
+        <h3 class="ibexa-field-types-available__header">Field Types</h3>
+        <div class="ibexa-field-types-available__body">
+            <input type="text" class="form-control ibexa-field-types-available__search" />
+            <div class="ibexa-field-types-available__fields">
+                {% for i in 0..10 %}
+                    <div class="ibexa-field-types-available__field">
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-field-types-available__field-drag-icon">
+                            <use xlink:href="{{ ibexa_icon_path('drag') }}"></use>
+                        </svg>
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-field-types-available__field-icon">
+                            <use xlink:href="{{ ibexa_icon_path('dropdown') }}"></use>
+                        </svg>
+                        <div class="ibexa-field-types-available__field-name ibexa-label ibexa-label--medium">Checkbox</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

@@ -1,4 +1,5 @@
 (function(global, doc, eZ) {
+    const SCROLL_POSITION_TO_FIT = 50;
     const headerNode = doc.querySelector('.ibexa-edit-header');
     const contentNode = doc.querySelector('.ibexa-edit-content');
 
@@ -9,6 +10,5 @@
         headerNode.classList.toggle('ibexa-edit-header--slim', shouldHeaderBeSlim);
     };
 
-    console.log('xxxxxxx');
     contentNode.addEventListener('scroll', fitHeader, false);
 })(window, window.document, window.eZ);
