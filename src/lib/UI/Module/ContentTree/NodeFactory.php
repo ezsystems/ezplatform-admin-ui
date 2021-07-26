@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Module\ContentTree;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
+use eZ\Publish\API\Repository\Exceptions\OutOfBoundsException;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
@@ -23,6 +24,7 @@ use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node;
+
 
 /**
  * @internal
@@ -47,9 +49,6 @@ final class NodeFactory
 
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
-
-    /** @var array */
-    private $containerLocations;
 
     public function __construct(
         ContentService $contentService,
@@ -214,27 +213,26 @@ final class NodeFactory
             return $result;
         }
 
-        $parentLocationIds = [];
-        foreach ($containerLocations as $containerLocation) {
-            $parentLocationIds[] = $containerLocation->id;
-        }
+        $parentLocationIds = array_column($containerLocations, 'id');
 
         $searchQuery = new LocationQuery();
         $searchQuery->filter = new Criterion\ParentLocationId($parentLocationIds);
-        $searchQuery->aggregations[] = new Query\Aggregation\Location\LocationChildrenTermAggregation('childrens');
-        $searchQuery->aggregations[0]->setLimit(count($parentLocationIds));
+        $locationChildrenTermAggregation = new Query\Aggregation\Location\LocationChildrenTermAggregation('childrens');
+        $locationChildrenTermAggregation->setLimit(count($parentLocationIds));
+        $searchQuery->aggregations[] = $locationChildrenTermAggregation;
+
         $result = $this->searchService->findLocations($searchQuery);
 
         try {
             return $this->aggregationResultToArray($result->aggregations->get('childrens'));
-        } catch (\eZ\Publish\API\Repository\Exceptions\OutOfBoundsException $e) {
+        } catch (OutOfBoundsException $e) {
         }
 
         return [];
     }
 
     /**
-     * @param TermAggregationResult $aggregationResult
+     * @param \eZ\Publish\API\Repository\Values\Content\Search\AggregationResult\TermAggregationResult $aggregationResult
      *
      * @return array
      */
