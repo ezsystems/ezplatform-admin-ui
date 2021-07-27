@@ -32,6 +32,9 @@ class TableRow extends Component
 
     public function goToItem(): void
     {
+        // TODO: Revisit during redesign
+        $this->element->find($this->getLocator('link'))->mouseOver();
+        usleep(100 * 5000); // 500ms
         $this->element->find($this->getLocator('link'))->click();
     }
 
@@ -42,6 +45,9 @@ class TableRow extends Component
 
     public function edit(): void
     {
+        // TODO: Revisit during redesign
+        $this->element->find($this->getLocator('edit'))->mouseOver();
+        usleep(100 * 5000); // 500ms
         $this->element->find($this->getLocator('edit'))->click();
     }
 

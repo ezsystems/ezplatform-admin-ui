@@ -43,12 +43,19 @@ class RoleUpdatePage extends AdminUpdateItemPage
                     ->findAll($this->getLocator('limitationField'))
                     ->getByCriterion(new ChildElementTextCriterion($this->getLocator('labelSelector'), $selectName))
                     ->find($this->getLocator('limitationDropdownOptionRemove'))
-                    ->click()
-                ;
+                    ->click();
             }
         } catch (Exception $e) {
             // no need to remove current selection
         }
+
+        // TODO: Revisit during redesign
+        $this->getHTMLPage()
+            ->findAll($this->getLocator('limitationField'))
+            ->getByCriterion(new ChildElementTextCriterion($this->getLocator('labelSelector'), $selectName))
+            ->find($this->getLocator('limitationDropdown'))
+            ->mouseOver();
+        usleep(100 * 5000); // 500ms
 
         $this->getHTMLPage()
             ->findAll($this->getLocator('limitationField'))
