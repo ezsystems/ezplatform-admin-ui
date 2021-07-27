@@ -6,7 +6,7 @@
     <div class="tab-content w-100">
         {% for child in current_item.children %}
             <div role="tabpanel"
-                 class="tab-pane fade{{ matcher.isAncestor(child, options.matchingDepth) ? ' show active' }}"
+                 class="tab-pane fade{{ matcher.isAncestor(child, options.matchingDepth) or matcher.isCurrent(child) ? ' show active' }}"
                  id="{{ child.name }}">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse">
