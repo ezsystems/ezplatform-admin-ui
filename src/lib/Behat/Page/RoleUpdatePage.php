@@ -49,14 +49,6 @@ class RoleUpdatePage extends AdminUpdateItemPage
             // no need to remove current selection
         }
 
-        // TODO: Revisit during redesign
-        $this->getHTMLPage()
-            ->findAll($this->getLocator('limitationField'))
-            ->getByCriterion(new ChildElementTextCriterion($this->getLocator('labelSelector'), $selectName))
-            ->find($this->getLocator('limitationDropdown'))
-            ->mouseOver();
-        usleep(100 * 5000); // 500ms
-
         $this->getHTMLPage()
             ->findAll($this->getLocator('limitationField'))
             ->getByCriterion(new ChildElementTextCriterion($this->getLocator('labelSelector'), $selectName))
@@ -65,6 +57,9 @@ class RoleUpdatePage extends AdminUpdateItemPage
         ;
 
         foreach ($values as $value) {
+            // TODO: Remove mouseOver and sleep after redesign - when the Content Type is placed on footer Selenium has issues selecting it
+            $this->getHTMLPage()->findAll($this->getLocator('limitationDropdownOption'))->getByCriterion(new ElementTextCriterion($value))->mouseOver();
+            usleep(100 * 5000); // 500ms
             $this->getHTMLPage()->findAll($this->getLocator('limitationDropdownOption'))->getByCriterion(new ElementTextCriterion($value))->click();
         }
 
@@ -72,8 +67,7 @@ class RoleUpdatePage extends AdminUpdateItemPage
             ->findAll($this->getLocator('limitationField'))
             ->getByCriterion(new ChildElementTextCriterion($this->getLocator('labelSelector'), $selectName))
             ->find($this->getLocator('limitationDropdown'))
-            ->click()
-        ;
+            ->click();
     }
 
     public function specifyLocators(): array
