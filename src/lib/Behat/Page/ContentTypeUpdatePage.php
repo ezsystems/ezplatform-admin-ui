@@ -47,7 +47,7 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
 
         if ($fieldDefinition->hasClass($this->getLocator('fieldCollapsed')->getSelector())) {
             // TODO: Convert to normal click once this page is redesigned
-            $this->getSession()->executeScript("document.querySelector('.ez-card--toggle-group:last-of-type .ez-card__body-display-toggler').click()");
+            $this->getSession()->executeScript("document.querySelector('.ibexa-card--toggle-group:last-of-type .ibexa-card__body-display-toggler').click()");
         }
     }
 
