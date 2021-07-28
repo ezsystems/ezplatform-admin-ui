@@ -149,8 +149,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'data-focus-element' => '.ez-instant-filter__input',
         ];
         $sendToTrashAttributes = [
-            'data-toggle' => 'modal',
-            'data-target' => '#trash-location-modal',
+            'data-bs-toggle' => 'modal',
+            'data-bs-target' => '#trash-location-modal',
         ];
         $copySubtreeAttributes = [
             'class' => 'ibexa-btn--udw-copy-subtree',
@@ -239,8 +239,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     [
                         'extras' => ['icon' => 'trash', 'orderNumber' => 70],
                         'attributes' => [
-                            'data-toggle' => 'modal',
-                            'data-target' => '#delete-user-modal',
+                            'data-bs-toggle' => 'modal',
+                            'data-bs-target' => '#delete-user-modal',
                         ],
                     ]
                 )

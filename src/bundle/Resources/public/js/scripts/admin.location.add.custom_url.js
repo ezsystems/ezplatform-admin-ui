@@ -2,7 +2,7 @@
     const modal = doc.querySelector('#ez-modal--custom-url-alias');
 
     if (modal) {
-        const discardBtns = modal.querySelectorAll('[data-dismiss="modal"]');
+        const discardBtns = modal.querySelectorAll('[data-bs-dismiss="modal"]');
         const submitBtn = modal.querySelector('[type="submit"]');
         const input = modal.querySelector('[required="required"]');
         const checkboxes = modal.querySelectorAll('.ez-field-edit--ezboolean input');

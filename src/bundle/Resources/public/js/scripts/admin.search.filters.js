@@ -1,4 +1,4 @@
-(function (global, doc, eZ, $, flatpickr) {
+(function(global, doc, eZ, flatpickr) {
     let getUsersTimeout;
     const CLASS_DATE_RANGE = 'ez-filters__range-wrapper';
     const CLASS_VISIBLE_DATE_RANGE = 'ez-filters__range-wrapper--visible';
@@ -351,4 +351,4 @@
     resetCreatorBtn.addEventListener('click', handleResetUser, false);
     listGroupsTitle.forEach((group) => group.addEventListener('click', toggleGroupState, false));
     contentTypeCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', filterByContentType, false));
-})(window, window.document, window.eZ, window.jQuery, window.flatpickr);
+})(window, window.document, window.eZ, window.flatpickr);

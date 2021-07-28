@@ -26,7 +26,7 @@
         'aria-controls': item.name,
         'class': ('nav-link' ~ (matcher.isAncestor(item, options.matchingDepth) ? ' ' ~ options.currentClass|trim)) ~  (item.linkAttributes.class is defined ?  ' ' ~ item.linkAttributes.class|trim),
         'role': 'tab',
-        'data-toggle': 'tab'
+        'data-bs-toggle': 'tab'
     }) %}
     {% if matcher.isAncestor(item, options.matchingDepth) %}{% set link_attributes = link_attributes|merge({'aria-expanded': 'true'}) %}{% endif %}
     <a{{ knp_menu.attributes(link_attributes) }}>

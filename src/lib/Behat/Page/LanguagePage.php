@@ -107,9 +107,9 @@ class LanguagePage extends Page
     {
         return [
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
-            new VisibleCSSLocator('deleteButton', 'button[data-original-title="Delete language"]'),
-            new VisibleCSSLocator('editButton', '[data-original-title="Edit"]'),
-            new VisibleCSSLocator('enabledField', 'input[data-original-title="Enabled"]'),
+            new VisibleCSSLocator('deleteButton', 'button[data-bs-original-title="Delete language"]'),
+            new VisibleCSSLocator('editButton', '[data-bs-original-title="Edit"]'),
+            new VisibleCSSLocator('enabledField', 'input[data-bs-original-title="Enabled"]'),
         ];
     }
 }

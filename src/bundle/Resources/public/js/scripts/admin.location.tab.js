@@ -1,4 +1,4 @@
-(function (global, doc, $) {
+(function(global, doc, bootstrap) {
     const SELECTOR_TABS = '.ibexa-tabs';
     const SELECTOR_TAB = '.ibexa-tabs__tab';
     const SELECTOR_TAB_ACTIVE = '.ibexa-tabs__tab--active';
@@ -32,11 +32,12 @@
         const parentTabs = activeHashTab.closest(SELECTOR_TABS);
         const currentActiveTab = parentTabs.querySelector(SELECTOR_TAB_ACTIVE);
 
-        $(activeHashTabLink).tab('show');
+        bootstrap.Tab.getOrCreateInstance(activeHashTabLink).show();
+
         switchActiveTabs(activeHashTab, currentActiveTab);
     };
 
     setActiveHashTab();
 
-    $('.ibexa-tabs a').on('shown.bs.tab', handleTabShown);
-})(window, window.document, window.jQuery);
+    doc.querySelectorAll('.ibexa-tabs a').forEach((tab) => tab.addEventListener('shown.bs.tab', handleTabShown));
+})(window, window.document, window.bootstrap);

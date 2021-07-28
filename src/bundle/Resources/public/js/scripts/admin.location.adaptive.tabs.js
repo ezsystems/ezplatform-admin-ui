@@ -1,4 +1,4 @@
-(function (global, doc, $, eZ) {
+(function(global, doc, eZ, bootstrap) {
     const TABS_SELECTOR = '.ibexa-tabs';
     const SELECTOR_TABS_LIST = '.ibexa-tabs__list';
     const SELECTOR_TAB_MORE = '.ibexa-tabs__tab--more';
@@ -52,7 +52,7 @@
                     const tabLinkId = itemElement.dataset.tabLinkId;
                     const tabToShow = tabsList.querySelector(`.ibexa-tabs__link#${tabLinkId}`);
 
-                    $(tabToShow).tab('show');
+                    bootstrap.Tab.getOrCreateInstance(tabToShow).show();
                 },
                 position: () => {
                     const popupMenuLeftPosition =
@@ -98,7 +98,7 @@
             adaptiveItems.adapt();
 
             tabsLinks.forEach((tabLink) => {
-                $(tabLink).on('shown.bs.tab', () => {
+                tabLink.addEventListener('shown.bs.tab', () => {
                     adaptiveItems.adapt();
                 });
             });
@@ -115,4 +115,4 @@
 
     doc.body.addEventListener('ez-content-tree-resized', handleTabsConainterChange, false);
     window.addEventListener('resize', handleTabsConainterChange, false);
-})(window, window.document, window.jQuery, window.eZ);
+})(window, window.document, window.eZ, window.bootstrap);

@@ -27,7 +27,7 @@
             <div class="ez-table-header__headline">{{ 'section.information.header'|trans|desc('Section information') }}</div>
             <div class="ez-table-header__tools">
                 {% if can_edit %}
-                    {% set modalDataAttributes = deletable ? 'data-toggle=modal data-target=#delete-section-modal' : '' %}
+                    {% set modalDataAttributes = deletable ? 'data-bs-toggle=modal data-bs-target=#delete-section-modal' : '' %}
                     <button
                         type="button"
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text {% if not deletable %}disabled{% endif %}"

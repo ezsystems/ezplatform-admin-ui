@@ -29,8 +29,8 @@
                 type="button"
                 class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                 {% if not can_manage %}disabled{% endif %}
-                data-toggle="modal"
-                data-target="#{{ modal_create_data_target }}"
+                data-bs-toggle="modal"
+                data-bs-target="#{{ modal_create_data_target }}"
                 title="{{ 'url_wildcard.list.action.create'|trans|desc('Create a URL wildcard') }}">
                 <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
                     <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
@@ -42,8 +42,8 @@
                 type="button"
                 class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                 disabled
-                data-toggle="modal"
-                data-target="#{{ modal_delete_data_target }}"
+                data-bs-toggle="modal"
+                data-bs-target="#{{ modal_delete_data_target }}"
                 title="{{ 'url_wildcard.list.action.delete'|trans|desc('Delete URL wildcards') }}">
                 <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
                     <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>

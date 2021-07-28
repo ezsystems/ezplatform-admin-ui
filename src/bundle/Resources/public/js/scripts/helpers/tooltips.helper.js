@@ -1,4 +1,4 @@
-(function(global, doc, eZ, $) {
+(function(global, doc, eZ, bootstrap) {
     let lastInsertTooltipTarget = null;
     const TOOLTIPS_SELECTOR = '[title]';
     const observerConfig = {
@@ -41,8 +41,7 @@
                 const container = tooltipNode.dataset.tooltipContainerSelector
                     ? tooltipNode.closest(tooltipNode.dataset.tooltipContainerSelector)
                     : 'body';
-
-                $(tooltipNode).tooltip({
+                const tooltip = new bootstrap.Tooltip(tooltipNode, {
                     delay,
                     placement,
                     container,
@@ -53,7 +52,7 @@
                                </div>`,
                 });
 
-                $(tooltipNode).on('inserted.bs.tooltip', (event) => {
+                tooltipNode.addEventListener('inserted.bs.tooltip', (event) => {
                     lastInsertTooltipTarget = event.currentTarget;
                 });
             }
@@ -67,7 +66,7 @@
         const tooltipsNode = baseElement.querySelectorAll(TOOLTIPS_SELECTOR);
 
         for (tooltipNode of tooltipsNode) {
-            $(tooltipNode).tooltip('hide');
+            bootstrap.Tooltip.getOrCreateInstance(tooltipNode).hide();
         }
     };
 
@@ -77,4 +76,4 @@
         parse,
         hideAll,
     });
-})(window, window.document, window.eZ, window.jQuery);
+})(window, window.document, window.eZ, window.bootstrap);

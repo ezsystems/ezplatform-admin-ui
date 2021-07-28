@@ -56,8 +56,8 @@
     {% if can_edit_custom_url %}
         <button
             class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--prevented"
-            data-toggle="modal"
-            data-target="#ez-modal--custom-url-alias"
+            data-bs-toggle="modal"
+            data-bs-target="#ez-modal--custom-url-alias"
             title="{{ 'tab.urls.action.add'|trans|desc('Add a custom URL alias') }}">
             <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
                 <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
@@ -70,8 +70,8 @@
             type="button"
             class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
             disabled
-            data-toggle="modal"
-            data-target="#{{ modal_data_target }}"
+            data-bs-toggle="modal"
+            data-bs-target="#{{ modal_data_target }}"
             title="{{ 'tab.urls.action.delete'|trans|desc('Delete custom URL alias') }}">
             <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
                 <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>

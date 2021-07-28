@@ -92,7 +92,7 @@ class SectionsPage extends Page
         return [
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
             new VisibleCSSLocator('createButton', '.ibexa-icon--create'),
-            new VisibleCSSLocator('deleteButton', '.ibexa-icon--trash,button[data-original-title^="Delete"]'),
+            new VisibleCSSLocator('deleteButton', '.ibexa-icon--trash,button[data-bs-original-title^="Delete"]'),
             new VisibleCSSLocator('tableContainer', '.ez-container'),
         ];
     }

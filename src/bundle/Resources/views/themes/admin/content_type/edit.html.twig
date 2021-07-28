@@ -62,8 +62,8 @@
                     <button type="button"
                             title="{{ 'content_type.view.edit.content_field_definition.delete'|trans|desc('Delete Field definition(s)') }}"
                             class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                            data-toggle="modal"
-                            data-target="#delete-content-type-modal"
+                            data-bs-toggle="modal"
+                            data-bs-target="#delete-content-type-modal"
                             {% if form.addFieldDefinition.vars.disabled %} disabled {% endif %}>
                         <svg class="ibexa-icon ibexa-icon--small">
                             <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>

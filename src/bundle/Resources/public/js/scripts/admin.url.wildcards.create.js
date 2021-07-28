@@ -5,7 +5,7 @@
         return;
     }
 
-    const discardBtns = modal.querySelectorAll('[data-dismiss="modal"]');
+    const discardBtns = modal.querySelectorAll('[data-bs-dismiss="modal"]');
     const submitBtn = modal.querySelector('[type="submit"]');
     const inputs = [...modal.querySelectorAll('[required="required"]')];
     const toggleButtonState = () => {

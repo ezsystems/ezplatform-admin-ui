@@ -1,4 +1,4 @@
-(function(global, doc, localStorage, $, React, ReactDOM, eZ, Routing, Translator) {
+(function(global, doc, localStorage, bootstrap, React, ReactDOM, eZ, Routing, Translator) {
     const SELECTOR_MODAL_BULK_ACTION_FAIL = '#bulk-action-failed-modal';
     const listContainers = doc.querySelectorAll('.ez-sil');
     const mfuContainer = doc.querySelector('#ez-mfu');
@@ -33,10 +33,11 @@
         };
         const addDraft = () => {
             submitVersionEditForm();
-            $('#version-draft-conflict-modal').modal('hide');
+            bootstrap.Modal.getOrCreateInstance(doc.querySelector('#version-draft-conflict-modal')).hide();
         };
         const attachModalListeners = (wrapper) => {
             const addDraftButton = wrapper.querySelector('.ibexa-btn--add-draft');
+            const conflictModal = doc.querySelector('#version-draft-conflict-modal');
 
             if (addDraftButton) {
                 addDraftButton.addEventListener('click', addDraft, false);
@@ -46,9 +47,10 @@
                 .querySelectorAll('.ibexa-btn--prevented')
                 .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
 
-            $('#version-draft-conflict-modal')
-                .modal('show')
-                .on('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+            if (conflictModal) {
+                bootstrap.Modal.getOrCreateInstance(conflictModal).show();
+                conflictModal.addEventListener('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+            }
         };
         const showModal = (modalHtml) => {
             const wrapper = doc.querySelector('.ez-modal-wrapper');
@@ -125,7 +127,7 @@
         setModalTableBody(failedItemsData);
         setModalTableTitle(tableTitle);
 
-        $(SELECTOR_MODAL_BULK_ACTION_FAIL).modal('show');
+        bootstrap.Modal.getOrCreateInstance(doc.querySelector(SELECTOR_MODAL_BULK_ACTION_FAIL)).show();
     };
     const getLocationActiveView = (parentLocationId) => {
         const mediaLocationId = eZ.adminUiConfig.locations.media;
@@ -192,7 +194,7 @@
     window,
     window.document,
     window.localStorage,
-    window.jQuery,
+    window.bootstrap,
     window.React,
     window.ReactDOM,
     window.eZ,

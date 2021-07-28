@@ -12,7 +12,7 @@
                 <img class="ibexa-login__logo" src="{{ asset('bundles/ezplatformadminui/img/ibexa-logo.svg') }}" alt="ibexa" />
                 <div class="container ibexa-login__content-wrapper">
                     <div class="row ibexa-login__content-row">
-                        <div class="col-5 ibexa-login__info-col">
+                        <div class="col-4 ibexa-login__info-col">
                             <h1 class="ibexa-login__info-headline">{{ 'base.welcome'|trans|desc('Welcome to<br/> Ibexa DXP')|raw }}</h1>
                             <div class="ibexa-login__support-wrapper">
                                 <h3 class="ibexa-login__support-headline">{{ 'base.need_assistance'|trans|desc('Get to know Ibexa DXP') }}</h3>
@@ -24,7 +24,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-5 ibexa-login__actions-col">
+                        <div class="col-4 ibexa-login__actions-col">
                             {%- block content -%} {%- endblock content -%}
                         </div>
                     </div>
@@ -32,8 +32,7 @@
             </div>
         </div>
 
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/@popperjs/core/dist/umd/popper.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
         {% if app.request.locale == 'ach_UG' %}

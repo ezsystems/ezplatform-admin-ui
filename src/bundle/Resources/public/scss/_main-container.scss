@@ -55,6 +55,7 @@
         top: calculateRem(80px);
         right: 0;
         flex: 0 0 calculateRem(80px);
+        width: auto;
 
         &--expanded {
             z-index: 1000;
