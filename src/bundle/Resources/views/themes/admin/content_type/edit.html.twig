@@ -1,17 +1,9 @@
 {% extends "@ezdesign/ui/base.html.twig" %}
 
 {% trans_default_domain 'content_type' %}
-{% form_theme form _self '@ezdesign/ui/form_fields.html.twig' %}
+{% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
 
 {% block body_class %}ez-admin-edit ez-has-full-width-footer{% endblock %}
-
-{% block field_type_palette_button_widget %}
-    {% set attr = attr|merge({
-        'data-definition-form-prototype': form_row(prototype)
-    }) %}
-
-    {{ block('button_widget') }}
-{% endblock %}
 
 {% block breadcrumbs_admin %}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [

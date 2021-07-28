@@ -247,6 +247,14 @@
     </div>
 {%- endblock -%}
 
+{% block field_type_palette_button_widget %}
+    {% set attr = attr|merge({
+        'data-definition-form-prototype': form_row(prototype)
+    }) %}
+
+    {{ block('button_widget') }}
+{% endblock %}
+
 {% block form_errors -%}
     {%- if errors|length > 0 -%}
         {%- for error in errors -%}
