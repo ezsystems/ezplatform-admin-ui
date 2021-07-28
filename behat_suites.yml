@@ -45,7 +45,6 @@ browser:
                 - Ibexa\AdminUi\Behat\BrowserContext\ContentUpdateContext
                 - Ibexa\AdminUi\Behat\BrowserContext\ContentPreviewContext
                 - Ibexa\AdminUi\Behat\BrowserContext\RightMenuContext
-                - Ibexa\AdminUi\Behat\BrowserContext\LeftMenuContext
                 - Ibexa\AdminUi\Behat\BrowserContext\NotificationContext
                 - Ibexa\AdminUi\Behat\BrowserContext\TrashContext
                 - Ibexa\AdminUi\Behat\BrowserContext\UDWContext

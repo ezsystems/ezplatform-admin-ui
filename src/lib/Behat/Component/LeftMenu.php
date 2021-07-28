@@ -9,14 +9,29 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component;
 
 use Ibexa\Behat\Browser\Component\Component;
-use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
+use Ibexa\Behat\Browser\Element\Criterion\ElementAttributeCriterion;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
+use Ibexa\Behat\Browser\Element\Criterion\LogicalOrCriterion;
+use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 
 class LeftMenu extends Component
 {
-    public function clickButton(string $buttonName): void
+    public function goToTab(string $tabName): void
     {
-        $this->getHTMLPage()->findAll($this->getLocator('buttonSelector'))->getByCriterion(new ElementTextCriterion($buttonName))->click();
+        $buttonCriteron = new LogicalOrCriterion([
+            new ElementAttributeCriterion('data-bs-original-title', $tabName),
+            new ElementTextCriterion($tabName),
+        ]);
+
+        $this->getHTMLPage()
+            ->findAll($this->getLocator('menuItem'))
+            ->getByCriterion($buttonCriteron)
+            ->click();
+    }
+
+    public function goToSubTab(string $tabName): void
+    {
+        $this->getHTMLPage()->findAll($this->getLocator('expandedMenuItem'))->getByCriterion(new ElementTextCriterion($tabName))->click();
     }
 
     public function verifyIsLoaded(): void
@@ -27,7 +42,8 @@ class LeftMenu extends Component
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('buttonSelector', '.ez-sticky-container .btn'),
+            new VisibleCSSLocator('menuItem', '.ibexa-main-menu__navbar--first-level .ibexa-main-menu__item'),
+            new VisibleCSSLocator('expandedMenuItem', '.ibexa-main-menu__tab-pane.show .ibexa-main-menu__items-list .ibexa-main-menu__item-text-column'),
             new VisibleCSSLocator('menuSelector', '.ibexa-main-menu'),
         ];
     }

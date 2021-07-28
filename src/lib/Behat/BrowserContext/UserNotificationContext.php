@@ -33,7 +33,7 @@ class UserNotificationContext implements Context
      */
     public function thereIsNotificationForCurrentUser()
     {
-        Assert::assertGreaterThan(0, $this->upperMenu->getNotificationsCount());
+        Assert::assertTrue($this->upperMenu->hasUnreadNotification());
     }
 
     /**
