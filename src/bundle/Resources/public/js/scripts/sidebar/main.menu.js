@@ -16,7 +16,7 @@
     let resizeStartPositionX = 0;
     let secondMenuLevelCurrentWidth = secondLevelMenuNode.getBoundingClientRect().width;
     const showSecondLevelMenu = (event) => {
-        if (!event.currentTarget.dataset.toggle) {
+        if (!event.currentTarget.dataset.bsToggle) {
             return;
         }
 

@@ -58,7 +58,7 @@
         {% set link_attributes = item.linkAttributes|merge({
             'href': '#' ~ item.name,
             'aria-selected': matcher.isCurrent(item) ? "true" : "false",
-            'data-toggle': 'pill'
+            'data-bs-toggle': 'pill'
         }) %}
     {% endif %}
 
