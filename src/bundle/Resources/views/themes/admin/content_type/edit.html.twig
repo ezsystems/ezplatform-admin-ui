@@ -1,10 +1,148 @@
-{% extends "@ezdesign/content_type/base_edit.html.twig" %}
+{% extends "@ezdesign/content_type/edit_base.html.twig" %}
 
-{% trans_default_domain 'content_type' %}
-{% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
+{% block header %}
+    {% set content_type_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_edit.sidebar_right', [], {
+        'form_view': form, 
+        'content_type': content_type
+    }) %}
 
-{% block content %}
-    aaa
+    {% include '@ezdesign/ui/edit_header.html.twig' with {
+        action_name: 'creating'|trans|desc('Creating'),
+        icon_name: 'content-type',
+        title: 'content_type.breadcrumb.create'|trans|desc('Creating a new Content Type'),
+        show_autosave_status: false,
+        buttons_render: knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
+    } %}
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form) }}
+        {# ==== Grouped fields ==== #}
+        {% set metadataGroup = [] %}
+        {% set contentGroup = [] %}
+
+        {% for field_definition in form.fieldDefinitionsData %}
+            {% set value = field_definition.vars.value %}
+            {% if value.fieldGroup == 'metadata' %}
+                {% set metadataGroup = metadataGroup|merge([field_definition])  %}
+            {% else %}
+                {% set contentGroup = contentGroup|merge([field_definition])  %}
+            {% endif %}
+        {% endfor %}
+
+        {% set fields = {
+            'content':contentGroup,
+            'metadata': metadataGroup
+        } %}
+        {# ==== end grouped fields ==== #}
+
+
+        {% set language_code = language_code|default(content_type.mainLanguageCode) %}
+        {% set is_translation = form.vars.data.languageCode != content_type.mainLanguageCode %}
+        
+        {% if is_translation %}
+            {% include '@ezdesign/content_type/part/nontranslatable_fields_disabled.html.twig' %}
+        {% endif %}
+
+        <div class="ibexa-content-type-edit__sections ibexa-anchor-navigation-sections container">
+            {% embed "@ezdesign/content_type/edit-section.html.twig" with { section_id: '#Global-properties' } %}
+                {% block title %}
+                    {{ 'content_type.view.edit.global_properties'|trans|desc('Global properties') }}
+                {% endblock %}
+
+                {% block left_column %}
+                    {# {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}}) }}
+                    {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
+                    {{ form_row(form.description, {'label_attr': {'class': 'ez-label'}}) }}
+                    {{ form_row(form.nameSchema, {'label_attr': {'class': 'ez-label'}}) }}
+                    {{ form_row(form.urlAliasSchema, {'label_attr': {'class': 'ez-label'}}) }}
+                    {{ form_row(form.isContainer, {'label_attr': {'class': 'ez-label'}}) }}
+                    {{ form_row(form.defaultSortField, {'label_attr': {'class': 'ez-label'}}) }}
+                    {{ form_row(form.defaultSortOrder, {'label_attr': {'class': 'ez-label'}}) }}
+                    {{ form_row(form.defaultAlwaysAvailable, {'label_attr': {'class': 'ez-label'}}) }} #}
+                {% endblock %}
+            {% endembed %}
+            
+            {% embed "@ezdesign/content_type/edit-section.html.twig" with { 
+                    section_id: '#Field-definitions',
+                    is_active: true,
+                    left_column_class: 'ibexa-content-type-edit__section-column--field-definitions'
+            } %}
+                {% block title %}
+                    {{ 'content_type.view.edit.content_field_definitions'|trans|desc('Field definitions') }}
+                {% endblock %}
+
+                {% block left_column %}
+                    {{ include('@ezdesign/content_type/field_definitions.html.twig', { grouped_fields: fields }) }}
+                {% endblock %}
+
+                {% block right_column %}
+                    {{ include('@ezdesign/content_type/available_field_types.html.twig') }}
+                {% endblock %}
+            {% endembed %}
+
+            {# <div 
+                data-anchor-section-id="#Field-definitions" 
+                class="ibexa-anchor-navigation-sections__section ibexa-anchor-navigation-sections__section--active row"
+            >
+                <div class="col-8 ibexa-content-type-edit__section-column ibexa-content-type-edit__section-column--field-definitions">
+                    <h2 class="ibexa-content-type-edit__section-header">{{ 'content_type.view.edit.content_field_definitions'|trans|desc('Field definitions') }}</h2>
+                    <div class="ibexa-content-type-edit__add-group">
+                        <button class="ibexa-content-type-edit__add-button btn ibexa-btn ibexa-btn ibexa-btn--info">
+                            <svg class="ibexa-icon ibexa-icon--small">
+                                <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+                            </svg>
+                            {{ 'content_type.view.edit.add'|trans|desc('Add') }}
+                        </button>
+                    </div> #}
+                    
+                    
+                    {# <a 
+                        class="btn btn-primary" 
+                        data-toggle="collapse" 
+                        href="#multiCollapseExample1" 
+                    >
+                        Toggle first element
+                    </a>
+                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+                        <div class="card card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        </div>
+                    </div> #}
+
+                    {# <div class="ibexa-content-type-edit-content__field-groups"> #}
+                        {# {% for group in fields %}
+                            {% if group|length %}
+                                <div class="card ez-card ez-card--toggle-group ez-card--collapsed">
+                                    <div class="ez-card__header">
+                                        <button class="ez-card__body-display-toggler btn">
+                                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--caret-down" aria-hidden="true">
+                                                <use xlink:href="{{ ibexa_icon_path('caret-down') }}"></use>
+                                            </svg>
+                                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--caret-next" aria-hidden="true">
+                                                <use xlink:href="{{ ibexa_icon_path('caret-next') }}"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <div class="ez-card__body">
+                                        aaaa
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div> #}
+                {# </div>
+                <div class="col-4 ibexa-content-type-edit__section-column ibexa-content-type-edit__section-column--available-fields">
+                </div>
+            </div> #}
+        </div>
+        
+        {{ form_widget(form.publishContentType, {'attr': { 'hidden': 'hidden' }}) }}
+        {{ form_widget(form.removeDraft, {'attr': { 'hidden': 'hidden' }}) }}
+
+        {{ form_widget(form._token) }}
+    {{ form_end(form, {'render_rest': false }) }}
 {% endblock %}
 
 {# {% block body_class %}ez-admin-edit{% endblock %}
@@ -111,15 +249,15 @@
                             {{ form_row(field_definition.fieldGroup, {'label_attr': {'class': 'ez-label'}}) }}
 
                             {# Field type specific fields below #}
-                            {{ ez_render_field_definition_edit(value, {
+                            {# {{ ez_render_field_definition_edit(value, {
                                 'languageCode': language_code,
                                 'form': field_definition,
                                 'group_class': value.group_class|default(''),
                                 'is_translation': is_translation,
-                            }) }}
+                            }) }} #}
 
                             {# Default rendering #}
-                            {% for child in field_definition|filter(child => child.isRendered() == false) %}
+                            {# {% for child in field_definition|filter(child => child.isRendered() == false) %}
                                 {{ form_row(child) }}
                             {% endfor %}
                         </div>
@@ -133,12 +271,12 @@
     {{ form_widget(form.removeDraft, {'attr': { 'hidden': 'hidden' }}) }}
 
     {{ form_widget(form._token) }}
-    {{ form_end(form, {'render_rest': false }) }}
-{% endblock %}
+    {{ form_end(form, {'render_rest': false }) }} #}
+{# {% endblock %} #}
 
-{% block right_sidebar %}
-    {% set content_type_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_edit.sidebar_right', [], {'form_view': form, 'content_type': content_type}) %}
-    {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
+{# {% block right_sidebar %} #}
+    {# {% set content_type_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_edit.sidebar_right', [], {'form_view': form, 'content_type': content_type}) %} #}
+    {# {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %} #}
 
 {% block javascripts %}

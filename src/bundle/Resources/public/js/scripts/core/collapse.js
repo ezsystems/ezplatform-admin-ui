@@ -1,0 +1,19 @@
+(function (global, doc, eZ, $) {
+    doc.querySelectorAll('.ibexa-collapse').forEach((collapseNode) => {
+        const toggleButton = collapseNode.querySelector('.ibexa-collapse__toggle');
+        const isCollapsed = toggleButton.classList.contains('collapsed');
+
+        collapseNode.classList.toggle('ibexa-collapse--collapsed', isCollapsed);
+        collapseNode.dataset.collapsed = isCollapsed ? true : false;
+
+        $(collapseNode).on('hidden.bs.collapse', function () {
+            collapseNode.classList.add('ibexa-collapse--collapsed');
+            collapseNode.dataset.collapsed = true;
+        });
+
+        $(collapseNode).on('show.bs.collapse', function () {
+            collapseNode.classList.remove('ibexa-collapse--collapsed');
+            collapseNode.dataset.collapsed = false;
+        });
+    });
+})(window, window.document, window.eZ, window.jQuery);

@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const CLASS_POPUP_MENU_HIDDEN = 'ibexa-popup-menu--hidden';
     class PopupMenu {
         constructor(config) {

@@ -53,6 +53,11 @@
 {% endblock %}
 
 {% block form %}
+    {% set field_groups = {
+            'metadata': [],
+            'content': []
+    } %}
+
     {{ form_start(form) }}
 
     <section class="container ez-container mb-4">
@@ -144,10 +149,6 @@
 
     {{ form_widget(form._token) }}
     {{ form_end(form, {'render_rest': false }) }}
-{% endblock %}
-
-{% block field_definition_form %}
-    
 {% endblock %}
 
 {% block javascripts %}

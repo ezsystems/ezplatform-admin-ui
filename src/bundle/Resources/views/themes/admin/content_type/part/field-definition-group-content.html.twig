@@ -1,0 +1,36 @@
+<div class="ibexa-content-type-edit__field-definition-group {{ not items|length ? 'ibexa-content-type-edit__field-definition-group--empty' }}">
+    {% if items|length %}
+        {% for field_definition in items %}
+            {% set value = field_definition.vars.value %}
+            {% set name = value.names[language_code] ?? value.names[content_type.mainLanguageCode]  %}
+
+            {%- embed "@ezdesign/ui/component/collapse.html.twig" with { 
+                'id': field_definition.vars.id ~ '_collapse',
+                'header_label': name,
+                'is_expand': false,
+                'container_class': 'ibexa-collapse--field-definition'
+            } -%}
+                {% block body_content %}
+                    <div class="ibexa-content-type-edit__field-definition-content">
+                        {{ form_row(field_definition.name, {'label_attr': {'class': 'ez-label'}}) }}
+                        {{ form_row(field_definition.identifier, {'label_attr': {'class': 'ez-label'}}) }}
+                        {{ form_row(field_definition.position, {'label_attr': {'class': 'ez-label'}}) }}
+                        {{ form_row(field_definition.description, {'label_attr': {'class': 'ez-label'}}) }}
+                        {{ form_row(field_definition.isRequired, {'label_attr': {'class': 'ez-label'}}) }}
+                        {{ form_row(field_definition.isSearchable, {'label_attr': {'class': 'ez-label'}}) }}
+                        {{ form_row(field_definition.isTranslatable, {'label_attr': {'class': 'ez-label'}}) }}
+                        {{ form_row(field_definition.isThumbnail, {'label_attr': {'class': 'ez-label'}}) }}
+                        {{ form_row(field_definition.fieldGroup, {'label_attr': {'class': 'ez-label'}}) }}
+                    </div>
+                {% endblock %}
+            {%- endembed -%}
+        {% endfor %}
+    {% else %}
+        <svg 
+            src="{{ asset('bundles/ezplatformadminui/img/empty-field-definition-group.svg') }}" 
+            alt="{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}" 
+        />
+        <label>{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}</label>
+        <h2>{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}</h2>
+    {% endif %}
+</div>

@@ -131,19 +131,17 @@
 
     &--info {
         color: $ibexa-color-info;
+        fill: $ibexa-color-info;
         border-color: $ibexa-color-info;
         
-        .ibexa-icon {
-            fill: $ibexa-color-info;
-        }
-
         &:hover {
-            // border-color: $ibexa-color-info;
-            // box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-info;
+            color: $ibexa-color-dark;
+            fill: $ibexa-color-dark;
+            border-color: $ibexa-color-dark;
         }
 
         &:focus {
-            // box-shadow: none;
+            box-shadow: $ibexa-btn-focus-box-shadow-info;
         }
     }
 
@@ -154,7 +152,7 @@
 
         &:hover {
             border-color: $ibexa-color-info;
-            box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-info;
+            box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-neon-info;
         }
 
         &:focus {

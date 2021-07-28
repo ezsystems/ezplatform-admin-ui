@@ -1,8 +1,16 @@
-(function (global, doc) {
-    const AVAILABLE_FIELDS_HEIGHT_OFFSET = 150;
-    const contentNode = doc.querySelector('.ibexa-edit-content');
-    const availableFieldsNode = doc.querySelector('.ibexa-field-types-available');
+(function (global, doc, eZ) {
     const searchFiledInput = doc.querySelector('.ibexa-field-types-available__search');
+    const popupMenuElement = doc.querySelector('.ibexa-content-type-edit-sections .ibexa-popup-menu');
+    const triggerElement = doc.querySelector(
+        '.ibexa-content-type-edit-sections .ibexa-content-type-edit__add-field-definition-group-button'
+    );
+    const popupMenu = new eZ.core.PopupMenu({
+        popupMenuElement,
+        triggerElement,
+        onItemClick: (event) => {
+            console.log('xxxxx');
+        },
+    });
     const searchField = (event) => {
         const fieldFilterQueryLowerCase = event.currentTarget.value.toLowerCase();
 
@@ -11,15 +19,11 @@
             const fieldNameLowerCase = fieldNameNode.innerText.toLowerCase();
             const fieldIsHidden = !fieldNameLowerCase.includes(fieldFilterQueryLowerCase);
 
-            field.classList.toggle('.ibexa-field-types-available__field--hidden', fieldIsHidden);
+            console.log(fieldIsHidden);
+
+            field.classList.toggle('ibexa-field-types-available__field--hidden', fieldIsHidden);
         });
     };
-    // fitAvailableFieldsContainer = () => {
-    //     const { height: contentHeight } = contentNode.getBoundingClientRect();
-
-    //     availableFieldsNode.style.height = `${contentHeight - AVAILABLE_FIELDS_HEIGHT_OFFSET}px`;
-    // };
 
     searchFiledInput.addEventListener('keyup', searchField, false);
-    // contentNode.addEventListener('scroll', fitAvailableFieldsContainer, false);
-})(window, window.document);
+})(window, window.document, window.eZ);

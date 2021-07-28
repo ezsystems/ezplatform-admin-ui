@@ -33,6 +33,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.form.autosubmit.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.anchor.navigation'),
     path.resolve(__dirname, '../public/js/scripts/admin.context.menu'),
+    path.resolve(__dirname, '../public/js/scripts/core/collapse.js'),
     path.resolve(__dirname, '../public/js/scripts/sidebar/main.menu.js'),
 ];
 const fieldTypes = [];
@@ -114,9 +115,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-section-view-js', [path.resolve(__dirname, '../public/js/scripts/admin.section.view.js')])
-        .addEntry('ezplatform-admin-ui-trash-list-js', [
-            path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js'),
-        ])
+        .addEntry('ezplatform-admin-ui-trash-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js')])
         .addEntry('ezplatform-admin-ui-content-preview-js', [path.resolve(__dirname, '../public/js/scripts/admin.preview.js')])
         .addEntry('ezplatform-admin-ui-location-view-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.location.change.language.js'),

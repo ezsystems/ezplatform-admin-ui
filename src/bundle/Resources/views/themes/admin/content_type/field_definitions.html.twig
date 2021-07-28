@@ -1,0 +1,43 @@
+<div class="ibexa-content-type-edit__field-definition-groups">
+    <div class="ibexa-content-type-edit__add-field-definition-group">
+        <button type="button" class="ibexa-content-type-edit__add-field-definition-group-button btn ibexa-btn ibexa-btn ibexa-btn--info">
+            <svg class="ibexa-icon ibexa-icon--small">
+                <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+            </svg>
+            {{ 'content_type.view.edit.add'|trans|desc('Add') }}
+        </button>
+        
+        {{ include('@ezdesign/ui/component/popup_menu/popup_menu.html.twig', {
+            'items': grouped_fields|keys|map(group => { 'label': group } ),
+        }) }}
+    </div>
+
+    <div class="ibexa-content-type-edit__field-definition-group-list">
+        {% for key, group in grouped_fields %}
+            {%- embed "@ezdesign/ui/component/collapse.html.twig" with { 
+                'id': key,
+                'header_label': key,
+                'is_expand': group|length,
+                'extra_actions': [
+                    { 'icon_name': 'trash' }
+                ]
+            } -%}
+                {% block body_content %}
+                    {{ include('@ezdesign/content_type/part/field-definition-group-content.html.twig', { items: group }) }}
+                {% endblock %}
+            {%- endembed -%}
+        {% endfor %}
+    </div>
+</div>
+
+    {# {% include '@ezdesign/ui/component/collapse.html.twig' with {
+                'id': key,
+                'header_label': key,
+                'is_expand': group|length,
+                'extra_actions': [
+                    { 'icon_name': 'trash' }
+                ],
+                'body': include('@ezdesign/content_type/part/field-definition-group-content.html.twig', { items: group })
+            } %} #}
+
+     {# {{ include('@ezdesign/content_type/part/field-definition-group-content.html.twig', { items: group }) }} #}

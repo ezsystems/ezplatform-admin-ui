@@ -115,6 +115,10 @@
     }
 }
 
+.ibexa-content-type-edit-content {
+    @include edit-right-side-container;
+}
+
 .ibexa-field-types-available {
     display: flex;
     flex-direction: column;
@@ -155,10 +159,19 @@
     &__field {
         display: flex;
         align-items: center;
+        overflow: hidden;
         margin: calculateRem(8px) 0;
         height: calculateRem(48px);
         border: calculateRem(1px) solid $ibexa-color-light;
         border-radius: $ibexa-border-radius;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+        &--hidden {
+            height: 0;
+            opacity: 0;
+            margin: 0;
+            border: none;
+        }
     }
 
     &__field-drag-icon {
@@ -175,7 +188,11 @@
     }
 }
 
-.ibexa-content-type-edit-sections {
+.ibexa-content-type-edit {
+    &__section {
+        margin-bottom: calculateRem(50px);
+    }
+
     &__section-column {
         &--field-definitions {
             min-height: calculateRem(700px);
@@ -183,9 +200,49 @@
             background: $ibexa-color-light-300;
             border-radius: $ibexa-border-radius;
         }
+
+        .ibexa-anchor-navigation-sections__section {
+            margin-bottom: calculateRem(100px);
+        }
+
+        .ibexa-popup-menu {
+            top: calculateRem(145px);
+        }
+
+        .ibexa-collapse {
+            margin-top: calculateRem(32px);
+            
+            &--field-definition {
+                margin: 24px;
+                margin-top: 0;
+                border-radius: $ibexa-border-radius;
+                border: calculateRem(1px) solid $ibexa-color-light;
+
+                .ibexa-collapse {
+                    margin: 12px;
+
+                    &__header {
+                        height: calculateRem(52px);
+                        border-top-width: 0;
+                        border-right-width: 0;
+                        border-left-width: 0;
+                        border-radius: $ibexa-border-radius;
+                    }
+                }
+            }
+        }
     }
 
-    &__add-group {
+    &__field-definition-group {
+        &--empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: calculateRem(50px);
+        }
+    }
+ 
+    &__add-field-definition-group {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -195,16 +252,12 @@
         border-radius: $ibexa-border-radius;
     }
 
-    &__add-button {
+    &__add-field-definition-group-button {
         min-width: calculateRem(210px);
         justify-content: center;
     }
 
-    .ibexa-anchor-navigation-sections__section {
-        margin-bottom: calculateRem(100px);
+    &__field-definition-content {
+        padding: 20px;
     }
-}
-
-.ibexa-content-type-edit-content {
-    @include edit-right-side-container;
 }
