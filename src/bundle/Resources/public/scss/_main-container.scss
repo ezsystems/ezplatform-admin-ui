@@ -55,7 +55,7 @@
 
     .ez-context-menu {
         position: fixed;
-        z-index: 9;
+        z-index: 1050;
         top: calculateRem(80px);
         right: 0;
         flex: 0 0 calculateRem(80px);

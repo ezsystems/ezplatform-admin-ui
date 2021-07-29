@@ -52,6 +52,7 @@
     }
 
     &__popup-menu {
+        z-index: 1060;
         top: calculateRem(65px);
         right: calculateRem(24px);
         min-width: calculateRem(200px);
