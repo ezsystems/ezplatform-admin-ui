@@ -3,7 +3,7 @@
 {% use '@ezdesign/ui/form_fields/toggle_widget.html.twig' %}
 
 {% block form_label -%}
-    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ez-label')|trim}) -%}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ibexa-label')|trim}) -%}
     {{ parent() }}
 {%- endblock form_label %}
 

@@ -220,11 +220,13 @@
                     margin: calculateRem(12px);
 
                     &__header {
+                        position: relative;
                         height: calculateRem(52px);
                         border-top-width: 0;
                         border-right-width: 0;
                         border-left-width: 0;
                         border-radius: $ibexa-border-radius;
+                        box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(19px) calculateRem(-10px) rgba($ibexa-color-info, 0.05);
                     }
 
                     &__header-label {

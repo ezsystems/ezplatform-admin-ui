@@ -45,27 +45,29 @@
         {% endif %}
 
         <div class="ibexa-content-type-edit__sections ibexa-anchor-navigation-sections container">
-            {% embed "@ezdesign/content_type/edit-section.html.twig" with { section_id: '#Global-properties' } %}
+            {% embed "@ezdesign/content_type/edit-section.html.twig" with { 
+                section_id: '#Global-properties', 
+                is_active: true,
+            } %}
                 {% block title %}
                     {{ 'content_type.view.edit.global_properties'|trans|desc('Global properties') }}
                 {% endblock %}
 
                 {% block left_column %}
-                    {# {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}}) }}
-                    {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
-                    {{ form_row(form.description, {'label_attr': {'class': 'ez-label'}}) }}
-                    {{ form_row(form.nameSchema, {'label_attr': {'class': 'ez-label'}}) }}
-                    {{ form_row(form.urlAliasSchema, {'label_attr': {'class': 'ez-label'}}) }}
-                    {{ form_row(form.isContainer, {'label_attr': {'class': 'ez-label'}}) }}
-                    {{ form_row(form.defaultSortField, {'label_attr': {'class': 'ez-label'}}) }}
-                    {{ form_row(form.defaultSortOrder, {'label_attr': {'class': 'ez-label'}}) }}
-                    {{ form_row(form.defaultAlwaysAvailable, {'label_attr': {'class': 'ez-label'}}) }} #}
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.identifier) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.nameSchema) }}
+                    {{ form_row(form.urlAliasSchema) }}
+                    {{ form_row(form.isContainer) }}
+                    {{ form_row(form.defaultSortField) }}
+                    {{ form_row(form.defaultSortOrder) }}
+                    {{ form_row(form.defaultAlwaysAvailable) }}
                 {% endblock %}
             {% endembed %}
             
             {% embed "@ezdesign/content_type/edit-section.html.twig" with { 
                     section_id: '#Field-definitions',
-                    is_active: true,
                     left_column_class: 'ibexa-content-type-edit__section-column--field-definitions'
             } %}
                 {% block title %}
