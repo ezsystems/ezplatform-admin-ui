@@ -21,30 +21,27 @@
         });
     };
     const removeFieldsGroup = (event) => {
-        const deleteGroupButton = event.currentTarget;
-        const collapseNode = deleteGroupButton.closest('.ibexa-collapse--field-definitions-group');
+        const collapseNode = event.currentTarget.closest('.ibexa-collapse');
         const fieldDefinitionGroupNode = collapseNode.querySelector('.ibexa-content-type-edit__field-definition-group');
         const { emptyGroupTemplate } = collapseNode.dataset;
 
         collapseNode.classList.add('ibexa-collapse--hidden');
-        fieldDefinitionGroupNode.innerHTML = emptyGroupTemplate(deleteGroupButton);
+        fieldDefinitionGroupNode.innerHTML = emptyGroupTemplate;
         fieldDefinitionGroupNode.classList.add('ibexa-content-type-edit__field-definition-group--empty');
-
-        
     }
     const removeField = (event) => {
-        const deleteButton = event.currentTarget;
-        const collapseNode = deleteButton.closest('.ibexa-collapse--field-definition');
-        const collapseContainerNode = collapseNode.parentNode;
-        const mainCollapseNode = deleteButton.closest('.ibexa-collapse--field-definitions-group');
-        const { emptyGroupTemplate } = mainCollapseNode.dataset;
+        const collapseNode = event.currentTarget.closest('.ibexa-collapse');
+        const parentCollapseNode = collapseNode.closest('.ibexa-collapse--field-definitions-group');
+        const parentFieldDefinitionGroupNode = parentCollapseNode.querySelector('.ibexa-content-type-edit__field-definition-group');
+        const { emptyGroupTemplate } = parentCollapseNode.dataset;
 
         collapseNode.remove();
 
-        const numberOfFields = collapseContainerNode.querySelectorAll('.ibexa-collapse').length;
-        
+        const numberOfFields = parentCollapseNode.querySelectorAll('.ibexa-collapse--field-definition').length;
+
         if (numberOfFields === 0) {
-            collapseContainerNode.innerHTML = emptyGroupTemplate;
+            parentFieldDefinitionGroupNode.innerHTML = emptyGroupTemplate;
+            parentFieldDefinitionGroupNode.classList.add('ibexa-content-type-edit__field-definition-group--empty');
         }
     }
 
