@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component;
 
 use Ibexa\Behat\Browser\Component\Component;
+use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementAttributeCriterion;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\Criterion\LogicalOrCriterion;
@@ -23,15 +24,20 @@ class LeftMenu extends Component
             new ElementTextCriterion($tabName),
         ]);
 
-        $this->getHTMLPage()
+        $menuButton = $this->getHTMLPage()
             ->findAll($this->getLocator('menuItem'))
-            ->getByCriterion($buttonCriteron)
-            ->click();
+            ->getByCriterion($buttonCriteron);
+        $menuButton->click();
+        $menuButton->find(new VisibleCSSLocator('activeMarker', '.ibexa-main-menu__item-action.active'))->assert()->isVisible();
     }
 
     public function goToSubTab(string $tabName): void
     {
-        $this->getHTMLPage()->findAll($this->getLocator('expandedMenuItem'))->getByCriterion(new ElementTextCriterion($tabName))->click();
+        $this->getHTMLPage()
+            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), new VisibleCSSLocator('collapsedMenu', '.ibexa-main-menu__navbar--collapsed')))
+            ->findAll($this->getLocator('expandedMenuItem'))
+            ->getByCriterion(new ElementTextCriterion($tabName))
+            ->click();
     }
 
     public function verifyIsLoaded(): void
@@ -43,7 +49,7 @@ class LeftMenu extends Component
     {
         return [
             new VisibleCSSLocator('menuItem', '.ibexa-main-menu__navbar--first-level .ibexa-main-menu__item'),
-            new VisibleCSSLocator('expandedMenuItem', '.ibexa-main-menu__tab-pane.show .ibexa-main-menu__items-list .ibexa-main-menu__item-text-column'),
+            new VisibleCSSLocator('expandedMenuItem', '.ibexa-main-menu__item-action--second-level .ibexa-main-menu__item-text-column'),
             new VisibleCSSLocator('menuSelector', '.ibexa-main-menu'),
         ];
     }
