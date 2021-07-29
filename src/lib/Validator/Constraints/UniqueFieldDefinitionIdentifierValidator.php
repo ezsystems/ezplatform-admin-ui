@@ -30,16 +30,18 @@ class UniqueFieldDefinitionIdentifierValidator extends ConstraintValidator
         }
 
         $contentTypeData = $value->contentTypeData;
-        foreach ($contentTypeData->fieldDefinitionsData as $fieldDefData) {
-            if ($fieldDefData === $value) {
-                continue;
-            }
+        foreach ($contentTypeData->fieldDefinitionsData as $fieldDefinitionsData) {
+            foreach ($fieldDefinitionsData as $fieldDefData) {
+                if ($fieldDefData === $value) {
+                    continue;
+                }
 
-            if ($value->identifier === $fieldDefData->identifier) {
-                $this->context->buildViolation($constraint->message)
-                    ->atPath('identifier')
-                    ->setParameter('%identifier%', $value->identifier)
-                    ->addViolation();
+                if ($value->identifier === $fieldDefData->identifier) {
+                    $this->context->buildViolation($constraint->message)
+                        ->atPath('identifier')
+                        ->setParameter('%identifier%', $value->identifier)
+                        ->addViolation();
+                }
             }
         }
     }

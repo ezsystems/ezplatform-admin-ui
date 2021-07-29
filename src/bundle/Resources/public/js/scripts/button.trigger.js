@@ -8,6 +8,8 @@ document.addEventListener(
             const button = event.currentTarget;
             const triggerTargetElement = document.querySelector(button.dataset.click);
 
+            console.log(triggerTargetElement);
+
             triggerTargetElement.click();
         };
 

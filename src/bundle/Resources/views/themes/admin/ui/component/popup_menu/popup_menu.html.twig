@@ -10,7 +10,9 @@
 
             {{ include('@ezdesign/ui/component/popup_menu/popup_menu_item.html.twig', {
                 'label': label,
-                'class': item.class|default('')
+                'class': item.class|default(''),
+                'action_class': item.action_class|default(''),
+                'action_data_attribute': item.action_data_attribute|default({})
             }) }}
         {% endfor %}
     {% endblock items %}

@@ -36,6 +36,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/sidebar/main.menu.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.input.text.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.table.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/collapse.js'),
 ];
 const fieldTypes = [];
 
@@ -67,11 +68,15 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-content-type-create-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.edit'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-edit-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.relation.default.location.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.edit'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-list-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
@@ -113,9 +118,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-section-view-js', [path.resolve(__dirname, '../public/js/scripts/admin.section.view.js')])
-        .addEntry('ezplatform-admin-ui-trash-list-js', [
-            path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js'),
-        ])
+        .addEntry('ezplatform-admin-ui-trash-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js')])
         .addEntry('ezplatform-admin-ui-content-preview-js', [path.resolve(__dirname, '../public/js/scripts/admin.preview.js')])
         .addEntry('ezplatform-admin-ui-location-view-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.location.change.language.js'),
@@ -174,6 +177,7 @@ module.exports = (Encore) => {
             ...fieldTypes,
             path.resolve(__dirname, '../public/js/scripts/sidebar/extra.actions.js'),
             path.resolve(__dirname, '../public/js/scripts/toggle.button.state.toggle.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
         ])
         .addEntry('ezplatform-admin-ui-settings-datetime-format-update-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.settings.datetimeformat.update.js'),

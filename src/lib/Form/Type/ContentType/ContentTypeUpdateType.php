@@ -102,24 +102,18 @@ class ContentTypeUpdateType extends AbstractType
                 'label' => /** @Desc("Make content available even with missing translations") */ 'content_type.default_always_available',
                 'disabled' => $isTranslation,
             ])
-            ->add('fieldDefinitionsData', CollectionType::class, [
-                'entry_type' => FieldDefinitionType::class,
-                'entry_options' => ['languageCode' => $options['languageCode'], 'mainLanguageCode' => $options['mainLanguageCode']],
-                'label' => /** @Desc("Content Field definitions") */ 'content_type.field_definitions_data',
+            ->add('fieldDefinitionsData', FieldDefinitionsCollectionType::class, [
+                'languageCode' => $options['languageCode'],
+                'mainLanguageCode' => $options['mainLanguageCode'],
             ])
-            ->add('fieldTypeSelection', FieldTypeChoiceType::class, [
-                'mapped' => false,
-                'label' => /** @Desc("Field Type selection") */ 'content_type.field_type_selection',
-                'disabled' => $isTranslation,
-            ])
-            ->add('addFieldDefinition', SubmitType::class, [
-                'label' => /** @Desc("Add field definition") */ 'content_type.add_field_definition',
-                'disabled' => $isTranslation,
-            ])
-            ->add('removeFieldDefinition', SubmitType::class, [
-                'label' => /** @Desc("Remove selected Field definitions") */ 'content_type.remove_field_definitions',
-                'disabled' => !$hasFieldDefinition || $isTranslation,
-            ])
+//            ->add('fieldDefinitionsData', CollectionType::class, [
+//                'entry_type' => FieldDefinitionType::class,
+//                'entry_options' => ['languageCode' => $options['languageCode'], 'mainLanguageCode' => $options['mainLanguageCode']],
+//                'label' => /** @Desc("Content Field definitions") */ 'content_type.field_definitions_data',
+//                'allow_add' => true,
+//                'allow_delete' => true,
+//                'prototype' => false,
+//            ])
             ->add('saveContentType', SubmitType::class, ['label' => /** @Desc("Apply") */ 'content_type.save'])
             ->add('removeDraft', SubmitType::class, ['label' => /** @Desc("Cancel") */ 'content_type.remove_draft', 'validation_groups' => false])
             ->add('publishContentType', SubmitType::class, [
