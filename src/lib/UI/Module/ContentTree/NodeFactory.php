@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\UI\Module\ContentTree;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
-use eZ\Publish\API\Repository\Exceptions\OutOfBoundsException;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
