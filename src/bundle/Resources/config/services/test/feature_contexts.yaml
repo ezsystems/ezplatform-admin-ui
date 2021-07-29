@@ -22,8 +22,6 @@ services:
 
   Ibexa\AdminUi\Behat\BrowserContext\ContentPreviewContext: ~
 
-  Ibexa\AdminUi\Behat\BrowserContext\LeftMenuContext: ~
-
   Ibexa\AdminUi\Behat\BrowserContext\RolesContext: ~
 
   Ibexa\AdminUi\Behat\BrowserContext\UDWContext: ~

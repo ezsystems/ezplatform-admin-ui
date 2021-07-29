@@ -12,9 +12,9 @@
 
                 if (removedNodes.length) {
                     removedNodes.forEach((removedNode) => {
-                        if (removedNode.classList && !removedNode.classList.contains('ez-tooltip')) {
+                        if (removedNode.classList && !removedNode.classList.contains('ibexa-tooltip')) {
                             lastInsertTooltipTarget = null;
-                            doc.querySelectorAll('.ez-tooltip.show').forEach((tooltipNode) => {
+                            doc.querySelectorAll('.ibexa-tooltip.show').forEach((tooltipNode) => {
                                 tooltipNode.remove();
                             });
                         }
@@ -33,11 +33,11 @@
         for (tooltipNode of tooltipNodes) {
             if (tooltipNode.title) {
                 const delay = {
-                    show: tooltipNode.dataset.delayShow || 150,
-                    hide: tooltipNode.dataset.delayHide || 75,
+                    show: parseInt(tooltipNode.dataset.delayShow, 10) ?? 150,
+                    hide: parseInt(tooltipNode.dataset.delayHide, 10) ?? 75,
                 };
-                const extraClasses = tooltipNode.dataset.extraClasses || '';
-                const placement = tooltipNode.dataset.placement || 'bottom';
+                const extraClass = tooltipNode.dataset.tooltipExtraClass ?? '';
+                const placement = tooltipNode.dataset.tooltipPlacement ?? 'bottom';
                 const container = tooltipNode.dataset.tooltipContainerSelector
                     ? tooltipNode.closest(tooltipNode.dataset.tooltipContainerSelector)
                     : 'body';
@@ -46,9 +46,9 @@
                     placement,
                     container,
                     html: true,
-                    template: `<div class="tooltip ez-tooltip ${extraClasses}">
-                                    <div class="arrow ez-tooltip__arrow"></div>
-                                    <div class="tooltip-inner ez-tooltip__inner"></div>
+                    template: `<div class="tooltip ibexa-tooltip ${extraClass}">
+                                    <div class="arrow ibexa-tooltip__arrow"></div>
+                                    <div class="tooltip-inner ibexa-tooltip__inner"></div>
                                </div>`,
                 });
 

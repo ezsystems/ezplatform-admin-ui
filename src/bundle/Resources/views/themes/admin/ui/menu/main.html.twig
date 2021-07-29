@@ -1,0 +1,93 @@
+{% extends '@ezdesign/ui/menu/main_base.html.twig' %}
+
+{% block root %}
+    {% set extraClass = 'ibexa-main-menu__navbar--collapsed' %}
+    {% set current_item = item %}
+    
+    {% for item in current_item.children %}
+        {% if matcher.isCurrent(item) and item.children|length == 0 %}
+            {% set extraClass = '' %}
+        {% endif %}
+    {% endfor %}
+    
+    <div class="ibexa-main-menu__navbar ibexa-main-menu__navbar--first-level {{ extraClass }}">
+        <ul class="ibexa-main-menu__items-list nav">
+            {% for item in current_item.children %}
+                {% if item.children|length > 0 or (item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink)) %}
+                    {{ block('item') }}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block linkElement %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+
+    {% set classes = [
+        'ibexa-main-menu__item-action',
+        ((matcher.isCurrent(item) ? options.currentClass)),
+        (item.linkAttributes.class is defined ? item.linkAttributes.class|trim)
+    ] %}
+
+    {% set link_attributes = item.linkAttributes|merge({
+        'href': item.uri, 
+        'aria-controls': item.name, 
+        'class': classes|join(' '),
+    }) %}
+
+    <a{{ knp_menu.attributes(link_attributes) }}>
+        {{ block('label') }}
+    </a>
+{% endblock %}
+
+{% block spanElement %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+    
+    {% set classes = [
+        'ibexa-main-menu__item-action',
+        (matcher.isAncestor(item, options.matchingDepth) ? options.currentClass|trim),
+        (item.linkAttributes.class is defined ? item.linkAttributes.class|trim)
+    ] %}
+
+    {% if item.uri is not empty %}
+        {% set link_attributes = item.linkAttributes|merge({
+            'href': item.uri
+        }) %}
+    {% else %}
+        {% set link_attributes = item.linkAttributes|merge({
+            'href': '#' ~ item.name,
+            'aria-selected': matcher.isCurrent(item) ? "true" : "false",
+            'data-bs-toggle': 'pill'
+        }) %}
+    {% endif %}
+
+    {% set link_attributes = link_attributes|merge({
+        'class': classes|join(' ')
+    }) %}
+    
+    <a{{ knp_menu.attributes(link_attributes) }}>
+        {{ block('label') }}
+    </a>
+{% endblock %}
+
+{% block label %}
+    {% set icon_path = null %}
+    {% set icon_class = icon_class|default('ibexa-main-menu__item-icon ibexa-icon ') ~ item.extras.icon_size|default('ibexa-icon--medium ') ~ item.extras.icon_class|default('')|trim %}
+
+    {% if item.extras.icon_path|default %}
+        {% set icon_path = item.extras.icon_path %}
+    {% elseif item.extras.icon is defined and item.extras.icon is not empty %}
+        {% set icon_path = ibexa_icon_path(item.extras.icon) %}
+    {% endif %}
+
+    {% if icon_path is not empty %}
+        <div class="ibexa-main-menu__item-icon-column">
+            <svg class="{{ icon_class }}">
+                <use xlink:href="{{ icon_path }}"></use>
+            </svg>
+        </div>
+    {% endif %}
+
+    <div class="ibexa-main-menu__item-text-column">{{ parent() }}</div>
+{% endblock %}

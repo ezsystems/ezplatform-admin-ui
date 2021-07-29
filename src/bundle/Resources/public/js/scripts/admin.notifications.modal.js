@@ -98,13 +98,9 @@
         modalTitle.dataset.notificationsTotal = `(${notificationsCount})`;
     };
     const updatePendingNotificationsView = (notificationsInfo) => {
-        const pendingNotificationsExist = notificationsInfo.pending;
-        const userName = doc.querySelector('.ez-user-menu__name');
+        const noticeDot = doc.querySelector('.ibexa-header-user-menu__notice-dot');
 
-        userName.dataset.count = notificationsInfo.pending;
-        userName.classList.toggle('n-pending-notifications', pendingNotificationsExist);
-
-        doc.querySelector('.ez-user-menu__item--notifications').dataset.count = notificationsInfo.pending;
+        noticeDot.classList.toggle('ibexa-header-user-menu__notice-dot--no-notice', notificationsInfo.pending === 0);
     };
     const setPendingNotificationCount = (notificationsInfo) => {
         updatePendingNotificationsView(notificationsInfo);

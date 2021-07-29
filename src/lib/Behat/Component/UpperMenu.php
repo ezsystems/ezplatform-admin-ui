@@ -11,32 +11,25 @@ namespace Ibexa\AdminUi\Behat\Component;
 use Ibexa\Behat\Browser\Component\Component;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
-use PHPUnit\Framework\Assert;
 
-/** Element that describes upper menu (Content, Admin, Page and theirs children) */
 class UpperMenu extends Component
 {
-    public function goToTab(string $tabName): void
-    {
-        $this->getHTMLPage()->findAll($this->getLocator('menuButton'))->getByCriterion(new ElementTextCriterion($tabName))->click();
-    }
-
     public function goToDashboard(): void
     {
         $this->getHTMLPage()->find($this->getLocator('dashboardLink'))->click();
     }
 
-    public function goToSubTab(string $tabName): void
+    public function hasUnreadNotification(): bool
     {
-        $this->getHTMLPage()->findAll($this->getLocator('submenuButton'))->getByCriterion(new ElementTextCriterion($tabName))->click();
+        return $this->getHTMLPage()
+            ->setTimeout(5)
+            ->findAll($this->getLocator('pendingNotification'))
+            ->any();
     }
 
-    public function getNotificationsCount(): int
+    public function openNotifications(): void
     {
-        return (int) $this->getHTMLPage()
-            ->setTimeout(5)
-            ->find($this->getLocator('pendingNotificationsCount'))
-            ->getAttribute('data-count');
+        $this->getHTMLPage()->find($this->getLocator('userImage'))->click();
     }
 
     public function chooseFromUserDropdown(string $option): void
@@ -47,18 +40,17 @@ class UpperMenu extends Component
 
     public function verifyIsLoaded(): void
     {
-        Assert::assertTrue($this->getHTMLPage()->find($this->getLocator('menuButton'))->isVisible());
+        $this->getHTMLPage()->find($this->getLocator('userSettingsToggle'))->assert()->isVisible();
     }
 
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('menuButton', '.ez-main-nav .nav-link'),
-            new VisibleCSSLocator('submenuButton', '.ez-main-sub-nav .nav-link'),
-            new VisibleCSSLocator('dashboardLink', '.navbar-brand'),
-            new VisibleCSSLocator('pendingNotificationsCount', '.ez-user-menu__name-wrapper .n-pending-notifications'),
-            new VisibleCSSLocator('userSettingsToggle', '.ez-user-menu__name-wrapper'),
-            new VisibleCSSLocator('userSettingsItem', '.ez-user-menu__item'),
+            new VisibleCSSLocator('dashboardLink', '.ibexa-main-header__brand'),
+            new VisibleCSSLocator('pendingNotification', '.ibexa-header-user-menu__notice-dot'),
+            new VisibleCSSLocator('userSettingsToggle', '.ibexa-header-user-menu'),
+            new VisibleCSSLocator('userImage', '.ibexa-header-user-menu__image'),
+            new VisibleCSSLocator('userSettingsItem', '.ibexa-popup-menu__item'),
         ];
     }
 }

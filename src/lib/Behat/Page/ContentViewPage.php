@@ -8,14 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Behat\Page;
 
+use Behat\Mink\Session;
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
-use Behat\Mink\Session;
-use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
-use Ibexa\Behat\Browser\Routing\Router;
-use Ibexa\Behat\Browser\Page\Page;
-use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use EzSystems\Behat\Core\Behat\ArgumentParser;
 use Ibexa\AdminUi\Behat\Component\Breadcrumb;
 use Ibexa\AdminUi\Behat\Component\ContentItemAdminPreview;
@@ -25,7 +21,10 @@ use Ibexa\AdminUi\Behat\Component\LanguagePicker;
 use Ibexa\AdminUi\Behat\Component\RightMenu;
 use Ibexa\AdminUi\Behat\Component\SubItemsList;
 use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
-use Ibexa\AdminUi\Behat\Component\UpperMenu;
+use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
+use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
+use Ibexa\Behat\Browser\Page\Page;
+use Ibexa\Behat\Browser\Routing\Router;
 use PHPUnit\Framework\Assert;
 
 class ContentViewPage extends Page
@@ -74,9 +73,6 @@ class ContentViewPage extends Page
     /** @var bool */
     private $expectedIsContainer;
 
-    /** @var \Ibexa\AdminUi\Behat\Component\UpperMenu */
-    private $upperMenu;
-
     /** @var \EzSystems\Behat\Core\Behat\ArgumentParser; */
     private $argumentParser;
 
@@ -84,7 +80,8 @@ class ContentViewPage extends Page
     private $universalDiscoveryWidget;
 
     public function __construct(
-        Session $session, Router $router,
+        Session $session,
+        Router $router,
         RightMenu $rightMenu,
         SubItemsList $subItemList,
         ContentTypePicker $contentTypePicker,
@@ -95,7 +92,6 @@ class ContentViewPage extends Page
         Breadcrumb $breadcrumb,
         ContentItemAdminPreview $contentItemAdminPreview,
         UserUpdatePage $userUpdatePage,
-        UpperMenu $upperMenu,
         ArgumentParser $argumentParser,
         UniversalDiscoveryWidget $universalDiscoveryWidget
     ) {
@@ -111,7 +107,6 @@ class ContentViewPage extends Page
         $this->contentItemAdminPreview = $contentItemAdminPreview;
         $this->userUpdatePage = $userUpdatePage;
         $this->repository = $repository;
-        $this->upperMenu = $upperMenu;
         $this->argumentParser = $argumentParser;
         $this->universalDiscoveryWidget = $universalDiscoveryWidget;
     }
@@ -167,11 +162,6 @@ class ContentViewPage extends Page
         }
     }
 
-    private function hasGridViewEnabledByDefault(): bool
-    {
-        return $this->expectedContentName === 'Media';
-    }
-
     public function setExpectedLocationPath(string $locationPath)
     {
         [$this->expectedContentType, $this->expectedContentName, $contentId, $contentMainLocationId, $isContainer] = $this->getContentData($this->argumentParser->parseUrl($locationPath));
@@ -179,37 +169,6 @@ class ContentViewPage extends Page
         $this->expectedIsContainer = $isContainer;
         $this->locationPath = $locationPath;
         $this->subItemList->shouldHaveGridViewEnabled($this->hasGridViewEnabledByDefault());
-    }
-
-    private function getContentData(string $locationPath): array
-    {
-        return $this->repository->sudo(function (Repository $repository) use ($locationPath) {
-            $content = $this->loadContent($repository, $locationPath);
-
-            return [
-                $content->getContentType()->getName(),
-                $content->getName(),
-                $content->id,
-                $content->contentInfo->getMainLocation()->id,
-                $content->getContentType()->isContainer,
-            ];
-        });
-    }
-
-    private function loadContent(Repository $repository, string $locationPath): Content
-    {
-        $this->getHTMLPage()->setTimeout(3)->waitUntil(function () use ($repository, $locationPath) {
-            $urlAlias = $repository->getURLAliasService()->lookup($locationPath);
-
-            return $urlAlias->type === URLALias::LOCATION;
-        }, sprintf('URLAlias: %s not found in 3 seconds', $locationPath));
-
-        $urlAlias = $repository->getURLAliasService()->lookup($locationPath);
-        Assert::assertEquals(URLAlias::LOCATION, $urlAlias->type);
-
-        return $repository->getLocationService()
-            ->loadLocation($urlAlias->destination)
-            ->getContent();
     }
 
     public function verifyIsLoaded(): void
@@ -285,5 +244,41 @@ class ContentViewPage extends Page
     protected function getRoute(): string
     {
         return $this->route;
+    }
+
+    private function hasGridViewEnabledByDefault(): bool
+    {
+        return 'Media' === $this->expectedContentName;
+    }
+
+    private function getContentData(string $locationPath): array
+    {
+        return $this->repository->sudo(function (Repository $repository) use ($locationPath) {
+            $content = $this->loadContent($repository, $locationPath);
+
+            return [
+                $content->getContentType()->getName(),
+                $content->getName(),
+                $content->id,
+                $content->contentInfo->getMainLocation()->id,
+                $content->getContentType()->isContainer,
+            ];
+        });
+    }
+
+    private function loadContent(Repository $repository, string $locationPath): Content
+    {
+        $this->getHTMLPage()->setTimeout(3)->waitUntil(function () use ($repository, $locationPath) {
+            $urlAlias = $repository->getURLAliasService()->lookup($locationPath);
+
+            return URLALias::LOCATION === $urlAlias->type;
+        }, sprintf('URLAlias: %s not found in 3 seconds', $locationPath));
+
+        $urlAlias = $repository->getURLAliasService()->lookup($locationPath);
+        Assert::assertEquals(URLAlias::LOCATION, $urlAlias->type);
+
+        return $repository->getLocationService()
+            ->loadLocation($urlAlias->destination)
+            ->getContent();
     }
 }
