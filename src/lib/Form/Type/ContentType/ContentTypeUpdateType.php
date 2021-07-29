@@ -105,9 +105,14 @@ class ContentTypeUpdateType extends AbstractType
             ->add('fieldDefinitionsData', CollectionType::class, [
                 'entry_type' => FieldDefinitionType::class,
                 'entry_options' => [
+
                     'languageCode' => $options['languageCode'],
                     'mainLanguageCode' => $options['mainLanguageCode'],
                 ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => false,
+                'by_reference' => true,
                 'label' => /** @Desc("Content Field definitions") */ 'content_type.field_definitions_data',
             ])
             ->add('fieldTypeSelection', FieldTypeChoiceType::class, [

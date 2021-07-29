@@ -51,7 +51,7 @@ final class FieldTypePaletteButtonType extends AbstractType
         ]);
 
         $resolver->setDefaults([
-            'prototype_name' => 'PLACEHOLDER',
+            'prototype_name' => 'NAME_PLACEHOLDER',
         ]);
     }
 

@@ -77,7 +77,7 @@
 
             {% include '@ezdesign/content_type/modal/delete_confirmation.html.twig' with {'form': form} %}
 
-            <div class="card-body ibexa-card__body ibexa-card__body--incresed-margin">
+            <div id="form-definitions-containers" class="card-body ibexa-card__body ibexa-card__body--incresed-margin">
                 {% for field_definition in form.fieldDefinitionsData %}
                     {% set value = field_definition.vars.value %}
 
@@ -142,4 +142,24 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('ezplatform-admin-ui-content-type-edit-js', null, 'ezplatform') }}
+    <script>
+        (function() {
+            const container = document.getElementById('form-definitions-containers');
+            let index = 100;
+            document.querySelectorAll('[data-definition-form-prototype]').forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    const name = 'ezplatform_content_forms_contenttype_update[fieldDefinitionsData][' + index + ']';
+                    console.log(button.dataset.definitionFormPrototype)
+                    const prototype = button.dataset.definitionFormPrototype + "";
+
+                    const element = document.createElement('div');
+                    element.innerHTML = prototype.replace(/NAME_PLACEHOLDER/g, name);
+
+                    container.appendChild(element)
+                });
+            });
+        })();
+    </script>
 {% endblock %}

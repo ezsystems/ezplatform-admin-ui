@@ -145,6 +145,11 @@ class FieldDefinitionType extends AbstractType
             $form = $event->getForm();
 
             $fieldTypeIdentifier = $data !== null ? $data->getFieldTypeIdentifier() : $options['field_type_identifier'];
+
+            if ($fieldTypeIdentifier === null) {
+                return ;
+            }
+
             $fieldType = $this->fieldTypeService->getFieldType($fieldTypeIdentifier);
             $isTranslation = $data !== null ? $data->contentTypeData->languageCode !== $data->contentTypeData->mainLanguageCode : false;
             // isSearchable field should be present only if the FieldType allows it.
