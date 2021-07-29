@@ -1,0 +1,104 @@
+
+{% set basciFieldDefinitionParams = {
+    'is_expand': false,
+    'is_draggable': true,
+    'container_class': 'ibexa-collapse--field-definition',
+    'extra_actions': [
+        { 'icon_name': 'trash', 'button_class': 'ibexa-collapse__extra-action-button--remove-field'}
+    ]
+} %}
+
+
+
+<div
+    class="ibexa-content-type-edit__field-definition-groups"
+>
+    <div class="ibexa-content-type-edit__add-field-definition-group">
+        <button type="button" class="ibexa-content-type-edit__add-field-definition-group-button btn ibexa-btn ibexa-btn ibexa-btn--info">
+            <svg class="ibexa-icon ibexa-icon--small">
+                <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+            </svg>
+            {{ 'content_type.view.edit.add'|trans|desc('Add') }}
+        </button>
+
+        {{ include('@ezdesign/ui/component/popup_menu/popup_menu.html.twig', {
+            'items': grouped_field_defintions|keys|map(group => { 'label': group } ),
+        }) }}
+    </div>
+    <div class="ibexa-content-type-edit__field-definition-group-list">
+        {% for id, field_defintions in grouped_field_defintions %}
+            {% set container_class = 'ibexa-collapse--field-definitions-group ibexa-field-definitions-group-' ~ id %}
+
+            {% if not field_defintions|length %}
+                {% set container_class = container_class ~ ' ibexa-collapse--hidden' %}
+            {% endif %}
+
+            {% set collapseParams = {
+                container_class,
+                'body_id': id ~ '_collapse',
+                'header_label': id,
+                'is_expand': field_defintions|length,
+                'extra_actions': [
+                    { 'icon_name': 'trash', 'button_class':  'ibexa-collapse__extra-action-button--remove-fields-group'}
+                ],
+                'data_attribute': {
+                    'data-empty-group-template': include('@ezdesign/content_type/empty_group_content.html.twig'),
+                    'data-field-group-id':  id
+                }
+            }%}
+
+            {%- embed "@ezdesign/ui/component/collapse.html.twig" with collapseParams -%}
+                {%- block body_content -%}
+                    <div
+                        class="ibexa-content-type-edit__field-definition-group {{ not field_defintions|length ? 'ibexa-content-type-edit__field-definition-group--empty' }}"
+                        data-placeholder="{{ include('@ezdesign/content_type/field_definition_placeholder.html.twig') }}"
+                    >
+                        {% if field_defintions|length %}
+                            {% for field_definition in field_defintions %}
+                                {% set value = field_definition.vars.value %}
+                                {% set name = value.names[language_code] ?? value.names[content_type.mainLanguageCode]  %}
+                                {% set collapseParams = basciFieldDefinitionParams|merge({ 
+                                    'body_id': field_definition.vars.id ~ '_collapse',
+                                    'header_label': name,
+                                    'data_attribute': {
+                                        'data-field-definition-identifier': field_definition.vars.value.identifier,
+                                    }
+                                }) %}
+
+                                {%- embed "@ezdesign/ui/component/collapse.html.twig" with collapseParams -%}
+                                    {% block body_content %}
+                                        <div class="ibexa-content-type-edit__field-definition-content">
+                                            {{ form_row(field_definition.name) }}
+                                            {{ form_row(field_definition.identifier) }}
+                                            {{ form_row(field_definition.description) }}
+                                            {{ form_row(field_definition.isRequired) }}
+                                            {{ form_row(field_definition.isSearchable) }}
+                                            {{ form_row(field_definition.isTranslatable) }}
+                                            {{ form_row(field_definition.isThumbnail) }}
+                                            {{ form_row(field_definition.fieldGroup, { attr: { class: "ibexa-input ibexa-input--field-group" } } ) }}
+
+                                            {# Field type specific fields below #}
+                                            {{ ez_render_field_definition_edit(value, {
+                                                'languageCode': language_code,
+                                                'form': field_definition,
+                                                'group_class': value.group_class|default(''),
+                                                'is_translation': is_translation,
+                                            }) }}
+
+                                            {# Default rendering #}
+                                            {% for child in field_definition|filter(child => child.isRendered() == false) %}
+                                                {{ form_row(child) }}
+                                            {% endfor %}
+                                        </div>
+                                    {%- endblock -%}
+                                {%- endembed -%}
+                            {% endfor %}
+                        {% else %}
+                            {{ include('@ezdesign/content_type/empty_group_content.html.twig') }}
+                        {% endif %}
+                    </div>
+                {% endblock %}
+            {%- endembed -%}
+        {% endfor %}
+    </div>
+</div>

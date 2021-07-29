@@ -12,7 +12,7 @@
         action_name: 'Create'|trans|desc('Creating'),
         title: 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%'),
         description: content_type.description,
-        buttons_render: knp_menu_render(user_content_edit_menu, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
+        context_actions: knp_menu_render(user_content_edit_menu, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
     } %}
 {% endblock %}
 

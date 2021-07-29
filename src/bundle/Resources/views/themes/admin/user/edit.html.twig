@@ -13,7 +13,7 @@
         title: content_type.name,
         description: content_type.description,
         content: user.content,
-        buttons_render: knp_menu_render(user_content_edit_menu, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
+        context_actions: knp_menu_render(user_content_edit_menu, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
     } %}
 {% endblock %}
 

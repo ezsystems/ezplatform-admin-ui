@@ -273,6 +273,28 @@
     </div>
 {%- endblock -%}
 
+{# {% block _field_definition_create_fieldTypeIdentifier_widget %}
+    {% for choice in choices %}
+        <div class="ibexa-field-types-available__field">
+                <svg class="ibexa-icon ibexa-icon--small ibexa-field-types-available__field-drag-icon">
+                    <use xlink:href="{{ ibexa_icon_path('drag') }}"></use>
+                </svg>
+                <svg class="ibexa-icon ibexa-icon--small ibexa-field-types-available__field-icon">
+                    <use xlink:href="{{ ibexa_icon_path('dropdown') }}"></use>
+                </svg>
+                <div class="ibexa-field-types-available__field-name ibexa-label ibexa-label--medium">{{ full_name }}</div>
+            </div>
+        <button type="submit"
+                name="{{ full_name }}"
+                class="btn ibexa-btn ibexa-btn--secondary"
+                style="display: block; width: 200px; margin: 3px;"
+                value="{{ choice.value }}">
+
+            {{ choice.label }}
+        </button>
+    {% endfor %}
+{% endblock %} #}
+
 {% block form_errors -%}
     {%- if errors|length > 0 -%}
         {%- set form_errors_attr = form_errors_attr|default({})|merge({class: (form_errors_attr.class|default('') ~ ' ibexa-form-error')|trim}) -%}

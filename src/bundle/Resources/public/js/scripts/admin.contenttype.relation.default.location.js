@@ -35,6 +35,17 @@
             udwContainer
         );
     };
+    const attachEvents = (nodes) => {
+        nodes.forEach((btn) => btn.addEventListener('click', openUDW, false));
+    }
 
-    btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
+    attachEvents(btns);
+
+    doc.body.addEventListener('ibexa-drop-field-definition', (event) => {
+        const { fieldSelector } = event.detail;
+        const fieldNode = doc.querySelector(fieldSelector);
+        const btns = fieldNode.querySelectorAll('.ibexa-btn--udw-relation-default-location');
+
+        attachEvents(btns);
+    }, false);
 })(window, window.document, window.eZ, window.React, window.ReactDOM);

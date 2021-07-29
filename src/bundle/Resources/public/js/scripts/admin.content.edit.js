@@ -1,5 +1,4 @@
 (function(global, doc, eZ, Translator) {
-    const SCROLL_POSITION_TO_FIT = 50;
     const ENTER_KEY_CODE = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',
@@ -102,22 +101,13 @@
     const isAutosaveEnabled = () => {
         return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
     };
-    const fitHeader = (event) => {
-        const { scrollTop } = event.currentTarget;
-        const headerNode = doc.querySelector('.ibexa-content-edit-header');
-        const contentNode = doc.querySelector('.ibexa-content-edit-content');
-        const shouldHeaderBeSlim = scrollTop > SCROLL_POSITION_TO_FIT;
-
-        headerNode.classList.toggle('ibexa-content-edit-header--slim', shouldHeaderBeSlim);
-        contentNode.classList.toggle('ibexa-content-edit-content--wide', shouldHeaderBeSlim);
-    };
     const fitSections = () => {
         const contentColumn = doc.querySelector('.ibexa-main-container__content-column');
         const lastSection = doc.querySelector('.ibexa-anchor-navigation-sections .ibexa-anchor-navigation-sections__section:last-child');
 
         if (lastSection && lastSection.offsetHeight) {
             const lastSectionHeight = lastSection.offsetHeight;
-            const headerHeight = doc.querySelector('.ibexa-content-edit-header').offsetHeight;
+            const headerHeight = doc.querySelector('.ibexa-edit-header').offsetHeight;
             const contentColumnBodyHeight = contentColumn.offsetHeight - headerHeight;
             const heightDiff = contentColumnBodyHeight - lastSectionHeight;
 
@@ -178,7 +168,6 @@
         btn.dataset.isFormValid = 0;
         btn.addEventListener('click', clickHandler, false);
     });
-
-    doc.querySelector('.ibexa-content-edit-content').addEventListener('scroll', fitHeader, false);
+    
     fitSections();
 })(window, window.document, window.eZ, window.Translator);

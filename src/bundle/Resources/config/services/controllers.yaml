@@ -196,3 +196,8 @@ services:
         parent: ezpublish_rest.controller.base
         tags: ['controller.service_arguments']
         autowire: true
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\FieldDefinitionController:
+        parent: ezpublish_rest.controller.base
+        tags: ['controller.service_arguments']
+        autowire: true

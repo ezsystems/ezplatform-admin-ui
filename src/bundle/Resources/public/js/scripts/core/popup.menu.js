@@ -24,14 +24,14 @@
 
                 container.insertAdjacentHTML('beforeend', renderedItem);
 
-                const popupMenuItem = container.querySelector('li');
+                const popupMenuItem = container.querySelector('button');
 
                 processAfterCreated(popupMenuItem, item);
 
                 popupMenuItem.addEventListener('click', (event) => {
                     this.popupMenuElement.classList.add(CLASS_POPUP_MENU_HIDDEN);
                     this.onItemClick(event);
-                });
+                }, false);
 
                 fragment.append(popupMenuItem);
             });

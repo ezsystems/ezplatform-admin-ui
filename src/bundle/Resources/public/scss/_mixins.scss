@@ -9,6 +9,7 @@
 @import 'mixins/togglers';
 @import 'mixins/pagination';
 @import 'mixins/font';
+@import 'mixins/containers';
 
 @mixin checkbox-icon($color: $ibexa-color-primary) {
     border: calculateRem(1px) solid $color;

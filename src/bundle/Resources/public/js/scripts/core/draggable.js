@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const SELECTOR_PLACEHOLDER = '.ez-draggable__placeholder';
     const TIMEOUT_REMOVE_PLACEHOLDERS = 500;
 
@@ -34,6 +34,7 @@
             setTimeout(() => {
                 event.target.style.setProperty('display', 'none');
             }, 0);
+
             this.draggedItem = event.currentTarget;
         }
 

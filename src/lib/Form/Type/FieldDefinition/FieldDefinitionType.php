@@ -121,11 +121,6 @@ class FieldDefinitionType extends AbstractType
             ->add('position', IntegerType::class, [
                 'label' => /** @Desc("Position") */ 'field_definition.position',
                 'disabled' => $isTranslation,
-            ])
-            ->add('selected', CheckboxType::class, [
-                'required' => false,
-                'mapped' => false,
-                'disabled' => $isTranslation,
             ]);
 
         // Hook on form generation for specific FieldType needs

@@ -147,6 +147,7 @@ export const findLocationsBySearchQuery = ({ token, siteaccess, query, limit = Q
             },
         },
     });
+    console.log('xxxxxxxx');
     const request = new Request(ENDPOINT_CREATE_VIEW, {
         method: 'POST',
         headers: { ...HEADERS_CREATE_VIEW, 'X-Siteaccess': siteaccess, 'X-CSRF-Token': token },
