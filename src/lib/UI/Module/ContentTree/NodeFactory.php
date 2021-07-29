@@ -35,7 +35,6 @@ final class NodeFactory
         'DatePublished' => SortClause\DatePublished::class,
         'ContentName' => SortClause\ContentName::class,
     ];
-    private const MAX_AGGREGATED_LOCATION_IDS = 100;
 
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
@@ -49,16 +48,21 @@ final class NodeFactory
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
+    /** @var int */
+    private $maxLocationIdsInSingleAggregation;
+
     public function __construct(
         ContentService $contentService,
         SearchService $searchService,
         TranslationHelper $translationHelper,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        int $maxLocationIdsInSingleAggregation
     ) {
         $this->contentService = $contentService;
         $this->searchService = $searchService;
         $this->translationHelper = $translationHelper;
         $this->configResolver = $configResolver;
+        $this->maxLocationIdsInSingleAggregation = $maxLocationIdsInSingleAggregation;
     }
 
     /**
@@ -182,8 +186,8 @@ final class NodeFactory
             return [];
         }
 
-        if (\count($containerLocations) > self::MAX_AGGREGATED_LOCATION_IDS) {
-            $containerLocationsChunks = array_chunk($containerLocations, self::MAX_AGGREGATED_LOCATION_IDS);
+        if (\count($containerLocations) > $this->maxLocationIdsInSingleAggregation) {
+            $containerLocationsChunks = array_chunk($containerLocations, $this->maxLocationIdsInSingleAggregation);
 
             $result = [];
             foreach ($containerLocationsChunks as $containerLocationsChunk) {
@@ -203,9 +207,8 @@ final class NodeFactory
 
         $result = $this->searchService->findLocations($searchQuery);
 
-        try {
+        if ($result->aggregations->has('childrens')) {
             return $this->aggregationResultToArray($result->aggregations->get('childrens'));
-        } catch (OutOfBoundsException $e) {
         }
 
         return [];
@@ -295,7 +298,7 @@ final class NodeFactory
             ? $contentInfo->getContentType()
             : null;
 
-        if ($contentType && $contentType->isContainer) {
+        if ($contentType !== null && $contentType->isContainer) {
             $containerLocations[] = $location;
         }
 
@@ -364,9 +367,7 @@ final class NodeFactory
     {
         if ($node->isContainer) {
             if ($aggregationResult) {
-                $totalCount = isset($aggregationResult[$node->locationId]) ?
-                    $aggregationResult[$node->locationId] :
-                    0;
+                $totalCount = $aggregationResult[$node->locationId] ?? 0;
             } else {
                 $totalCount = $this->countSubitems($node->locationId);
             }
