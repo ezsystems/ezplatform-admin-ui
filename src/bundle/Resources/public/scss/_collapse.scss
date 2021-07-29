@@ -8,6 +8,7 @@
         display: flex;
         height: calculateRem(80px);
         align-items: center;
+        padding: 0 calculateRem(4px);
         background-color: $ibexa-color-white;
         border-bottom: calculateRem(1px) solid $ibexa-color-light-500;
         border-top-right-radius: $ibexa-border-radius;
