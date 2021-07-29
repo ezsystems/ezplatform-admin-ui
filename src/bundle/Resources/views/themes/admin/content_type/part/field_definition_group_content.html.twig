@@ -1,4 +1,6 @@
-<div class="ibexa-content-type-edit__field-definition-group {{ not items|length ? 'ibexa-content-type-edit__field-definition-group--empty' }}">
+<div 
+    class="ibexa-content-type-edit__field-definition-group {{ not items|length ? 'ibexa-content-type-edit__field-definition-group--empty' }}"
+>
     {% if items|length %}
         {% for field_definition in items %}
             {% set value = field_definition.vars.value %}
@@ -11,7 +13,10 @@
                 'is_dragable': true,
                 'container_class': 'ibexa-collapse--field-definition',
                 'extra_actions': [
-                    { 'icon_name': 'trash', 'button_class':  'ibexa-collapse__extra-action-button--remove-field'}
+                    { 
+                        'icon_name': 'trash', 
+                        'button_class': 'ibexa-collapse__extra-action-button--remove-field',
+                    }
                 ]
             } -%}
                 {% block body_content %}
@@ -30,11 +35,6 @@
             {%- endembed -%}
         {% endfor %}
     {% else %}
-        <svg 
-            src="{{ asset('bundles/ezplatformadminui/img/empty-field-definition-group.svg') }}" 
-            alt="{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}" 
-        />
-        <label>{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}</label>
-        <h2>{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}</h2>
+         {{ include('@ezdesign/content_type/part/empty_group_content.html.twig') }}
     {% endif %}
 </div>

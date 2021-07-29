@@ -22,10 +22,13 @@
                 'container_class': 'ibexa-collapse--field-definitions-group',
                 'extra_actions': [
                     { 'icon_name': 'trash', 'button_class':  'ibexa-collapse__extra-action-button--remove-fields-group'}
-                ]
+                ],
+                'data_attribute': {
+                    'data-empty-group-template': include('@ezdesign/content_type/part/empty_group_content.html.twig')
+                }
             } -%}
                 {% block body_content %}
-                    {{ include('@ezdesign/content_type/part/field-definition-group-content.html.twig', { items: group }) }}
+                    {{ include('@ezdesign/content_type/part/field_definition_group_content.html.twig', { items: group }) }}
                 {% endblock %}
             {%- endembed -%}
         {% endfor %}

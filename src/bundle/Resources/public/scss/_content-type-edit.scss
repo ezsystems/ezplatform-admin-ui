@@ -206,7 +206,7 @@
         }
 
         .ibexa-popup-menu {
-            top: calculateRem(145px);
+            top: calculateRem(70px);
         }
 
         .ibexa-collapse {
@@ -251,6 +251,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
         height: calculateRem(80px);
         margin: calculateRem(24px) 0;
         border: calculateRem(1px) dashed $ibexa-color-light-600;
