@@ -8,9 +8,10 @@
         display: flex;
         height: calculateRem(80px);
         align-items: center;
-        padding: 0 calculateRem(20px);
         background-color: $ibexa-color-white;
-        border-bottom: 1px solid $ibexa-color-light-500;
+        border-bottom: calculateRem(1px) solid $ibexa-color-light-500;
+        border-top-right-radius: $ibexa-border-radius;
+        border-top-left-radius: $ibexa-border-radius;
     }
 
     &__header-label {
@@ -18,9 +19,6 @@
     }
 
     &__toggle {
-        display: inline-block;
-        text-decoration: none;
-
         &--status {
             margin-left: auto;
         }
@@ -31,9 +29,22 @@
         border-bottom-right-radius: $ibexa-border-radius;
         border-bottom-left-radius: $ibexa-border-radius;
     }
+    
+    &__body-content {
+        padding: calculateRem(24px);
+    }
 
     &--hidden {
         height: 0;
         opacity: 0;
+    }
+
+    &--collapsed {
+        .ibexa-collapse {
+            &__header {
+                border-color: $ibexa-color-white;
+                border-radius: $ibexa-border-radius;
+            }
+        }
     }
 }

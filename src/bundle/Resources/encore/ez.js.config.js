@@ -74,6 +74,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.relation.default.location.js'),
             path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.edit')
         ])
         .addEntry('ezplatform-admin-ui-content-type-list-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),

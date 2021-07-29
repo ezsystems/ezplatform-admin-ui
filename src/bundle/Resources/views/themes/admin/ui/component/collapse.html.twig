@@ -2,22 +2,27 @@
     {% block header %}
         <div class="ibexa-collapse__header {{ header_class|default('') }}">
             {% block header_content %}
-                {% if isDragable|default(false) %}
+                {% if is_dragable|default(false) %}
+                    <button class="btn ibexa-btn ibexa-btn--no-text">
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path("drag") }}"></use>
+                        </svg>
+                    </button>
                 {% endif %}
                 
                 <button 
-                    class="ibexa-collapse__toggle {{ not is_expand|default(false) ? 'collapsed' }} {{ button_class|default('') }}" 
+                    class="ibexa-collapse__toggle btn ibexa-btn {{ not is_expand|default(false) ? 'collapsed' }} {{ label_button_class|default('') }}" 
                     type="button"
-                    data-toggle="collapse" 
-                    data-target="#{{ id }}" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#{{ id }}" 
                 >
                     <h2 class="ibexa-collapse__header-label">{{ header_label|default('') }}</h2>
                 </button>
                 
                 {% if extra_actions is defined %}
                     {% for action in extra_actions %}
-                        <button class="ibexa-collapse__extra-action-button btn ibexa-btn ibexa-btn--no-text ibexa-btn--ghost {{ action.button_class|default('') }}">
-                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                        <button type="button" class="ibexa-collapse__extra-action-button btn ibexa-btn ibexa-btn--no-text {{ action.button_class|default('') }}">
+                            <svg class="ibexa-icon ibexa-icon--small">
                                 <use xlink:href="{{ ibexa_icon_path(action.icon_name) }}"></use>
                             </svg>
                         </button>
@@ -25,10 +30,10 @@
                 {% endif %}
 
                 <button 
-                    class="ibexa-collapse__toggle ibexa-collapse__toggle--status"
+                    class="ibexa-collapse__toggle ibexa-collapse__toggle--status btn ibexa-btn ibexa-btn--no-text"
                     type="button"
-                    data-toggle="collapse" 
-                    data-target="#{{ id }}" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#{{ id }}" 
                 >
                     <svg class="ibexa-icon ibexa-icon--small ibexa-collapse__toggle-status-icon {{ status_icon_class|default('') }}">
                         <use xlink:href="{{ ibexa_icon_path(status_icon|default('caret-down')) }}"></use>
@@ -40,7 +45,9 @@
 
     {% block body %}
         <div class="ibexa-collapse__body collapse {{ is_expand|default(false) ? 'show' }} {{ body_class|default('') }}" id="{{ id }}">
-            {% block body_content %}{% endblock %}
+            <div class="ibexa-collapse__body-content">
+                {% block body_content %}{% endblock %}
+            </div>
         </div>
     {% endblock %}
 </div>

@@ -8,7 +8,11 @@
                 'id': field_definition.vars.id ~ '_collapse',
                 'header_label': name,
                 'is_expand': false,
-                'container_class': 'ibexa-collapse--field-definition'
+                'is_dragable': true,
+                'container_class': 'ibexa-collapse--field-definition',
+                'extra_actions': [
+                    { 'icon_name': 'trash', 'button_class':  'ibexa-collapse__extra-action-button--remove-field'}
+                ]
             } -%}
                 {% block body_content %}
                     <div class="ibexa-content-type-edit__field-definition-content">

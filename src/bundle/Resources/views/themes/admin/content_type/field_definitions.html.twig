@@ -18,8 +18,10 @@
                 'id': key,
                 'header_label': key,
                 'is_expand': group|length,
+                'is_expand': false,
+                'container_class': 'ibexa-collapse--field-definitions-group',
                 'extra_actions': [
-                    { 'icon_name': 'trash' }
+                    { 'icon_name': 'trash', 'button_class':  'ibexa-collapse__extra-action-button--remove-fields-group'}
                 ]
             } -%}
                 {% block body_content %}
@@ -29,15 +31,3 @@
         {% endfor %}
     </div>
 </div>
-
-    {# {% include '@ezdesign/ui/component/collapse.html.twig' with {
-                'id': key,
-                'header_label': key,
-                'is_expand': group|length,
-                'extra_actions': [
-                    { 'icon_name': 'trash' }
-                ],
-                'body': include('@ezdesign/content_type/part/field-definition-group-content.html.twig', { items: group })
-            } %} #}
-
-     {# {{ include('@ezdesign/content_type/part/field-definition-group-content.html.twig', { items: group }) }} #}
