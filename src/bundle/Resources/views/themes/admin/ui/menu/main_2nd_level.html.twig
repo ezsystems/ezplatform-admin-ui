@@ -14,7 +14,7 @@
     <div class="ibexa-main-menu__navbar ibexa-main-menu__navbar--second-level {{ extraClass }}">
         <div class="tab-content ibexa-main-menu__tab-content">
             {% for child in current_item.children %}
-                <div class="tab-pane fade ibexa-main-menu__tab-pane {{ matcher.isAncestor(child, options.matchingDepth) ? ' show active' }}" id="{{ child.name }}">
+                <div class="tab-pane fade ibexa-main-menu__tab-pane {{ matcher.isAncestor(child, options.matchingDepth) or matcher.isCurrent(child) ? ' show active' }}" id="{{ child.name }}">
                     <ul class="ibexa-main-menu__items-list">
                         <li class="ibexa-main-menu__item ibexa-main-menu__item--popup-container">
                             <button 
