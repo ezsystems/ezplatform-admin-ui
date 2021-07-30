@@ -4,6 +4,12 @@
             <div class="ez-page-title__content-name">
                 {{ title }}
             </div>
+            {% if location is defined and location_is_bookmarked is defined %}
+                {% include '@ezdesign/account/bookmarks/toggle_switch.html.twig' with {
+                    location: location,
+                    location_is_bookmarked: location_is_bookmarked
+                } %}
+            {% endif %}
         </h1>
         {% if content_type_name is defined %}
             <h4 class="ez-page-title__content-type-name">
@@ -18,12 +24,6 @@
                 {% endif %}
                 {{ content_type_name }}
             </h4>
-        {% endif %}
-        {% if location is defined and location_is_bookmarked is defined %}
-            {% include '@ezdesign/account/bookmarks/toggle_switch.html.twig' with {
-                location: location,
-                location_is_bookmarked: location_is_bookmarked
-            } %}
         {% endif %}
     </div>
 {% endif %}

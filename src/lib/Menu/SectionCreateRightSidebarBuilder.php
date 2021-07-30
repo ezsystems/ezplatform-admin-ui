@@ -69,13 +69,11 @@ class SectionCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => '#section_create_create',
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.section.list',
                 ]
             ),

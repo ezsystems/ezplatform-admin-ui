@@ -59,7 +59,6 @@ class ObjectStateCreateRightSidebarBuilder extends AbstractBuilder implements Tr
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => '#object_state_create_create',
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
@@ -69,7 +68,6 @@ class ObjectStateCreateRightSidebarBuilder extends AbstractBuilder implements Tr
                     'routeParameters' => [
                         'objectStateGroupId' => $groupId,
                     ],
-                    'extras' => ['icon' => 'circle-close'],
                 ]
             ),
         ]);

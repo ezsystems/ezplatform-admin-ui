@@ -14,7 +14,12 @@
     ]} %}
 {% endblock %}
 
-{% block page_title_admin %}
+{% block context_menu_admin %}
+    {% set content_type_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_edit.sidebar_right', [], {'form_view': form, 'content_type': content_type}) %}
+    {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+{% endblock %}
+
+{% block header_admin %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'content_type.view.edit.title'|trans({ '%name%': content_type.name })|desc('Editing Content Type \'%name%\''),
         content_type_identifier: content_type.identifier
@@ -130,11 +135,6 @@
 
     {{ form_widget(form._token) }}
     {{ form_end(form, {'render_rest': false }) }}
-{% endblock %}
-
-{% block right_sidebar %}
-    {% set content_type_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_edit.sidebar_right', [], {'form_view': form, 'content_type': content_type}) %}
-    {{ knp_menu_render(content_type_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
 {% block javascripts %}

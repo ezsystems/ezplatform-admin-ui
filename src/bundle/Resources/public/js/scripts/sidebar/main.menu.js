@@ -44,6 +44,8 @@
             'ibexa-main-menu__navbar--collapsed',
             secondLevelMenuWidth <= SECOND_LEVEL_MANUAL_RESIZE_MIN_WIDTH
         );
+
+        doc.body.dispatchEvent(new CustomEvent('ibexa-main-menu-resized'));
     };
     const toggleSecondLevelMenu = () => {
         const isSecondLevelMenuCollapsed = secondLevelMenuNode.classList.contains('ibexa-main-menu__navbar--collapsed');
@@ -128,4 +130,5 @@
     secondLevelMenuNode.querySelector('.ibexa-main-menu__toggler').addEventListener('click', toggleSecondLevelMenu, false);
     secondLevelMenuNode.querySelector('.ibexa-main-menu__resizer').addEventListener('mousedown', addResizeListeners, false);
     secondLevelMenuNode.querySelectorAll('.ibexa-main-menu__tooltip-trigger').forEach(parsePopup);
+    secondLevelMenuNode.addEventListener('transitionend', () => doc.body.dispatchEvent(new CustomEvent('ibexa-main-menu-resized')), false);
 })(window, window.document, window.eZ, window.localStorage);

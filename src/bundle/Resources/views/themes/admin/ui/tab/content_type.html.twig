@@ -14,7 +14,7 @@
                         { value: 'content_type.breadcrumb.view'|trans({ '%identifier%': content_type.name })|desc('%identifier%') }
                     ]} %}
                 {% endblock %}
-                {% block page_title %}
+                {% block header %}
                     {% include '@ezdesign/ui/page_title.html.twig' with {
                         title: 'content_type.view.view.title'|trans({ '%name%': content_type.name })|desc('%name%'),
                         content_type_identifier: content_type.identifier

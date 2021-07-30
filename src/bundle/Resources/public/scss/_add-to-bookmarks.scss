@@ -1,6 +1,6 @@
 .ez-add-to-bookmarks {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: calculateRem(36px);
+    height: calculateRem(36px);
     transform: translateY(3%);
     grid-area: bookmark;
     justify-self: center;
@@ -12,17 +12,12 @@
     &__icon-wrapper {
         &--add,
         &--remove {
-            width: 2.25rem;
-            height: 2.25rem;
-            padding: 0.25rem;
+            width: calculateRem(36px);
+            height: calculateRem(36px);
+            padding: calculateRem(2px);
             position: absolute;
             transition: all 0.25s ease-in;
             z-index: 2;
-        }
-
-        .ibexa-icon--secondary {
-            width: 1.75rem;
-            height: 1.75rem;
         }
     }
 

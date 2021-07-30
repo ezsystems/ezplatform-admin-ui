@@ -71,14 +71,12 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => '#user_password_change_change',
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.dashboard',
-                    'extras' => ['icon' => 'circle-close'],
                 ]
             ),
         ]);

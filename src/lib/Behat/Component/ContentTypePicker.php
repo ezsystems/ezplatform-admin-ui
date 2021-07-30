@@ -41,9 +41,9 @@ class ContentTypePicker extends Component
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('filterInput', '.ez-extra-actions__section-content--content-type .ez-instant-filter__input'),
-            new VisibleCSSLocator('filteredItem', '.ez-extra-actions__section-content--content-type .ez-instant-filter__group-item:not([hidden])'),
-            new VisibleCSSLocator('headerSelector', '.ez-extra-actions--create .ez-extra-actions__header'),
+            new VisibleCSSLocator('filterInput', '.ibexa-extra-actions__section-content--content-type .ez-instant-filter__input'),
+            new VisibleCSSLocator('filteredItem', '.ibexa-extra-actions__section-content--content-type .ez-instant-filter__group-item:not([hidden])'),
+            new VisibleCSSLocator('headerSelector', '.ibexa-extra-actions--create .ibexa-extra-actions__header'),
         ];
     }
 }

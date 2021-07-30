@@ -73,13 +73,11 @@ class SectionEditRightSidebarBuilder extends AbstractBuilder implements Translat
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#update-section-%d_update', $section->id),
                     ],
-                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.section.list',
                 ]
             ),
