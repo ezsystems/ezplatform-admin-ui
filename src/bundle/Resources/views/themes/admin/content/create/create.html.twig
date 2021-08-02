@@ -16,8 +16,9 @@
 
     {% include '@ezdesign/ui/edit_header.html.twig' with {
         action_name: 'creating'|trans|desc('Creating'),
+        content_type_name: content_type.name,
         title: 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%'),
-        icon_name: 'content-type',
+        icon_name: content_type.name,
         show_autosave_status: true,
         location_name: 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%'),
         buttons_render: knp_menu_render(content_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})

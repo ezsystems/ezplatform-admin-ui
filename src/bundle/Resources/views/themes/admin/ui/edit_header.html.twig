@@ -1,7 +1,20 @@
 <div class="ibexa-edit-header">
 	<div class="container">
 		<div class="row ibexa-edit-header__row ibexa-edit-header__row--top">
-			<div class="col-6 offset-6 ibexa-edit-header__column ibexa-context-menu-wrapper">
+			<div class="col-5 offset-1 ibexa-edit-header__column ibexa-edit-header__column--main">
+				<div class="">
+					{% if icon_name %}
+						<svg class="ibexa-icon ibexa-icon--small">
+							<use xlink:href="{{ ibexa_icon_path(icon_name|lower) }}"></use>
+						</svg>
+					{% endif %}
+
+					<label class="ibexa-label ibexa-label--small ibexa-edit-header__action-name">{{ action_name|default('') }} {{ action_object|default('') }} {{ content_type_name|default('') }}</label>
+				</div>
+
+				<h1 class="ibexa-edit-header__title">{{ title }}</h1>
+			</div>
+			<div class="col-6 ibexa-edit-header__column ibexa-context-menu-wrapper">
 				<div class="ibexa-edit-header__context-actions">
 					{% if (description is defined and description|length) or content is defined %}
 						<div 
@@ -25,8 +38,8 @@
 	<div class="container">
 		<div class="row ibexa-edit-header__row ibexa-edit-header__row--bottom">
 			<div class="col-5 offset-1 ibexa-edit-header__column ibexa-edit-header__column--left">
-				<label class="ibexa-label ibexa-label--small ibexa-edit-header__action-name">{{ action_name|default('') }} {{ action_object|default('') }}</label>
-				<h1>{{ title }}</h1>
+				<h1 class="ibexa-edit-header__title ibexa-edit-header__title">{{ title }}</h1>
+
 				{% if location_name is defined %}
 					<div class="ibexa-edit-header__location">{{ location_name|raw }}</div>
 				{% endif %}

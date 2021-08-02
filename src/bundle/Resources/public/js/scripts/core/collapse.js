@@ -14,7 +14,6 @@
             collapseNode.dataset.collapsed = true;
         }, false)
 
-
         collapseNode.addEventListener('show.bs.collapse', (event) => {
             collapseNode.classList.remove('ibexa-collapse--collapsed');
             collapseNode.dataset.collapsed = false;

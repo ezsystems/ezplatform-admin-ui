@@ -12,16 +12,32 @@
     &__row {
         &--top {
             height: calculateRem(85px);
+
+            .ibexa-edit-header__title {
+                height: 0;
+                opacity: 0;
+            }
         }
 
         &--bottom {
             height: calculateRem(154px);
-            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
         }
     }
 
     &__column {
         position: static;
+
+        &--main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 0;
+
+            .ibexa-icon {
+                margin-right: calculateRem(16px);
+                fill: $ibexa-color-dark-400;
+            }
+        }
 
         &--left {
             padding-left: 0;
@@ -42,6 +58,12 @@
         }
     }
 
+    &__title {
+        height: auto;
+        opacity: 1;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+    }
+
     &__context-actions {
         display: flex;
         position: absolute;
@@ -55,7 +77,12 @@
         align-items: center;
     }
 
-    &__action-name,
+    &__action-name {
+        color: $ibexa-color-dark-400;
+        opacity: 1;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+    }
+
     &__location {
         opacity: 1;
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
@@ -77,6 +104,22 @@
     }
     
     &--slim {
-        height: calculateRem(86px);
+        height: calculateRem(87px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+        
+        .ibexa-autosave {
+            opacity: 0;
+        }
+
+        .ibexa-edit-header {
+            &__row {
+                &--top {
+                    .ibexa-edit-header__title {
+                        height: auto;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
     }
 }

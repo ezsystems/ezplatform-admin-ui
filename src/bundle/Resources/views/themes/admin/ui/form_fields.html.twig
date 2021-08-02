@@ -37,6 +37,7 @@
             </div>
         {%- else -%}
             <div class="ez-instant-filter__group-item">
+            {{ dump(choice.value) }}
                 <svg class="ibexa-icon ibexa-icon--small">
                     <use xlink:href="{{ ez_content_type_icon(choice.value) }}"></use>
                 </svg>
