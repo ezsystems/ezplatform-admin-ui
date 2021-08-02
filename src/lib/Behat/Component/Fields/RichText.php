@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Behat\Component\Fields;
 
+use Behat\Mink\Session;
+use EzSystems\EzPlatformRichText\Configuration\Provider\CustomStyle;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
@@ -26,6 +28,15 @@ class RichText extends FieldTypeComponent
         'Heading 5' => 'h5',
         'Heading 6' => 'h6',
     ];
+
+    /** @var \EzSystems\EzPlatformRichText\Configuration\Provider\CustomStyle */
+    private $customStyleProvider;
+
+    public function __construct(Session $session, CustomStyle $customStyleProvider)
+    {
+        parent::__construct($session);
+        $this->customStyleProvider = $customStyleProvider;
+    }
 
     private function getFieldInput(): ElementInterface
     {
@@ -124,22 +135,16 @@ class RichText extends FieldTypeComponent
 
     public function clickEmbedInlineButton(): void
     {
+        $buttonPosition = 22 + $this->getCustomStylesOffset();
         $this->openElementsToolbar();
-        $this->getHTMLPage()
-            ->find($this->getLocator('additionalToolbar'))
-            ->findAll($this->getLocator('toolbarElement'))
-            ->toArray()[16]
-            ->click();
+        $this->clickElementsToolbarButton($buttonPosition);
     }
 
     public function clickEmbedButton(): void
     {
+        $buttonPosition = 20 + $this->getCustomStylesOffset();
         $this->openElementsToolbar();
-        $this->getHTMLPage()
-            ->find($this->getLocator('additionalToolbar'))
-            ->findAll($this->getLocator('toolbarElement'))
-            ->toArray()[14]
-            ->click();
+        $this->clickElementsToolbarButton($buttonPosition);
     }
 
     public function equalsEmbedInlineItem($itemName): bool
@@ -180,6 +185,23 @@ class RichText extends FieldTypeComponent
             $this->getLocator('fieldInput')->getSelector(),
             $commandName
         );
+        $this->getSession()->executeScript($script);
+    }
+
+    private function getCustomStylesOffset(): int
+    {
+        return count($this->customStyleProvider->getConfiguration());
+    }
+
+    private function clickElementsToolbarButton(int $buttonPosition): void
+    {
+        $script = sprintf(
+            "document.querySelectorAll('%s %s')[%d].click()",
+            $this->getLocator('additionalToolbar')->getSelector(),
+            $this->getLocator('toolbarElement')->getSelector(),
+            $buttonPosition,
+        );
+
         $this->getSession()->executeScript($script);
     }
 }
