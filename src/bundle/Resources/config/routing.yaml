@@ -352,6 +352,16 @@ ezplatform.content_type.update:
     requirements:
         contentTypeGroupId: \d+
 
+ezplatform.content_type.update_v2:
+    path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/update_v2/{toLanguageCode}/{fromLanguageCode}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController::updateActionV2'
+        toLanguageCode: ~
+        fromLanguageCode: ~
+    requirements:
+        contentTypeGroupId: \d+
+
 ezplatform.content_type.delete:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}
     methods: ['DELETE']

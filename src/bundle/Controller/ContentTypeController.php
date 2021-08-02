@@ -20,9 +20,12 @@ use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeUpdateV2Data;
+use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionDataV2;
 use EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateV2Type;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\ContentType\TranslationsTab;
 use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper;
@@ -528,6 +531,30 @@ class ContentTypeController extends Controller
         ]);
     }
 
+    public function updateActionV2(
+        Request $request,
+        ContentTypeGroup $group,
+        ContentTypeDraft $contentTypeDraft,
+        Language $language = null,
+        Language $baseLanguage = null
+    ): Response {
+        if (!$language) {
+            $language = $this->getDefaultLanguage($contentTypeDraft);
+        }
+
+        $form = $this->createUpdateFormV2($group, $contentTypeDraft, $language, $baseLanguage);
+        $form->handleRequest($request);
+
+        dump($form->getData());
+
+        return $this->render('@ezdesign/content_type/edit_v2.html.twig', [
+            'content_type_group' => $group,
+            'content_type' => $contentTypeDraft,
+            'form' => $form->createView(),
+            'language_code' => $baseLanguage ? $baseLanguage->languageCode : $language->languageCode,
+        ]);
+    }
+
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
@@ -682,6 +709,58 @@ class ContentTypeController extends Controller
             ]),
             'languageCode' => $language->languageCode,
             'mainLanguageCode' => $contentTypeDraft->mainLanguageCode,
+        ]);
+    }
+
+    public function createUpdateFormV2(
+        ContentTypeGroup $contentTypeGroup,
+        ContentTypeDraft $contentTypeDraft,
+        ?Language $language = null,
+        ?Language $baseLanguage = null
+    ): FormInterface {
+        $data = new ContentTypeUpdateV2Data();
+        $data->languageCode = $language ? $language->languageCode : $contentTypeDraft->mainLanguageCode;
+
+        $data->metadata->remoteId = $contentTypeDraft->remoteId;
+        $data->metadata->urlAliasSchema = $contentTypeDraft->urlAliasSchema;
+        $data->metadata->nameSchema = $contentTypeDraft->nameSchema;
+        $data->metadata->isContainer = $contentTypeDraft->isContainer;
+        $data->metadata->mainLanguageCode = $contentTypeDraft->mainLanguageCode;
+        $data->metadata->defaultSortField = $contentTypeDraft->defaultSortField;
+        $data->metadata->defaultSortOrder = $contentTypeDraft->defaultSortOrder;
+        $data->metadata->defaultAlwaysAvailable = $contentTypeDraft->defaultAlwaysAvailable;
+        $data->metadata->names = $contentTypeDraft->getNames();
+        $data->metadata->descriptions = $contentTypeDraft->getDescriptions();
+        if ($baseLanguage && $language) {
+            $data->metadata->names[$language->languageCode] = $contentTypeDraft->getName($baseLanguage->languageCode);
+            $data->metadata->descriptions[$language->languageCode] = $contentTypeDraft->getDescription($baseLanguage->languageCode);
+        }
+
+        foreach ($contentTypeDraft->fieldDefinitions->toArray() as $fieldDefinition) {
+            $fieldDefinitionData = new FieldDefinitionDataV2();
+            $fieldDefinitionData->identifier = $fieldDefinition->identifier;
+            $fieldDefinitionData->names = $fieldDefinition->getNames();
+            $fieldDefinitionData->descriptions = $fieldDefinition->getDescriptions();
+            $fieldDefinitionData->fieldGroup = $fieldDefinition->fieldGroup;
+            $fieldDefinitionData->isInfoCollector = $fieldDefinition->isInfoCollector;
+            $fieldDefinitionData->isRequired = $fieldDefinition->isRequired;
+            $fieldDefinitionData->isSearchable = $fieldDefinition->isSearchable;
+            $fieldDefinitionData->isThumbnail = $fieldDefinition->isThumbnail;
+            $fieldDefinitionData->isTranslatable = $fieldDefinition->isTranslatable;
+
+            $data->fieldDefinitions[] = $fieldDefinitionData;
+        }
+
+        return $this->createForm(ContentTypeUpdateV2Type::class, $data, [
+            'method' => Request::METHOD_POST,
+            'action' => $this->generateUrl('ezplatform.content_type.update_v2', [
+                'contentTypeGroupId' => $contentTypeGroup->id,
+                'contentTypeId' => $contentTypeDraft->id,
+                'fromLanguageCode' => $baseLanguage ? $baseLanguage->languageCode : null,
+                'toLanguageCode' => $language->languageCode,
+            ]),
+            'language_code' => $language->languageCode,
+            'main_language_code' => $contentTypeDraft->mainLanguageCode,
         ]);
     }
 

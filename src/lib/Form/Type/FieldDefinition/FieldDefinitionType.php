@@ -108,7 +108,7 @@ class FieldDefinitionType extends AbstractType
                     'required' => false,
                     'label' => /** @Desc("Description") */ 'field_definition.description',
                 ])
-                    ->addModelTransformer($translatablePropertyTransformer)
+                ->addModelTransformer($translatablePropertyTransformer)
             )
             ->add('isRequired', CheckboxType::class, [
                 'required' => false,
@@ -147,7 +147,7 @@ class FieldDefinitionType extends AbstractType
             $fieldTypeIdentifier = $data !== null ? $data->getFieldTypeIdentifier() : $options['field_type_identifier'];
 
             if ($fieldTypeIdentifier === null) {
-                return ;
+                return;
             }
 
             $fieldType = $this->fieldTypeService->getFieldType($fieldTypeIdentifier);
