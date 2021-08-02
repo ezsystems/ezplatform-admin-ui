@@ -10,6 +10,8 @@
     transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
     &__row {
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
         &--top {
             height: calculateRem(85px);
 
@@ -58,12 +60,6 @@
         }
     }
 
-    &__title {
-        height: auto;
-        opacity: 1;
-        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
-    }
-
     &__context-actions {
         display: flex;
         position: absolute;
@@ -75,6 +71,10 @@
     &__tooltip {
         display: flex;
         align-items: center;
+    }
+
+    &__action-name-container {
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
     }
 
     &__action-name {
@@ -105,21 +105,37 @@
     
     &--slim {
         height: calculateRem(87px);
-        border-bottom: calculateRem(1px) solid $ibexa-color-light;
-        
-        .ibexa-autosave {
-            opacity: 0;
-        }
 
         .ibexa-edit-header {
             &__row {
-                &--top {
-                    .ibexa-edit-header__title {
-                        height: auto;
-                        opacity: 1;
-                    }
+                &--bottom {
+                    height: calculateRem(85px);
+                    margin-top: calculateRem(-45px);
                 }
             }
+
+            &__column {
+                &--left {
+                    border-bottom: none;
+                }
+            }
+
+            &__action-name-container {
+                margin-top: calculateRem(-30px);
+            }
+
+            &__separate-div {
+                transform: scaleX(1);
+            }
+
+            &__location {
+                opacity: 0;
+            }
+        }
+
+        .ibexa-autosave {
+            opacity: 0;
+            height: 0;
         }
     }
 }
