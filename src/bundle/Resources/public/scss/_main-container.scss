@@ -11,7 +11,7 @@
         overflow: hidden;
     }
 
-    &--without-grouped-fields {
+    &--without-anchor-menu-items {
         .ibexa-main-container {
             &__side-column {
                 width: 10vw;
@@ -19,7 +19,7 @@
         }
     }
 
-    &--with-grouped-fields {
+    &--with-anchor-menu-items {
         .ibexa-main-container {
             &__side-column {
                 width: 20vw;
@@ -27,7 +27,7 @@
         }
     }
 
-    &--edit-content {
+    &--edit-container {
         height: 100vh;
         padding: calculateRem(16px);
         background-color: $ibexa-color-dark;

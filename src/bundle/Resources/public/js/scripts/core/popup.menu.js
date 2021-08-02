@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const CLASS_POPUP_MENU_HIDDEN = 'ibexa-popup-menu--hidden';
     class PopupMenu {
         constructor(config) {
@@ -7,11 +7,14 @@
             this.onItemClick = config.onItemClick;
             this.position = config.position || (() => {});
 
+            this.attachOnClickToItem = this.attachOnClickToItem.bind(this);
             this.handleToggle = this.handleToggle.bind(this);
             this.handleClickOutsidePopupMenu = this.handleClickOutsidePopupMenu.bind(this);
 
             this.triggerElement.addEventListener('click', this.handleToggle, false);
             doc.addEventListener('click', this.handleClickOutsidePopupMenu, false);
+
+            this.attachOnClickToExistingItems();
         }
 
         generateItems(itemsToGenerate, processAfterCreated) {
@@ -24,20 +27,41 @@
 
                 container.insertAdjacentHTML('beforeend', renderedItem);
 
-                const popupMenuItem = container.querySelector('li');
+                const popupMenuItem = container.querySelector('button');
 
                 processAfterCreated(popupMenuItem, item);
 
-                popupMenuItem.addEventListener('click', (event) => {
-                    this.popupMenuElement.classList.add(CLASS_POPUP_MENU_HIDDEN);
-                    this.onItemClick(event);
-                });
+                popupMenuItem.addEventListener(
+                    'click',
+                    (event) => {
+                        this.popupMenuElement.classList.add(CLASS_POPUP_MENU_HIDDEN);
+                        this.onItemClick(event);
+                    },
+                    false
+                );
 
                 fragment.append(popupMenuItem);
             });
 
             this.popupMenuElement.innerHTML = '';
             this.popupMenuElement.append(fragment);
+        }
+
+        attachOnClickToExistingItems() {
+            const items = this.getItems();
+
+            items.forEach(this.attachOnClickToItem);
+        }
+
+        attachOnClickToItem(item) {
+            item.querySelector('.ibexa-popup-menu__item-content').addEventListener(
+                'click',
+                (event) => {
+                    this.popupMenuElement.classList.add(CLASS_POPUP_MENU_HIDDEN);
+                    this.onItemClick(event);
+                },
+                false
+            );
         }
 
         getItems() {

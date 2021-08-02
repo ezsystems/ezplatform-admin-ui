@@ -126,7 +126,7 @@
 
         if (lastSection && lastSection.offsetHeight) {
             const lastSectionHeight = lastSection.offsetHeight;
-            const headerHeight = doc.querySelector('.ibexa-content-edit-header').offsetHeight;
+            const headerHeight = doc.querySelector('.ibexa-edit-header').offsetHeight;
             const contentColumnBodyHeight = contentColumn.offsetHeight - headerHeight;
             const heightDiff = contentColumnBodyHeight - lastSectionHeight;
 
@@ -187,7 +187,6 @@
         btn.dataset.isFormValid = 0;
         btn.addEventListener('click', clickHandler, false);
     });
-
-    doc.querySelector('.ibexa-content-edit-content').addEventListener('scroll', fitHeader, false);
+    
     fitSections();
 })(window, window.document, window.eZ, window.Translator);

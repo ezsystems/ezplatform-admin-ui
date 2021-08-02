@@ -8,103 +8,95 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Behat\Page;
 
-use Behat\Mink\Session;
-use EzSystems\Behat\API\ContentData\FieldTypeNameConverter;
-use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
-use Ibexa\AdminUi\Behat\Component\IbexaDropdown;
-use Ibexa\AdminUi\Behat\Component\Notification;
 use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
-use Ibexa\Behat\Browser\Element\ElementInterface;
+use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
-use Ibexa\Behat\Browser\Routing\Router;
 
 class ContentTypeUpdatePage extends AdminUpdateItemPage
 {
-    /** @var \Ibexa\AdminUi\Behat\Component\Notification */
-    private $notification;
-    /**
-     * @var \Ibexa\AdminUi\Behat\Component\IbexaDropdown
-     */
-    private $ibexaDropdown;
-
-    public function __construct(
-        Session $session,
-        Router $router,
-        ContentActionsMenu $contentActionsMenu,
-        Notification $notification,
-        IbexaDropdown $ibexaDropdown
-    ) {
-        parent::__construct($session, $router, $contentActionsMenu);
-        $this->notification = $notification;
-        $this->ibexaDropdown = $ibexaDropdown;
-    }
-
     public function fillFieldDefinitionFieldWithValue(string $fieldName, string $label, string $value)
     {
-        $this->expandFieldDefinition($fieldName);
-
-        $this->getFieldDefinition($fieldName)
+        $this->expandLastFieldDefinition();
+        $this->getHTMLPage()->find($this->getLocator('fieldDefinitionOpenContainer'))
             ->findAll($this->getLocator('field'))->getByCriterion(new ElementTextCriterion($label))
-            ->find($this->getLocator('fieldInput'))->setValue($value);
+            ->find($this->getLocator('fieldInput'))
+            ->setValue($value);
     }
 
-    public function expandFieldDefinition(string $fieldName): void
+    public function expandLastFieldDefinition(): void
     {
-        $fieldDefinition = $this->getFieldDefinition($fieldName);
-
-        if ($fieldDefinition->hasClass($this->getLocator('fieldCollapsed')->getSelector())) {
-            // TODO: Convert to normal click once this page is redesigned
-            $this->getSession()->executeScript("document.querySelector('.ibexa-card--toggle-group:last-of-type .ibexa-card__body-display-toggler').click()");
-        }
+        usleep(500000);
+        $fieldToggleLocator = $this->getLocator('fieldDefinitionToggle');
+        $lastFieldAdded = $this->getHTMLPage()
+            ->findAll($fieldToggleLocator)
+            ->last();
+        usleep(500000);
+        $lastFieldAdded->mouseOver();
+        $lastFieldAdded->click();
+        usleep(500000);
     }
 
     public function specifyLocators(): array
     {
         return array_merge(parent::specifyLocators(), [
-            new VisibleCSSLocator('fieldTypesList', '.ibexa-card__field-control .ibexa-dropdown__selection-info'),
-            new VisibleCSSLocator('addFieldDefinition', '#ezplatform_content_forms_contenttype_update_addFieldDefinition'),
-            new VisibleCSSLocator('fieldDefinitionContainer', '.ibexa-card--toggle-group'),
-            new VisibleCSSLocator('fieldDefinitionName', '.ibexa-card--toggle-group .ibexa-card__header .form-check-label'),
+            new VisibleCSSLocator('fieldDefinitionContainer', '.ibexa-collapse--field-definition  div.ibexa-collapse__header'),
             new VisibleCSSLocator('field', '.form-group'),
-            new VisibleCSSLocator('fieldBody', 'ibexa-card__body'),
-            new VisibleCSSLocator('fieldCollapsed', 'ibexa-card--collapsed'),
-            new VisibleCSSLocator('fieldDefinitionToggler', '.ibexa-card__body-display-toggler'),
+            new VisibleCSSLocator('contentTypeAddButton', '.ibexa-content-type-edit__add-field-definitions-group-btn'),
+            new VisibleCSSLocator('contentTypeCategoryList', ' div.ibexa-content-type-edit__add-field-definitions-group > ul > li:nth-child(n):not(.ibexa-popup-menu__item-action--disabled)'),
+            new VisibleCSSLocator('availableFieldLabelList', '.ibexa-available-field-types__fields > li'),
+            new VisibleCSSLocator('workspace', '#content_collapse > div.ibexa-collapse__body-content > div'),
+            new VisibleCSSLocator('fieldDefinitionToggle', '.ibexa-collapse:nth-last-child(2) > div.ibexa-collapse__header > button:last-child:not([data-bs-target="#content_collapse"])'),
+            new VisibleCSSLocator('fieldDefinitionOpenContainer', '[data-collapsed="false"] .ibexa-content-type-edit__field-definition-content'),
         ]);
     }
 
     public function addFieldDefinition(string $fieldName)
     {
-        usleep(500000);
-        $this->getHTMLPage()->find($this->getLocator('fieldTypesList'))->mouseOver();
-        usleep(500000);
-        $this->getHTMLPage()->find($this->getLocator('fieldTypesList'))->click();
-        $this->ibexaDropdown->selectOption($fieldName);
-        usleep(500000);
-        $this->getHTMLPage()->find($this->getLocator('addFieldDefinition'))->mouseOver();
-        usleep(500000);
-        $this->getHTMLPage()->find($this->getLocator('addFieldDefinition'))->click();
+        $availableFieldLabel = $this->getLocator('availableFieldLabelList');
+        $listElement = $this->getHTMLPage()
+            ->findAll($availableFieldLabel)
+            ->getByCriterion(new ElementTextCriterion($fieldName));
+        $listElement->mouseOver();
+
+        $fieldPosition = array_search(
+            $fieldName,
+            $this->getHTMLPage()->findAll($this->getLocator('availableFieldLabelList'))->mapBy(new ElementTextMapper()),
+            true
+        ) + 1; // CSS selectors are 1-indexed
+
+        $availableFieldLabelsScript = "document.querySelector('.ibexa-available-field-types__fields > li:nth-child(%d) > .ibexa-label')";
+        $scriptToExecute = sprintf($availableFieldLabelsScript, $fieldPosition);
+        $this->getSession()->executeScript($scriptToExecute);
+
+        $workspace = sprintf('document.querySelector(\'%s\')', $this->getLocator('workspace')->getSelector());
+        $this->getHTMLPage()->dragAndDrop($scriptToExecute, $workspace, $workspace);
         $this->getHTMLPage()
             ->setTimeout(3)
             ->waitUntilCondition(
                 new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('fieldDefinitionContainer'))
             );
-        $this->getFieldDefinition($fieldName)->assert()->isVisible();
-        $this->notification->verifyIsLoaded();
-        $this->notification->verifyAlertSuccess();
-        $this->notification->closeAlert();
     }
 
-    private function getFieldDefinition($fieldName): ElementInterface
+    public function clickAddButton(): void
     {
-        $fieldTypeIdentifier = FieldTypeNameConverter::getFieldTypeIdentifierByName($fieldName);
+        $this->getHTMLPage()->find($this->getLocator('contentTypeAddButton'))->mouseOver();
+        $this->getHTMLPage()->find($this->getLocator('contentTypeAddButton'))->click();
+        $this->getHTMLPage()
+            ->setTimeout(3)
+            ->waitUntilCondition(
+                new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('contentTypeCategoryList'))
+            );
+        $this->getHTMLPage()->find($this->getLocator('contentTypeCategoryList'))->mouseOver();
+    }
 
-        return $this->getHTMLPage()
-            ->findAll($this->getLocator('fieldDefinitionContainer'))
-            ->filter(function (ElementInterface $element) use ($fieldTypeIdentifier) {
-                return false !== strpos($element->find($this->getLocator('fieldDefinitionName'))->getText(), $fieldTypeIdentifier);
-            })
-            ->first()
-        ;
+    public function selectContentTypeCategory(string $categoryName): void
+    {
+        $categoryLocator = $this->getLocator('contentTypeCategoryList');
+        $listElement = $this->getHTMLPage()
+            ->findAll($categoryLocator)
+            ->getByCriterion(new ElementTextCriterion($categoryName));
+        $listElement->mouseOver();
+        $listElement->click();
     }
 }

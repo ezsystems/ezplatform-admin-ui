@@ -129,6 +129,22 @@
         }
     }
 
+    &--info {
+        color: $ibexa-color-info;
+        fill: $ibexa-color-info;
+        border-color: $ibexa-color-info;
+
+        &:hover {
+            color: $ibexa-color-dark;
+            fill: $ibexa-color-dark;
+            border-color: $ibexa-color-dark;
+        }
+
+        &:focus {
+            box-shadow: $ibexa-btn-focus-box-shadow-info;
+        }
+    }
+
     &--neon-info {
         border-radius: $ibexa-border-radius;
 

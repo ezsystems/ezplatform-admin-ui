@@ -1,4 +1,4 @@
-(function(global, doc, eZ, React, ReactDOM) {
+(function (global, doc, eZ, React, ReactDOM) {
     const SELECTOR_RESET_STARTING_LOCATION_BTN = '.ibexa-btn--reset-starting-location';
     const resetStartingLocationBtns = doc.querySelectorAll(SELECTOR_RESET_STARTING_LOCATION_BTN);
     const udwBtns = doc.querySelectorAll('.ibexa-btn--udw-relation-default-location');
@@ -12,10 +12,7 @@
         const objectRelationListSettingsWrapper = btn.closest('.ezobjectrelationlist-settings');
         const objectRelationSettingsWrapper = btn.closest('.ezobjectrelation-settings');
 
-        toggleResetStartingLocationBtn(
-            btn.parentNode.querySelector(SELECTOR_RESET_STARTING_LOCATION_BTN),
-            true
-        );
+        toggleResetStartingLocationBtn(btn.parentNode.querySelector(SELECTOR_RESET_STARTING_LOCATION_BTN), true);
 
         if (objectRelationListSettingsWrapper) {
             objectRelationListSettingsWrapper.querySelector(btn.dataset.relationRootInputSelector).value = locationId;
@@ -58,7 +55,26 @@
 
         toggleResetStartingLocationBtn(button, false);
     };
+    const attachEvents = (btns) => {
+        btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
+    };
 
-    udwBtns.forEach(btn => btn.addEventListener('click', openUDW, false));
-    resetStartingLocationBtns.forEach(btn => btn.addEventListener('click', resetStartingLocation, false));
+    attachEvents(udwBtns);
+
+    doc.body.addEventListener(
+        'ibexa-drop-field-definition',
+        (event) => {
+            const { nodes } = event.detail;
+
+            nodes.forEach((node) => {
+                const btns = node.querySelectorAll('.ibexa-btn--udw-relation-default-location');
+
+                btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
+                attachEvents(btns);
+            });
+        },
+        false
+    );
+
+    resetStartingLocationBtns.forEach((btn) => btn.addEventListener('click', resetStartingLocation, false));
 })(window, window.document, window.eZ, window.React, window.ReactDOM);

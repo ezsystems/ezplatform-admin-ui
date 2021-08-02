@@ -1,0 +1,28 @@
+{% extends '@ezdesign/ui/edit_base.html.twig' %}
+
+{% trans_default_domain 'content_type' %}
+{% form_theme form _self '@ezdesign/ui/form_fields.html.twig'  %}
+
+{% set anchor_params = {
+    close_href: path('ezplatform.content_type_group.view', {
+        contentTypeGroupId: content_type_group.id
+    }),
+    items: [
+        'content_type.view.edit.global_properties'|trans|desc('Global properties'),
+        'content_type.view.edit.content_field_definitions'|trans|desc('Field definitions')
+    ]
+} %}
+
+{% block main_container_class %}{{ parent() }} ibexa-content-type-edit ibexa-main-container--with-anchor-menu-items{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col col-10 offset-1">
+            {% block form %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-content-type-edit-js', null, 'ezplatform') }}
+{% endblock %}

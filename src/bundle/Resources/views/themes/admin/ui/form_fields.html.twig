@@ -136,7 +136,7 @@
 
 {%- block number_widget -%}
     {%- set type = type|default('number') -%}
-    {{ block('form_widget_simple') }}
+    {{ parent() }}
 {%- endblock number_widget -%}
 
 {%- block password_widget -%}
@@ -148,7 +148,7 @@
 {%- block email_widget -%}
     {% set force_text = true %}
     {%- set type = type|default('email') -%}
-    {{ block('form_widget_simple') }}
+    {{ parent() }}
 {%- endblock email_widget -%}
 
 {%- block table_header_tool_btn -%}

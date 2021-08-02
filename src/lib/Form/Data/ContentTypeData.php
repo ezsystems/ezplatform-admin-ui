@@ -14,7 +14,6 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentTypeUpdateStruct;
  * Base data class for ContentType update form, with FieldDefinitions data and ContentTypeDraft.
  *
  * @property \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft $contentTypeDraft
- * @property \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData[] $fieldDefinitionsData
  */
 class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckable
 {
@@ -23,11 +22,8 @@ class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckabl
      */
     use NewnessChecker;
 
-    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft */
-    protected $contentTypeDraft;
-
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData[] */
-    protected $fieldDefinitionsData = [];
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData[][] */
+    public $fieldDefinitionsData = [];
 
     /**
      * Language Code of currently edited contentTypeDraft.
@@ -36,26 +32,40 @@ class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckabl
      */
     public $languageCode = null;
 
+    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft */
+    protected $contentTypeDraft;
+
     protected function getIdentifierValue(): string
     {
         return $this->contentTypeDraft->identifier;
     }
 
+    /**
+     * @return iterable<string, \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData>
+     */
+    public function getFlatFieldDefinitionsData(): iterable
+    {
+        foreach ($this->fieldDefinitionsData as $outerKey => $fieldDefinitionGroupData) {
+            foreach ($fieldDefinitionGroupData as $innerKey => $fieldDefinitionData) {
+                yield "$outerKey.$innerKey" => $fieldDefinitionData;
+            }
+        }
+    }
+
     public function addFieldDefinitionData(FieldDefinitionData $fieldDefinitionData): void
     {
-        $this->fieldDefinitionsData[] = $fieldDefinitionData;
+        $this->fieldDefinitionsData[$fieldDefinitionData->fieldGroup][$fieldDefinitionData->identifier] = $fieldDefinitionData;
     }
 
     public function replaceFieldDefinitionData(string $fieldDefinitionIdentifier, FieldDefinitionData $fieldDefinitionData): void
     {
-        $currentFieldDefinition = array_filter(
-            $this->fieldDefinitionsData,
-            static function (FieldDefinitionData $fieldDefinitionData) use ($fieldDefinitionIdentifier) {
-                return $fieldDefinitionIdentifier === $fieldDefinitionData->identifier;
+        foreach ($this->fieldDefinitionsData as $key => $fieldDefinitionsByGroup) {
+            if (isset($this->fieldDefinitionsData[$key][$fieldDefinitionIdentifier])) {
+                unset($this->fieldDefinitionsData[$key][$fieldDefinitionIdentifier]);
             }
-        );
+        }
 
-        $this->fieldDefinitionsData[key($currentFieldDefinition)] = $fieldDefinitionData;
+        $this->fieldDefinitionsData[$fieldDefinitionData->fieldGroup][$fieldDefinitionIdentifier] = $fieldDefinitionData;
     }
 
     /**
@@ -63,16 +73,19 @@ class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckabl
      */
     public function sortFieldDefinitions(): void
     {
-        usort(
-            $this->fieldDefinitionsData,
-            static function ($a, $b) {
-                if ($a->fieldDefinition->position === $b->fieldDefinition->position) {
-                    // The identifiers can never be the same
-                    return $a->fieldDefinition->identifier < $b->fieldDefinition->identifier ? -1 : 1;
-                }
+        foreach ($this->fieldDefinitionsData as $key => $fieldDefinitionByGroup) {
+            uasort(
+                $fieldDefinitionByGroup,
+                static function ($a, $b): int {
+                    if ($a->fieldDefinition->position === $b->fieldDefinition->position) {
+                        return $a->fieldDefinition->identifier <=> $b->fieldDefinition->identifier;
+                    }
 
-                return $a->fieldDefinition->position < $b->fieldDefinition->position ? -1 : 1;
-            }
-        );
+                    return $a->fieldDefinition->position <=> $b->fieldDefinition->position;
+                }
+            );
+
+            $this->fieldDefinitionsData[$key] = $fieldDefinitionByGroup;
+        }
     }
 }

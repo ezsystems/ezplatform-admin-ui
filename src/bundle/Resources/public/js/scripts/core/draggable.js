@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const SELECTOR_PLACEHOLDER = '.ez-draggable__placeholder';
     const TIMEOUT_REMOVE_PLACEHOLDERS = 500;
 
@@ -10,6 +10,7 @@
             this.itemsContainer = config.itemsContainer;
             this.selectorItem = config.selectorItem;
             this.selectorPlaceholder = config.selectorPlaceholder || SELECTOR_PLACEHOLDER;
+            this.timeoutRemovePlaceholders = config.timeoutRemovePlaceholders || TIMEOUT_REMOVE_PLACEHOLDERS;
 
             this.onDragStart = this.onDragStart.bind(this);
             this.onDragEnd = this.onDragEnd.bind(this);
@@ -80,7 +81,7 @@
         removePlaceholderAfterTimeout() {
             global.clearTimeout(this.onDragOverTimeout);
 
-            this.onDragOverTimeout = global.setTimeout(() => this.removePlaceholder(), TIMEOUT_REMOVE_PLACEHOLDERS);
+            this.onDragOverTimeout = global.setTimeout(() => this.removePlaceholder(), this.timeoutRemovePlaceholders);
         }
 
         init() {

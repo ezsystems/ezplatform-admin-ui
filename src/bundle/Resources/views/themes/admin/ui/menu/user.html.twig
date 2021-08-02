@@ -28,7 +28,7 @@
 
 {% block item %}
     {% if item.name != 'root' %}
-        {% set link_attributes = item.linkAttributes|merge({'class': (item.linkAttributes.class|default('') ~ ' ibexa-popup-menu__item-action')|trim}) %}
+        {% set link_attributes = item.linkAttributes|merge({'class': (item.linkAttributes.class|default('') ~ ' ibexa-popup-menu__item-content')|trim}) %}
         {% set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' ibexa-popup-menu__item')|trim}) %}
         
         {% do item.setLinkAttributes(link_attributes) %}

@@ -19,8 +19,8 @@
 
 {% block popupLinkElement %}
     {% set classes = [
-        'ibexa-popup-menu__item-action',
-        ((matcher.isCurrent(item) ? 'ibexa-popup-menu__item-action--current')),
+        'ibexa-popup-menu__item-content',
+        ((matcher.isCurrent(item) ? 'ibexa-popup-menu__item-content--current')),
     ] %}
 
     {% set link_attributes = {
@@ -39,7 +39,7 @@
     {% if item.displayed %}
         {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
         {%- set classes = classes|merge(['ibexa-main-menu__item']) %}
-        
+
         {%- if item.extras.separate is defined and item.extras.separate -%}
             {%- set classes = classes|merge(['ibexa-main-menu__item--separator']) -%}
         {%- endif -%}
@@ -57,9 +57,9 @@
         {%- if classes is not empty %}
             {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
         {%- endif %}
-        
+
         {% import 'knp_menu.html.twig' as knp_menu %}
-        
+
         {%- if item.extras.separate is defined and item.extras.separate -%}
             <li class="ibexa-main-menu__separator ibexa-main-menu__separator--top"></li>
         {%- endif -%}
@@ -71,7 +71,7 @@
                 {{ block('spanElement') }}
             {%- endif %}
         </li>
-        
+
         {%- if item.extras.separate is defined and item.extras.separate -%}
             <li class="ibexa-main-menu__separator ibexa-main-menu__separator--bottom"></li>
         {%- endif -%}
