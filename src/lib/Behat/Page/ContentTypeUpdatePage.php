@@ -58,6 +58,7 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             new VisibleCSSLocator('addFieldDefinition', '#ezplatform_content_forms_contenttype_update_addFieldDefinition'),
             new VisibleCSSLocator('fieldDefinitionContainer', '.ibexa-card--toggle-group'),
             new VisibleCSSLocator('fieldDefinitionName', '.ibexa-card--toggle-group .ibexa-card__header .form-check-label'),
+            new VisibleCSSLocator('field', '.form-group'),
             new VisibleCSSLocator('fieldBody', 'ibexa-card__body'),
             new VisibleCSSLocator('fieldCollapsed', 'ibexa-card--collapsed'),
             new VisibleCSSLocator('fieldDefinitionToggler', '.ibexa-card__body-display-toggler'),
