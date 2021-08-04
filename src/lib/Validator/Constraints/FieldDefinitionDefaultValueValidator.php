@@ -4,11 +4,11 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use EzSystems\EzPlatformContentForms\Validator\Constraints\FieldTypeValidator;
 use Symfony\Component\Validator\Constraint;
 
@@ -64,3 +64,5 @@ class FieldDefinitionDefaultValueValidator extends FieldTypeValidator
         return 'defaultValue';
     }
 }
+
+class_alias(FieldDefinitionDefaultValueValidator::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldDefinitionDefaultValueValidator');

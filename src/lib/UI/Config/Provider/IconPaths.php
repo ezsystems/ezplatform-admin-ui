@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
+namespace Ibexa\AdminUi\UI\Config\Provider;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 /**
  * @internal
@@ -32,3 +32,5 @@ final class IconPaths implements ProviderInterface
         ];
     }
 }
+
+class_alias(IconPaths::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Provider\IconPaths');

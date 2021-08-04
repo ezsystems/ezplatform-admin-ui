@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard;
+namespace Ibexa\AdminUi\Form\Data\URLWildcard;
 
 use eZ\Publish\API\Repository\Values\Content\URLWildcard;
 
@@ -38,3 +38,5 @@ class URLWildcardUpdateData extends URLWildcardData
         $this->urlWildcard = $urlWildcard;
     }
 }
+
+class_alias(URLWildcardUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardUpdateData');

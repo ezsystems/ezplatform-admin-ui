@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
+namespace Ibexa\AdminUi\Form\Type\ContentType;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
@@ -66,3 +66,5 @@ class ContentTypeCreateType extends AbstractType
             ->add('create', SubmitType::class, ['label' => /** @Desc("Create a Content Type") */ 'content_type.create']);
     }
 }
+
+class_alias(ContentTypeCreateType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCreateType');

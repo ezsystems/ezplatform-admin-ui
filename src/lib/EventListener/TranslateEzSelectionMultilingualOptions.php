@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\EventListener;
+namespace Ibexa\AdminUi\EventListener;
 
-use EzSystems\EzPlatformAdminUi\Event\FieldDefinitionMappingEvent;
+use Ibexa\Contracts\AdminUi\Event\FieldDefinitionMappingEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class TranslateEzSelectionMultilingualOptions implements EventSubscriberInterface
@@ -44,3 +44,5 @@ class TranslateEzSelectionMultilingualOptions implements EventSubscriberInterfac
         $event->setFieldDefinitionData($fieldDefinitionData);
     }
 }
+
+class_alias(TranslateEzSelectionMultilingualOptions::class, 'EzSystems\EzPlatformAdminUi\EventListener\TranslateEzSelectionMultilingualOptions');

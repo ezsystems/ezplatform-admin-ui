@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Location;
+namespace Ibexa\AdminUi\Form\Data\Location;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 
@@ -60,3 +60,5 @@ abstract class AbstractLocationCopyData
         $this->newParentLocation = $newParentLocation;
     }
 }
+
+class_alias(AbstractLocationCopyData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Location\AbstractLocationCopyData');

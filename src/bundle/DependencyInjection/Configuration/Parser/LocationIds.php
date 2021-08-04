@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser;
+namespace Ibexa\Bundle\AdminUi\DependencyInjection\Configuration\Parser;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\AbstractParser;
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
@@ -71,3 +71,5 @@ class LocationIds extends AbstractParser
         }
     }
 }
+
+class_alias(LocationIds::class, 'EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LocationIds');

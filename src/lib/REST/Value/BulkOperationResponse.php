@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Value;
+namespace Ibexa\AdminUi\REST\Value;
 
 use EzSystems\EzPlatformRest\Value as RestValue;
 
@@ -23,3 +23,5 @@ class BulkOperationResponse extends RestValue
         $this->operations = $operations;
     }
 }
+
+class_alias(BulkOperationResponse::class, 'EzSystems\EzPlatformAdminUi\REST\Value\BulkOperationResponse');

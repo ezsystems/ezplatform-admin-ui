@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Component;
+namespace Ibexa\AdminUi\Component;
 
 class Registry
 {
@@ -50,3 +50,5 @@ class Registry
         $this->components[$group] = $components;
     }
 }
+
+class_alias(Registry::class, 'EzSystems\EzPlatformAdminUi\Component\Registry');

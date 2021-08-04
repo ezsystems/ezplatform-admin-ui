@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Service\Role;
+namespace Ibexa\AdminUi\Service\Role;
 
 use eZ\Publish\API\Repository;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
@@ -17,9 +17,9 @@ use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
-use EzSystems\EzPlatformAdminUi\Form\Data\PolicyData;
-use EzSystems\EzPlatformAdminUi\Form\Data\RoleAssignmentData;
-use EzSystems\EzPlatformAdminUi\Form\Data\RoleData;
+use Ibexa\AdminUi\Form\Data\PolicyData;
+use Ibexa\AdminUi\Form\Data\RoleAssignmentData;
+use Ibexa\AdminUi\Form\Data\RoleData;
 
 class RoleService
 {
@@ -216,3 +216,5 @@ class RoleService
         }
     }
 }
+
+class_alias(RoleService::class, 'EzSystems\EzPlatformAdminUi\Service\Role\RoleService');

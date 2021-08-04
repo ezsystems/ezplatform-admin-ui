@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Query;
-use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Provider;
+use Ibexa\Contracts\AdminUi\UniversalDiscovery\Provider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -118,3 +118,5 @@ class UniversalDiscoveryController extends Controller
         ]);
     }
 }
+
+class_alias(UniversalDiscoveryController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController');

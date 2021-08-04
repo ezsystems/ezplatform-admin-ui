@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Siteaccess;
+namespace Ibexa\AdminUi\Siteaccess;
 
 use eZ\Bundle\EzPublishCoreBundle\ApiLoader\RepositoryConfigurationProvider;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
@@ -88,3 +88,5 @@ abstract class AbstractSiteaccessPreviewVoter implements SiteaccessPreviewVoterI
      */
     abstract protected function getRootLocationIds(string $siteaccess): array;
 }
+
+class_alias(AbstractSiteaccessPreviewVoter::class, 'EzSystems\EzPlatformAdminUi\Siteaccess\AbstractSiteaccessPreviewVoter');

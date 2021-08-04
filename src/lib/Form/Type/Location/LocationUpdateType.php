@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Location;
+namespace Ibexa\AdminUi\Form\Type\Location;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortFieldChoiceType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortOrderChoiceType;
+use Ibexa\AdminUi\Form\Data\Location\LocationUpdateData;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Form\Type\ContentType\SortFieldChoiceType;
+use Ibexa\AdminUi\Form\Type\ContentType\SortOrderChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -53,3 +53,5 @@ class LocationUpdateType extends AbstractType
         ]);
     }
 }
+
+class_alias(LocationUpdateType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType');

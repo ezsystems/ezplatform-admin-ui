@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Service;
+namespace Ibexa\AdminUi\UI\Service;
 
 use DateTimeInterface;
 
@@ -14,3 +14,5 @@ interface DateTimeFormatterInterface
 {
     public function formatDiff(DateTimeInterface $from, DateTimeInterface $to): string;
 }
+
+class_alias(DateTimeFormatterInterface::class, 'EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatterInterface');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\View;
+namespace Ibexa\AdminUi\View;
 
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,3 +27,5 @@ class ContentTranslateSuccessView extends BaseView
         $this->setControllerReference(new ControllerReference('EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::translationSuccessAction'));
     }
 }
+
+class_alias(ContentTranslateSuccessView::class, 'EzSystems\EzPlatformAdminUi\View\ContentTranslateSuccessView');

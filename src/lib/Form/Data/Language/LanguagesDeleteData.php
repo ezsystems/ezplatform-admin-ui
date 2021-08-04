@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Language;
+namespace Ibexa\AdminUi\Form\Data\Language;
 
 use eZ\Publish\API\Repository\Values\Content\Language;
 
@@ -42,3 +42,5 @@ class LanguagesDeleteData
         $this->languages = $languages;
     }
 }
+
+class_alias(LanguagesDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguagesDeleteData');

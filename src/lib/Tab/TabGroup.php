@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab;
+namespace Ibexa\AdminUi\Tab;
 
 class TabGroup
 {
@@ -78,3 +78,5 @@ class TabGroup
         unset($this->tabs[$identifier]);
     }
 }
+
+class_alias(TabGroup::class, 'EzSystems\EzPlatformAdminUi\Tab\TabGroup');

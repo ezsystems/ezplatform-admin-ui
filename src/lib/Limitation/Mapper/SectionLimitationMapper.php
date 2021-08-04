@@ -4,12 +4,12 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Limitation\Mapper;
+namespace Ibexa\AdminUi\Limitation\Mapper;
 
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperInterface;
+use Ibexa\AdminUi\Limitation\LimitationValueMapperInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 
@@ -52,3 +52,5 @@ class SectionLimitationMapper extends MultipleSelectionBasedMapper implements Li
         return $values;
     }
 }
+
+class_alias(SectionLimitationMapper::class, 'EzSystems\EzPlatformAdminUi\Limitation\Mapper\SectionLimitationMapper');

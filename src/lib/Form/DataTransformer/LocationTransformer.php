@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
@@ -75,3 +75,5 @@ class LocationTransformer implements DataTransformerInterface
         }
     }
 }
+
+class_alias(LocationTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\LocationTransformer');

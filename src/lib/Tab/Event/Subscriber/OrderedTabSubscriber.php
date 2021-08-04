@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\Event\Subscriber;
+namespace Ibexa\AdminUi\Tab\Event\Subscriber;
 
-use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
-use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
-use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
-use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
+use Ibexa\AdminUi\Tab\Event\TabEvents;
+use Ibexa\AdminUi\Tab\Event\TabGroupEvent;
+use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
+use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -77,3 +77,5 @@ class OrderedTabSubscriber implements EventSubscriberInterface
         return $tab1->getOrder() <=> $tab2->getOrder();
     }
 }
+
+class_alias(OrderedTabSubscriber::class, 'EzSystems\EzPlatformAdminUi\Tab\Event\Subscriber\OrderedTabSubscriber');

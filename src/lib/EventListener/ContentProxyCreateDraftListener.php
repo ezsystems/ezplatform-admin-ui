@@ -6,15 +6,15 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\EventListener;
+namespace Ibexa\AdminUi\EventListener;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Field;
-use EzSystems\EzPlatformAdminUi\Event\ContentProxyCreateEvent;
-use EzSystems\EzPlatformAdminUi\Event\ContentProxyTranslateEvent;
-use EzSystems\EzPlatformAdminUi\UserSetting\Autosave as AutosaveSetting;
+use Ibexa\Contracts\AdminUi\Event\ContentProxyCreateEvent;
+use Ibexa\Contracts\AdminUi\Event\ContentProxyTranslateEvent;
+use Ibexa\AdminUi\UserSetting\Autosave as AutosaveSetting;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -157,3 +157,5 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
         }, $translatableFields);
     }
 }
+
+class_alias(ContentProxyCreateDraftListener::class, 'EzSystems\EzPlatformAdminUi\EventListener\ContentProxyCreateDraftListener');

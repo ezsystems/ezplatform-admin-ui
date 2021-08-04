@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Version;
+namespace Ibexa\AdminUi\Form\Type\Version;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use Ibexa\AdminUi\Form\Data\Version\VersionRemoveData;
+use Ibexa\AdminUi\Form\Type\Content\ContentInfoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -43,3 +43,5 @@ class VersionRemoveType extends AbstractType
         ]);
     }
 }
+
+class_alias(VersionRemoveType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType');

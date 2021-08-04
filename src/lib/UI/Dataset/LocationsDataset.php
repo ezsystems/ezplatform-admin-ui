@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
+namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
-use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
+use Ibexa\AdminUi\UI\Value as UIValue;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 class LocationsDataset
 {
@@ -77,3 +77,5 @@ class LocationsDataset
         return $this->data;
     }
 }
+
+class_alias(LocationsDataset::class, 'EzSystems\EzPlatformAdminUi\UI\Dataset\LocationsDataset');

@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
+namespace Ibexa\AdminUi\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\URLService;
 use eZ\Publish\API\Repository\Values\URL\URLQuery;
@@ -61,3 +61,5 @@ class URLSearchAdapter implements AdapterInterface
         return $this->urlService->findUrls($query)->items;
     }
 }
+
+class_alias(URLSearchAdapter::class, 'EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\URLSearchAdapter');

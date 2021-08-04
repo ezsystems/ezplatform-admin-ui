@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\User;
+namespace Ibexa\AdminUi\UI\Value\User;
 
 use eZ\Publish\API\Repository\Values\User\Limitation\RoleLimitation as APIRoleLimitation;
 use eZ\Publish\API\Repository\Values\User\Role as APIRole;
@@ -60,3 +60,5 @@ class Role extends RoleAssignment
         $this->limitation = $roleAssignment->limitation;
     }
 }
+
+class_alias(Role::class, 'EzSystems\EzPlatformAdminUi\UI\Value\User\Role');

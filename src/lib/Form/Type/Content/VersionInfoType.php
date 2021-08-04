@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content;
+namespace Ibexa\AdminUi\Form\Type\Content;
 
 use eZ\Publish\API\Repository\ContentService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\VersionInfoTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\VersionInfoTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,3 +43,5 @@ class VersionInfoType extends AbstractType
             ->addViewTransformer(new VersionInfoTransformer($this->contentService));
     }
 }
+
+class_alias(VersionInfoType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\VersionInfoType');

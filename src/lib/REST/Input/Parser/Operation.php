@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Input\Parser;
+namespace Ibexa\AdminUi\REST\Input\Parser;
 
 use EzSystems\EzPlatformRest\Input\BaseParser;
 use EzSystems\EzPlatformRest\Input\ParsingDispatcher;
 use EzSystems\EzPlatformRest\Exceptions;
-use EzSystems\EzPlatformAdminUi\REST\Value\Operation as OperationValue;
+use Ibexa\AdminUi\REST\Value\Operation as OperationValue;
 
 class Operation extends BaseParser
 {
@@ -56,3 +56,5 @@ class Operation extends BaseParser
         return $operation;
     }
 }
+
+class_alias(Operation::class, 'EzSystems\EzPlatformAdminUi\REST\Input\Parser\Operation');

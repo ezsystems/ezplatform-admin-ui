@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
+namespace Ibexa\AdminUi\Form\Type\Policy;
 
-use EzSystems\EzPlatformAdminUi\Translation\Extractor\PolicyTranslationExtractor;
+use Ibexa\AdminUi\Translation\Extractor\PolicyTranslationExtractor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -115,3 +115,5 @@ class PolicyChoiceType extends AbstractType
         return $policyChoices;
     }
 }
+
+class_alias(PolicyChoiceType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType');

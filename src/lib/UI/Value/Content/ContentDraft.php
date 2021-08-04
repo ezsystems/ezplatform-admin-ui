@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
+namespace Ibexa\AdminUi\UI\Value\Content;
 
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
@@ -69,3 +69,5 @@ class ContentDraft implements ContentDraftInterface
         return true;
     }
 }
+
+class_alias(ContentDraft::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Content\ContentDraft');

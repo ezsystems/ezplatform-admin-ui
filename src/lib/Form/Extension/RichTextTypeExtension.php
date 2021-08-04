@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Extension;
+namespace Ibexa\AdminUi\Form\Extension;
 
 use EzSystems\EzPlatformRichText\Form\Type\RichTextType;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -43,3 +43,5 @@ class RichTextTypeExtension extends AbstractTypeExtension
         return [RichTextType::class];
     }
 }
+
+class_alias(RichTextTypeExtension::class, 'EzSystems\EzPlatformAdminUi\Form\Extension\RichTextTypeExtension');

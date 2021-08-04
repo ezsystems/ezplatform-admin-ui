@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard;
+namespace Ibexa\AdminUi\Form\Data\URLWildcard;
 
 final class URLWildcardDeleteData
 {
@@ -34,3 +34,5 @@ final class URLWildcardDeleteData
         $this->urlWildcardsChoices = $urlWildcardsChoices;
     }
 }
+
+class_alias(URLWildcardDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData');

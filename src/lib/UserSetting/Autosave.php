@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UserSetting;
+namespace Ibexa\AdminUi\UserSetting;
 
 use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
 use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
@@ -121,3 +121,5 @@ class Autosave implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 }
+
+class_alias(Autosave::class, 'EzSystems\EzPlatformAdminUi\UserSetting\Autosave');

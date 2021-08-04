@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
+namespace Ibexa\Bundle\AdminUi\ParamConverter;
 
 use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
@@ -62,3 +62,5 @@ class ObjectStateParamConverter implements ParamConverterInterface
         return ObjectState::class === $configuration->getClass();
     }
 }
+
+class_alias(ObjectStateParamConverter::class, 'EzSystems\EzPlatformAdminUiBundle\ParamConverter\ObjectStateParamConverter');

@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -22,13 +22,13 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
-use EzSystems\EzPlatformAdminUi\Event\ContentProxyCreateEvent;
-use EzSystems\EzPlatformAdminUi\Event\Options;
-use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher;
-use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
-use EzSystems\EzPlatformAdminUi\View\CreateContentOnTheFlyView;
-use EzSystems\EzPlatformAdminUi\View\EditContentOnTheFlyView;
-use EzSystems\EzPlatformAdminUi\View\EditContentOnTheFlySuccessView;
+use Ibexa\Contracts\AdminUi\Event\ContentProxyCreateEvent;
+use Ibexa\AdminUi\Event\Options;
+use Ibexa\AdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher;
+use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUser;
+use Ibexa\AdminUi\View\CreateContentOnTheFlyView;
+use Ibexa\AdminUi\View\EditContentOnTheFlyView;
+use Ibexa\AdminUi\View\EditContentOnTheFlySuccessView;
 use EzSystems\EzPlatformContentForms\Data\Mapper\ContentCreateMapper;
 use EzSystems\EzPlatformContentForms\Data\Mapper\ContentUpdateMapper;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
@@ -359,3 +359,5 @@ class ContentOnTheFlyController extends Controller
         return $view;
     }
 }
+
+class_alias(ContentOnTheFlyController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentOnTheFlyController');

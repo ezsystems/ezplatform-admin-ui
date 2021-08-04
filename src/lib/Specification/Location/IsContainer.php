@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification\Location;
+namespace Ibexa\AdminUi\Specification\Location;
 
-use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
+use Ibexa\AdminUi\Specification\AbstractSpecification;
 
 class IsContainer extends AbstractSpecification
 {
@@ -22,3 +22,5 @@ class IsContainer extends AbstractSpecification
         return $item->getContent()->getContentType()->isContainer;
     }
 }
+
+class_alias(IsContainer::class, 'EzSystems\EzPlatformAdminUi\Specification\Location\IsContainer');

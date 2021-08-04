@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification\Location;
+namespace Ibexa\AdminUi\Specification\Location;
 
 use eZ\Publish\API\Repository\LocationService;
-use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
+use Ibexa\AdminUi\Specification\AbstractSpecification;
 
 class HasChildren extends AbstractSpecification
 {
@@ -36,3 +36,5 @@ class HasChildren extends AbstractSpecification
         return 0 < $childCount;
     }
 }
+
+class_alias(HasChildren::class, 'EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren');

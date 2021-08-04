@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Role;
+namespace Ibexa\AdminUi\Form\Data\Role;
 
 class RolesDeleteData
 {
@@ -37,3 +37,5 @@ class RolesDeleteData
         $this->roles = $roles;
     }
 }
+
+class_alias(RolesDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Role\RolesDeleteData');

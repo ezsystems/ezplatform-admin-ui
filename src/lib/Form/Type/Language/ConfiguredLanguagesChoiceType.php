@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
+namespace Ibexa\AdminUi\Form\Type\Language;
 
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader;
+use Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader;
 
 /**
  * Form Type allowing to select from all configured (also not enabled) Languages.
@@ -23,3 +23,5 @@ class ConfiguredLanguagesChoiceType extends AbstractLanguageChoiceType
         parent::__construct($languageChoiceLoader);
     }
 }
+
+class_alias(ConfiguredLanguagesChoiceType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Language\ConfiguredLanguagesChoiceType');

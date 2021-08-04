@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType;
+namespace Ibexa\AdminUi\Form\DataTransformer\FieldType;
 
 use eZ\Publish\Core\FieldType\ImageAsset\Value;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -64,3 +64,5 @@ class ImageAssetValueTransformer extends AbstractBinaryBaseTransformer implement
         return new Value($value['destinationContentId'], $value['alternativeText']);
     }
 }
+
+class_alias(ImageAssetValueTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType\ImageAssetValueTransformer');

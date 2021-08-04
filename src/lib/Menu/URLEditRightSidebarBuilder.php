@@ -4,10 +4,10 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Menu;
+namespace Ibexa\AdminUi\Menu;
 
 use eZ\Publish\API\Repository\Values\URL\URL;
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -77,3 +77,5 @@ class URLEditRightSidebarBuilder extends AbstractBuilder implements TranslationC
         ];
     }
 }
+
+class_alias(URLEditRightSidebarBuilder::class, 'EzSystems\EzPlatformAdminUi\Menu\URLEditRightSidebarBuilder');

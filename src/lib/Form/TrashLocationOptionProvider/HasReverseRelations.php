@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider;
+namespace Ibexa\AdminUi\Form\TrashLocationOptionProvider;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -58,3 +58,5 @@ final class HasReverseRelations implements TrashLocationOptionProvider
             ]);
     }
 }
+
+class_alias(HasReverseRelations::class, 'EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasReverseRelations');

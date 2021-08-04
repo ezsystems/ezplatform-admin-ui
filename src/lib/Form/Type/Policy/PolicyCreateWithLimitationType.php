@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
+namespace Ibexa\AdminUi\Form\Type\Policy;
 
 use eZ\Publish\API\Repository\RoleService;
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
+use Ibexa\AdminUi\Form\Data\Policy\PolicyCreateData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType;
+use Ibexa\AdminUi\Form\Type\Role\LimitationType;
 
 class PolicyCreateWithLimitationType extends AbstractType
 {
@@ -115,3 +115,5 @@ class PolicyCreateWithLimitationType extends AbstractType
         return $limitations;
     }
 }
+
+class_alias(PolicyCreateWithLimitationType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateWithLimitationType');

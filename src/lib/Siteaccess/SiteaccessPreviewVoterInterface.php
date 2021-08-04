@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Siteaccess;
+namespace Ibexa\AdminUi\Siteaccess;
 
 interface SiteaccessPreviewVoterInterface
 {
@@ -19,3 +19,5 @@ interface SiteaccessPreviewVoterInterface
      */
     public function vote(SiteaccessPreviewVoterContext $context): bool;
 }
+
+class_alias(SiteaccessPreviewVoterInterface::class, 'EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessPreviewVoterInterface');

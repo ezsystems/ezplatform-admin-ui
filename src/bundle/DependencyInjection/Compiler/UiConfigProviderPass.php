@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
+namespace Ibexa\Bundle\AdminUi\DependencyInjection\Compiler;
 
-use EzSystems\EzPlatformAdminUi\UI\Config\Aggregator;
+use Ibexa\AdminUi\UI\Config\Aggregator;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
@@ -45,3 +45,5 @@ class UiConfigProviderPass implements CompilerPassInterface
         }
     }
 }
+
+class_alias(UiConfigProviderPass::class, 'EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\UiConfigProviderPass');

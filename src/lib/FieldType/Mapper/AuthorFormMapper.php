@@ -4,12 +4,12 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\FieldType\Mapper;
+namespace Ibexa\AdminUi\FieldType\Mapper;
 
 use eZ\Publish\Core\FieldType\Author\Type;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
-use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
 use EzSystems\EzPlatformContentForms\FieldType\FieldValueFormMapperInterface;
 use EzSystems\EzPlatformContentForms\Form\Type\FieldType\AuthorFieldType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -75,3 +75,5 @@ class AuthorFormMapper implements FieldDefinitionFormMapperInterface, FieldValue
             ]);
     }
 }
+
+class_alias(AuthorFormMapper::class, 'EzSystems\EzPlatformAdminUi\FieldType\Mapper\AuthorFormMapper');

@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Permission;
+namespace Ibexa\AdminUi\Permission;
 
 use eZ\Publish\API\Repository\Values\User\LookupLimitationResult;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
 
 /**
  * @internal
@@ -85,3 +85,5 @@ final class LookupLimitationsTransformer
         return $groupedLimitationsValues;
     }
 }
+
+class_alias(LookupLimitationsTransformer::class, 'EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer');

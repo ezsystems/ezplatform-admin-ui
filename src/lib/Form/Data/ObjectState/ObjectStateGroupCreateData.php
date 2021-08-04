@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ObjectState;
+namespace Ibexa\AdminUi\Form\Data\ObjectState;
 
 class ObjectStateGroupCreateData
 {
@@ -48,3 +48,5 @@ class ObjectStateGroupCreateData
         $this->name = $name;
     }
 }
+
+class_alias(ObjectStateGroupCreateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupCreateData');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
@@ -16,12 +16,12 @@ use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\AdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
+use Ibexa\AdminUi\Form\Data\Role\RoleAssignmentCreateData;
+use Ibexa\AdminUi\Form\Data\Role\RoleAssignmentDeleteData;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -278,3 +278,5 @@ class RoleAssignmentController extends Controller
         return $limitations;
     }
 }
+
+class_alias(RoleAssignmentController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\RoleAssignmentController');

@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace Ibexa\Bundle\AdminUi\Templating\Twig;
 
-use EzSystems\EzPlatformAdminUi\Component\Registry as ComponentRegistry;
-use EzSystems\EzPlatformAdminUi\Component\Renderer\RendererInterface;
+use Ibexa\AdminUi\Component\Registry as ComponentRegistry;
+use Ibexa\Contracts\AdminUi\Component\Renderer\RendererInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -53,3 +53,5 @@ class ComponentExtension extends AbstractExtension
         return $this->renderer->renderSingle($group, $id, $parameters);
     }
 }
+
+class_alias(ComponentExtension::class, 'EzSystems\EzPlatformAdminUiBundle\Templating\Twig\ComponentExtension');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
+namespace Ibexa\AdminUi\Tab\Dashboard;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -15,7 +15,7 @@ use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\Repository\LocationResolver\LocationResolver;
-use EzSystems\EzPlatformAdminUi\Pagination\Mapper\AbstractPagerContentToDataMapper;
+use Ibexa\AdminUi\Pagination\Mapper\AbstractPagerContentToDataMapper;
 use Pagerfanta\Pagerfanta;
 
 class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
@@ -100,3 +100,5 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
         return $data;
     }
 }
+
+class_alias(PagerContentToDataMapper::class, 'EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper');

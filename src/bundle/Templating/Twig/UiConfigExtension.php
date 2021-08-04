@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace Ibexa\Bundle\AdminUi\Templating\Twig;
 
-use EzSystems\EzPlatformAdminUi\UI\Config\Aggregator;
-use EzSystems\EzPlatformAdminUi\UI\Config\ConfigWrapper;
+use Ibexa\AdminUi\UI\Config\Aggregator;
+use Ibexa\AdminUi\UI\Config\ConfigWrapper;
 use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 use ProxyManager\Proxy\LazyLoadingInterface;
 use Twig\Environment;
@@ -65,3 +65,5 @@ class UiConfigExtension extends AbstractExtension implements GlobalsInterface
         return $factory->createProxy(ConfigWrapper::class, $initializer);
     }
 }
+
+class_alias(UiConfigExtension::class, 'EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UiConfigExtension');

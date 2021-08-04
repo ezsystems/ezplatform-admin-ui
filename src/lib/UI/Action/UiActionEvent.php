@@ -6,8 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Action;
+namespace Ibexa\AdminUi\UI\Action;
 
+use Ibexa\Contracts\AdminUi\UI\Action\UiActionEventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -104,3 +105,5 @@ class UiActionEvent extends Event implements UiActionEventInterface
         $this->response = $response;
     }
 }
+
+class_alias(UiActionEvent::class, 'EzSystems\EzPlatformAdminUi\UI\Action\UiActionEvent');

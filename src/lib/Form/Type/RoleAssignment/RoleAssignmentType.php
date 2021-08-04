@@ -4,13 +4,13 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\RoleAssignment;
+namespace Ibexa\AdminUi\Form\Type\RoleAssignment;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\RoleAssignmentData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
-use EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
-use EzSystems\EzPlatformAdminUi\Form\Type\UserChoiceType;
-use EzSystems\EzPlatformAdminUi\Form\Type\UserGroupChoiceType;
+use Ibexa\AdminUi\Form\Data\RoleAssignmentData;
+use Ibexa\AdminUi\Form\Type\Section\SectionChoiceType;
+use Ibexa\AdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
+use Ibexa\AdminUi\Form\Type\UserChoiceType;
+use Ibexa\AdminUi\Form\Type\UserGroupChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,3 +52,5 @@ class RoleAssignmentType extends AbstractType
         ]);
     }
 }
+
+class_alias(RoleAssignmentType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\RoleAssignment\RoleAssignmentType');

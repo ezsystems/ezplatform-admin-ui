@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification;
+namespace Ibexa\AdminUi\Specification;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\UserService;
@@ -36,3 +36,5 @@ class ContentIsUser implements ContentSpecification
         return $this->userService->isUser($content);
     }
 }
+
+class_alias(ContentIsUser::class, 'EzSystems\EzPlatformAdminUi\Specification\ContentIsUser');

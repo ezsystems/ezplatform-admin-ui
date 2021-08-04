@@ -6,8 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Notification;
+namespace Ibexa\AdminUi\Notification;
 
+use Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class FlashBagNotificationHandler implements NotificationHandlerInterface
@@ -62,3 +63,5 @@ final class FlashBagNotificationHandler implements NotificationHandlerInterface
         $this->session->getFlashBag()->add(self::TYPE_ERROR, $message);
     }
 }
+
+class_alias(FlashBagNotificationHandler::class, 'EzSystems\EzPlatformAdminUi\Notification\FlashBagNotificationHandler');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Exception;
+namespace Ibexa\AdminUi\Exception;
 
 use Exception;
 use Throwable;
@@ -26,3 +26,5 @@ class NoValidResultException extends Exception
         parent::__construct($message, $code, $previous);
     }
 }
+
+class_alias(NoValidResultException::class, 'EzSystems\EzPlatformAdminUi\Exception\NoValidResultException');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
+namespace Ibexa\AdminUi\Form\Data\Section;
 
 use eZ\Publish\API\Repository\Values\Content\Section;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -98,3 +98,5 @@ class SectionUpdateData
         $this->section = $section;
     }
 }
+
+class_alias(SectionUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData');

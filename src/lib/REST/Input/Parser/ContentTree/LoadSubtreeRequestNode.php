@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree;
+namespace Ibexa\AdminUi\REST\Input\Parser\ContentTree;
 
 use EzSystems\EzPlatformRest\Exceptions;
 use EzSystems\EzPlatformRest\Input\BaseParser;
 use EzSystems\EzPlatformRest\Input\ParsingDispatcher;
-use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode as LoadSubtreeRequestNodeValue;
+use Ibexa\AdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode as LoadSubtreeRequestNodeValue;
 
 class LoadSubtreeRequestNode extends BaseParser
 {
@@ -52,3 +52,5 @@ class LoadSubtreeRequestNode extends BaseParser
         );
     }
 }
+
+class_alias(LoadSubtreeRequestNode::class, 'EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentTree\LoadSubtreeRequestNode');

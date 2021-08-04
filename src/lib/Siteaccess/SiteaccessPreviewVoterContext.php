@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Siteaccess;
+namespace Ibexa\AdminUi\Siteaccess;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
@@ -69,3 +69,5 @@ final class SiteaccessPreviewVoterContext
         return $this->versionInfo;
     }
 }
+
+class_alias(SiteaccessPreviewVoterContext::class, 'EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessPreviewVoterContext');

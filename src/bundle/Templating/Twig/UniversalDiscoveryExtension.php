@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace Ibexa\Bundle\AdminUi\Templating\Twig;
 
-use EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver;
+use Ibexa\AdminUi\UniversalDiscovery\ConfigResolver;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -76,3 +76,5 @@ class UniversalDiscoveryExtension extends AbstractExtension
         return lcfirst(implode('', $words));
     }
 }
+
+class_alias(UniversalDiscoveryExtension::class, 'EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension');

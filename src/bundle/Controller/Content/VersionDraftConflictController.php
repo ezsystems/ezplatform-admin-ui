@@ -6,16 +6,16 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller\Content;
+namespace Ibexa\Bundle\AdminUi\Controller\Content;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\UserService;
-use EzSystems\EzPlatformAdminUi\Specification\Content\ContentDraftHasConflict;
-use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
-use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
+use Ibexa\AdminUi\Specification\Content\ContentDraftHasConflict;
+use Ibexa\AdminUi\Specification\ContentIsUser;
+use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -115,3 +115,5 @@ class VersionDraftConflictController extends Controller
         return new Response();
     }
 }
+
+class_alias(VersionDraftConflictController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\Content\VersionDraftConflictController');

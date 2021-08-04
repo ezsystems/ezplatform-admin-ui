@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Module\ContentTree;
+namespace Ibexa\AdminUi\UI\Module\ContentTree;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
@@ -20,8 +20,8 @@ use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
-use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node;
+use Ibexa\AdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
+use Ibexa\AdminUi\REST\Value\ContentTree\Node;
 
 /**
  * @internal
@@ -311,3 +311,5 @@ final class NodeFactory
         }
     }
 }
+
+class_alias(NodeFactory::class, 'EzSystems\EzPlatformAdminUi\UI\Module\ContentTree\NodeFactory');

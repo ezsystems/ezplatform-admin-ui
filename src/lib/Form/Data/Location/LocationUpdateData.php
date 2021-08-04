@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Location;
+namespace Ibexa\AdminUi\Form\Data\Location;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 
@@ -90,3 +90,5 @@ class LocationUpdateData
         return $this->sortOrder;
     }
 }
+
+class_alias(LocationUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData');

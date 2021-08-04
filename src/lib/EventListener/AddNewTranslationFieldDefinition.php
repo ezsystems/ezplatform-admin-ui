@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\EventListener;
+namespace Ibexa\AdminUi\EventListener;
 
-use EzSystems\EzPlatformAdminUi\Event\FieldDefinitionMappingEvent;
+use Ibexa\Contracts\AdminUi\Event\FieldDefinitionMappingEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AddNewTranslationFieldDefinition implements EventSubscriberInterface
@@ -36,3 +36,5 @@ class AddNewTranslationFieldDefinition implements EventSubscriberInterface
         $event->setFieldDefinitionData($fieldDefinitionData);
     }
 }
+
+class_alias(AddNewTranslationFieldDefinition::class, 'EzSystems\EzPlatformAdminUi\EventListener\AddNewTranslationFieldDefinition');

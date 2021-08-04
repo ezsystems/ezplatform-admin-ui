@@ -4,9 +4,9 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget;
+namespace Ibexa\AdminUi\Form\Type\UniversalDiscoveryWidget;
 
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -112,3 +112,5 @@ class UniversalDiscoveryWidgetType extends AbstractType
         );
     }
 }
+
+class_alias(UniversalDiscoveryWidgetType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType');

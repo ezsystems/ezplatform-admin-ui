@@ -6,8 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\FormMapper;
+namespace Ibexa\AdminUi\Form\Data\FormMapper;
 
+use Ibexa\Contracts\AdminUi\Form\Data\FormMapper\FormDataMapperInterface;
 use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData;
@@ -56,3 +57,5 @@ class ContentCreateMapper implements FormDataMapperInterface
             ->setAllowedTypes('parentLocation', '\eZ\Publish\API\Repository\Values\Content\LocationCreateStruct');
     }
 }
+
+class_alias(ContentCreateMapper::class, 'EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentCreateMapper');

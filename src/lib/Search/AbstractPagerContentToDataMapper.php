@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Search;
+namespace Ibexa\AdminUi\Search;
 
 use function class_alias;
 
@@ -24,3 +24,5 @@ if (false) {
     {
     }
 }
+
+class_alias(AbstractPagerContentToDataMapper::class, 'EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper');

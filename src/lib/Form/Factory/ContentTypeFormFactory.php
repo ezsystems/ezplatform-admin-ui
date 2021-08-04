@@ -6,16 +6,16 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Factory;
+namespace Ibexa\AdminUi\Form\Factory;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeCopyData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCopyType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation\TranslationAddType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeEditType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation\TranslationRemoveType;
+use Ibexa\AdminUi\Form\Data\ContentType\ContentTypeCopyData;
+use Ibexa\AdminUi\Form\Data\ContentType\ContentTypeEditData;
+use Ibexa\AdminUi\Form\Data\ContentType\Translation\TranslationAddData;
+use Ibexa\AdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
+use Ibexa\AdminUi\Form\Type\ContentType\ContentTypeCopyType;
+use Ibexa\AdminUi\Form\Type\ContentType\Translation\TranslationAddType;
+use Ibexa\AdminUi\Form\Type\ContentType\ContentTypeEditType;
+use Ibexa\AdminUi\Form\Type\ContentType\Translation\TranslationRemoveType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
@@ -98,3 +98,5 @@ class ContentTypeFormFactory
         return $this->formFactory->createNamed($name, ContentTypeCopyType::class, $data, $options);
     }
 }
+
+class_alias(ContentTypeFormFactory::class, 'EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory');

@@ -4,9 +4,9 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\FieldType;
+namespace Ibexa\AdminUi\FieldType;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Symfony\Component\Form\FormInterface;
 
 /**
@@ -47,3 +47,5 @@ class FieldTypeDefinitionFormMapperDispatcher implements FieldTypeDefinitionForm
         $this->mappers[$fieldTypeIdentifier]->mapFieldDefinitionForm($fieldForm, $data);
     }
 }
+
+class_alias(FieldTypeDefinitionFormMapperDispatcher::class, 'EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher');

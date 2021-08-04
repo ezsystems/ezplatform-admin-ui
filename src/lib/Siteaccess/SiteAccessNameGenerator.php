@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Siteaccess;
+namespace Ibexa\AdminUi\Siteaccess;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 
@@ -17,3 +17,5 @@ final class SiteAccessNameGenerator implements SiteAccessNameGeneratorInterface
         return $siteAccess->name;
     }
 }
+
+class_alias(SiteAccessNameGenerator::class, 'EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessNameGenerator');

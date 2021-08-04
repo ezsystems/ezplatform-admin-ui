@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Processor\User;
+namespace Ibexa\AdminUi\Form\Processor\User;
 
 use eZ\Publish\API\Repository\UserService;
-use EzSystems\EzPlatformAdminUi\Event\UserOnTheFlyEvents;
+use Ibexa\Contracts\AdminUi\Event\UserOnTheFlyEvents;
 use EzSystems\EzPlatformContentForms\Data\User\UserCreateData;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use EzSystems\EzPlatformContentForms\Form\Processor\User\UserUpdateFormProcessor;
@@ -102,3 +102,5 @@ class UserOnTheFlyProcessor implements EventSubscriberInterface
         }
     }
 }
+
+class_alias(UserOnTheFlyProcessor::class, 'EzSystems\EzPlatformAdminUi\Form\Processor\User\UserOnTheFlyProcessor');

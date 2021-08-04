@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace Ibexa\Bundle\AdminUi\Templating\Twig;
 
 use EzSystems\EzPlatformUser\UserSetting\UserSettingArrayAccessor;
 use Twig\Extension\AbstractExtension;
@@ -43,3 +43,5 @@ class UserPreferencesGlobalExtension extends AbstractExtension implements Global
         ];
     }
 }
+
+class_alias(UserPreferencesGlobalExtension::class, 'EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UserPreferencesGlobalExtension');

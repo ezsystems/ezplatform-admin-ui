@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
+namespace Ibexa\AdminUi\UI\Value\Content;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\Repository\Values\Content\Relation as CoreRelation;
@@ -80,3 +80,5 @@ class Relation extends CoreRelation implements RelationInterface
         return true;
     }
 }
+
+class_alias(Relation::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Content\Relation');

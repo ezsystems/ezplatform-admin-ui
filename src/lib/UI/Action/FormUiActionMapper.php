@@ -6,8 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Action;
+namespace Ibexa\AdminUi\UI\Action;
 
+use Ibexa\Contracts\AdminUi\UI\Action\FormUiActionMapperInterface;
+use Ibexa\Contracts\AdminUi\UI\Action\UiActionEventInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
 
@@ -31,3 +33,5 @@ class FormUiActionMapper implements FormUiActionMapperInterface
         return true;
     }
 }
+
+class_alias(FormUiActionMapper::class, 'EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapper');

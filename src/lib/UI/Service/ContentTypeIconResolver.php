@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Service;
+namespace Ibexa\AdminUi\UI\Service;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Symfony\Component\Asset\Packages;
@@ -81,3 +81,5 @@ final class ContentTypeIconResolver
         return sprintf(self::PARAM_NAME_FORMAT, $identifier);
     }
 }
+
+class_alias(ContentTypeIconResolver::class, 'EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver');

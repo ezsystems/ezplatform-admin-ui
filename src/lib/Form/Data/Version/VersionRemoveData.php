@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Version;
+namespace Ibexa\AdminUi\Form\Data\Version;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 
@@ -63,3 +63,5 @@ class VersionRemoveData
         $this->versions = $versions;
     }
 }
+
+class_alias(VersionRemoveData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData');

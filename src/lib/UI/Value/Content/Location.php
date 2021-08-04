@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
+namespace Ibexa\AdminUi\UI\Value\Content;
 
 use eZ\Publish\Core\Repository\Values\Content\Location as CoreLocation;
 use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
@@ -88,3 +88,5 @@ class Location extends CoreLocation
         return $this->userCanEdit;
     }
 }
+
+class_alias(Location::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Content\Location');

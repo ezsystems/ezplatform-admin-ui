@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\BookmarkService;
 use eZ\Publish\API\Repository\ContentService;
@@ -23,22 +23,22 @@ use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentEditTranslationChoiceLoader;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType;
-use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
-use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
-use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
-use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
+use Ibexa\AdminUi\Form\Data\Content\ContentVisibilityUpdateData;
+use Ibexa\AdminUi\Form\Data\Content\Draft\ContentCreateData;
+use Ibexa\AdminUi\Form\Data\Content\Draft\ContentEditData;
+use Ibexa\AdminUi\Form\Data\Location\LocationCopyData;
+use Ibexa\AdminUi\Form\Data\Location\LocationCopySubtreeData;
+use Ibexa\AdminUi\Form\Data\Location\LocationMoveData;
+use Ibexa\AdminUi\Form\Data\Location\LocationTrashData;
+use Ibexa\AdminUi\Form\Data\User\UserDeleteData;
+use Ibexa\AdminUi\Form\Data\User\UserEditData;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ContentEditTranslationChoiceLoader;
+use Ibexa\AdminUi\Form\Type\Content\ContentVisibilityUpdateType;
+use Ibexa\AdminUi\Permission\LookupLimitationsTransformer;
+use Ibexa\AdminUi\Specification\ContentIsUser;
+use Ibexa\AdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
+use Ibexa\AdminUi\UI\Service\PathService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -524,3 +524,5 @@ class ContentViewController extends Controller
         $view->addParameters(['content_has_reverse_relations' => $hasReverseRelations]);
     }
 }
+
+class_alias(ContentViewController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentViewController');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value;
+namespace Ibexa\AdminUi\UI\Value;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
@@ -34,10 +34,10 @@ use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\Repository\LocationResolver\LocationResolver;
 use eZ\Publish\SPI\Limitation\Target;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
-use EzSystems\EzPlatformAdminUi\Specification\UserExists;
-use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
-use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
+use Ibexa\AdminUi\Specification\UserExists;
+use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\AdminUi\UI\Service\PathService;
+use Ibexa\AdminUi\UI\Value as UIValue;
 
 class ValueFactory
 {
@@ -397,3 +397,5 @@ class ValueFactory
         return '';
     }
 }
+
+class_alias(ValueFactory::class, 'EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory');

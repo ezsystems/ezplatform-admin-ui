@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Util;
+namespace Ibexa\AdminUi\Util;
 
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 
@@ -51,3 +51,5 @@ class FieldDefinitionGroupsUtil
         return $fieldDefinitionsByGroup;
     }
 }
+
+class_alias(FieldDefinitionGroupsUtil::class, 'EzSystems\EzPlatformAdminUi\Util\FieldDefinitionGroupsUtil');

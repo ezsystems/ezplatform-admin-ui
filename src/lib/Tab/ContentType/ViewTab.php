@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\ContentType;
+namespace Ibexa\AdminUi\Tab\ContentType;
 
-use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
-use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab;
+use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
 
 class ViewTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
@@ -58,3 +58,5 @@ class ViewTab extends AbstractEventDispatchingTab implements OrderedTabInterface
         return $contextParameters;
     }
 }
+
+class_alias(ViewTab::class, 'EzSystems\EzPlatformAdminUi\Tab\ContentType\ViewTab');

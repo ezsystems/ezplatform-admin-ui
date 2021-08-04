@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -20,22 +20,22 @@ use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationUpdateStruct;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Helper\TranslationHelper;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation;
-use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\Tab\LocationView\DetailsTab;
-use EzSystems\EzPlatformAdminUi\Tab\LocationView\LocationsTab;
+use Ibexa\AdminUi\Form\Data\Content\Location\ContentLocationAddData;
+use Ibexa\AdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use Ibexa\AdminUi\Form\Data\Location\LocationCopyData;
+use Ibexa\AdminUi\Form\Data\Location\LocationCopySubtreeData;
+use Ibexa\AdminUi\Form\Data\Location\LocationMoveData;
+use Ibexa\AdminUi\Form\Data\Location\LocationSwapData;
+use Ibexa\AdminUi\Form\Data\Location\LocationTrashData;
+use Ibexa\AdminUi\Form\Data\Location\LocationUpdateData;
+use Ibexa\AdminUi\Form\Data\Location\LocationAssignSubtreeData;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation;
+use Ibexa\AdminUi\Form\Type\Location\LocationAssignSectionType;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\AdminUi\Tab\LocationView\DetailsTab;
+use Ibexa\AdminUi\Tab\LocationView\LocationsTab;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -683,3 +683,5 @@ class LocationController extends Controller
         return $this->redirectToRoute('ezplatform.dashboard');
     }
 }
+
+class_alias(LocationController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\LocationController');

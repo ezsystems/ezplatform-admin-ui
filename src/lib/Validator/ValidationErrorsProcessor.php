@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Validator;
+namespace Ibexa\AdminUi\Validator;
 
 use EzSystems\EzPlatformContentForms\Validator\ValidationErrorsProcessor as BaseValidationErrorProcessor;
 
@@ -36,3 +36,5 @@ final class ValidationErrorsProcessor
         $this->validationErrorsProcessor->processValidationErrors($validationErrors);
     }
 }
+
+class_alias(ValidationErrorsProcessor::class, 'EzSystems\EzPlatformAdminUi\Validator\ValidationErrorsProcessor');

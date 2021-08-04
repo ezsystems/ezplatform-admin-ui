@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
+namespace Ibexa\AdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
@@ -104,3 +104,5 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
         return array_merge($orderedLanguages, array_values($languagesAssoc));
     }
 }
+
+class_alias(ConfiguredLanguagesChoiceLoader::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader');

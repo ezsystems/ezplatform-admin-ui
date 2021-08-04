@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab;
+namespace Ibexa\AdminUi\Tab;
 
 class TabRegistry
 {
@@ -79,3 +79,5 @@ class TabRegistry
         $this->tabGroups[$group]->addTab($tab);
     }
 }
+
+class_alias(TabRegistry::class, 'EzSystems\EzPlatformAdminUi\Tab\TabRegistry');

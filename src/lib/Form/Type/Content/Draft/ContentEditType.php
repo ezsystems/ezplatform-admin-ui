@@ -6,15 +6,15 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft;
+namespace Ibexa\AdminUi\Form\Type\Content\Draft;
 
 use eZ\Publish\API\Repository\LanguageService;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\VersionInfoType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType;
+use Ibexa\AdminUi\Form\Data\Content\Draft\ContentEditData;
+use Ibexa\AdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader;
+use Ibexa\AdminUi\Form\Type\Content\ContentInfoType;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Form\Type\Content\VersionInfoType;
+use Ibexa\AdminUi\Form\Type\Language\LanguageChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -110,3 +110,5 @@ class ContentEditType extends AbstractType
         return $languageOptions;
     }
 }
+
+class_alias(ContentEditType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentEditType');

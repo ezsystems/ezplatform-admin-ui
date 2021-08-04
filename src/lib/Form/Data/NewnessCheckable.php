@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data;
+namespace Ibexa\AdminUi\Form\Data;
 
 interface NewnessCheckable
 {
@@ -15,3 +15,5 @@ interface NewnessCheckable
      */
     public function isNew(): bool;
 }
+
+class_alias(NewnessCheckable::class, 'EzSystems\EzPlatformAdminUi\Form\Data\NewnessCheckable');

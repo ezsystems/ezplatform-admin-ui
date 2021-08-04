@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -70,3 +70,5 @@ class PolicyTransformer implements DataTransformerInterface
         ];
     }
 }
+
+class_alias(PolicyTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\PolicyTransformer');

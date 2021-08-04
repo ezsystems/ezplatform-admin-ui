@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard;
+namespace Ibexa\AdminUi\Form\Type\URLWildcard;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
+use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -47,3 +47,5 @@ final class URLWildcardDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(URLWildcardDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType');

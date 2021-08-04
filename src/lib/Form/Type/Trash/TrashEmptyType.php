@@ -4,9 +4,9 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Trash;
+namespace Ibexa\AdminUi\Form\Type\Trash;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
+use Ibexa\AdminUi\Form\Data\Trash\TrashEmptyData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -50,3 +50,5 @@ class TrashEmptyType extends AbstractType
         ]);
     }
 }
+
+class_alias(TrashEmptyType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType');

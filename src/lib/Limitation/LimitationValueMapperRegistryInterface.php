@@ -4,9 +4,9 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Limitation;
+namespace Ibexa\AdminUi\Limitation;
 
-use EzSystems\EzPlatformAdminUi\Exception\ValueMapperNotFoundException;
+use Ibexa\AdminUi\Exception\ValueMapperNotFoundException;
 
 /**
  * Interface for Limitation value mappers registry.
@@ -53,3 +53,5 @@ class_alias(
     LimitationValueMapperRegistryInterface::class,
     \EzSystems\RepositoryForms\Limitation\LimitationValueMapperRegistryInterface::class
 );
+
+class_alias(LimitationValueMapperRegistryInterface::class, 'EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistryInterface');

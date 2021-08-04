@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor;
+namespace Ibexa\AdminUi\UI\Module\Subitems\ValueObjectVisitor;
 
 use EzSystems\EzPlatformRest\Output\Generator;
 use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
 use EzSystems\EzPlatformRest\Output\Visitor;
-use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList as SubitemsListValue;
+use Ibexa\AdminUi\UI\Module\Subitems\Values\SubitemsList as SubitemsListValue;
 
 class SubitemsList extends ValueObjectVisitor
 {
@@ -39,3 +39,5 @@ class SubitemsList extends ValueObjectVisitor
         $generator->endObjectElement('SubitemsList');
     }
 }
+
+class_alias(SubitemsList::class, 'EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList');

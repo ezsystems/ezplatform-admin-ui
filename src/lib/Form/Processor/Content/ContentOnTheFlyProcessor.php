@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Processor\Content;
+namespace Ibexa\AdminUi\Form\Processor\Content;
 
-use EzSystems\EzPlatformAdminUi\Event\ContentOnTheFlyEvents;
+use Ibexa\Contracts\AdminUi\Event\ContentOnTheFlyEvents;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use EzSystems\EzPlatformContentForms\Form\Processor\ContentFormProcessor;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -96,3 +96,5 @@ class ContentOnTheFlyProcessor implements EventSubscriberInterface
         );
     }
 }
+
+class_alias(ContentOnTheFlyProcessor::class, 'EzSystems\EzPlatformAdminUi\Form\Processor\Content\ContentOnTheFlyProcessor');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\EventListener;
+namespace Ibexa\AdminUi\EventListener;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Repository;
@@ -20,7 +20,7 @@ use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\View\View;
-use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
+use Ibexa\AdminUi\View\ContentTranslateView;
 use EzSystems\EzPlatformContentForms\Content\View\ContentCreateView;
 use EzSystems\EzPlatformContentForms\Content\View\ContentEditView;
 use EzSystems\EzPlatformContentForms\User\View\UserUpdateView;
@@ -232,3 +232,5 @@ class SetViewParametersListener implements EventSubscriberInterface
         );
     }
 }
+
+class_alias(SetViewParametersListener::class, 'EzSystems\EzPlatformAdminUi\EventListener\SetViewParametersListener');

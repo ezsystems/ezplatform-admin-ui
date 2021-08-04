@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values;
+namespace Ibexa\AdminUi\UI\Module\Subitems\Values;
 
 use EzSystems\EzPlatformRest\Value as RestValue;
 use EzSystems\EzPlatformRest\Server\Values\RestContent;
@@ -30,3 +30,5 @@ class SubitemsRow extends RestValue
         $this->restContent = $restContent;
     }
 }
+
+class_alias(SubitemsRow::class, 'EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow');
