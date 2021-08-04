@@ -15,17 +15,23 @@ use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Routing\Router;
 use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
+use Ibexa\AdminUi\Behat\Component\IbexaDropdown;
 use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
 
 class RoleUpdatePage extends AdminUpdateItemPage
 {
     /** @var \Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget */
     private $universalDiscoveryWidget;
+    /**
+     * @var \Ibexa\AdminUi\Behat\Component\IbexaDropdown
+     */
+    private $ibexaDropdown;
 
-    public function __construct(Session $session, Router $router, ContentActionsMenu $contentActionsMenu, UniversalDiscoveryWidget $universalDiscoveryWidget)
+    public function __construct(Session $session, Router $router, ContentActionsMenu $contentActionsMenu, UniversalDiscoveryWidget $universalDiscoveryWidget, IbexaDropdown $ibexaDropdown)
     {
         parent::__construct($session, $router, $contentActionsMenu);
         $this->universalDiscoveryWidget = $universalDiscoveryWidget;
+        $this->ibexaDropdown = $ibexaDropdown;
     }
 
     public function selectLimitationValues(string $selectName, array $values): void
@@ -80,7 +86,8 @@ class RoleUpdatePage extends AdminUpdateItemPage
                 new VisibleCSSLocator('limitationDropdownOption', 'ul:not(.ibexa-dropdown__items--hidden) .ibexa-dropdown__item'),
                 new VisibleCSSLocator('limitationDropdownOptionRemove', '.ibexa-dropdown__remove-selection'),
                 new VisibleCSSLocator('labelSelector', '.ibexa-label'),
-                new VisibleCSSLocator('policyAssignmentSelect', '#role_assignment_create_sections'),
+                new VisibleCSSLocator('policyAssignmentSelect', '#role_assignment_create_limitation_type_section'),
+                new VisibleCSSLocator('ibexaDropdownSelectionInfo', 'div.ibexa-dropdown__wrapper > ul.ibexa-dropdown__selection-info'),
                 new VisibleCSSLocator('newPolicySelectList', '#policy_create_policy'),
             ]
         );
@@ -106,7 +113,9 @@ class RoleUpdatePage extends AdminUpdateItemPage
     public function assignSectionLimitation(string $limitationName): void
     {
         $this->fillFieldWithValue('Sections', true);
-        $this->getHTMLPage()->find($this->getLocator('policyAssignmentSelect'))->selectOption($limitationName);
+        $this->getHTMLPage()->find($this->getLocator('policyAssignmentSelect'))->click();
+        $this->getHTMLPage()->find($this->getLocator('ibexaDropdownSelectionInfo'))->click();
+        $this->ibexaDropdown->selectOption($limitationName);
     }
 
     public function selectLimitationForAssignment(string $itemPath)
@@ -136,6 +145,7 @@ class RoleUpdatePage extends AdminUpdateItemPage
 
     public function selectPolicy(string $policyName)
     {
-        $this->getHTMLPage()->find($this->getLocator('newPolicySelectList'))->selectOption($policyName);
+        $this->getHTMLPage()->find($this->getLocator('ibexaDropdownSelectionInfo'))->click();
+        $this->ibexaDropdown->selectOption($policyName);
     }
 }

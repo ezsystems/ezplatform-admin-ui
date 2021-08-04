@@ -10,6 +10,8 @@ namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
 use EzSystems\Behat\API\ContentData\FieldTypeNameConverter;
+use Ibexa\AdminUi\Behat\Component\IbexaDropdown;
+use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
@@ -21,15 +23,21 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
 {
     /** @var \Ibexa\AdminUi\Behat\Component\Notification */
     private $notification;
+    /**
+     * @var IbexaDropdown
+     */
+    private $ibexaDropdown;
 
     public function __construct(
         Session $session,
         Router $router,
         ContentActionsMenu $contentActionsMenu,
-        Notification $notification
+        Notification $notification,
+        IbexaDropdown $ibexaDropdown
     ) {
         parent::__construct($session, $router, $contentActionsMenu);
         $this->notification = $notification;
+        $this->ibexaDropdown = $ibexaDropdown;
     }
 
     public function fillFieldDefinitionFieldWithValue(string $fieldName, string $label, string $value)
@@ -54,7 +62,7 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
     public function specifyLocators(): array
     {
         return array_merge(parent::specifyLocators(), [
-            new VisibleCSSLocator('fieldTypesList', '#ezplatform_content_forms_contenttype_update_fieldTypeSelection'),
+            new VisibleCSSLocator('fieldTypesList', '.ibexa-card__field-control .ibexa-dropdown__selection-info'),
             new VisibleCSSLocator('addFieldDefinition', '#ezplatform_content_forms_contenttype_update_addFieldDefinition'),
             new VisibleCSSLocator('fieldDefinitionContainer', '.ibexa-card--toggle-group'),
             new VisibleCSSLocator('fieldDefinitionName', '.ibexa-card--toggle-group .ibexa-card__header .form-check-label'),
@@ -67,9 +75,14 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
 
     public function addFieldDefinition(string $fieldName)
     {
-        $this->getHTMLPage()->find($this->getLocator('fieldTypesList'))->selectOption($fieldName);
-        sleep(1); // TODO: Remove sleep once this page is redesigned
+        $this->getHTMLPage()->find($this->getLocator('fieldTypesList'))->click();
+        $this->ibexaDropdown->selectOption($fieldName);
         $this->getHTMLPage()->find($this->getLocator('addFieldDefinition'))->click();
+        $this->getHTMLPage()
+            ->setTimeout(3)
+            ->waitUntilCondition(
+                new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('fieldDefinitionContainer'))
+            );
         $this->getFieldDefinition($fieldName)->assert()->isVisible();
         $this->notification->verifyIsLoaded();
         $this->notification->verifyAlertSuccess();
