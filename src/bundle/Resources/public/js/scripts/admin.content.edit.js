@@ -23,6 +23,8 @@
     ];
     const form = doc.querySelector('.ez-form-validate');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
+    const buttonsMenuWorkflow = doc.querySelectorAll('button[id^="workflow__apply__"]');
+    let workflowEventListener = false;
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
         const validatorName = validator.constructor.name;
@@ -147,6 +149,35 @@
                 });
         }, eZ.adminUiConfig.autosave.interval);
     }
+
+    const addClickWorkflowHandler = (event) => {
+        const applyButton = doc.querySelector('[name="ezplatform_content_forms_content_edit[workflow][apply]"]');
+        if (workflowEventListener === true) {
+            return;
+        }
+
+        applyButton.dataset.isFormValid = 0;
+        workflowEventListener = true;
+        applyButton.addEventListener('click', clickHandler, false);
+    }
+
+    const removeClickWorkflowHandler = (event) => {
+        const applyButton = doc.querySelector('[name="ezplatform_content_forms_content_edit[workflow][apply]"]');
+        if (workflowEventListener === false) {
+            return;
+        }
+
+        workflowEventListener = false;
+        applyButton.removeEventListener('click', clickHandler, false);
+    }
+
+    buttonsMenuWorkflow.forEach((buttonMenuWorkflow) => {
+        if (buttonMenuWorkflow.dataset.hasOwnProperty('validate')) {
+            buttonMenuWorkflow.addEventListener('click', addClickWorkflowHandler, false);
+        } else {
+            buttonMenuWorkflow.addEventListener('click', removeClickWorkflowHandler, false);
+        }
+    });
 
     form.setAttribute('novalidate', true);
     form.onkeypress = (event) => {
