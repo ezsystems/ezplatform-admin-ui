@@ -362,10 +362,10 @@ final class NodeFactory
     /**
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    private function supplyChildrenCount(Node $node, array $aggregationResult = null): void
+    private function supplyChildrenCount(Node $node, ?array $aggregationResult = null): void
     {
         if ($node->isContainer) {
-            if ($aggregationResult) {
+            if ($aggregationResult !== null) {
                 $totalCount = $aggregationResult[$node->locationId] ?? 0;
             } else {
                 $totalCount = $this->countSubitems($node->locationId);
