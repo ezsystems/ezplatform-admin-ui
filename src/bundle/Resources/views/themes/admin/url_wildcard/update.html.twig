@@ -31,15 +31,15 @@
                         <div class="card ibexa-card ibexa-card--light">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <span class="ez-label required">{{ 'url_wildcard.modal.create.url.wildcard'|trans|desc('URL wildcard') }}</span>
+                                    <span class="ibexa-label required">{{ 'url_wildcard.modal.create.url.wildcard'|trans|desc('URL wildcard') }}</span>
                                     {{ form_widget(form.source_url) }}
                                 </div>
                                 <div class="form-group">
-                                    <span class="ez-label required">{{ 'url_wildcard.modal.create.url.destintion'|trans|desc('Destination') }}</span>
+                                    <span class="ibexa-label required">{{ 'url_wildcard.modal.create.url.destintion'|trans|desc('Destination') }}</span>
                                     {{ form_widget(form.destination_url) }}
                                 </div>
                                 <div class="form-group">
-                                    <span class="ez-label">{{ 'url_wildcard.modal.create.redirect'|trans|desc('Redirect to wildcard destination') }}</span>
+                                    <span class="ibexa-label">{{ 'url_wildcard.modal.create.redirect'|trans|desc('Redirect to wildcard destination') }}</span>
                                     {{ form_widget(form.forward) }}
                                     <div>{{ 'url_wildcard.modal.create.redirect.helper'|trans|desc('When checked, the URL displayed will be the URL of the destination. When unchecked, the wildcard will not redirect to the destination and the URL will stay the same.') }}</div>
                                 </div>
