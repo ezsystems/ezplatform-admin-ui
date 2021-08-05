@@ -1,37 +1,15 @@
 .ez-page-title {
-    display: grid;
-    grid-column-gap: calculateRem(10px);
-    grid-template-rows: auto;
-    grid-template-areas:
-        'content-item'
-        'content-type-name';
-
-    &__content-item {
-        width: 100%;
-        margin-bottom: 0;
-        grid-area: content-item;
-        justify-self: start;
-        display: flex;
+    &__top {
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: auto 1fr;
     }
 
-    &__content-name {
+    &__title {
         white-space: nowrap;
         overflow: hidden;
         font-weight: normal;
         text-overflow: ellipsis;
         margin-bottom: calculateRem(16px);
-    }
-
-    &__content-type-name {
-        display: flex;
-        grid-area: content-type-name;
-        margin-bottom: calculateRem(24px);
-        font-size: calculateRem(16px);
-        font-weight: normal;
-        color: $ibexa-color-font-pale;
-
-        .ibexa-icon {
-            margin-right: calculateRem(8px);
-        }
     }
 }

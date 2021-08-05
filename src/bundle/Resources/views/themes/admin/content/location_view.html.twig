@@ -77,11 +77,36 @@
 {% endblock %}
 
 {% block header %}
-    {% include '@ezdesign/ui/page_title.html.twig' with {
+    {% embed '@ezdesign/ui/page_title.html.twig' with {
         title: ez_content_name(content),
         icon_name: content_type.identifier,
         content_type_name: content_type.name
     } %}
+        {% block top_side %}
+            {% if location is defined and location_is_bookmarked is defined %}
+                {% include '@ezdesign/account/bookmarks/toggle_switch.html.twig' with {
+                    location: location,
+                    location_is_bookmarked: location_is_bookmarked
+                } %}
+            {% endif %}
+        {% endblock %}
+        {% block bottom %}
+            {% if content_type_name is defined %}
+                <span class="ibexa-icon-tag">
+                    {% if icon_name is defined%}
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--base-dark ibexa-icon--{{ icon_name }}">
+                            <use xlink:href="{{ ibexa_icon_path(icon_name) }}"></use>
+                        </svg>
+                    {% elseif content_type_identifier is defined %}
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--base-dark ibexa-icon--{{ content_type_identifier }}">
+                            <use xlink:href="{{ ez_content_type_icon(content_type_identifier) }}"></use>
+                        </svg>
+                    {% endif %}
+                    {{ content_type_name }}
+                </h4>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
 
     <div class="container">
         {% if location.hidden or location.invisible %}
