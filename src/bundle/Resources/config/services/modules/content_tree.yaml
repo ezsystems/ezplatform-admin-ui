@@ -4,12 +4,12 @@ services:
         autoconfigure: true
         public: true
 
-    EzSystems\EzPlatformAdminUi\UI\Module\ContentTree\NodeFactory:
+    Ibexa\AdminUi\UI\Module\ContentTree\NodeFactory:
         arguments:
             $contentService: '@ezpublish.api.service.content'
             $translationHelper: '@ezpublish.translation_helper'
             $configResolver: '@ezpublish.config.resolver'
 
-    EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\ContentTree:
+    Ibexa\AdminUi\UI\Config\Provider\Module\ContentTree:
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'contentTree' }

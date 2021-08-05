@@ -4,29 +4,29 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\Validator\Constraints\:
+    Ibexa\AdminUi\Validator\Constraints\:
         resource: "../../../lib/Validator/Constraints"
 
-    EzSystems\EzPlatformAdminUi\Validator\Constraints\UserPasswordValidator:
+    Ibexa\AdminUi\Validator\Constraints\UserPasswordValidator:
         tags:
             - { name: validator.constraint_validator }
 
-    EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsWithinCopySubtreeLimitValidator:
+    Ibexa\AdminUi\Validator\Constraints\LocationIsWithinCopySubtreeLimitValidator:
         arguments:
             $configResolver: '@ezpublish.config.resolver'
 
-    EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueContentTypeIdentifierValidator:
+    Ibexa\AdminUi\Validator\Constraints\UniqueContentTypeIdentifierValidator:
         arguments: ["@ezpublish.api.service.content_type"]
         tags:
             - { name: validator.constraint_validator, alias: ezplatform.content_forms.validator.unique_content_type_identifier }
 
     ezplatform.content_forms.validator.field_type.abstract:
-        class: EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldTypeValidator
+        class: Ibexa\AdminUi\Validator\Constraints\FieldTypeValidator
         arguments: ["@ezpublish.api.service.field_type"]
         abstract: true
         autoconfigure: false
 
-    EzSystems\EzPlatformAdminUi\Validator\Constraints\ValidatorConfigurationValidator:
+    Ibexa\AdminUi\Validator\Constraints\ValidatorConfigurationValidator:
         parent: ezplatform.content_forms.validator.field_type.abstract
         autowire: true
         autoconfigure: false
@@ -34,7 +34,7 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: ezplatform.content_forms.validator.validator_configuration }
 
-    EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldSettingsValidator:
+    Ibexa\AdminUi\Validator\Constraints\FieldSettingsValidator:
         parent: ezplatform.content_forms.validator.field_type.abstract
         autowire: true
         autoconfigure: false
@@ -42,7 +42,7 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: ezplatform.content_forms.validator.field_settings }
 
-    EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueURLValidator:
+    Ibexa\AdminUi\Validator\Constraints\UniqueURLValidator:
         arguments:
             - '@ezpublish.api.service.url'
         tags:

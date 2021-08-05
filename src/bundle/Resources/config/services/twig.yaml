@@ -4,18 +4,18 @@ services:
         autowire: true
         autoconfigure: true
 
-    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FieldEditRenderingExtension:
+    Ibexa\Bundle\AdminUi\Templating\Twig\FieldEditRenderingExtension:
         arguments:
             - '@ezpublish.templating.field_block_renderer'
         tags:
             - { name: twig.extension }
 
-    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FormatIntervalExtension:
+    Ibexa\Bundle\AdminUi\Templating\Twig\FormatIntervalExtension:
         tags:
             - { name: twig.extension }
 
-    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\LimitationValueRenderingExtension:
+    Ibexa\Bundle\AdminUi\Templating\Twig\LimitationValueRenderingExtension:
         arguments:
-            - '@EzSystems\EzPlatformAdminUi\Limitation\Templating\LimitationBlockRenderer'
+            - '@Ibexa\AdminUi\Limitation\Templating\LimitationBlockRenderer'
         tags:
             - { name: twig.extension }

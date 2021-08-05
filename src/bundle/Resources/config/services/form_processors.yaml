@@ -9,26 +9,26 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\:
+    Ibexa\AdminUi\Form\Processor\:
         resource: "../../../lib/Form/Processor/*"
         public: true
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\ContentEditNotificationFormProcessor:
+    Ibexa\AdminUi\Form\Processor\ContentEditNotificationFormProcessor:
         public: true
         arguments:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\Content\UrlRedirectProcessor:
+    Ibexa\AdminUi\Form\Processor\Content\UrlRedirectProcessor:
         public: true
         decorates: EzSystems\EzPlatformContentForms\Form\Processor\SystemUrlRedirectProcessor
         arguments:
             $siteaccessGroups: '%ezpublish.siteaccess.groups%'
-            $systemUrlRedirectProcessor: '@EzSystems\EzPlatformAdminUi\Form\Processor\Content\UrlRedirectProcessor.inner'
+            $systemUrlRedirectProcessor: '@Ibexa\AdminUi\Form\Processor\Content\UrlRedirectProcessor.inner'
 
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\ContentType\ContentTypeFormProcessor:
+    Ibexa\AdminUi\Form\Processor\ContentType\ContentTypeFormProcessor:
         arguments: ["@ezpublish.api.service.content_type", "@router", "%ezplatform.content_forms.form_processor.content_type.options%"]
         calls:
             - [setGroupsList, ["@ezpublish.fields_groups.list"]]
