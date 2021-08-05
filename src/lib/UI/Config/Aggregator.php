@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\UI\Config;
 
 use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 /**
  * Aggregates a set of ApplicationConfig Providers.

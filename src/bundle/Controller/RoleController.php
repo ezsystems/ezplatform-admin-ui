@@ -32,6 +32,7 @@ use Symfony\Component\HttpFoundation\Response;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class RoleController extends Controller
 {

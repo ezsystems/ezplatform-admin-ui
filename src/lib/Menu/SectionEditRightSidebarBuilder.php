@@ -15,6 +15,7 @@ use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Section Edit contextual sidebar menu.

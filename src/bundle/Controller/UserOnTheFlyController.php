@@ -34,6 +34,7 @@ use EzSystems\EzPlatformContentForms\Form\Type\User\UserUpdateType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class UserOnTheFlyController extends Controller
 {

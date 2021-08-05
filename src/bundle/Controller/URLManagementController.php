@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\AdminUi\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 final class URLManagementController extends Controller
 {

@@ -39,7 +39,7 @@ class IsAdmin extends AbstractSpecification
             throw new InvalidArgumentException($item, sprintf('Must be an instance of %s', SiteAccess::class));
         }
 
-        return in_array($item->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME], true);
+        return in_array($item->name, $this->siteAccessGroups[IbexaAdminUiBundle::ADMIN_GROUP_NAME], true);
     }
 }
 

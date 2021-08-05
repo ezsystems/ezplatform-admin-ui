@@ -49,6 +49,7 @@ use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException as APIRepositoryInvalidArgumentException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentController extends Controller
 {

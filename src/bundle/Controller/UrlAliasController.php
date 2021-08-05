@@ -16,6 +16,7 @@ use Ibexa\AdminUi\Form\SubmitHandler;
 use Ibexa\AdminUi\Tab\LocationView\UrlsTab;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class UrlAliasController extends Controller
 {

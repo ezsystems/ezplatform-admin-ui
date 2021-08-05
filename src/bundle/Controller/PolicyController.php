@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class PolicyController extends Controller
 {

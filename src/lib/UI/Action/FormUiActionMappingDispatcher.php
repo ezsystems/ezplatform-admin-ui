@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\UI\Action;
 
+use Ibexa\Contracts\AdminUi\UI\Action\FormUiActionMapperInterface;
 use Symfony\Component\Form\FormInterface;
 use Traversable;
 

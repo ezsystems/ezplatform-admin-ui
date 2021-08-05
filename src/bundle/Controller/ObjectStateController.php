@@ -30,6 +30,7 @@ use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterfac
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ObjectStateController extends Controller
 {

@@ -20,6 +20,7 @@ use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class BookmarkController extends Controller
 {

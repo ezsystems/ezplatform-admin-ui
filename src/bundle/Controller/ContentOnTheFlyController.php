@@ -37,6 +37,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentOnTheFlyController extends Controller
 {

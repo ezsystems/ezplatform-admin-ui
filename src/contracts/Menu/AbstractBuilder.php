@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Contracts\AdminUi\Menu;
 
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\MenuItemFactory;
 use Knp\Menu\ItemInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

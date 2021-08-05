@@ -20,6 +20,7 @@ use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterfac
 use Ibexa\AdminUi\Tab\URLManagement\URLWildcardsTab;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 final class URLWildcardController extends Controller
 {

@@ -21,6 +21,7 @@ use Ibexa\AdminUi\Form\SubmitHandler;
 use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ObjectStateGroupController extends Controller
 {

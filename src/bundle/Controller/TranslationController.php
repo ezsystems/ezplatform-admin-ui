@@ -18,6 +18,7 @@ use Ibexa\AdminUi\Tab\LocationView\TranslationsTab;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class TranslationController extends Controller
 {

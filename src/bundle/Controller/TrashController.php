@@ -34,6 +34,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Ibexa\AdminUi\UI\Service\PathService as UiPathService;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class TrashController extends Controller
 {

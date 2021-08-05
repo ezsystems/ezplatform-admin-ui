@@ -42,6 +42,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentTypeController extends Controller
 {

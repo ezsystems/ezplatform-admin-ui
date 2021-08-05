@@ -127,7 +127,7 @@ class RequestAttributesListener implements EventSubscriberInterface
     {
         $siteAccess = $request->attributes->get('siteaccess');
 
-        return \in_array($siteAccess->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME], true);
+        return \in_array($siteAccess->name, $this->siteAccessGroups[IbexaAdminUiBundle::ADMIN_GROUP_NAME], true);
     }
 }
 

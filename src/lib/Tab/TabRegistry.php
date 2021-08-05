@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Tab;
 
+use Ibexa\Contracts\AdminUi\Tab\TabInterface;
+
 class TabRegistry
 {
     /** @var TabGroup[] */

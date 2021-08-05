@@ -17,6 +17,7 @@ use Ibexa\AdminUi\Pagination\Pagerfanta\URLUsagesAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 final class LinkManagerController extends Controller
 {

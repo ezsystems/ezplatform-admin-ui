@@ -19,6 +19,7 @@ use Ibexa\AdminUi\UI\Value\Content\VersionId;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentDraftController extends Controller
 {

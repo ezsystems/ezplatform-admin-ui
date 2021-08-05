@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Component;
 
+use Ibexa\Contracts\AdminUi\Component\Renderable;
+
 class Registry
 {
     /** @var Renderable[] */

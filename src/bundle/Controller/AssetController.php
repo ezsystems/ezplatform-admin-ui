@@ -12,6 +12,7 @@ use Exception;
 use eZ\Publish\Core\FieldType\Image\Value as ImageValue;
 use eZ\Publish\Core\FieldType\ImageAsset\AssetMapper as ImageAssetMapper;
 use Ibexa\AdminUi\Form\Data\Asset\ImageAssetUploadData;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

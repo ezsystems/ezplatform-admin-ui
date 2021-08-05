@@ -12,6 +12,7 @@ use Ibexa\AdminUi\Form\Data\Content\Draft\ContentEditData;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use eZ\Publish\API\Repository\PermissionResolver;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class DashboardController extends Controller
 {

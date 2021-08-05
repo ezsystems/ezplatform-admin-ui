@@ -42,6 +42,7 @@ use Ibexa\AdminUi\UI\Service\PathService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentViewController extends Controller
 {

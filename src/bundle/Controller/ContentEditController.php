@@ -11,6 +11,7 @@ use Ibexa\AdminUi\View\ContentTranslateSuccessView;
 use Ibexa\AdminUi\View\ContentTranslateView;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentEditController extends Controller
 {
