@@ -123,9 +123,10 @@ class RoleUpdatePage extends AdminUpdateItemPage
         $buttons = $this->getHTMLPage()
             ->findAll($this->getLocator('button'))
             ->filterBy(new ElementTextCriterion('Select Locations'))
-            ->toArray()
-        ;
+            ->toArray();
 
+        $buttons[1]->mouseOver();
+        usleep(100 * 2500); // 250 ms TODO: Remove after redesign is done
         $buttons[1]->click();
 
         $this->universalDiscoveryWidget->verifyIsLoaded();
