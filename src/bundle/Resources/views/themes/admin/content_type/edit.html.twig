@@ -22,7 +22,6 @@
 {% block header_admin %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'content_type.view.edit.title'|trans({ '%name%': content_type.name })|desc('Editing Content Type \'%name%\''),
-        content_type_identifier: content_type.identifier
     } %}
 {% endblock %}
 

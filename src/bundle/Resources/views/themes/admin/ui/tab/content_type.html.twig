@@ -17,20 +17,19 @@
                 {% block header %}
                     {% include '@ezdesign/ui/page_title.html.twig' with {
                         title: 'content_type.view.view.title'|trans({ '%name%': content_type.name })|desc('%name%'),
-                        content_type_identifier: content_type.identifier
                     } %}
                 {% endblock %}
             </div>
         </div>
         <div class="panel panel-primary">
             <div class="panel-body">
-                {% set tabs_to_show = tabs|map((tab, index) => { 
+                {% set tabs_to_show = tabs|map((tab, index) => {
                     id: group ~ '-' ~ tab.identifier,
                     label: tab.name,
                     content: tab.view,
                     active: index == 0,
                 }) %}
-                {% include '@ezdesign/ui/component/tab/tabs.html.twig' with { 
+                {% include '@ezdesign/ui/component/tab/tabs.html.twig' with {
                     tabs: tabs_to_show,
                 } %}
             </div>

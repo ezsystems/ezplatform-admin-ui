@@ -22,7 +22,6 @@
 {% block header %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'url_wildcard.editing'|trans({'%url%': urlWildcard.sourceUrl|u.truncate(50) })|desc('Editing URL wildcard: %url%'),
-        icon_name: 'link'
     } %}
 {% endblock %}
 
