@@ -61,13 +61,13 @@
             {% include '@ezdesign/content/widget/user_edit.html.twig' with {'form': form_user_edit} only %}
         {% endif %}
     </div>
-    {%  if form_location_trash is defined and form_user_delete is not defined %}
+    {% if form_location_trash is defined and form_user_delete is not defined %}
         {% include '@ezdesign/content/modal/location_trash.html.twig' with {
             'form': form_location_trash,
             'content_name': ez_content_name(content)
         } only %}
     {% endif %}
-    {%  if form_user_delete is defined %}
+    {% if form_user_delete is defined %}
         {% include '@ezdesign/content/modal/user_delete.html.twig' with {'form': form_user_delete} only %}
     {% endif %}
     {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}

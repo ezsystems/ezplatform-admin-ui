@@ -1,6 +1,6 @@
 (function(global, doc) {
     const editButton = doc.querySelector('.ibexa-btn--edit');
-    const languageRadioOption = doc.querySelector('.ibexa-extra-actions--edit.ibexa-extra-actions--prevent-show [type="radio"]');
+    const languageRadioOption = doc.querySelector('.ibexa-extra-actions--edit.ibexa-extra-actions--prevent-show .ibexa-input--radio');
     const editActions = doc.querySelector('.ibexa-extra-actions--edit');
     const btns = editActions.querySelectorAll('.form-check [type="radio"]');
     const changeHandler = () => {
