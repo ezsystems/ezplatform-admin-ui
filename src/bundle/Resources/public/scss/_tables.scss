@@ -339,6 +339,7 @@
     &__sort-column {
         position: relative;
         cursor: pointer;
+        display: inline-block;
 
         &:after {
             content: url('/bundles/ezplatformadminui/img/down.svg');
