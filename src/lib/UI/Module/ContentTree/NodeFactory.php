@@ -213,6 +213,9 @@ final class NodeFactory
         return [];
     }
 
+    /**
+     * @return array<int,int>
+     */
     private function aggregationResultToArray(TermAggregationResult $aggregationResult): array
     {
         $resultsAsArray = [];
