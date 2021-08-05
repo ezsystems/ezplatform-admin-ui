@@ -11,6 +11,7 @@ namespace Ibexa\AdminUi\Behat\Component\Table;
 use Behat\Mink\Session;
 use Ibexa\Behat\Browser\Component\Component;
 use Ibexa\Behat\Browser\Element\ElementInterface;
+use Ibexa\Behat\Browser\Exception\ElementNotFoundException;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
 use Ibexa\Behat\Browser\Locator\LocatorCollection;
 use Ibexa\Behat\Browser\Locator\LocatorInterface;
@@ -92,8 +93,7 @@ final class Table extends Component implements TableInterface
         }
 
         $allHeaders = $this->parentElement->findAll($this->getLocator('columnHeader'))
-            ->mapBy(new ElementTextMapper())
-        ;
+            ->mapBy(new ElementTextMapper());
 
         $foundHeaders = array_filter($allHeaders, function (string $header) use ($columnNames) {
             return in_array($header, $columnNames, true);
@@ -179,6 +179,10 @@ final class Table extends Component implements TableInterface
 
     public function getTableRowByIndex(int $rowIndex): TableRow
     {
+        if ($this->isEmpty()) {
+            throw new ElementNotFoundException(sprintf('Table is empty.'));
+        }
+
         foreach ($this->parentElement->setTimeout(0)->findAll($this->getLocator('row')) as $rowPosition => $row) {
             if ($rowPosition === $rowIndex) {
                 $rowElement = $row;

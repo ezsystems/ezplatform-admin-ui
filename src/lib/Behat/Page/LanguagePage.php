@@ -54,7 +54,7 @@ class LanguagePage extends Page
         $hasExpectedEnabledFieldValue = true;
         if (array_key_exists('Enabled', $data)) {
             // Table does not handle returning non-string values
-            $hasEnabledField = $this->getHTMLPage()->find($this->getLocator('enabledField'))->hasAttribute('checked');
+            $hasEnabledField = $this->getHTMLPage()->find($this->getLocator('enabledField'))->getValue() === 'on';
             $shouldHaveEnabledField = 'true' === $data['Enabled'];
             $hasExpectedEnabledFieldValue = $hasEnabledField === $shouldHaveEnabledField;
             unset($data['Enabled']);

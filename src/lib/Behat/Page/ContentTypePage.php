@@ -110,9 +110,9 @@ class ContentTypePage extends Page
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
             new VisibleCSSLocator('contentTypeDataTable', '.ez-fieldgroup .ez-fieldgroup__content .ibexa-table'),
             new VisibleCSSLocator('contentFieldsTable', '.ez-fieldgroup:nth-of-type(2)'),
-            new VisibleCSSLocator('globalPropertiesRow', '.ez-fieldgroup__content .ibexa-table__row'),
-            new VisibleCSSLocator('globalPropertiesLabel', '.ibexa-table__cell:nth-of-type(1)'),
-            new VisibleCSSLocator('globalPropertiesValue', '.ibexa-table__cell:nth-of-type(2)'),
+            new VisibleCSSLocator('globalPropertiesRow', '.ez-fieldgroup__content .ez-table__row'),
+            new VisibleCSSLocator('globalPropertiesLabel', '.ez-table__cell:nth-of-type(1)'),
+            new VisibleCSSLocator('globalPropertiesValue', '.ez-table__cell:nth-of-type(2)'),
         ];
     }
 }

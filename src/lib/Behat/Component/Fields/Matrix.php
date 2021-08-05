@@ -55,7 +55,7 @@ class Matrix extends FieldTypeComponent
     {
         return [
             new VisibleCSSLocator('matrixCellSelectorFormat', '[name="ezplatform_content_forms_content_edit[fieldsData][ezmatrix][value][entries][%d][%s]"]'),
-            new VisibleCSSLocator('row', '.ibexa-table__matrix-entry'),
+            new VisibleCSSLocator('row', '.ibexa-table__row'),
             new VisibleCSSLocator('addRowButton', '.ibexa-btn--add-matrix-entry'),
             new VisibleCSSLocator('viewModeTableHeaders', '.ez-content-field-value thead th'),
             new VisibleCSSLocator('viewModeTableRow', '.ez-content-field-value tbody tr'),
@@ -116,8 +116,7 @@ class Matrix extends FieldTypeComponent
             $parsedTable .= ',';
             $cellValues = $row
                 ->findAll(new VisibleCSSLocator('cell', 'td'))
-                ->mapBy(new ElementTextMapper())
-            ;
+                ->mapBy(new ElementTextMapper());
             $parsedTable .= implode(':', $cellValues);
         }
 

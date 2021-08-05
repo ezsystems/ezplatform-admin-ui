@@ -11,6 +11,7 @@ use eZ\Publish\Core\Base\Exceptions\BadStateException;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
 use Ibexa\Behat\Browser\Locator\LocatorCollection;
 use Ibexa\AdminUi\Behat\Component\Pagination;
+use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 
 class TableBuilder
 {
@@ -47,11 +48,11 @@ class TableBuilder
         $this->buildInProgress = true;
 
         $this->locators = new LocatorCollection([
-            new CSSLocator('empty', '.ez-table__empty-table-cell'),
-            new CSSLocator('columnHeader', '.ez-table__header-cell,th'),
-            new CSSLocator('row', 'tr'),
-            new CSSLocator('cell', '.ez-table__cell:nth-of-type(%d),td:nth-of-type(%d)'),
-            new CSSLocator('parent', '.ez-table'),
+            new VisibleCSSLocator('empty', '.ibexa-table__empty-table-cell'),
+            new VisibleCSSLocator('columnHeader', '.ibexa-table__header-cell,th'),
+            new VisibleCSSLocator('row', 'tr'),
+            new VisibleCSSLocator('cell', '.ibexa-table__cell:nth-of-type(%d),td:nth-of-type(%d)'),
+            new VisibleCSSLocator('parent', '.ibexa-table'),
         ]);
 
         return $this;
