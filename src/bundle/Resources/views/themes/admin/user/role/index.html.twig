@@ -32,7 +32,7 @@
                 {% block tab_content %}
                     {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with { id: 'policies', active: true } %}
                         {% block content %}
-                            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\PolicyController::listAction', {
+                            {{ render(controller('Ibexa\\Bundle\\AdminUi\\Controller\\PolicyController::listAction', {
                                 roleId: role.id,
                                 policyPage: policy_page,
                                 routeName: route_name
@@ -41,7 +41,7 @@
                     {% endembed %}
                     {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with { id: 'users-and-groups', active: false } %}
                         {% block content %}
-                            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\RoleAssignmentController::listAction', {
+                            {{ render(controller('Ibexa\\Bundle\\AdminUi\\Controller\\RoleAssignmentController::listAction', {
                                 roleId: role.id,
                                 assignmentPage: assignment_page,
                                 routeName: route_name

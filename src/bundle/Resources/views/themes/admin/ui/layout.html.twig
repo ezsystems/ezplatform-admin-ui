@@ -94,9 +94,9 @@
         <title>{% block title %}Ibexa DXP{% endblock %}</title>
         {{ encore_entry_link_tags('ezplatform-admin-ui-layout-css', null, 'ezplatform') }}
         {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('bundles/ezplatformadminui/img/favicon-16x16.png') }}" />
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bundles/ezplatformadminui/img/favicon-32x32.png') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ibexaadminui/img/favicon.ico') }}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('bundles/ibexaadminui/img/favicon-16x16.png') }}" />
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bundles/ibexaadminui/img/favicon-32x32.png') }}" />
 
         {{ ez_render_component_group('stylesheet-head') }}
         {{ ez_render_component_group('script-head') }}
@@ -122,7 +122,7 @@
             <div class="ibexa-main-header">
                 <div class="ibexa-main-header__brand-column">
                     <a class="ibexa-main-header__brand" href="{{ url('ezplatform.dashboard') }}">
-                        <img class="ibexa-main-header__brand-image" src="{{ asset('/bundles/ezplatformadminui/img/ibexa-logo.svg') }}" alt="Ibexa" />
+                        <img class="ibexa-main-header__brand-image" src="{{ asset('/bundles/ibexaadminui/img/ibexa-logo.svg') }}" alt="Ibexa" />
                     </a>
                 </div>
                 <div class="ibexa-main-header__search-column">

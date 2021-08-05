@@ -346,7 +346,7 @@
                 </thead>
                 {% for contentId in field.value.destinationContentIds %}
                 <tr>
-                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
+                    {{ render(controller('Ibexa\\Bundle\\AdminUi\\Controller\\ContentController::relationViewAction', {
                             'contentId': contentId,
                     } )) }}
                 </tr>
@@ -491,7 +491,7 @@
                     </tr>
                 </thead>
                 <tr>
-                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
+                    {{ render(controller('Ibexa\\Bundle\\AdminUi\\Controller\\ContentController::relationViewAction', {
                         'contentId': field.value.destinationContentId,
                     })) }}
                 </tr>
