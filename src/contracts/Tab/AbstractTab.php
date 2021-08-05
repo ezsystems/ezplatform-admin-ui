@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\AdminUi\Tab;
 
-use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
