@@ -152,7 +152,8 @@
 
     const addClickWorkflowHandler = (event) => {
         const applyButton = doc.querySelector('[name="ezplatform_content_forms_content_edit[workflow][apply]"]');
-        if (workflowEventListener === true) {
+
+        if (workflowEventListener) {
             return;
         }
 
@@ -160,10 +161,10 @@
         workflowEventListener = true;
         applyButton.addEventListener('click', clickHandler, false);
     }
-
     const removeClickWorkflowHandler = (event) => {
         const applyButton = doc.querySelector('[name="ezplatform_content_forms_content_edit[workflow][apply]"]');
-        if (workflowEventListener === false) {
+
+        if (!workflowEventListener) {
             return;
         }
 
