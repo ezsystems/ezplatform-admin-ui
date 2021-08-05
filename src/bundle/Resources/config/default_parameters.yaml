@@ -75,4 +75,4 @@ parameters:
 
     ez_systems.multifile_upload.max_file_size: 5242880
 
-    ezplatform.nodefactory.max_location_ids_in_single_aggregation: 100
+    ibexa.admin_ui.content_tree.node_factory.max_location_ids_in_single_aggregation: 100
