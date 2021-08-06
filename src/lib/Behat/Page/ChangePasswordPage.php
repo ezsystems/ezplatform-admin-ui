@@ -10,22 +10,22 @@ use Behat\Mink\Session;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Routing\Router;
-use Ibexa\AdminUi\Behat\Component\RightMenu;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 
 class ChangePasswordPage extends Page
 {
-    /** @var \Ibexa\AdminUi\Behat\Component\RightMenu */
-    private $rightMenu;
+    /** @var \Ibexa\AdminUi\Behat\Component\ContentActionsMenu */
+    private $contentActionsMenu;
 
-    public function __construct(Session $session, Router $router, RightMenu $rightMenu)
+    public function __construct(Session $session, Router $router, ContentActionsMenu $contentActionsMenu)
     {
         parent::__construct($session, $router);
-        $this->rightMenu = $rightMenu;
+        $this->contentActionsMenu = $contentActionsMenu;
     }
 
     public function verifyIsLoaded(): void
     {
-        $this->rightMenu->verifyIsLoaded();
+        $this->contentActionsMenu->verifyIsLoaded();
         $this->getHTMLPage()->find($this->getLocator('title'))->assert()->textEquals('Change my password');
     }
 

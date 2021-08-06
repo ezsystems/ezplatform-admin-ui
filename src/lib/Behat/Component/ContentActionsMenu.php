@@ -10,26 +10,47 @@ namespace Ibexa\AdminUi\Behat\Component;
 
 use Ibexa\Behat\Browser\Component\Component;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
-use Ibexa\Behat\Browser\Locator\CSSLocator;
+use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 
-class RightMenu extends Component
+class ContentActionsMenu extends Component
 {
     public function clickButton(string $buttonName): void
     {
-        $this->getHTMLPage()
+        $buttons = $this->getHTMLPage()
             ->findAll($this->getLocator('menuButton'))
-            ->assert()->hasElements()
+            ->filterBy(new ElementTextCriterion($buttonName));
+
+        if ($buttons->any()) {
+            $buttons->first()->click();
+
+            return;
+        }
+
+        $moreButton = $this->getHTMLPage()->find($this->getLocator('moreButton'))->click();
+
+        $this->getHTMLPage()
+            ->findAll($this->getLocator('expandedMenuButton'))
             ->getByCriterion(new ElementTextCriterion($buttonName))
             ->click();
     }
 
     public function isButtonActive(string $buttonName): bool
     {
+        $moreButton = $this->getHTMLPage()->findAll($this->getLocator('moreButton'));
+        if ($moreButton->any()) {
+            $moreButton->single()->click();
+        }
+
         return !$this->getHTMLPage()->findAll($this->getLocator('menuButton'))->getByCriterion(new ElementTextCriterion($buttonName))->hasAttribute('disabled');
     }
 
     public function isButtonVisible(string $buttonName): bool
     {
+        $moreButton = $this->getHTMLPage()->findAll($this->getLocator('moreButton'));
+        if ($moreButton->any()) {
+            $moreButton->single()->click();
+        }
+
         return $this->getHTMLPage()
             ->findAll($this->getLocator('menuButton'))
             ->filterBy(new ElementTextCriterion($buttonName))
@@ -47,7 +68,9 @@ class RightMenu extends Component
     protected function specifyLocators(): array
     {
         return [
-            new CSSLocator('menuButton', '.ibexa-context-menu .ibexa-btn, .ez-context-menu .btn'), // TO DO: set one selector after redesign
+            new VisibleCSSLocator('menuButton', '.ibexa-context-menu .ibexa-btn, .ibexa-context-menu__item .ibexa-popup-menu__item, .ez-context-menu .btn'), // TO DO: set one selector after redesign
+            new VisibleCSSLocator('moreButton', '.ibexa-context-menu__item--more'),
+            new VisibleCSSLocator('expandedMenuButton', '.ibexa-context-menu__item .ibexa-popup-menu__item'),
         ];
     }
 }
