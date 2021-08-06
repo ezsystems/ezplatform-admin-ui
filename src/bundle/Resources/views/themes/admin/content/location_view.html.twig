@@ -77,10 +77,10 @@
 {% endblock %}
 
 {% block header %}
+    {% set icon_name = content_type.identifier %}
+    {% set content_type_name = content_type.name %}
     {% embed '@ezdesign/ui/page_title.html.twig' with {
         title: ez_content_name(content),
-        icon_name: content_type.identifier,
-        content_type_name: content_type.name
     } %}
         {% block top_side %}
             {% if location is defined and location_is_bookmarked is defined %}
