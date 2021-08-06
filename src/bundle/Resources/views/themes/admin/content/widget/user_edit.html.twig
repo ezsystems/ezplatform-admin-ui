@@ -1,16 +1,16 @@
 {% trans_default_domain 'locationview' %}
 
-<div class="ez-extra-actions ez-extra-actions--edit-user ez-extra-actions--hidden
-    {% if form.language.vars.choices|length == 1 %} ez-extra-actions--prevent-show {% endif %}"
+<div class="ibexa-extra-actions ibexa-extra-actions--edit-user ibexa-extra-actions--hidden
+    {% if form.language.vars.choices|length == 1 %} ibexa-extra-actions--prevent-show {% endif %}"
     data-actions="edit-user">
-    <div class="ez-extra-actions__header">{{ 'user.edit.select_language'|trans|desc('Select a language:') }}</div>
-    <div class="ez-extra-actions__content">
+    <div class="ibexa-extra-actions__header">{{ 'user.edit.select_language'|trans|desc('Select a language:') }}</div>
+    <div class="ibexa-extra-actions__content">
         {{ form_start(form) }}
         {{ form_widget(form.content_info) }}
         {{ form_widget(form.location) }}
         {{ form_widget(form.version_info) }}
         {{ form_widget(form.language, { 'attr': {
-            'class': 'ez-extra-actions__form-values'
+            'class': 'ibexa-extra-actions__form-values'
         } }) }}
         {{ form_end(form) }}
     </div>

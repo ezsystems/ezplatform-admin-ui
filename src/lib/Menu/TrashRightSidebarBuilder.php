@@ -85,7 +85,6 @@ class TrashRightSidebarBuilder extends AbstractBuilder implements TranslationCon
 
         $menu->addChild(
             $this->createMenuItem(self::ITEM__EMPTY, [
-                'extras' => ['icon' => 'trash-empty'],
                 'attributes' => $canDelete > 0 && $trashItemsCount > 0
                     ? $trashEmptyAttributes
                     : ['class' => 'disabled'],

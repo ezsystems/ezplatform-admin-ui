@@ -19,6 +19,7 @@ const DESCENDING_SORT_ORDER = 'descending';
 const DEFAULT_SORT_ORDER = ASCENDING_SORT_ORDER;
 const ACTION_FLOW_ADD_LOCATIONS = 'add';
 const ACTION_FLOW_MOVE = 'move';
+const SUBITEMS_PADDING = 15;
 
 export default class SubItemsModule extends Component {
     constructor(props) {
@@ -47,6 +48,8 @@ export default class SubItemsModule extends Component {
         this.afterBulkUnhide = this.afterBulkUnhide.bind(this);
         this.changePage = this.changePage.bind(this);
         this.changeSorting = this.changeSorting.bind(this);
+        this.calculateSubItemsWidth = this.calculateSubItemsWidth.bind(this);
+        this.resizeSubItems = this.resizeSubItems.bind(this);
 
         this._refListViewWrapper = React.createRef();
         this.bulkActionModalContainer = null;
@@ -71,6 +74,7 @@ export default class SubItemsModule extends Component {
             actionFlow: null,
             sortClause: sortClauseData.name,
             sortOrder: sortClauseData.order,
+            subItemsWidth: this.calculateSubItemsWidth(),
         };
     }
 
@@ -79,6 +83,8 @@ export default class SubItemsModule extends Component {
         this.bulkActionModalContainer = document.createElement('div');
         this.bulkActionModalContainer.classList.add('m-sub-items__bulk-action-modal-container');
         document.body.appendChild(this.bulkActionModalContainer);
+        document.body.addEventListener('ibexa-main-menu-resized', this.resizeSubItems, false);
+        window.addEventListener('resize', this.resizeSubItems, false);
 
         if (!this.state.activePageItems) {
             this.loadPage(0);
@@ -110,6 +116,18 @@ export default class SubItemsModule extends Component {
 
     componentWillUnmount() {
         document.body.removeChild(this.bulkActionModalContainer);
+    }
+
+    resizeSubItems() {
+        this.setState({ subItemsWidth: this.calculateSubItemsWidth() });
+    }
+
+    calculateSubItemsWidth() {
+        const sideMenu = document.querySelector('.ibexa-main-container__side-column');
+        const sideMenuRect = sideMenu.getBoundingClientRect();
+        const windowWidth = window.innerWidth;
+
+        return windowWidth - sideMenuRect.width - SUBITEMS_PADDING;
     }
 
     getDefaultSortClause(sortClauses) {
@@ -1212,7 +1230,7 @@ export default class SubItemsModule extends Component {
 
     render() {
         const listTitle = Translator.trans(/*@Desc("Sub-items")*/ 'items_list.title', {}, 'sub_items');
-        const { selectedItems, activeView, totalCount, isDuringBulkOperation, activePageItems } = this.state;
+        const { selectedItems, activeView, totalCount, isDuringBulkOperation, activePageItems, subItemsWidth } = this.state;
         const nothingSelected = !selectedItems.size;
         const isTableViewActive = activeView === 'table';
         const pageLoaded = !!activePageItems;
@@ -1233,7 +1251,7 @@ export default class SubItemsModule extends Component {
         }
 
         return (
-            <div className="m-sub-items">
+            <div className="m-sub-items" style={{ width: `${subItemsWidth}px` }}>
                 <div className="m-sub-items__header">
                     <div className="m-sub-items__title">
                         {listTitle} ({this.state.totalCount})
@@ -1308,5 +1326,5 @@ SubItemsModule.defaultProps = {
     limit: parseInt(window.eZ.adminUiConfig.subItems.limit, 10),
     offset: 0,
     totalCount: 0,
-    languageContainerSelector: '.ez-extra-actions-container',
+    languageContainerSelector: '.ibexa-extra-actions-container',
 };

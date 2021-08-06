@@ -68,7 +68,6 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
                             'menu'
                         ),
                     ],
-                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
@@ -83,7 +82,6 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
                             'menu'
                         ),
                     ],
-                    'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.role.list',
                 ]
             ),

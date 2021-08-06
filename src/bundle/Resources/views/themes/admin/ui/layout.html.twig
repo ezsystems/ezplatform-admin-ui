@@ -122,7 +122,7 @@
             <div class="ibexa-main-header">
                 <div class="ibexa-main-header__brand-column">
                     <a class="ibexa-main-header__brand" href="{{ url('ezplatform.dashboard') }}">
-                        <img class="ibexa-main-header__brand-image" src="{{ asset('/bundles/ibexaadminui/img/ibexa-logo.svg') }}" alt="Ibexa" />
+                        <img class="ibexa-main-header__brand-image" src="{{ asset('bundles/ibexaadminui/img/ibexa-logo.svg') }}" alt="Ibexa" />
                     </a>
                 </div>
                 <div class="ibexa-main-header__search-column">
@@ -171,8 +171,19 @@
             {% block content_column %}
                 <div class="ibexa-main-container__content-column">
                     <div class="container">
-                        {% block breadcrumbs %}{% endblock %}
-                        {% block header %}{% endblock %}
+                        {% block content_header %}
+                            <div class="ibexa-page-header-wrapper">
+                                <div class="ibexa-breadcrums-wrapper">
+                                    {% block breadcrumbs %}{% endblock %}
+                                </div>
+                                <div class="ibexa-content-menu-wrapper">
+                                    {% block context_menu %}{% endblock %}
+                                </div>
+                                <div class="ibexa-header-wrapper">
+                                    {% block header %}{% endblock %}
+                                </div>
+                            </div>
+                        {% endblock %}
                         {% block content %}{% endblock %}
                     </div>
                 </div>

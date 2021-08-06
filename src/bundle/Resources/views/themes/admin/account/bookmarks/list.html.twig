@@ -6,17 +6,15 @@
 
 {% block body_class %}ez-bookmark-list-view{% endblock %}
 
+{% block header %}
+    {% include '@ezdesign/ui/page_title.html.twig' with {
+        title: 'bookmark.headline'|trans|desc('Bookmarks')
+    } %}
+{% endblock %}
+
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
         <div class="container ez-content-container">
-            <div class="ez-header mt-5">
-                <div class="container">
-                    {% include '@ezdesign/ui/page_title.html.twig' with { 
-                        title: 'bookmark.headline'|trans|desc('Bookmarks'), icon_name: 'bookmark-manager' } 
-                    %}
-                </div>
-            </div>
-
             <section class="container ez-container">
                 {{ form_start(form_remove, {
                     'action': path('ezplatform.bookmark.remove'),

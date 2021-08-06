@@ -124,7 +124,6 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
                         ? $publishAttributes
                         : array_merge($publishAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => [
-                        'icon' => 'publish',
                         'orderNumber' => 10,
                     ],
                 ]
@@ -136,7 +135,6 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
                         ? $editAttributes
                         : array_merge($editAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => [
-                        'icon' => 'save',
                         'orderNumber' => 50,
                     ],
                 ]
@@ -157,7 +155,6 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
                     ? $deleteAttributes
                     : array_merge($deleteAttributes, self::BTN_DISABLED_ATTR),
                 'extras' => [
-                    'icon' => 'trash-empty',
                     'orderNumber' => 70,
                 ],
             ]
@@ -231,7 +228,6 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
                     ? $previewAttributes
                     : array_merge($previewAttributes, self::BTN_DISABLED_ATTR),
                 'extras' => [
-                    'icon' => 'view-desktop',
                     'orderNumber' => 60,
                 ],
             ]

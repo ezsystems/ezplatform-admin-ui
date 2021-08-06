@@ -8,19 +8,24 @@
 
 {% block body_class %}ez-trash-list-view ez-has-two-sidebars{% endblock %}
 
+{% block context_menu %}
+    {% if can_cleantrash and form_trash_item_restore.trash_items|length > 0 %}
+        {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
+        {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+    {% endif %}
+{% endblock %}
+
+{% block header %}
+    {% include '@ezdesign/ui/page_title.html.twig' with {
+        title: 'trash.headline'|trans|desc('Trash')
+    } %}
+{% endblock %}
+
 {% block content %}
     {%  set trashSearchParams = app.request.get('trash_search') %}
 
     <div class="row align-items-stretch ez-main-row">
         <div class="container ez-content-container">
-            <div class="ez-header mt-5">
-                <div class="container">
-                    {% include '@ezdesign/ui/page_title.html.twig' with {
-                        title: 'trash.headline'|trans|desc('Trash')
-                    } %}
-                </div>
-            </div>
-
             <section class="container ez-container">
                 {{ form_start(form_search, { attr: { class: 'ez-trash-search-form' } }) }}
                     <div class="ez-trash-search-form__inputs-group">
@@ -249,14 +254,6 @@
                 {% include '@ezdesign/trash/modal/empty_trash_confirmation.html.twig' with {'form': form_trash_empty, 'trash_items_count': pager.nbResults} %}
             </section>
         </div>
-        {% if can_cleantrash and form_trash_item_restore.trash_items|length > 0 %}
-            <div class="ez-context-menu">
-                <div class="ez-sticky-container">
-                    {% set sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.trash.sidebar_right', []) %}
-                    {{ knp_menu_render(sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
-                </div>
-            </div>
-        {% endif %}
     </div>
 {% endblock %}
 

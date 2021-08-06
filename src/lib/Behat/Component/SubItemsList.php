@@ -46,11 +46,17 @@ class SubItemsList extends Component
             return;
         }
 
-        $this->getHTMLPage()->findAll($this->getLocator('horizontalHeaders'))->getByCriterion(new ElementTextCriterion($columnName))->click();
+        $header = $this->getHTMLPage()->findAll($this->getLocator('horizontalHeaders'))->getByCriterion(new ElementTextCriterion($columnName));
+        $header->mouseOver();
+        usleep(100 * 2500); // 250 ms TODO: Remove after redesign
+        $header->click();
         $isSortedDescending = $this->getHTMLPage()->findAll($this->getLocator('sortingOrderDescending'))->any();
 
         if (!$isSortedDescending && !$ascending) {
-            $this->getHTMLPage()->findAll($this->getLocator('horizontalHeaders'))->getByCriterion(new ElementTextCriterion($columnName))->click();
+            $header = $this->getHTMLPage()->findAll($this->getLocator('horizontalHeaders'))->getByCriterion(new ElementTextCriterion($columnName));
+            $header->mouseOver();
+            usleep(100 * 2500); // 250 ms TODO: Remove after redesign
+            $header->click();
         }
 
         $verificationLocator = $ascending ?
@@ -70,6 +76,7 @@ class SubItemsList extends Component
         $this->getHTMLPage()->setTimeout(5)->waitUntilCondition(
             new ElementNotExistsCondition($this->getHTMLPage(), $this->getLocator('spinner'))
         );
+        $this->getHTMLPage()->find($this->getLocator('paginationInfo'))->assert()->textContains('Viewing');
     }
 
     public function clickListElement(string $contentName, string $contentType)
@@ -98,6 +105,7 @@ class SubItemsList extends Component
             new VisibleCSSLocator('table', '.m-sub-items'),
             new VisibleCSSLocator('empty', '.c-no-items'),
             new VisibleCSSLocator('horizontalHeaders', '.m-sub-items .c-table-view__cell--head'),
+            new VisibleCSSLocator('paginationInfo', '.m-sub-items__pagination-info'),
             new CSSLocator('spinner', '.m-sub-items__spinner-wrapper'),
             new CSSLocator('sortingOrderAscending', '.m-sub-items .c-table-view__cell--head.c-table-view__cell--sorted-asc'),
             new CSSLocator('sortingOrderDescending', '.m-sub-items .c-table-view__cell--head.c-table-view__cell--sorted-desc'),

@@ -5,15 +5,28 @@
     }
 }
 
-.ez-extra-actions--create {
+.ibexa-extra-actions--create {
     .ez-instant-filter {
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            padding-bottom: calculateRem(16px);
+            border-bottom: calculateRem(1px) solid $ibexa-color-base;
+        }
+
         &__group-name {
             margin: calculateRem(16px) calculateRem(8px) 0;
             color: $ibexa-color-base-dark;
+            flex-basis: 100%;
+            font-size: $ibexa-text-font-size-small;
         }
 
         &__group-item {
             position: relative;
+            flex-basis: 50%;
+            padding: calculateRem(4px);
+            display: flex;
+            align-items: center;
 
             label {
                 cursor: pointer;
@@ -22,11 +35,9 @@
             .ibexa-icon {
                 fill: $ibexa-black;
                 position: absolute;
-                top: 0;
                 left: calculateRem(20px);
                 width: calculateRem(16px);
                 height: calculateRem(16px);
-                margin-top: calculateRem(3px);
             }
         }
 

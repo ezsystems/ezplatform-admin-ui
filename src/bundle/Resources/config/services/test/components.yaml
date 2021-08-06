@@ -27,7 +27,7 @@ services:
 
   Ibexa\AdminUi\Behat\Component\UpperMenu: ~
 
-  Ibexa\AdminUi\Behat\Component\RightMenu: ~
+  Ibexa\AdminUi\Behat\Component\ContentActionsMenu: ~
 
   Ibexa\AdminUi\Behat\Component\UserNotificationPopup: ~
 

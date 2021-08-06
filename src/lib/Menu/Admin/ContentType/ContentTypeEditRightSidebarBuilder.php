@@ -75,7 +75,6 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['publishContentType']->vars['id']),
                     ],
-                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
@@ -85,7 +84,6 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['removeDraft']->vars['id']),
                     ],
-                    'extras' => ['icon' => 'circle-close'],
                 ]
             ),
         ]);

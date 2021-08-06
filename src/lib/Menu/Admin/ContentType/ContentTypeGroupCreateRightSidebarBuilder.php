@@ -71,13 +71,11 @@ class ContentTypeGroupCreateRightSidebarBuilder extends AbstractBuilder implemen
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => '#content_type_group_create_create',
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.content_type_group.list',
                 ]
             ),

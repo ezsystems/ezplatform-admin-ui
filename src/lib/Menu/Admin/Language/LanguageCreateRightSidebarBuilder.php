@@ -71,13 +71,11 @@ class LanguageCreateRightSidebarBuilder extends AbstractBuilder implements Trans
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => '#language_create_save',
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.language.list',
                 ]
             ),

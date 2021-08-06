@@ -58,15 +58,15 @@ Feature: Verify that an Editor with Subtree limitations can perform all his task
 
   Scenario: I cannot edit, create or send to trash Content in root location
     Then the buttons are disabled
-      | buttonName |
-      | Create     |
-      | Edit       |
+      | buttonName     |
+      | Create content |
+      | Edit           |
     And the "Send to Trash" button is not visible
 
   Scenario: I cannot edit, create or send to trash Content outside my permissions
     Given I navigate to content "FolderGrandParent" of type "DedicatedFolder" in "root"
     Then the buttons are disabled
-      | buttonName |
-      | Create     |
-      | Edit       |
+      | buttonName     |
+      | Create content |
+      | Edit           |
     And the "Send to Trash" button is not visible

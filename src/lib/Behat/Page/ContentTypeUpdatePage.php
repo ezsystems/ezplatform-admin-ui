@@ -15,7 +15,7 @@ use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Routing\Router;
 use Ibexa\AdminUi\Behat\Component\Notification;
-use Ibexa\AdminUi\Behat\Component\RightMenu;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 
 class ContentTypeUpdatePage extends AdminUpdateItemPage
 {
@@ -25,10 +25,10 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
     public function __construct(
         Session $session,
         Router $router,
-        RightMenu $rightMenu,
+        ContentActionsMenu $contentActionsMenu,
         Notification $notification
     ) {
-        parent::__construct($session, $router, $rightMenu);
+        parent::__construct($session, $router, $contentActionsMenu);
         $this->notification = $notification;
     }
 

@@ -60,7 +60,6 @@ class ObjectStateEditRightSidebarBuilder extends AbstractBuilder implements Tran
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#%s', $saveId),
                     ],
-                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
@@ -70,7 +69,6 @@ class ObjectStateEditRightSidebarBuilder extends AbstractBuilder implements Tran
                     'routeParameters' => [
                         'objectStateGroupId' => $groupId,
                     ],
-                    'extras' => ['icon' => 'circle-close'],
                 ]
             ),
         ]);

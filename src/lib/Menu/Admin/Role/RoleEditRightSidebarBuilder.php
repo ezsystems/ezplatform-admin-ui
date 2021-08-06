@@ -75,13 +75,11 @@ class RoleEditRightSidebarBuilder extends AbstractBuilder implements Translation
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#update-role-%d_save', $role->id),
                     ],
-                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.role.list',
                 ]
             ),
