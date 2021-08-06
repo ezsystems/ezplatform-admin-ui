@@ -128,7 +128,7 @@
                 'data-allowed-content-types': allowed_content_type_identifiers|join(','),
             },
         } %}
-            {% block tbody %}{% endblock %}
+            {% block tbody_empty %}{% endblock %}
             {% block header %}
                 {% embed '@ezdesign/ui/component/table/table_header.html.twig' %}
                     {% block headline %}
