@@ -27,34 +27,21 @@
         }) }}
         {% set body_rows = [] %}
         {% for role in pager.currentPageResults %}
-            {% set body_row_cols = [] %}
-
-            {% set col_raw %}
+            {% set col_checkbox %}
                 {% if can_delete %}
                     {{ form_widget(form_roles_delete.roles[role.id]) }}
                 {% else %}
                     {% do form_roles_delete.roles.setRendered %}
                 {% endif %}
             {% endset %}
-            {% set body_row_cols = body_row_cols|merge([{
-                has_checkbox: true,
-                content: col_raw,
-            }]) %}
 
-            {% set col_raw %}
+            {% set col_name %}
                 <a href="{{ path('ezplatform.role.view', { roleId: role.id }) }}">
                     {{ role.identifier }}
                 </a>
             {% endset %}
-            {% set body_row_cols = body_row_cols|merge([{
-                content: col_raw,
-            }]) %}
 
-            {% set body_row_cols = body_row_cols|merge([
-                { content: role.id },
-            ]) %}
-
-            {% set col_raw %}
+            {% set col_action_btns %}
                 {% if can_assign %}
                     <a
                         title="{{ 'role.view.list.action.assign_to_users_or_groups'|trans|desc('Assign to Users/Groups') }}"
@@ -89,12 +76,13 @@
                     </a>
                 {% endif %}
             {% endset %}
-            {% set body_row_cols = body_row_cols|merge([{
-                has_action_btns: true,
-                content: col_raw,
-            }]) %}
 
-            {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+            {% set body_rows = body_rows|merge([{ cols: [
+                { has_checkbox: true, content: col_checkbox },
+                { content: col_name },
+                { content: role.id },
+                { has_action_btns: true, content: col_action_btns },
+            ] }]) %}
         {% endfor %}
 
         {% embed '@ezdesign/ui/component/table/table.html.twig' with {
@@ -102,7 +90,7 @@
             head_cols: [
                 { has_checkbox: true },
                 { content: 'role.view.list.column.name'|trans|desc('Name') },
-                { content: 'role.view.list.column.name'|trans|desc('Name') },
+                { content: 'role.view.list.column.id'|trans|desc('Role ID') },
                 { },
             ],
             body_rows: body_rows,
