@@ -149,7 +149,6 @@
                 });
         }, eZ.adminUiConfig.autosave.interval);
     }
-
     const addClickWorkflowHandler = (event) => {
         const applyButton = doc.querySelector('[name="ezplatform_content_forms_content_edit[workflow][apply]"]');
 
