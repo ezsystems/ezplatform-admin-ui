@@ -126,6 +126,7 @@
                     ],
                     body_rows: body_rows,
                     actions: macros.table_header_tools(form_remove),
+                    empty_table_info_text: 'drafts.list.empty'|trans|desc('You have no drafts yet. Your drafts will show up here.'),
                 } %}
                 {% if pager.haveToPaginate %}
                     {% include '@ezdesign/ui/pagination.html.twig' with {
