@@ -13,9 +13,6 @@ use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
-use eZ\Publish\API\Repository\Values\User\Limitation\LanguageLimitation;
-use eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
@@ -198,7 +195,16 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 'universal_discovery_widget_module.default_location_id'
             ),
         ];
-        $canCreateAnywhere = $this->canCreateAnywhere($content);
+        $createPolicies = $this->permissionResolver->hasAccess(
+            'content',
+            'create'
+        );
+        $manageLocationsPolicies = $this->permissionResolver->hasAccess(
+            'content',
+            'manage_locations'
+        );
+        $hasCreatePermission = is_bool($createPolicies) ? $createPolicies : true;
+        $hasManageLocationsPermission = is_bool($manageLocationsPolicies) ? $manageLocationsPolicies : true;
 
         $copyLimit = $this->configResolver->getParameter(
             'subtree_operations.copy_subtree.limit'
@@ -230,7 +236,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 self::ITEM__MOVE,
                 [
                     'extras' => ['icon' => 'move'],
-                    'attributes' => $canCreateAnywhere
+                    'attributes' => $hasCreatePermission
                         ? $moveAttributes
                         : array_merge($moveAttributes, ['disabled' => 'disabled']),
                 ]
@@ -242,7 +248,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__COPY,
                     [
                         'extras' => ['icon' => 'copy'],
-                        'attributes' => $canCreateAnywhere
+                        'attributes' => $hasCreatePermission && $hasManageLocationsPermission
                             ? $copyAttributes
                             : array_merge($copyAttributes, ['disabled' => 'disabled']),
                     ]
@@ -254,7 +260,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__COPY_SUBTREE,
                     [
                         'extras' => ['icon' => 'copy-subtree'],
-                        'attributes' => $canCopySubtree && $canCreateAnywhere
+                        'attributes' => $canCopySubtree && $hasCreatePermission
                             ? $copySubtreeAttributes
                             : array_merge($copySubtreeAttributes, ['disabled' => 'disabled']),
                     ]
@@ -407,48 +413,5 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 ]
             )
         );
-    }
-
-    private function canCreateAnywhere(Content $content): bool
-    {
-        $createPolicies = $this->permissionResolver->hasAccess(
-            'content',
-            'create'
-        );
-
-        if (is_bool($createPolicies)) {
-            return $createPolicies;
-        }
-
-        foreach ($createPolicies as $createPolicy) {
-            $sectionId = $content->contentInfo->sectionId;
-            if (
-                !empty($createPolicy['limitation'])
-                && $createPolicy['limitation'] instanceof SectionLimitation
-                && !in_array($sectionId, $createPolicy['limitation']->limitationValues)
-            ) {
-                return false;
-            }
-
-            foreach ($createPolicy['policies'] ?? [] as $policy) {
-                foreach ($policy->limitations as $limitation) {
-                    if ($limitation instanceof SectionLimitation && !in_array($sectionId, $limitation->limitationValues)) {
-                        return false;
-                    }
-
-                    if ($limitation instanceof ContentTypeLimitation && !in_array($content->getContentType()->id, $limitation->limitationValues)) {
-                        return false;
-                    }
-
-                    $commonArray = \array_intersect($content->getVersionInfo()->languageCodes, $limitation->limitationValues);
-
-                    if ($limitation instanceof LanguageLimitation && \count($commonArray) === 0) {
-                        return false;
-                    }
-                }
-            }
-        }
-
-        return true;
     }
 }
