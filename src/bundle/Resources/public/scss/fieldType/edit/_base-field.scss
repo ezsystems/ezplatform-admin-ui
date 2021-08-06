@@ -1,56 +1,41 @@
-.ez-field-edit {
+.ibexa-field-edit {
     &__label {
         @include label-required();
     }
 
-    &__label-wrapper {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-
-    &__icon-wrapper {
-        width: calculateRem(16px);
-        height: calculateRem(16px);
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: calculateRem(4px);
-
-        .ibexa-icon {
-            fill: $ibexa-color-base-dark;
+    &__data {
+        &--compound {
+            border: calculateRem(1px) solid $ibexa-color-dark-200;
+            border-radius: $ibexa-border-radius;
+            padding: 0 calculateRem(23px) calculateRem(4px);
         }
     }
 
-    &__data,
-    &__preview {
-        padding-top: calculateRem(8px);
+    .ibexa-input-text-wrapper {
+        width: auto;
     }
 
-    .ez-data-description {
-        margin-bottom: calculateRem(16px);
-        color: $ibexa-color-base-dark;
+    .ibexa-form-help {
+        margin-top: calculateRem(8px);
     }
 
-    .ez-data-source__label {
-        &:after {
-            content: ': ';
-        }
+    .ibexa-form-error {
+        min-height: calculateRem(18px);
+        margin: calculateRem(4px) 0;
     }
 
     &--nontranslatable,
     &--disabled {
-        opacity: 0.4;
         pointer-events: none;
-    }
 
-    &__error {
-        @include error-under-input();
-    }
+        .ibexa-label {
+            color: $ibexa-color-black-300;
+        }
 
-    .ez-data-source__input {
-        &.is-invalid {
-            @include input-invalid;
+        &__data {
+            &--compound {
+                border-color: $ibexa-color-light-400;
+            }
         }
     }
 }
