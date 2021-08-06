@@ -15,18 +15,18 @@ use Ibexa\Behat\Browser\Routing\Router;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
-use Ibexa\AdminUi\Behat\Component\RightMenu;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 use PHPUnit\Framework\Assert;
 
 class AdminUpdateItemPage extends Page
 {
-    /** @var \Ibexa\AdminUi\Behat\Component\RightMenu */
-    protected $rightMenu;
+    /** @var \Ibexa\AdminUi\Behat\Component\ContentActionsMenu */
+    protected $contentActionsMenu;
 
-    public function __construct(Session $session, Router $router, RightMenu $rightMenu)
+    public function __construct(Session $session, Router $router, ContentActionsMenu $contentActionsMenu)
     {
         parent::__construct($session, $router);
-        $this->rightMenu = $rightMenu;
+        $this->contentActionsMenu = $contentActionsMenu;
     }
 
     public function getFieldValue($label)
@@ -66,7 +66,7 @@ class AdminUpdateItemPage extends Page
 
     public function verifyIsLoaded(): void
     {
-        $this->rightMenu->verifyIsLoaded();
+        $this->contentActionsMenu->verifyIsLoaded();
         Assert::assertTrue($this->getHTMLPage()->find($this->getLocator('formElement'))->isVisible());
     }
 

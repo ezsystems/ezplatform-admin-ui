@@ -1,19 +1,26 @@
 {% trans_default_domain 'locationview' %}
 
-<div class="ez-extra-actions ez-extra-actions--create ez-extra-actions--hidden" data-actions="create">
-    <div class="ez-extra-actions__header">{{ 'content.create.choose_content_type'|trans|desc('Create content') }}</div>
-    <div class="ez-extra-actions__content">
+<div class="ibexa-extra-actions ibexa-extra-actions--create ibexa-extra-actions--hidden" data-actions="create">
+    <div class="ibexa-extra-actions__header">
+        <h3>{{ 'content.create.choose_content_type'|trans|desc('Create content') }}</h3>
+        <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--close">
+            <svg class="ibexa-icon ibexa-icon--small-medium">
+                <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
+            </svg>
+        </button>
+    </div>
+    <div class="ibexa-extra-actions__content">
         {{ form_start(form, { 'action': path('ezplatform.content.create'), 'attr': { 'autocomplete': 'off' } }) }}
-            <div class="ez-extra-actions__section-header">{{ 'content.create.select_language'|trans|desc('Select a language:') }}</div>
-            <div class="ez-extra-actions__section-content">
+            <div class="ibexa-extra-actions__section-header">{{ 'content.create.select_language'|trans|desc('Select a language:') }}</div>
+            <div class="ibexa-extra-actions__section-content">
                 {% if form.language.vars.choices|length == 1 %}
-                    {{ form_widget(form.language, {'attr': {'class': 'ez-content-create', 'readonly': true}}) }}
+                    {{ form_widget(form.language, {'attr': {'class': 'ez-content-create form-control', 'readonly': true}}) }}
                 {% else %}
-                    {{ form_widget(form.language) }}
+                    {{ form_widget(form.language, {'attr': {'class': 'form-control'}}) }}
                 {% endif %}
             </div>
-            <div class="ez-extra-actions__section-header">{{ 'content.create.select_content_type'|trans|desc('Select a Content Type:') }}</div>
-            <div class="ez-extra-actions__section-content ez-extra-actions__section-content--content-type">
+            <div class="ibexa-extra-actions__section-header">{{ 'content.create.select_content_type'|trans|desc('Select a Content Type:') }}</div>
+            <div class="ibexa-extra-actions__section-content ibexa-extra-actions__section-content--content-type">
                 <div class="ez-instant-filter">
                     <div class="ez-instant-filter__input-wrapper">
                         <input type="text" class="ez-instant-filter__input form-control" placeholder="{{ ('Type to refine') }}" value="" />
@@ -23,6 +30,7 @@
                     </div>
                 </div>
             </div>
+            {{ form_widget(form.create, {'attr': {'hidden': 'hidden'}}) }}
         {{ form_end(form) }}
     </div>
 </div>

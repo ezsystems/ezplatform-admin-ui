@@ -1,0 +1,11 @@
+.ibexa-icon-tag {
+    display: flex;
+    align-items: center;
+    color: $ibexa-color-font-pale;
+    letter-spacing: calculateRem(0.12px);
+    margin-bottom: calculateRem(24px);
+
+    .ibexa-icon {
+        margin-right: calculateRem(8px);
+    }
+}

@@ -10,17 +10,17 @@ namespace Ibexa\AdminUi\Behat\BrowserContext;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use Ibexa\AdminUi\Behat\Component\RightMenu;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 use PHPUnit\Framework\Assert;
 
-class RightMenuContext implements Context
+class ContentActionsMenuContext implements Context
 {
-    /** @var \Ibexa\AdminUi\Behat\Component\RightMenu */
-    private $rightMenu;
+    /** @var \Ibexa\AdminUi\Behat\Component\ContentActionsMenu */
+    private $contentActionsMenu;
 
-    public function __construct(RightMenu $rightMenu)
+    public function __construct(ContentActionsMenu $contentActionsMenu)
     {
-        $this->rightMenu = $rightMenu;
+        $this->contentActionsMenu = $contentActionsMenu;
     }
 
     /**
@@ -28,7 +28,7 @@ class RightMenuContext implements Context
      */
     public function clickEditActionBar(string $button): void
     {
-        $this->rightMenu->clickButton($button);
+        $this->contentActionsMenu->clickButton($button);
     }
 
     /**
@@ -37,7 +37,7 @@ class RightMenuContext implements Context
     public function theButtonsAreDisabled(TableNode $buttons): void
     {
         foreach ($buttons->getHash() as $button) {
-            Assert::assertFalse($this->rightMenu->isButtonActive($button['buttonName']));
+            Assert::assertFalse($this->contentActionsMenu->isButtonActive($button['buttonName']));
         }
     }
 
@@ -46,6 +46,6 @@ class RightMenuContext implements Context
      */
     public function buttonIsNotVisible(string $buttonName): void
     {
-        Assert::assertFalse($this->rightMenu->isButtonVisible($buttonName));
+        Assert::assertFalse($this->contentActionsMenu->isButtonVisible($buttonName));
     }
 }

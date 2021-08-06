@@ -14,7 +14,7 @@ use Ibexa\Behat\Browser\Element\Criterion\ChildElementTextCriterion;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Routing\Router;
-use Ibexa\AdminUi\Behat\Component\RightMenu;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
 
 class RoleUpdatePage extends AdminUpdateItemPage
@@ -22,9 +22,9 @@ class RoleUpdatePage extends AdminUpdateItemPage
     /** @var \Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget */
     private $universalDiscoveryWidget;
 
-    public function __construct(Session $session, Router $router, RightMenu $rightMenu, UniversalDiscoveryWidget $universalDiscoveryWidget)
+    public function __construct(Session $session, Router $router, ContentActionsMenu $contentActionsMenu, UniversalDiscoveryWidget $universalDiscoveryWidget)
     {
-        parent::__construct($session, $router, $rightMenu);
+        parent::__construct($session, $router, $contentActionsMenu);
         $this->universalDiscoveryWidget = $universalDiscoveryWidget;
     }
 

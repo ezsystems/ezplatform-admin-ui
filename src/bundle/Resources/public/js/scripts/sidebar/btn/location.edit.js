@@ -1,5 +1,5 @@
 (function(global, doc, eZ, bootstrap, Routing) {
-    const editActions = doc.querySelector('.ez-extra-actions--edit') || doc.querySelector('.ez-extra-actions--edit-user');
+    const editActions = doc.querySelector('.ibexa-extra-actions--edit') || doc.querySelector('.ibexa-extra-actions--edit-user');
     const btns = [...editActions.querySelectorAll('.form-check [type="radio"]')];
     const form = editActions.querySelector('form');
     const contentIdInput = form.querySelector('#content_edit_content_info') || form.querySelector('#user_edit_content_info');

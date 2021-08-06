@@ -51,12 +51,6 @@ img {
 
     &--edit {
         background: $ibexa-white;
-
-        .ez-context-menu {
-            .ez-sticky-container {
-                top: calculateRem(50px);
-            }
-        }
     }
 }
 
@@ -143,10 +137,6 @@ select {
     }
 }
 
-.ez-content-view .ez-content-container {
-    margin-right: calculateRem(80px); //Please delete after redsign context menu on content view
-}
-
 .ez-info-view,
 .ez-content-view,
 .ez-content-type-view,
@@ -164,10 +154,10 @@ select {
 .ez-object-state-group-list-view,
 .ez-workflow-list-view,
 .ez-segment-group-list-view {
-    background-color: $ibexa-color-base-pale;
+    background-color: $ibexa-color-white;
 
     .ibexa-main-container {
-        background-color: $ibexa-color-base-pale;
+        background-color: $ibexa-color-white;
     }
 }
 
@@ -213,8 +203,4 @@ select {
     .ez-main-container {
         padding: 0;
     }
-}
-
-.ez-content-view .ez-content-container {
-    margin-right: calculateRem(80px); // TODO: Please delete after redsign context menu on content view
 }

@@ -59,7 +59,6 @@ class PolicyCreateRightSidebarBuilder extends AbstractBuilder implements Transla
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => '#policy_create_save',
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
@@ -69,7 +68,6 @@ class PolicyCreateRightSidebarBuilder extends AbstractBuilder implements Transla
                     'routeParameters' => [
                         'roleId' => $role->id,
                     ],
-                    'extras' => ['icon' => 'circle-close'],
                 ]
             ),
         ]);

@@ -63,7 +63,6 @@ class PolicyEditRightSidebarBuilder extends AbstractBuilder implements Translati
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => sprintf('#%s', $saveId),
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
@@ -73,7 +72,6 @@ class PolicyEditRightSidebarBuilder extends AbstractBuilder implements Translati
                     'routeParameters' => [
                         'roleId' => $role->id,
                     ],
-                    'extras' => ['icon' => 'circle-close'],
                 ]
             ),
         ]);

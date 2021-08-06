@@ -59,7 +59,6 @@ class RoleAssignmentCreateRightSidebarBuilder extends AbstractBuilder implements
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => '#role_assignment_create_save',
                     ],
-                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
@@ -69,7 +68,6 @@ class RoleAssignmentCreateRightSidebarBuilder extends AbstractBuilder implements
                     'routeParameters' => [
                         'roleId' => $role->id,
                     ],
-                    'extras' => ['icon' => 'circle-close'],
                 ]
             ),
         ]);

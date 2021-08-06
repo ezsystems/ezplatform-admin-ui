@@ -1,7 +1,7 @@
 (function(global, doc, eZ) {
     const adapatItemsContainer = doc.querySelector('.ibexa-context-menu');
 
-    if(!adapatItemsContainer) {
+    if (!adapatItemsContainer) {
         return;
     }
 
@@ -47,4 +47,5 @@
     adaptiveItems.adapt();
 
     global.addEventListener('resize', () => adaptiveItems.adapt(), false);
+    doc.body.addEventListener('ibexa-main-menu-resized', () => adaptiveItems.adapt(), false);
 })(window, window.document, window.eZ);

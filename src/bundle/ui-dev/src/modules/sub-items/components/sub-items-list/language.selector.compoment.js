@@ -6,10 +6,10 @@ import InstantFilter from '../sub-items-list/instant.filter.component';
 
 const LanguageSelector = (props) => {
     const className = createCssClassNames({
-        'ez-extra-actions': true,
+        'ibexa-extra-actions': true,
         'c-language-selector': true,
-        'ez-extra-actions--edit': true,
-        'ez-extra-actions--hidden': !props.isOpen,
+        'ibexa-extra-actions--edit': true,
+        'ibexa-extra-actions--hidden': !props.isOpen,
     });
     const closeLanguageSelector = (event) => {
         if (!event.target.closest('.c-table-view-item__btn') && !event.target.classList.contains('ez-instant-filter__input')) {
@@ -27,8 +27,8 @@ const LanguageSelector = (props) => {
 
     return (
         <div className={className}>
-            <div className="ez-extra-actions__header">{props.label}</div>
-            <div className="ez-extra-actions__content">
+            <div className="ibexa-extra-actions__header">{props.label}</div>
+            <div className="ibexa-extra-actions__content">
                 <InstantFilter items={props.languageItems} handleItemChange={props.handleItemChange} />
             </div>
         </div>
