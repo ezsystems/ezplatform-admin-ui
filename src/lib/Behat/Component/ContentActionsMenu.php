@@ -17,7 +17,7 @@ class ContentActionsMenu extends Component
     public function clickButton(string $buttonName): void
     {
         $buttons = $this->getHTMLPage()
-            ->findAll($this->getLocator('menuButtonLabel'))
+            ->findAll($this->getLocator('menuButton'))
             ->filterBy(new ElementTextCriterion($buttonName));
 
         if ($buttons->any()) {
@@ -69,7 +69,6 @@ class ContentActionsMenu extends Component
     {
         return [
             new VisibleCSSLocator('menuButton', '.ibexa-context-menu .ibexa-btn, .ibexa-context-menu__item .ibexa-popup-menu__item, .ez-context-menu .btn'), // TO DO: set one selector after redesign
-            new VisibleCSSLocator('menuButtonLabel', '.ibexa-context-menu .ibexa-btn .ibexa-btn__label, .ibexa-context-menu__item .ibexa-popup-menu__item, .ez-context-menu .btn'), // TO DO: set one selector after redesign
             new VisibleCSSLocator('moreButton', '.ibexa-context-menu__item--more'),
             new VisibleCSSLocator('expandedMenuButton', '.ibexa-context-menu__item .ibexa-popup-menu__item'),
         ];
