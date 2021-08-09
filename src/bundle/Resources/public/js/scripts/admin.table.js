@@ -1,8 +1,4 @@
 (function(global, doc, $, eZ) {
-    const STATE_CHECKED = 'CHECKED';
-    const STATE_UNCHECKED = 'UNCHECKED';
-    const STATE_ENABLED = 'ENABLED';
-    const STATE_DISABLED = 'DISABLED';
     const tables = doc.querySelectorAll('.ibexa-table');
     const setMainCheckboxState = (mainCheckbox, subCheckboxes, event) => {
         const isFromJS = event?.detail?.isFromJS ?? false;
@@ -20,18 +16,12 @@
             return;
         }
 
-        const subCheckboxesStates = [...subCheckboxes].map((subCheckbox) => {
-            const disabledState = subCheckbox.disabled ? STATE_DISABLED : STATE_ENABLED;
-            const checkedState = subCheckbox.checked ? STATE_CHECKED : STATE_UNCHECKED;
-
-            return [disabledState, checkedState];
-        });
-        const areAllSubCheckboxesDisabled = subCheckboxesStates.every((state) => state[0] === STATE_DISABLED);
+        const areAllSubCheckboxesDisabled = subCheckboxes.every((checkbox) => checkbox.disabled);
         const subCheckboxesStatesConsidered = areAllSubCheckboxesDisabled
-            ? subCheckboxesStates
-            : subCheckboxesStates.filter((state) => state[0] === STATE_ENABLED);
-        const areAllSubCheckboxesChecked = subCheckboxesStatesConsidered.every((state) => state[1] === STATE_CHECKED);
-        const areAllSubCheckboxesUnchecked = subCheckboxesStatesConsidered.every((state) => state[1] === STATE_UNCHECKED);
+            ? subCheckboxes
+            : subCheckboxes.filter((checkbox) => !checkbox.disabled);
+        const areAllSubCheckboxesChecked = subCheckboxesStatesConsidered.every((checkbox) => checkbox.checked);
+        const areAllSubCheckboxesUnchecked = subCheckboxesStatesConsidered.every((checkbox) => !checkbox.checked);
 
         mainCheckbox.disabled = areAllSubCheckboxesDisabled;
 
@@ -72,9 +62,9 @@
                 return;
             }
 
-            setMainCheckboxState(mainCheckbox, subCheckboxes);
+            setMainCheckboxState(mainCheckbox, [...subCheckboxes]);
 
-            const hadleSubCheckboxesChange = setMainCheckboxState.bind(null, mainCheckbox, subCheckboxes);
+            const hadleSubCheckboxesChange = setMainCheckboxState.bind(null, mainCheckbox, [...subCheckboxes]);
             const hadleMainCheckboxChange = setSubCheckboxesStates.bind(null, mainCheckbox, subCheckboxes);
 
             subCheckboxes.forEach((subCheckbox) => {
