@@ -18,12 +18,7 @@
 {% endblock %}
 
 {% block form %}
-    {{ form_start(form) }}
-        {# 
-            ==============================================================
-            ==== !! Grouped fields: this part will be done in backend ====
-            ==============================================================
-        #}
+    {{ form_start(form) }}}
         {% set metadataGroup = [] %}
         {% set contentGroup = [] %}
 
@@ -40,7 +35,6 @@
             'content':contentGroup,
             'metadata': metadataGroup
         } %}
-        {# ==== end grouped fields ==== #}
 
         {% set is_translation = form.vars.data.languageCode != content_type.mainLanguageCode %}
 

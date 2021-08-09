@@ -1,36 +1,3 @@
-<<<<<<< HEAD
-{% extends "@ezdesign/ui/base.html.twig" %}
-
-{% trans_default_domain 'content_type' %}
-
-{% form_theme form _self '@ezdesign/ui/form_fields.html.twig'  %}
-
-{% block _ezplatform_content_forms_contenttype_update_removeFieldDefinition_widget %}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
-        <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--light">
-            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
-        </svg>
-    </button>
-{% endblock %}
-
-{% block breadcrumbs_admin %}
-    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
-        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
-        { url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }), value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%') },
-        { value: 'content_type.breadcrumb.create'|trans|desc('Creating a new Content Type') }
-    ]} %}
-{% endblock %}
-
-{% block context_menu_admin %}
-    {% set content_type_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_create.sidebar_right', [], {'save_id': form.publishContentType.vars.id, 'group': content_type_group}) %}
-    {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
-{% endblock %}
-
-{% block header_admin %}
-    {% include '@ezdesign/ui/page_title.html.twig' with {
-        title: 'content_type.view.create.title'|trans|desc('Creating a new Content Type'),
-=======
 {% extends "@ezdesign/content_type/edit_base.html.twig" %}
 
 {% set language_code = content_type.mainLanguageCode %}
@@ -47,7 +14,6 @@
         title: 'content_type.breadcrumb.create'|trans|desc('Creating a new Content Type'),
         show_autosave_status: false,
         context_actions: knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
->>>>>>> 23fd6027... IBX-792: Redesign content type create
     } %}
 {% endblock %}
 
