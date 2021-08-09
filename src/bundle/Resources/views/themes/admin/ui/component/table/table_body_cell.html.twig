@@ -12,7 +12,9 @@
     {% block content %}
         {% if has_action_btns|default(false) %}
             <div class="ibexa-table__cell-btns-wrapper">
-                {{ content|raw }}
+                {% block action_btns_content %}
+                    {{ content|raw }}
+                {% endblock %}
             </div>
         {% else %}
             {{ content|raw }}
