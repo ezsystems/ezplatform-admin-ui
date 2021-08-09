@@ -75,51 +75,54 @@
             {% include '@ezdesign/content_type/modal/delete_confirmation.html.twig' with {'form': form} %}
 
             <div class="card-body ibexa-card__body ibexa-card__body--incresed-margin">
-                {% for field_definition in form.fieldDefinitionsData %}
-                    {% set value = field_definition.vars.value %}
+                {% for field_group, field_definitions in form.fieldDefinitionsData|group_by((field) => field.vars.data.fieldGroup) %}
+                    <h2>{{ field_group }}</h2>
+                    {% for field_definition in field_definitions %}
+                        {% set value = field_definition.vars.value %}
 
-                    <div class="card ibexa-card ibexa-card--toggle-group ibexa-card--collapsed">
-                        <div id="field-definition-{{ value.identifier }}" class="ibexa-card__header">
-                            {% set name = value.names[language_code] ?? value.names[content_type.mainLanguageCode]  %}
-                            <button class="ibexa-card__body-display-toggler btn">
-                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--caret-down" aria-hidden="true">
-                                    <use xlink:href="{{ ibexa_icon_path('caret-down') }}"></use>
-                                </svg>
-                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--caret-next" aria-hidden="true">
-                                    <use xlink:href="{{ ibexa_icon_path('caret-next') }}"></use>
-                                </svg>
-                            </button>
-                            {{ form_widget(field_definition.selected, {
-                                'label': '%s (%s)'|format(name, value.fieldTypeIdentifier),
-                                'attr': {'class': 'mr-1'}
-                            }) }}
+                        <div class="card ibexa-card ibexa-card--toggle-group ibexa-card--collapsed">
+                            <div id="field-definition-{{ value.identifier }}" class="ibexa-card__header">
+                                {% set name = value.names[language_code] ?? value.names[content_type.mainLanguageCode]  %}
+                                <button class="ibexa-card__body-display-toggler btn">
+                                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--caret-down" aria-hidden="true">
+                                        <use xlink:href="{{ ibexa_icon_path('caret-down') }}"></use>
+                                    </svg>
+                                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--caret-next" aria-hidden="true">
+                                        <use xlink:href="{{ ibexa_icon_path('caret-next') }}"></use>
+                                    </svg>
+                                </button>
+                                {{ form_widget(field_definition.selected, {
+                                    'label': '%s (%s)'|format(name, value.fieldTypeIdentifier),
+                                    'attr': {'class': 'mr-1'}
+                                }) }}
+                            </div>
+
+                            <div class="ibexa-card__body">
+                                {{ form_row(field_definition.name) }}
+                                {{ form_row(field_definition.identifier) }}
+                                {{ form_row(field_definition.position) }}
+                                {{ form_row(field_definition.description) }}
+                                {{ form_row(field_definition.isRequired) }}
+                                {{ form_row(field_definition.isSearchable) }}
+                                {{ form_row(field_definition.isTranslatable) }}
+                                {{ form_row(field_definition.isThumbnail) }}
+                                {{ form_row(field_definition.fieldGroup) }}
+
+                                {# Field type specific fields below #}
+                                {{ ez_render_field_definition_edit(value, {
+                                    'languageCode': language_code,
+                                    'form': field_definition,
+                                    'group_class': value.group_class|default(''),
+                                    'is_translation': is_translation,
+                                }) }}
+
+                                {# Default rendering #}
+                                {% for child in field_definition|filter(child => child.isRendered() == false) %}
+                                    {{ form_row(child) }}
+                                {% endfor %}
+                            </div>
                         </div>
-
-                        <div class="ibexa-card__body">
-                            {{ form_row(field_definition.name) }}
-                            {{ form_row(field_definition.identifier) }}
-                            {{ form_row(field_definition.position) }}
-                            {{ form_row(field_definition.description) }}
-                            {{ form_row(field_definition.isRequired) }}
-                            {{ form_row(field_definition.isSearchable) }}
-                            {{ form_row(field_definition.isTranslatable) }}
-                            {{ form_row(field_definition.isThumbnail) }}
-                            {{ form_row(field_definition.fieldGroup) }}
-
-                            {# Field type specific fields below #}
-                            {{ ez_render_field_definition_edit(value, {
-                                'languageCode': language_code,
-                                'form': field_definition,
-                                'group_class': value.group_class|default(''),
-                                'is_translation': is_translation,
-                            }) }}
-
-                            {# Default rendering #}
-                            {% for child in field_definition|filter(child => child.isRendered() == false) %}
-                                {{ form_row(child) }}
-                            {% endfor %}
-                        </div>
-                    </div>
+                    {% endfor %}
                 {% endfor %}
             </div>
         </div>

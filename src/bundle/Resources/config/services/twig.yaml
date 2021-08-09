@@ -19,3 +19,7 @@ services:
             - '@EzSystems\EzPlatformAdminUi\Limitation\Templating\LimitationBlockRenderer'
         tags:
             - { name: twig.extension }
+
+    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\GroupByExtension:
+        tags:
+            - { name: twig.extension }
