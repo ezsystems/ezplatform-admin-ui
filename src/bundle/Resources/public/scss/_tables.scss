@@ -259,6 +259,7 @@
 
     &__cell.ibexa-table__cell {
         vertical-align: middle;
+        padding: calculateRem(12px) calculateRem(16px);
 
         .form-check {
             display: flex;
@@ -300,8 +301,7 @@
             vertical-align: middle;
             border-top: calculateRem(1px) solid $ibexa-color-dark-200;
             border-bottom: 0;
-            padding-top: calculateRem(22px);
-            padding-bottom: calculateRem(22px);
+            padding: calculateRem(18px) calculateRem(16px);
         }
 
         .table &--has-icon {
