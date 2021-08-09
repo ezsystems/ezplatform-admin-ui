@@ -9,6 +9,7 @@ services:
             $contentService: '@ezpublish.api.service.content'
             $translationHelper: '@ezpublish.translation_helper'
             $configResolver: '@ezpublish.config.resolver'
+            $maxLocationIdsInSingleAggregation: '%ibexa.admin_ui.content_tree.node_factory.max_location_ids_in_single_aggregation%'
 
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\ContentTree:
         tags:
