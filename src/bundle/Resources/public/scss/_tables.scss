@@ -157,29 +157,6 @@
     background-color: $ibexa-white;
 }
 
-.table {
-    border-spacing: 0 calculateRem(1px);
-    border-collapse: separate;
-    margin-bottom: calculateRem(48px);
-
-    thead {
-        th {
-            padding: calculateRem(12px) calculateRem(16px);
-            color: $ibexa-color-base-dark;
-            font-weight: normal;
-            vertical-align: top;
-            border-top: calculateRem(1px) solid $ibexa-color-base;
-            border-bottom: calculateRem(1px) solid $ibexa-color-base;
-        }
-    }
-
-    td {
-        .checkbox label {
-            margin-bottom: 0;
-        }
-    }
-}
-
 .ez-table-no-content {
     margin: 0;
     padding: 0 calculateRem(24px) calculateRem(24px);
@@ -261,6 +238,11 @@
     border-spacing: 0;
     background-color: $ibexa-color-white;
 
+    &.table > :not(caption) > * > * {
+        background-color: transparent;
+        box-shadow: none;
+    }
+
     &__row:nth-child(odd) {
         background-color: $ibexa-color-light-300;
     }
@@ -312,13 +294,14 @@
             @include ibexa-font-sans-serif();
 
             font-size: $ibexa-text-font-size-small;
+            font-weight: normal;
             color: $ibexa-color-dark-400;
             line-height: calculateRem(18px);
             vertical-align: middle;
             border-top: calculateRem(1px) solid $ibexa-color-dark-200;
             border-bottom: 0;
-            padding-top: calculateRem(18px);
-            padding-bottom: calculateRem(18px);
+            padding-top: calculateRem(22px);
+            padding-bottom: calculateRem(22px);
         }
 
         .table &--has-icon {
