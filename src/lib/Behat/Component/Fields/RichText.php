@@ -64,11 +64,10 @@ class RichText extends FieldTypeComponent
     {
         $this->focusFieldInput();
         $this->getHTMLPage()
-            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('mainToolbar')))
-            ->findAll($this->getLocator('toolbarElement'))
-            ->last()
-            ->click();
-        $this->getHTMLPage()->find($this->getLocator('additionalToolbar'))->assert()->isVisible();
+            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('mainToolbar')));
+
+        $script = "document.querySelector('.ck-toolbar__grouped-dropdown > .ck-dropdown__button').click()";
+        $this->getSession()->executeScript($script);
     }
 
     public function changeStyle(string $style): void
