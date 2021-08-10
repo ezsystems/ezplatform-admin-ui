@@ -38,7 +38,6 @@
                     { 'icon_name': 'trash', 'button_class':  'ibexa-collapse__extra-action-button--remove-fields-group'}
                 ],
                 'data_attribute': {
-                    'data-empty-group-template': include('@ezdesign/content_type/empty_group_content.html.twig'),
                     'data-field-group-id':  id
                 }
             }%}
@@ -46,52 +45,63 @@
             {%- embed "@ezdesign/ui/component/collapse.html.twig" with collapseParams -%}
                 {%- block body_content -%}
                     <div
-                        class="ibexa-content-type-edit__field-definition-group {{ not field_defintions|length ? 'ibexa-content-type-edit__field-definition-group--empty' }}"
+                        class="ibexa-content-type-edit__field-definition-group"
                         data-placeholder="{{ include('@ezdesign/content_type/field_definition_placeholder.html.twig') }}"
                     >
-                        {% if field_defintions|length %}
-                            {% for field_definition in field_defintions %}
-                                {% set value = field_definition.vars.value %}
-                                {% set name = value.names[language_code] ?? value.names[content_type.mainLanguageCode]  %}
-                                {% set collapseParams = basciFieldDefinitionParams|merge({ 
-                                    'body_id': field_definition.vars.id ~ '_collapse',
-                                    'header_label': name,
-                                    'data_attribute': {
-                                        'data-field-definition-identifier': field_definition.vars.value.identifier,
-                                    }
-                                }) %}
+                        <div class="ibexa-content-type-edit__empty-group-placeholder {% if field_defintions|length != 0 %}ibexa-content-type-edit__empty-group-placeholder--hidden{% endif %}">
+                            <img
+                                class="ibexa-content-type-edit__empty-group-image"
+                                src="{{ asset('bundles/ezplatformadminui/img/empty-field-definition-group.svg') }}"
+                                alt="{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}"
+                            >
+                            <label>{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}</label>
+                            <h2>{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}</h2>
+                        </div>
 
-                                {%- embed "@ezdesign/ui/component/collapse.html.twig" with collapseParams -%}
-                                    {% block body_content %}
-                                        <div class="ibexa-content-type-edit__field-definition-content">
-                                            {{ form_row(field_definition.name) }}
-                                            {{ form_row(field_definition.identifier) }}
-                                            {{ form_row(field_definition.description) }}
-                                            {{ form_row(field_definition.isRequired) }}
-                                            {{ form_row(field_definition.isSearchable) }}
-                                            {{ form_row(field_definition.isTranslatable) }}
-                                            {{ form_row(field_definition.isThumbnail) }}
-                                            {{ form_row(field_definition.fieldGroup, { attr: { class: "ibexa-input ibexa-input--field-group" } } ) }}
+                        {% for field_definition in field_defintions %}
+                            {% set value = field_definition.vars.value %}
+                            {% set name = value.names[language_code] ?? value.names[content_type.mainLanguageCode]  %}
+                            {% set collapseParams = basciFieldDefinitionParams|merge({ 
+                                'body_id': field_definition.vars.id ~ '_collapse',
+                                'header_label': name,
+                                'data_attribute': {
+                                    'data-field-definition-identifier': field_definition.vars.value.identifier,
+                                }
+                            }) %}
 
-                                            {# Field type specific fields below #}
-                                            {{ ez_render_field_definition_edit(value, {
-                                                'languageCode': language_code,
-                                                'form': field_definition,
-                                                'group_class': value.group_class|default(''),
-                                                'is_translation': is_translation,
-                                            }) }}
+                            {%- embed "@ezdesign/ui/component/collapse.html.twig" with collapseParams -%}
+                                {% block body_content %}
+                                    <div class="ibexa-content-type-edit__field-definition-content">
+                                        {{ form_row(field_definition.name) }}
+                                        {{ form_row(field_definition.identifier) }}
+                                        {{ form_row(field_definition.description) }}
+                                        {{ form_row(field_definition.isRequired) }}
+                                        {{ form_row(field_definition.isSearchable) }}
+                                        {{ form_row(field_definition.isTranslatable) }}
+                                        {{ form_row(field_definition.isThumbnail) }}
+                                        {{ form_row(field_definition.fieldGroup, { attr: { 
+                                            class: "ibexa-input ibexa-input--field-group" 
+                                        }}) }}
+                                        {{ form_widget(field_definition.position, { attr: { 
+                                            hidden: 'hidden' 
+                                        }}) }}
 
-                                            {# Default rendering #}
-                                            {% for child in field_definition|filter(child => child.isRendered() == false) %}
-                                                {{ form_row(child) }}
-                                            {% endfor %}
-                                        </div>
-                                    {%- endblock -%}
-                                {%- endembed -%}
-                            {% endfor %}
-                        {% else %}
-                            {{ include('@ezdesign/content_type/empty_group_content.html.twig') }}
-                        {% endif %}
+                                        {# Field type specific fields below #}
+                                        {{ ez_render_field_definition_edit(value, {
+                                            'languageCode': language_code,
+                                            'form': field_definition,
+                                            'group_class': value.group_class|default(''),
+                                            'is_translation': is_translation,
+                                        }) }}
+
+                                        {# Default rendering #}
+                                        {% for child in field_definition|filter(child => child.isRendered() == false) %}
+                                            {{ form_row(child) }}
+                                        {% endfor %}
+                                    </div>
+                                {%- endblock -%}
+                            {%- endembed -%}
+                        {% endfor %}
                     </div>
                 {% endblock %}
             {%- endembed -%}

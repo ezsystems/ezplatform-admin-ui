@@ -121,11 +121,19 @@
             body: JSON.stringify(bodyData),
         });
     };
-    const changeSubmitButtonAttributes = () => {
+    const afterChangeGroup = () => {
         const submitButton = doc.querySelector('.ibexa-content-type-edit__publish-content-type');
-        const definedFields = doc.querySelectorAll('.ibexa-collapse--field-definition');
+        const formHasAnyFieldDefinition = doc.querySelectorAll('.ibexa-collapse--field-definition').length;
 
-        if (definedFields.length) {
+        doc.querySelectorAll('.ibexa-collapse--field-definitions-group').forEach((group) => {
+            const fields = group.querySelectorAll('.ibexa-collapse--field-definition');
+            const numberOfFields = fields.length;
+            const emptyGroupPlaceholder = group.querySelector('.ibexa-content-type-edit__empty-group-placeholder');
+
+            emptyGroupPlaceholder.classList.toggle('ibexa-content-type-edit__empty-group-placeholder--hidden', numberOfFields !== 0);
+        });
+
+        if (formHasAnyFieldDefinition) {
             submitButton.removeAttribute('disabled');
         } else {
             submitButton.setAttribute('disabled', 'disabled');
@@ -146,22 +154,16 @@
 
         if (!sourceContainer.classList.contains('ibexa-field-types-available__fields')) {
             insertFieldDefinitionNode(currentDraggedItem);
+            afterChangeGroup();
 
             return;
         }
 
-        const request = generateRequest('add', bodyData, languageCode);
-
-        fetch(request)
+        fetch(generateRequest('add', bodyData, languageCode))
             .then(eZ.helpers.request.getTextFromResponse)
             .then((response) => {
-                if (targetContainer.classList.contains('ibexa-content-type-edit__field-definition-group--empty')) {
-                    targetContainer.classList.remove('ibexa-content-type-edit__field-definition-group--empty');
-                    targetContainer.innerHTML = '';
-                }
-
                 insertFieldDefinitionNode(response);
-                changeSubmitButtonAttributes();
+                afterChangeGroup();
             })
             .catch((errorMessage) => eZ.helpers.notification.showErrorNotification(errorMessage));
     };
@@ -172,7 +174,7 @@
             (fieldDefinition) => fieldDefinition.dataset.fieldDefinitionIdentifier
         );
         const bodyData = {
-            FieldDefinitionOrder: {
+            FieldDefinitionReorder: {
                 fieldDefinitionIdentifiers: fieldsOrder,
             },
         };
@@ -180,15 +182,12 @@
 
         fetch(request)
             .then(eZ.helpers.request.getTextFromResponse)
-            .then((response) => {
-                console.log(response);
-            })
+            .then(afterChangeGroup)
             .catch((errorMessage) => eZ.helpers.notification.showErrorNotification(errorMessage));
     };
     const removeFieldsGroup = (event) => {
         const collapseNode = event.currentTarget.closest('.ibexa-collapse');
         const fieldDefinitionGroupNode = collapseNode.querySelector('.ibexa-content-type-edit__field-definition-group');
-        const { emptyGroupTemplate } = collapseNode.dataset;
         const fieldsToDelete = [...fieldDefinitionGroupNode.querySelectorAll('.ibexa-collapse--field-definition')].map(
             (fieldDefinition) => fieldDefinition.dataset.fieldDefinitionIdentifier
         );
@@ -197,46 +196,25 @@
                 fieldDefinitionIdentifiers: fieldsToDelete,
             },
         };
-        const request = generateRequest('remove', bodyData);
 
-        fetch(request)
+        fetch(generateRequest('remove', bodyData))
             .then(eZ.helpers.request.getTextFromResponse)
-            .then((response) => {
-                collapseNode.classList.add('ibexa-collapse--hidden');
-                fieldDefinitionGroupNode.innerHTML = emptyGroupTemplate;
-                fieldDefinitionGroupNode.classList.add('ibexa-content-type-edit__field-definition-group--empty');
-                changeSubmitButtonAttributes();
-            })
             .catch((errorMessage) => eZ.helpers.notification.showErrorNotification(errorMessage));
     };
     const removeField = (event) => {
         const collapseNode = event.currentTarget.closest('.ibexa-collapse');
-        const parentCollapseNode = collapseNode.closest('.ibexa-collapse--field-definitions-group');
-        const parentFieldDefinitionGroupNode = parentCollapseNode.querySelector('.ibexa-content-type-edit__field-definition-group');
-        const { emptyGroupTemplate } = parentCollapseNode.dataset;
         const itemIdentifierToDelete = collapseNode.dataset.fieldDefinitionIdentifier;
-
         const bodyData = {
             FieldDefinitionDelete: {
                 fieldDefinitionIdentifiers: [itemIdentifierToDelete],
             },
         };
 
-        const request = generateRequest('remove', bodyData);
-
-        fetch(request)
+        fetch(generateRequest('remove', bodyData))
             .then(eZ.helpers.request.getTextFromResponse)
-            .then((response) => {
+            .then(() => {
                 collapseNode.remove();
-
-                const numberOfFields = parentCollapseNode.querySelectorAll('.ibexa-collapse--field-definition').length;
-
-                if (numberOfFields === 0) {
-                    parentFieldDefinitionGroupNode.innerHTML = emptyGroupTemplate;
-                    parentFieldDefinitionGroupNode.classList.add('ibexa-content-type-edit__field-definition-group--empty');
-                }
-
-                changeSubmitButtonAttributes();
+                afterChangeGroup();
             })
             .catch((errorMessage) => eZ.helpers.notification.showErrorNotification(errorMessage));
     };

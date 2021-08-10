@@ -121,12 +121,16 @@
 
     &__field-definition-group {
         padding: 24px;
+    }
 
-        &--empty {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: calculateRem(50px);
+    &__empty-group-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: calculateRem(50px);
+
+        &--hidden {
+            display: none;
         }
     }
 

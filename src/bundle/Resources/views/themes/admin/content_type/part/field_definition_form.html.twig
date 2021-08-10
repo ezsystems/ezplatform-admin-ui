@@ -13,7 +13,7 @@
     'container_class': 'ibexa-collapse--field-definition ' ~ 'ibexa-field-definition-' ~ form.identifier.vars.value,
     'data_attribute': {
         'data-is-new-field': "true",
-        'data-identifier-value': form.identifier.vars.value
+        'data-field-definition-identifier': form.identifier.vars.value
     },
     'extra_actions': [
         {
@@ -31,7 +31,12 @@
             {{ form_row(form.isSearchable) }}
             {{ form_row(form.isTranslatable) }}
             {{ form_row(form.isThumbnail) }}
-            {{ form_row(form.fieldGroup, { attr: { class: "ibexa-input ibexa-input--field-group" } } ) }}
+            {{ form_row(form.fieldGroup, { attr: { 
+                class: "ibexa-input ibexa-input--field-group" 
+            }}) }}
+            {{ form_widget(form.position, { attr: { 
+                hidden: 'hidden' 
+            }}) }}
 
             {# Field type specific fields below #}
             {{ ez_render_field_definition_edit(value, {
