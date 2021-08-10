@@ -27,7 +27,7 @@ class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckabl
     protected $contentTypeDraft;
 
     /** @var \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData[] */
-    protected $fieldDefinitionsData = [];
+    public $fieldDefinitionsData = [];
 
     /**
      * Language Code of currently edited contentTypeDraft.
@@ -43,7 +43,7 @@ class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckabl
 
     public function addFieldDefinitionData(FieldDefinitionData $fieldDefinitionData): void
     {
-        $this->fieldDefinitionsData[] = $fieldDefinitionData;
+        $this->fieldDefinitionsData[$fieldDefinitionData->identifier] = $fieldDefinitionData;
     }
 
     public function replaceFieldDefinitionData(string $fieldDefinitionIdentifier, FieldDefinitionData $fieldDefinitionData): void
@@ -63,7 +63,7 @@ class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckabl
      */
     public function sortFieldDefinitions(): void
     {
-        usort(
+        uasort(
             $this->fieldDefinitionsData,
             function ($a, $b) {
                 if ($a->fieldDefinition->position === $b->fieldDefinition->position) {

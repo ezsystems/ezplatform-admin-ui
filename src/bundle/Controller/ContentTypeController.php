@@ -23,7 +23,6 @@ use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRem
 use EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\FieldDefinitionType;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\ContentType\TranslationsTab;
 use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper;
@@ -559,28 +558,19 @@ class ContentTypeController extends Controller
             ]
         );
 
-        foreach ($contentTypeDraftData->fieldDefinitionsData as $fieldDefinitionData) {
-            if ($fieldDefinitionData->identifier === $fieldDefinitionIdentifier) {
-                $fieldDefinitionForm = $this->createForm(
-                    FieldDefinitionType::class,
-                    $fieldDefinitionData,
-                    [
-                        'languageCode' => $baseLanguage ? $baseLanguage->languageCode : $language->languageCode,
-                        'mainLanguageCode' => $contentTypeDraftData->mainLanguageCode,
-                    ]
-                );
+        $form = $this->createUpdateForm($group, $contentTypeDraft, $language, $baseLanguage);
 
-                return $this->render('@ezdesign/content_type/part/field_definition_form.html.twig', [
-                    'form' => $fieldDefinitionForm->createView(),
-                    'content_type_group' => $group,
-                    'content_type' => $contentTypeDraft,
-                    'language_code' => $baseLanguage ? $baseLanguage->languageCode : $language->languageCode,
-                    'is_translation' => $contentTypeDraftData->mainLanguageCode !== $contentTypeDraftData->languageCode,
-                ]);
-            }
+        if (!isset($form['fieldDefinitionsData'][$fieldDefinitionIdentifier])) {
+            throw $this->createNotFoundException("Field definition with identifier $fieldDefinitionIdentifier not found");
         }
 
-        throw $this->createNotFoundException("Field definition with identifier $fieldDefinitionIdentifier not found");
+        return $this->render('@ezdesign/content_type/part/field_definition_form.html.twig', [
+            'form' => $form['fieldDefinitionsData'][$fieldDefinitionIdentifier]->createView(),
+            'content_type_group' => $group,
+            'content_type' => $contentTypeDraft,
+            'language_code' => $baseLanguage ? $baseLanguage->languageCode : $language->languageCode,
+            'is_translation' => $contentTypeDraftData->mainLanguageCode !== $contentTypeDraftData->languageCode,
+        ]);
     }
 
     /**
