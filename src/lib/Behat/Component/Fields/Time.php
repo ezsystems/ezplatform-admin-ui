@@ -64,7 +64,7 @@ class Time extends FieldTypeComponent
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('fieldInput', '.ez-data-source__input-wrapper input'),
+            new VisibleCSSLocator('fieldInput', '.ibexa-data-source__input-wrapper input'),
         ];
     }
 
