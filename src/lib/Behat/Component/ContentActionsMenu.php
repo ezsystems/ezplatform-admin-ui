@@ -17,16 +17,26 @@ class ContentActionsMenu extends Component
     public function clickButton(string $buttonName): void
     {
         $buttons = $this->getHTMLPage()
-            ->findAll($this->getLocator('menuButtonLabel'))
+            ->findAll($this->getLocator('menuButton'))
             ->filterBy(new ElementTextCriterion($buttonName));
 
+        // TODO: Remove parts of this logic once redeisgn is fully done
         if ($buttons->any()) {
-            $buttons->first()->click();
+            $button = $buttons->first();
+            $button->mouseOver();
+
+            if ($button->findAll($this->getLocator('label'))->any()) {
+                $button->find($this->getLocator('label'))->click();
+
+                return;
+            }
+
+            $button->click();
 
             return;
         }
 
-        $moreButton = $this->getHTMLPage()->find($this->getLocator('moreButton'))->click();
+        $this->getHTMLPage()->find($this->getLocator('moreButton'))->click();
 
         $this->getHTMLPage()
             ->findAll($this->getLocator('expandedMenuButton'))
@@ -69,7 +79,7 @@ class ContentActionsMenu extends Component
     {
         return [
             new VisibleCSSLocator('menuButton', '.ibexa-context-menu .ibexa-btn, .ibexa-context-menu__item .ibexa-popup-menu__item, .ez-context-menu .btn'), // TO DO: set one selector after redesign
-            new VisibleCSSLocator('menuButtonLabel', '.ibexa-context-menu .ibexa-btn .ibexa-btn__label, .ibexa-context-menu__item .ibexa-popup-menu__item, .ez-context-menu .btn'), // TO DO: set one selector after redesign
+            new VisibleCSSLocator('label', '.ibexa-btn__label'),
             new VisibleCSSLocator('moreButton', '.ibexa-context-menu__item--more'),
             new VisibleCSSLocator('expandedMenuButton', '.ibexa-context-menu__item .ibexa-popup-menu__item'),
         ];
