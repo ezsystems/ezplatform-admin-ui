@@ -1,24 +1,15 @@
-.ez-field-edit--ezurl {
+.ibexa-field-edit--ezurl {
     .ez-field-edit__data {
-        background-color:  $ibexa-white;
+        background-color: $ibexa-white;
     }
 
-    .ez-data-source__field {
-        &--link,
-        &--text {
-            display: inline-block;
-            width: 48%;
-            margin-top: calculateRem(8px);
-        }
+    .ibexa-data-source {
+        display: flex;
 
-        &--link {
-            margin-right: 3.5%;
-        }
-    }
-
-    &.is-invalid {
-        .ez-data-source__field--link {
-            color: $ibexa-color-danger;
+        &__field {
+            &--link {
+                margin-right: calculateRem(52px);
+            }
         }
     }
 }
