@@ -332,27 +332,26 @@
     {% if not ez_field_is_empty( content, field ) %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezobjectrelationlist')|trim}) %}
     <div {{ block( 'field_attributes' ) }}>
-        <div class="ez-table-header ">
-            <div class="ez-table-header__headline">{{ 'ezobjectrelationlist.multiple_relations'|trans|desc('Multiple relations') }}:</div>
-        </div>
-        <div class="ez-scrollable-table-wrapper mb-0">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>{{ 'ezobjectrelationlist.name'|trans|desc('Name') }}</th>
-                        <th>{{ 'ezobjectrelationlist.content_type'|trans|desc('Content Type') }}</th>
-                        <th>{{ 'ezobjectrelationlist.created'|trans|desc('Created') }}</th>
-                    </tr>
-                </thead>
+        {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'ezobjectrelationlist.multiple_relations'|trans|desc('Multiple relations'),
+            head_cols: [
+                { content: 'ezobjectrelationlist.name'|trans|desc('Name') },
+                { content: 'ezobjectrelationlist.content_type'|trans|desc('Content Type') },
+                { content: 'ezobjectrelationlist.created'|trans|desc('Created') },
+            ],
+        } %}
+            {% block tbody %}
                 {% for contentId in field.value.destinationContentIds %}
-                <tr>
-                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
-                            'contentId': contentId,
-                    } )) }}
-                </tr>
+                    {% embed '@ezdesign/ui/component/table/table_body_row.html.twig' %}
+                        {% block body_row_cells %}
+                            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
+                                    'contentId': contentId,
+                            } )) }}
+                        {% endblock %}
+                    {% endembed %}
                 {% endfor %}
-            </table>
-        </div>
+            {% endblock %}
+        {% endembed %}
     </div>
     {% endif %}
 {% endapply %}
@@ -478,25 +477,24 @@
 {% if not ez_field_is_empty( content, field ) %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezobjectrelationlist')|trim}) %}
     <div {{ block( 'field_attributes' ) }}>
-        <div class="ez-table-header ">
-            <div class="ez-table-header__headline">{{ 'ezobjectrelation.single_relation'|trans|desc('Single relation') }}:</div>
-        </div>
-        <div class="ez-scrollable-table-wrapper mb-0">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>{{ 'ezobjectrelation.name'|trans|desc('Name') }}</th>
-                        <th>{{ 'ezobjectrelation.content_type'|trans|desc('Content Type') }}</th>
-                        <th>{{ 'ezobjectrelation.created'|trans|desc('Created') }}</th>
-                    </tr>
-                </thead>
-                <tr>
-                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
-                        'contentId': field.value.destinationContentId,
-                    })) }}
-                </tr>
-            </table>
-        </div>
+        {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'ezobjectrelation.single_relation'|trans|desc('Single relation'),
+            head_cols: [
+                { content: 'ezobjectrelation.name'|trans|desc('Name') },
+                { content: 'ezobjectrelation.content_type'|trans|desc('Content Type') },
+                { content: 'ezobjectrelation.created'|trans|desc('Created') },
+            ],
+        } %}
+            {% block tbody %}
+                {% embed '@ezdesign/ui/component/table/table_body_row.html.twig' with { field: field } %}
+                    {% block body_row_cells %}
+                        {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
+                            'contentId': field.value.destinationContentId,
+                        } )) }}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
     </div>
 {% endif %}
 {% endapply %}

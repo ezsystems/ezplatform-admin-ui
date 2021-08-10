@@ -35,6 +35,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.context.menu'),
     path.resolve(__dirname, '../public/js/scripts/sidebar/main.menu.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.input.text.js'),
+    path.resolve(__dirname, '../public/js/scripts/admin.table.js'),
 ];
 const fieldTypes = [];
 
@@ -144,7 +145,6 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.bookmark.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.main.translation.update.js'),
-            path.resolve(__dirname, '../public/js/scripts/table.checkbox.js'),
         ])
         .addEntry('ezplatform-admin-ui-modal-location-trash-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.js')])
         .addEntry('ezplatform-admin-ui-modal-location-trash-container-js', [
@@ -160,7 +160,6 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
             path.resolve(__dirname, '../public/js/scripts/button.translation.edit.js'),
-            path.resolve(__dirname, '../public/js/scripts/table.checkbox.js'),
         ])
         .addEntry('ezplatform-admin-ui-link-manager-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.linkmanager.list.js')])
         .addEntry('ezplatform-admin-ui-link-manager-view-js', [path.resolve(__dirname, '../public/js/scripts/button.content.edit.js')])

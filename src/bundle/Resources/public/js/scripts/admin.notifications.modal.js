@@ -6,7 +6,7 @@
     const SELECTOR_MODAL_RESULTS = '.ez-notifications-modal__results';
     const SELECTOR_MODAL_TITLE = '.modal-title';
     const SELECTOR_DESC_TEXT = '.description__text';
-    const SELECTOR_TABLE = '.n-table--notifications';
+    const SELECTOR_TABLE = '.ibexa-table--notifications';
     const CLASS_ELLIPSIS = 'description__text--ellipsis';
     const CLASS_PAGINATION_LINK = 'page-link';
     const CLASS_MODAL_LOADING = 'ez-notifications-modal--loading';

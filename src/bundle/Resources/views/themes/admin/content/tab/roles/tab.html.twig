@@ -1,6 +1,5 @@
 {% trans_default_domain 'role' %}
 {% import _self as tab %}
-{% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.roles.roles'|trans|desc('Roles') } %}
 
 {{  include('@ezdesign/content/tab/roles/table.html.twig', {
         'roles_pager': roles_pager,

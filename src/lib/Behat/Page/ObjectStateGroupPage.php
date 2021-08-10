@@ -123,7 +123,7 @@ class ObjectStateGroupPage extends Page
     {
         return [
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
-            new VisibleCSSLocator('propertiesTable', '.ez-container > .ez-table'),
+            new VisibleCSSLocator('propertiesTable', '.ez-container > .ibexa-table'),
             new VisibleCSSLocator('objectStatesTable', '[name="object_states_delete"]'),
             new VisibleCSSLocator('createButton', '.ibexa-icon--create'),
             new VisibleCSSLocator('deleteButton', '.ibexa-icon--trash'),
