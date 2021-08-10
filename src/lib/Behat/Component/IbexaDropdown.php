@@ -22,8 +22,8 @@ class IbexaDropdown extends Component
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('ibexaDropdownExtendedWithChildren', 'div.ibexa-dropdown__wrapper > ul.ibexa-dropdown__items > li:nth-child(n) > ul >li:nth-child(n)'),
             new VisibleCSSLocator('ibexaDropdownExtended', '.ibexa-dropdown--is-expanded .ibexa-dropdown__items .ibexa-dropdown__item'),
+            new VisibleCSSLocator('ibexaDropdownLabel', '.ibexa-dropdown__item-label'),
             new VisibleCSSLocator('isIbexaDropdownVisible', '.ibexa-dropdown--is-expanded '),
         ];
     }
@@ -32,9 +32,10 @@ class IbexaDropdown extends Component
     {
         $this->verifyIsLoaded();
         $dropdownOptionLocator = $this->getLocator('ibexaDropdownExtended');
-        $this->getHTMLPage()
+        $listElement = $this->getHTMLPage()
             ->findAll($dropdownOptionLocator)
-            ->getByCriterion(new ElementTextCriterion($value))
-            ->click();
+            ->getByCriterion(new ElementTextCriterion($value));
+        $listElement->mouseOver();
+        $listElement->find($this->getLocator('ibexaDropdownLabel'))->click();
     }
 }
