@@ -15,7 +15,6 @@ use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use PHPUnit\Framework\Assert;
-use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 
 class RichText extends FieldTypeComponent
 {
@@ -63,9 +62,6 @@ class RichText extends FieldTypeComponent
     public function openElementsToolbar(): void
     {
         $this->focusFieldInput();
-        $this->getHTMLPage()
-            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('mainToolbar')));
-
         $script = "document.querySelector('.ck-toolbar__grouped-dropdown > .ck-dropdown__button').click()";
         $this->getSession()->executeScript($script);
     }
@@ -160,7 +156,6 @@ class RichText extends FieldTypeComponent
     {
         return [
             new VisibleCSSLocator('fieldInput', '.ck-editor__editable'),
-            new VisibleCSSLocator('mainToolbar', '.ck-balloon-panel'),
             new VisibleCSSLocator('additionalToolbar', '.ck-dropdown__panel-visible .ck-toolbar'),
             new VisibleCSSLocator('toolbarElement', '.ck-button'),
             new VisibleCSSLocator('toolbarDropdown', '.ck-dropdown'),
