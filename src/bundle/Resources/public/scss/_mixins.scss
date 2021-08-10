@@ -97,7 +97,7 @@
         outline: none;
 
         .ibexa-icon {
-            transition: fill 0.3s $ibexa-admin-transition;
+            transition: fill $ibexa-admin-transition-duration $ibexa-admin-transition;
             width: calculateRem(8px);
             height: calculateRem(8px);
         }
