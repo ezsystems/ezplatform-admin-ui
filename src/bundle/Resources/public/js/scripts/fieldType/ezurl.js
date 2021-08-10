@@ -1,9 +1,9 @@
 (function(global, doc, eZ) {
-    const SELECTOR_FIELD = '.ez-field-edit--ezurl';
-    const SELECTOR_FIELD_LINK = '.ez-data-source__field--link';
-    const SELECTOR_LINK_INPUT = `${SELECTOR_FIELD_LINK} .ez-data-source__input`;
-    const SELECTOR_LABEL = '.ez-data-source__label';
-    const SELECTOR_ERROR_NODE = '.ez-data-source'
+    const SELECTOR_FIELD = '.ibexa-field-edit--ezurl';
+    const SELECTOR_FIELD_LINK = '.ibexa-data-source__field--link';
+    const SELECTOR_LINK_INPUT = `${SELECTOR_FIELD_LINK} .ibexa-data-source__input`;
+    const SELECTOR_LABEL = '.ibexa-data-source__label';
+    const SELECTOR_ERROR_NODE = '.ibexa-data-source__field--link .ibexa-form-error';
 
     class EzUrlValidator extends eZ.BaseFieldValidator {
         validateUrl(event) {

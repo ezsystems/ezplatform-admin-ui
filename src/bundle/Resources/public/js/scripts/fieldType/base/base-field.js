@@ -107,7 +107,7 @@
         createErrorNode(message) {
             const errorNode = doc.createElement('em');
 
-            errorNode.classList.add('ez-field-edit__error');
+            errorNode.classList.add('ibexa-field-edit__error');
             errorNode.innerHTML = message;
 
             return errorNode;
@@ -153,7 +153,7 @@
         toggleErrorMessage(validationResult, config, input) {
             const container = this.getFieldTypeContainer(input.closest(this.fieldSelector));
             const nodes = this.findErrorContainers(container, input, config.errorNodeSelectors);
-            const existingErrorSelectors = config.errorNodeSelectors.map((selector) => `${selector} .ez-field-edit__error`);
+            const existingErrorSelectors = config.errorNodeSelectors.map((selector) => `${selector} .ibexa-field-edit__error`);
             const existingErrorNodes = this.findExistingErrorNodes(container, input, existingErrorSelectors);
 
             existingErrorNodes.forEach((el) => el.remove());
