@@ -19,11 +19,6 @@
 
 {% block form %}
     {{ form_start(form) }}
-        {#
-            ==============================================================
-            ==== !! Grouped fields: this part will be done in backend ====
-            ==============================================================
-        #}
         {% set metadataGroup = [] %}
         {% set contentGroup = [] %}
 
@@ -40,7 +35,6 @@
             'content':contentGroup,
             'metadata': metadataGroup
         } %}
-        {# ==== end grouped fields ==== #}
 
         <div
             class="ibexa-content-type-edit__sections ibexa-anchor-navigation-sections container"
@@ -82,7 +76,7 @@
         </div>
 
         {{ form_widget(form.saveContentType, { attr: { hidden: 'hidden' }}) }}
-        {{ form_widget(form.publishContentType, { attr: { hidden: 'hidden' }}) }}
+        {{ form_widget(form.publishContentType, { attr: { class: 'ibexa-content-type-edit__publish-content-type', hidden: 'hidden' }}) }}
 
         {{ form_widget(form._token) }}
     {{ form_end(form, {'render_rest': false }) }}

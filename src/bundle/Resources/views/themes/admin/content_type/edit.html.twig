@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block form %}
-    {{ form_start(form) }}}
+    {{ form_start(form) }}
         {% set metadataGroup = [] %}
         {% set contentGroup = [] %}
 
@@ -81,7 +81,7 @@
             {% endembed %}
         </div>
 
-        {{ form_widget(form.publishContentType, {'attr': { 'hidden': 'hidden' }}) }}
+        {{ form_widget(form.publishContentType, { attr: { class: 'ibexa-content-type-edit__publish-content-type', hidden: 'hidden' }}) }}
         {{ form_widget(form.removeDraft, {'attr': { 'hidden': 'hidden' }}) }}
 
         {{ form_widget(form._token) }}

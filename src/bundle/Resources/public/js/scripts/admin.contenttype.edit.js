@@ -83,6 +83,10 @@
         fieldNode.querySelector('.ibexa-input--field-group').value = fieldGroupId;
         targetContainer.insertBefore(fieldNode, targetPlace);
 
+        fieldNode.querySelectorAll('.ibexa-collapse__extra-action-button--remove-field').forEach((removeFieldButton) => {
+            removeFieldButton.addEventListener('click', removeField, false);
+        });
+
         if (fieldNode.dataset.identifierValue) {
             doc.body.dispatchEvent(
                 new CustomEvent('ibexa-drop-field-definition', {
@@ -117,9 +121,15 @@
             body: JSON.stringify(bodyData),
         });
     };
-    const moveBetweendGroup = () => {
-        insertFieldDefinitionNode(currentDraggedItem);
-        console.log('Not form available, not make add request', currentDraggedItem);
+    const changeSubmitButtonAttributes = () => {
+        const submitButton = doc.querySelector('.ibexa-content-type-edit__publish-content-type');
+        const definedFields = doc.querySelectorAll('.ibexa-collapse--field-definition');
+
+        if (definedFields.length) {
+            submitButton.removeAttribute('disabled');
+        } else {
+            submitButton.setAttribute('disabled', 'disabled');
+        }
     };
     const addField = () => {
         const { languageCode } = sectionsNode.dataset;
@@ -135,7 +145,7 @@
         }
 
         if (!sourceContainer.classList.contains('ibexa-field-types-available__fields')) {
-            moveBetweendGroup();
+            insertFieldDefinitionNode(currentDraggedItem);
 
             return;
         }
@@ -151,6 +161,7 @@
                 }
 
                 insertFieldDefinitionNode(response);
+                changeSubmitButtonAttributes();
             })
             .catch((errorMessage) => eZ.helpers.notification.showErrorNotification(errorMessage));
     };
@@ -194,6 +205,7 @@
                 collapseNode.classList.add('ibexa-collapse--hidden');
                 fieldDefinitionGroupNode.innerHTML = emptyGroupTemplate;
                 fieldDefinitionGroupNode.classList.add('ibexa-content-type-edit__field-definition-group--empty');
+                changeSubmitButtonAttributes();
             })
             .catch((errorMessage) => eZ.helpers.notification.showErrorNotification(errorMessage));
     };
@@ -223,6 +235,8 @@
                     parentFieldDefinitionGroupNode.innerHTML = emptyGroupTemplate;
                     parentFieldDefinitionGroupNode.classList.add('ibexa-content-type-edit__field-definition-group--empty');
                 }
+
+                changeSubmitButtonAttributes();
             })
             .catch((errorMessage) => eZ.helpers.notification.showErrorNotification(errorMessage));
     };
