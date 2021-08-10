@@ -53,6 +53,8 @@ class TableRow extends Component
 
     public function assign(): void
     {
+        // TODO: Revisit during redesign
+        $this->element->mouseOver();
         $this->element->find($this->getLocator('assign'))->click();
     }
 
