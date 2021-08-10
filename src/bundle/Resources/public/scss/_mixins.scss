@@ -75,15 +75,15 @@
 }
 
 @mixin datetime-field() {
-    .ez-data-source__input-wrapper {
+    .ibexa-data-source__input-wrapper {
         max-width: 30ch;
         position: relative;
     }
 
-    .ez-data-source__btn--clear-input {
+    .ibexa-data-source__btn--clear-input {
         position: absolute;
         top: 50%;
-        right: calculateRem(4px);
+        right: calculateRem(32px);
         transform: translate(0, -50%);
         background: none;
         border: 0;
@@ -97,8 +97,9 @@
         outline: none;
 
         .ibexa-icon {
-            fill: $ibexa-color-base-dark;
             transition: fill 0.3s $ibexa-admin-transition;
+            width: calculateRem(8px);
+            height: calculateRem(8px);
         }
 
         &:hover,
@@ -107,6 +108,13 @@
                 fill: $ibexa-color-base-deep;
             }
         }
+    }
+
+    .ibexa-icon--date {
+        position: absolute;
+        top: 50%;
+        right: calculateRem(12px);
+        transform: translate(0, -50%);
     }
 
     .flatpickr-input {

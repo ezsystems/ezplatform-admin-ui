@@ -11,6 +11,10 @@
         }
     }
 
+    &__error {
+        color: $ibexa-color-danger;
+    }
+
     .ibexa-input-text-wrapper {
         width: auto;
     }

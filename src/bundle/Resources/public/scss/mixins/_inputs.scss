@@ -4,9 +4,10 @@
 }
 
 @mixin input-invalid {
-    background: $ibexa-white;
-    border-width: calculateRem(1px) calculateRem(1px) calculateRem(1px) calculateRem(3px);
-    border-color: $ibexa-color-base-dark $ibexa-color-base-dark $ibexa-color-base-dark $ibexa-color-danger;
+    color: $ibexa-color-danger;
+    background-image: none;
+    border-color: $ibexa-color-danger;
+    background-color: $ibexa-color-danger-100;
 }
 
 @mixin area-invalid {
