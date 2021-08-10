@@ -20,6 +20,91 @@
     <div class="row align-items-stretch ez-main-row">
         <div class="container ez-content-container">
             <div class="container ez-container">
+                {% set body_rows = [] %}
+                {% for row in pager.currentPageResults %}
+                    {% set body_row_cols = [] %}
+                    {% if row.isAccessible %}
+                        {% set content_draft_edit_url = content_is_user|default(false) ? 'ezplatform.user.update' : 'ezplatform.content.draft.edit' %}
+
+                        {% set col_raw %}
+                            {{ form_widget(form_remove.versions[row.versionId ~ '']) }}
+                        {% endset %}
+                        {% set body_row_cols = body_row_cols|merge([{
+                            has_checkbox: true,
+                            content: col_raw,
+                        }]) %}
+
+                        {% set col_raw %}
+                            <svg class="ibexa-icon ibexa-icon--small">
+                                <use xlink:href="{{ ez_content_type_icon(row.contentType.identifier) }}"></use>
+                            </svg>
+                        {% endset %}
+                        {% set body_row_cols = body_row_cols|merge([{
+                            has_checkbox: true,
+                            content: col_raw,
+                        }]) %}
+
+                        {% set col_raw %}
+                            <span title="{{ row.versionInfo.name }}">
+                                {{ row.versionInfo.name }}
+                            </span>
+                        {% endset %}
+                        {% set body_row_cols = body_row_cols|merge([{
+                            content: col_raw,
+                        }]) %}
+
+                        {% set body_row_cols = body_row_cols|merge([
+                            { content: row.contentType.name },
+                            { content: ez_admin_ui_config.languages.mappings[row.versionInfo.initialLanguageCode].name },
+                            { content: row.versionInfo.versionNo },
+                            { content: row.versionInfo.modificationDate|ez_full_datetime },
+                        ]) %}
+
+                        {% set col_raw %}
+                            <button
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--content-draft-edit"
+                                title="{{ 'drafts.list.action.edit'|trans|desc('Edit draft') }}"
+                                data-content-id="{{ row.versionInfo.contentInfo.id }}"
+                                data-language-code="{{ row.versionInfo.initialLanguageCode }}"
+                                data-content-draft-edit-url="{{ path(content_draft_edit_url, {
+                                    'contentId': row.versionInfo.contentInfo.id,
+                                    'versionNo': row.versionInfo.versionNo,
+                                    'language': row.versionInfo.initialLanguageCode
+                                }) }}"
+                                data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
+                                    'contentId': row.versionInfo.contentInfo.id,
+                                    'versionNo': row.versionInfo.versionNo,
+                                    'languageCode': row.versionInfo.initialLanguageCode
+                                }) }}"
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                                </svg>
+                            </button>
+                        {% endset %}
+                        {% set body_row_cols = body_row_cols|merge([{
+                            has_action_btns: true,
+                            content: col_raw,
+                        }]) %}
+
+                        {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+                    {% else %}
+                        {# TODO: add CSS class to center text ??? #}
+                        {% set body_row_cols = body_row_cols|merge([{
+                            attr: { colspan: 8 },
+                            content: 'dashboard.table.draft.unauthorized'|trans({
+                                    '%module%': row.unauthorizedContentDraft.module,
+                                    '%function%': row.unauthorizedContentDraft.function,
+                                    '%contentId%': row.unauthorizedContentDraft.payload.contentId,
+                                })|desc('You do not have permissions for \'%function%\' \'%module%\' for content ID: %contentId%'),
+                        }]) %}
+
+                        {% set body_rows = body_rows|merge([{
+                            cols: body_row_cols,
+                        }]) %}
+                    {% endif %}
+                {% endfor %}
+
                 {{ form_start(form_remove, {
                     'action': path('ezplatform.content_draft.remove'),
                     'attr': {
@@ -27,101 +112,27 @@
                         'data-toggle-button-id': '#confirm-' ~ form_remove.remove.vars.id
                     }
                 }) }}
-
-                {% include '@ezdesign/ui/table_header.html.twig' with {
-                    header_text: 'drafts.table.header'|trans|desc('Drafts') ~ ' (' ~ pager.count ~ ')',
-                    tools: macros.table_header_tools(form_remove)
+                {% include '@ezdesign/ui/component/table/table.html.twig' with {
+                    headline: 'drafts.table.header'|trans|desc('Drafts') ~ ' (' ~ pager.count ~ ')',
+                    head_cols: [
+                        { has_checkbox: true },
+                        { has_icon: true },
+                        { content: 'drafts.list.name'|trans|desc('Name') },
+                        { content: 'drafts.list.content_type'|trans|desc('Content Type') },
+                        { content: 'drafts.list.modified_language'|trans|desc('Modified Language') },
+                        { content: 'drafts.list.version'|trans|desc('Version') },
+                        { content: 'drafts.list.last_saved'|trans|desc('Last Saved') },
+                        { },
+                    ],
+                    body_rows: body_rows,
+                    actions: macros.table_header_tools(form_remove),
+                    empty_table_info_text: 'drafts.list.empty'|trans|desc('You have no drafts yet. Your drafts will show up here.'),
                 } %}
-                <div class="ez-scrollable-table-wrapper">
-                    <table class="ez-table table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="ez-table__header-cell"></th>
-                                <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
-                                <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'drafts.list.name'|trans|desc('Name') }}</th>
-                                <th class="ez-table__header-cell">{{ 'drafts.list.content_type'|trans|desc('Content Type') }}</th>
-                                <th class="ez-table__header-cell">{{ 'drafts.list.modified_language'|trans|desc('Modified Language') }}</th>
-                                <th class="ez-table__header-cell">{{ 'drafts.list.version'|trans|desc('Version') }}</th>
-                                <th class="ez-table__header-cell">{{ 'drafts.list.last_saved'|trans|desc('Last Saved') }}</th>
-                                <th class="ez-table__header-cell"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% if pager.count is same as(0) %}
-                            <tr>
-                                <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
-                                    <span class="mb-0 py-1 pl-0">
-                                        {{ 'drafts.list.empty'|trans|desc('You have no drafts yet. Your drafts will show up here.') }}
-                                    </span>
-                                </td>
-                            </tr>
-                        {% else %}
-                            {% for row in pager.currentPageResults %}
-                                {% if row.isAccessible %}
-                                    {% set content_draft_edit_url = content_is_user|default(false) ? 'ezplatform.user.update' : 'ezplatform.content.draft.edit' %}
-                                    <tr>
-                                        <td class="ez-table__cell ez-table__cell--has-checkbox">
-                                            {{ form_widget(form_remove.versions[row.versionId ~ '']) }}
-                                        </td>
-                                        <td class="ez-table__cell ez-table__cell--has-icon">
-                                            <svg class="ibexa-icon ibexa-icon--small">
-                                                <use xlink:href="{{ ez_content_type_icon(row.contentType.identifier) }}"></use>
-                                            </svg>
-                                        </td>
-                                        <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
-                                            <span title="{{ row.versionInfo.name }}">
-                                                {{ row.versionInfo.name }}
-                                            </span>
-                                        </td>
-                                        <td class="ez-table__cell">{{ row.contentType.name }}</td>
-                                        <td class="ez-table__cell">{{ ez_admin_ui_config.languages.mappings[row.versionInfo.initialLanguageCode].name }}</td>
-                                        <td class="ez-table__cell">{{ row.versionInfo.versionNo }}</td>
-                                        <td class="ez-table__cell">{{ row.versionInfo.modificationDate|ez_full_datetime }}</td>
-                                        <td class="ez-table__cell ez-table__cell--has-action-btns">
-                                            <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--content-draft-edit"
-                                                    title="{{ 'drafts.list.action.edit'|trans|desc('Edit draft') }}"
-                                                    data-content-id="{{ row.versionInfo.contentInfo.id }}"
-                                                    data-language-code="{{ row.versionInfo.initialLanguageCode }}"
-                                                    data-content-draft-edit-url="{{ path(content_draft_edit_url, {
-                                                        'contentId': row.versionInfo.contentInfo.id,
-                                                        'versionNo': row.versionInfo.versionNo,
-                                                        'language': row.versionInfo.initialLanguageCode
-                                                    }) }}"
-                                                    data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
-                                                        'contentId': row.versionInfo.contentInfo.id,
-                                                        'versionNo': row.versionInfo.versionNo,
-                                                        'languageCode': row.versionInfo.initialLanguageCode
-                                                    }) }}">
-                                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
-                                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                {% else %}
-                                    <tr>
-                                        <td class="table__cell ez-table__cell--has-text-info" colspan="8">
-                                            {{
-                                                'dashboard.table.draft.unauthorized'|trans({
-                                                    '%module%': row.unauthorizedContentDraft.module,
-                                                    '%function%': row.unauthorizedContentDraft.function,
-                                                    '%contentId%': row.unauthorizedContentDraft.payload.contentId,
-                                                })|desc('You do not have permissions for \'%function%\' \'%module%\' for content ID: %contentId%')
-                                            }}
-                                        </td>
-                                    </tr>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                        </tbody>
-                    </table>
-                    {% if pager.haveToPaginate %}
-                        {% include '@ezdesign/ui/pagination.html.twig' with {
-                            'pager': pager
-                        } %}
-                    {% endif %}
-                </div>
-
+                {% if pager.haveToPaginate %}
+                    {% include '@ezdesign/ui/pagination.html.twig' with {
+                        'pager': pager
+                    } %}
+                {% endif %}
                 {{ form_widget(form_remove.remove, {
                     'attr': {
                         'hidden': true

@@ -80,7 +80,7 @@ class ContentRelationMultiple extends FieldTypeComponent
         $explodedValue = explode('/', $values['secondItem']);
         $secondValue = $explodedValue[count($explodedValue) - 1];
 
-        $viewPatternRegex = '/Multiple relations:[\w\/,: ]* %s [\w \/,:]*/';
+        $viewPatternRegex = '/Multiple relations[\w\/,: ]* %s [\w \/,:]*/';
         Assert::assertRegExp(
             sprintf($viewPatternRegex, $firstValue),
             $this->getHTMLPage()->find($this->parentLocator)->getText(),

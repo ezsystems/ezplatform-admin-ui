@@ -1,0 +1,22 @@
+{% import "@ezdesign/ui/component/macros.html.twig" as html %}
+
+<tr class="ibexa-table__row
+    {{ class|default('') -}}"
+    {{ html.attributes(attr|default({})) }}
+>
+    {% block body_row_cells %}
+        {% set next_is_close_left = false %}
+        {% for body_col in body_row_cols %}
+            {% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with {
+                has_checkbox: body_col.has_checkbox|default(false),
+                has_action_btns: body_col.has_action_btns|default(false),
+                has_icon: body_col.has_icon|default(false),
+                is_close_left: body_col.is_close_left is defined ? body_col.is_close_left : next_is_close_left,
+                content: body_col.content,
+                class: body_col.class|default(null),
+                attr: body_col.attr|default({}),
+            } %}
+            {% set next_is_close_left = body_col.has_checkbox|default(false) or body_col.has_icon|default(false) %}
+        {% endfor %}
+    {% endblock %}
+</tr>

@@ -1,33 +1,31 @@
 {% trans_default_domain 'content_url' %}
 
-<div class="ez-scrollable-table-wrapper">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>{{ 'tab.urls.url'|trans|desc('URL') }}</th>
-            <th>{{ 'tab.urls.language'|trans|desc('Language') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-            {% if system_urls_pager.currentPageResults is not empty %}
-                {% for system_url in system_urls_pager.currentPageResults %}
-                    <tr>
-                        <td>{{ system_url.path }}</td>
-                        <td>
-                            {% for language_code in system_url.languageCodes %}{{ ez_admin_ui_config.languages.mappings[language_code].name }}<br>{% endfor %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            {% else %}
-                <tr>
-                    <td class="ez-table__cell ez-table__cell--no-content" colspan="2">
-                        <p class="ez-table-no-content mb-0 py-0">
-                            {{ 'tab.urls.no_system_urls'|trans|desc('This Content item has no system URLs.') }}
-                        </p>
-                    </td>
-                </tr>
-            {% endif %}
-        </tbody>
-    </table>
-</div>
+{% set body_rows = [] %}
+{% if system_urls_pager.currentPageResults is not empty %}
+    {% for system_url in system_urls_pager.currentPageResults %}
+        {% set body_row_cols = [] %}
 
+        {% set body_row_cols = body_row_cols|merge([
+            { content: system_url.path },
+        ]) %}
+
+        {% set col_raw %}
+            {% for language_code in system_url.languageCodes %}{{ ez_admin_ui_config.languages.mappings[language_code].name }}<br>{% endfor %}
+        {% endset %}
+        {% set body_row_cols = body_row_cols|merge([{
+            content: col_raw,
+        }]) %}
+
+        {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+    {% endfor %}
+{% endif %}
+
+{% include '@ezdesign/ui/component/table/table.html.twig' with {
+    headline: 'tab.urls.system.title'|trans|desc('System URL'),
+    head_cols: [
+        { content: 'tab.urls.url'|trans|desc('URL') },
+        { content: 'tab.urls.language'|trans|desc('Language') },
+    ],
+    body_rows: body_rows,
+    empty_table_info_text: 'tab.urls.no_system_urls'|trans|desc('This Content item has no system URLs.'),
+} %}

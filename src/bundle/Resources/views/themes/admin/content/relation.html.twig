@@ -1,4 +1,4 @@
-<td>
+{% set name_cell_raw %}
     {% if content.contentInfo.mainLocationId is not null %}
         <a href="{{ path('_ez_content_view', { 'contentId': content.id, 'locationId': content.contentInfo.mainLocationId } ) }}">
             {{ content.getName() }}
@@ -9,10 +9,8 @@
             <em>({{ 'content.in_trash'|trans(domain='content')|desc('In Trash') }})</em>
         {% endif %}
     {% endif %}
-</td>
-<td>
-    {{ contentType.getName() }}
-</td>
-<td>
-    {{ content.versionInfo.creationDate|ez_short_datetime }}
-</td>
+{% endset %}
+
+{% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with { content: name_cell_raw } %}
+{% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with { content: contentType.getName() } %}
+{% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with { content: content.versionInfo.creationDate|ez_short_datetime } %}

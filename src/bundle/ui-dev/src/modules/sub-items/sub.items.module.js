@@ -821,7 +821,7 @@ export default class SubItemsModule extends Component {
      * @param {Object} rawPlaceholdersMap
      */
     handleBulkOperationFailedNotification(failedItems, modalTableTitle, notificationMessage, rawPlaceholdersMap) {
-        const failedItemsData = failedItems.map((content) => ({
+        const failedItemsData = failedItems.map(({ content }) => ({
             contentTypeName: content._info.contentType.name,
             contentName: content._name,
         }));

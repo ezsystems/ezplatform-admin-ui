@@ -26,9 +26,9 @@
     <section class="container ez-container">
         {{ form_start(form) }}
         {{ form_widget(form.identifier, {'attr': {'hidden': 'hidden'}}) }}
-        <div class="ez-table-header ground-base">
-            <div class="ez-table-header__headline">{{ user_setting.name }}</div>
-        </div>
+        {% include '@ezdesign/ui/component/table/table_header.html.twig' with {
+            headline: user_setting.name,
+        } %}
         <div class="bg-white p-4">
             {{ form_row(form.value) }}
         </div>

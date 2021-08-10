@@ -7,9 +7,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ 'draft.conflict.header'|trans|desc('Draft conflict') }}</h5>
-                <button 
-                    type="button" 
-                    class="close" 
+                <button
+                    type="button"
+                    class="close"
                     data-bs-dismiss="modal"
                     aria-label={{ 'draft.conflict.close'|trans|desc('Close') }}
                     title={{ 'draft.conflict.close'|trans|desc('Close') }}
@@ -35,7 +35,10 @@
                     {% endif %}
                 </div>
                 {% set show_add_draft_button = (not content_is_user) %}
-                {% include '@ezdesign/ui/table_header.html.twig' with { header_text: null, tools: version_modal_draft_conflict.table_header_tools(show_add_draft_button) } %}
+                {% include '@ezdesign/ui/component/table/table_header.html.twig' with {
+                    headline: '',
+                    actions: version_modal_draft_conflict.table_header_tools(show_add_draft_button),
+                } only %}
                 <div class="ez-scrollable-wrapper">
                     {{ include('@ezdesign/content/tab/versions/table.html.twig', {
                         'versions': conflicted_drafts,
@@ -53,8 +56,8 @@
 
 {% macro table_header_tools(show_add_button) %}
     {% if show_add_button %}
-        <button 
-            type="button" 
+        <button
+            type="button"
             class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--add-draft"
             title="{{ 'tab.versions.action.delete'|trans|desc('Create a draft') }}"
         >

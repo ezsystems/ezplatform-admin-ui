@@ -96,7 +96,7 @@ class ContentRelationSingle extends FieldTypeComponent
         $explodedValue = explode('/', $values['value']);
         $value = $explodedValue[count($explodedValue) - 1];
 
-        $viewPatternRegex = '/Single relation:[\w\/,: ]* %s [\w \/,:]*/';
+        $viewPatternRegex = '/Single relation[\w\/,: ]* %s [\w \/,:]*/';
 
         Assert::assertRegExp(
             sprintf($viewPatternRegex, $value),

@@ -156,18 +156,14 @@
             const contentTypeName = eZ.helpers.contentType.getContentTypeName(item.ContentInfo.Content.ContentTypeInfo.identifier);
             const contentName = escapeHTML(item.ContentInfo.Content.TranslatedName);
             const contentId = escapeHTML(item.ContentInfo.Content._id);
+            const { rowTemplate } = relationsWrapper.dataset;
 
-            return `
-                <tr class="ez-relations__item" data-content-id="${contentId}">
-                    <td><input class="ibexa-input ibexa-input--checkbox" type="checkbox" value="${contentId}" /></td>
-                    <td class="ez-relations__item-name">${contentName}</td>
-                    <td>${contentTypeName}</td>
-                    <td>${formatShortDateTime(item.ContentInfo.Content.publishedDate)}</td>
-                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length +
-                        index +
-                        1}" /></td>
-                </tr>
-            `;
+            return rowTemplate
+                .replace('{{ content_id }}', contentId)
+                .replace('{{ content_name }}', contentName)
+                .replace('{{ content_type_name }}', contentTypeName)
+                .replace('{{ published_date }}', formatShortDateTime(item.ContentInfo.Content.publishedDate))
+                .replace('{{ order }}', selectedItems.length + index + 1);
         };
         const updateFieldState = () => {
             const wrapperMethod = selectedItems.length ? 'removeAttribute' : 'setAttribute';
