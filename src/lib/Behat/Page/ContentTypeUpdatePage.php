@@ -75,8 +75,14 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
 
     public function addFieldDefinition(string $fieldName)
     {
+        usleep(500000);
+        $this->getHTMLPage()->find($this->getLocator('fieldTypesList'))->mouseOver();
+        usleep(500000);
         $this->getHTMLPage()->find($this->getLocator('fieldTypesList'))->click();
         $this->ibexaDropdown->selectOption($fieldName);
+        usleep(500000);
+        $this->getHTMLPage()->find($this->getLocator('addFieldDefinition'))->mouseOver();
+        usleep(500000);
         $this->getHTMLPage()->find($this->getLocator('addFieldDefinition'))->click();
         $this->getHTMLPage()
             ->setTimeout(3)
