@@ -69,6 +69,10 @@
 }
 
 .ibexa-content-type-edit {
+    &__sections {
+        padding: 0;
+    }
+
     &__section {
         margin-bottom: calculateRem(50px);
     }
@@ -120,7 +124,7 @@
     }
 
     &__field-definitions {
-        padding: 24px;
+        padding: calculateRem(24px);
     }
 
     &__empty-group-placeholder {
