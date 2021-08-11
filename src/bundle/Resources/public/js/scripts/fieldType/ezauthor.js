@@ -106,11 +106,7 @@
             const isAnyCheckboxSelected = [...checkboxes].some((checkbox) => checkbox.checked);
             const bulkDeleteButton = container.querySelector('.ibexa-btn--bulk-remove-author');
 
-            if (isAnyCheckboxSelected) {
-                bulkDeleteButton.removeAttribute('disabled');
-            } else {
-                bulkDeleteButton.setAttribute('disabled', 'disabled');
-            }
+            bulkDeleteButton.toggleAttribute('disabled', !isAnyCheckboxSelected);
         }
 
         removeSelectedItems(event) {
