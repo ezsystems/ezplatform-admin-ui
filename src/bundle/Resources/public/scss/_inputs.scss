@@ -29,7 +29,8 @@
     }
 
     &:focus,
-    &.ibexa-input--text.form-control:focus {
+    &.ibexa-input--text.form-control:focus,
+    &.ibexa-input--date.form-control:focus {
         border-color: $ibexa-color-primary;
         box-shadow: 0 0 calculateRem(3px) 0 rgba($ibexa-color-primary, 0.75);
     }
@@ -40,7 +41,8 @@
     }
 
     &--text,
-    &--textarea {
+    &--textarea,
+    &--date {
         @include ibexa-font-sans-serif();
 
         font-size: $ibexa-text-font-size-medium;
@@ -69,8 +71,7 @@
             background-color: $ibexa-color-light-300;
         }
 
-        &.form-control.is-invalid,
-        &.form-control:invalid {
+        &.form-control.is-invalid {
             color: $ibexa-color-danger;
             background-image: none;
             border-color: $ibexa-color-danger;
@@ -78,7 +79,8 @@
         }
     }
 
-    &--text {
+    &--text,
+    &--date {
         height: calculateRem(48px);
         padding-right: calculateRem(36px);
 
