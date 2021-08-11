@@ -41,11 +41,6 @@
         <target state="new">Sent to trash date</target>
         <note>key: trash.date</note>
       </trans-unit>
-      <trans-unit id="7ffaa1444a83e959f8de3c2410bb65acdd3e3ff0" resname="trash.delete">
-        <source>Delete</source>
-        <target state="new">Delete</target>
-        <note>key: trash.delete</note>
-      </trans-unit>
       <trans-unit id="45548aed8adb5019c3b806992e903965699c7e08" resname="trash.deleted.success">
         <source>Deleted selected item(s) from Trash.</source>
         <target state="new">Deleted selected item(s) from Trash.</target>
@@ -75,11 +70,6 @@
         <source>Deleted user</source>
         <target state="new">Deleted user</target>
         <note>key: trash.item.deleted_user</note>
-      </trans-unit>
-      <trans-unit id="2720e3018fc8b1158cb728b1d5dc377ef7293b57" resname="trash.modal.message">
-        <source>Do you want to delete the selected item(s) from Trash?</source>
-        <target state="new">Do you want to delete the selected item(s) from Trash?</target>
-        <note>key: trash.modal.message</note>
       </trans-unit>
       <trans-unit id="34525fc5da381111c2104d20a55021eb8b698c7c" resname="trash.name">
         <source>Name</source>
