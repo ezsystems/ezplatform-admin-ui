@@ -118,6 +118,14 @@
                         font-size: $ibexa-text-font-size;
                         font-weight: normal;
                     }
+
+                    &__toggle--status {
+                        margin-left: 0;
+                    }
+
+                    &__extra-action-button--remove-field-definitions {
+                        margin-left: auto;
+                    }
                 }
             }
         }
@@ -146,7 +154,6 @@
         color: $ibexa-color-dark-400;
         margin-bottom: calculateRem(16px);
     }
-    
 
     &__field-definitions-placeholder {
         position: relative;
