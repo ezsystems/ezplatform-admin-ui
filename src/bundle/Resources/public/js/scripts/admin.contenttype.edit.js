@@ -60,8 +60,6 @@
             container.insertAdjacentHTML('beforeend', fieldNode);
             fieldNode = container.querySelector('.ibexa-collapse');
         }
-        draggedItemPosition = 1;
-        // console.log(draggedItemPosition, `.ibexa-collapse:nth-child(${draggedItemPosition})`, targetContainer, targetContainer.querySelector(`.ibexa-collapse:nth-child(${draggedItemPosition})`))
 
         if (draggedItemPosition === -1) {
             targetPlace = targetContainer.lastChild;

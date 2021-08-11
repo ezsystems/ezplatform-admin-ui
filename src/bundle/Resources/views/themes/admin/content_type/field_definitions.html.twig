@@ -58,8 +58,8 @@
                                 src="{{ asset('bundles/ezplatformadminui/img/empty-field-definition-group.svg') }}"
                                 alt="{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}"
                             >
-                            <label>{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}</label>
-                            <h2>{{ 'content_type.view.edit.empty_group_content'|trans|desc('Empty group, please drag some field') }}</h2>
+                            <label class="ibexa-content-type-edit__empty-group-label">{{ 'content_type.view.edit.empty_group_label'|trans|desc('Your section is empty') }}</label>
+                            <h3 class="ibexa-content-type-edit__empty-group-title">{{ 'content_type.view.edit.empty_group_content'|trans|desc('Drag and drop field type') }}</h2>
                         </div>
 
                         {% for field_definition in field_defintions %}

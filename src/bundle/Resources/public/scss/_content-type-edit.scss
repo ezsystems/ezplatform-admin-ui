@@ -138,6 +138,12 @@
         margin: calculateRem(32px) auto calculateRem(48px);
     }
 
+    &__empty-group-label {
+        color: $ibexa-color-dark-400;
+        margin-bottom: calculateRem(16px);
+    }
+    
+
     &__field-definitions-placeholder {
         position: relative;
         width: 100%;

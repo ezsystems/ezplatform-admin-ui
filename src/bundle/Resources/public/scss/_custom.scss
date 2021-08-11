@@ -421,7 +421,7 @@ $ibexa-text-font-size-small: calculateRem(12px);
 
 // Ibexa shadows
 $ibexa-btn-focus-box-shadow: 0 0 0 calculateRem(3px) rgba($ibexa-color-primary, 0.2);
-$ibexa-btn-focus-box-shadow-info: 0 0 0 calculateRem(3px) rgba($ibexa-color-primary, 0.2);
+$ibexa-btn-focus-box-shadow-info: 0 0 0 calculateRem(3px) rgba($ibexa-color-info, 0.2);
 $ibexa-btn-hover-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-danger, 0.2);
 $ibexa-btn-hover-box-shadow-dark: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-dark, 0.2);
 $ibexa-btn-hover-box-shadow-info: 0 calculateRem(10px) calculateRem(24px) 0 rgba($ibexa-color-info, 0.5);
