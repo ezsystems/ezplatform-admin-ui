@@ -83,7 +83,7 @@ class DateAndTime extends FieldTypeComponent
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('fieldInput', '.flatpickr-input.ez-data-source__input'),
+            new VisibleCSSLocator('fieldInput', '.flatpickr-input.ibexa-data-source__input'),
         ];
     }
 }
