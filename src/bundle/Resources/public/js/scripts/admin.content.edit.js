@@ -23,8 +23,9 @@
     ];
     const form = doc.querySelector('.ez-form-validate');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
-    const buttonsMenuWorkflow = doc.querySelectorAll('button[id^="workflow__apply__"]');
-    let workflowEventListener = false;
+    const menuWorkflowButtons = doc.querySelectorAll('button[id^="workflow__apply__"]');
+    const applyButton = doc.querySelector('[name="ezplatform_content_forms_content_edit[workflow][apply]"]');
+    let isWorkflowEventListenerAttached = false;
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
         const validatorName = validator.constructor.name;
@@ -149,29 +150,25 @@
                 });
         }, eZ.adminUiConfig.autosave.interval);
     }
-    const addClickWorkflowHandler = (event) => {
-        const applyButton = doc.querySelector('[name="ezplatform_content_forms_content_edit[workflow][apply]"]');
-
-        if (workflowEventListener) {
+    const addClickWorkflowHandler = () => {
+        if (isWorkflowEventListenerAttached) {
             return;
         }
 
         applyButton.dataset.isFormValid = 0;
-        workflowEventListener = true;
+        isWorkflowEventListenerAttached = true;
         applyButton.addEventListener('click', clickHandler, false);
     }
-    const removeClickWorkflowHandler = (event) => {
-        const applyButton = doc.querySelector('[name="ezplatform_content_forms_content_edit[workflow][apply]"]');
-
-        if (!workflowEventListener) {
+    const removeClickWorkflowHandler = () => {
+        if (!isWorkflowEventListenerAttached) {
             return;
         }
 
-        workflowEventListener = false;
+        isWorkflowEventListenerAttached = false;
         applyButton.removeEventListener('click', clickHandler, false);
     }
 
-    buttonsMenuWorkflow.forEach((buttonMenuWorkflow) => {
+    menuWorkflowButtons.forEach((buttonMenuWorkflow) => {
         if (buttonMenuWorkflow.dataset.hasOwnProperty('validate')) {
             buttonMenuWorkflow.addEventListener('click', addClickWorkflowHandler, false);
         } else {
