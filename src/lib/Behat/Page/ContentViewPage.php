@@ -214,6 +214,8 @@ class ContentViewPage extends Page
 
     public function verifyIsLoaded(): void
     {
+        throw new \Exception('I am a dependency!');
+
         $this->getHTMLPage()->find($this->getLocator('mainContainer'))->assert()->isVisible();
         $this->rightMenu->verifyIsLoaded();
         Assert::assertStringContainsString(
