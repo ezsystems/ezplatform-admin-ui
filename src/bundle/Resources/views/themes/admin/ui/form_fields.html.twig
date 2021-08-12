@@ -138,6 +138,18 @@
     {{ block('form_widget_simple') }}
 {%- endblock number_widget -%}
 
+{%- block password_widget -%}
+    {% set force_text = true %}
+    {%- set type = type|default('password') -%}
+    {{ block('form_widget_simple') }}
+{%- endblock password_widget -%}
+
+{%- block email_widget -%}
+    {% set force_text = true %}
+    {%- set type = type|default('email') -%}
+    {{ block('form_widget_simple') }}
+{%- endblock email_widget -%}
+
 {%- block table_header_tool_btn -%}
     {%- set type = type|default('submit') -%}
     {%- if label is not same as(false) and label is empty -%}
@@ -277,7 +289,7 @@
 {% block form_label_errors %}{% endblock form_label_errors %}
 
 {%- block form_widget_simple -%}
-    {%- set is_text_input = type|default('text') == 'text' -%}
+    {%- set is_text_input = type|default('text') == 'text' or force_text|default(false) -%}
     {%- if is_text_input -%}
         {%- set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input ibexa-input--text')|trim}) -%}
         {%- set empty_placeholder_for_hiding_clear_btn_with_css = ' ' -%}
