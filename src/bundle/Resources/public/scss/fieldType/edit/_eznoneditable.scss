@@ -1,19 +1,14 @@
-.ez-field-edit--eznoneditable {
-    display: flex;
+.ibexa-field-edit--eznoneditable {
     padding: calculateRem(24px) 0;
     border-bottom: calculateRem(1px) solid $ibexa-color-base;
 
     .col-form-label {
-        flex: 0 0 calculateRem(200px);
         margin: 0;
-        font-size: calculateRem(16px);
         font-weight: normal;
-        color: $ibexa-color-base-dark;
     }
 
     .non-editable {
-        flex: 0 0 calc(100% - #{calculateRem(200px)});
         margin-bottom: 0;
-        padding-top: calculateRem(8px);
+        color: $ibexa-color-dark-400;
     }
 }
