@@ -31,9 +31,9 @@ class Country extends FieldTypeComponent
     {
         return [
             new VisibleCSSLocator('fieldInput', 'select'),
-            new VisibleCSSLocator('dropdownSelector', '.ez-custom-dropdown__selection-info'),
-            new VisibleCSSLocator('dropdownExpanded', '.ez-custom-dropdown__selection-info:not(.ez-custom-dropdown__items--hidden)'),
-            new VisibleCSSLocator('dropdownItem', '.ez-custom-dropdown__item'),
+            new VisibleCSSLocator('dropdownSelector', '.ibexa-dropdown__selection-info'),
+            new VisibleCSSLocator('dropdownExpanded', '.ibexa-dropdown__selection-info:not(.ibexa-dropdown__items--hidden)'),
+            new VisibleCSSLocator('dropdownItem', '.ibexa-dropdown__item'),
         ];
     }
 }

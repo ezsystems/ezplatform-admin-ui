@@ -1,7 +1,6 @@
 (function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezcountry';
-    const SELECTOR_SELECTED = '.ez-custom-dropdown__selection-info';
-    const SELECTOR_SOURCE_INPUT = '.ez-data-source__input';
+    const SELECTOR_SELECTED = '.ibexa-dropdown__selection-info';
     const EVENT_VALUE_CHANGED = 'valueChanged';
     const SELECTOR_ERROR_NODE = '.ez-data-source';
 
@@ -16,7 +15,7 @@
          */
         validateInput(event) {
             const fieldContainer = event.currentTarget.closest(SELECTOR_FIELD);
-            const hasSelectedOptions = !!fieldContainer.querySelectorAll('.ez-custom-dropdown__selected-item').length;
+            const hasSelectedOptions = !!fieldContainer.querySelector('.ez-data-source__input').value;
             const isRequired = fieldContainer.classList.contains('ez-field-edit--required');
             const isError = isRequired && !hasSelectedOptions;
             const label = fieldContainer.querySelector('.ez-field-edit__label').innerHTML;
@@ -44,13 +43,4 @@
 
     validator.init();
     eZ.addConfig('fieldTypeValidators', [validator], true);
-    doc.querySelectorAll(SELECTOR_FIELD).forEach((container) => {
-        const dropdown = new eZ.core.CustomDropdown({
-            container,
-            itemsContainer: container.querySelector('.ez-custom-dropdown__items'),
-            sourceInput: container.querySelector(SELECTOR_SOURCE_INPUT),
-        });
-
-        dropdown.init();
-    });
 })(window, window.document, window.eZ);

@@ -1,16 +1,6 @@
 (function(global, doc) {
     const SELECTOR_MODAL = '.ez-modal';
 
-    doc.querySelectorAll('.ez-translation .ez-custom-dropdown__wrapper').forEach((container) => {
-        const dropdown = new eZ.core.CustomDropdown({
-            container,
-            itemsContainer: container.querySelector('.ez-custom-dropdown__items'),
-            sourceInput: doc.querySelector(container.dataset.sourceSelector),
-        });
-
-        dropdown.init();
-    });
-
     doc.querySelectorAll('.ez-translation__language-wrapper--language').forEach((select) => {
         select.addEventListener(
             'valueChanged',
