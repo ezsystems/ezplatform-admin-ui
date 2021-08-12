@@ -47,3 +47,5 @@ services:
   Ibexa\AdminUi\Behat\Component\Table\TableRowFactory: ~
 
   Ibexa\AdminUi\Behat\Component\Table\SubitemsGrid: ~
+
+  Ibexa\AdminUi\Behat\Component\IbexaDropdown: ~
