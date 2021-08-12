@@ -69,7 +69,7 @@
         const startingLocationId =
             relationsContainer.dataset.defaultLocation !== '0' ? parseInt(relationsContainer.dataset.defaultLocation, 10) : null;
         const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
-        const renderRows = (items) =>
+        const renderRows = (items) => {
             items.forEach((item, index) => {
                 relationsContainer.insertAdjacentHTML('beforeend', renderRow(item, index));
 
@@ -79,9 +79,10 @@
 
                 itemNode.setAttribute('data-content-id', escapeHTML(item.ContentInfo.Content._id));
                 itemNode.querySelector('.ibexa-relations__table-action--remove-item').addEventListener('click', removeItem, false);
-
-                eZ.helpers.tooltips.parse();
             });
+
+            eZ.helpers.tooltips.parse();
+        };
         const updateInputValue = (items) => {
             sourceInput.value = items.join();
             sourceInput.dispatchEvent(new CustomEvent(EVENT_CUSTOM));
@@ -149,20 +150,20 @@
                 .replace('{{ order }}', selectedItems.length + index + 1);
         };
         const updateFieldState = () => {
-            const tableMethod = selectedItems.length ? 'removeAttribute' : 'setAttribute';
-            const ctaMethod = selectedItems.length ? 'setAttribute' : 'removeAttribute';
+            const tableHideMethod = selectedItems.length ? 'removeAttribute' : 'setAttribute';
+            const ctaHideMethod = selectedItems.length ? 'setAttribute' : 'removeAttribute';
 
-            relationsTable[tableMethod]('hidden', true);
+            relationsTable[tableHideMethod]('hidden', true);
 
             if (trashBtn) {
-                trashBtn[tableMethod]('hidden', true);
+                trashBtn[tableHideMethod]('hidden', true);
             }
 
             if (addBtn) {
-                addBtn[tableMethod]('hidden', true);
+                addBtn[tableHideMethod]('hidden', true);
             }
 
-            relationsCTA[ctaMethod]('hidden', true);
+            relationsCTA[ctaHideMethod]('hidden', true);
         };
         const updateAddBtnState = () => {
             if (!addBtn) {

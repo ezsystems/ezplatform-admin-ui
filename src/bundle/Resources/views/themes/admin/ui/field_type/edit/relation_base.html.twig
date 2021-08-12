@@ -200,11 +200,11 @@
                     {% block headline %}
                         <div class="ibexa-relations__info-wrapper">
                             <p class="ibexa-relations__info-text">
-                            {% if limit != 1 %}
-                                {{ 'ezobjectrelationlist.cta.limit.multi'|trans|desc('Set up a Relation with one or several Items') }}
-                            {% else %}
-                                {{ 'ezobjectrelationlist.cta.limit.single'|trans|desc('Set up a Relation with one Item') }}
-                            {% endif %}
+                                {% if limit != 1 %}
+                                    {{ 'ezobjectrelationlist.cta.limit.multi'|trans|desc('Set up a Relation with one or several Items') }}
+                                {% else %}
+                                    {{ 'ezobjectrelationlist.cta.limit.single'|trans|desc('Set up a Relation with one Item') }}
+                                {% endif %}
                             </p>
                             {% if limit != 0 %}
                                 <p class="ibexa-relations__info-sub-text">
