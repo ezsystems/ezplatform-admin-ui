@@ -1,5 +1,13 @@
-.ez-field-edit--ezinteger {
-    .ez-data-source__input {
-        width: calculateRem(100px);
+.ibexa-field-edit--ezinteger {
+    .ibexa-data-source__input {
+        width: calculateRem(84px);
+        height: calculateRem(48px);
+
+        &.is-invalid {
+            background-image: none;
+            padding-right: calculateRem(12px);
+            background-color: $ibexa-color-danger-100;
+            color: $ibexa-color-danger;
+        }
     }
 }
