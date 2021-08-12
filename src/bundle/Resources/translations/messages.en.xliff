@@ -86,6 +86,11 @@
         <target state="new"><![CDATA[Welcome to<br/> Ibexa DXP]]></target>
         <note>key: base.welcome</note>
       </trans-unit>
+      <trans-unit id="e55cc61e6e0bcd97f329c00790704a381212f55b" resname="bookmark.list.empty">
+        <source>You have no notifications.</source>
+        <target state="new">You have no notifications.</target>
+        <note>key: bookmark.list.empty</note>
+      </trans-unit>
       <trans-unit id="d21d07085caa55b0fee2fc054a6878bbdb24ae78" resname="breadcrumb.admin">
         <source>Admin</source>
         <target state="new">Admin</target>
@@ -186,6 +191,21 @@
         <target state="new">%identifier%</target>
         <note>key: content_type.breadcrumb.view</note>
       </trans-unit>
+      <trans-unit id="02f6ddfcdd8bbd05cdd1b954503a3801288b74eb" resname="content_type.modal.message">
+        <source>Do you want to delete the Content Type?</source>
+        <target state="new">Do you want to delete the Content Type?</target>
+        <note>key: content_type.modal.message</note>
+      </trans-unit>
+      <trans-unit id="803a61fc8cf4e7bdfcf27432bb35e379a4971134" resname="content_type.view.list.action.add">
+        <source>Create a Content Type</source>
+        <target state="new">Create a Content Type</target>
+        <note>key: content_type.view.list.action.add</note>
+      </trans-unit>
+      <trans-unit id="c3287b9fccc0b54216e50ba02e3d72e17cc1c92e" resname="content_type.view.list.action.delete">
+        <source>Delete Content Type</source>
+        <target state="new">Delete Content Type</target>
+        <note>key: content_type.view.list.action.delete</note>
+      </trans-unit>
       <trans-unit id="dc7335e54d834bb6a342bf0bcb113850de4b69f9" resname="content_type.view.view.title">
         <source>%name%</source>
         <target state="new">%name%</target>
@@ -200,6 +220,21 @@
         <source>%identifier%</source>
         <target state="new">%identifier%</target>
         <note>key: content_type_group.breadcrumb.view</note>
+      </trans-unit>
+      <trans-unit id="09f63694559a9149fb1297e33be843cf54788b95" resname="content_type_group.modal.message">
+        <source>Do you want to delete the Content Type group?</source>
+        <target state="new">Do you want to delete the Content Type group?</target>
+        <note>key: content_type_group.modal.message</note>
+      </trans-unit>
+      <trans-unit id="8eb8668549f90436db605805680144f4b87c7fc0" resname="content_type_group.view.list.action.add">
+        <source>Create a Content Type group</source>
+        <target state="new">Create a Content Type group</target>
+        <note>key: content_type_group.view.list.action.add</note>
+      </trans-unit>
+      <trans-unit id="ceb2e962eccd99d66a600df886fb1ff3253c2f16" resname="content_type_group.view.list.action.delete">
+        <source>Delete Content Type group(s)</source>
+        <target state="new">Delete Content Type group(s)</target>
+        <note>key: content_type_group.view.list.action.delete</note>
       </trans-unit>
       <trans-unit id="fe1c876b1a9bcde155f03227bce4ae4fbd54c24f" resname="custom_url_alias_add_form.add">
         <source>Create</source>
@@ -271,15 +306,45 @@
         <target state="new">Something went wrong</target>
         <note>key: error.page.default.title</note>
       </trans-unit>
+      <trans-unit id="2c7f89a37db43b829ff76f40565020c5bd4c2dae" resname="ezauthor.Email">
+        <source>Email</source>
+        <target state="new">Email</target>
+        <note>key: ezauthor.Email</note>
+      </trans-unit>
       <trans-unit id="86a1d081394a7faba471dc5eaa4b1c112e9ff03a" resname="ezauthor.action.add">
-        <source>Add author</source>
-        <target state="new">Add author</target>
+        <source>Add</source>
+        <target state="new">Add</target>
         <note>key: ezauthor.action.add</note>
       </trans-unit>
       <trans-unit id="3a0389d073f00ef9a968a5cdc60e2794b434b381" resname="ezauthor.action.delete">
-        <source>Remove author</source>
-        <target state="new">Remove author</target>
+        <source>Delete</source>
+        <target state="new">Delete</target>
         <note>key: ezauthor.action.delete</note>
+      </trans-unit>
+      <trans-unit id="06a34ac23ac86f7c4368380203e3dd4d91489fa0" resname="ezauthor.name">
+        <source>Name</source>
+        <target state="new">Name</target>
+        <note>key: ezauthor.name</note>
+      </trans-unit>
+      <trans-unit id="7df0c551bbd003f5a7d37ebe3434bce08ade074c" resname="ezobjectrelationlist.add_relation">
+        <source>Add relations</source>
+        <target state="new">Add relations</target>
+        <note>key: ezobjectrelationlist.add_relation</note>
+      </trans-unit>
+      <trans-unit id="85874e8811087f9c2169915345cdf71d5243182e" resname="ezobjectrelationlist.delete_selected_relations">
+        <source>Delete selected relation(s)</source>
+        <target state="new">Delete selected relation(s)</target>
+        <note>key: ezobjectrelationlist.delete_selected_relations</note>
+      </trans-unit>
+      <trans-unit id="91cee9d11eeed40768d4e5270d91cd5165f4562f" resname="ezobjectrelationlist.limit">
+        <source>(max. %limit%)</source>
+        <target state="new">(max. %limit%)</target>
+        <note>key: ezobjectrelationlist.limit</note>
+      </trans-unit>
+      <trans-unit id="4ab30b13084b6d6bff3b8fd7dc9ab5879b35097c" resname="ezobjectrelationlist.relations">
+        <source>Relations</source>
+        <target state="new">Relations</target>
+        <note>key: ezobjectrelationlist.relations</note>
       </trans-unit>
       <trans-unit id="8c3f0606ebb870dd8113cca42da7510414c5a0a8" resname="ezplatform.forgot_password.reset_your_password.reason.migration">
         <source>Your password has expired, change it.</source>
@@ -369,6 +434,26 @@
         <target state="new">Cancel</target>
         <note>key: form.cancel</note>
       </trans-unit>
+      <trans-unit id="7100bfb6741e032fcfcc681f3eceef78650e4672" resname="header.search">
+        <source>Search...</source>
+        <target state="new">Search...</target>
+        <note>key: header.search</note>
+      </trans-unit>
+      <trans-unit id="8390c7c1adbff8a264583f6f060256c993023787" resname="language.delete">
+        <source>Delete language</source>
+        <target state="new">Delete language</target>
+        <note>key: language.delete</note>
+      </trans-unit>
+      <trans-unit id="2a52961302ce7dfa4a21c5e0bcc239f5a9a36cfe" resname="language.modal.message">
+        <source>Do you want to delete the language(s)?</source>
+        <target state="new">Do you want to delete the language(s)?</target>
+        <note>key: language.modal.message</note>
+      </trans-unit>
+      <trans-unit id="8e4642a0c879921e8bf31752abc577c4bf8d098b" resname="language.new">
+        <source>Create a new language</source>
+        <target state="new">Create a new language</target>
+        <note>key: language.new</note>
+      </trans-unit>
       <trans-unit id="fb1d64fdeabb5f2fe1671d4f3fb72ccca7722ed3" resname="list.action.edit">
         <source>Edit</source>
         <target state="new">Edit</target>
@@ -409,6 +494,91 @@
         <target state="new">Password</target>
         <note>key: my_account_settings.password.title</note>
       </trans-unit>
+      <trans-unit id="5b03625b8de51d296ad7f4bc980e631c964185d8" resname="notification.no_longer_available">
+        <source>The Content item is no longer available</source>
+        <target state="new">The Content item is no longer available</target>
+        <note>key: notification.no_longer_available</note>
+      </trans-unit>
+      <trans-unit id="1c91fe849525c315015b2e765f6600fd199e78a0" resname="notification.title">
+        <source>Title:</source>
+        <target state="new">Title:</target>
+        <note>key: notification.title</note>
+      </trans-unit>
+      <trans-unit id="0480844e257807b48dbf75fa7a374ceb7649ec5c" resname="object_state.delete.bulk_delete.submit">
+        <source>Delete Object state</source>
+        <target state="new">Delete Object state</target>
+        <note>key: object_state.delete.bulk_delete.submit</note>
+      </trans-unit>
+      <trans-unit id="2331731a1072a77f20ceef81614545768fc1d446" resname="object_state.modal.message">
+        <source>Do you want to delete the Object state(s)?</source>
+        <target state="new">Do you want to delete the Object state(s)?</target>
+        <note>key: object_state.modal.message</note>
+      </trans-unit>
+      <trans-unit id="85cbd870cb6255f3d3d481ece6c23e6e2117e91e" resname="object_state.new">
+        <source>Create a new Object state</source>
+        <target state="new">Create a new Object state</target>
+        <note>key: object_state.new</note>
+      </trans-unit>
+      <trans-unit id="0f857d4dff9c8232ede300a39010d289d31c2937" resname="object_state_group.delete.bulk_delete.submit">
+        <source>Delete Object state group</source>
+        <target state="new">Delete Object state group</target>
+        <note>key: object_state_group.delete.bulk_delete.submit</note>
+      </trans-unit>
+      <trans-unit id="5696f8cad271e56ef0e2661b314fa31b70a81bb3" resname="object_state_group.modal.message">
+        <source>Do you want to delete the Object state group(s)?</source>
+        <target state="new">Do you want to delete the Object state group(s)?</target>
+        <note>key: object_state_group.modal.message</note>
+      </trans-unit>
+      <trans-unit id="1cbfb4528f41be4d8de98fa4f81c26b41f8ffad9" resname="object_state_group.new">
+        <source>Create a new Object state group</source>
+        <target state="new">Create a new Object state group</target>
+        <note>key: object_state_group.new</note>
+      </trans-unit>
+      <trans-unit id="fda44832f6a675807e1bcd01460231f7117d9e1e" resname="policy.modal.message">
+        <source>Do you want to delete the Policy?</source>
+        <target state="new">Do you want to delete the Policy?</target>
+        <note>key: policy.modal.message</note>
+      </trans-unit>
+      <trans-unit id="84d0c2844a996fbfdc23872405533f92b6e6e2f6" resname="policy.view.list.action.add">
+        <source>Add a new Policy</source>
+        <target state="new">Add a new Policy</target>
+        <note>key: policy.view.list.action.add</note>
+      </trans-unit>
+      <trans-unit id="abf42b328e259dc5ec851e70dad234636d0134fe" resname="policy.view.list.action.delete">
+        <source>Delete Policy</source>
+        <target state="new">Delete Policy</target>
+        <note>key: policy.view.list.action.delete</note>
+      </trans-unit>
+      <trans-unit id="b8faa90fed74479d8cdb01dc2c0e1af8a79cf9b1" resname="role.modal.message">
+        <source>Do you want to delete the Role(s)?</source>
+        <target state="new">Do you want to delete the Role(s)?</target>
+        <note>key: role.modal.message</note>
+      </trans-unit>
+      <trans-unit id="88d7426f344cc9d85b90903dad013d5806b82faa" resname="role.view.list.action.add">
+        <source>Create a Role</source>
+        <target state="new">Create a Role</target>
+        <note>key: role.view.list.action.add</note>
+      </trans-unit>
+      <trans-unit id="e0b49df6c6b235f7eb4d03019d1f9505dd77a135" resname="role.view.list.action.delete">
+        <source>Delete Role</source>
+        <target state="new">Delete Role</target>
+        <note>key: role.view.list.action.delete</note>
+      </trans-unit>
+      <trans-unit id="a21a7a13956cadf2256095fbdd062f1b33dd05a8" resname="role_assignment.view.list.action.add">
+        <source>Assign to Users/Groups</source>
+        <target state="new">Assign to Users/Groups</target>
+        <note>key: role_assignment.view.list.action.add</note>
+      </trans-unit>
+      <trans-unit id="76361d414c957ff63dcfdaf4490b3e9a2c632750" resname="role_assignment.view.list.action.delete">
+        <source>Unassign</source>
+        <target state="new">Unassign</target>
+        <note>key: role_assignment.view.list.action.delete</note>
+      </trans-unit>
+      <trans-unit id="304836ca19b0d01940431c18b955ae028a6110f9" resname="role_assignments.modal.message">
+        <source>Do you want to unassign the Users/Groups?</source>
+        <target state="new">Do you want to unassign the Users/Groups?</target>
+        <note>key: role_assignments.modal.message</note>
+      </trans-unit>
       <trans-unit id="08232f4c5c3ca88a7f2fd8e29eda7e20ec346aae" resname="search.any_time">
         <source>Any time</source>
         <target state="new">Any time</target>
@@ -419,15 +589,30 @@
         <target state="new">From date - to date</target>
         <note>key: search.date.range</note>
       </trans-unit>
+      <trans-unit id="128df491a522e7af4916cd002d9e11a3d2bc4078" resname="section.action.delete">
+        <source>Delete Section</source>
+        <target state="new">Delete Section</target>
+        <note>key: section.action.delete</note>
+      </trans-unit>
       <trans-unit id="9567771350aff93580f743089937b0c8fe31058e" resname="section.assign,content">
         <source>Assign Content</source>
         <target state="new">Assign Content</target>
         <note>key: section.assign,content</note>
       </trans-unit>
+      <trans-unit id="48a0071d3b889cbfef3ff4ee5af8cf83b1e8b7f6" resname="section.delete">
+        <source>Delete Section</source>
+        <target state="new">Delete Section</target>
+        <note>key: section.delete</note>
+      </trans-unit>
       <trans-unit id="6a17e9f4ed416563fc8c3e188509b8eec8a6f7c0" resname="section.modal.message">
         <source>Do you want to delete the Section(s)?</source>
         <target state="new">Do you want to delete the Section(s)?</target>
         <note>key: section.modal.message</note>
+      </trans-unit>
+      <trans-unit id="12023a25e9c04ceef708820416f14a5a1e188688" resname="section.new">
+        <source>Create a new Section</source>
+        <target state="new">Create a new Section</target>
+        <note>key: section.new</note>
       </trans-unit>
       <trans-unit id="1152c93462d8bed85642b961f01ed63a6f2525ab" resname="tab.locations.location_content_swap">
         <source>Swap Locations</source>
@@ -439,10 +624,40 @@
         <target state="new">Swap the Content item at this Location with another</target>
         <note>key: tab.locations.swap_with_another</note>
       </trans-unit>
+      <trans-unit id="d2e707023baa6830915c5d12b915974d627522e4" resname="tab.versions.table.action.archived.edit">
+        <source>Restore archived version</source>
+        <target state="new">Restore archived version</target>
+        <note>key: tab.versions.table.action.archived.edit</note>
+      </trans-unit>
+      <trans-unit id="97721a4a6c33834bb6421c29ef72e8654f39a4ab" resname="tab.versions.table.action.draft.edit">
+        <source>Edit draft</source>
+        <target state="new">Edit draft</target>
+        <note>key: tab.versions.table.action.draft.edit</note>
+      </trans-unit>
+      <trans-unit id="a602612589c6e902caaf8acf1fd51fcd215955f1" resname="tab.versions.table.author.not_found">
+        <source>Can't fetch contributor</source>
+        <target state="new">Can't fetch contributor</target>
+        <note>key: tab.versions.table.author.not_found</note>
+      </trans-unit>
       <trans-unit id="1246bcf8752e249bdec2067d43cfae2a5103bc5f" resname="tab.view.preview">
         <source>Preview</source>
         <target state="new">Preview</target>
         <note>key: tab.view.preview</note>
+      </trans-unit>
+      <trans-unit id="5254d6524746a8c9cd0be82fc006baa2fa037198" resname="toggle_widget.label.off">
+        <source>Off</source>
+        <target state="new">Off</target>
+        <note>key: toggle_widget.label.off</note>
+      </trans-unit>
+      <trans-unit id="922e4e5291baf0a3d11841da92466703d6786cb5" resname="toggle_widget.label.on">
+        <source>On</source>
+        <target state="new">On</target>
+        <note>key: toggle_widget.label.on</note>
+      </trans-unit>
+      <trans-unit id="7ffaa1444a83e959f8de3c2410bb65acdd3e3ff0" resname="trash.delete">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: trash.delete</note>
       </trans-unit>
       <trans-unit id="4e7901a215220faba4d546cd3fb63f3e2a64e849" resname="trash.delete.all.confirm">
         <source>Are you sure you want to permanently delete %trashItemsCount% item(s)?</source>
@@ -473,6 +688,11 @@
         <source>Are you sure you want to send this Content item to Trash?</source>
         <target state="new">Are you sure you want to send this Content item to Trash?</target>
         <note>key: trash.modal.message</note>
+      </trans-unit>
+      <trans-unit id="bf721bb2cc736984908badd0489116d289171d33" resname="trash.modal.send_to_trash.message">
+        <source>Are you sure you want to send this Content item to Trash?</source>
+        <target state="new">Are you sure you want to send this Content item to Trash?</target>
+        <note>key: trash.modal.send_to_trash.message</note>
       </trans-unit>
       <trans-unit id="3a46b65a9b678fb947285b2c9509943ee6764195" resname="trash.search.any_content_types">
         <source>Any Content Types</source>
@@ -523,6 +743,21 @@
         <source>Show</source>
         <target state="new">Show</target>
         <note>key: ui.component.tab.tabs_toggler.show</note>
+      </trans-unit>
+      <trans-unit id="316f9f0d65ecd76792e8b79bccb094ffd281e7a2" resname="url_wildcard.list.action.create">
+        <source>Create a URL wildcard</source>
+        <target state="new">Create a URL wildcard</target>
+        <note>key: url_wildcard.list.action.create</note>
+      </trans-unit>
+      <trans-unit id="3f12e58e0ba64a84239826e8fec1ebe129595cc3" resname="url_wildcard.list.action.delete">
+        <source>Delete URL wildcards</source>
+        <target state="new">Delete URL wildcards</target>
+        <note>key: url_wildcard.list.action.delete</note>
+      </trans-unit>
+      <trans-unit id="b33b3b1380dda4782c33124620ac87c596acb020" resname="url_wildcard.modal.message">
+        <source>Are you sure you want to delete selected URL wildcard(s)?</source>
+        <target state="new">Are you sure you want to delete selected URL wildcard(s)?</target>
+        <note>key: url_wildcard.modal.message</note>
       </trans-unit>
     </body>
   </file>

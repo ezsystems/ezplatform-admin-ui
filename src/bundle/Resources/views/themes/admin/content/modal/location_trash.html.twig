@@ -17,7 +17,7 @@
 
             {{ form_start(form, {'action': path('ezplatform.location.trash')}) }}
             <div class="modal-body">
-                {{ 'trash.modal.message'|trans|desc('Are you sure you want to send this Content item to Trash?') }}
+                {{ 'trash.modal.send_to_trash.message'|trans|desc('Are you sure you want to send this Content item to Trash?') }}
 
                 {% for option in form.trash_options %}
                     <div class="ez-modal__trash-option">
