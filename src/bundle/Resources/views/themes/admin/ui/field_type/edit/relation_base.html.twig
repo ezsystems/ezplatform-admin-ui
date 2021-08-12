@@ -223,7 +223,6 @@
                                 }) }}"
                                 type="button"
                                 class="btn ibexa-btn ibexa-btn--secondary ibexa-btn--small ibexa-relations__table-action--create ibexa-btn"
-                                title="{{ 'ezobjectrelationlist.add_relation'|trans|desc('Add relations') }}"
                                 disabled
                                 {% if not has_relations %}hidden="true"{% endif %}
                             >
@@ -232,7 +231,6 @@
                             <button
                                 type="button"
                                 class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-relations__table-action--remove ibexa-btn"
-                                title="{{ 'ezobjectrelationlist.delete_selected_relations'|trans|desc('Delete') }}"
                                 disabled
                                 {% if not has_relations %}hidden="true"{% endif %}
                             >

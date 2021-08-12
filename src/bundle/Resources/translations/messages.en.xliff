@@ -326,26 +326,6 @@
         <target state="new">Name</target>
         <note>key: ezauthor.name</note>
       </trans-unit>
-      <trans-unit id="7df0c551bbd003f5a7d37ebe3434bce08ade074c" resname="ezobjectrelationlist.add_relation">
-        <source>Add relations</source>
-        <target state="new">Add relations</target>
-        <note>key: ezobjectrelationlist.add_relation</note>
-      </trans-unit>
-      <trans-unit id="85874e8811087f9c2169915345cdf71d5243182e" resname="ezobjectrelationlist.delete_selected_relations">
-        <source>Delete selected relation(s)</source>
-        <target state="new">Delete selected relation(s)</target>
-        <note>key: ezobjectrelationlist.delete_selected_relations</note>
-      </trans-unit>
-      <trans-unit id="91cee9d11eeed40768d4e5270d91cd5165f4562f" resname="ezobjectrelationlist.limit">
-        <source>(max. %limit%)</source>
-        <target state="new">(max. %limit%)</target>
-        <note>key: ezobjectrelationlist.limit</note>
-      </trans-unit>
-      <trans-unit id="4ab30b13084b6d6bff3b8fd7dc9ab5879b35097c" resname="ezobjectrelationlist.relations">
-        <source>Relations</source>
-        <target state="new">Relations</target>
-        <note>key: ezobjectrelationlist.relations</note>
-      </trans-unit>
       <trans-unit id="8c3f0606ebb870dd8113cca42da7510414c5a0a8" resname="ezplatform.forgot_password.reset_your_password.reason.migration">
         <source>Your password has expired, change it.</source>
         <target state="new">Your password has expired, change it.</target>
