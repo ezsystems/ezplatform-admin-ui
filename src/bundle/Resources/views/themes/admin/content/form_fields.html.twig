@@ -129,7 +129,9 @@
                 {{ block('form_help') }}
             {% endwith %}
         {% endif %}
-        {{ block('form_errors') }}
+        <div class="ibexa-form-error">
+            {{ block('form_errors') }}
+        </div>
     </div>
 {% endblock %}
 
