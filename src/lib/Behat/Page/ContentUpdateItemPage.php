@@ -78,9 +78,9 @@ class ContentUpdateItemPage extends Page
             new VisibleCSSLocator('pageTitle', '.ibexa-content-edit-header__column h1'),
             new VisibleCSSLocator('formElement', '[name=ezplatform_content_forms_content_edit]'),
             new VisibleCSSLocator('closeButton', '.ez-content-edit-container__close, .ibexa-content-edit-sidebar__header .ibexa-content-edit-sidebar__back'),  // TODO: Set one selector after redesign
-            new VisibleCSSLocator('fieldLabel', '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ibexa-card > .card-body > div > div > legend, .ez-field-edit--eznoneditable > legend.col-form-label'),
+            new VisibleCSSLocator('fieldLabel', '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ibexa-card > .card-body > div > div > legend, .ibexa-field-edit--eznoneditable > legend.col-form-label'),
             new VisibleCSSLocator('nthField', '.ibexa-card .card-body > div > div > div:nth-of-type(%s)'),
-            new VisibleCSSLocator('noneditableFieldClass', 'ez-field-edit--eznoneditable'),
+            new VisibleCSSLocator('noneditableFieldClass', 'ibexa-field-edit--eznoneditable'),
             new VisibleCSSLocator('fieldOfType', '.ez-field-edit--%s'),
         ];
     }
