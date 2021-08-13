@@ -1,5 +1,5 @@
 (function(global, doc, eZ) {
-    const SELECTOR_FIELD = '.ez-field-edit--eztext';
+    const SELECTOR_FIELD = '.ibexa-field-edit--eztext';
 
     class EzTextValidator extends eZ.BaseFieldValidator {
         /**
@@ -12,7 +12,7 @@
          */
         validateInput(event) {
             const isError = event.target.required && !event.target.value.trim();
-            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
+            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ibexa-field-edit__label').innerHTML;
             const errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
 
             return {
@@ -27,10 +27,10 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-field-edit--eztext textarea',
+                selector: '.ibexa-field-edit--eztext textarea',
                 eventName: 'blur',
                 callback: 'validateInput',
-                errorNodeSelectors: ['.ez-field-edit__label-wrapper'],
+                errorNodeSelectors: ['.ibexa-form-error'],
             },
         ],
     });
