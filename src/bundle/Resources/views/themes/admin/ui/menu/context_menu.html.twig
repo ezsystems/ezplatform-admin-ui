@@ -24,10 +24,12 @@
 
     {%- set default_classes = 'btn ibexa-btn' -%}
 
-    {%  if item.extras.primary|default(false) %}
-        {%- set default_classes = default_classes ~ ' ibexa-btn--primary' -%}
-    {% else %}
-        {%- set default_classes = default_classes ~ ' ibexa-btn--secondary' -%}
+    {% if not item.extras.noDefaultBtnStyling|default(false) %}
+        {% if item.extras.primary|default(false) %}
+            {%- set default_classes = default_classes ~ ' ibexa-btn--primary' -%}
+        {% else %}
+            {%- set default_classes = default_classes ~ ' ibexa-btn--secondary' -%}
+        {% endif %}
     {% endif %}
 
     <li class="ibexa-context-menu__item ibexa-adaptive-items__item">

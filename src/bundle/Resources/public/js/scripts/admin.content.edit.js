@@ -116,7 +116,10 @@
 
         return false;};
     const isAutosaveEnabled = () => {
-        return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
+        // TODO: disabled temporarily
+        console.error('autosave temporarily disabled !!!!')
+        // return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
+        return false;
     };
     const fitSections = () => {
         const contentColumn = doc.querySelector('.ibexa-main-container__content-column');

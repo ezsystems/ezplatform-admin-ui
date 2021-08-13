@@ -307,7 +307,7 @@ $h5-font-size: 14px !default;
 $h6-font-size: 12px !default;
 
 $headings-font-weight: 700;
-$headings-font-family: 'Work Sans SemiBold', sans-serif;
+$headings-font-family: 'Work Sans', sans-serif;
 
 $text-muted: $ibexa-color-dark-400 !default;
 
@@ -423,7 +423,7 @@ $ibexa-btn-focus-box-shadow: 0 0 0 calculateRem(3px) rgba($ibexa-color-primary, 
 $ibexa-btn-focus-box-shadow-info: 0 0 0 calculateRem(3px) rgba($ibexa-color-info, 0.2);
 $ibexa-btn-hover-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-danger, 0.2);
 $ibexa-btn-hover-box-shadow-dark: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-dark, 0.2);
-$ibexa-btn-hover-box-shadow-info: 0 calculateRem(10px) calculateRem(24px) 0 rgba($ibexa-color-info, 0.5);
+$ibexa-btn-hover-box-shadow-info: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-info, 0.5);
 $ibexa-edit-header-box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.15);
 $ibexa-edit-content-box-shadow: calculateRem(4px) calculateRem(35px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.15);
 $ibexa-anchor-btn-hover-box-shadow: 0 0 calculateRem(14px) 0 rgba($ibexa-color-black, 0.05);

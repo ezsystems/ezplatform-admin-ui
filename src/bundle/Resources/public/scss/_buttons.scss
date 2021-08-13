@@ -43,7 +43,7 @@
     &--secondary {
         color: $ibexa-color-primary;
         fill: $ibexa-color-primary;
-        background-color: $ibexa-color-white;
+        background-color: transparent;
         border-color: $ibexa-color-primary;
 
         &:focus {
@@ -53,20 +53,21 @@
         &:hover {
             color: $ibexa-color-dark;
             border-color: $ibexa-color-dark;
+            background-color: rgba($ibexa-color-primary, 0.2);
         }
 
         &:disabled {
             color: $ibexa-color-dark-400;
             fill: $ibexa-color-dark-400;
             border-color: $ibexa-color-dark-200;
-            background-color: $ibexa-color-light-300;
+            background-color: rgba($ibexa-color-light, 0.4);
         }
     }
 
     &--tertiary {
         color: $ibexa-color-dark;
         fill: $ibexa-color-dark;
-        background-color: $ibexa-color-white;
+        background-color: transparent;
         border-color: $ibexa-color-light;
 
         &:hover {
@@ -113,6 +114,7 @@
         &:hover {
             color: $ibexa-color-white;
             fill: $ibexa-color-white;
+            background-color: $ibexa-color-dark;
             box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-dark;
 
             &:focus {
@@ -126,6 +128,22 @@
             background-color: $ibexa-color-light;
             border-color: $ibexa-color-light;
             box-shadow: none;
+        }
+    }
+
+    &--filled-info {
+        color: $ibexa-color-white;
+        fill: $ibexa-color-white;
+        border-color: $ibexa-color-info;
+        background-color: $ibexa-color-info;
+
+        &:hover {
+            color: $ibexa-color-white;
+            box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-info;
+        }
+
+        &:hover:focus {
+            box-shadow: $ibexa-btn-focus-box-shadow-info, $ibexa-btn-hover-box-shadow-info;
         }
     }
 
@@ -159,6 +177,26 @@
 
         &:focus {
             box-shadow: none;
+        }
+    }
+
+    &--selector {
+        color: $ibexa-color-dark;
+        fill: $ibexa-color-dark;
+        padding: calculateRem(12px);
+
+        &.ibexa-btn--selected {
+            background-color: $ibexa-color-info-200;
+            fill: $ibexa-color-info;
+        }
+
+        &:hover,
+        &:focus {
+            border-color: $ibexa-color-info;
+        }
+
+        &:focus {
+            box-shadow: $ibexa-btn-focus-box-shadow-info;
         }
     }
 
