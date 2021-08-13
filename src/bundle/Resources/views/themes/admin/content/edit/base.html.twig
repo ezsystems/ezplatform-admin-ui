@@ -77,7 +77,7 @@
                                                 data-anchor-section-id="#{{ sanitized_key }}"
                                                 class="row ibexa-anchor-navigation-sections__section {{ loop.first ? 'ibexa-anchor-navigation-sections__section--active' }}"
                                             >
-                                                <div class="offset-1 col-6">
+                                                <div class="offset-1 col-8">
                                                     {% for field in group %}
                                                         {% set formField = form.fieldsData[field] %}
                                                         
@@ -101,7 +101,7 @@
                                     </div>
                                 {% else %}
                                     <div class="row">
-                                        <div class="offset-1 col-6 p-0">
+                                        <div class="offset-1 col-8 p-0">
                                             {% for field in form.fieldsData %}
                                                 {% if not field.rendered %}
                                                     {% if field.value is defined %}
