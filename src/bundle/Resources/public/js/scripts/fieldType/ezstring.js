@@ -1,7 +1,6 @@
 (function(global, doc, eZ) {
-    const SELECTOR_FIELD = '.ez-field-edit--ezstring';
-    const SELECTOR_ERROR_NODE = '.ez-data-source';
-    const SELECTOR_SOURCE_INPUT = '.ez-data-source__input';
+    const SELECTOR_FIELD = '.ibexa-field-edit--ezstring';
+    const SELECTOR_SOURCE_INPUT = '.ibexa-data-source__input';
 
     class EzStringValidator extends eZ.BaseFieldValidator {
         /**
@@ -18,7 +17,7 @@
             const isTooShort = event.target.value.length < parseInt(event.target.dataset.min, 10);
             const isTooLong = event.target.value.length > parseInt(event.target.dataset.max, 10);
             const isError = (isEmpty && isRequired) || isTooShort || isTooLong;
-            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
+            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ibexa-field-edit__label').innerHTML;
             const result = { isError };
 
             if (isEmpty) {
@@ -38,10 +37,10 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-field-edit--ezstring input',
+                selector: '.ibexa-field-edit--ezstring input',
                 eventName: 'blur',
                 callback: 'validateInput',
-                errorNodeSelectors: [SELECTOR_ERROR_NODE],
+                errorNodeSelectors: ['.ibexa-form-error'],
                 invalidStateSelectors: [SELECTOR_SOURCE_INPUT],
             },
         ],
