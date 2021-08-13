@@ -30,7 +30,7 @@ class ContentRelationSingle extends FieldTypeComponent
     {
         return [
             new VisibleCSSLocator('selectContent', '.ibexa-relations__cta-btn-label'),
-            new VisibleCSSLocator('buttonRemove', '.ibexa-relations__table-action--remove'),
+            new VisibleCSSLocator('buttonRemove', '.ibexa-relations__table-action--remove-item'),
             new VisibleCSSLocator('relationRow', '.ibexa-relations__list tr'),
             new VisibleCSSLocator('columnHeader', 'tr:not(.ibexa-relations__table-header) th'),
         ];
@@ -46,19 +46,7 @@ class ContentRelationSingle extends FieldTypeComponent
     public function setValue(array $parameters): void
     {
         if (!$this->isRelationEmpty()) {
-            $itemName = explode('/', $parameters['value'])[substr_count($parameters['value'], '/')];
-            if (!$this->table->hasElement(['Name' => $itemName])) {
-                $this->table->getTableRowByIndex(0)->select();
-                $this->getHTMLPage()
-                    ->find(
-                        CSSLocatorBuilder::base($this->parentLocator)
-                            ->withDescendant($this->getLocator('buttonRemove'))
-                            ->build()
-                    )
-                    ->click();
-            } else {
-                return;
-            }
+            $this->getHTMLPage()->find($this->getLocator('buttonRemove'))->click();
         }
 
         $this->getHTMLPage()
