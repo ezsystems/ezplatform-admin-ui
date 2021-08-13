@@ -386,6 +386,12 @@
         color: $ibexa-color-font;
         text-decoration: none;
     }
+
+    &--not-striped {
+        .ibexa-table__row {
+            background-color: $ibexa-color-white;
+        }
+    }
 }
 
 .ibexa-table-header {
