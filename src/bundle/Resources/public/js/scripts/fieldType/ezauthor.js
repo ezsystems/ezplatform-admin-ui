@@ -238,7 +238,7 @@
             },
             {
                 isValueValidator: false,
-                selector: '.ibexa-input--checkbox',
+                selector: '.ibexa-btn--remove-author .ibexa-input--checkbox',
                 eventName: 'change',
                 callback: 'toggleBulkDeleteButtonState',
             },

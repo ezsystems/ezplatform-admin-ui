@@ -83,12 +83,12 @@
     &--date {
         height: calculateRem(48px);
         padding-right: calculateRem(36px);
+    }
 
-        &.ibexa-input--small {
-            height: calculateRem(32px);
-            padding-top: 0;
-            padding-bottom: 0;
-        }
+    &--small {
+        height: calculateRem(32px);
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
     &--textarea {
