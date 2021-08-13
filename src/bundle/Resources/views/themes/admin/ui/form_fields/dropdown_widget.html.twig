@@ -1,20 +1,20 @@
 {%- block choice_widget -%}
-    {% set attr = attr|default({})|merge({
-        'class': (attr.class|default('') ~ ' ibexa-input ibexa-input--select')|trim,
-    }) %}
-    {% set source %}
-        {% if expanded %}
-            {{- block('choice_widget_expanded') -}}
-        {% else %}
+    {% if expanded %}
+        {{- block('choice_widget_expanded') -}}
+    {% else %}
+        {% set attr = attr|default({})|merge({
+            'class': (attr.class|default('') ~ ' ibexa-input ibexa-input--select')|trim,
+        }) %}
+        {% set source %}
             {{- block('choice_widget_collapsed') -}}
-        {% endif %}
-    {% endset %}
+        {% endset %}
 
-    {% include '@ezdesign/ui/component/dropdown.html.twig' with {
-        source: source,
-        choices: choices,
-        value: form.vars.value,
-        multiple: form.vars.multiple,
-        choice_translation_domain: choice_translation_domain|default(false)
-    } %}
+        {% include '@ezdesign/ui/component/dropdown.html.twig' with {
+            source: source,
+            choices: choices,
+            value: form.vars.value,
+            multiple: form.vars.multiple,
+            choice_translation_domain: choice_translation_domain|default(false)
+        } %}
+    {% endif %}
 {%- endblock choice_widget -%}
