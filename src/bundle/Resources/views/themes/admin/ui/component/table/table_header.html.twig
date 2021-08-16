@@ -4,7 +4,7 @@
         title="{{ headline_title|default(headline|default('')) }}"
     >
         {% block headline %}
-            {{ headline }}
+            {{ headline|default('') }}
         {% endblock %}
     </div>
     <div class="ibexa-table-header__actions">
