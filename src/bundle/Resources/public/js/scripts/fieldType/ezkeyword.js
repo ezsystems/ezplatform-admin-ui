@@ -1,7 +1,7 @@
 (function(global, doc, eZ) {
     const SELECTOR_FIELD = '.ez-field-edit--ezkeyword';
     const SELECTOR_TAGGIFY = '.ez-data-source__taggify';
-    const SELECTOR_ERROR_NODE = '.ez-data-source'
+    const SELECTOR_ERROR_NODE = '.ibexa-form-error';
     const CLASS_TAGGIFY_FOCUS = 'ez-data-source__taggify--focused';
 
     class EzKeywordValidator extends eZ.BaseFieldValidator {
