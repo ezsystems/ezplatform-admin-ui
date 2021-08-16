@@ -5,6 +5,7 @@
         {% include '@ezdesign/ui/component/table/table_header.html.twig' with {
             headline,
             actions: actions|default(null),
+            headline_title: headline_title|default(headline|default('')),
         } only %}
     {% endif %}
 {% endblock %}

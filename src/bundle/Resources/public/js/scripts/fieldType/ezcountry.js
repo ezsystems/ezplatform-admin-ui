@@ -2,7 +2,7 @@
     const SELECTOR_FIELD = '.ez-field-edit--ezcountry';
     const SELECTOR_SELECTED = '.ibexa-dropdown__selection-info';
     const EVENT_VALUE_CHANGED = 'valueChanged';
-    const SELECTOR_ERROR_NODE = '.ez-data-source';
+    const SELECTOR_ERROR_NODE = '.ibexa-form-error';
 
     class EzCountryValidator extends eZ.BaseFieldValidator {
         /**

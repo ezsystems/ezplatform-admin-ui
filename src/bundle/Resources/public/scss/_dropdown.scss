@@ -51,6 +51,22 @@
             border-width: calculateRem(8.33px) calculateRem(8px) 0 calculateRem(8px);
             border-color: $ibexa-color-white transparent transparent transparent;
         }
+
+        &.is-invalid {
+            @include input-invalid;
+
+            .ibexa-dropdown__selected-item {
+                color: $ibexa-color-danger;
+            }
+
+            &:before {
+                border-color: $ibexa-color-danger transparent transparent transparent;
+            }
+
+            &:after {
+                border-color: $ibexa-color-danger-100 transparent transparent transparent;
+            }
+        }
     }
 
     &__remove-selection {
@@ -222,7 +238,7 @@
     &:not(&--is-disabled) {
         .ibexa-dropdown {
             &__selection-info {
-                &:hover {
+                &:not(.is-invalid):hover {
                     border-color: $ibexa-color-primary;
 
                     &:before {
