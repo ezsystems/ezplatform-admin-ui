@@ -1,12 +1,12 @@
-.ez-field-edit--ezkeyword {
-    .ez-data-source__taggify {
+.ibexa-field-edit--ezkeyword {
+    .ibexa-data-source__taggify {
         display: flex;
         flex-wrap: wrap;
         height: auto;
         min-height: calculateRem(38px);
         padding: 0 calculateRem(8px) calculateRem(4px) calculateRem(4px);
 
-        &.ez-data-source__taggify--focused {
+        &.ibexa-data-source__taggify--focused {
             border-color: $ibexa-color-primary;
         }
 

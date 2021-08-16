@@ -16,7 +16,7 @@ use PHPUnit\Framework\Assert;
 class Keywords extends FieldTypeComponent
 {
     private $setKeywordsValueScript = <<<SCRIPT
-const SELECTOR_TAGGIFY = '.ez-data-source__taggify';
+const SELECTOR_TAGGIFY = '.ibexa-data-source__taggify';
 const taggifyContainer = document.querySelector(SELECTOR_TAGGIFY);
 const taggify = new window.Taggify({
     containerNode: taggifyContainer,
