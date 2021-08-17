@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function (global, doc, eZ) {
     const OFFSET_ROUNDING_COMPENSATOR = 0.5;
     class AdaptiveItems {
         constructor(config) {
@@ -24,6 +24,12 @@
 
             for (let i = 0; i < this.items.length; i++) {
                 const item = this.items[i];
+                const isForceHide = item.classList.contains('ibexa-adaptive-items__item--force-hide');
+
+                if (isForceHide) {
+                    hiddenItemsWithoutSelector.add(item);
+                    continue;
+                }
 
                 if (item === activeItem) {
                     continue;
