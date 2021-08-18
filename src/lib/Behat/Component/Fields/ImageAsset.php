@@ -82,8 +82,8 @@ class ImageAsset extends Image
         return array_merge(
             parent::specifyLocators(),
             [
-                new VisibleCSSLocator('selectFromRepoButton', '.ez-data-source__btn-select'),
-                new VisibleCSSLocator('previewLoading', '.ez-field-edit--is-preview-loading'),
+                new VisibleCSSLocator('selectFromRepoButton', '.ibexa-data-source__btn-select'),
+                new VisibleCSSLocator('previewLoading', '.ibexa-field-edit--is-preview-loading'),
             ]
         );
     }
