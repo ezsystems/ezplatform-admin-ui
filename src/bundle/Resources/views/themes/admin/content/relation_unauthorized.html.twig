@@ -1,8 +1,7 @@
-<div class="ez-alert ez-alert--info">
-    <svg class="ibexa-icon ibexa-icon--small">
-        <use xlink:href="{{ ibexa_icon_path('lock') }}"></use>
-    </svg>
-    {{ 'content.hidden.message'|trans({
-        '%contentId%' : contentId
-    })|desc('You don\'t have permissions to view this Content item (contentID: %contentId%).') }}
-</div>
+{% include '@ezdesign/ui/component/alert/alert.html.twig' with {
+    type: 'info',
+    title: 'content.hidden.message'|trans({
+            '%contentId%' : contentId
+        })|desc('You don\'t have permissions to view this Content item (contentID: %contentId%).'),
+    icon_path: ibexa_icon_path('lock'),
+} only %}

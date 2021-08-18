@@ -11,12 +11,11 @@
 
 <section class="container mt-4">
     {% if not url_wildcards_enabled %}
-        <div class="ez-alert ez-alert--info mb-4">
-            <svg class="ibexa-icon ibexa-icon--small">
-                <use xlink:href="{{ ibexa_icon_path('warning') }}"></use>
-            </svg>
-            {{ 'url_wildcard.disabled'|trans|desc('URL wildcards are disabled. Contact your Administrator.') }}
-        </div>
+        {% include '@ezdesign/ui/component/alert/alert.html.twig' with {
+            type: 'warning',
+            title: 'url_wildcard.disabled'|trans|desc('URL wildcards are disabled. Contact your Administrator.'),
+            class: 'mb-4',
+        } only %}
     {% endif %}
 
     {% set body_rows = [] %}
