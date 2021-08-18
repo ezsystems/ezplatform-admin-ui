@@ -8,8 +8,7 @@
 } %}
 
 <div
-    class="alert ibexa-alert ibexa-alert--{{ type }}
-        {{ class|default('') -}}"
+    class="alert ibexa-alert ibexa-alert--{{ type }} {{ class|default('') -}}"
     role="alert"
     {{ html.attributes(attr|default({})) }}
 >
@@ -22,7 +21,7 @@
     {% block content %}
         <div
             class="ibexa-alert__content
-                {% if show_subtitle_beside|default(false) %} ibexa-alert__content--subtitle-below{% endif %}"
+                {% if show_subtitle_below|default(false) %} ibexa-alert__content--subtitle-below{% endif %}"
         >
             {% block title %}
                 {% if title is defined %}
@@ -38,11 +37,11 @@
                     </div>
                 {% endif %}
             {% endblock %}
-            {% block custom_wrapper %}
-                <div class="ibexa-alert__custom">
-                    {% block custom %}
-                        {% if custom is defined %}
-                            {{ custom|raw }}
+            {% block extra_content_wrapper %}
+                <div class="ibexa-alert__extra_content">
+                    {% block extra_content %}
+                        {% if extra_content is defined %}
+                            {{ extra_content|raw }}
                         {% endif %}
                     {% endblock %}
                 </div>
