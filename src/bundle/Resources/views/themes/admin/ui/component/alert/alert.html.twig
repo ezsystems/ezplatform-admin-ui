@@ -19,7 +19,7 @@
         </svg>
     {% endblock %}
     {% block content %}
-        <div class="ibexa-alert__content {% if show_subtitle_below|default(false) %} ibexa-alert__content--subtitle-below{% endif %}" >
+        <div class="ibexa-alert__content {% if show_subtitle_below|default(false) %}ibexa-alert__content--subtitle-below{% endif %}" >
             {% block title %}
                 {% if title is defined %}
                     <div class="ibexa-alert__title">
