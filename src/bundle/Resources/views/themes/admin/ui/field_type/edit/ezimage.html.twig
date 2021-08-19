@@ -50,9 +50,9 @@
                 />
             </div>
             <div class="ibexa-field-edit-preview__details">
-                <div class="ibexa-field-edit-preview__file-name">
+                <div class="ibexa-field-edit-preview__file-name-wrapper">
                     <label class="ibexa-label form-label">{{ 'content.field_type.ezimage.file_name.label'|trans|desc('File name') }}</label>
-                    <p>{{ form.parent.vars.value.value.fileName }}</p>
+                    <p class="ibexa-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</p>
                 </div>
                 <div class="ibexa-field-edit-preview__dimensions-wrapper">
                     <label class="ibexa-label form-label">{{ 'content.field_type.ezimage.dimensions.label'|trans|desc('Master dimension') }}</label>
@@ -65,9 +65,9 @@
                         </span>
                     </p>
                 </div>
-                <div class="ibexa-field-edit-preview__file-size">
+                <div class="ibexa-field-edit-preview__file-size-wrapper">
                     <label class="ibexa-label form-label">{{ 'content.field_type.ezimage.file_size.label'|trans|desc('Size') }}</label>
-                    <p>{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</p>
+                    <p class="ibexa-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</p>
                 </div>
             </div>
             <div class="ibexa-field-edit-preview__image-alt">

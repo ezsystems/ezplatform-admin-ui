@@ -31,8 +31,8 @@
         loadDroppedFilePreview(event) {
             const preview = this.fieldContainer.querySelector('.ibexa-field-edit__preview');
             const imageNode = preview.querySelector('.ibexa-field-edit-preview__media');
-            const nameContainer = preview.querySelector('.ibexa-field-edit-preview__file-name p');
-            const sizeContainer = preview.querySelector('.ibexa-field-edit-preview__file-size p');
+            const nameContainer = preview.querySelector('.ibexa-field-edit-preview__file-name');
+            const sizeContainer = preview.querySelector('.ibexa-field-edit-preview__file-size');
             const files = [].slice.call(event.target.files);
             const fileSize = this.formatFileSize(files[0].size);
 

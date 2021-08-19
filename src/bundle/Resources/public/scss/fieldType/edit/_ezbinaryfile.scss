@@ -25,8 +25,8 @@
                 padding: calculateRem(24px);
             }
 
-            &__file-name,
-            &__file-size {
+            &__file-name-wrapper,
+            &__file-size-wrapper {
                 display: inline-block;
                 font-size: calculateRem(16px);
                 margin-right: calculateRem(40px);
@@ -36,11 +36,11 @@
                 }
             }
 
-            &__file-name {
+            &__file-name-wrapper {
                 max-width: calculateRem(500px);
             }
 
-            &__file-size {
+            &__file-size-wrapper {
                 max-width: calculateRem(150px);
             }
         }

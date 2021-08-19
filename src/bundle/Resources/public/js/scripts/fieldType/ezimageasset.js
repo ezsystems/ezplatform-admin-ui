@@ -130,7 +130,7 @@
             const previewImg = preview.querySelector('.ibexa-field-edit-preview__media');
             const previewAlt = preview.querySelector('.ibexa-field-edit-preview__image-alt input');
             const previewActionPreview = preview.querySelector('.ibexa-field-edit-preview__action--preview');
-            const assetNameContainer = preview.querySelector('.ibexa-field-edit-preview__file-name a');
+            const assetNameContainer = preview.querySelector('.ibexa-field-edit-preview__file-name');
             const destinationLocationUrl = Routing.generate('_ez_content_view', {
                 contentId: destinationContentId,
                 locationId: destinationLocationId,

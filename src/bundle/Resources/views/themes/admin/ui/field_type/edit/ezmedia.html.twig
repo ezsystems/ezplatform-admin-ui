@@ -49,13 +49,13 @@
 
 
             <div class="ibexa-field-edit-preview__details">
-                <span class="ibexa-field-edit-preview__file-name">
+                <span class="ibexa-field-edit-preview__file-name-wrapper">
                     <label class="ibexa-label form-label">{{ 'content.field_type.ezmedia.file_name.label'|trans|desc('File name') }}</label>
-                    <p>{{ form.parent.vars.value.value.fileName }}</p>
+                    <p class="ibexa-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</p>
                 </span>
-                <span class="ibexa-field-edit-preview__file-size">
+                <span class="ibexa-field-edit-preview__file-size-wrapper">
                     <label class="ibexa-label form-label">{{ 'content.field_type.ezmedia.file_size.label'|trans|desc('Size') }}</label>
-                    <p>{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</p>
+                    <p class="ibexa-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</p>
                 </span>
                 <div class="ibexa-field-edit-preview__settings">
                     <div class="ibexa-field-edit-preview__dimensions">

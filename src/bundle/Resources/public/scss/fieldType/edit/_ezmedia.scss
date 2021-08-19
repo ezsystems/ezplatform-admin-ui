@@ -5,8 +5,8 @@
             flex-wrap: wrap;
         }
 
-        &__file-name,
-        &__file-size,
+        &__file-name-wrapper,
+        &__file-size-wrapper,
         &__control,
         &__settings {
             flex-basis: 50%;
@@ -50,9 +50,6 @@
                     padding-right: calculateRem(12px);
                 }
             }
-        }
-
-        &__settings {
         }
     }
 
