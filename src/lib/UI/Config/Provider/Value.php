@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
+namespace Ibexa\AdminUi\UI\Config\Provider;
 
-use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 /**
  * Simple value provider that passes on the value it is given in the constructor.
@@ -37,3 +37,5 @@ class Value implements ProviderInterface
         return $this->config;
     }
 }
+
+class_alias(Value::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Provider\Value');

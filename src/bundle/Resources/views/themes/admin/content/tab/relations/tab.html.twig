@@ -1,20 +1,15 @@
 {% trans_default_domain 'locationview' %}
 
 <section>
-    {% include '@ezdesign/ui/table_header.html.twig' with {
-        header_text: 'tab.relations.related_content'|trans({
-            '%contentName%' : ez_content_name(content)
-        })|desc('Related content (Content items used by %contentName%)') } %}
-    {{ include('@ezdesign/content/tab/relations/table_relations.html.twig', {'relations': relations}) }}
+    {{ include('@ezdesign/content/tab/relations/table_relations.html.twig', {
+        relations: relations,
+        content: content,
+    }) }}
 
     {% if reverse_relation_pager is defined %}
-        {% include '@ezdesign/ui/table_header.html.twig' with {
-            header_text: 'tab.relations.reverse_relations'|trans({
-                '%contentName%' : ez_content_name(content)
-            })|desc('Reverse relations (Content items using %contentName%)')
-        } %}
         {{ include('@ezdesign/content/tab/relations/table_relations_reverse.html.twig', {
-            'relations': reverse_relation_pager.currentPageResults
+            relations: reverse_relation_pager.currentPageResults,
+            content: content,
         }) }}
         {% if reverse_relation_pager.haveToPaginate %}
             {% include '@ezdesign/ui/pagination.html.twig' with {
@@ -22,7 +17,7 @@
                 'paginaton_params': {
                     'routeName': reverse_relation_pagination_params.route_name,
                     'routeParams': reverse_relation_pagination_params.route_params|merge({
-                        '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\RelationsTab::URI_FRAGMENT'),
+                        '_fragment': constant('Ibexa\\AdminUi\\Tab\\LocationView\\RelationsTab::URI_FRAGMENT'),
                     }),
                     'pageParameter': '[page][reverse_relation]'
                 }

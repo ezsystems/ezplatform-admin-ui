@@ -6,8 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Action;
+namespace Ibexa\AdminUi\UI\Action;
 
+use Ibexa\Contracts\AdminUi\UI\Action\FormUiActionMapperInterface;
 use Symfony\Component\Form\FormInterface;
 use Traversable;
 
@@ -84,3 +85,5 @@ class FormUiActionMappingDispatcher
         return $this->defaultMapper->map($form);
     }
 }
+
+class_alias(FormUiActionMappingDispatcher::class, 'EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMappingDispatcher');

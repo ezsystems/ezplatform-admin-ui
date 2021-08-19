@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace Ibexa\Bundle\AdminUi\Templating\Twig;
 
 use eZ\Publish\API\Repository\LocationService;
 use Twig\Extension\AbstractExtension;
@@ -49,3 +49,5 @@ class PathStringExtension extends AbstractExtension
         return $this->locationService->loadLocationList($locationIds);
     }
 }
+
+class_alias(PathStringExtension::class, 'EzSystems\EzPlatformAdminUiBundle\Templating\Twig\PathStringExtension');

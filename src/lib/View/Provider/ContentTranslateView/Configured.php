@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\View\Provider\ContentTranslateView;
+namespace Ibexa\AdminUi\View\Provider\ContentTranslateView;
 
 use eZ\Publish\Core\MVC\Symfony\Matcher\MatcherFactoryInterface;
 use eZ\Publish\Core\MVC\Symfony\View\View;
 use eZ\Publish\Core\MVC\Symfony\View\ViewProvider;
-use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
+use Ibexa\AdminUi\View\ContentTranslateView;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
 /**
@@ -72,3 +72,5 @@ class Configured implements ViewProvider
         return $view;
     }
 }
+
+class_alias(Configured::class, 'EzSystems\EzPlatformAdminUi\View\Provider\ContentTranslateView\Configured');

@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation;
+namespace Ibexa\AdminUi\Form\Type\ContentType\Translation;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
+use Ibexa\AdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
+use Ibexa\AdminUi\Form\Type\Content\ContentTypeType;
+use Ibexa\AdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -73,3 +73,5 @@ class TranslationRemoveType extends AbstractType
         ]);
     }
 }
+
+class_alias(TranslationRemoveType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation\TranslationRemoveType');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
@@ -15,19 +15,19 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeCopyData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\Tab\ContentType\TranslationsTab;
-use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper;
+use Ibexa\AdminUi\Form\Data\ContentType\ContentTypeCopyData;
+use Ibexa\AdminUi\Form\Data\ContentType\ContentTypeEditData;
+use Ibexa\AdminUi\Form\Data\ContentType\ContentTypesDeleteData;
+use Ibexa\AdminUi\Form\Data\ContentType\Translation\TranslationAddData;
+use Ibexa\AdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
+use Ibexa\AdminUi\Form\Factory\ContentTypeFormFactory;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\AdminUi\Tab\ContentType\TranslationsTab;
+use Ibexa\AdminUi\Form\Data\FormMapper\ContentTypeDraftMapper;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType;
+use Ibexa\AdminUi\Form\Type\ContentType\ContentTypeUpdateType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use eZ\Publish\API\Repository\Exceptions\BadStateException;
@@ -42,6 +42,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentTypeController extends Controller
 {
@@ -780,3 +781,5 @@ class ContentTypeController extends Controller
         }
     }
 }
+
+class_alias(ContentTypeController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController');

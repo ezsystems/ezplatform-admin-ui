@@ -4,20 +4,20 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguagesDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\AdminUi\Form\Data\Language\LanguageCreateData;
+use Ibexa\AdminUi\Form\Data\Language\LanguageDeleteData;
+use Ibexa\AdminUi\Form\Data\Language\LanguagesDeleteData;
+use Ibexa\AdminUi\Form\Data\Language\LanguageUpdateData;
+use Ibexa\AdminUi\Form\DataMapper\LanguageCreateMapper;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -28,6 +28,7 @@ use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class LanguageController extends Controller
 {
@@ -281,3 +282,5 @@ class LanguageController extends Controller
         return array_combine($languagesNumbers, array_fill_keys($languagesNumbers, false));
     }
 }
+
+class_alias(LanguageController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\LanguageController');

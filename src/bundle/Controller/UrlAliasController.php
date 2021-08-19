@@ -6,16 +6,17 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\URLAliasService;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Tab\LocationView\UrlsTab;
+use Ibexa\AdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
+use Ibexa\AdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\AdminUi\Tab\LocationView\UrlsTab;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class UrlAliasController extends Controller
 {
@@ -116,3 +117,5 @@ class UrlAliasController extends Controller
         return $this->redirectToRoute('ezplatform.dashboard');
     }
 }
+
+class_alias(UrlAliasController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\UrlAliasController');

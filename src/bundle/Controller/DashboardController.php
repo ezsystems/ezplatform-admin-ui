@@ -6,12 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\Data\Content\Draft\ContentEditData;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
 use eZ\Publish\API\Repository\PermissionResolver;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class DashboardController extends Controller
 {
@@ -50,3 +51,5 @@ class DashboardController extends Controller
         ]);
     }
 }
+
+class_alias(DashboardController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\DashboardController');

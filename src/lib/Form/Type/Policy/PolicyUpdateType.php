@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
+namespace Ibexa\AdminUi\Form\Type\Policy;
 
 use eZ\Publish\API\Repository\RoleService;
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType;
+use Ibexa\AdminUi\Form\Data\Policy\PolicyUpdateData;
+use Ibexa\AdminUi\Form\Type\Role\LimitationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -117,3 +117,5 @@ class PolicyUpdateType extends AbstractType
         return $limitations;
     }
 }
+
+class_alias(PolicyUpdateType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType');

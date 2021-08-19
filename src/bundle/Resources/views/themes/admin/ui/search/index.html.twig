@@ -2,85 +2,121 @@
 
 {% trans_default_domain 'search' %}
 
-{% block header %}{% endblock %}
-
 {% block body_class %}ez-search-view{% endblock %}
 
 {% block title %}{{ 'search'|trans|desc('Search') }}{% endblock %}
 
+{% block header %}
+    {% include '@ezdesign/ui/page_title.html.twig' with {
+        title: 'search'|trans|desc('Search'),
+    } %}
+{% endblock %}
+
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
         <div class="container ez-content-container">
-            <div class="ez-header mt-5">
-                <div class="container">
-                    {% include '@ezdesign/ui/page_title.html.twig' with {
-                        title: 'search'|trans|desc('Search'),
-                        icon_name: 'search'
-                    } %}
-                </div>
-            </div>
             <section class="container ez-container">
                 {% include '@ezdesign/ui/search/form.html.twig' with { form: form } %}
             </section>
 
             {% if results is defined %}
                 <section class="container ez-container mt-4">
-                    <div class="ez-table-header">
-                        <div class="ez-table-header__headline">{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</div>
-                    </div>
+                    {% set body_rows = [] %}
+                    {% for result in results %}
+                        {% set body_row_cols = [] %}
+                        {% set col_raw %}
+                            <svg class="ibexa-icon ibexa-icon--small">
+                                <use xlink:href="{{ ez_content_type_icon(result.content_type.identifier) }}"></use>
+                            </svg>
+                        {% endset %}
+                        {% set body_row_cols = body_row_cols|merge([{
+                            has_icon: true,
+                            content: col_raw,
+                        }]) %}
 
-                    {% if results is empty %}
-                        <div class="mx-4">
-                            <table class="table table-hover">
-                                <tr>
-                                    <td colspan="4">
-                                        <span>{{ 'search.no_result'|trans({'%query%': form.vars.value.query})|desc('No results found for "%query%".') }}</span>
-                                    </td>
-                                </tr>
-                            </table>
-                            <h6>{{ 'search.tips.headline'|trans|desc('Some helpful search tips:') }}</h6>
-                            <ul>
-                                <li>{{ 'search.tips.check_spelling'|trans|desc('Check the spelling of keywords.') }}</li>
-                                <li>{{ 'search.tips.different_keywords'|trans|desc('Try different keywords.') }}</li>
-                                <li>{{ 'search.tips.more_general_keywords'|trans|desc('Try more general keywords.') }}</li>
-                                <li>{{ 'search.tips.fewer_keywords'|trans|desc('Try fewer keywords. Reducing keywords results in more matches.') }}</li>
-                            </ul>
-                        </div>
-                    {% else %}
-                        <div class="ez-scrollable-table-wrapper">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
-                                    <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'search.name'|trans|desc('Name') }}</th>
-                                    <th class="ez-table__header-cell">{{ 'search.modified'|trans|desc('Modified') }}</th>
-                                    <th class="ez-table__header-cell">{{ 'search.type'|trans|desc('Content Type') }}</th>
-                                    {% if form.search_language.vars.choices|length > 1 %}
-                                        <th class="ez-table__header-cell">{{ 'search.translations'|trans|desc('Translations') }}</th>
-                                    {% endif %}
-                                    <th class="ez-table__header-cell"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for row in results %}
-                                    {% include '@ezdesign/ui/search/list_item.html.twig' with { row: row } %}
+                        {% set col_raw %}
+                            {% if result.mainLocationId is not null %}
+                                <a
+                                    href="{{ path('_ez_content_view', {
+                                        'contentId': result.contentId,
+                                        'locationId': result.resolvedLocation.id,
+                                        'languageCode': result.translation_language_code,
+                                    }) }}"
+                                >
+                                    {{ result.name }}
+                                </a>
+                            {% else %}
+                                {{ result.name }}
+                            {% endif %}
+                        {% endset %}
+                        {% set body_row_cols = body_row_cols|merge([{
+                            content: col_raw,
+                        }]) %}
+
+                        {% set body_row_cols = body_row_cols|merge([
+                            { content: result.modified|ez_full_datetime },
+                            { content: result.type },
+                        ]) %}
+
+                        {% if form.search_language.vars.choices|length > 1 %}
+                            {% set col_raw %}
+                                {% for language in result.available_translations %}
+                                    {{ language.name }}{% if not loop.last %}, {% endif %}
                                 {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                            {% endset %}
 
-                        {% if pager.haveToPaginate %}
-                            {% include '@ezdesign/ui/pagination.html.twig' with {
-                                'pager': pager,
-                                'paginaton_params' : {
-                                    'pageParameter': '[search][page]'
-                                }
-                            } %}
+                            {% set body_row_cols = body_row_cols|merge([{
+                                has_icon: true,
+                                content: col_raw,
+                            }]) %}
                         {% endif %}
+
+                        {% set col_raw %}
+                            {% if result.mainLocationId is not null %}
+                                {% include '@ezdesign/ui/edit_translation_button.html.twig' with {
+                                    'contentId': result.contentId,
+                                    'translations': result.available_enabled_translations,
+                                    'top_offset': 100
+                                }%}
+                            {% endif %}
+                        {% endset %}
+                        {% set body_row_cols = body_row_cols|merge([{
+                            has_action_btns: true,
+                            content: col_raw,
+                        }]) %}
+
+                        {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+                    {% endfor %}
+
+                    {% set head_cols = [
+                        { has_icon: true },
+                        { content: 'search.name'|trans|desc('Name') },
+                        { content: 'search.modified'|trans|desc('Modified') },
+                        { content: 'search.type'|trans|desc('Content Type') },
+                    ] %}
+                    {% if form.search_language.vars.choices|length > 1 %}
+                        {% set head_cols = head_cols|merge([{
+                            content: 'search.translations'|trans|desc('Translations'),
+                        }]) %}
+                    {% endif %}
+                    {% set head_cols = head_cols|merge([{ }]) %}
+
+                    {% include '@ezdesign/ui/component/table/table.html.twig' with {
+                        headline: 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)'),
+                        head_cols: head_cols,
+                        body_rows: body_rows,
+                    } %}
+
+                    {% if pager.haveToPaginate %}
+                        {% include '@ezdesign/ui/pagination.html.twig' with {
+                            'pager': pager,
+                            'paginaton_params' : {
+                                'pageParameter': '[search][page]'
+                            }
+                        } %}
                     {% endif %}
 
                     {% form_theme form_edit '@ezdesign/ui/form/flat_widgets.html.twig' %}
-
                     {{ form_start(form_edit, {
                         'action': path('ezplatform.content.edit'),
                         'attr': { 'class': 'ez-edit-content-form'}

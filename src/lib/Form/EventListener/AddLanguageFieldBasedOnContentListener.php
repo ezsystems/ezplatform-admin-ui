@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\EventListener;
+namespace Ibexa\AdminUi\Form\EventListener;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
+use Ibexa\AdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormEvent;
@@ -93,3 +93,5 @@ class AddLanguageFieldBasedOnContentListener
         );
     }
 }
+
+class_alias(AddLanguageFieldBasedOnContentListener::class, 'EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener');

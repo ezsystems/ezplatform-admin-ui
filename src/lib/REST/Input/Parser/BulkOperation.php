@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Input\Parser;
+namespace Ibexa\AdminUi\REST\Input\Parser;
 
 use EzSystems\EzPlatformRest\Input\BaseParser;
 use EzSystems\EzPlatformRest\Input\ParsingDispatcher;
 use EzSystems\EzPlatformRest\Exceptions;
-use EzSystems\EzPlatformAdminUi\REST\Value\BulkOperation as BulkOperationValue;
+use Ibexa\AdminUi\REST\Value\BulkOperation as BulkOperationValue;
 
 class BulkOperation extends BaseParser
 {
@@ -43,3 +43,5 @@ class BulkOperation extends BaseParser
         return new BulkOperationValue($operations);
     }
 }
+
+class_alias(BulkOperation::class, 'EzSystems\EzPlatformAdminUi\REST\Input\Parser\BulkOperation');

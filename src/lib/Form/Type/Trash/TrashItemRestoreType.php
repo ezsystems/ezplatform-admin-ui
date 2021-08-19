@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Trash;
+namespace Ibexa\AdminUi\Form\Type\Trash;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
-use EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
+use Ibexa\AdminUi\Form\Data\Trash\TrashItemRestoreData;
+use Ibexa\AdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -54,3 +54,5 @@ class TrashItemRestoreType extends AbstractType
         ]);
     }
 }
+
+class_alias(TrashItemRestoreType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType');

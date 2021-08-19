@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content;
+namespace Ibexa\AdminUi\Form\Type\Extension\Content;
 
 use EzSystems\EzPlatformContentForms\Form\Type\Content\ContentEditType;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -49,3 +49,5 @@ class ContentEditTypeExtension extends AbstractTypeExtension
         return [ContentEditType::class];
     }
 }
+
+class_alias(ContentEditTypeExtension::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension');

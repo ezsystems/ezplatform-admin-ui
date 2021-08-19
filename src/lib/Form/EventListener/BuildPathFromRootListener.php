@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\EventListener;
+namespace Ibexa\AdminUi\Form\EventListener;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\URLAliasService;
@@ -70,3 +70,5 @@ class BuildPathFromRootListener
         return $urlAlias->path . '/' . $path;
     }
 }
+
+class_alias(BuildPathFromRootListener::class, 'EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener');

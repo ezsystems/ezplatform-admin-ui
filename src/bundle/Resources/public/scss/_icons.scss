@@ -54,13 +54,6 @@
     }
 }
 
-.ez-side-menu,
-.ez-context-menu {
-    .ibexa-icon {
-        fill: $ibexa-white;
-    }
-}
-
 .ibexa-btn--extra-actions {
     .ibexa-icon {
         pointer-events: none;
@@ -92,23 +85,6 @@
         .ibexa-icon {
             fill: $ibexa-white;
         }
-    }
-}
-
-.ez-field-edit--ezdate,
-.ez-field-edit--ezdatetime,
-.ez-field-edit--eztime {
-    .ez-data-source__btn--clear-input {
-        .ibexa-icon {
-            width: calculateRem(16px);
-            height: calculateRem(16px);
-        }
-    }
-}
-
-.ez-alert--info {
-    .ibexa-icon--warning {
-        fill: $ibexa-color-primary;
     }
 }
 

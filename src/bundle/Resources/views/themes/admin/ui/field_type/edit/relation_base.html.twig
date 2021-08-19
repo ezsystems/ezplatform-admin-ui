@@ -6,94 +6,247 @@
     {% set has_relations = relations|length > 0 %}
     {% set allowed_content_types = form.parent.vars.value.fieldDefinition.fieldSettings.selectionContentTypes %}
     {% set helper = helper|default('') %}
-    <div class="ez-relations__wrapper" {% if not has_relations %}hidden="true"{% endif %}>
-        <table class="table ez-relations__table">
-            <thead>
-            <tr class="ez-relations__table-header">
-                <th colspan="5">
-                    {{ 'ezobjectrelationlist.relations'|trans|desc('Relations') }}:
-                    {% if limit != 0 %}
-                        <small>{{ 'ezobjectrelationlist.limit'|trans({'%limit%': limit})|desc('(max. %limit%)') }}</small>
-                    {% endif %}
-                </th>
-                <th class="ez-relations__table-actions">
-                    <button
-                        {% if limit == 1 %}
-                            data-udw-config="{{ ez_udw_config('single', {
-                                'type': 'object_relation',
-                                'starting_location_id' : default_location,
-                                'allowed_content_types': allowed_content_types
-                            }) }}"
-                        {% else %}
-                            data-udw-config="{{ ez_udw_config('multiple', {
-                                'type': 'object_relation',
-                                'starting_location_id' : default_location,
-                                'allowed_content_types': allowed_content_types
-                            }) }}"
-                        {% endif %}
-                        type="button"
-                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ez-relations__table-action--create ibexa-btn"
-                        title="{{ 'ezobjectrelationlist.add_relation'|trans|desc('Add relations') }}"
-                        disabled>
-                        <svg class="ibexa-icon ibexa-icon--small">
-                            <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
-                        </svg>
-                    </button>
-                    <button 
-                        type="button" 
-                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ez-relations__table-action--remove ibexa-btn"
-                        title="{{ 'ezobjectrelationlist.delete_selected_relations'|trans|desc('Delete selected relation(s)') }}" 
-                        disabled
-                    >
-                        <svg class="ibexa-icon ibexa-icon--small">
-                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
-                        </svg>
-                    </button>
-                </th>
-            </tr>
-            <tr>
-                <th></th>
-                <th>{{ 'ezobjectrelationlist.table.row.name'|trans|desc('Name') }}</th>
-                <th>{{ 'ezobjectrelationlist.table.row.content_type'|trans|desc('Content Type') }}</th>
-                <th>{{ 'ezobjectrelationlist.table.row.created'|trans|desc('Created') }}</th>
-                <th>{{ 'ezobjectrelationlist.table.row.order'|trans|desc('Order') }}</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody class="ez-relations__list" data-limit="{{ limit }}" data-default-location="{{ default_location }}" data-allowed-content-types="{{ allowed_content_type_identifiers|join(',') }}">
-            {% for relation in relations %}
-                {% if relation.contentInfo is not null and relation.contentType is not null %}
-                    <tr class="ez-relations__item" data-content-id="{{ relation.contentInfo.id }}">
-                        <td><input type="checkbox" value="{{ relation.contentInfo.id }}" /></td>
-                        <td class="ez-relations__item-name">{{ ez_content_name(relation.contentInfo) }}</td>
-                        <td>{{ relation.contentType.name }}</td>
-                        <td>{{ relation.contentInfo.publishedDate|ez_short_datetime }}</td>
-                        <td colspan="2"><input class="ez-relations__order-input" type="number" value="{{ loop.index }}" /></td>
-                    </tr>
-                {% elseif relation.unauthorized %}
-                    <tr class="ez-relations__item" data-content-id="{{ relation.contentId }}">
-                        {% include '@ezdesign/content/relation_unauthorized.html.twig' with {
-                            contentId: relation.contentId
-                        } %}
-                        <td class="ez-relations__hidden-column">
-                            <input class="ez-relations__order-input" type="number" value="{{ loop.index }}" />
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <div class="ez-relations__cta" {% if has_relations %}hidden="true"{% endif %}>
-        <p class="ez-relations__cta-text">
-        {% if limit != 1 %}
-            {{ 'ezobjectrelationlist.cta.limit.multi'|trans|desc('Set up multiple Relations with one or several Content items') }}
-        {% else %}
-            {{ 'ezobjectrelationlist.cta.limit.single'|trans|desc('Set up a Relation with one Content item') }}
-        {% endif %}
-        </p>
+
+    {% set col_raw_checkbox_template %}
+        <input type="checkbox" class="ibexa-input ibexa-input--checkbox" value="{{ '{{ content_id }}' }}">
+    {% endset %}
+
+    {% set col_raw_order_input_template %}
+        <input class="ibexa-relations__order-input ibexa-input ibexa-input--small form-control" type="number" value="{{ '{{ order }}' }}">
+    {% endset %}
+
+    {% set col_raw_actions %}
         <button
-            title="{{ 'ezobjectrelationlist.cta.select'|trans|desc('Select content') }}"
+            type="button"
+            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-relations__table-action--remove-item ibexa-btn"
+            title="{{ 'ezobjectrelationlist.delete_selected_relations'|trans|desc('Delete') }}"
+        >
+            <svg class="ibexa-icon ibexa-icon--small">
+                <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
+            </svg>
+        </button>
+    {% endset %}
+
+    {% set body_row_cols_template = [] %}
+
+    {% if limit != 1 %}
+        {% set body_row_cols_template = body_row_cols_template|merge([
+            {
+                has_checkbox: true,
+                content: col_raw_checkbox_template|raw,
+            },
+        ]) %}
+    {% endif %}
+
+    {% set body_row_cols_template = body_row_cols_template|merge([
+        {
+            content: '{{ content_name }}',
+            attr: { class: 'ibexa-relations__item-name' },
+        },
+        { content: '{{ content_type_name }}' },
+        { content: '{{ published_date }}' },
+    ]) %}
+
+    {% if limit != 1 %}
+        {% set body_row_cols_template = body_row_cols_template|merge([
+            {
+                content: col_raw_order_input_template|raw,
+                attr: { class: 'ibexa-relations__order-wrapper' }
+            },
+        ]) %}
+    {% endif %}
+
+    {% set body_row_cols_template = body_row_cols_template|merge([
+        {
+            content: col_raw_actions,
+            has_icon: true,
+        },
+    ]) %}
+
+    {% set row_template %}
+        {{ include('@ezdesign/ui/component/table/table_body_row.html.twig', {
+            body_row_cols: body_row_cols_template,
+            class: 'ibexa-relations__item',
+        }) }}
+    {% endset %}
+    <div
+        class="ibexa-relations__wrapper"
+        data-row-template="{{ row_template|e('html_attr') }}"
+    >
+        {% set body_rows = [] %}
+        {% for relation in relations %}
+            {% set body_row_cols = [] %}
+            {% if relation.contentInfo is not null and relation.contentType is not null %}
+                {% set col_raw_checkbox %}
+                    <input
+                        type="checkbox"
+                        class="ibexa-input ibexa-input--checkbox"
+                        value="{{ relation.contentInfo.id }}"
+                    >
+                {% endset %}
+
+                {% set col_raw_order_input %}
+                    <input
+                        class="ibexa-relations__order-input ibexa-input ibexa-input--small form-control"
+                        type="number"
+                        value="{{ loop.index }}"
+                    >
+                {% endset %}
+
+                {% if limit != 1 %}
+                    {% set body_row_cols = body_row_cols|merge([
+                        {
+                            has_checkbox: true,
+                            content: col_raw_checkbox,
+                        },
+                    ]) %}
+                {% endif %}
+
+                {% set body_row_cols = body_row_cols|merge([
+                    {
+                        content: ez_content_name(relation.contentInfo),
+                        attr: { class: 'ibexa-relations__item-name' },
+                    },
+                    { content: relation.contentType.name },
+                    { content: relation.contentInfo.publishedDate|ez_short_datetime },
+                ]) %}
+
+                {% if limit != 1 %}
+                    {% set body_row_cols = body_row_cols|merge([
+                        {
+                            content: col_raw_order_input,
+                            attr: { class: 'ibexa-relations__order-wrapper' }
+                        }
+                    ]) %}
+                {% endif %}
+
+                {% set body_row_cols = body_row_cols|merge([
+                    {
+                        content: col_raw_actions,
+                        has_icon: true,
+                    },
+                ]) %}
+
+                {% set body_rows = body_rows|merge([{
+                    cols: body_row_cols,
+                    class: 'ibexa-relations__item',
+                    attr: { 'data-content-id': relation.contentInfo.id },
+                }]) %}
+            {% elseif relation.unauthorized %}
+                {% set col_raw_unauthorised %}
+                    {% include '@ezdesign/content/relation_unauthorized.html.twig' with {
+                        contentId: relation.contentId
+                    } %}
+                {% endset %}
+
+                {% set col_raw_order_input %}
+                    <input
+                        class="ibexa-relations__order-input ibexa-input ibexa-input--small form-control"
+                        type="number"
+                        value="{{ loop.index }}"
+                    >
+                {% endset %}
+
+                {% set body_rows = body_rows|merge([{
+                    cols: [
+                        { content: col_raw_unauthorised, attr: { colspan: 5 } },
+                        { content: col_raw_order_input, attr: { class: 'ibexa-relations__order-wrapper' } }
+                    ],
+                    class: 'ibexa-relations__item',
+                    attr: { 'data-content-id': relation.contentId },
+                }]) %}
+            {% endif %}
+        {% endfor %}
+
+        {% set head_cols = [] %}
+
+        {% if limit != 1 %}
+            {% set head_cols = head_cols|merge([
+                { has_checkbox: true },
+            ]) %}
+        {% endif %}
+
+        {% set head_cols = head_cols|merge([
+            { content: 'ezobjectrelationlist.table.row.name'|trans|desc('Name') },
+            { content: 'ezobjectrelationlist.table.row.content_type'|trans|desc('Content Type') },
+            { content: 'ezobjectrelationlist.table.row.created'|trans|desc('Created') },
+        ]) %}
+
+        {% if limit != 1 %}
+            {% set head_cols = head_cols|merge([
+                { content: 'ezobjectrelationlist.table.row.order'|trans|desc('Order') },
+            ]) %}
+        {% endif %}
+
+        {% set head_cols = head_cols|merge([{ }]) %}
+
+        {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+            head_cols: head_cols,
+            attr: {
+                hidden: not has_relations,
+            },
+            class: 'ibexa-table--not-striped',
+            body_rows: body_rows,
+            table_body_class: 'ibexa-relations__list',
+            table_body_attr: {
+                'data-limit': limit,
+                'data-default-location': default_location,
+                'data-allowed-content-types': allowed_content_type_identifiers|join(','),
+            },
+        } %}
+            {% block tbody_empty %}{% endblock %}
+            {% block header %}
+                {% embed '@ezdesign/ui/component/table/table_header.html.twig' %}
+                    {% block headline %}
+                        <div class="ibexa-relations__info-wrapper">
+                            <p class="ibexa-relations__info-text">
+                                {% if limit != 1 %}
+                                    {{ 'ezobjectrelationlist.cta.limit.multi'|trans|desc('Set up a Relation with one or several Items') }}
+                                {% else %}
+                                    {{ 'ezobjectrelationlist.cta.limit.single'|trans|desc('Set up a Relation with one Item') }}
+                                {% endif %}
+                            </p>
+                            {% if limit != 0 %}
+                                <p class="ibexa-relations__info-sub-text">
+                                    {{ 'ezobjectrelationlist.cta.limit.sub_text'|trans({'%limit%': limit})|desc('Relations max. %limit%') }}
+                                </p>
+                            {% endif %}
+                        </div>
+                    {% endblock %}
+                    {% block actions %}
+                        {% if limit != 1 %}
+                            <button
+                                data-udw-config="{{ ez_udw_config('multiple', {
+                                    'type': 'object_relation',
+                                    'starting_location_id' : default_location,
+                                    'allowed_content_types': allowed_content_types
+                                }) }}"
+                                type="button"
+                                class="btn ibexa-btn ibexa-btn--secondary ibexa-btn--small ibexa-relations__table-action--create ibexa-btn"
+                                disabled
+                                {% if not has_relations %}hidden="true"{% endif %}
+                            >
+                                <span class="ibexa-btn__label">{{ 'ezobjectrelationlist.cta.select'|trans|desc('Select Item') }}</span>
+                            </button>
+                            <button
+                                type="button"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-relations__table-action--remove ibexa-btn"
+                                disabled
+                                {% if not has_relations %}hidden="true"{% endif %}
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small">
+                                    <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
+                                </svg>
+                                <span class="ibexa-btn__label">{{ 'ezobjectrelationlist.delete_selected_relations'|trans|desc('Delete') }}</span>
+                            </button>
+                        {% endif %}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
+    </div>
+    <div class="ibexa-relations__cta" {% if has_relations %}hidden="true"{% endif %}>
+        <button
             {% if limit == 1 %}
                 data-udw-config="{{ ez_udw_config('single', {
                     'type': 'object_relation',
@@ -108,16 +261,16 @@
                 }) }}"
             {% endif %}
             data-limit="{{limit}}"
-            class="ez-relations__cta-btn btn ibexa-btn ibexa-btn--secondary"
+            class="ibexa-relations__cta-btn btn ibexa-btn ibexa-btn--secondary"
             type="button"
         >
-            <span class="ez-relations__cta-btn-label">
-                {{ 'ezobjectrelationlist.cta.select'|trans|desc('Select content') }}
+            <span class="ibexa-relations__cta-btn-label">
+                {{ 'ezobjectrelationlist.cta.select'|trans|desc('Select Item') }}
             </span>
         </button>
-        <p class="ez-relations__helper-text">{{ helper }}</p>
+        <p class="ibexa-relations__helper-text">{{ helper }}</p>
     </div>
     {% set attr = attr|merge({'hidden': 'hidden'}) %}
     {{ block('form_widget') }}
-    
+
 {% endblock %}

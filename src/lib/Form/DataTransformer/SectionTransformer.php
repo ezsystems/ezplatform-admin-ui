@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\Values\Content\Section as APISection;
@@ -57,3 +57,5 @@ final class SectionTransformer implements DataTransformerInterface
         }
     }
 }
+
+class_alias(SectionTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\SectionTransformer');

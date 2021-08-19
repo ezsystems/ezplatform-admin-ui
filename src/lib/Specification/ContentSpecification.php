@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Specification;
+namespace Ibexa\AdminUi\Specification;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 
@@ -19,3 +19,5 @@ interface ContentSpecification
      */
     public function isSatisfiedBy(Content $content): bool;
 }
+
+class_alias(ContentSpecification::class, 'EzSystems\EzPlatformAdminUi\Specification\ContentSpecification');

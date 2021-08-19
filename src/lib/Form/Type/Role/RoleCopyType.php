@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
+namespace Ibexa\AdminUi\Form\Type\Role;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCopyData;
+use Ibexa\AdminUi\Form\Data\Role\RoleCopyData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -40,3 +40,5 @@ class RoleCopyType extends AbstractType
         ]);
     }
 }
+
+class_alias(RoleCopyType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCopyType');

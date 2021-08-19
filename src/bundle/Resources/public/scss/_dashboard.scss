@@ -18,4 +18,8 @@
     &__version {
         margin: 0 calculateRem(24px) 0 0;
     }
+
+    .table:not(.ibexa-table__draft-conflict) {
+        margin-bottom: 0;
+    }
 }

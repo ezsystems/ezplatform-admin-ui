@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
+namespace Ibexa\AdminUi\Form\Type\Language;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
@@ -42,3 +42,5 @@ abstract class AbstractLanguageChoiceType extends AbstractType
             ]);
     }
 }
+
+class_alias(AbstractLanguageChoiceType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Language\AbstractLanguageChoiceType');

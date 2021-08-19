@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
@@ -80,3 +80,5 @@ class RoleTransformer implements DataTransformerInterface
         }
     }
 }
+
+class_alias(RoleTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\RoleTransformer');

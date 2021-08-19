@@ -10,12 +10,11 @@
     ]} %}
 {%- endblock -%}
 
-{%- block page_title -%}
+{% block header %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: url.url|u.truncate(60),
-        icon_name: 'link'
     } %}
-{%- endblock -%}
+{% endblock %}
 
 {% block title %}
     {{ 'url.view'|trans({ '%url%': url.url|u.truncate(60) })|desc('Link %url%') }}
@@ -74,52 +73,57 @@
     </section>
 
     <section class="container ez-container mt-5">
-        <div class="ez-table-header">
-            <div class="ez-table-header__headline">
-                {{ 'url.tab.usages'|trans({'%count%': usages.nbResults })|desc('Content item(s) using this URL') }}
-            </div>
-        </div>
-        <table class="ez-table table table-hover">
-            <thead>
-                <tr>
-                    <th>{{ 'url.usages.column.name'|trans|desc('Name') }}</th>
-                    <th>{{ 'url.usages.column.status'|trans|desc('Status') }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for content in usages %}
-                    {% set view_url = path('_ez_content_view', { contentId: content.id }) %}
+        {% set body_rows = [] %}
+        {% for content in usages %}
+            {% set body_row_cols = [] %}
+            {% set view_url = path('_ez_content_view', { contentId: content.id }) %}
 
-                    <tr>
-                        <td class="ez-table__cell">
-                            <a href="{{ view_url }}">
-                                {{ ez_content_name(content) }}
-                            </a>
-                        </td>
-                        <td class="ez-table__cell">
-                            {% if content.published %}
-                                {{ 'url.usages.content_status.published'|trans|desc('Published') }}
-                            {% else %}
-                                {{ 'url.usages.content_status.draft'|trans|desc('Draft') }}
-                            {% endif %}
-                        </td>
-                        <td class="ez-table__cell ez-table__cell--has-action-btns">
-                            {% if can_edit %}
-                                <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--content-edit"
-                                        title="{{ 'url.action.item.edit'|trans|desc('Edit content') }}"
-                                        data-content-id="{{ content.id }}"
-                                        data-language-code="{{ content.mainLanguageCode }}">
-                                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
-                                        <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
-                                    </svg>
-                                </button>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            {% set col_raw %}
+                <a href="{{ view_url }}">
+                    {{ ez_content_name(content) }}
+                </a>
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                content: col_raw,
+            }]) %}
+
+            {% set body_row_cols = body_row_cols|merge([{
+                content: content.published
+                    ? 'url.usages.content_status.published'|trans|desc('Published')
+                    : 'url.usages.content_status.draft'|trans|desc('Draft'),
+            }]) %}
+
+            {% set col_raw %}
+                {% if can_edit %}
+                    <button
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--content-edit"
+                        title="{{ 'url.action.item.edit'|trans|desc('Edit content') }}"
+                        data-content-id="{{ content.id }}"
+                        data-language-code="{{ content.mainLanguageCode }}"
+                    >
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                            <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                        </svg>
+                    </button>
+                {% endif %}
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                has_action_btns: true,
+                content: col_raw,
+            }]) %}
+
+            {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+        {% endfor %}
+
+        {% include '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'url.tab.usages'|trans({'%count%': usages.nbResults })|desc('Content item(s) using this URL'),
+            head_cols: [
+                { content: 'url.usages.column.name'|trans|desc('Name') },
+                { content: 'url.usages.column.status'|trans|desc('Status') },
+                { },
+            ],
+            body_rows: body_rows,
+        } %}
 
         {% if usages.haveToPaginate %}
             <div class="row justify-content-center align-items-center ez-pagination__spacing mb-5">

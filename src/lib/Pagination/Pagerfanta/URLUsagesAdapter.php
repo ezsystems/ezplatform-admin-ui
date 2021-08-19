@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
+namespace Ibexa\AdminUi\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\URLService;
 use eZ\Publish\API\Repository\Values\URL\URL;
@@ -50,3 +50,5 @@ class URLUsagesAdapter implements AdapterInterface
         return $this->urlService->findUsages($this->url, $offset, $length)->items;
     }
 }
+
+class_alias(URLUsagesAdapter::class, 'EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\URLUsagesAdapter');

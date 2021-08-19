@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use Exception;
 use eZ\Publish\API\Repository\LocationService;
@@ -20,26 +20,27 @@ use eZ\Publish\API\Repository\Values\User\Limitation\NewSectionLimitation;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
-use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionsDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper;
-use EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\UI\Service\PathService;
-use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
-use EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView;
-use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
+use Ibexa\AdminUi\Form\Data\Section\SectionContentAssignData;
+use Ibexa\AdminUi\Form\Data\Section\SectionCreateData;
+use Ibexa\AdminUi\Form\Data\Section\SectionDeleteData;
+use Ibexa\AdminUi\Form\Data\Section\SectionsDeleteData;
+use Ibexa\AdminUi\Form\Data\Section\SectionUpdateData;
+use Ibexa\AdminUi\Form\DataMapper\SectionCreateMapper;
+use Ibexa\AdminUi\Form\DataMapper\SectionUpdateMapper;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\AdminUi\UI\Service\PathService;
+use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
+use Ibexa\Bundle\AdminUi\View\EzPagerfantaView;
+use Ibexa\Bundle\AdminUi\View\Template\EzPagerfantaTemplate;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class SectionController extends Controller
 {
@@ -504,3 +505,5 @@ class SectionController extends Controller
         return true;
     }
 }
+
+class_alias(SectionController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\SectionController');

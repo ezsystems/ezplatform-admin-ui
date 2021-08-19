@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Location;
+namespace Ibexa\AdminUi\Form\Data\Content\Location;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -73,3 +73,5 @@ class ContentLocationRemoveData
         $this->locations = $locations;
     }
 }
+
+class_alias(ContentLocationRemoveData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData');

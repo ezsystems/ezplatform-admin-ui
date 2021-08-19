@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Menu;
+namespace Ibexa\AdminUi\Menu;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
@@ -76,3 +76,5 @@ class MenuItemFactory implements FactoryInterface
         return $this->factory->createItem($name, array_merge_recursive($defaults, $options));
     }
 }
+
+class_alias(MenuItemFactory::class, 'EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory');

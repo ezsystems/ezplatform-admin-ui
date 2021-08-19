@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation;
+namespace Ibexa\AdminUi\Form\Data\Content\Translation;
 
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -108,3 +108,5 @@ class TranslationAddData
         return $this;
     }
 }
+
+class_alias(TranslationAddData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData');

@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation;
+namespace Ibexa\AdminUi\Form\Type\Content\Translation;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use Ibexa\AdminUi\Form\Data\Content\Translation\TranslationDeleteData;
+use Ibexa\AdminUi\Form\Type\Content\ContentInfoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -55,3 +55,5 @@ class TranslationDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(TranslationDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationDeleteType');

@@ -16,7 +16,7 @@ services:
 
   Ibexa\AdminUi\Behat\BrowserContext\DashboardContext: ~
 
-  Ibexa\AdminUi\Behat\BrowserContext\RightMenuContext: ~
+  Ibexa\AdminUi\Behat\BrowserContext\ContentActionsMenuContext: ~
 
   Ibexa\AdminUi\Behat\BrowserContext\TrashContext: ~
 

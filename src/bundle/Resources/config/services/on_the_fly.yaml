@@ -4,13 +4,13 @@ services:
         autowire: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\Content\ContentOnTheFlyProcessor:
+    Ibexa\AdminUi\Form\Processor\Content\ContentOnTheFlyProcessor:
         arguments:
             $innerContentFormProcessor: '@ezplatform.content_forms.form_processor.content'
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\User\UserOnTheFlyProcessor:
+    Ibexa\AdminUi\Form\Processor\User\UserOnTheFlyProcessor:
         arguments:
             $innerUserUpdateFormProcessor: '@ezplatform.content_forms.form_processor.user_update'
         tags:

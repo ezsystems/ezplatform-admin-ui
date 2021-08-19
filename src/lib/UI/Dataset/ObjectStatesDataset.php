@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
+namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
-use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
-use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
+use Ibexa\AdminUi\UI\Value as UIValue;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 class ObjectStatesDataset
 {
@@ -68,3 +68,5 @@ class ObjectStatesDataset
         return $this->data;
     }
 }
+
+class_alias(ObjectStatesDataset::class, 'EzSystems\EzPlatformAdminUi\UI\Dataset\ObjectStatesDataset');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
+namespace Ibexa\Bundle\AdminUi\ParamConverter;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\SectionService;
@@ -65,3 +65,5 @@ class SectionParamConverter implements ParamConverterInterface
         return Section::class === $configuration->getClass();
     }
 }
+
+class_alias(SectionParamConverter::class, 'EzSystems\EzPlatformAdminUiBundle\ParamConverter\SectionParamConverter');

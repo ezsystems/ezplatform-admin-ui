@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\Event;
+namespace Ibexa\AdminUi\Tab\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
@@ -73,3 +73,5 @@ class TabViewRenderEvent extends Event
         $this->parameters = $parameters;
     }
 }
+
+class_alias(TabViewRenderEvent::class, 'EzSystems\EzPlatformAdminUi\Tab\Event\TabViewRenderEvent');

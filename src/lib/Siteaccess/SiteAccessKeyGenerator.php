@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Siteaccess;
+namespace Ibexa\AdminUi\Siteaccess;
 
 final class SiteAccessKeyGenerator implements SiteAccessKeyGeneratorInterface
 {
@@ -15,3 +15,5 @@ final class SiteAccessKeyGenerator implements SiteAccessKeyGeneratorInterface
         return sprintf('%u', crc32($siteAccessIdentifier));
     }
 }
+
+class_alias(SiteAccessKeyGenerator::class, 'EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessKeyGenerator');

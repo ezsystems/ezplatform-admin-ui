@@ -2,43 +2,46 @@
 
 {% import "@ezdesign/ui/dashboard/macros.html.twig" as macros %}
 
-<table class="ez-table table table-hover">
-    <thead>
-    <tr>
-        <th class="ez-table__header-cell ez-table__header-cell--has-icon"></th>
-        <th class="ez-table__header-cell ez-table__header-cell--after-icon">{{ 'dashboard.table.name'|trans|desc('Name') }}</th>
-        <th class="ez-table__header-cell">{{ 'dashboard.table.content_type'|trans|desc('Content Type') }}</th>
-        <th class="ez-table__header-cell">{{ 'dashboard.table.last_saved'|trans|desc('Last Saved') }}</th>
-        <th class="ez-table__header-cell"></th>
-    </tr>
-    </thead>
-    <tbody>
-        {% if data|length %}
-            {% for row in data %}
-                <tr>
-                    <td class="ez-table__cell ez-table__cell--has-icon">
-                        <svg class="ibexa-icon ibexa-icon--small-medium ibexa-icon--base-dark">
-                            <use xlink:href="{{ ez_content_type_icon(row.content_type.identifier) }}"></use>
-                        </svg>
-                    </td>
-                    <td class="ez-table__cell ez-table__cell--name ez-table__cell--after-icon">
-                        <a class="ez-table__cell-link" href="{{ url('_ez_content_view', { 'contentId': row.contentId, 'locationId': row.resolvedLocation.id }) }}">
-                            {{ row.name }}
-                        </a>
-                    </td>
-                    <td class="ez-table__cell">{{ row.type }}</td>
-                    <td class="ez-table__cell">{{ row.modified|ez_full_datetime }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns">
-                        {{ macros.edit_content_button(row, 'dashboard.table.content.edit'|trans|desc('Edit Content')) }}
-                    </td>
-                </tr>
-            {% endfor %}
-        {% else %}
-            <tr>
-                <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
-                    <p class="ez-table-no-content mb-0 py-0">{{ 'dashboard.tab.my_content.empty'|trans|desc('No content. Content items you create will show up here') }}</p>
-                </td>
-            </tr>
-        {% endif %}
-    </tbody>
-</table>
+{% set body_rows = [] %}
+{% for row in data %}
+    {% set body_row_cols = [] %}
+
+    {% set col_raw %}
+        <svg class="ibexa-icon ibexa-icon--small-medium ibexa-icon--base-dark">
+            <use xlink:href="{{ ez_content_type_icon(row.content_type.identifier) }}"></use>
+        </svg>
+    {% endset %}
+    {% set body_row_cols = body_row_cols|merge([{
+        has_icon: true,
+        content: col_raw,
+    }]) %}
+
+    {% set col_raw %}
+        <a href="{{ url('_ez_content_view', { 'contentId': row.contentId, 'locationId': row.resolvedLocation.id }) }}">
+            {{ row.name }}
+        </a>
+    {% endset %}
+    {% set body_row_cols = body_row_cols|merge([{
+        content: col_raw,
+    }]) %}
+
+    {% set body_row_cols = body_row_cols|merge([
+        { content: row.type },
+        { content: row.modified|ez_full_datetime },
+        { has_action_btns: true, content: macros.edit_content_button(row, 'dashboard.table.content.edit'|trans|desc('Edit Content')) },
+    ]) %}
+
+    {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+{% endfor %}
+
+{% include '@ezdesign/ui/component/table/table.html.twig' with {
+    head_cols: [
+        { has_icon: true },
+        { content: 'dashboard.table.name'|trans|desc('Name') },
+        { content: 'dashboard.table.content_type'|trans|desc('Content Type') },
+        { content: 'dashboard.table.last_saved'|trans|desc('Last Saved') },
+        { },
+    ],
+    body_rows: body_rows,
+    empty_table_info_text: 'dashboard.tab.my_content.empty'|trans|desc('No content. Content items you create will show up here'),
+} %}

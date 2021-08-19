@@ -4,12 +4,13 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
+namespace Ibexa\AdminUi\Form\DataMapper;
 
+use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Form\Data\Section\SectionUpdateData;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
 use eZ\Publish\API\Repository\Values\Content\Section;
 
 /**
@@ -56,3 +57,5 @@ class SectionUpdateMapper implements DataMapperInterface
         ]);
     }
 }
+
+class_alias(SectionUpdateMapper::class, 'EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper');

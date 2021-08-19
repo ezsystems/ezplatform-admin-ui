@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data;
+namespace Ibexa\AdminUi\Form\Data;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeUpdateStruct;
 
@@ -76,3 +76,5 @@ class ContentTypeData extends ContentTypeUpdateStruct implements NewnessCheckabl
         );
     }
 }
+
+class_alias(ContentTypeData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData');

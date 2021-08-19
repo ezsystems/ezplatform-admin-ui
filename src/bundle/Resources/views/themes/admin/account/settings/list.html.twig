@@ -11,7 +11,6 @@
 {% block header %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'list.title'|trans|desc('User Settings'),
-        icon_name: 'user'
     } %}
 {% endblock %}
 
@@ -28,36 +27,34 @@
             {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with { id: 'my-preferences', active: true } %}
                 {% block content %}
                     {% for user_setting in pager %}
-                        <div class="ez-table-header">
-                            <div class="ez-table-header__headline">{{ user_setting.name }}</div>
-                        </div>
+                        {% set col_raw %}
+                            <a
+                                title="{{ 'list.action.edit'|trans|desc('Edit') }}"
+                                href="{{ path('ezplatform.user_settings.update', { 'identifier': user_setting.identifier }) }}"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                                </svg>
+                            </a>
+                        {% endset %}
 
-                        <table class="table table-hover mb-3">
-                            {% if user_setting.description is not empty %}
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">{{ user_setting.description }}</th>
-                                    </tr>
-                                </thead>
-                            {% endif %}
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        {{ value_definitions[user_setting.identifier].getDisplayValue(user_setting.value)|raw }}
-                                    </td>
-                                    <td class="text-right">
-                                        <a
-                                            title="{{ 'list.action.edit'|trans|desc('Edit') }}"
-                                            href="{{ path('ezplatform.user_settings.update', { 'identifier': user_setting.identifier }) }}"
-                                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-3">
-                                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
-                                                <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
-                                            </svg>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        {% set body_rows = [{
+                            cols: [
+                                { content: value_definitions[user_setting.identifier].getDisplayValue(user_setting.value) },
+                                { has_action_btns: true, content: col_raw },
+                            ]
+                        }] %}
+
+                        {% set head_cols = user_setting.description is not empty
+                            ? [{ content: user_setting.description, attr: { colspan: 2 } }]
+                            : null %}
+
+                        {% include '@ezdesign/ui/component/table/table.html.twig' with {
+                            headline: user_setting.name,
+                            head_cols: head_cols,
+                            body_rows: body_rows,
+                        } %}
                     {% endfor %}
 
                     {% if pager.haveToPaginate %}
@@ -69,28 +66,27 @@
             {% endembed %}
             {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with { id: 'my-account-settings' } %}
                 {% block content %}
-                    <div class="ez-table-header">
-                        <div class="ez-table-header__headline">{{ 'my_account_settings.password.title'|trans|desc('Password') }}</div>
-                    </div>
+                    {% set col_raw %}
+                        <a
+                            title="{{ 'my_account_settings.password.action.edit'|trans|desc('Edit') }}"
+                            href="{{ path('ezplatform.user_profile.change_password') }}"
+                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                        >
+                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                            </svg>
+                        </a>
+                    {% endset %}
 
-                    <table class="table table-hover mb-3">
-                        <tbody>
-                        <tr>
-                            <td>
-                                {{ 'my_account_settings.password.description'|trans|desc('Current password') }}
-                            </td>
-                            <td class="text-right">
-                                <a title="{{ 'my_account_settings.password.action.edit'|trans|desc('Edit') }}"
-                                href="{{ path('ezplatform.user_profile.change_password') }}"
-                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-3">
-                                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
-                                        <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    {% include '@ezdesign/ui/component/table/table.html.twig' with {
+                        headline: 'my_account_settings.password.title'|trans|desc('Password'),
+                        body_rows: [{
+                            cols: [
+                                { content: 'my_account_settings.password.description'|trans|desc('Current password') },
+                                { has_action_btns: true, content: col_raw },
+                            ]
+                        }],
+                    } %}
                 {% endblock %}
             {% endembed %}
         {% endblock %}

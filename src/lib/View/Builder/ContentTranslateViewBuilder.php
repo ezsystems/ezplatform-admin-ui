@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\View\Builder;
+namespace Ibexa\AdminUi\View\Builder;
 
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -17,8 +17,8 @@ use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\Builder\ViewBuilder;
 use eZ\Publish\Core\MVC\Symfony\View\Configurator;
 use eZ\Publish\Core\MVC\Symfony\View\ParametersInjector;
-use EzSystems\EzPlatformAdminUi\View\ContentTranslateSuccessView;
-use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
+use Ibexa\AdminUi\View\ContentTranslateSuccessView;
+use Ibexa\AdminUi\View\ContentTranslateView;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
 
 /**
@@ -285,3 +285,5 @@ class ContentTranslateViewBuilder implements ViewBuilder
         return null;
     }
 }
+
+class_alias(ContentTranslateViewBuilder::class, 'EzSystems\EzPlatformAdminUi\View\Builder\ContentTranslateViewBuilder');

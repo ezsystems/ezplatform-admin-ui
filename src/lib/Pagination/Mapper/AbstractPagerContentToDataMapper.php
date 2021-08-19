@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Pagination\Mapper;
+namespace Ibexa\AdminUi\Pagination\Mapper;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
@@ -18,7 +18,7 @@ use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
-use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
+use Ibexa\AdminUi\Specification\ContentIsUser;
 
 abstract class AbstractPagerContentToDataMapper
 {
@@ -124,3 +124,5 @@ abstract class AbstractPagerContentToDataMapper
         }
     }
 }
+
+class_alias(AbstractPagerContentToDataMapper::class, 'EzSystems\EzPlatformAdminUi\Pagination\Mapper\AbstractPagerContentToDataMapper');

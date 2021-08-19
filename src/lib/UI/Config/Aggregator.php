@@ -6,9 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config;
+namespace Ibexa\AdminUi\UI\Config;
 
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 /**
  * Aggregates a set of ApplicationConfig Providers.
@@ -84,3 +85,5 @@ class Aggregator
         return $config;
     }
 }
+
+class_alias(Aggregator::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Aggregator');

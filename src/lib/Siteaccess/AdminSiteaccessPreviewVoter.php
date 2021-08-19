@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Siteaccess;
+namespace Ibexa\AdminUi\Siteaccess;
 
 class AdminSiteaccessPreviewVoter extends AbstractSiteaccessPreviewVoter
 {
@@ -35,3 +35,5 @@ class AdminSiteaccessPreviewVoter extends AbstractSiteaccessPreviewVoter
         return $locationIds;
     }
 }
+
+class_alias(AdminSiteaccessPreviewVoter::class, 'EzSystems\EzPlatformAdminUi\Siteaccess\AdminSiteaccessPreviewVoter');

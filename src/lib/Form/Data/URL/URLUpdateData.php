@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\URL;
+namespace Ibexa\AdminUi\Form\Data\URL;
 
 use eZ\Publish\API\Repository\Values\URL\URLUpdateStruct;
 
@@ -15,3 +15,5 @@ class URLUpdateData extends URLUpdateStruct
     /** @var int */
     public $id;
 }
+
+class_alias(URLUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\URL\URLUpdateData');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
@@ -63,3 +63,5 @@ final class ContentInfoTransformer implements DataTransformerInterface
         }
     }
 }
+
+class_alias(ContentInfoTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\ContentInfoTransformer');

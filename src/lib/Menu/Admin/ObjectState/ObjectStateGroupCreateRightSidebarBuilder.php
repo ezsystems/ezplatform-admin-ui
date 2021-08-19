@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState;
+namespace Ibexa\AdminUi\Menu\Admin\ObjectState;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
-use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\MenuItemFactory;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -73,13 +73,11 @@ class ObjectStateGroupCreateRightSidebarBuilder extends AbstractBuilder implemen
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => '#object_state_group_create_create',
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.object_state.groups.list',
                 ]
             ),
@@ -99,3 +97,5 @@ class ObjectStateGroupCreateRightSidebarBuilder extends AbstractBuilder implemen
         ];
     }
 }
+
+class_alias(ObjectStateGroupCreateRightSidebarBuilder::class, 'EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState\ObjectStateGroupCreateRightSidebarBuilder');

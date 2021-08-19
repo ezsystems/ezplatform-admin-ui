@@ -6,14 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\ContentType;
+namespace Ibexa\AdminUi\Tab\ContentType;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
-use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
-use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\AdminUi\Form\Data\ContentType\Translation\TranslationAddData;
+use Ibexa\AdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
+use Ibexa\AdminUi\Form\Factory\ContentTypeFormFactory;
+use Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab;
+use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
+use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -123,3 +123,5 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
         return array_replace($contextParameters, $viewParameters);
     }
 }
+
+class_alias(TranslationsTab::class, 'EzSystems\EzPlatformAdminUi\Tab\ContentType\TranslationsTab');

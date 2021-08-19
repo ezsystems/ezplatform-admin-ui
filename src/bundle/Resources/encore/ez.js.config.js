@@ -14,7 +14,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/helpers/table.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.format.date.js'),
     path.resolve(__dirname, '../public/js/scripts/core/draggable.js'),
-    path.resolve(__dirname, '../public/js/scripts/core/custom.dropdown.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/dropdown.js'),
     path.resolve(__dirname, '../public/js/scripts/core/custom.tooltip.js'),
     path.resolve(__dirname, '../public/js/scripts/core/base.chart.js'),
     path.resolve(__dirname, '../public/js/scripts/core/line.chart.js'),
@@ -35,6 +35,8 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.context.menu'),
     path.resolve(__dirname, '../public/js/scripts/sidebar/main.menu.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.input.text.js'),
+    path.resolve(__dirname, '../public/js/scripts/admin.table.js'),
+    path.resolve(__dirname, '../public/js/scripts/admin.dropdown.js'),
 ];
 const fieldTypes = [];
 
@@ -112,9 +114,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-section-view-js', [path.resolve(__dirname, '../public/js/scripts/admin.section.view.js')])
-        .addEntry('ezplatform-admin-ui-trash-list-js', [
-            path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js'),
-        ])
+        .addEntry('ezplatform-admin-ui-trash-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js')])
         .addEntry('ezplatform-admin-ui-content-preview-js', [path.resolve(__dirname, '../public/js/scripts/admin.preview.js')])
         .addEntry('ezplatform-admin-ui-location-view-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.location.change.language.js'),
@@ -144,7 +144,6 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.bookmark.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.main.translation.update.js'),
-            path.resolve(__dirname, '../public/js/scripts/table.checkbox.js'),
         ])
         .addEntry('ezplatform-admin-ui-modal-location-trash-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.js')])
         .addEntry('ezplatform-admin-ui-modal-location-trash-container-js', [
@@ -160,7 +159,6 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
             path.resolve(__dirname, '../public/js/scripts/button.translation.edit.js'),
-            path.resolve(__dirname, '../public/js/scripts/table.checkbox.js'),
         ])
         .addEntry('ezplatform-admin-ui-link-manager-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.linkmanager.list.js')])
         .addEntry('ezplatform-admin-ui-link-manager-view-js', [path.resolve(__dirname, '../public/js/scripts/button.content.edit.js')])

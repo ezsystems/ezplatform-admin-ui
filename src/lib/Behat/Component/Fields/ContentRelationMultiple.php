@@ -80,7 +80,7 @@ class ContentRelationMultiple extends FieldTypeComponent
         $explodedValue = explode('/', $values['secondItem']);
         $secondValue = $explodedValue[count($explodedValue) - 1];
 
-        $viewPatternRegex = '/Multiple relations:[\w\/,: ]* %s [\w \/,:]*/';
+        $viewPatternRegex = '/Multiple relations[\w\/,: ]* %s [\w \/,:]*/';
         Assert::assertRegExp(
             sprintf($viewPatternRegex, $firstValue),
             $this->getHTMLPage()->find($this->parentLocator)->getText(),
@@ -106,12 +106,12 @@ class ContentRelationMultiple extends FieldTypeComponent
     public function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('selectContent', '.ez-relations__cta-btn-label'),
-            new VisibleCSSLocator('buttonRemove', '.ez-relations__table-action--remove'),
-            new VisibleCSSLocator('columnHeader', 'tr:not(.ez-relations__table-header) th'),
-            new VisibleCSSLocator('removeRelations', '.ez-relations__table-action--remove'),
-            new VisibleCSSLocator('addRelation', '.ez-relations__table-action--create'),
-            new VisibleCSSLocator('relationRow', '.ez-relations__list tr'),
+            new VisibleCSSLocator('selectContent', '.ibexa-relations__cta-btn-label'),
+            new VisibleCSSLocator('buttonRemove', '.ibexa-relations__table-action--remove'),
+            new VisibleCSSLocator('columnHeader', 'tr:not(.ibexa-relations__table-header) th'),
+            new VisibleCSSLocator('removeRelations', '.ibexa-relations__table-action--remove'),
+            new VisibleCSSLocator('addRelation', '.ibexa-relations__table-action--create'),
+            new VisibleCSSLocator('relationRow', '.ibexa-relations__list tr'),
         ];
     }
 

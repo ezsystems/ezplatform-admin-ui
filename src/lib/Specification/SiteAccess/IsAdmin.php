@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification\SiteAccess;
+namespace Ibexa\AdminUi\Specification\SiteAccess;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
-use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
-use EzSystems\EzPlatformAdminUiBundle\EzPlatformAdminUiBundle;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Specification\AbstractSpecification;
+use Ibexa\Bundle\AdminUi\IbexaAdminUiBundle;
 
 class IsAdmin extends AbstractSpecification
 {
@@ -39,6 +39,8 @@ class IsAdmin extends AbstractSpecification
             throw new InvalidArgumentException($item, sprintf('Must be an instance of %s', SiteAccess::class));
         }
 
-        return in_array($item->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME], true);
+        return in_array($item->name, $this->siteAccessGroups[IbexaAdminUiBundle::ADMIN_GROUP_NAME], true);
     }
 }
+
+class_alias(IsAdmin::class, 'EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin');

@@ -4,10 +4,10 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
+namespace Ibexa\AdminUi\Form\Type\Search;
 
-use EzSystems\EzPlatformAdminUi\Form\Type\Date\DateIntervalType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserType;
+use Ibexa\AdminUi\Form\Type\Date\DateIntervalType;
+use Ibexa\AdminUi\Form\Type\User\UserType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -107,3 +107,5 @@ final class SearchType extends AbstractType
         ];
     }
 }
+
+class_alias(SearchType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType');

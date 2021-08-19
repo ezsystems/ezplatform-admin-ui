@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Value;
+namespace Ibexa\AdminUi\REST\Value;
 
 use EzSystems\EzPlatformRest\Value as RestValue;
 
@@ -48,3 +48,5 @@ class Operation extends RestValue
         $this->content = $content;
     }
 }
+
+class_alias(Operation::class, 'EzSystems\EzPlatformAdminUi\REST\Value\Operation');

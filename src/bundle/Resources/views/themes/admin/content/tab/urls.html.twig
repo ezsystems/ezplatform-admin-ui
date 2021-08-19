@@ -1,14 +1,11 @@
 {% trans_default_domain 'content_url' %}
 {% import _self as tab %}
-{% include '@ezdesign/ui/table_header.html.twig' with {
-    header_text: 'tab.urls.custom_url_aliases'|trans({'%contentName%' : ez_content_name(content)})|desc('Custom URL aliases for %contentName%'),
-    tools: tab.table_header_tools(form_custom_url_remove, can_edit_custom_url)
-} %}
 
 {{  include('@ezdesign/content/tab/url/custom_urls_table.html.twig', {
         'custom_urls_pager': custom_urls_pager,
         'form_custom_url_remove': form_custom_url_remove,
         'can_edit_custom_url': can_edit_custom_url,
+        actions: tab.table_header_tools(form_custom_url_remove, can_edit_custom_url),
 }) }}
 
 {% if custom_urls_pager.haveToPaginate %}
@@ -17,15 +14,13 @@
         'paginaton_params': {
             'routeName': custom_urls_pagination_params.route_name,
             'routeParams': custom_urls_pagination_params.route_params|merge({
-                '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
+                '_fragment': constant('Ibexa\\AdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
                 'page[system_url]': system_urls_pagination_params.page
             }),
             'pageParameter': '[page][custom_url]'
         }
     } %}
 {% endif %}
-
-{% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.urls.system.title'|trans|desc('System URL') } %}
 
 {{  include('@ezdesign/content/tab/url/system_urls_table.html.twig', {
         'system_urls_pager': system_urls_pager,
@@ -37,7 +32,7 @@
         'paginaton_params': {
             'routeName': system_urls_pagination_params.route_name,
             'routeParams': system_urls_pagination_params.route_params|merge({
-                '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
+                '_fragment': constant('Ibexa\\AdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
                 'page[custom_url]': custom_urls_pagination_params.page
             }),
             'pageParameter': '[page][system_url]'

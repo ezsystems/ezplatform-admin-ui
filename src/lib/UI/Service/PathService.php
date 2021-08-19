@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\UI\Service;
+namespace Ibexa\AdminUi\UI\Service;
 
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
@@ -49,3 +49,5 @@ class PathService
         }, $searchResult->searchHits);
     }
 }
+
+class_alias(PathService::class, 'EzSystems\EzPlatformAdminUi\UI\Service\PathService');

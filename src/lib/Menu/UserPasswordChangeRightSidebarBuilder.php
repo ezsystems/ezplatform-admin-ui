@@ -6,16 +6,17 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Menu;
+namespace Ibexa\AdminUi\Menu;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI change password contextual sidebar menu.
@@ -71,14 +72,12 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
                         'class' => 'ibexa-btn--trigger',
                         'data-click' => '#user_password_change_change',
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
                     'route' => 'ezplatform.dashboard',
-                    'extras' => ['icon' => 'circle-close'],
                 ]
             ),
         ]);
@@ -97,3 +96,5 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
         ];
     }
 }
+
+class_alias(UserPasswordChangeRightSidebarBuilder::class, 'EzSystems\EzPlatformAdminUi\Menu\UserPasswordChangeRightSidebarBuilder');

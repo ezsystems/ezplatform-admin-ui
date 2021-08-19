@@ -6,14 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
+namespace Ibexa\AdminUi\Form\Type\ContentType;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType;
+use Ibexa\AdminUi\Form\Data\ContentType\ContentTypeEditData;
+use Ibexa\AdminUi\Form\Type\Content\ContentTypeType;
+use Ibexa\AdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
+use Ibexa\AdminUi\Form\Type\Language\LanguageChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -89,3 +89,5 @@ class ContentTypeEditType extends AbstractType
             ->setAllowedTypes('contentType', ContentType::class);
     }
 }
+
+class_alias(ContentTypeEditType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeEditType');

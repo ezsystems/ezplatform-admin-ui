@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ObjectState;
+namespace Ibexa\AdminUi\Form\Data\ObjectState;
 
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
 
@@ -41,3 +41,5 @@ class ObjectStateDeleteData
         $this->objectState = $objectState;
     }
 }
+
+class_alias(ObjectStateDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateDeleteData');

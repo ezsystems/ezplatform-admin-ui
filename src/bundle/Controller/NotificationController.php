@@ -6,19 +6,20 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\NotificationService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\Notification\Renderer\Registry;
-use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\NotificationAdapter;
-use EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView;
-use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
+use Ibexa\AdminUi\Pagination\Pagerfanta\NotificationAdapter;
+use Ibexa\Bundle\AdminUi\View\EzPagerfantaView;
+use Ibexa\Bundle\AdminUi\View\Template\EzPagerfantaTemplate;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class NotificationController extends Controller
 {
@@ -175,3 +176,5 @@ class NotificationController extends Controller
         return $response;
     }
 }
+
+class_alias(NotificationController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\NotificationController');

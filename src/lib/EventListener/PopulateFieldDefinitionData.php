@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\EventListener;
+namespace Ibexa\AdminUi\EventListener;
 
-use EzSystems\EzPlatformAdminUi\Event\FieldDefinitionMappingEvent;
+use Ibexa\Contracts\AdminUi\Event\FieldDefinitionMappingEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class PopulateFieldDefinitionData implements EventSubscriberInterface
@@ -40,3 +40,5 @@ class PopulateFieldDefinitionData implements EventSubscriberInterface
         $event->setFieldDefinitionData($fieldDefinitionData);
     }
 }
+
+class_alias(PopulateFieldDefinitionData::class, 'EzSystems\EzPlatformAdminUi\EventListener\PopulateFieldDefinitionData');

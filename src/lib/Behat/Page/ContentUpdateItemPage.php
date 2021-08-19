@@ -13,14 +13,14 @@ use Ibexa\Behat\Browser\Routing\Router;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\AdminUi\Behat\Component\Fields\FieldTypeComponent;
-use Ibexa\AdminUi\Behat\Component\RightMenu;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 use PHPUnit\Framework\Assert;
 use Traversable;
 
 class ContentUpdateItemPage extends Page
 {
-    /** @var \Ibexa\AdminUi\Behat\Component\RightMenu */
-    private $rightMenu;
+    /** @var \Ibexa\AdminUi\Behat\Component\ContentActionsMenu */
+    private $contentActionsMenu;
 
     private $pageTitle;
 
@@ -30,11 +30,11 @@ class ContentUpdateItemPage extends Page
     public function __construct(
         Session $session,
         Router $router,
-        RightMenu $rightMenu,
+        ContentActionsMenu $contentActionsMenu,
         Traversable $fieldTypeComponents
     ) {
         parent::__construct($session, $router);
-        $this->rightMenu = $rightMenu;
+        $this->contentActionsMenu = $contentActionsMenu;
         $this->fieldTypeComponents = iterator_to_array($fieldTypeComponents);
     }
 
@@ -49,7 +49,7 @@ class ContentUpdateItemPage extends Page
             );
         }
         $this->getHTMLPage()->setTimeout(10)->find($this->getLocator('formElement'))->assert()->isVisible();
-        $this->rightMenu->verifyIsLoaded();
+        $this->contentActionsMenu->verifyIsLoaded();
     }
 
     public function setExpectedPageTitle(string $title): void
@@ -78,9 +78,9 @@ class ContentUpdateItemPage extends Page
             new VisibleCSSLocator('pageTitle', '.ibexa-content-edit-header__column h1'),
             new VisibleCSSLocator('formElement', '[name=ezplatform_content_forms_content_edit]'),
             new VisibleCSSLocator('closeButton', '.ez-content-edit-container__close, .ibexa-content-edit-sidebar__header .ibexa-content-edit-sidebar__back'),  // TODO: Set one selector after redesign
-            new VisibleCSSLocator('fieldLabel', '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ibexa-card > .card-body > div > div > legend, .ez-field-edit--eznoneditable > legend.col-form-label'),
+            new VisibleCSSLocator('fieldLabel', '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ibexa-card > .card-body > div > div > legend, .ibexa-field-edit--eznoneditable > legend.col-form-label'),
             new VisibleCSSLocator('nthField', '.ibexa-card .card-body > div > div > div:nth-of-type(%s)'),
-            new VisibleCSSLocator('noneditableFieldClass', 'ez-field-edit--eznoneditable'),
+            new VisibleCSSLocator('noneditableFieldClass', 'ibexa-field-edit--eznoneditable'),
             new VisibleCSSLocator('fieldOfType', '.ez-field-edit--%s'),
         ];
     }

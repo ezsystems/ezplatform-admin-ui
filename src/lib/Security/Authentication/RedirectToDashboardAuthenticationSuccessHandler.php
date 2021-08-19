@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Security\Authentication;
+namespace Ibexa\AdminUi\Security\Authentication;
 
 use eZ\Publish\Core\MVC\Symfony\Security\Authentication\DefaultAuthenticationSuccessHandler;
-use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
+use Ibexa\AdminUi\Specification\SiteAccess\IsAdmin;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
@@ -64,3 +64,5 @@ class RedirectToDashboardAuthenticationSuccessHandler extends DefaultAuthenticat
         return parent::determineTargetUrl($request);
     }
 }
+
+class_alias(RedirectToDashboardAuthenticationSuccessHandler::class, 'EzSystems\EzPlatformAdminUi\Security\Authentication\RedirectToDashboardAuthenticationSuccessHandler');

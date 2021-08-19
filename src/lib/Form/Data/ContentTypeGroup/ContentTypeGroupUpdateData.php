@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup;
+namespace Ibexa\AdminUi\Form\Data\ContentTypeGroup;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 
@@ -58,3 +58,5 @@ class ContentTypeGroupUpdateData
         $this->contentTypeGroup = $contentTypeGroup;
     }
 }
+
+class_alias(ContentTypeGroupUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupUpdateData');

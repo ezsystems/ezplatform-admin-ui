@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
-use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
+use Ibexa\AdminUi\Specification\Location\IsRoot;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -34,3 +34,5 @@ class LocationIsNotRootValidator extends ConstraintValidator
         }
     }
 }
+
+class_alias(LocationIsNotRootValidator::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsNotRootValidator');

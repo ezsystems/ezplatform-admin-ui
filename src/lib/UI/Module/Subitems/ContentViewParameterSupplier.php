@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems;
+namespace Ibexa\AdminUi\UI\Module\Subitems;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -21,10 +21,10 @@ use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeInfoLis
 use EzSystems\EzPlatformRest\Server\Values\ContentTypeInfoList;
 use EzSystems\EzPlatformRest\Server\Values\RestContent;
 use EzSystems\EzPlatformRest\Server\Values\RestLocation;
-use EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings;
-use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList as SubitemsListValueObjectVisitor;
-use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList;
-use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow;
+use Ibexa\AdminUi\UI\Config\Provider\ContentTypeMappings;
+use Ibexa\AdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList as SubitemsListValueObjectVisitor;
+use Ibexa\AdminUi\UI\Module\Subitems\Values\SubitemsList;
+use Ibexa\AdminUi\UI\Module\Subitems\Values\SubitemsRow;
 use EzSystems\EzPlatformRest\Output\Generator\Json as JsonOutputGenerator;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 
@@ -270,3 +270,5 @@ class ContentViewParameterSupplier
         return $createPermissionsInMfu;
     }
 }
+
+class_alias(ContentViewParameterSupplier::class, 'EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ContentViewParameterSupplier');

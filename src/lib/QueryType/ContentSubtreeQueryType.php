@@ -4,9 +4,9 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\QueryType;
+namespace Ibexa\AdminUi\QueryType;
 
-use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\SubtreePath;
+use Ibexa\Bundle\AdminUi\DependencyInjection\Configuration\Parser\SubtreePath;
 
 final class ContentSubtreeQueryType extends SubtreeQueryType
 {
@@ -20,3 +20,5 @@ final class ContentSubtreeQueryType extends SubtreeQueryType
         return $this->configResolver->getParameter(SubtreePath::CONTENT_SUBTREE_PATH);
     }
 }
+
+class_alias(ContentSubtreeQueryType::class, 'EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType');

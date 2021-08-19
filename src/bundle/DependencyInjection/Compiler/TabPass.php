@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
+namespace Ibexa\Bundle\AdminUi\DependencyInjection\Compiler;
 
-use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Tab\TabRegistry;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -49,3 +49,5 @@ class TabPass implements CompilerPassInterface
         }
     }
 }
+
+class_alias(TabPass::class, 'EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\TabPass');

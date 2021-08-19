@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\ActionDispatcher;
+namespace Ibexa\AdminUi\Form\ActionDispatcher;
 
-use EzSystems\EzPlatformAdminUi\Event\ContentOnTheFlyEvents;
+use Ibexa\Contracts\AdminUi\Event\ContentOnTheFlyEvents;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ContentDispatcher;
 
 class CreateContentOnTheFlyDispatcher extends ContentDispatcher
@@ -18,3 +18,5 @@ class CreateContentOnTheFlyDispatcher extends ContentDispatcher
         return ContentOnTheFlyEvents::CONTENT_CREATE;
     }
 }
+
+class_alias(CreateContentOnTheFlyDispatcher::class, 'EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher');

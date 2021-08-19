@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ObjectState;
+namespace Ibexa\AdminUi\Form\Data\ObjectState;
 
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 
@@ -81,3 +81,5 @@ class ObjectStateGroupUpdateData
         $this->objectStateGroup = $objectStateGroup;
     }
 }
+
+class_alias(ObjectStateGroupUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupUpdateData');

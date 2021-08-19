@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\EventListener;
+namespace Ibexa\AdminUi\EventListener;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUiBundle\EzPlatformAdminUiBundle;
+use Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface;
+use Ibexa\Bundle\AdminUi\IbexaAdminUiBundle;
 use SplFileInfo;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
@@ -136,7 +136,7 @@ class AdminExceptionListener
         /** @var SiteAccess $siteAccess */
         $siteAccess = $request->get('siteaccess', new SiteAccess('default'));
 
-        return \in_array($siteAccess->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME]);
+        return \in_array($siteAccess->name, $this->siteAccessGroups[IbexaAdminUiBundle::ADMIN_GROUP_NAME]);
     }
 
     /**
@@ -160,3 +160,5 @@ class AdminExceptionListener
         return sprintf('%s [in %s:%d]', $message, $relativePathname, $line);
     }
 }
+
+class_alias(AdminExceptionListener::class, 'EzSystems\EzPlatformAdminUi\EventListener\AdminExceptionListener');

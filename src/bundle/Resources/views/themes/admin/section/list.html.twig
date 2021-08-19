@@ -17,109 +17,138 @@
 {% block header %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'section.list.title'|trans|desc('Sections'),
-        icon_name: 'sections'
     } %}
 {% endblock %}
 
 {% block content %}
     <section class="container ez-container">
-        <div class="ez-table-header">
-            <div class="ez-table-header__headline">{{ 'section.list.title'|trans|desc('Sections') }}</div>
-            <div class="ez-table-header__tools">
-                {% if can_add %}
+        {% set body_rows = [] %}
+        {% for section in pager.currentPageResults %}
+            {% set body_row_cols = [] %}
+
+            {% set col_raw %}
+                {% if can_edit %}
+                    {{ form_widget(form_sections_delete.sections[section.id], {
+                        "disabled": not deletable[section.id]
+                    }) }}
+                {% else %}
+                    {% do form_sections_delete.sections.setRendered %}
+                {% endif %}
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                has_checkbox: true,
+                content: col_raw,
+            }]) %}
+
+            {% set col_raw %}
+                <a href="{{ path( 'ezplatform.section.view', {'sectionId': section.id} ) }}">
+                    {{ section.name }}
+                </a>
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                content: col_raw,
+            }]) %}
+
+            {% set body_row_cols = body_row_cols|merge([
+                { content: section.identifier },
+                { content: section.id },
+                { content: content_count[section.id] },
+            ]) %}
+
+            {% set col_raw %}
+                {% if assignable[section.id] %}
                     <a
-                        title="{{ 'section.new'|trans|desc('Create a new Section') }}"
-                        href="{{ path('ezplatform.section.create') }}"
+                        title="{{ 'section.assign_content'|trans|desc('Assign content') }}"
+                        href="#"
+                        data-section-id="{{ section.id }}"
+                        data-form-action="{{ path("ezplatform.section.assign_content", {"sectionId": section.id}) }}"
+                        data-udw-config="{{ ez_udw_config('multiple', {'type': 'section_assign'}) }}"
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     >
-                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
-                            <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--relations ibexa-icon--small ibexa-btn--open-udw">
+                            <use xlink:href="{{ ibexa_icon_path('assign-section') }}"></use>
                         </svg>
                     </a>
                 {% endif %}
                 {% if can_edit %}
-                    {% set modal_data_target = 'delete-sections-modal' %}
-                    <button
-                        id="delete-sections"
-                        type="button"
+                    <a
+                        title="{{ 'section.edit'|trans|desc('Edit') }}"
+                        href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                        disabled
-                        data-bs-toggle="modal"
-                        data-bs-target="#{{ modal_data_target }}"
-                        title="{{ 'section.delete'|trans|desc('Delete Section') }}"
                     >
-                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
-                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                            <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
                         </svg>
-                    </button>
-                    {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
-                        'id': modal_data_target,
-                        'message': 'section.modal.message'|trans|desc('Do you want to delete the Section(s)?'),
-                        'data_click': '#sections_delete_delete',
-                    }%}
+                    </a>
                 {% endif %}
-            </div>
-        </div>
+            {% endset %}
+            {% set body_row_cols = body_row_cols|merge([{
+                has_action_btns: true,
+                content: col_raw,
+            }]) %}
 
-        {{ form_start(form_sections_delete, {
-            'action': path('ezplatform.section.bulk_delete'),
-            'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-sections' }
-        }) }}
-        <table class="ez-table table table-hover">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>{{ 'section.name'|trans|desc('Name') }}</th>
-                    <th>{{ 'section.identifier'|trans|desc('Identifier') }}</th>
-                    <th>{{ 'section.id'|trans|desc('ID') }}</th>
-                    <th>{{ 'section.assigned.content'|trans|desc('Assigned content') }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for section in pager.currentPageResults %}
-                <tr>
-                    <td class="ez-table__cell ez-table__cell--has-checkbox">
-                        {% if can_edit %}
-                            {{ form_widget(form_sections_delete.sections[section.id], {
-                                "disabled": not deletable[section.id]
-                            }) }}
-                        {% else %}
-                            {% do form_sections_delete.sections.setRendered %}
-                        {% endif %}
-                    </td>
-                    <td class="ez-table__cell"><a href="{{ path( 'ezplatform.section.view', {'sectionId': section.id} ) }}">{{ section.name }}</a></td>
-                    <td class="ez-table__cell">{{ section.identifier }}</td>
-                    <td class="ez-table__cell">{{ section.id }}</td>
-                    <td class="ez-table__cell">{{ content_count[section.id] }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns">
-                        {% if assignable[section.id] %}
+            {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+        {% endfor %}
+
+        {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'section.list.title'|trans|desc('Sections'),
+            head_cols: [
+                { has_checkbox: true },
+                { content: 'section.name'|trans|desc('Name') },
+                { content: 'section.identifier'|trans|desc('Identifier') },
+                { content: 'section.id'|trans|desc('ID') },
+                { content: 'section.assigned.content'|trans|desc('Assigned content') },
+                { },
+            ],
+            body_rows: body_rows,
+            empty_table_info_text: 'dashboard.tab.my_drafts.empty'|trans|desc('No content. Drafts you create will show up here'),
+        } %}
+            {% block header %}
+                {% embed '@ezdesign/ui/component/table/table_header.html.twig' %}
+                    {% block actions %}
+                        {% if can_add %}
                             <a
-                                title="{{ 'section.assign_content'|trans|desc('Assign content') }}"
-                                href="#"
-                                data-section-id="{{ section.id }}"
-                                data-form-action="{{ path("ezplatform.section.assign_content", {"sectionId": section.id}) }}"
-                                data-udw-config="{{ ez_udw_config('multiple', {'type': 'section_assign'}) }}"
-                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-3">
-                                <svg class="ibexa-icon ibexa-icon--relations ibexa-icon--small ibexa-btn--open-udw">
-                                    <use xlink:href="{{ ibexa_icon_path('assign-section') }}"></use>
+                                title="{{ 'section.new'|trans|desc('Create a new Section') }}"
+                                href="{{ path('ezplatform.section.create') }}"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                                    <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
                                 </svg>
                             </a>
                         {% endif %}
                         {% if can_edit %}
-                            <a title="{{ 'section.edit'|trans|desc('Edit') }}"
-                               href="{{ path('ezplatform.section.update', {'sectionId': section.id}) }}"
-                               class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2">
-                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
-                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                            {% set modal_data_target = 'delete-sections-modal' %}
+                            <button
+                                id="delete-sections"
+                                type="button"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                                disabled
+                                data-bs-toggle="modal"
+                                data-bs-target="#{{ modal_data_target }}"
+                                title="{{ 'section.delete'|trans|desc('Delete Section') }}"
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+                                    <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                                 </svg>
-                            </a>
+                            </button>
+                            {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
+                                'id': modal_data_target,
+                                'message': 'section.modal.message'|trans|desc('Do you want to delete the Section(s)?'),
+                                'data_click': '#sections_delete_delete',
+                            }%}
                         {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+
+            {% block between_header_and_table %}
+                {{ form_start(form_sections_delete, {
+                    'action': path('ezplatform.section.bulk_delete'),
+                    'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-sections' }
+                }) }}
+            {% endblock %}
+        {% endembed %}
         {{ form_end(form_sections_delete) }}
 
         {% if pager.haveToPaginate %}

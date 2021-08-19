@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
+namespace Ibexa\AdminUi\Form\Data\Section;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -83,3 +83,5 @@ class SectionCreateData
         return $this;
     }
 }
+
+class_alias(SectionCreateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData');

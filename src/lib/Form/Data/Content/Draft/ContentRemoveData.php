@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft;
+namespace Ibexa\AdminUi\Form\Data\Content\Draft;
 
 class ContentRemoveData
 {
@@ -41,3 +41,5 @@ class ContentRemoveData
         return $this;
     }
 }
+
+class_alias(ContentRemoveData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentRemoveData');

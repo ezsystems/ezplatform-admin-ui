@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Component\Event;
+namespace Ibexa\AdminUi\Component\Event;
 
-use EzSystems\EzPlatformAdminUi\Component\Registry;
+use Ibexa\AdminUi\Component\Registry;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class RenderGroupEvent extends Event
@@ -68,3 +68,5 @@ class RenderGroupEvent extends Event
         return $this->parameters;
     }
 }
+
+class_alias(RenderGroupEvent::class, 'EzSystems\EzPlatformAdminUi\Component\Event\RenderGroupEvent');

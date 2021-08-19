@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Exception;
+namespace Ibexa\AdminUi\Exception;
 
 use Exception;
 use RuntimeException;
@@ -18,3 +18,5 @@ class ContentTypeIconNotFoundException extends RuntimeException
         parent::__construct("No icon found for '$contentType' Content Type", $code, $previous);
     }
 }
+
+class_alias(ContentTypeIconNotFoundException::class, 'EzSystems\EzPlatformAdminUi\Exception\ContentTypeIconNotFoundException');

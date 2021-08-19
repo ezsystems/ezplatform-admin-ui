@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ObjectState;
+namespace Ibexa\AdminUi\Form\Data\ObjectState;
 
 class ObjectStateGroupsDeleteData
 {
@@ -37,3 +37,5 @@ class ObjectStateGroupsDeleteData
         $this->objectStateGroups = $objectStateGroups;
     }
 }
+
+class_alias(ObjectStateGroupsDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupsDeleteData');

@@ -29,7 +29,8 @@
     }
 
     &:focus,
-    &.ibexa-input--text.form-control:focus {
+    &.ibexa-input--text.form-control:focus,
+    &.ibexa-input--date.form-control:focus {
         border-color: $ibexa-color-primary;
         box-shadow: 0 0 calculateRem(3px) 0 rgba($ibexa-color-primary, 0.75);
     }
@@ -39,14 +40,14 @@
         border-color: $ibexa-color-dark-200;
     }
 
-    &--text {
+    &--text,
+    &--textarea,
+    &--date {
         @include ibexa-font-sans-serif();
 
         font-size: $ibexa-text-font-size-medium;
         color: $ibexa-color-dark;
         line-height: calculateRem(21px);
-        height: calculateRem(48px);
-        padding-right: calculateRem(36px);
         border: calculateRem(1px) solid $ibexa-color-dark-200;
         border-radius: $ibexa-border-radius;
         position: relative;
@@ -70,19 +71,31 @@
             background-color: $ibexa-color-light-300;
         }
 
-        &.form-control.is-invalid,
-        &.form-control:invalid {
+        &.form-control.is-invalid {
             color: $ibexa-color-danger;
             background-image: none;
             border-color: $ibexa-color-danger;
             background-color: $ibexa-color-danger-100;
         }
+    }
 
-        &.ibexa-input--small {
-            height: calculateRem(32px);
-            padding-top: 0;
-            padding-bottom: 0;
-        }
+    &--text,
+    &--date {
+        height: calculateRem(48px);
+        padding-right: calculateRem(36px);
+    }
+
+    &--small {
+        height: calculateRem(32px);
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    &--textarea {
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition, box-shadow 0s; // Chrome does not render box-shadow properly with transition
+        width: calculateRem(288px);
+        height: calculateRem(120px);
+        padding: calculateRem(10px) calculateRem(16px);
     }
 
     &--checkbox,

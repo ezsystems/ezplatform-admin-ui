@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
+namespace Ibexa\AdminUi\Form\Type\ContentType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -39,3 +39,5 @@ class ContentTypeGroupType extends AbstractType
         ]);
     }
 }
+
+class_alias(ContentTypeGroupType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeGroupType');

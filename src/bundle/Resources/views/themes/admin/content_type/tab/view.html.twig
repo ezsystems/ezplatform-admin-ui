@@ -10,45 +10,41 @@
             <form class="form-inline justify-content-end mb-4">
                 <select class="form-control ez-location-language-change">
                     {% for language in languages %}
-                        <option value="{{ path('ezplatform.content_type.view', {
-                            'contentTypeId': content_type.id,
-                            'contentTypeGroupId': content_type_group.id,
-                            'languageCode': language.languageCode,
-                            '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\ContentType\\ViewTab::URI_FRAGMENT'),
-                        }) }}"
-                        {% if current_language == language.languageCode %} selected="selected" {% endif %}
-                        >{{ language.name }}</option>
+                        <option
+                            value="{{ path('ezplatform.content_type.view', {
+                                'contentTypeId': content_type.id,
+                                'contentTypeGroupId': content_type_group.id,
+                                'languageCode': language.languageCode,
+                                '_fragment': constant('Ibexa\\AdminUi\\Tab\\ContentType\\ViewTab::URI_FRAGMENT'),
+                            }) }}"
+                            {% if current_language == language.languageCode %} selected="selected" {% endif %}
+                        >
+                            {{ language.name }}
+                        </option>
                     {% endfor %}
                 </select>
             </form>
         {% endif %}
         <div class="ez-fieldgroup__content">
-            <header class="ez-table-header">
-                <div class="ez-table-header__headline">{{ "content_type.content_type"|trans|desc("Content Type") }}</div>
-            </header>
-
-            <table class="ez-table table table-hover mb-3">
-                <thead>
-                <tr>
-                    <th>{{ "content_type.name"|trans|desc("Name") }}</th>
-                    <th>{{ "content_type.identifier"|trans|desc("Identifier") }}</th>
-                    <th>{{ "content_type.description"|trans|desc("Description") }}</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="ez-table__cell">{{ content_type.names[current_language] }}</td>
-                    <td class="ez-table__cell">{{ content_type.identifier }}</td>
-                    <td class="ez-table__cell">{{ content_type.descriptions[current_language]|default('') }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns">
-                        {% if can_update %}
-                            {{ macros.content_type_edit(content_type, content_type_group, 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2') }}
-                        {% endif %}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            {% include '@ezdesign/ui/component/table/table.html.twig' with {
+                headline: "content_type.content_type"|trans|desc("Content Type"),
+                head_cols: [
+                    { content: "content_type.name"|trans|desc("Name") },
+                    { content: "content_type.identifier"|trans|desc("Identifier") },
+                    { content: "content_type.description"|trans|desc("Description") },
+                    { },
+                ],
+                body_rows: [{
+                    cols: [
+                        { content: content_type.names[current_language] },
+                        { content: content_type.identifier },
+                        { content: content_type.descriptions[current_language]|default('') },
+                        { content: can_update
+                            ? macros.content_type_edit(content_type, content_type_group, 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2')
+                            : null },
+                    ]
+                }],
+            } %}
 
             <table class="ez-table table ez-table--list">
                 <tbody>
@@ -92,7 +88,7 @@
                     </td>
                 </tr>
                 </tbody>
-            </table>    
+            </table>
         </div>
     </section>
 
@@ -100,27 +96,26 @@
         <h2 class="ez-fieldgroup__name">{{ "content_type.content_field_definitions"|trans|desc("Content Field definitions") }}</h2>
         <div class="ez-fieldgroup__content">
             {% for group, field_definitions in field_definitions_by_group %}
-                <header class="ez-table-header">
-                    <div class="ez-table-header__headline">{{ group|capitalize }}</div>
-                </header>
-                <table class="table table-hover ez-table">
-                    <thead>
-                    <tr>
-                        <th class="ez-table__cell--field-definitions-head" scope="col">Name</th>
-                        <th class="ez-table__cell--field-definitions-head" scope="col">Identifier</th>
-                        <th class="ez-table__cell--field-definitions-head" scope="col">Type</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for field_definition in field_definitions %}
-                        <tr>
-                            <td class="ez-table__cell" scope="row">{{ field_definition.names[current_language] }}</td>
-                            <td class="ez-table__cell">{{ field_definition.identifier }}</td>
-                            <td class="ez-table__cell">{{ field_definition.fieldTypeIdentifier }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                {% set body_rows = [] %}
+                {% for field_definition in field_definitions %}
+                    {% set body_rows = body_rows|merge([{
+                        cols: [
+                            { content: field_definition.names[current_language] },
+                            { content: field_definition.identifier },
+                            { content: field_definition.fieldTypeIdentifier },
+                        ]
+                    }]) %}
+                {% endfor %}
+
+                {% include '@ezdesign/ui/component/table/table.html.twig' with {
+                    headline: group|capitalize,
+                    head_cols: [
+                        { content: 'Name', class: 'ibexa-table__head-cell--field-definitions-head' },
+                        { content: 'Identifier', class: 'ibexa-table__head-cell--field-definitions-head' },
+                        { content: 'Type', class: 'ibexa-table__head-cell--field-definitions-head' },
+                    ],
+                    body_rows: body_rows,
+                } %}
             {% endfor %}
         </div>
     </section>

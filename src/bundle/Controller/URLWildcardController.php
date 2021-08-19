@@ -6,20 +6,21 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\URLWildcardService;
 use eZ\Publish\API\Repository\Values\Content\URLWildcard;
 use eZ\Publish\API\Repository\Values\Content\URLWildcardUpdateStruct;
-use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardData;
-use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\Tab\URLManagement\URLWildcardsTab;
+use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardData;
+use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
+use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardUpdateData;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\AdminUi\Tab\URLManagement\URLWildcardsTab;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 final class URLWildcardController extends Controller
 {
@@ -168,3 +169,5 @@ final class URLWildcardController extends Controller
         ]));
     }
 }
+
+class_alias(URLWildcardController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\URLWildcardController');

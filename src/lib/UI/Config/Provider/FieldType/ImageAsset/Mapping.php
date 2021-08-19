@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\ImageAsset;
+namespace Ibexa\AdminUi\UI\Config\Provider\FieldType\ImageAsset;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 /**
  * Provide information about ImageAsset Field Type mappings.
@@ -42,3 +42,5 @@ class Mapping implements ProviderInterface
         ];
     }
 }
+
+class_alias(Mapping::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Provider\FieldType\ImageAsset\Mapping');

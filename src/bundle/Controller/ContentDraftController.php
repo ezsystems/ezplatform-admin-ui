@@ -6,19 +6,20 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\ContentDraftAdapter;
-use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
-use EzSystems\EzPlatformAdminUi\UI\Value\Content\VersionId;
+use Ibexa\AdminUi\Form\Data\Content\Draft\ContentRemoveData;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\AdminUi\Pagination\Pagerfanta\ContentDraftAdapter;
+use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\AdminUi\UI\Value\Content\VersionId;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentDraftController extends Controller
 {
@@ -132,3 +133,5 @@ class ContentDraftController extends Controller
         );
     }
 }
+
+class_alias(ContentDraftController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentDraftController');

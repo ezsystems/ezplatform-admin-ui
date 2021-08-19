@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Component\Event;
+namespace Ibexa\AdminUi\Component\Event;
 
-use EzSystems\EzPlatformAdminUi\Component\Registry;
-use EzSystems\EzPlatformAdminUi\Component\Renderable;
+use Ibexa\AdminUi\Component\Registry;
+use Ibexa\Contracts\AdminUi\Component\Renderable;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class RenderSingleEvent extends Event
@@ -83,3 +83,5 @@ class RenderSingleEvent extends Event
         return $this->parameters;
     }
 }
+
+class_alias(RenderSingleEvent::class, 'EzSystems\EzPlatformAdminUi\Component\Event\RenderSingleEvent');

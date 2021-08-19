@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Trash;
+namespace Ibexa\AdminUi\Form\Data\Trash;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\TrashItem;
@@ -69,3 +69,5 @@ class TrashItemRestoreData
         $this->location = $location;
     }
 }
+
+class_alias(TrashItemRestoreData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData');

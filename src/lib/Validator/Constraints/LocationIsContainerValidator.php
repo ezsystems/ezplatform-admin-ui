@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
-use EzSystems\EzPlatformAdminUi\Specification\Location\IsContainer;
+use Ibexa\AdminUi\Specification\Location\IsContainer;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -34,3 +34,5 @@ class LocationIsContainerValidator extends ConstraintValidator
         }
     }
 }
+
+class_alias(LocationIsContainerValidator::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsContainerValidator');

@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType;
+namespace Ibexa\AdminUi\Form\DataTransformer\FieldType;
 
 use eZ\Publish\Core\FieldType\Media\Value;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -65,3 +65,5 @@ class MediaValueTransformer extends AbstractBinaryBaseTransformer implements Dat
         return $valueObject;
     }
 }
+
+class_alias(MediaValueTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType\MediaValueTransformer');

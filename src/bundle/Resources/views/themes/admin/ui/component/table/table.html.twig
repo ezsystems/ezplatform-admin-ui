@@ -1,22 +1,59 @@
-{% block header %}
-    <div class="ez-table-header">
-        <div class="ez-table-header__headline">
-            {% block headline %}{% endblock %}
-        </div>
+{% import "@ezdesign/ui/component/macros.html.twig" as html %}
 
-        <div class="ez-table-header__tools">
-            {% block actions %}{% endblock %}
-        </div>
-    </div>
+{% block header %}
+    {% if headline is defined %}
+        {% include '@ezdesign/ui/component/table/table_header.html.twig' with {
+            headline,
+            actions: actions|default(null),
+            headline_title: headline_title|default(headline|default('')),
+        } only %}
+    {% endif %}
 {% endblock %}
 
+{% block between_header_and_table %}{% endblock %}
+
 {% block table %}
-    <table class="table table-hover table-striped ez-table {{ table_class|default('') }}">
+    <table
+        class="ibexa-table table
+        {{ class|default('') -}}"
+        {{ html.attributes(attr|default({})) }}
+    >
         <thead>
-        {% block thead %}{% endblock %}
+            {% block thead %}
+                {% if head_cols is defined %}
+                    {% include '@ezdesign/ui/component/table/table_head_row.html.twig' with {
+                        head_cols: head_cols,
+                    } %}
+                {% endif %}
+            {% endblock %}
         </thead>
-        <tbody>
-        {% block tbody %}{% endblock %}
+        <tbody
+            class="ibexa-table__body
+            {{ table_body_class|default('') -}}"
+            {{ html.attributes(table_body_attr|default({})) }}
+        >
+            {% block tbody %}
+                {% if body_rows is defined %}
+                    {% if body_rows is empty %}
+                        {% block tbody_empty %}
+                            {% include '@ezdesign/ui/component/table/empty_table_body_row.html.twig' with {
+                                colspan: head_cols|length,
+                            } %}
+                        {% endblock %}
+                    {% else %}
+                        {% block tbody_not_empty %}
+                            {% for row in body_rows %}
+                                {# TODO: do we need to pass tab explicitely??? #}
+                                {% include '@ezdesign/ui/component/table/table_body_row.html.twig' with {
+                                    body_row_cols: row.cols,
+                                    class: row.class|default(''),
+                                    attr: row.attr|default({}),
+                                } %}
+                            {% endfor %}
+                        {% endblock %}
+                    {% endif %}
+                {% endif %}
+            {% endblock %}
         </tbody>
     </table>
 {% endblock %}

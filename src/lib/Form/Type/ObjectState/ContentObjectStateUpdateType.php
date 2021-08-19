@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ObjectState;
+namespace Ibexa\AdminUi\Form\Type\ObjectState;
 
 use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use Ibexa\AdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
+use Ibexa\AdminUi\Form\Type\Content\ContentInfoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -89,3 +89,5 @@ class ContentObjectStateUpdateType extends AbstractType
         ]);
     }
 }
+
+class_alias(ContentObjectStateUpdateType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType');

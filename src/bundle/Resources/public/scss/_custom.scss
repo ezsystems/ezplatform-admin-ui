@@ -97,12 +97,11 @@ $ibexa-color-white-800: #666666;
 $ibexa-color-white-700: #999999;
 $ibexa-color-white-600: #cccccc;
 
-
 $ibexa-color-accent-soft: #ecdfd1;
-$ibexa-color-accent-soft-900: #2F2D2A;
-$ibexa-color-accent-soft-800: #5E5954;
-$ibexa-color-accent-soft-700: #8E867D;
-$ibexa-color-accent-soft-600: #BDB2A7;
+$ibexa-color-accent-soft-900: #2f2d2a;
+$ibexa-color-accent-soft-800: #5e5954;
+$ibexa-color-accent-soft-700: #8e867d;
+$ibexa-color-accent-soft-600: #bdb2a7;
 $ibexa-color-accent-soft-500: #f0e5da;
 $ibexa-color-accent-soft-400: #f4ece3;
 $ibexa-color-accent-soft-300: #f7f2ed;
@@ -326,7 +325,7 @@ $table-border-width: 0;
 $table-hover-bg: $ibexa-color-base-pale;
 
 // Breadcrumbs
-$breadcrumb-font-size: 14px;
+$breadcrumb-font-size: 12px;
 $breadcrumb-padding-y: 0;
 $breadcrumb-padding-x: 0;
 $breadcrumb-item-padding: 8px;
@@ -340,7 +339,7 @@ $link-hover-decoration: underline;
 $link-hover-color: $ibexa-color-primary;
 
 // Body
-$body-bg: $ibexa-color-light-200;
+$body-bg: $ibexa-color-white;
 $body-color: $ibexa-black;
 
 // Pagination

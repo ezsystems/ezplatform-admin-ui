@@ -6,10 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\View;
+namespace Ibexa\AdminUi\View;
 
 use EzSystems\EzPlatformContentForms\Content\View\ContentEditView;
 
 class EditContentOnTheFlyView extends ContentEditView
 {
 }
+
+class_alias(EditContentOnTheFlyView::class, 'EzSystems\EzPlatformAdminUi\View\EditContentOnTheFlyView');

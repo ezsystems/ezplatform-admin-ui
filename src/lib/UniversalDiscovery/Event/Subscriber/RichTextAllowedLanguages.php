@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber;
+namespace Ibexa\AdminUi\UniversalDiscovery\Event\Subscriber;
 
-use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
+use Ibexa\AdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class RichTextAllowedLanguages implements EventSubscriberInterface
@@ -44,3 +44,5 @@ class RichTextAllowedLanguages implements EventSubscriberInterface
         $event->setConfig($config);
     }
 }
+
+class_alias(RichTextAllowedLanguages::class, 'EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\RichTextAllowedLanguages');

@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
+namespace Ibexa\AdminUi\Form\Type\Policy;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PoliciesDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleType;
+use Ibexa\AdminUi\Form\Data\Policy\PoliciesDeleteData;
+use Ibexa\AdminUi\Form\Type\Role\RoleType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -44,3 +44,5 @@ class PoliciesDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(PoliciesDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Policy\PoliciesDeleteType');

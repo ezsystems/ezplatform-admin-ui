@@ -16,7 +16,6 @@
 {% block header %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'role.breadcrumb.list'|trans|desc('Roles'),
-        icon_name: 'roles'
     } %}
 {% endblock %}
 
@@ -26,105 +25,116 @@
             'action': path('ezplatform.role.bulk_delete'),
             'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-roles' }
         }) }}
-        <div class="ez-table-header">
-            <div class="ez-table-header__headline">{{ 'role.view.list.title'|trans|desc('Roles') }}</div>
-            <div class="ez-table-header__tools">
-                {% if can_create %}
+        {% set body_rows = [] %}
+        {% for role in pager.currentPageResults %}
+            {% set col_checkbox %}
+                {% if can_delete %}
+                    {{ form_widget(form_roles_delete.roles[role.id]) }}
+                {% else %}
+                    {% do form_roles_delete.roles.setRendered %}
+                {% endif %}
+            {% endset %}
+
+            {% set col_name %}
+                <a href="{{ path('ezplatform.role.view', { roleId: role.id }) }}">
+                    {{ role.identifier }}
+                </a>
+            {% endset %}
+
+            {% set col_action_btns %}
+                {% if can_assign %}
                     <a
-                        title="{{ 'role.view.list.action.add'|trans|desc('Create a Role') }}"
-                        href="{{ path('ezplatform.role.create') }}"
+                        title="{{ 'role.view.list.action.assign_to_users_or_groups'|trans|desc('Assign to Users/Groups') }}"
+                        href="{{ path('ezplatform.role_assignment.create', { roleId: role.id }) }}"
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     >
-                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
-                            <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('assign-user') }}"></use>
                         </svg>
                     </a>
                 {% endif %}
-                {% if can_delete %}
-                    {% set modal_data_target = 'delete-sections-modal' %}
-                    <button
-                        id="delete-roles"
-                        type="button"
+                {% if can_create %}
+                    <a
+                        title="{{ 'role.view.list.action.copy'|trans|desc('Copy') }}"
+                        href="{{ path('ezplatform.role.copy', { roleId: role.id }) }}"
                         class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                        disabled
-                        data-bs-toggle="modal"
-                        data-bs-target="#{{ modal_data_target }}"
-                        title="{{ 'role.view.list.action.delete'|trans|desc('Delete Role') }}"
                     >
-                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
-                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('copy') }}"></use>
                         </svg>
-                    </button>
-                    {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
-                        'id': modal_data_target,
-                        'message': 'role.modal.message'|trans|desc('Do you want to delete the Role(s)?'),
-                        'data_click': '#delete-roles_delete',
-                    }%}
+                    </a>
                 {% endif %}
-            </div>
-        </div>
+                {% if can_update %}
+                    <a
+                        title="{{ 'role.view.list.action.edit'|trans|desc('Edit') }}"
+                        href="{{ path('ezplatform.role.update', { roleId: role.id }) }}"
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                    >
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+            {% endset %}
 
-        <table class="ez-table table table-hover mb-3">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>{{ 'role.view.list.column.name'|trans|desc('Name') }}</th>
-                    <th>{{ 'role.view.list.column.id'|trans|desc('Role ID') }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for role in pager.currentPageResults %}
-                <tr>
-                    <td class="ez-table__cell ez-table__cell--has-checkbox">
-                        {% if can_delete %}
-                            {{ form_widget(form_roles_delete.roles[role.id]) }}
-                        {% else %}
-                            {% do form_roles_delete.roles.setRendered %}
-                        {% endif %}
-                    </td>
-                    <td class="ez-table__cell">
-                        <a href="{{ path('ezplatform.role.view', { roleId: role.id }) }}">
-                            {{ role.identifier }}
-                        </a>
-                    </td>
-                    <td class="ez-table__cell">{{ role.id }}</td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns">
-                        {% if can_assign %}
-                            <a
-                                title="{{ 'role.view.list.action.assign_to_users_or_groups'|trans|desc('Assign to Users/Groups') }}"
-                                href="{{ path('ezplatform.role_assignment.create', { roleId: role.id }) }}"
-                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
-                                <svg class="ibexa-icon ibexa-icon--small">
-                                    <use xlink:href="{{ ibexa_icon_path('assign-user') }}"></use>
-                                </svg>
-                            </a>
-                        {% endif %}
+            {% set body_rows = body_rows|merge([{ cols: [
+                { has_checkbox: true, content: col_checkbox },
+                { content: col_name },
+                { content: role.id },
+                { has_action_btns: true, content: col_action_btns },
+            ] }]) %}
+        {% endfor %}
+
+        {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'role.view.list.title'|trans|desc('Roles'),
+            head_cols: [
+                { has_checkbox: true },
+                { content: 'role.view.list.column.name'|trans|desc('Name') },
+                { content: 'role.view.list.column.id'|trans|desc('Role ID') },
+                { },
+            ],
+            body_rows: body_rows,
+        } %}
+            {% block header %}
+                {% embed '@ezdesign/ui/component/table/table_header.html.twig' %}
+                    {% block actions %}
                         {% if can_create %}
                             <a
-                                title="{{ 'role.view.list.action.copy'|trans|desc('Copy') }}"
-                                href="{{ path('ezplatform.role.copy', { roleId: role.id }) }}"
-                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
-                                <svg class="ibexa-icon ibexa-icon--small">
-                                    <use xlink:href="{{ ibexa_icon_path('copy') }}"></use>
+                                title="{{ 'role.view.list.action.add'|trans|desc('Create a Role') }}"
+                                href="{{ path('ezplatform.role.create') }}"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                                    <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
                                 </svg>
                             </a>
                         {% endif %}
-                        {% if can_update %}
-                            <a
-                                title="{{ 'role.view.list.action.edit'|trans|desc('Edit') }}"
-                                href="{{ path('ezplatform.role.update', { roleId: role.id }) }}"
-                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text">
-                                <svg class="ibexa-icon ibexa-icon--small">
-                                    <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                        {% if can_delete %}
+                            {% set modal_data_target = 'delete-sections-modal' %}
+                            <button
+                                id="delete-roles"
+                                type="button"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                                disabled
+                                data-bs-toggle="modal"
+                                data-bs-target="#{{ modal_data_target }}"
+                                title="{{ 'role.view.list.action.delete'|trans|desc('Delete Role') }}"
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+                                    <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                                 </svg>
-                            </a>
+                            </button>
+                            {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {
+                                'id': modal_data_target,
+                                'message': 'role.modal.message'|trans|desc('Do you want to delete the Role(s)?'),
+                                'data_click': '#delete-roles_delete',
+                            }%}
                         {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
+
         {{ form_end(form_roles_delete) }}
         {% if pager.haveToPaginate %}
             {% include '@ezdesign/ui/pagination.html.twig' with {

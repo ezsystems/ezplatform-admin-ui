@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl;
+namespace Ibexa\AdminUi\Form\Type\Content\CustomUrl;
 
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -51,3 +51,5 @@ class CustomUrlRemoveType extends AbstractType
             );
     }
 }
+
+class_alias(CustomUrlRemoveType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlRemoveType');

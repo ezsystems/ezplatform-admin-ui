@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
 use eZ\Publish\API\Repository\LocationService;
-use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren;
+use Ibexa\AdminUi\Specification\Location\HasChildren;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -47,3 +47,5 @@ class LocationHasChildrenValidator extends ConstraintValidator
         }
     }
 }
+
+class_alias(LocationHasChildrenValidator::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationHasChildrenValidator');

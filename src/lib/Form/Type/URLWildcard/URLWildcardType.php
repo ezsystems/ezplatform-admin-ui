@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard;
+namespace Ibexa\AdminUi\Form\Type\URLWildcard;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardData;
+use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -50,3 +50,5 @@ final class URLWildcardType extends AbstractType
         ]);
     }
 }
+
+class_alias(URLWildcardType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
@@ -57,3 +57,5 @@ final class ContentTypeGroupTransformer implements DataTransformerInterface
         }
     }
 }
+
+class_alias(ContentTypeGroupTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\ContentTypeGroupTransformer');

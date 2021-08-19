@@ -10,6 +10,7 @@ namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
 use eZ\Publish\API\Repository\ContentTypeService;
+use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Routing\Router;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
@@ -71,6 +72,12 @@ class ContentTypeGroupPage extends Page
 
     public function delete(string $contentTypeName)
     {
+        $contentTypeLabelLocator = $this->getLocator('contentTypeLabel');
+        $listElement = $this->getHTMLPage()
+            ->findAll($contentTypeLabelLocator)
+            ->getByCriterion(new ElementTextCriterion($contentTypeName));
+        usleep(1000000); //TODO : refactor after redesign
+        $listElement->mouseOver();
         $this->table->getTableRow(['Name' => $contentTypeName])->select();
         $this->getHTMLPage()->find($this->getLocator('deleteButton'))->click();
         $this->dialog->verifyIsLoaded();
@@ -121,10 +128,11 @@ class ContentTypeGroupPage extends Page
         return [
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
             new VisibleCSSLocator('createButton', '.ibexa-icon--create'),
-            new VisibleCSSLocator('listHeader', '.ez-table-header .ez-table-header__headline, header .ez-table__headline, header h5'),
+            new VisibleCSSLocator('listHeader', '.ibexa-table-header .ibexa-table-header__headline, header .ibexa-table__headline, header h5'),
             new VisibleCSSLocator('tableContainer', '.ez-container'),
             new VisibleCSSLocator('deleteButton', '.ibexa-icon--trash,button[data-bs-original-title^="Delete"]'),
             new VisibleCSSLocator('tableItem', '.ez-main-container tbody tr'),
+            new VisibleCSSLocator('contentTypeLabel', '.ibexa-table__cell > a'),
         ];
     }
 }

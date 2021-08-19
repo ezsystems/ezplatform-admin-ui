@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Content\Location;
+namespace Ibexa\AdminUi\UI\Value\Content\Location;
 
-use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
-use EzSystems\EzPlatformAdminUi\UI\Value;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
+use Ibexa\AdminUi\UI\Value;
 
 final class Mapper
 {
@@ -54,3 +54,5 @@ final class Mapper
         return $locations;
     }
 }
+
+class_alias(Mapper::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Content\Location\Mapper');

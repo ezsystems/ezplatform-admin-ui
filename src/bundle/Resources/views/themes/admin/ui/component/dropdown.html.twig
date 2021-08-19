@@ -1,0 +1,46 @@
+
+{% set choices_flat = choices
+    | map(choice => choice.choices is defined ? choice.choices : [choice])
+    | reduce((carry, choices) => carry|merge(choices), [])
+%}
+
+<div class="ibexa-dropdown {{ multiple|default(false) ? "ibexa-dropdown--multi" : "ibexa-dropdown--single" }}">
+    <div class="ibexa-dropdown__source">
+        {{ source|default(null)|raw }}
+    </div>
+    <div class="ibexa-dropdown__wrapper {{ class|default('') }}">
+        <ul class="ibexa-dropdown__selection-info">
+            {% if value is defined %}
+                {% for choice in choices_flat %}
+                    {% if choice is selectedchoice(value) %}
+                        <li class="ibexa-dropdown__selected-item" data-value="{{ choice.value }}">
+                            {{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
+                            <span class="ibexa-dropdown__remove-selection"></span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% set default_placeholder = 'dropdown.placeholder'|trans|desc("Choose an option") %}
+            {% set placeholder = placeholder|default(default_placeholder) %}
+            {% set label = placeholder %}
+
+            {% if placeholder != '' %}
+                {% if translation_domain|default(false) is same as(false) %}
+                    {% set label = placeholder %}
+                {% else %}
+                    {% set label = placeholder|trans({}, translation_domain) %}
+                {% endif %}
+            {% endif %}
+
+            <li class="ibexa-dropdown__selected-placeholder ibexa-dropdown__selected-item">{{ label }}</li>
+
+            <li class="ibexa-dropdown__selected-overflow-number ibexa-dropdown__selected-item" hidden></li>
+        </ul>
+        <ul class="ibexa-dropdown__items">
+            {% for choice in choices %}
+                {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice: choice } %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>

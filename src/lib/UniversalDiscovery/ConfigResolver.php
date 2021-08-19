@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UniversalDiscovery;
+namespace Ibexa\AdminUi\UniversalDiscovery;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
+use Ibexa\AdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ConfigResolver
@@ -121,3 +121,5 @@ class ConfigResolver
         return $udwConfiguration[$configName] ?? [];
     }
 }
+
+class_alias(ConfigResolver::class, 'EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver');

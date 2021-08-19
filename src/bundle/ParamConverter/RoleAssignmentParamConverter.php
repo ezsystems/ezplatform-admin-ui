@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
+namespace Ibexa\Bundle\AdminUi\ParamConverter;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\RoleService;
@@ -61,3 +61,5 @@ class RoleAssignmentParamConverter implements ParamConverterInterface
         return RoleAssignment::class === $configuration->getClass();
     }
 }
+
+class_alias(RoleAssignmentParamConverter::class, 'EzSystems\EzPlatformAdminUiBundle\ParamConverter\RoleAssignmentParamConverter');

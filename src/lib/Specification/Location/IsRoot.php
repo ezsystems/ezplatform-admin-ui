@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification\Location;
+namespace Ibexa\AdminUi\Specification\Location;
 
-use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
+use Ibexa\AdminUi\Specification\AbstractSpecification;
 
 class IsRoot extends AbstractSpecification
 {
@@ -22,3 +22,5 @@ class IsRoot extends AbstractSpecification
         return 1 === $item->depth;
     }
 }
+
+class_alias(IsRoot::class, 'EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot');

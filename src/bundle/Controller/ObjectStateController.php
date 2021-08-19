@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
@@ -15,21 +15,22 @@ use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStatesDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateCreateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateUpdateType;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\AdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
+use Ibexa\AdminUi\Form\Data\ObjectState\ObjectStateCreateData;
+use Ibexa\AdminUi\Form\Data\ObjectState\ObjectStateDeleteData;
+use Ibexa\AdminUi\Form\Data\ObjectState\ObjectStatesDeleteData;
+use Ibexa\AdminUi\Form\Data\ObjectState\ObjectStateUpdateData;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\AdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
+use Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateCreateType;
+use Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateDeleteType;
+use Ibexa\AdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
+use Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateUpdateType;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ObjectStateController extends Controller
 {
@@ -362,3 +363,5 @@ class ObjectStateController extends Controller
         return array_combine($statesIds, array_fill_keys($statesIds, false));
     }
 }
+
+class_alias(ObjectStateController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\ObjectStateController');

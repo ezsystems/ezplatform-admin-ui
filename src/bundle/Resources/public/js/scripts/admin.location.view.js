@@ -91,20 +91,22 @@
     };
     const generateLink = (locationId, contentId) => Routing.generate('_ez_content_view', { contentId, locationId });
     const setModalTableTitle = (title) => {
-        const modalTableTitleNode = doc.querySelector(`${SELECTOR_MODAL_BULK_ACTION_FAIL} .ez-table-header__headline`);
+        const modalTableTitleNode = doc.querySelector(`${SELECTOR_MODAL_BULK_ACTION_FAIL} .ibexa-table-header__headline`);
 
         modalTableTitleNode.innerHTML = title;
+        modalTableTitleNode.setAttribute('title', title);
+        modalTableTitleNode.dataset.originalTitle = title;
     };
     const setModalTableBody = (failedItemsData) => {
         const modal = doc.querySelector(SELECTOR_MODAL_BULK_ACTION_FAIL);
         const table = modal.querySelector('.ez-bulk-action-failed-modal__table');
         const tableBody = table.querySelector('.ez-bulk-action-failed-modal__table-body');
-        const tableRowTemplate = table.dataset.tableRowTemplate;
+        const { rowTemplate } = table.dataset;
         const fragment = doc.createDocumentFragment();
 
         failedItemsData.forEach(({ contentName, contentTypeName }) => {
             const container = doc.createElement('tbody');
-            const renderedItem = tableRowTemplate
+            const renderedItem = rowTemplate
                 .replace('{{ content_name }}', contentName)
                 .replace('{{ content_type_name }}', contentTypeName);
 

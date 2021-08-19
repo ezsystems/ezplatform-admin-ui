@@ -6,16 +6,16 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Factory;
+namespace Ibexa\AdminUi\Form\Factory;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Search\TrashSearchData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Search\TrashSearchType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType;
+use Ibexa\AdminUi\Form\Data\Search\TrashSearchData;
+use Ibexa\AdminUi\Form\Data\Trash\TrashEmptyData;
+use Ibexa\AdminUi\Form\Data\Trash\TrashItemDeleteData;
+use Ibexa\AdminUi\Form\Data\Trash\TrashItemRestoreData;
+use Ibexa\AdminUi\Form\Type\Search\TrashSearchType;
+use Ibexa\AdminUi\Form\Type\Trash\TrashEmptyType;
+use Ibexa\AdminUi\Form\Type\Trash\TrashItemDeleteType;
+use Ibexa\AdminUi\Form\Type\Trash\TrashItemRestoreType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
@@ -69,3 +69,5 @@ class TrashFormFactory
         return $this->formFactory->createNamed($name, TrashSearchType::class, $data);
     }
 }
+
+class_alias(TrashFormFactory::class, 'EzSystems\EzPlatformAdminUi\Form\Factory\TrashFormFactory');

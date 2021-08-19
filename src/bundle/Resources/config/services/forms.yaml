@@ -5,93 +5,93 @@ services:
         public: false
 
     _instanceof:
-        EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\TrashLocationOptionProvider:
+        Ibexa\AdminUi\Form\TrashLocationOptionProvider\TrashLocationOptionProvider:
             tags: ['ezplatform.form.trash_location_option']
 
-    EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
+    Ibexa\AdminUi\Form\SubmitHandler: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Factory\:
+    Ibexa\AdminUi\Form\Factory\:
         resource: '../../../lib/Form/Factory'
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\:
+    Ibexa\AdminUi\Form\DataMapper\:
         resource: '../../../lib/Form/DataMapper'
 
-    EzSystems\EzPlatformAdminUi\Form\Type\:
+    Ibexa\AdminUi\Form\Type\:
         resource: '../../../lib/Form/Type'
 
-    EzSystems\EzPlatformAdminUi\Form\EventListener\:
+    Ibexa\AdminUi\Form\EventListener\:
         resource: '../../../lib/Form/EventListener'
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\:
         resource: '../../../lib/Form/TrashLocationOptionProvider'
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\OptionsFactory:
         arguments: [!tagged ezplatform.form.trash_location_option]
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
+    Ibexa\AdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
         tags:
             - { name: form.type_extension }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
+    Ibexa\AdminUi\Form\Type\Policy\PolicyChoiceType:
         arguments:
             $policyMap: "%ezpublish.api.role.policy_map%"
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType:
+    Ibexa\AdminUi\Form\Type\Content\Draft\ContentCreateType:
         arguments:
-            $contentTypeChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader'
-            $languageChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader'
+            $contentTypeChoiceLoader: '@Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader'
+            $languageChoiceLoader: '@Ibexa\AdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader'
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader:
-        arguments:
-            $configResolver: "@ezpublish.config.resolver"
-
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader:
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader:
         arguments:
             $configResolver: "@ezpublish.config.resolver"
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\TimePeriodChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader:
+        arguments:
+            $configResolver: "@ezpublish.config.resolver"
 
-    EzSystems\EzPlatformAdminUi\Form\Extension\RichTextTypeExtension:
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\TimePeriodChoiceLoader: ~
+
+    Ibexa\AdminUi\Form\Extension\RichTextTypeExtension:
         public: true
         tags:
             - { name: form.type_extension }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType:
+    Ibexa\AdminUi\Form\Type\Role\LimitationType:
         arguments: ["@ezplatform.content_forms.limitation_form_mapper.registry", "@ezplatform.content_forms.limitation.form_mapper.null"]
         tags:
             - { name: form.type, alias: ezplatform_content_forms_policy_limitation_edit }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\SwitcherType: ~
+    Ibexa\AdminUi\Form\Type\SwitcherType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\LocationType: ~
+    Ibexa\AdminUi\Form\Type\LocationType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCreateType:
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypeCreateType:
         arguments: ["@ezpublish.api.service.content_type"]
         tags:
             - {name: form.type, alias: ezplatform_content_forms_contenttype_create}
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType:
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypeUpdateType:
         tags:
             - {name: form.type, alias: ezplatform_content_forms_contenttype_update}
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\FieldTypeChoiceType:
+    Ibexa\AdminUi\Form\Type\ContentType\FieldTypeChoiceType:
         arguments: ['@eZ\Publish\Core\FieldType\FieldTypeRegistry', '@translator']
         tags:
             - { name: form.type, alias: ezplatform_content_forms_contenttype_field_type_choice }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortFieldChoiceType:
+    Ibexa\AdminUi\Form\Type\ContentType\SortFieldChoiceType:
         arguments: ["@translator"]
         tags:
             - { name: form.type, alias: ezplatform_content_forms_contenttype_sort_field_choice }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortOrderChoiceType:
+    Ibexa\AdminUi\Form\Type\ContentType\SortOrderChoiceType:
         arguments: ["@translator"]
         tags:
             - { name: form.type, alias: ezplatform_content_forms_contenttype_sort_order_choice }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\FieldDefinitionType:
+    Ibexa\AdminUi\Form\Type\FieldDefinition\FieldDefinitionType:
         arguments:
             $fieldTypeService: "@ezpublish.api.service.field_type"
             $thumbnailStrategy: '@eZ\Publish\Core\Repository\Strategy\ContentThumbnail\Field\ContentFieldStrategy'
@@ -100,39 +100,39 @@ services:
         tags:
             - { name: form.type, alias: ezplatform_content_forms_fielddefinition_update }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\URL\URLListType:
+    Ibexa\AdminUi\Form\Type\URL\URLListType:
         arguments:
             - '@translator'
         tags:
             - { name: form.type, alias: ezplatform_content_forms_url_list }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\URL\URLEditType:
+    Ibexa\AdminUi\Form\Type\URL\URLEditType:
         tags:
             - { name: form.type, alias: ezplatform_content_forms_url_edit }
 
-    EzSystems\EzPlatformAdminUi\Form\Extension\HelpMultilineMessageExtension:
+    Ibexa\AdminUi\Form\Extension\HelpMultilineMessageExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasReverseRelations:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasReverseRelations:
         tags:
             - { name: 'ezplatform.form.trash_location_option', priority: 100 }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasChildren:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasChildren:
         tags:
             - { name: 'ezplatform.form.trash_location_option', priority: 80 }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation:
         tags:
             - { name: 'ezplatform.form.trash_location_option', priority: 60 }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasAssetRelation:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasAssetRelation:
         tags:
             - { name: 'ezplatform.form.trash_location_option', priority: 40 }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType:
+    Ibexa\AdminUi\Form\Type\Search\SearchType:
         arguments:
             $baseType: '@Ibexa\Platform\Bundle\Search\Form\Type\SearchType'
             $translator: '@translator'
         tags:
-            - { name: form.type, alias: EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType }
+            - { name: form.type, alias: Ibexa\AdminUi\Form\Type\Search\SearchType }

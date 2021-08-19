@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
+namespace Ibexa\AdminUi\UI\Value\Content;
 
 class VersionId
 {
@@ -65,3 +65,5 @@ class VersionId
         return new self((int) $contentId, (int) $versionNo);
     }
 }
+
+class_alias(VersionId::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Content\VersionId');

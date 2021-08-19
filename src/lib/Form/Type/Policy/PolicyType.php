@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
+namespace Ibexa\AdminUi\Form\Type\Policy;
 
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\PolicyTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\PolicyTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,3 +25,5 @@ class PolicyType extends AbstractType
         return HiddenType::class;
     }
 }
+
+class_alias(PolicyType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyType');

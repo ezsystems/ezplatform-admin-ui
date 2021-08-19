@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace Ibexa\Bundle\AdminUi\Templating\Twig;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
-use EzSystems\EzPlatformAdminUi\Limitation\Templating\LimitationBlockRendererInterface;
+use Ibexa\AdminUi\Limitation\Templating\LimitationBlockRendererInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -45,3 +45,5 @@ class LimitationValueRenderingExtension extends AbstractExtension
         return 'ezplatform.content_forms.limitation_value_rendering';
     }
 }
+
+class_alias(LimitationValueRenderingExtension::class, 'EzSystems\EzPlatformAdminUiBundle\Templating\Twig\LimitationValueRenderingExtension');

@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification\Content;
+namespace Ibexa\AdminUi\Specification\Content;
 
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\ContentService;
-use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
+use Ibexa\AdminUi\Specification\AbstractSpecification;
 
 class ContentDraftHasConflict extends AbstractSpecification
 {
@@ -55,3 +55,5 @@ class ContentDraftHasConflict extends AbstractSpecification
         return false;
     }
 }
+
+class_alias(ContentDraftHasConflict::class, 'EzSystems\EzPlatformAdminUi\Specification\Content\ContentDraftHasConflict');

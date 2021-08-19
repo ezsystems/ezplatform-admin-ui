@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
@@ -36,3 +36,5 @@ class UniqueURL extends Constraint
         return self::CLASS_CONSTRAINT;
     }
 }
+
+class_alias(UniqueURL::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueURL');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Event;
+namespace Ibexa\AdminUi\Event;
 
 use eZ\Publish\SPI\Options\OptionsBag;
 
@@ -39,3 +39,5 @@ final class Options implements OptionsBag
         return isset($this->options[$key]);
     }
 }
+
+class_alias(Options::class, 'EzSystems\EzPlatformAdminUi\Event\Options');

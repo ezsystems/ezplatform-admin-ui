@@ -4,12 +4,13 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
+namespace Ibexa\AdminUi\Form\DataMapper;
 
+use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\Repository\Values\User\RoleCopyStruct;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCopyData;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Form\Data\Role\RoleCopyData;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
 
 /**
  * Maps between RoleCopyStruct and RoleCopyData objects.
@@ -48,3 +49,5 @@ class RoleCopyMapper implements DataMapperInterface
         ]);
     }
 }
+
+class_alias(RoleCopyMapper::class, 'EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCopyMapper');

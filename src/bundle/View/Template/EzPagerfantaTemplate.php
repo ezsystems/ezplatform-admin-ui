@@ -4,7 +4,7 @@
  * @copyright Copyright (C) eZ Systems AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\View\Template;
+namespace Ibexa\Bundle\AdminUi\View\Template;
 
 use Pagerfanta\View\Template\TwitterBootstrap4Template;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
@@ -41,3 +41,5 @@ class EzPagerfantaTemplate extends TwitterBootstrap4Template
         $this->setOptions(['prev_message' => $prevMessage, 'next_message' => $nextMessage, 'css_container_class' => 'pagination ez-pagination__btns']);
     }
 }
+
+class_alias(EzPagerfantaTemplate::class, 'EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate');

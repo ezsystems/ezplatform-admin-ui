@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
+namespace Ibexa\Bundle\AdminUi\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -67,3 +67,5 @@ class ContentParamConverter implements ParamConverterInterface
         return Content::class === $configuration->getClass();
     }
 }
+
+class_alias(ContentParamConverter::class, 'EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentParamConverter');
