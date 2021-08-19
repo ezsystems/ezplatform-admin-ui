@@ -1,9 +1,8 @@
 (function(global, doc, eZ, React, ReactDOM, Translator, Routing) {
-    const SELECTOR_FIELD = '.ez-field-edit--ezimageasset';
+    const SELECTOR_FIELD = '.ibexa-field-edit--ezimageasset';
     const SELECTOR_INPUT_FILE = 'input[type="file"]';
-    const SELECTOR_INPUT_DESTINATION_CONTENT_ID = '.ez-data-source__destination-content-id';
-    const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
-    const SELECTOR_FILESIZE_NOTICE = '.ez-data-source__message--filesize';
+    const SELECTOR_INPUT_DESTINATION_CONTENT_ID = '.ibexa-data-source__destination-content-id';
+    const SELECTOR_FILESIZE_NOTICE = '.ibexa-data-source__message--filesize';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const showErrorNotification = eZ.helpers.notification.showErrorNotification;
     const showSuccessNotification = eZ.helpers.notification.showSuccessNotification;
@@ -14,7 +13,7 @@
         constructor(props) {
             super(props);
 
-            this.showPreviewEventName = 'ez-image-asset:show-preview';
+            this.showPreviewEventName = 'ibexa-image-asset:show-preview';
         }
         /**
          * Creates a new Image Asset
@@ -113,7 +112,7 @@
          * @param {boolean} show
          */
         toggleLoading(show) {
-            this.fieldContainer.classList.toggle('ez-field-edit--is-preview-loading', show);
+            this.fieldContainer.classList.toggle('ibexa-field-edit--is-preview-loading', show);
         }
 
         /**
@@ -126,12 +125,12 @@
          * @param {Object} image
          */
         updateData(destinationContentId, destinationContentName, destinationLocationId, image) {
-            const preview = this.fieldContainer.querySelector('.ez-field-edit__preview');
-            const previewVisual = preview.querySelector('.ez-field-edit-preview__visual');
-            const previewImg = preview.querySelector('.ez-field-edit-preview__media');
-            const previewAlt = preview.querySelector('.ez-field-edit-preview__image-alt input');
-            const previewActionPreview = preview.querySelector('.ez-field-edit-preview__action--preview');
-            const assetNameContainer = preview.querySelector('.ez-field-edit-preview__asset-name a');
+            const preview = this.fieldContainer.querySelector('.ibexa-field-edit__preview');
+            const previewVisual = preview.querySelector('.ibexa-field-edit-preview__visual');
+            const previewImg = preview.querySelector('.ibexa-field-edit-preview__media');
+            const previewAlt = preview.querySelector('.ibexa-field-edit-preview__image-alt input');
+            const previewActionPreview = preview.querySelector('.ibexa-field-edit-preview__action--preview');
+            const assetNameContainer = preview.querySelector('.ibexa-field-edit-preview__file-name');
             const destinationLocationUrl = Routing.generate('_ez_content_view', {
                 contentId: destinationContentId,
                 locationId: destinationLocationId,
@@ -198,7 +197,7 @@
                 return;
             }
 
-            this.fieldContainer.querySelector('.ez-field-edit__option--remove-media').checked = false;
+            this.fieldContainer.querySelector('.ibexa-field-edit__option--remove-media').checked = false;
 
             this.createAsset(file, languageCode);
         }
@@ -222,7 +221,7 @@
         init() {
             super.init();
 
-            this.btnSelect = this.fieldContainer.querySelector('.ez-data-source__btn-select');
+            this.btnSelect = this.fieldContainer.querySelector('.ibexa-data-source__btn-select');
             this.btnSelect.addEventListener('click', this.openUDW.bind(this), false);
             this.inputDestinationContentId = this.fieldContainer.querySelector(SELECTOR_INPUT_DESTINATION_CONTENT_ID);
         }
@@ -230,7 +229,7 @@
 
     class EzImageAssetFieldValidator extends eZ.BaseFileFieldValidator {
         validateFileSize(event) {
-            event.currentTarget.dispatchEvent(new CustomEvent('ez-invalid-file-size'));
+            event.currentTarget.dispatchEvent(new CustomEvent('ibexa-invalid-file-size'));
 
             return {
                 isError: false,
@@ -247,12 +246,12 @@
                     selector: `${SELECTOR_INPUT_FILE}`,
                     eventName: 'change',
                     callback: 'validateInput',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: ['.ibexa-form-error'],
                 },
                 {
                     isValueValidator: false,
                     selector: `${SELECTOR_INPUT_FILE}`,
-                    eventName: 'ez-invalid-file-size',
+                    eventName: 'ibexa-invalid-file-size',
                     callback: 'showFileSizeError',
                     errorNodeSelectors: [SELECTOR_FILESIZE_NOTICE],
                 },

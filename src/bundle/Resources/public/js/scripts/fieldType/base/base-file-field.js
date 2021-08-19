@@ -1,5 +1,5 @@
 (function(global, doc, eZ) {
-    const SELECTOR_FIELD_LABEL = '.ez-field-edit__label-wrapper .ez-field-edit__label';
+    const SELECTOR_FIELD_LABEL = '.ibexa-field-edit__label-wrapper .ibexa-field-edit__label';
 
     class BaseFileFieldValidator extends eZ.BaseFieldValidator {
         /**
@@ -11,9 +11,9 @@
          */
         validateInput(event) {
             const input = event.currentTarget;
-            const dataContainer = this.fieldContainer.querySelector('.ez-field-edit__data');
+            const dataContainer = this.fieldContainer.querySelector('.ibexa-field-edit__data');
             const label = this.fieldContainer.querySelector(SELECTOR_FIELD_LABEL).innerHTML;
-            const isRequired = input.required || this.fieldContainer.classList.contains('ez-field-edit--required');
+            const isRequired = input.required || this.fieldContainer.classList.contains('ibexa-field-edit--required');
             const dataMaxSize = +input.dataset.maxFileSize;
             const maxFileSize = parseInt(dataMaxSize, 10);
             const isEmpty = input.files && !input.files.length && dataContainer && !dataContainer.hasAttribute('hidden');
