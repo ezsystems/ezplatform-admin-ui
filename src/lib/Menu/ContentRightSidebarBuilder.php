@@ -135,6 +135,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         $lookupLimitationsResult = $this->permissionChecker->getContentCreateLimitations($location);
         $canCreate = $lookupLimitationsResult->hasAccess && $contentType->isContainer;
+        $rootLocation = $this->configResolver->getParameter('universal_discovery_widget_module.default_location_id');
+        $uwdConfig = $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container');
         $canEdit = $this->permissionResolver->canUser(
             'content',
             'edit',
@@ -176,24 +178,18 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         ];
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
-            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-            'data-root-location' => $this->configResolver->getParameter(
-                'universal_discovery_widget_module.default_location_id'
-            ),
+            'data-udw-config' => $uwdConfig,
+            'data-root-location' => $rootLocation,
         ];
         $moveAttributes = [
             'class' => 'btn--udw-move',
-            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-            'data-root-location' => $this->configResolver->getParameter(
-                'universal_discovery_widget_module.default_location_id'
-            ),
+            'data-udw-config' => $uwdConfig,
+            'data-root-location' => $rootLocation,
         ];
         $copyAttributes = [
             'class' => 'btn--udw-copy',
-            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-            'data-root-location' => $this->configResolver->getParameter(
-                'universal_discovery_widget_module.default_location_id'
-            ),
+            'data-udw-config' => $uwdConfig,
+            'data-root-location' => $rootLocation,
         ];
         $createPolicies = $this->permissionResolver->hasAccess(
             'content',
@@ -203,8 +199,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'content',
             'manage_locations'
         );
-        $hasCreatePermission = is_bool($createPolicies) ? $createPolicies : true;
-        $hasManageLocationsPermission = is_bool($manageLocationsPolicies) ? $manageLocationsPolicies : true;
+        $hasCreatePermission = !is_bool($createPolicies) || $createPolicies;
+        $hasManageLocationsPermission = !is_bool($manageLocationsPolicies) || $manageLocationsPolicies;
 
         $copyLimit = $this->configResolver->getParameter(
             'subtree_operations.copy_subtree.limit'
