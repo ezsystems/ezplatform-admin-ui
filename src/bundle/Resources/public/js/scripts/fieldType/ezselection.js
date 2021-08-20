@@ -33,7 +33,7 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ibexa-data-source__input--selection',
+                selector: `${SELECTOR_FIELD} .ibexa-data-source__input--selection`,
                 eventName: EVENT_VALUE_CHANGED,
                 callback: 'validateInput',
                 errorNodeSelectors: [SELECTOR_ERROR_NODE],
