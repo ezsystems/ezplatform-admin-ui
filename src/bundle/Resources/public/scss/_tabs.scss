@@ -132,6 +132,24 @@
     overflow: hidden;
     box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.1);
     background-color: $ibexa-color-white;
+
+    &__pane {
+        padding: calculateRem(10px) calculateRem(40px) calculateRem(40px);
+
+        &--no-padding {
+            padding: 0;
+        }
+
+        .ibexa-table-header {
+            margin-top: calculateRem(30px);
+            margin-bottom: calculateRem(15px);
+
+            &__headline {
+                font-size: calculateRem(18px);
+                line-height: calculateRem(33px);
+            }
+        }
+    }
 }
 
 .ibexa-tabs {
