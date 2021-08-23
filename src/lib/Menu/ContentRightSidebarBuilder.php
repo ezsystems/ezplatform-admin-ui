@@ -167,6 +167,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $content,
             [$target]
         );
+        $hasCreatePermission = $this->hasCreatePermission();
+        $canCopy = $this->canCopy($hasCreatePermission);
+        $canCopySubtree = $this->canCopySubtree($location, $hasCreatePermission);
         $createAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--create',
             'data-actions' => 'create',
@@ -191,24 +194,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'data-udw-config' => $uwdConfig,
             'data-root-location' => $rootLocation,
         ];
-        $createPolicies = $this->permissionResolver->hasAccess(
-            'content',
-            'create'
-        );
-        $manageLocationsPolicies = $this->permissionResolver->hasAccess(
-            'content',
-            'manage_locations'
-        );
-        $hasCreatePermission = !is_bool($createPolicies) || $createPolicies;
-        $hasManageLocationsPermission = !is_bool($manageLocationsPolicies) || $manageLocationsPolicies;
-
-        $copyLimit = $this->configResolver->getParameter(
-            'subtree_operations.copy_subtree.limit'
-        );
-        $canCopySubtree = (new IsWithinCopySubtreeLimit(
-            $copyLimit,
-            $this->searchService
-        ))->and((new IsRoot())->not())->isSatisfiedBy($location);
 
         $contentIsUser = (new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType);
         $contentIsUserGroup = (new ContentTypeIsUserGroup($this->userGroupContentTypeIdentifier))->isSatisfiedBy($contentType);
@@ -244,7 +229,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__COPY,
                     [
                         'extras' => ['icon' => 'copy'],
-                        'attributes' => $hasCreatePermission && $hasManageLocationsPermission
+                        'attributes' => $canCopy
                             ? $copyAttributes
                             : array_merge($copyAttributes, ['disabled' => 'disabled']),
                     ]
@@ -256,7 +241,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__COPY_SUBTREE,
                     [
                         'extras' => ['icon' => 'copy-subtree'],
-                        'attributes' => $canCopySubtree && $hasCreatePermission
+                        'attributes' => $canCopySubtree
                             ? $copySubtreeAttributes
                             : array_merge($copySubtreeAttributes, ['disabled' => 'disabled']),
                     ]
@@ -409,5 +394,41 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 ]
             )
         );
+    }
+
+    private function hasCreatePermission(): bool
+    {
+        $createPolicies = $this->permissionResolver->hasAccess(
+            'content',
+            'create'
+        );
+
+        return !is_bool($createPolicies) || $createPolicies;
+    }
+
+    private function canCopy(bool $hasCreatePermission): bool
+    {
+        $manageLocationsPolicies = $this->permissionResolver->hasAccess(
+            'content',
+            'manage_locations'
+        );
+
+        $hasManageLocationsPermission = !is_bool($manageLocationsPolicies) || $manageLocationsPolicies;
+
+        return $hasCreatePermission && $hasManageLocationsPermission;
+    }
+
+    private function canCopySubtree(Location $location, bool $hasCreatePermission): bool
+    {
+        $copyLimit = $this->configResolver->getParameter(
+            'subtree_operations.copy_subtree.limit'
+        );
+
+        $canCopySubtree = (new IsWithinCopySubtreeLimit(
+            $copyLimit,
+            $this->searchService
+        ))->and((new IsRoot())->not())->isSatisfiedBy($location);
+
+        return $canCopySubtree && $hasCreatePermission;
     }
 }
