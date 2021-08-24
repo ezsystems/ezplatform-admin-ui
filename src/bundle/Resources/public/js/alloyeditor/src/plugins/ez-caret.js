@@ -16,6 +16,18 @@
     }
 
     /**
+     * Moves caret to the end of the element.
+     *
+     * @method moveCaretToElementEnd
+     */
+    const moveCaretToElementEnd = (editor, element) => {
+        const range = editor.createRange();
+
+        range.moveToPosition(element, CKEDITOR.POSITION_AFTER_END);
+        editor.getSelection().selectRanges([range]);
+    }
+
+    /**
      * Finds caret element.
      *
      * @method findCaretElement
@@ -50,6 +62,15 @@
              * @param {CKEDITOR.dom.element} element
              */
             editor.eZ.moveCaretToElement = moveCaretToElement;
+
+            /**
+             * Moves the caret in the editor to the end of the given element
+             *
+             * @method eZ.moveCaretToElementEnd
+             * @param {CKEDITOR.editor} editor
+             * @param {CKEDITOR.dom.element} element
+             */
+            editor.eZ.moveCaretToElementEnd = moveCaretToElementEnd;
 
             /**
              * Finds the "caret element" for the given element. For some elements,
