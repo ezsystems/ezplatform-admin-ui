@@ -1,11 +1,14 @@
-<div class="ez-pagination">
-    <div class="ez-pagination__text">
-        {{ 'pagination.viewing'|trans({
-            '%viewing%': pager.currentPageResults|length,
-            '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw 
-        }}
-    </div>
-    <div class="ez-pagination__navigation">
-        {{ pagerfanta(pager, 'ez', paginaton_params|default({})) }}
-    </div>
+{% set hide_additional_info = hide_additional_info is defined ? hide_additional_info : false %}
+
+<div class="ibexa-pagination {% if hide_additional_info %}ibexa-pagination--simply{% endif %}">
+    {% if not hide_additional_info %}
+        <div class="ibexa-pagination__info">
+            {{ 'pagination.viewing'|trans({
+                '%viewing%': pager.currentPageResults|length,
+                '%total%': pager.nbResults}, 'pagination')|desc('Viewing %viewing% out of %total% items')|raw
+            }}
+        </div>
+    {% endif %}
+
+    {{ pagerfanta(pager, 'ez', paginaton_params|default({})) }}
 </div>
