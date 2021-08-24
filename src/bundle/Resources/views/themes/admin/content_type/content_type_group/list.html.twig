@@ -29,7 +29,7 @@
                 {% if can_delete %}
                     {{ form_widget(
                         form_content_type_groups_delete.content_type_groups[content_type_group.id],
-                        { 'disabled': not deletable[content_type_group.id] and loop.first }
+                        { 'disabled': not deletable[content_type_group.id] }
                     ) }}
                 {% else %}
                     {% do form_content_type_groups_delete.content_type_groups.setRendered %}
