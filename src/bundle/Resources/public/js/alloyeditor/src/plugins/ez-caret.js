@@ -8,22 +8,10 @@
      *
      * @method moveCaretToElement
      */
-    const moveCaretToElement = (editor, element) => {
+    const moveCaretToElement = (editor, element, position = CKEDITOR.POSITION_AFTER_START) => {
         const range = editor.createRange();
 
-        range.moveToPosition(element, CKEDITOR.POSITION_AFTER_START);
-        editor.getSelection().selectRanges([range]);
-    }
-
-    /**
-     * Moves caret to the end of the element.
-     *
-     * @method moveCaretToElementEnd
-     */
-    const moveCaretToElementEnd = (editor, element) => {
-        const range = editor.createRange();
-
-        range.moveToPosition(element, CKEDITOR.POSITION_AFTER_END);
+        range.moveToPosition(element, position);
         editor.getSelection().selectRanges([range]);
     }
 
@@ -60,17 +48,9 @@
              * @method eZ.moveCaretToElement
              * @param {CKEDITOR.editor} editor
              * @param {CKEDITOR.dom.element} element
+             * @param {Number} position
              */
             editor.eZ.moveCaretToElement = moveCaretToElement;
-
-            /**
-             * Moves the caret in the editor to the end of the given element
-             *
-             * @method eZ.moveCaretToElementEnd
-             * @param {CKEDITOR.editor} editor
-             * @param {CKEDITOR.dom.element} element
-             */
-            editor.eZ.moveCaretToElementEnd = moveCaretToElementEnd;
 
             /**
              * Finds the "caret element" for the given element. For some elements,
@@ -86,4 +66,3 @@
         },
     });
 })(window);
-
