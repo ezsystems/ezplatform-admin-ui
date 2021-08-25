@@ -473,7 +473,7 @@ export default class EzBtnLinkEdit extends Component {
             'data-ez-temporary-link': this.state.isTemporary ? true : null,
         };
         const modifySelection = { advance: true };
-        const caretToEndMovingElements = ['strong', 'u', 'em'];
+        const caretToEndMovingElements = ['strong', 'u', 'em', 'sup', 'sub', 's'];
 
         if (this.state.linkHref) {
             linkAttrs.href = this.state.linkHref;
