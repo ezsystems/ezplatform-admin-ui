@@ -60,8 +60,8 @@
         callbackAfterRender() {}
 
         updateChartMessageDisplay() {
-            const chartBody = this.chart.canvas.closest('.ez-chart__body');
-            const chartMessagesNode = chartBody.querySelector('.ez-chart__message');
+            const chartBody = this.chart.canvas.closest('.ibexa-chart__body');
+            const chartMessagesNode = chartBody.querySelector('.ibexa-chart__message');
 
             chartMessagesNode.classList.toggle('d-none', this.chart.config.data.datasets.length);
         }
@@ -78,10 +78,10 @@
 
         onCompleteAnimationCallback(animation) {
             const { chart } = animation;
-            const chartNode = chart.canvas.closest('.ez-chart');
+            const chartNode = chart.canvas.closest('.ibexa-chart');
 
-            chartNode.dispatchEvent(new CustomEvent('ez-chart-animation-complete'));
-            chartNode.classList.toggle('ez-chart--no-data', !chart.config.data.datasets.length);
+            chartNode.dispatchEvent(new CustomEvent('ibexa-chart-animation-complete'));
+            chartNode.classList.toggle('ibexa-chart--no-data', !chart.config.data.datasets.length);
         }
 
         render() {

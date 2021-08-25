@@ -1,20 +1,20 @@
 <div 
-    class="ez-chart ez-chart--{{ chart_id }} {% block chart_class %}{% endblock %}"
+    class="ibexa-chart ibexa-chart--{{ chart_id }} {% block chart_class %}{% endblock %}"
     data-chart-data="{{ data|default({})|json_encode() }}"
 >
     {% block chart_header %}
-        <div class="ez-chart__header {% block header_class %}{% endblock %}">
+        <div class="ibexa-chart__header {% block header_class %}{% endblock %}">
             {% block header %}
-                <div class="ez-chart__title">{% block title %}{% endblock %}</div>
-                <div class="ez-chart__time-range">{% block time_range %}{% endblock %}</div>
+                <div class="ibexa-chart__title">{% block title %}{% endblock %}</div>
+                <div class="ibexa-chart__time-range">{% block time_range %}{% endblock %}</div>
             {% endblock %}
         </div>
     {% endblock %}
 
     {% block chart_body %}
-        <div class="ez-chart__body">
+        <div class="ibexa-chart__body">
             {% block message %}
-                <div class="ez-chart__message">
+                <div class="ibexa-chart__message">
                     <svg class="ibexa-icon ibexa-icon--extra-large ibexa-icon--secondary">
                         <use width="64" height="64" xlink:href="{{ ibexa_icon_path('error-icon') }}"></use>
                     </svg>
@@ -23,7 +23,7 @@
             {% endblock %}
 
             {% block canvas %}
-                <canvas class="ez-chart__canvas ez-chart__canvas--{{ chart_id }}"></canvas>
+                <canvas class="ibexa-chart__canvas ibexa-chart__canvas--{{ chart_id }}"></canvas>
             {% endblock %}
         </div>
     {% endblock %}
