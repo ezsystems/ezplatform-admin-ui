@@ -2,7 +2,7 @@
     const SELECTOR_FIELD = '.ibexa-field-edit--ezdate';
     const SELECTOR_INPUT = '.ibexa-data-source__input:not(.flatpickr-input)';
     const SELECTOR_FLATPICKR_INPUT = '.flatpickr-input';
-    const EVENT_VALUE_CHANGED = 'valueChanged';
+    const EVENT_VALUE_CHANGED = 'change';
     const SELECTOR_ERROR_NODE = '.ibexa-data-source';
 
     class EzDateValidator extends eZ.BaseFieldValidator {
