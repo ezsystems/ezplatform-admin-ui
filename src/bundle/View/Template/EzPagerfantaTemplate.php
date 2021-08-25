@@ -28,7 +28,7 @@ class EzPagerfantaTemplate extends TwitterBootstrap4Template
             'prev_message' => '',
             'next_message' => '',
             'active_suffix' => '',
-            'css_container_class' => 'pagination ibexa-pagination__navigation'
+            'css_container_class' => 'pagination ibexa-pagination__navigation',
         ]);
     }
 }
