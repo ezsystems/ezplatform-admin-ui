@@ -8,9 +8,6 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
-use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -55,20 +52,11 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
     private $configResolver;
 
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    private $contentTypeService;
-
     /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
     /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
     private $udwExtension;
-
-    /** @var \eZ\Publish\API\Repository\ContentService */
-    private $contentService;
-
-    /** @var \eZ\Publish\API\Repository\LocationService */
-    private $locationService;
 
     /** @var \EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface */
     private $permissionChecker;
@@ -98,11 +86,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver,
         ConfigResolverInterface $configResolver,
-        ContentTypeService $contentTypeService,
         SearchService $searchService,
         UniversalDiscoveryExtension $udwExtension,
-        ContentService $contentService,
-        LocationService $locationService,
         PermissionCheckerInterface $permissionChecker,
         array $userContentTypeIdentifier,
         array $userGroupContentTypeIdentifier
@@ -111,11 +96,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
-        $this->contentTypeService = $contentTypeService;
         $this->searchService = $searchService;
         $this->udwExtension = $udwExtension;
-        $this->contentService = $contentService;
-        $this->locationService = $locationService;
         $this->permissionChecker = $permissionChecker;
         $this->userContentTypeIdentifier = $userContentTypeIdentifier;
         $this->userGroupContentTypeIdentifier = $userGroupContentTypeIdentifier;
@@ -153,6 +135,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         $lookupLimitationsResult = $this->permissionChecker->getContentCreateLimitations($location);
         $canCreate = $lookupLimitationsResult->hasAccess && $contentType->isContainer;
+        $rootLocation = $this->configResolver->getParameter('universal_discovery_widget_module.default_location_id');
+        $uwdConfig = $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container');
         $canEdit = $this->permissionResolver->canUser(
             'content',
             'edit',
@@ -177,7 +161,15 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $location->getContentInfo(),
             [$location, $target]
         );
-
+        $canHide = $this->permissionResolver->canUser(
+            'content',
+            'hide',
+            $content,
+            [$target]
+        );
+        $hasCreatePermission = $this->hasCreatePermission();
+        $canCopy = $this->canCopy($hasCreatePermission);
+        $canCopySubtree = $this->canCopySubtree($location, $hasCreatePermission);
         $createAttributes = [
             'class' => 'ez-btn--extra-actions ez-btn--create',
             'data-actions' => 'create',
@@ -189,19 +181,19 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         ];
         $copySubtreeAttributes = [
             'class' => 'ez-btn--udw-copy-subtree',
-            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-            'data-root-location' => $this->configResolver->getParameter(
-                'universal_discovery_widget_module.default_location_id'
-            ),
+            'data-udw-config' => $uwdConfig,
+            'data-root-location' => $rootLocation,
         ];
-
-        $copyLimit = $this->configResolver->getParameter(
-            'subtree_operations.copy_subtree.limit'
-        );
-        $canCopySubtree = (new IsWithinCopySubtreeLimit(
-            $copyLimit,
-            $this->searchService
-        ))->and((new IsRoot())->not())->isSatisfiedBy($location);
+        $moveAttributes = [
+            'class' => 'btn--udw-move',
+            'data-udw-config' => $uwdConfig,
+            'data-root-location' => $rootLocation,
+        ];
+        $copyAttributes = [
+            'class' => 'btn--udw-copy',
+            'data-udw-config' => $uwdConfig,
+            'data-root-location' => $rootLocation,
+        ];
 
         $contentIsUser = (new ContentTypeIsUser($this->userContentTypeIdentifier))->isSatisfiedBy($contentType);
         $contentIsUserGroup = (new ContentTypeIsUserGroup($this->userGroupContentTypeIdentifier))->isSatisfiedBy($contentType);
@@ -225,13 +217,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 self::ITEM__MOVE,
                 [
                     'extras' => ['icon' => 'move'],
-                    'attributes' => [
-                        'class' => 'btn--udw-move',
-                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-                        'data-root-location' => $this->configResolver->getParameter(
-                            'universal_discovery_widget_module.default_location_id'
-                        ),
-                    ],
+                    'attributes' => $hasCreatePermission
+                        ? $moveAttributes
+                        : array_merge($moveAttributes, ['disabled' => 'disabled']),
                 ]
             )
         );
@@ -241,13 +229,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__COPY,
                     [
                         'extras' => ['icon' => 'copy'],
-                        'attributes' => [
-                            'class' => 'btn--udw-copy',
-                            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-                            'data-root-location' => $this->configResolver->getParameter(
-                                'universal_discovery_widget_module.default_location_id'
-                            ),
-                        ],
+                        'attributes' => $canCopy
+                            ? $copyAttributes
+                            : array_merge($copyAttributes, ['disabled' => 'disabled']),
                     ]
                 )
             );
@@ -266,9 +250,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         }
 
         if ($content->getVersionInfo()->getContentInfo()->isHidden) {
-            $this->addRevealMenuItem($menu);
+            $this->addRevealMenuItem($menu, $canHide);
         } else {
-            $this->addHideMenuItem($menu);
+            $this->addHideMenuItem($menu, $canHide);
         }
 
         if ($contentIsUser && $canDelete) {
@@ -369,17 +353,21 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /**
      * @param \Knp\Menu\ItemInterface $menu
      */
-    private function addRevealMenuItem(ItemInterface $menu): void
+    private function addRevealMenuItem(ItemInterface $menu, bool $canHide): void
     {
+        $attributes = [
+            'data-actions' => 'reveal',
+            'class' => 'ez-btn--reveal',
+        ];
+
         $menu->addChild(
             $this->createMenuItem(
                 self::ITEM__REVEAL,
                 [
                     'extras' => ['icon' => 'reveal'],
-                    'attributes' => [
-                        'data-actions' => 'reveal',
-                        'class' => 'ez-btn--reveal',
-                    ],
+                    'attributes' => $canHide
+                        ? $attributes
+                        : array_merge($attributes, ['disabled' => 'disabled']),
                 ]
             )
         );
@@ -388,19 +376,59 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /**
      * @param \Knp\Menu\ItemInterface $menu
      */
-    private function addHideMenuItem(ItemInterface $menu): void
+    private function addHideMenuItem(ItemInterface $menu, bool $canHide): void
     {
+        $attributes = [
+            'data-actions' => 'hide',
+            'class' => 'ez-btn--hide',
+        ];
+
         $menu->addChild(
             $this->createMenuItem(
                 self::ITEM__HIDE,
                 [
                     'extras' => ['icon' => 'hide'],
-                    'attributes' => [
-                        'data-actions' => 'hide',
-                        'class' => 'ez-btn--hide',
-                    ],
+                    'attributes' => $canHide
+                        ? $attributes
+                        : array_merge($attributes, ['disabled' => 'disabled']),
                 ]
             )
         );
+    }
+
+    private function hasCreatePermission(): bool
+    {
+        $createPolicies = $this->permissionResolver->hasAccess(
+            'content',
+            'create'
+        );
+
+        return !is_bool($createPolicies) || $createPolicies;
+    }
+
+    private function canCopy(bool $hasCreatePermission): bool
+    {
+        $manageLocationsPolicies = $this->permissionResolver->hasAccess(
+            'content',
+            'manage_locations'
+        );
+
+        $hasManageLocationsPermission = !is_bool($manageLocationsPolicies) || $manageLocationsPolicies;
+
+        return $hasCreatePermission && $hasManageLocationsPermission;
+    }
+
+    private function canCopySubtree(Location $location, bool $hasCreatePermission): bool
+    {
+        $copyLimit = $this->configResolver->getParameter(
+            'subtree_operations.copy_subtree.limit'
+        );
+
+        $canCopySubtree = (new IsWithinCopySubtreeLimit(
+            $copyLimit,
+            $this->searchService
+        ))->and((new IsRoot())->not())->isSatisfiedBy($location);
+
+        return $canCopySubtree && $hasCreatePermission;
     }
 }
