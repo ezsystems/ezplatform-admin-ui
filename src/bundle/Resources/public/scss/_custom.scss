@@ -230,7 +230,6 @@ $ez-alloyeditor-color-hover: $ibexa-color-info-400;
 
 $ez-pagination-bg: transparent;
 $ez-pagination-margin: 0.25rem;
-$ez-pagination-font-size: 1rem;
 $ez-pagination-page-link-radius: 50%;
 $ez-pagination-border-radius: 0.3rem;
 
@@ -343,27 +342,27 @@ $body-bg: $ibexa-color-white;
 $body-color: $ibexa-black;
 
 // Pagination
-$pagination-color: $ibexa-color-font;
+$pagination-color: $ibexa-color-dark;
 $pagination-bg: $ibexa-white;
-
+$pagination-border-width: 1px;
+$pagination-border-color: transparent;
 $pagination-padding-y: 0;
 $pagination-padding-x: 0;
 
-$pagination-active-color: $ibexa-color-font;
-$pagination-active-bg: $ibexa-color-base;
+$pagination-focus-color: $ibexa-color-dark;
+$pagination-focus-bg: transparent;
+
+$pagination-active-color: $ibexa-color-dark;
+$pagination-active-bg: $ibexa-color-light-300;
 $pagination-active-border-color: transparent;
 
-$pagination-hover-color: $ibexa-color-font;
-$pagination-hover-bg: $ibexa-color-base;
-$pagination-hover-border-width: 0;
-$pagination-hover-border-color: transparent;
+$pagination-hover-bg: transparent;
+$pagination-hover-color: $ibexa-color-dark;
+$pagination-hover-border-color: $ibexa-color-dark;
 
-$pagination-disabled-color: $ibexa-color-font-pale;
+$pagination-disabled-color: $ibexa-color-dark-200;
 $pagination-disabled-bg: transparent;
 $pagination-disabled-border-color: transparent;
-
-$pagination-border-width: 0;
-$pagination-border-color: transparent;
 
 // Modals
 $modal-header-padding-y: 24px;

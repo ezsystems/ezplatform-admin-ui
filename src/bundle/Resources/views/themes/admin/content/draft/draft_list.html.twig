@@ -130,7 +130,7 @@
                 } %}
                 {% if pager.haveToPaginate %}
                     {% include '@ezdesign/ui/pagination.html.twig' with {
-                        'pager': pager
+                        'pager': pager,
                     } %}
                 {% endif %}
                 {{ form_widget(form_remove.remove, {
