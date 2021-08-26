@@ -301,16 +301,6 @@
         <target state="new">This location has no sub-items</target>
         <note>key: no_items.message</note>
       </trans-unit>
-      <trans-unit id="af3bcdfcdcd33a16838a6f2b88c845c92fcb0938" resname="pagination.back">
-        <source>Back</source>
-        <target state="new">Back</target>
-        <note>key: pagination.back</note>
-      </trans-unit>
-      <trans-unit id="b10157de76c0f57fa166904d97c06336e10559ca" resname="pagination.next">
-        <source>Next</source>
-        <target state="new">Next</target>
-        <note>key: pagination.next</note>
-      </trans-unit>
       <trans-unit id="af207d1e719904a39524b34212a1ea6116cb3d46" resname="switch_to_grid_view.btn.label">
         <source>View as grid</source>
         <target state="new">View as grid</target>

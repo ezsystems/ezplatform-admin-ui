@@ -6,16 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="0173399db18eb7fe3a297f66fac4bf3a98378733" resname="pagination.next_message">
-        <source>Next</source>
-        <target state="new">Next</target>
-        <note>key: pagination.next_message</note>
-      </trans-unit>
-      <trans-unit id="ccf59d9760c08875a8b87b5fac62105841415c40" resname="pagination.prev_message">
-        <source>Back</source>
-        <target state="new">Back</target>
-        <note>key: pagination.prev_message</note>
-      </trans-unit>
       <trans-unit id="663d5cd498c0849675ac4fd684d4270a1a3f1acb" resname="pagination.viewing">
         <source>Viewing %viewing% out of %total% items</source>
         <target state="new">Viewing %viewing% out of %total% items</target>
