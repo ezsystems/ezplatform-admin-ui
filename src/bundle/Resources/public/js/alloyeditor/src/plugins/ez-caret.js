@@ -8,10 +8,10 @@
      *
      * @method moveCaretToElement
      */
-    const moveCaretToElement = (editor, element) => {
+    const moveCaretToElement = (editor, element, position = CKEDITOR.POSITION_AFTER_START) => {
         const range = editor.createRange();
 
-        range.moveToPosition(element, CKEDITOR.POSITION_AFTER_START);
+        range.moveToPosition(element, position);
         editor.getSelection().selectRanges([range]);
     }
 
@@ -48,6 +48,7 @@
              * @method eZ.moveCaretToElement
              * @param {CKEDITOR.editor} editor
              * @param {CKEDITOR.dom.element} element
+             * @param {Number} position
              */
             editor.eZ.moveCaretToElement = moveCaretToElement;
 
@@ -65,4 +66,3 @@
         },
     });
 })(window);
-
