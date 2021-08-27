@@ -6,20 +6,33 @@
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
+use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\LocationService;
 use EzSystems\EzPlatformAdminUi\Event\ContentProxyTranslateEvent;
 use EzSystems\EzPlatformAdminUi\View\ContentTranslateSuccessView;
 use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
+use Ibexa\AdminUi\Event\CancelEditVersionDraftEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class ContentEditController extends Controller
 {
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
+
     /** @var \Symfony\Contracts\EventDispatcher\EventDispatcherInterface */
     private $eventDispatcher;
 
     public function __construct(
+        ContentService $contentService,
+        LocationService $locationService,
         EventDispatcherInterface $eventDispatcher
     ) {
+        $this->contentService = $contentService;
+        $this->locationService = $locationService;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -67,5 +80,27 @@ class ContentEditController extends Controller
     public function translationSuccessAction(ContentTranslateSuccessView $view): ContentTranslateSuccessView
     {
         return $view;
+    }
+
+    public function cancelEditVersionDraftAction(
+        int $contentId,
+        int $versionNo,
+        int $referrerLocationId,
+        string $languageCode
+    ): Response {
+        $content = $this->contentService->loadContent($contentId, [$languageCode], $versionNo);
+        $referrerlocation = $this->locationService->loadLocation($referrerLocationId);
+
+        $response = $this->eventDispatcher->dispatch(
+            new CancelEditVersionDraftEvent(
+                $content,
+                $referrerlocation
+            )
+        )->getResponse();
+
+        return $response ?? $this->redirectToRoute('_ez_content_view', [
+            'contentId' => $referrerlocation->contentId,
+            'locationId' => $referrerlocation->id,
+        ]);
     }
 }
