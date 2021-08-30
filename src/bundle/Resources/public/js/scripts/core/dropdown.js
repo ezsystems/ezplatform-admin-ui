@@ -142,7 +142,7 @@
         getItemsContainerHeight(isItemsContainerAbove) {
             const DROPDOWN_MARGIN = 16;
             const SELECTOR_MODAL = '.modal[aria-modal=true]';
-            const documentElementHeight = doc.documentElement.getBoundingClientRect().height;
+            const documentElementHeight = global.innerHeight;
             const itemsContainerTop = this.itemsContainer.getBoundingClientRect().top;
 
             if (isItemsContainerAbove) {
