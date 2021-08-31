@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -40,7 +40,7 @@ class SortingTranslationExtractor implements ExtractorInterface
 
         $sortConstants = array_filter(
             $locationClass->getConstants(),
-            function ($value, $key) {
+            static function ($value, $key) {
                 return is_scalar($value) && strtolower(substr($key, 0, 11)) === 'sort_field_';
             },
             ARRAY_FILTER_USE_BOTH

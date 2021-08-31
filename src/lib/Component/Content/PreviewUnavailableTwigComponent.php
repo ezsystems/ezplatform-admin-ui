@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Component\Content;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Component\Renderable;
 use EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver;
@@ -49,11 +48,11 @@ class PreviewUnavailableTwigComponent implements Renderable
      */
     public function render(array $parameters = []): string
     {
-        /** @var Location $location */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         $location = $parameters['location'];
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $parameters['content'];
-        /** @var Language $language */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Language $language */
         $language = $parameters['language'];
         $versionNo = $content->getVersionInfo()->versionNo;
 

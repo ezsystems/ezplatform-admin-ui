@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -15,8 +15,8 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
-use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
+use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -118,7 +118,7 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplate(): string
     {
@@ -126,7 +126,7 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {

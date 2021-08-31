@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -16,7 +16,7 @@ class RenderSingleEvent extends Event
 {
     const NAME = 'ezplatform_admin_ui.component.render_single';
 
-    /** @var Registry */
+    /** @var \EzSystems\EzPlatformAdminUi\Component\Registry */
     private $registry;
 
     /** @var string */
@@ -29,7 +29,7 @@ class RenderSingleEvent extends Event
     private $parameters;
 
     /**
-     * @param Registry $registry
+     * @param \EzSystems\EzPlatformAdminUi\Component\Registry $registry
      * @param string $groupName
      * @param array $parameters
      */
@@ -58,7 +58,7 @@ class RenderSingleEvent extends Event
     }
 
     /**
-     * @return Renderable
+     * @return \EzSystems\EzPlatformAdminUi\Component\Renderable
      */
     public function getComponent(): Renderable
     {
@@ -68,7 +68,7 @@ class RenderSingleEvent extends Event
     }
 
     /**
-     * @param Renderable $component
+     * @param \EzSystems\EzPlatformAdminUi\Component\Renderable $component
      */
     public function setComponent(Renderable $component)
     {

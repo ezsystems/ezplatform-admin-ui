@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\REST\Input\Parser;
 
+use EzSystems\EzPlatformAdminUi\REST\Value\BulkOperation as BulkOperationValue;
+use EzSystems\EzPlatformRest\Exceptions;
 use EzSystems\EzPlatformRest\Input\BaseParser;
 use EzSystems\EzPlatformRest\Input\ParsingDispatcher;
-use EzSystems\EzPlatformRest\Exceptions;
-use EzSystems\EzPlatformAdminUi\REST\Value\BulkOperation as BulkOperationValue;
 
 class BulkOperation extends BaseParser
 {

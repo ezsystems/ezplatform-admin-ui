@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -14,10 +14,10 @@ use eZ\Publish\API\Repository\Values\User\PasswordValidationContext;
 use eZ\Publish\Core\FieldType\ValidationError;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\Password;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\PasswordValidator;
+use EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator as BasePasswordValidator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
-use EzSystems\EzPlatformUser\Validator\Constraints\PasswordValidator as BasePasswordValidator;
 
 class PasswordValidatorTest extends TestCase
 {

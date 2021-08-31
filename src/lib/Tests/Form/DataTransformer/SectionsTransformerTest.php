@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\SectionService;
+use eZ\Publish\API\Repository\Values\Content\Section as APISection;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\SectionsTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use eZ\Publish\API\Repository\SectionService;
-use eZ\Publish\API\Repository\Values\Content\Section as APISection;
 
 class SectionsTransformerTest extends TestCase
 {

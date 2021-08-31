@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,13 +9,13 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component\Table;
 
 use Behat\Mink\Session;
+use Ibexa\AdminUi\Behat\Component\Pagination;
 use Ibexa\Behat\Browser\Component\Component;
 use Ibexa\Behat\Browser\Element\ElementInterface;
+use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
 use Ibexa\Behat\Browser\Locator\LocatorCollection;
 use Ibexa\Behat\Browser\Locator\LocatorInterface;
-use Ibexa\AdminUi\Behat\Component\Pagination;
-use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
 use PHPUnit\Framework\Assert;
 
 final class Table extends Component implements TableInterface
@@ -95,7 +95,7 @@ final class Table extends Component implements TableInterface
             ->mapBy(new ElementTextMapper())
         ;
 
-        $foundHeaders = array_filter($allHeaders, function (string $header) use ($columnNames) {
+        $foundHeaders = array_filter($allHeaders, static function (string $header) use ($columnNames) {
             return in_array($header, $columnNames, true);
         });
 
@@ -160,7 +160,7 @@ final class Table extends Component implements TableInterface
             $cellLocators[] = $this->getTableCellLocator($headerPosition, $header);
         }
 
-        $filteredCellLocators = array_filter($cellLocators, function (LocatorInterface $locator) {
+        $filteredCellLocators = array_filter($cellLocators, static function (LocatorInterface $locator) {
             return '' !== $locator->getIdentifier();
         });
 
@@ -195,7 +195,7 @@ final class Table extends Component implements TableInterface
             $cellLocators[] = $this->getTableCellLocator($headerPosition, $header);
         }
 
-        $filteredCellLocators = array_filter($cellLocators, function (LocatorInterface $locator) {
+        $filteredCellLocators = array_filter($cellLocators, static function (LocatorInterface $locator) {
             return '' !== $locator->getIdentifier();
         });
 
@@ -234,7 +234,7 @@ final class Table extends Component implements TableInterface
      */
     private function getHeaderPositions(array $searchedHeaders, array $allHeaders): array
     {
-        $foundHeaders = array_filter($allHeaders, function (string $header) use ($searchedHeaders) {
+        $foundHeaders = array_filter($allHeaders, static function (string $header) use ($searchedHeaders) {
             return in_array($header, $searchedHeaders, true);
         });
 

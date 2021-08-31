@@ -1,33 +1,32 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\EventListener;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
+use EzSystems\EzPlatformAdminUi\EventListener\RequestListener;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use PHPUnit\Framework\TestCase;
-use EzSystems\EzPlatformAdminUi\EventListener\RequestListener;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class RequestListenerTest extends TestCase
 {
-    /** @var RequestListener */
+    /** @var \EzSystems\EzPlatformAdminUi\EventListener\RequestListener */
     private $requestListener;
 
-    /** @var Request */
+    /** @var \Symfony\Component\HttpFoundation\Request */
     private $request;
 
-    /** @var RequestEvent */
+    /** @var \Symfony\Component\HttpKernel\Event\RequestEvent */
     private $event;
 
-    /** @var HttpKernelInterface|MockObject */
+    /** @var \Symfony\Component\HttpKernel\HttpKernelInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $httpKernel;
 
     protected function setUp(): void

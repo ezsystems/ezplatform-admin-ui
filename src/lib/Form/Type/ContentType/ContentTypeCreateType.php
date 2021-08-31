@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class ContentTypeCreateType extends AbstractType
 {
     /**
-     * @var ContentTypeService
+     * @var \eZ\Publish\API\Repository\ContentTypeService
      */
     private $contentTypeService;
 

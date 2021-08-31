@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType;
@@ -17,18 +17,18 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
  */
 abstract class AbstractBinaryBaseTransformer
 {
-    /** @var FieldType */
+    /** @var \eZ\Publish\API\Repository\FieldType */
     protected $fieldType;
 
-    /** @var Value */
+    /** @var \eZ\Publish\Core\FieldType\Value */
     protected $initialValue;
 
     /** @var string */
     protected $valueClass;
 
     /**
-     * @param FieldType $fieldType
-     * @param Value $initialValue
+     * @param \eZ\Publish\API\Repository\FieldType $fieldType
+     * @param \eZ\Publish\Core\FieldType\Value $initialValue
      * @param string $valueClass
      */
     public function __construct(FieldType $fieldType, Value $initialValue, $valueClass)
@@ -52,9 +52,9 @@ abstract class AbstractBinaryBaseTransformer
     /**
      * @param array $value
      *
-     * @return Value
+     * @return \eZ\Publish\Core\FieldType\Value
      *
-     * @throws TransformationFailedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function getReverseTransformedValue($value)
     {

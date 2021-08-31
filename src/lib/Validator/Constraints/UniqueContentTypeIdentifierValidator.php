@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
@@ -18,7 +18,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class UniqueContentTypeIdentifierValidator extends ConstraintValidator
 {
     /**
-     * @var ContentTypeService
+     * @var \eZ\Publish\API\Repository\ContentTypeService
      */
     private $contentTypeService;
 
@@ -30,8 +30,8 @@ class UniqueContentTypeIdentifierValidator extends ConstraintValidator
     /**
      * Checks if the passed value is valid.
      *
-     * @param ContentTypeData $value The value that should be validated
-     * @param Constraint|UniqueFieldDefinitionIdentifier $constraint The constraint for the validation
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData $value The value that should be validated
+     * @param \Symfony\Component\Validator\Constraint|UniqueFieldDefinitionIdentifier $constraint The constraint for the validation
      *
      * @api
      */

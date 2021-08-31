@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -12,20 +12,20 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
-use EzSystems\EzPlatformRest\Output\Visitor;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeInfoList as ContentTypeInfoListValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\ContentTypeInfoList;
-use EzSystems\EzPlatformRest\Server\Values\RestContent;
-use EzSystems\EzPlatformRest\Server\Values\RestLocation;
 use EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\ValueObjectVisitor\SubitemsList as SubitemsListValueObjectVisitor;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsList;
 use EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow;
 use EzSystems\EzPlatformRest\Output\Generator\Json as JsonOutputGenerator;
+use EzSystems\EzPlatformRest\Output\Visitor;
+use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeInfoList as ContentTypeInfoListValueObjectVisitor;
+use EzSystems\EzPlatformRest\Server\Values\ContentTypeInfoList;
+use EzSystems\EzPlatformRest\Server\Values\RestContent;
+use EzSystems\EzPlatformRest\Server\Values\RestLocation;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 
 /**

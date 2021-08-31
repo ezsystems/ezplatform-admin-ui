@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation;
 
-use EzSystems\EzPlatformRest\Message;
 use EzSystems\EzPlatformAdminUi\REST\Value\BulkOperationResponse;
 use EzSystems\EzPlatformAdminUi\REST\Value\Operation;
 use EzSystems\EzPlatformAdminUi\REST\Value\OperationResponse;
+use EzSystems\EzPlatformRest\Message;
 use EzSystems\EzPlatformRest\Server\Controller as RestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;

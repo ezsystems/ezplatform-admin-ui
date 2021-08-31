@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -26,13 +26,13 @@ class URLWildcardUpdateData extends URLWildcardData
         }
     }
 
-    /** @return URLWildcard|null */
+    /** @return \eZ\Publish\API\Repository\Values\Content\URLWildcard|null */
     public function getUrlWildcard(): ?URLWildcard
     {
         return $this->urlWildcard;
     }
 
-    /** @param URLWildcard|null $urlWildcard */
+    /** @param \eZ\Publish\API\Repository\Values\Content\URLWildcard|null $urlWildcard */
     public function setUrlWildcard(?URLWildcard $urlWildcard): void
     {
         $this->urlWildcard = $urlWildcard;

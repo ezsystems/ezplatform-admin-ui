@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType;
@@ -17,7 +17,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 class FieldValueTransformer implements DataTransformerInterface
 {
     /**
-     * @var eZ\Publish\API\Repository\FieldType
+     * @var \eZ\Publish\API\Repository\FieldType
      */
     private $fieldType;
 

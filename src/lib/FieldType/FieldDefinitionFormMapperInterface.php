@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\FieldType;
@@ -23,8 +23,8 @@ interface FieldDefinitionFormMapperInterface
      * - field settings
      * - default value.
      *
-     * @param FormInterface $fieldDefinitionForm form for current FieldDefinition
-     * @param FieldDefinitionData $data underlying data for current FieldDefinition form
+     * @param \Symfony\Component\Form\FormInterface $fieldDefinitionForm form for current FieldDefinition
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData $data underlying data for current FieldDefinition form
      */
     public function mapFieldDefinitionForm(FormInterface $fieldDefinitionForm, FieldDefinitionData $data): void;
 }

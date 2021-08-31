@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -96,7 +96,7 @@ class Languages implements ProviderInterface
         // Append fallback languages at the end of priority language list
         $languageCodes = array_unique(array_merge($priority, $fallback));
 
-        $languages = array_filter(array_values($languageCodes), function ($languageCode) use ($languagesMap) {
+        $languages = array_filter(array_values($languageCodes), static function ($languageCode) use ($languagesMap) {
             // Get only Languages defined and enabled in Admin
             return isset($languagesMap[$languageCode]) && $languagesMap[$languageCode]['enabled'];
         });

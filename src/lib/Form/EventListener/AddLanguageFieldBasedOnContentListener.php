@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -11,7 +11,6 @@ namespace EzSystems\EzPlatformAdminUi\Form\EventListener;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormEvent;
@@ -42,7 +41,7 @@ class AddLanguageFieldBasedOnContentListener
      */
     public function onPreSetData(FormEvent $event)
     {
-        /** @var CustomUrlAddData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData $data */
         $data = $event->getData();
         $location = $data->getLocation();
         if (null === $location) {
@@ -87,7 +86,7 @@ class AddLanguageFieldBasedOnContentListener
     {
         return array_filter(
             $this->languageService->loadLanguages(),
-            function (Language $language) use ($contentLanguages) {
+            static function (Language $language) use ($contentLanguages) {
                 return in_array($language->languageCode, $contentLanguages, true);
             }
         );

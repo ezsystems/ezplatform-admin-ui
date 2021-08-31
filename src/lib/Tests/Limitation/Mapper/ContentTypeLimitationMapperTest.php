@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\Limitation\Mapper;
@@ -20,13 +20,13 @@ class ContentTypeLimitationMapperTest extends TestCase
     private const EXAMPLE_CONTENT_TYPE_ID_B = 2;
     private const EXAMPLE_CONTENT_TYPE_ID_C = 3;
 
-    /** @var ContentTypeService|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject */
     private $contentTypeService;
 
-    /** @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Psr\Log\LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $logger;
 
-    /** @var ContentTypeLimitationMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Limitation\Mapper\ContentTypeLimitationMapper */
     private $mapper;
 
     protected function setUp(): void

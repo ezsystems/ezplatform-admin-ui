@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -12,7 +12,7 @@ use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 
 class RoleAssignmentDeleteData
 {
-    /** @var RoleAssignment */
+    /** @var \eZ\Publish\API\Repository\Values\User\RoleAssignment */
     private $roleAssignment;
 
     public function __construct(?RoleAssignment $roleAssignment = null)
@@ -21,7 +21,7 @@ class RoleAssignmentDeleteData
     }
 
     /**
-     * @return RoleAssignment
+     * @return \eZ\Publish\API\Repository\Values\User\RoleAssignment
      */
     public function getRoleAssignment(): ?RoleAssignment
     {
@@ -29,7 +29,7 @@ class RoleAssignmentDeleteData
     }
 
     /**
-     * @param RoleAssignment $roleAssignment
+     * @param \eZ\Publish\API\Repository\Values\User\RoleAssignment $roleAssignment
      */
     public function setRoleAssignment(RoleAssignment $roleAssignment)
     {

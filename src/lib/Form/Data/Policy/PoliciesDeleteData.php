@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -15,14 +15,14 @@ use eZ\Publish\API\Repository\Values\User\Role;
  */
 class PoliciesDeleteData
 {
-    /** @var Role|null */
+    /** @var \eZ\Publish\API\Repository\Values\User\Role|null */
     protected $role;
 
     /** @var array|null */
     protected $policies;
 
     /**
-     * @param Role|null $role
+     * @param \eZ\Publish\API\Repository\Values\User\Role|null $role
      * @param array|null $policies
      */
     public function __construct(?Role $role = null, array $policies = [])
@@ -32,7 +32,7 @@ class PoliciesDeleteData
     }
 
     /**
-     * @return Role|null
+     * @return \eZ\Publish\API\Repository\Values\User\Role|null
      */
     public function getRole(): ?Role
     {
@@ -40,7 +40,7 @@ class PoliciesDeleteData
     }
 
     /**
-     * @param Role|null $role
+     * @param \eZ\Publish\API\Repository\Values\User\Role|null $role
      */
     public function setRole(?Role $role)
     {

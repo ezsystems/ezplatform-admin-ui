@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -63,7 +63,7 @@ class ContentDraftsDataset
             $contentDrafts = [];
         }
 
-        $contentDrafts = array_filter($contentDrafts, function (VersionInfo $version) {
+        $contentDrafts = array_filter($contentDrafts, static function (VersionInfo $version) {
             // Filter out content that has been sent to trash
             return !$version->getContentInfo()->isTrashed();
         });
@@ -79,7 +79,7 @@ class ContentDraftsDataset
 
         // ContentService::loadContentDrafts returns unsorted list of VersionInfo.
         // Sort results by modification date, descending.
-        usort($contentDrafts, function (VersionInfo $a, VersionInfo $b) {
+        usort($contentDrafts, static function (VersionInfo $a, VersionInfo $b) {
             return $b->modificationDate <=> $a->modificationDate;
         });
 

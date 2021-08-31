@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
 
-use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -21,7 +21,7 @@ class TabPass implements CompilerPassInterface
     const TAG_TAB = 'ezplatform.tab';
 
     /**
-     * @param ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      *
      * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException When a service is abstract
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException When a tag is missing 'group' attribute

@@ -1,22 +1,22 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataMapper;
 
-use eZ\Publish\Core\Repository\Values\User\RoleCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
+use eZ\Publish\Core\Repository\Values\User\RoleCreateStruct;
+use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper;
 use PHPUnit\Framework\TestCase;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class RoleCreateMapperTest extends TestCase
 {
-    /** @var RoleCreateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper */
     private $mapper;
 
     protected function setUp(): void
@@ -79,7 +79,7 @@ class RoleCreateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return RoleCreateStruct
+     * @return \eZ\Publish\Core\Repository\Values\User\RoleCreateStruct
      */
     private function createStruct(array $properties): RoleCreateStruct
     {
@@ -89,7 +89,7 @@ class RoleCreateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return RoleCreateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData
      */
     private function createData(array $properties): RoleCreateData
     {

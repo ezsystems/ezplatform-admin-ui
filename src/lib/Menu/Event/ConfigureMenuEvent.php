@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -50,18 +50,18 @@ class ConfigureMenuEvent extends Event
     const USER_SETTING_UPDATE_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.user_setting_update_sidebar_right';
     const CONTENT_TYPE_SIDEBAR_RIGHT = 'ezplatform_admin_ui.menu_configure.content_type_sidebar_right';
 
-    /** @var FactoryInterface */
+    /** @var \Knp\Menu\FactoryInterface */
     private $factory;
 
-    /** @var ItemInterface */
+    /** @var \Knp\Menu\ItemInterface */
     private $menu;
 
     /** @var array|null */
     private $options;
 
     /**
-     * @param FactoryInterface $factory
-     * @param ItemInterface $menu
+     * @param \Knp\Menu\FactoryInterface $factory
+     * @param \Knp\Menu\ItemInterface $menu
      * @param array $options
      */
     public function __construct(FactoryInterface $factory, ItemInterface $menu, array $options = [])
@@ -72,7 +72,7 @@ class ConfigureMenuEvent extends Event
     }
 
     /**
-     * @return FactoryInterface
+     * @return \Knp\Menu\FactoryInterface
      */
     public function getFactory(): FactoryInterface
     {
@@ -80,7 +80,7 @@ class ConfigureMenuEvent extends Event
     }
 
     /**
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      */
     public function getMenu(): ItemInterface
     {

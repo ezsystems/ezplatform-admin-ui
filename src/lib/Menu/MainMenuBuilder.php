@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -157,7 +157,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var ItemInterface|ItemInterface[] $menu */
+        /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
         $contentMenuItems = $this->getContentMenuItems();

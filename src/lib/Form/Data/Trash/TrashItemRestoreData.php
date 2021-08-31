@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Trash;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\Content\TrashItem;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -20,16 +19,16 @@ class TrashItemRestoreData
     /**
      * @Assert\NotBlank()
      *
-     * @var TrashItem[]
+     * @var \eZ\Publish\API\Repository\Values\Content\TrashItem[]
      */
     public $trashItems;
 
-    /** @var Location|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
     public $location;
 
     /**
-     * @param TrashItem[] $trashItems
-     * @param Location|null $location
+     * @param \eZ\Publish\API\Repository\Values\Content\TrashItem[] $trashItems
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
      */
     public function __construct(array $trashItems = [], ?Location $location = null)
     {
@@ -38,7 +37,7 @@ class TrashItemRestoreData
     }
 
     /**
-     * @return TrashItem[]
+     * @return \eZ\Publish\API\Repository\Values\Content\TrashItem[]
      */
     public function getTrashItems(): array
     {
@@ -46,7 +45,7 @@ class TrashItemRestoreData
     }
 
     /**
-     * @param TrashItem[] $trashItems
+     * @param \eZ\Publish\API\Repository\Values\Content\TrashItem[] $trashItems
      */
     public function setTrashItems(array $trashItems)
     {
@@ -54,7 +53,7 @@ class TrashItemRestoreData
     }
 
     /**
-     * @return Location|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      */
     public function getLocation(): ?Location
     {
@@ -62,7 +61,7 @@ class TrashItemRestoreData
     }
 
     /**
-     * @param Location|null $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
      */
     public function setLocation(?Location $location)
     {

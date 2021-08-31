@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\Limitation\Mapper;
@@ -18,13 +18,13 @@ class SectionLimitationMapperTest extends TestCase
 {
     private const EXAMPLE_SECTION_ID = 0xFF;
 
-    /** @var \PHPUnit\Framework\MockObject\MockObject|SectionService */
+    /** @var \PHPUnit\Framework\MockObject\MockObject|\eZ\Publish\API\Repository\SectionService */
     private $sectionServiceMock;
 
-    /** @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Psr\Log\LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $logger;
 
-    /** @var SectionLimitationMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Limitation\Mapper\SectionLimitationMapper */
     private $mapper;
 
     protected function setUp(): void

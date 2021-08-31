@@ -1,27 +1,28 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
+use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\Pagination\Pagerfanta\LocationSearchAdapter;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use eZ\Publish\API\Repository\Values\Content\Query;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UI\Value\Content\Location\Mapper;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -30,7 +31,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
-use eZ\Publish\API\Repository\PermissionResolver;
 
 class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
@@ -119,7 +119,7 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplate(): string
     {
@@ -127,7 +127,7 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {

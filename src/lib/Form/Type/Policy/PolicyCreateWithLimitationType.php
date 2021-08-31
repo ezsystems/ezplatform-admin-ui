@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,14 +10,14 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
 
 use eZ\Publish\API\Repository\RoleService;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
+use EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PolicyCreateWithLimitationType extends AbstractType
 {
@@ -33,7 +33,7 @@ class PolicyCreateWithLimitationType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -76,7 +76,7 @@ class PolicyCreateWithLimitationType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function configureOptions(OptionsResolver $resolver)
     {

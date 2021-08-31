@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
@@ -37,13 +37,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserOnTheFlyController extends Controller
 {
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
     /** @var \eZ\Publish\API\Repository\UserService */

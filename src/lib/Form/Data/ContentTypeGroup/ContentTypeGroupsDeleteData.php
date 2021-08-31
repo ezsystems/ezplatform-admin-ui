@@ -1,25 +1,23 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
-
 /**
  * @todo Add validation
  */
 class ContentTypeGroupsDeleteData
 {
-    /** @var ContentTypeGroup[]|null */
+    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup[]|null */
     protected $contentTypeGroups;
 
     /**
-     * @param ContentTypeGroup[]|null $contentTypeGroups
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup[]|null $contentTypeGroups
      */
     public function __construct(array $contentTypeGroups = [])
     {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -12,7 +12,6 @@ use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
-use eZ\Publish\API\Repository\Values\User\UserGroup;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,13 +19,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserGroupChoiceType extends AbstractType
 {
-    /** @var Repository */
+    /** @var \eZ\Publish\API\Repository\Repository */
     private $repository;
 
     /**
      * UserGroupChoiceType constructor.
      *
-     * @param Repository $repository
+     * @param \eZ\Publish\API\Repository\Repository $repository
      */
     public function __construct(Repository $repository)
     {
@@ -34,7 +33,7 @@ class UserGroupChoiceType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -48,7 +47,7 @@ class UserGroupChoiceType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getParent(): ?string
     {
@@ -58,11 +57,11 @@ class UserGroupChoiceType extends AbstractType
     /**
      * Get list of available user groups.
      *
-     * @return UserGroup[]
+     * @return \eZ\Publish\API\Repository\Values\User\UserGroup[]
      */
     protected function getUserGroups(): array
     {
-        return $this->repository->sudo(function (Repository $repository) {
+        return $this->repository->sudo(static function (Repository $repository) {
             $query = new LocationQuery();
             $query->filter = new ContentTypeIdentifier('user_group');
             $query->offset = 0;

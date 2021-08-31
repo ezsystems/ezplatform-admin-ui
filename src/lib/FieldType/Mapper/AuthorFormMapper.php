@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\FieldType\Mapper;
 
 use eZ\Publish\Core\FieldType\Author\Type;
-use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
 use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
+use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
+use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
 use EzSystems\EzPlatformContentForms\FieldType\FieldValueFormMapperInterface;
 use EzSystems\EzPlatformContentForms\Form\Type\FieldType\AuthorFieldType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

@@ -1,12 +1,11 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
-use eZ\Publish\API\Repository\Values\URL\URL;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -40,10 +39,10 @@ class URLEditRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
     protected function createStructure(array $options): ItemInterface
     {
-        /** @var URL $url */
+        /** @var \eZ\Publish\API\Repository\Values\URL\URL $url */
         $url = $options['url'];
 
-        /** @var ItemInterface|ItemInterface[] $menu */
+        /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
         $menu->setChildren([

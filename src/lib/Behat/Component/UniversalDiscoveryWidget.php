@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -128,7 +128,7 @@ class UniversalDiscoveryWidget extends Component
         $levelItemsSelector = new CSSLocator('css', sprintf($this->getLocator('treeLevelElementsFormat')->getSelector(), $level));
 
         return $this->getHTMLPage()->setTimeout(self::LONG_TIMEOUT)->findAll($levelItemsSelector)->map(
-            function (ElementInterface $element) {
+            static function (ElementInterface $element) {
                 return $element->getText();
             }
         );

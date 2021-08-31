@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,13 +10,13 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\User;
 
 use eZ\Publish\API\Repository\Values\User\User;
 use EzSystems\EzPlatformAdminUi\Form\Data\User\UserPasswordResetData;
+use EzSystems\EzPlatformAdminUi\Validator\Constraints\Password as NewPassword;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use EzSystems\EzPlatformAdminUi\Validator\Constraints\Password as NewPassword;
 
 /**
  * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.

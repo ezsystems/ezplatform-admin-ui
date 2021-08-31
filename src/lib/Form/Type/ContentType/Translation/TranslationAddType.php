@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LanguageService;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\AvailableTranslationLanguageChoiceLoader;
@@ -18,9 +17,6 @@ use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\BaseTranslationLangu
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeType;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Exception\AlreadySubmittedException;
-use Symfony\Component\Form\Exception\LogicException;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -95,20 +91,20 @@ class TranslationAddType extends AbstractType
     /**
      * Adds language fields and populates options list based on default form data.
      *
-     * @param FormEvent $event
+     * @param \Symfony\Component\Form\FormEvent $event
      *
-     * @throws UnauthorizedException
-     * @throws NotFoundException
-     * @throws AlreadySubmittedException
-     * @throws LogicException
-     * @throws UnexpectedTypeException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
      */
     public function onPreSetData(FormEvent $event)
     {
         $contentLanguages = [];
         $form = $event->getForm();
 
-        /** @var TranslationAddData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData $data */
         $data = $event->getData();
         $contentType = $data->getContentType();
 
@@ -122,13 +118,13 @@ class TranslationAddType extends AbstractType
     /**
      * Adds language fields and populates options list based on submitted form data.
      *
-     * @param FormEvent $event
+     * @param \Symfony\Component\Form\FormEvent $event
      *
-     * @throws UnauthorizedException
-     * @throws NotFoundException
-     * @throws AlreadySubmittedException
-     * @throws LogicException
-     * @throws UnexpectedTypeException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
      */
     public function onPreSubmit(FormEvent $event)
     {
@@ -169,12 +165,12 @@ class TranslationAddType extends AbstractType
     /**
      * Adds language fields to the $form. Language options are composed based on content language.
      *
-     * @param FormInterface $form
+     * @param \Symfony\Component\Form\FormInterface $form
      * @param string[] $contentLanguages
      *
-     * @throws AlreadySubmittedException
-     * @throws LogicException
-     * @throws UnexpectedTypeException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
      */
     public function addLanguageFields(FormInterface $form, array $contentLanguages): void
     {

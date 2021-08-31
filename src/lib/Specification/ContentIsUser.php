@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Specification;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\API\Repository\Values\Content\Content;
 
 class ContentIsUser implements ContentSpecification
 {
-    /** @var UserService */
+    /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
     /**
-     * @param UserService $userService
+     * @param \eZ\Publish\API\Repository\UserService $userService
      */
     public function __construct(UserService $userService)
     {
@@ -27,7 +27,7 @@ class ContentIsUser implements ContentSpecification
     /**
      * Checks if $contentId is an existing User content.
      *
-     * @param Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      *
      * @return bool
      */

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -11,8 +11,8 @@ namespace EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
-use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
+use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class SectionAssign implements EventSubscriberInterface

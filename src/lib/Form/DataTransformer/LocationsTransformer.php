@@ -1,29 +1,29 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 /**
  * Transforms between a Location's ID and a domain specific Location object.
  */
 class LocationsTransformer implements DataTransformerInterface
 {
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
     /**
-     * @param LocationService $locationService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
      */
     public function __construct(LocationService $locationService)
     {
@@ -52,9 +52,9 @@ class LocationsTransformer implements DataTransformerInterface
      *
      * @param mixed $value
      *
-     * @return Location[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Location[]
      *
-     * @throws TransformationFailedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function reverseTransform($value): ?array
     {

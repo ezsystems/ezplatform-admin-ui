@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Language;
@@ -10,7 +10,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 
 class LanguageUpdateData
 {
-    /** @var Language */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Language */
     private $language;
 
     /** @var string */
@@ -20,7 +20,7 @@ class LanguageUpdateData
     private $enabled;
 
     /**
-     * @param Language|null $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
      */
     public function __construct(Language $language = null)
     {
@@ -30,7 +30,7 @@ class LanguageUpdateData
     }
 
     /**
-     * @return Language
+     * @return \eZ\Publish\API\Repository\Values\Content\Language
      */
     public function getLanguage(): Language
     {
@@ -38,7 +38,7 @@ class LanguageUpdateData
     }
 
     /**
-     * @param Language $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
      */
     public function setLanguage(Language $language)
     {

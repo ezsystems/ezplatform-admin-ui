@@ -1,12 +1,11 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\Data;
 
-use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\TrashItem as APITrashItem;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\User\User;
@@ -16,13 +15,13 @@ use eZ\Publish\API\Repository\Values\User\User;
  */
 class TrashItemData
 {
-    /** @var APITrashItem */
+    /** @var \eZ\Publish\API\Repository\Values\Content\TrashItem */
     protected $location;
 
-    /** @var ContentType */
+    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType */
     protected $contentType;
 
-    /** @var Location[] */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location[] */
     protected $ancestors;
 
     /** @var \eZ\Publish\API\Repository\Values\User\User */
@@ -44,7 +43,7 @@ class TrashItemData
     }
 
     /**
-     * @return APITrashItem
+     * @return \eZ\Publish\API\Repository\Values\Content\TrashItem
      */
     public function getLocation(): APITrashItem
     {
@@ -52,7 +51,7 @@ class TrashItemData
     }
 
     /**
-     * @param APITrashItem $location
+     * @param \eZ\Publish\API\Repository\Values\Content\TrashItem $location
      */
     public function setLocation(APITrashItem $location)
     {
@@ -60,7 +59,7 @@ class TrashItemData
     }
 
     /**
-     * @return ContentType
+     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType
      */
     public function getContentType(): ContentType
     {
@@ -68,7 +67,7 @@ class TrashItemData
     }
 
     /**
-     * @param ContentType $contentType
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      */
     public function setContentType(ContentType $contentType)
     {
@@ -76,7 +75,7 @@ class TrashItemData
     }
 
     /**
-     * @return Location[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Location[]
      */
     public function getAncestors(): array
     {
@@ -84,7 +83,7 @@ class TrashItemData
     }
 
     /**
-     * @param Location[] $ancestors
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $ancestors
      */
     public function setAncestors(array $ancestors)
     {

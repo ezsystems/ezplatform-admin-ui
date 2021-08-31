@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,8 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\Role;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Section;
-use eZ\Publish\API\Repository\Values\User\User;
-use eZ\Publish\API\Repository\Values\User\UserGroup;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -23,14 +21,14 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     const LIMITATION_TYPE_SECTION = 'section';
     const LIMITATION_TYPE_LOCATION = 'location';
 
-    /** @var UserGroup[] */
+    /** @var \eZ\Publish\API\Repository\Values\User\UserGroup[] */
     private $groups;
 
-    /** @var User[] */
+    /** @var \eZ\Publish\API\Repository\Values\User\User[] */
     private $users;
 
     /**
-     * @var Section[]
+     * @var \eZ\Publish\API\Repository\Values\Content\Section[]
      *
      * @Assert\Expression(
      *     "this.getLimitationType() != 'section' or (this.getLimitationType() == 'section' and value != [])",
@@ -40,7 +38,7 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     private $sections;
 
     /**
-     * @var Location[]
+     * @var \eZ\Publish\API\Repository\Values\Content\Location[]
      *
      * @Assert\Expression(
      *     "this.getLimitationType() != 'location' or (this.getLimitationType() == 'location' and value != [])",
@@ -62,10 +60,10 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     private $limitationType;
 
     /**
-     * @param UserGroup[] $groups
-     * @param User[] $users
-     * @param Section[] $sections
-     * @param Location[] $locations
+     * @param \eZ\Publish\API\Repository\Values\User\UserGroup[] $groups
+     * @param \eZ\Publish\API\Repository\Values\User\User[] $users
+     * @param \eZ\Publish\API\Repository\Values\Content\Section[] $sections
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $locations
      * @param string $limitationType
      */
     public function __construct(
@@ -83,7 +81,7 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     }
 
     /**
-     * @return UserGroup[]
+     * @return \eZ\Publish\API\Repository\Values\User\UserGroup[]
      */
     public function getGroups(): ?array
     {
@@ -91,7 +89,7 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     }
 
     /**
-     * @param UserGroup[] $groups
+     * @param \eZ\Publish\API\Repository\Values\User\UserGroup[] $groups
      *
      * @return self
      */
@@ -103,7 +101,7 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     }
 
     /**
-     * @return User[]
+     * @return \eZ\Publish\API\Repository\Values\User\User[]
      */
     public function getUsers(): ?array
     {
@@ -111,7 +109,7 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     }
 
     /**
-     * @param User[] $users
+     * @param \eZ\Publish\API\Repository\Values\User\User[] $users
      *
      * @return self
      */
@@ -123,7 +121,7 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     }
 
     /**
-     * @return Section[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Section[]
      */
     public function getSections(): ?array
     {
@@ -131,7 +129,7 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     }
 
     /**
-     * @param Section[] $sections
+     * @param \eZ\Publish\API\Repository\Values\Content\Section[] $sections
      *
      * @return self
      */
@@ -143,7 +141,7 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     }
 
     /**
-     * @return Location[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Location[]
      */
     public function getLocations(): ?array
     {
@@ -151,7 +149,7 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     }
 
     /**
-     * @param Location[] $locations
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $locations
      *
      * @return self
      */
@@ -183,7 +181,7 @@ class RoleAssignmentCreateData implements TranslationContainerInterface
     }
 
     /**
-     * @param ExecutionContextInterface $context
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      * @param $payload
      *
      * @Assert\Callback

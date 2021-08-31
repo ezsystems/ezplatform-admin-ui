@@ -1,14 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
-
-use eZ\Publish\API\Repository\Values\Content\Section;
 
 /**
  * @todo Add validation
@@ -19,7 +17,7 @@ class SectionsDeleteData
     protected $sections;
 
     /**
-     * @param Section[]|null $sections
+     * @param \eZ\Publish\API\Repository\Values\Content\Section[]|null $sections
      */
     public function __construct(array $sections = [])
     {

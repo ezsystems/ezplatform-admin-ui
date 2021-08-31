@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\Validator\Constraint;
@@ -30,7 +30,7 @@ class ValidatorConfigurationValidatorTest extends TestCase
     private $fieldTypeService;
 
     /**
-     * @var ValidatorConfigurationValidator
+     * @var \EzSystems\EzPlatformAdminUi\Validator\Constraints\ValidatorConfigurationValidator
      */
     private $validator;
 

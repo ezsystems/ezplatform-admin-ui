@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
-use Symfony\Component\Validator\Constraint;
 use EzSystems\EzPlatformContentForms\Validator\Constraints\FieldTypeValidator;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Will check if field settings for FieldDefinition are valid.

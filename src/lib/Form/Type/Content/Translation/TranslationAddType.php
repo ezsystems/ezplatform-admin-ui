@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,7 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
@@ -23,9 +22,6 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
-use Symfony\Component\Form\Exception\AlreadySubmittedException;
-use Symfony\Component\Form\Exception\LogicException;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -102,13 +98,13 @@ class TranslationAddType extends AbstractType
     /**
      * Adds language fields and populates options list based on default form data.
      *
-     * @param FormEvent $event
+     * @param \Symfony\Component\Form\FormEvent $event
      *
-     * @throws UnauthorizedException
-     * @throws NotFoundException
-     * @throws AlreadySubmittedException
-     * @throws LogicException
-     * @throws UnexpectedTypeException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
      */
     public function onPreSetData(FormEvent $event)
     {
@@ -130,13 +126,13 @@ class TranslationAddType extends AbstractType
     /**
      * Adds language fields and populates options list based on submitted form data.
      *
-     * @param FormEvent $event
+     * @param \Symfony\Component\Form\FormEvent $event
      *
-     * @throws UnauthorizedException
-     * @throws NotFoundException
-     * @throws AlreadySubmittedException
-     * @throws LogicException
-     * @throws UnexpectedTypeException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
      */
     public function onPreSubmit(FormEvent $event)
     {
@@ -180,7 +176,7 @@ class TranslationAddType extends AbstractType
     /**
      * Adds language fields to the $form. Language options are composed based on content language.
      *
-     * @param FormInterface $form
+     * @param \Symfony\Component\Form\FormInterface $form
      * @param string[] $contentLanguages
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
      *
@@ -218,7 +214,7 @@ class TranslationAddType extends AbstractType
                     'expanded' => false,
                     'choice_loader' => new CallbackChoiceLoader(function () use ($contentLanguages, $limitationLanguageCodes) {
                         return $this->loadLanguages(
-                            function (Language $language) use ($contentLanguages, $limitationLanguageCodes) {
+                            static function (Language $language) use ($contentLanguages, $limitationLanguageCodes) {
                                 return $language->enabled
                                     && !in_array($language->languageCode, $contentLanguages, true)
                                     && (empty($limitationLanguageCodes) || in_array($language->languageCode, $limitationLanguageCodes, true));
@@ -239,7 +235,7 @@ class TranslationAddType extends AbstractType
                     'expanded' => false,
                     'choice_loader' => new CallbackChoiceLoader(function () use ($contentLanguages) {
                         return $this->loadLanguages(
-                            function (Language $language) use ($contentLanguages) {
+                            static function (Language $language) use ($contentLanguages) {
                                 return $language->enabled && in_array($language->languageCode, $contentLanguages, true);
                             }
                         );

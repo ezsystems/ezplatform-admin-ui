@@ -1,14 +1,13 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
 
-use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Section;
 
 /**
@@ -16,15 +15,15 @@ use eZ\Publish\API\Repository\Values\Content\Section;
  */
 class SectionContentAssignData
 {
-    /** @var Section|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Section|null */
     protected $section;
 
-    /** @var Location[] */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location[] */
     protected $locations;
 
     /**
-     * @param Section|null $section
-     * @param Location[] $locations
+     * @param \eZ\Publish\API\Repository\Values\Content\Section|null $section
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $locations
      */
     public function __construct(?Section $section = null, array $locations = [])
     {
@@ -33,7 +32,7 @@ class SectionContentAssignData
     }
 
     /**
-     * @return Section|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Section|null
      */
     public function getSection(): ?Section
     {
@@ -41,7 +40,7 @@ class SectionContentAssignData
     }
 
     /**
-     * @param Section|null $section
+     * @param \eZ\Publish\API\Repository\Values\Content\Section|null $section
      */
     public function setSection(?Section $section)
     {
@@ -49,7 +48,7 @@ class SectionContentAssignData
     }
 
     /**
-     * @return Location[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Location[]
      */
     public function getLocations(): array
     {
@@ -57,7 +56,7 @@ class SectionContentAssignData
     }
 
     /**
-     * @param Location[] $locations
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $locations
      */
     public function setLocations(array $locations)
     {

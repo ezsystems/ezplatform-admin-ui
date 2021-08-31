@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -20,7 +20,7 @@ class UniversalDiscoveryWidget extends AbstractParser
     /**
      * Adds semantic configuration definition.
      *
-     * @param NodeBuilder $nodeBuilder Node just under ezpublish.system.<siteaccess>
+     * @param \Symfony\Component\Config\Definition\Builder\NodeBuilder $nodeBuilder Node just under ezpublish.system.<siteaccess>
      */
     public function addSemanticConfig(NodeBuilder $nodeBuilder)
     {
@@ -38,7 +38,7 @@ class UniversalDiscoveryWidget extends AbstractParser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {

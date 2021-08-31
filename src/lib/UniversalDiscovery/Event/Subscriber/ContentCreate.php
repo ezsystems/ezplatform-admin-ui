@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -13,8 +13,8 @@ use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\LanguageLimitation;
-use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
+use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ContentCreate implements EventSubscriberInterface
@@ -52,7 +52,7 @@ class ContentCreate implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getSubscribedEvents(): array
     {
@@ -98,7 +98,7 @@ class ContentCreate implements EventSubscriberInterface
 
         $restrictedContentTypes = $this->contentTypeService->loadContentTypeList($restrictedContentTypesIds);
 
-        return array_values(array_map(function (ContentType $contentType): string {
+        return array_values(array_map(static function (ContentType $contentType): string {
             return $contentType->identifier;
         }, (array)$restrictedContentTypes));
     }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -21,13 +21,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class VersionDraftConflictController extends Controller
 {
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var DatasetFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     private $datasetFactory;
 
     /** @var \eZ\Publish\API\Repository\UserService */
@@ -62,7 +62,7 @@ class VersionDraftConflictController extends Controller
      * @param string $languageCode
      * @param int|null $locationId
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException

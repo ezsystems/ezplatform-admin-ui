@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -40,7 +40,7 @@ class ContentObjectStateUpdateType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -56,7 +56,7 @@ class ContentObjectStateUpdateType extends AbstractType
             ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            /** @var ContentObjectStateUpdateData $contentObjectStateUpdateData */
+            /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData $contentObjectStateUpdateData */
             $contentObjectStateUpdateData = $event->getData();
             $objectStateGroup = $contentObjectStateUpdateData->getObjectStateGroup();
             $contentInfo = $contentObjectStateUpdateData->getContentInfo();
@@ -79,7 +79,7 @@ class ContentObjectStateUpdateType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function configureOptions(OptionsResolver $resolver)
     {

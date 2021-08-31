@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -22,14 +22,14 @@ class ContentTypeParamConverter implements ParamConverterInterface
     const PARAMETER_CONTENT_TYPE_ID = 'contentTypeId';
     const PARAMETER_CONTENT_TYPE_IDENTIFIER = 'contentTypeIdentifier';
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
     /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
     private $languagePreferenceProvider;
 
     /**
-     * @param ContentTypeService $contentTypeGroupService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeGroupService
      * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $languagePreferenceProvider
      */
     public function __construct(
@@ -41,7 +41,7 @@ class ContentTypeParamConverter implements ParamConverterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
@@ -69,7 +69,7 @@ class ContentTypeParamConverter implements ParamConverterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function supports(ParamConverter $configuration)
     {

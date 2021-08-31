@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Limitation;
@@ -24,8 +24,8 @@ interface LimitationFormMapperInterface
      * - Add a "limitationValues" form field
      * - OR add field(s) that map to "limitationValues" property from $data.
      *
-     * @param FormInterface $form form for current Limitation
-     * @param Limitation $data underlying data for current Limitation form
+     * @param \Symfony\Component\Form\FormInterface $form form for current Limitation
+     * @param \eZ\Publish\API\Repository\Values\User\Limitation $data underlying data for current Limitation form
      */
     public function mapLimitationForm(FormInterface $form, Limitation $data);
 
@@ -40,7 +40,7 @@ interface LimitationFormMapperInterface
      * This method will be called when FormEvents::SUBMIT is called.
      * It gives the opportunity to filter/manipulate limitation values.
      *
-     * @param Limitation $limitation
+     * @param \eZ\Publish\API\Repository\Values\User\Limitation $limitation
      */
     public function filterLimitationValues(Limitation $limitation);
 }

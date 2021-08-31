@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,20 +9,20 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Controller\Version;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\Core\Base\Exceptions\BadStateException;
 use EzSystems\EzPlatformAdminUi\Specification\Version\VersionHasConflict;
 use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use eZ\Publish\Core\Base\Exceptions\BadStateException;
 
 class VersionConflictController extends Controller
 {
     /**
-     * @var ContentService
+     * @var \eZ\Publish\API\Repository\ContentService
      */
     private $contentService;
 
     /**
-     * @param ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
      */
     public function __construct(ContentService $contentService)
     {
@@ -38,7 +38,7 @@ class VersionConflictController extends Controller
      * @param int $versionNo
      * @param string $languageCode
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
