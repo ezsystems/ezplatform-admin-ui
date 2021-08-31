@@ -98,9 +98,6 @@ class ContentEditController extends Controller
             )
         )->getResponse();
 
-        return $response ?? $this->redirectToRoute('_ez_content_view', [
-            'contentId' => $referrerlocation->contentId,
-            'locationId' => $referrerlocation->id,
-        ]);
+        return $response ?? $this->redirectToLocation($referrerlocation);
     }
 }

@@ -16,7 +16,7 @@
         {% block close_button %}
             {% if without_close_button is not defined or without_close_button != true %}
                 {% set referrer_location = is_published ? location : parent_location %}
-                {% set cancel_path = path('ezplatform.content.draft.edit.cancel', {
+                {% set cancel_path = path('ibexa.content.draft.edit.cancel', {
                     'contentId': content.id,
                     'referrerLocationId': referrer_location.id,
                     'versionNo': content.versionInfo.versionNo,
