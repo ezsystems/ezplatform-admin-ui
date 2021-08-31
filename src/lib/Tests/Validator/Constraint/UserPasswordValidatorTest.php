@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,37 +9,36 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Tests\Validator\Constraint;
 
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\API\Repository\Values\User\User as APIUser;
 use eZ\Publish\Core\MVC\Symfony\Security\ReferenceUserInterface;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\UserPassword;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints\UserPasswordValidator;
+use EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator as BaseUserPasswordValidator;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use eZ\Publish\API\Repository\Values\User\User as APIUser;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
-use EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator as BaseUserPasswordValidator;
 
 final class UserPasswordValidatorTest extends TestCase
 {
     /**
-     * @var MockObject|UserService
+     * @var \PHPUnit\Framework\MockObject\MockObject|\eZ\Publish\API\Repository\UserService
      */
     private $userService;
 
     /**
-     * @var MockObject|TokenStorageInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
      */
     private $tokenStorage;
 
     /**
-     * @var ExecutionContextInterface|MockObject
+     * @var \Symfony\Component\Validator\Context\ExecutionContextInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $executionContext;
 
     /**
-     * @var UserPasswordValidator
+     * @var \EzSystems\EzPlatformAdminUi\Validator\Constraints\UserPasswordValidator
      */
     private $validator;
 

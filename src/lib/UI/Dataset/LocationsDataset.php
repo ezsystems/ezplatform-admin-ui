@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,24 +10,22 @@ namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
 class LocationsDataset
 {
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
-    /** @var ValueFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory */
     protected $valueFactory;
 
-    /** @var UIValue\Content\Location[] */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location[] */
     protected $data;
 
     /**
-     * @param LocationService $locationService
-     * @param ValueFactory $valueFactory
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory $valueFactory
      */
     public function __construct(LocationService $locationService, ValueFactory $valueFactory)
     {
@@ -36,7 +34,7 @@ class LocationsDataset
     }
 
     /**
-     * @param ContentInfo $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      *
      * @return LocationsDataset
      */
@@ -52,9 +50,9 @@ class LocationsDataset
     }
 
     /**
-     * @param Location[] $locations
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $locations
      *
-     * @return UIValue\Content\Location[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Location[]
      */
     protected function prioritizeMainLocation(array $locations): array
     {
@@ -70,7 +68,7 @@ class LocationsDataset
     }
 
     /**
-     * @return UIValue\Content\Location[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Location[]
      */
     public function getLocations(): array
     {

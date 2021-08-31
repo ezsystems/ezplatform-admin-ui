@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\QueryType;
 
+use eZ\Publish\API\Repository\Values\Content\Location;
+use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\Core\QueryType\OptionsResolverBasedQueryType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 
 final class LocationPathQueryType extends OptionsResolverBasedQueryType
 {
@@ -33,7 +33,7 @@ final class LocationPathQueryType extends OptionsResolverBasedQueryType
 
     protected function doGetQuery(array $parameters): Query
     {
-        /** @var Location $location */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         $location = $parameters['location'];
         /** @var int $rootLocationId */
         $rootLocationId = $parameters['rootLocationId'];

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,11 +10,11 @@ namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
 use eZ\Publish\API\Repository\Repository;
+use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
+use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Routing\Router;
-use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
-use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
 use PHPUnit\Framework\Assert;
 
 class ObjectStatePage extends Page
@@ -87,7 +87,7 @@ class ObjectStatePage extends Page
 
     private function getObjectState(string $objectStateName): ?ObjectState
     {
-        return $this->repository->sudo(function (Repository $repository) use ($objectStateName) {
+        return $this->repository->sudo(static function (Repository $repository) use ($objectStateName) {
             foreach ($repository->getObjectStateService()->loadObjectStateGroups() as $group) {
                 foreach ($repository->getObjectStateService()->loadObjectStates($group) as $objectState) {
                     if ($objectState->getName() === $objectStateName) {

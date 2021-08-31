@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,11 +9,11 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Trash;
 
 use eZ\Publish\API\Repository\TrashService;
+use EzSystems\EzPlatformAdminUi\Form\DataTransformer\TrashItemTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\TrashItemTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TrashItemCheckboxType extends AbstractType
@@ -27,7 +27,7 @@ class TrashItemCheckboxType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -35,7 +35,7 @@ class TrashItemCheckboxType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {

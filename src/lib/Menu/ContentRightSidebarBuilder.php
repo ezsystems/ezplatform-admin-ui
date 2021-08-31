@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,20 +10,18 @@ namespace EzSystems\EzPlatformAdminUi\Menu;
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUserGroup;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsRoot;
-use EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver;
-use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
-use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use EzSystems\EzPlatformAdminUi\Specification\Location\IsWithinCopySubtreeLimit;
+use EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver;
+use EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -106,13 +104,13 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var Location $location */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         $location = $options['location'];
-        /** @var ContentType $contentType */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $options['content_type'];
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $options['content'];
-        /** @var ItemInterface|ItemInterface[] $menu */
+        /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
         $startingLocationId = $this->udwConfigResolver->getConfig('default')['starting_location_id'];
 

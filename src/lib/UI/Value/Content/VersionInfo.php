@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
 
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo as CoreVersionInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo as APIVersionInfo;
+use eZ\Publish\Core\Repository\Values\Content\VersionInfo as CoreVersionInfo;
 
 /**
  * Extends original value object in order to provide additional fields.

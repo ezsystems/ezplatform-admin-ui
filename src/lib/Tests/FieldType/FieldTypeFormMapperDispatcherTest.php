@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\FieldType;
@@ -9,7 +9,6 @@ namespace EzSystems\EzPlatformAdminUi\Tests\FieldType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
 use EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher;
-use EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcherInterface;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +17,7 @@ use Symfony\Component\Form\FormInterface;
 class FieldTypeFormMapperDispatcherTest extends TestCase
 {
     /**
-     * @var FieldTypeDefinitionFormMapperDispatcherInterface
+     * @var \EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcherInterface
      */
     private $dispatcher;
 

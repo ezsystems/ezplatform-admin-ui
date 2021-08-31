@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\EventListener;
@@ -13,7 +13,7 @@ use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * {@inheritdoc}
+ * @inheritdoc
  */
 class ContentTranslateViewFilterParametersListener implements EventSubscriberInterface
 {

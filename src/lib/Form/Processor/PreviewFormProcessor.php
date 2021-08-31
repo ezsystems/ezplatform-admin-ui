@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,27 +10,16 @@ namespace EzSystems\EzPlatformAdminUi\Form\Processor;
 
 use Exception;
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Exceptions\BadStateException;
-use eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException;
-use eZ\Publish\API\Repository\Exceptions\ContentValidationException;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentStruct;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData;
-use EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData;
 use EzSystems\EzPlatformContentForms\Data\NewnessCheckable;
-use EzSystems\EzPlatformAdminUi\Form\Data\NewnessChecker;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Exception\InvalidParameterException;
-use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -38,23 +27,23 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class PreviewFormProcessor implements EventSubscriberInterface
 {
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var UrlGeneratorInterface */
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var TranslatableNotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
     /**
-     * @param ContentService $contentService
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param TranslatableNotificationHandlerInterface $notificationHandler
-     * @param LocationService $locationService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
      */
     public function __construct(
         ContentService $contentService,
@@ -69,7 +58,7 @@ class PreviewFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getSubscribedEvents(): array
     {
@@ -79,13 +68,13 @@ class PreviewFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param FormActionEvent $event
+     * @param \EzSystems\EzPlatformContentForms\Event\FormActionEvent $event
      *
      * @throws \InvalidArgumentException
      */
     public function processPreview(FormActionEvent $event): void
     {
-        /** @var ContentCreateData|ContentUpdateData $data */
+        /** @var \EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData|\EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData $data */
         $data = $event->getData();
         $form = $event->getForm();
         $languageCode = $form->getConfig()->getOption('languageCode');
@@ -119,16 +108,16 @@ class PreviewFormProcessor implements EventSubscriberInterface
      * Saves content draft corresponding to $data.
      * Depending on the nature of $data (create or update data), the draft will either be created or simply updated.
      *
-     * @param ContentCreateData|ContentStruct|ContentUpdateData $data
+     * @param \EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData|\eZ\Publish\API\Repository\Values\Content\ContentStruct|\EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData $data
      * @param string $languageCode
      *
-     * @return Content
+     * @return \eZ\Publish\API\Repository\Values\Content\Content
      *
-     * @throws BadStateException
-     * @throws UnauthorizedException
-     * @throws InvalidArgumentException
-     * @throws ContentValidationException
-     * @throws ContentFieldValidationException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ContentValidationException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException
      */
     private function saveDraft(ContentStruct $data, string $languageCode, ?array $fieldIdentifiersToValidate): Content
     {
@@ -153,14 +142,14 @@ class PreviewFormProcessor implements EventSubscriberInterface
     /**
      * Returns content create or edit URL depending on $data type.
      *
-     * @param ContentCreateData|ContentUpdateData $data
+     * @param \EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData|\EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData $data
      * @param string $languageCode
      *
      * @return string
      *
-     * @throws RouteNotFoundException
-     * @throws MissingMandatoryParametersException
-     * @throws InvalidParameterException
+     * @throws \Symfony\Component\Routing\Exception\RouteNotFoundException
+     * @throws \Symfony\Component\Routing\Exception\MissingMandatoryParametersException
+     * @throws \Symfony\Component\Routing\Exception\InvalidParameterException
      */
     private function getContentEditUrl($data, string $languageCode): string
     {
@@ -178,7 +167,7 @@ class PreviewFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * @param ContentCreateData|ContentUpdateData|NewnessChecker $data
+     * @param \EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData|\EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData|\EzSystems\EzPlatformAdminUi\Form\Data\NewnessChecker $data
      *
      * @return string
      */

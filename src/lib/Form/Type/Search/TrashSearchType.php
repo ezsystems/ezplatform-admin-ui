@@ -1,27 +1,27 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
 
+use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Form\Data\Search\TrashSearchData;
 use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\DatePeriodChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\Content\SortType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Trash\ChoiceList\Loader\SearchContentTypeChoiceLoader;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use eZ\Publish\API\Repository\PermissionResolver;
 
 class TrashSearchType extends AbstractType
 {
@@ -88,7 +88,7 @@ class TrashSearchType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      */

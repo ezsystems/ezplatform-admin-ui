@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -57,6 +57,8 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
+use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLListData;
+use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardUpdateData;
@@ -117,10 +119,11 @@ use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionCreateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionsDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType;
+use EzSystems\EzPlatformAdminUi\Form\Type\URL\URLEditType;
+use EzSystems\EzPlatformAdminUi\Form\Type\URL\URLListType;
 use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType;
 use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardUpdateType;
-use EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserEditType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordChangeType;
@@ -128,14 +131,10 @@ use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordForgotType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordForgotWithLoginType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordResetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType;
-use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLListData;
-use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\URL\URLEditType;
-use EzSystems\EzPlatformAdminUi\Form\Type\URL\URLListType;
+use EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -166,13 +165,13 @@ class FormFactory
     }
 
     /**
-     * @param ContentEditData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData|null $data
      * @param string|null $name
      * @param array $options
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function contentEdit(
         ?ContentEditData $data = null,
@@ -195,12 +194,12 @@ class FormFactory
     }
 
     /**
-     * @param ContentCreateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function createContent(
         ?ContentCreateData $data = null,
@@ -213,12 +212,12 @@ class FormFactory
     }
 
     /**
-     * @param ContentTypesDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function deleteContentTypes(
         ContentTypesDeleteData $data = null,
@@ -230,10 +229,10 @@ class FormFactory
     }
 
     /**
-     * @param ContentTypeGroupCreateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createContentTypeGroup(
         ?ContentTypeGroupCreateData $data = null,
@@ -249,10 +248,10 @@ class FormFactory
     }
 
     /**
-     * @param ContentTypeGroupUpdateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupUpdateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function updateContentTypeGroup(
         ContentTypeGroupUpdateData $data = null,
@@ -264,10 +263,10 @@ class FormFactory
     }
 
     /**
-     * @param ContentTypeGroupDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function deleteContentTypeGroup(
         ContentTypeGroupDeleteData $data = null,
@@ -279,12 +278,12 @@ class FormFactory
     }
 
     /**
-     * @param ContentTypeGroupsDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupsDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function deleteContentTypeGroups(
         ContentTypeGroupsDeleteData $data = null,
@@ -296,12 +295,12 @@ class FormFactory
     }
 
     /**
-     * @param TranslationAddData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function addTranslation(
         TranslationAddData $data = null,
@@ -313,12 +312,12 @@ class FormFactory
     }
 
     /**
-     * @param TranslationDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function deleteTranslation(
         TranslationDeleteData $data = null,
@@ -330,12 +329,12 @@ class FormFactory
     }
 
     /**
-     * @param VersionRemoveData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Version\VersionRemoveData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function removeVersion(
         VersionRemoveData $data = null,
@@ -347,10 +346,10 @@ class FormFactory
     }
 
     /**
-     * @param ContentLocationAddData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function addLocation(
         ContentLocationAddData $data = null,
@@ -362,10 +361,10 @@ class FormFactory
     }
 
     /**
-     * @param ContentLocationRemoveData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function removeLocation(
         ContentLocationRemoveData $data = null,
@@ -377,10 +376,10 @@ class FormFactory
     }
 
     /**
-     * @param LocationSwapData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function swapLocation(
         LocationSwapData $data = null,
@@ -392,12 +391,12 @@ class FormFactory
     }
 
     /**
-     * @param ContentMainLocationUpdateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function updateContentMainLocation(
         ?ContentMainLocationUpdateData $data = null,
@@ -414,10 +413,10 @@ class FormFactory
     }
 
     /**
-     * @param LocationTrashData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function trashLocation(
         LocationTrashData $data = null,
@@ -429,10 +428,10 @@ class FormFactory
     }
 
     /**
-     * @param LocationMoveData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationMoveData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function moveLocation(
         LocationMoveData $data = null,
@@ -444,10 +443,10 @@ class FormFactory
     }
 
     /**
-     * @param LocationCopyData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function copyLocation(
         LocationCopyData $data = null,
@@ -459,12 +458,12 @@ class FormFactory
     }
 
     /**
-     * @param LocationUpdateVisibilityData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function updateVisibilityLocation(
         LocationUpdateVisibilityData $data = null,
@@ -476,10 +475,10 @@ class FormFactory
     }
 
     /**
-     * @param LocationUpdateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function updateLocation(
         LocationUpdateData $data = null,
@@ -491,10 +490,10 @@ class FormFactory
     }
 
     /**
-     * @param SectionContentAssignData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function assignContentSectionForm(
         SectionContentAssignData $data = null,
@@ -506,10 +505,10 @@ class FormFactory
     }
 
     /**
-     * @param SectionDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function deleteSection(
         SectionDeleteData $data = null,
@@ -521,12 +520,12 @@ class FormFactory
     }
 
     /**
-     * @param SectionsDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionsDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function deleteSections(
         SectionsDeleteData $data = null,
@@ -538,10 +537,10 @@ class FormFactory
     }
 
     /**
-     * @param SectionCreateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createSection(
         ?SectionCreateData $data = null,
@@ -557,10 +556,10 @@ class FormFactory
     }
 
     /**
-     * @param SectionUpdateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function updateSection(
         SectionUpdateData $data = null,
@@ -572,10 +571,10 @@ class FormFactory
     }
 
     /**
-     * @param LanguageCreateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createLanguage(
         ?LanguageCreateData $data = null,
@@ -591,10 +590,10 @@ class FormFactory
     }
 
     /**
-     * @param LanguageUpdateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageUpdateData $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function updateLanguage(
         LanguageUpdateData $data,
@@ -606,10 +605,10 @@ class FormFactory
     }
 
     /**
-     * @param LanguageDeleteData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function deleteLanguage(
         LanguageDeleteData $data,
@@ -621,12 +620,12 @@ class FormFactory
     }
 
     /**
-     * @param LanguagesDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguagesDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function deleteLanguages(
         LanguagesDeleteData $data = null,
@@ -638,10 +637,10 @@ class FormFactory
     }
 
     /**
-     * @param RoleCreateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createRole(
         ?RoleCreateData $data = null,
@@ -653,10 +652,10 @@ class FormFactory
     }
 
     /**
-     * @param RoleUpdateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function updateRole(
         RoleUpdateData $data,
@@ -668,10 +667,10 @@ class FormFactory
     }
 
     /**
-     * @param RoleDeleteData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function deleteRole(
         RoleDeleteData $data,
@@ -683,12 +682,12 @@ class FormFactory
     }
 
     /**
-     * @param RolesDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RolesDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function deleteRoles(
         RolesDeleteData $data = null,
@@ -700,10 +699,10 @@ class FormFactory
     }
 
     /**
-     * @param RoleAssignmentCreateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createRoleAssignment(
         ?RoleAssignmentCreateData $data = null,
@@ -719,10 +718,10 @@ class FormFactory
     }
 
     /**
-     * @param RoleAssignmentDeleteData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function deleteRoleAssignment(
         RoleAssignmentDeleteData $data,
@@ -741,12 +740,12 @@ class FormFactory
     }
 
     /**
-     * @param RoleAssignmentsDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentsDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function deleteRoleAssignments(
         RoleAssignmentsDeleteData $data = null,
@@ -761,7 +760,7 @@ class FormFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createPolicy(
         ?PolicyCreateData $data = null,
@@ -776,7 +775,7 @@ class FormFactory
      * @param \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createPolicyWithLimitation(
         ?PolicyCreateData $data = null,
@@ -788,10 +787,10 @@ class FormFactory
     }
 
     /**
-     * @param PolicyUpdateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function updatePolicy(
         PolicyUpdateData $data,
@@ -803,10 +802,10 @@ class FormFactory
     }
 
     /**
-     * @param PolicyDeleteData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function deletePolicy(
         PolicyDeleteData $data,
@@ -818,12 +817,12 @@ class FormFactory
     }
 
     /**
-     * @param PoliciesDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PoliciesDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function deletePolicies(
         PoliciesDeleteData $data = null,
@@ -835,11 +834,11 @@ class FormFactory
     }
 
     /**
-     * @param SearchData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData|null $data
      * @param string|null $name
      * @param array $options
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createSearchForm(
         SearchData $data = null,
@@ -852,11 +851,11 @@ class FormFactory
     }
 
     /**
-     * @param URLListData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\URL\URLListData|null $data
      * @param string|null $name
      * @param array $options
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createUrlListForm(
         URLListData $data = null,
@@ -869,11 +868,11 @@ class FormFactory
     }
 
     /**
-     * @param URLUpdateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\URL\URLUpdateData|null $data
      * @param string|null $name
      * @param array $options
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createUrlEditForm(
         URLUpdateData $data = null,
@@ -886,10 +885,10 @@ class FormFactory
     }
 
     /**
-     * @param UserDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function deleteUser(
         UserDeleteData $data = null,
@@ -908,9 +907,9 @@ class FormFactory
      * @param string|null $name
      * @param \eZ\Publish\API\Repository\Values\User\User|null $user
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function changeUserPassword(
         UserPasswordChangeData $data = null,
@@ -1019,10 +1018,10 @@ class FormFactory
     }
 
     /**
-     * @param ObjectStateGroupCreateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupCreateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function createObjectStateGroup(
         ?ObjectStateGroupCreateData $data = null,
@@ -1038,10 +1037,10 @@ class FormFactory
     }
 
     /**
-     * @param ObjectStateGroupDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function deleteObjectStateGroup(
         ObjectStateGroupDeleteData $data = null,
@@ -1053,12 +1052,12 @@ class FormFactory
     }
 
     /**
-     * @param ObjectStateGroupsDeleteData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupsDeleteData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function deleteObjectStateGroups(
         ObjectStateGroupsDeleteData $data = null,
@@ -1070,10 +1069,10 @@ class FormFactory
     }
 
     /**
-     * @param ObjectStateGroupUpdateData|null $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ObjectStateGroupUpdateData|null $data
      * @param string|null $name
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      */
     public function updateObjectStateGroup(
         ObjectStateGroupUpdateData $data = null,

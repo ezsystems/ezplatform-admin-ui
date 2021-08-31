@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
@@ -23,27 +23,22 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 
 class LanguageController extends Controller
 {
-    /** @var TranslatableNotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     private $languageService;
 
-    /** @var LanguageCreateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper */
     private $languageCreateMapper;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
     /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
@@ -68,9 +63,9 @@ class LanguageController extends Controller
     /**
      * Renders the language list.
      *
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction(Request $request): Response
     {
@@ -83,7 +78,7 @@ class LanguageController extends Controller
         $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination.language_limit'));
         $pagerfanta->setCurrentPage(min($page, $pagerfanta->getNbPages()));
 
-        /** @var Language[] $languageList */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Language[] $languageList */
         $languageList = $pagerfanta->getCurrentPageResults();
 
         $deleteLanguagesForm = $this->formFactory->deleteLanguages(
@@ -100,9 +95,9 @@ class LanguageController extends Controller
     /**
      * Renders the view of a language.
      *
-     * @param Language $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(Language $language): Response
     {
@@ -120,10 +115,10 @@ class LanguageController extends Controller
     /**
      * Deletes a language.
      *
-     * @param Request $request
-     * @param Language $language
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function deleteAction(Request $request, Language $language): Response
     {
@@ -156,15 +151,15 @@ class LanguageController extends Controller
     /**
      * Handles removing languages based on submitted form.
      *
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws UnauthorizedException
-     * @throws InvalidOptionsException
-     * @throws TranslationInvalidArgumentException
-     * @throws InvalidArgumentException
-     * @throws NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \InvalidArgumentException
      */
     public function bulkDeleteAction(Request $request): Response
@@ -270,7 +265,7 @@ class LanguageController extends Controller
     }
 
     /**
-     * @param Language[] $languages
+     * @param \eZ\Publish\API\Repository\Values\Content\Language[] $languages
      *
      * @return array
      */

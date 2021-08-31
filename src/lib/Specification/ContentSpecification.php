@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Specification;
@@ -13,7 +13,7 @@ interface ContentSpecification
     /**
      * Check to see if the specification is satisfied.
      *
-     * @param Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      *
      * @return bool
      */

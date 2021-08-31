@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\Core\Repository\Values\Content\Location;
+use EzSystems\EzPlatformAdminUi\Form\DataTransformer\LocationsTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use eZ\Publish\API\Repository\LocationService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\LocationsTransformer;
-use eZ\Publish\Core\Repository\Values\Content\Location;
 
 class LocationsTransformerTest extends TestCase
 {

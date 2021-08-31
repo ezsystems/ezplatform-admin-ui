@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\Core\Repository\Values\Content\Relation as CoreRelation;
 use eZ\Publish\API\Repository\Values\Content\Relation as APIRelation;
+use eZ\Publish\Core\Repository\Values\Content\Relation as CoreRelation;
 
 /**
  * Extends original value object in order to provide additional fields.
@@ -37,7 +37,7 @@ class Relation extends CoreRelation implements RelationInterface
      * Main location for the relation.
      * This will either come from destinationContentInfo OR sourceContentInfo depending upon if reverse relation or normal relation.
      *
-     * @var Location
+     * @var \eZ\Publish\API\Repository\Values\Content\Location
      */
     protected $relationLocation;
 
@@ -52,19 +52,19 @@ class Relation extends CoreRelation implements RelationInterface
     /**
      * Source location for the relation.
      *
-     * @var Location
+     * @var \eZ\Publish\API\Repository\Values\Content\Location
      */
     protected $resolvedSourceLocation;
 
     /**
      * Destination location for the relation.
      *
-     * @var Location
+     * @var \eZ\Publish\API\Repository\Values\Content\Location
      */
     protected $resolvedDestinationLocation;
 
     /**
-     * @param APIRelation $relation
+     * @param \eZ\Publish\API\Repository\Values\Content\Relation $relation
      * @param array $properties
      */
     public function __construct(APIRelation $relation, array $properties = [])

@@ -1,11 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
 
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\TranslatablePropertyTransformer;
 use EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\FieldDefinitionType;
 use Symfony\Component\Form\AbstractType;
@@ -15,7 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
 
 /**
  * Form type for ContentType update.

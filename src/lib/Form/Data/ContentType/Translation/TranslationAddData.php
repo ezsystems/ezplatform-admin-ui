@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -80,7 +80,7 @@ class TranslationAddData
     }
 
     /**
-     * @return ContentTypeGroup|null
+     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup|null
      */
     public function getContentTypeGroup(): ?ContentTypeGroup
     {
@@ -88,7 +88,7 @@ class TranslationAddData
     }
 
     /**
-     * @param ContentTypeGroup $contentTypeGroup
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $contentTypeGroup
      *
      * @return self
      */

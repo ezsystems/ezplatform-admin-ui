@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
@@ -11,7 +11,6 @@ use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\RoleAssignmentParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RoleAssignmentParamConverterTest extends AbstractParamConverterTest
@@ -19,10 +18,10 @@ class RoleAssignmentParamConverterTest extends AbstractParamConverterTest
     const SUPPORTED_CLASS = RoleAssignment::class;
     const PARAMETER_NAME = 'roleAssignment';
 
-    /** @var RoleAssignmentParamConverter */
+    /** @var \EzSystems\EzPlatformAdminUiBundle\ParamConverter\RoleAssignmentParamConverter */
     protected $converter;
 
-    /** @var MockObject */
+    /** @var \PHPUnit\Framework\MockObject\MockObject */
     protected $serviceMock;
 
     protected function setUp(): void

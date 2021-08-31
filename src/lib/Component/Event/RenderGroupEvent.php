@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -15,7 +15,7 @@ class RenderGroupEvent extends Event
 {
     const NAME = 'ezplatform_admin_ui.component.render_group';
 
-    /** @var Registry */
+    /** @var \EzSystems\EzPlatformAdminUi\Component\Registry */
     private $registry;
 
     /** @var string */
@@ -25,7 +25,7 @@ class RenderGroupEvent extends Event
     private $parameters;
 
     /**
-     * @param Registry $registry
+     * @param \EzSystems\EzPlatformAdminUi\Component\Registry $registry
      * @param string $groupName
      * @param array $parameters
      */

@@ -1,13 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle\View\Template;
 
 use Pagerfanta\View\Template\TwitterBootstrap4Template;
-use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -16,9 +15,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class EzPagerfantaTemplate extends TwitterBootstrap4Template
 {
     /**
-     * @param TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      *
-     * @throws InvalidArgumentException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     public function __construct(TranslatorInterface $translator)
     {

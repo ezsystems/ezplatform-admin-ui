@@ -1,18 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
 
+use EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator as BaseUserPasswordValidator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Exception\ConstraintDefinitionException as ValidatorConstraintDefinitionException;
-use EzSystems\EzPlatformUser\Validator\Constraints\UserPasswordValidator as BaseUserPasswordValidator;
 
 /**
  * Will check if logged user and password are match.
@@ -39,9 +38,9 @@ class UserPasswordValidator extends ConstraintValidator
      * Checks if the passed password exists for logged user.
      *
      * @param string $password The password that should be validated
-     * @param Constraint|UserPassword $constraint The constraint for the validation
+     * @param \Symfony\Component\Validator\Constraint|UserPassword $constraint The constraint for the validation
      *
-     * @throws ValidatorConstraintDefinitionException
+     * @throws \Symfony\Component\Validator\Exception\ConstraintDefinitionException
      */
     public function validate($password, Constraint $constraint)
     {

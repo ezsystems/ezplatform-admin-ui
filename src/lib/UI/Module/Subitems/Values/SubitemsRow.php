@@ -1,28 +1,28 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values;
 
-use EzSystems\EzPlatformRest\Value as RestValue;
 use EzSystems\EzPlatformRest\Server\Values\RestContent;
 use EzSystems\EzPlatformRest\Server\Values\RestLocation;
+use EzSystems\EzPlatformRest\Value as RestValue;
 
 class SubitemsRow extends RestValue
 {
-    /** @var RestLocation */
+    /** @var \EzSystems\EzPlatformRest\Server\Values\RestLocation */
     public $restLocation;
 
-    /** @var RestContent */
+    /** @var \EzSystems\EzPlatformRest\Server\Values\RestContent */
     public $restContent;
 
     /**
-     * @param RestLocation $restLocation
-     * @param RestContent $restContent
+     * @param \EzSystems\EzPlatformRest\Server\Values\RestLocation $restLocation
+     * @param \EzSystems\EzPlatformRest\Server\Values\RestContent $restContent
      */
     public function __construct(RestLocation $restLocation, RestContent $restContent)
     {

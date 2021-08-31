@@ -1,27 +1,26 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
 
+use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\VersionInfoParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use PHPUnit\Framework\MockObject\MockObject;
-use eZ\Publish\API\Repository\ContentService;
 
 class VersionInfoParamConverterTest extends AbstractParamConverterTest
 {
     const SUPPORTED_CLASS = VersionInfo::class;
     const PARAMETER_NAME = 'versionInfo';
 
-    /** @var VersionInfoParamConverter */
+    /** @var \EzSystems\EzPlatformAdminUiBundle\ParamConverter\VersionInfoParamConverter */
     protected $converter;
 
-    /** @var MockObject */
+    /** @var \PHPUnit\Framework\MockObject\MockObject */
     protected $serviceMock;
 
     protected function setUp(): void

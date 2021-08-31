@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -18,11 +17,11 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class ContentTypeTransformer implements DataTransformerInterface
 {
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     protected $contentTypeService;
 
     /**
-     * @param ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      */
     public function __construct(ContentTypeService $contentTypeService)
     {
@@ -30,7 +29,7 @@ class ContentTypeTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param ContentType $value
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $value
      *
      * @return string|null
      */
@@ -44,9 +43,9 @@ class ContentTypeTransformer implements DataTransformerInterface
     /**
      * @param mixed $value
      *
-     * @return ContentType|null
+     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType|null
      *
-     * @throws NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function reverseTransform($value)
     {

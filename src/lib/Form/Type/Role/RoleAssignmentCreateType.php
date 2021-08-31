@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -61,7 +61,7 @@ class RoleAssignmentCreateType extends AbstractType
                     RoleAssignmentCreateData::LIMITATION_TYPE_SECTION => RoleAssignmentCreateData::LIMITATION_TYPE_SECTION,
                     RoleAssignmentCreateData::LIMITATION_TYPE_LOCATION => RoleAssignmentCreateData::LIMITATION_TYPE_LOCATION,
                 ],
-                'choice_name' => function ($value) {
+                'choice_name' => static function ($value) {
                     return $value;
                 },
             ])

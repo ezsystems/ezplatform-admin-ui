@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\Content\SectionCreateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData;
 
 /**
  * Maps between SectionCreateStruct and SectionCreateData objects.
@@ -19,11 +19,11 @@ class SectionCreateMapper implements DataMapperInterface
     /**
      * Maps given SectionCreateStruct object to a SectionCreateData object.
      *
-     * @param SectionCreateStruct|ValueObject $value
+     * @param \eZ\Publish\API\Repository\Values\Content\SectionCreateStruct|\eZ\Publish\API\Repository\Values\ValueObject $value
      *
-     * @return SectionCreateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function map(ValueObject $value): SectionCreateData
     {
@@ -37,11 +37,11 @@ class SectionCreateMapper implements DataMapperInterface
     /**
      * Maps given SectionCreateData object to a SectionCreateStruct object.
      *
-     * @param SectionCreateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData $data
      *
-     * @return SectionCreateStruct
+     * @return \eZ\Publish\API\Repository\Values\Content\SectionCreateStruct
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function reverseMap($data): SectionCreateStruct
     {

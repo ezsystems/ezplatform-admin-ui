@@ -1,12 +1,11 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType;
 
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\FieldType\Date\Value;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -21,7 +20,7 @@ class DateValueTransformer implements DataTransformerInterface
      *
      * @return int|null
      *
-     * @throws TransformationFailedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function transform($value)
     {
@@ -45,10 +44,10 @@ class DateValueTransformer implements DataTransformerInterface
     /**
      * @param int|mixed $value
      *
-     * @return Value|null
+     * @return \eZ\Publish\Core\FieldType\Date\Value|null
      *
-     * @throws InvalidArgumentException
-     * @throws TransformationFailedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function reverseTransform($value)
     {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
@@ -9,11 +9,10 @@ namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Policy;
-use eZ\Publish\Core\Repository\Values\User\Policy as UserPolicy;
 use eZ\Publish\API\Repository\Values\User\Role;
+use eZ\Publish\Core\Repository\Values\User\Policy as UserPolicy;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\PolicyParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PolicyParamConverterTest extends AbstractParamConverterTest
@@ -21,10 +20,10 @@ class PolicyParamConverterTest extends AbstractParamConverterTest
     const SUPPORTED_CLASS = Policy::class;
     const PARAMETER_NAME = 'policy';
 
-    /** @var PolicyParamConverter */
+    /** @var \EzSystems\EzPlatformAdminUiBundle\ParamConverter\PolicyParamConverter */
     protected $converter;
 
-    /** @var MockObject */
+    /** @var \PHPUnit\Framework\MockObject\MockObject */
     protected $serviceMock;
 
     protected function setUp(): void

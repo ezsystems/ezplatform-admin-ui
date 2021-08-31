@@ -1,30 +1,29 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
-use eZ\Publish\API\Repository\RoleService;
-use Symfony\Component\Form\DataTransformerInterface;
-use eZ\Publish\API\Repository\Values\User\RoleAssignment as APIRoleAssignment;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\RoleService;
+use eZ\Publish\API\Repository\Values\User\RoleAssignment as APIRoleAssignment;
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * Transforms between a Role Assignment's identifier and a domain specific object.
  */
 class RoleAssignmentTransformer implements DataTransformerInterface
 {
-    /** @var RoleService */
+    /** @var \eZ\Publish\API\Repository\RoleService */
     protected $roleService;
 
     /**
-     * @param RoleService $roleService
+     * @param \eZ\Publish\API\Repository\RoleService $roleService
      */
     public function __construct(RoleService $roleService)
     {
@@ -38,7 +37,7 @@ class RoleAssignmentTransformer implements DataTransformerInterface
      *
      * @return mixed|null
      *
-     * @throws TransformationFailedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function transform($value)
     {
@@ -58,10 +57,10 @@ class RoleAssignmentTransformer implements DataTransformerInterface
      *
      * @param mixed $value
      *
-     * @return APIRoleAssignment|null
+     * @return \eZ\Publish\API\Repository\Values\User\RoleAssignment|null
      *
-     * @throws TransformationFailedException
-     * @throws UnauthorizedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function reverseTransform($value): ?APIRoleAssignment
     {

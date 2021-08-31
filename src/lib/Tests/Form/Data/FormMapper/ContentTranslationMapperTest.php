@@ -1,25 +1,25 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\Data\FormMapper;
 
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\Field;
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType as ApiContentType;
 use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
-use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTranslationMapper;
-use eZ\Publish\SPI\FieldType\Value;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
-use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\API\Repository\Values\Content\Field;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use eZ\Publish\SPI\FieldType\Value;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
+use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTranslationMapper;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
@@ -29,7 +29,7 @@ final class ContentTranslationMapperTest extends TestCase
 {
     public const LANGUAGE_CODE = 'cyb-CY';
 
-    /** @var ContentTranslationMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTranslationMapper */
     private $mapper;
 
     protected function setUp(): void

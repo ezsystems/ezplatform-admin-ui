@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,39 +9,37 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ContentTypeService;
+use eZ\Publish\API\Repository\Exceptions\BadStateException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeCopyData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData;
+use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper;
 use EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
+use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\ContentType\TranslationsTab;
-use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
-use eZ\Publish\API\Repository\Exceptions\BadStateException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 
 class ContentTypeController extends Controller
 {
@@ -124,7 +122,7 @@ class ContentTypeController extends Controller
         $deletableTypes = [];
         $contentTypes = $this->contentTypeService->loadContentTypes($group, $this->configResolver->getParameter('languages'));
 
-        usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
+        usort($contentTypes, static function (ContentType $contentType1, ContentType $contentType2) {
             return strnatcasecmp($contentType1->getName(), $contentType2->getName());
         });
 
@@ -218,7 +216,7 @@ class ContentTypeController extends Controller
         );
         $form->handleRequest($request);
 
-        /** @var TranslationAddData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData $data */
         $data = $form->getData();
         $contentType = $data->getContentType();
         $contentTypeGroup = $data->getContentTypeGroup();
@@ -278,7 +276,7 @@ class ContentTypeController extends Controller
         );
         $form->handleRequest($request);
 
-        /** @var TranslationRemoveData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData $data */
         $data = $form->getData();
         $contentType = $data->getContentType();
         $contentTypeGroup = $data->getContentTypeGroup();
@@ -573,8 +571,8 @@ class ContentTypeController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws TranslationInvalidArgumentException
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      * @throws \InvalidArgumentException
      */
     public function bulkDeleteAction(Request $request, ContentTypeGroup $group): Response

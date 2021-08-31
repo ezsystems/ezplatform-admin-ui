@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Behat\Page;
 
-use eZ\Publish\API\Repository\Repository;
 use Behat\Mink\Session;
-use Ibexa\Behat\Browser\Routing\Router;
-use Ibexa\Behat\Browser\Page\Page;
-use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
+use eZ\Publish\API\Repository\Repository;
 use Ibexa\AdminUi\Behat\Component\Dialog;
 use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
+use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
+use Ibexa\Behat\Browser\Page\Page;
+use Ibexa\Behat\Browser\Routing\Router;
 use PHPUnit\Framework\Assert;
 
 class ObjectStateGroupPage extends Page

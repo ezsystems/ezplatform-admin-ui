@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\Processor;
@@ -10,8 +10,8 @@ use eZ\Publish\API\Repository\ContentService;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
 use EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
-use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use EzSystems\EzPlatformContentForms\Event\ContentFormEvents;
+use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class TranslationFormProcessor implements EventSubscriberInterface
 {
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
     public function __construct(
@@ -43,11 +43,11 @@ class TranslationFormProcessor implements EventSubscriberInterface
      *
      * This step is required to achieve compatibility with other FormProcessors.
      *
-     * @param FormActionEvent $event
+     * @param \EzSystems\EzPlatformContentForms\Event\FormActionEvent $event
      */
     public function createContentDraft(FormActionEvent $event): void
     {
-        /** @var ContentTranslationData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData $data */
         $data = $event->getData();
 
         if (!$data instanceof ContentTranslationData) {
@@ -55,7 +55,7 @@ class TranslationFormProcessor implements EventSubscriberInterface
         }
 
         $contentDraft = $this->contentService->createContentDraft($data->content->contentInfo);
-        $fields = array_filter($data->fieldsData, function (FieldData $fieldData) use ($contentDraft, $data) {
+        $fields = array_filter($data->fieldsData, static function (FieldData $fieldData) use ($contentDraft, $data) {
             $mainLanguageCode = $contentDraft->getVersionInfo()->getContentInfo()->mainLanguageCode;
 
             return $mainLanguageCode === $data->initialLanguageCode

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
@@ -18,9 +18,9 @@ class PolicyUpdateMapper implements DataMapperInterface
     /**
      * Maps given PolicyUpdateStruct object to a PolicyUpdateData object.
      *
-     * @param PolicyUpdateStruct|ValueObject $value
+     * @param \eZ\Publish\Core\Repository\Values\User\PolicyUpdateStruct|\eZ\Publish\API\Repository\Values\ValueObject $value
      *
-     * @return PolicyUpdateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData
      */
     public function map(ValueObject $value): PolicyUpdateData
     {
@@ -36,9 +36,9 @@ class PolicyUpdateMapper implements DataMapperInterface
     /**
      * Maps given PolicyUpdateData object to a PolicyUpdateStruct object.
      *
-     * @param PolicyUpdateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData $data
      *
-     * @return PolicyUpdateStruct
+     * @return \eZ\Publish\Core\Repository\Values\User\PolicyUpdateStruct
      */
     public function reverseMap($data): PolicyUpdateStruct
     {

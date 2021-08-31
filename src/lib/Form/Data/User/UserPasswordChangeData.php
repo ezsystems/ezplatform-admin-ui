@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\User;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use EzSystems\EzPlatformAdminUi\Validator\Constraints as AdminUiAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformUser Bundle. Use it instead.

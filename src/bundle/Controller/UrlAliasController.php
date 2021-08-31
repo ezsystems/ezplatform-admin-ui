@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -53,7 +53,7 @@ class UrlAliasController extends Controller
         $form = $this->formFactory->addCustomUrl();
         $form->handleRequest($request);
 
-        /** @var CustomUrlAddData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData $data */
         $data = $form->getData();
         $location = $data->getLocation();
 

@@ -1,21 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Behat\Page;
 
+use Behat\Mink\Session;
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
-use Behat\Mink\Session;
-use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
-use Ibexa\Behat\Browser\Routing\Router;
-use Ibexa\Behat\Browser\Page\Page;
-use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use EzSystems\Behat\Core\Behat\ArgumentParser;
 use Ibexa\AdminUi\Behat\Component\Breadcrumb;
 use Ibexa\AdminUi\Behat\Component\ContentItemAdminPreview;
@@ -26,6 +22,10 @@ use Ibexa\AdminUi\Behat\Component\RightMenu;
 use Ibexa\AdminUi\Behat\Component\SubItemsList;
 use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
 use Ibexa\AdminUi\Behat\Component\UpperMenu;
+use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
+use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
+use Ibexa\Behat\Browser\Page\Page;
+use Ibexa\Behat\Browser\Routing\Router;
 use PHPUnit\Framework\Assert;
 
 class ContentViewPage extends Page
@@ -198,7 +198,7 @@ class ContentViewPage extends Page
 
     private function loadContent(Repository $repository, string $locationPath): Content
     {
-        $this->getHTMLPage()->setTimeout(3)->waitUntil(function () use ($repository, $locationPath) {
+        $this->getHTMLPage()->setTimeout(3)->waitUntil(static function () use ($repository, $locationPath) {
             $urlAlias = $repository->getURLAliasService()->lookup($locationPath);
 
             return $urlAlias->type === URLALias::LOCATION;

@@ -1,16 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
@@ -63,7 +62,7 @@ class ContentTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplate(): string
     {
@@ -71,13 +70,13 @@ class ContentTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $contextParameters['content'];
-        /** @var ContentType $contentType */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $contextParameters['contentType'];
         $fieldDefinitions = $contentType->getFieldDefinitions();
         $fieldDefinitionsByGroup = $this->fieldDefinitionGroupsUtil->groupFieldDefinitions($fieldDefinitions);
@@ -103,7 +102,7 @@ class ContentTab extends AbstractEventDispatchingTab implements OrderedTabInterf
     {
         $contentLanguages = $content->versionInfo->languageCodes;
 
-        $filter = function (Language $language) use ($contentLanguages) {
+        $filter = static function (Language $language) use ($contentLanguages) {
             return $language->enabled && in_array($language->languageCode, $contentLanguages, true);
         };
 

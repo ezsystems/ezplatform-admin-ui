@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -11,10 +11,9 @@ namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\Values\Content\Content;
 use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\ReverseRelationAdapter;
-use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
+use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Pagerfanta;
@@ -105,7 +104,7 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplate(): string
     {
@@ -113,11 +112,11 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $contextParameters['content'];
         $reverseRelationPaginationParams = $contextParameters['reverse_relation_pagination_params'];
         $reverseRelationPagination = new Pagerfanta(

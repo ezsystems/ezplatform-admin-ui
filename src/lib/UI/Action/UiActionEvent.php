@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Action;
 
-use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class UiActionEvent extends Event implements UiActionEventInterface
 {
@@ -41,7 +41,7 @@ class UiActionEvent extends Event implements UiActionEventInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getName(): string
     {
@@ -49,7 +49,7 @@ class UiActionEvent extends Event implements UiActionEventInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setName(string $name): void
     {
@@ -57,7 +57,7 @@ class UiActionEvent extends Event implements UiActionEventInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getType(): string
     {
@@ -65,7 +65,7 @@ class UiActionEvent extends Event implements UiActionEventInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setType(string $type): void
     {
@@ -73,7 +73,7 @@ class UiActionEvent extends Event implements UiActionEventInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getForm(): FormInterface
     {
@@ -81,7 +81,7 @@ class UiActionEvent extends Event implements UiActionEventInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setForm(FormInterface $form): void
     {
@@ -89,7 +89,7 @@ class UiActionEvent extends Event implements UiActionEventInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getResponse(): ?Response
     {
@@ -97,7 +97,7 @@ class UiActionEvent extends Event implements UiActionEventInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setResponse(?Response $response): void
     {

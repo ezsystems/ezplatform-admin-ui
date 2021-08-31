@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,19 +9,19 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Translation\Extractor;
 
 use Doctrine\Common\Annotations\DocParser;
-use JMS\TranslationBundle\Model\Message;
-use JMS\TranslationBundle\Annotation\Meaning;
 use JMS\TranslationBundle\Annotation\Desc;
 use JMS\TranslationBundle\Annotation\Ignore;
-use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
-use JMS\TranslationBundle\Model\MessageCatalogue;
+use JMS\TranslationBundle\Annotation\Meaning;
 use JMS\TranslationBundle\Logger\LoggerAwareInterface;
+use JMS\TranslationBundle\Model\Message;
+use JMS\TranslationBundle\Model\MessageCatalogue;
+use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
 use JMS\TranslationBundle\Translation\FileSourceFactory;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
+use PhpParser\Node\Scalar\String_;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor;
-use PhpParser\Node\Scalar\String_;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Twig\Node\Node as TwigNode;

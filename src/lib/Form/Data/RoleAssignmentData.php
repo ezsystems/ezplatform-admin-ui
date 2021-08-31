@@ -1,32 +1,27 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\Data;
 
-use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\Content\Section;
-use eZ\Publish\API\Repository\Values\User\User;
-use eZ\Publish\API\Repository\Values\User\UserGroup;
-
 class RoleAssignmentData
 {
-    /** @var UserGroup[] */
+    /** @var \eZ\Publish\API\Repository\Values\User\UserGroup[] */
     private $groups;
 
-    /** @var User[] */
+    /** @var \eZ\Publish\API\Repository\Values\User\User[] */
     private $users;
 
-    /** @var Section[] */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Section[] */
     private $sections;
 
-    /** @var Location[] */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location[] */
     private $locations;
 
     /**
-     * @return UserGroup[]
+     * @return \eZ\Publish\API\Repository\Values\User\UserGroup[]
      */
     public function getGroups(): array
     {
@@ -34,7 +29,7 @@ class RoleAssignmentData
     }
 
     /**
-     * @param UserGroup[] $groups
+     * @param \eZ\Publish\API\Repository\Values\User\UserGroup[] $groups
      */
     public function setGroups(array $groups)
     {
@@ -42,7 +37,7 @@ class RoleAssignmentData
     }
 
     /**
-     * @return User[]
+     * @return \eZ\Publish\API\Repository\Values\User\User[]
      */
     public function getUsers(): array
     {
@@ -50,7 +45,7 @@ class RoleAssignmentData
     }
 
     /**
-     * @param User[] $users
+     * @param \eZ\Publish\API\Repository\Values\User\User[] $users
      */
     public function setUsers(array $users)
     {
@@ -58,7 +53,7 @@ class RoleAssignmentData
     }
 
     /**
-     * @return Section[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Section[]
      */
     public function getSections(): array
     {
@@ -66,7 +61,7 @@ class RoleAssignmentData
     }
 
     /**
-     * @param Section[] $sections
+     * @param \eZ\Publish\API\Repository\Values\Content\Section[] $sections
      */
     public function setSections(array $sections)
     {
@@ -74,7 +69,7 @@ class RoleAssignmentData
     }
 
     /**
-     * @return Location[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Location[]
      */
     public function getLocations(): array
     {
@@ -82,7 +77,7 @@ class RoleAssignmentData
     }
 
     /**
-     * @param Location[] $locations
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $locations
      */
     public function setLocations(array $locations)
     {

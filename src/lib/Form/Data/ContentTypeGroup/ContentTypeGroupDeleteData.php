@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -12,7 +12,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 
 class ContentTypeGroupDeleteData
 {
-    /** @var ContentTypeGroup */
+    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup */
     private $contentTypeGroup;
 
     public function __construct(?ContentTypeGroup $contentTypeGroup = null)
@@ -21,7 +21,7 @@ class ContentTypeGroupDeleteData
     }
 
     /**
-     * @return ContentTypeGroup
+     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup
      */
     public function getContentTypeGroup(): ContentTypeGroup
     {
@@ -29,7 +29,7 @@ class ContentTypeGroupDeleteData
     }
 
     /**
-     * @param ContentTypeGroup $contentTypeGroup
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $contentTypeGroup
      */
     public function setContentTypeGroup(ContentTypeGroup $contentTypeGroup)
     {

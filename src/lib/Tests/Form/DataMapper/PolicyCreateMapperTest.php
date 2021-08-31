@@ -1,22 +1,22 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\DataMapper;
 
-use eZ\Publish\Core\Repository\Values\User\PolicyCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
+use eZ\Publish\Core\Repository\Values\User\PolicyCreateStruct;
+use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper;
 use PHPUnit\Framework\TestCase;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class PolicyCreateMapperTest extends TestCase
 {
-    /** @var PolicyCreateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper */
     private $mapper;
 
     protected function setUp(): void
@@ -79,7 +79,7 @@ class PolicyCreateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return PolicyCreateStruct
+     * @return \eZ\Publish\Core\Repository\Values\User\PolicyCreateStruct
      */
     private function createStruct(array $properties): PolicyCreateStruct
     {
@@ -89,7 +89,7 @@ class PolicyCreateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return PolicyCreateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData
      */
     private function createData(array $properties): PolicyCreateData
     {

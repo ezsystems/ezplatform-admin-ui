@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,14 +9,13 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\EventListener;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\View\View;
@@ -88,7 +87,7 @@ class SetViewParametersListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $contentView->getParameter('content');
         $location = $contentView->hasParameter('location') ? $contentView->getParameter('location') : null;
         $isPublished = null !== $content->contentInfo->mainLocationId && $content->contentInfo->published;
@@ -125,7 +124,7 @@ class SetViewParametersListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $contentView->getContent();
         $location = $contentView->getLocation();
         $isPublished = null !== $content->contentInfo->mainLocationId && $content->contentInfo->published;
@@ -157,7 +156,7 @@ class SetViewParametersListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var User $user */
+        /** @var \eZ\Publish\API\Repository\Values\User\User $user */
         $user = $contentView->getParameter('user');
         $contentInfo = $user->versionInfo->contentInfo;
 
@@ -213,7 +212,7 @@ class SetViewParametersListener implements EventSubscriberInterface
     {
         if (!$isPublished) {
             $parentLocations = $this->repository->sudo(
-                function (Repository $repository) use ($content) {
+                static function (Repository $repository) use ($content) {
                     return $repository->getLocationService()->loadParentLocationsForDraftContent($content->getVersionInfo());
                 }
             );
@@ -226,7 +225,7 @@ class SetViewParametersListener implements EventSubscriberInterface
         }
 
         return $this->repository->sudo(
-            function (Repository $repository) use ($location) {
+            static function (Repository $repository) use ($location) {
                 return $repository->getLocationService()->loadLocation($location->parentLocationId);
             }
         );

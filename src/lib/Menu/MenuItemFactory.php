@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Menu;
@@ -13,19 +13,19 @@ use Knp\Menu\ItemInterface;
 
 class MenuItemFactory implements FactoryInterface
 {
-    /** @var FactoryInterface */
+    /** @var \Knp\Menu\FactoryInterface */
     protected $factory;
 
-    /** @var PermissionResolver */
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
     /**
-     * @param FactoryInterface $factory
-     * @param PermissionResolver $permissionResolver
-     * @param LocationService $locationService
+     * @param \Knp\Menu\FactoryInterface $factory
+     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
      */
     public function __construct(
         FactoryInterface $factory,
@@ -44,7 +44,7 @@ class MenuItemFactory implements FactoryInterface
      * @param int $locationId
      * @param array $options
      *
-     * @return ItemInterface|null
+     * @return \Knp\Menu\ItemInterface|null
      */
     public function createLocationMenuItem(string $name, int $locationId, array $options = []): ?ItemInterface
     {

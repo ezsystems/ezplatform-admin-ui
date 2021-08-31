@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,15 +10,8 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use eZ\Publish\API\Repository\Values\User\UserGroup;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
 use EzSystems\EzPlatformContentForms\Data\User\UserCreateData;
-use Symfony\Component\OptionsResolver\Exception\AccessException;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use Symfony\Component\OptionsResolver\Exception\NoSuchOptionException;
-use Symfony\Component\OptionsResolver\Exception\OptionDefinitionException;
-use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -27,18 +20,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class UserCreateMapper
 {
     /**
-     * @param ContentType $contentType
-     * @param UserGroup[] $parentGroups
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     * @param \eZ\Publish\API\Repository\Values\User\UserGroup[] $parentGroups
      * @param array $params
      *
-     * @return UserCreateData
+     * @return \EzSystems\EzPlatformContentForms\Data\User\UserCreateData
      *
-     * @throws UndefinedOptionsException
-     * @throws OptionDefinitionException
-     * @throws NoSuchOptionException
-     * @throws MissingOptionsException
-     * @throws InvalidOptionsException
-     * @throws AccessException
+     * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\OptionDefinitionException
+     * @throws \Symfony\Component\OptionsResolver\Exception\NoSuchOptionException
+     * @throws \Symfony\Component\OptionsResolver\Exception\MissingOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      */
     public function mapToFormData(ContentType $contentType, array $parentGroups, array $params = []): UserCreateData
     {
