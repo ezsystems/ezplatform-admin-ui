@@ -84,7 +84,7 @@ class TranslationController extends Controller
                 $language = $data->getLanguage();
                 $baseLanguage = $data->getBaseLanguage();
 
-                return new RedirectResponse($this->generateUrl('ezplatform.content.translate', [
+                return new RedirectResponse($this->generateUrl('ezplatform.content.translate_with_location', [
                     'contentId' => $contentInfo->id,
                     'locationId' => $location->id,
                     'fromLanguageCode' => null !== $baseLanguage ? $baseLanguage->languageCode : null,

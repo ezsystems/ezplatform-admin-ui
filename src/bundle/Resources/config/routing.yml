@@ -564,7 +564,14 @@ ezplatform.content.preview:
         locationId: ~
 
 ezplatform.content.translate:
-    path: /content/{contentId}/{locationId}/translate/{toLanguageCode}/{fromLanguageCode}
+    path: /content/{contentId}/translate/{toLanguageCode}/{fromLanguageCode}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzPlatformAdminUiBundle:ContentEdit:translate'
+        fromLanguageCode: ~
+
+ezplatform.content.translate_with_location:
+    path: /content/{contentId}/location/{locationId}/translate/{toLanguageCode}/{fromLanguageCode}
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzPlatformAdminUiBundle:ContentEdit:translate'
