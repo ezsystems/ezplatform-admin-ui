@@ -7,11 +7,32 @@
 {% endblock %}
 
 {% block page_title %}
-    {% include '@ezdesign/content/page_title_edit.html.twig' with { 
+    {% embed '@ezdesign/content/page_title_edit.html.twig' with {
         action_name: 'editing'|trans|desc('Editing'),
         title: content.name,
+        content: content,
         description: content_type.description
     } %}
+        {% block close_button %}
+            {% if without_close_button is not defined or without_close_button != true %}
+                {% set referrer_location = is_published ? location : parent_location %}
+                {% set cancel_path = path('ibexa.content.draft.edit.cancel', {
+                    'contentId': content.id,
+                    'referrerLocationId': referrer_location.id,
+                    'versionNo': content.versionInfo.versionNo,
+                    'languageCode': language.languageCode
+                }) %}
+                <a class="ez-content-edit-container__close"
+                   href="{{ cancel_path }}"
+                   title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
+                >
+                    <svg class="ez-icon ez-icon--small ez-icon--primary">
+                        <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+                    </svg>
+                </a>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
 
     <div class="ez-content-item__errors-wrapper" hidden>
         {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}

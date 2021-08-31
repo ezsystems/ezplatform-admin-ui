@@ -587,6 +587,11 @@ ezplatform.content.draft.edit:
     options:
         expose: true
 
+ibexa.content.draft.edit.cancel:
+    path: /content/edit/draft/{contentId}/{versionNo}/{languageCode}/{referrerLocationId}/cancel
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::cancelEditVersionDraftAction'
+
 ezplatform.content.draft.create:
     path: /content/create/draft/{contentId}/{fromVersionNo}/{fromLanguage}/{toLanguage}
     defaults:
