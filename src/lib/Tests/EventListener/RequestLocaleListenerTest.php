@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -13,14 +13,14 @@ use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener;
+use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Translation\Translator;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class RequestLocaleListenerTest extends TestCase
 {
@@ -31,7 +31,7 @@ class RequestLocaleListenerTest extends TestCase
     /** @var \Symfony\Component\HttpFoundation\Request */
     private $request;
 
-    /** @var MockObject|\Symfony\Component\HttpKernel\HttpKernelInterface */
+    /** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpKernel\HttpKernelInterface */
     private $httpKernel;
 
     /** @var \Symfony\Contracts\Translation\TranslatorInterface */

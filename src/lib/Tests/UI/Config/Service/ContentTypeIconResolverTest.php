@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -43,7 +43,7 @@ class ContentTypeIconResolverTest extends TestCase
         $this->configResolver
             ->expects($this->any())
             ->method('hasParameter')
-            ->willReturnCallback(function (string $key) use ($config) {
+            ->willReturnCallback(static function (string $key) use ($config) {
                 $key = explode('.', $key);
 
                 return isset($config[array_pop($key)]);
@@ -52,7 +52,7 @@ class ContentTypeIconResolverTest extends TestCase
         $this->configResolver
             ->expects($this->any())
             ->method('getParameter')
-            ->willReturnCallback(function (string $key) use ($config) {
+            ->willReturnCallback(static function (string $key) use ($config) {
                 $key = explode('.', $key);
 
                 return $config[array_pop($key)];
@@ -61,7 +61,7 @@ class ContentTypeIconResolverTest extends TestCase
         $this->packages
             ->expects($this->any())
             ->method('getUrl')
-            ->willReturnCallback(function (string $uri) {
+            ->willReturnCallback(static function (string $uri) {
                 return "https://cdn.example.com/$uri";
             });
 

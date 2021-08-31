@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -65,7 +65,7 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getIdentifier(): string
     {
@@ -73,7 +73,7 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getName(): string
     {
@@ -82,7 +82,7 @@ class MyDraftsTab extends AbstractTab implements OrderedTabInterface, Conditiona
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getOrder(): int
     {

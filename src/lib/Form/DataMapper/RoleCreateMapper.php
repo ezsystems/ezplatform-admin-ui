@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\Repository\Values\User\RoleCreateStruct;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
 
 /**
  * Maps between RoleCreateStruct and RoleCreateData objects.
@@ -19,11 +19,11 @@ class RoleCreateMapper implements DataMapperInterface
     /**
      * Maps given RoleCreateStruct object to a RoleCreateData object.
      *
-     * @param RoleCreateStruct|ValueObject $value
+     * @param \eZ\Publish\Core\Repository\Values\User\RoleCreateStruct|\eZ\Publish\API\Repository\Values\ValueObject $value
      *
-     * @return RoleCreateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function map(ValueObject $value): RoleCreateData
     {
@@ -41,11 +41,11 @@ class RoleCreateMapper implements DataMapperInterface
     /**
      * Maps given RoleCreateData object to a RoleCreateStruct object.
      *
-     * @param RoleCreateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData $data
      *
-     * @return RoleCreateStruct
+     * @return \eZ\Publish\Core\Repository\Values\User\RoleCreateStruct
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function reverseMap($data): RoleCreateStruct
     {

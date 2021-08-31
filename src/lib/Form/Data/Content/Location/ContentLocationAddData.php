@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,18 +9,17 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Location;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\Location;
 
 class ContentLocationAddData
 {
-    /** @var ContentInfo|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo|null */
     protected $contentInfo;
 
-    /** @var Location[] */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location[] */
     protected $newLocations;
 
     /**
-     * @param ContentInfo|null $currentLocation
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $currentLocation
      * @param array $newLocations
      */
     public function __construct(
@@ -32,7 +31,7 @@ class ContentLocationAddData
     }
 
     /**
-     * @return ContentInfo|null
+     * @return \eZ\Publish\API\Repository\Values\Content\ContentInfo|null
      */
     public function getContentInfo(): ?ContentInfo
     {
@@ -40,7 +39,7 @@ class ContentLocationAddData
     }
 
     /**
-     * @param ContentInfo|null $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
      */
     public function setContentInfo(?ContentInfo $contentInfo)
     {
@@ -48,7 +47,7 @@ class ContentLocationAddData
     }
 
     /**
-     * @return Location[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Location[]
      */
     public function getNewLocations(): array
     {
@@ -56,7 +55,7 @@ class ContentLocationAddData
     }
 
     /**
-     * @param Location[] $newLocations
+     * @param \eZ\Publish\API\Repository\Values\Content\Location[] $newLocations
      */
     public function setNewLocations(array $newLocations)
     {

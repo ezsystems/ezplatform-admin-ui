@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -55,7 +55,7 @@ class ConfigResolver
         $configResolveEvent->setContext($context);
         $configResolveEvent->setConfig($config);
 
-        /** @var ConfigResolveEvent $event */
+        /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent $event */
         $event = $this->eventDispatcher->dispatch($configResolveEvent, ConfigResolveEvent::NAME);
 
         return $event->getConfig();

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -18,8 +18,8 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface;
 use Symfony\WebpackEncoreBundle\Asset\TagRenderer;
-use Twig\Environment;
 use Throwable;
+use Twig\Environment;
 use Twig\Error\RuntimeError;
 
 class AdminExceptionListener
@@ -73,7 +73,7 @@ class AdminExceptionListener
     }
 
     /**
-     * @param ExceptionEvent $event
+     * @param \Symfony\Component\HttpKernel\Event\ExceptionEvent $event
      */
     public function onKernelException(ExceptionEvent $event)
     {
@@ -125,7 +125,7 @@ class AdminExceptionListener
     }
 
     /**
-     * @param ExceptionEvent $event
+     * @param \Symfony\Component\HttpKernel\Event\ExceptionEvent $event
      *
      * @return bool
      */
@@ -133,14 +133,14 @@ class AdminExceptionListener
     {
         $request = $event->getRequest();
 
-        /** @var SiteAccess $siteAccess */
+        /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess $siteAccess */
         $siteAccess = $request->get('siteaccess', new SiteAccess('default'));
 
         return \in_array($siteAccess->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME]);
     }
 
     /**
-     * @param Throwable $exception
+     * @param \Throwable $exception
      *
      * @return string
      */

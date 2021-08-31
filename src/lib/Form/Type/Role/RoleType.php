@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -16,11 +16,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class RoleType extends AbstractType
 {
-    /** @var RoleService */
+    /** @var \eZ\Publish\API\Repository\RoleService */
     protected $roleService;
 
     /**
-     * @param RoleService $roleService
+     * @param \eZ\Publish\API\Repository\RoleService $roleService
      */
     public function __construct(RoleService $roleService)
     {

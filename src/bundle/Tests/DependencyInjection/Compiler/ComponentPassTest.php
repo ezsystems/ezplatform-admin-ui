@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\DependencyInjection\Compiler;
 
+use EzSystems\EzPlatformAdminUi\Component\Registry;
+use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 use EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\ComponentPass;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use EzSystems\EzPlatformAdminUi\Component\Registry;
 use Symfony\Component\DependencyInjection\Reference;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 
 class ComponentPassTest extends AbstractCompilerPassTestCase
 {
@@ -25,7 +25,7 @@ class ComponentPassTest extends AbstractCompilerPassTestCase
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {

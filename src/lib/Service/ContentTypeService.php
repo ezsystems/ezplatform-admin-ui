@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -20,7 +20,7 @@ class ContentTypeService
     /** @var Repository\ContentTypeService */
     private $contentTypeService;
 
-    /** @var FormFactoryInterface */
+    /** @var \Symfony\Component\Form\FormFactoryInterface */
     private $formFactory;
 
     /** @var array */
@@ -30,7 +30,7 @@ class ContentTypeService
      * ContentTypeGroupService constructor.
      *
      * @param Repository\ContentTypeService $contentTypeService
-     * @param FormFactoryInterface $formFactory
+     * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param array $prioritizedLanguages
      */
     public function __construct(
@@ -91,7 +91,7 @@ class ContentTypeService
      * Return the highest prioritized language that $contentType is translated to.
      * If there is no translation for a prioritized language, return $contentType's main language.
      *
-     * @param ContentType $contentType Content type (or content type draft)
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType Content type (or content type draft)
      *
      * @return string Language code
      */

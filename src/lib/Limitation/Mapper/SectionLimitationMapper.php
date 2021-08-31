@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Limitation\Mapper;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\Values\User\Limitation;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
@@ -18,7 +18,7 @@ class SectionLimitationMapper extends MultipleSelectionBasedMapper implements Li
     use LoggerAwareTrait;
 
     /**
-     * @var SectionService
+     * @var \eZ\Publish\API\Repository\SectionService
      */
     private $sectionService;
 

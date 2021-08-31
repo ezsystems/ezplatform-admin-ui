@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -15,15 +15,15 @@ use eZ\Publish\API\Repository\Values\Content\Location;
  */
 class LocationSwapData
 {
-    /** @var Location|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
     protected $currentLocation;
 
-    /** @var Location|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
     protected $newLocation;
 
     /**
-     * @param Location|null $currentLocation
-     * @param Location|null $newLocation
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $currentLocation
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $newLocation
      */
     public function __construct(?Location $currentLocation = null, Location $newLocation = null)
     {
@@ -32,7 +32,7 @@ class LocationSwapData
     }
 
     /**
-     * @return Location|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      */
     public function getCurrentLocation(): ?Location
     {
@@ -40,7 +40,7 @@ class LocationSwapData
     }
 
     /**
-     * @param Location|null $currentLocation
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $currentLocation
      */
     public function setCurrentLocation(?Location $currentLocation)
     {
@@ -48,7 +48,7 @@ class LocationSwapData
     }
 
     /**
-     * @return Location|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      */
     public function getNewLocation(): ?Location
     {
@@ -56,7 +56,7 @@ class LocationSwapData
     }
 
     /**
-     * @param Location|null $newLocation
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $newLocation
      */
     public function setNewLocation(?Location $newLocation)
     {

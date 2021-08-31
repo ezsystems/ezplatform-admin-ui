@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
@@ -16,13 +16,13 @@ class ContentTypeDraftParamConverter implements ParamConverterInterface
 {
     const PARAMETER_CONTENT_TYPE_ID = 'contentTypeId';
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
     /**
      * ContentTypeGroupParamConverter constructor.
      *
-     * @param ContentTypeService $contentTypeGroupService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeGroupService
      */
     public function __construct(ContentTypeService $contentTypeGroupService)
     {
@@ -30,7 +30,7 @@ class ContentTypeDraftParamConverter implements ParamConverterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
@@ -48,7 +48,7 @@ class ContentTypeDraftParamConverter implements ParamConverterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function supports(ParamConverter $configuration)
     {

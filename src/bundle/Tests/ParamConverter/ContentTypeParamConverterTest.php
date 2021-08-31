@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Tests\ParamConverter;
@@ -12,7 +12,6 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentTypeParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ContentTypeParamConverterTest extends AbstractParamConverterTest
@@ -20,10 +19,10 @@ class ContentTypeParamConverterTest extends AbstractParamConverterTest
     const SUPPORTED_CLASS = ContentType::class;
     const PARAMETER_NAME = 'contentType';
 
-    /** @var ContentTypeParamConverter */
+    /** @var \EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentTypeParamConverter */
     protected $converter;
 
-    /** @var MockObject */
+    /** @var \PHPUnit\Framework\MockObject\MockObject */
     protected $serviceMock;
 
     protected function setUp(): void

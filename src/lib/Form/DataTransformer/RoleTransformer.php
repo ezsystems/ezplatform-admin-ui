@@ -1,30 +1,29 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\RoleService;
+use eZ\Publish\API\Repository\Values\User\Role as APIRole;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Values\User\Role as APIRole;
 
 /**
  * Transforms between a Role's ID and a domain specific object.
  */
 class RoleTransformer implements DataTransformerInterface
 {
-    /** @var RoleService */
+    /** @var \eZ\Publish\API\Repository\RoleService */
     protected $roleService;
 
     /**
-     * @param RoleService $roleService
+     * @param \eZ\Publish\API\Repository\RoleService $roleService
      */
     public function __construct(RoleService $roleService)
     {
@@ -38,7 +37,7 @@ class RoleTransformer implements DataTransformerInterface
      *
      * @return mixed|null
      *
-     * @throws TransformationFailedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function transform($value)
     {
@@ -58,10 +57,10 @@ class RoleTransformer implements DataTransformerInterface
      *
      * @param mixed $value
      *
-     * @return APIRole|null
+     * @return \eZ\Publish\API\Repository\Values\User\Role|null
      *
-     * @throws UnauthorizedException
-     * @throws TransformationFailedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function reverseTransform($value): ?APIRole
     {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -16,18 +16,18 @@ use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
 class ObjectStatesDataset
 {
-    /** @var ObjectStateService */
+    /** @var \eZ\Publish\API\Repository\ObjectStateService */
     protected $objectStateService;
 
-    /** @var ValueFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory */
     protected $valueFactory;
 
     /** @var UIValue\ObjectState\ObjectState[] */
     protected $data;
 
     /**
-     * @param ObjectStateService $objectStateService
-     * @param ValueFactory $valueFactory
+     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
+     * @param \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory $valueFactory
      */
     public function __construct(ObjectStateService $objectStateService, ValueFactory $valueFactory)
     {
@@ -36,7 +36,7 @@ class ObjectStatesDataset
     }
 
     /**
-     * @param ContentInfo $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
      *
      * @return ObjectStatesDataset
      */

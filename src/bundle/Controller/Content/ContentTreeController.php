@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,12 +10,12 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller\Content;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Query;
-use EzSystems\EzPlatformRest\Message;
-use EzSystems\EzPlatformRest\Server\Controller as RestController;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Root;
 use EzSystems\EzPlatformAdminUi\UI\Module\ContentTree\NodeFactory;
+use EzSystems\EzPlatformRest\Message;
+use EzSystems\EzPlatformRest\Server\Controller as RestController;
 use Symfony\Component\HttpFoundation\Request;
 
 class ContentTreeController extends RestController

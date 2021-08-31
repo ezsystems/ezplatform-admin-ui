@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -36,7 +36,7 @@ class Language extends APILanguage
     protected $userCanEdit = false;
 
     /**
-     * @param APILanguage $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
      * @param array $properties
      */
     public function __construct(APILanguage $language, array $properties = [])

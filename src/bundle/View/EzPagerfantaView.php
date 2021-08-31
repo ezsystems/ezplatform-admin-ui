@@ -1,21 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle\View;
 
 use EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate;
 use Pagerfanta\View\DefaultView;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * View to render Pagerfanta pagination.
  */
 class EzPagerfantaView extends DefaultView
 {
-    /** @var TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     protected function createDefaultTemplate()
@@ -29,7 +28,7 @@ class EzPagerfantaView extends DefaultView
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getName()
     {

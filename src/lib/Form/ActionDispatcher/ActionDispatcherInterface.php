@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\ActionDispatcher;
@@ -21,8 +21,8 @@ interface ActionDispatcherInterface
     /**
      * Dispatches the action of a given form.
      *
-     * @param FormInterface $form the form that has been submitted
-     * @param ValueObject $data Underlying data for the form. Most likely a create or update struct.
+     * @param \Symfony\Component\Form\FormInterface $form the form that has been submitted
+     * @param \eZ\Publish\API\Repository\Values\ValueObject $data Underlying data for the form. Most likely a create or update struct.
      * @param string|null $actionName The form action itself. Typically the form clicked button name,
      *                                or null if the default action is used (e.g. when pressing enter).
      * @param array $options arbitrary hash of options

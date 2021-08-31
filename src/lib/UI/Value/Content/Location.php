@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
 
-use eZ\Publish\Core\Repository\Values\Content\Location as CoreLocation;
 use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
+use eZ\Publish\Core\Repository\Values\Content\Location as CoreLocation;
 
 /**
  * Extends original value object in order to provide additional fields.
@@ -34,7 +34,7 @@ class Location extends CoreLocation
     /**
      * Path locations.
      *
-     * @var APILocation[]
+     * @var \eZ\Publish\API\Repository\Values\Content\Location[]
      */
     protected $pathLocations;
 
@@ -60,7 +60,7 @@ class Location extends CoreLocation
     protected $userCanEdit;
 
     /**
-     * @param APILocation $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      * @param array $properties
      */
     public function __construct(APILocation $location, array $properties = [])

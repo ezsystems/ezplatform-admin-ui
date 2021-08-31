@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
 
+use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
-use eZ\Publish\API\Repository\Values\Content\Section;
+use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData;
 
 /**
  * Maps between SectionUpdateStruct and SectionUpdateData objects.
@@ -20,11 +20,11 @@ class SectionUpdateMapper implements DataMapperInterface
     /**
      * Maps given SectionUpdateStruct object to a SectionUpdateData object.
      *
-     * @param SectionUpdateStruct|ValueObject $value
+     * @param \eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct|\eZ\Publish\API\Repository\Values\ValueObject $value
      *
-     * @return SectionUpdateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function map(ValueObject $value): SectionUpdateData
     {
@@ -38,11 +38,11 @@ class SectionUpdateMapper implements DataMapperInterface
     /**
      * Maps given SectionUpdateData object to a SectionUpdateStruct object.
      *
-     * @param SectionUpdateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData $data
      *
-     * @return SectionUpdateStruct
+     * @return \eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function reverseMap($data): SectionUpdateStruct
     {

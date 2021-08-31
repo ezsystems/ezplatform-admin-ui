@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\Limitation\Mapper;
@@ -16,13 +16,13 @@ use Psr\Log\LoggerInterface;
 
 class LanguageTypeLimitationMapperTest extends TestCase
 {
-    /** @var LanguageService|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \eZ\Publish\API\Repository\LanguageService|\PHPUnit\Framework\MockObject\MockObject */
     private $languageService;
 
-    /** @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Psr\Log\LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $logger;
 
-    /** @var LanguageLimitationMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Limitation\Mapper\LanguageLimitationMapper */
     private $mapper;
 
     protected function setUp(): void

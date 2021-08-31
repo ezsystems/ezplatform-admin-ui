@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
@@ -18,11 +18,11 @@ class DateIntervalToArrayTransformer implements DataTransformerInterface
     /**
      * Transforms a date interval into an array of date interval elements.
      *
-     * @param DateInterval $dateInterval date interval
+     * @param \DateInterval $dateInterval date interval
      *
      * @return array date interval elements
      *
-     * @throws TransformationFailedException If the given value is not an instance of DateInterval
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException If the given value is not an instance of DateInterval
      */
     public function transform($dateInterval)
     {
@@ -58,9 +58,9 @@ class DateIntervalToArrayTransformer implements DataTransformerInterface
      *
      * @param array $value date interval elements
      *
-     * @return DateInterval date interval
+     * @return \DateInterval date interval
      *
-     * @throws TransformationFailedException if the given value is not an array,
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException if the given value is not an array,
      *                                       or if the value could not be transformed
      */
     public function reverseTransform($value)

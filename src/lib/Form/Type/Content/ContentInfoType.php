@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -16,11 +16,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class ContentInfoType extends AbstractType
 {
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     protected $contentService;
 
     /**
-     * @param ContentService $contentService
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
      */
     public function __construct(ContentService $contentService)
     {

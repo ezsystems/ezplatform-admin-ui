@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -176,7 +176,7 @@ class PermissionChecker implements PermissionCheckerInterface
         $restrictedSubtrees = $this->getRestrictions($hasAccess, SubtreeLimitation::class);
         $canCreateInSubtree = empty($restrictedSubtrees)
             ? true
-            : !empty(array_filter($restrictedSubtrees, function ($restrictedSubtree) use ($location) {
+            : !empty(array_filter($restrictedSubtrees, static function ($restrictedSubtree) use ($location) {
                 return strpos($location->pathString, $restrictedSubtree) === 0;
             }));
 
@@ -302,7 +302,7 @@ class PermissionChecker implements PermissionCheckerInterface
     {
         $filter = array_filter(
             $this->languageService->loadLanguages(),
-            function (Language $language) {
+            static function (Language $language) {
                 return $language->enabled;
             }
         );

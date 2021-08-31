@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
@@ -62,7 +62,7 @@ class ContentTypes implements ProviderInterface
                 $preferredLanguages
             );
 
-            usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
+            usort($contentTypes, static function (ContentType $contentType1, ContentType $contentType2) {
                 return strnatcasecmp($contentType1->getName(), $contentType2->getName());
             });
 

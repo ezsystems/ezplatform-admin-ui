@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Behat\Component\Table;
 
 use Behat\Mink\Session;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
+use Ibexa\AdminUi\Behat\Component\Pagination;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
 use Ibexa\Behat\Browser\Locator\LocatorCollection;
-use Ibexa\AdminUi\Behat\Component\Pagination;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 
 class TableBuilder

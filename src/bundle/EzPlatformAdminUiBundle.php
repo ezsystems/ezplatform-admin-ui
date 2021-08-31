@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle;
@@ -22,7 +22,7 @@ class EzPlatformAdminUiBundle extends Bundle
     public const ADMIN_GROUP_NAME = 'admin_group';
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * @throws \Symfony\Component\DependencyInjection\Exception\LogicException
      */

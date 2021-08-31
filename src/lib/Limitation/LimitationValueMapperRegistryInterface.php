@@ -1,12 +1,10 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Limitation;
-
-use EzSystems\EzPlatformAdminUi\Exception\ValueMapperNotFoundException;
 
 /**
  * Interface for Limitation value mappers registry.
@@ -23,7 +21,7 @@ interface LimitationValueMapperRegistryInterface
     /**
      * Returns mapper corresponding to given Limitation Type.
      *
-     * @throws ValueMapperNotFoundException if no mapper exists for $limitationType
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\ValueMapperNotFoundException if no mapper exists for $limitationType
      *
      * @param string $limitationType
      *

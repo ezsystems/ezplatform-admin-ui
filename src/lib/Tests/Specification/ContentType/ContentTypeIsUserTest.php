@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -89,7 +89,7 @@ class ContentTypeIsUserTest extends TestCase
 
         $contentType
             ->method('hasFieldDefinitionOfType')
-            ->willReturnCallback(function (string $fieldTypeIdentifier) use ($fieldsType) {
+            ->willReturnCallback(static function (string $fieldTypeIdentifier) use ($fieldsType) {
                 return in_array($fieldTypeIdentifier, $fieldsType);
             });
 

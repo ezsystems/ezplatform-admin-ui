@@ -1,25 +1,24 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Specification;
 
+use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUi\Specification\Version\VersionHasConflict;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 
 class VersionHasConflictTest extends TestCase
 {
     public function testVersionWithStatusDraft()
     {
-        /** @var ContentService|MockObject $contentServiceMock */
+        /** @var \eZ\Publish\API\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject $contentServiceMock */
         $contentServiceMock = $this->createMock(ContentService::class);
         $contentServiceMock
             ->method('loadVersions')
@@ -37,7 +36,7 @@ class VersionHasConflictTest extends TestCase
 
     public function testVersionWithStatusDraftAndVersionConflict()
     {
-        /** @var ContentService|MockObject $contentServiceMock */
+        /** @var \eZ\Publish\API\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject $contentServiceMock */
         $contentServiceMock = $this->createMock(ContentService::class);
         $contentServiceMock
             ->method('loadVersions')
@@ -75,7 +74,7 @@ class VersionHasConflictTest extends TestCase
      * @param int $versionNo
      * @param string $languageCode
      *
-     * @return MockObject|VersionInfo
+     * @return \PHPUnit\Framework\MockObject\MockObject|\eZ\Publish\API\Repository\Values\Content\VersionInfo
      */
     private function createVersionInfo(bool $isPublished = false, int $versionNo = 1, string $languageCode = 'eng-GB'): VersionInfo
     {

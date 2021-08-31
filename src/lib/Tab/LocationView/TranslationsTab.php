@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -25,7 +25,6 @@ use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -34,13 +33,13 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
 {
     const URI_FRAGMENT = 'ibexa-tab-location-view-translations';
 
-    /** @var DatasetFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     protected $datasetFactory;
 
     /** @var \Symfony\Component\Form\FormFactoryInterface */
     private $formFactory;
 
-    /** @var UrlGeneratorInterface */
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     protected $urlGenerator;
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
@@ -50,10 +49,10 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     private $languageService;
 
     /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param DatasetFactory $datasetFactory
-     * @param UrlGeneratorInterface $urlGenerator
+     * @param \Twig\Environment $twig
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
+     * @param \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory $datasetFactory
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \Symfony\Component\Form\FormFactoryInterface $formFactory
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
@@ -94,7 +93,7 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplate(): string
     {
@@ -102,13 +101,13 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {
-        /** @var Location $location */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         $location = $contextParameters['location'];
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $contextParameters['content'];
         $versionInfo = $content->getVersionInfo();
         $translationsDataset = $this->datasetFactory->translations();
@@ -148,11 +147,11 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     }
 
     /**
-     * @param Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     private function createTranslationAddForm(Location $location): FormInterface
     {
@@ -162,12 +161,12 @@ class TranslationsTab extends AbstractEventDispatchingTab implements OrderedTabI
     }
 
     /**
-     * @param Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      * @param array $languageCodes
      *
-     * @return FormInterface
+     * @return \Symfony\Component\Form\FormInterface
      *
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     private function createTranslationDeleteForm(Location $location, array $languageCodes): FormInterface
     {

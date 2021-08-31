@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,9 +10,9 @@ namespace EzSystems\EzPlatformAdminUi\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ValueObject;
+use EzSystems\EzPlatformAdminUi\Event\FieldDefinitionMappingEvent;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
 use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
-use EzSystems\EzPlatformAdminUi\Event\FieldDefinitionMappingEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -33,10 +33,10 @@ class ContentTypeDraftMapper implements FormDataMapperInterface
     /**
      * Maps a ValueObject from eZ content repository to a data usable as underlying form data (e.g. create/update struct).
      *
-     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft|ValueObject $contentTypeDraft
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft|\eZ\Publish\API\Repository\Values\ValueObject $contentTypeDraft
      * @param array $params
      *
-     * @return ContentTypeData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData
      */
     public function mapToFormData(ValueObject $contentTypeDraft, array $params = [])
     {

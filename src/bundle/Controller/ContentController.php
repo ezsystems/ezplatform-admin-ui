@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUiBundle\Controller;
@@ -22,7 +22,6 @@ use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Event\ContentProxyCreateEvent;
 use EzSystems\EzPlatformAdminUi\Event\Options;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException as AdminInvalidArgumentException;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
@@ -44,33 +43,29 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\Translation\Exception\InvalidArgumentException;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException as APIRepositoryInvalidArgumentException;
-use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class ContentController extends Controller
 {
-    /** @var TranslatableNotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
-    /** @var ContentMainLocationUpdateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper */
     private $contentMainLocationUpdateMapper;
 
-    /** @var SiteaccessResolverInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface */
     private $siteaccessResolver;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
     /** @var \eZ\Publish\API\Repository\UserService */
@@ -127,14 +122,14 @@ class ContentController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws InvalidOptionsException
-     * @throws InvalidArgumentException
-     * @throws ApiException\UnauthorizedException
-     * @throws ApiException\InvalidArgumentException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      * @throws ApiException\ContentValidationException
      * @throws ApiException\ContentFieldValidationException
      */
@@ -200,13 +195,13 @@ class ContentController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws InvalidArgumentException
-     * @throws UnauthorizedException
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function editAction(Request $request): Response
     {
@@ -262,7 +257,7 @@ class ContentController extends Controller
             }
         }
 
-        /** @var ContentEditData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData $data */
         $data = $form->getData();
         $contentInfo = $data->getContentInfo();
 
@@ -277,16 +272,16 @@ class ContentController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws AdminInvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      * @throws \InvalidArgumentException
-     * @throws TranslationInvalidArgumentException
-     * @throws APIRepositoryInvalidArgumentException
-     * @throws UnauthorizedException
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function updateMainLocationAction(Request $request): Response
     {
@@ -320,7 +315,7 @@ class ContentController extends Controller
             }
         }
 
-        /** @var ContentEditData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData $data */
         $data = $form->getData();
         $contentInfo = $data->getContentInfo();
 
@@ -336,12 +331,12 @@ class ContentController extends Controller
     }
 
     /**
-     * @param Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      * @param string|null $languageCode
      * @param int|null $versionNo
-     * @param Location|null $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function previewAction(
         Content $content,

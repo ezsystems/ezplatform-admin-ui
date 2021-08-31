@@ -1,13 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form;
 
+use Exception;
 use eZ\Publish\API\Repository\Exceptions\ForbiddenException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
@@ -21,7 +22,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Exception;
 
 class SubmitHandler implements UserActionsSubmitHandler
 {
@@ -60,10 +60,10 @@ class SubmitHandler implements UserActionsSubmitHandler
      * Handles form errors (NotificationHandler:warning).
      * Handles business logic exceptions (NotificationHandler:error).
      *
-     * @param FormInterface $form
+     * @param \Symfony\Component\Form\FormInterface $form
      * @param callable(mixed):?Response $handler
      *
-     * @return Response|null
+     * @return \Symfony\Component\HttpFoundation\Response|null
      */
     public function handle(FormInterface $form, callable $handler): ?Response
     {
@@ -104,10 +104,10 @@ class SubmitHandler implements UserActionsSubmitHandler
      * Handles form errors (JsonResponse(['errors'=> [...], Response::ERROR_STATUS_CODE])).
      * Handles business logic exceptions (JsonResponse(['errors'=> [...], Response::ERROR_STATUS_CODE])).
      *
-     * @param FormInterface $form
+     * @param \Symfony\Component\Form\FormInterface $form
      * @param callable(mixed):?Response $handler
      *
-     * @return JsonResponse
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function handleAjax(FormInterface $form, callable $handler): JsonResponse
     {
@@ -115,7 +115,7 @@ class SubmitHandler implements UserActionsSubmitHandler
 
         if ($form->isValid()) {
             try {
-                /** @var JsonResponse $result */
+                /** @var \Symfony\Component\HttpFoundation\JsonResponse $result */
                 $result = $handler($data);
                 if ($result instanceof JsonResponse && $result->getStatusCode() === Response::HTTP_OK) {
                     $event = $this->formUiActionMappingDispatcher->dispatch($form);

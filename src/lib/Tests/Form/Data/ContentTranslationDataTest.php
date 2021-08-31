@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\Data;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
-use PHPUnit\Framework\TestCase;
-use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
+use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
+use PHPUnit\Framework\TestCase;
 
 class ContentTranslationDataTest extends TestCase
 {
-    /** @var ContentTranslationData */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData */
     private $contentTranslationData;
 
     protected function setUp(): void
@@ -47,7 +47,7 @@ class ContentTranslationDataTest extends TestCase
     /**
      * @param string $identifier
      *
-     * @return FieldDefinition
+     * @return \eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition
      */
     private function getFieldDefinition(string $identifier = 'identifier'): FieldDefinition
     {

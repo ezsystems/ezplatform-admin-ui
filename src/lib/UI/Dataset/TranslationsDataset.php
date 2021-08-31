@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -12,23 +12,22 @@ use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
 
 class TranslationsDataset
 {
-    /** @var LanguageService */
+    /** @var \eZ\Publish\API\Repository\LanguageService */
     protected $languageService;
 
-    /** @var ValueFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory */
     protected $valueFactory;
 
-    /** @var UIValue\Content\Language[] */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Language[] */
     protected $data;
 
     /**
-     * @param LanguageService $languageService
-     * @param ValueFactory $valueFactory
+     * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory $valueFactory
      */
     public function __construct(LanguageService $languageService, ValueFactory $valueFactory)
     {
@@ -37,7 +36,7 @@ class TranslationsDataset
     }
 
     /**
-     * @param VersionInfo $versionInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
      *
      * @return TranslationsDataset
      */
@@ -83,7 +82,7 @@ class TranslationsDataset
     }
 
     /**
-     * @return UIValue\Content\Language[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Language[]
      */
     public function getTranslations(): array
     {
@@ -91,7 +90,7 @@ class TranslationsDataset
     }
 
     /**
-     * @return UIValue\Content\Language[]
+     * @return \eZ\Publish\API\Repository\Values\Content\Language[]
      */
     public function getLanguageCodes(): array
     {

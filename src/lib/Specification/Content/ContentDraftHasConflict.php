@@ -1,14 +1,13 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Specification\Content;
 
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\ContentService;
 use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
 
@@ -37,7 +36,7 @@ class ContentDraftHasConflict extends AbstractSpecification
      *
      * @return bool
      *
-     * @throws UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function isSatisfiedBy($contentInfo): bool
     {

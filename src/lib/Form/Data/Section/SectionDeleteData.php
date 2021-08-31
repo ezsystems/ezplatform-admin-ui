@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -15,11 +15,11 @@ use eZ\Publish\API\Repository\Values\Content\Section;
  */
 class SectionDeleteData
 {
-    /** @var Section|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Section|null */
     protected $section;
 
     /**
-     * @param Section|null $section
+     * @param \eZ\Publish\API\Repository\Values\Content\Section|null $section
      */
     public function __construct(?Section $section = null)
     {
@@ -27,7 +27,7 @@ class SectionDeleteData
     }
 
     /**
-     * @return Section|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Section|null
      */
     public function getSection(): ?Section
     {
@@ -35,7 +35,7 @@ class SectionDeleteData
     }
 
     /**
-     * @param Section|null $section
+     * @param \eZ\Publish\API\Repository\Values\Content\Section|null $section
      */
     public function setSection(?Section $section)
     {

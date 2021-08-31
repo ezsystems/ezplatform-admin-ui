@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\TrashItem;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -18,7 +17,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 class TrashItemTransformer implements DataTransformerInterface
 {
     /**
-     * @var TrashService
+     * @var \eZ\Publish\API\Repository\TrashService
      */
     private $trashService;
 
@@ -34,7 +33,7 @@ class TrashItemTransformer implements DataTransformerInterface
      *
      * @return mixed|null
      *
-     * @throws TransformationFailedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function transform($value): ?int
     {
@@ -54,10 +53,10 @@ class TrashItemTransformer implements DataTransformerInterface
      *
      * @param mixed $value
      *
-     * @return TrashItem|null
+     * @return \eZ\Publish\API\Repository\Values\Content\TrashItem|null
      *
-     * @throws TransformationFailedException
-     * @throws UnauthorizedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function reverseTransform($value): ?TrashItem
     {

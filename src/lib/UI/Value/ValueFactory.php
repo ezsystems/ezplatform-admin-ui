@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -16,12 +16,12 @@ use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\DraftList\Item\ContentDraftListItem;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\DraftList\Item\ContentDraftListItem;
+use eZ\Publish\API\Repository\Values\Content\DraftList\Item\UnauthorizedContentDraftListItem;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Relation;
-use eZ\Publish\API\Repository\Values\Content\DraftList\Item\UnauthorizedContentDraftListItem;
 use eZ\Publish\API\Repository\Values\Content\RelationList\Item\RelationListItem;
 use eZ\Publish\API\Repository\Values\Content\RelationList\Item\UnauthorizedRelationListItem;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
@@ -116,7 +116,7 @@ class ValueFactory
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
      *
-     * @return UIValue\Content\VersionInfo
+     * @return \eZ\Publish\API\Repository\Values\Content\VersionInfo
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
@@ -143,7 +143,7 @@ class ValueFactory
      * @param \eZ\Publish\API\Repository\Values\Content\Language $language
      * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
      *
-     * @return UIValue\Content\Language
+     * @return \eZ\Publish\API\Repository\Values\Content\Language
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
@@ -162,10 +162,10 @@ class ValueFactory
     /**
      * @deprecated since version 2.5, to be removed in 3.0. Please use ValueFactory::createRelationItem instead.
      *
-     * @param Relation $relation
-     * @param Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Relation $relation
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      *
-     * @return UIValue\Content\Relation
+     * @return \eZ\Publish\API\Repository\Values\Content\Relation
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
@@ -190,7 +190,7 @@ class ValueFactory
      * @param \eZ\Publish\API\Repository\Values\Content\RelationList\Item\RelationListItem $relationListItem
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      *
-     * @return UIValue\Content\Relation
+     * @return \eZ\Publish\API\Repository\Values\Content\Relation
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
@@ -226,7 +226,7 @@ class ValueFactory
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      *
-     * @return UIValue\Content\Location
+     * @return \eZ\Publish\API\Repository\Values\Content\Location
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException

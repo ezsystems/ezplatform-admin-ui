@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Tests\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\TrashService;
-use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\TrashItemAdapter;
-use PHPUnit\Framework\TestCase;
+use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\CriterionInterface;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Trash\SearchResult;
-use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
+use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\TrashItemAdapter;
+use PHPUnit\Framework\TestCase;
 
 class TrashItemAdapterTest extends TestCase
 {
@@ -31,10 +31,10 @@ class TrashItemAdapterTest extends TestCase
     /**
      * Returns the adapter to test.
      *
-     * @param Query $query
-     * @param TrashService $trashService
+     * @param \eZ\Publish\API\Repository\Values\Content\Query $query
+     * @param \eZ\Publish\API\Repository\TrashService $trashService
      *
-     * @return TrashItemAdapter
+     * @return \EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\TrashItemAdapter
      */
     protected function getAdapter(Query $query, TrashService $trashService): TrashItemAdapter
     {

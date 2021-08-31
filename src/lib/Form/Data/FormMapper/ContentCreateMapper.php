@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -22,10 +22,10 @@ class ContentCreateMapper implements FormDataMapperInterface
     /**
      * Maps a ValueObject from eZ content repository to a data usable as underlying form data (e.g. create/update struct).
      *
-     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType|ValueObject $contentType
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType|\eZ\Publish\API\Repository\Values\ValueObject $contentType
      * @param array $params
      *
-     * @return ContentCreateData
+     * @return \EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData
      */
     public function mapToFormData(ValueObject $contentType, array $params = [])
     {

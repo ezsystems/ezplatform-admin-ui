@@ -1,47 +1,47 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Form\Processor;
 
-use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
-use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
-use PHPUnit\Framework\TestCase;
 use eZ\Publish\API\Repository\ContentService;
-use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData;
-use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
-use Symfony\Component\Form\FormConfigInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Form\FormInterface;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
 use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
-use PHPUnit\Framework\MockObject\MockObject;
+use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
 use EzSystems\EzPlatformAdminUi\Form\Processor\PreviewFormProcessor;
+use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
+use EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData;
+use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
+use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Form\FormConfigInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PreviewFormProcessorTest extends TestCase
 {
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var UrlGeneratorInterface */
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var TranslatableNotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
     protected function setUp(): void
@@ -53,12 +53,12 @@ class PreviewFormProcessorTest extends TestCase
     }
 
     /**
-     * @param ContentService|null $contentService
-     * @param UrlGeneratorInterface|null $urlGenerator
-     * @param TranslatableNotificationHandlerInterface|null $notificationHandler
+     * @param \eZ\Publish\API\Repository\ContentService|null $contentService
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface|null $urlGenerator
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface|null $notificationHandler
      * @param \eZ\Publish\API\Repository\LocationService|null $locationService
      *
-     * @return PreviewFormProcessor
+     * @return \EzSystems\EzPlatformAdminUi\Form\Processor\PreviewFormProcessor
      */
     private function createPreviewFormProcessor(
         ContentService $contentService = null,
@@ -149,7 +149,7 @@ class PreviewFormProcessorTest extends TestCase
      * @param string $fieldDefinitionIdentifier
      * @param string $fieldDataValue
      *
-     * @return ContentCreateData
+     * @return \EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData
      */
     private function generateContentStruct(string $mainLanguageCode, string $fieldDefinitionIdentifier, string $fieldDataValue): ContentCreateData
     {
@@ -169,10 +169,10 @@ class PreviewFormProcessorTest extends TestCase
     }
 
     /**
-     * @param ContentCreateData $contentStruct
-     * @param APIContent $contentDraft
+     * @param \EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData $contentStruct
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $contentDraft
      *
-     * @return MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function generateContentServiceMock(ContentCreateData $contentStruct, APIContent $contentDraft): MockObject
     {
@@ -187,7 +187,7 @@ class PreviewFormProcessorTest extends TestCase
     }
 
     /**
-     * @return MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function generateConfigMock($languageCode): MockObject
     {
@@ -204,7 +204,7 @@ class PreviewFormProcessorTest extends TestCase
     /**
      * @param $config
      *
-     * @return FormInterface|MockObject
+     * @return \Symfony\Component\Form\FormInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function generateFormMock($config): MockObject
     {
@@ -218,7 +218,7 @@ class PreviewFormProcessorTest extends TestCase
     }
 
     /**
-     * @param APIContent $contentDraft
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $contentDraft
      * @param string $languageCode
      * @param string $url
      * @param int|null $locationId
@@ -246,11 +246,11 @@ class PreviewFormProcessorTest extends TestCase
     }
 
     /**
-     * @param APIContent $contentDraft
+     * @param \eZ\Publish\API\Repository\Values\Content\Content $contentDraft
      * @param string $languageCode
      * @param string $url
      *
-     * @return MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function generateUrlGeneratorForContentEditUrlMock(APIContent $contentDraft, string $languageCode, string $url): MockObject
     {
@@ -272,7 +272,7 @@ class PreviewFormProcessorTest extends TestCase
      * @param $contentDraftId
      * @param $languageCode
      *
-     * @return APIContent
+     * @return \eZ\Publish\API\Repository\Values\Content\Content
      */
     private function generateContentDraft($contentDraftId, $languageCode, $mainLocationId): APIContent
     {

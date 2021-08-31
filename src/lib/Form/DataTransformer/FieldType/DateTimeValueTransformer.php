@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType;
@@ -20,7 +20,7 @@ class DateTimeValueTransformer implements DataTransformerInterface
      *
      * @return int|null
      *
-     * @throws TransformationFailedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function transform($value)
     {
@@ -44,9 +44,9 @@ class DateTimeValueTransformer implements DataTransformerInterface
     /**
      * @param mixed $value
      *
-     * @return Value|null
+     * @return \eZ\Publish\Core\FieldType\DateAndTime\Value|null
      *
-     * @throws TransformationFailedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function reverseTransform($value)
     {

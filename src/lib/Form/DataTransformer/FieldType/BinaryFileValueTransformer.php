@@ -1,14 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType;
 
-use eZ\Publish\Core\FieldType\BinaryFile\Value;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * Data transformer for ezbinaryfile field type.
@@ -18,7 +16,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 class BinaryFileValueTransformer extends AbstractBinaryBaseTransformer implements DataTransformerInterface
 {
     /**
-     * @param Value $value
+     * @param \eZ\Publish\Core\FieldType\BinaryFile\Value $value
      *
      * @return array
      */
@@ -37,13 +35,13 @@ class BinaryFileValueTransformer extends AbstractBinaryBaseTransformer implement
     /**
      * @param array $value
      *
-     * @return Value
+     * @return \eZ\Publish\Core\FieldType\BinaryFile\Value
      *
-     * @throws TransformationFailedException
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException
      */
     public function reverseTransform($value)
     {
-        /** @var Value $valueObject */
+        /** @var \eZ\Publish\Core\FieldType\BinaryFile\Value $valueObject */
         $valueObject = $this->getReverseTransformedValue($value);
 
         if ($this->fieldType->isEmptyValue($valueObject)) {

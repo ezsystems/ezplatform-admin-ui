@@ -56,11 +56,11 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
         "ezsystems/doctrine-dbal-schema": "^2.0@dev",
         "ezsystems/ezplatform-http-cache": "^3.0@dev",
-        "ezsystems/ezplatform-code-style": "^0.1.0"
+        "ezsystems/ezplatform-code-style": "^1.0"
     },
     "scripts": {
-        "fix-cs": "php-cs-fixer fix -v --show-progress=estimating",
-        "check-cs": "php-cs-fixer fix -v --diff --dry-run --show-progress=estimating",
+        "fix-cs": "php-cs-fixer fix --config=.php-cs-fixer.php --show-progress=dots",
+        "check-cs": "@fix-cs --dry-run",
         "test": "phpunit -c phpunit.xml"
     },
     "extra": {

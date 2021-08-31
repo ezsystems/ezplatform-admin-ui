@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tests\Menu;
 
-use eZ\Publish\Core\MVC\Symfony\Security\UserInterface;
-use EzSystems\EzPlatformAdminUi\Menu\MainMenuBuilder;
-use Knp\Menu\MenuItem;
-use PHPUnit\Framework\TestCase;
-use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use eZ\Publish\Core\MVC\Symfony\Security\UserInterface;
+use EzSystems\EzPlatformAdminUi\Menu\MainMenuBuilder;
+use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
+use Knp\Menu\MenuItem;
+use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

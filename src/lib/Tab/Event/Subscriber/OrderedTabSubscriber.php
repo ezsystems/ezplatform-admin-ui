@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -11,7 +11,6 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Event\Subscriber;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
 use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
-use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -33,7 +32,7 @@ class OrderedTabSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param TabGroupEvent $tabGroupEvent
+     * @param \EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent $tabGroupEvent
      */
     public function onTabGroupPreRender(TabGroupEvent $tabGroupEvent)
     {
@@ -47,7 +46,7 @@ class OrderedTabSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param TabInterface[] $tabs
+     * @param \EzSystems\EzPlatformAdminUi\Tab\TabInterface[] $tabs
      *
      * @return array
      */
@@ -67,8 +66,8 @@ class OrderedTabSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param OrderedTabInterface $tab1
-     * @param OrderedTabInterface $tab2
+     * @param \EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface $tab1
+     * @param \EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface $tab2
      *
      * @return int
      */
