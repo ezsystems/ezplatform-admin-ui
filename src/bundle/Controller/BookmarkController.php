@@ -17,10 +17,10 @@ use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
 use Ibexa\AdminUi\Pagination\Pagerfanta\BookmarkAdapter;
 use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class BookmarkController extends Controller
 {

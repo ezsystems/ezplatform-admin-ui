@@ -12,12 +12,12 @@ use Ibexa\AdminUi\Form\Data\Content\Draft\ContentEditData;
 use Ibexa\AdminUi\Form\Data\URL\URLUpdateData;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
-use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Ibexa\AdminUi\Pagination\Pagerfanta\URLUsagesAdapter;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 final class LinkManagerController extends Controller
 {

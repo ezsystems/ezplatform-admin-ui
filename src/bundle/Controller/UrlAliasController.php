@@ -14,9 +14,9 @@ use Ibexa\AdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
 use Ibexa\AdminUi\Tab\LocationView\UrlsTab;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class UrlAliasController extends Controller
 {

@@ -18,15 +18,15 @@ use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUser;
 use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUserGroup;
 use Ibexa\AdminUi\Specification\Location\IsRoot;
-use Ibexa\AdminUi\UniversalDiscovery\ConfigResolver;
-use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
-use Ibexa\Bundle\AdminUi\Templating\Twig\UniversalDiscoveryExtension;
 use Ibexa\AdminUi\Specification\Location\IsWithinCopySubtreeLimit;
+use Ibexa\AdminUi\UniversalDiscovery\ConfigResolver;
+use Ibexa\Bundle\AdminUi\Templating\Twig\UniversalDiscoveryExtension;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
+use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Location View contextual sidebar menu.

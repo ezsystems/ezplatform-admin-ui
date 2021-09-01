@@ -10,14 +10,14 @@ namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
 use EzSystems\Behat\API\ContentData\FieldTypeNameConverter;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 use Ibexa\AdminUi\Behat\Component\IbexaDropdown;
+use Ibexa\AdminUi\Behat\Component\Notification;
 use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Routing\Router;
-use Ibexa\AdminUi\Behat\Component\Notification;
-use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 
 class ContentTypeUpdatePage extends AdminUpdateItemPage
 {

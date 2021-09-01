@@ -22,19 +22,19 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
+use EzSystems\EzPlatformContentForms\Data\Mapper\UserCreateMapper;
+use EzSystems\EzPlatformContentForms\Data\Mapper\UserUpdateMapper;
+use EzSystems\EzPlatformContentForms\Form\Type\User\UserCreateType;
+use EzSystems\EzPlatformContentForms\Form\Type\User\UserUpdateType;
 use Ibexa\AdminUi\Form\ActionDispatcher\CreateUserOnTheFlyDispatcher;
 use Ibexa\AdminUi\Form\ActionDispatcher\EditUserOnTheFlyDispatcher;
 use Ibexa\AdminUi\View\CreateUserOnTheFlyView;
 use Ibexa\AdminUi\View\EditContentOnTheFlySuccessView;
 use Ibexa\AdminUi\View\EditUserOnTheFlyView;
-use EzSystems\EzPlatformContentForms\Data\Mapper\UserCreateMapper;
-use EzSystems\EzPlatformContentForms\Data\Mapper\UserUpdateMapper;
-use EzSystems\EzPlatformContentForms\Form\Type\User\UserCreateType;
-use EzSystems\EzPlatformContentForms\Form\Type\User\UserUpdateType;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class UserOnTheFlyController extends Controller
 {

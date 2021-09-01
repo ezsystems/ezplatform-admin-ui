@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\REST\Input\Parser;
 
-use Ibexa\AdminUi\REST\Value\BulkOperation as BulkOperationValue;
 use EzSystems\EzPlatformRest\Exceptions;
 use EzSystems\EzPlatformRest\Input\BaseParser;
 use EzSystems\EzPlatformRest\Input\ParsingDispatcher;
+use Ibexa\AdminUi\REST\Value\BulkOperation as BulkOperationValue;
 
 class BulkOperation extends BaseParser
 {

@@ -11,8 +11,8 @@ namespace Ibexa\AdminUi\Component\Content;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use Ibexa\Contracts\AdminUi\Component\Renderable;
 use Ibexa\AdminUi\Siteaccess\NonAdminSiteaccessResolver;
+use Ibexa\Contracts\AdminUi\Component\Renderable;
 use Twig\Environment;
 
 class PreviewUnavailableTwigComponent implements Renderable

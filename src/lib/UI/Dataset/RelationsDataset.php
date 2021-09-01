@@ -9,10 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use Ibexa\AdminUi\UI\Value\ValueFactory;
 use Ibexa\AdminUi\UI\Value as UIValue;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 class RelationsDataset
 {

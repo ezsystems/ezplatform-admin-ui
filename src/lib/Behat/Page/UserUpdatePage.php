@@ -6,10 +6,10 @@
  */
 namespace Ibexa\AdminUi\Behat\Page;
 
-use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Behat\Mink\Session;
-use Ibexa\Behat\Browser\Routing\Router;
 use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
+use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
+use Ibexa\Behat\Browser\Routing\Router;
 use Traversable;
 
 class UserUpdatePage extends ContentUpdateItemPage

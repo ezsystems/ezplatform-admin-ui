@@ -11,13 +11,12 @@ use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
-use InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Trash contextual sidebar menu.

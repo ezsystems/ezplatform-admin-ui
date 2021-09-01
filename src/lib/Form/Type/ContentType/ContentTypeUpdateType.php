@@ -6,7 +6,7 @@
  */
 namespace Ibexa\AdminUi\Form\Type\ContentType;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
+use Ibexa\AdminUi\Form\Data\ContentTypeData;
 use Ibexa\AdminUi\Form\DataTransformer\TranslatablePropertyTransformer;
 use Ibexa\AdminUi\Form\Type\FieldDefinition\FieldDefinitionType;
 use Symfony\Component\Form\AbstractType;
@@ -16,7 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Ibexa\AdminUi\Form\Data\ContentTypeData;
 
 /**
  * Form type for ContentType update.

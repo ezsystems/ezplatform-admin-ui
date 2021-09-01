@@ -10,14 +10,14 @@ namespace Ibexa\AdminUi\Form\Type\Policy;
 
 use eZ\Publish\API\Repository\RoleService;
 use Ibexa\AdminUi\Form\Data\Policy\PolicyCreateData;
+use Ibexa\AdminUi\Form\Type\Role\LimitationType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Ibexa\AdminUi\Form\Type\Role\LimitationType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PolicyCreateWithLimitationType extends AbstractType
 {

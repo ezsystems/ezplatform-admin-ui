@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\UI\Config\Provider;
 
-use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
-use Ibexa\AdminUi\UserSetting\Autosave as AutosaveSetting;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
+use Ibexa\AdminUi\UserSetting\Autosave as AutosaveSetting;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 class Autosave implements ProviderInterface
 {

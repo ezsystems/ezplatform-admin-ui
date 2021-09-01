@@ -11,7 +11,6 @@ namespace Ibexa\AdminUi\Tab\Event\Subscriber;
 use Ibexa\AdminUi\Tab\Event\TabEvents;
 use Ibexa\AdminUi\Tab\Event\TabGroupEvent;
 use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
-use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

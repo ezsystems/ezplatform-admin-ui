@@ -10,10 +10,10 @@ namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\Query;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\UniversalDiscovery\Provider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class UniversalDiscoveryController extends Controller
 {

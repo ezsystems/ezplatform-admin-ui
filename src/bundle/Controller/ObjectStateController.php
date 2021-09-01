@@ -26,11 +26,11 @@ use Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateCreateType;
 use Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateDeleteType;
 use Ibexa\AdminUi\Form\Type\ObjectState\ObjectStatesDeleteType;
 use Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateUpdateType;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ObjectStateController extends Controller
 {

@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\UI\Service;
 
 use Ibexa\AdminUi\Tab\TabGroup;
-use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 use Ibexa\AdminUi\Tab\TabRegistry;
+use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 
 class TabService
 {

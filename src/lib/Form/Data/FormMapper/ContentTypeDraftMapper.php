@@ -8,12 +8,12 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Form\Data\FormMapper;
 
-use Ibexa\Contracts\AdminUi\Form\Data\FormMapper\FormDataMapperInterface;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use Ibexa\AdminUi\Event\FieldDefinitionMappingEvent;
 use Ibexa\AdminUi\Form\Data\ContentTypeData;
-use Ibexa\Contracts\AdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\Contracts\AdminUi\Event\FieldDefinitionMappingEvent;
+use Ibexa\Contracts\AdminUi\Form\Data\FormMapper\FormDataMapperInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

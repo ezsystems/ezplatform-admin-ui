@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\AdminUi\Controller;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\Role;
@@ -21,14 +22,13 @@ use Ibexa\AdminUi\Form\DataMapper\PolicyCreateMapper;
 use Ibexa\AdminUi\Form\DataMapper\PolicyUpdateMapper;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class PolicyController extends Controller
 {

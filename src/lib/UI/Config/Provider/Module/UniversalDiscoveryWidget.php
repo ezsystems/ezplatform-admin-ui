@@ -6,8 +6,8 @@
  */
 namespace Ibexa\AdminUi\UI\Config\Provider\Module;
 
-use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 use Ibexa\AdminUi\UniversalDiscovery\ConfigResolver;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 /**
  * Provides information about the id of starting Location for the Universal Discovery Widget.

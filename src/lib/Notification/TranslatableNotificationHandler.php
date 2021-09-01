@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Notification;
 
+use EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler;
 use Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface;
 use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class TranslatableNotificationHandler implements TranslatableNotificationHandlerInterface, ActionResultHandler

@@ -6,9 +6,9 @@
  */
 namespace Ibexa\AdminUi\Validator\Constraints;
 
+use EzSystems\EzPlatformContentForms\Validator\Constraints\FieldTypeValidator;
 use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Symfony\Component\Validator\Constraint;
-use EzSystems\EzPlatformContentForms\Validator\Constraints\FieldTypeValidator;
 
 /**
  * Will check if validator configuration for FieldDefinition is valid.

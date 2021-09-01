@@ -9,9 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Form\Processor\Content;
 
 use eZ\Publish\API\Repository\Exceptions\Exception as APIException;
-use Ibexa\Contracts\AdminUi\Event\AutosaveEvents;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use EzSystems\EzPlatformContentForms\Form\Processor\ContentFormProcessor;
+use Ibexa\Contracts\AdminUi\Event\AutosaveEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -17,18 +17,13 @@ use Ibexa\AdminUi\Form\Data\Language\LanguageUpdateData;
 use Ibexa\AdminUi\Form\DataMapper\LanguageCreateMapper;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\Translation\Exception\InvalidArgumentException as TranslationInvalidArgumentException;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class LanguageController extends Controller
 {

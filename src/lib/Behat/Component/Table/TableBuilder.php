@@ -8,9 +8,9 @@ namespace Ibexa\AdminUi\Behat\Component\Table;
 
 use Behat\Mink\Session;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
+use Ibexa\AdminUi\Behat\Component\Pagination;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
 use Ibexa\Behat\Browser\Locator\LocatorCollection;
-use Ibexa\AdminUi\Behat\Component\Pagination;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 
 class TableBuilder

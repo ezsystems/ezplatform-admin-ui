@@ -16,11 +16,11 @@ use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
 use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardUpdateData;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
-use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Ibexa\AdminUi\Tab\URLManagement\URLWildcardsTab;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 final class URLWildcardController extends Controller
 {

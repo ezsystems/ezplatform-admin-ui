@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\EventListener;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface;
 use Ibexa\Bundle\AdminUi\IbexaAdminUiBundle;
+use Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface;
 use SplFileInfo;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;

@@ -6,8 +6,8 @@
  */
 namespace Ibexa\AdminUi\Form\ActionDispatcher;
 
-use Ibexa\Contracts\AdminUi\Event\FormEvents;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\AbstractActionDispatcher;
+use Ibexa\Contracts\AdminUi\Event\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContentTypeDispatcher extends AbstractActionDispatcher

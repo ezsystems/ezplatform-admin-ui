@@ -9,13 +9,13 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
+use Ibexa\AdminUi\Behat\Component\Dialog;
+use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
+use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Routing\Router;
-use Ibexa\AdminUi\Behat\Component\Dialog;
-use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
-use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
-use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
 use PHPUnit\Framework\Assert;
 
 class TrashPage extends Page

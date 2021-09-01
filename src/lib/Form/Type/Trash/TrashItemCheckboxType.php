@@ -9,11 +9,11 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Form\Type\Trash;
 
 use eZ\Publish\API\Repository\TrashService;
+use Ibexa\AdminUi\Form\DataTransformer\TrashItemTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Ibexa\AdminUi\Form\DataTransformer\TrashItemTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TrashItemCheckboxType extends AbstractType

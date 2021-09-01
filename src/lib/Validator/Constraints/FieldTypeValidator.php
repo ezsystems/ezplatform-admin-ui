@@ -6,9 +6,9 @@
  */
 namespace Ibexa\AdminUi\Validator\Constraints;
 
-use Ibexa\AdminUi\Validator\ValidationErrorsProcessor;
 use EzSystems\EzPlatformContentForms\Validator\Constraints\FieldTypeValidator as BaseFieldTypeValidator;
 use EzSystems\EzPlatformContentForms\Validator\ValidationErrorsProcessor as BaseValidationErrorsProcessor;
+use Ibexa\AdminUi\Validator\ValidationErrorsProcessor;
 
 /**
  * @deprecated Since eZ Platform 3.0.2 class moved to EzPlatformContentForms Bundle. Use it instead.

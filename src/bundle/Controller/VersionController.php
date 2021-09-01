@@ -7,22 +7,16 @@
 namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Exceptions\BadStateException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use Ibexa\AdminUi\Form\Data\Version\VersionRemoveData;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
-use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Ibexa\AdminUi\Tab\LocationView\VersionsTab;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\Translation\Exception\InvalidArgumentException;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class VersionController extends Controller
 {

@@ -7,9 +7,9 @@
 namespace Ibexa\AdminUi\Menu\Admin\ContentType;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
-use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use Ibexa\AdminUi\Menu\MenuItemFactory;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;

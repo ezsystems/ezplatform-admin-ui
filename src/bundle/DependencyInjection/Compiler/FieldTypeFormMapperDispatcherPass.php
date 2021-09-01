@@ -6,11 +6,11 @@
  */
 namespace Ibexa\Bundle\AdminUi\DependencyInjection\Compiler;
 
+use Ibexa\AdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher;
+use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use LogicException;
 use Symfony\Component\DependencyInjection\Reference;
-use Ibexa\AdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher;
 
 /**
  * Compiler pass to register FieldType form mappers in the mapper dispatcher.

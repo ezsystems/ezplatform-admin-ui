@@ -6,11 +6,11 @@
  */
 namespace Ibexa\AdminUi\Form\DataMapper;
 
-use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\Repository\Values\User\RoleCopyStruct;
-use Ibexa\AdminUi\Form\Data\Role\RoleCopyData;
 use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Form\Data\Role\RoleCopyData;
+use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 
 /**
  * Maps between RoleCopyStruct and RoleCopyData objects.

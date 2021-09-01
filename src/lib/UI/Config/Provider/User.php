@@ -9,10 +9,10 @@ namespace Ibexa\AdminUi\UI\Config\Provider;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\User\User as ApiUser;
+use eZ\Publish\Core\MVC\Symfony\Security\UserInterface;
 use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use eZ\Publish\Core\MVC\Symfony\Security\UserInterface;
 
 /**
  * Provides information about current user with resolved profile picture.

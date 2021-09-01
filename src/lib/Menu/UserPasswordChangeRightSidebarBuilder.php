@@ -10,13 +10,12 @@ namespace Ibexa\AdminUi\Menu;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
-use InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI change password contextual sidebar menu.

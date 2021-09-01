@@ -10,13 +10,13 @@ namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
 use Exception;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
+use Ibexa\AdminUi\Behat\Component\IbexaDropdown;
+use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
 use Ibexa\Behat\Browser\Element\Criterion\ChildElementTextCriterion;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Routing\Router;
-use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
-use Ibexa\AdminUi\Behat\Component\IbexaDropdown;
-use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
 
 class RoleUpdatePage extends AdminUpdateItemPage
 {

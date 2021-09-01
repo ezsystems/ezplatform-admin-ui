@@ -6,9 +6,9 @@
  */
 namespace Ibexa\AdminUi\FieldType\Mapper;
 
+use EzSystems\EzPlatformContentForms\Form\Type\FieldType\ISBNFieldType;
 use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
 use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
-use EzSystems\EzPlatformContentForms\Form\Type\FieldType\ISBNFieldType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

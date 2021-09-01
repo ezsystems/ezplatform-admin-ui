@@ -33,15 +33,15 @@ use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
 use Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation;
 use Ibexa\AdminUi\Form\Type\Location\LocationAssignSectionType;
-use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Ibexa\AdminUi\Tab\LocationView\DetailsTab;
 use Ibexa\AdminUi\Tab\LocationView\LocationsTab;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class LocationController extends Controller
 {

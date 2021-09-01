@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\UI\Config\Provider;
 
-use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 class Timezone implements ProviderInterface
 {

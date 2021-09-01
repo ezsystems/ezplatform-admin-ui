@@ -17,9 +17,9 @@ use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\Builder\ViewBuilder;
 use eZ\Publish\Core\MVC\Symfony\View\Configurator;
 use eZ\Publish\Core\MVC\Symfony\View\ParametersInjector;
+use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use Ibexa\AdminUi\View\ContentTranslateSuccessView;
 use Ibexa\AdminUi\View\ContentTranslateView;
-use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
 
 /**
  * Builds ContentEditView objects.

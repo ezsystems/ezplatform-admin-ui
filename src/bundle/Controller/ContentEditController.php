@@ -8,11 +8,11 @@ namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LocationService;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
-use Ibexa\Contracts\AdminUi\Event\ContentProxyTranslateEvent;
+use Ibexa\AdminUi\Event\CancelEditVersionDraftEvent;
 use Ibexa\AdminUi\View\ContentTranslateSuccessView;
 use Ibexa\AdminUi\View\ContentTranslateView;
-use Ibexa\AdminUi\Event\CancelEditVersionDraftEvent;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Event\ContentProxyTranslateEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 

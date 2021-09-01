@@ -6,17 +6,15 @@
  */
 namespace Ibexa\AdminUi\EventListener;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
+use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewBuilderParametersEvent;
+use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
 use Ibexa\Bundle\AdminUi\IbexaAdminUiBundle;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
-use eZ\Publish\API\Repository\Repository;
 
 /**
  * Collects parameters for the ViewBuilder from the Request.

@@ -8,8 +8,8 @@ namespace Ibexa\AdminUi\Validator\Constraints;
 
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
-use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use EzSystems\EzPlatformContentForms\Validator\Constraints\FieldTypeValidator;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Symfony\Component\Validator\Constraint;
 
 /**

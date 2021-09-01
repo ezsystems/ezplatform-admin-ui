@@ -6,11 +6,11 @@
  */
 namespace Ibexa\AdminUi\Form\DataMapper;
 
-use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 use eZ\Publish\API\Repository\Values\Content\ContentMetadataUpdateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use Ibexa\AdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
+use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 
 /**
  * Maps between ContentMetadataUpdateStruct and ContentMetadataUpdateData objects.

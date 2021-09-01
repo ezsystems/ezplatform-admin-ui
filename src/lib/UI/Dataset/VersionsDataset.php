@@ -12,7 +12,6 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use Ibexa\AdminUi\UI\Value\ValueFactory;
-use Ibexa\AdminUi\UI\Value as UIValue;
 
 class VersionsDataset
 {

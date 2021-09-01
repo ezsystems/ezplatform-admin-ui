@@ -9,14 +9,14 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component\Table;
 
 use Behat\Mink\Session;
+use Ibexa\AdminUi\Behat\Component\Pagination;
 use Ibexa\Behat\Browser\Component\Component;
 use Ibexa\Behat\Browser\Element\ElementInterface;
+use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
 use Ibexa\Behat\Browser\Exception\ElementNotFoundException;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
 use Ibexa\Behat\Browser\Locator\LocatorCollection;
 use Ibexa\Behat\Browser\Locator\LocatorInterface;
-use Ibexa\AdminUi\Behat\Component\Pagination;
-use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
 use PHPUnit\Framework\Assert;
 
 final class Table extends Component implements TableInterface

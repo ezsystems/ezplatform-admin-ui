@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Component\Renderer;
 
-use Ibexa\Contracts\AdminUi\Component\Renderer\RendererInterface;
 use Ibexa\AdminUi\Component\Event\RenderGroupEvent;
 use Ibexa\AdminUi\Component\Event\RenderSingleEvent;
 use Ibexa\AdminUi\Component\Registry;
 use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Component\Renderer\RendererInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DefaultRenderer implements RendererInterface

@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\AdminUi\DependencyInjection\Compiler;
 
-use Ibexa\AdminUi\Tab\TabRegistry;
 use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Tab\TabRegistry;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

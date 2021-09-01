@@ -6,9 +6,9 @@
  */
 namespace Ibexa\AdminUi\Limitation\Mapper;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\Values\User\Limitation;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use Ibexa\AdminUi\Limitation\LimitationValueMapperInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;

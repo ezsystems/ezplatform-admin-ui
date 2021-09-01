@@ -13,8 +13,8 @@ use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\LanguageLimitation;
-use Ibexa\AdminUi\Permission\PermissionCheckerInterface;
-use Ibexa\Contracts\AdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
+use Ibexa\AdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
+use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ContentCreate implements EventSubscriberInterface

@@ -8,21 +8,22 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Tab\LocationView;
 
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
+use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\Pagination\Pagerfanta\LocationSearchAdapter;
-use Ibexa\AdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use Ibexa\AdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use Ibexa\AdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use Ibexa\AdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
 use Ibexa\AdminUi\Form\Data\Location\LocationSwapData;
 use Ibexa\AdminUi\Form\Data\Location\LocationUpdateVisibilityData;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
-use eZ\Publish\API\Repository\Values\Content\Query;
+use Ibexa\AdminUi\UI\Value\Content\Location\Mapper;
 use Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab;
 use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use Ibexa\AdminUi\UI\Value\Content\Location\Mapper;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
@@ -30,7 +31,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
-use eZ\Publish\API\Repository\PermissionResolver;
 
 class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {

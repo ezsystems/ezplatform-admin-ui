@@ -12,7 +12,6 @@ use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use Ibexa\AdminUi\UI\Value as UIValue;
 use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 class TranslationsDataset

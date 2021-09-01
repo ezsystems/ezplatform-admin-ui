@@ -16,10 +16,10 @@ use Ibexa\AdminUi\Form\SubmitHandler;
 use Ibexa\AdminUi\Pagination\Pagerfanta\ContentDraftAdapter;
 use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
 use Ibexa\AdminUi\UI\Value\Content\VersionId;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentDraftController extends Controller
 {

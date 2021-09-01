@@ -18,14 +18,13 @@ use Ibexa\AdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupsDeleteData;
 use Ibexa\AdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupUpdateData;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentTypeGroupController extends Controller
 {

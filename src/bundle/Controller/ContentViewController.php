@@ -39,10 +39,10 @@ use Ibexa\AdminUi\Permission\LookupLimitationsTransformer;
 use Ibexa\AdminUi\Specification\ContentIsUser;
 use Ibexa\AdminUi\UI\Module\Subitems\ContentViewParameterSupplier as SubitemsContentViewParameterSupplier;
 use Ibexa\AdminUi\UI\Service\PathService;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentViewController extends Controller
 {

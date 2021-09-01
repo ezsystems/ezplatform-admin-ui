@@ -8,20 +8,20 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Form\Type\Search;
 
+use eZ\Publish\API\Repository\PermissionResolver;
 use Ibexa\AdminUi\Form\Data\Search\TrashSearchData;
 use Ibexa\AdminUi\Form\Type\ChoiceList\Loader\DatePeriodChoiceLoader;
 use Ibexa\AdminUi\Form\Type\Content\SortType;
+use Ibexa\AdminUi\Form\Type\Section\SectionChoiceType;
 use Ibexa\AdminUi\Form\Type\Trash\ChoiceList\Loader\SearchContentTypeChoiceLoader;
 use Ibexa\AdminUi\Form\Type\User\UserType;
-use Ibexa\AdminUi\Form\Type\Section\SectionChoiceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use eZ\Publish\API\Repository\PermissionResolver;
 
 class TrashSearchType extends AbstractType
 {

@@ -8,9 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Specification\Version;
 
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use Ibexa\AdminUi\Specification\AbstractSpecification;
 
 class VersionHasConflict extends AbstractSpecification

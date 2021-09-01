@@ -6,12 +6,12 @@
  */
 namespace Ibexa\AdminUi\Form\DataMapper;
 
-use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
+use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use Ibexa\AdminUi\Form\Data\Section\SectionUpdateData;
 use Ibexa\AdminUi\Exception\InvalidArgumentException;
-use eZ\Publish\API\Repository\Values\Content\Section;
+use Ibexa\AdminUi\Form\Data\Section\SectionUpdateData;
+use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 
 /**
  * Maps between SectionUpdateStruct and SectionUpdateData objects.

@@ -7,11 +7,8 @@
 namespace Ibexa\AdminUi\Menu\Admin\Role;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
-use eZ\Publish\API\Repository\Values\User\Policy;
-use eZ\Publish\API\Repository\Values\User\Role;
-use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
-use InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;

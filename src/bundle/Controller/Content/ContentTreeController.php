@@ -10,12 +10,12 @@ namespace Ibexa\Bundle\AdminUi\Controller\Content;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Query;
+use EzSystems\EzPlatformRest\Message;
+use EzSystems\EzPlatformRest\Server\Controller as RestController;
 use Ibexa\AdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
 use Ibexa\AdminUi\REST\Value\ContentTree\Node;
 use Ibexa\AdminUi\REST\Value\ContentTree\Root;
 use Ibexa\AdminUi\UI\Module\ContentTree\NodeFactory;
-use EzSystems\EzPlatformRest\Message;
-use EzSystems\EzPlatformRest\Server\Controller as RestController;
 use Symfony\Component\HttpFoundation\Request;
 
 class ContentTreeController extends RestController

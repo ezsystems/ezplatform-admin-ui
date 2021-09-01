@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Form\ActionDispatcher;
 
-use Ibexa\Contracts\AdminUi\Event\ContentOnTheFlyEvents;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ContentDispatcher;
+use Ibexa\Contracts\AdminUi\Event\ContentOnTheFlyEvents;
 
 class CreateContentOnTheFlyDispatcher extends ContentDispatcher
 {

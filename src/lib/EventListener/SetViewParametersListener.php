@@ -19,10 +19,10 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\View\View;
-use Ibexa\AdminUi\View\ContentTranslateView;
 use EzSystems\EzPlatformContentForms\Content\View\ContentCreateView;
 use EzSystems\EzPlatformContentForms\Content\View\ContentEditView;
 use EzSystems\EzPlatformContentForms\User\View\UserUpdateView;
+use Ibexa\AdminUi\View\ContentTranslateView;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

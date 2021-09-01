@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Form\Data\FormMapper;
 
-use Ibexa\Contracts\AdminUi\Form\Data\FormMapper\FormDataMapperInterface;
 use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
+use Ibexa\Contracts\AdminUi\Form\Data\FormMapper\FormDataMapperInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

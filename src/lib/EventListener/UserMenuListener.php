@@ -11,9 +11,9 @@ namespace Ibexa\AdminUi\EventListener;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\UserService;
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
+use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use JMS\TranslationBundle\Model\Message;
 
 /**
  * @internal

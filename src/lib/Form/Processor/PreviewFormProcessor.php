@@ -10,27 +10,16 @@ namespace Ibexa\AdminUi\Form\Processor;
 
 use Exception;
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Exceptions\BadStateException;
-use eZ\Publish\API\Repository\Exceptions\ContentFieldValidationException;
-use eZ\Publish\API\Repository\Exceptions\ContentValidationException;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentStruct;
 use eZ\Publish\API\Repository\Values\Content\Location;
+use EzSystems\EzPlatformContentForms\Data\NewnessCheckable;
+use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use Ibexa\AdminUi\Form\Event\ContentEditEvents;
 use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData;
-use EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData;
-use EzSystems\EzPlatformContentForms\Data\NewnessCheckable;
-use Ibexa\AdminUi\Form\Data\NewnessChecker;
-use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Exception\InvalidParameterException;
-use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**

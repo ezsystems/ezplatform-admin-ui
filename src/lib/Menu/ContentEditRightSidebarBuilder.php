@@ -15,12 +15,12 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\SPI\Limitation\Target;
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use Ibexa\AdminUi\Siteaccess\NonAdminSiteaccessResolver;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Content Edit contextual sidebar menu.

@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\REST\Input\Parser;
 
+use EzSystems\EzPlatformRest\Exceptions;
 use EzSystems\EzPlatformRest\Input\BaseParser;
 use EzSystems\EzPlatformRest\Input\ParsingDispatcher;
-use EzSystems\EzPlatformRest\Exceptions;
 use Ibexa\AdminUi\REST\Value\Operation as OperationValue;
 
 class Operation extends BaseParser

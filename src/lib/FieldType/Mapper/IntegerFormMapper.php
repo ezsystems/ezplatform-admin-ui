@@ -6,9 +6,9 @@
  */
 namespace Ibexa\AdminUi\FieldType\Mapper;
 
+use EzSystems\EzPlatformContentForms\Form\Type\FieldType\IntegerFieldType;
 use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
 use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
-use EzSystems\EzPlatformContentForms\Form\Type\FieldType\IntegerFieldType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

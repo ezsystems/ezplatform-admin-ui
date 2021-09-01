@@ -7,11 +7,11 @@
 namespace Ibexa\AdminUi\Form\Processor;
 
 use eZ\Publish\API\Repository\ContentService;
-use Ibexa\AdminUi\Form\Data\ContentTranslationData;
 use EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
 use EzSystems\EzPlatformContentForms\Event\ContentFormEvents;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use Ibexa\AdminUi\Form\Data\ContentTranslationData;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

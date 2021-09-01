@@ -11,8 +11,8 @@ namespace Ibexa\Bundle\AdminUi\Controller;
 use eZ\Publish\API\Repository\PermissionResolver;
 use Ibexa\AdminUi\Form\Data\Content\Draft\ContentEditData;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
-use Symfony\Component\HttpFoundation\Response;
 use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends Controller
 {

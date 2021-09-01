@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\UI\Action;
 
 use Ibexa\Contracts\AdminUi\UI\Action\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher as SymfonyEventDispatcher;
 use Ibexa\Contracts\AdminUi\UI\Action\UiActionEventInterface;
+use Symfony\Component\EventDispatcher as SymfonyEventDispatcher;
 
 class EventDispatcher implements EventDispatcherInterface
 {

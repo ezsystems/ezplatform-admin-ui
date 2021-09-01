@@ -9,9 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\UI\Action;
 
 use Ibexa\Contracts\AdminUi\UI\Action\UiActionEventInterface;
-use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class UiActionEvent extends Event implements UiActionEventInterface
 {

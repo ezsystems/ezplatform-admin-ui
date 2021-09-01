@@ -6,8 +6,8 @@
  */
 namespace Ibexa\AdminUi\FieldType\Mapper;
 
-use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Ibexa\AdminUi\Form\DataTransformer\MultilingualSelectionTransformer;
 use Ibexa\AdminUi\Form\EventListener\SelectionMultilingualOptionsDataListener;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

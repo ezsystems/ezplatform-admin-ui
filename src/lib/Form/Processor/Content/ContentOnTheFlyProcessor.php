@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Form\Processor\Content;
 
-use Ibexa\Contracts\AdminUi\Event\ContentOnTheFlyEvents;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use EzSystems\EzPlatformContentForms\Form\Processor\ContentFormProcessor;
+use Ibexa\Contracts\AdminUi\Event\ContentOnTheFlyEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;

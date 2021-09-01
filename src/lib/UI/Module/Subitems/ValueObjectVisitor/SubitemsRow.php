@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\UI\Module\Subitems\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
 use EzSystems\EzPlatformRest\Output\Generator;
+use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
 use EzSystems\EzPlatformRest\Output\Visitor;
 
 class SubitemsRow extends ValueObjectVisitor

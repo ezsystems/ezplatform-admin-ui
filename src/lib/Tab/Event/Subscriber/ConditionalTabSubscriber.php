@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Tab\Event\Subscriber;
 
-use Ibexa\Contracts\AdminUi\Tab\ConditionalTabInterface;
 use Ibexa\AdminUi\Tab\Event\TabEvents;
 use Ibexa\AdminUi\Tab\Event\TabGroupEvent;
 use Ibexa\AdminUi\UI\Service\TabService;
+use Ibexa\Contracts\AdminUi\Tab\ConditionalTabInterface;
 use InvalidArgumentException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

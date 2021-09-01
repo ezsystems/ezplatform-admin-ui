@@ -22,22 +22,22 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
-use Ibexa\Contracts\AdminUi\Event\ContentProxyCreateEvent;
+use EzSystems\EzPlatformContentForms\Data\Mapper\ContentCreateMapper;
+use EzSystems\EzPlatformContentForms\Data\Mapper\ContentUpdateMapper;
+use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
+use EzSystems\EzPlatformContentForms\Form\Type\Content\ContentEditType;
 use Ibexa\AdminUi\Event\Options;
 use Ibexa\AdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher;
 use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUser;
 use Ibexa\AdminUi\View\CreateContentOnTheFlyView;
 use Ibexa\AdminUi\View\EditContentOnTheFlySuccessView;
 use Ibexa\AdminUi\View\EditContentOnTheFlyView;
-use EzSystems\EzPlatformContentForms\Data\Mapper\ContentCreateMapper;
-use EzSystems\EzPlatformContentForms\Data\Mapper\ContentUpdateMapper;
-use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
-use EzSystems\EzPlatformContentForms\Form\Type\Content\ContentEditType;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Event\ContentProxyCreateEvent;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentOnTheFlyController extends Controller
 {

@@ -9,12 +9,12 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
+use Ibexa\AdminUi\Behat\Component\Dialog;
+use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Routing\Router;
-use Ibexa\AdminUi\Behat\Component\Dialog;
-use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
 use PHPUnit\Framework\Assert;
 
 class RolesPage extends Page

@@ -9,8 +9,8 @@ namespace Ibexa\AdminUi\UI\Config\Provider;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
-use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 use Ibexa\AdminUi\UI\Service\ContentTypeIconResolver;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ContentTypes implements ProviderInterface

@@ -19,14 +19,14 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 abstract class AbstractBuilder
 {
-    /** @var MenuItemFactory */
+    /** @var \Ibexa\AdminUi\Menu\MenuItemFactory */
     protected $factory;
 
     /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
     protected $eventDispatcher;
 
     /**
-     * @param MenuItemFactory $factory
+     * @param \Ibexa\AdminUi\Menu\MenuItemFactory $factory
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(MenuItemFactory $factory, EventDispatcherInterface $eventDispatcher)

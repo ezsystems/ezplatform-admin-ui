@@ -9,10 +9,10 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Form\Processor\User;
 
 use eZ\Publish\API\Repository\UserService;
-use Ibexa\Contracts\AdminUi\Event\UserOnTheFlyEvents;
 use EzSystems\EzPlatformContentForms\Data\User\UserCreateData;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use EzSystems\EzPlatformContentForms\Form\Processor\User\UserUpdateFormProcessor;
+use Ibexa\Contracts\AdminUi\Event\UserOnTheFlyEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;

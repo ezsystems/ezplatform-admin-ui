@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Component;
 
-use Ibexa\Contracts\AdminUi\Component\Renderable;
 use Ibexa\AdminUi\Tab\Event\TabEvent;
 use Ibexa\AdminUi\Tab\Event\TabEvents;
 use Ibexa\AdminUi\Tab\Event\TabGroupEvent;
 use Ibexa\AdminUi\Tab\TabGroup;
+use Ibexa\Contracts\AdminUi\Component\Renderable;
 use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;

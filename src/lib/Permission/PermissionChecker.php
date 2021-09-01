@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Permission;
 
-use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
@@ -28,6 +27,7 @@ use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
 use eZ\Publish\API\Repository\Values\User\LookupLimitationResult;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
+use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
 
 class PermissionChecker implements PermissionCheckerInterface
 {
