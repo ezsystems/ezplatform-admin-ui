@@ -104,10 +104,7 @@ class RichText extends FieldTypeComponent
     public function addUnorderedList(array $listElements): void
     {
         $this->focusFieldInput();
-        $this->getHTMLPage()
-            ->findAll($this->getLocator('toolbarDropdown'))
-            ->toArray()[2]
-            ->click();
+        $this->executeCommand('bulletedList');
 
         foreach ($listElements as $listElement) {
             $this->insertLine($listElement);
@@ -130,14 +127,14 @@ class RichText extends FieldTypeComponent
 
     public function clickEmbedInlineButton(): void
     {
-        $buttonPosition = 22 + $this->getCustomStylesOffset();
+        $buttonPosition = 32 + $this->getCustomStylesOffset();
         $this->openElementsToolbar();
         $this->clickElementsToolbarButton($buttonPosition);
     }
 
     public function clickEmbedButton(): void
     {
-        $buttonPosition = 20 + $this->getCustomStylesOffset();
+        $buttonPosition = 30 + $this->getCustomStylesOffset();
         $this->openElementsToolbar();
         $this->clickElementsToolbarButton($buttonPosition);
     }
