@@ -92,13 +92,18 @@ class ContentDraftController extends Controller
             $result = $this->submitHandler->handle($form, function (ContentRemoveData $data) {
                 foreach (array_keys($data->getVersions()) as $version) {
                     $versionId = VersionId::fromString($version);
+                    $contentInfo = $this->contentService->loadContentInfo($versionId->getContentId());
 
-                    $this->contentService->deleteVersion(
-                        $this->contentService->loadVersionInfoById(
-                            $versionId->getContentId(),
-                            $versionId->getVersionNo()
-                        )
-                    );
+                    if (1 === count($this->contentService->loadVersions($contentInfo))) {
+                        $this->contentService->deleteContent($contentInfo);
+                    } else {
+                        $this->contentService->deleteVersion(
+                            $this->contentService->loadVersionInfoById(
+                                $versionId->getContentId(),
+                                $versionId->getVersionNo()
+                            )
+                        );
+                    }
                 }
 
                 return $this->redirectToRoute('ezplatform.content_draft.list');
