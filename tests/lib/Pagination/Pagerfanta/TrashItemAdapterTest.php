@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Tests\AdminUi\Pagination\Pagerfanta;
@@ -31,10 +31,10 @@ class TrashItemAdapterTest extends TestCase
     /**
      * Returns the adapter to test.
      *
-     * @param Query $query
-     * @param TrashService $trashService
+     * @param \eZ\Publish\API\Repository\Values\Content\Query $query
+     * @param \eZ\Publish\API\Repository\TrashService $trashService
      *
-     * @return TrashItemAdapter
+     * @return \EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\TrashItemAdapter
      */
     protected function getAdapter(Query $query, TrashService $trashService): TrashItemAdapter
     {

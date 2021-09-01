@@ -1,14 +1,13 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Form\Processor\ContentType;
 
-use Ibexa\AdminUi\Form\Data\ContentTypeData;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use Ibexa\Contracts\AdminUi\Event\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,11 +19,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class ContentTypeDiscardChangesFormProcessor implements EventSubscriberInterface
 {
-    /** @var UrlGeneratorInterface */
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     private $urlGenerator;
 
     /**
-     * @param UrlGeneratorInterface $urlGenerator
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
      */
     public function __construct(
         UrlGeneratorInterface $urlGenerator
@@ -33,7 +32,7 @@ class ContentTypeDiscardChangesFormProcessor implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getSubscribedEvents(): array
     {
@@ -44,7 +43,7 @@ class ContentTypeDiscardChangesFormProcessor implements EventSubscriberInterface
 
     public function processDiscardChanges(FormActionEvent $event)
     {
-        /** @var ContentTypeData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData $data */
         $data = $event->getData();
         $contentTypeDraft = $data->contentTypeDraft;
 

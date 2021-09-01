@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\EventListener;
@@ -25,7 +25,7 @@ class RequestAttributesListener implements EventSubscriberInterface
 {
     private const TRANSLATED_CONTENT_VIEW_ROUTE_NAME = '_ez_content_translation_view';
 
-    /** @var Repository */
+    /** @var \eZ\Publish\API\Repository\Repository */
     private $repository;
 
     /** @var array */
@@ -33,7 +33,7 @@ class RequestAttributesListener implements EventSubscriberInterface
 
     /**
      * @param array $siteAccessGroups
-     * @param Repository $repository
+     * @param \eZ\Publish\API\Repository\Repository $repository
      */
     public function __construct(array $siteAccessGroups, Repository $repository)
     {
@@ -49,10 +49,10 @@ class RequestAttributesListener implements EventSubscriberInterface
     /**
      * Adds all the request attributes to the parameters.
      *
-     * @param FilterViewBuilderParametersEvent $event
+     * @param \eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewBuilderParametersEvent $event
      *
-     * @throws NotFoundException
-     * @throws UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function addRequestAttributes(FilterViewBuilderParametersEvent $event)
     {
@@ -70,7 +70,7 @@ class RequestAttributesListener implements EventSubscriberInterface
         }
 
         if ($this->hasContentLanguage($request, $parameterBag)) {
-            /** @var Location $location */
+            /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
             $location = $parameterBag->get('location');
 
             $languageCode = $parameterBag->get('languageCode');
@@ -81,8 +81,8 @@ class RequestAttributesListener implements EventSubscriberInterface
     }
 
     /**
-     * @param Request $request
-     * @param ParameterBag $parameterBag
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Symfony\Component\HttpFoundation\ParameterBag $parameterBag
      *
      * @return bool
      */
@@ -96,12 +96,12 @@ class RequestAttributesListener implements EventSubscriberInterface
     /**
      * @param int $locationId
      *
-     * @return Location
+     * @return \eZ\Publish\API\Repository\Values\Content\Location
      */
     private function loadLocation(int $locationId): Location
     {
         $location = $this->repository->sudo(
-            function (Repository $repository) use ($locationId) {
+            static function (Repository $repository) use ($locationId) {
                 return $repository->getLocationService()->loadLocation($locationId);
             }
         );
@@ -113,10 +113,10 @@ class RequestAttributesListener implements EventSubscriberInterface
      * @param int $contentId
      * @param string $language
      *
-     * @return Content
+     * @return \eZ\Publish\API\Repository\Values\Content\Content
      *
-     * @throws UnauthorizedException
-     * @throws NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     private function loadContent(int $contentId, ?string $language): Content
     {

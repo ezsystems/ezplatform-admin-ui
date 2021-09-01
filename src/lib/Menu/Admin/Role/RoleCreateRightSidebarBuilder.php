@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Menu\Admin\Role;
@@ -52,15 +52,15 @@ class RoleCreateRightSidebarBuilder extends AbstractBuilder implements Translati
     /**
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      *
-     * @throws ApiExceptions\InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws ApiExceptions\BadStateException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var ItemInterface|ItemInterface[] $menu */
+        /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
         $menu->setChildren([
@@ -85,7 +85,7 @@ class RoleCreateRightSidebarBuilder extends AbstractBuilder implements Translati
     }
 
     /**
-     * @return Message[]
+     * @return \JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {

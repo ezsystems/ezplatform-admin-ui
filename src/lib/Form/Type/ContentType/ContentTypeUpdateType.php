@@ -1,11 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Form\Type\ContentType;
 
+use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
 use Ibexa\AdminUi\Form\DataTransformer\TranslatablePropertyTransformer;
 use Ibexa\AdminUi\Form\Type\FieldDefinition\FieldDefinitionType;
 use Symfony\Component\Form\AbstractType;

@@ -1,26 +1,39 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Bundle\AdminUi\Controller;
 
+use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\LocationService;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\Event\ContentProxyTranslateEvent;
 use Ibexa\AdminUi\View\ContentTranslateSuccessView;
 use Ibexa\AdminUi\View\ContentTranslateView;
+use Ibexa\AdminUi\Event\CancelEditVersionDraftEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class ContentEditController extends Controller
 {
+    /** @var \eZ\Publish\API\Repository\ContentService */
+    private $contentService;
+
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
+
     /** @var \Symfony\Contracts\EventDispatcher\EventDispatcherInterface */
     private $eventDispatcher;
 
     public function __construct(
+        ContentService $contentService,
+        LocationService $locationService,
         EventDispatcherInterface $eventDispatcher
     ) {
+        $this->contentService = $contentService;
+        $this->locationService = $locationService;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -68,6 +81,25 @@ class ContentEditController extends Controller
     public function translationSuccessAction(ContentTranslateSuccessView $view): ContentTranslateSuccessView
     {
         return $view;
+    }
+
+    public function cancelEditVersionDraftAction(
+        int $contentId,
+        int $versionNo,
+        int $referrerLocationId,
+        string $languageCode
+    ): Response {
+        $content = $this->contentService->loadContent($contentId, [$languageCode], $versionNo);
+        $referrerlocation = $this->locationService->loadLocation($referrerLocationId);
+
+        $response = $this->eventDispatcher->dispatch(
+            new CancelEditVersionDraftEvent(
+                $content,
+                $referrerlocation
+            )
+        )->getResponse();
+
+        return $response ?? $this->redirectToLocation($referrerlocation);
     }
 }
 

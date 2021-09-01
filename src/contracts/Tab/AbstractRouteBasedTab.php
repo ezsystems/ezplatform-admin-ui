@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -18,17 +18,17 @@ use Twig\Environment;
  */
 abstract class AbstractRouteBasedTab extends AbstractTab
 {
-    /** @var UrlGeneratorInterface */
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     protected $urlGenerator;
 
-    /** @var HttpKernelRuntime */
+    /** @var \Symfony\Bridge\Twig\Extension\HttpKernelRuntime */
     private $httpKernelRuntime;
 
     /**
-     * @param Environment $twig
-     * @param TranslatorInterface $translator
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param HttpKernelRuntime $httpKernelRuntime
+     * @param \Twig\Environment $twig
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator
+     * @param \Symfony\Bridge\Twig\Extension\HttpKernelRuntime $httpKernelRuntime
      */
     public function __construct(
         Environment $twig,

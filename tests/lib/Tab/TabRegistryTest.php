@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Tests\AdminUi\Tab;
@@ -137,7 +137,7 @@ class TabRegistryTest extends TestCase
      * @param string $name
      * @param array $tabs
      *
-     * @return TabGroup
+     * @return \EzSystems\EzPlatformAdminUi\Tab\TabGroup
      */
     private function createTabGroup(string $name = 'lorem', array $tabs = []): TabGroup
     {
@@ -148,10 +148,10 @@ class TabRegistryTest extends TestCase
      * Returns Tab.
      *
      * @param string $name
-     * @param Environment|MockObject $twig
-     * @param MockObject|TranslatorInterface $translator
+     * @param \Twig\Environment|\PHPUnit\Framework\MockObject\MockObject $twig
+     * @param \PHPUnit\Framework\MockObject\MockObject|\Symfony\Contracts\Translation\TranslatorInterface $translator
      *
-     * @return TabInterface
+     * @return \EzSystems\EzPlatformAdminUi\Tab\TabInterface
      */
     private function createTab(string $name, Environment $twig, TranslatorInterface $translator): TabInterface
     {
@@ -159,16 +159,16 @@ class TabRegistryTest extends TestCase
             /** @var string */
             protected $name;
 
-            /** @var Environment */
+            /** @var \Twig\Environment */
             protected $twig;
 
-            /** @var TranslatorInterface */
+            /** @var \Symfony\Contracts\Translation\TranslatorInterface */
             protected $translator;
 
             /**
              * @param string $name
-             * @param Environment $twig
-             * @param TranslatorInterface $translator
+             * @param \Twig\Environment $twig
+             * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
              */
             public function __construct(string $name = 'tab', Environment $twig, TranslatorInterface $translator)
             {

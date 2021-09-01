@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Form\DataMapper;
@@ -20,7 +20,7 @@ class RoleCopyMapper implements DataMapperInterface
     /**
      * Maps given RoleCopyStruct object to a RoleCopyData object.
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function map(ValueObject $value): RoleCopyData
     {
@@ -34,9 +34,9 @@ class RoleCopyMapper implements DataMapperInterface
     /**
      * Maps given RoleCopyData object to a RoleCopyStruct object.
      *
-     * @param EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCopyData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCopyData $data
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function reverseMap($data): RoleCopyStruct
     {

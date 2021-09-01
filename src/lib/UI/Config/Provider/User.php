@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\UI\Config\Provider;
@@ -19,15 +19,15 @@ use eZ\Publish\Core\MVC\Symfony\Security\UserInterface;
  */
 class User implements ProviderInterface
 {
-    /** @var TokenStorageInterface */
+    /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
     private $tokenStorage;
 
-    /** @var ContentTypeService */
+    /** @var \eZ\Publish\API\Repository\ContentTypeService */
     private $contentTypeService;
 
     /**
-     * @param TokenStorageInterface $tokenStorage
-     * @param ContentTypeService $contentTypeService
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      */
     public function __construct(
         TokenStorageInterface $tokenStorage,
@@ -64,9 +64,9 @@ class User implements ProviderInterface
     /**
      * Returns first occurrence of an `ezimage` fieldtype.
      *
-     * @param ApiUser $user
+     * @param \eZ\Publish\API\Repository\Values\User\User $user
      *
-     * @return Field|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Field|null
      */
     private function resolveProfilePictureField(ApiUser $user): ?Field
     {

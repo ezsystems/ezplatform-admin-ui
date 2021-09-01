@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Limitation\Mapper;
@@ -26,12 +26,12 @@ use Symfony\Component\Form\FormInterface;
 class UDWBasedMapper implements LimitationFormMapperInterface, LimitationValueMapperInterface
 {
     /**
-     * @var LocationService
+     * @var \eZ\Publish\API\Repository\LocationService
      */
     protected $locationService;
 
     /**
-     * @var SearchService
+     * @var \eZ\Publish\API\Repository\SearchService
      */
     protected $searchService;
 
@@ -45,7 +45,7 @@ class UDWBasedMapper implements LimitationFormMapperInterface, LimitationValueMa
     /**
      * UDWBasedMapper constructor.
      *
-     * @param SearchService $searchService
+     * @param \eZ\Publish\API\Repository\SearchService $searchService
      */
     public function __construct(LocationService $locationService, SearchService $searchService)
     {

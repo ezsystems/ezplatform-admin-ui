@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\AdminUi\DependencyInjection\Compiler;
 
+use Ibexa\AdminUi\Component\Registry;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
 use Ibexa\Bundle\AdminUi\DependencyInjection\Compiler\ComponentPass;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Ibexa\AdminUi\Component\Registry;
 use Symfony\Component\DependencyInjection\Reference;
-use Ibexa\AdminUi\Exception\InvalidArgumentException;
 
 class ComponentPassTest extends AbstractCompilerPassTestCase
 {
@@ -25,7 +25,7 @@ class ComponentPassTest extends AbstractCompilerPassTestCase
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {

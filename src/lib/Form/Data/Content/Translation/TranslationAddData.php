@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -17,26 +17,26 @@ class TranslationAddData
     /**
      * @Assert\NotBlank()
      *
-     * @var Location|null
+     * @var \eZ\Publish\API\Repository\Values\Content\Location|null
      */
     protected $location;
 
     /**
      * @Assert\NotBlank()
      *
-     * @var Language|null
+     * @var \eZ\Publish\API\Repository\Values\Content\Language|null
      */
     protected $language;
 
     /**
-     * @var Language|null
+     * @var \eZ\Publish\API\Repository\Values\Content\Language|null
      */
     protected $baseLanguage;
 
     /**
-     * @param Location|null $location
-     * @param Language|null $language
-     * @param Language|null $baseLanguage
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $baseLanguage
      */
     public function __construct(
         Location $location = null,
@@ -49,7 +49,7 @@ class TranslationAddData
     }
 
     /**
-     * @return Location|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      */
     public function getLocation(): ?Location
     {
@@ -57,7 +57,7 @@ class TranslationAddData
     }
 
     /**
-     * @param Location $location
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
      *
      * @return self
      */
@@ -69,7 +69,7 @@ class TranslationAddData
     }
 
     /**
-     * @return Language|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Language|null
      */
     public function getLanguage(): ?Language
     {
@@ -77,7 +77,7 @@ class TranslationAddData
     }
 
     /**
-     * @param Language $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
      *
      * @return self
      */
@@ -89,7 +89,7 @@ class TranslationAddData
     }
 
     /**
-     * @return Language|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Language|null
      */
     public function getBaseLanguage(): ?Language
     {
@@ -97,7 +97,7 @@ class TranslationAddData
     }
 
     /**
-     * @param Language $baseLanguage
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $baseLanguage
      *
      * @return self
      */

@@ -1,13 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use Ibexa\AdminUi\Form\Data\Content\Translation\TranslationAddData;
 use Ibexa\AdminUi\Form\Data\Content\Translation\TranslationDeleteData;
@@ -22,26 +21,26 @@ use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class TranslationController extends Controller
 {
-    /** @var TranslatableNotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
     /** @var \eZ\Publish\Core\Helper\TranslationHelper */
     private $translationHelper;
 
     /**
-     * @param TranslatableNotificationHandlerInterface $notificationHandler
-     * @param ContentService $contentService
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      */
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
@@ -58,16 +57,16 @@ class TranslationController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function addAction(Request $request): Response
     {
         $form = $this->formFactory->addTranslation();
         $form->handleRequest($request);
 
-        /** @var TranslationAddData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData $data */
         $data = $form->getData();
         $location = $data->getLocation();
 
@@ -101,16 +100,16 @@ class TranslationController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function removeAction(Request $request): Response
     {
         $form = $this->formFactory->deleteTranslation();
         $form->handleRequest($request);
 
-        /** @var ContentInfo $contentInfo */
+        /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo */
         $contentInfo = $form->getData()->getContentInfo();
 
         if ($form->isSubmitted()) {

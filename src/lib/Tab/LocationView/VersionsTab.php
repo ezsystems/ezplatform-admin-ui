@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -118,7 +118,7 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplate(): string
     {
@@ -126,7 +126,7 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {

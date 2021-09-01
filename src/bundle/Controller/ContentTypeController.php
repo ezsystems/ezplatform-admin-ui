@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -125,7 +125,7 @@ class ContentTypeController extends Controller
         $deletableTypes = [];
         $contentTypes = $this->contentTypeService->loadContentTypes($group, $this->configResolver->getParameter('languages'));
 
-        usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
+        usort($contentTypes, static function (ContentType $contentType1, ContentType $contentType2) {
             return strnatcasecmp($contentType1->getName(), $contentType2->getName());
         });
 
@@ -219,7 +219,7 @@ class ContentTypeController extends Controller
         );
         $form->handleRequest($request);
 
-        /** @var TranslationAddData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData $data */
         $data = $form->getData();
         $contentType = $data->getContentType();
         $contentTypeGroup = $data->getContentTypeGroup();
@@ -279,7 +279,7 @@ class ContentTypeController extends Controller
         );
         $form->handleRequest($request);
 
-        /** @var TranslationRemoveData $data */
+        /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData $data */
         $data = $form->getData();
         $contentType = $data->getContentType();
         $contentTypeGroup = $data->getContentTypeGroup();
@@ -574,8 +574,8 @@ class ContentTypeController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws TranslationInvalidArgumentException
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      * @throws \InvalidArgumentException
      */
     public function bulkDeleteAction(Request $request, ContentTypeGroup $group): Response

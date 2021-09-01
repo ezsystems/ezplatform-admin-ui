@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Form\DataMapper;
@@ -9,8 +9,8 @@ namespace Ibexa\AdminUi\Form\DataMapper;
 use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\Repository\Values\User\PolicyCreateStruct;
-use Ibexa\AdminUi\Form\Data\Policy\PolicyCreateData;
 use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Form\Data\Policy\PolicyCreateData;
 
 /**
  * Maps between PolicyCreateStruct and LanguageCreateData objects.
@@ -20,11 +20,11 @@ class PolicyCreateMapper implements DataMapperInterface
     /**
      * Maps given PolicyCreateStruct object to a PolicyCreateData object.
      *
-     * @param PolicyCreateStruct|ValueObject $value
+     * @param \eZ\Publish\Core\Repository\Values\User\PolicyCreateStruct|\eZ\Publish\API\Repository\Values\ValueObject $value
      *
-     * @return PolicyCreateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function map(ValueObject $value): PolicyCreateData
     {
@@ -44,11 +44,11 @@ class PolicyCreateMapper implements DataMapperInterface
     /**
      * Maps given PolicyCreateData object to a PolicyCreateStruct object.
      *
-     * @param PolicyCreateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData $data
      *
-     * @return PolicyCreateStruct
+     * @return \eZ\Publish\Core\Repository\Values\User\PolicyCreateStruct
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function reverseMap($data): PolicyCreateStruct
     {

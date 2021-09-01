@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -53,15 +53,15 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
     /**
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      *
-     * @throws ApiExceptions\InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws ApiExceptions\BadStateException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var ItemInterface $menu */
+        /** @var \Knp\Menu\ItemInterface $menu */
         $menu = $this->factory->createItem('root');
 
         $menu->setChildren([
@@ -86,7 +86,7 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
     }
 
     /**
-     * @return Message[]
+     * @return \JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {

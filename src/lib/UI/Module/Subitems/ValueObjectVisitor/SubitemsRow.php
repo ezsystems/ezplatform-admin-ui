@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -11,14 +11,13 @@ namespace Ibexa\AdminUi\UI\Module\Subitems\ValueObjectVisitor;
 use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
 use EzSystems\EzPlatformRest\Output\Generator;
 use EzSystems\EzPlatformRest\Output\Visitor;
-use Ibexa\AdminUi\UI\Module\Subitems\Values\SubitemsRow as SubitemsRowValue;
 
 class SubitemsRow extends ValueObjectVisitor
 {
     /**
-     * @param Visitor $visitor
-     * @param Generator $generator
-     * @param SubitemsRowValue $data
+     * @param \EzSystems\EzPlatformRest\Output\Visitor $visitor
+     * @param \EzSystems\EzPlatformRest\Output\Generator $generator
+     * @param \EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\SubitemsRow $data
      */
     public function visit(Visitor $visitor, Generator $generator, $data)
     {

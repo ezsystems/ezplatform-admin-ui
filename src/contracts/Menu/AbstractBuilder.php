@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -11,8 +11,8 @@ namespace Ibexa\Contracts\AdminUi\Menu;
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use Ibexa\AdminUi\Menu\MenuItemFactory;
 use Knp\Menu\ItemInterface;
-use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Base builder for extendable AdminUI menus.
@@ -22,12 +22,12 @@ abstract class AbstractBuilder
     /** @var MenuItemFactory */
     protected $factory;
 
-    /** @var EventDispatcherInterface */
+    /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
     protected $eventDispatcher;
 
     /**
      * @param MenuItemFactory $factory
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(MenuItemFactory $factory, EventDispatcherInterface $eventDispatcher)
     {
@@ -39,7 +39,7 @@ abstract class AbstractBuilder
      * @param string $id
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      */
     protected function createMenuItem(string $id, array $options): ?ItemInterface
     {
@@ -48,7 +48,7 @@ abstract class AbstractBuilder
 
     /**
      * @param string $name
-     * @param Event $event
+     * @param \Symfony\Contracts\EventDispatcher\Event $event
      */
     protected function dispatchMenuEvent(string $name, Event $event): void
     {
@@ -56,9 +56,9 @@ abstract class AbstractBuilder
     }
 
     /**
-     * @param ItemInterface $menu
+     * @param \Knp\Menu\ItemInterface $menu
      *
-     * @return ConfigureMenuEvent
+     * @return \EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent
      */
     protected function createConfigureMenuEvent(ItemInterface $menu, array $options = []): ConfigureMenuEvent
     {
@@ -68,7 +68,7 @@ abstract class AbstractBuilder
     /**
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      */
     public function build(array $options): ItemInterface
     {

@@ -1099,7 +1099,7 @@ export default class SubItemsModule extends Component {
             'sub_items'
         );
 
-        return <div className="m-sub-items__pagination-info" dangerouslySetInnerHTML={{ __html: message }} />;
+        return <div className="m-sub-items__pagination-info ibexa-pagination__info" dangerouslySetInnerHTML={{ __html: message }} />;
     }
 
     /**
@@ -1271,7 +1271,7 @@ export default class SubItemsModule extends Component {
                     {this.renderListView()}
                     {this.renderNoItems()}
                 </div>
-                <div className="m-sub-items__pagination-container">
+                <div className="m-sub-items__pagination-container ibexa-pagination">
                     {this.renderPaginationInfo()}
                     {this.renderPagination()}
                 </div>

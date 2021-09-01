@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -18,12 +18,12 @@ class LocationVoter implements VoterInterface
     private const CONTENT_VIEW_ROUTE_NAME = '_ez_content_view';
 
     /**
-     * @var RequestStack
+     * @var \Symfony\Component\HttpFoundation\RequestStack
      */
     private $requestStack;
 
     /**
-     * @param RequestStack $requestStack
+     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      */
     public function __construct(RequestStack $requestStack)
     {
@@ -31,7 +31,7 @@ class LocationVoter implements VoterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function matchItem(ItemInterface $item): ?bool
     {

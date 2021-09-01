@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Form\DataMapper;
@@ -20,11 +20,11 @@ class ContentMainLocationUpdateMapper implements DataMapperInterface
     /**
      * Maps given ContentMetadataUpdateStruct object to a ContentMainLocationUpdateData object.
      *
-     * @param ContentMetadataUpdateStruct|ValueObject $value
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentMetadataUpdateStruct|\eZ\Publish\API\Repository\Values\ValueObject $value
      *
-     * @return ContentMainLocationUpdateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function map(ValueObject $value): ContentMainLocationUpdateData
     {
@@ -42,11 +42,11 @@ class ContentMainLocationUpdateMapper implements DataMapperInterface
     /**
      * Maps given ContentMainLocationUpdateData object to a ContentMetadataUpdateStruct object.
      *
-     * @param ContentMainLocationUpdateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData $data
      *
-     * @return ContentMetadataUpdateStruct
+     * @return \eZ\Publish\API\Repository\Values\Content\ContentMetadataUpdateStruct
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function reverseMap($data): ContentMetadataUpdateStruct
     {

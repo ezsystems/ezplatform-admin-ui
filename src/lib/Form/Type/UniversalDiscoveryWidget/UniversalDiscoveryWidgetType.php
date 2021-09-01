@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Form\Type\UniversalDiscoveryWidget;
@@ -88,12 +88,12 @@ class UniversalDiscoveryWidgetType extends AbstractType
     }
 
     /**
-     * @return DataTransformerInterface
+     * @return \Symfony\Component\Form\DataTransformerInterface
      */
     private function getDataTransformer(): DataTransformerInterface
     {
         return new CallbackTransformer(
-            function ($value) {
+            static function ($value) {
                 if (null === $value) {
                     return null;
                 }
@@ -102,7 +102,7 @@ class UniversalDiscoveryWidgetType extends AbstractType
 
                 return ['location' => !empty($ids) ? $ids : null];
             },
-            function ($value) {
+            static function ($value) {
                 if (is_array($value) && array_key_exists('location', $value)) {
                     return $value['location'] ?? null;
                 }

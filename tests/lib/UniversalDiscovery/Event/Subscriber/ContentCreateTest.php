@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -12,11 +12,11 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 use eZ\Publish\API\Repository\Values\User\Limitation\LanguageLimitation;
-use Ibexa\AdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
-use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
-use Ibexa\AdminUi\UniversalDiscovery\Event\Subscriber\ContentCreate;
-use PHPUnit\Framework\TestCase;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\AdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
+use Ibexa\AdminUi\UniversalDiscovery\Event\Subscriber\ContentCreate;
+use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
+use PHPUnit\Framework\TestCase;
 
 class ContentCreateTest extends TestCase
 {

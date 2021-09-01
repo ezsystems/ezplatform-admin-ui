@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -105,7 +105,7 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplate(): string
     {
@@ -113,11 +113,11 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $contextParameters['content'];
         $reverseRelationPaginationParams = $contextParameters['reverse_relation_pagination_params'];
         $reverseRelationPagination = new Pagerfanta(

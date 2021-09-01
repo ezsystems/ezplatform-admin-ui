@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Form\DataMapper;
@@ -20,11 +20,11 @@ class RoleUpdateMapper implements DataMapperInterface
     /**
      * Maps given RoleUpdateStruct object to a RoleUpdateData object.
      *
-     * @param RoleUpdateStruct|ValueObject $value
+     * @param \eZ\Publish\API\Repository\Values\User\RoleUpdateStruct|\eZ\Publish\API\Repository\Values\ValueObject $value
      *
-     * @return RoleUpdateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function map(ValueObject $value): RoleUpdateData
     {
@@ -42,11 +42,11 @@ class RoleUpdateMapper implements DataMapperInterface
     /**
      * Maps given RoleUpdateData object to a RoleUpdateStruct object.
      *
-     * @param RoleUpdateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData $data
      *
-     * @return RoleUpdateStruct
+     * @return \eZ\Publish\API\Repository\Values\User\RoleUpdateStruct
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function reverseMap($data): RoleUpdateStruct
     {

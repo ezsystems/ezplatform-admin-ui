@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -21,7 +21,7 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
     const LIMITATION_VALUE_BLOCK_NAME = 'ez_limitation_%s_value';
     const LIMITATION_VALUE_BLOCK_NAME_FALLBACK = 'ez_limitation_value_fallback';
 
-    /** @var LimitationValueMapperRegistryInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistryInterface */
     private $valueMapperRegistry;
 
     /** @var \Twig\Environment */
@@ -67,7 +67,7 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
     /**
      * Generates value block name based on Limitation.
      *
-     * @param Limitation $limitation
+     * @param \eZ\Publish\API\Repository\Values\User\Limitation $limitation
      *
      * @return string
      */
@@ -113,7 +113,7 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
     /**
      * Get parameters passed as context of value block render.
      *
-     * @param Limitation $limitation
+     * @param \eZ\Publish\API\Repository\Values\User\Limitation $limitation
      * @param array $parameters
      *
      * @return array
@@ -135,7 +135,7 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
     /**
      * Get parameters passed as context of value fallback block.
      *
-     * @param Limitation $limitation
+     * @param \eZ\Publish\API\Repository\Values\User\Limitation $limitation
      * @param array $parameters
      *
      * @return array

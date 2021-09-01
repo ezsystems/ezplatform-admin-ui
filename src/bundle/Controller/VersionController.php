@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Bundle\AdminUi\Controller;
@@ -26,26 +26,26 @@ use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class VersionController extends Controller
 {
-    /** @var TranslatableNotificationHandlerInterface */
+    /** @var \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface */
     private $notificationHandler;
 
-    /** @var ContentService */
+    /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var FormFactory */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
     private $formFactory;
 
-    /** @var SubmitHandler */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\SubmitHandler */
     private $submitHandler;
 
     /** @var \eZ\Publish\Core\Helper\TranslationHelper */
     private $translationHelper;
 
     /**
-     * @param TranslatableNotificationHandlerInterface $notificationHandler
-     * @param ContentService $contentService
-     * @param FormFactory $formFactory
-     * @param SubmitHandler $submitHandler
+     * @param \EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface $notificationHandler
+     * @param \eZ\Publish\API\Repository\ContentService $contentService
+     * @param \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory $formFactory
+     * @param \EzSystems\EzPlatformAdminUi\Form\SubmitHandler $submitHandler
      * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
      */
     public function __construct(
@@ -63,16 +63,16 @@ class VersionController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \InvalidArgumentException
-     * @throws InvalidOptionsException
-     * @throws UnauthorizedException
-     * @throws NotFoundException
-     * @throws BadStateException
-     * @throws InvalidArgumentException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
      */
     public function removeAction(Request $request): Response
     {
@@ -90,7 +90,7 @@ class VersionController extends Controller
         );
         $form->handleRequest($request);
 
-        /** @var ContentInfo $contentInfo */
+        /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo */
         $contentInfo = $form->getData()->getContentInfo();
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (VersionRemoveData $data) {

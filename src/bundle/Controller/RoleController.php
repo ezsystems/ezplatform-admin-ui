@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -313,13 +313,13 @@ class RoleController extends Controller
     /**
      * Handles removing roles based on submitted form.
      *
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \InvalidArgumentException
-     * @throws InvalidArgumentException
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function bulkDeleteAction(Request $request): Response
     {

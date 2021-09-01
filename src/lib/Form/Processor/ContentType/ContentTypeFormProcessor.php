@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Form\Processor\ContentType;
@@ -21,12 +21,12 @@ use Symfony\Component\Routing\RouterInterface;
 class ContentTypeFormProcessor implements EventSubscriberInterface
 {
     /**
-     * @var ContentTypeService
+     * @var \eZ\Publish\API\Repository\ContentTypeService
      */
     private $contentTypeService;
 
     /**
-     * @var RouterInterface
+     * @var \Symfony\Component\Routing\RouterInterface
      */
     private $router;
 
@@ -165,7 +165,7 @@ class ContentTypeFormProcessor implements EventSubscriberInterface
     /**
      * Resolves unique field definition identifier.
      *
-     * @param ContentTypeDraft $contentTypeDraft
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft $contentTypeDraft
      * @param int $startIndex
      * @param string $fieldTypeIdentifier
      *

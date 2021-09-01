@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,12 +9,12 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component\Fields;
 
 use Behat\Mink\Session;
+use Ibexa\AdminUi\Behat\Component\Notification;
+use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
 use Ibexa\Behat\Browser\Element\Condition\ElementNotExistsCondition;
 use Ibexa\Behat\Browser\FileUpload\FileUploadHelper;
 use Ibexa\Behat\Browser\Locator\CSSLocatorBuilder;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
-use Ibexa\AdminUi\Behat\Component\Notification;
-use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
 use PHPUnit\Framework\Assert;
 
 class ImageAsset extends Image
@@ -82,8 +82,8 @@ class ImageAsset extends Image
         return array_merge(
             parent::specifyLocators(),
             [
-                new VisibleCSSLocator('selectFromRepoButton', '.ez-data-source__btn-select'),
-                new VisibleCSSLocator('previewLoading', '.ez-field-edit--is-preview-loading'),
+                new VisibleCSSLocator('selectFromRepoButton', '.ibexa-data-source__btn-select'),
+                new VisibleCSSLocator('previewLoading', '.ibexa-field-edit--is-preview-loading'),
             ]
         );
     }

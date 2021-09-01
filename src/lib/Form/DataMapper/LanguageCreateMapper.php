@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Form\DataMapper;
@@ -20,11 +20,11 @@ class LanguageCreateMapper implements DataMapperInterface
     /**
      * Maps given LanguageCreateStruct object to a LanguageCreateData object.
      *
-     * @param LanguageCreateStruct|ValueObject $value
+     * @param \eZ\Publish\API\Repository\Values\Content\LanguageCreateStruct|\eZ\Publish\API\Repository\Values\ValueObject $value
      *
-     * @return LanguageCreateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function map(ValueObject $value): LanguageCreateData
     {
@@ -44,11 +44,11 @@ class LanguageCreateMapper implements DataMapperInterface
     /**
      * Maps given LanguageCreateData object to a LanguageCreateStruct object.
      *
-     * @param LanguageCreateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData $data
      *
-     * @return LanguageCreateStruct
+     * @return \eZ\Publish\API\Repository\Values\Content\LanguageCreateStruct
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function reverseMap($data): LanguageCreateStruct
     {

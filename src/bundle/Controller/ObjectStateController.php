@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,10 +9,10 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ObjectStateService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
-use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use Ibexa\AdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
@@ -75,7 +75,7 @@ class ObjectStateController extends Controller
      */
     public function listAction(ObjectStateGroup $objectStateGroup): Response
     {
-        /** @var ObjectState[] $objectStates */
+        /** @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectState[] $objectStates */
         $objectStates = $this->objectStateService->loadObjectStates($objectStateGroup);
 
         $deleteObjectStatesForm = $this->formFactory->create(

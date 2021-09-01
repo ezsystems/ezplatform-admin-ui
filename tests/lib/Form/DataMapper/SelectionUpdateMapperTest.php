@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Tests\AdminUi\Form\DataMapper;
@@ -17,7 +17,7 @@ use eZ\Publish\API\Repository\Values\Content\Section;
 
 class SelectionUpdateMapperTest extends TestCase
 {
-    /** @var SectionUpdateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper */
     private $mapper;
 
     protected function setUp(): void
@@ -83,7 +83,7 @@ class SelectionUpdateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return SectionUpdateStruct
+     * @return \eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct
      */
     private function createStruct(array $properties): SectionUpdateStruct
     {
@@ -93,7 +93,7 @@ class SelectionUpdateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return SectionUpdateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData
      */
     private function createData(array $properties): SectionUpdateData
     {

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\FieldType\Mapper;
 
-use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use EzSystems\EzPlatformContentForms\Form\Type\FieldType\CheckboxFieldType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

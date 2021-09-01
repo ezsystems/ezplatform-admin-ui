@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SectionUpdateData
 {
-    /** @var Section|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Section|null */
     protected $section;
 
     /**
@@ -38,7 +38,7 @@ class SectionUpdateData
     protected $name;
 
     /**
-     * @param Section|null $section
+     * @param \eZ\Publish\API\Repository\Values\Content\Section|null $section
      */
     public function __construct(?Section $section = null)
     {

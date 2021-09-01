@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\FieldType\Mapper;
@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\Range;
 
 class MediaFormMapper implements FieldDefinitionFormMapperInterface
 {
-    /** @var MaxUploadSize */
+    /** @var \EzSystems\EzPlatformContentForms\ConfigResolver\MaxUploadSize */
     private $maxUploadSize;
 
     protected const ACCEPT_VIDEO = 'video/*';

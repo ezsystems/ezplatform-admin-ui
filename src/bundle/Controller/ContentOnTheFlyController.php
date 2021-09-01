@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Bundle\AdminUi\Controller;
@@ -27,8 +27,8 @@ use Ibexa\AdminUi\Event\Options;
 use Ibexa\AdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher;
 use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUser;
 use Ibexa\AdminUi\View\CreateContentOnTheFlyView;
-use Ibexa\AdminUi\View\EditContentOnTheFlyView;
 use Ibexa\AdminUi\View\EditContentOnTheFlySuccessView;
+use Ibexa\AdminUi\View\EditContentOnTheFlyView;
 use EzSystems\EzPlatformContentForms\Data\Mapper\ContentCreateMapper;
 use EzSystems\EzPlatformContentForms\Data\Mapper\ContentUpdateMapper;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;

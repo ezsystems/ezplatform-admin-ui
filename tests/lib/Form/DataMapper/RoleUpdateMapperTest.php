@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Tests\AdminUi\Form\DataMapper;
@@ -16,7 +16,7 @@ use Ibexa\AdminUi\Exception\InvalidArgumentException;
 
 class RoleUpdateMapperTest extends TestCase
 {
-    /** @var RoleUpdateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper */
     private $mapper;
 
     protected function setUp(): void
@@ -79,7 +79,7 @@ class RoleUpdateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return RoleUpdateStruct
+     * @return \eZ\Publish\API\Repository\Values\User\RoleUpdateStruct
      */
     private function createStruct(array $properties): RoleUpdateStruct
     {
@@ -89,7 +89,7 @@ class RoleUpdateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return RoleUpdateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData
      */
     private function createData(array $properties): RoleUpdateData
     {
