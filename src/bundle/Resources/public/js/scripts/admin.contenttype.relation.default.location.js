@@ -44,7 +44,7 @@
     };
     const toggleResetStartingLocationBtn = (button, isEnabled) => {
         if (isEnabled) {
-            button.removeAttribute('disabled')
+            button.removeAttribute('disabled');
         } else {
             button.setAttribute('disabled', true);
         }
