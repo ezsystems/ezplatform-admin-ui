@@ -170,7 +170,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'data-root-location' => $startingLocationId,
         ];
         $copyAttributes = [
-            'class' => 'ibexa--udw-copy',
+            'class' => 'ibexa-btn--udw-copy',
             'data-udw-config' => $uwdConfig,
             'data-root-location' => $startingLocationId,
         ];
