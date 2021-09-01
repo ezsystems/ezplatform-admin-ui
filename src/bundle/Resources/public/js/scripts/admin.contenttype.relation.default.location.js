@@ -1,5 +1,6 @@
 (function (global, doc, React, ReactDOM) {
-    const resetStartingLocationBtns = doc.querySelectorAll('.ez-reset-starting-location');
+    const RESET_STARTING_LOCATION_BTN_SELECTOR = '.ez-btn--reset-starting-location';
+    const resetStartingLocationBtns = doc.querySelectorAll(RESET_STARTING_LOCATION_BTN_SELECTOR);
     const udwBtns = doc.querySelectorAll('.btn--udw-relation-default-location');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
@@ -14,7 +15,7 @@
         const objectRelationSettingsWrapper = btn.closest('.ezobjectrelation-settings');
 
         toggleResetStartingLocationBtn(
-            btn.parentNode.querySelector('.ez-reset-starting-location'),
+            btn.parentNode.querySelector(RESET_STARTING_LOCATION_BTN_SELECTOR),
             true
         );
 
@@ -42,13 +43,15 @@
         }, config)), udwContainer);
     };
     const toggleResetStartingLocationBtn = (button, isEnabled) => {
-        isEnabled ? button.removeAttribute('disabled') : button.setAttribute('disabled', true);
+        if (isEnabled) {
+            button.removeAttribute('disabled')
+        } else {
+            button.setAttribute('disabled', true);
+        }
     };
     const resetStartingLocation = (event) => {
-        const button = event.target.closest('button');
-        const buttonDataset = button.dataset;
-        const relationRootInputSelector = buttonDataset.relationRootInputSelector;
-        const relationSelectedRootNameSelector = buttonDataset.relationSelectedRootNameSelector;
+        const button = event.currentTarget;
+        const {relationRootInputSelector, relationSelectedRootNameSelector} = button.dataset;
 
         doc.querySelector(relationRootInputSelector).value = '';
         doc.querySelector(relationSelectedRootNameSelector).innerHTML = '';
