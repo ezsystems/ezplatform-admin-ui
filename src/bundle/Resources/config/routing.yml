@@ -570,7 +570,7 @@ ezplatform.content.translate:
         _controller: 'EzPlatformAdminUiBundle:ContentEdit:translate'
         fromLanguageCode: ~
 
-ezplatform.content.translate_with_location:
+ibexa.content.translate_with_location:
     path: /content/{contentId}/location/{locationId}/translate/{toLanguageCode}/{fromLanguageCode}
     methods: ['GET', 'POST']
     defaults:
