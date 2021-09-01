@@ -16,6 +16,11 @@
         <target state="new">Select a starting location for browsing for relation</target>
         <note>key: field_definition.ezobjectrelation.selection_root_udw_title</note>
       </trans-unit>
+      <trans-unit id="58fa0150fbbe5c094880333e871c71ff7b9ee19b" resname="field_definition.ezobjectrelationlist.selection_root_reset_title">
+        <source>Reset starting location</source>
+        <target state="new">Reset starting location</target>
+        <note>key: field_definition.ezobjectrelationlist.selection_root_reset_title</note>
+      </trans-unit>
       <trans-unit id="1592c36df8d445c3154d1f639027f97a90739856" resname="field_definition.ezobjectrelationlist.selection_root_udw_button">
         <source>Select location</source>
         <target state="new">Select location</target>

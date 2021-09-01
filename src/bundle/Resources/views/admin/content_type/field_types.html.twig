@@ -4,7 +4,7 @@
  # - \EzSystems\RepositoryForms\Data\FieldDefinitionData data Data object for current fieldDefinition.
  # - \Symfony\Component\Form\FormView form Field definition form.
  # - string languageCode
- #}
+#}
 
 {# @var data \EzSystems\RepositoryForms\Data\FieldDefinitionData #}
 {# @var form \Symfony\Component\Form\FormView #}
@@ -142,6 +142,19 @@
             >{{ "field_definition.ezobjectrelation.selection_root_udw_button"
                 |trans({}, "ezrepoforms_content_type")
                 |desc("Select item") }}</button>
+            <button type="button"
+                title="{{ "field_definition.ezobjectrelationlist.selection_root_reset_title"
+                |trans({}, "ezrepoforms_content_type")
+                |desc('Reset starting location') }}"
+                class="ez-reset-starting-location btn btn-danger"
+                data-relation-root-input-selector="#{{ form.selectionRoot.vars.id }}"
+                data-relation-selected-root-name-selector="#{{ form.selectionRoot.vars.id }}-selected-root-name"
+                {% if form.selectionRoot.vars.destination_location is null %} disabled {% endif %}
+            >
+                <svg class="ez-icon ez-icon--medium ez-icon--light">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                </svg>
+            </button>
         </div>
         <div id="{{ form.selectionRoot.vars.id }}-selected-root-name">
             {% if form.selectionRoot.vars.destination_location is not null %}
@@ -174,6 +187,19 @@
             >{{ "field_definition.ezobjectrelationlist.selection_root_udw_button"
                 |trans({}, "ezrepoforms_content_type")
                 |desc("Select location") }}</button>
+            <button type="button"
+                title="{{ "field_definition.ezobjectrelationlist.selection_root_reset_title"
+                |trans({}, "ezrepoforms_content_type")
+                |desc('Reset starting location') }}"
+                class="ez-reset-starting-location btn btn-danger"
+                data-relation-root-input-selector="#{{ form.selectionDefaultLocation.vars.id }}"
+                data-relation-selected-root-name-selector="#{{ form.selectionDefaultLocation.vars.id }}-selected-root-name"
+                {% if form.selectionDefaultLocation.vars.destination_location is null %} disabled {% endif %}
+            >
+                <svg class="ez-icon ez-icon--medium ez-icon--light">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#trash"></use>
+                </svg>
+            </button>
         </div>
         <div id="{{ form.selectionDefaultLocation.vars.id }}-selected-root-name">
             {% if form.selectionDefaultLocation.vars.destination_location is not null %}
