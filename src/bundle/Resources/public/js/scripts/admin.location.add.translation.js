@@ -3,7 +3,7 @@
 
     doc.querySelectorAll('.ez-translation__language-wrapper--language').forEach((select) => {
         select.addEventListener(
-            'valueChanged',
+            'change',
             (event) => {
                 const modal = event.target.closest(SELECTOR_MODAL);
                 const buttonCreate = modal.querySelector('.ibexa-btn--create-translation');

@@ -2,7 +2,7 @@
     const SELECTOR_FIELD = '.ibexa-field-edit--ezselection';
     const SELECTOR_SELECTED = '.ibexa-dropdown__selection-info';
     const SELECTOR_ERROR_NODE = '.ibexa-form-error';
-    const EVENT_VALUE_CHANGED = 'valueChanged';
+    const EVENT_VALUE_CHANGED = 'change';
 
     class EzSelectionValidator extends eZ.BaseFieldValidator {
         /**
