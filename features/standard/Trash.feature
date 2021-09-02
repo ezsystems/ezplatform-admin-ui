@@ -1,4 +1,4 @@
-@IbexaOSS @IbexaContent @IbexaExperience @IbexaCommerce
+@IbexaOSS @IbexaContent @IbexaExperience @IbexaCommerce @trash
 Feature: Trash management
   As an administrator
   In order to manage content on my site

@@ -45,6 +45,7 @@ class TrashPage extends Page
         $this->dialog = $dialog;
         $this->contentActionsMenu = $contentActionsMenu;
         $this->table = $tableBuilder->newTable()->build();
+        $this->enableDebugging();
     }
 
     public function hasElement(string $itemType, string $itemName): bool
