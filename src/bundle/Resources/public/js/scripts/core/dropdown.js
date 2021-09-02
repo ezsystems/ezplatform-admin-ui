@@ -13,7 +13,7 @@
     const SELECTOR_SELECTION_INFO = '.ibexa-dropdown__selection-info';
     const SELECTOR_OVERFLOW_ITEM_INFO = '.ibexa-dropdown__selected-overflow-number';
     const SELECTOR_PLACEHOLDER = '.ibexa-dropdown__selected-placeholder';
-    const EVENT_VALUE_CHANGED = 'valueChanged';
+    const EVENT_VALUE_CHANGED = 'change';
     const ITEMS_LIST_MAX_HEIGHT = 300;
     const RESTRICTED_AREA_ITEMS_CONTAINER = 190;
 
