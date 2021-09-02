@@ -15,6 +15,7 @@ use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
@@ -179,12 +180,17 @@ class TranslationAddType extends AbstractType
      * @param \Symfony\Component\Form\FormInterface $form
      * @param string[] $contentLanguages
      * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo|null $contentInfo
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $location
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function addLanguageFields(FormInterface $form, array $contentLanguages, ?ContentInfo $contentInfo): void
-    {
+    public function addLanguageFields(
+        FormInterface $form,
+        array $contentLanguages,
+        ?ContentInfo $contentInfo,
+        ?Location $location
+    ): void {
         $languagesCodes = array_column($this->languageService->loadLanguages(), 'languageCode');
 
         $limitationLanguageCodes = [];
@@ -195,7 +201,7 @@ class TranslationAddType extends AbstractType
                 $contentInfo,
                 [
                     (new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build(),
-                    $this->locationService->loadLocation($contentInfo->mainLocationId),
+                    $this->locationService->loadLocation($location->id),
                 ],
                 [Limitation::LANGUAGE]
             );

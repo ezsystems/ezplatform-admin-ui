@@ -13,6 +13,7 @@ use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\SPI\Limitation\Target;
 use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
@@ -37,6 +38,9 @@ class ContentEditTranslationChoiceLoader extends BaseChoiceLoader
     /** @var \eZ\Publish\API\Repository\LocationService */
     private $locationService;
 
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
+    private $location;
+
     /**
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
@@ -50,7 +54,8 @@ class ContentEditTranslationChoiceLoader extends BaseChoiceLoader
         ?ContentInfo $contentInfo,
         LookupLimitationsTransformer $lookupLimitationsTransformer,
         array $languageCodes,
-        LocationService $locationService
+        LocationService $locationService,
+        ?Location $location
     ) {
         $this->languageService = $languageService;
         $this->permissionResolver = $permissionResolver;
@@ -58,6 +63,7 @@ class ContentEditTranslationChoiceLoader extends BaseChoiceLoader
         $this->languageCodes = $languageCodes;
         $this->lookupLimitationsTransformer = $lookupLimitationsTransformer;
         $this->locationService = $locationService;
+        $this->location = $location;
     }
 
     /**
@@ -85,7 +91,7 @@ class ContentEditTranslationChoiceLoader extends BaseChoiceLoader
                 $this->contentInfo,
                 [
                     (new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build(),
-                    $this->locationService->loadLocation($this->contentInfo->mainLocationId),
+                    $this->locationService->loadLocation($this->location->id),
                 ],
                 [Limitation::LANGUAGE]
             );
