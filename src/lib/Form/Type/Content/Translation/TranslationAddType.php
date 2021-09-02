@@ -121,7 +121,7 @@ class TranslationAddType extends AbstractType
             $contentLanguages = $versionInfo->languageCodes;
         }
 
-        $this->addLanguageFields($form, $contentLanguages, $contentInfo);
+        $this->addLanguageFields($form, $contentLanguages, $contentInfo, $location);
     }
 
     /**
@@ -142,6 +142,7 @@ class TranslationAddType extends AbstractType
         $form = $event->getForm();
         $data = $event->getData();
 
+        $location = null;
         if (isset($data['location'])) {
             try {
                 $location = $this->locationService->loadLocation((int)$data['location']);
@@ -156,7 +157,7 @@ class TranslationAddType extends AbstractType
             }
         }
 
-        $this->addLanguageFields($form, $contentLanguages, $contentInfo);
+        $this->addLanguageFields($form, $contentLanguages, $contentInfo, $location);
     }
 
     /**
@@ -201,7 +202,11 @@ class TranslationAddType extends AbstractType
                 $contentInfo,
                 [
                     (new Target\Builder\VersionBuilder())->translateToAnyLanguageOf($languagesCodes)->build(),
-                    $this->locationService->loadLocation($location->id),
+                    $this->locationService->loadLocation(
+                        $location !== null
+                            ? $location->id
+                            : $contentInfo->mainLocationId
+                    ),
                 ],
                 [Limitation::LANGUAGE]
             );
