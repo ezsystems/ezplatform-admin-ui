@@ -1,15 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Menu\Admin\Role;
 
-use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use Ibexa\AdminUi\Menu\MenuItemFactory;
-use InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -46,11 +45,11 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var ItemInterface|ItemInterface[] $menu */
+        /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
         $menu->setChildren([
@@ -91,7 +90,7 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
     }
 
     /**
-     * @return Message[]
+     * @return \JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {

@@ -1,38 +1,36 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\Bundle\AdminUi\Controller;
 
+use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use Ibexa\AdminUi\Form\Data\Role\RoleCreateData;
 use Ibexa\AdminUi\Form\Data\Role\RoleCopyData;
+use Ibexa\AdminUi\Form\Data\Role\RoleCreateData;
 use Ibexa\AdminUi\Form\Data\Role\RoleDeleteData;
 use Ibexa\AdminUi\Form\Data\Role\RolesDeleteData;
 use Ibexa\AdminUi\Form\Data\Role\RoleUpdateData;
-use Ibexa\AdminUi\Form\DataMapper\RoleCreateMapper;
 use Ibexa\AdminUi\Form\DataMapper\RoleCopyMapper;
+use Ibexa\AdminUi\Form\DataMapper\RoleCreateMapper;
 use Ibexa\AdminUi\Form\DataMapper\RoleUpdateMapper;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
 use Ibexa\AdminUi\Form\Type\Role\RoleCopyType;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\Translation\Exception\InvalidArgumentException;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class RoleController extends Controller
 {
@@ -313,13 +311,13 @@ class RoleController extends Controller
     /**
      * Handles removing roles based on submitted form.
      *
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \InvalidArgumentException
-     * @throws InvalidArgumentException
-     * @throws InvalidOptionsException
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      */
     public function bulkDeleteAction(Request $request): Response
     {

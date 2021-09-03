@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -21,7 +21,7 @@ class DateTimePickerTransformer implements DataTransformerInterface
      *
      * @return mixed The value in the transformed representation
      *
-     * @throws TransformationFailedException when the transformation fails
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException when the transformation fails
      */
     public function transform($value)
     {
@@ -46,7 +46,7 @@ class DateTimePickerTransformer implements DataTransformerInterface
      *
      * @return mixed The value in the original representation
      *
-     * @throws TransformationFailedException when the transformation fails
+     * @throws \Symfony\Component\Form\Exception\TransformationFailedException when the transformation fails
      */
     public function reverseTransform($value)
     {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -13,14 +13,14 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class TabGroupEvent extends Event
 {
-    /** @var TabGroup */
+    /** @var \EzSystems\EzPlatformAdminUi\Tab\TabGroup */
     private $data;
 
     /** @var array */
     private $parameters;
 
     /**
-     * @return TabGroup
+     * @return \EzSystems\EzPlatformAdminUi\Tab\TabGroup
      */
     public function getData(): TabGroup
     {
@@ -28,7 +28,7 @@ class TabGroupEvent extends Event
     }
 
     /**
-     * @param TabGroup $data
+     * @param \EzSystems\EzPlatformAdminUi\Tab\TabGroup $data
      */
     public function setData(TabGroup $data)
     {

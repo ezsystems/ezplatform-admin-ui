@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Form\DataMapper;
 
-use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
+use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use Ibexa\AdminUi\Form\Data\Section\SectionUpdateData;
 use Ibexa\AdminUi\Exception\InvalidArgumentException;
-use eZ\Publish\API\Repository\Values\Content\Section;
+use Ibexa\AdminUi\Form\Data\Section\SectionUpdateData;
+use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 
 /**
  * Maps between SectionUpdateStruct and SectionUpdateData objects.
@@ -21,11 +21,11 @@ class SectionUpdateMapper implements DataMapperInterface
     /**
      * Maps given SectionUpdateStruct object to a SectionUpdateData object.
      *
-     * @param SectionUpdateStruct|ValueObject $value
+     * @param \eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct|\eZ\Publish\API\Repository\Values\ValueObject $value
      *
-     * @return SectionUpdateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function map(ValueObject $value): SectionUpdateData
     {
@@ -39,11 +39,11 @@ class SectionUpdateMapper implements DataMapperInterface
     /**
      * Maps given SectionUpdateData object to a SectionUpdateStruct object.
      *
-     * @param SectionUpdateData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData $data
      *
-     * @return SectionUpdateStruct
+     * @return \eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct
      *
-     * @throws InvalidArgumentException
+     * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
     public function reverseMap($data): SectionUpdateStruct
     {

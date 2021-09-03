@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -33,7 +33,7 @@ class ContentTypeChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getChoiceList(): array
     {
@@ -42,7 +42,7 @@ class ContentTypeChoiceLoader implements ChoiceLoaderInterface
         $contentTypeGroups = $this->contentTypeService->loadContentTypeGroups($preferredLanguages);
         foreach ($contentTypeGroups as $contentTypeGroup) {
             $contentTypes = $this->contentTypeService->loadContentTypes($contentTypeGroup, $preferredLanguages);
-            usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
+            usort($contentTypes, static function (ContentType $contentType1, ContentType $contentType2) {
                 return strnatcasecmp($contentType1->getName(), $contentType2->getName());
             });
 
@@ -53,7 +53,7 @@ class ContentTypeChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function loadChoiceList($value = null)
     {
@@ -63,7 +63,7 @@ class ContentTypeChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function loadChoicesForValues(array $values, $value = null)
     {
@@ -77,7 +77,7 @@ class ContentTypeChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function loadValuesForChoices(array $choices, $value = null)
     {

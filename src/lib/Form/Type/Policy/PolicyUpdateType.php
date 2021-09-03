@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -21,13 +21,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PolicyUpdateType extends AbstractType
 {
-    /** @var RoleService */
+    /** @var \eZ\Publish\API\Repository\RoleService */
     private $roleService;
 
     /**
      * PolicyLimitationsType constructor.
      *
-     * @param RoleService $roleService
+     * @param \eZ\Publish\API\Repository\RoleService $roleService
      */
     public function __construct(RoleService $roleService)
     {
@@ -35,7 +35,7 @@ class PolicyUpdateType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -78,7 +78,7 @@ class PolicyUpdateType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function configureOptions(OptionsResolver $resolver)
     {

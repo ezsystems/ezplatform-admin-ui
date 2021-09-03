@@ -1,27 +1,27 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Tab\LocationView;
 
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUser;
 use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUserGroup;
 use Ibexa\AdminUi\Specification\OrSpecification;
-use Ibexa\Contracts\AdminUi\Tab\ConditionalTabInterface;
-use Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab;
-use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
 use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab;
+use Ibexa\Contracts\AdminUi\Tab\ConditionalTabInterface;
+use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
-use eZ\Publish\API\Repository\PermissionResolver;
 
 class RolesTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
 {
@@ -105,7 +105,7 @@ class RolesTab extends AbstractEventDispatchingTab implements OrderedTabInterfac
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplate(): string
     {
@@ -113,7 +113,7 @@ class RolesTab extends AbstractEventDispatchingTab implements OrderedTabInterfac
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {

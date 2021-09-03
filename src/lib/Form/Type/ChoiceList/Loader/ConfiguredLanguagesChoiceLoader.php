@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -32,7 +32,7 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getChoiceList(): array
     {
@@ -40,7 +40,7 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function loadChoiceList($value = null)
     {
@@ -50,7 +50,7 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function loadChoicesForValues(array $values, $value = null)
     {
@@ -64,7 +64,7 @@ class ConfiguredLanguagesChoiceLoader implements ChoiceLoaderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function loadValuesForChoices(array $choices, $value = null)
     {

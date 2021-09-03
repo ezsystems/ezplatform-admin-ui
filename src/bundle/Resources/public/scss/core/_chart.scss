@@ -1,10 +1,10 @@
-.ez-chart {
+.ibexa-chart {
     max-height: calculateRem(1000px);
-    border: calculateRem(1px) solid $ibexa-color-base-medium;
+    border: calculateRem(1px) solid $ibexa-color-light-500;
     border-radius: $ibexa-border-radius;
 
     &--no-data {
-        .ez-chart {
+        .ibexa-chart {
             &__canvas,
             &__legend,
             &__summary {
@@ -21,7 +21,7 @@
 
     &__time-range,
     &__time-period {
-        color: $ibexa-color-font-pale;
+        color: $ibexa-color-dark-300;
     }
 
     &__message {
@@ -38,8 +38,8 @@
         width: calculateRem(400px);
         height: calculateRem(226px);
         border-radius: $ibexa-border-radius;
-        border: calculateRem(1px) solid $ibexa-color-base;
-        background: $ibexa-white;
+        border: calculateRem(1px) solid $ibexa-color-light;
+        background: $ibexa-color-white;
 
         .ibexa-icon {
             margin-bottom: calculateRem(12px);
@@ -53,6 +53,6 @@
 
     &__canvas {
         max-height: calculateRem(350px);
-        width: 100%
+        width: 100%;
     }
 }

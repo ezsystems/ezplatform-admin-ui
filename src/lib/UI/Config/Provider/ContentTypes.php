@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\UI\Config\Provider;
@@ -9,8 +9,8 @@ namespace Ibexa\AdminUi\UI\Config\Provider;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
-use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 use Ibexa\AdminUi\UI\Service\ContentTypeIconResolver;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ContentTypes implements ProviderInterface
@@ -62,7 +62,7 @@ class ContentTypes implements ProviderInterface
                 $preferredLanguages
             );
 
-            usort($contentTypes, function (ContentType $contentType1, ContentType $contentType2) {
+            usort($contentTypes, static function (ContentType $contentType1, ContentType $contentType2) {
                 return strnatcasecmp($contentType1->getName(), $contentType2->getName());
             });
 

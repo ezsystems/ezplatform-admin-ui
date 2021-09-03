@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -21,13 +21,13 @@ class PolicyParamConverter implements ParamConverterInterface
     const PARAMETER_ROLE_ID = 'roleId';
     const PARAMETER_POLICY_ID = 'policyId';
 
-    /** @var RoleService */
+    /** @var \eZ\Publish\API\Repository\RoleService */
     private $roleService;
 
     /**
      * RoleParamConverter constructor.
      *
-     * @param RoleService $roleService
+     * @param \eZ\Publish\API\Repository\RoleService $roleService
      */
     public function __construct(RoleService $roleService)
     {
@@ -35,7 +35,7 @@ class PolicyParamConverter implements ParamConverterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
@@ -65,7 +65,7 @@ class PolicyParamConverter implements ParamConverterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function supports(ParamConverter $configuration)
     {

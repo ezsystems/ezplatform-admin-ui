@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -22,26 +22,26 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use Ibexa\AdminUi\Form\Data\Content\Location\ContentLocationAddData;
 use Ibexa\AdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use Ibexa\AdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use Ibexa\AdminUi\Form\Data\Location\LocationCopyData;
 use Ibexa\AdminUi\Form\Data\Location\LocationCopySubtreeData;
 use Ibexa\AdminUi\Form\Data\Location\LocationMoveData;
 use Ibexa\AdminUi\Form\Data\Location\LocationSwapData;
 use Ibexa\AdminUi\Form\Data\Location\LocationTrashData;
 use Ibexa\AdminUi\Form\Data\Location\LocationUpdateData;
-use Ibexa\AdminUi\Form\Data\Location\LocationAssignSubtreeData;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
 use Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation;
 use Ibexa\AdminUi\Form\Type\Location\LocationAssignSectionType;
-use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Ibexa\AdminUi\Tab\LocationView\DetailsTab;
 use Ibexa\AdminUi\Tab\LocationView\LocationsTab;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class LocationController extends Controller
 {

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Behat\Component\Table;
 
+use Behat\Mink\Session;
 use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Locator\LocatorCollection;
-use Behat\Mink\Session;
 
 class TableRowFactory
 {
-    /** @var Session */
+    /** @var \Behat\Mink\Session */
     private $session;
 
     public function __construct(Session $session)

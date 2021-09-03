@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Component\Renderer;
 
-use Ibexa\Contracts\AdminUi\Component\Renderer\RendererInterface;
 use Ibexa\AdminUi\Component\Event\RenderGroupEvent;
 use Ibexa\AdminUi\Component\Event\RenderSingleEvent;
 use Ibexa\AdminUi\Component\Registry;
 use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Component\Renderer\RendererInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DefaultRenderer implements RendererInterface

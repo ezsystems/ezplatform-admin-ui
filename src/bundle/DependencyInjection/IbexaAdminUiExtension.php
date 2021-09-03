@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Bundle\AdminUi\DependencyInjection;
@@ -20,7 +20,7 @@ class IbexaAdminUiExtension extends Extension implements PrependExtensionInterfa
      * Loads a specific configuration.
      *
      * @param array            $configs   An array of configuration values
-     * @param ContainerBuilder $container A ContainerBuilder instance
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container A ContainerBuilder instance
      *
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
      */

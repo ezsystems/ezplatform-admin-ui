@@ -1,20 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Menu;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
-use InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Section Edit contextual sidebar menu.
@@ -51,15 +50,15 @@ class SectionCreateRightSidebarBuilder extends AbstractBuilder implements Transl
     /**
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      *
-     * @throws ApiExceptions\InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws ApiExceptions\BadStateException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var ItemInterface|ItemInterface[] $menu */
+        /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
         $menu->setChildren([
@@ -84,7 +83,7 @@ class SectionCreateRightSidebarBuilder extends AbstractBuilder implements Transl
     }
 
     /**
-     * @return Message[]
+     * @return \JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {

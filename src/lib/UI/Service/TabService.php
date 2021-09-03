@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,16 +9,16 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\UI\Service;
 
 use Ibexa\AdminUi\Tab\TabGroup;
-use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 use Ibexa\AdminUi\Tab\TabRegistry;
+use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 
 class TabService
 {
-    /** @var TabRegistry */
+    /** @var \EzSystems\EzPlatformAdminUi\Tab\TabRegistry */
     protected $tabRegistry;
 
     /**
-     * @param TabRegistry $tabRegistry
+     * @param \EzSystems\EzPlatformAdminUi\Tab\TabRegistry $tabRegistry
      */
     public function __construct(TabRegistry $tabRegistry)
     {
@@ -28,7 +28,7 @@ class TabService
     /**
      * @param string $groupIdentifier
      *
-     * @return TabGroup
+     * @return \EzSystems\EzPlatformAdminUi\Tab\TabGroup
      */
     public function getTabGroup(string $groupIdentifier): TabGroup
     {
@@ -51,7 +51,7 @@ class TabService
      * @param string $tabIdentifier
      * @param string $groupIdentifier
      *
-     * @return TabInterface
+     * @return \EzSystems\EzPlatformAdminUi\Tab\TabInterface
      */
     public function getTabFromGroup(string $tabIdentifier, string $groupIdentifier): TabInterface
     {

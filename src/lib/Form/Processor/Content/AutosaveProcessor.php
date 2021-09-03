@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,9 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Form\Processor\Content;
 
 use eZ\Publish\API\Repository\Exceptions\Exception as APIException;
-use Ibexa\Contracts\AdminUi\Event\AutosaveEvents;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use EzSystems\EzPlatformContentForms\Form\Processor\ContentFormProcessor;
+use Ibexa\Contracts\AdminUi\Event\AutosaveEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 

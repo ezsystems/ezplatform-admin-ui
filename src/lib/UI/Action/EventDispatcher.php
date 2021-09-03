@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\UI\Action;
 
 use Ibexa\Contracts\AdminUi\UI\Action\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher as SymfonyEventDispatcher;
 use Ibexa\Contracts\AdminUi\UI\Action\UiActionEventInterface;
+use Symfony\Component\EventDispatcher as SymfonyEventDispatcher;
 
 class EventDispatcher implements EventDispatcherInterface
 {

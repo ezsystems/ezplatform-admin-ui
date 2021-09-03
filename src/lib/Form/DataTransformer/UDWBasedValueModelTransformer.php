@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -33,7 +33,7 @@ class UDWBasedValueModelTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * @return \eZ\Publish\API\Repository\Values\Content\Location[]|null
      */
@@ -57,7 +57,7 @@ class UDWBasedValueModelTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * @return int[]|null
      */

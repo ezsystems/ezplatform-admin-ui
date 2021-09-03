@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -18,7 +18,7 @@ class TabRegistry
     /**
      * @param string $group
      *
-     * @return TabInterface[]
+     * @return \Ibexa\Contracts\AdminUi\Tab\TabInterface[]
      */
     public function getTabsByGroupName(string $group): array
     {
@@ -43,7 +43,7 @@ class TabRegistry
      * @param string $name
      * @param string $group
      *
-     * @return TabInterface
+     * @return \Ibexa\Contracts\AdminUi\Tab\TabInterface
      */
     public function getTabFromGroup(string $name, string $group): TabInterface
     {
@@ -69,7 +69,7 @@ class TabRegistry
     }
 
     /**
-     * @param TabInterface $tab
+     * @param \Ibexa\Contracts\AdminUi\Tab\TabInterface $tab
      * @param string $group
      */
     public function addTab(TabInterface $tab, string $group)

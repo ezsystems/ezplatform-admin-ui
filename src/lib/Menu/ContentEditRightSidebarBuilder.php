@@ -1,27 +1,26 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Menu;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\SPI\Limitation\Target;
 use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use Ibexa\AdminUi\Siteaccess\NonAdminSiteaccessResolver;
-use InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use eZ\Publish\API\Repository\PermissionResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Content Edit contextual sidebar menu.
@@ -78,24 +77,24 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
     /**
      * @param array $options
      *
-     * @return ItemInterface
+     * @return \Knp\Menu\ItemInterface
      *
-     * @throws ApiExceptions\InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws ApiExceptions\BadStateException
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var ItemInterface|ItemInterface[] $menu */
+        /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
 
-        /** @var Location $location */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         $location = $options['location'];
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $options['content'];
-        /** @var Language $language */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Language $language */
         $language = $options['language'];
-        /** @var Location $parentLocation */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $parentLocation */
         $parentLocation = $options['parent_location'];
 
         $target = (new Target\Builder\VersionBuilder())->translateToAnyLanguageOf([$language->languageCode])->build();
@@ -166,7 +165,7 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
     }
 
     /**
-     * @return Message[]
+     * @return \JMS\TranslationBundle\Model\Message[]
      */
     public static function getTranslationMessages(): array
     {

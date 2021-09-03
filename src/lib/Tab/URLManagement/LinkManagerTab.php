@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,14 +10,14 @@ namespace Ibexa\AdminUi\Tab\URLManagement;
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\URLService;
-use eZ\Publish\API\Repository\Values\URL\URLQuery;
 use eZ\Publish\API\Repository\Values\URL\Query\Criterion;
 use eZ\Publish\API\Repository\Values\URL\Query\SortClause;
+use eZ\Publish\API\Repository\Values\URL\URLQuery;
 use Ibexa\AdminUi\Form\Data\URL\URLListData;
 use Ibexa\AdminUi\Form\Factory\FormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
-use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Ibexa\AdminUi\Pagination\Pagerfanta\URLSearchAdapter;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Ibexa\Contracts\AdminUi\Tab\AbstractTab;
 use Ibexa\Contracts\AdminUi\Tab\ConditionalTabInterface;
 use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
@@ -134,9 +134,9 @@ class LinkManagerTab extends AbstractTab implements OrderedTabInterface, Conditi
     /**
      * Builds URL criteria from list data.
      *
-     * @param URLListData $data
+     * @param \EzSystems\EzPlatformAdminUi\Form\Data\URL\URLListData $data
      *
-     * @return URLQuery
+     * @return \eZ\Publish\API\Repository\Values\URL\URLQuery
      */
     private function buildListQuery(URLListData $data): URLQuery
     {

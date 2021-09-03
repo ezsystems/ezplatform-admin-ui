@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -10,9 +10,7 @@ namespace Ibexa\AdminUi\Menu;
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
@@ -20,15 +18,15 @@ use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUser;
 use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUserGroup;
 use Ibexa\AdminUi\Specification\Location\IsRoot;
-use Ibexa\AdminUi\UniversalDiscovery\ConfigResolver;
-use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
-use Ibexa\Bundle\AdminUi\Templating\Twig\UniversalDiscoveryExtension;
 use Ibexa\AdminUi\Specification\Location\IsWithinCopySubtreeLimit;
+use Ibexa\AdminUi\UniversalDiscovery\ConfigResolver;
+use Ibexa\Bundle\AdminUi\Templating\Twig\UniversalDiscoveryExtension;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
+use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 
 /**
  * KnpMenuBundle Menu Builder service implementation for AdminUI Location View contextual sidebar menu.
@@ -107,18 +105,19 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      */
     public function createStructure(array $options): ItemInterface
     {
-        /** @var Location $location */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         $location = $options['location'];
-        /** @var ContentType $contentType */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $options['content_type'];
-        /** @var Content $content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $options['content'];
-        /** @var ItemInterface|ItemInterface[] $menu */
+        /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
         $menu = $this->factory->createItem('root');
         $startingLocationId = $this->udwConfigResolver->getConfig('default')['starting_location_id'];
 
         $lookupLimitationsResult = $this->permissionChecker->getContentCreateLimitations($location);
         $canCreate = $lookupLimitationsResult->hasAccess && $contentType->isContainer;
+        $uwdConfig = $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container');
         $canEdit = $this->permissionResolver->canUser(
             'content',
             'edit',
@@ -143,7 +142,15 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             $location->getContentInfo(),
             [$location, $target]
         );
-
+        $canHide = $this->permissionResolver->canUser(
+            'content',
+            'hide',
+            $content,
+            [$target]
+        );
+        $hasCreatePermission = $this->hasCreatePermission();
+        $canCopy = $this->canCopy($hasCreatePermission);
+        $canCopySubtree = $this->canCopySubtree($location, $hasCreatePermission);
         $createAttributes = [
             'class' => 'ibexa-btn--extra-actions ibexa-btn--create ibexa-btn--primary',
             'data-actions' => 'create',
@@ -155,17 +162,19 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         ];
         $copySubtreeAttributes = [
             'class' => 'ibexa-btn--udw-copy-subtree',
-            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
+            'data-udw-config' => $uwdConfig,
             'data-root-location' => $startingLocationId,
         ];
-
-        $copyLimit = $this->configResolver->getParameter(
-            'subtree_operations.copy_subtree.limit'
-        );
-        $canCopySubtree = (new IsWithinCopySubtreeLimit(
-            $copyLimit,
-            $this->searchService
-        ))->and((new IsRoot())->not())->isSatisfiedBy($location);
+        $moveAttributes = [
+            'class' => 'ibexa-btn--udw-move',
+            'data-udw-config' => $uwdConfig,
+            'data-root-location' => $startingLocationId,
+        ];
+        $copyAttributes = [
+            'class' => 'ibexa-btn--udw-copy',
+            'data-udw-config' => $uwdConfig,
+            'data-root-location' => $startingLocationId,
+        ];
 
         $contentIsUser = (new ContentTypeIsUser($this->configResolver->getParameter('user_content_type_identifier')))
             ->isSatisfiedBy($contentType);
@@ -191,11 +200,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                 self::ITEM__MOVE,
                 [
                     'extras' => ['orderNumber' => 30],
-                    'attributes' => [
-                        'class' => 'ibexa-btn--udw-move',
-                        'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-                        'data-root-location' => $startingLocationId,
-                    ],
+                    'attributes' => $hasCreatePermission
+                        ? $moveAttributes
+                        : array_merge($moveAttributes, ['disabled' => 'disabled']),
                 ]
             )
         );
@@ -205,11 +212,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
                     self::ITEM__COPY,
                     [
                         'extras' => ['orderNumber' => 40],
-                        'attributes' => [
-                            'class' => 'ibexa-btn--udw-copy',
-                            'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('single_container'),
-                            'data-root-location' => $startingLocationId,
-                        ],
+                        'attributes' => $canCopy
+                            ? $copyAttributes
+                            : array_merge($copyAttributes, ['disabled' => 'disabled']),
                     ]
                 )
             );
@@ -228,9 +233,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         }
 
         if ($content->getVersionInfo()->getContentInfo()->isHidden) {
-            $this->addRevealMenuItem($menu);
+            $this->addRevealMenuItem($menu, $canHide);
         } else {
-            $this->addHideMenuItem($menu);
+            $this->addHideMenuItem($menu, $canHide);
         }
 
         if ($contentIsUser && $canDelete) {
@@ -331,17 +336,21 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /**
      * @param \Knp\Menu\ItemInterface $menu
      */
-    private function addRevealMenuItem(ItemInterface $menu): void
+    private function addRevealMenuItem(ItemInterface $menu, bool $canHide): void
     {
+        $attributes = [
+            'class' => 'ibexa-btn--reveal',
+            'data-actions' => 'reveal',
+        ];
+
         $menu->addChild(
             $this->createMenuItem(
                 self::ITEM__REVEAL,
                 [
                     'extras' => ['orderNumber' => 60],
-                    'attributes' => [
-                        'class' => 'ibexa-btn--reveal',
-                        'data-actions' => 'reveal',
-                    ],
+                    'attributes' => $canHide
+                        ? $attributes
+                        : array_merge($attributes, ['disabled' => 'disabled']),
                 ]
             )
         );
@@ -350,20 +359,60 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /**
      * @param \Knp\Menu\ItemInterface $menu
      */
-    private function addHideMenuItem(ItemInterface $menu): void
+    private function addHideMenuItem(ItemInterface $menu, bool $canHide): void
     {
+        $attributes = [
+            'class' => 'ibexa-btn--hide',
+            'data-actions' => 'hide',
+        ];
+
         $menu->addChild(
             $this->createMenuItem(
                 self::ITEM__HIDE,
                 [
                     'extras' => ['orderNumber' => 60],
-                    'attributes' => [
-                        'class' => 'ibexa-btn--hide',
-                        'data-actions' => 'hide',
-                    ],
+                    'attributes' => $canHide
+                        ? $attributes
+                        : array_merge($attributes, ['disabled' => 'disabled']),
                 ]
             )
         );
+    }
+
+    private function hasCreatePermission(): bool
+    {
+        $createPolicies = $this->permissionResolver->hasAccess(
+            'content',
+            'create'
+        );
+
+        return !is_bool($createPolicies) || $createPolicies;
+    }
+
+    private function canCopy(bool $hasCreatePermission): bool
+    {
+        $manageLocationsPolicies = $this->permissionResolver->hasAccess(
+            'content',
+            'manage_locations'
+        );
+
+        $hasManageLocationsPermission = !is_bool($manageLocationsPolicies) || $manageLocationsPolicies;
+
+        return $hasCreatePermission && $hasManageLocationsPermission;
+    }
+
+    private function canCopySubtree(Location $location, bool $hasCreatePermission): bool
+    {
+        $copyLimit = $this->configResolver->getParameter(
+            'subtree_operations.copy_subtree.limit'
+        );
+
+        $canCopySubtree = (new IsWithinCopySubtreeLimit(
+            $copyLimit,
+            $this->searchService
+        ))->and((new IsRoot())->not())->isSatisfiedBy($location);
+
+        return $canCopySubtree && $hasCreatePermission;
     }
 }
 

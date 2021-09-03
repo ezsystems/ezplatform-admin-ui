@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -17,19 +17,19 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
  */
 class ContentCreateData
 {
-    /** @var ContentType|null */
+    /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType|null */
     protected $contentType;
 
-    /** @var Location|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
     protected $parentLocation;
 
-    /** @var Language|null */
+    /** @var \eZ\Publish\API\Repository\Values\Content\Language|null */
     protected $language;
 
     /**
-     * @param ContentType|null $contentType
-     * @param Location|null $parentLocation
-     * @param Language|null $language
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType|null $contentType
+     * @param \eZ\Publish\API\Repository\Values\Content\Location|null $parentLocation
+     * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
      */
     public function __construct(
         ?ContentType $contentType = null,
@@ -42,7 +42,7 @@ class ContentCreateData
     }
 
     /**
-     * @return ContentType|null
+     * @return \eZ\Publish\API\Repository\Values\ContentType\ContentType|null
      */
     public function getContentType(): ?ContentType
     {
@@ -50,7 +50,7 @@ class ContentCreateData
     }
 
     /**
-     * @param ContentType $contentType
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
      *
      * @return self
      */
@@ -62,7 +62,7 @@ class ContentCreateData
     }
 
     /**
-     * @return Location|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Location|null
      */
     public function getParentLocation(): ?Location
     {
@@ -70,7 +70,7 @@ class ContentCreateData
     }
 
     /**
-     * @param Location $parentLocation
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $parentLocation
      *
      * @return self
      */
@@ -82,7 +82,7 @@ class ContentCreateData
     }
 
     /**
-     * @return Language|null
+     * @return \eZ\Publish\API\Repository\Values\Content\Language|null
      */
     public function getLanguage(): ?Language
     {
@@ -90,7 +90,7 @@ class ContentCreateData
     }
 
     /**
-     * @param Language $language
+     * @param \eZ\Publish\API\Repository\Values\Content\Language $language
      *
      * @return self
      */

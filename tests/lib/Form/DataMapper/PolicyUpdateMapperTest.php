@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Tests\AdminUi\Form\DataMapper;
@@ -16,7 +16,7 @@ use Ibexa\AdminUi\Exception\InvalidArgumentException;
 
 class PolicyUpdateMapperTest extends TestCase
 {
-    /** @var PolicyUpdateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper */
     private $mapper;
 
     protected function setUp(): void
@@ -73,7 +73,7 @@ class PolicyUpdateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return PolicyUpdateStruct
+     * @return \eZ\Publish\Core\Repository\Values\User\PolicyUpdateStruct
      */
     private function createStruct(array $properties): PolicyUpdateStruct
     {
@@ -86,7 +86,7 @@ class PolicyUpdateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return PolicyUpdateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData
      */
     private function createData(array $properties): PolicyUpdateData
     {

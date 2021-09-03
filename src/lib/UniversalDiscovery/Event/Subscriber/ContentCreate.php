@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -52,7 +52,7 @@ class ContentCreate implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getSubscribedEvents(): array
     {
@@ -98,7 +98,7 @@ class ContentCreate implements EventSubscriberInterface
 
         $restrictedContentTypes = $this->contentTypeService->loadContentTypeList($restrictedContentTypesIds);
 
-        return array_values(array_map(function (ContentType $contentType): string {
+        return array_values(array_map(static function (ContentType $contentType): string {
             return $contentType->identifier;
         }, (array)$restrictedContentTypes));
     }

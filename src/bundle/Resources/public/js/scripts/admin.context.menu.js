@@ -8,6 +8,11 @@
     const menuButtons = [...adapatItemsContainer.querySelectorAll('.ibexa-context-menu__item > .ibexa-btn:not(.ibexa-btn--more)')];
     const popupMenuElement = adapatItemsContainer.querySelector('.ibexa-popup-menu');
     const showPopupButton = adapatItemsContainer.querySelector('.ibexa-btn--more');
+
+    if (!showPopupButton) {
+        return;
+    }
+
     const adaptiveItems = new eZ.core.AdaptiveItems({
         itemHiddenClass: 'ibexa-context-menu__item--hidden',
         container: adapatItemsContainer,

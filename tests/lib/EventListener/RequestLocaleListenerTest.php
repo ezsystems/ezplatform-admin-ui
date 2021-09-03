@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -31,7 +31,7 @@ class RequestLocaleListenerTest extends TestCase
     /** @var \Symfony\Component\HttpFoundation\Request */
     private $request;
 
-    /** @var MockObject|\Symfony\Component\HttpKernel\HttpKernelInterface */
+    /** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpKernel\HttpKernelInterface */
     private $httpKernel;
 
     /** @var \Symfony\Contracts\Translation\TranslatorInterface */

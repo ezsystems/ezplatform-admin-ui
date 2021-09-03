@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -18,11 +18,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LocationType extends AbstractType
 {
-    /** @var LocationService */
+    /** @var \eZ\Publish\API\Repository\LocationService */
     protected $locationService;
 
     /**
-     * @param LocationService $locationService
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
      */
     public function __construct(LocationService $locationService)
     {

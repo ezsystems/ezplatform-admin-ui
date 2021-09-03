@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -24,17 +24,17 @@ use Ibexa\AdminUi\Form\Data\TrashItemData;
 use Ibexa\AdminUi\Form\Factory\TrashFormFactory;
 use Ibexa\AdminUi\Form\SubmitHandler;
 use Ibexa\AdminUi\Form\Type\Search\TrashSearchType;
-use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Ibexa\AdminUi\Pagination\Pagerfanta\TrashItemAdapter;
 use Ibexa\AdminUi\QueryType\TrashSearchQueryType;
 use Ibexa\AdminUi\Specification\UserExists;
+use Ibexa\AdminUi\UI\Service\PathService as UiPathService;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Ibexa\AdminUi\UI\Service\PathService as UiPathService;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
 
 class TrashController extends Controller
 {

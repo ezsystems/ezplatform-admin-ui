@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Bundle\AdminUi\DependencyInjection\Compiler;
 
+use Ibexa\AdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher;
+use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use LogicException;
 use Symfony\Component\DependencyInjection\Reference;
-use Ibexa\AdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher;
 
 /**
  * Compiler pass to register FieldType form mappers in the mapper dispatcher.

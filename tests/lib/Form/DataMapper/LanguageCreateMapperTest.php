@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\Tests\AdminUi\Form\DataMapper;
@@ -16,7 +16,7 @@ use Ibexa\AdminUi\Exception\InvalidArgumentException;
 
 class LanguageCreateMapperTest extends TestCase
 {
-    /** @var LanguageCreateMapper */
+    /** @var \EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper */
     private $mapper;
 
     protected function setUp(): void
@@ -80,7 +80,7 @@ class LanguageCreateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return LanguageCreateStruct
+     * @return \eZ\Publish\API\Repository\Values\Content\LanguageCreateStruct
      */
     private function createStruct(array $properties): LanguageCreateStruct
     {
@@ -90,7 +90,7 @@ class LanguageCreateMapperTest extends TestCase
     /**
      * @param array $properties
      *
-     * @return LanguageCreateData
+     * @return \EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData
      */
     private function createData(array $properties): LanguageCreateData
     {

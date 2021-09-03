@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
@@ -9,14 +9,14 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component;
 
 use Behat\Mink\Session;
+use Ibexa\AdminUi\Behat\Component\Table\SubitemsGrid;
+use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
+use Ibexa\AdminUi\Behat\Component\Table\TableInterface;
 use Ibexa\Behat\Browser\Component\Component;
 use Ibexa\Behat\Browser\Element\Condition\ElementNotExistsCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
-use Ibexa\AdminUi\Behat\Component\Table\SubitemsGrid;
-use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
-use Ibexa\AdminUi\Behat\Component\Table\TableInterface;
 use PHPUnit\Framework\Assert;
 
 class SubItemsList extends Component

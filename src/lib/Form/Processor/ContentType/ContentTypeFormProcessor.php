@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 namespace Ibexa\AdminUi\Form\Processor\ContentType;
@@ -12,8 +12,8 @@ use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinitionCreateStruct;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
-use Ibexa\Contracts\AdminUi\Event\FormEvents;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use Ibexa\Contracts\AdminUi\Event\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
@@ -21,12 +21,12 @@ use Symfony\Component\Routing\RouterInterface;
 class ContentTypeFormProcessor implements EventSubscriberInterface
 {
     /**
-     * @var ContentTypeService
+     * @var \eZ\Publish\API\Repository\ContentTypeService
      */
     private $contentTypeService;
 
     /**
-     * @var RouterInterface
+     * @var \Symfony\Component\Routing\RouterInterface
      */
     private $router;
 
@@ -165,7 +165,7 @@ class ContentTypeFormProcessor implements EventSubscriberInterface
     /**
      * Resolves unique field definition identifier.
      *
-     * @param ContentTypeDraft $contentTypeDraft
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft $contentTypeDraft
      * @param int $startIndex
      * @param string $fieldTypeIdentifier
      *
