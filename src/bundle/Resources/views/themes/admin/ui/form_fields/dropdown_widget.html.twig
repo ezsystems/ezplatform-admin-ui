@@ -12,6 +12,7 @@
         {% include '@ezdesign/ui/component/dropdown.html.twig' with {
             source: source,
             choices: choices,
+            preferred_choices: preferred_choices,
             value: form.vars.value,
             multiple: form.vars.multiple,
             choice_translation_domain: choice_translation_domain|default(false)

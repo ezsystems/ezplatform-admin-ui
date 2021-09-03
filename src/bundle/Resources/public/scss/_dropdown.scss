@@ -151,7 +151,7 @@
         background: $ibexa-white;
         border: calculateRem(1px) solid $ibexa-color-light;
         color: $ibexa-color-dark;
-        z-index: 2;
+        z-index: 2000;
         border-radius: $ibexa-border-radius;
         overflow-y: auto;
         transform: scaleY(0);
@@ -196,6 +196,10 @@
 
     &__item-group-list {
         padding-left: 0;
+    }
+
+    &__separator {
+        background-color: $ibexa-color-light-600;
     }
 
     &--is-disabled {
