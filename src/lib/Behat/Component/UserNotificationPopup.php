@@ -34,7 +34,7 @@ class UserNotificationPopup extends Component
             return;
         }
 
-        throw new Exception(sprintf('Notification of type: %s with description: %d not found', $type, $description));
+        throw new Exception(sprintf('Notification of type: %s with description: %d not found', $expectedType, $expectedDescription));
     }
 
     public function verifyIsLoaded(): void
