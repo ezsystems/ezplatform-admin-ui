@@ -1,6 +1,8 @@
+{% set item_label = choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) %}
+
 {% if choice.choices is defined %}
     <li class="ibexa-dropdown__item-group">
-        <label class="ibexa-dropdown__item-group-label">{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</label>
+        <label class="ibexa-dropdown__item-group-label">{{ item_label }}</label>
         <ul class="ibexa-dropdown__item-group-list">
             {% for child in choice.choices %}
                 {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice: child } %}
@@ -8,10 +10,10 @@
         </ul>
     </li>
 {% else %}
-    <li data-value="{{ choice.value }}" class="ibexa-dropdown__item {% if choice is selectedchoice(value) %}ibexa-dropdown__item--selected{% endif %}">
+    <li data-value="{{ choice.value }}" data-filter-value="{{ item_label }}" class="ibexa-dropdown__item {% if choice is selectedchoice(value) %}ibexa-dropdown__item--selected{% endif %}">
         {% if multiple is defined and multiple %}
             <input type="checkbox" name="dropdown-checkbox" class="ibexa-input ibexa-input--checkbox" {% if choice is selectedchoice(value) %}checked{% endif %} />
         {% endif %}
-        <span class="ibexa-dropdown__item-label">{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</span>
+        <span class="ibexa-dropdown__item-label">{{ item_label }}</span>
     </li>
 {% endif %}

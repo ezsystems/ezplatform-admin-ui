@@ -295,14 +295,14 @@
         {%- set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input ibexa-input--text')|trim}) -%}
         {%- set empty_placeholder_for_hiding_clear_btn_with_css = ' ' -%}
         {%- set attr = attr|merge({placeholder: (attr.placeholder is defined) ? attr.placeholder : empty_placeholder_for_hiding_clear_btn_with_css}) -%}
-        <div class="ibexa-input-text-wrapper">
+        {%- set input_html -%}
             {{ parent() }}
-            <button type="button" class="btn ibexa-input__clear ibexa-input-text-wrapper__clear-btn" tabindex="-1">
-                <svg class="ibexa-icon ibexa-input-text-wrapper__clear-btn-icon">
-                    <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
-                </svg>
-            </button>
-        </div>
+        {%- endset -%}
+        {%- embed '@ezdesign/ui/component/input_text.html.twig' -%}
+            {% block content %}
+                {{ input_html }}
+            {% endblock %}
+        {%- endembed -%}
     {%- else -%}
         {{ parent() }}
     {%- endif -%}

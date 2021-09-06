@@ -1,5 +1,5 @@
 (function (global, doc, $, eZ) {
-    const textInputClearBtns = doc.querySelectorAll('.ibexa-input-text-wrapper__clear-btn');
+    const textInputClearBtns = doc.querySelectorAll('.ibexa-input-text-wrapper__action-btn--clear');
     const clearText = (event) => {
         const inputWrapper = event.target.closest('.ibexa-input-text-wrapper');
         const textInput = inputWrapper.querySelector('.ibexa-input--text');
