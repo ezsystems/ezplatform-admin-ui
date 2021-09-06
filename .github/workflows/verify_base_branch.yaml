@@ -25,5 +25,5 @@ jobs:
         run: |
           BASE_BRANCH_ALIAS=$(cat base/composer.json | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
           echo "{$BASE_BRANCH_ALIAS}" && echo "BASE_BRANCH_ALIAS=${BASE_BRANCH_ALIAS}" >> $GITHUB_ENV
-      - name: Compare branch-aliases
+      - name: Check if base branch is correct
         run: if [ "$CURRENT_BRANCH_ALIAS" != "$BASE_BRANCH_ALIAS" ]; then exit 1; fi
