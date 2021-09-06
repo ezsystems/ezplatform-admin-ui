@@ -269,7 +269,7 @@
                 return;
             }
 
-            const visibleItems = this.itemsListContainer.querySelectorAll(`[data-filter-value^="${event.currentTarget.value}"]`);
+            const visibleItems = this.itemsListContainer.querySelectorAll(`[data-filter-value^="${event.currentTarget.value.toLowerCase()}"]`);
 
             [...allItems].forEach((item) => item.classList.add(CLASS_ITEM_HIDDEN));
             [...visibleItems].forEach((item) => item.classList.remove(CLASS_ITEM_HIDDEN));
