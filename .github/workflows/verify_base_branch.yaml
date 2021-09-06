@@ -11,6 +11,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: head
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Get current branch-alias
         run: | 
           CURRENT_BRANCH_ALIAS=$(cat head/composer.json | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
@@ -18,7 +19,6 @@ jobs:
       - name: Check out base branch
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ env.GITHUB_BASE_REF }}
           path: base
       - name: Get base branch-alias
