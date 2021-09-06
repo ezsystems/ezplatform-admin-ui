@@ -1,0 +1,29 @@
+name: Pull Request base branch verification
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  test-base-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v2
+        with:
+          path: head
+      - name: Get current branch-alias
+        run: | 
+          CURRENT_BRANCH_ALIAS=$(cat head/composer.json | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
+          echo "CURRENT_BRANCH_ALIAS=${CURRENT_BRANCH_ALIAS}" >> $GITHUB_ENV
+      - name: Check out base branch
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ env.GITHUB_BASE_REF }}
+          path: base
+      - name: Get base branch-alias
+        run: |
+          BASE_BRANCH_ALIAS=$(cat base/composer.json | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
+          echo "{$BASE_BRANCH_ALIAS}" && echo "BASE_BRANCH_ALIAS=${BASE_BRANCH_ALIAS}" >> $GITHUB_ENV
+      - name: Compare branch-aliases
+        run: if [ "$CURRENT_BRANCH_ALIAS" != "$BASE_BRANCH_ALIAS" ]; then exit 1; fi
