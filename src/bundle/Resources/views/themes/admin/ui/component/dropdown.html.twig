@@ -38,6 +38,12 @@
             <li class="ibexa-dropdown__selected-overflow-number ibexa-dropdown__selected-item" hidden></li>
         </ul>
         <ul class="ibexa-dropdown__items">
+            {% for choice in preferred_choices %}
+                {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice: choice } %}
+            {% endfor %}
+            {% if preferred_choices|length > 0 %}
+                <hr class="ibexa-dropdown__separator"/>
+            {% endif %}
             {% for choice in choices %}
                 {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice: choice } %}
             {% endfor %}
