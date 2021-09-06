@@ -7,7 +7,7 @@
 {% set have_actions = (is_draft or is_archived) or custom_actions %}
 
 <div class="ibexa-scrollable-wrapper">
-    <table class="ibexa-table table ibexa-table__draft-conflict {{ (is_draft and have_to_paginate ? 'mb-3' : '') }}">
+    <table class="ibexa-table table ibexa-table--draft-conflict {{ (is_draft and have_to_paginate ? 'mb-3' : '') }}">
         <thead>
             <tr class="ibexa-table__head-row">
                 {% if form is defined %}
@@ -41,9 +41,7 @@
                 {% endif %}
             </tr>
         </thead>
-        <tbody
-            class="ibexa-table__body"
-        >
+        <tbody class="ibexa-table__body">
             {% for version in versions %}
                 {% set edit_url = content_is_user is defined and content_is_user ?
                         path('ezplatform.user.update', {

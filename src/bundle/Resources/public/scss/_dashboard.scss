@@ -19,7 +19,7 @@
         margin: 0 calculateRem(24px) 0 0;
     }
 
-    .table:not(.ibexa-table__draft-conflict) {
+    .table:not(.ibexa-table--draft-conflict) {
         margin-bottom: 0;
     }
 }
