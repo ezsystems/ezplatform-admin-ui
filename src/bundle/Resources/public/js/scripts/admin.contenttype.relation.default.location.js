@@ -1,5 +1,7 @@
 (function(global, doc, eZ, React, ReactDOM) {
-    const btns = doc.querySelectorAll('.ibexa-btn--udw-relation-default-location');
+    const SELECTOR_RESET_STARTING_LOCATION_BTN = '.ibexa-btn--reset-starting-location';
+    const resetStartingLocationBtns = doc.querySelectorAll(SELECTOR_RESET_STARTING_LOCATION_BTN);
+    const udwBtns = doc.querySelectorAll('.ibexa-btn--udw-relation-default-location');
     const udwContainer = doc.getElementById('react-udw');
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const onConfirm = (btn, items) => {
@@ -9,6 +11,11 @@
         const locationName = items[0].ContentInfo.Content.TranslatedName;
         const objectRelationListSettingsWrapper = btn.closest('.ezobjectrelationlist-settings');
         const objectRelationSettingsWrapper = btn.closest('.ezobjectrelation-settings');
+
+        toggleResetStartingLocationBtn(
+            btn.parentNode.querySelector(SELECTOR_RESET_STARTING_LOCATION_BTN),
+            true
+        );
 
         if (objectRelationListSettingsWrapper) {
             objectRelationListSettingsWrapper.querySelector(btn.dataset.relationRootInputSelector).value = locationId;
@@ -35,6 +42,23 @@
             udwContainer
         );
     };
+    const toggleResetStartingLocationBtn = (button, isEnabled) => {
+        if (isEnabled) {
+            button.removeAttribute('disabled');
+        } else {
+            button.setAttribute('disabled', true);
+        }
+    };
+    const resetStartingLocation = (event) => {
+        const button = event.currentTarget;
+        const { relationRootInputSelector, relationSelectedRootNameSelector } = button.dataset;
 
-    btns.forEach((btn) => btn.addEventListener('click', openUDW, false));
+        doc.querySelector(relationRootInputSelector).value = '';
+        doc.querySelector(relationSelectedRootNameSelector).innerHTML = '';
+
+        toggleResetStartingLocationBtn(button, false);
+    };
+
+    udwBtns.forEach(btn => btn.addEventListener('click', openUDW, false));
+    resetStartingLocationBtns.forEach(btn => btn.addEventListener('click', resetStartingLocation, false));
 })(window, window.document, window.eZ, window.React, window.ReactDOM);
