@@ -10,19 +10,23 @@ jobs:
       - name: Download composer.json from Pull Request
         env:
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          GITHUB_TOKEN: ${{ secrets.TRAVIS_GITHUB_TOKEN }}
         run: |
           curl --url $GITHUB_API_URL/repos/$HEAD_REPO/contents/composer.json?ref=$GITHUB_HEAD_REF \
           --header 'Accept: application/vnd.github.v3.raw' \
+          --header "Authorization: token $GITHUB_TOKEN" \
           > pr_composer.json;
       - name: Set branch-alias from Pull Request
         run: |
           CURRENT_BRANCH_ALIAS=$(cat pr_composer.json | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
           echo "CURRENT_BRANCH_ALIAS=${CURRENT_BRANCH_ALIAS}" >> $GITHUB_ENV
-          echo $CURRENT_BRANCH_ALIAS
       - name: Download composer.json from base branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.TRAVIS_GITHUB_TOKEN }}
         run: |
           curl --url $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/contents/composer.json?ref=$GITHUB_BASE_REF \
           --header 'Accept: application/vnd.github.v3.raw' \
+          --header "Authorization: token $GITHUB_TOKEN" \
           > base_composer.json;  
       - name: Get base branch-alias
         run: |
