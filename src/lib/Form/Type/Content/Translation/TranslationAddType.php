@@ -190,7 +190,7 @@ class TranslationAddType extends AbstractType
         FormInterface $form,
         array $contentLanguages,
         ?ContentInfo $contentInfo,
-        ?Location $location
+        ?Location $location = null
     ): void {
         $languagesCodes = array_column($this->languageService->loadLanguages(), 'languageCode');
 
