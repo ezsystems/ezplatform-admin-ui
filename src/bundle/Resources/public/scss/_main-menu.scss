@@ -7,7 +7,7 @@
         opacity: 0;
         border: none;
     }
-    
+
     display: flex;
     height: 100%;
     min-height: calc(100vh - #{calculateRem(72px)});
@@ -53,14 +53,16 @@
             }
 
             &.ibexa-main-menu__navbar--collapsed {
+                width: calculateRem(48px);
+
                 .ibexa-main-menu {
                     &__items-list {
-                        width: calculateRem(48px);
+                        width: calculateRem(38px);
                     }
-    
+
                     &__item {
                         @include hidden-main-menu-node;
-    
+
                         &--popup-container {
                             display: flex;
                             justify-content: flex-end;
@@ -74,7 +76,7 @@
                 }
             }
         }
-        
+
         &--hidden {
             @include hidden-main-menu-node;
         }
