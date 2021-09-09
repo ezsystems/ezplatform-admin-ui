@@ -18,6 +18,7 @@ jobs:
           > pr_composer.json;
       - name: Set branch-alias from Pull Request
         run: |
+          cat pr_composer.json
           CURRENT_BRANCH_ALIAS=$(cat pr_composer.json | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
           echo "CURRENT_BRANCH_ALIAS=${CURRENT_BRANCH_ALIAS}" >> $GITHUB_ENV
       - name: Download composer.json from base branch
