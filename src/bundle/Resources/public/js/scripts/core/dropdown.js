@@ -49,7 +49,6 @@
             this.onOptionClick = this.onOptionClick.bind(this);
             this.fireValueChangedEvent = this.fireValueChangedEvent.bind(this);
             this.filterItems = this.filterItems.bind(this);
-            this.afterClose = this.afterClose.bind(this);
         }
 
         createSelectedItem(value, label) {
@@ -182,6 +181,10 @@
 
                 this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(isItemsContainerAbove)}px`;
                 this.itemsContainer.classList.toggle(CLASS_ITEMS_POSITION_TOP, isItemsContainerAbove);
+                this.itemsFilterInput
+                    .closest('.ibexa-input-text-wrapper')
+                    .querySelector('.ibexa-input-text-wrapper__action-btn--clear')
+                    .click();
             }
 
             this.itemsFilterInput.focus();
@@ -260,28 +263,22 @@
             }
         }
 
-        filterItems(event) {
-            const allItems = this.itemsListContainer.querySelectorAll('[data-filter-value]');
+        compareItem(itemFilterValue, searchedTerm) {
+            const itemFilterValueLowerCase = itemFilterValue.toLowerCase();
+            const searchedTermLowerCase = searchedTerm.toLowerCase();
 
-            if (event.currentTarget.value.length < 3) {
-                [...allItems].forEach((item) => item.classList.remove(CLASS_ITEM_HIDDEN));
-
-                return;
-            }
-
-            const visibleItems = this.itemsListContainer.querySelectorAll(`[data-filter-value^="${event.currentTarget.value.toLowerCase()}"]`);
-
-            [...allItems].forEach((item) => item.classList.add(CLASS_ITEM_HIDDEN));
-            [...visibleItems].forEach((item) => item.classList.remove(CLASS_ITEM_HIDDEN));
+            return itemFilterValueLowerCase.indexOf(searchedTermLowerCase) === 0;
         }
 
-        afterClose(event) {
-            if (event.propertyName === 'transform' && !this.container.classList.contains(CLASS_DROPDOWN_EXPANDED)) {
-                this.itemsFilterInput
-                    .closest('.ibexa-input-text-wrapper')
-                    .querySelector('.ibexa-input-text-wrapper__action-btn--clear')
-                    .click();
-            }
+        filterItems(event) {
+            const forceShowItems = event.currentTarget.value.length < 3;
+            const allItems = [...this.itemsListContainer.querySelectorAll('[data-filter-value]')];
+
+            allItems.forEach((item) => {
+                const isItemVisible = forceShowItems || this.compareItem(item.dataset.filterValue, event.currentTarget.value);
+
+                item.classList.toggle(CLASS_ITEM_HIDDEN, !isItemVisible);
+            });
         }
 
         init() {
@@ -295,7 +292,6 @@
             this.fitItems();
 
             this.container.querySelector(SELECTOR_SELECTION_INFO).onclick = this.onInputClick;
-            this.itemsContainer.addEventListener('transitionend', this.afterClose, false);
             this.itemsListContainer
                 .querySelectorAll(`${SELECTOR_ITEM}:not([disabled])`)
                 .forEach((option) => (option.onclick = this.onOptionClick));

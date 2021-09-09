@@ -49,13 +49,13 @@
             {%- endembed -%}
             <ul class="ibexa-dropdown__items-list">
                 {% for choice in preferred_choices %}
-                    {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice: choice } %}
+                    {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice } %}
                 {% endfor %}
                 {% if preferred_choices|length > 0 %}
                     <hr class="ibexa-dropdown__separator"/>
                 {% endif %}
                 {% for choice in choices %}
-                    {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice: choice } %}
+                    {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice } %}
                 {% endfor %}
             </ul>
         </div>

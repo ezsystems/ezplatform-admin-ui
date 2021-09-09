@@ -150,7 +150,6 @@
         color: $ibexa-color-dark;
         z-index: 2000;
         border-radius: $ibexa-border-radius;
-        overflow-y: auto;
         transform: scaleY(0);
         display: flex;
         flex-direction: column;
@@ -163,7 +162,7 @@
         }
 
         .ibexa-input-text-wrapper {
-            margin: calculateRem(8px) calculateRem(12px) 0;
+            margin: calculateRem(8px) calculateRem(12px);
         }
     }
 
@@ -171,6 +170,7 @@
         list-style: none;
         padding: calculateRem(8.5px);
         margin: 0;
+        overflow-y: auto;
     }
 
     &__item {

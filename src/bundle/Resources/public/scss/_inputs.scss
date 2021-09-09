@@ -372,13 +372,6 @@
                 height: calculateRem(8px);
             }
         }
-
-        &--search {
-            .ibexa-icon {
-                width: calculateRem(16px);
-                height: calculateRem(16px);
-            }
-        }
     }
 
     &--search {
@@ -388,13 +381,13 @@
     }
 }
 
-.ibexa-input--text:placeholder-shown + .ibexa-input-text-wrapper__clear-btn,
-.ibexa-input--text:disabled + .ibexa-input-text-wrapper__clear-btn,
-.ibexa-input--text[hidden] + .ibexa-input-text-wrapper__clear-btn {
+.ibexa-input--text:placeholder-shown + .ibexa-input-text-wrapper__actions,
+.ibexa-input--text:disabled + .ibexa-input-text-wrapper__actions,
+.ibexa-input--text[hidden] + .ibexa-input-text-wrapper__actions {
     display: none;
 }
 
-.ibexa-input--text.is-invalid + .ibexa-input-text-wrapper__clear-btn {
+.ibexa-input--text.is-invalid + .ibexa-input-text-wrapper__actions {
     .ibexa-icon {
         fill: $ibexa-color-danger;
     }

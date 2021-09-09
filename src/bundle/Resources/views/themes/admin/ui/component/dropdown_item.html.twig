@@ -10,7 +10,7 @@
         </ul>
     </li>
 {% else %}
-    <li data-value="{{ choice.value }}" data-filter-value="{{ item_label|lower }}" class="ibexa-dropdown__item {% if choice is selectedchoice(value) %}ibexa-dropdown__item--selected{% endif %}">
+    <li data-value="{{ choice.value }}" data-filter-value="{{ item_label }}" class="ibexa-dropdown__item {% if choice is selectedchoice(value) %}ibexa-dropdown__item--selected{% endif %}">
         {% if multiple is defined and multiple %}
             <input type="checkbox" name="dropdown-checkbox" class="ibexa-input ibexa-input--checkbox" {% if choice is selectedchoice(value) %}checked{% endif %} />
         {% endif %}
