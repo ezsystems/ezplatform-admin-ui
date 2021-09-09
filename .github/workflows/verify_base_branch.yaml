@@ -6,33 +6,30 @@ on:
 jobs:
   test-base-branch:
     runs-on: ubuntu-latest
-    env:
-      TOKEN_HEADER: "Authorization: token "
     steps:
-      - name: Download composer.json from Pull Request
+      - uses: octokit/request-action@v2.x
+        name: Get PR's composer.json
         env:
-          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
-        run: |
-          curl --url $GITHUB_API_URL/repos/$HEAD_REPO/contents/composer.json?ref=$GITHUB_HEAD_REF \
-          --header 'Accept: application/vnd.github.v3.raw' \
-          --header "$TOKEN_HEADER"
-          > pr_composer.json;
-      - name: Set branch-alias from Pull Request
-        run: |
-          cat pr_composer.json
-          CURRENT_BRANCH_ALIAS=$(cat pr_composer.json | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
-          echo "CURRENT_BRANCH_ALIAS=${CURRENT_BRANCH_ALIAS}" >> $GITHUB_ENV
-      - name: Download composer.json from base branch
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: pr
+        with:
+          branch: ${{ env.GITHUB_REF }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          route: /repos/{repository}/contents/composer.json?ref={branch}
+      - uses: octokit/request-action@v2.x
+        name: Get base's composer.json
+        id: base
+        with:
+          route: /repos/{repository}/contents/composer.json?ref={branch}
+          repository: ${{ env.GITHUB_REPOSITORY }}
+          branch: ${{ env.GITHUB_BASE_REF }}
         env:
-          IBEXA_GITHUB_TOKEN: ${{ secrets.TRAVIS_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify base branch
         run: |
-          curl --url $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/contents/composer.json?ref=$GITHUB_BASE_REF \
-          --header 'Accept: application/vnd.github.v3.raw' \
-          --header "$TOKEN_HEADER"
-          > base_composer.json;  
-      - name: Get base branch-alias
-        run: |
-          BASE_BRANCH_ALIAS=$(cat base_composer.json | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
-          echo "BASE_BRANCH_ALIAS=${BASE_BRANCH_ALIAS}" >> $GITHUB_ENV
-      - name: Check if base branch is correct
-        run: if [ "$CURRENT_BRANCH_ALIAS" != "$BASE_BRANCH_ALIAS" ]; then exit 1; fi
+          PR_BRANCH_ALIAS=$(echo $DATA1 | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
+          BASE_BRANCH_ALIAS=$(echo $DATA2 | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
+          if [ "$PR_BRANCH_ALIAS" != "$BASE_BRANCH_ALIAS" ]; then exit 1; fi
+        env:
+          DATA1: ${{ steps.pr.outputs.data }}
+          DATA2: ${{ steps.base.outputs.data }}
