@@ -13,47 +13,57 @@
 {% block between_header_and_table %}{% endblock %}
 
 {% block table %}
-    <table
-        class="ibexa-table table
-        {{ class|default('') -}}"
-        {{ html.attributes(attr|default({})) }}
-    >
-        <thead>
-            {% block thead %}
-                {% if head_cols is defined %}
-                    {% include '@ezdesign/ui/component/table/table_head_row.html.twig' with {
-                        head_cols: head_cols,
-                    } %}
-                {% endif %}
-            {% endblock %}
-        </thead>
-        <tbody
-            class="ibexa-table__body
-            {{ table_body_class|default('') -}}"
-            {{ html.attributes(table_body_attr|default({})) }}
+    {% set table_content %}
+        <table
+            class="ibexa-table table
+            {{ class|default('') -}}"
+            {{ html.attributes(attr|default({})) }}
         >
-            {% block tbody %}
-                {% if body_rows is defined %}
-                    {% if body_rows is empty %}
-                        {% block tbody_empty %}
-                            {% include '@ezdesign/ui/component/table/empty_table_body_row.html.twig' with {
-                                colspan: head_cols|length,
-                            } %}
-                        {% endblock %}
-                    {% else %}
-                        {% block tbody_not_empty %}
-                            {% for row in body_rows %}
-                                {# TODO: do we need to pass tab explicitely??? #}
-                                {% include '@ezdesign/ui/component/table/table_body_row.html.twig' with {
-                                    body_row_cols: row.cols,
-                                    class: row.class|default(''),
-                                    attr: row.attr|default({}),
-                                } %}
-                            {% endfor %}
-                        {% endblock %}
+            <thead>
+                {% block thead %}
+                    {% if head_cols is defined %}
+                        {% include '@ezdesign/ui/component/table/table_head_row.html.twig' with {
+                            head_cols: head_cols,
+                        } %}
                     {% endif %}
-                {% endif %}
-            {% endblock %}
-        </tbody>
-    </table>
+                {% endblock %}
+            </thead>
+            <tbody
+                class="ibexa-table__body
+                {{ table_body_class|default('') -}}"
+                {{ html.attributes(table_body_attr|default({})) }}
+            >
+                {% block tbody %}
+                    {% if body_rows is defined %}
+                        {% if body_rows is empty %}
+                            {% block tbody_empty %}
+                                {% include '@ezdesign/ui/component/table/empty_table_body_row.html.twig' with {
+                                    colspan: head_cols|length,
+                                } %}
+                            {% endblock %}
+                        {% else %}
+                            {% block tbody_not_empty %}
+                                {% for row in body_rows %}
+                                    {# TODO: do we need to pass tab explicitely??? #}
+                                    {% include '@ezdesign/ui/component/table/table_body_row.html.twig' with {
+                                        body_row_cols: row.cols,
+                                        class: row.class|default(''),
+                                        attr: row.attr|default({}),
+                                    } %}
+                                {% endfor %}
+                            {% endblock %}
+                        {% endif %}
+                    {% endif %}
+                {% endblock %}
+            </tbody>
+        </table>
+    {% endset %}
+
+    {% if is_scrollable is defined ? is_scrollable : true %}
+        <div class="ibexa-scrollable-wrapper">
+            {{ table_content }}
+        </div>
+    {% else %}
+        {{ table_content }}
+    {% endif %}
 {% endblock %}

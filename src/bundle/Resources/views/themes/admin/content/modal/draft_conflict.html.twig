@@ -39,16 +39,14 @@
                     headline: '',
                     actions: version_modal_draft_conflict.table_header_tools(show_add_draft_button),
                 } only %}
-                <div class="ez-scrollable-wrapper">
-                    {{ include('@ezdesign/content/tab/versions/table.html.twig', {
-                        'versions': conflicted_drafts,
-                        'location': location,
-                        'is_draft': true,
-                        'have_to_paginate': false,
-                        'is_draft_conflict': true,
-                        'content_is_user': content_is_user
-                    }) }}
-                </div>
+                {{ include('@ezdesign/content/tab/versions/table.html.twig', {
+                    'versions': conflicted_drafts,
+                    'location': location,
+                    'is_draft': true,
+                    'have_to_paginate': false,
+                    'is_draft_conflict': true,
+                    'content_is_user': content_is_user
+                }) }}
             </div>
         </div>
     </div>
