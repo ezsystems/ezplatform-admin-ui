@@ -4,6 +4,7 @@
     const CLASS_ITEMS_POSITION_TOP = 'ibexa-dropdown__items--position-top';
     const CLASS_REMOVE_SELECTION = 'ibexa-dropdown__remove-selection';
     const CLASS_ITEM_SELECTED_IN_LIST = 'ibexa-dropdown__item--selected';
+    const CLASS_ITEM_PREFERRED_CHOICE = 'ibexa-dropdown__item--preferred-choice';
     const CLASS_ITEM_HIDDEN = 'ibexa-dropdown__item--hidden';
     const SELECTOR_ITEM = '.ibexa-dropdown__item';
     const SELECTOR_DROPDOWN = '.ibexa-dropdown';
@@ -13,12 +14,14 @@
     const SELECTOR_ITEMS_FILTER = '.ibexa-dropdown__items-filter';
     const SELECTOR_SELECTED_ITEM_IN_LABEL = '.ibexa-dropdown__selected-item';
     const SELECTOR_SELECTED_ITEM_IN_LIST = '.ibexa-dropdown__item--selected';
+    const SELECTOR_SEPARATOR = '.ibexa-dropdown__separator';
     const SELECTOR_SELECTION_INFO = '.ibexa-dropdown__selection-info';
     const SELECTOR_OVERFLOW_ITEM_INFO = '.ibexa-dropdown__selected-overflow-number';
     const SELECTOR_PLACEHOLDER = '.ibexa-dropdown__selected-placeholder';
     const EVENT_VALUE_CHANGED = 'change';
     const ITEMS_LIST_MAX_HEIGHT = 300;
     const RESTRICTED_AREA_ITEMS_CONTAINER = 190;
+    const MINIMUM_LETTERS_TO_FILTER = 3;
 
     class Dropdown {
         constructor(config = {}) {
@@ -271,14 +274,29 @@
         }
 
         filterItems(event) {
-            const forceShowItems = event.currentTarget.value.length < 3;
+            const forceShowItems = event.currentTarget.value.length < MINIMUM_LETTERS_TO_FILTER;
             const allItems = [...this.itemsListContainer.querySelectorAll('[data-filter-value]')];
+            const separator = this.itemsListContainer.querySelector(SELECTOR_SEPARATOR);
+            let hideSeparator = true;
+
+            if (separator) {
+                separator.setAttribute('hidden', 'hidden');
+            }
 
             allItems.forEach((item) => {
                 const isItemVisible = forceShowItems || this.compareItem(item.dataset.filterValue, event.currentTarget.value);
+                const isPreferredChoice = item.classList.contains(CLASS_ITEM_PREFERRED_CHOICE);
+
+                if (isPreferredChoice && isItemVisible) {
+                    hideSeparator = false;
+                }
 
                 item.classList.toggle(CLASS_ITEM_HIDDEN, !isItemVisible);
             });
+
+            if (separator && !hideSeparator) {
+                separator.removeAttribute('hidden');
+            }
         }
 
         init() {
