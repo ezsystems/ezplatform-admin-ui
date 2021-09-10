@@ -13,7 +13,7 @@
 {% block between_header_and_table %}{% endblock %}
 
 {% block table %}
-    <div class="ibexa-scrollable-wrapper">
+    {% set table_content %}
         <table
             class="ibexa-table table
             {{ class|default('') -}}"
@@ -57,5 +57,13 @@
                 {% endblock %}
             </tbody>
         </table>
-    </div>
+    {% endset %}
+
+    {% if scrollable|default(true) %}
+        <div class="ibexa-scrollable-wrapper">
+            {{ table_content }}
+        </div>
+    {% else %}
+        {{ table_content }}
+    {% endif %}
 {% endblock %}
