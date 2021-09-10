@@ -1,23 +1,21 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const setCookie = (name, value, maxAgeDays = 356, path = '/') => {
         const maxAge = maxAgeDays * 24 * 60 * 60;
 
         doc.cookie = `${name}=${value};max-age=${maxAge};path=${path}`;
     };
     const getCookie = (name) => {
-        const cookieName = name + '=';
         const decodedCookie = decodeURIComponent(doc.cookie);
         const cookiesArray = decodedCookie.split(';');
 
-        for (index in cookiesArray) {
-            const cookieString = cookiesArray[index].trim();
+        const cookieValue = cookiesArray.find((cookie) => {
+            const cookieString = cookie.trim();
+            const seachingString = `${name}=`;
 
-            if (cookieString.indexOf(cookieName) === 0) {
-                return cookieString.split('=')[1];
-            }
-        }
+            return cookieString.indexOf(seachingString) === 0;
+        });
 
-        return '';
+        return cookieValue ? cookieValue.split('=')[1] : null;
     };
 
     eZ.addConfig('helpers.cookies', {

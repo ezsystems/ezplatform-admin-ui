@@ -1,4 +1,4 @@
-(function (global, doc, eZ, localStorage) {
+(function(global, doc, eZ, localStorage) {
     const HEADER_HEIGHT = 72;
     const RESIZER_WIDTH = 10;
     const TOGGLER_HEIGHT = 48;

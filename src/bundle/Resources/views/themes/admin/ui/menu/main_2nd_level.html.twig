@@ -5,7 +5,7 @@
     {% set second_level_manual_resize_min_width = 80 %}
     {% set second_level_menu_width = app.request.cookies.get('second_menu_width') %}
     {% set second_menu_width_style = '' %}
-    {% set second_menu_list_widt_style = '' %}
+    {% set second_menu_list_width_style = '' %}
     {% set extra_class = 'ibexa-main-menu__navbar--hidden' %}
     {% set list_attributes = item.childrenAttributes %}
     {% set current_item = item %}
@@ -21,7 +21,7 @@
             {% set extra_class = extra_class ~ ' ibexa-main-menu__navbar--collapsed' %}
         {% else %}
             {% set second_menu_width_style = 'width: %spx;'|format(second_level_menu_width) %}
-            {% set second_menu_list_widt_style = 'width: %spx'|format(second_level_menu_width - resizer_width) %}
+            {% set second_menu_list_width_style = 'width: %spx'|format(second_level_menu_width - resizer_width) %}
         {% endif %}
     {% endif %}
 
@@ -29,7 +29,7 @@
         <div class="tab-content ibexa-main-menu__tab-content">
             {% for child in current_item.children %}
                 <div class="tab-pane fade ibexa-main-menu__tab-pane {{ matcher.isAncestor(child, options.matchingDepth) or matcher.isCurrent(child) ? ' show active' }}" id="{{ child.name }}">
-                    <ul class="ibexa-main-menu__items-list" style="{{ second_menu_list_widt_style }}">
+                    <ul class="ibexa-main-menu__items-list" style="{{ second_menu_list_width_style }}">
                         <li class="ibexa-main-menu__item ibexa-main-menu__item--popup-container">
                             <button
                                 class="ibexa-main-menu__tooltip-trigger ibexa-btn ibexa-btn--small ibexa-btn--no-text ibexa-btn--neon-info"
