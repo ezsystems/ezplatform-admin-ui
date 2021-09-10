@@ -1,0 +1,15 @@
+{% set can_delete = can_delete is defined ? can_delete : true %}
+
+<div class="ibexa-tag-view-select__selected_item" data-id="{{ id }}">
+    {{ name }}
+    <button
+        type="button"
+        class="btn ibexa-tag-view-select__selected_item_remove"
+        tabindex="-1"
+        {% if not can_delete %}hidden{% endif %}
+    >
+        <svg class="ibexa-icon">
+            <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
+        </svg>
+    </button>
+</div>

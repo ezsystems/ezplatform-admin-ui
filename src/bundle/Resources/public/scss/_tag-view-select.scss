@@ -1,0 +1,47 @@
+.ibexa-tag-view-select {
+    border: calculateRem(1px) solid $ibexa-color-dark-200;
+    border-radius: $ibexa-border-radius;
+    padding: calculateRem(24px);
+    letter-spacing: calculateRem(0.12px);
+
+    &__info {
+        @include ibexa-font-sans-serif();
+
+        font-size: $ibexa-text-font-size-medium;
+        color: $ibexa-black;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__selected_list {
+        display: flex;
+        margin: calculateRem(10px) 0;
+    }
+
+    &__selected_item {
+        display: inline-flex;
+        align-items: center;
+        height:calculateRem(24px);
+        padding: 0 calculateRem(8px);
+        border-radius: $ibexa-border-radius;
+        background-color: $ibexa-color-light-400;
+        font-size: $ibexa-text-font-size-small;
+        line-height: calculateRem(18px);
+
+        & + & {
+            margin-left: calculateRem(8px);
+        }
+    }
+
+    &__selected_item_remove {
+        padding: 0;
+        margin-left: calculateRem(12px);
+        display: flex;
+
+        .ibexa-icon {
+            width: calculateRem(8px);
+            height: calculateRem(8px);
+        }
+    }
+}

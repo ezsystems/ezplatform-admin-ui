@@ -1,0 +1,52 @@
+{% set attr = attr|default({})|merge({
+    class: 'btn ibexa-btn ibexa-btn--secondary ibexa-btn--select-path ' ~ attr.class|default('')
+}) %}
+{% set separator = separator|default(',') %}
+{% set values = form.vars.value|split(separator)|filter(value => value is not empty) %}
+{% set has_value = values|length > 0 %}
+{% set can_delete_last = can_delete_last is defined ? can_delete_last : false %}
+{% set single_select = single_select is defined ? single_select : false %}
+{% set is_delete_visible = can_delete_last or values|length != 1 %}
+
+<div
+    class="ibexa-tag-view-select"
+    data-single-select="{{ single_select }}"
+    data-can-delete-last="{{ can_delete_last }}"
+>
+    <div class="ibexa-tag-view-select__info">
+        {{ 'tag_view_select.info'|trans|desc('Select location') }}
+    </div>
+    <div
+        class="ibexa-tag-view-select__selected_list"
+        data-template="{{ include('@ezdesign/ui/component/tag_view_select_selected_item.html.twig', {
+            id: '{{ id }}',
+            name: '{{ name }}',
+        })|e('html_attr') }}"
+    >
+        {% for item in items %}
+            {{ include('@ezdesign/ui/component/tag_view_select_selected_item.html.twig', {
+                id: item.id,
+                name: item.name,
+                can_delete: is_delete_visible
+            }) }}
+        {% endfor %}
+    </div>
+    {{ form_widget(form, { attr: { hidden: false } }) }}
+    <button
+        type="button"
+        {{ block('attributes', 'bootstrap_5_layout.html.twig') }}
+    >
+        <span
+            class="ibexa-btn__label ibexa-tag-view-select__btn-label ibexa-tag-view-select__btn-label--select"
+            {% if single_select and has_value %}hidden{% endif %}
+        >
+            {{ 'tag_view_select.select_path'|trans|desc('Select path') }}
+        </span>
+        <span
+            class="ibexa-btn__label ibexa-tag-view-select__btn-label ibexa-tag-view-select__btn-label--change"
+            {% if (single_select and not has_value) or not single_select %}hidden{% endif %}
+        >
+            {{ 'tag_view_select.change_path'|trans|desc('Change path') }}
+        </span>
+    </button>
+</div>
