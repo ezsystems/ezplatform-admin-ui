@@ -59,7 +59,7 @@
         </table>
     {% endset %}
 
-    {% if scrollable|default(true) %}
+    {% if is_scrollable is defined ? is_scrollable : true %}
         <div class="ibexa-scrollable-wrapper">
             {{ table_content }}
         </div>
