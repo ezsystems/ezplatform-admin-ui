@@ -21,10 +21,11 @@ jobs:
         id: base
         with:
           branch: master
-          repository: ${{ env.GITHUB_REPOSITORY }}
+          repository: $BASE_REPOSITORY
           route: /repos/{repository}/contents/composer.json?ref={branch}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
       - name: Verify base branch
         run: |
           PR_BRANCH_ALIAS=$(echo $PR_DATA | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
