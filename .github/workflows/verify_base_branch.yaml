@@ -9,23 +9,22 @@ jobs:
     steps:
       - uses: octokit/request-action@v2.x
         name: Get PR's composer.json
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         id: pr
         with:
-          branch: master
+          branch: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           route: /repos/{repository}/contents/composer.json?ref={branch}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: octokit/request-action@v2.x
         name: Get base's composer.json
         id: base
         with:
-          branch: master
-          repository: $BASE_REPOSITORY
+          branch: ${{ github.event.pull_request.base.ref }}
+          repository: ${{ github.event.pull_request.base.repo.full_name }}
           route: /repos/{repository}/contents/composer.json?ref={branch}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BASE_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
       - name: Verify base branch
         run: |
           PR_BRANCH_ALIAS=$(echo $PR_DATA | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
