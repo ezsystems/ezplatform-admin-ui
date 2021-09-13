@@ -20,9 +20,9 @@ jobs:
         name: Get base's composer.json
         id: base
         with:
-          branch: ${{ env.GITHUB_BASE_REF }}
-          route: /repos/{repository}/contents/composer.json?ref={branch}
+          branch: master
           repository: ${{ env.GITHUB_REPOSITORY }}
+          route: /repos/{repository}/contents/composer.json?ref={branch}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Verify base branch
