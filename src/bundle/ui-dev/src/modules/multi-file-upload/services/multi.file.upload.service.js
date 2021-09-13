@@ -212,7 +212,7 @@ const createDraft = ({ struct, token, siteaccess }, requestEventHandlers) => {
             xhr.onloadstart = requestEventHandlers.onloadstart;
         }
 
-        for (let headerType in headers) {
+        for (const headerType in headers) {
             if (headers.hasOwnProperty(headerType)) {
                 xhr.setRequestHeader(headerType, headers[headerType]);
             }

@@ -127,7 +127,7 @@ const processBulkResponse = (items, callback, response) => {
 
             return itemsMatches;
         },
-        { success: [], fail: [] }
+        { success: [], fail: [] },
     );
 
     callback(itemsMatches.success, itemsMatches.fail);
@@ -158,7 +158,7 @@ const makeBulkRequest = ({ token, siteaccess }, requestBodyOperations, callback)
                 /*@Desc("An unexpected error occurred while processing the Content item(s). Please try again later.")*/
                 'bulk_request.error.message',
                 {},
-                'sub_items'
+                'sub_items',
             );
 
             window.eZ.helpers.notification.showErrorNotification(message);

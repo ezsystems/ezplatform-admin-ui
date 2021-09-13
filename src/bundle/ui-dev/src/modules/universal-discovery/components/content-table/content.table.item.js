@@ -36,7 +36,7 @@ const ContentTableItem = ({ location }) => {
     const allowedContentTypes = useContext(AllowedContentTypesContext);
     const contentTypeInfo = contentTypesMap[location.ContentInfo.Content.ContentType._href];
     const containersOnly = useContext(ContainersOnlyContext);
-    const isContainer = contentTypeInfo.isContainer;
+    const { isContainer } = contentTypeInfo;
     const isNotSelectable =
         (containersOnly && !isContainer) || (allowedContentTypes && !allowedContentTypes.includes(contentTypeInfo.identifier));
     const className = createCssClassNames({
@@ -63,7 +63,7 @@ const ContentTableItem = ({ location }) => {
             },
             (locationsMap) => {
                 dispatchLoadedLocationsAction({ type: 'SET_LOCATIONS', data: locationsMap });
-            }
+            },
         );
 
         if (!multiple && !isNotSelectable) {
@@ -80,9 +80,15 @@ const ContentTableItem = ({ location }) => {
     };
 
     return (
-        <tr className={className} onClick={markLocation}>
+        <tr
+            className={className}
+            onClick={markLocation}
+        >
             <td className="c-content-table-item__icon-wrapper">
-                <Icon extraClasses="ibexa-icon--small" customPath={contentTypeInfo.thumbnail} />
+                <Icon
+                    extraClasses="ibexa-icon--small"
+                    customPath={contentTypeInfo.thumbnail}
+                />
             </td>
             <td>{location.ContentInfo.Content.TranslatedName}</td>
             <td>{formatShortDateTime(new Date(location.ContentInfo.Content.lastModificationDate))}</td>

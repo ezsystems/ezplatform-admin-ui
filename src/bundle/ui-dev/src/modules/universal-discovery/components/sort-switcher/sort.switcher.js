@@ -39,7 +39,8 @@ const SortSwitcher = ({ isDisabled }) => {
                         extraClasses={extraClasses}
                         onClick={onClick}
                         isDisabled={isDisabled}
-                        title={option.tooltipLabel}>
+                        title={option.tooltipLabel}
+                    >
                         {option.label}
                     </MenuButton>
                 );
@@ -65,7 +66,7 @@ eZ.addConfig(
             component: SortSwitcher,
         },
     ],
-    true
+    true,
 );
 
 export default SortSwitcher;

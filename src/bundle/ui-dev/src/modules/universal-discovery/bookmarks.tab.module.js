@@ -58,7 +58,7 @@ const BookmarksTabModule = () => {
             },
             (locationsMap) => {
                 dispatchLoadedLocationsAction({ type: 'SET_LOCATIONS', data: locationsMap });
-            }
+            },
         );
     }, [bookmarkedLocationMarked, currentView, restInfo, dispatchLoadedLocationsAction, setMarkedLocationId]);
 
@@ -72,7 +72,10 @@ const BookmarksTabModule = () => {
     return (
         <div className="m-bookmarks-tab">
             <Tab>
-                <BookmarksList itemsPerPage={tabsConfig.bookmarks.itemsPerPage} setBookmarkedLocationMarked={setBookmarkedLocationMarked} />
+                <BookmarksList
+                    itemsPerPage={tabsConfig.bookmarks.itemsPerPage}
+                    setBookmarkedLocationMarked={setBookmarkedLocationMarked}
+                />
                 {renderBrowseLocations()}
             </Tab>
         </div>
@@ -89,7 +92,7 @@ eZ.addConfig(
             icon: window.eZ.helpers.icon.getIconPath('bookmark'),
         },
     ],
-    true
+    true,
 );
 
 export default BookmarksTabModule;

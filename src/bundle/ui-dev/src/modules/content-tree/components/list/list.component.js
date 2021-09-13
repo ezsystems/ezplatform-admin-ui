@@ -37,7 +37,7 @@ const List = ({
                     contentId: item.contentId,
                     locationId: item.locationId,
                 });
-                const itemPath = `${hasPreviousPath ? path + ',' : ''}${item.locationId}`;
+                const itemPath = `${hasPreviousPath ? `${path },` : ''}${item.locationId}`;
                 const { subitems } = item;
 
                 return (
@@ -49,9 +49,15 @@ const List = ({
                         href={locationHref}
                         isRootItem={isRoot}
                         onClick={onClickItem.bind(null, item)}
-                        path={itemPath}>
+                        path={itemPath}
+                    >
                         {subitems.length ? (
-                            <List path={itemPath} items={subitems} isRoot={false} {...listAttrs} />
+                            <List
+                                path={itemPath}
+                                items={subitems}
+                                isRoot={false}
+                                {...listAttrs}
+                            />
                         ) : (
                             renderNoSubitemMessage()
                         )}

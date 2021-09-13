@@ -70,28 +70,28 @@ const Search = ({ itemsPerPage }) => {
         const noResultsLabel = Translator.trans(
             /*@Desc("Sorry, no results were found for")*/ 'search.no_results',
             {},
-            'universal_discovery_widget'
+            'universal_discovery_widget',
         );
         const tipsLabel = Translator.trans(/*@Desc("Some helpful search tips")*/ 'search.tips', {}, 'universal_discovery_widget');
         const checkSpellingLabel = Translator.trans(
             /*@Desc("Check spelling of keywords.")*/ 'search.check_spelling',
             {},
-            'universal_discovery_widget'
+            'universal_discovery_widget',
         );
         const differentKeywordsLabel = Translator.trans(
             /*@Desc("Try different keywords.")*/ 'search.different_keywords',
             {},
-            'universal_discovery_widget'
+            'universal_discovery_widget',
         );
         const moreGeneralLabel = Translator.trans(
             /*@Desc("Try more general keywords.")*/ 'search.more_general',
             {},
-            'universal_discovery_widget'
+            'universal_discovery_widget',
         );
         const fewerKeywordsLabel = Translator.trans(
             /*@Desc("Try fewer keywords. Reducing keywords result in more matches.")*/ 'search.fewer_keywords',
             {},
-            'universal_discovery_widget'
+            'universal_discovery_widget',
         );
         const title = `${searchResultsLabel} (${data.count})`;
 
@@ -150,14 +150,19 @@ const Search = ({ itemsPerPage }) => {
                         <select
                             className="form-control c-search__select-language"
                             onChange={updateSelectedLanguage}
-                            value={selectedLanguage}>
+                            value={selectedLanguage}
+                        >
                             {languages.map((language) => {
                                 if (!language.enabled) {
                                     return null;
                                 }
 
                                 return (
-                                    <option key={language.id} value={language.languageCode} onChange={updateSelectedLanguage}>
+                                    <option
+                                        key={language.id}
+                                        value={language.languageCode}
+                                        onChange={updateSelectedLanguage}
+                                    >
                                         {language.name}
                                     </option>
                                 );
@@ -165,11 +170,17 @@ const Search = ({ itemsPerPage }) => {
                         </select>
                     </div>
                 ) : null}
-                <button className="c-search__search-btn btn ibexa-btn ibexa-btn--primary" onClick={search.bind(this, 0)}>
+                <button
+                    className="c-search__search-btn btn ibexa-btn ibexa-btn--primary"
+                    onClick={search.bind(this, 0)}
+                >
                     {searchLabel}
                 </button>
                 <div className="c-search__filters-btn-wrapper">
-                    <button className="c-search__toggle-filters-btn btn ibexa-btn ibexa-btn--secondary" onClick={toggleFiltersCollapsed}>
+                    <button
+                        className="c-search__toggle-filters-btn btn ibexa-btn ibexa-btn--secondary"
+                        onClick={toggleFiltersCollapsed}
+                    >
                         {filtersLabel}
                     </button>
                 </div>
@@ -177,7 +188,10 @@ const Search = ({ itemsPerPage }) => {
             <SelectedContentTypesContext.Provider value={[selectedContentTypes, dispatchSelectedContentTypesAction]}>
                 <SelectedSectionContext.Provider value={[selectedSection, setSelectedSection]}>
                     <SelectedSubtreeContext.Provider value={[selectedSubtree, setSelectedSubtree]}>
-                        <Filters isCollapsed={filtersCollapsed} search={search} />
+                        <Filters
+                            isCollapsed={filtersCollapsed}
+                            search={search}
+                        />
                     </SelectedSubtreeContext.Provider>
                 </SelectedSectionContext.Provider>
             </SelectedContentTypesContext.Provider>

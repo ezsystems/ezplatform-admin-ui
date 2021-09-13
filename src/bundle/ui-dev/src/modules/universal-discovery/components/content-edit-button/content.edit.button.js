@@ -43,24 +43,24 @@ const ContentEditButton = ({ version, location, isDisabled }) => {
         if (allowRedirects) {
             const href = isUserContentType
                 ? window.Routing.generate(
-                      'ezplatform.user.update',
-                      {
-                          contentId,
-                          versionNo,
-                          language,
-                      },
-                      true
-                  )
+                    'ezplatform.user.update',
+                    {
+                        contentId,
+                        versionNo,
+                        language,
+                    },
+                    true,
+                )
                 : window.Routing.generate(
-                      'ezplatform.content.draft.edit',
-                      {
-                          contentId,
-                          versionNo,
-                          language,
-                          locationId,
-                      },
-                      true
-                  );
+                    'ezplatform.content.draft.edit',
+                    {
+                        contentId,
+                        versionNo,
+                        language,
+                        locationId,
+                    },
+                    true,
+                );
 
             window.location.href = href;
 
@@ -89,7 +89,7 @@ const ContentEditButton = ({ version, location, isDisabled }) => {
                 ...restInfo,
                 contentId,
             },
-            (response) => redirectToContentEdit(contentId, response.Version.VersionInfo.versionNo, languageCode, location.id)
+            (response) => redirectToContentEdit(contentId, response.Version.VersionInfo.versionNo, languageCode, location.id),
         );
     };
     const renderTranslationSelector = () => {
@@ -110,8 +110,12 @@ const ContentEditButton = ({ version, location, isDisabled }) => {
                 disabled={!version || isDisabled}
                 onClick={toggleTranslationSelectorVisibility}
                 data-tooltip-container-selector=".c-udw-tab"
-                title={editLabel}>
-                <Icon name="edit" extraClasses="ibexa-icon--small" />
+                title={editLabel}
+            >
+                <Icon
+                    name="edit"
+                    extraClasses="ibexa-icon--small"
+                />
             </button>
             {renderTranslationSelector()}
         </div>

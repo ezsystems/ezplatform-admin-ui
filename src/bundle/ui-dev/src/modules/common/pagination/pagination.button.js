@@ -14,7 +14,11 @@ const PaginationButton = ({ label, disabled, additionalClasses, buttonAdditional
 
     return (
         <li className={className}>
-            <button className={`page-link ${buttonAdditionalClasses}`} onClick={handleClick} type="button">
+            <button
+                className={`page-link ${buttonAdditionalClasses}`}
+                onClick={handleClick}
+                type="button"
+            >
                 {label}
             </button>
         </li>

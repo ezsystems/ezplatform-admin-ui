@@ -53,7 +53,7 @@ const ContentMetaPreview = () => {
         window.location.href = window.Routing.generate(
             '_ez_content_view',
             { contentId: location.ContentInfo.Content._id, locationId: location.id },
-            true
+            true,
         );
     };
     const renderActions = () => {
@@ -62,15 +62,23 @@ const ContentMetaPreview = () => {
                 className="c-content-meta-preview__preview-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                 onClick={previewContent}
                 data-tooltip-container-selector=".c-udw-tab"
-                title={previewLabel}>
-                <Icon name="view" extraClasses="ibexa-icon--small" />
+                title={previewLabel}
+            >
+                <Icon
+                    name="view"
+                    extraClasses="ibexa-icon--small"
+                />
             </button>
         ) : null;
         const hasAccess = permissions && permissions.edit.hasAccess;
 
         return (
             <div className="c-content-meta-preview__actions">
-                <ContentEditButton location={location} version={version} isDisabled={!hasAccess} />
+                <ContentEditButton
+                    location={location}
+                    version={version}
+                    isDisabled={!hasAccess}
+                />
                 {previewButton}
             </div>
         );
@@ -80,9 +88,15 @@ const ContentMetaPreview = () => {
     const translationsLabel = Translator.trans(/*@Desc("Translations")*/ 'meta_preview.translations', {}, 'universal_discovery_widget');
 
     return (
-        <div className="c-content-meta-preview" ref={refContentMetaPreview}>
+        <div
+            className="c-content-meta-preview"
+            ref={refContentMetaPreview}
+        >
             <div className="c-content-meta-preview__preview">
-                <Thumbnail thumbnailData={version.Thumbnail} iconExtraClasses="ibexa-icon--extra-large" />
+                <Thumbnail
+                    thumbnailData={version.Thumbnail}
+                    iconExtraClasses="ibexa-icon--extra-large"
+                />
             </div>
             <div className="c-content-meta-preview__header">
                 <span className="c-content-meta-preview__content-name">{location.ContentInfo.Content.TranslatedName}</span>
@@ -91,8 +105,12 @@ const ContentMetaPreview = () => {
                     onClick={toggleBookmarked}
                     title={bookmarkLabel}
                     data-placement="left"
-                    data-tooltip-container-selector=".c-content-meta-preview">
-                    <Icon name={bookmarkIconName} extraClasses="ibexa-icon--small" />
+                    data-tooltip-container-selector=".c-content-meta-preview"
+                >
+                    <Icon
+                        name={bookmarkIconName}
+                        extraClasses="ibexa-icon--small"
+                    />
                 </button>
             </div>
             {renderActions()}
@@ -114,7 +132,10 @@ const ContentMetaPreview = () => {
                         <div className="c-content-meta-preview__translations-wrapper">
                             {version.VersionInfo.languageCodes.split(',').map((languageCode) => {
                                 return (
-                                    <span key={languageCode} className="c-content-meta-preview__translation">
+                                    <span
+                                        key={languageCode}
+                                        className="c-content-meta-preview__translation"
+                                    >
                                         {window.eZ.adminUiConfig.languages.mappings[languageCode].name}
                                     </span>
                                 );

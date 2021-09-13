@@ -25,8 +25,12 @@ const TopMenu = ({ actionsDisabledMap }) => {
                     type="button"
                     onClick={cancelUDW}
                     title={backTitle}
-                    data-tooltip-container-selector=".c-top-menu__cancel-btn-wrapper">
-                    <Icon name="caret-back" extraClasses="ibexa-icon--small" />
+                    data-tooltip-container-selector=".c-top-menu__cancel-btn-wrapper"
+                >
+                    <Icon
+                        name="caret-back"
+                        extraClasses="ibexa-icon--small"
+                    />
                 </button>
             </span>
             <span className="c-top-menu__title-wrapper">{title}</span>
@@ -34,7 +38,10 @@ const TopMenu = ({ actionsDisabledMap }) => {
                 {sortedActions.map((action) => {
                     const Component = action.component;
 
-                    return <Component key={action.id} isDisabled={actionsDisabledMap[action.id]} />;
+                    return <Component
+                        key={action.id}
+                        isDisabled={actionsDisabledMap[action.id]}
+                           />;
                 })}
             </div>
         </div>

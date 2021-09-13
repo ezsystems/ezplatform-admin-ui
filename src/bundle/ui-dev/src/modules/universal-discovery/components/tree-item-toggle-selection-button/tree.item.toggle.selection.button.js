@@ -45,7 +45,10 @@ const TreeItemToggleSelectionButton = ({ locationId, isContainer, contentTypeIde
         return null;
     }
 
-    return <PureToggleSelectionButton isSelected={isSelected} toggleSelection={toggleSelection} />;
+    return <PureToggleSelectionButton
+        isSelected={isSelected}
+        toggleSelection={toggleSelection}
+           />;
 };
 
 eZ.addConfig(
@@ -57,7 +60,7 @@ eZ.addConfig(
             component: TreeItemToggleSelectionButton,
         },
     ],
-    true
+    true,
 );
 
 TreeItemToggleSelectionButton.propTypes = {

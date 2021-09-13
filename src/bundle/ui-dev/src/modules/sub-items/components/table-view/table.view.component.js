@@ -109,7 +109,7 @@ export default class TableViewComponent extends Component {
                     [column]: !state.columnsVisibility[column],
                 },
             }),
-            this.setColumnsVisibilityInLocalStorage
+            this.setColumnsVisibilityInLocalStorage,
         );
     }
 
@@ -197,7 +197,12 @@ export default class TableViewComponent extends Component {
             }
 
             return (
-                <th key={columnKey} className={className} onClick={onClick} tabIndex={-1}>
+                <th
+                    key={columnKey}
+                    className={className}
+                    onClick={onClick}
+                    tabIndex={-1}
+                >
                     <span className="c-table-view__label">{headerLabels[columnKey]}</span>
                 </th>
             );
@@ -265,7 +270,7 @@ export default class TableViewComponent extends Component {
                         close={this.closeLanguageSelector}
                         {...this.state.languageSelectorData}
                     />,
-                    window.document.querySelector(this.props.languageContainerSelector)
+                    window.document.querySelector(this.props.languageContainerSelector),
                 )}
             </div>
         );

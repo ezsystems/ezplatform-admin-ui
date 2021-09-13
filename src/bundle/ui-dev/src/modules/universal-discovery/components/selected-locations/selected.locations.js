@@ -21,7 +21,7 @@ const SelectedLocations = () => {
     const collapseLabel = Translator.trans(
         /*@Desc("Collapse sidebar")*/ 'selected_locations.collapse.sidebar',
         {},
-        'universal_discovery_widget'
+        'universal_discovery_widget',
     );
     const togglerLabel = isExpanded ? collapseLabel : expandLabel;
     const clearSelection = () => {
@@ -51,8 +51,12 @@ const SelectedLocations = () => {
                 className="c-selected-locations__toggle-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                 onClick={toggleExpanded}
                 title={togglerLabel}
-                data-tooltip-container-selector=".c-udw-tab">
-                <Icon name={iconName} extraClasses="ibexa-icon--small" />
+                data-tooltip-container-selector=".c-udw-tab"
+            >
+                <Icon
+                    name={iconName}
+                    extraClasses="ibexa-icon--small"
+                />
             </button>
         );
     };
@@ -60,7 +64,7 @@ const SelectedLocations = () => {
         const confirmSelectionLabel = Translator.trans(
             /*@Desc("Confirm selection")*/ 'selected_locations.confirm_selection',
             {},
-            'universal_discovery_widget'
+            'universal_discovery_widget',
         );
         const clearAllLabel = Translator.trans(/*@Desc("Clear all")*/ 'selected_locations.clear_all', {}, 'universal_discovery_widget');
 
@@ -71,16 +75,24 @@ const SelectedLocations = () => {
                     className="c-selected-locations__confirm-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     onClick={() => onConfirm()}
                     title={confirmSelectionLabel}
-                    data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="checkmark" extraClasses="ibexa-icon--small" />
+                    data-tooltip-container-selector=".c-udw-tab"
+                >
+                    <Icon
+                        name="checkmark"
+                        extraClasses="ibexa-icon--small"
+                    />
                 </button>
                 <button
                     type="button"
                     className="c-selected-locations__clear-selection-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     onClick={clearSelection}
                     title={clearAllLabel}
-                    data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="trash" extraClasses="ibexa-icon--small" />
+                    data-tooltip-container-selector=".c-udw-tab"
+                >
+                    <Icon
+                        name="trash"
+                        extraClasses="ibexa-icon--small"
+                    />
                 </button>
             </Fragment>
         );
@@ -117,7 +129,10 @@ const SelectedLocations = () => {
     }
 
     return (
-        <div className={className} ref={refSelectedLocations}>
+        <div
+            className={className}
+            ref={refSelectedLocations}
+        >
             <div className="c-selected-locations__header">
                 <div className="c-selected-locations__actions-wrapper">
                     {renderToggleButton()}

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 const TableViewColumnsTogglerListElement = ({ label, isColumnVisible, toggleColumnVisibility, columnKey }) => {
     return (
-        <li className="c-table-view-columns-toggler-list-element" onClick={() => toggleColumnVisibility(columnKey)}>
+        <li
+            className="c-table-view-columns-toggler-list-element"
+            onClick={() => toggleColumnVisibility(columnKey)}
+        >
             <div className="form-check form-check-inline">
                 <input
                     className="form-check-input ibexa-input ibexa-input--checkbox"

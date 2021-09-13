@@ -115,7 +115,7 @@ export default class UploadItemComponent extends Component {
                 onloadstart: this.handleLoadStart,
                 onerror: this.handleUploadError,
             },
-            this.handleUploadEnd
+            this.handleUploadEnd,
         );
     }
 
@@ -297,10 +297,10 @@ export default class UploadItemComponent extends Component {
                 };
             },
             () => {
-                const data = this.props.data;
+                const { data } = this.props;
 
                 this.props.onAfterUpload({ ...data, struct: this.state.struct });
-            }
+            },
         );
     }
 
@@ -324,7 +324,7 @@ export default class UploadItemComponent extends Component {
     deleteFile() {
         this.setState(
             () => ({ deleted: true }),
-            () => this.props.deleteFile(this.props.adminUiConfig, this.state.struct, this.handleFileDeleted)
+            () => this.props.deleteFile(this.props.adminUiConfig, this.state.struct, this.handleFileDeleted),
         );
     }
 
@@ -375,7 +375,10 @@ export default class UploadItemComponent extends Component {
 
         const contentTypeIconUrl = eZ.helpers.contentType.getContentTypeIconUrl(contentTypeIdentifier);
 
-        return <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--small-medium ibexa-icon--base-dark" />;
+        return <Icon
+            customPath={contentTypeIconUrl}
+            extraClasses="ibexa-icon--small-medium ibexa-icon--base-dark"
+               />;
     }
 
     /**
@@ -392,7 +395,11 @@ export default class UploadItemComponent extends Component {
             return null;
         }
 
-        return <ProgressBarComponent progress={progress} uploaded={uploadedSize} total={totalSize} />;
+        return <ProgressBarComponent
+            progress={progress}
+            uploaded={uploadedSize}
+            total={totalSize}
+               />;
     }
 
     /**
@@ -409,17 +416,17 @@ export default class UploadItemComponent extends Component {
         const disallowedTypeMessage = Translator.trans(
             /*@Desc("File type is not allowed")*/ 'disallowed_type.message',
             {},
-            'multi_file_upload'
+            'multi_file_upload',
         );
         const disallowedSizeMessage = Translator.trans(
             /*@Desc("File size is not allowed")*/ 'disallowed_size.message',
             {},
-            'multi_file_upload'
+            'multi_file_upload',
         );
         const disallowedContentTypeMessage = Translator.trans(
             /*@Desc("You do not have permission to create this Content item")*/ 'disallowed_content_type.message',
             {},
-            'multi_file_upload'
+            'multi_file_upload',
         );
         let msg = cannotUploadMessage;
 
@@ -475,8 +482,12 @@ export default class UploadItemComponent extends Component {
                 className="c-upload-list-item__action c-upload-list-item__action--abort"
                 onClick={this.abortUploading}
                 title={label}
-                tabIndex="-1">
-                <Icon name="circle-close" extraClasses="ibexa-icon--small-medium" />
+                tabIndex="-1"
+            >
+                <Icon
+                    name="circle-close"
+                    extraClasses="ibexa-icon--small-medium"
+                />
             </div>
         );
     }
@@ -494,8 +505,8 @@ export default class UploadItemComponent extends Component {
         const { struct } = this.state;
         const content = struct.Content;
         const contentId = content._id;
-        const languageCode = content.CurrentVersion.Version.VersionInfo.VersionTranslationInfo.Language['0'].languageCode;
-        const versionNo = content.CurrentVersion.Version.VersionInfo.versionNo;
+        const { languageCode } = content.CurrentVersion.Version.VersionInfo.VersionTranslationInfo.Language['0'];
+        const { versionNo } = content.CurrentVersion.Version.VersionInfo;
 
         this.contentInfoInput.value = contentId;
         this.contentVersionInfoInput.value = contentId;
@@ -526,8 +537,12 @@ export default class UploadItemComponent extends Component {
                 className="c-upload-list-item__action c-upload-list-item__action--edit"
                 title={label}
                 onClick={this.handleEditBtnClick}
-                tabIndex="-1">
-                <Icon name="edit" extraClasses="ibexa-icon--small-medium" />
+                tabIndex="-1"
+            >
+                <Icon
+                    name="edit"
+                    extraClasses="ibexa-icon--small-medium"
+                />
             </div>
         );
     }
@@ -554,8 +569,12 @@ export default class UploadItemComponent extends Component {
                 className="c-upload-list-item__action c-upload-list-item__action--delete"
                 onClick={this.deleteFile}
                 title={label}
-                tabIndex="-1">
-                <Icon name="trash" extraClasses="ibexa-icon--small-medium" />
+                tabIndex="-1"
+            >
+                <Icon
+                    name="trash"
+                    extraClasses="ibexa-icon--small-medium"
+                />
             </div>
         );
     }

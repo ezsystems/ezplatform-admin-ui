@@ -40,7 +40,7 @@ class ListItem extends Component {
             const notificationMessage = Translator.trans(
                 /*@Desc("Cannot load sub-items for this Location because you reached max tree depth.")*/ 'expand_item.limit.message',
                 {},
-                'content_tree'
+                'content_tree',
             );
 
             window.eZ.helpers.notification.showWarningNotification(notificationMessage);
@@ -55,7 +55,7 @@ class ListItem extends Component {
 
                 afterItemToggle(path, this.state.isExpanded);
                 this.handleAfterExpandedStateChange();
-            }
+            },
         );
     }
 
@@ -87,8 +87,8 @@ class ListItem extends Component {
                         offset: subitems.length,
                         limit: subitemsLoadLimit,
                     },
-                    this.cancelLoadingState
-                )
+                    this.cancelLoadingState,
+                ),
         );
     }
 
@@ -139,11 +139,18 @@ class ListItem extends Component {
         let loadingSpinner = null;
 
         if (isLoading) {
-            loadingSpinner = <Icon name="spinner" extraClasses="ibexa-spin ibexa-icon--small c-list-item__load-more-btn-spinner" />;
+            loadingSpinner = <Icon
+                name="spinner"
+                extraClasses="ibexa-spin ibexa-icon--small c-list-item__load-more-btn-spinner"
+                             />;
         }
 
         return (
-            <button type="button" className="c-list-item__load-more-btn btn ibexa-btn" onClick={this.loadMoreSubitems}>
+            <button
+                type="button"
+                className="c-list-item__load-more-btn btn ibexa-btn"
+                onClick={this.loadMoreSubitems}
+            >
                 {loadingSpinner} {btnLabel}
             </button>
         );
@@ -184,13 +191,20 @@ class ListItem extends Component {
         return (
             <div className="c-list-item__label">
                 <span {...togglerAttrs} />
-                <a className="c-list-item__link" href={href} onClick={onClick}>
+                <a
+                    className="c-list-item__link"
+                    href={href}
+                    onClick={onClick}
+                >
                     {this.renderIcon()} {name}
                 </a>
                 {this.sortedActions.map((action) => {
                     const Component = action.component;
 
-                    return <Component key={action.id} {...this.props} />;
+                    return <Component
+                        key={action.id}
+                        {...this.props}
+                           />;
                 })}
             </div>
         );

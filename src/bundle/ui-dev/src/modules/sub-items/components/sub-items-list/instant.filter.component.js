@@ -36,7 +36,10 @@ const InstantFilter = (props) => {
     }, [filterQuery]);
 
     return (
-        <div className="ez-instant-filter" ref={_refInstantFilter}>
+        <div
+            className="ez-instant-filter"
+            ref={_refInstantFilter}
+        >
             <div className="ez-instant-filter__input-wrapper">
                 <input
                     type="text"
@@ -61,7 +64,10 @@ const InstantFilter = (props) => {
                                     value={item.value}
                                     onChange={() => props.handleItemChange(item.value)}
                                 />
-                                <label className="form-check-label" for={radioId}>
+                                <label
+                                    className="form-check-label"
+                                    htmlFor={radioId}
+                                >
                                     {item.label}
                                 </label>
                             </div>

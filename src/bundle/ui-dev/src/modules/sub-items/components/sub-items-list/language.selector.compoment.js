@@ -29,7 +29,10 @@ const LanguageSelector = (props) => {
         <div className={className}>
             <div className="ibexa-extra-actions__header">{props.label}</div>
             <div className="ibexa-extra-actions__content">
-                <InstantFilter items={props.languageItems} handleItemChange={props.handleItemChange} />
+                <InstantFilter
+                    items={props.languageItems}
+                    handleItemChange={props.handleItemChange}
+                />
             </div>
         </div>
     );

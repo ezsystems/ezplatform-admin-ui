@@ -71,7 +71,7 @@ export default class ContentTreeModule extends Component {
             parentLocationId,
             this.updateLocationsStateAfterLoadingMoreItems.bind(this, path, successCallback),
             limit,
-            offset
+            offset,
         );
     }
 
@@ -206,7 +206,7 @@ export default class ContentTreeModule extends Component {
 
         return path.reduce(
             (subtreeChild, locationId) => subtreeChild.children.find((element) => element.locationId === parseInt(locationId, 10)),
-            subtree
+            subtree,
         );
     }
 

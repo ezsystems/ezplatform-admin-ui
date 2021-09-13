@@ -102,12 +102,23 @@ const ContentCreateTabModule = () => {
 
     return (
         <div className={className}>
-            <iframe src={iframeUrl} className="m-content-create__iframe" ref={iframeRef} onLoad={handleIframeLoad} />
+            <iframe
+                src={iframeUrl}
+                className="m-content-create__iframe"
+                ref={iframeRef}
+                onLoad={handleIframeLoad}
+            />
             <div className="m-content-create__actions">
-                <button className="m-content-create__cancel-button btn ibexa-btn ibexa-btn--secondary" onClick={cancelContentCreate}>
+                <button
+                    className="m-content-create__cancel-button btn ibexa-btn ibexa-btn--secondary"
+                    onClick={cancelContentCreate}
+                >
                     {cancelLabel}
                 </button>
-                <button className="m-content-create__confirm-button btn ibexa-btn ibexa-btn--primary" onClick={publishContent}>
+                <button
+                    className="m-content-create__confirm-button btn ibexa-btn ibexa-btn--primary"
+                    onClick={publishContent}
+                >
                     {confirmLabel}
                 </button>
             </div>
@@ -126,7 +137,7 @@ eZ.addConfig(
             isHiddenOnList: true,
         },
     ],
-    true
+    true,
 );
 
 export default ContentCreateTabModule;

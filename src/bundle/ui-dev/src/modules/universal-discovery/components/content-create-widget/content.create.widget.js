@@ -62,12 +62,12 @@ const ContentCreateWidget = () => {
     const selectLanguageLabel = Translator.trans(
         /*@Desc("Select a language")*/ 'create_content.select_language',
         {},
-        'universal_discovery_widget'
+        'universal_discovery_widget',
     );
     const selectContentType = Translator.trans(
         /*@Desc("Select a Content Type")*/ 'create_content.select_content_type',
         {},
-        'universal_discovery_widget'
+        'universal_discovery_widget',
     );
     const createLabel = Translator.trans(/*@Desc("Create")*/ 'create_content.create', {}, 'universal_discovery_widget');
     const closeLabel = Translator.trans(/*@Desc("Close")*/ 'popup.close.label', {}, 'universal_discovery_widget');
@@ -82,7 +82,10 @@ const ContentCreateWidget = () => {
     }, []);
 
     return (
-        <div className={widgetClassName} ref={refContentTree}>
+        <div
+            className={widgetClassName}
+            ref={refContentTree}
+        >
             <div className="c-content-create__header">
                 <div className="c-content-create__header-title">{createContentLabel}</div>
                 <button
@@ -90,20 +93,32 @@ const ContentCreateWidget = () => {
                     className="c-content-create__close-button"
                     onClick={close}
                     title={closeLabel}
-                    data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="discard" extraClasses="ibexa-icon--small" />
+                    data-tooltip-container-selector=".c-udw-tab"
+                >
+                    <Icon
+                        name="discard"
+                        extraClasses="ibexa-icon--small"
+                    />
                 </button>
             </div>
             <div className="c-content-create__language-selector-wrapper">
                 <div className="c-content-create__language-selector-label">{selectLanguageLabel}</div>
-                <select className="form-control" onChange={updateSelectedLanguage} value={selectedLanguage}>
+                <select
+                    className="form-control"
+                    onChange={updateSelectedLanguage}
+                    value={selectedLanguage}
+                >
                     {filteredLanguages.map((language) => {
                         if (!language.enabled) {
                             return null;
                         }
 
                         return (
-                            <option key={language.id} value={language.languageCode} onChange={updateSelectedLanguage}>
+                            <option
+                                key={language.id}
+                                value={language.languageCode}
+                                onChange={updateSelectedLanguage}
+                            >
                                 {language.name}
                             </option>
                         );
@@ -112,7 +127,13 @@ const ContentCreateWidget = () => {
             </div>
             <div className="c-content-create__select-content-type-wrapper">
                 <div className="c-content-create__select-content-type-label">{selectContentType}</div>
-                <input autoFocus className="form-control" type="text" placeholder="Type to refine" onChange={updateFilterQuery} />
+                <input
+                    autoFocus={true}
+                    className="form-control"
+                    type="text"
+                    placeholder="Type to refine"
+                    onChange={updateFilterQuery}
+                />
                 <div className="c-content-create__content-type-list">
                     {contentTypes.map(([groupName, groupItems]) => {
                         const isHidden = groupItems.every((groupItem) => {
@@ -127,8 +148,14 @@ const ContentCreateWidget = () => {
                         });
 
                         return (
-                            <div className="c-content-create__group" key={groupName}>
-                                <div className="c-content-create__group-name" hidden={isHidden}>
+                            <div
+                                className="c-content-create__group"
+                                key={groupName}
+                            >
+                                <div
+                                    className="c-content-create__group-name"
+                                    hidden={isHidden}
+                                >
                                     {groupName}
                                 </div>
                                 {groupItems.map(({ name, thumbnail, identifier, id }) => {
@@ -146,9 +173,17 @@ const ContentCreateWidget = () => {
                                     const updateSelectedContentType = () => setSelectedContentType(identifier);
 
                                     return (
-                                        <div hidden={isHidden} key={identifier} className={className} onClick={updateSelectedContentType}>
+                                        <div
+                                            hidden={isHidden}
+                                            key={identifier}
+                                            className={className}
+                                            onClick={updateSelectedContentType}
+                                        >
                                             <div className="c-content-create__group-item-icon">
-                                                <Icon customPath={thumbnail} extraClasses="ibexa-icon--small" />
+                                                <Icon
+                                                    customPath={thumbnail}
+                                                    extraClasses="ibexa-icon--small"
+                                                />
                                             </div>
                                             <div className="c-content-create__group-item-name">{name}</div>
                                         </div>
@@ -160,10 +195,17 @@ const ContentCreateWidget = () => {
                 </div>
             </div>
             <div className="c-content-create__confirm-wrapper">
-                <button className="c-content-create__confirm-button btn ibexa-btn ibexa-btn--primary" onClick={createContent} disabled={isConfirmDisabled}>
+                <button
+                    className="c-content-create__confirm-button btn ibexa-btn ibexa-btn--primary"
+                    onClick={createContent}
+                    disabled={isConfirmDisabled}
+                >
                     {createLabel}
                 </button>
-                <button className="btn ibexa-btn ibexa-btn--ghost" onClick={close}>
+                <button
+                    className="btn ibexa-btn ibexa-btn--ghost"
+                    onClick={close}
+                >
                     {cancelLabel}
                 </button>
             </div>

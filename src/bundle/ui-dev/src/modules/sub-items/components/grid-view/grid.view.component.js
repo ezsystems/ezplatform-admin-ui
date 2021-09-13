@@ -6,7 +6,11 @@ import GridViewItemComponent from './grid.view.item.component';
 const GridViewComponent = ({ items, generateLink }) => (
     <div className="c-grid-view">
         {items.map((item) => (
-            <GridViewItemComponent key={item.id} item={item} generateLink={generateLink} />
+            <GridViewItemComponent
+                key={item.id}
+                item={item}
+                generateLink={generateLink}
+            />
         ))}
     </div>
 );

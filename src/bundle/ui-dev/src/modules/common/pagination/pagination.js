@@ -54,12 +54,16 @@ const Pagination = ({ totalCount, itemsPerPage, proximity, activePageIndex, onPa
     const pages = computePages({ proximity, activePageIndex, pagesCount, separator: DOTS });
     const paginationButtons = pages.map((page, index) => {
         if (page === DOTS) {
-            return <PaginationButton key={`dots-${index}`} label={DOTS} disabled={true} />;
+            return <PaginationButton
+                key={`dots-${index}`}
+                label={DOTS}
+                disabled={true}
+                   />;
         }
 
         const isCurrentPage = page === activePageIndex + 1;
         const additionalClasses = isCurrentPage ? 'active' : '';
-        const label = '' + page;
+        const label = `${ page}`;
 
         return (
             <PaginationButton

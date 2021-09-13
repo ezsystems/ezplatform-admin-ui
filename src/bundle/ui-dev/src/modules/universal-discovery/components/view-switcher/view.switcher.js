@@ -29,8 +29,12 @@ const ViewSwitcher = ({ isDisabled }) => {
                         extraClasses={extraClasses}
                         onClick={onClick}
                         isDisabled={isDisabled}
-                        title={view.tooltipLabel}>
-                        <Icon name={view.icon} extraClasses="ibexa-icon--small-medium" />
+                        title={view.tooltipLabel}
+                    >
+                        <Icon
+                            name={view.icon}
+                            extraClasses="ibexa-icon--small-medium"
+                        />
                     </MenuButton>
                 );
             })}
@@ -55,7 +59,7 @@ eZ.addConfig(
             component: ViewSwitcher,
         },
     ],
-    true
+    true,
 );
 
 export default ViewSwitcher;

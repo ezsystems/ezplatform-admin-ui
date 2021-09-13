@@ -28,7 +28,7 @@ const deepClone = (data) => {
 
     clonedData = {};
 
-    for (let i in data) {
+    for (const i in data) {
         if (data.hasOwnProperty(i)) {
             clonedData[i] = deepClone(data[i]);
         }

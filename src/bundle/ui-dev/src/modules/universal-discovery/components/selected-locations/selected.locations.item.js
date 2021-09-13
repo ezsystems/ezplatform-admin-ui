@@ -13,7 +13,7 @@ const SelectedLocationsItem = ({ location, permissions }) => {
     const clearLabel = Translator.trans(
         /*@Desc("Clear selection")*/ 'selected_locations.clear_selection',
         {},
-        'universal_discovery_widget'
+        'universal_discovery_widget',
     );
     const removeFromSelection = () => {
         window.eZ.helpers.tooltips.hideAll(refSelectedLocationsItem.current);
@@ -35,7 +35,10 @@ const SelectedLocationsItem = ({ location, permissions }) => {
     }, []);
 
     return (
-        <div className="c-selected-locations-item" ref={refSelectedLocationsItem}>
+        <div
+            className="c-selected-locations-item"
+            ref={refSelectedLocationsItem}
+        >
             <div className="c-selected-locations-item__image-wrapper">
                 <Thumbnail thumbnailData={thumbnailData} />
             </div>
@@ -49,15 +52,23 @@ const SelectedLocationsItem = ({ location, permissions }) => {
                 {sortedActions.map((action) => {
                     const Component = action.component;
 
-                    return <Component key={action.id} location={location} permissions={permissions} />;
+                    return <Component
+                        key={action.id}
+                        location={location}
+                        permissions={permissions}
+                           />;
                 })}
                 <button
                     type="button"
                     className="c-selected-locations-item__remove-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     onClick={removeFromSelection}
                     title={clearLabel}
-                    data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="trash" extraClasses="ibexa-icon--small" />
+                    data-tooltip-container-selector=".c-udw-tab"
+                >
+                    <Icon
+                        name="trash"
+                        extraClasses="ibexa-icon--small"
+                    />
                 </button>
             </div>
         </div>

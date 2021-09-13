@@ -59,7 +59,7 @@ const TreeView = ({ itemsPerPage }) => {
             (locationsMap) => {
                 const { location } = locationsMap[locationsMap.length - 1];
                 const contentTypeInfo = contentTypesMap[location.ContentInfo.Content.ContentType._href];
-                const isContainer = contentTypeInfo.isContainer;
+                const { isContainer } = contentTypeInfo;
                 const isNotSelectable =
                     (containersOnly && !isContainer) || (allowedContentTypes && !allowedContentTypes.includes(contentTypeInfo.identifier));
 
@@ -69,7 +69,7 @@ const TreeView = ({ itemsPerPage }) => {
                 if (!multiple && !isNotSelectable) {
                     dispatchSelectedLocationsAction({ type: 'REPLACE_SELECTED_LOCATIONS', locations: [{ location }] });
                 }
-            }
+            },
         );
     };
     const readSubtreeRecursive = (tree) => {
@@ -86,7 +86,7 @@ const TreeView = ({ itemsPerPage }) => {
             offset: 0,
             '_media-type': 'application/vnd.ez.api.ContentTreeLoadSubtreeRequestNode',
         }];
-    }
+    };
     const readSubtree = () => readSubtreeRecursive([...loadedLocationsMap]);
     const currentLocationPath = locationData && locationData.location ? locationData.location.pathString : '/1/';
     const locationsLoaded = loadedLocationsMap.length > 1 || (loadedLocationsMap.length === 1 && loadedLocationsMap[0].subitems.length > 0);

@@ -19,5 +19,5 @@ export const fileSizeToString = (filesize) => {
 
     decimalUnits = unitIndex < 1 ? 0 : 1;
 
-    return size.toFixed(size >= 10 || decimalUnits) + ' ' + units[unitIndex];
+    return `${size.toFixed(size >= 10 || decimalUnits) } ${ units[unitIndex]}`;
 };

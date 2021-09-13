@@ -39,7 +39,7 @@ export const useLoadBookmarksFetch = (limit, offset) => {
                 }
 
                 dispatch({ type: 'FETCH_END', data: response });
-            }
+            },
         );
 
         return () => {

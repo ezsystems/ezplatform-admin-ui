@@ -19,7 +19,7 @@ const ContentTypeSelector = () => {
         setCollapsedGroups((prevState) => ({ ...prevState, [contentTypeGroup]: !prevState[contentTypeGroup] }));
     };
     const handleContentTypeSelect = ({ nativeEvent }) => {
-        const contentTypeIdentifier = nativeEvent.target.dataset.contentTypeIdentifier;
+        const { contentTypeIdentifier } = nativeEvent.target.dataset;
         const action = { contentTypeIdentifier };
 
         action.type = selectedContentTypes.includes(contentTypeIdentifier) ? 'REMOVE_CONTENT_TYPE' : 'ADD_CONTENT_TYPE';
@@ -31,7 +31,7 @@ const ContentTypeSelector = () => {
         <div className="ez-content-type-selector c-content-type-selector">
             {Object.entries(contentTypesMap).map(([contentTypeGroup, contentTypes]) => {
                 const isHidden = contentTypes.every(
-                    (contentType) => allowedContentTypes && !allowedContentTypes.includes(contentType.identifier)
+                    (contentType) => allowedContentTypes && !allowedContentTypes.includes(contentType.identifier),
                 );
 
                 if (isHidden) {
@@ -44,8 +44,15 @@ const ContentTypeSelector = () => {
                 });
 
                 return (
-                    <div key={contentTypeGroup} className={groupSelectorClassName}>
-                        <span className="ez-content-type-selector__group-title" data-id={contentTypeGroup} onClick={toggleCollapsed}>
+                    <div
+                        key={contentTypeGroup}
+                        className={groupSelectorClassName}
+                    >
+                        <span
+                            className="ez-content-type-selector__group-title"
+                            data-id={contentTypeGroup}
+                            onClick={toggleCollapsed}
+                        >
                             {contentTypeGroup}
                         </span>
                         <ul className="ez-content-type-selector__list">
@@ -57,7 +64,10 @@ const ContentTypeSelector = () => {
                                 }
 
                                 return (
-                                    <li key={contentType.identifier} className="ez-content-type-selector__item">
+                                    <li
+                                        key={contentType.identifier}
+                                        className="ez-content-type-selector__item"
+                                    >
                                         <div className="form-check form-check-inline">
                                             <input
                                                 type="checkbox"
@@ -70,7 +80,8 @@ const ContentTypeSelector = () => {
                                             />
                                             <label
                                                 className="checkbox-inline form-check-label"
-                                                htmlFor={`ez-search-content-type-${contentType.identifier}`}>
+                                                htmlFor={`ez-search-content-type-${contentType.identifier}`}
+                                            >
                                                 {contentType.name}
                                             </label>
                                         </div>

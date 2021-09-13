@@ -21,7 +21,7 @@ const GridView = ({ itemsPerPage }) => {
         { sortClause: sortingOptions.sortClause, sortOrder },
         itemsPerPage,
         offset,
-        true
+        true,
     );
     const loadMore = ({ target }) => {
         const areAllItemsLoaded = locationData.subitems.length >= loadedLocations.totalCount;
@@ -38,7 +38,11 @@ const GridView = ({ itemsPerPage }) => {
             return null;
         }
 
-        return <GridViewItem key={itemData.location.id} location={itemData.location} version={itemData.version} />;
+        return <GridViewItem
+            key={itemData.location.id}
+            location={itemData.location}
+            version={itemData.version}
+               />;
     };
 
     useEffect(() => {
@@ -55,7 +59,10 @@ const GridView = ({ itemsPerPage }) => {
     return (
         <div className="c-grid">
             <Breadcrumbs />
-            <div className="c-grid__items-wrapper" onScroll={loadMore}>
+            <div
+                className="c-grid__items-wrapper"
+                onScroll={loadMore}
+            >
                 {locationData.subitems.map(renderItem)}
             </div>
         </div>

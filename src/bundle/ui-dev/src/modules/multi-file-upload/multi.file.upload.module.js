@@ -92,7 +92,7 @@ export default class MultiFileUploadModule extends Component {
      * @memberof MultiFileUploadModule
      */
     hidePopup() {
-        this.setState((state) => Object.assign({}, state, { popupVisible: false }));
+        this.setState((state) => ({ ...state, popupVisible: false }));
 
         this.props.onPopupClose(this._itemsUploaded);
     }
@@ -105,10 +105,8 @@ export default class MultiFileUploadModule extends Component {
      */
     showUploadPopup() {
         this.setState((state) =>
-            Object.assign({}, state, {
-                popupVisible: true,
-                itemsToUpload: [],
-            })
+            ({ ...state, popupVisible: true,
+                itemsToUpload: [] }),
         );
     }
 
@@ -147,11 +145,9 @@ export default class MultiFileUploadModule extends Component {
         window.removeEventListener('dragover', this.preventDefaultAction, false);
 
         this.setState((state) =>
-            Object.assign({}, state, {
-                itemsToUpload,
+            ({ ...state, itemsToUpload,
                 popupVisible: true,
-                allowDropOnWindow: false,
-            })
+                allowDropOnWindow: false }),
         );
     }
 
@@ -217,7 +213,7 @@ export default class MultiFileUploadModule extends Component {
             return null;
         }
 
-        const uploadDisabled = this.state.uploadDisabled;
+        const { uploadDisabled } = this.state;
         const title = Translator.trans(/*@Desc("Upload sub-items")*/ 'multi_file_upload_open_btn.label', {}, 'multi_file_upload');
         const attrs = { className: 'm-mfu__btn--upload', title, onClick: this.showUploadPopup, type: 'button' };
 
@@ -229,7 +225,10 @@ export default class MultiFileUploadModule extends Component {
 
         return (
             <button {...attrs}>
-                <Icon name="upload" extraClasses="ibexa-icon--base-dark ibexa-icon--small-medium" />
+                <Icon
+                    name="upload"
+                    extraClasses="ibexa-icon--base-dark ibexa-icon--small-medium"
+                />
             </button>
         );
     }

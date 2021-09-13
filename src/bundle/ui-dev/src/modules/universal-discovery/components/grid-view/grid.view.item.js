@@ -29,7 +29,7 @@ const GridViewItem = ({ location, version }) => {
     const containersOnly = useContext(ContainersOnlyContext);
     const allowedContentTypes = useContext(AllowedContentTypesContext);
     const contentTypeInfo = contentTypesMap[location.ContentInfo.Content.ContentType._href];
-    const isContainer = contentTypeInfo.isContainer;
+    const { isContainer } = contentTypeInfo;
     const isNotSelectable =
         (containersOnly && !isContainer) || (allowedContentTypes && !allowedContentTypes.includes(contentTypeInfo.identifier));
     const className = createCssClassNames({
@@ -65,7 +65,11 @@ const GridViewItem = ({ location, version }) => {
     };
 
     return (
-        <div className={className} onClick={markLocation} onDoubleClick={loadLocation}>
+        <div
+            className={className}
+            onClick={markLocation}
+            onDoubleClick={loadLocation}
+        >
             <div className="c-grid-item__preview">
                 <Thumbnail
                     thumbnailData={version.Thumbnail}

@@ -33,7 +33,7 @@ const Filters = ({ isCollapsed, search }) => {
         'ez-filters--collapsed': isCollapsed,
     });
     const updateSection = (event) => {
-        const value = event.target.value;
+        const { value } = event.target;
 
         setSelectedSection(value);
     };
@@ -45,7 +45,7 @@ const Filters = ({ isCollapsed, search }) => {
             udwContainer.remove();
         };
         const onConfirm = (items) => {
-            const pathString = items[0].pathString;
+            const { pathString } = items[0];
             const pathArray = pathString.split('/').filter((val) => val);
             const id = pathArray.splice(1, pathArray.length - 1).join();
 
@@ -80,7 +80,11 @@ const Filters = ({ isCollapsed, search }) => {
         }
 
         return (
-            <button className="btn ibexa-btn ibexa-btn--secondary ibexa-btn--udw-select-location" type="button" onClick={openUdw}>
+            <button
+                className="btn ibexa-btn ibexa-btn--secondary ibexa-btn--udw-select-location"
+                type="button"
+                onClick={openUdw}
+            >
                 Select content
             </button>
         );
@@ -93,8 +97,15 @@ const Filters = ({ isCollapsed, search }) => {
         return (
             <div className="ez-tag">
                 <div className="ez-tag__content">{subtreeBreadcrumbs}</div>
-                <button type="button" className="ez-tag__remove-btn" onClick={clearSelectedSubree}>
-                    <Icon name="discard" extraClasses="ibexa-icon--small ibexa-icon--dark" />
+                <button
+                    type="button"
+                    className="ez-tag__remove-btn"
+                    onClick={clearSelectedSubree}
+                >
+                    <Icon
+                        name="discard"
+                        extraClasses="ibexa-icon--small ibexa-icon--dark"
+                    />
                 </button>
             </div>
         );
@@ -124,11 +135,18 @@ const Filters = ({ isCollapsed, search }) => {
             <div className="ez-filters__row">
                 <div className="ez-filters__item ez-filters__item--section">
                     <label className="ibexa-label">{sectionLabel}</label>
-                    <select className="ez-filters__select form-control" onChange={updateSection} value={selectedSection}>
+                    <select
+                        className="ez-filters__select form-control"
+                        onChange={updateSection}
+                        value={selectedSection}
+                    >
                         <option value={''}>{anySectionLabel}</option>
                         {Object.entries(window.eZ.adminUiConfig.sections).map(([sectionIdentifier, sectionName]) => {
                             return (
-                                <option key={sectionIdentifier} value={sectionIdentifier}>
+                                <option
+                                    key={sectionIdentifier}
+                                    value={sectionIdentifier}
+                                >
                                     {sectionName}
                                 </option>
                             );
@@ -144,10 +162,18 @@ const Filters = ({ isCollapsed, search }) => {
                 </div>
             </div>
             <div className="ez-filters__btns">
-                <button type="submit" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--apply" onClick={makeSearch} disabled={!isApplyButtonEnabled}>
+                <button
+                    type="submit"
+                    className="btn ibexa-btn ibexa-btn--primary ibexa-btn--apply"
+                    onClick={makeSearch}
+                    disabled={!isApplyButtonEnabled}
+                >
                     {applyLabel}
                 </button>
-                <button className="btn ibexa-btn ibexa-btn--ghost" onClick={clearFilters}>
+                <button
+                    className="btn ibexa-btn ibexa-btn--ghost"
+                    onClick={clearFilters}
+                >
                     {clearLabel}
                 </button>
             </div>

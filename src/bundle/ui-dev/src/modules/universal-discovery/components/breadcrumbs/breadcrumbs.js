@@ -19,7 +19,7 @@ const Breadcrumbs = () => {
 
                 return splittedItems;
             },
-            { visibleItems: [], hiddenItems: [] }
+            { visibleItems: [], hiddenItems: [] },
         );
     }, [loadedLocationsMap]);
     const goToLocation = (locationId) => {
@@ -49,8 +49,14 @@ const Breadcrumbs = () => {
 
         return (
             <div className="c-breadcrumbs__hidden-list-wrapper">
-                <button className={toggleClassNames} onClick={toggleHiddenListVisible}>
-                    <Icon name="options" extraClasses="ibexa-icon--small-medium" />
+                <button
+                    className={toggleClassNames}
+                    onClick={toggleHiddenListVisible}
+                >
+                    <Icon
+                        name="options"
+                        extraClasses="ibexa-icon--small-medium"
+                    />
                 </button>
                 <ul className={hiddenListClassNames}>
                     {hiddenItems.map((item) => {
@@ -62,7 +68,11 @@ const Breadcrumbs = () => {
                         const onClickHandler = goToLocation.bind(this, locationId);
 
                         return (
-                            <li key={locationId} onClick={onClickHandler} className="c-breadcrumbs__hidden-list-item">
+                            <li
+                                key={locationId}
+                                onClick={onClickHandler}
+                                className="c-breadcrumbs__hidden-list-item"
+                            >
                                 {locationName}
                             </li>
                         );
@@ -108,7 +118,11 @@ const Breadcrumbs = () => {
                         });
 
                         return (
-                            <li key={locationId} onClick={onClickHandler} className={className}>
+                            <li
+                                key={locationId}
+                                onClick={onClickHandler}
+                                className={className}
+                            >
                                 <span className="c-breadcrumbs__list-item-text">{locationName}</span>
                                 {!isLast && renderSeparator()}
                             </li>

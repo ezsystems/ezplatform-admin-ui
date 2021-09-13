@@ -45,7 +45,7 @@ export const useSearchByQueryFetch = () => {
             dispatch({ type: SEARCH_START });
             findLocationsBySearchQuery({ ...restInfo, query, limit, offset, languageCode }, handleFetch);
         },
-        [restInfo, dispatch]
+        [restInfo, dispatch],
     );
 
     return [isLoading, data, searchByQuery];

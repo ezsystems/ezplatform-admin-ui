@@ -13,7 +13,10 @@ const ToggleSelectionButton = ({ location }) => {
         dispatchSelectedLocationsAction(action);
     };
 
-    return <PureToggleSelectionButton isSelected={isSelected} toggleSelection={toggleSelection} />;
+    return <PureToggleSelectionButton
+        isSelected={isSelected}
+        toggleSelection={toggleSelection}
+           />;
 };
 
 ToggleSelectionButton.propTypes = {

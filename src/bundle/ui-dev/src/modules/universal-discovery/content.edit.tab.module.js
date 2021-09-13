@@ -88,7 +88,7 @@ const ContentEditTabModule = () => {
             languageCode: editOnTheFlyData.languageCode,
             locationId: editOnTheFlyData.locationId,
         },
-        true
+        true,
     );
     const className = createCssClassNames({
         'c-content-edit': true,
@@ -107,12 +107,23 @@ const ContentEditTabModule = () => {
 
     return (
         <div className={className}>
-            <iframe src={iframeUrl} className="c-content-edit__iframe" ref={iframeRef} onLoad={handleIframeLoad} />
+            <iframe
+                src={iframeUrl}
+                className="c-content-edit__iframe"
+                ref={iframeRef}
+                onLoad={handleIframeLoad}
+            />
             <div className="c-content-edit__actions">
-                <button className="c-content-edit__cancel-button btn ibexa-btn ibexa-btn--secondary" onClick={cancelContentEdit}>
+                <button
+                    className="c-content-edit__cancel-button btn ibexa-btn ibexa-btn--secondary"
+                    onClick={cancelContentEdit}
+                >
                     {cancelLabel}
                 </button>
-                <button className="c-content-edit__confirm-button btn ibexa-btn ibexa-btn--primary" onClick={publishContent}>
+                <button
+                    className="c-content-edit__confirm-button btn ibexa-btn ibexa-btn--primary"
+                    onClick={publishContent}
+                >
                     {confirmLabel}
                 </button>
             </div>
@@ -130,7 +141,7 @@ eZ.addConfig(
             isHiddenOnList: true,
         },
     ],
-    true
+    true,
 );
 
 export default ContentEditTabModule;

@@ -10,7 +10,13 @@ const MenuButton = ({ extraClasses, onClick, isDisabled, title, children }) => {
     });
 
     return (
-        <button className={className} onClick={onClick} disabled={isDisabled} title={title} data-tooltip-container-selector=".c-udw-tab">
+        <button
+            className={className}
+            onClick={onClick}
+            disabled={isDisabled}
+            title={title}
+            data-tooltip-container-selector=".c-udw-tab"
+        >
             {children}
         </button>
     );

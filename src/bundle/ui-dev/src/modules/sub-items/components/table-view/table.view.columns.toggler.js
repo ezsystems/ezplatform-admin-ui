@@ -117,8 +117,12 @@ export default class TableViewColumnsTogglerComponent extends Component {
                     type="button"
                     title={filterLabel}
                     className="c-action-btn c-table-view-columns-toggler__btn btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                    onClick={this.togglePanel}>
-                    <Icon name="filters" extraClasses="ibexa-icon--small" />
+                    onClick={this.togglePanel}
+                >
+                    <Icon
+                        name="filters"
+                        extraClasses="ibexa-icon--small"
+                    />
                 </button>
                 {this.renderPanel()}
             </div>

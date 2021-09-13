@@ -128,7 +128,7 @@ export default class TableViewItemComponent extends PureComponent {
                     },
                 },
             },
-            this.props.item.id
+            this.props.item.id,
         );
     }
 
@@ -190,7 +190,10 @@ export default class TableViewItemComponent extends PureComponent {
         }
 
         return (
-            <div className="c-table-view-item__priority-wrapper" {...priorityWrapperAttrs}>
+            <div
+                className="c-table-view-item__priority-wrapper"
+                {...priorityWrapperAttrs}
+            >
                 <div className="c-table-view-item__inner-wrapper c-table-view-item__inner-wrapper--input">
                     <input
                         className="c-table-view-item__priority-value ez-input ez-input--text"
@@ -198,12 +201,29 @@ export default class TableViewItemComponent extends PureComponent {
                         {...inputAttrs}
                     />
                 </div>
-                <div className="c-table-view-item__priority-actions" {...innerWrapperAttrs}>
-                    <button type="button" className="c-table-view-item__btn c-table-view-item__btn--submit" onClick={this.handleSubmit}>
-                        <Icon name="checkmark" extraClasses="ibexa-icon--small ibexa-icon--light" />
+                <div
+                    className="c-table-view-item__priority-actions"
+                    {...innerWrapperAttrs}
+                >
+                    <button
+                        type="button"
+                        className="c-table-view-item__btn c-table-view-item__btn--submit"
+                        onClick={this.handleSubmit}
+                    >
+                        <Icon
+                            name="checkmark"
+                            extraClasses="ibexa-icon--small ibexa-icon--light"
+                        />
                     </button>
-                    <button type="button" className="c-table-view-item__btn c-table-view-item__btn--cancel" onClick={this.handleCancel}>
-                        <Icon name="discard" extraClasses="ibexa-icon--small ibexa-icon--light" />
+                    <button
+                        type="button"
+                        className="c-table-view-item__btn c-table-view-item__btn--cancel"
+                        onClick={this.handleCancel}
+                    >
+                        <Icon
+                            name="discard"
+                            extraClasses="ibexa-icon--small ibexa-icon--light"
+                        />
                     </button>
                 </div>
             </div>
@@ -234,7 +254,10 @@ export default class TableViewItemComponent extends PureComponent {
         return (
             <Fragment>
                 {item.content._info.currentVersion.languageCodes.map((languageCode) => (
-                    <span key={languageCode} className="c-table-view-item__translation">
+                    <span
+                        key={languageCode}
+                        className="c-table-view-item__translation"
+                    >
                         {languages.mappings[languageCode].name}
                     </span>
                 ))}
@@ -292,7 +315,10 @@ export default class TableViewItemComponent extends PureComponent {
             }
 
             return (
-                <td key={columnKey} className={`c-table-view-item__cell c-table-view-item__cell--${columnKey}`}>
+                <td
+                    key={columnKey}
+                    className={`c-table-view-item__cell c-table-view-item__cell--${columnKey}`}
+                >
                     {this.columnsRenderers[columnKey]()}
                 </td>
             );
@@ -353,13 +379,16 @@ export default class TableViewItemComponent extends PureComponent {
                 <td className="c-table-view-item__cell c-table-view-item__cell--checkbox">
                     <input
                         type="checkbox"
-                        class="ibexa-input ibexa-input--checkbox"
+                        className="ibexa-input ibexa-input--checkbox"
                         checked={isSelected}
                         onChange={this.onSelectCheckboxChange}
                     />
                 </td>
                 <td className="c-table-view-item__cell c-table-view-item__cell--icon">
-                    <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--small-medium" />
+                    <Icon
+                        customPath={contentTypeIconUrl}
+                        extraClasses="ibexa-icon--small-medium"
+                    />
                 </td>
                 {this.renderBasicColumns()}
                 <td className="c-table-view-item__cell c-table-view-item__cell--actions">
@@ -368,9 +397,13 @@ export default class TableViewItemComponent extends PureComponent {
                         data-extra-classes="c-table-view-item__tooltip"
                         onClick={this.handleEdit}
                         className="c-table-view-item__btn c-table-view-item__btn--edit"
-                        tabIndex={-1}>
+                        tabIndex={-1}
+                    >
                         <div className="c-table-view-item__btn-inner">
-                            <Icon name="edit" extraClasses="ibexa-icon--small-medium" />
+                            <Icon
+                                name="edit"
+                                extraClasses="ibexa-icon--small-medium"
+                            />
                         </div>
                     </span>
                 </td>

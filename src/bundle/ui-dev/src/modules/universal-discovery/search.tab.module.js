@@ -32,7 +32,7 @@ eZ.addConfig(
             icon: window.eZ.helpers.icon.getIconPath('search'),
         },
     ],
-    true
+    true,
 );
 
 export default SearchTabModule;

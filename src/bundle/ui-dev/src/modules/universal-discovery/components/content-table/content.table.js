@@ -16,22 +16,28 @@ const ContentTable = ({ count, itemsPerPage, items, activePageIndex, title, onPa
     }, []);
 
     return (
-        <div className="c-content-table" ref={refContentTable}>
+        <div
+            className="c-content-table"
+            ref={refContentTable}
+        >
             <div className="c-content-table__title">{title}</div>
             <div className="c-content-table__items">
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th />
                             <th>{nameLabel}</th>
                             <th>{modifiedLabel}</th>
                             <th>{contentTypeLabel}</th>
-                            <th></th>
+                            <th />
                         </tr>
                     </thead>
                     <tbody>
                         {items.map((item) => (
-                            <ContentTableItem key={item.id} location={item} />
+                            <ContentTableItem
+                                key={item.id}
+                                location={item}
+                            />
                         ))}
                     </tbody>
                 </table>

@@ -24,7 +24,7 @@ const FinderLeaf = ({ location }) => {
     const containersOnly = useContext(ContainersOnlyContext);
     const allowedContentTypes = useContext(AllowedContentTypesContext);
     const contentTypeInfo = contentTypesMap[location.ContentInfo.Content.ContentType._href];
-    const isContainer = contentTypeInfo.isContainer;
+    const { isContainer } = contentTypeInfo;
     const isNotSelectable =
         (containersOnly && !isContainer) || (allowedContentTypes && !allowedContentTypes.includes(contentTypeInfo.identifier));
     const markLocation = ({ nativeEvent }) => {
@@ -63,7 +63,10 @@ const FinderLeaf = ({ location }) => {
     }, []);
 
     return (
-        <div className={className} onClick={markLocation}>
+        <div
+            className={className}
+            onClick={markLocation}
+        >
             <span className="c-finder-leaf__name">
                 <span className="c-finder-leaf__icon-wrapper">
                     <Icon
@@ -71,7 +74,10 @@ const FinderLeaf = ({ location }) => {
                         customPath={contentTypesMap[location.ContentInfo.Content.ContentType._href].thumbnail}
                     />
                 </span>
-                <span title={location.ContentInfo.Content.TranslatedName} data-tooltip-container-selector=".c-udw-tab">
+                <span
+                    title={location.ContentInfo.Content.TranslatedName}
+                    data-tooltip-container-selector=".c-udw-tab"
+                >
                     {location.ContentInfo.Content.TranslatedName}
                 </span>
             </span>

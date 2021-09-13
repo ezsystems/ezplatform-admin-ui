@@ -85,7 +85,7 @@ export const ContentOnTheFlyConfigContext = createContext();
 export const EditOnTheFlyDataContext = createContext();
 
 const UniversalDiscoveryModule = (props) => {
-    const tabs = window.eZ.adminUiConfig.universalDiscoveryWidget.tabs;
+    const { tabs } = window.eZ.adminUiConfig.universalDiscoveryWidget;
     const defaultMarkedLocationId = props.startingLocationId || props.rootLocationId;
     const [activeTab, setActiveTab] = useState(props.activeTab);
     const [sorting, setSorting] = useState(props.activeSortClause);
@@ -123,7 +123,7 @@ const UniversalDiscoveryModule = (props) => {
 
         response.forEach((item) => {
             const locationWithoutPermissions = clonedSelectedLocation.find(
-                (selectedItem) => selectedItem.location.id === item.location.Location.id
+                (selectedItem) => selectedItem.location.id === item.location.Location.id,
             );
 
             if (locationWithoutPermissions) {
@@ -189,7 +189,7 @@ const UniversalDiscoveryModule = (props) => {
 
     useEffect(() => {
         const locationsWithoutVersion = selectedLocations.filter(
-            (selectedItem) => !selectedItem.location.ContentInfo.Content.CurrentVersion.Version
+            (selectedItem) => !selectedItem.location.ContentInfo.Content.CurrentVersion.Version,
         );
 
         if (!locationsWithoutVersion.length) {
@@ -208,7 +208,7 @@ const UniversalDiscoveryModule = (props) => {
 
                 response.forEach((content) => {
                     const clonedLocation = clonedLocations.find(
-                        (clonedItem) => clonedItem.location.ContentInfo.Content._id === content._id
+                        (clonedItem) => clonedItem.location.ContentInfo.Content._id === content._id,
                     );
 
                     if (clonedLocation) {
@@ -217,7 +217,7 @@ const UniversalDiscoveryModule = (props) => {
                 });
 
                 dispatchSelectedLocationsAction({ type: 'REPLACE_SELECTED_LOCATIONS', locations: clonedLocations });
-            }
+            },
         );
     }, [selectedLocations]);
 
@@ -261,7 +261,7 @@ const UniversalDiscoveryModule = (props) => {
             (locationsMap) => {
                 dispatchLoadedLocationsAction({ type: 'SET_LOCATIONS', data: locationsMap });
                 setMarkedLocationId(props.startingLocationId);
-            }
+            },
         );
     }, [props.startingLocationId]);
 
@@ -295,40 +295,49 @@ const UniversalDiscoveryModule = (props) => {
                                                                         <SortingContext.Provider value={[sorting, setSorting]}>
                                                                             <SortOrderContext.Provider value={[sortOrder, setSortOrder]}>
                                                                                 <CurrentViewContext.Provider
-                                                                                    value={[currentView, setCurrentView]}>
+                                                                                    value={[currentView, setCurrentView]}
+                                                                                >
                                                                                     <MarkedLocationIdContext.Provider
-                                                                                        value={[markedLocationId, setMarkedLocationId]}>
+                                                                                        value={[markedLocationId, setMarkedLocationId]}
+                                                                                    >
                                                                                         <LoadedLocationsMapContext.Provider
                                                                                             value={[
                                                                                                 loadedLocationsMap,
                                                                                                 dispatchLoadedLocationsAction,
-                                                                                            ]}>
+                                                                                            ]}
+                                                                                        >
                                                                                             <RootLocationIdContext.Provider
-                                                                                                value={props.rootLocationId}>
+                                                                                                value={props.rootLocationId}
+                                                                                            >
                                                                                                 <SelectedLocationsContext.Provider
                                                                                                     value={[
                                                                                                         selectedLocations,
                                                                                                         dispatchSelectedLocationsAction,
-                                                                                                    ]}>
+                                                                                                    ]}
+                                                                                                >
                                                                                                     <CreateContentWidgetContext.Provider
                                                                                                         value={[
                                                                                                             createContentVisible,
                                                                                                             setCreateContentVisible,
-                                                                                                        ]}>
+                                                                                                        ]}
+                                                                                                    >
                                                                                                         <ContentOnTheFlyDataContext.Provider
                                                                                                             value={[
                                                                                                                 contentOnTheFlyData,
                                                                                                                 setContentOnTheFlyData,
-                                                                                                            ]}>
+                                                                                                            ]}
+                                                                                                        >
                                                                                                             <ContentOnTheFlyConfigContext.Provider
                                                                                                                 value={
                                                                                                                     props.contentOnTheFly
-                                                                                                                }>
+                                                                                                                }
+                                                                                                            >
                                                                                                                 <EditOnTheFlyDataContext.Provider
                                                                                                                     value={[
                                                                                                                         editOnTheFlyData,
                                                                                                                         setEditOnTheFlyData,
-                                                                                                                    ]}>
+                                                                                                                    ]}
+                                                                                                                >
                                                                                                                     <Tab />
                                                                                                                 </EditOnTheFlyDataContext.Provider>
                                                                                                             </ContentOnTheFlyConfigContext.Provider>
@@ -387,7 +396,7 @@ UniversalDiscoveryModule.propTypes = {
             itemsPerPage: PropTypes.number.isRequired,
             priority: PropTypes.number.isRequired,
             hidden: PropTypes.bool.isRequired,
-        })
+        }),
     ).isRequired,
     selectedLocations: PropTypes.array,
     allowRedirects: PropTypes.bool.isRequired,

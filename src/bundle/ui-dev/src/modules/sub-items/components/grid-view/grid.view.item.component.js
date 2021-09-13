@@ -13,22 +13,35 @@ const GridViewItemComponent = ({ item, generateLink }) => {
     if (content._thumbnail === null || content._thumbnail.mimeType === 'image/svg+xml') {
         image = (
             <div className={`${imageClassName} ${imageClassName}--none`}>
-                <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--extra-large" />
+                <Icon
+                    customPath={contentTypeIconUrl}
+                    extraClasses="ibexa-icon--extra-large"
+                />
             </div>
         );
     } else {
         const { uri, alternativeText } = content._thumbnail;
 
-        image = <img className={imageClassName} src={uri} alt={alternativeText} />;
+        image = <img
+            className={imageClassName}
+            src={uri}
+            alt={alternativeText}
+                />;
         contentTypeIcon = (
             <div className="c-grid-view-item__content-type">
-                <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--small" />
+                <Icon
+                    customPath={contentTypeIconUrl}
+                    extraClasses="ibexa-icon--small"
+                />
             </div>
         );
     }
 
     return (
-        <a className="c-grid-view-item" href={generateLink(locationId, content._info.id)}>
+        <a
+            className="c-grid-view-item"
+            href={generateLink(locationId, content._info.id)}
+        >
             {contentTypeIcon}
             <div className="c-grid-view-item__image-wrapper">{image}</div>
             <div className="c-grid-view-item__title">{content._name}</div>

@@ -33,7 +33,7 @@ eZ.addConfig(
             icon: window.eZ.helpers.icon.getIconPath('browse'),
         },
     ],
-    true
+    true,
 );
 
 export default BrowseTabModule;

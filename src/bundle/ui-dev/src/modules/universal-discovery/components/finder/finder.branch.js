@@ -32,7 +32,7 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
         locationData,
         { sortClause: sortingOptions.sortClause, sortOrder },
         itemsPerPage,
-        offset
+        offset,
     );
     const { subitems, collapsed } = locationData;
     let resizeStartPositionX = 0;
@@ -82,7 +82,7 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
         const selectedLocation = subitems.find(
             (subitem) =>
                 loadedLocationsMap.find((loadedLocation) => loadedLocation.parentLocationId === subitem.location.id) ||
-                subitem.location.id === markedLocationId
+                subitem.location.id === markedLocationId,
         );
         const contentName = selectedLocation ? selectedLocation.location.ContentInfo.Content.TranslatedName : '';
         const iconPath = locationData.location
@@ -92,14 +92,20 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
         return (
             <div className="c-finder-branch__info-wrapper">
                 <span className="c-finder-branch__icon-wrapper">
-                    <Icon extraClasses="ibexa-icon--small ibexa-icon--primary" customPath={iconPath} />
+                    <Icon
+                        extraClasses="ibexa-icon--small ibexa-icon--primary"
+                        customPath={iconPath}
+                    />
                 </span>
                 <span className="c-finder-branch__name">{contentName}</span>
             </div>
         );
     };
     const renderDragHandler = () => {
-        return <div className="c-finder-branch__resize-handler" onMouseDown={addResizeListeners} />;
+        return <div
+            className="c-finder-branch__resize-handler"
+            onMouseDown={addResizeListeners}
+               />;
     };
     const renderSubitems = () => {
         if (collapsed) {
@@ -110,11 +116,18 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
 
         return (
             <Fragment>
-                <div className="c-finder-branch__items-wrapper" onScroll={loadMore} style={{ width }}>
+                <div
+                    className="c-finder-branch__items-wrapper"
+                    onScroll={loadMore}
+                    style={{ width }}
+                >
                     {renderLoadingSpinner()}
 
                     {subitems.map(({ location }) => (
-                        <FinderLeaf key={location.id} location={location} />
+                        <FinderLeaf
+                            key={location.id}
+                            location={location}
+                        />
                     ))}
                 </div>
                 {renderDragHandler()}
@@ -128,10 +141,13 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
 
         return (
             <div className="c-finder-branch__loading-spinner">
-                <Icon name="spinner" extraClasses="ibexa-icon--medium ibexa-spin" />
+                <Icon
+                    name="spinner"
+                    extraClasses="ibexa-icon--medium ibexa-spin"
+                />
             </div>
         );
-    }
+    };
 
     useEffect(() => {
         if (loadedLocations.subitems) {
@@ -152,7 +168,11 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
     const onClick = collapsed ? expandBranch : null;
 
     return (
-        <div className={className} onClick={onClick} ref={branchRef}>
+        <div
+            className={className}
+            onClick={onClick}
+            ref={branchRef}
+        >
             {renderCollapsedBranch()}
             {renderSubitems()}
         </div>
