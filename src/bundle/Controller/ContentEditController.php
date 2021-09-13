@@ -39,14 +39,17 @@ class ContentEditController extends Controller
     public function proxyTranslateAction(
         int $contentId,
         ?string $fromLanguageCode,
-        string $toLanguageCode
+        string $toLanguageCode,
+        ?int $locationId = null
     ): Response {
         /** @var \EzSystems\EzPlatformAdminUi\Event\ContentProxyTranslateEvent $event */
         $event = $this->eventDispatcher->dispatch(
             new ContentProxyTranslateEvent(
                 $contentId,
                 $fromLanguageCode,
-                $toLanguageCode
+                $toLanguageCode,
+                null,
+                $locationId
             )
         );
 

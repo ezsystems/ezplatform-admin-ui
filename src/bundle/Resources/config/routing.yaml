@@ -555,8 +555,22 @@ ezplatform.content.translate:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::translateAction'
         fromLanguageCode: ~
 
+ibexa.content.translate_with_location:
+    path: /content/{contentId}/location/{locationId}/translate/{toLanguageCode}/{fromLanguageCode}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::translateAction'
+        fromLanguageCode: ~
+
 ezplatform.content.translate.proxy:
     path: /content/{contentId}/translate/proxy/{toLanguageCode}/{fromLanguageCode}
+    methods: ['GET', 'POST']
+    defaults:
+        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::proxyTranslateAction'
+        fromLanguageCode: ~
+
+ibexa.content.translate_with_location.proxy:
+    path: /content/{contentId}/location/{locationId}/translate/proxy/{toLanguageCode}/{fromLanguageCode}
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::proxyTranslateAction'
