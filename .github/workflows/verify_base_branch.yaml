@@ -13,23 +13,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         id: pr
         with:
-          branch: ${{ env.GITHUB_REF }}
+          branch: master
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           route: /repos/{repository}/contents/composer.json?ref={branch}
       - uses: octokit/request-action@v2.x
         name: Get base's composer.json
         id: base
         with:
+          branch: ${{ env.GITHUB_BASE_REF }}
           route: /repos/{repository}/contents/composer.json?ref={branch}
           repository: ${{ env.GITHUB_REPOSITORY }}
-          branch: ${{ env.GITHUB_BASE_REF }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Verify base branch
         run: |
-          PR_BRANCH_ALIAS=$(echo $DATA1 | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
-          BASE_BRANCH_ALIAS=$(echo $DATA2 | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
+          PR_BRANCH_ALIAS=$(echo $PR_DATA | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
+          BASE_BRANCH_ALIAS=$(echo $BASE_DATA | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
           if [ "$PR_BRANCH_ALIAS" != "$BASE_BRANCH_ALIAS" ]; then exit 1; fi
         env:
-          DATA1: ${{ steps.pr.outputs.data }}
-          DATA2: ${{ steps.base.outputs.data }}
+          PR_DATA: ${{ steps.pr.outputs.data }}
+          BASE_DATA: ${{ steps.base.outputs.data }}
