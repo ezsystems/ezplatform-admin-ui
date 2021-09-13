@@ -5,6 +5,8 @@ import Search from './components/search/search';
 
 import { TabsConfigContext } from './universal.discovery.module';
 
+const { eZ, Translator } = window;
+
 const SearchTabModule = () => {
     const tabsConfig = useContext(TabsConfigContext);
     const actionsDisabledMap = {

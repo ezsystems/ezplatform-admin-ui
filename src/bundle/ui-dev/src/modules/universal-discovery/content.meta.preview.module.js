@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useMemo, useState, useRef } from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 
 import Icon from '../common/icon/icon';
 import Thumbnail from '../common/thumbnail/thumbnail';
-import TranslationSelector from './components/translation-selector/translation.selector';
 import ContentEditButton from './components/content-edit-button/content.edit.button';
 
 import { addBookmark, removeBookmark } from './services/universal.discovery.service';
@@ -14,6 +13,8 @@ import {
     AllowRedirectsContext,
 } from './universal.discovery.module';
 
+const { eZ, Translator } = window;
+
 export const getLocationData = (loadedLocationsMap, markedLocationId) =>
     loadedLocationsMap.find((loadedLocation) => loadedLocation.parentLocationId === markedLocationId) ||
     (loadedLocationsMap.length &&
@@ -21,7 +22,7 @@ export const getLocationData = (loadedLocationsMap, markedLocationId) =>
 
 const ContentMetaPreview = () => {
     const refContentMetaPreview = useRef(null);
-    const [markedLocationId, setMarkedLocationId] = useContext(MarkedLocationIdContext);
+    const [markedLocationId] = useContext(MarkedLocationIdContext);
     const [loadedLocationsMap, dispatchLoadedLocationsAction] = useContext(LoadedLocationsMapContext);
     const contentTypesMap = useContext(ContentTypesMapContext);
     const restInfo = useContext(RestInfoContext);
@@ -59,6 +60,7 @@ const ContentMetaPreview = () => {
     const renderActions = () => {
         const previewButton = allowRedirects ? (
             <button
+                type="button"
                 className="c-content-meta-preview__preview-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                 onClick={previewContent}
                 data-tooltip-container-selector=".c-udw-tab"
@@ -101,6 +103,7 @@ const ContentMetaPreview = () => {
             <div className="c-content-meta-preview__header">
                 <span className="c-content-meta-preview__content-name">{location.ContentInfo.Content.TranslatedName}</span>
                 <button
+                    type="button"
                     className="c-content-meta-preview__toggle-bookmark-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     onClick={toggleBookmarked}
                     title={bookmarkLabel}

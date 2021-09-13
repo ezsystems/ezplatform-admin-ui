@@ -12,11 +12,13 @@ import { findLocationsByParentLocationId } from './services/universal.discovery.
 import deepClone from '../common/helpers/deep.clone.helper';
 import { createCssClassNames } from '../common/helpers/css.class.names';
 
+const { eZ, Translator } = window;
+
 const ContentEditTabModule = () => {
     const [footerVisible, setFooterVisible] = useState(true);
     const restInfo = useContext(RestInfoContext);
     const tabs = useContext(TabsContext);
-    const [activeTab, setActiveTab] = useContext(ActiveTabContext);
+    const [, setActiveTab] = useContext(ActiveTabContext);
     const [loadedLocationsMap, dispatchLoadedLocationsAction] = useContext(LoadedLocationsMapContext);
     const [selectedLocations, dispatchSelectedLocationsAction] = useContext(SelectedLocationsContext);
     const [editOnTheFlyData, setEditOnTheFlyData] = useContext(EditOnTheFlyDataContext);

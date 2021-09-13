@@ -13,6 +13,7 @@ import {
     loadLocationsWithPermissions,
 } from './services/universal.discovery.service';
 
+const { eZ, Translator } = window;
 const CLASS_SCROLL_DISABLED = 'ez-scroll-disabled';
 
 export const SORTING_OPTIONS = [
@@ -49,7 +50,7 @@ const restInfo = {
     token: document.querySelector('meta[name="CSRF-Token"]').content,
     siteaccess: document.querySelector('meta[name="SiteAccess"]').content,
 };
-const contentTypesMap = Object.values(eZ.adminUiConfig.contentTypes).reduce((contentTypesMap, contentTypesGroup) => {
+const defaultContentTypesMap = Object.values(eZ.adminUiConfig.contentTypes).reduce((contentTypesMap, contentTypesGroup) => {
     contentTypesGroup.forEach((contentType) => {
         contentTypesMap[contentType.href] = contentType;
     });
@@ -165,7 +166,7 @@ const UniversalDiscoveryModule = (props) => {
 
         findLocationsById({ ...restInfo, id: props.selectedLocations.join(',') }, (locations) => {
             const mappedLocation = props.selectedLocations.map((locationId) => {
-                const location = locations.find((location) => location.id === parseInt(locationId, 10));
+                const location = locations.find((locationItem) => locationItem.id === parseInt(locationId, 10));
 
                 return { location };
             });
@@ -275,6 +276,7 @@ const UniversalDiscoveryModule = (props) => {
         dispatchLoadedLocationsAction({ type: 'SET_LOCATIONS', data: locationsMap });
     }, [sorting, sortOrder]);
 
+    /* eslint-disable max-len */
     return (
         <div className={className}>
             <UDWContext.Provider value={true}>
@@ -282,7 +284,7 @@ const UniversalDiscoveryModule = (props) => {
                     <AllowRedirectsContext.Provider value={props.allowRedirects}>
                         <AllowConfirmationContext.Provider value={props.allowConfirmation}>
                             <ContentTypesInfoMapContext.Provider value={contentTypesInfoMap}>
-                                <ContentTypesMapContext.Provider value={contentTypesMap}>
+                                <ContentTypesMapContext.Provider value={defaultContentTypesMap}>
                                     <MultipleConfigContext.Provider value={[props.multiple, props.multipleItemsLimit]}>
                                         <ContainersOnlyContext.Provider value={props.containersOnly}>
                                             <AllowedContentTypesContext.Provider value={props.allowedContentTypes}>
@@ -367,6 +369,7 @@ const UniversalDiscoveryModule = (props) => {
             </UDWContext.Provider>
         </div>
     );
+    /* eslint-enable max-len */
 };
 
 UniversalDiscoveryModule.propTypes = {
@@ -413,7 +416,6 @@ UniversalDiscoveryModule.defaultProps = {
     activeSortClause: 'date',
     activeSortOrder: 'ascending',
     activeView: 'finder',
-    tabs: window.eZ.adminUiConfig.universalDiscoveryWidget.tabs,
     selectedLocations: [],
 };
 
