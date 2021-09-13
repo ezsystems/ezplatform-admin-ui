@@ -44,4 +44,20 @@
             height: calculateRem(8px);
         }
     }
+
+    &[disabled] {
+        border-color: $ibexa-color-light;
+
+        .ibexa-tag-view-select {
+            &__info {
+                color: $ibexa-color-dark-300;
+            }
+
+            &__selected_item {
+                color: $ibexa-color-dark-400;
+                fill: $ibexa-color-dark-400;
+                background-color: $ibexa-color-light-300;
+            }
+        }
+    }
 }

@@ -1,5 +1,5 @@
 {% set attr = attr|default({})|merge({
-    class: 'btn ibexa-btn ibexa-btn--secondary ibexa-btn--select-path ' ~ attr.class|default('')
+    class: 'ibexa-tag-view-select__btn-select-path btn ibexa-btn ibexa-btn--secondary ' ~ attr.class|default(''),
 }) %}
 {% set separator = separator|default(',') %}
 {% set values = form.vars.value|split(separator)|filter(value => value is not empty) %}
@@ -7,14 +7,19 @@
 {% set can_delete_last = can_delete_last is defined ? can_delete_last : false %}
 {% set single_select = single_select is defined ? single_select : false %}
 {% set is_delete_visible = can_delete_last or values|length != 1 %}
+{% set default_title = 'tag_view_select.info'|trans|desc('Select location') %}
+{% set is_disabled = attr.disabled is defined ? attr.disabled : false %}
+{% set default_type = 'tag_view_select.default_type'|trans|desc('path') %}
+{% set type = type|default(default_type) %}
 
 <div
     class="ibexa-tag-view-select"
     data-single-select="{{ single_select }}"
     data-can-delete-last="{{ can_delete_last }}"
+    {% if is_disabled %}disabled{% endif %}
 >
     <div class="ibexa-tag-view-select__info">
-        {{ 'tag_view_select.info'|trans|desc('Select location') }}
+        {{ title|default(default_title) }}
     </div>
     <div
         class="ibexa-tag-view-select__selected_list"
@@ -27,11 +32,12 @@
             {{ include('@ezdesign/ui/component/tag_view_select_selected_item.html.twig', {
                 id: item.id,
                 name: item.name,
-                can_delete: is_delete_visible
+                can_delete: is_delete_visible,
+                is_disabled
             }) }}
         {% endfor %}
     </div>
-    {{ form_widget(form, { attr: { hidden: false } }) }}
+    {{ form_widget(form, { attr: { hidden: false }, type: 'text' }) }}
     <button
         type="button"
         {{ block('attributes', 'bootstrap_5_layout.html.twig') }}
@@ -40,13 +46,13 @@
             class="ibexa-btn__label ibexa-tag-view-select__btn-label ibexa-tag-view-select__btn-label--select"
             {% if single_select and has_value %}hidden{% endif %}
         >
-            {{ 'tag_view_select.select_path'|trans|desc('Select path') }}
+            {{ 'tag_view_select.select'|trans({ '%type%': type })|desc('Select %type%') }}
         </span>
         <span
             class="ibexa-btn__label ibexa-tag-view-select__btn-label ibexa-tag-view-select__btn-label--change"
             {% if (single_select and not has_value) or not single_select %}hidden{% endif %}
         >
-            {{ 'tag_view_select.change_path'|trans|desc('Change path') }}
+            {{ 'tag_view_select.change'|trans({ '%type%': type })|desc('Change %type%') }}
         </span>
     </button>
 </div>

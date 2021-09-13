@@ -1,7 +1,7 @@
 (function(global, doc, eZ) {
     class TagViewSelect {
         constructor(config) {
-            this.inputSelector = config.inputSelector || '.ibexa-data-source__input';
+            this.inputSelector = config.inputSelector || 'input';
             this.fieldContainer = config.fieldContainer;
 
             if (!this.fieldContainer) {
@@ -11,35 +11,91 @@
             this.container = this.fieldContainer.querySelector('.ibexa-tag-view-select');
             this.listContainer = this.container.querySelector('.ibexa-tag-view-select__selected_list');
             this.inputField = this.fieldContainer.querySelector(this.inputSelector);
+            this.selectButton = this.container.querySelector('.ibexa-tag-view-select__btn-select-path')
             this.singleSelect = this.container.dataset.singleSelect === '1';
             this.canDeleteLast = this.container.dataset.canDeleteLast === '1';
             this.inputSeparator = config.seperator || ',';
             this.selectedItemTemplate = this.listContainer.dataset.template;
 
+            this.addItems = this.addItems.bind(this);
             this.addItem = this.addItem.bind(this);
+            this.removeItems = this.removeItems.bind(this);
             this.removeItem = this.removeItem.bind(this);
             this.toggleDeleteButtons = this.toggleDeleteButtons.bind(this);
             this.attachDeleteEvents = this.attachDeleteEvents.bind(this);
             this.adjustButtonLabel = this.adjustButtonLabel.bind(this);
+            this.toggleDisabledState = this.toggleDisabledState.bind(this);
 
             this.attachDeleteEvents();
+
+            this.disabledObserver = new MutationObserver((mutationsList) => {
+                const isDisabled = mutationsList[0].target.hasAttribute('disabled');
+
+                this.toggleDisabledState(isDisabled);
+            });
+
+            this.disabledObserver.observe(this.container, {
+                attributeFilter: ['disabled'],
+                attributeOldValue: true,
+            });
+        }
+
+        toggleDisabledState(disabledState) {
+            const removeBtns = this.listContainer.querySelectorAll('.ibexa-tag-view-select__selected_item_remove');
+
+            removeBtns.forEach((btn) => btn.toggleAttribute('disabled', disabledState));
+            this.inputField.toggleAttribute('disabled', disabledState);
+            this.selectButton.toggleAttribute('disabled', disabledState);
+
+        }
+
+        addItems(items, forceRecreate) {
+            if (this.singleSelect) {
+                this.inputField.value = items[0].id;
+                this.listContainer.textContent = '';
+            } else {
+                const newItemsIds = items.map((item) => item.id);
+
+                if (this.inputField.value !== '' && !forceRecreate) {
+                    newItemsIds.unshift(this.inputField.value);
+                }
+
+                this.inputField.value = newItemsIds.join(this.inputSeparator);
+            }
+
+            if (forceRecreate) {
+                this.listContainer.textContent = '';
+            }
+
+            items.forEach((item) => {
+                const { id, name } = item;
+                const itemTemplate = this.selectedItemTemplate.replace('{{ id }}', id).replace('{{ name }}', name);
+                const range = doc.createRange();
+                const itemHtmlWidget = range.createContextualFragment(itemTemplate);
+                const deleteButton = itemHtmlWidget.querySelector('.ibexa-tag-view-select__selected_item_remove');
+
+                deleteButton.toggleAttribute('disabled', false);
+                deleteButton.addEventListener('click', () => this.removeItem(id), false);
+                this.listContainer.append(itemHtmlWidget);
+            })
+
+            this.inputField.dispatchEvent(new Event('change'));
+            this.toggleDeleteButtons();
+            this.adjustButtonLabel();
         }
 
         addItem(id, name) {
-            if (this.singleSelect) {
-                this.inputField.value = id;
-                this.listContainer.textContent = '';
-            } else {
-                this.inputField.value = `${this.inputField.value}${this.inputSeparator}${id}`;
-            }
+            this.addItems([id, name]);
+        }
 
-            const itemTemplate = this.selectedItemTemplate.replace('{{ id }}', id).replace('{{ name }}', name);
-            const range = doc.createRange();
-            const itemHtmlWidget = range.createContextualFragment(itemTemplate);
-            const deleteButton = itemHtmlWidget.querySelector('.ibexa-tag-view-select__selected_item_remove');
+        removeItems(items) {
+            const prevSelectedIds = this.inputField.value.split(this.inputSeparator);
+            const nextSelectedIds = prevSelectedIds.filter((savedId) => !items.includes(parseInt(savedId, 10)));
+            this.inputField.value = nextSelectedIds.join(this.inputSeparator);
 
-            deleteButton.addEventListener('click', () => this.removeItem(id), false);
-            this.listContainer.append(itemHtmlWidget);
+            items.forEach((itemId) => {
+                this.listContainer.querySelector(`[data-id="${itemId}"]`).remove();
+            });
 
             this.inputField.dispatchEvent(new Event('change'));
             this.toggleDeleteButtons();
@@ -47,14 +103,7 @@
         }
 
         removeItem(id) {
-            const prevSelectedIds = this.inputField.value.split(this.inputSeparator);
-            const nextSelectedIds = prevSelectedIds.filter((savedId) => parseInt(savedId, 10) !== id);
-            this.inputField.value = nextSelectedIds.join(this.inputSeparator);
-
-            this.inputField.dispatchEvent(new Event('change'));
-            this.listContainer.querySelector(`[data-id="${id}"]`).remove();
-            this.toggleDeleteButtons();
-            this.adjustButtonLabel();
+            this.removeItems([id]);
         }
 
         toggleDeleteButtons() {
