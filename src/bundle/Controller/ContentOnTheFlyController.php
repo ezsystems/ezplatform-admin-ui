@@ -33,6 +33,7 @@ use EzSystems\EzPlatformContentForms\Data\Mapper\ContentCreateMapper;
 use EzSystems\EzPlatformContentForms\Data\Mapper\ContentUpdateMapper;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use EzSystems\EzPlatformContentForms\Form\Type\Content\ContentEditType;
+use Ibexa\Contracts\ContentForms\Content\Form\Provider\GroupedContentFormFieldsProviderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,6 +58,9 @@ class ContentOnTheFlyController extends Controller
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
+    /** @var \Ibexa\Contracts\ContentForms\Content\Form\Provider\GroupedContentFormFieldsProviderInterface */
+    private $groupedContentFormFieldsProvider;
+
     /** @var \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface */
     private $userLanguagePreferenceProvider;
 
@@ -78,6 +82,7 @@ class ContentOnTheFlyController extends Controller
         LocationService $locationService,
         ContentTypeService $contentTypeService,
         PermissionResolver $permissionResolver,
+        GroupedContentFormFieldsProviderInterface $groupedContentFormFieldsProvider,
         UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider,
         CreateContentOnTheFlyDispatcher $createContentActionDispatcher,
         ConfigResolverInterface $configResolver,
@@ -89,6 +94,7 @@ class ContentOnTheFlyController extends Controller
         $this->languageService = $languageService;
         $this->contentTypeService = $contentTypeService;
         $this->permissionResolver = $permissionResolver;
+        $this->groupedContentFormFieldsProvider = $groupedContentFormFieldsProvider;
         $this->userLanguagePreferenceProvider = $userLanguagePreferenceProvider;
         $this->createContentActionDispatcher = $createContentActionDispatcher;
         $this->configResolver = $configResolver;
@@ -213,6 +219,9 @@ class ContentOnTheFlyController extends Controller
             'language' => $language,
             'content_type' => $contentType,
             'parent_location' => $parentLocation,
+            'grouped_fields' => $this->groupedContentFormFieldsProvider->getGroupedFields(
+                $form->get('fieldsData')->all()
+            ),
         ]);
     }
 
@@ -354,6 +363,9 @@ class ContentOnTheFlyController extends Controller
             'language' => $language,
             'content_type' => $contentType,
             'form' => $form->createView(),
+            'grouped_fields' => $this->groupedContentFormFieldsProvider->getGroupedFields(
+                $form->get('fieldsData')->all()
+            ),
         ]);
 
         return $view;

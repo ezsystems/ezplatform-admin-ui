@@ -199,6 +199,7 @@ final class ContentProxyCreateDraftListenerTest extends TestCase
                 'contentId' => null,
                 'versionNo' => null,
                 'language' => 'pol-PL',
+                'locationId' => null,
             ])
             ->willReturn('redirect_test_url');
 
