@@ -4,18 +4,24 @@
     const CLASS_ITEMS_POSITION_TOP = 'ibexa-dropdown__items--position-top';
     const CLASS_REMOVE_SELECTION = 'ibexa-dropdown__remove-selection';
     const CLASS_ITEM_SELECTED_IN_LIST = 'ibexa-dropdown__item--selected';
+    const CLASS_ITEM_PREFERRED_CHOICE = 'ibexa-dropdown__item--preferred-choice';
+    const CLASS_ITEM_HIDDEN = 'ibexa-dropdown__item--hidden';
     const SELECTOR_ITEM = '.ibexa-dropdown__item';
     const SELECTOR_DROPDOWN = '.ibexa-dropdown';
     const SELECTOR_SOURCE = '.ibexa-dropdown__source .ibexa-input';
     const SELECTOR_ITEMS_CONTAINER = '.ibexa-dropdown__items';
+    const SELECTOR_ITEMS_LIST_CONTAINER = '.ibexa-dropdown__items-list';
+    const SELECTOR_ITEMS_FILTER = '.ibexa-dropdown__items-filter';
     const SELECTOR_SELECTED_ITEM_IN_LABEL = '.ibexa-dropdown__selected-item';
     const SELECTOR_SELECTED_ITEM_IN_LIST = '.ibexa-dropdown__item--selected';
+    const SELECTOR_SEPARATOR = '.ibexa-dropdown__separator';
     const SELECTOR_SELECTION_INFO = '.ibexa-dropdown__selection-info';
     const SELECTOR_OVERFLOW_ITEM_INFO = '.ibexa-dropdown__selected-overflow-number';
     const SELECTOR_PLACEHOLDER = '.ibexa-dropdown__selected-placeholder';
     const EVENT_VALUE_CHANGED = 'change';
     const ITEMS_LIST_MAX_HEIGHT = 300;
     const RESTRICTED_AREA_ITEMS_CONTAINER = 190;
+    const MINIMUM_LETTERS_TO_FILTER = 3;
 
     class Dropdown {
         constructor(config = {}) {
@@ -25,6 +31,8 @@
             this.container = container;
             this.sourceInput = sourceInput;
             this.itemsContainer = config.itemsContainer ?? container.querySelector(SELECTOR_ITEMS_CONTAINER);
+            this.itemsListContainer = config.itemsListContainer ?? container.querySelector(SELECTOR_ITEMS_LIST_CONTAINER);
+            this.itemsFilterInput = config.itemsFilterInput ?? container.querySelector(SELECTOR_ITEMS_FILTER);
             this.hasDefaultSelection = config.hasDefaultSelection || false;
             this.selectedItemTemplate =
                 config.selectedItemTemplate ||
@@ -43,6 +51,7 @@
             this.onInputClick = this.onInputClick.bind(this);
             this.onOptionClick = this.onOptionClick.bind(this);
             this.fireValueChangedEvent = this.fireValueChangedEvent.bind(this);
+            this.filterItems = this.filterItems.bind(this);
         }
 
         createSelectedItem(value, label) {
@@ -50,7 +59,7 @@
         }
 
         selectFirstItem() {
-            const items = this.itemsContainer.querySelectorAll(SELECTOR_ITEM);
+            const items = this.itemsListContainer.querySelectorAll(SELECTOR_ITEM);
             const firstItem = items[0];
             const label = firstItem.querySelector('.ibexa-dropdown__item-label').innerHTML;
 
@@ -68,7 +77,9 @@
             const overflowNumber = this.container.querySelector(SELECTOR_OVERFLOW_ITEM_INFO).cloneNode();
 
             this.sourceInput.querySelectorAll('option').forEach((option) => (option.selected = false));
-            this.itemsContainer.querySelectorAll(SELECTOR_ITEM).forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
+            this.itemsListContainer
+                .querySelectorAll(SELECTOR_ITEM)
+                .forEach((option) => option.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
             this.container.querySelector(SELECTOR_SELECTION_INFO).innerHTML = '';
             this.container.querySelector(SELECTOR_SELECTION_INFO).append(placeholder);
             this.container.querySelector(SELECTOR_SELECTION_INFO).append(overflowNumber);
@@ -96,7 +107,7 @@
                 }
             }
 
-            this.itemsContainer.querySelector(`[data-value="${value}"]`).classList.toggle(CLASS_ITEM_SELECTED_IN_LIST, selected);
+            this.itemsListContainer.querySelector(`[data-value="${value}"]`).classList.toggle(CLASS_ITEM_SELECTED_IN_LIST, selected);
 
             const selectedItemsList = this.container.querySelector(SELECTOR_SELECTION_INFO);
 
@@ -173,8 +184,13 @@
 
                 this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(isItemsContainerAbove)}px`;
                 this.itemsContainer.classList.toggle(CLASS_ITEMS_POSITION_TOP, isItemsContainerAbove);
+                this.itemsFilterInput
+                    .closest('.ibexa-input-text-wrapper')
+                    .querySelector('.ibexa-input-text-wrapper__action-btn--clear')
+                    .click();
             }
 
+            this.itemsFilterInput.focus();
             doc.body[bodyMethodName]('click', this.onClickOutside, false);
         }
 
@@ -188,7 +204,7 @@
         deselectOption(option) {
             const value = option.dataset.value;
             const optionSelect = this.sourceInput.querySelector(`[value="${value}"]`);
-            const itemSelected = this.itemsContainer.querySelector(`[data-value="${value}"]`);
+            const itemSelected = this.itemsListContainer.querySelector(`[data-value="${value}"]`);
 
             itemSelected.classList.remove(CLASS_ITEM_SELECTED_IN_LIST);
             itemSelected.querySelector('.ibexa-input').checked = false;
@@ -199,7 +215,7 @@
 
             option.remove();
 
-            if (!this.itemsContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length && this.hasDefaultSelection) {
+            if (!this.itemsListContainer.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LIST).length && this.hasDefaultSelection) {
                 this.hideOptions();
                 this.clearCurrentSelection();
                 this.selectFirstItem();
@@ -250,6 +266,39 @@
             }
         }
 
+        compareItem(itemFilterValue, searchedTerm) {
+            const itemFilterValueLowerCase = itemFilterValue.toLowerCase();
+            const searchedTermLowerCase = searchedTerm.toLowerCase();
+
+            return itemFilterValueLowerCase.indexOf(searchedTermLowerCase) === 0;
+        }
+
+        filterItems(event) {
+            const forceShowItems = event.currentTarget.value.length < MINIMUM_LETTERS_TO_FILTER;
+            const allItems = [...this.itemsListContainer.querySelectorAll('[data-filter-value]')];
+            const separator = this.itemsListContainer.querySelector(SELECTOR_SEPARATOR);
+            let hideSeparator = true;
+
+            if (separator) {
+                separator.setAttribute('hidden', 'hidden');
+            }
+
+            allItems.forEach((item) => {
+                const isItemVisible = forceShowItems || this.compareItem(item.dataset.filterValue, event.currentTarget.value);
+                const isPreferredChoice = item.classList.contains(CLASS_ITEM_PREFERRED_CHOICE);
+
+                if (isPreferredChoice && isItemVisible) {
+                    hideSeparator = false;
+                }
+
+                item.classList.toggle(CLASS_ITEM_HIDDEN, !isItemVisible);
+            });
+
+            if (separator && !hideSeparator) {
+                separator.removeAttribute('hidden');
+            }
+        }
+
         init() {
             const isEmpty = !this.container.querySelectorAll(SELECTOR_SELECTED_ITEM_IN_LABEL).length;
 
@@ -261,9 +310,11 @@
             this.fitItems();
 
             this.container.querySelector(SELECTOR_SELECTION_INFO).onclick = this.onInputClick;
-            this.itemsContainer
+            this.itemsListContainer
                 .querySelectorAll(`${SELECTOR_ITEM}:not([disabled])`)
                 .forEach((option) => (option.onclick = this.onOptionClick));
+            this.itemsFilterInput.addEventListener('keyup', this.filterItems, false);
+            this.itemsFilterInput.addEventListener('input', this.filterItems, false);
         }
     }
 
