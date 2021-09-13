@@ -90,7 +90,7 @@
                 keywordInput.value.split(',').map((item) => ({
                     id: Math.floor((1 + Math.random()) * 0x10000).toString(16),
                     label: item,
-                }))
+                })),
             );
         }
 

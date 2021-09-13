@@ -108,15 +108,15 @@
             const title =
                 limit === 1
                     ? Translator.trans(
-                          /*@Desc("Select a Content item")*/ 'ezobjectrelationlist.title.single',
-                          {},
-                          'universal_discovery_widget'
-                      )
+                        /*@Desc("Select a Content item")*/ 'ezobjectrelationlist.title.single',
+                        {},
+                        'universal_discovery_widget',
+                    )
                     : Translator.trans(
-                          /*@Desc("Select Content item(s)")*/ 'ezobjectrelationlist.title.multi',
-                          {},
-                          'universal_discovery_widget'
-                      );
+                        /*@Desc("Select Content item(s)")*/ 'ezobjectrelationlist.title.multi',
+                        {},
+                        'universal_discovery_widget',
+                    );
 
             ReactDOM.render(
                 React.createElement(eZ.modules.UniversalDiscovery, {
@@ -128,7 +128,7 @@
                     multiple: isSingle ? false : selectedItemsLimit !== 1,
                     multipleItemsLimit: selectedItemsLimit > 1 ? selectedItemsLimit - selectedItems.length : selectedItemsLimit,
                 }),
-                udwContainer
+                udwContainer,
             );
         };
         const excludeDuplicatedItems = (items) => {
@@ -278,11 +278,11 @@
         attachRowsEventHandlers();
 
         [...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD), ...fieldContainer.querySelectorAll('.ibexa-relations__cta-btn')].forEach(
-            (btn) => btn.addEventListener('click', openUDW, false)
+            (btn) => btn.addEventListener('click', openUDW, false),
         );
 
         [...fieldContainer.querySelectorAll('.ibexa-relations__table-action--remove-item')].forEach((btn) =>
-            btn.addEventListener('click', removeItem, false)
+            btn.addEventListener('click', removeItem, false),
         );
 
         if (trashBtn) {

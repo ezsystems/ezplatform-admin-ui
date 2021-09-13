@@ -25,6 +25,6 @@
                 form.submit();
             }
         },
-        false
+        false,
     );
 })(window, window.document, window.bootstrap);

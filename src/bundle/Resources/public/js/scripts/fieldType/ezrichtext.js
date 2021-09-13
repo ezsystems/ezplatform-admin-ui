@@ -18,10 +18,8 @@
 
             ReactDOM.unmountComponentAtNode(udwContainer);
         };
-        const mergedConfig = Object.assign({}, config, {
-            onConfirm: confirmHandler,
-            onCancel: cancelHandler,
-        });
+        const mergedConfig = { ...config, onConfirm: confirmHandler,
+            onCancel: cancelHandler };
 
         ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, mergedConfig), udwContainer);
     };

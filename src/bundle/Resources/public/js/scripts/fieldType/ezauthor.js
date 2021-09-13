@@ -131,7 +131,7 @@
          */
         addItem(event) {
             const authorNode = event.target.closest(SELECTOR_FIELD);
-            const template = authorNode.dataset.template;
+            const { template } = authorNode.dataset;
             const node = event.target.closest('.ibexa-field-edit__data .ibexa-data-source');
 
             node.insertAdjacentHTML('beforeend', this.setIndex(authorNode, template));

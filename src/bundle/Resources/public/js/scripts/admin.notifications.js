@@ -1,7 +1,7 @@
-(function(global, doc, eZ, bootstrap) {
+(function(global, doc, eZ) {
     const notificationsContainer = doc.querySelector('.ez-notifications-container');
     const notifications = JSON.parse(notificationsContainer.dataset.notifications);
-    const template = notificationsContainer.dataset.template;
+    const { template } = notificationsContainer.dataset;
     const addNotification = ({ detail }) => {
         const { onShow, label, message, rawPlaceholdersMap = {} } = detail;
         const templateLabel = label === 'error' ? 'danger' : label;
@@ -39,4 +39,4 @@
     });
 
     doc.body.addEventListener('ez-notify', addNotification, false);
-})(window, window.document, window.eZ, window.bootstrap);
+})(window, window.document, window.eZ);

@@ -13,6 +13,6 @@
             languageRadioOption.checked = true;
             languageRadioOption.dispatchEvent(new CustomEvent('change'));
         },
-        false
+        false,
     );
 })(window, window.document);

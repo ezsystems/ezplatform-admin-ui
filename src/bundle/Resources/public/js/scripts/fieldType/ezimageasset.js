@@ -4,10 +4,10 @@
     const SELECTOR_INPUT_DESTINATION_CONTENT_ID = '.ibexa-data-source__destination-content-id';
     const SELECTOR_FILESIZE_NOTICE = '.ibexa-data-source__message--filesize';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
-    const showErrorNotification = eZ.helpers.notification.showErrorNotification;
-    const showSuccessNotification = eZ.helpers.notification.showSuccessNotification;
-    const getJsonFromResponse = eZ.helpers.request.getJsonFromResponse;
-    const imageAssetMapping = eZ.adminUiConfig.imageAssetMapping;
+    const { showErrorNotification } = eZ.helpers.notification;
+    const { showSuccessNotification } = eZ.helpers.notification;
+    const { getJsonFromResponse } = eZ.helpers.request;
+    const { imageAssetMapping } = eZ.adminUiConfig;
 
     class EzImageAssetPreviewField extends eZ.BasePreviewField {
         constructor(props) {
@@ -56,7 +56,7 @@
          * @param {Object} response
          */
         onAssetCreateSuccess(response) {
-            const destinationContent = response.destinationContent;
+            const { destinationContent } = response;
 
             this.updateData(destinationContent.id, destinationContent.name, destinationContent.locationId, response.value);
             this.toggleLoading(false);
@@ -65,8 +65,8 @@
                 Translator.trans(
                     /* @Desc("The image has been published and can now be reused") */ 'ezimageasset.create.message.success',
                     {},
-                    'fieldtypes_edit'
-                )
+                    'fieldtypes_edit',
+                ),
             );
         }
 
@@ -79,7 +79,7 @@
             const message = Translator.trans(
                 /* @Desc("Error while creating Image Asset: %error%") */ 'ezimageasset.create.message.error',
                 { error: error.message },
-                'fieldtypes_edit'
+                'fieldtypes_edit',
             );
 
             this.toggleLoading(false);
@@ -101,7 +101,7 @@
                 response.ContentInfo.Content._id,
                 response.ContentInfo.Content.TranslatedName,
                 response.id,
-                imageField.fieldValue
+                imageField.fieldValue,
             );
         }
 
@@ -176,7 +176,7 @@
                     title,
                     ...config,
                 }),
-                udwContainer
+                udwContainer,
             );
         }
 
@@ -187,8 +187,8 @@
          * @param {Event} event
          */
         handleInputChange(event) {
-            const file = event.currentTarget.files[0];
-            const languageCode = event.currentTarget.dataset.languageCode;
+            const [file] = event.currentTarget.files;
+            const { languageCode } = event.currentTarget.dataset;
             const isFileSizeLimited = this.maxFileSize > 0;
             const maxFileSizeExceeded = isFileSizeLimited && file.size > this.maxFileSize;
 

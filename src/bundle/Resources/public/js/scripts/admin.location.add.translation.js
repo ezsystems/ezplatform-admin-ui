@@ -11,7 +11,7 @@
 
                 buttonCreate[method]('disabled', true);
             },
-            false
+            false,
         );
     });
 })(window, window.document);

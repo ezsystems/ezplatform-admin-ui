@@ -1,4 +1,4 @@
-(function(global, doc, eZ, localStorage) {
+(function(global, doc, eZ) {
     const HEADER_HEIGHT = 72;
     const RESIZER_WIDTH = 10;
     const TOGGLER_HEIGHT = 48;
@@ -42,7 +42,7 @@
         });
         secondLevelMenuNode.classList.toggle(
             'ibexa-main-menu__navbar--collapsed',
-            secondLevelMenuWidth <= SECOND_LEVEL_MANUAL_RESIZE_MIN_WIDTH
+            secondLevelMenuWidth <= SECOND_LEVEL_MANUAL_RESIZE_MIN_WIDTH,
         );
 
         doc.body.dispatchEvent(new CustomEvent('ibexa-main-menu-resized'));
@@ -62,7 +62,7 @@
             return;
         }
 
-        const popup = new eZ.core.PopupMenu({
+        new eZ.core.PopupMenu({
             popupMenuElement: popupNode,
             triggerElement: button,
         });
@@ -130,4 +130,4 @@
     secondLevelMenuNode.querySelector('.ibexa-main-menu__resizer').addEventListener('mousedown', addResizeListeners, false);
     secondLevelMenuNode.querySelectorAll('.ibexa-main-menu__tooltip-trigger').forEach(parsePopup);
     secondLevelMenuNode.addEventListener('transitionend', () => doc.body.dispatchEvent(new CustomEvent('ibexa-main-menu-resized')), false);
-})(window, window.document, window.eZ, window.localStorage);
+})(window, window.document, window.eZ);

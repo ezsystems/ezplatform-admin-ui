@@ -33,7 +33,7 @@
             return result;
         }
 
-        validateFileSize(event) {
+        validateFileSize() {
             return this.showFileSizeError();
         }
 

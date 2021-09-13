@@ -150,7 +150,7 @@
     const filterByContentType = () => {
         const selectedCheckboxes = [...contentTypeCheckboxes].filter((checkbox) => checkbox.checked);
         const contentTypesText = selectedCheckboxes.map((checkbox) => checkbox.dataset.name).join(', ');
-        const option = contentTypeSelect[0];
+        const [option] = contentTypeSelect;
         const defaultText = option.dataset.default;
 
         option.innerHTML = contentTypesText || defaultText;

@@ -23,7 +23,7 @@
                 onCancel,
                 ...config,
             }),
-            udwContainer
+            udwContainer,
         );
     };
 

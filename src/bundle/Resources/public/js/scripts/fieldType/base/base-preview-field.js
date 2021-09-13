@@ -35,14 +35,13 @@
             const kilobyte = 1024;
             let size = parseInt(bytes, 10) || 0;
             let unitIndex = 0;
-            let decimalUnits;
 
             while (size >= kilobyte) {
                 size = size / kilobyte;
                 unitIndex++;
             }
 
-            decimalUnits = unitIndex < 1 ? 0 : 1;
+            const decimalUnits = unitIndex < 1 ? 0 : 1;
 
             const sizeFixed = size.toFixed(size >= 10 || decimalUnits);
             const unit = units[unitIndex];
@@ -78,7 +77,7 @@
          * @param {Event} event
          */
         handleDropFile(event) {
-            const file = event.dataTransfer.files[0];
+            const [file] = event.dataTransfer.files;
 
             if (!this.checkCanDrop(file)) {
                 return;
@@ -171,7 +170,7 @@
          * @param {Event} event
          */
         loadDroppedFilePreview(event) {
-            console.log('CUSTOMIZE RENDERING DROPPED FILE PREVIEW', event);
+            console.warn('CUSTOMIZE RENDERING DROPPED FILE PREVIEW', event);
         }
 
         /**

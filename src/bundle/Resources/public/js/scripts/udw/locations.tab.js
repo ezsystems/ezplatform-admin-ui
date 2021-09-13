@@ -28,7 +28,7 @@
                 multiple: false,
                 ...config,
             }),
-            udwContainer
+            udwContainer,
         );
     };
 

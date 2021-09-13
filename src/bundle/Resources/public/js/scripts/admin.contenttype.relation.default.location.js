@@ -14,7 +14,7 @@
 
         toggleResetStartingLocationBtn(
             btn.parentNode.querySelector(SELECTOR_RESET_STARTING_LOCATION_BTN),
-            true
+            true,
         );
 
         if (objectRelationListSettingsWrapper) {
@@ -39,7 +39,7 @@
                 multiple: false,
                 ...config,
             }),
-            udwContainer
+            udwContainer,
         );
     };
     const toggleResetStartingLocationBtn = (button, isEnabled) => {
@@ -59,6 +59,6 @@
         toggleResetStartingLocationBtn(button, false);
     };
 
-    udwBtns.forEach(btn => btn.addEventListener('click', openUDW, false));
-    resetStartingLocationBtns.forEach(btn => btn.addEventListener('click', resetStartingLocation, false));
+    udwBtns.forEach((btn) => btn.addEventListener('click', openUDW, false));
+    resetStartingLocationBtns.forEach((btn) => btn.addEventListener('click', resetStartingLocation, false));
 })(window, window.document, window.eZ, window.React, window.ReactDOM);

@@ -51,7 +51,7 @@
 
         selectFirstItem() {
             const items = this.itemsContainer.querySelectorAll(SELECTOR_ITEM);
-            const firstItem = items[0];
+            const [firstItem] = items;
             const label = firstItem.querySelector('.ibexa-dropdown__item-label').innerHTML;
 
             items.forEach((item) => item.classList.remove(CLASS_ITEM_SELECTED_IN_LIST));
@@ -81,7 +81,7 @@
         }
 
         onSelect(element, selected) {
-            const value = element.dataset.value;
+            const { value } = element.dataset;
 
             if (this.canSelectOnlyOne && selected) {
                 this.hideOptions();
@@ -186,7 +186,7 @@
         }
 
         deselectOption(option) {
-            const value = option.dataset.value;
+            const { value } = option.dataset;
             const optionSelect = this.sourceInput.querySelector(`[value="${value}"]`);
             const itemSelected = this.itemsContainer.querySelector(`[data-value="${value}"]`);
 

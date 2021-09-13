@@ -22,7 +22,7 @@
             (checkboxInputs.every((el) => el.checked) && ANY_CHECKED === toggleMode);
 
         checkboxInputs.forEach((input) =>
-            input.addEventListener('change', toggleButtonState.bind(input, button, validateCheckboxStatus), false)
+            input.addEventListener('change', toggleButtonState.bind(input, button, validateCheckboxStatus), false),
         );
     });
 })(window, window.document);

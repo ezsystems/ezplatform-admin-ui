@@ -77,7 +77,7 @@
             return;
         }
 
-        const selectedDate = dates[0];
+        const [selectedDate] = dates;
         const selectedDateWithUserTimezone = convertDateToTimezone(selectedDate, userTimezone, true);
         const timestamp = Math.floor(selectedDateWithUserTimezone.valueOf() / 1000);
 

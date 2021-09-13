@@ -21,6 +21,6 @@
             languageRadioOption.checked = true;
             changeHandler();
         },
-        false
+        false,
     );
 })(window, window.document);

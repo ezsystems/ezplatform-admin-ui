@@ -1,4 +1,4 @@
-(function(global, doc, eZ) {
+(function(global, doc, eZ, Chart) {
     const MAX_NUMBER_OF_LABELS = 16;
     const lineDefaultOptions = {
         elements: {

@@ -30,7 +30,7 @@
 
         const tooltipNodes = baseElement.querySelectorAll(TOOLTIPS_SELECTOR);
 
-        for (tooltipNode of tooltipNodes) {
+        for (const tooltipNode of tooltipNodes) {
             if (tooltipNode.title) {
                 const delay = {
                     show: parseInt(tooltipNode.dataset.delayShow, 10) ?? 150,
@@ -41,7 +41,8 @@
                 const container = tooltipNode.dataset.tooltipContainerSelector
                     ? tooltipNode.closest(tooltipNode.dataset.tooltipContainerSelector)
                     : 'body';
-                const tooltip = new bootstrap.Tooltip(tooltipNode, {
+
+                new bootstrap.Tooltip(tooltipNode, {
                     delay,
                     placement,
                     container,
@@ -65,7 +66,7 @@
 
         const tooltipsNode = baseElement.querySelectorAll(TOOLTIPS_SELECTOR);
 
-        for (tooltipNode of tooltipsNode) {
+        for (const tooltipNode of tooltipsNode) {
             bootstrap.Tooltip.getOrCreateInstance(tooltipNode).hide();
         }
     };

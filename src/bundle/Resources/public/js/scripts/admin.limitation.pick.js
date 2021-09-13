@@ -27,7 +27,7 @@
         const errorMessage = Translator.trans(
             /*@Desc("Could not fetch content names")*/ 'limitation.pick.error',
             {},
-            'universal_discovery_widget'
+            'universal_discovery_widget',
         );
 
         fetch(request)
@@ -134,7 +134,7 @@
     };
     const handleTagRemove = (limitationBtn, tag) => {
         const removedLocationId = tag.dataset.locationId;
-        const locationInputSelector = limitationBtn.dataset.locationInputSelector;
+        const { locationInputSelector } = limitationBtn.dataset;
 
         removeLocationFromInput(locationInputSelector, removedLocationId);
         tag.remove();
@@ -174,7 +174,7 @@
                 selectedLocations: selectedLocationsIds,
                 ...config,
             }),
-            udwContainer
+            udwContainer,
         );
     };
 

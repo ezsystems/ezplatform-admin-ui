@@ -95,7 +95,7 @@
         if (sourceInput.value) {
             defaultDate = new Date(sourceInput.value * 1000);
 
-            const actionType = sourceInput.dataset.actionType;
+            const { actionType } = sourceInput.dataset;
 
             if (actionType === 'create') {
                 defaultDate.setTime(new Date().getTime());

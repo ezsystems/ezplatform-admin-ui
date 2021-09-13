@@ -1,4 +1,4 @@
-(function(global, doc) {
+(function(global, doc, Translator) {
     const form = doc.querySelector('form[name="location_trash"]');
     const submitButton = form.querySelector('button[type="submit"]');
     const allOptions = form.querySelectorAll('.ez-modal__trash-option');
@@ -25,7 +25,7 @@
                     content_name: contentName,
                     children_count: numberOfSubitems,
                 },
-                'content'
+                'content',
             );
 
             modalBody.querySelector('.ez-modal__option-description').innerHTML = message;
@@ -33,7 +33,7 @@
             const message = Translator.trans(
                 /*@Desc("Are you sure you want to send this Content item to Trash?")*/ 'trash.modal.message',
                 {},
-                'content'
+                'content',
             );
 
             modalBody.innerHTML = message;
@@ -62,4 +62,4 @@
     };
 
     form.addEventListener('change', toggleSubmitButton, false);
-})(window, document);
+})(window, window.document, window.Translator);

@@ -49,7 +49,7 @@
                 triggerElement: tabMore,
                 onItemClick: (event) => {
                     const itemElement = event.target;
-                    const tabLinkId = itemElement.dataset.tabLinkId;
+                    const { tabLinkId } = itemElement.dataset;
                     const tabToShow = tabsList.querySelector(`.ibexa-tabs__link#${tabLinkId}`);
 
                     bootstrap.Tab.getOrCreateInstance(tabToShow).show();

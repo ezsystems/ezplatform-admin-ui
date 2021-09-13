@@ -58,6 +58,6 @@
 
     eZ.addConfig('helpers.contentType', {
         getContentTypeIconUrl,
-        getContentTypeName
+        getContentTypeName,
     });
 })(window, window.document, window.eZ);

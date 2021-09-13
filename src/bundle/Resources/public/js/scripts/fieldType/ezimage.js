@@ -37,23 +37,23 @@
             const fileSize = this.formatFileSize(files[0].size);
 
             this.getImageUrl(files[0], (url) => {
-                var image = new Image();
+                const image = new Image();
 
                 image.onload = function() {
-                    const width = image.width;
-                    const height = image.height;
+                    const { width } = image;
+                    const { height } = image;
                     const widthNode = preview.querySelector('.ibexa-field-edit-preview__dimension--width');
                     const heightNode = preview.querySelector('.ibexa-field-edit-preview__dimension--height');
 
                     widthNode.innerHTML = Translator.trans(
                         /* @Desc("W:%width% px") */ 'ezimage.dimensions.width',
                         { width },
-                        'fieldtypes_edit'
+                        'fieldtypes_edit',
                     );
                     heightNode.innerHTML = Translator.trans(
                         /* @Desc("H:%height% px") */ 'ezimage.dimensions.width',
                         { height },
-                        'fieldtypes_edit'
+                        'fieldtypes_edit',
                     );
                 };
 
@@ -101,7 +101,7 @@
             const fileField = this.fieldContainer.querySelector(SELECTOR_INPUT_FILE);
             const dataContainer = this.fieldContainer.querySelector('.ibexa-field-edit__data');
             const isFileFieldEmpty = fileField.files && !fileField.files.length && dataContainer && !dataContainer.hasAttribute('hidden');
-            const isRequired = event.target.dataset.isRequired;
+            const { isRequired } = event.target.dataset;
             const isEmpty = !event.target.value;
             const isError = isEmpty && isRequired && !isFileFieldEmpty;
             const label = event.target.closest(SELECTOR_ALT_WRAPPER).querySelector('.ibexa-data-source__label').innerHTML;

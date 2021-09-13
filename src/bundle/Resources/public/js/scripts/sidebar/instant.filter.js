@@ -35,7 +35,7 @@
                     element: item,
                 },
             ],
-            []
+            [],
         );
 
         filterInput.addEventListener('change', filterItems.bind(filter, itemsMap, groups), false);

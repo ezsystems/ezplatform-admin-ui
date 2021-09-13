@@ -3,7 +3,7 @@
     const viewIconNode = doc.querySelector('.ibexa-login__password-visibility-toggler .ibexa-icon--view');
     const viewHideIconNode = doc.querySelector('.ibexa-login__password-visibility-toggler .ibexa-icon--view-hide');
 
-    doc.querySelector('.ibexa-login__password-visibility-toggler').addEventListener('click', (event) => {
+    doc.querySelector('.ibexa-login__password-visibility-toggler').addEventListener('click', () => {
         if (passwordInputNode) {
             const inputTypeToSet = passwordInputNode.type === 'password' ? 'text' : 'password';
 

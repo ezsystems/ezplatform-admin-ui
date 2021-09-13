@@ -5,6 +5,6 @@
     };
 
     doc.querySelectorAll('input[name="updateMainLocation"]').forEach((input) =>
-        input.addEventListener('change', updateMainLocation, false)
+        input.addEventListener('change', updateMainLocation, false),
     );
 })(window, window.document);

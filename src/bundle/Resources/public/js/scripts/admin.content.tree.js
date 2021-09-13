@@ -1,4 +1,4 @@
-(function (global, doc, React, ReactDOM, eZ, localStorage) {
+(function(global, doc, React, ReactDOM, eZ, localStorage) {
     const KEY_CONTENT_TREE_EXPANDED = 'ez-content-tree-expanded';
     const CLASS_CONTENT_TREE_EXPANDED = 'ez-content-tree-container--expanded';
     const CLASS_CONTENT_TREE_ANIMATE = 'ez-content-tree-container--animate';
@@ -20,7 +20,7 @@
 
         const isContentTreeExpanded = contentTreeContainer.classList.contains(CLASS_CONTENT_TREE_EXPANDED);
 
-        saveContentTreeExpandedState(userId, isContentTreeExpanded);
+        saveContentTreeExpandedState(isContentTreeExpanded);
         eZ.helpers.tooltips.hideAll();
     };
     const updateContentTreeWrapperHeight = () => {
@@ -35,7 +35,7 @@
 
         frame = requestAnimationFrame(updateContentTreeWrapperHeight);
     };
-    const saveContentTreeExpandedState = (userId, isExpanded) => {
+    const saveContentTreeExpandedState = (isExpanded) => {
         let expandedState = JSON.parse(localStorage.getItem(KEY_CONTENT_TREE_EXPANDED));
 
         if (!(expandedState instanceof Object)) {
@@ -46,7 +46,7 @@
 
         localStorage.setItem(KEY_CONTENT_TREE_EXPANDED, JSON.stringify(expandedState));
     };
-    const isContentTreeExpanded = (userId) => {
+    const isContentTreeExpanded = () => {
         const expandedState = JSON.parse(localStorage.getItem(KEY_CONTENT_TREE_EXPANDED));
 
         return expandedState && expandedState[userId];
@@ -59,12 +59,12 @@
             rootLocationId: parseInt(treeRootLocationId, 10),
             restInfo: { token, siteaccess },
         }),
-        contentTreeWrapper
+        contentTreeWrapper,
     );
 
     btn.addEventListener('click', toggleContentTreePanel, false);
 
-    if (isContentTreeExpanded(userId)) {
+    if (isContentTreeExpanded()) {
         contentTreeContainer.classList.add(CLASS_CONTENT_TREE_EXPANDED);
         btn.classList.add(CLASS_BTN_CONTENT_TREE_EXPANDED);
     }

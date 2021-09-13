@@ -26,7 +26,7 @@
                 selectedLocations: selectedLocationsIds,
                 ...config,
             }),
-            udwContainer
+            udwContainer,
         );
     };
     const toggleDisabledState = () => {
@@ -57,7 +57,7 @@
     };
     const addContentTags = (selectBtn, selectedItems) => {
         const tagsList = doc.querySelector(selectBtn.dataset.selectedContentListSelector);
-        const tagTemplate = selectBtn.dataset.tagTemplate;
+        const { tagTemplate } = selectBtn.dataset;
         const fragment = doc.createDocumentFragment();
 
         selectedItems.forEach((location) => {
@@ -114,7 +114,7 @@
                 selectedLocations: selectedLocationsIds,
                 ...config,
             }),
-            udwContainer
+            udwContainer,
         );
     };
     const selectUsersBtn = doc.querySelector('#role_assignment_create_users__btn');

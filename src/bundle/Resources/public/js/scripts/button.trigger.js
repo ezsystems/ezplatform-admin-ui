@@ -13,5 +13,5 @@ document.addEventListener(
 
         buttons.forEach((button) => button.addEventListener('click', trigger, false));
     },
-    false
+    false,
 );

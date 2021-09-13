@@ -27,7 +27,7 @@
                 onCancel,
                 ...config,
             }),
-            udwContainer
+            udwContainer,
         );
     };
 

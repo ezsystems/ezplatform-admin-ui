@@ -109,7 +109,7 @@
 
                 sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
             },
-            false
+            false,
         );
 
         flatpickr(flatPickrInput, {

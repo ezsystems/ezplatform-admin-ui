@@ -1,4 +1,4 @@
-(function (global, doc, eZ, Translator) {
+(function(global, doc, eZ, Translator) {
     let currentPageLink = null;
     let getNotificationsStatusErrorShowed = false;
     let lastFailedCountFetchNotificationNode = null;
@@ -82,7 +82,7 @@
             const message = Translator.trans(
                 /* @Desc("Cannot update notifications") */ 'notifications.modal.message.error',
                 { error: error.message },
-                'notifications'
+                'notifications',
             );
 
             showWarningNotification(message, (notificationNode) => {

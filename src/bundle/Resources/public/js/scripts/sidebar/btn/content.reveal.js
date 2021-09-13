@@ -13,6 +13,6 @@
             visiblity.value = 1;
             form.submit();
         },
-        false
+        false,
     );
 })(window, window.document);

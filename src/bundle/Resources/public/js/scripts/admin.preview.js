@@ -22,6 +22,6 @@
     };
     doc.querySelectorAll(SELECTOR_BTN_ACTION).forEach((btn) => btn.addEventListener('click', changePreviewMode, false));
     doc.querySelectorAll(SELECTOR_PREVIEW_SITEACCESS_SELECT).forEach((select) =>
-        select.addEventListener('change', changePreviewSiteaccess, false)
+        select.addEventListener('change', changePreviewSiteaccess, false),
     );
 })(window, window.document);

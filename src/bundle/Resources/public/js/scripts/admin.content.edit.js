@@ -91,7 +91,7 @@
             invalidSections.forEach((sections) => {
                 sections.forEach((invalidSectionId) => {
                     doc.querySelector(`[data-anchor-target-section='${invalidSectionId}']`).classList.add(
-                        'ibexa-anchor-navigation-menu__btn--invalid'
+                        'ibexa-anchor-navigation-menu__btn--invalid',
                     );
                 });
             });
@@ -156,7 +156,7 @@
                         const lastSavedText = Translator.trans(
                             /*@Desc("Last saved draft was on %date%")*/ 'content_edit.last_saved',
                             { date: lastSuccessfulAutosave },
-                            'content'
+                            'content',
                         );
                         autosaveWrapper.querySelector('.ibexa-autosave__last-saved').innerHTML = lastSavedText;
                     }

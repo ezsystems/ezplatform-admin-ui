@@ -33,7 +33,7 @@
         const errorMessage = Translator.trans(
             /*@Desc("Cannot find children Locations with ID %idList%")*/ 'select_location.error',
             { idList: idList.join(',') },
-            'universal_discovery_widget'
+            'universal_discovery_widget',
         );
 
         fetch(request)
@@ -89,7 +89,7 @@
     const onConfirm = (btn, items) => {
         closeUDW();
 
-        const pathString = items[0].pathString;
+        const [{ pathString }] = items;
 
         updateBreadcrumbsState(btn, pathString);
         toggleVisibility(btn, !!pathString);
@@ -108,7 +108,7 @@
                 multiple: false,
                 ...config,
             }),
-            udwContainer
+            udwContainer,
         );
     };
     const clearSelection = (btn) => {
