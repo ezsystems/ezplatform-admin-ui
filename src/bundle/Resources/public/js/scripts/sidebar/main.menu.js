@@ -1,7 +1,5 @@
 (function(global, doc, eZ, localStorage) {
-    const HEADER_HEIGHT = 72;
     const RESIZER_WIDTH = 10;
-    const TOGGLER_HEIGHT = 48;
     const SECOND_LEVEL_COLLAPSED_WIDTH = 48;
     const SECOND_LEVEL_EXPANDED_WIDTH = 220;
     const SECOND_LEVEL_MANUAL_RESIZE_MIN_WIDTH = 80;
@@ -102,24 +100,8 @@
         eZ.helpers.cookies.setCookie('second_menu_width', newMenuWidth);
         setWidthOfSecondLevelMenu();
     };
-    const fitMenu = () => {
-        const scrollPositionDiff = Math.max(HEADER_HEIGHT - global.scrollY, 0);
-        const firstLevelMenuItemsList = firstLevelMenuNode.querySelector('.ibexa-main-menu__items-list');
 
-        firstLevelMenuItemsList.style.top = `${scrollPositionDiff}px`;
-        firstLevelMenuItemsList.style.height = `${global.innerHeight - scrollPositionDiff}px`;
-
-        secondLevelMenuNode.querySelectorAll('.ibexa-main-menu__items-list').forEach((itemList) => {
-            itemList.style.top = `${scrollPositionDiff}px`;
-            itemList.style.height = `${global.innerHeight - (scrollPositionDiff + TOGGLER_HEIGHT)}px`;
-        });
-    };
-
-    fitMenu();
     parseMenuTitles();
-
-    global.addEventListener('scroll', fitMenu, false);
-    global.addEventListener('resize', fitMenu, false);
 
     firstLevelMenuNode.querySelectorAll('.ibexa-main-menu__item-action').forEach((button) => {
         button.addEventListener('click', showSecondLevelMenu, false);
