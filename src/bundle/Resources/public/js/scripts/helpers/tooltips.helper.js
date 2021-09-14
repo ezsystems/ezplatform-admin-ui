@@ -41,10 +41,51 @@
                 const container = tooltipNode.dataset.tooltipContainerSelector
                     ? tooltipNode.closest(tooltipNode.dataset.tooltipContainerSelector)
                     : 'body';
+                const iframe = document.querySelector(tooltipNode.dataset.tooltipIframeSelector);
+
                 const tooltip = new bootstrap.Tooltip(tooltipNode, {
                     delay,
                     placement,
                     container,
+                    popperConfig: (defaultBsPopperConfig) => {
+                        if (!iframe) {
+                            return defaultBsPopperConfig;
+                        }
+
+                        const iframeDOMRect = iframe.getBoundingClientRect();
+                        const offsetX = iframeDOMRect.x;
+                        const offsetY = iframeDOMRect.y;
+                        const offsetModifier = {
+                            name: 'offset',
+                            options: {
+                                offset: ({ placement }) => {
+                                    const basePlacement = placement.split('-')[0];
+
+                                    switch (basePlacement) {
+                                        case 'top':
+                                            return [offsetX, -offsetY];
+                                        case 'bottom':
+                                            return [offsetX, offsetY];
+                                        case 'right':
+                                            return [offsetY, offsetX];
+                                        case 'left':
+                                            return [offsetY, -offsetX];
+                                        default:
+                                            return [];
+                                    }
+                                },
+                            },
+                        };
+                        const idx = defaultBsPopperConfig.modifiers.findIndex((modifier) => modifier.name == 'offset');
+
+                        if (idx != -1) {
+                            defaultBsPopperConfig.modifiers[idx] = offsetModifier;
+                        } else {
+                            defaultBsPopperConfig.modifiers.push(offsetModifier);
+                        }
+
+                        return defaultBsPopperConfig;
+                    },
                     html: true,
                     template: `<div class="tooltip ibexa-tooltip ${extraClass}">
                                     <div class="arrow ibexa-tooltip__arrow"></div>
