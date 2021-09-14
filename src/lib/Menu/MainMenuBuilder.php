@@ -270,13 +270,6 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $rootContentId,
             [
                 'label' => self::ITEM_CONTENT__CONTENT_STRUCTURE,
-                'extras' => [
-                    'routes' => [
-                        'search' => 'ezplatform.search',
-                        'trash' => 'ezplatform.trash.list',
-                        'bookmark' => 'ezplatform.bookmark.list',
-                    ],
-                ],
             ]
         );
         $mediaItem = $this->factory->createLocationMenuItem(
