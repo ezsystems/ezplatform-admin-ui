@@ -327,7 +327,8 @@ class ContentViewController extends Controller
                     $contentInfo,
                     $this->lookupLimitationsTransformer,
                     $languageCodes,
-                    $this->locationService
+                    $this->locationService,
+                    $location
                 ),
             ]
         );
