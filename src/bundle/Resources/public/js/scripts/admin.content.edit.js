@@ -116,10 +116,7 @@
 
         return false;};
     const isAutosaveEnabled = () => {
-        // TODO: disabled temporarily
-        console.error('autosave temporarily disabled !!!!')
-        // return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
-        return false;
+        return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
     };
     const fitSections = () => {
         const contentColumn = doc.querySelector('.ibexa-main-container__content-column');
@@ -152,15 +149,15 @@
                 .then(() => {
                     lastSuccessfulAutosave = eZ.helpers.timezone.formatFullDateTime(new Date());
 
-                    autosaveWrapper.classList.remove('ibexa-autosave--failed');
-                    autosaveWrapper.classList.add('ibexa-autosave--saved');
+                    autosaveWrapper?.classList.remove('ibexa-autosave--failed');
+                    autosaveWrapper?.classList.add('ibexa-autosave--saved');
                 })
                 .catch(() => {
-                    autosaveWrapper.classList.remove('ibexa-autosave--saved');
-                    autosaveWrapper.classList.add('ibexa-autosave--failed');
+                    autosaveWrapper?.classList.remove('ibexa-autosave--saved');
+                    autosaveWrapper?.classList.add('ibexa-autosave--failed');
                 })
                 .finally(() => {
-                    autosaveWrapper.classList.remove('ibexa-autosave--not-saved');
+                    autosaveWrapper?.classList.remove('ibexa-autosave--not-saved');
 
                     if (lastSuccessfulAutosave) {
                         const lastSavedText = Translator.trans(
@@ -168,7 +165,10 @@
                             { date: lastSuccessfulAutosave },
                             'content'
                         );
-                        autosaveWrapper.querySelector('.ibexa-autosave__last-saved').innerHTML = lastSavedText;
+
+                        if (autosaveWrapper) {
+                            autosaveWrapper.querySelector('.ibexa-autosave__last-saved').innerHTML = lastSavedText;
+                        }
                     }
                 });
         }, eZ.adminUiConfig.autosave.interval);
