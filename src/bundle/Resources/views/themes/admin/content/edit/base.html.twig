@@ -20,20 +20,22 @@
 {% block left_sidebar %}
     <div class="ibexa-content-edit-sidebar">
         <div class="ibexa-content-edit-sidebar__header">
-            {% if without_close_button is not defined or without_close_button != true %}
-                {% set referrer_location = content is defined and is_published ? location : parent_location %}
-                
-                <a
-                    class="btn ibexa-btn ibexa-btn--ghost ibexa-content-edit-sidebar__back"
-                    href="{{ path('_ez_content_view', { 'contentId': referrer_location.contentId, 'locationId': referrer_location.id }) }}"
-                    title="{{ 'edit.close'|trans|desc('Close') }}"
-                >
-                    <svg class="ibexa-icon ibexa-icon--small">
-                        <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
-                    </svg>
-                    {{ "edit.close"|trans|desc('Close') }}
-                </a>
-            {% endif %}
+            {% block close_button %}
+                {% if without_close_button is not defined or without_close_button != true %}
+                    {% set referrer_location = content is defined and is_published ? location : parent_location %}
+
+                    <a
+                        class="btn ibexa-btn ibexa-btn--ghost ibexa-content-edit-sidebar__back"
+                        href="{{ path('_ez_content_view', { 'contentId': referrer_location.contentId, 'locationId': referrer_location.id }) }}"
+                        title="{{ 'edit.close'|trans|desc('Close') }}"
+                    >
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
+                        </svg>
+                        {{ "edit.close"|trans|desc('Close') }}
+                    </a>
+                {% endif %}
+            {% endblock %}
         </div>
         
         <div class="ibexa-content-edit-sidebar__body">
