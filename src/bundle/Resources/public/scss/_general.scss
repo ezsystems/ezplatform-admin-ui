@@ -10,11 +10,7 @@ body {
 }
 
 a {
-    transition: color 0.3s $ibexa-admin-transition;
-
-    &:visited {
-        color: $ibexa-color-complementary-strong;
-    }
+    transition: color $ibexa-admin-transition-duration $ibexa-admin-transition;
 
     &[disabled] {
         color: $ibexa-color-dark-300;
