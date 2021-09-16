@@ -1,5 +1,6 @@
 (function(global, doc, eZ, Translator) {
     const SCROLL_POSITION_TO_FIT = 50;
+    const MIN_HEIGHT_DIFF_FOR_FITTING_HEADER = 150;
     const ENTER_KEY_CODE = 13;
     const inputTypeToPreventSubmit = [
         'checkbox',
@@ -22,6 +23,8 @@
         'time',
         'url',
     ];
+    const headerNode = doc.querySelector('.ibexa-content-edit-header');
+    const { height: expandedHeaderHeight } = headerNode.getBoundingClientRect();
     const form = doc.querySelector('.ez-form-validate');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
     const getValidationResults = (validator) => {
@@ -103,13 +106,19 @@
         return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
     };
     const fitHeader = (event) => {
+        const { height: formHeight } = form.getBoundingClientRect();
+        const contentHeightWithExpandedHeader = formHeight + expandedHeaderHeight;
+        const heightDiffBetweenWindowAndContent = contentHeightWithExpandedHeader - global.innerHeight;
+
+        if (heightDiffBetweenWindowAndContent < MIN_HEIGHT_DIFF_FOR_FITTING_HEADER) {
+            return;
+        }
+
         const { scrollTop } = event.currentTarget;
         const headerNode = doc.querySelector('.ibexa-content-edit-header');
-        const contentNode = doc.querySelector('.ibexa-content-edit-content');
         const shouldHeaderBeSlim = scrollTop > SCROLL_POSITION_TO_FIT;
 
         headerNode.classList.toggle('ibexa-content-edit-header--slim', shouldHeaderBeSlim);
-        contentNode.classList.toggle('ibexa-content-edit-content--wide', shouldHeaderBeSlim);
     };
     const fitSections = () => {
         const contentColumn = doc.querySelector('.ibexa-main-container__content-column');
