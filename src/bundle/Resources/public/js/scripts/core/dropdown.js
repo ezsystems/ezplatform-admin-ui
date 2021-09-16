@@ -273,7 +273,7 @@
                     if (
                         !isOverflowNumber &&
                         index !== 0 &&
-                        itemsWidth > selectedItemsContainer.offsetWidth - RESTRICTED_AREA_ITEMS_CONTAINER
+                        itemsWidth > this.selectedItemsContainer.offsetWidth - RESTRICTED_AREA_ITEMS_CONTAINER
                     ) {
                         numberOfOverflowItems++;
                         item.hidden = true;
