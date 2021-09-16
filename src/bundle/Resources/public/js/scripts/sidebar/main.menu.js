@@ -68,6 +68,8 @@
         });
     };
     const parseMenuTitles = () => {
+        eZ.helpers.tooltips.hideAll();
+
         firstLevelMenuNode.querySelectorAll('.ibexa-main-menu__item').forEach((item) => {
             const label = item.querySelector('.ibexa-main-menu__item-text-column').textContent;
 
@@ -78,10 +80,7 @@
             }
 
             eZ.helpers.tooltips.parse(mainMenuNode);
-            item.removeAttribute('title');
         });
-
-        eZ.helpers.tooltips.hideAll();
     };
     const addResizeListeners = ({ clientX }) => {
         resizeStartPositionX = clientX;
