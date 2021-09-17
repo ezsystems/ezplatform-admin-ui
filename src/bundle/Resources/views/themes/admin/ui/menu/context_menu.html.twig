@@ -7,9 +7,7 @@
         {% endfor %}
 
         <li class="ibexa-context-menu__item ibexa-context-menu__item--more ibexa-adaptive-items__item ibexa-adaptive-items__item--selector">
-            {% set selector_btn_classes = item.extras.adaptiveItemsSelectorBtnClass is defined
-                ? item.extras.adaptiveItemsSelectorBtnClass
-                : 'btn ibexa-btn ibexa-btn--secondary ibexa-btn--no-text' %}
+            {% set selector_btn_classes = item.extras.adaptiveItemsSelectorBtnClass|default('btn ibexa-btn ibexa-btn--secondary ibexa-btn--no-text') %}
             <button class="{{ selector_btn_classes ~ ' ibexa-btn--more' }}">
                 <svg class="ibexa-icon ibexa-icon--small">
                     <use xlink:href="{{ ibexa_icon_path('options') }}"></use>

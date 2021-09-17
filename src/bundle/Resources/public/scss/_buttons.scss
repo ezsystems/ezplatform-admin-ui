@@ -140,10 +140,10 @@
         &:hover {
             color: $ibexa-color-white;
             box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-info;
-        }
 
-        &:hover:focus {
-            box-shadow: $ibexa-btn-focus-box-shadow-info, $ibexa-btn-hover-box-shadow-info;
+            &:focus {
+                box-shadow: $ibexa-btn-focus-box-shadow-info, $ibexa-btn-hover-box-shadow-info;
+            }
         }
     }
 

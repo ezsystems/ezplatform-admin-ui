@@ -82,8 +82,8 @@
             @include ibexa-font-sans-serif();
 
             color: $ibexa-color-dark-400;
-            font-size: 14px;
-            line-height: 21px;
+            font-size: $ibexa-text-font-size-medium;
+            line-height: calculateRem(21px);
         }
     }
 

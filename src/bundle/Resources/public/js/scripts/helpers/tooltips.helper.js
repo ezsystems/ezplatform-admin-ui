@@ -43,7 +43,7 @@
                     : 'body';
                 const iframe = document.querySelector(tooltipNode.dataset.tooltipIframeSelector);
 
-                const tooltip = new bootstrap.Tooltip(tooltipNode, {
+                new bootstrap.Tooltip(tooltipNode, {
                     delay,
                     placement,
                     container,
@@ -76,10 +76,10 @@
                                 },
                             },
                         };
-                        const idx = defaultBsPopperConfig.modifiers.findIndex((modifier) => modifier.name == 'offset');
+                        const offsetModifierIndex = defaultBsPopperConfig.modifiers.findIndex((modifier) => modifier.name == 'offset');
 
-                        if (idx != -1) {
-                            defaultBsPopperConfig.modifiers[idx] = offsetModifier;
+                        if (offsetModifierIndex != -1) {
+                            defaultBsPopperConfig.modifiers[offsetModifierIndex] = offsetModifier;
                         } else {
                             defaultBsPopperConfig.modifiers.push(offsetModifier);
                         }

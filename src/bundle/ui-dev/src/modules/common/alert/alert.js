@@ -33,6 +33,7 @@ const Alert = ({
     });
 
     let iconName = undefined;
+
     if (!iconPath) {
         iconName = iconNameProp ? iconNameProp : ICON_NAME_MAP[type];
     }
@@ -46,8 +47,10 @@ const Alert = ({
                 <div className="ibexa-alert__extra_content">{children}</div>
             </div>
             {showCloseBtn && (
-                <button className="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-alert__close-btn" onClick={onClose}>
-                    <Icon name="discard" />
+                <button
+                    className="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-alert__close-btn"
+                    onClick={onClose}>
+                    <Icon name="discard" extraClasses="ibexa-icon--tiny-small" />
                 </button>
             )}
         </div>
@@ -68,7 +71,15 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
+    title: null,
+    subtitle: null,
+    iconName: null,
+    iconPath: null,
+    showSubtitleBelow: false,
+    showCloseBtn: false,
+    onClose: () => {},
     extraClasses: '',
+    children: null,
 };
 
 export default Alert;
