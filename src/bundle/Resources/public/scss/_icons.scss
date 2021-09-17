@@ -3,6 +3,16 @@
     height: calculateRem(32px);
     transition: fill 0.3s $ibexa-admin-transition;
 
+    &--tiny {
+        width: calculateRem(8px);
+        height: calculateRem(8px);
+    }
+
+    &--tiny-small {
+        width: calculateRem(12px);
+        height: calculateRem(12px);
+    }
+
     &--small {
         width: calculateRem(16px);
         height: calculateRem(16px);
