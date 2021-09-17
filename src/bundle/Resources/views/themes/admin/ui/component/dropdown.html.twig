@@ -14,7 +14,7 @@
             data-template="{{ include('@ezdesign/ui/component/dropdown_selected_item.html.twig', {
                 value: '{{ value }}',
                 label: '{{ label }}',
-            })|e }}"
+            })|e('html_attr') }}"
         >
             {% if value is defined %}
                 {% for choice in choices_flat %}

@@ -9,8 +9,6 @@
             this.container = config.container.classList.contains('ibexa-dropdown') ? config.container : config.container.querySelector('.ibexa-dropdown');
 
             if (!this.container) {
-                this.error = true;
-
                 throw new Error('No valid container provided');
             }
 
@@ -174,15 +172,15 @@
         expandDropdown() {
             const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
             const { left, top, bottom } = this.selectedItemsContainer.getBoundingClientRect();
-            const isItemsContainerAbove = bottom + ITEMS_LIST_MIN_HEIGHT > viewportHeight;
+            const shouldItemsContainerBeAbove = bottom + ITEMS_LIST_MIN_HEIGHT > viewportHeight;
 
             this.itemsFixedWrapperContainer.style.left = `${left}px`;
-            this.itemsFixedWrapperContainer.style.top = `${isItemsContainerAbove ? top : bottom}px`;
+            this.itemsFixedWrapperContainer.style.top = `${shouldItemsContainerBeAbove ? top : bottom}px`;
 
             this.itemsFixedWrapperContainer.classList
-                .toggle('ibexa-dropdown__items-fixed-wrapper--position-top', isItemsContainerAbove);
+                .toggle('ibexa-dropdown__items-fixed-wrapper--position-top', shouldItemsContainerBeAbove);
 
-            this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(isItemsContainerAbove)}px`;
+            this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(shouldItemsContainerBeAbove)}px`;
 
             this.container.classList.add('ibexa-dropdown--is-expanding');
             this.itemsFilterInput
@@ -325,10 +323,6 @@
         }
 
         init() {
-            if (this.error) {
-                return;
-            }
-
             const selectedItems = this.getSelectedItems();
             const isEmpty = !selectedItems.length;
 
