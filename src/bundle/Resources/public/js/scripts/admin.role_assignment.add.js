@@ -14,7 +14,7 @@
     const selectUsersBtn = doc.querySelector('#role_assignment_create_users__btn');
     const selectGroupsBtn = doc.querySelector('#role_assignment_create_groups__btn');
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
-    const handleSubtreeUDWConfirm = (data) => {
+    const confirmSubtreeUDW = (data) => {
         const items = data.map((item) => ({
             id: item.id,
             name: item.ContentInfo.Content.TranslatedName,
@@ -33,7 +33,7 @@
 
         ReactDOM.render(
             React.createElement(eZ.modules.UniversalDiscovery, {
-                onConfirm: handleSubtreeUDWConfirm.bind(this),
+                onConfirm: confirmSubtreeUDW.bind(this),
                 onCancel: closeUDW,
                 multiple: true,
                 selectedLocations: selectedLocationsIds,
@@ -42,7 +42,7 @@
             udwContainer
         );
     };
-    const handleUsersAndGroupsUDWConfirm = (widget, selectedItems) => {
+    const confirmUsersAndGroupsUDW = (widget, selectedItems) => {
         const items = selectedItems.map((item) => ({
             id: item.ContentInfo.Content._id,
             name: item.ContentInfo.Content.Name,
@@ -66,7 +66,7 @@
 
         ReactDOM.render(
             React.createElement(eZ.modules.UniversalDiscovery, {
-                onConfirm: handleUsersAndGroupsUDWConfirm.bind(this, widget),
+                onConfirm: confirmUsersAndGroupsUDW.bind(this, widget),
                 onCancel: () => ReactDOM.unmountComponentAtNode(udwContainer),
                 title: selectBtn.dataset.universaldiscoveryTitle,
                 multiple: true,
