@@ -37,7 +37,7 @@
             }) }}
         {% endfor %}
     </div>
-    {{ form_widget(form, { attr: { hidden: false }, type: 'text' }) }}
+    {{ form_widget(form) }}
     <button
         type="button"
         {{ block('attributes', 'bootstrap_5_layout.html.twig') }}

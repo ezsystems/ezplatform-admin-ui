@@ -58,6 +58,7 @@
         event.preventDefault();
 
         const selectBtn = event.currentTarget;
+        console.log(selectBtn.dataset);
         const config = JSON.parse(selectBtn.dataset.udwConfig);
         const itemsMap = JSON.parse(selectBtn.dataset.itemsMap);
         const selectedContent = widget.inputField.value;

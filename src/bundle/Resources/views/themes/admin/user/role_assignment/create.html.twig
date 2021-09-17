@@ -56,7 +56,7 @@
                                 'data-input-selector': '#' ~ form.users.vars.id,
                                 'data-selected-content-list-selector': '#' ~ form.users.vars.id ~ '-selected-content',
                                 'data-udw-config': ez_udw_config('multiple_user', {}),
-                                'data-users-map': items_map|json_encode(),
+                                'data-items-map': items_map|json_encode(),
                             },
                             single_select: false,
                             can_delete_last: true,
@@ -97,33 +97,6 @@
                             type: 'role_assignment.view.type.groups'|trans|desc('User Groups'),
                         }) }}
                     </div>
-
-                    <button type="button" data-universaldiscovery-title="{{ "role_assignment.view.add.panel.users_and_groups.groups.udw_title"
-                        |trans({}, "role")
-                        |desc("Select User Groups to assign to the Role") }}"
-                        data-tag-template="{{ include('@ezdesign/user/role_assignment/create_tag_list_item.html.twig', {
-                            'content_name': '{{ content_name }}',
-                            'content_id': '{{ content_id }}'
-                        })|e('html_attr') }}"
-                        class="btn ibexa-btn ibexa-btn--secondary"
-                        id="{{ form.groups.vars.id }}__btn"
-                        data-input-selector="#{{ form.groups.vars.id }}"
-                        data-selected-content-list-selector="#{{ form.groups.vars.id }}-selected-content"
-                        data-udw-config="{{ ez_udw_config('multiple_user_group', {}) }}">
-                        {{ 'role_assignment.view.add.panel.users_and_groups.select_groups_btn.label'|trans|desc('Select User Groups') }}
-                    </button>
-
-                    <ul class="list-unstyled" id="{{ form.groups.vars.id }}-selected-content">
-                        {% for group in form.groups.vars.data %}
-                            {% if group is not empty %}
-                                {% set content_name = ez_content_name(group.content) %}
-                                {{ include('@ezdesign/user/role_assignment/create_tag_list_item.html.twig', {
-                                    'content_name': content_name,
-                                    'content_id': group.content.versionInfo.contentInfo.id
-                                }) }}
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
                 </div>
             </div>
         </section>
