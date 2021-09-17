@@ -22,7 +22,7 @@
                         <input
                             type="text"
                             id="username"
-                            class="form-control ibexa-input ibexa-login__input"
+                            class="form-control ibexa-input ibexa-input--text ibexa-login__input"
                             name="_username"
                             value="{{ last_username }}"
                             required="required"
@@ -38,16 +38,16 @@
                         <input
                             type="password"
                             id="password"
-                            class="form-control ibexa-input ibexa-login__input--password"
+                            class="form-control ibexa-input ibexa-input--text ibexa-login__input--password"
                             name="_password"
                             required="required"
                             tabindex="2"
                         />
                         <button type="button" class="ibexa-login__password-visibility-toggler" tabindex="5">
-                            <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--dark ibexa-icon--view">
+                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--dark ibexa-icon--view">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ ibexa_icon_path('view') }}"></use>
                             </svg>
-                            <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--dark ibexa-icon--view-hide d-none">
+                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--dark ibexa-icon--view-hide d-none">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ ibexa_icon_path('view-hide') }}"></use>
                             </svg>
                         </button>
@@ -57,7 +57,7 @@
                 {% endblock %}
 
                 {% block login_form_buttons %}
-                    <button type="submit" class="btn ibexa-btn ibexa-btn--small ibexa-btn--primary ibexa-login__btn ibexa-login__btn--sign-in" tabindex="3">
+                    <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-login__btn ibexa-login__btn--sign-in" tabindex="3">
                         {{ 'authentication.login'|trans|desc('Login') }}
                     </button>
                     <div class="ibexa-login__link-wrapper">
