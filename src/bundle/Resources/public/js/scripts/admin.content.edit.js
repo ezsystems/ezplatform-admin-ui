@@ -23,9 +23,7 @@
     ];
     const form = doc.querySelector('.ez-form-validate');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
-    const menuWorkflowButtons = doc.querySelectorAll('button[id^="workflow__apply__"]');
-    const applyButton = doc.querySelector('[name="ezplatform_content_forms_content_edit[workflow][apply]"]');
-    let isWorkflowEventListenerAttached = false;
+    const menuButtonsToValidate = doc.querySelectorAll('button[data-validate]');
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
         const validatorName = validator.constructor.name;
@@ -150,31 +148,6 @@
                 });
         }, eZ.adminUiConfig.autosave.interval);
     }
-    const addClickWorkflowHandler = () => {
-        if (isWorkflowEventListenerAttached) {
-            return;
-        }
-
-        applyButton.dataset.isFormValid = 0;
-        isWorkflowEventListenerAttached = true;
-        applyButton.addEventListener('click', clickHandler, false);
-    }
-    const removeClickWorkflowHandler = () => {
-        if (!isWorkflowEventListenerAttached) {
-            return;
-        }
-
-        isWorkflowEventListenerAttached = false;
-        applyButton.removeEventListener('click', clickHandler, false);
-    }
-
-    menuWorkflowButtons.forEach((buttonMenuWorkflow) => {
-        if (buttonMenuWorkflow.dataset.hasOwnProperty('validate')) {
-            buttonMenuWorkflow.addEventListener('click', addClickWorkflowHandler, false);
-        } else {
-            buttonMenuWorkflow.addEventListener('click', removeClickWorkflowHandler, false);
-        }
-    });
 
     form.setAttribute('novalidate', true);
     form.onkeypress = (event) => {
@@ -187,6 +160,11 @@
     };
 
     submitBtns.forEach((btn) => {
+        btn.dataset.isFormValid = 0;
+        btn.addEventListener('click', clickHandler, false);
+    });
+
+    menuButtonsToValidate.forEach((btn) => {
         btn.dataset.isFormValid = 0;
         btn.addEventListener('click', clickHandler, false);
     });

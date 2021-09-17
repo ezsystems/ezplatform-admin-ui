@@ -37,6 +37,10 @@
             () => {
                 const actions = doc.querySelector(`.ez-extra-actions[data-actions="${btn.dataset.actions}"]`);
 
+                if (btn.dataset.validate && !parseInt(btn.dataset.isFormValid, 10)) {
+                    return;
+                }
+
                 const isHidden = haveHiddenPart(actions);
                 const methodNameButton = isHidden ? 'add' : 'remove';
                 const methodNameContainer = isHidden ? 'remove' : 'add';
