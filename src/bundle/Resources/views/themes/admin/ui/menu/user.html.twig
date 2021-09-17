@@ -12,7 +12,11 @@
             data-bs-toggle="modal"
             data-bs-target="#view-notifications"
         />
-        <button class="ibexa-header-user-menu__notice-dot ibexa-header-user-menu__notice-dot--no-notice"></button>
+        <span
+            class="ibexa-header-user-menu__notice-dot ibexa-header-user-menu__notice-dot--no-notice"
+            data-bs-toggle="modal"
+            data-bs-target="#view-notifications"
+        ></span>
         <button class="ibexa-header-user-menu__name">{{ user.name }}</button>
 
         {% do item.setChildrenAttribute('class', 'ibexa-header-user-menu__popup-menu ibexa-popup-menu ibexa-popup-menu--hidden') %}
