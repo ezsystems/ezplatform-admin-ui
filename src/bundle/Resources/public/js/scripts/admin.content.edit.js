@@ -70,6 +70,12 @@
 
         event.preventDefault();
 
+        if (isFormValid(btn)) {
+            btn.click();
+        }
+    };
+
+    const isFormValid = (btn) => {
         const validators = eZ.fieldTypeValidators;
         const validationResults = validators.map(getValidationResults);
         const isFormValid = validationResults.every((result) => result.isValid);
@@ -77,34 +83,34 @@
 
         if (isFormValid) {
             btn.dataset.isFormValid = 1;
-            // for some reason trying to fire click event inside the event handler flow is impossible
-            // the following line breaks the flow so it's possible to fire click event on a button again.
-            window.setTimeout(() => btn.click(), 0);
-        } else {
-            btn.dataset.validatorsWithErrors = Array.from(
-                validationResults
-                    .filter((result) => !result.isValid)
-                    .reduce((total, result) => {
-                        total.add(result.validatorName);
 
-                        return total;
-                    }, new Set())
-            ).join();
-
-            fields.forEach((field) => field.removeAttribute('id'));
-
-            doc.querySelectorAll('.ez-tabs__nav-item').forEach((navItem) => {
-                navItem.classList.remove('ez-tabs__nav-item--invalid');
-            });
-
-            invalidTabs.forEach((invalidInputs) => {
-                invalidInputs.forEach((invalidInputKey) => {
-                    doc.querySelector(`#item-${invalidInputKey}`).classList.add('ez-tabs__nav-item--invalid');
-                });
-            });
-
-            focusOnFirstError();
+            return true;
         }
+        btn.dataset.validatorsWithErrors = Array.from(
+            validationResults
+                .filter((result) => !result.isValid)
+                .reduce((total, result) => {
+                    total.add(result.validatorName);
+
+                    return total;
+                }, new Set())
+        ).join();
+
+        fields.forEach((field) => field.removeAttribute('id'));
+
+        doc.querySelectorAll('.ez-tabs__nav-item').forEach((navItem) => {
+            navItem.classList.remove('ez-tabs__nav-item--invalid');
+        });
+
+        invalidTabs.forEach((invalidInputs) => {
+            invalidInputs.forEach((invalidInputKey) => {
+                doc.querySelector(`#item-${invalidInputKey}`).classList.add('ez-tabs__nav-item--invalid');
+            });
+        });
+
+        focusOnFirstError();
+
+        return false;
     };
 
     const isAutosaveEnabled = () => {
@@ -166,6 +172,6 @@
 
     menuButtonsToValidate.forEach((btn) => {
         btn.dataset.isFormValid = 0;
-        btn.addEventListener('click', clickHandler, false);
+        btn.addEventListener('click', isFormValid, false);
     });
 })(window, window.document, window.eZ, window.Translator);
