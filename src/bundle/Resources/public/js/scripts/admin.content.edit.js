@@ -71,7 +71,7 @@
         event.preventDefault();
 
         if (isFormValid(btn)) {
-            btn.click();
+            window.setTimeout(() => btn.click(), 0);
         }
     };
 
