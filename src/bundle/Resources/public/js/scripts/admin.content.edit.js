@@ -71,7 +71,9 @@
         event.preventDefault();
 
         if (isFormValid(btn)) {
-            window.setTimeout(() => btn.click(), 0);
+            // for some reason trying to fire click event inside the event handler flow is impossible
+            // the following line breaks the flow so it's possible to fire click event on a button again.
+            global.setTimeout(() => btn.click(), 0);
         }
     };
     const validateHandler = (event) => {
