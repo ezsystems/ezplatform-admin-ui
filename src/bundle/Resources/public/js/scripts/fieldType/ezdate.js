@@ -77,9 +77,9 @@
 
         date = new Date(date[0]);
         date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-        const microTime = date.getTime() - selectedDateWithUserTimezone.utcOffset() * 60 * 1000;
+        const milliseconds = date.getTime() - selectedDateWithUserTimezone.utcOffset() * 60 * 1000;
 
-        sourceInput.value = Math.floor(microTime / 1000);
+        sourceInput.value = Math.floor(milliseconds / 1000);
         sourceInput.dispatchEvent(event);
     };
     const clearValue = (sourceInput, flatpickrInstance, event) => {
