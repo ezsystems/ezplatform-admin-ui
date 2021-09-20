@@ -74,7 +74,13 @@
             window.setTimeout(() => btn.click(), 0);
         }
     };
+    const validateHandler = (event) => {
+        const btn = event.currentTarget;
+        btn.dataset.isFormValid = 0;
 
+        event.preventDefault();
+        isFormValid(btn);
+    };
     const isFormValid = (btn) => {
         const validators = eZ.fieldTypeValidators;
         const validationResults = validators.map(getValidationResults);
@@ -112,7 +118,6 @@
 
         return false;
     };
-
     const isAutosaveEnabled = () => {
         return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
     };
@@ -171,7 +176,7 @@
     });
 
     menuButtonsToValidate.forEach((btn) => {
-        btn.dataset.isFormValid = 0;
-        btn.addEventListener('click', isFormValid, false);
+        btn.addEventListener('click', validateHandler, false);
     });
+
 })(window, window.document, window.eZ, window.Translator);
