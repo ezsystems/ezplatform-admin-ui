@@ -75,10 +75,12 @@
         }
     };
     const validateHandler = (event) => {
+        event.preventDefault();
+
         const btn = event.currentTarget;
+
         btn.dataset.isFormValid = 0;
 
-        event.preventDefault();
         isFormValid(btn);
     };
     const isFormValid = (btn) => {
@@ -92,6 +94,7 @@
 
             return true;
         }
+
         btn.dataset.validatorsWithErrors = Array.from(
             validationResults
                 .filter((result) => !result.isValid)
