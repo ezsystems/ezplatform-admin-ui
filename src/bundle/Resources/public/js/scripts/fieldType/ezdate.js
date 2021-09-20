@@ -73,13 +73,9 @@
             return;
         }
 
-        const selectedDateWithUserTimezone = eZ.helpers.timezone.convertDateToTimezone(date[0]);
+        const selectedDateWithUserTimezone = eZ.helpers.timezone.convertDateToTimezone(date[0], eZ.adminUiConfig.timezone, true);
 
-        date = new Date(date[0]);
-        date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-        const milliseconds = date.getTime() - selectedDateWithUserTimezone.utcOffset() * 60 * 1000;
-
-        sourceInput.value = Math.floor(milliseconds / 1000);
+        sourceInput.value = Math.floor(selectedDateWithUserTimezone.valueOf() / 1000);
         sourceInput.dispatchEvent(event);
     };
     const clearValue = (sourceInput, flatpickrInstance, event) => {
