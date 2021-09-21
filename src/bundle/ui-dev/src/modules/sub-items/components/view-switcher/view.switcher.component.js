@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import ViewSwitcherButton from './view.switcher.button.component';
+import Icon from '../../../common/icon/icon';
 
 const ViewSwitcherComponent = ({ onViewChange, activeView, isDisabled }) => {
     let componentClassName = 'c-view-switcher';
@@ -10,27 +9,23 @@ const ViewSwitcherComponent = ({ onViewChange, activeView, isDisabled }) => {
         componentClassName = `${componentClassName} ${componentClassName}--disabled`;
     }
 
-    const listViewBtnLabel = Translator.trans(/*@Desc("View as list")*/ 'switch_to_list_view.btn.label', {}, 'sub_items');
-    const gridViewBtnLabel = Translator.trans(/*@Desc("View as grid")*/ 'switch_to_grid_view.btn.label', {}, 'sub_items');
+    const viewBtnLabel = Translator.trans(/*@Desc("View")*/ 'switch_to_list_view.btn.label.2', {}, 'sub_items');
+    const listViewBtnTitle = Translator.trans(/*@Desc("View as list")*/ 'switch_to_list_view.btn.title', {}, 'sub_items');
+    const gridViewBtnTitle = Translator.trans(/*@Desc("View as grid")*/ 'switch_to_grid_view.btn.title', {}, 'sub_items');
+    const viewBtnTitle = activeView === 'table' ? gridViewBtnTitle : listViewBtnTitle;
+    const viewBtnIconName = activeView === 'table' ? 'view-grid' : 'view-list';
+    const switchView = () => {
+        const newView = activeView === 'table' ? 'grid' : 'table';
+
+        onViewChange(newView);
+    };
+    const btnClassName = 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--icon-on-right';
 
     return (
         <div className={componentClassName}>
-            <ViewSwitcherButton
-                id="table"
-                icon="view-list"
-                title={listViewBtnLabel}
-                onClick={onViewChange}
-                activeView={activeView}
-                isDisabled={isDisabled}
-            />
-            <ViewSwitcherButton
-                id="grid"
-                icon="view-grid"
-                title={gridViewBtnLabel}
-                onClick={onViewChange}
-                activeView={activeView}
-                isDisabled={isDisabled}
-            />
+            <button type="button" className={btnClassName} title={viewBtnTitle} onClick={switchView} disabled={isDisabled}>
+                {viewBtnLabel} <Icon name={viewBtnIconName} extraClasses="ibexa-icon--small" />
+            </button>
         </div>
     );
 };

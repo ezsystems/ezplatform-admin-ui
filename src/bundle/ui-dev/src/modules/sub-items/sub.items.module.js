@@ -1129,33 +1129,39 @@ export default class SubItemsModule extends Component {
     }
 
     renderBulkMoveBtn(disabled) {
-        const label = Translator.trans(/*@Desc("Move selected items")*/ 'move_btn.label', {}, 'sub_items');
+        const label = Translator.trans(/*@Desc("Move")*/ 'move_btn.label', {}, 'sub_items');
+        const title = Translator.trans(/*@Desc("Move selected items")*/ 'move_btn.title', {}, 'sub_items');
 
-        return <ActionButton disabled={disabled} onClick={this.onMoveBtnClick} label={label} type="move" />;
+        return <ActionButton disabled={disabled} onClick={this.onMoveBtnClick} label={label} title={title} type="move" />;
     }
 
     renderBulkAddLocationBtn(disabled) {
-        const label = Translator.trans(/*@Desc("Add Locations to selected Content item(s)")*/ 'add_locations_btn.label', {}, 'sub_items');
+        const label = Translator.trans(/*@Desc("Add Locations")*/ 'add_locations_btn.label', {}, 'sub_items');
+        const title = Translator.trans(/*@Desc("Add Locations to selected Content item(s)")*/ 'add_locations_btn.title', {}, 'sub_items');
 
-        return <ActionButton disabled={disabled} onClick={this.onAddLocationsBtnClick} label={label} type="create-location" />;
+        return <ActionButton disabled={disabled} onClick={this.onAddLocationsBtnClick} label={label} title={title} type="create-location" />;
     }
 
     renderBulkHideBtn(disabled) {
-        const label = Translator.trans(/*@Desc("Hide selected Locations")*/ 'hide_locations_btn.label', {}, 'sub_items');
+        const label = Translator.trans(/*@Desc("Hide")*/ 'hide_locations_btn.label', {}, 'sub_items');
+        const title = Translator.trans(/*@Desc("Hide selected Locations")*/ 'hide_locations_btn.title', {}, 'sub_items');
 
-        return <ActionButton disabled={disabled} onClick={this.onHideBtnClick} label={label} type="hide" />;
+        console.log(label, title)
+        return <ActionButton disabled={disabled} onClick={this.onHideBtnClick} label={label} title={title} type="hide" />;
     }
 
     renderBulkUnhideBtn(disabled) {
-        const label = Translator.trans(/*@Desc("Reveal selected Locations")*/ 'unhide_locations_btn.label', {}, 'sub_items');
+        const label = Translator.trans(/*@Desc("Reveal")*/ 'unhide_locations_btn.label', {}, 'sub_items');
+        const title = Translator.trans(/*@Desc("Reveal selected Locations")*/ 'unhide_locations_btn.title', {}, 'sub_items');
 
-        return <ActionButton disabled={disabled} onClick={this.onUnhideBtnClick} label={label} type="reveal" />;
+        return <ActionButton disabled={disabled} onClick={this.onUnhideBtnClick} label={label} title={title} type="reveal" />;
     }
 
     renderBulkDeleteBtn(disabled) {
-        const label = Translator.trans(/*@Desc("Delete selected items")*/ 'trash_btn.label', {}, 'sub_items');
+        const label = Translator.trans(/*@Desc("Delete")*/ 'trash_btn.label', {}, 'sub_items');
+        const title = Translator.trans(/*@Desc("Delete selected items")*/ 'trash_btn.title', {}, 'sub_items');
 
-        return <ActionButton disabled={disabled} onClick={this.onDeleteBtnClick} label={label} type="trash" />;
+        return <ActionButton disabled={disabled} onClick={this.onDeleteBtnClick} label={label} title={title} type="trash" />;
     }
 
     renderSpinner() {
@@ -1252,7 +1258,21 @@ export default class SubItemsModule extends Component {
 
         return (
             <div className="m-sub-items" style={{ width: `${subItemsWidth}px` }}>
-                <div className="m-sub-items__header">
+                <div class="ibexa-table-header ">
+                    <div class="ibexa-table-header__headline">
+                        {listTitle} ({this.state.totalCount})
+                    </div>
+                    <div class="ibexa-table-header__actions">
+                        {this.props.extraActions.map(this.renderExtraActions)}
+                        {this.renderBulkMoveBtn(bulkBtnDisabled)}
+                        {this.renderBulkAddLocationBtn(bulkBtnDisabled)}
+                        {this.renderBulkHideBtn(bulkHideBtnDisabled)}
+                        {this.renderBulkUnhideBtn(bulkUnhideBtnDisabled)}
+                        {this.renderBulkDeleteBtn(bulkBtnDisabled)}
+                        <ViewSwitcherComponent onViewChange={this.switchView} activeView={activeView} isDisabled={!totalCount} />
+                    </div>
+                </div>
+                {/* <div className="m-sub-items__header">
                     <div className="m-sub-items__title">
                         {listTitle} ({this.state.totalCount})
                     </div>
@@ -1265,7 +1285,7 @@ export default class SubItemsModule extends Component {
                         {this.renderBulkDeleteBtn(bulkBtnDisabled)}
                     </div>
                     <ViewSwitcherComponent onViewChange={this.switchView} activeView={activeView} isDisabled={!totalCount} />
-                </div>
+                </div> */}
                 <div ref={this._refListViewWrapper} className={listClassName}>
                     {this.renderSpinner()}
                     {this.renderListView()}

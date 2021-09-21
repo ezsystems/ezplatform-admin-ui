@@ -30,7 +30,7 @@ const SORTKEY_MAP = {
     priority: 'LocationPriority',
 };
 const TABLE_CELL_CLASS = 'c-table-view__cell';
-const TABLE_HEAD_CLASS = `${TABLE_CELL_CLASS} ${TABLE_CELL_CLASS}--head`;
+const TABLE_HEAD_CLASS = `ibexa-table__header-cell ${TABLE_CELL_CLASS} ${TABLE_CELL_CLASS}--head`;
 export const headerLabels = {
     name: Translator.trans(/*@Desc("Name")*/ 'items_table.header.name', {}, 'sub_items'),
     modified: Translator.trans(/*@Desc("Modified")*/ 'items_table.header.modified', {}, 'sub_items'),
@@ -182,12 +182,21 @@ export default class TableViewComponent extends Component {
             }
 
             let onClick = null;
+            const isNameColumn = columnKey === 'name';
             const className = createCssClassNames({
                 [TABLE_HEAD_CLASS]: true,
-                [`${TABLE_CELL_CLASS}--sortable`]: columnKey in SORTKEY_MAP,
-                [`${TABLE_CELL_CLASS}--sorted-asc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'ascending',
-                [`${TABLE_CELL_CLASS}--sorted-desc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'descending',
-                [`${TABLE_CELL_CLASS}--name`]: columnKey === 'name',
+                // [`${TABLE_CELL_CLASS}--sortable`]: columnKey in SORTKEY_MAP,
+                // [`${TABLE_CELL_CLASS}--sorted-asc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'ascending',
+                // [`${TABLE_CELL_CLASS}--sorted-desc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'descending',
+                [`${TABLE_CELL_CLASS}--name`]: isNameColumn,
+                'ibexa-table__header-cell--close-left': isNameColumn,
+            });
+            const wrapperClassName = createCssClassNames({
+                'c-table-view__label': true,
+                'ibexa-table__sort-column': columnKey in SORTKEY_MAP,
+                'ibexa-table__header-cell-text-wrapper': true,
+                'ibexa-table__sort-column--asc': SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'ascending',
+                'ibexa-table__sort-column--desc': SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'descending',
             });
 
             if (columnKey in SORTKEY_MAP) {
@@ -198,7 +207,7 @@ export default class TableViewComponent extends Component {
 
             return (
                 <th key={columnKey} className={className} onClick={onClick} tabIndex={-1}>
-                    <span className="c-table-view__label">{headerLabels[columnKey]}</span>
+                    <span className={wrapperClassName}>{headerLabels[columnKey]}</span>
                 </th>
             );
         });
@@ -224,7 +233,8 @@ export default class TableViewComponent extends Component {
 
         return (
             <thead className="c-table-view__head">
-                <tr className="c-table-view__row">
+                <tr className="ibexa-table__head-row c-table-view__row">
+                    {/* TODO: disable ibexa-tables checkbox JSes for this table */}
                     <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--checkbox`}>
                         <ThreeStateCheckboxComponent
                             indeterminate={isCheckboxIndeterminate}
@@ -234,7 +244,7 @@ export default class TableViewComponent extends Component {
                             class="ibexa-input ibexa-input--checkbox"
                         />
                     </th>
-                    <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--icon`} />
+                    {/* <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--icon`} /> */}
                     {this.renderBasicColumnsHeader()}
                     <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--actions`}>
                         <TableViewColumnsTogglerComponent
@@ -254,9 +264,9 @@ export default class TableViewComponent extends Component {
         return (
             <div className="c-table-view__wrapper">
                 <div className="c-table-view__scroller">
-                    <table className="c-table-view c-table-view--hoverable">
+                    <table className="table ibexa-table c-table-view">
                         {this.renderHead()}
-                        <tbody className="c-table-view__body">{renderedItems}</tbody>
+                        <tbody className="ibexa-table__body c-table-view__body">{renderedItems}</tbody>
                     </table>
                 </div>
                 {createPortal(

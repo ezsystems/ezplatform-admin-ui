@@ -1,6 +1,7 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../../../common/icon/icon';
+import { createCssClassNames } from '../../../common/helpers/css.class.names';
 
 const { formatShortDateTime } = window.eZ.helpers.timezone;
 
@@ -157,12 +158,19 @@ export default class TableViewItemComponent extends PureComponent {
     renderNameCell() {
         const { item, generateLink } = this.props;
         const contentName = item.content._name;
+        const contentTypeIdentifier = item.content._info.contentType.identifier;
+        const contentTypeIconUrl = eZ.helpers.contentType.getContentTypeIconUrl(contentTypeIdentifier);
         const linkAttrs = {
             className: 'c-table-view-item__link c-table-view-item__text-wrapper',
             href: generateLink(item.id, item.content._info.id),
         };
 
-        return <a {...linkAttrs}>{contentName}</a>;
+        return (
+            <span className="c-table-view-item__icon-with-name-wrapper">
+                <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--small" />
+                <a {...linkAttrs}>{contentName}</a>
+            </span>
+        );
     }
 
     /**
@@ -232,13 +240,13 @@ export default class TableViewItemComponent extends PureComponent {
         const { item, languages } = this.props;
 
         return (
-            <Fragment>
+            <>
                 {item.content._info.currentVersion.languageCodes.map((languageCode) => (
                     <span key={languageCode} className="c-table-view-item__translation">
                         {languages.mappings[languageCode].name}
                     </span>
                 ))}
-            </Fragment>
+            </>
         );
     }
 
@@ -252,31 +260,37 @@ export default class TableViewItemComponent extends PureComponent {
     }
 
     renderCreatorCell() {
-        return <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.owner)}</div>;
+        return <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.owner)}</div>;
     }
 
     renderContributorCell() {
-        return <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.currentVersion.creator)}</div>;
+        return (
+            <div className="ibexa-table__cell c-table-view-item__text-wrapper">
+                {this.getName(this.props.item.content._info.currentVersion.creator)}
+            </div>
+        );
     }
 
     renderSectionCell() {
-        return <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.section)}</div>;
+        return (
+            <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.section)}</div>
+        );
     }
 
     renderLocationIdCell() {
-        return <div className="c-table-view-item__text-wrapper">{this.props.item.id}</div>;
+        return <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.props.item.id}</div>;
     }
 
     renderLocationRemoteIdCell() {
-        return <div className="c-table-view-item__text-wrapper">{this.props.item.remoteId}</div>;
+        return <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.props.item.remoteId}</div>;
     }
 
     renderObjectIdCell() {
-        return <div className="c-table-view-item__text-wrapper">{this.props.item.content._info.id}</div>;
+        return <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.props.item.content._info.id}</div>;
     }
 
     renderObjectRemoteIdCell() {
-        return <div className="c-table-view-item__text-wrapper">{this.props.item.content._info.remoteId}</div>;
+        return <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.props.item.content._info.remoteId}</div>;
     }
 
     renderBasicColumns() {
@@ -291,8 +305,16 @@ export default class TableViewItemComponent extends PureComponent {
                 return null;
             }
 
+            const isNameColumn = columnKey === 'name';
+            const className = createCssClassNames({
+                'ibexa-table__cell': true,
+                'c-table-view-item__cell': true,
+                [`c-table-view-item__cell--${columnKey}`]: true,
+                'ibexa-table__cell--close-left': isNameColumn,
+            });
+
             return (
-                <td key={columnKey} className={`c-table-view-item__cell c-table-view-item__cell--${columnKey}`}>
+                <td key={columnKey} className={className}>
                     {this.columnsRenderers[columnKey]()}
                 </td>
             );
@@ -345,12 +367,10 @@ export default class TableViewItemComponent extends PureComponent {
     render() {
         const { item, isSelected } = this.props;
         const editLabel = Translator.trans(/*@Desc("Edit")*/ 'edit_item_btn.label', {}, 'sub_items');
-        const contentTypeIdentifier = item.content._info.contentType.identifier;
-        const contentTypeIconUrl = eZ.helpers.contentType.getContentTypeIconUrl(contentTypeIdentifier);
 
         return (
-            <tr className="c-table-view-item">
-                <td className="c-table-view-item__cell c-table-view-item__cell--checkbox">
+            <tr className="ibexa-table__row c-table-view-item">
+                <td className="ibexa-table__cell c-table-view-item__cell c-table-view-item__cell--checkbox">
                     <input
                         type="checkbox"
                         class="ibexa-input ibexa-input--checkbox"
@@ -358,11 +378,11 @@ export default class TableViewItemComponent extends PureComponent {
                         onChange={this.onSelectCheckboxChange}
                     />
                 </td>
-                <td className="c-table-view-item__cell c-table-view-item__cell--icon">
+                {/* <td className="ibexa-table__cell c-table-view-item__cell c-table-view-item__cell--icon">
                     <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--small-medium" />
-                </td>
+                </td> */}
                 {this.renderBasicColumns()}
-                <td className="c-table-view-item__cell c-table-view-item__cell--actions">
+                <td className="ibexa-table__cell c-table-view-item__cell c-table-view-item__cell--actions">
                     <span
                         title={editLabel}
                         data-extra-classes="c-table-view-item__tooltip"
