@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block form %}
-    {{ form_start(form) }}
+    {{ form_start(form, { attr: { class: 'ibexa-form' } } ) }}
         <div
             class="ibexa-content-type-edit__sections ibexa-anchor-navigation-sections container"
             data-language-code="{{ language_code }}"
