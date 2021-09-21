@@ -6,15 +6,35 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="64c5c95d125dba2fe988e587edf8586decebae5a" resname="content.field_type.ezgmaplocation.locate_me">
-        <source>Locate me</source>
-        <target state="new">Locate me</target>
-        <note>key: content.field_type.ezgmaplocation.locate_me</note>
-      </trans-unit>
       <trans-unit id="6a6094a8406a207e85ac5523d0fa582b0e62b45e" resname="content.field_type.ezimage.delete">
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: content.field_type.ezimage.delete</note>
+      </trans-unit>
+      <trans-unit id="29eeb1b93f4861921c61a7945e2391277f8f51cb" resname="content.field_type.ezimage.dimensions.height">
+        <source>H:%height% px</source>
+        <target state="new">H:%height% px</target>
+        <note>key: content.field_type.ezimage.dimensions.height</note>
+      </trans-unit>
+      <trans-unit id="f7b5c9f8a50ded940700a03352cf0e485ea60c76" resname="content.field_type.ezimage.dimensions.label">
+        <source>Master dimension</source>
+        <target state="new">Master dimension</target>
+        <note>key: content.field_type.ezimage.dimensions.label</note>
+      </trans-unit>
+      <trans-unit id="6c094e8d763a88aa509c3cbbede52fa7c3845d1e" resname="content.field_type.ezimage.dimensions.width">
+        <source>W:%width% px</source>
+        <target state="new">W:%width% px</target>
+        <note>key: content.field_type.ezimage.dimensions.width</note>
+      </trans-unit>
+      <trans-unit id="5b2917ba4fda1ac4fb73307200d9928f736d98fc" resname="content.field_type.ezimage.file_name.label">
+        <source>File name</source>
+        <target state="new">File name</target>
+        <note>key: content.field_type.ezimage.file_name.label</note>
+      </trans-unit>
+      <trans-unit id="031874e861b36e8a866f00fad21ab9b123bfeac0" resname="content.field_type.ezimage.file_size.label">
+        <source>Size</source>
+        <target state="new">Size</target>
+        <note>key: content.field_type.ezimage.file_size.label</note>
       </trans-unit>
       <trans-unit id="9cadbe380acedd355a84784a1c98cc7aca8897c6" resname="content.field_type.ezimage.img_alt">
         <source>Image stored in Field '%label%'</source>
@@ -25,6 +45,11 @@
         <source>Preview</source>
         <target state="new">Preview</target>
         <note>key: content.field_type.ezimage.preview</note>
+      </trans-unit>
+      <trans-unit id="d0a33e267c69b34b41947ba52461856032760baa" resname="content.field_type.ezimageasset.file_name.label">
+        <source>File name</source>
+        <target state="new">File name</target>
+        <note>key: content.field_type.ezimageasset.file_name.label</note>
       </trans-unit>
       <trans-unit id="03ebd0d1e50c8323be782f1095d9d4d7f9edffa4" resname="content.field_type.ezimageasset.img_alt">
         <source>Image stored in Field '%label%'</source>
@@ -41,6 +66,16 @@
         <target state="new">Download</target>
         <note>key: content.field_type.ezmedia.download</note>
       </trans-unit>
+      <trans-unit id="fbb1d36df5b97fd759acc4bc2751583063cf4345" resname="content.field_type.ezmedia.file_name.label">
+        <source>File name</source>
+        <target state="new">File name</target>
+        <note>key: content.field_type.ezmedia.file_name.label</note>
+      </trans-unit>
+      <trans-unit id="4bf6f1e57e56347d3f67817a1821e34e8e10223f" resname="content.field_type.ezmedia.file_size.label">
+        <source>Size</source>
+        <target state="new">Size</target>
+        <note>key: content.field_type.ezmedia.file_size.label</note>
+      </trans-unit>
       <trans-unit id="093c498e82bd382a4732e4bb8356c7d88b671f25" resname="content.field_type.ezmedia.player_settings">
         <source>Player settings</source>
         <target state="new">Player settings</target>
@@ -56,10 +91,25 @@
         <target state="new">Delete</target>
         <note>key: ezbinaryfile.action.remove</note>
       </trans-unit>
-      <trans-unit id="b388b6cf9e8d44856fed11bc8ff3f4decb177449" resname="ezgmaplocation.action.search">
-        <source>Search</source>
-        <target state="new">Search</target>
-        <note>key: ezgmaplocation.action.search</note>
+      <trans-unit id="b3041013e5ac79a0e13e801e961113d316e5f53b" resname="ezbinaryfile.file_name.label">
+        <source>File name</source>
+        <target state="new">File name</target>
+        <note>key: ezbinaryfile.file_name.label</note>
+      </trans-unit>
+      <trans-unit id="6d325718c51e875c68421267b3327d4293e2377c" resname="ezbinaryfile.file_size.label">
+        <source>Size</source>
+        <target state="new">Size</target>
+        <note>key: ezbinaryfile.file_size.label</note>
+      </trans-unit>
+      <trans-unit id="7c04ee07097d51038bc2f39c8d21a29d7088eb73" resname="ezgmaplocation.input.placeholder">
+        <source>Search address</source>
+        <target state="new">Search address</target>
+        <note>key: ezgmaplocation.input.placeholder</note>
+      </trans-unit>
+      <trans-unit id="1f1e64c4f617827d9668a0b463990d86abb94202" resname="ezgmaplocation.text.info">
+        <source>or enter geographical coordinates</source>
+        <target state="new">or enter geographical coordinates</target>
+        <note>key: ezgmaplocation.text.info</note>
       </trans-unit>
       <trans-unit id="8743253091e5a5798966bae8d2dc65682bffa0de" resname="ezobjectrelation.helper">
         <source>Stores a Relation to a Content item.</source>
@@ -80,11 +130,6 @@
         <source>Stores Relations to other Content items.</source>
         <target state="new">Stores Relations to other Content items.</target>
         <note>key: ezobjectrelationlist.helper</note>
-      </trans-unit>
-      <trans-unit id="e3d3887285c9d2ee774741a92bbfe53708143bc6" resname="ezobjectrelationlist.cta.limit.sub_text">
-        <source>Relations max. %limit%</source>
-        <target state="new">Relations max. %limit%</target>
-        <note>key: ezobjectrelationlist.cta.limit.sub_text</note>
       </trans-unit>
       <trans-unit id="97e94752cba8892136d56b07057f0cac9344cb56" resname="ezobjectrelationlist.table.row.content_type">
         <source>Content Type</source>
@@ -111,6 +156,11 @@
         <target state="new">Drag and drop file</target>
         <note>key: fieldtype.binary_base.drag_drop</note>
       </trans-unit>
+      <trans-unit id="02ce19b8a1c8ed94bade2e4fcff441b8226b90c0" resname="fieldtype.binary_base.drag_drop.or">
+        <source>or</source>
+        <target state="new">or</target>
+        <note>key: fieldtype.binary_base.drag_drop.or</note>
+      </trans-unit>
       <trans-unit id="858c986173f1ef87d7acda017535b86f01bca87d" resname="fieldtype.binary_base.max_file_size">
         <source>Max file size: %size%</source>
         <target state="new">Max file size: %size%</target>
@@ -125,11 +175,6 @@
         <source>Delete</source>
         <target state="new">Delete</target>
         <note>key: fieldtype.ezimageasset.delete</note>
-      </trans-unit>
-      <trans-unit id="44b5dc8270a7494f1c46883bc7fbc31f45789027" resname="fieldtype.ezimageasset.open">
-        <source>Open</source>
-        <target state="new">Open</target>
-        <note>key: fieldtype.ezimageasset.open</note>
       </trans-unit>
       <trans-unit id="dcf8a820f28bd6b955d76c6d3b95a2661d2b7540" resname="fieldtype.ezimageasset.select.label">
         <source>Select from library</source>

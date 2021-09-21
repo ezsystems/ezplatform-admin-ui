@@ -251,6 +251,16 @@
         <target state="new"><![CDATA[No data collected<br/> for the selected period]]></target>
         <note>key: dashboard.charts.no_data</note>
       </trans-unit>
+      <trans-unit id="a3390555f717ffd9b3560f17198e5a437899967f" resname="dropdown.placeholder">
+        <source>Choose an option</source>
+        <target state="new">Choose an option</target>
+        <note>key: dropdown.placeholder</note>
+      </trans-unit>
+      <trans-unit id="272e650f8667b4f4fcb7032b85b98ef4a9974f0f" resname="dropdown.search">
+        <source>Search...</source>
+        <target state="new">Search...</target>
+        <note>key: dropdown.search</note>
+      </trans-unit>
       <trans-unit id="7cb40cbc703336ab1285e81ebf100b82b05a0e27" resname="error.page.403.actions">
         <source><![CDATA[Please contact your Administrator to request access to this content or modify your profile.<br/>Otherwise, go back to <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></source>
         <target state="new"><![CDATA[Please contact your Administrator to request access to this content or modify your profile.<br/>Otherwise, go back to <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></target>
@@ -325,6 +335,31 @@
         <source>Name</source>
         <target state="new">Name</target>
         <note>key: ezauthor.name</note>
+      </trans-unit>
+      <trans-unit id="9a8153d976ff4a6805e00fa7945d153f01bc61a8" resname="ezobjectrelationlist.cta.limit.multi">
+        <source>Set up a Relation with one or several Items</source>
+        <target state="new">Set up a Relation with one or several Items</target>
+        <note>key: ezobjectrelationlist.cta.limit.multi</note>
+      </trans-unit>
+      <trans-unit id="6589b9cece0e96f6430a994e1b4e9db1ee5f8139" resname="ezobjectrelationlist.cta.limit.single">
+        <source>Set up a Relation with one Item</source>
+        <target state="new">Set up a Relation with one Item</target>
+        <note>key: ezobjectrelationlist.cta.limit.single</note>
+      </trans-unit>
+      <trans-unit id="e3d3887285c9d2ee774741a92bbfe53708143bc6" resname="ezobjectrelationlist.cta.limit.sub_text">
+        <source>Relations max. %limit%</source>
+        <target state="new">Relations max. %limit%</target>
+        <note>key: ezobjectrelationlist.cta.limit.sub_text</note>
+      </trans-unit>
+      <trans-unit id="df33d5cc8c00514b2c50d4949b872cc3cd99284c" resname="ezobjectrelationlist.cta.select">
+        <source>Select Item</source>
+        <target state="new">Select Item</target>
+        <note>key: ezobjectrelationlist.cta.select</note>
+      </trans-unit>
+      <trans-unit id="85874e8811087f9c2169915345cdf71d5243182e" resname="ezobjectrelationlist.delete_selected_relations">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: ezobjectrelationlist.delete_selected_relations</note>
       </trans-unit>
       <trans-unit id="8c3f0606ebb870dd8113cca42da7510414c5a0a8" resname="ezplatform.forgot_password.reset_your_password.reason.migration">
         <source>Your password has expired, change it.</source>

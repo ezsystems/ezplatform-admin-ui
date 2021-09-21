@@ -51,7 +51,7 @@
                         'fieldtypes_edit'
                     );
                     heightNode.innerHTML = Translator.trans(
-                        /* @Desc("H:%height% px") */ 'ezimage.dimensions.width',
+                        /* @Desc("H:%height% px") */ 'ezimage.dimensions.height',
                         { height },
                         'fieldtypes_edit'
                     );

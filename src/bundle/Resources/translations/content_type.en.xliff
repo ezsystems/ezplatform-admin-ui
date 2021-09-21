@@ -181,11 +181,6 @@
         <target state="new">Container</target>
         <note>key: content_type.is_container</note>
       </trans-unit>
-      <trans-unit id="02f6ddfcdd8bbd05cdd1b954503a3801288b74eb" resname="content_type.modal.message">
-        <source>Do you want to delete the Content Type?</source>
-        <target state="new">Do you want to delete the Content Type?</target>
-        <note>key: content_type.modal.message</note>
-      </trans-unit>
       <trans-unit id="7fddd251857df821bd536dd680e1edbc921790a2" resname="content_type.name">
         <source>Name</source>
         <target state="new">Name</target>
@@ -381,16 +376,6 @@
         <target state="new">Editing Content Type '%name%'</target>
         <note>key: content_type.view.edit.title</note>
       </trans-unit>
-      <trans-unit id="803a61fc8cf4e7bdfcf27432bb35e379a4971134" resname="content_type.view.list.action.add">
-        <source>Create a Content Type</source>
-        <target state="new">Create a Content Type</target>
-        <note>key: content_type.view.list.action.add</note>
-      </trans-unit>
-      <trans-unit id="c3287b9fccc0b54216e50ba02e3d72e17cc1c92e" resname="content_type.view.list.action.delete">
-        <source>Delete Content Type</source>
-        <target state="new">Delete Content Type</target>
-        <note>key: content_type.view.list.action.delete</note>
-      </trans-unit>
       <trans-unit id="bef02fc3d41e74bf002af93b413a2a203a04db1a" resname="content_type.view.list.column.id">
         <source>ID</source>
         <target state="new">ID</target>
@@ -461,11 +446,6 @@
         <target state="new">Deleted Content Type group '%name%'.</target>
         <note>key: content_type_group.delete.success</note>
       </trans-unit>
-      <trans-unit id="09f63694559a9149fb1297e33be843cf54788b95" resname="content_type_group.modal.message">
-        <source>Do you want to delete the Content Type group?</source>
-        <target state="new">Do you want to delete the Content Type group?</target>
-        <note>key: content_type_group.modal.message</note>
-      </trans-unit>
       <trans-unit id="4c6dfb0b81f5b9d70fed0dda3840f0677ece9570" resname="content_type_group.update.name">
         <source>Name</source>
         <target state="new">Name</target>
@@ -490,16 +470,6 @@
         <source>Editing Content Type group '%identifier%'</source>
         <target state="new">Editing Content Type group '%identifier%'</target>
         <note>key: content_type_group.view.edit.title</note>
-      </trans-unit>
-      <trans-unit id="8eb8668549f90436db605805680144f4b87c7fc0" resname="content_type_group.view.list.action.add">
-        <source>Create a Content Type group</source>
-        <target state="new">Create a Content Type group</target>
-        <note>key: content_type_group.view.list.action.add</note>
-      </trans-unit>
-      <trans-unit id="ceb2e962eccd99d66a600df886fb1ff3253c2f16" resname="content_type_group.view.list.action.delete">
-        <source>Delete Content Type group(s)</source>
-        <target state="new">Delete Content Type group(s)</target>
-        <note>key: content_type_group.view.list.action.delete</note>
       </trans-unit>
       <trans-unit id="e078a8733eac84a6f85ccb7883df2767d357528e" resname="content_type_group.view.list.action.edit">
         <source>Edit</source>

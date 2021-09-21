@@ -36,11 +36,6 @@
         <target state="new">Section identifier may only contain letters from "a" to "z", numbers and underscores.</target>
         <note>key: ez.section.identifier.format</note>
       </trans-unit>
-      <trans-unit id="54d912b0089483cfd533714e50262851b6d1421a" resname="ezplatform.change_user_password.passwords_must_match">
-        <source>Passwords do not match.</source>
-        <target state="new">Passwords do not match.</target>
-        <note>key: ezplatform.change_user_password.passwords_must_match</note>
-      </trans-unit>
       <trans-unit id="1235bb9d75f7a324d6b06742720ab9c18775ddce" resname="ezplatform.copy_subtree.is_not_container">
         <source>Selected Location cannot contain children.</source>
         <target state="new">Selected Location cannot contain children.</target>
@@ -60,11 +55,6 @@
         <source>Copy subtree limit exceeded. Current limit: %currentLimit%</source>
         <target state="new">Copy subtree limit exceeded. Current limit: %currentLimit%</target>
         <note>key: ezplatform.copy_subtree.limit_exceeded</note>
-      </trans-unit>
-      <trans-unit id="58f9ad2e8a8df010fb8abb25e39b46f2ccf92294" resname="ezplatform.reset_user_password.passwords_must_match">
-        <source>Passwords do not match.</source>
-        <target state="new">Passwords do not match.</target>
-        <note>key: ezplatform.reset_user_password.passwords_must_match</note>
       </trans-unit>
       <trans-unit id="dcdb0ac04fad96ebe26ca71df1c731e6228ff14f" resname="ezplatform.trash.have_used_assets">
         <source>Selected Location has assets that cannot be removed.</source>
