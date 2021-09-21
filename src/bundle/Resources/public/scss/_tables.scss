@@ -265,6 +265,8 @@
             display: flex;
             height: calculateRem(16px);
             width: calculateRem(16px);
+            margin-bottom: 0;
+            min-height: calculateRem(16px);
         }
     }
 

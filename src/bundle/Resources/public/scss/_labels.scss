@@ -14,7 +14,7 @@
         font-size: calculateRem(14px);
         line-height: calculateRem(21px);
         color: $ibexa-color-dark;
-        margin: calculateRem(10px) 0 calculateRem(9px);
+        margin: 0 0 calculateRem(9px);
 
         &.required {
             &:after {

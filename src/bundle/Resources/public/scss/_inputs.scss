@@ -116,6 +116,10 @@
         border-radius: calculateRem(2px);
         margin-bottom: calculateRem(3px);
 
+        &.form-check-input {
+            float: none;
+        }
+
         &::after {
             content: ' ';
             position: absolute;
