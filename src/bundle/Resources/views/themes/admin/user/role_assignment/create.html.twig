@@ -32,7 +32,7 @@
                     {{ 'role_assignment.view.add.panel.users_and_groups.title'|trans|desc('Users and Groups') }}
                 </div>
                 <div class="card-body ibexa-card__body">
-                    <div class="ez-assign-users">
+                    <div class="ibexa-assign-users">
                         {{ form_label(form.users) }}
                         {{ form_errors(form.users) }}
 
@@ -58,14 +58,14 @@
                                 'data-udw-config': ez_udw_config('multiple_user', {}),
                                 'data-items-map': items_map|json_encode(),
                             },
-                            single_select: false,
-                            can_delete_last: true,
+                            is_single_select: false,
+                            can_be_empty: true,
                             title: 'role_assignment.view.select.users'|trans|desc('Select Users'),
                             type: 'role_assignment.view.type.users'|trans|desc('Users'),
                         }) }}
                     </div>
 
-                    <div class="ez-assign-groups">
+                    <div class="ibexa-assign-groups">
                         {{ form_label(form.groups) }}
                         {{ form_errors(form.groups) }}
 
@@ -91,8 +91,8 @@
                                 'data-udw-config': ez_udw_config('multiple_user_group', {}),
                                 'data-items-map': items_map|json_encode(),
                             },
-                            single_select: false,
-                            can_delete_last: true,
+                            is_single_select: false,
+                            can_be_empty: true,
                             title: 'role_assignment.view.select.groups'|trans|desc('Select User Groups'),
                             type: 'role_assignment.view.type.groups'|trans|desc('User Groups'),
                         }) }}
@@ -135,8 +135,8 @@
                                     'data-input-selector': '#' ~ form.locations.vars.id,
                                     'data-udw-config': ez_udw_config('multiple', {})
                                 },
-                                single_select: false,
-                                can_delete_last: true,
+                                is_single_select: false,
+                                can_be_empty: true,
                                 title: 'role_assignment.view.select.subtree'|trans|desc('Select subtree')
                             }) }}
                         </div>

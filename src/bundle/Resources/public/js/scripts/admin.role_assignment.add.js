@@ -5,10 +5,10 @@
         fieldContainer: doc.querySelector('.ez-limitations__item-subtree'),
     });
     const selectUsersWidget = new eZ.core.TagViewSelect({
-        fieldContainer: doc.querySelector('.ez-assign-users'),
+        fieldContainer: doc.querySelector('.ibexa-assign-users'),
     });
     const selectGroupsWidget = new eZ.core.TagViewSelect({
-        fieldContainer: doc.querySelector('.ez-assign-groups'),
+        fieldContainer: doc.querySelector('.ibexa-assign-groups'),
     });
     const subtreeBtn = doc.querySelector('.ez-limitations__btn-select-subtree');
     const selectUsersBtn = doc.querySelector('#role_assignment_create_users__btn');
@@ -58,7 +58,6 @@
         event.preventDefault();
 
         const selectBtn = event.currentTarget;
-        console.log(selectBtn.dataset);
         const config = JSON.parse(selectBtn.dataset.udwConfig);
         const itemsMap = JSON.parse(selectBtn.dataset.itemsMap);
         const selectedContent = widget.inputField.value;
