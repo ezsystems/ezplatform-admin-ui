@@ -7,9 +7,14 @@
     </header>
     <body>
       <trans-unit id="8d9e2f3fb15679717338a9f8ba95640c4b6b2e66" resname="add_locations_btn.label">
+        <source>Add Locations</source>
+        <target state="new">Add Locations</target>
+        <note>key: add_locations_btn.label</note>
+      </trans-unit>
+      <trans-unit id="6ba5c2079e228fda8a01a35ae552f1554b79813d" resname="add_locations_btn.title">
         <source>Add Locations to selected Content item(s)</source>
         <target state="new">Add Locations to selected Content item(s)</target>
-        <note>key: add_locations_btn.label</note>
+        <note>key: add_locations_btn.title</note>
       </trans-unit>
       <trans-unit id="ca61c6a680354ca0ca27b53f63d9d30ba35eee2a" resname="bulk_action.error.more_info">
         <source><![CDATA[<u><a class='ez-notification-btn ez-notification-btn--show-modal'>Click here for more information.</a></u><br>]]></source>
@@ -187,9 +192,14 @@
         <note>key: edit_item_btn.label</note>
       </trans-unit>
       <trans-unit id="0f2106150fc552b94658eee2125a4c4680f3564c" resname="hide_locations_btn.label">
+        <source>Hide</source>
+        <target state="new">Hide</target>
+        <note>key: hide_locations_btn.label</note>
+      </trans-unit>
+      <trans-unit id="730434b3420c800024bb940ef21fc46346695f2a" resname="hide_locations_btn.title">
         <source>Hide selected Locations</source>
         <target state="new">Hide selected Locations</target>
-        <note>key: hide_locations_btn.label</note>
+        <note>key: hide_locations_btn.title</note>
       </trans-unit>
       <trans-unit id="2f2de7291ed87063841f5d65e5d73c1c50eaa3be" resname="instant.filter.placeholder">
         <source>Type to refine</source>
@@ -292,29 +302,44 @@
         <note>key: languages.modal.label</note>
       </trans-unit>
       <trans-unit id="e3c395cec9466f06c8f2f3f4b2bfcd9021537714" resname="move_btn.label">
+        <source>Move</source>
+        <target state="new">Move</target>
+        <note>key: move_btn.label</note>
+      </trans-unit>
+      <trans-unit id="dc4e7682cfab5d9febd2efd94b40c5b747832694" resname="move_btn.title">
         <source>Move selected items</source>
         <target state="new">Move selected items</target>
-        <note>key: move_btn.label</note>
+        <note>key: move_btn.title</note>
       </trans-unit>
       <trans-unit id="276a7024903672cd0476c82ba8845453e13db95e" resname="no_items.message">
         <source>This location has no sub-items</source>
         <target state="new">This location has no sub-items</target>
         <note>key: no_items.message</note>
       </trans-unit>
-      <trans-unit id="af207d1e719904a39524b34212a1ea6116cb3d46" resname="switch_to_grid_view.btn.label">
+      <trans-unit id="4bed04fe70182d0491c20005326bda3abfccc8aa" resname="switch_to_grid_view.btn.title">
         <source>View as grid</source>
         <target state="new">View as grid</target>
-        <note>key: switch_to_grid_view.btn.label</note>
+        <note>key: switch_to_grid_view.btn.title</note>
       </trans-unit>
       <trans-unit id="b5bfcc24141601264b6c03972d8e45bbb7c49a09" resname="switch_to_list_view.btn.label">
-        <source>View as list</source>
-        <target state="new">View as list</target>
+        <source>View</source>
+        <target state="new">View</target>
         <note>key: switch_to_list_view.btn.label</note>
       </trans-unit>
+      <trans-unit id="4c4637653764ac21c32fc8f8daff690ddad7e0de" resname="switch_to_list_view.btn.title">
+        <source>View as list</source>
+        <target state="new">View as list</target>
+        <note>key: switch_to_list_view.btn.title</note>
+      </trans-unit>
       <trans-unit id="11b5de206f496e357ede3c3798b8e113c2946a60" resname="trash_btn.label">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note>key: trash_btn.label</note>
+      </trans-unit>
+      <trans-unit id="742ab3052cf3d512a135faab3de494e4f63a89ae" resname="trash_btn.title">
         <source>Delete selected items</source>
         <target state="new">Delete selected items</target>
-        <note>key: trash_btn.label</note>
+        <note>key: trash_btn.title</note>
       </trans-unit>
       <trans-unit id="cd8466f8e727278543a7e1ded7f3a0c67243c276" resname="udw.choose_location.title">
         <source>Choose Location</source>
@@ -322,9 +347,14 @@
         <note>key: udw.choose_location.title</note>
       </trans-unit>
       <trans-unit id="8518fc267b3ab3f637351ddbd8ad08e1312d822c" resname="unhide_locations_btn.label">
+        <source>Reveal</source>
+        <target state="new">Reveal</target>
+        <note>key: unhide_locations_btn.label</note>
+      </trans-unit>
+      <trans-unit id="df4c2dced7fda2897fda67b6b5227e1395c9ab66" resname="unhide_locations_btn.title">
         <source>Reveal selected Locations</source>
         <target state="new">Reveal selected Locations</target>
-        <note>key: unhide_locations_btn.label</note>
+        <note>key: unhide_locations_btn.title</note>
       </trans-unit>
       <trans-unit id="5ae5a511a5c344781ad0caa53efe7b33429c6132" resname="viewing_message">
         <source><![CDATA[Viewing <strong>%viewingCount%</strong> out of <strong>%totalCount%</strong> sub-items]]></source>

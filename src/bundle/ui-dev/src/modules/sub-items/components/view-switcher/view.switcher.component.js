@@ -9,7 +9,7 @@ const ViewSwitcherComponent = ({ onViewChange, activeView, isDisabled }) => {
         componentClassName = `${componentClassName} ${componentClassName}--disabled`;
     }
 
-    const viewBtnLabel = Translator.trans(/*@Desc("View")*/ 'switch_to_list_view.btn.label.2', {}, 'sub_items');
+    const viewBtnLabel = Translator.trans(/*@Desc("View")*/ 'switch_to_list_view.btn.label', {}, 'sub_items');
     const listViewBtnTitle = Translator.trans(/*@Desc("View as list")*/ 'switch_to_list_view.btn.title', {}, 'sub_items');
     const gridViewBtnTitle = Translator.trans(/*@Desc("View as grid")*/ 'switch_to_grid_view.btn.title', {}, 'sub_items');
     const viewBtnTitle = activeView === 'table' ? gridViewBtnTitle : listViewBtnTitle;
