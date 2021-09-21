@@ -4,9 +4,9 @@
     const timeout = 200;
     const filters = doc.querySelectorAll('.ez-instant-filter');
     const toggleGroupDisplay = (group) => {
-        const hasAllChildrenHidden = [...group.querySelectorAll(SELECTOR_ITEM)].every((item) => item.hasAttribute('hidden'));
+        const areChildrenHidden = [...group.querySelectorAll(SELECTOR_ITEM)].every((item) => item.hasAttribute('hidden'));
 
-        group.toggleAttribute('hidden', hasAllChildrenHidden);
+        group.toggleAttribute('hidden', areChildrenHidden);
     };
     const filterItems = function(itemsMap, groups, event) {
         window.clearTimeout(filterTimeout);
