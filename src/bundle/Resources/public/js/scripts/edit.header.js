@@ -17,7 +17,6 @@
         }
 
         const { scrollTop } = event.currentTarget;
-        const headerNode = doc.querySelector('.ibexa-edit-header');
         const shouldHeaderBeSlim = scrollTop > SCROLL_POSITION_TO_FIT;
 
         headerNode.classList.toggle('ibexa-edit-header--slim', shouldHeaderBeSlim);
