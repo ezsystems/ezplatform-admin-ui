@@ -172,7 +172,8 @@
         flex-direction: column;
 
         .ibexa-input-text-wrapper {
-            margin: calculateRem(8px) calculateRem(12px);
+            width: 100%;
+            padding: calculateRem(8px) calculateRem(12px);
         }
     }
 

@@ -171,7 +171,7 @@
 
         expandDropdown() {
             const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-            const { left, top, bottom } = this.selectedItemsContainer.getBoundingClientRect();
+            const { left, top, bottom, width } = this.selectedItemsContainer.getBoundingClientRect();
             const shouldItemsContainerBeAbove = bottom + ITEMS_LIST_MIN_HEIGHT > viewportHeight;
 
             this.itemsFixedWrapperContainer.style.left = `${left}px`;
@@ -181,6 +181,7 @@
                 .toggle('ibexa-dropdown__items-fixed-wrapper--position-top', shouldItemsContainerBeAbove);
 
             this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(shouldItemsContainerBeAbove)}px`;
+            this.itemsContainer.style.width = `${width}px`;
 
             this.container.classList.add('ibexa-dropdown--is-expanding');
             this.itemsFilterInput
