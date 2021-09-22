@@ -15,6 +15,7 @@ use Ibexa\AdminUi\Behat\Component\RightMenu;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
+use Ibexa\Behat\Browser\Locator\XPathLocator;
 use Ibexa\Behat\Browser\Routing\Router;
 
 class ContentTypeUpdatePage extends AdminUpdateItemPage
@@ -60,6 +61,9 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             new VisibleCSSLocator('fieldBody', 'ez-card__body'),
             new VisibleCSSLocator('fieldCollapsed', 'ez-card--collapsed'),
             new VisibleCSSLocator('fieldDefinitionToggler', '.ez-card__body-display-toggler'),
+            new XPathLocator('ezlandingpageFieldDisplayButton', '//*[@id="field-definition-page"]/button'),
+            new XPathLocator('selectBlocksDropdown', '//div[contains(@class,"ez-page-select-items")]/a[contains(text(),"Select blocks")]'),
+            new XPathLocator('selectBlocksDropdownDefault', '//div[contains(@class,"ez-page-select-items__group")]/a[contains(text(),"default")]'),
         ]);
     }
 
@@ -85,5 +89,18 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             })
             ->first()
         ;
+    }
+
+    public function expandDefaultBlocksOption()
+    {
+        $this->getHTMLPage()->find($this->getLocator('selectBlocksDropdown'))->click();
+        $this->getHTMLPage()->find($this->getLocator('selectBlocksDropdownDefault'))->click();
+    }
+
+    public function selectBlock($blockName)
+    {
+        $blockFindingScript = "document.querySelector('.ez-page-select-items__item .form-check .form-check-input[value=\'%s\']').click()";
+        $scriptToExecute = sprintf($blockFindingScript, $blockName);
+        $this->getSession()->executeScript($scriptToExecute);
     }
 }
