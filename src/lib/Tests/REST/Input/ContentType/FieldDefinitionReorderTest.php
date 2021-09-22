@@ -26,7 +26,7 @@ final class FieldDefinitionReorderTest extends TestCase
 
     public function testValidInput(): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             new FieldDefinitionReorderValue(['foo', 'bar', 'baz']),
             $this->parser->parse(
                 [

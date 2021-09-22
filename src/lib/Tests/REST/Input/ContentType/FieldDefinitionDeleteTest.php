@@ -26,7 +26,7 @@ final class FieldDefinitionDeleteTest extends TestCase
 
     public function testValidInput(): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             new FieldDefinitionDeleteValue(['foo', 'bar', 'baz']),
             $this->parser->parse(
                 [

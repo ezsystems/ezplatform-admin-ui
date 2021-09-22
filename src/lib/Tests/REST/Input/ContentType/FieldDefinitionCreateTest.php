@@ -26,7 +26,7 @@ final class FieldDefinitionCreateTest extends TestCase
 
     public function testValidInput(): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             new FieldDefinitionCreateValue('ezstring', null),
             $this->parser->parse(
                 [
@@ -36,7 +36,7 @@ final class FieldDefinitionCreateTest extends TestCase
             )
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             new FieldDefinitionCreateValue('ezstring', 'foo_identifier', 10),
             $this->parser->parse(
                 [
