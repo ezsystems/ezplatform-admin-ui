@@ -41,7 +41,7 @@
         display: block;
         width: auto;
         height: auto;
-        max-width: calculateRem(248px);
+        max-width: calculateRem(184px);
         max-height: calculateRem(248px);
     }
 
@@ -63,6 +63,17 @@
         text-decoration: none;
         font-weight: 600;
         letter-spacing: calculateRem(0.12px);
+        line-height: calculateRem(21px);
+    }
+
+    &__sub-title {
+        margin-top: calculateRem(4px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        font-size: $ibexa-text-font-size-small;
+        letter-spacing: calculateRem(0.12px);
         line-height: calculateRem(24px);
     }
 
@@ -71,5 +82,30 @@
         top: calculateRem(8px);
         right: calculateRem(8px);
         line-height: 1;
+    }
+
+    &__info {
+        display: flex;
+        height: calculateRem(64px);
+    }
+
+    &__status-container {
+        width: calculateRem(20px);
+        display: flex;
+    }
+
+    &__title-container {
+        width: calc(100% - #{calculateRem(40px)});
+    }
+
+    &__actions-container {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        width: calculateRem(20px);
+
+        .ibexa-popup-menu {
+            left: calculateRem(22px);
+        }
     }
 }
