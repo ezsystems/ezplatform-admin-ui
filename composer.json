@@ -12,7 +12,10 @@
         }
     },
     "autoload-dev": {
-        "psr-4": { "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests" }
+        "psr-4": {
+            "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests",
+            "Ibexa\\AdminUi\\Tests\\": "src/lib/Tests"
+        }
     },
     "require": {
         "php": "^7.3",
