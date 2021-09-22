@@ -535,7 +535,6 @@ class ContentTypeController extends Controller
     }
 
     public function addFieldDefinitionFormAction(
-        Request $request,
         ContentTypeGroup $group,
         ContentTypeDraft $contentTypeDraft,
         string $fieldDefinitionIdentifier,
