@@ -13,6 +13,9 @@ use Ibexa\AdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbar;
 use Ibexa\AdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbarItem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @internal
+ */
 final class FieldTypeToolbarFactory
 {
     /** @var \eZ\Publish\Core\FieldType\FieldTypeRegistry */
