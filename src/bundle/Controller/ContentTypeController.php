@@ -544,7 +544,7 @@ class ContentTypeController extends Controller
     ): Response {
         $this->denyAccessUnlessGranted(new Attribute('class', 'update'));
 
-        if (!$language) {
+        if ($language === null) {
             $language = $this->getDefaultLanguage($contentTypeDraft);
         }
 
