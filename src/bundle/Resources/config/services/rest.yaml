@@ -46,7 +46,7 @@ services:
     tags:
       - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTypFieldDefinitionCreate }
 
-  EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentType\FieldDefinitionDelete:
+  Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionDelete:
     parent: ezpublish_rest.input.parser
     tags:
       - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTypeFieldDefinitionDelete }

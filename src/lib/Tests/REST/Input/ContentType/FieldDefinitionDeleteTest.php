@@ -6,17 +6,17 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tests\REST\Input\ContentType;
+namespace Ibexa\AdminUi\Tests\REST\Input\ContentType;
 
-use EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentType\FieldDefinitionDelete;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentType\FieldDefinitionDelete as FieldDefinitionDeleteValue;
 use EzSystems\EzPlatformRest\Exceptions;
 use EzSystems\EzPlatformRest\Input\ParsingDispatcher;
+use Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionDelete;
 use PHPUnit\Framework\TestCase;
 
 final class FieldDefinitionDeleteTest extends TestCase
 {
-    /** @var \EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentType\FieldDefinitionDelete */
+    /** @var \Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionDelete */
     private $parser;
 
     protected function setUp(): void
@@ -40,7 +40,7 @@ final class FieldDefinitionDeleteTest extends TestCase
     public function testInvalidInput(): void
     {
         $this->expectException(Exceptions\Parser::class);
-        $this->expectExceptionMessage("Missing or invalid 'fieldDefinitionIdentifiers' property for EzSystems\EzPlatformAdminUi\REST\Value\ContentType\FieldDefinitionDelete.");
+        $this->expectExceptionMessage("Missing or invalid 'fieldDefinitionIdentifiers' property for Ibexa\AdminUi\REST\Value\ContentType\FieldDefinitionDelete.");
 
         $this->parser->parse(
             [],
