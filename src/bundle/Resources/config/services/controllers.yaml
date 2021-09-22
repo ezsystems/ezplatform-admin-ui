@@ -1,7 +1,7 @@
 services:
     EzSystems\EzPlatformAdminUiBundle\Controller\:
         resource: "../../Controller/*"
-        exclude: "../../Controller/{Controller}"
+        exclude: "../../Controller/{FieldDefinitionController.php}"
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         tags:
@@ -197,7 +197,7 @@ services:
         tags: ['controller.service_arguments']
         autowire: true
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\FieldDefinitionController:
+    Ibexa\Bundle\AdminUi\Controller\FieldDefinitionController:
         parent: ezpublish_rest.controller.base
         tags: ['controller.service_arguments']
         autowire: true

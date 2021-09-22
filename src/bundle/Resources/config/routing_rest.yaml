@@ -43,8 +43,8 @@ ezplatform.location.tree.load_subtree:
 ibexa.content_type.field_definition.create:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/add_field_definition/{toLanguageCode}
     methods: ['POST']
+    controller: 'Ibexa\Bundle\AdminUi\Controller\FieldDefinitionController::addFieldDefinitionAction'
     defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\FieldDefinitionController::addFieldDefinitionAction'
         toLanguageCode: ~
     requirements:
         contentTypeGroupId: \d+
@@ -52,15 +52,13 @@ ibexa.content_type.field_definition.create:
 ibexa.content_type.field_definition.remove:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/remove_field_definition
     methods: ['DELETE']
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\FieldDefinitionController::removeFieldDefinitionAction'
+    controller: 'Ibexa\Bundle\AdminUi\Controller\FieldDefinitionController::removeFieldDefinitionAction'
     requirements:
         contentTypeGroupId: \d+
 
 ibexa.content_type.field_definition.reorder:
     path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/reorder_field_definitions
     methods: ['PUT']
-    defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\FieldDefinitionController::reorderFieldDefinitionsAction'
+    controller: 'Ibexa\Bundle\AdminUi\Controller\FieldDefinitionController::reorderFieldDefinitionsAction'
     requirements:
         contentTypeGroupId: \d+

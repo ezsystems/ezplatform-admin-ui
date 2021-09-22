@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use Exception;
 use eZ\Publish\API\Repository\ContentTypeService;
