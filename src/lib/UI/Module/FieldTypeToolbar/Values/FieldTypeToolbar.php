@@ -6,14 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar\Values;
+namespace Ibexa\AdminUi\UI\Module\FieldTypeToolbar\Values;
 
 use Iterator;
 use IteratorAggregate;
 
 final class FieldTypeToolbar implements IteratorAggregate
 {
-    /** @var \EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbarItem[] */
+    /** @var \Ibexa\AdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbarItem[] */
     private $items;
 
     public function __construct(array $fieldTypes)
@@ -22,7 +22,7 @@ final class FieldTypeToolbar implements IteratorAggregate
     }
 
     /**
-     * @return \EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbarItem[]
+     * @return \Ibexa\AdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbarItem[]
      */
     public function getItems(): iterable
     {
@@ -30,7 +30,7 @@ final class FieldTypeToolbar implements IteratorAggregate
     }
 
     /**
-     * @return \EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbarItem[]
+     * @return \Ibexa\AdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbarItem[]
      */
     public function getIterator(): Iterator
     {

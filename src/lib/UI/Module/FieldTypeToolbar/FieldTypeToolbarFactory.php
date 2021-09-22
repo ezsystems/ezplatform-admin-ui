@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar;
 
 use eZ\Publish\Core\FieldType\FieldTypeRegistry;
-use EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbar;
-use EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbarItem;
+use Ibexa\AdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbar;
+use Ibexa\AdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbarItem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class FieldTypeToolbarFactory

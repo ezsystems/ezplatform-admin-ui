@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar\Values;
+namespace Ibexa\AdminUi\UI\Module\FieldTypeToolbar\Values;
 
 final class FieldTypeToolbarItem
 {
