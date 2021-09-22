@@ -558,15 +558,17 @@ class ContentTypeController extends Controller
         $form = $this->createUpdateForm($group, $contentTypeDraft, $language, $baseLanguage);
 
         foreach ($form['fieldDefinitionsData'] as $fieldDefinitionsGroupForm) {
-            if (isset($fieldDefinitionsGroupForm[$fieldDefinitionIdentifier])) {
-                return $this->render('@ezdesign/content_type/part/field_definition_form.html.twig', [
-                    'form' => $fieldDefinitionsGroupForm[$fieldDefinitionIdentifier]->createView(),
-                    'content_type_group' => $group,
-                    'content_type' => $contentTypeDraft,
-                    'language_code' => $baseLanguage ? $baseLanguage->languageCode : $language->languageCode,
-                    'is_translation' => $contentTypeDraftData->mainLanguageCode !== $contentTypeDraftData->languageCode,
-                ]);
+            if (!isset($fieldDefinitionsGroupForm[$fieldDefinitionIdentifier])) {
+                continue;
             }
+
+            return $this->render('@ezdesign/content_type/part/field_definition_form.html.twig', [
+                'form' => $fieldDefinitionsGroupForm[$fieldDefinitionIdentifier]->createView(),
+                'content_type_group' => $group,
+                'content_type' => $contentTypeDraft,
+                'language_code' => $baseLanguage ? $baseLanguage->languageCode : $language->languageCode,
+                'is_translation' => $contentTypeDraftData->mainLanguageCode !== $contentTypeDraftData->languageCode,
+            ]);
         }
 
         throw $this->createNotFoundException("Field definition with identifier $fieldDefinitionIdentifier not found");
