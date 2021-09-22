@@ -1,0 +1,13 @@
+<div class="ibexa-list-search {{ class|default('') }}">
+    {% block search_form_wrapper %}
+        <div class="ibexa-list-search__form-wrapper">
+            {% block search_form %}{% endblock %}
+        </div>
+    {% endblock %}
+
+    {% block pagination_wrapper %}
+        <div class="ibexa-list-search__pagination-wrapper">
+            {% block search_pagination %}{% endblock %}
+        </div>
+    {% endblock %}
+</div>
