@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Tests\REST\Input\ContentType;
 
-use Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionCreate;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentType\FieldDefinitionCreate as FieldDefinitionCreateValue;
 use EzSystems\EzPlatformRest\Exceptions;
 use EzSystems\EzPlatformRest\Input\ParsingDispatcher;
 use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase;
+use Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionCreate;
 
 final class FieldDefinitionCreateTest extends TestCase
 {
