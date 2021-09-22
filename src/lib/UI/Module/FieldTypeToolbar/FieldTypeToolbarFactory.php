@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar;
+namespace Ibexa\AdminUi\UI\Module\FieldTypeToolbar;
 
 use eZ\Publish\Core\FieldType\FieldTypeRegistry;
 use Ibexa\AdminUi\UI\Module\FieldTypeToolbar\Values\FieldTypeToolbar;

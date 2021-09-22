@@ -32,7 +32,7 @@ use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUi\Tab\ContentType\TranslationsTab;
-use EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar\FieldTypeToolbarFactory;
+use Ibexa\AdminUi\UI\Module\FieldTypeToolbar\FieldTypeToolbarFactory;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ActionDispatcherInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -78,7 +78,7 @@ class ContentTypeController extends Controller
      */
     private $configResolver;
 
-    /** @var \EzSystems\EzPlatformAdminUi\UI\Module\FieldTypeToolbar\FieldTypeToolbarFactory */
+    /** @var \Ibexa\AdminUi\UI\Module\FieldTypeToolbar\FieldTypeToolbarFactory */
     private $fieldTypeToolbarFactory;
 
     public function __construct(
