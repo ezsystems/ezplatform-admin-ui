@@ -14,14 +14,14 @@ use PHPUnit\Framework\TestCase;
 
 class ContentTypeDataTest extends TestCase
 {
-    public function testContentTypeDraft()
+    public function testContentTypeDraft(): void
     {
         $contentTypeDraft = $this->getMockForAbstractClass(ContentTypeDraft::class);
         $data = new ContentTypeData(['contentTypeDraft' => $contentTypeDraft]);
         self::assertSame($contentTypeDraft, $data->contentTypeDraft);
     }
 
-    public function testFieldDefinitionData()
+    public function testFieldDefinitionData(): void
     {
         $fieldDef1 = new FieldDefinitionData([
             'fieldGroup' => 'field_group__alpha',
@@ -66,7 +66,7 @@ class ContentTypeDataTest extends TestCase
         ], iterator_to_array($data->getFlatFieldDefinitionsData()));
     }
 
-    public function testSortFieldDefinitions()
+    public function testSortFieldDefinitions(): void
     {
         $fieldDef1 = new FieldDefinitionData([
             'fieldDefinition' => $this->getMockForAbstractClass(
