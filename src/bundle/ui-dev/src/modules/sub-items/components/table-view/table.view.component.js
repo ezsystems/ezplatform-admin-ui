@@ -59,14 +59,42 @@ export default class TableViewComponent extends Component {
         this.setLanguageSelectorData = this.setLanguageSelectorData.bind(this);
         this.openLanguageSelector = this.openLanguageSelector.bind(this);
         this.closeLanguageSelector = this.closeLanguageSelector.bind(this);
+        this.handleScrollerScroll = this.handleScrollerScroll.bind(this);
 
         this._refColumnsTogglerButton = createRef();
+        this._refScroller = createRef();
 
         this.state = {
             columnsVisibility: this.getColumnsVisibilityFromLocalStorage(),
             languageSelectorData: {},
             languageSelectorOpen: false,
+            scrollShadowLeft: false,
+            scrollShadowRight: false,
         };
+    }
+
+    componentDidMount() {
+        this._refScroller.current.addEventListener('scroll', this.handleScrollerScroll, false);
+        this.handleScrollerScroll();
+    }
+
+    componentWillUnmount() {
+        this._refScroller.current.removeEventListener('scroll', this.handleScrollerScroll, false);
+    }
+
+    handleScrollerScroll() {
+        this.setState(() => {
+            if (!this._refScroller.current) {
+                return {}
+            }
+
+            const scroller = this._refScroller.current
+
+            return {
+                scrollShadowLeft: scroller.scrollLeft > 0,
+                scrollShadowRight: scroller.scrollLeft !== scroller.scrollWidth - scroller.offsetWidth,
+            }
+        })
     }
 
     getColumnsVisibilityFromLocalStorage() {
@@ -147,7 +175,7 @@ export default class TableViewComponent extends Component {
      * @memberof TableViewComponent
      */
     renderItem(item) {
-        const { columnsVisibility } = this.state;
+        const { columnsVisibility, scrollShadowLeft, scrollShadowRight } = this.state;
         const { handleItemPriorityUpdate, handleEditItem, generateLink, languages, onItemSelect, selectedLocationsIds } = this.props;
         const isSelected = selectedLocationsIds.has(item.id);
 
@@ -164,6 +192,8 @@ export default class TableViewComponent extends Component {
                 columnsVisibility={columnsVisibility}
                 setLanguageSelectorData={this.setLanguageSelectorData}
                 openLanguageSelector={this.openLanguageSelector}
+                showScrollShadowLeft={scrollShadowLeft}
+                showScrollShadowRight={scrollShadowRight}
             />
         );
     }
@@ -241,7 +271,7 @@ export default class TableViewComponent extends Component {
                             checked={anyLocationSelected}
                             onClick={this.selectAll} // We need onClick, because MS Edge does not trigger onChange when checkbox has indeterminate state. (ref: https://stackoverflow.com/a/33529024/5766602)
                             onChange={() => {}} // Dummy callback to not trigger React warning as we cannot use onChange on MS Edge
-                            class="ibexa-input ibexa-input--checkbox"
+                            className="ibexa-input ibexa-input--checkbox"
                         />
                     </th>
                     {/* <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--icon`} /> */}
@@ -263,7 +293,7 @@ export default class TableViewComponent extends Component {
 
         return (
             <div className="c-table-view__wrapper">
-                <div className="c-table-view__scroller">
+                <div className="c-table-view__scroller" ref={this._refScroller}>
                     <table className="table ibexa-table c-table-view">
                         {this.renderHead()}
                         <tbody className="ibexa-table__body c-table-view__body">{renderedItems}</tbody>

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../../../common/icon/icon';
 
+import { VIEW_MODE_TABLE, VIEW_MODE_GRID } from '../../sub.items.module';
+
 const ViewSwitcherComponent = ({ onViewChange, activeView, isDisabled }) => {
     let componentClassName = 'c-view-switcher';
 
@@ -12,10 +14,11 @@ const ViewSwitcherComponent = ({ onViewChange, activeView, isDisabled }) => {
     const viewBtnLabel = Translator.trans(/*@Desc("View")*/ 'switch_to_list_view.btn.label', {}, 'sub_items');
     const listViewBtnTitle = Translator.trans(/*@Desc("View as list")*/ 'switch_to_list_view.btn.title', {}, 'sub_items');
     const gridViewBtnTitle = Translator.trans(/*@Desc("View as grid")*/ 'switch_to_grid_view.btn.title', {}, 'sub_items');
-    const viewBtnTitle = activeView === 'table' ? gridViewBtnTitle : listViewBtnTitle;
-    const viewBtnIconName = activeView === 'table' ? 'view-grid' : 'view-list';
+    const isTableViewActive = activeView === VIEW_MODE_TABLE;
+    const viewBtnTitle = isTableViewActive ? gridViewBtnTitle : listViewBtnTitle;
+    const viewBtnIconName = isTableViewActive ? 'view-grid' : 'view-list';
     const switchView = () => {
-        const newView = activeView === 'table' ? 'grid' : 'table';
+        const newView = isTableViewActive ? VIEW_MODE_GRID : VIEW_MODE_TABLE;
 
         onViewChange(newView);
     };

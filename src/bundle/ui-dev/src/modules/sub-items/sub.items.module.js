@@ -21,6 +21,9 @@ const ACTION_FLOW_ADD_LOCATIONS = 'add';
 const ACTION_FLOW_MOVE = 'move';
 const SUBITEMS_PADDING = 15;
 
+export const VIEW_MODE_TABLE = 'table';
+export const VIEW_MODE_GRID = 'grid';
+
 export default class SubItemsModule extends Component {
     constructor(props) {
         super(props);
@@ -1091,7 +1094,7 @@ export default class SubItemsModule extends Component {
         const viewingCount = activePageItems ? activePageItems.length : 0;
 
         const message = Translator.trans(
-            /*@Desc("Viewing <strong>%viewingCount%</strong> out of <strong>%totalCount%</strong> sub-items")*/ 'viewing_message',
+            /*@Desc("Viewing %viewingCount% out of %totalCount% sub-items")*/ 'viewing_message',
             {
                 viewingCount,
                 totalCount,
@@ -1139,14 +1142,15 @@ export default class SubItemsModule extends Component {
         const label = Translator.trans(/*@Desc("Add Locations")*/ 'add_locations_btn.label', {}, 'sub_items');
         const title = Translator.trans(/*@Desc("Add Locations to selected Content item(s)")*/ 'add_locations_btn.title', {}, 'sub_items');
 
-        return <ActionButton disabled={disabled} onClick={this.onAddLocationsBtnClick} label={label} title={title} type="create-location" />;
+        return (
+            <ActionButton disabled={disabled} onClick={this.onAddLocationsBtnClick} label={label} title={title} type="create-location" />
+        );
     }
 
     renderBulkHideBtn(disabled) {
         const label = Translator.trans(/*@Desc("Hide")*/ 'hide_locations_btn.label', {}, 'sub_items');
         const title = Translator.trans(/*@Desc("Hide selected Locations")*/ 'hide_locations_btn.title', {}, 'sub_items');
 
-        console.log(label, title)
         return <ActionButton disabled={disabled} onClick={this.onHideBtnClick} label={label} title={title} type="hide" />;
     }
 
@@ -1238,7 +1242,7 @@ export default class SubItemsModule extends Component {
         const listTitle = Translator.trans(/*@Desc("Sub-items")*/ 'items_list.title', {}, 'sub_items');
         const { selectedItems, activeView, totalCount, isDuringBulkOperation, activePageItems, subItemsWidth } = this.state;
         const nothingSelected = !selectedItems.size;
-        const isTableViewActive = activeView === 'table';
+        const isTableViewActive = activeView === VIEW_MODE_TABLE;
         const pageLoaded = !!activePageItems;
         const bulkBtnDisabled = nothingSelected || !isTableViewActive || !pageLoaded;
         let bulkHideBtnDisabled = true;
@@ -1258,11 +1262,11 @@ export default class SubItemsModule extends Component {
 
         return (
             <div className="m-sub-items" style={{ width: `${subItemsWidth}px` }}>
-                <div class="ibexa-table-header ">
-                    <div class="ibexa-table-header__headline">
+                <div className="ibexa-table-header ">
+                    <div className="ibexa-table-header__headline">
                         {listTitle} ({this.state.totalCount})
                     </div>
-                    <div class="ibexa-table-header__actions">
+                    <div className="ibexa-table-header__actions">
                         {this.props.extraActions.map(this.renderExtraActions)}
                         {this.renderBulkMoveBtn(bulkBtnDisabled)}
                         {this.renderBulkAddLocationBtn(bulkBtnDisabled)}
@@ -1339,7 +1343,7 @@ SubItemsModule.defaultProps = {
     loadLocation,
     sortClauses: {},
     updateLocationPriority,
-    activeView: 'table',
+    activeView: VIEW_MODE_TABLE,
     extraActions: [],
     languages: window.eZ.adminUiConfig.languages,
     items: [],

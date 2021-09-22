@@ -1,5 +1,5 @@
 .c-table-view {
-    border-spacing: 0 calculateRem(2px);
+    // border-spacing: 0 calculateRem(2px);
     border-collapse: separate;
     width: 100%;
     margin-bottom: 0;
@@ -129,8 +129,13 @@
         }
 
         &--actions {
-            position: absolute;
+            position: sticky;
             right: 0;
+            width: calculateRem(70px);
+            padding: 0;
+            margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
+            background: $ibexa-white;
+            z-index: 1;
             // height: calculateRem(44px);
             // width: calculateRem(70px);
             // padding: 0;

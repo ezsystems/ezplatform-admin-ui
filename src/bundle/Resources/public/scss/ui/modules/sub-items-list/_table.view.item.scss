@@ -3,14 +3,16 @@
         display: block;
     }
 
-    &__text-wrapper {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
+    // &__text-wrapper {
+    //     text-overflow: ellipsis;
+    //     white-space: nowrap;
+    //     overflow: hidden;
+    // }
 
     &__cell {
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
         // padding-top: calculateRem(8px);
+
         // padding-bottom: calculateRem(8px);
         // padding-left: calculateRem(16px);
         // border-top: calculateRem(1px) solid transparent;
@@ -32,7 +34,7 @@
         }
 
         &--name .c-table-view-item__text-wrapper {
-            max-width: calculateRem(260px);
+            min-width: calculateRem(120px);
         }
 
         &--modified .c-table-view-item__text-wrapper {
@@ -45,8 +47,30 @@
             left: 0;
             width: calculateRem(30px);
             line-height: 0;
+            // TODO: -0.5px no longer needed ??
             margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
             background: $ibexa-white;
+        }
+
+        .ibexa-table.table &--shadow-left {
+            box-shadow: -13px 5px 20px 0 rgba(65, 145, 255, 0.1);
+            // z-index: 2;
+
+            // &:before {
+            //     content: '';
+            //     position: absolute;
+            //     top: 0;
+            //     bottom: 0;
+            //     left: 0;
+            //     right: 0;
+            //     // z-index: 1;
+            //     // box-shadow: -13px 5px 20px 0 rgba(65, 145, 255, 0.1);
+            //     // box-shadow: -13px 0 20px 0 rgba(65, 145, 255, 0.9);
+            // }
+        }
+
+        .ibexa-table.table &--shadow-right {
+            box-shadow: 13px 5px 20px 0 rgba(65, 145, 255, 0.1);
         }
 
         // &--icon {
@@ -218,6 +242,7 @@
         align-items: center;
 
         .ibexa-icon {
+            flex-shrink: 0;
             margin-right: calculateRem(16px);
         }
     }

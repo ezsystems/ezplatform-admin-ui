@@ -357,8 +357,8 @@
         <note>key: unhide_locations_btn.title</note>
       </trans-unit>
       <trans-unit id="5ae5a511a5c344781ad0caa53efe7b33429c6132" resname="viewing_message">
-        <source><![CDATA[Viewing <strong>%viewingCount%</strong> out of <strong>%totalCount%</strong> sub-items]]></source>
-        <target state="new"><![CDATA[Viewing <strong>%viewingCount%</strong> out of <strong>%totalCount%</strong> sub-items]]></target>
+        <source>Viewing %viewingCount% out of %totalCount% sub-items</source>
+        <target state="new">Viewing %viewingCount% out of %totalCount% sub-items</target>
         <note>key: viewing_message</note>
       </trans-unit>
     </body>

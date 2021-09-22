@@ -294,7 +294,7 @@ export default class TableViewItemComponent extends PureComponent {
     }
 
     renderBasicColumns() {
-        const { columnsVisibility } = this.props;
+        const { columnsVisibility, showScrollShadowLeft } = this.props;
         const columnsToRender = {
             name: true,
             ...columnsVisibility,
@@ -309,6 +309,7 @@ export default class TableViewItemComponent extends PureComponent {
             const className = createCssClassNames({
                 'ibexa-table__cell': true,
                 'c-table-view-item__cell': true,
+                'c-table-view-item__cell--shadow-right': isNameColumn & showScrollShadowLeft,
                 [`c-table-view-item__cell--${columnKey}`]: true,
                 'ibexa-table__cell--close-left': isNameColumn,
             });
@@ -365,15 +366,21 @@ export default class TableViewItemComponent extends PureComponent {
     }
 
     render() {
-        const { item, isSelected } = this.props;
+        const { isSelected, showScrollShadowRight } = this.props;
         const editLabel = Translator.trans(/*@Desc("Edit")*/ 'edit_item_btn.label', {}, 'sub_items');
+        const actionCellClassName = createCssClassNames({
+            'ibexa-table__cell': true,
+            'c-table-view-item__cell': true,
+            'c-table-view-item__cell--actions': true,
+            'c-table-view-item__cell--shadow-left': showScrollShadowRight,
+        });
 
         return (
             <tr className="ibexa-table__row c-table-view-item">
                 <td className="ibexa-table__cell c-table-view-item__cell c-table-view-item__cell--checkbox">
                     <input
                         type="checkbox"
-                        class="ibexa-input ibexa-input--checkbox"
+                        className="ibexa-input ibexa-input--checkbox"
                         checked={isSelected}
                         onChange={this.onSelectCheckboxChange}
                     />
@@ -382,7 +389,7 @@ export default class TableViewItemComponent extends PureComponent {
                     <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--small-medium" />
                 </td> */}
                 {this.renderBasicColumns()}
-                <td className="ibexa-table__cell c-table-view-item__cell c-table-view-item__cell--actions">
+                <td className={actionCellClassName}>
                     <span
                         title={editLabel}
                         data-extra-classes="c-table-view-item__tooltip"
@@ -408,4 +415,6 @@ TableViewItemComponent.propTypes = {
     languages: PropTypes.object.isRequired,
     onItemSelect: PropTypes.func.isRequired,
     columnsVisibility: PropTypes.object.isRequired,
+    showScrollShadowLeft: PropTypes.bool.isRequired,
+    showScrollShadowRight: PropTypes.bool.isRequired,
 };
