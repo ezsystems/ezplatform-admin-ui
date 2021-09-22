@@ -51,7 +51,7 @@ services:
     tags:
       - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTypeFieldDefinitionDelete }
 
-  EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentType\FieldDefinitionReorder:
+  Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionReorder:
     parent: ezpublish_rest.input.parser
     tags:
       - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTypeFieldDefinitionReorder }
