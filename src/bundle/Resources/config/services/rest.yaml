@@ -41,7 +41,7 @@ services:
   #
   # Content type create/edit form
   #
-  EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentType\FieldDefinitionCreate:
+  Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionCreate:
     parent: ezpublish_rest.input.parser
     tags:
       - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTypFieldDefinitionCreate }

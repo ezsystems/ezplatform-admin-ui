@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Input\Parser\ContentType;
+namespace Ibexa\AdminUi\REST\Input\Parser\ContentType;
 
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentType\FieldDefinitionCreate as FieldDefinitionCreateValue;
 use EzSystems\EzPlatformRest\Exceptions;
