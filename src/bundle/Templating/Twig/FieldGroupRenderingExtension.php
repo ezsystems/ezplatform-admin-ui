@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace Ibexa\Bundle\AdminUi\Templating\Twig;
 
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use Twig\Extension\AbstractExtension;

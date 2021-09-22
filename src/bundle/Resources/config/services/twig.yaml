@@ -10,7 +10,7 @@ services:
         tags:
             - { name: twig.extension }
 
-    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FieldGroupRenderingExtension:
+    Ibexa\Bundle\AdminUi\Templating\Twig\FieldGroupRenderingExtension:
         arguments:
             - '@ezpublish.fields_groups.list'
         tags:
