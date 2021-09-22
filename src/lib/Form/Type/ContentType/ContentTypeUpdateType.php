@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
 
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\TranslatablePropertyTransformer;
+use Ibexa\AdminUi\Form\Type\ContentType\FieldDefinitionsCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
