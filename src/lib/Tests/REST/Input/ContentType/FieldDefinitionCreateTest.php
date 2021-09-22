@@ -11,8 +11,8 @@ namespace Ibexa\AdminUi\Tests\REST\Input\ContentType;
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentType\FieldDefinitionCreate as FieldDefinitionCreateValue;
 use EzSystems\EzPlatformRest\Exceptions;
 use EzSystems\EzPlatformRest\Input\ParsingDispatcher;
-use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase;
 use Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionCreate;
+use PHPUnit\Framework\TestCase;
 
 final class FieldDefinitionCreateTest extends TestCase
 {
@@ -52,7 +52,7 @@ final class FieldDefinitionCreateTest extends TestCase
     public function testInvalidInput(): void
     {
         $this->expectException(Exceptions\Parser::class);
-        $this->expectExceptionMessage("Missing or invalid 'fieldTypeIdentifier' property for Ibexa\AdminUi\REST\Value\ContentType\FieldDefinitionCreate.");
+        $this->expectExceptionMessage("Missing or invalid 'fieldTypeIdentifier' property for EzSystems\EzPlatformAdminUi\REST\Value\ContentType\FieldDefinitionCreate.");
 
         $this->parser->parse(
             [],

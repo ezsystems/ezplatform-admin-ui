@@ -40,7 +40,7 @@ final class FieldDefinitionReorderTest extends TestCase
     public function testInvalidInput(): void
     {
         $this->expectException(Exceptions\Parser::class);
-        $this->expectExceptionMessage("Missing or invalid 'fieldDefinitionIdentifiers' property for Ibexa\AdminUi\REST\Value\ContentType\FieldDefinitionReorder.");
+        $this->expectExceptionMessage("Missing or invalid 'fieldDefinitionIdentifiers' property for EzSystems\EzPlatformAdminUi\REST\Value\ContentType\FieldDefinitionReorder.");
 
         $this->parser->parse(
             [],
