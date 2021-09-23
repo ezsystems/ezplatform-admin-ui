@@ -173,7 +173,7 @@
     &__headline {
         @include ibexa-font-sans-serif();
 
-        font-size: calculateRem(18px);
+        font-size: $ibexa-text-font-size-large;
         line-height: calculateRem(33px);
         color: $ibexa-black;
         font-weight: 600;
