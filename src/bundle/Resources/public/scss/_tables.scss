@@ -1,236 +1,3 @@
-.ez-table {
-    border-spacing: 0 calculateRem(1px);
-
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        background-color: $ibexa-white;
-        align-items: center;
-        padding: 0 calculateRem(20px);
-        min-height: calculateRem(50px);
-        border-radius: calculateRem(4px) calculateRem(4px) 0 0;
-    }
-
-    &__headline {
-        font-size: calculateRem(16px);
-        margin-bottom: 0;
-        font-weight: bold;
-        color: $ibexa-black;
-    }
-
-    &__header-cell {
-        .table & {
-            border-top: calculateRem(1px) solid $ibexa-color-base;
-            border-bottom: calculateRem(1px) solid $ibexa-color-base;
-        }
-
-        .table &--has-icon {
-            width: calculateRem(52px);
-        }
-
-        .table &--after-icon {
-            padding-left: 0;
-        }
-    }
-
-    &__sort-column {
-        position: relative;
-        cursor: pointer;
-
-        &:hover {
-            text-decoration: none;
-        }
-
-        &:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            top: calculateRem(9px);
-            right: calculateRem(-10px);
-        }
-
-        &--asc:after {
-            border-left: calculateRem(3px) solid transparent;
-            border-right: calculateRem(3px) solid transparent;
-            border-bottom: calculateRem(5px) solid $ibexa-black;
-        }
-
-        &--desc::after {
-            border-left: calculateRem(3px) solid transparent;
-            border-right: calculateRem(3px) solid transparent;
-            border-top: calculateRem(5px) solid $ibexa-black;
-        }
-    }
-
-    &__cell {
-        vertical-align: middle;
-
-        &--field-definitions-head {
-            width: calc(100% / 3);
-        }
-
-        .table &--has-action-btns {
-            padding-right: calculateRem(20px);
-            text-align: right;
-
-            .btn {
-                margin: 0 calculateRem(5px);
-            }
-        }
-
-        .table &--has-text-info {
-            padding: calculateRem(16px) calculateRem(8px);
-            text-align: center;
-        }
-
-        &--has-checkbox {
-            width: 5%;
-        }
-
-        .table &--has-icon {
-            padding: calculateRem(17px) calculateRem(16px) 0 calculateRem(16px);
-            width: calculateRem(24px);
-            text-align: right;
-            line-height: 0;
-
-            .ibexa-icon {
-                margin-top: calculateRem(-2px);
-            }
-        }
-
-        .table &--after-icon {
-            padding-left: 0;
-        }
-
-        &--no-content {
-            margin-bottom: calculateRem(48px);
-            padding: calculateRem(12px) calculateRem(16px);
-            background-color: $ibexa-white;
-            font-style: italic;
-            color: $ibexa-black;
-        }
-
-        &--limitation {
-            width: 70%;
-        }
-    }
-
-    &__cell-link,
-    &__cell-link:hover {
-        color: $ibexa-color-font;
-        text-decoration: none;
-    }
-}
-
-.ez-table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: calculateRem(16px) calculateRem(8px) calculateRem(16px);
-    background-color: $ibexa-white;
-
-    &__headline {
-        font-size: calculateRem(16px);
-        margin-bottom: 0;
-        font-weight: bold;
-        color: $ibexa-black;
-        max-width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    &__tools {
-        white-space: nowrap;
-
-        .btn {
-            margin: 0 calculateRem(5px);
-        }
-    }
-
-    &--bordered-bottom {
-        border-bottom: calculateRem(1px) solid $ibexa-color-base;
-    }
-}
-
-.ez-table-header.ground-base {
-    background-color: $ibexa-white;
-}
-
-.ez-table-no-content {
-    margin: 0;
-    padding: 0 calculateRem(24px) calculateRem(24px);
-    overflow-x: auto;
-    background-color: $ibexa-white;
-    font-style: italic;
-    font-size: calculateRem(14px);
-    color: $ibexa-color-font;
-}
-
-.ez-table {
-    &--no-border {
-        td {
-            border: none;
-        }
-    }
-
-    &--no-bordered-top {
-        thead th {
-            border-top-width: 0;
-        }
-    }
-
-    &--list {
-        background: none;
-        margin-bottom: calculateRem(48px);
-
-        .ez-table {
-            &__cell {
-                font-size: calculateRem(16px);
-                border: none;
-
-                &:first-child {
-                    font-weight: bold;
-                    width: calc(100% / 3);
-                }
-
-                &:last-child {
-                    width: (calc((100% / 3) * 2));
-                }
-            }
-        }
-    }
-}
-
-.ez-checkbox-cell {
-    width: 5%;
-}
-
-.ez-limitation-cell {
-    width: 70%;
-}
-
-.ez-scrollable-table-wrapper {
-    overflow-x: auto;
-    margin-bottom: calculateRem(48px);
-
-    table {
-        margin-bottom: 0;
-    }
-}
-
-.ez-link-manager-view {
-    .ez-table__row {
-        .ez-table__cell {
-            &--has-action-btns {
-                display: flex;
-                justify-content: space-between;
-                width: auto;
-            }
-        }
-    }
-}
-
 .ibexa-table {
     font-family: $font-family-sans-serif;
     font-size: $ibexa-text-font-size;
@@ -301,7 +68,6 @@
             color: $ibexa-color-dark-400;
             line-height: calculateRem(18px);
             vertical-align: middle;
-            border-top: calculateRem(1px) solid $ibexa-color-dark-200;
             border-bottom: 0;
             padding: calculateRem(18px) calculateRem(16px);
         }
@@ -400,12 +166,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: calculateRem(20px);
+    margin-top: calculateRem(30px);
+    padding-bottom: calculateRem(15px);
+    border-bottom: calculateRem(1px) solid $ibexa-color-dark-200;
 
     &__headline {
         @include ibexa-font-sans-serif();
 
-        font-size: calculateRem(22px);
+        font-size: calculateRem(18px);
+        line-height: calculateRem(33px);
         color: $ibexa-black;
         font-weight: 600;
         white-space: nowrap;
@@ -421,9 +190,5 @@
         .btn {
             margin: 0 calculateRem(5px);
         }
-    }
-
-    &--bordered-bottom {
-        border-bottom: calculateRem(1px) solid $ibexa-color-base;
     }
 }
