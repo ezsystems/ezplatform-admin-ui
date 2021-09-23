@@ -221,9 +221,9 @@ class ContentTypeContext implements Context
     }
 
     /**
-     * @Given I deselect :blockName block in ezlandingpage field blocks section
+     * @Given I check :blockName block in ezlandingpage field blocks section
      */
-    public function iDeselectBlockInField($blockName)
+    public function iCheckBlockInField($blockName)
     {
         $this->contentTypeUpdatePage->expandFieldDefinition('Landing Page');
         $this->contentTypeUpdatePage->expandDefaultBlocksOption();
