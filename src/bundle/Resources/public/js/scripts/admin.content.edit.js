@@ -23,6 +23,7 @@
     ];
     const form = doc.querySelector('.ez-form-validate');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
+    const menuButtonsToValidate = doc.querySelectorAll('button[data-validate]');
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
         const validatorName = validator.constructor.name;
@@ -69,6 +70,22 @@
 
         event.preventDefault();
 
+        if (isFormValid(btn)) {
+            // for some reason trying to fire click event inside the event handler flow is impossible
+            // the following line breaks the flow so it's possible to fire click event on a button again.
+            global.setTimeout(() => btn.click(), 0);
+        }
+    };
+    const validateHandler = (event) => {
+        event.preventDefault();
+
+        const btn = event.currentTarget;
+
+        btn.dataset.isFormValid = 0;
+
+        isFormValid(btn);
+    };
+    const isFormValid = (btn) => {
         const validators = eZ.fieldTypeValidators;
         const validationResults = validators.map(getValidationResults);
         const isFormValid = validationResults.every((result) => result.isValid);
@@ -76,36 +93,36 @@
 
         if (isFormValid) {
             btn.dataset.isFormValid = 1;
-            // for some reason trying to fire click event inside the event handler flow is impossible
-            // the following line breaks the flow so it's possible to fire click event on a button again.
-            window.setTimeout(() => btn.click(), 0);
-        } else {
-            btn.dataset.validatorsWithErrors = Array.from(
-                validationResults
-                    .filter((result) => !result.isValid)
-                    .reduce((total, result) => {
-                        total.add(result.validatorName);
 
-                        return total;
-                    }, new Set())
-            ).join();
-
-            fields.forEach((field) => field.removeAttribute('id'));
-
-            doc.querySelectorAll('.ez-tabs__nav-item').forEach((navItem) => {
-                navItem.classList.remove('ez-tabs__nav-item--invalid');
-            });
-
-            invalidTabs.forEach((invalidInputs) => {
-                invalidInputs.forEach((invalidInputKey) => {
-                    doc.querySelector(`#item-${invalidInputKey}`).classList.add('ez-tabs__nav-item--invalid');
-                });
-            });
-
-            focusOnFirstError();
+            return true;
         }
-    };
 
+        btn.dataset.validatorsWithErrors = Array.from(
+            validationResults
+                .filter((result) => !result.isValid)
+                .reduce((total, result) => {
+                    total.add(result.validatorName);
+
+                    return total;
+                }, new Set())
+        ).join();
+
+        fields.forEach((field) => field.removeAttribute('id'));
+
+        doc.querySelectorAll('.ez-tabs__nav-item').forEach((navItem) => {
+            navItem.classList.remove('ez-tabs__nav-item--invalid');
+        });
+
+        invalidTabs.forEach((invalidInputs) => {
+            invalidInputs.forEach((invalidInputKey) => {
+                doc.querySelector(`#item-${invalidInputKey}`).classList.add('ez-tabs__nav-item--invalid');
+            });
+        });
+
+        focusOnFirstError();
+
+        return false;
+    };
     const isAutosaveEnabled = () => {
         return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
     };
@@ -162,4 +179,9 @@
         btn.dataset.isFormValid = 0;
         btn.addEventListener('click', clickHandler, false);
     });
+
+    menuButtonsToValidate.forEach((btn) => {
+        btn.addEventListener('click', validateHandler, false);
+    });
+
 })(window, window.document, window.eZ, window.Translator);
