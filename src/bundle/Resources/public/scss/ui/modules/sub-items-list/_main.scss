@@ -12,37 +12,7 @@
     .ibexa-table-header {
         margin-bottom: 0;
         padding-bottom: 20px;
-        border-bottom: 0.0625rem solid #cfd1d3;
-    }
-
-    &,
-    & * {
-        box-sizing: border-box;
-    }
-
-    &__header {
-        width: 100%;
-        padding: 0 calculateRem(8px) calculateRem(32px);
-        font-weight: bold;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    &__title {
-        font-size: calculateRem(16px);
-        color: $ibexa-black;
-        flex: 1 1 auto;
-    }
-
-    &__actions {
-        display: flex;
-    }
-
-    &__actions .m-mfu {
-        margin-right: calculateRem(24px);
-        display: flex;
+        border-bottom: 0.0625rem solid $ibexa-color-dark-200;
     }
 
     &__list {

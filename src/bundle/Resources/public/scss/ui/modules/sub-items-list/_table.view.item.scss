@@ -3,31 +3,8 @@
         display: block;
     }
 
-    // &__text-wrapper {
-    //     text-overflow: ellipsis;
-    //     white-space: nowrap;
-    //     overflow: hidden;
-    // }
-
     &__cell {
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
-        // padding-top: calculateRem(8px);
-
-        // padding-bottom: calculateRem(8px);
-        // padding-left: calculateRem(16px);
-        // border-top: calculateRem(1px) solid transparent;
-        // border-bottom: calculateRem(1px) solid transparent;
-        // font-size: calculateRem(16px);
-        // line-height: calculateRem(20px);
-        // vertical-align: middle;
-
-        // &:first-child {
-        //     border-left: calculateRem(1px) solid transparent;
-        // }
-
-        // &:last-child {
-        //     border-right: calculateRem(1px) solid transparent;
-        // }
 
         &--content-type {
             min-width: calculateRem(130px);
@@ -53,41 +30,12 @@
         }
 
         .ibexa-table.table &--shadow-left {
-            box-shadow: -13px 5px 20px 0 rgba(65, 145, 255, 0.1);
-            // z-index: 2;
-
-            // &:before {
-            //     content: '';
-            //     position: absolute;
-            //     top: 0;
-            //     bottom: 0;
-            //     left: 0;
-            //     right: 0;
-            //     // z-index: 1;
-            //     // box-shadow: -13px 5px 20px 0 rgba(65, 145, 255, 0.1);
-            //     // box-shadow: -13px 0 20px 0 rgba(65, 145, 255, 0.9);
-            // }
+            box-shadow: calculateRem(-13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
         }
 
         .ibexa-table.table &--shadow-right {
-            box-shadow: 13px 5px 20px 0 rgba(65, 145, 255, 0.1);
+            box-shadow: calculateRem(13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
         }
-
-        // &--icon {
-        //     position: sticky;
-        //     z-index: 1;
-        //     left: calculateRem(34px);
-        //     padding-right: calculateRem(8px);
-        //     width: calculateRem(24px);
-        //     text-align: right;
-        //     line-height: 0;
-        //     height: calculateRem(47px);
-        //     background: $ibexa-white;
-
-        //     .ibexa-icon {
-        //         fill: $ibexa-color-base-dark;
-        //     }
-        // }
 
         &--name {
             position: sticky;
@@ -114,11 +62,8 @@
 
         &--toggler {
             position: absolute;
-            // right: 0;
             height: calculateRem(55px);
             width: calculateRem(80px);
-            // padding: 0;
-            // background: #fff;
         }
     }
 
@@ -265,16 +210,3 @@
         }
     }
 }
-
-// .c-table-view--hoverable {
-//     .c-table-view-item:hover {
-//         .c-table-view-item__cell {
-//             &--checkbox,
-//             &--icon,
-//             &--name,
-//             &--actions {
-//                 background-color: $ibexa-color-base-pale;
-//             }
-//         }
-//     }
-// }

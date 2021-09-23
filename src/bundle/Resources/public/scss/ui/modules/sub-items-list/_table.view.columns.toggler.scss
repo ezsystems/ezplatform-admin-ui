@@ -4,29 +4,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #131c26;
+    color: $ibexa-color-dark;
 
     &__panel {
-        // @include container-box-shadow;
-
-        // border-radius: $ibexa-border-radius;
-        // background: $ibexa-white;
-        // position: absolute;
-        // z-index: 10;
-        // padding: calculateRem(4px) calculateRem(14px);
         top: calculateRem(36px);
         right: calculateRem(17px);
-        // font-weight: normal;
 
         &--above-btn {
             bottom: calculateRem(36px);
             top: auto;
         }
     }
-
-    // &__list {
-    //     padding: 0;
-    //     margin: 0;
-    //     list-style: none;
-    // }
 }

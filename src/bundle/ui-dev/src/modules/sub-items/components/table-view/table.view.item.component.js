@@ -385,9 +385,6 @@ export default class TableViewItemComponent extends PureComponent {
                         onChange={this.onSelectCheckboxChange}
                     />
                 </td>
-                {/* <td className="ibexa-table__cell c-table-view-item__cell c-table-view-item__cell--icon">
-                    <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--small-medium" />
-                </td> */}
                 {this.renderBasicColumns()}
                 <td className={actionCellClassName}>
                     <span

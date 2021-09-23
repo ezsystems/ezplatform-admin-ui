@@ -1276,20 +1276,6 @@ export default class SubItemsModule extends Component {
                         <ViewSwitcherComponent onViewChange={this.switchView} activeView={activeView} isDisabled={!totalCount} />
                     </div>
                 </div>
-                {/* <div className="m-sub-items__header">
-                    <div className="m-sub-items__title">
-                        {listTitle} ({this.state.totalCount})
-                    </div>
-                    <div className="m-sub-items__actions">
-                        {this.props.extraActions.map(this.renderExtraActions)}
-                        {this.renderBulkMoveBtn(bulkBtnDisabled)}
-                        {this.renderBulkAddLocationBtn(bulkBtnDisabled)}
-                        {this.renderBulkHideBtn(bulkHideBtnDisabled)}
-                        {this.renderBulkUnhideBtn(bulkUnhideBtnDisabled)}
-                        {this.renderBulkDeleteBtn(bulkBtnDisabled)}
-                    </div>
-                    <ViewSwitcherComponent onViewChange={this.switchView} activeView={activeView} isDisabled={!totalCount} />
-                </div> */}
                 <div ref={this._refListViewWrapper} className={listClassName}>
                     {this.renderSpinner()}
                     {this.renderListView()}

@@ -215,9 +215,6 @@ export default class TableViewComponent extends Component {
             const isNameColumn = columnKey === 'name';
             const className = createCssClassNames({
                 [TABLE_HEAD_CLASS]: true,
-                // [`${TABLE_CELL_CLASS}--sortable`]: columnKey in SORTKEY_MAP,
-                // [`${TABLE_CELL_CLASS}--sorted-asc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'ascending',
-                // [`${TABLE_CELL_CLASS}--sorted-desc`]: SORTKEY_MAP[columnKey] === sortClause && sortOrder === 'descending',
                 [`${TABLE_CELL_CLASS}--name`]: isNameColumn,
                 'ibexa-table__header-cell--close-left': isNameColumn,
             });
@@ -274,7 +271,6 @@ export default class TableViewComponent extends Component {
                             className="ibexa-input ibexa-input--checkbox"
                         />
                     </th>
-                    {/* <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--icon`} /> */}
                     {this.renderBasicColumnsHeader()}
                     <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--toggler`}>
                         <TableViewColumnsTogglerComponent
