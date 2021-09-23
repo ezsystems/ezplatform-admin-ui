@@ -3,11 +3,15 @@
 
     .form-check-inline {
         display: flex;
-        justify-content: flex-start;
+        // justify-content: flex-start;
         align-items: center;
-        padding: calculateRem(12px) calculateRem(4px);
-        margin-right: calculateRem(12px);
-        line-height: 0;
+        // padding: calculateRem(12px) calculateRem(4px);
+        // margin-right: calculateRem(12px);
+        // line-height: 0;
+    }
+
+    .ibexa-input--checkbox {
+        margin-right: calculateRem(8px);
     }
 
     &__label {

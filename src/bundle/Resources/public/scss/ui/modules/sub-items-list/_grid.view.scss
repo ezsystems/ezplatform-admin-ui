@@ -1,12 +1,17 @@
 .c-grid-view {
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: calculateRem(8px);
-    padding-top: calculateRem(8px);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(217px, 1fr));
+    row-gap: calculateRem(32px);
+    column-gap: calculateRem(24px);
+    padding-top: 24px;
+    // display: flex;
+    // flex-wrap: wrap;
+    // padding-left: calculateRem(8px);
+    // padding-top: calculateRem(8px);
 
-    .c-grid-view-item {
-        flex: 1 1 calc(100% / 5);
-        max-width: calculateRem(248px);
-        margin-right: calculateRem(20px);
-    }
+    // .c-grid-view-item {
+    //     flex: 1 1 calc(100% / 5);
+    //     max-width: calculateRem(248px);
+    //     margin-right: calculateRem(20px);
+    // }
 }

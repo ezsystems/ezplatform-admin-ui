@@ -5,6 +5,16 @@
     background: $ibexa-white;
     border-radius: $ibexa-border-radius;
 
+    .table .ibexa-table__header-cell {
+        border-top-width: 0;
+    }
+
+    .ibexa-table-header {
+        margin-bottom: 0;
+        padding-bottom: 20px;
+        border-bottom: 0.0625rem solid #cfd1d3;
+    }
+
     &,
     & * {
         box-sizing: border-box;

@@ -111,6 +111,15 @@
             margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
             background: $ibexa-white;
         }
+
+        &--toggler {
+            position: absolute;
+            // right: 0;
+            height: calculateRem(55px);
+            width: calculateRem(80px);
+            // padding: 0;
+            // background: #fff;
+        }
     }
 
     &__inner-wrapper {

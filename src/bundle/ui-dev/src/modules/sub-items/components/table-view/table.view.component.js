@@ -276,7 +276,7 @@ export default class TableViewComponent extends Component {
                     </th>
                     {/* <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--icon`} /> */}
                     {this.renderBasicColumnsHeader()}
-                    <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--actions`}>
+                    <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--toggler`}>
                         <TableViewColumnsTogglerComponent
                             columnsVisibility={columnsVisibility}
                             toggleColumnVisibility={this.toggleColumnVisibility}

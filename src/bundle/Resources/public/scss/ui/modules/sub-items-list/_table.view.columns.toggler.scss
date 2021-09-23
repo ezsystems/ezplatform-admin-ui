@@ -4,18 +4,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #131c26;
 
     &__panel {
-        @include container-box-shadow;
+        // @include container-box-shadow;
 
-        border-radius: $ibexa-border-radius;
-        background: $ibexa-white;
-        position: absolute;
-        z-index: 10;
-        padding: calculateRem(4px) calculateRem(14px);
+        // border-radius: $ibexa-border-radius;
+        // background: $ibexa-white;
+        // position: absolute;
+        // z-index: 10;
+        // padding: calculateRem(4px) calculateRem(14px);
         top: calculateRem(36px);
         right: calculateRem(17px);
-        font-weight: normal;
+        // font-weight: normal;
 
         &--above-btn {
             bottom: calculateRem(36px);
@@ -23,9 +24,9 @@
         }
     }
 
-    &__list {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
+    // &__list {
+    //     padding: 0;
+    //     margin: 0;
+    //     list-style: none;
+    // }
 }

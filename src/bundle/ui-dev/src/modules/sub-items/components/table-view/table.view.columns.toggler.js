@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from '../../../common/icon/icon';
 import TableViewColumnsTogglerListElement from './table.view.columns.toggler.list.element';
 import { headerLabels } from './table.view.component';
+import { createCssClassNames } from '../../../common/helpers/css.class.names';
 
 const DEFAULT_PANEL_HEIGHT = 450;
 
@@ -80,30 +81,29 @@ export default class TableViewColumnsTogglerComponent extends Component {
         const { columnsVisibility, toggleColumnVisibility } = this.props;
         const { buttonBottomDocumentOffset, panelHeight: measuredPanelHeight } = this.state;
         const panelHeight = measuredPanelHeight ? measuredPanelHeight : DEFAULT_PANEL_HEIGHT;
-        const panelAttrs = { className: 'c-table-view-columns-toggler__panel', ref: this._refPanel };
-
-        if (buttonBottomDocumentOffset < panelHeight) {
-            panelAttrs.className = `${panelAttrs.className} ${panelAttrs.className}--above-btn`;
-        }
+        const showAboveBtn = buttonBottomDocumentOffset < panelHeight;
+        const className = createCssClassNames({
+            'ibexa-popup-menu': true,
+            'c-table-view-columns-toggler__panel': true,
+            'c-table-view-columns-toggler__panel--above-btn': showAboveBtn,
+        });
 
         return (
-            <div {...panelAttrs}>
-                <ul className="c-table-view-columns-toggler__list">
-                    {Object.entries(columnsVisibility).map(([columnKey, isColumnVisible]) => {
-                        const label = headerLabels[columnKey];
+            <ul className={className} ref={this._refPanel}>
+                {Object.entries(columnsVisibility).map(([columnKey, isColumnVisible]) => {
+                    const label = headerLabels[columnKey];
 
-                        return (
-                            <TableViewColumnsTogglerListElement
-                                key={columnKey}
-                                label={label}
-                                columnKey={columnKey}
-                                isColumnVisible={isColumnVisible}
-                                toggleColumnVisibility={toggleColumnVisibility}
-                            />
-                        );
-                    })}
-                </ul>
-            </div>
+                    return (
+                        <TableViewColumnsTogglerListElement
+                            key={columnKey}
+                            label={label}
+                            columnKey={columnKey}
+                            isColumnVisible={isColumnVisible}
+                            toggleColumnVisibility={toggleColumnVisibility}
+                        />
+                    );
+                })}
+            </ul>
         );
     }
 
