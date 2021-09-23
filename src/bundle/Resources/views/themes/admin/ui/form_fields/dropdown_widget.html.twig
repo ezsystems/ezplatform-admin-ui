@@ -15,7 +15,8 @@
             preferred_choices: preferred_choices,
             value: form.vars.value,
             multiple: form.vars.multiple,
-            choice_translation_domain: choice_translation_domain|default(false)
+            translation_domain: choice_translation_domain|default(false),
+            custom_form: false,
         } %}
     {% endif %}
 {%- endblock choice_widget -%}
