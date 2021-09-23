@@ -1,7 +1,7 @@
 services:
     EzSystems\EzPlatformAdminUiBundle\Controller\:
         resource: "../../Controller/*"
-        exclude: "../../Controller/{Controller}"
+        exclude: "../../Controller/{FieldDefinitionController.php}"
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         tags:
@@ -193,6 +193,11 @@ services:
         autowire: true
 
     EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation\BulkOperationController:
+        parent: ezpublish_rest.controller.base
+        tags: ['controller.service_arguments']
+        autowire: true
+
+    Ibexa\Bundle\AdminUi\Controller\FieldDefinitionController:
         parent: ezpublish_rest.controller.base
         tags: ['controller.service_arguments']
         autowire: true

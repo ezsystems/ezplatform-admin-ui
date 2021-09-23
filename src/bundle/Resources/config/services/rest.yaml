@@ -38,6 +38,24 @@ services:
       tags:
           - { name: ezpublish_rest.output.value_object_visitor, type: EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Root }
 
+  #
+  # Content type create/edit form
+  #
+  Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionCreate:
+    parent: ezpublish_rest.input.parser
+    tags:
+      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTypFieldDefinitionCreate }
+
+  Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionDelete:
+    parent: ezpublish_rest.input.parser
+    tags:
+      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTypeFieldDefinitionDelete }
+
+  Ibexa\AdminUi\REST\Input\Parser\ContentType\FieldDefinitionReorder:
+    parent: ezpublish_rest.input.parser
+    tags:
+      - { name: ezpublish_rest.input.parser, mediaType: application/vnd.ez.api.ContentTypeFieldDefinitionReorder }
+
   EzSystems\EzPlatformAdminUi\REST\Security\NonAdminRESTRequestMatcher:
       arguments:
           $siteAccessGroups: '%ezpublish.siteaccess.groups%'

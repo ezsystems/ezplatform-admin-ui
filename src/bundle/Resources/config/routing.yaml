@@ -389,6 +389,18 @@ ezplatform.content_type.remove_translation:
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController::removeTranslationAction'
 
+ibexa.content_type.field_definition_form:
+    path: /contenttypegroup/{contentTypeGroupId}/contenttype/{contentTypeId}/field_definition_form/{fieldDefinitionIdentifier}/{toLanguageCode}/{fromLanguageCode}
+    methods: ['GET']
+    options:
+        expose: true
+    controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController::addFieldDefinitionFormAction'
+    defaults:
+        toLanguageCode: ~
+        fromLanguageCode: ~
+    requirements:
+        contentTypeGroupId: \d+
+
 #
 # Location View
 #

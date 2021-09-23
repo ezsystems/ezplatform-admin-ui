@@ -1,6 +1,6 @@
 (function(global, doc, eZ) {
     const scrollOffset = 300;
-    const formContainerNode = doc.querySelector('.ibexa-content-edit-content');
+    const formContainerNode = doc.querySelector('.ibexa-edit-content');
     const allSections = [...doc.querySelectorAll('.ibexa-anchor-navigation-sections__section')];
     const isVerticalScrollVisible = () => {
         const { scrollHeight, offsetHeight } = formContainerNode;
@@ -8,10 +8,10 @@
         return scrollHeight > offsetHeight;
     };
     const showSection = (sectionId) => {
-        doc.querySelectorAll('.ibexa-anchor-navigation-menu__btn').forEach((btn) => {
+        doc.querySelectorAll('.ibexa-anchor-navigation-menu__item-btn').forEach((btn) => {
             const { anchorTargetSectionId } = btn.dataset;
 
-            btn.classList.toggle('ibexa-anchor-navigation-menu__btn--active', anchorTargetSectionId === sectionId);
+            btn.classList.toggle('ibexa-anchor-navigation-menu__item-btn--active', anchorTargetSectionId === sectionId);
         });
 
         doc.querySelectorAll('.ibexa-anchor-navigation-sections__section').forEach((section) => {
@@ -36,7 +36,7 @@
         }
     };
 
-    doc.querySelectorAll('.ibexa-anchor-navigation-menu__btn').forEach((btn) => {
+    doc.querySelectorAll('.ibexa-anchor-navigation-menu__item-btn').forEach((btn) => {
         btn.addEventListener('click', navigateTo, false);
     });
 
@@ -49,9 +49,12 @@
 
                 return position > start && position < end;
             });
-            const activeSectionId = activeSection.dataset.anchorSectionId;
 
-            showSection(activeSectionId);
+            if (activeSection) {
+                const activeSectionId = activeSection.dataset.anchorSectionId;
+
+                showSection(activeSectionId);
+            }
         });
     }
 })(window, window.document, window.eZ);

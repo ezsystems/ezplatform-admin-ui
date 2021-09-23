@@ -420,6 +420,7 @@ $ibexa-text-font-size-small: calculateRem(12px);
 
 // Ibexa shadows
 $ibexa-btn-focus-box-shadow: 0 0 0 calculateRem(3px) rgba($ibexa-color-primary, 0.2);
+$ibexa-btn-focus-box-shadow-info: 0 0 0 calculateRem(3px) rgba($ibexa-color-info, 0.2);
 $ibexa-btn-hover-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-danger, 0.2);
 $ibexa-btn-hover-box-shadow-dark: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-dark, 0.2);
 $ibexa-btn-hover-box-shadow-info: 0 calculateRem(10px) calculateRem(24px) 0 rgba($ibexa-color-info, 0.5);
@@ -427,6 +428,7 @@ $ibexa-edit-header-box-shadow: calculateRem(4px) calculateRem(22px) calculateRem
 $ibexa-edit-content-box-shadow: calculateRem(4px) calculateRem(35px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.15);
 $ibexa-anchor-btn-hover-box-shadow: 0 0 calculateRem(14px) 0 rgba($ibexa-color-black, 0.05);
 $ibexa-context-menu-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-info, 0.15);
+$ibexa-content-type-edit-field-shadow: calculateRem(4px) calculateRem(22px) calculateRem(19px) calculateRem(-10px) rgba($ibexa-color-info, 0.05);
 
 // Ibexa gradients
 $ibexa-gradient-danger-primary: linear-gradient(to right, $ibexa-color-danger 0%, $ibexa-color-primary 100%);

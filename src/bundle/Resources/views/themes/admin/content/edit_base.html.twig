@@ -1,0 +1,100 @@
+{% extends '@ezdesign/ui/edit_base.html.twig' %}
+
+{% trans_default_domain 'content_edit' %}
+
+{% set grouped_fields = grouped_fields|default([]) %}
+{% set anchor_params = { items: grouped_fields|keys } %}
+{% set is_autosave_enabled = ez_user_settings['autosave'] is same as('enabled') %}
+{% set form_has_autosave = form.autosave is defined %}
+{% set default_form_templates = ez_admin_ui_config.contentEditFormTemplates %}
+{% set form_templates = form_templates is defined ? default_form_templates|merge(form_templates) : default_form_templates %}
+{% set extra_main_class = grouped_fields|length < 2 
+    ? 'ibexa-main-container--without-anchor-menu-items' 
+    : 'ibexa-main-container--with-anchor-menu-items'  
+%}
+
+{% form_theme form with form_templates %}
+
+{% if without_close_button is not defined or without_close_button != true %}
+    {% set referrer_location = content is defined and is_published ? location : parent_location %}
+
+    {% set anchor_params = anchor_params|merge({
+        close_href: path('_ez_content_view', { 'contentId': referrer_location.contentId, 'locationId': referrer_location.id })
+    }) %}
+{% endif %}
+
+{% block main_container_class %}{{ parent() }} {{ extra_main_class }}{% endblock %}
+
+{% block content%}
+    {% block form_before %}{% endblock %}
+
+    {% block form %}
+        {{ form_start(form, {'attr': {'class': 'ez-form-validate ibexa-form'}}) }}
+            {% block form_fields %}
+                {% if grouped_fields|length > 1 %}
+                    <div class="ibexa-anchor-navigation-sections">
+                        {% for key, group in grouped_fields %}
+                            {% set sanitized_key = key|slug %}
+
+                            <div
+                                data-anchor-section-id="#{{ sanitized_key }}"
+                                class="row ibexa-anchor-navigation-sections__section {{ loop.first ? 'ibexa-anchor-navigation-sections__section--active' }}"
+                            >
+                                <div class="offset-1 col-6">
+                                    {% for field in group %}
+                                        {% set formField = form.fieldsData[field] %}
+
+                                        {% if not formField.rendered %}
+                                            {% if formField.value is defined %}
+                                                {{- form_widget(formField) -}}
+                                            {% else %}
+                                                <div class="ibexa-field-edit ibexa-field-edit--eznoneditable">
+                                                    {{- form_label(formField) -}}
+                                                    <p class="non-editable">
+                                                        {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
+                                                    </p>
+                                                    {% do formField.setRendered() %}
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="row">
+                        <div class="offset-1 col-6 p-0">
+                            {% for field in form.fieldsData %}
+                                {% if not field.rendered %}
+                                    {% if field.value is defined %}
+                                        {{- form_widget(field) -}}
+                                    {% else %}
+                                        <div class="ibexa-field-edit ibexa-field-edit--eznoneditable">
+                                            {{- form_label(field) -}}
+                                            <p class="non-editable">
+                                                {{ "content.field.non_editable"|trans|desc('This Field Type is not editable') }}
+                                            </p>
+                                            {% do field.setRendered() %}
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {%- endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endblock %}
+        {{ form_end(form) }}
+    {% endblock %}
+
+    {% block form_after %}{% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    {% include '@ezdesign/content/edit/javascripts.html.twig' %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-tabs-js', null, 'ezplatform') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {% include '@ezdesign/content/edit/stylesheets.html.twig' %}
+{% endblock %}

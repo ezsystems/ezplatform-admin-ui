@@ -7,11 +7,15 @@
         "psr-4": {
           "EzSystems\\EzPlatformAdminUiBundle\\": "src/bundle/",
           "EzSystems\\EzPlatformAdminUi\\": "src/lib/",
+          "Ibexa\\Bundle\\AdminUi\\": "src/bundle/",
           "Ibexa\\AdminUi\\": "src/lib/"
         }
     },
     "autoload-dev": {
-        "psr-4": { "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests" }
+        "psr-4": {
+            "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests",
+            "Ibexa\\AdminUi\\Tests\\": "tests/lib"
+        }
     },
     "require": {
         "php": "^7.3",

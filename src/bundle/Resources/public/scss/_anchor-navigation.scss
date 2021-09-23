@@ -1,9 +1,26 @@
 .ibexa-anchor-navigation-menu {
-    margin: 0;
-    padding: calculateRem(16px);
-    list-style: none;
+    &__header {
+        height: calculateRem(87px);
+        padding: calculateRem(17px) 0 0 calculateRem(17px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+    }
 
-    &__btn {
+    &__body {
+        height: calc(100% - #{calculateRem(87px)});
+        overflow: auto;
+    }
+
+    &__back {
+        font-weight: 600;
+    }
+
+    &__items {
+        margin: 0;
+        padding: calculateRem(16px);
+        list-style: none;
+    }
+
+    &__item-btn {
         display: inline-flex;
         align-items: center;
         width: 100%;

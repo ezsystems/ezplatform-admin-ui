@@ -8,6 +8,7 @@ namespace EzSystems\EzPlatformAdminUi\Tests\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\FieldType\Value;
+use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
@@ -192,6 +193,12 @@ class ContentTypeDraftMapperTest extends TestCase
                 }
             );
 
-        self::assertEquals($expectedContentTypeData, (new ContentTypeDraftMapper($eventDispatcherMock))->mapToFormData($contentTypeDraft));
+        $fieldGroupList = $this->createMock(FieldsGroupsList::class);
+        $fieldGroupList->method('getDefaultGroup')
+            ->willReturn('foo');
+
+        $contentTypeDraftMapper = new ContentTypeDraftMapper($eventDispatcherMock, $fieldGroupList);
+
+        self::assertEquals($expectedContentTypeData, $contentTypeDraftMapper->mapToFormData($contentTypeDraft));
     }
 }
