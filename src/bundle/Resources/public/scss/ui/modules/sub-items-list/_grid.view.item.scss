@@ -6,6 +6,7 @@
     border: calculateRem(1px) solid $ibexa-color-light;
     border-radius: calculateRem(5px);
     box-shadow: calculateRem(4px) calculateRem(2px) calculateRem(17px) 0 rgba($ibexa-color-black, 0.05);
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
     &:link {
         text-decoration: none;
@@ -61,7 +62,7 @@
         text-overflow: ellipsis;
         text-decoration: none;
         font-weight: 600;
-        letter-spacing: 0calculaterem (12px);
+        letter-spacing: calculateRem(0.12px);
         line-height: calculateRem(24px);
     }
 }

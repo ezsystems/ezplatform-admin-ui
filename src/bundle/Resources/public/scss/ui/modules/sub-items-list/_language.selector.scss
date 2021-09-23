@@ -6,7 +6,7 @@
             overflow: auto;
 
             .form-check-label {
-                font-size: calculateRem(16px);
+                font-size: $ibexa-text-font-size;
                 line-height: calculateRem(50px);
             }
         }

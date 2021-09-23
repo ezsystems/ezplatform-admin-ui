@@ -260,12 +260,12 @@ export default class TableViewItemComponent extends PureComponent {
     }
 
     renderCreatorCell() {
-        return <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.owner)}</div>;
+        return <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.owner)}</div>;
     }
 
     renderContributorCell() {
         return (
-            <div className="ibexa-table__cell c-table-view-item__text-wrapper">
+            <div className="c-table-view-item__text-wrapper">
                 {this.getName(this.props.item.content._info.currentVersion.creator)}
             </div>
         );
@@ -273,24 +273,24 @@ export default class TableViewItemComponent extends PureComponent {
 
     renderSectionCell() {
         return (
-            <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.section)}</div>
+            <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.section)}</div>
         );
     }
 
     renderLocationIdCell() {
-        return <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.props.item.id}</div>;
+        return <div className="c-table-view-item__text-wrapper">{this.props.item.id}</div>;
     }
 
     renderLocationRemoteIdCell() {
-        return <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.props.item.remoteId}</div>;
+        return <div className="c-table-view-item__text-wrapper">{this.props.item.remoteId}</div>;
     }
 
     renderObjectIdCell() {
-        return <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.props.item.content._info.id}</div>;
+        return <div className="c-table-view-item__text-wrapper">{this.props.item.content._info.id}</div>;
     }
 
     renderObjectRemoteIdCell() {
-        return <div className="ibexa-table__cell c-table-view-item__text-wrapper">{this.props.item.content._info.remoteId}</div>;
+        return <div className="c-table-view-item__text-wrapper">{this.props.item.content._info.remoteId}</div>;
     }
 
     renderBasicColumns() {
@@ -309,8 +309,8 @@ export default class TableViewItemComponent extends PureComponent {
             const className = createCssClassNames({
                 'ibexa-table__cell': true,
                 'c-table-view-item__cell': true,
-                'c-table-view-item__cell--shadow-right': isNameColumn & showScrollShadowLeft,
                 [`c-table-view-item__cell--${columnKey}`]: true,
+                'c-table-view__cell--shadow-right': isNameColumn & showScrollShadowLeft,
                 'ibexa-table__cell--close-left': isNameColumn,
             });
 
@@ -372,7 +372,7 @@ export default class TableViewItemComponent extends PureComponent {
             'ibexa-table__cell': true,
             'c-table-view-item__cell': true,
             'c-table-view-item__cell--actions': true,
-            'c-table-view-item__cell--shadow-left': showScrollShadowRight,
+            'c-table-view__cell--shadow-left': showScrollShadowRight,
         });
 
         return (

@@ -85,16 +85,16 @@ export default class TableViewComponent extends Component {
     handleScrollerScroll() {
         this.setState(() => {
             if (!this._refScroller.current) {
-                return {}
+                return {};
             }
 
-            const scroller = this._refScroller.current
+            const scroller = this._refScroller.current;
 
             return {
                 scrollShadowLeft: scroller.scrollLeft > 0,
                 scrollShadowRight: scroller.scrollLeft !== scroller.scrollWidth - scroller.offsetWidth,
-            }
-        })
+            };
+        });
     }
 
     getColumnsVisibilityFromLocalStorage() {
@@ -200,7 +200,7 @@ export default class TableViewComponent extends Component {
 
     renderBasicColumnsHeader() {
         const { sortClause, sortOrder, onSortChange } = this.props;
-        const { columnsVisibility } = this.state;
+        const { columnsVisibility, scrollShadowLeft } = this.state;
         const columnsToRender = {
             name: true,
             ...columnsVisibility,
@@ -217,6 +217,7 @@ export default class TableViewComponent extends Component {
                 [TABLE_HEAD_CLASS]: true,
                 [`${TABLE_CELL_CLASS}--name`]: isNameColumn,
                 'ibexa-table__header-cell--close-left': isNameColumn,
+                'c-table-view__cell--shadow-right': scrollShadowLeft && isNameColumn,
             });
             const wrapperClassName = createCssClassNames({
                 'c-table-view__label': true,
@@ -252,11 +253,16 @@ export default class TableViewComponent extends Component {
             return null;
         }
 
-        const { columnsVisibility } = this.state;
+        const { columnsVisibility, scrollShadowRight } = this.state;
         const { selectedLocationsIds, items } = this.props;
         const anyLocationSelected = !!selectedLocationsIds.size;
         const allLocationsSelected = selectedLocationsIds.size === items.length;
         const isCheckboxIndeterminate = anyLocationSelected && !allLocationsSelected;
+        const togglerClassName = createCssClassNames({
+            'c-table-view__cell asdafasdf': true,
+            'c-table-view__cell--toggler': true,
+            'c-table-view__cell--shadow-left': scrollShadowRight,
+        });
 
         return (
             <thead className="c-table-view__head">
@@ -272,7 +278,7 @@ export default class TableViewComponent extends Component {
                         />
                     </th>
                     {this.renderBasicColumnsHeader()}
-                    <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--toggler`}>
+                    <th className={togglerClassName}>
                         <TableViewColumnsTogglerComponent
                             columnsVisibility={columnsVisibility}
                             toggleColumnVisibility={this.toggleColumnVisibility}

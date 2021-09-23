@@ -16,7 +16,7 @@
     }
 
     &__list {
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size;
         line-height: calculateRem(40px);
         text-align: left;
         position: relative;

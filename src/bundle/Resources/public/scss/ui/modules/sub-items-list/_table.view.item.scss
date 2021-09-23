@@ -29,14 +29,6 @@
             background: $ibexa-white;
         }
 
-        .ibexa-table.table &--shadow-left {
-            box-shadow: calculateRem(-13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
-        }
-
-        .ibexa-table.table &--shadow-right {
-            box-shadow: calculateRem(13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
-        }
-
         &--name {
             position: sticky;
             z-index: 1;

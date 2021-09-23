@@ -3,6 +3,14 @@
     width: 100%;
     margin-bottom: 0;
 
+    .ibexa-table.table &--shadow-left {
+        box-shadow: calculateRem(-13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
+    }
+
+    .ibexa-table.table &--shadow-right {
+        box-shadow: calculateRem(13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
+    }
+
     &__wrapper {
         position: relative;
     }
@@ -59,16 +67,21 @@
     &__columns-toggler-option-label {
         white-space: nowrap;
         user-select: none;
-        font-size: calculateRem(14px);
+        font-size: $ibexa-text-font-size-medium;
         cursor: pointer;
     }
 
     &__cell {
+        .ibexa-table.table &--shadow-left {
+            box-shadow: calculateRem(-13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
+        }
+
+        .ibexa-table.table &--shadow-right {
+            box-shadow: calculateRem(13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
+        }
+
         &--head {
-            padding-left: calculateRem(16px);
-            font-weight: 700;
-            border-top: calculateRem(1px) solid $ibexa-color-base;
-            border-bottom: calculateRem(1px) solid $ibexa-color-base;
+            white-space: nowrap;
         }
 
         &--checkbox {
@@ -80,11 +93,6 @@
             width: calculateRem(30px);
             padding-left: calculateRem(16px);
             background: $ibexa-white;
-        }
-
-        &--sortable {
-            cursor: pointer;
-            padding-right: calculateRem(12px);
         }
 
         &--name {
@@ -100,7 +108,7 @@
             right: 0;
             width: calculateRem(70px);
             padding: 0;
-            margin-top: -0calculaterem (5px); // Fixes borders alignment on Safari and Edge
+            margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
             background: $ibexa-white;
             z-index: 1;
         }
