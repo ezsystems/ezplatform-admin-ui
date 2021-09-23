@@ -10,7 +10,7 @@
     const selectGroupsWidget = new eZ.core.TagViewSelect({
         fieldContainer: doc.querySelector('.ibexa-assign-groups'),
     });
-    const subtreeBtn = doc.querySelector('.ez-limitations__btn-select-subtree');
+    const selectSubtreeBtn = doc.querySelector('.ez-limitations__btn-select-subtree');
     const selectUsersBtn = doc.querySelector('#role_assignment_create_users__btn');
     const selectGroupsBtn = doc.querySelector('#role_assignment_create_groups__btn');
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
@@ -50,7 +50,7 @@
         const itemsMap = selectedItems.reduce((output, item) => ({ ...output, [item.ContentInfo.Content._id]: item.id }), {});
 
         widget.addItems(items, true);
-        widget.selectButton.setAttribute('data-items-map', JSON.stringify(itemsMap));
+        widget.selectBtn.setAttribute('data-items-map', JSON.stringify(itemsMap));
 
         closeUDW();
     };
@@ -87,7 +87,7 @@
         });
     };
 
-    subtreeBtn.addEventListener('click', openSubtreeUDW, false);
+    selectSubtreeBtn.addEventListener('click', openSubtreeUDW, false);
     selectUsersBtn.addEventListener('click', openUsersAndGroupsUDW.bind(null, selectUsersWidget), false);
     selectGroupsBtn.addEventListener('click', openUsersAndGroupsUDW.bind(null, selectGroupsWidget), false);
     limitationsRadio.forEach((radio) => radio.addEventListener('change', toggleDisabledState, false));
