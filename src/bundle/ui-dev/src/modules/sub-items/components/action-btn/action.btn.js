@@ -27,7 +27,7 @@ const ActionButton = (props) => {
 
 ActionButton.propTypes = {
     label: PropTypes.string,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     disabled: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
@@ -35,6 +35,7 @@ ActionButton.propTypes = {
 
 ActionButton.defaultPropTypes = {
     label: null,
+    title: null,
 };
 
 export default ActionButton;

@@ -56,11 +56,6 @@
         <target state="new">Upload</target>
         <note>key: multi_file_upload_open_btn.label.2</note>
       </trans-unit>
-      <trans-unit id="2b8115013cd4869d3817aac9157bc41fbf5c97ea" resname="multi_file_upload_open_btn.title">
-        <source>Upload sub-items</source>
-        <target state="new">Upload sub-items</target>
-        <note>key: multi_file_upload_open_btn.title</note>
-      </trans-unit>
       <trans-unit id="76d7ffabd7e8c5d27a9b732dd5f15d1da68ff00c" resname="upload.success.message">
         <source>Uploaded</source>
         <target state="new">Uploaded</target>

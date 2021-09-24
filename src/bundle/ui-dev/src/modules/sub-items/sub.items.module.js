@@ -1133,39 +1133,34 @@ export default class SubItemsModule extends Component {
 
     renderBulkMoveBtn(disabled) {
         const label = Translator.trans(/*@Desc("Move")*/ 'move_btn.label', {}, 'sub_items');
-        const title = Translator.trans(/*@Desc("Move selected items")*/ 'move_btn.title', {}, 'sub_items');
 
-        return <ActionButton disabled={disabled} onClick={this.onMoveBtnClick} label={label} title={title} type="move" />;
+        return <ActionButton disabled={disabled} onClick={this.onMoveBtnClick} label={label} type="move" />;
     }
 
     renderBulkAddLocationBtn(disabled) {
         const label = Translator.trans(/*@Desc("Add Locations")*/ 'add_locations_btn.label', {}, 'sub_items');
-        const title = Translator.trans(/*@Desc("Add Locations to selected Content item(s)")*/ 'add_locations_btn.title', {}, 'sub_items');
 
         return (
-            <ActionButton disabled={disabled} onClick={this.onAddLocationsBtnClick} label={label} title={title} type="create-location" />
+            <ActionButton disabled={disabled} onClick={this.onAddLocationsBtnClick} label={label} type="create-location" />
         );
     }
 
     renderBulkHideBtn(disabled) {
         const label = Translator.trans(/*@Desc("Hide")*/ 'hide_locations_btn.label', {}, 'sub_items');
-        const title = Translator.trans(/*@Desc("Hide selected Locations")*/ 'hide_locations_btn.title', {}, 'sub_items');
 
-        return <ActionButton disabled={disabled} onClick={this.onHideBtnClick} label={label} title={title} type="hide" />;
+        return <ActionButton disabled={disabled} onClick={this.onHideBtnClick} label={label} type="hide" />;
     }
 
     renderBulkUnhideBtn(disabled) {
         const label = Translator.trans(/*@Desc("Reveal")*/ 'unhide_locations_btn.label', {}, 'sub_items');
-        const title = Translator.trans(/*@Desc("Reveal selected Locations")*/ 'unhide_locations_btn.title', {}, 'sub_items');
 
-        return <ActionButton disabled={disabled} onClick={this.onUnhideBtnClick} label={label} title={title} type="reveal" />;
+        return <ActionButton disabled={disabled} onClick={this.onUnhideBtnClick} label={label} type="reveal" />;
     }
 
     renderBulkDeleteBtn(disabled) {
         const label = Translator.trans(/*@Desc("Delete")*/ 'trash_btn.label', {}, 'sub_items');
-        const title = Translator.trans(/*@Desc("Delete selected items")*/ 'trash_btn.title', {}, 'sub_items');
 
-        return <ActionButton disabled={disabled} onClick={this.onDeleteBtnClick} label={label} title={title} type="trash" />;
+        return <ActionButton disabled={disabled} onClick={this.onDeleteBtnClick} label={label} type="trash" />;
     }
 
     renderSpinner() {
