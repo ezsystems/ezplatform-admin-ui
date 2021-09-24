@@ -268,7 +268,6 @@ export default class TableViewComponent extends Component {
         return (
             <thead className="c-table-view__head">
                 <tr className="ibexa-table__head-row c-table-view__row">
-                    {/* TODO: disable ibexa-tables checkbox JSes for this table */}
                     <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--checkbox`}>
                         <ThreeStateCheckboxComponent
                             indeterminate={isCheckboxIndeterminate}
@@ -297,7 +296,7 @@ export default class TableViewComponent extends Component {
         return (
             <div className="c-table-view__wrapper">
                 <div className="c-table-view__scroller" ref={this._refScroller}>
-                    <table className="table ibexa-table c-table-view">
+                    <table className="table ibexa-table ibexa-table--no-automatic-main-checkbox c-table-view">
                         {this.renderHead()}
                         <tbody className="ibexa-table__body c-table-view__body">{renderedItems}</tbody>
                     </table>
