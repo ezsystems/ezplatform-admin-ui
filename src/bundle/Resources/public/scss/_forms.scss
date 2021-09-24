@@ -47,7 +47,7 @@ form:not(.form-inline) {
 }
 
 .ibexa-field {
-    .ibexa-field__label {
+    &__label {
         @include label-required();
     }
 }
