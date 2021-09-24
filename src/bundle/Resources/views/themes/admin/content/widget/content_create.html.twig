@@ -23,7 +23,12 @@
             <div class="ibexa-extra-actions__section-content ibexa-extra-actions__section-content--content-type">
                 <div class="ez-instant-filter">
                     <div class="ez-instant-filter__input-wrapper">
-                        <input type="text" class="ez-instant-filter__input ibexa-input ibexa-input--text form-control" placeholder="{{ ('Type to refine') }}" value="" />
+                        <input
+                            type="text"
+                            class="ez-instant-filter__input ibexa-input ibexa-input--text form-control"
+                            placeholder="{{ ('content.create.input.placeholder'|trans|desc('Type to refine')) }}"
+                            value=""
+                        />
                     </div>
                     <div class="ez-instant-filter__items">
                         {{ form_widget(form.content_type) }}
