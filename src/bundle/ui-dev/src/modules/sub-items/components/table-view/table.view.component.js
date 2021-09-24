@@ -75,11 +75,19 @@ export default class TableViewComponent extends Component {
 
     componentDidMount() {
         this._refScroller.current.addEventListener('scroll', this.handleScrollerScroll, false);
+        window.addEventListener('resize', this.handleScrollerScroll, false);
         this.handleScrollerScroll();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.columnsVisibility !== prevState.columnsVisibility) {
+            this.handleScrollerScroll();
+        }
     }
 
     componentWillUnmount() {
         this._refScroller.current.removeEventListener('scroll', this.handleScrollerScroll, false);
+        window.removeEventListener('resize', this.handleScrollerScroll, false);
     }
 
     handleScrollerScroll() {
