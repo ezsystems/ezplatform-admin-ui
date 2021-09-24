@@ -239,12 +239,19 @@
     background-color: $ibexa-color-white;
 
     &.table > :not(caption) > * > * {
-        background-color: transparent;
         box-shadow: none;
     }
 
     &__row:nth-child(odd) {
-        background-color: $ibexa-color-light-300;
+        .ibexa-table__cell {
+            background-color: $ibexa-color-light-300;
+        }
+    }
+
+    &__row:nth-child(even) {
+        .ibexa-table__cell {
+            background-color: $ibexa-color-white;
+        }
     }
 
     &__cell:first-child {
