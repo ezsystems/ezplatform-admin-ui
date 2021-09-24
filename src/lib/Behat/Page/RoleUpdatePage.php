@@ -121,7 +121,7 @@ class RoleUpdatePage extends AdminUpdateItemPage
     public function selectLimitationForAssignment(string $itemPath)
     {
         $this->fillFieldWithValue('Subtree', 'true');
-        $this->clickButton('Select Subtree');
+        $this->clickButton('Select path');
         $this->universalDiscoveryWidget->verifyIsLoaded();
         $this->universalDiscoveryWidget->selectContent($itemPath);
         $this->universalDiscoveryWidget->confirm();
