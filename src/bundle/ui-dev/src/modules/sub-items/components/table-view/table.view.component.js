@@ -89,10 +89,11 @@ export default class TableViewComponent extends Component {
             }
 
             const scroller = this._refScroller.current;
+            const offsetRoudingCompensator = 0.5;
 
             return {
                 scrollShadowLeft: scroller.scrollLeft > 0,
-                scrollShadowRight: scroller.scrollLeft !== scroller.scrollWidth - scroller.offsetWidth,
+                scrollShadowRight: scroller.scrollLeft < scroller.scrollWidth - scroller.offsetWidth - 2 * offsetRoudingCompensator,
             };
         });
     }

@@ -69,7 +69,7 @@
 
     &__priority-wrapper {
         position: relative;
-        min-width: calculateRem(140px);
+        min-width: calculateRem(145px);
     }
 
     &__priority-actions {
@@ -79,22 +79,13 @@
         justify-content: center;
         right: 0;
         top: 0;
-        width: calculateRem(62px);
-        height: calculateRem(44px);
-        background: $ibexa-white;
     }
 
     &__priority-value {
         max-width: 100%;
-        height: calculateRem(40px);
-        margin: calculateRem(2px) 0;
         padding: 0 calculateRem(10px);
-        border: none;
-        border-radius: $ibexa-border-radius;
 
         &[readonly] {
-            background-color: $ibexa-white;
-            color: $ibexa-color-font;
             cursor: pointer;
         }
 
@@ -122,34 +113,8 @@
     }
 
     &__btn {
-        color: $ibexa-white;
-        border: calculateRem(1px) solid transparent;
-        width: calculateRem(48px);
-        height: calculateRem(48px);
-        transition: background 0.3s $ibexa-admin-transition;
-        cursor: pointer;
-
         &--submit {
-            margin-right: calculateRem(4px);
-            padding: 0;
-            border-radius: $ibexa-border-radius;
-            background: $ibexa-color-primary;
-        }
-
-        &--submit:hover,
-        &--submit:focus {
-            background: $ibexa-color-primary-hover;
-        }
-
-        &--cancel {
-            padding: 0;
-            border-radius: $ibexa-border-radius;
-            background: $ibexa-color-base-dark;
-        }
-
-        &--cancel:hover,
-        &--cancel:focus {
-            background: darken($ibexa-color-base-dark, 15%);
+            margin-right: calculateRem(8px);
         }
 
         &--edit {
@@ -163,17 +128,6 @@
                 height: 100%;
                 display: flex;
                 align-items: center;
-            }
-
-            .ibexa-icon {
-                fill: $ibexa-black;
-            }
-
-            &:hover,
-            &:focus {
-                .ibexa-icon {
-                    fill: $ibexa-color-primary;
-                }
             }
         }
     }

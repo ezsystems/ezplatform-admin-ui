@@ -201,17 +201,23 @@ export default class TableViewItemComponent extends PureComponent {
             <div className="c-table-view-item__priority-wrapper" {...priorityWrapperAttrs}>
                 <div className="c-table-view-item__inner-wrapper c-table-view-item__inner-wrapper--input">
                     <input
-                        className="c-table-view-item__priority-value ez-input ez-input--text"
+                        className="ibexa-input ibexa-input--text ibexa-input--small c-table-view-item__priority-value ibexa-input"
                         ref={this.setPriorityInputRef}
                         {...inputAttrs}
                     />
                 </div>
                 <div className="c-table-view-item__priority-actions" {...innerWrapperAttrs}>
-                    <button type="button" className="c-table-view-item__btn c-table-view-item__btn--submit" onClick={this.handleSubmit}>
-                        <Icon name="checkmark" extraClasses="ibexa-icon--small ibexa-icon--light" />
+                    <button
+                        type="button"
+                        className="btn ibexa-btn ibexa-btn--primary ibexa-btn--no-text ibexa-btn--small c-table-view-item__btn c-table-view-item__btn--submit"
+                        onClick={this.handleSubmit}>
+                        <Icon name="checkmark" extraClasses="ibexa-icon--small" />
                     </button>
-                    <button type="button" className="c-table-view-item__btn c-table-view-item__btn--cancel" onClick={this.handleCancel}>
-                        <Icon name="discard" extraClasses="ibexa-icon--small ibexa-icon--light" />
+                    <button
+                        type="button"
+                        className="btn ibexa-btn ibexa-btn--secondary ibexa-btn--no-text ibexa-btn--small"
+                        onClick={this.handleCancel}>
+                        <Icon name="discard" extraClasses="ibexa-icon--small" />
                     </button>
                 </div>
             </div>
@@ -264,17 +270,11 @@ export default class TableViewItemComponent extends PureComponent {
     }
 
     renderContributorCell() {
-        return (
-            <div className="c-table-view-item__text-wrapper">
-                {this.getName(this.props.item.content._info.currentVersion.creator)}
-            </div>
-        );
+        return <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.currentVersion.creator)}</div>;
     }
 
     renderSectionCell() {
-        return (
-            <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.section)}</div>
-        );
+        return <div className="c-table-view-item__text-wrapper">{this.getName(this.props.item.content._info.section)}</div>;
     }
 
     renderLocationIdCell() {
