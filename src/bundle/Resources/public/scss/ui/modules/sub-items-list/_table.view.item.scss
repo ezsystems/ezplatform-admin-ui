@@ -24,8 +24,6 @@
             left: 0;
             width: calculateRem(30px);
             line-height: 0;
-            // TODO: -0.5px no longer needed ??
-            margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
             background: $ibexa-white;
         }
 
@@ -48,7 +46,6 @@
             right: 0;
             width: calculateRem(70px);
             padding: 0;
-            margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
             background: $ibexa-white;
         }
 
