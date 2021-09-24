@@ -14,7 +14,7 @@
     "autoload-dev": {
         "psr-4": {
             "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests",
-            "Ibexa\\AdminUi\\Tests\\": "tests/lib"
+            "Ibexa\\Tests\\AdminUi\\": "tests/lib"
         }
     },
     "require": {
