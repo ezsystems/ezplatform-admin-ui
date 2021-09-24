@@ -14,7 +14,7 @@
         <testsuite name="EzSystems\EzPlatformAdminUiBundle">
             <directory>src/bundle/Tests/</directory>
         </testsuite>
-        <testsuite name="Ibexa\AdminUi">
+        <testsuite name="Ibexa\Tests\AdminUi">
             <directory>tests/lib/</directory>
         </testsuite>
     </testsuites>

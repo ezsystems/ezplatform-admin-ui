@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\AdminUi\Tests\REST\Input\ContentType;
+namespace Ibexa\Tests\AdminUi\REST\Input\ContentType;
 
 use EzSystems\EzPlatformAdminUi\REST\Value\ContentType\FieldDefinitionDelete as FieldDefinitionDeleteValue;
 use EzSystems\EzPlatformRest\Exceptions;
