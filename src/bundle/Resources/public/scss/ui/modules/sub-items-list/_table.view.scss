@@ -3,14 +3,6 @@
     width: 100%;
     margin-bottom: 0;
 
-    .ibexa-table.table &--shadow-left {
-        box-shadow: calculateRem(-13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
-    }
-
-    .ibexa-table.table &--shadow-right {
-        box-shadow: calculateRem(13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
-    }
-
     &__wrapper {
         position: relative;
     }
@@ -73,11 +65,11 @@
 
     &__cell {
         .ibexa-table.table &--shadow-left {
-            box-shadow: calculateRem(-13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
+            box-shadow: calculateRem(-13px) calculateRem(5px) calculateRem(20px) 0 rgba($ibexa-color-info, 0.1);
         }
 
         .ibexa-table.table &--shadow-right {
-            box-shadow: calculateRem(13px) calculateRem(5px) 20px 0 rgba(65, 145, 255, 0.1);
+            box-shadow: calculateRem(13px) calculateRem(5px) calculateRem(20px) 0 rgba($ibexa-color-info, 0.1);
         }
 
         &--head {

@@ -260,7 +260,7 @@ export default class TableViewComponent extends Component {
         const allLocationsSelected = selectedLocationsIds.size === items.length;
         const isCheckboxIndeterminate = anyLocationSelected && !allLocationsSelected;
         const togglerClassName = createCssClassNames({
-            'c-table-view__cell asdafasdf': true,
+            'c-table-view__cell': true,
             'c-table-view__cell--toggler': true,
             'c-table-view__cell--shadow-left': scrollShadowRight,
         });
