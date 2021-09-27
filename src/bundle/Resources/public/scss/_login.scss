@@ -33,10 +33,6 @@
         padding: calculateRem(90px) calculateRem(120px);
     }
 
-    &__actions-headline {
-        margin-bottom: calculateRem(38px);
-    }
-
     &__content-wrapper {
         display: flex;
         flex-direction: column;
@@ -77,7 +73,7 @@
     &__password-visibility-toggler {
         position: absolute;
         right: calculateRem(8px);
-        bottom: calculateRem(6px);
+        bottom: calculateRem(12px);
         z-index: 1;
         margin-left: auto;
         border: none;
@@ -95,6 +91,7 @@
         &--sign-in {
             width: 100%;
             justify-content: center;
+            margin-top: calculateRem(40px);
         }
     }
 
@@ -103,5 +100,11 @@
         justify-content: center;
         margin-top: calculateRem(14px);
         font-size: $ibexa-text-font-size-medium;
+    }
+
+    &__input-label-wrapper {
+        .ibexa-label {
+            margin-top: calculateRem(40px);
+        }
     }
 }

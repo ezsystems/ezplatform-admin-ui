@@ -32,16 +32,21 @@ class ContentProxyTranslateEvent extends Event
     /** @var \EzSystems\EzPlatformAdminUi\Event\Options */
     private $options;
 
+    /** @var int|null */
+    private $locationId;
+
     public function __construct(
         int $contentId,
         ?string $fromLanguageCode,
         string $toLanguageCode,
-        ?Options $options = null
+        ?Options $options = null,
+        ?int $locationId = null
     ) {
         $this->contentId = $contentId;
         $this->fromLanguageCode = $fromLanguageCode;
         $this->toLanguageCode = $toLanguageCode;
         $this->options = $options ?? new Options();
+        $this->locationId = $locationId;
     }
 
     public function getContentId(): int
@@ -62,6 +67,11 @@ class ContentProxyTranslateEvent extends Event
     public function getOptions(): Options
     {
         return $this->options;
+    }
+
+    public function getLocationId(): ?int
+    {
+        return $this->locationId;
     }
 
     public function getResponse(): ?Response

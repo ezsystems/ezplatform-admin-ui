@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    Ibexa\AdminUi\UI\Module\FieldTypeToolbar\FieldTypeToolbarFactory:
+        arguments:
+            - '@eZ\Publish\Core\FieldType\FieldTypeRegistry'
+            - '@translator'

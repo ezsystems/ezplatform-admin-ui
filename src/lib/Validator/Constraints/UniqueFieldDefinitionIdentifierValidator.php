@@ -30,7 +30,7 @@ class UniqueFieldDefinitionIdentifierValidator extends ConstraintValidator
         }
 
         $contentTypeData = $value->contentTypeData;
-        foreach ($contentTypeData->fieldDefinitionsData as $fieldDefData) {
+        foreach ($contentTypeData->getFlatFieldDefinitionsData() as $fieldDefData) {
             if ($fieldDefData === $value) {
                 continue;
             }

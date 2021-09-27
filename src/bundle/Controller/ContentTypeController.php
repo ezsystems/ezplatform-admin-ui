@@ -34,6 +34,7 @@ use Ibexa\AdminUi\Form\Type\ContentType\ContentTypeUpdateType;
 use Ibexa\AdminUi\Tab\ContentType\TranslationsTab;
 use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\AdminUi\UI\Module\FieldTypeToolbar\FieldTypeToolbarFactory;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\FormInterface;
@@ -78,6 +79,9 @@ class ContentTypeController extends Controller
      */
     private $configResolver;
 
+    /** @var \Ibexa\AdminUi\UI\Module\FieldTypeToolbar\FieldTypeToolbarFactory */
+    private $fieldTypeToolbarFactory;
+
     public function __construct(
         TranslatableNotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
@@ -89,7 +93,8 @@ class ContentTypeController extends Controller
         LanguageService $languageService,
         ContentTypeFormFactory $contentTypeFormFactory,
         ContentTypeDraftMapper $contentTypeDraftMapper,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        FieldTypeToolbarFactory $fieldTypeToolbarFactory
     ) {
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
@@ -102,6 +107,7 @@ class ContentTypeController extends Controller
         $this->contentTypeFormFactory = $contentTypeFormFactory;
         $this->contentTypeDraftMapper = $contentTypeDraftMapper;
         $this->configResolver = $configResolver;
+        $this->fieldTypeToolbarFactory = $fieldTypeToolbarFactory;
     }
 
     /**
@@ -202,6 +208,7 @@ class ContentTypeController extends Controller
             'content_type_group' => $group,
             'content_type' => $contentTypeDraft,
             'form' => $form->createView(),
+            'field_type_toolbar' => $this->fieldTypeToolbarFactory->create(),
         ]);
     }
 
@@ -524,7 +531,48 @@ class ContentTypeController extends Controller
             'content_type' => $contentTypeDraft,
             'form' => $form->createView(),
             'language_code' => $baseLanguage ? $baseLanguage->languageCode : $language->languageCode,
+            'field_type_toolbar' => $this->fieldTypeToolbarFactory->create(),
         ]);
+    }
+
+    public function addFieldDefinitionFormAction(
+        ContentTypeGroup $group,
+        ContentTypeDraft $contentTypeDraft,
+        string $fieldDefinitionIdentifier,
+        ?Language $language = null,
+        ?Language $baseLanguage = null
+    ): Response {
+        $this->denyAccessUnlessGranted(new Attribute('class', 'update'));
+
+        if ($language === null) {
+            $language = $this->getDefaultLanguage($contentTypeDraft);
+        }
+
+        $contentTypeDraftData = $this->contentTypeDraftMapper->mapToFormData(
+            $contentTypeDraft,
+            [
+                'language' => $language,
+                'baseLanguage' => $baseLanguage,
+            ]
+        );
+
+        $form = $this->createUpdateForm($group, $contentTypeDraft, $language, $baseLanguage);
+
+        foreach ($form['fieldDefinitionsData'] as $fieldDefinitionsGroupForm) {
+            if (!isset($fieldDefinitionsGroupForm[$fieldDefinitionIdentifier])) {
+                continue;
+            }
+
+            return $this->render('@ezdesign/content_type/part/field_definition_form.html.twig', [
+                'form' => $fieldDefinitionsGroupForm[$fieldDefinitionIdentifier]->createView(),
+                'content_type_group' => $group,
+                'content_type' => $contentTypeDraft,
+                'language_code' => $baseLanguage ? $baseLanguage->languageCode : $language->languageCode,
+                'is_translation' => $contentTypeDraftData->mainLanguageCode !== $contentTypeDraftData->languageCode,
+            ]);
+        }
+
+        throw $this->createNotFoundException("Field definition with identifier $fieldDefinitionIdentifier not found");
     }
 
     /**

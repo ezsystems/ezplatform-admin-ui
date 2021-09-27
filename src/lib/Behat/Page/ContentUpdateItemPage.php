@@ -11,6 +11,7 @@ namespace Ibexa\AdminUi\Behat\Page;
 use Behat\Mink\Session;
 use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 use Ibexa\AdminUi\Behat\Component\Fields\FieldTypeComponent;
+use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Routing\Router;
@@ -69,15 +70,17 @@ class ContentUpdateItemPage extends Page
 
     public function close(): void
     {
+        $this->getHTMLPage()->setTimeout(3)
+            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('closeButton')));
         $this->getHTMLPage()->find($this->getLocator('closeButton'))->click();
     }
 
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('pageTitle', '.ibexa-content-edit-header__column h1'),
+            new VisibleCSSLocator('pageTitle', '.ibexa-edit-header__title'),
             new VisibleCSSLocator('formElement', '[name=ezplatform_content_forms_content_edit]'),
-            new VisibleCSSLocator('closeButton', '.ez-content-edit-container__close, .ibexa-content-edit-sidebar__header .ibexa-content-edit-sidebar__back'),  // TODO: Set one selector after redesign
+            new VisibleCSSLocator('closeButton', '.ibexa-anchor-navigation-menu__back'),
             new VisibleCSSLocator('fieldLabel', '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ibexa-card > .card-body > div > div > legend, .ibexa-field-edit--eznoneditable > legend.col-form-label'),
             new VisibleCSSLocator('nthField', '.ibexa-card .card-body > div > div > div:nth-of-type(%s)'),
             new VisibleCSSLocator('noneditableFieldClass', 'ibexa-field-edit--eznoneditable'),

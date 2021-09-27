@@ -113,6 +113,15 @@ class ContentTypeContext implements Context
     }
 
     /**
+     * @When I select :categoryName category to Content Type definition
+     */
+    public function iSelectCategory(string $categoryName): void
+    {
+        $this->contentTypeUpdatePage->clickAddButton();
+        $this->contentTypeUpdatePage->selectContentTypeCategory($categoryName);
+    }
+
+    /**
      * @When I add field :fieldName to Content Type definition
      */
     public function iAddField(string $fieldName): void

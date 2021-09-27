@@ -10,6 +10,7 @@ namespace Ibexa\AdminUi\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ValueObject;
+use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use Ibexa\AdminUi\Form\Data\ContentTypeData;
 use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Ibexa\Contracts\AdminUi\Event\FieldDefinitionMappingEvent;
@@ -22,13 +23,18 @@ class ContentTypeDraftMapper implements FormDataMapperInterface
     /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
     private $eventDispatcher;
 
+    /** @var \eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList */
+    private $fieldsGroupsList;
+
     /**
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        FieldsGroupsList $fieldsGroupsList
     ) {
         $this->eventDispatcher = $eventDispatcher;
+        $this->fieldsGroupsList = $fieldsGroupsList;
     }
 
     /**
@@ -87,6 +93,10 @@ class ContentTypeDraftMapper implements FormDataMapperInterface
             );
 
             $this->eventDispatcher->dispatch($event, FieldDefinitionMappingEvent::NAME);
+
+            if (empty($fieldDefinitionData->fieldGroup)) {
+                $fieldDefinitionData->fieldGroup = $this->fieldsGroupsList->getDefaultGroup();
+            }
 
             $contentTypeData->addFieldDefinitionData($event->getFieldDefinitionData());
         }

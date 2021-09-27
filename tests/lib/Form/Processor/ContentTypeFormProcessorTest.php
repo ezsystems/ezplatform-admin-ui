@@ -74,23 +74,30 @@ class ContentTypeFormProcessorTest extends TestCase
     {
         $contentTypeDraft = new ContentTypeDraft();
         $fieldDef1 = new FieldDefinition();
-        $fieldDefData1 = new FieldDefinitionData(['fieldDefinition' => $fieldDef1]);
+        $fieldDefData1 = new FieldDefinitionData([
+            'fieldDefinition' => $fieldDef1,
+            'fieldGroup' => 'foo',
+            'identifier' => 'foo',
+        ]);
         $fieldDef2 = new FieldDefinition();
-        $fieldDefData2 = new FieldDefinitionData(['fieldDefinition' => $fieldDef2]);
+        $fieldDefData2 = new FieldDefinitionData([
+            'fieldDefinition' => $fieldDef2,
+            'fieldGroup' => 'foo',
+            'identifier' => 'bar',
+        ]);
         $contentTypeData = new ContentTypeData(['contentTypeDraft' => $contentTypeDraft]);
         $contentTypeData->addFieldDefinitionData($fieldDefData1);
         $contentTypeData->addFieldDefinitionData($fieldDefData2);
 
         $this->contentTypeService
-            ->expects($this->at(0))
+            ->expects(self::exactly(2))
             ->method('updateFieldDefinition')
-            ->with($contentTypeDraft, $fieldDef1, $fieldDefData1);
+            ->withConsecutive(
+                [$contentTypeDraft, $fieldDef1, $fieldDefData1],
+                [$contentTypeDraft, $fieldDef2, $fieldDefData2],
+            );
         $this->contentTypeService
-            ->expects($this->at(1))
-            ->method('updateFieldDefinition')
-            ->with($contentTypeDraft, $fieldDef2, $fieldDefData2);
-        $this->contentTypeService
-            ->expects($this->at(2))
+            ->expects(self::once())
             ->method('updateContentTypeDraft')
             ->with($contentTypeDraft, $contentTypeData);
 

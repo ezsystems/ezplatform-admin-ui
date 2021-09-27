@@ -27,13 +27,13 @@
         setWidthOfSecondLevelMenu();
     };
     const setWidthOfSecondLevelMenu = () => {
-        const savedSecondLevelMenuWidth = localStorage.getItem('secondLevelMenuWidth');
+        const secondLevelMenuWidth = eZ.helpers.cookies.getCookie('second_menu_width');
         const isSecondLevelMenuHidden = secondLevelMenuNode.classList.contains('ibexa-main-menu__navbar--hidden');
 
-        if (!savedSecondLevelMenuWidth || isSecondLevelMenuHidden) {
+        if (!secondLevelMenuWidth || isSecondLevelMenuHidden) {
             return;
         }
-        const { secondLevelMenuWidth } = localStorage;
+
         const secondLevelMenuListWidth = secondLevelMenuWidth - RESIZER_WIDTH;
 
         secondLevelMenuNode.style.width = `${secondLevelMenuWidth}px`;
@@ -51,7 +51,7 @@
         const isSecondLevelMenuCollapsed = secondLevelMenuNode.classList.contains('ibexa-main-menu__navbar--collapsed');
         const newMenuWidth = isSecondLevelMenuCollapsed ? SECOND_LEVEL_EXPANDED_WIDTH : SECOND_LEVEL_COLLAPSED_WIDTH;
 
-        localStorage.secondLevelMenuWidth = newMenuWidth;
+        eZ.helpers.cookies.setCookie('second_menu_width', newMenuWidth);
         setWidthOfSecondLevelMenu();
     };
     const parsePopup = (button) => {
@@ -68,6 +68,8 @@
         });
     };
     const parseMenuTitles = () => {
+        eZ.helpers.tooltips.hideAll();
+
         firstLevelMenuNode.querySelectorAll('.ibexa-main-menu__item').forEach((item) => {
             const label = item.querySelector('.ibexa-main-menu__item-text-column').textContent;
 
@@ -78,10 +80,7 @@
             }
 
             eZ.helpers.tooltips.parse(mainMenuNode);
-            item.removeAttribute('title');
         });
-
-        eZ.helpers.tooltips.hideAll();
     };
     const addResizeListeners = ({ clientX }) => {
         resizeStartPositionX = clientX;
@@ -98,9 +97,9 @@
     };
     const triggerSecondLevelChangeWidth = ({ clientX }) => {
         const resizeValue = secondMenuLevelCurrentWidth + (clientX - resizeStartPositionX);
-        const newMenuLevelWidth = resizeValue > SECOND_LEVEL_MANUAL_RESIZE_MIN_WIDTH ? resizeValue : SECOND_LEVEL_COLLAPSED_WIDTH;
+        const newMenuWidth = resizeValue > SECOND_LEVEL_MANUAL_RESIZE_MIN_WIDTH ? resizeValue : SECOND_LEVEL_COLLAPSED_WIDTH;
 
-        localStorage.secondLevelMenuWidth = newMenuLevelWidth;
+        eZ.helpers.cookies.setCookie('second_menu_width', newMenuWidth);
         setWidthOfSecondLevelMenu();
     };
     const fitMenu = () => {
@@ -118,7 +117,6 @@
 
     fitMenu();
     parseMenuTitles();
-    setWidthOfSecondLevelMenu();
 
     global.addEventListener('scroll', fitMenu, false);
     global.addEventListener('resize', fitMenu, false);

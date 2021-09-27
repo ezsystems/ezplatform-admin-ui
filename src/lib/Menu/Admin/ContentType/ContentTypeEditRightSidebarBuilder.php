@@ -70,7 +70,7 @@ class ContentTypeEditRightSidebarBuilder extends AbstractBuilder implements Tran
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'ibexa-btn--trigger',
+                        'class' => 'ibexa-btn--trigger ibexa-btn--save-content-type',
                         'data-click' => sprintf('#%s', $contentTypeEditFormView['publishContentType']->vars['id']),
                     ],
                 ]

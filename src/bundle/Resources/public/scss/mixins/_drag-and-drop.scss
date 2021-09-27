@@ -1,0 +1,88 @@
+@mixin drag-items-container() {
+    display: flex;
+    flex-direction: column;
+    max-width: calculateRem(340px);
+    max-height: calculateRem(700px);
+    margin-left: calculateRem(24px);
+    padding-top: calculateRem(16px);
+    overflow: hidden;
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: $ibexa-border-radius;
+    background-color: $ibexa-color-light-400;
+    box-shadow: calculateRem(-4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+}
+
+@mixin drag-items-action-header() {
+    display: flex;
+    justify-content: space-between;
+    height: calculateRem(16px);
+    background-color: $ibexa-color-light-400;
+}
+
+@mixin drag-items-header() {
+    margin: 0;
+    padding: calculateRem(12px) calculateRem(24px);
+    background: $ibexa-color-white;
+    border-bottom: calculateRem(1px) solid $ibexa-color-light;
+}
+
+@mixin drag-items-list {
+    background: $ibexa-color-white;
+    overflow: auto;
+    padding: 0 calculateRem(24px) calculateRem(24px);
+}
+
+@mixin drag-item {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin: calculateRem(8px) 0;
+    height: calculateRem(48px);
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: $ibexa-border-radius;
+    box-shadow: $ibexa-content-type-edit-field-shadow;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:hover {
+        cursor: grab;
+    }
+
+    &--hidden {
+        height: 0;
+        opacity: 0;
+        margin: 0;
+        border: none;
+    }
+
+    &--is-dragged-out {
+        background: $ibexa-color-light-400;
+        opacity: 0.5;
+
+        .ibexa-icon {
+            &--field-icon {
+                fill: $ibexa-color-dark-200;
+            }
+        }
+    }
+
+    .ibexa-icon {
+        &--drag-icon {
+            fill: $ibexa-color-dark-200;
+            margin: 0 calculateRem(16px);
+        }
+
+        &--field-icon {
+            margin-right: calculateRem(8px);
+        }
+    }
+
+    .ibexa-label {
+        margin: calculateRem(8px) 0;
+        font-weight: 600;
+    }
+}

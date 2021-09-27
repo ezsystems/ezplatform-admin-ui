@@ -45,6 +45,7 @@
     &__image-wrapper {
         height: calculateRem(248px);
         width: calculateRem(248px);
+        max-width: 100%;
         background: $ibexa-color-base-light;
         display: flex;
         align-items: center;

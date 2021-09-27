@@ -1,0 +1,44 @@
+{% set value = field_definition.vars.value %}
+{% set name = value.names[language_code] ?? value.names[content_type.mainLanguageCode]  %}
+
+{%- embed "@ezdesign/ui/component/collapse.html.twig" with {
+    'is_expanded': false,
+    'is_draggable': true,
+    'class': 'ibexa-collapse--field-definition',
+    'body_id': field_definition.vars.id ~ '_collapse',
+    'header_label': '%s (%s)'|format(name, field_definition.vars.value.fieldTypeIdentifier),
+    'data_attr': {
+        'data-field-definition-identifier': field_definition.vars.value.identifier,
+    },
+    'extra_actions': [
+        { 'icon_name': 'trash', 'button_class': 'ibexa-collapse__extra-action-button--remove-field-definitions'}
+    ]
+} -%}
+    {% block body_content %}
+        {{ form_row(field_definition.name) }}
+        {{ form_row(field_definition.identifier) }}
+        {{ form_row(field_definition.description) }}
+        {{ form_row(field_definition.isRequired) }}
+        {{ form_row(field_definition.isSearchable) }}
+        {{ form_row(field_definition.isTranslatable) }}
+        {{ form_row(field_definition.isThumbnail) }}
+        {{ form_row(field_definition.fieldGroup, { attr: {
+            class: "ibexa-input ibexa-input--field-group"
+        }}) }}
+        {{ form_widget(field_definition.position, { attr: {
+            hidden: 'hidden',
+            class: "ibexa-input ibexa-input--position"
+        }}) }}
+
+        {{ ez_render_field_definition_edit(value, {
+            'languageCode': language_code,
+            'form': field_definition,
+            'group_class': value.group_class|default(''),
+            'is_translation': is_translation,
+        }) }}
+
+        {% for child in field_definition|filter(child => child.isRendered() == false) %}
+            {{ form_row(child) }}
+        {% endfor %}
+    {% endblock %}
+{%- endembed -%}

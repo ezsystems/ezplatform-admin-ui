@@ -1,0 +1,12 @@
+@mixin edit-right-side-container {
+    position: relative;
+    padding-top: calculateRem(42px);
+    min-height: calc(100vh - #{calculateRem(273px)});
+    overflow-y: auto;
+    border-bottom-left-radius: $ibexa-border-radius;
+    border-width: 0 calculateRem(1px) calculateRem(1px);
+    border-style: solid;
+    border-color: $ibexa-color-light-400;
+    background-color: $ibexa-color-white;
+    box-shadow: $ibexa-edit-content-box-shadow;
+}

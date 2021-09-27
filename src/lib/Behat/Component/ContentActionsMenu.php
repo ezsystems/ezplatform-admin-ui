@@ -81,7 +81,7 @@ class ContentActionsMenu extends Component
             new VisibleCSSLocator('menuButton', '.ibexa-context-menu .ibexa-btn, .ibexa-context-menu__item .ibexa-popup-menu__item, .ez-context-menu .btn'), // TO DO: set one selector after redesign
             new VisibleCSSLocator('label', '.ibexa-btn__label'),
             new VisibleCSSLocator('moreButton', '.ibexa-context-menu__item--more'),
-            new VisibleCSSLocator('expandedMenuButton', '.ibexa-context-menu__item .ibexa-popup-menu__item'),
+            new VisibleCSSLocator('expandedMenuButton', '.ibexa-context-menu__item .ibexa-popup-menu__item-content'),
         ];
     }
 }

@@ -1,0 +1,21 @@
+{% extends view_base_layout is defined ? view_base_layout : '@ezdesign/ui/layout.html.twig' %}
+
+{% block main_container_class %}ibexa-main-container--edit-container{% endblock %}
+
+{% block header_row %}{% endblock %}
+
+{% block left_sidebar %}
+    {% include '@ezdesign/ui/anchor_navigation_menu.html.twig' with anchor_params %}
+{% endblock %}
+
+{% block content_column %}
+    <div class="ibexa-main-container__content-column">
+        {% block header %}{% endblock %}
+
+        <div class="ibexa-edit-content">
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

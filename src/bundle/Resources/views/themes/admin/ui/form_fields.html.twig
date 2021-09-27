@@ -136,7 +136,7 @@
 
 {%- block number_widget -%}
     {%- set type = type|default('number') -%}
-    {{ block('form_widget_simple') }}
+    {{ parent() }}
 {%- endblock number_widget -%}
 
 {%- block password_widget -%}
@@ -148,7 +148,7 @@
 {%- block email_widget -%}
     {% set force_text = true %}
     {%- set type = type|default('email') -%}
-    {{ block('form_widget_simple') }}
+    {{ parent() }}
 {%- endblock email_widget -%}
 
 {%- block table_header_tool_btn -%}
@@ -207,13 +207,13 @@
         <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
         <div class="hidden" data-udw-config-name="richtext_embed" data-udw-config="{{ ez_udw_config('richtext_embed', udw_context) }}"></div>
         <div class="hidden" data-udw-config-name="richtext_embed_image" data-udw-config="{{ ez_udw_config('richtext_embed_image', udw_context) }}"></div>
-        <div class="ez-data-source__richtext" id="{{ form.vars.id }}__editable"></div>
-        <div class="ez-richtext-tools">
-            <ul class="ez-elements-path"></ul>
+        <div class="ibexa-data-source__richtext" id="{{ form.vars.id }}__editable"></div>
+        <div class="ibexa-richtext-tools">
+            <ul class="ibexa-elements-path"></ul>
             {% if ez_user_settings['character_counter'] == 'enabled' %}
-                <div class="ez-character-counter">
-                    <span class="ez-character-counter__word-count">0</span> {{ 'character_counter.words'|trans|desc('words') }}
-                    <span class="ez-character-counter__character-count">0</span> {{ 'character_counter.characters'|trans|desc('characters') }}
+                <div class="ibexa-character-counter">
+                    <span class="ibexa-character-counter__word-count">0</span> {{ 'character_counter.words'|trans|desc('words') }}
+                    <span class="ibexa-character-counter__character-count">0</span> {{ 'character_counter.characters'|trans|desc('characters') }}
                 </div>
             {% endif %}
         </div>
@@ -295,14 +295,14 @@
         {%- set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input ibexa-input--text')|trim}) -%}
         {%- set empty_placeholder_for_hiding_clear_btn_with_css = ' ' -%}
         {%- set attr = attr|merge({placeholder: (attr.placeholder is defined) ? attr.placeholder : empty_placeholder_for_hiding_clear_btn_with_css}) -%}
-        <div class="ibexa-input-text-wrapper">
+        {%- set input_html -%}
             {{ parent() }}
-            <button type="button" class="btn ibexa-input__clear ibexa-input-text-wrapper__clear-btn" tabindex="-1">
-                <svg class="ibexa-icon ibexa-input-text-wrapper__clear-btn-icon">
-                    <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
-                </svg>
-            </button>
-        </div>
+        {%- endset -%}
+        {%- embed '@ezdesign/ui/component/input_text.html.twig' -%}
+            {% block content %}
+                {{ input_html }}
+            {% endblock %}
+        {%- endembed -%}
     {%- else -%}
         {{ parent() }}
     {%- endif -%}

@@ -1,11 +1,11 @@
-Ibexa Business Use License Agreement ("Ibexa BUL") Version 2.3
+Ibexa Business Use License Agreement ("Ibexa BUL") Version 2.4
 
 
 IMPORTANT: Please read the following license agreement carefully.
 
 This Ibexa Business License Agreement (“Ibexa BUL”) is between Ibexa AS
-(Norwegian business registration no. 981601564, formerly eZ Systems AS),
-a Norwegian company ("Licensor", “Ibexa” or “we”), and the customer ("Licensee"
+(Norwegian business registration no. 981601564), a Norwegian company
+("Licensor", “Ibexa” or “we”), and the customer ("Licensee"
 or "you"). By installing all or any portion of the Licensed Software (or
 authorizing any other person to do so), you accept the terms and conditions of
 this Ibexa BUL. If you acquired the Licensed Software without an opportunity to
@@ -25,11 +25,6 @@ eZ Publish Platform) downloaded, ordered or otherwise legally acquired
 
 "Licensed Copy" means one sample of the Licensed Software.
 
-"Subscription Agreement" means the Ibexa Digital Experience Platform (DXP)
-Subscription Agreement, or other applicable Ibexa subscription (such as eZ
-Enterprise or eZ Platform Enterprise Subscription Agreement), entitling
-you to a BUL to the Licensed Software.
-
 2. License grant
 
 2.1 You may
@@ -37,8 +32,8 @@ If you have entered into an Ibexa Subscription Agreement, you have paid the
 correct fees and you comply with the terms of this Ibexa BUL, we grant you a
 limited, non-exclusive and non-transferable right to:
 
-(a) install and run the Licensed Copy on the agreed number of websites
-or with the agreed number of database content objects; and
+(a) install and run the Licensed Copy according to the terms
+defined by the Ibexa Subscription Agreement
 
 (b) modify or make improvements, patches, workarounds and bug fixes
 (collectively "Licensee Modifications") to the Licensed Copy, or permit
@@ -78,11 +73,8 @@ not use the Licensed Software.
 Please see the Ibexa Subscription Agreement for the prices and terms of payment,
 that apply.
 
-Within six months of the termination or expiration of any such Ibexa
-Subscription Agreement, all use of the Licensed Software has to stop,
-unless the Ibexa Subscription Agreement is renewed within such six month
-period. During this six month period, Ibexa is not liable for any loss
-or damage (of any kind) with you.
+All use of the Licensed Software has to stop immediately after the termination or
+expiration of any such Ibexa Subscription Agreement.
 
 5. Audit rights
 To make sure everyone is contributing their part to enable us to
@@ -115,7 +107,7 @@ Software, and confirm the destruction within 7 (seven) days.
 7. Intellectual property rights
 You agree that no copyright, other intellectual property or proprietary
 rights in the Licensed Software and related documentation are
-transferred to you. No trademarks of Ibexa may be used by you without Ibexa’
+transferred to you. No trademarks of Ibexa may be used by you without Ibexa’s
 express written permission. If permission is granted, use must always
 take place in accordance with our guidelines as they may be updated from
 time to time. For Licensee Modifications, you must, in the modified
@@ -132,7 +124,7 @@ accuracy of informational content. We do not warrant that the Licensed
 Software will meet your requirements or that the operation of it will be
 uninterrupted or error-free, or that errors will be corrected. The
 entire risk of the Licensed Software's quality and performance is
-therefore with you
+therefore with you.
 
 9. Limitation of liability
 To the extent permitted by law, we do not have liability with respect to
@@ -159,7 +151,7 @@ any third party supplier Ibexa is distributing software for, or other
 licensee, alleging that the Licensed Software infringes a patent.
 
 10.2 Transfer
-Without Ibexa’ written permission, you may not sublicense or otherwise
+Without Ibexa’s written permission, you may not sublicense or otherwise
 transfer your rights and obligations under this Ibexa BUL to any other
 person or party. Any attempt by you to do so, will terminate this Ibexa BUL
 without further notice. Ibexa may assign its rights hereunder at any time
@@ -210,7 +202,7 @@ You are responsible for complying with any applicable local laws,
 including export and import regulations.
 
 10.7 Entire agreement
-This Ibexa BUL comprises the entire agreement, and replaces all earlier
+This Ibexa BUL and Ibexa Subscription Agreement comprise the entire agreement, and replace all earlier
 proposals, understandings and agreements, oral and written, between us.
 
 10.8 Update of terms

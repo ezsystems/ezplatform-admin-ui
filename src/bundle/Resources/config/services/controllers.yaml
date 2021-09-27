@@ -1,7 +1,7 @@
 services:
     Ibexa\Bundle\AdminUi\Controller\:
         resource: "../../Controller/*"
-        exclude: "../../Controller/{Controller}"
+        exclude: "../../Controller/{FieldDefinitionController.php}"
         parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         tags:
@@ -193,6 +193,11 @@ services:
         autowire: true
 
     Ibexa\Bundle\AdminUi\Controller\BulkOperation\BulkOperationController:
+        parent: ezpublish_rest.controller.base
+        tags: ['controller.service_arguments']
+        autowire: true
+
+    Ibexa\Bundle\AdminUi\Controller\FieldDefinitionController:
         parent: ezpublish_rest.controller.base
         tags: ['controller.service_arguments']
         autowire: true

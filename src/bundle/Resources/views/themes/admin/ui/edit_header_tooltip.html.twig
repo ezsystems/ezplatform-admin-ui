@@ -1,0 +1,23 @@
+{% if content is defined %}
+    {% if creator is defined and creator is not empty %}
+        <div>{{ 'content.details.created_by'|trans({'%name%': ez_content_name(creator)})|desc('Created by %name%') }}</div>
+    {% endif %}
+
+    <div>{{ content.versionInfo.contentInfo.publishedDate|ez_full_datetime }}</div>
+    <div>
+        {% set separatorString = '|' %}
+
+        {{ 'content.details.content_id'|trans({'%contentId%': content.id})|desc('Content ID: %contentId%') }} {{ separatorString }}
+
+        {% if is_published is defined and is_published == false %}
+            {{ 'content.details.parent_location_id'|trans({'%locationId%': parent_location.id})|desc('Parent Location ID: %locationId%') }}
+        {% else %}
+            {{ 'content.details.location_id'|trans({'%locationId%': location.id})|desc('Location ID: %locationId%') }}
+        {% endif %}
+
+    </div>
+{% endif %}
+
+{% if description is defined %}
+    <div>{{ description }}</div>
+{% endif %}
