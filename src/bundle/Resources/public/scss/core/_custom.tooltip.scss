@@ -91,6 +91,7 @@
                 color: $ibexa-color-dark;
                 background-color: $ibexa-color-info;
                 border-color: transparent;
+                box-shadow: 0 calculateRem(4px) calculateRem(6px) rgba(65, 145, 255, 0.1);
             }
         }
 
