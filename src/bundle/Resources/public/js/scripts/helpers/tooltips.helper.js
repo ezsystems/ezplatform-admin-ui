@@ -23,6 +23,45 @@
             });
         }
     });
+    const modifyPopperConfig = (iframe, defaultBsPopperConfig) => {
+        if (!iframe) {
+            return defaultBsPopperConfig;
+        }
+
+        const iframeDOMRect = iframe.getBoundingClientRect();
+        const offsetX = iframeDOMRect.x;
+        const offsetY = iframeDOMRect.y;
+        const offsetModifier = {
+            name: 'offset',
+            options: {
+                offset: ({ placement }) => {
+                    const basePlacement = placement.split('-')[0];
+
+                    switch (basePlacement) {
+                        case 'top':
+                            return [offsetX, -offsetY];
+                        case 'bottom':
+                            return [offsetX, offsetY];
+                        case 'right':
+                            return [offsetY, offsetX];
+                        case 'left':
+                            return [offsetY, -offsetX];
+                        default:
+                            return [];
+                    }
+                },
+            },
+        };
+        const offsetModifierIndex = defaultBsPopperConfig.modifiers.findIndex((modifier) => modifier.name == 'offset');
+
+        if (offsetModifierIndex != -1) {
+            defaultBsPopperConfig.modifiers[offsetModifierIndex] = offsetModifier;
+        } else {
+            defaultBsPopperConfig.modifiers.push(offsetModifier);
+        }
+
+        return defaultBsPopperConfig;
+    };
     const parse = (baseElement = doc) => {
         if (!baseElement) {
             return;
@@ -37,7 +76,7 @@
                     hide: parseInt(tooltipNode.dataset.delayHide, 10) ?? 75,
                 };
                 const extraClass = tooltipNode.dataset.tooltipExtraClass ?? '';
-                const tooltipPlacement = tooltipNode.dataset.tooltipPlacement ?? 'bottom';
+                const placement = tooltipNode.dataset.tooltipPlacement ?? 'bottom';
                 const container = tooltipNode.dataset.tooltipContainerSelector
                     ? tooltipNode.closest(tooltipNode.dataset.tooltipContainerSelector)
                     : 'body';
@@ -45,47 +84,9 @@
 
                 new bootstrap.Tooltip(tooltipNode, {
                     delay,
-                    placement: tooltipPlacement,
+                    placement,
                     container,
-                    popperConfig: (defaultBsPopperConfig) => {
-                        if (!iframe) {
-                            return defaultBsPopperConfig;
-                        }
-
-                        const iframeDOMRect = iframe.getBoundingClientRect();
-                        const offsetX = iframeDOMRect.x;
-                        const offsetY = iframeDOMRect.y;
-                        const offsetModifier = {
-                            name: 'offset',
-                            options: {
-                                offset: ({ placement }) => {
-                                    const basePlacement = placement.split('-')[0];
-
-                                    switch (basePlacement) {
-                                        case 'top':
-                                            return [offsetX, -offsetY];
-                                        case 'bottom':
-                                            return [offsetX, offsetY];
-                                        case 'right':
-                                            return [offsetY, offsetX];
-                                        case 'left':
-                                            return [offsetY, -offsetX];
-                                        default:
-                                            return [];
-                                    }
-                                },
-                            },
-                        };
-                        const offsetModifierIndex = defaultBsPopperConfig.modifiers.findIndex((modifier) => modifier.name == 'offset');
-
-                        if (offsetModifierIndex != -1) {
-                            defaultBsPopperConfig.modifiers[offsetModifierIndex] = offsetModifier;
-                        } else {
-                            defaultBsPopperConfig.modifiers.push(offsetModifier);
-                        }
-
-                        return defaultBsPopperConfig;
-                    },
+                    popperConfig: modifyPopperConfig.bind(null, iframe),
                     html: true,
                     template: `<div class="tooltip ibexa-tooltip ${extraClass}">
                                     <div class="arrow ibexa-tooltip__arrow"></div>
