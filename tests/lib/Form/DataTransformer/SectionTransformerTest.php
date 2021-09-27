@@ -8,12 +8,12 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\AdminUi\Form\DataTransformer;
 
-use Ibexa\AdminUi\Form\DataTransformer\SectionTransformer;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\SectionService;
 use eZ\Publish\API\Repository\Values\Content\Section as APISection;
+use Ibexa\AdminUi\Form\DataTransformer\SectionTransformer;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class SectionTransformerTest extends TestCase
 {

@@ -8,13 +8,13 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\AdminUi\Menu;
 
-use eZ\Publish\Core\MVC\Symfony\Security\UserInterface;
-use Ibexa\AdminUi\Menu\MainMenuBuilder;
-use Knp\Menu\MenuItem;
-use PHPUnit\Framework\TestCase;
-use Ibexa\AdminUi\Menu\MenuItemFactory;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use eZ\Publish\Core\MVC\Symfony\Security\UserInterface;
+use Ibexa\AdminUi\Menu\MainMenuBuilder;
+use Ibexa\AdminUi\Menu\MenuItemFactory;
+use Knp\Menu\MenuItem;
+use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

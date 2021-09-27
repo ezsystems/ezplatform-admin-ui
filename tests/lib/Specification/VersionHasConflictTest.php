@@ -8,12 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\AdminUi\Specification;
 
+use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use Ibexa\AdminUi\Specification\Version\VersionHasConflict;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 
 class VersionHasConflictTest extends TestCase
 {

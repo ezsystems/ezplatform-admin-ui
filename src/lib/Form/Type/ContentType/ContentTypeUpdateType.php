@@ -8,7 +8,6 @@ namespace Ibexa\AdminUi\Form\Type\ContentType;
 
 use Ibexa\AdminUi\Form\Data\ContentTypeData;
 use Ibexa\AdminUi\Form\DataTransformer\TranslatablePropertyTransformer;
-use Ibexa\AdminUi\Form\Type\ContentType\FieldDefinitionsCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

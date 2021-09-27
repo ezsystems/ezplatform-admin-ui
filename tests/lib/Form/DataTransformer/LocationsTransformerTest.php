@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\AdminUi\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\Core\Repository\Values\Content\Location;
+use Ibexa\AdminUi\Form\DataTransformer\LocationsTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use eZ\Publish\API\Repository\LocationService;
-use Ibexa\AdminUi\Form\DataTransformer\LocationsTransformer;
-use eZ\Publish\Core\Repository\Values\Content\Location;
 
 class LocationsTransformerTest extends TestCase
 {

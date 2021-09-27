@@ -12,9 +12,9 @@ use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
-use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
 use Ibexa\AdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Ibexa\AdminUi\UniversalDiscovery\Event\Subscriber\RichTextEmbedAllowedContentTypes;
+use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
 use PHPUnit\Framework\TestCase;
 
 final class RichTextEmbedAllowedContentTypesTest extends TestCase

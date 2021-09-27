@@ -18,9 +18,9 @@ use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\View\View;
 use eZ\Publish\Core\Repository\Values\Content as Core;
 use eZ\Publish\Core\Repository\Values\User\User as CoreUser;
-use Ibexa\AdminUi\EventListener\SetViewParametersListener;
 use EzSystems\EzPlatformContentForms\Content\View\ContentEditView;
 use EzSystems\EzPlatformContentForms\User\View\UserUpdateView;
+use Ibexa\AdminUi\EventListener\SetViewParametersListener;
 use PHPUnit\Framework\TestCase;
 
 final class SetViewParametersListenerTest extends TestCase

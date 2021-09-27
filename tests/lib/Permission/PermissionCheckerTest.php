@@ -8,20 +8,20 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\AdminUi\Permission;
 
-use Ibexa\AdminUi\Permission\PermissionChecker;
-use PHPUnit\Framework\TestCase;
-use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\LanguageService;
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content;
-use eZ\Publish\Core\Repository\Values\Content as CoreContent;
-use eZ\Publish\Core\Repository\Values\User\User as CoreUser;
-use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\API\Repository\Values\User\Limitation;
+use eZ\Publish\API\Repository\Values\User\User;
+use eZ\Publish\Core\Repository\Values\Content as CoreContent;
 use eZ\Publish\Core\Repository\Values\User\Policy;
+use eZ\Publish\Core\Repository\Values\User\User as CoreUser;
+use Ibexa\AdminUi\Permission\PermissionChecker;
+use PHPUnit\Framework\TestCase;
 
 class PermissionCheckerTest extends TestCase
 {

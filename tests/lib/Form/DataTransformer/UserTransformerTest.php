@@ -8,15 +8,15 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\AdminUi\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\API\Repository\Values\Content as API;
+use eZ\Publish\API\Repository\Values\User\User;
+use eZ\Publish\Core\Repository\Values\Content as Core;
+use eZ\Publish\Core\Repository\Values\User\User as CoreUser;
 use Ibexa\AdminUi\Form\DataTransformer\UserTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Values\User\User;
-use eZ\Publish\Core\Repository\Values\User\User as CoreUser;
-use eZ\Publish\API\Repository\Values\Content as API;
-use eZ\Publish\Core\Repository\Values\Content as Core;
 
 class UserTransformerTest extends TestCase
 {

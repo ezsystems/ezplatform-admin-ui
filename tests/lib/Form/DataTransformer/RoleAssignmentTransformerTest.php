@@ -8,13 +8,13 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\AdminUi\Form\DataTransformer;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\RoleService;
+use eZ\Publish\API\Repository\Values\User\RoleAssignment as APIRoleAsignment;
+use eZ\Publish\Core\Repository\Values\User\UserRoleAssignment as RoleAssignment;
 use Ibexa\AdminUi\Form\DataTransformer\RoleAssignmentTransformer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\RoleService;
-use eZ\Publish\Core\Repository\Values\User\UserRoleAssignment as RoleAssignment;
-use eZ\Publish\API\Repository\Values\User\RoleAssignment as APIRoleAsignment;
 
 class RoleAssignmentTransformerTest extends TestCase
 {

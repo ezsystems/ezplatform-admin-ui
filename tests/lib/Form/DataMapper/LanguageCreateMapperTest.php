@@ -8,11 +8,11 @@ namespace Ibexa\Tests\AdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\Content\LanguageCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
 use Ibexa\AdminUi\Form\Data\Language\LanguageCreateData;
 use Ibexa\AdminUi\Form\Data\Language\LanguageDeleteData;
 use Ibexa\AdminUi\Form\DataMapper\LanguageCreateMapper;
 use PHPUnit\Framework\TestCase;
-use Ibexa\AdminUi\Exception\InvalidArgumentException;
 
 class LanguageCreateMapperTest extends TestCase
 {
