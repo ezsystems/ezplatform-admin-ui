@@ -1,3 +1,4 @@
+// TODO: should be remove when ez-table--list is redesigned
 .ez-table {
     border-spacing: 0 calculateRem(1px);
 
@@ -230,6 +231,7 @@
         }
     }
 }
+// TODO: end
 
 .ibexa-table {
     font-family: $font-family-sans-serif;
@@ -301,7 +303,6 @@
             color: $ibexa-color-dark-400;
             line-height: calculateRem(18px);
             vertical-align: middle;
-            border-top: calculateRem(1px) solid $ibexa-color-dark-200;
             border-bottom: 0;
             padding: calculateRem(18px) calculateRem(16px);
         }
@@ -400,12 +401,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: calculateRem(20px);
+    margin-top: calculateRem(30px);
+    padding-bottom: calculateRem(15px);
+    border-bottom: calculateRem(1px) solid $ibexa-color-dark-200;
 
     &__headline {
         @include ibexa-font-sans-serif();
 
-        font-size: calculateRem(22px);
+        font-size: $ibexa-text-font-size-large;
+        line-height: calculateRem(33px);
         color: $ibexa-black;
         font-weight: 600;
         white-space: nowrap;
@@ -421,9 +425,5 @@
         .btn {
             margin: 0 calculateRem(5px);
         }
-    }
-
-    &--bordered-bottom {
-        border-bottom: calculateRem(1px) solid $ibexa-color-base;
     }
 }

@@ -139,16 +139,6 @@
         &--no-padding {
             padding: 0;
         }
-
-        .ibexa-table-header {
-            margin-top: calculateRem(30px);
-            margin-bottom: calculateRem(15px);
-
-            &__headline {
-                font-size: calculateRem(18px);
-                line-height: calculateRem(33px);
-            }
-        }
     }
 }
 
