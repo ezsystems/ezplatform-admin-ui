@@ -73,7 +73,7 @@ class AdminUpdateItemPage extends Page
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('formElement', '.ez-container'),
+            new VisibleCSSLocator('formElement', '.ibexa-main-container '),
             new VisibleCSSLocator('closeButton', '.ez-content-edit-container__close'),
             new VisibleCSSLocator('button', 'button'),
             new VisibleCSSLocator('fieldInput', 'input'),

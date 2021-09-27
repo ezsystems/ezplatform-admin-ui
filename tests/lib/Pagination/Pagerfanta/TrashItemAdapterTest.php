@@ -7,13 +7,13 @@
 namespace Ibexa\Tests\AdminUi\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\TrashService;
-use Ibexa\AdminUi\Pagination\Pagerfanta\TrashItemAdapter;
-use PHPUnit\Framework\TestCase;
+use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\CriterionInterface;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\API\Repository\Values\Content\Trash\SearchResult;
-use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
+use Ibexa\AdminUi\Pagination\Pagerfanta\TrashItemAdapter;
+use PHPUnit\Framework\TestCase;
 
 class TrashItemAdapterTest extends TestCase
 {

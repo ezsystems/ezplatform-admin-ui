@@ -28,10 +28,11 @@ Feature: Content types management
         | Name                 | Test Content Type         |
         | Identifier           | TestContentTypeIdentifier |
         | Content name pattern | <name>                    |
+      And I select "content" category to Content Type definition
       And I add field "Country" to Content Type definition
       And I set "Name" to "Country field" for "Country" field
-      And I click on the edit action bar button "Save"
-    Then notification that "Content Type" "Test Content Type" is updated appears
+      And I click on the edit action bar button "Create"
+    Then notification that "Content Type" "New Content Type" is updated appears
     Then I should be on Content Type page for "Test Content Type"
       And Content Type has proper Global properties
         | label                | value                     |
@@ -71,7 +72,7 @@ Feature: Content types management
       And I add field "Date" to Content Type definition
     And I set "Name" to "DateField" for "Date" field
       And I click on the edit action bar button "Save"
-    Then success notification that "Content Type 'Test Content Type edited' updated." appears
+    Then success notification that "Content Type 'TestEdit CT' updated." appears
     Then I should be on Content Type page for "Test Content Type edited"
       And Content Type has proper Global properties
         | label                | value                     |

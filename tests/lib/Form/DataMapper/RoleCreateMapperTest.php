@@ -6,13 +6,13 @@
  */
 namespace Ibexa\Tests\AdminUi\Form\DataMapper;
 
-use eZ\Publish\Core\Repository\Values\User\RoleCreateStruct;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
+use eZ\Publish\Core\Repository\Values\User\RoleCreateStruct;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
 use Ibexa\AdminUi\Form\Data\Language\LanguageCreateData;
 use Ibexa\AdminUi\Form\Data\Role\RoleCreateData;
 use Ibexa\AdminUi\Form\DataMapper\RoleCreateMapper;
 use PHPUnit\Framework\TestCase;
-use Ibexa\AdminUi\Exception\InvalidArgumentException;
 
 class RoleCreateMapperTest extends TestCase
 {

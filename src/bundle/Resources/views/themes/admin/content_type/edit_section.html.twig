@@ -1,0 +1,16 @@
+<div 
+    data-anchor-section-id="{{ section_id }}" 
+    class="ibexa-content-type-edit__section ibexa-anchor-navigation-sections__section row {% if is_active|default(false) %}ibexa-anchor-navigation-sections__section--active{% endif %}"
+>
+    <div class="col-8 ibexa-content-type-edit__section-column {{ left_column_class|default('') }}">
+        <h2 class="ibexa-content-type-edit__section-column-header">{% block title %}{% endblock %}</h2>
+        <div class="ibexa-content-type-edit__section-column-body">
+            {% block left_column %}{% endblock %}
+        </div>
+    </div>
+    <div class="col-4 ibexa-content-type-edit__section-column {{ right_column_class|default('') }}">
+        <div class="ibexa-content-type-edit__section-column-body">
+            {% block right_column %}{% endblock %}
+        </div>
+    </div>
+</div>

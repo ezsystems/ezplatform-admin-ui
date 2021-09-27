@@ -46,13 +46,13 @@
         background-color: $ibexa-color-white;
         border-color: $ibexa-color-primary;
 
-        &:hover,
         &:focus {
             color: $ibexa-color-primary;
         }
 
         &:hover {
-            background-color: $ibexa-color-primary-200;
+            color: $ibexa-color-dark;
+            border-color: $ibexa-color-dark;
         }
 
         &:disabled {
@@ -126,6 +126,22 @@
             background-color: $ibexa-color-light;
             border-color: $ibexa-color-light;
             box-shadow: none;
+        }
+    }
+
+    &--info {
+        color: $ibexa-color-info;
+        fill: $ibexa-color-info;
+        border-color: $ibexa-color-info;
+
+        &:hover {
+            color: $ibexa-color-dark;
+            fill: $ibexa-color-dark;
+            border-color: $ibexa-color-dark;
+        }
+
+        &:focus {
+            box-shadow: $ibexa-btn-focus-box-shadow-info;
         }
     }
 

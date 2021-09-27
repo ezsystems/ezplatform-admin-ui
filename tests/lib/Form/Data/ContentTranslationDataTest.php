@@ -7,8 +7,8 @@
 namespace Ibexa\Tests\AdminUi\Form\Data;
 
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use Ibexa\AdminUi\Form\Data\ContentTranslationData;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
+use Ibexa\AdminUi\Form\Data\ContentTranslationData;
 use PHPUnit\Framework\TestCase;
 
 class ContentTranslationDataTest extends TestCase

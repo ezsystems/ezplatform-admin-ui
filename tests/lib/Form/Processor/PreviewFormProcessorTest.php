@@ -8,27 +8,27 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\AdminUi\Form\Processor;
 
-use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
-use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
-use PHPUnit\Framework\TestCase;
 use eZ\Publish\API\Repository\ContentService;
-use Ibexa\AdminUi\Form\Event\ContentEditEvents;
-use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData;
-use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
-use Symfony\Component\Form\FormConfigInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Form\FormInterface;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
 use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
-use PHPUnit\Framework\MockObject\MockObject;
+use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use EzSystems\EzPlatformContentForms\Data\Content\ContentCreateData;
+use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
+use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use Ibexa\AdminUi\Form\Event\ContentEditEvents;
 use Ibexa\AdminUi\Form\Processor\PreviewFormProcessor;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Form\FormConfigInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PreviewFormProcessorTest extends TestCase
 {

@@ -1,7 +1,7 @@
 (function(global, doc, eZ, React, ReactDOM) {
-    const SELECTOR_FIELD = '.ez-field-edit--ezrichtext';
-    const SELECTOR_INPUT = '.ez-data-source__richtext';
-    const SELECTOR_ERROR_NODE = '.ez-field-edit__label-wrapper';
+    const SELECTOR_FIELD = '.ibexa-field-edit--ezrichtext';
+    const SELECTOR_INPUT = '.ibexa-data-source__richtext';
+    const SELECTOR_ERROR_NODE = '.ibexa-form-error';
     const selectContent = (config) => {
         const udwContainer = document.querySelector('#react-udw');
         const confirmHandler = (items) => {
@@ -44,8 +44,8 @@
          */
         validateInput(event) {
             const fieldContainer = event.currentTarget.closest(SELECTOR_FIELD);
-            const isRequired = fieldContainer.classList.contains('ez-field-edit--required');
-            const label = fieldContainer.querySelector('.ez-field-edit__label').innerHTML;
+            const isRequired = fieldContainer.classList.contains('ibexa-field-edit--required');
+            const label = fieldContainer.querySelector('.ibexa-field-edit__label').innerHTML;
             const isEmpty = !this.richtextEditor.getData().length;
             const isError = isRequired && isEmpty;
             const result = { isError };

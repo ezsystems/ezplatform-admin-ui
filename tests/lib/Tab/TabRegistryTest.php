@@ -6,11 +6,10 @@
  */
 namespace Ibexa\Tests\AdminUi\Tab;
 
-use Ibexa\Contracts\AdminUi\Tab\AbstractTab;
 use Ibexa\AdminUi\Tab\TabGroup;
-use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 use Ibexa\AdminUi\Tab\TabRegistry;
-use PHPUnit\Framework\MockObject\MockObject;
+use Ibexa\Contracts\AdminUi\Tab\AbstractTab;
+use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;

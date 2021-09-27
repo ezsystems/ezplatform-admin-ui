@@ -6,14 +6,14 @@
  */
 namespace Ibexa\Tests\AdminUi\Form\DataMapper;
 
-use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
 use eZ\Publish\API\Repository\Values\Content\LocationCreateStruct;
+use eZ\Publish\API\Repository\Values\Content\Section;
+use eZ\Publish\API\Repository\Values\Content\SectionUpdateStruct;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
 use Ibexa\AdminUi\Form\Data\Language\LanguageCreateData;
 use Ibexa\AdminUi\Form\Data\Section\SectionUpdateData;
 use Ibexa\AdminUi\Form\DataMapper\SectionUpdateMapper;
 use PHPUnit\Framework\TestCase;
-use Ibexa\AdminUi\Exception\InvalidArgumentException;
-use eZ\Publish\API\Repository\Values\Content\Section;
 
 class SelectionUpdateMapperTest extends TestCase
 {

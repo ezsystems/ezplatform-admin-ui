@@ -7,14 +7,13 @@
 namespace Ibexa\Tests\AdminUi\EventListener;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
+use Ibexa\AdminUi\EventListener\RequestListener;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use PHPUnit\Framework\TestCase;
-use Ibexa\AdminUi\EventListener\RequestListener;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class RequestListenerTest extends TestCase
 {

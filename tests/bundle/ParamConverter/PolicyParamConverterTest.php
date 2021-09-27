@@ -9,11 +9,10 @@ namespace Ibexa\Tests\Bundle\AdminUi\ParamConverter;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Policy;
-use eZ\Publish\Core\Repository\Values\User\Policy as UserPolicy;
 use eZ\Publish\API\Repository\Values\User\Role;
+use eZ\Publish\Core\Repository\Values\User\Policy as UserPolicy;
 use Ibexa\Bundle\AdminUi\ParamConverter\PolicyParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PolicyParamConverterTest extends AbstractParamConverterTest

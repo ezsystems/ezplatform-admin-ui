@@ -133,6 +133,7 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
                 'contentId' => $contentDraft->id,
                 'versionNo' => $contentDraft->getVersionInfo()->versionNo,
                 'language' => $toLanguageCode,
+                'locationId' => $event->getLocationId(),
             ])
         );
 

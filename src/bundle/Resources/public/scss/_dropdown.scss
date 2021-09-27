@@ -26,30 +26,25 @@
         align-items: center;
         flex-wrap: wrap;
 
-        &:before {
-            content: '';
-            position: absolute;
-            z-index: 1;
-            top: calc(50% - #{calculateRem(4px)});
-            right: calculateRem(16px);
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: calculateRem(8.33px) calculateRem(8px) 0 calculateRem(8px);
-            border-color: $ibexa-color-dark transparent transparent transparent;
-        }
-
+        &:before,
         &:after {
             content: '';
             position: absolute;
             z-index: 1;
-            top: calc(50% - #{calculateRem(5px)});
-            right: calculateRem(16px);
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: calculateRem(8.33px) calculateRem(8px) 0 calculateRem(8px);
-            border-color: $ibexa-color-white transparent transparent transparent;
+            top: 50%;
+            width: calculateRem(10px);
+            height: calculateRem(1px);
+            background: $ibexa-color-dark;
+        }
+
+        &:before {
+            transform: rotate(135deg);
+            right: calculateRem(12px);
+        }
+
+        &:after {
+            transform: rotate(-135deg);
+            right: calculateRem(19px);
         }
 
         &.is-invalid {
@@ -139,28 +134,53 @@
         }
     }
 
+    &__items-fixed-wrapper {
+        position: fixed;
+        z-index: 2000;
+        padding-top: calculateRem(4px);
+        display: none;
+
+        &--position-top {
+            transform: translateY(-100%);
+            padding-top: 0;
+            padding-bottom: calculateRem(4px);
+
+            .ibexa-dropdown {
+                &__items {
+                    transform-origin: bottom center;
+                    flex-direction: column-reverse;
+                }
+            }
+        }
+    }
+
     &__items {
-        list-style: none;
-        padding: calculateRem(8.5px);
-        margin: 0;
-        position: absolute;
-        top: calc(100% + #{calculateRem(4px)});
         transform-origin: top center;
         transition: transform $ibexa-admin-transition-duration $ibexa-admin-transition;
         width: 100%;
         background: $ibexa-white;
         border: calculateRem(1px) solid $ibexa-color-light;
         color: $ibexa-color-dark;
-        z-index: 2;
         border-radius: $ibexa-border-radius;
-        overflow-y: auto;
         transform: scaleY(0);
+        display: flex;
+        flex-direction: column;
 
-        &--position-top {
-            top: initial;
-            bottom: calc(100% + #{calculateRem(4px)});
-            transform-origin: bottom center;
+        .ibexa-input-text-wrapper {
+            width: 100%;
+            padding: calculateRem(8px) calculateRem(12px);
+
+            &__actions {
+                right: calculateRem(16px);
+            }
         }
+    }
+
+    &__items-list {
+        list-style: none;
+        padding: calculateRem(8.5px);
+        margin: 0;
+        overflow-y: auto;
     }
 
     &__item {
@@ -172,6 +192,10 @@
         cursor: pointer;
         display: flex;
         align-items: center;
+
+        &--hidden {
+            display: none;
+        }
 
         .ibexa-input {
             margin-right: calculateRem(16px);
@@ -196,6 +220,16 @@
 
     &__item-group-list {
         padding-left: 0;
+    }
+
+    &__separator {
+        background-color: $ibexa-color-light-600;
+    }
+
+    &__items-filter {
+        &.form-control {
+            margin-bottom: 0;
+        }
     }
 
     &--is-disabled {
@@ -282,19 +316,27 @@
         }
     }
 
+    &--is-expanding,
     &--is-expanded {
         .ibexa-dropdown {
             &__selection-info {
-                &:before,
-                &:after {
-                    transform: rotate(180deg);
+                &:before {
+                    transform: rotate(45deg);
                 }
 
                 &:after {
-                    top: calc(50% - #{calculateRem(3px)});
+                    transform: rotate(-45deg);
                 }
             }
 
+            &__items-fixed-wrapper {
+                display: block;
+            }
+        }
+    }
+
+    &--is-expanded {
+        .ibexa-dropdown {
             &__items {
                 transform: scaleY(1);
             }

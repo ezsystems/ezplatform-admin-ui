@@ -13,11 +13,11 @@ use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
-use Ibexa\Contracts\AdminUi\Event\FormEvents;
+use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use Ibexa\AdminUi\Form\Data\ContentTypeData;
 use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Ibexa\AdminUi\Form\Processor\ContentType\ContentTypeFormProcessor;
-use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use Ibexa\Contracts\AdminUi\Event\FormEvents;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormInterface;
@@ -74,23 +74,30 @@ class ContentTypeFormProcessorTest extends TestCase
     {
         $contentTypeDraft = new ContentTypeDraft();
         $fieldDef1 = new FieldDefinition();
-        $fieldDefData1 = new FieldDefinitionData(['fieldDefinition' => $fieldDef1]);
+        $fieldDefData1 = new FieldDefinitionData([
+            'fieldDefinition' => $fieldDef1,
+            'fieldGroup' => 'foo',
+            'identifier' => 'foo',
+        ]);
         $fieldDef2 = new FieldDefinition();
-        $fieldDefData2 = new FieldDefinitionData(['fieldDefinition' => $fieldDef2]);
+        $fieldDefData2 = new FieldDefinitionData([
+            'fieldDefinition' => $fieldDef2,
+            'fieldGroup' => 'foo',
+            'identifier' => 'bar',
+        ]);
         $contentTypeData = new ContentTypeData(['contentTypeDraft' => $contentTypeDraft]);
         $contentTypeData->addFieldDefinitionData($fieldDefData1);
         $contentTypeData->addFieldDefinitionData($fieldDefData2);
 
         $this->contentTypeService
-            ->expects($this->at(0))
+            ->expects(self::exactly(2))
             ->method('updateFieldDefinition')
-            ->with($contentTypeDraft, $fieldDef1, $fieldDefData1);
+            ->withConsecutive(
+                [$contentTypeDraft, $fieldDef1, $fieldDefData1],
+                [$contentTypeDraft, $fieldDef2, $fieldDefData2],
+            );
         $this->contentTypeService
-            ->expects($this->at(1))
-            ->method('updateFieldDefinition')
-            ->with($contentTypeDraft, $fieldDef2, $fieldDefData2);
-        $this->contentTypeService
-            ->expects($this->at(2))
+            ->expects(self::once())
             ->method('updateContentTypeDraft')
             ->with($contentTypeDraft, $contentTypeData);
 

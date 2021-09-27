@@ -8,13 +8,14 @@ namespace Ibexa\Tests\AdminUi\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\FieldType\Value;
+use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentTypeDraft;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use Ibexa\Contracts\AdminUi\Event\FieldDefinitionMappingEvent;
 use Ibexa\AdminUi\Form\Data\ContentTypeData;
 use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Ibexa\AdminUi\Form\Data\FormMapper\ContentTypeDraftMapper;
+use Ibexa\Contracts\AdminUi\Event\FieldDefinitionMappingEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\EventDispatcher\Event;
@@ -192,7 +193,13 @@ class ContentTypeDraftMapperTest extends TestCase
                 }
             );
 
-        self::assertEquals($expectedContentTypeData, (new ContentTypeDraftMapper($eventDispatcherMock))->mapToFormData($contentTypeDraft));
+        $fieldGroupList = $this->createMock(FieldsGroupsList::class);
+        $fieldGroupList->method('getDefaultGroup')
+            ->willReturn('foo');
+
+        $contentTypeDraftMapper = new ContentTypeDraftMapper($eventDispatcherMock, $fieldGroupList);
+
+        self::assertEquals($expectedContentTypeData, $contentTypeDraftMapper->mapToFormData($contentTypeDraft));
     }
 }
 

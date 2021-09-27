@@ -12,6 +12,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/helpers/user.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/helpers/tooltips.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/helpers/table.helper.js'),
+    path.resolve(__dirname, '../public/js/scripts/helpers/cookies.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.format.date.js'),
     path.resolve(__dirname, '../public/js/scripts/core/draggable.js'),
     path.resolve(__dirname, '../public/js/scripts/core/dropdown.js'),
@@ -36,6 +37,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/sidebar/main.menu.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.input.text.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.table.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/collapse.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.dropdown.js'),
 ];
 const fieldTypes = [];
@@ -68,11 +70,15 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-content-type-create-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.edit'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-edit-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.relation.default.location.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.edit'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-list-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
@@ -173,6 +179,7 @@ module.exports = (Encore) => {
             ...fieldTypes,
             path.resolve(__dirname, '../public/js/scripts/sidebar/extra.actions.js'),
             path.resolve(__dirname, '../public/js/scripts/toggle.button.state.toggle.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
         ])
         .addEntry('ezplatform-admin-ui-settings-datetime-format-update-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.settings.datetimeformat.update.js'),

@@ -5,6 +5,9 @@
         <title>Ibexa DXP</title>
         {{ encore_entry_link_tags('ezplatform-admin-ui-security-base-css', null, 'ezplatform') }}
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ibexaadminui/img/favicon.ico') }}" />
+
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/@popperjs/core/dist/umd/popper.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     </head>
     <body class="ibexa-login-view">
         <div class="container-fluid ez-main-container">
@@ -31,9 +34,6 @@
                 </div>
             </div>
         </div>
-
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/@popperjs/core/dist/umd/popper.min.js') }}"></script>
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
         {% if app.request.locale == 'ach_UG' %}
             <script type="text/javascript">

@@ -9,7 +9,6 @@ namespace Ibexa\Tests\AdminUi\FieldType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
 use Ibexa\AdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher;
-use Ibexa\AdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcherInterface;
 use Ibexa\AdminUi\Form\Data\ContentTypeData;
 use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use PHPUnit\Framework\TestCase;

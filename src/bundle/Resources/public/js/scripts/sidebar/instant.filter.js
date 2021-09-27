@@ -3,12 +3,10 @@
     const SELECTOR_ITEM = '.ez-instant-filter__group-item';
     const timeout = 200;
     const filters = doc.querySelectorAll('.ez-instant-filter');
-    const toggleGroupNameDisplay = (group) => {
-        const hasVisibleChildren = !![...group.querySelectorAll(SELECTOR_ITEM)].filter((item) => !item.hasAttribute('hidden')).length;
-        const groupName = group.querySelector('.ez-instant-filter__group-name');
-        const methodName = hasVisibleChildren ? 'removeAttribute' : 'setAttribute';
+    const toggleGroupDisplay = (group) => {
+        const areChildrenHidden = [...group.querySelectorAll(SELECTOR_ITEM)].every((item) => item.hasAttribute('hidden'));
 
-        groupName[methodName]('hidden', true);
+        group.toggleAttribute('hidden', areChildrenHidden);
     };
     const filterItems = function(itemsMap, groups, event) {
         window.clearTimeout(filterTimeout);
@@ -20,7 +18,7 @@
             itemsMap.forEach((item) => item.element.setAttribute('hidden', true));
             results.forEach((item) => item.element.removeAttribute('hidden'));
 
-            groups.forEach(toggleGroupNameDisplay);
+            groups.forEach(toggleGroupDisplay);
         }, timeout);
     };
     const initFilter = (filter) => {

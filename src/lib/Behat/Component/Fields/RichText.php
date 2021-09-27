@@ -157,9 +157,9 @@ class RichText extends FieldTypeComponent
             new VisibleCSSLocator('toolbarElement', '.ck-button'),
             new VisibleCSSLocator('toolbarDropdown', '.ck-dropdown'),
             new VisibleCSSLocator('styleDropdownItem', '.ck-list__item'),
-            new VisibleCSSLocator('unorderedListElement', '.ez-data-source__richtext ul li'),
-            new VisibleCSSLocator('embedInlineTitle', '.ez-embed-inline .ez-embed-content__title'),
-            new VisibleCSSLocator('embedTitle', '.ez-embed .ez-embed-content__title'),
+            new VisibleCSSLocator('unorderedListElement', '.ibexa-data-source__richtext ul li'),
+            new VisibleCSSLocator('embedInlineTitle', '.ibexa-embed-inline .ibexa-embed-content__title'),
+            new VisibleCSSLocator('embedTitle', '.ibexa-embed .ibexa-embed-content__title'),
         ];
     }
 

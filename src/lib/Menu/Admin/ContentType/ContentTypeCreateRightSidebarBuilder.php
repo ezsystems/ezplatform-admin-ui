@@ -72,7 +72,7 @@ class ContentTypeCreateRightSidebarBuilder extends AbstractBuilder implements Tr
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'ibexa-btn--trigger',
+                        'class' => 'ibexa-btn--trigger ibexa-btn--save-content-type',
                         'data-click' => sprintf('#%s', $saveId),
                     ],
                 ]
