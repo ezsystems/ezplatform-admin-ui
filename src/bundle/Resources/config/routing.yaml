@@ -394,7 +394,7 @@ ibexa.content_type.field_definition_form:
     methods: ['GET']
     options:
         expose: true
-    controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController::addFieldDefinitionFormAction'
+    controller: 'Ibexa\Bundle\AdminUi\Controller\ContentTypeController::addFieldDefinitionFormAction'
     defaults:
         toLanguageCode: ~
         fromLanguageCode: ~
@@ -571,7 +571,7 @@ ibexa.content.translate_with_location:
     path: /content/{contentId}/location/{locationId}/translate/{toLanguageCode}/{fromLanguageCode}
     methods: ['GET', 'POST']
     defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::translateAction'
+        _controller: 'Ibexa\Bundle\AdminUi\Controller\ContentEditController::translateAction'
         fromLanguageCode: ~
 
 ezplatform.content.translate.proxy:
@@ -585,7 +585,7 @@ ibexa.content.translate_with_location.proxy:
     path: /content/{contentId}/location/{locationId}/translate/proxy/{toLanguageCode}/{fromLanguageCode}
     methods: ['GET', 'POST']
     defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::proxyTranslateAction'
+        _controller: 'Ibexa\Bundle\AdminUi\Controller\ContentEditController::proxyTranslateAction'
         fromLanguageCode: ~
 
 ezplatform.content.check_edit_permission:
@@ -616,7 +616,7 @@ ezplatform.content.draft.edit:
 ibexa.content.draft.edit.cancel:
     path: /content/edit/draft/{contentId}/{versionNo}/{languageCode}/{referrerLocationId}/cancel
     defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::cancelEditVersionDraftAction'
+        _controller: 'Ibexa\Bundle\AdminUi\Controller\ContentEditController::cancelEditVersionDraftAction'
 
 ezplatform.content.draft.create:
     path: /content/create/draft/{contentId}/{fromVersionNo}/{fromLanguage}/{toLanguage}
