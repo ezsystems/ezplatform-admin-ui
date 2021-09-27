@@ -1,4 +1,4 @@
-(function(global, doc, eZ, bootstrap) {
+(function (global, doc, eZ, bootstrap) {
     let lastInsertTooltipTarget = null;
     const TOOLTIPS_SELECTOR = '[title]';
     const observerConfig = {
@@ -37,7 +37,7 @@
                     hide: parseInt(tooltipNode.dataset.delayHide, 10) ?? 75,
                 };
                 const extraClass = tooltipNode.dataset.tooltipExtraClass ?? '';
-                const placement = tooltipNode.dataset.tooltipPlacement ?? 'bottom';
+                const tooltipPlacement = tooltipNode.dataset.tooltipPlacement ?? 'bottom';
                 const container = tooltipNode.dataset.tooltipContainerSelector
                     ? tooltipNode.closest(tooltipNode.dataset.tooltipContainerSelector)
                     : 'body';
@@ -45,7 +45,7 @@
 
                 new bootstrap.Tooltip(tooltipNode, {
                     delay,
-                    placement,
+                    placement: tooltipPlacement,
                     container,
                     popperConfig: (defaultBsPopperConfig) => {
                         if (!iframe) {

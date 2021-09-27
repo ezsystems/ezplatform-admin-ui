@@ -9,6 +9,7 @@
 
     &__icon {
         grid-area: icon;
+        margin-top: calculateRem(2px);
     }
 
     &__close-btn {
@@ -18,10 +19,6 @@
         height: calculateRem(28px);
         margin-left: calculateRem(17px);
         margin-top: calculateRem(-6px);
-    }
-
-    &__icon {
-        margin-top: calculateRem(2px);
     }
 
     &__content {
