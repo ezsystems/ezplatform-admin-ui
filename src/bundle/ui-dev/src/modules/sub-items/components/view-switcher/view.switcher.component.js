@@ -22,7 +22,7 @@ const ViewSwitcherComponent = ({ onViewChange, activeView, isDisabled }) => {
 
         onViewChange(newView);
     };
-    const btnClassName = 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--icon-on-right';
+    const btnClassName = 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--icon-right';
 
     return (
         <div className={componentClassName}>

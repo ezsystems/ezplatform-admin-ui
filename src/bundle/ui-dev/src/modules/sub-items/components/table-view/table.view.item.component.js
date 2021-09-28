@@ -372,7 +372,7 @@ export default class TableViewItemComponent extends PureComponent {
             'ibexa-table__cell': true,
             'c-table-view-item__cell': true,
             'c-table-view-item__cell--actions': true,
-            'c-table-view__cell--shadow-left': showScrollShadowRight,
+            'c-table-view-item__cell--shadow-left': showScrollShadowRight,
         });
 
         return (

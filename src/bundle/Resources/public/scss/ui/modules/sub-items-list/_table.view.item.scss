@@ -6,6 +6,14 @@
     &__cell {
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
+        .ibexa-table.table &--shadow-left {
+            box-shadow: calculateRem(-13px) calculateRem(5px) calculateRem(20px) 0 rgba($ibexa-color-info, 0.1);
+        }
+
+        .ibexa-table.table &--shadow-right {
+            box-shadow: calculateRem(13px) calculateRem(5px) calculateRem(20px) 0 rgba($ibexa-color-info, 0.1);
+        }
+
         &--content-type {
             min-width: calculateRem(130px);
         }
