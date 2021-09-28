@@ -29,8 +29,7 @@ const SORTKEY_MAP = {
     modified: 'DateModified',
     priority: 'LocationPriority',
 };
-const TABLE_CELL_CLASS = 'c-table-view__cell';
-const TABLE_HEAD_CLASS = `ibexa-table__header-cell ${TABLE_CELL_CLASS} ${TABLE_CELL_CLASS}--head`;
+const TABLE_HEAD_CLASS = 'ibexa-table__header-cell c-table-view__cell c-table-view__cell--head';
 export const headerLabels = {
     name: Translator.trans(/*@Desc("Name")*/ 'items_table.header.name', {}, 'sub_items'),
     modified: Translator.trans(/*@Desc("Modified")*/ 'items_table.header.modified', {}, 'sub_items'),
@@ -224,7 +223,7 @@ export default class TableViewComponent extends Component {
             const isNameColumn = columnKey === 'name';
             const className = createCssClassNames({
                 [TABLE_HEAD_CLASS]: true,
-                [`${TABLE_CELL_CLASS}--name`]: isNameColumn,
+                'c-table-view__cell--name': isNameColumn,
                 'ibexa-table__header-cell--close-left': isNameColumn,
                 'c-table-view__cell--shadow-right': scrollShadowLeft && isNameColumn,
             });
@@ -276,7 +275,7 @@ export default class TableViewComponent extends Component {
         return (
             <thead className="c-table-view__head">
                 <tr className="ibexa-table__head-row c-table-view__row">
-                    <th className={`${TABLE_HEAD_CLASS} ${TABLE_CELL_CLASS}--checkbox`}>
+                    <th className={`${TABLE_HEAD_CLASS} c-table-view__cell--checkbox`}>
                         <ThreeStateCheckboxComponent
                             indeterminate={isCheckboxIndeterminate}
                             checked={anyLocationSelected}
@@ -304,7 +303,7 @@ export default class TableViewComponent extends Component {
         return (
             <div className="c-table-view__wrapper">
                 <div className="c-table-view__scroller" ref={this._refScroller}>
-                    <table className="table ibexa-table ibexa-table--no-automatic-main-checkbox c-table-view">
+                    <table className="table ibexa-table ibexa-table--has-bulk-checkbox c-table-view">
                         {this.renderHead()}
                         <tbody className="ibexa-table__body c-table-view__body">{renderedItems}</tbody>
                     </table>

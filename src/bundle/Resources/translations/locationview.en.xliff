@@ -21,6 +21,11 @@
         <target state="new">Create content</target>
         <note>key: content.create.choose_content_type</note>
       </trans-unit>
+      <trans-unit id="a68fa29f2de8a9e5a1a533e7240b0b667651c4d5" resname="content.create.input.placeholder">
+        <source>Type to refine</source>
+        <target state="new">Type to refine</target>
+        <note>key: content.create.input.placeholder</note>
+      </trans-unit>
       <trans-unit id="f599001c1ab9442f20e23d535e1dad8f3b75c337" resname="content.create.select_content_type">
         <source>Select a Content Type:</source>
         <target state="new">Select a Content Type:</target>

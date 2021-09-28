@@ -11,6 +11,11 @@
         <target state="new">Close</target>
         <note>key: alert.close</note>
       </trans-unit>
+      <trans-unit id="9177237415bf4199961eb8de9353011a5b22a039" resname="anchor_navigation.close">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note>key: anchor_navigation.close</note>
+      </trans-unit>
       <trans-unit id="8ace6daf300d4e12a28054d996c185db9ce7fe91" resname="authentication.credentials_expire_in.warning">
         <source>Your current password will expire in %days% day(s). You can change it in User Settings/My Account Settings.</source>
         <target state="new">Your current password will expire in %days% day(s). You can change it in User Settings/My Account Settings.</target>
@@ -196,6 +201,41 @@
         <target state="new">Do you want to delete the Content Type?</target>
         <note>key: content_type.modal.message</note>
       </trans-unit>
+      <trans-unit id="a7184ac693722bff0fedf65c45c914509af2b17f" resname="content_type.view.edit.add">
+        <source>Add</source>
+        <target state="new">Add</target>
+        <note>key: content_type.view.edit.add</note>
+      </trans-unit>
+      <trans-unit id="94367a951b897bc2964d0c45286b560c59ebb996" resname="content_type.view.edit.content_field_definitions">
+        <source>Field definitions</source>
+        <target state="new">Field definitions</target>
+        <note>key: content_type.view.edit.content_field_definitions</note>
+      </trans-unit>
+      <trans-unit id="3e0b70d6f624782a5deaa55de446878855231ebb" resname="content_type.view.edit.content_field_types">
+        <source>Field types</source>
+        <target state="new">Field types</target>
+        <note>key: content_type.view.edit.content_field_types</note>
+      </trans-unit>
+      <trans-unit id="cdc87bbe1a58b07964472f9d1285cbedf7e8cfa4" resname="content_type.view.edit.empty_group_content">
+        <source>Empty group, please drag some field</source>
+        <target state="new">Empty group, please drag some field</target>
+        <note>key: content_type.view.edit.empty_group_content</note>
+      </trans-unit>
+      <trans-unit id="10fcf7db63ceaf2a8ffb2b8e2b20e664d18701d5" resname="content_type.view.edit.empty_group_label">
+        <source>Your section is empty</source>
+        <target state="new">Your section is empty</target>
+        <note>key: content_type.view.edit.empty_group_label</note>
+      </trans-unit>
+      <trans-unit id="199485ac12697819a72f2b71cd4222df19864419" resname="content_type.view.edit.empty_group_title">
+        <source>Drag and drop field type</source>
+        <target state="new">Drag and drop field type</target>
+        <note>key: content_type.view.edit.empty_group_title</note>
+      </trans-unit>
+      <trans-unit id="a32a5e3d2d67da43b4c5f0f5574c90520868b36a" resname="content_type.view.edit.global_properties">
+        <source>Global properties</source>
+        <target state="new">Global properties</target>
+        <note>key: content_type.view.edit.global_properties</note>
+      </trans-unit>
       <trans-unit id="803a61fc8cf4e7bdfcf27432bb35e379a4971134" resname="content_type.view.list.action.add">
         <source>Create a Content Type</source>
         <target state="new">Create a Content Type</target>
@@ -236,6 +276,16 @@
         <target state="new">Delete Content Type group(s)</target>
         <note>key: content_type_group.view.list.action.delete</note>
       </trans-unit>
+      <trans-unit id="ad4e9a4e42b99d945f972bab5a2eff694d283793" resname="creating">
+        <source>Creating Content type</source>
+        <target state="new">Creating Content type</target>
+        <note>key: creating</note>
+      </trans-unit>
+      <trans-unit id="3e8769270428f8e66f5880d772f45e09d2c88aa0" resname="creating.title">
+        <source>New Content type</source>
+        <target state="new">New Content type</target>
+        <note>key: creating.title</note>
+      </trans-unit>
       <trans-unit id="fe1c876b1a9bcde155f03227bce4ae4fbd54c24f" resname="custom_url_alias_add_form.add">
         <source>Create</source>
         <target state="new">Create</target>
@@ -260,6 +310,16 @@
         <source>Search...</source>
         <target state="new">Search...</target>
         <note>key: dropdown.search</note>
+      </trans-unit>
+      <trans-unit id="f34946beab1da2af6535a8e4a88145e9557de0aa" resname="editing">
+        <source>Editing</source>
+        <target state="new">Editing</target>
+        <note>key: editing</note>
+      </trans-unit>
+      <trans-unit id="3103e1aed613987a16236d0f603f22ae48aa417b" resname="editing.title">
+        <source>Editing Content type %identifier%</source>
+        <target state="new">Editing Content type %identifier%</target>
+        <note>key: editing.title</note>
       </trans-unit>
       <trans-unit id="7cb40cbc703336ab1285e81ebf100b82b05a0e27" resname="error.page.403.actions">
         <source><![CDATA[Please contact your Administrator to request access to this content or modify your profile.<br/>Otherwise, go back to <a class="error-page__link" href="%dashboard%">dashboard</a> or <a class="error-page__link" href="%search%">search</a> for another Content item.]]></source>

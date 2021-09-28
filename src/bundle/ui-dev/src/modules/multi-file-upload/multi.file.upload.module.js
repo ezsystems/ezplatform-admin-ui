@@ -218,7 +218,7 @@ export default class MultiFileUploadModule extends Component {
         }
 
         const uploadDisabled = this.state.uploadDisabled;
-        const label = Translator.trans(/*@Desc("Upload")*/ 'multi_file_upload_open_btn.label.2', {}, 'multi_file_upload');
+        const label = Translator.trans(/*@Desc("Upload")*/ 'multi_file_upload_open_btn.label', {}, 'multi_file_upload');
 
         return (
             <button

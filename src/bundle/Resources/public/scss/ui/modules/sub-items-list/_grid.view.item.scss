@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     padding: calculateRem(16px);
-    height: calculateRem(238px);
+    min-height: calculateRem(238px);
     border: calculateRem(1px) solid $ibexa-color-light;
     border-radius: calculateRem(5px);
     box-shadow: calculateRem(4px) calculateRem(2px) calculateRem(17px) 0 rgba($ibexa-color-black, 0.05);
