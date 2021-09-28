@@ -91,13 +91,13 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
         ;
     }
 
-    public function expandDefaultBlocksOption()
+    public function expandDefaultBlocksOption(): void
     {
         $this->getHTMLPage()->find($this->getLocator('selectBlocksDropdown'))->click();
         $this->getHTMLPage()->find($this->getLocator('selectBlocksDropdownDefault'))->click();
     }
 
-    public function selectBlock($blockName)
+    public function selectBlock(string $blockName): void
     {
         $blockFindingScript = "document.querySelector('.ez-page-select-items__item .form-check .form-check-input[value=\'%s\']').click()";
         $scriptToExecute = sprintf($blockFindingScript, $blockName);
