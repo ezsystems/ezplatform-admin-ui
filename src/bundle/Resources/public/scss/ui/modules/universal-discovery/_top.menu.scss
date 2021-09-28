@@ -1,11 +1,12 @@
 .c-top-menu {
     display: flex;
     align-items: center;
-    height: calculateRem(64px);
+    justify-content: space-between;
+    height: calculateRem(72px);
+    padding: 0 calculateRem(38px) 0 calculateRem(65px);
 
     &__cancel-btn-wrapper {
-        margin-left: calculateRem(16px);
-        margin-right: calculateRem(36px);
+        margin-left: calculateRem(53px);
     }
 
     &__cancel-btn {
@@ -14,8 +15,9 @@
 
     &__title-wrapper {
         min-width: calculateRem(500px);
-        font-size: calculateRem(16px);
-        font-weight: bold;
+        font-size: calculateRem(22px);
+        font-weight: 600;
+        color: $ibexa-color-dark;
     }
 
     &__actions-wrapper {

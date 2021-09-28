@@ -18,14 +18,16 @@ const Tab = ({ children, actionsDisabledMap }) => {
             <div className="c-udw-tab__top-bar">
                 <TopMenu actionsDisabledMap={actionsDisabledMap} />
             </div>
-            <div className="c-udw-tab__left-sidebar">
-                <ContentCreateWidget />
-                <TabSelector />
-            </div>
-            <div className="c-udw-tab__main">{children}</div>
-            <div className="c-udw-tab__right-sidebar">
-                {ContentMetaPreview && <ContentMetaPreview />}
-                {selectedLocationsComponent}
+            <div className="c-udw-tab__content">
+                <div className="c-udw-tab__left-sidebar">
+                    <ContentCreateWidget />
+                    <TabSelector />
+                </div>
+                <div className="c-udw-tab__main">{children}</div>
+                <div className="c-udw-tab__right-sidebar">
+                    {ContentMetaPreview && <ContentMetaPreview />}
+                    {selectedLocationsComponent}
+                </div>
             </div>
         </div>
     );

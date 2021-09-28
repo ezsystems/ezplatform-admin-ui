@@ -1,33 +1,42 @@
 .c-udw-tab {
     height: 100vh;
-    display: grid;
-    grid-template-areas:
-        'top-bar top-bar top-bar'
-        'left-sidebar main right-sidebar';
-    grid-template-rows: auto 1fr;
-    grid-template-columns: calculateRem(220px) 1fr calculateRem(285px);
+    display: flex;
+    flex-direction: column;
     transition: all 0.4s ease-in;
 
     &__top-bar {
-        grid-area: top-bar;
         background-color: $ibexa-white;
+    }
+
+    &__content {
+        display: flex;
+        height: 100%;
+        border-top: calculateRem(1px) solid $ibexa-color-light;
+        box-shadow: calculateRem(4px) calculateRem(2px) calculateRem(17px) 0 rgba($ibexa-color-black, 0.05);
     }
 
     &__left-sidebar {
-        grid-area: left-sidebar;
-        background-color: $ibexa-white;
         position: relative;
+        overflow: hidden;
+        margin-top: calculateRem(-1px);
+        width: calculateRem(66px);
+        background-color: $ibexa-white;
+        border: calculateRem(1px) solid $ibexa-color-light;
+        border-top-right-radius: calculateRem(10px);
+        border-bottom-right-radius: calculateRem(10px);
+        box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
     }
 
     &__main {
-        grid-area: main;
-        background-color: $ibexa-color-base-light;
+        flex: 1;
+        background-color: $ibexa-white;
         overflow: auto;
     }
 
     &__right-sidebar {
-        grid-area: right-sidebar;
+        width: calculateRem(491px);
         background-color: $ibexa-white;
+        border-left: calculateRem(1px) solid $ibexa-color-light;
     }
 }
 
