@@ -1,7 +1,7 @@
 .c-finder-leaf {
     cursor: pointer;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: calculateRem(10px) calculateRem(40px) calculateRem(10px) calculateRem(15px);
     border-radius: $ibexa-border-radius;
@@ -85,6 +85,8 @@
         font-size: $ibexa-text-font-size-medium;
         line-height: calculateRem(21px);
         color: $ibexa-color-dark-400;
+        margin-left: calculateRem(16px);
+        flex: 1;
 
         .ibexa-icon {
             margin-right: calculateRem(8px);
