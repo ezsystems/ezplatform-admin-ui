@@ -18,6 +18,7 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Type\:
         resource: '../../../lib/Form/Type'
+        exclude: '../../../lib/Form/Type/ContentType/{FieldDefinitionsCollectionType}.php'
 
     EzSystems\EzPlatformAdminUi\Form\EventListener\:
         resource: '../../../lib/Form/EventListener'
