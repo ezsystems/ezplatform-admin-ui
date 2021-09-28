@@ -3,11 +3,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: calculateRem(7px) calculateRem(20px) calculateRem(7px) calculateRem(8px);
+    padding: calculateRem(10px) calculateRem(40px) calculateRem(10px) calculateRem(15px);
+    border-radius: $ibexa-border-radius;
     position: relative;
 
     &:hover {
-        background-color: $ibexa-color-base-medium;
+        background-color: $ibexa-color-light-300;
 
         .c-toggle-selection-button {
             opacity: 1;
@@ -18,29 +19,29 @@
         content: '';
         width: 0;
         height: 0;
-        border-top: calculateRem(5px) solid transparent;
-        border-left: calculateRem(8px) solid $ibexa-color-base-dark;
-        border-bottom: calculateRem(5px) solid transparent;
+        border-top: calculateRem(4px) solid transparent;
+        border-left: calculateRem(6px) solid $ibexa-black;
+        border-bottom: calculateRem(4px) solid transparent;
         position: absolute;
-        right: calculateRem(5px);
+        right: calculateRem(15px);
         top: 50%;
         transform: translateY(-50%);
     }
 
     &--marked {
         font-weight: bold;
-        background-color: $ibexa-color-base-medium;
+        background-color: $ibexa-color-light-300;
         color: $ibexa-color-primary;
 
         &:hover {
-            background-color: $ibexa-color-base-medium;
+            background-color: $ibexa-color-light-300;
         }
 
         &.c-finder-leaf--not-selectable {
-            background-color: $ibexa-color-base-medium;
+            background-color: $ibexa-color-light-300;
 
             &:hover {
-                background-color: $ibexa-color-base-medium;
+                background-color: $ibexa-color-light-300;
             }
         }
 
@@ -59,8 +60,11 @@
         }
 
         .c-finder-leaf__name {
+            color: $ibexa-black;
+            font-weight: 600;
+
             .ibexa-icon {
-                fill: $ibexa-color-primary;
+                fill: $ibexa-black;
             }
         }
     }
@@ -78,10 +82,12 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size-medium;
+        line-height: calculateRem(21px);
+        color: $ibexa-color-dark-400;
 
         .ibexa-icon {
-            margin-right: calculateRem(5px);
+            margin-right: calculateRem(8px);
         }
     }
 
@@ -95,6 +101,7 @@
             top: 50%;
             transform: translateY(-50%);
             margin-top: calculateRem(-1px);
+            fill: $ibexa-color-dark-400;
         }
     }
 }

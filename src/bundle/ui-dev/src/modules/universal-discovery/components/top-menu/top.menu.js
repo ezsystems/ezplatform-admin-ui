@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../../../common/icon/icon';
+import InputText from '../../../common/inputs/input.text';
 
 import { TitleContext, CancelContext } from '../../universal.discovery.module';
 
@@ -19,16 +20,6 @@ const TopMenu = ({ actionsDisabledMap }) => {
 
     return (
         <div className="c-top-menu">
-            <span className="c-top-menu__cancel-btn-wrapper">
-                <button
-                    className="c-top-menu__cancel-btn btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                    type="button"
-                    onClick={cancelUDW}
-                    title={backTitle}
-                    data-tooltip-container-selector=".c-top-menu__cancel-btn-wrapper">
-                    <Icon name="caret-back" extraClasses="ibexa-icon--small" />
-                </button>
-            </span>
             <span className="c-top-menu__title-wrapper">{title}</span>
             <div className="c-top-menu__actions-wrapper">
                 {sortedActions.map((action) => {
@@ -37,6 +28,17 @@ const TopMenu = ({ actionsDisabledMap }) => {
                     return <Component key={action.id} isDisabled={actionsDisabledMap[action.id]} />;
                 })}
             </div>
+            <InputText />
+            <span className="c-top-menu__cancel-btn-wrapper">
+                <button
+                    className="c-top-menu__cancel-btn btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                    type="button"
+                    onClick={cancelUDW}
+                    title={backTitle}
+                    data-tooltip-container-selector=".c-top-menu__cancel-btn-wrapper">
+                    <Icon name="discard" extraClasses="ibexa-icon--medium" />
+                </button>
+            </span>
         </div>
     );
 };
