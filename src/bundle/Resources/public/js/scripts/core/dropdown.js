@@ -6,7 +6,9 @@
 
     class Dropdown {
         constructor(config = {}) {
-            this.container = config.container.classList.contains('ibexa-dropdown') ? config.container : config.container.querySelector('.ibexa-dropdown');
+            this.container = config.container.classList.contains('ibexa-dropdown')
+                ? config.container
+                : config.container.querySelector('.ibexa-dropdown');
 
             if (!this.container) {
                 throw new Error('No valid container provided');
@@ -38,7 +40,9 @@
         }
 
         getSelectedItems() {
-            return this.selectedItemsContainer.querySelectorAll('.ibexa-dropdown__selected-item:not(.ibexa-dropdown__selected-item--predefined)');
+            return this.selectedItemsContainer.querySelectorAll(
+                '.ibexa-dropdown__selected-item:not(.ibexa-dropdown__selected-item--predefined)'
+            );
         }
 
         createSelectedItem(value, label) {
@@ -153,7 +157,7 @@
         }
 
         removeExpandingClass(event) {
-            if (event.propertyName === 'transform') {
+            if (event.propertyName === 'opacity') {
                 this.container.classList.remove('ibexa-dropdown--is-expanding');
                 this.itemsContainer.removeEventListener('transitionend', this.removeExpandingClass, false);
             }
@@ -177,8 +181,10 @@
             this.itemsFixedWrapperContainer.style.left = `${left}px`;
             this.itemsFixedWrapperContainer.style.top = `${shouldItemsContainerBeAbove ? top : bottom}px`;
 
-            this.itemsFixedWrapperContainer.classList
-                .toggle('ibexa-dropdown__items-fixed-wrapper--position-top', shouldItemsContainerBeAbove);
+            this.itemsFixedWrapperContainer.classList.toggle(
+                'ibexa-dropdown__items-fixed-wrapper--position-top',
+                shouldItemsContainerBeAbove
+            );
 
             this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(shouldItemsContainerBeAbove)}px`;
             this.itemsContainer.style.width = `${width}px`;
