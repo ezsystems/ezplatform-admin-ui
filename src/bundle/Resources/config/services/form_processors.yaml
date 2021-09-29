@@ -8,17 +8,14 @@ services:
         autowire: true
         autoconfigure: true
         public: false
-
-    EzSystems\EzPlatformAdminUi\Form\Processor\:
-        resource: "../../../lib/Form/Processor/*"
-        public: true
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\ContentEditNotificationFormProcessor:
-        public: true
+    EzSystems\EzPlatformAdminUi\Form\Processor\Content\AutosaveProcessor: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\Content\ContentOnTheFlyProcessor:
         arguments:
-            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+            $innerContentFormProcessor: '@ezplatform.content_forms.form_processor.content'
 
     EzSystems\EzPlatformAdminUi\Form\Processor\Content\UrlRedirectProcessor:
         public: true
@@ -27,10 +24,25 @@ services:
             $siteaccessGroups: '%ezpublish.siteaccess.groups%'
             $systemUrlRedirectProcessor: '@EzSystems\EzPlatformAdminUi\Form\Processor\Content\UrlRedirectProcessor.inner'
 
+    EzSystems\EzPlatformAdminUi\Form\Processor\ContentEditNotificationFormProcessor:
+        public: true
+        arguments:
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\ContentType\ContentTypeDiscardChangesFormProcessor: ~
 
     EzSystems\EzPlatformAdminUi\Form\Processor\ContentType\ContentTypeFormProcessor:
-        arguments: ["@ezpublish.api.service.content_type", "@router", "%ezplatform.content_forms.form_processor.content_type.options%"]
+        arguments:
+            - "@ezpublish.api.service.content_type"
+            - "@router"
+            - "%ezplatform.content_forms.form_processor.content_type.options%"
         calls:
-            - [setGroupsList, ["@ezpublish.fields_groups.list"]]
-        tags:
-            - { name: kernel.event_subscriber }
+            - [ setGroupsList, [ "@ezpublish.fields_groups.list" ] ]
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\PreviewFormProcessor: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\TranslationFormProcessor: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Processor\User\UserOnTheFlyProcessor:
+        arguments:
+            $innerUserUpdateFormProcessor: '@ezplatform.content_forms.form_processor.user_update'
