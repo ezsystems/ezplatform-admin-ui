@@ -28,8 +28,8 @@
         }
 
         &--second-level {
+            position: relative;
             width: calculateRem(220px);
-            overflow-x: hidden;
             padding-bottom: calculateRem(32px);
 
             .ibexa-main-menu {
@@ -114,8 +114,8 @@
 
         .ibexa-popup-menu {
             width: calculateRem(250px);
-            top: calculateRem(90px);
-            left: calculateRem(120px);
+            top: calculateRem(12px);
+            left: calculateRem(48px);
         }
     }
 
