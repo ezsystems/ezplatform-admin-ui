@@ -2,8 +2,7 @@
     id: group ~ '-' ~ tab.identifier,
     label: tab.name,
     content: tab.view,
-    active: index == 0,
-    tab_pane_class: tab.identifier == 'content' ? 'ibexa-tab-content__pane--no-padding'
+    active: index == 0
 }) %}
 {% include '@ezdesign/ui/component/tab/tabs.html.twig' with { 
     tabs: tabs_to_show,
