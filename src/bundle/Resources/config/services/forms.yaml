@@ -110,7 +110,7 @@ services:
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCreateType:
         arguments: ["@ezpublish.api.service.content_type"]
         tags:
-            - { name: form.type, alias: ezplatform_content_forms_contenttype_create }
+            - {name: form.type, alias: ezplatform_content_forms_contenttype_create}
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeDeleteType: ~
 
@@ -122,25 +122,22 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType:
         tags:
-            - { name: form.type, alias: ezplatform_content_forms_contenttype_update }
+            - {name: form.type, alias: ezplatform_content_forms_contenttype_update}
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypesDeleteType: ~
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\FieldTypeChoiceType:
-        arguments:
-            - '@eZ\Publish\Core\FieldType\FieldTypeRegistry'
-            - '@translator'
+        arguments: ['@eZ\Publish\Core\FieldType\FieldTypeRegistry', '@translator']
         tags:
             - { name: form.type, alias: ezplatform_content_forms_contenttype_field_type_choice }
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortFieldChoiceType:
-        arguments:
-            - "@translator"
+        arguments: ["@translator"]
         tags:
             - { name: form.type, alias: ezplatform_content_forms_contenttype_sort_field_choice }
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortOrderChoiceType:
-        arguments: [ "@translator" ]
+        arguments: ["@translator"]
         tags:
             - { name: form.type, alias: ezplatform_content_forms_contenttype_sort_order_choice }
 
@@ -175,7 +172,7 @@ services:
             $fieldTypeService: "@ezpublish.api.service.field_type"
             $thumbnailStrategy: '@eZ\Publish\Core\Repository\Strategy\ContentThumbnail\Field\ContentFieldStrategy'
         calls:
-            - [ setGroupsList, [ "@ezpublish.fields_groups.list" ] ]
+            - [setGroupsList, ["@ezpublish.fields_groups.list"]]
         tags:
             - { name: form.type, alias: ezplatform_content_forms_fielddefinition_update }
 
