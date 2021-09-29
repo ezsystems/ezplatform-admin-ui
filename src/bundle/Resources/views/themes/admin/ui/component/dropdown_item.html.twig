@@ -1,4 +1,4 @@
-{% set item_label = choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) %}
+{% set item_label = translation_domain is same as(false) ? choice.label : choice.label|trans({}, translation_domain) %}
 {% set preferred_choice = preferred_choice|default(false) %}
 
 {% if choice.choices is defined %}

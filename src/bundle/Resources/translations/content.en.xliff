@@ -51,11 +51,6 @@
         <target state="new">Content item '%name%' revealed.</target>
         <note>key: content.reveal.success</note>
       </trans-unit>
-      <trans-unit id="c078d68107501c81ef81e99437b4285ff012e0bd" resname="content.view.more.label">
-        <source>More</source>
-        <target state="new">More</target>
-        <note>key: content.view.more.label</note>
-      </trans-unit>
       <trans-unit id="fab6f6efafaeec371aaa8302c82362846d2b8f69" resname="content_edit.last_saved">
         <source>Last saved draft was on %date%</source>
         <target state="new">Last saved draft was on %date%</target>

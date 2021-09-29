@@ -4,13 +4,19 @@
     | reduce((carry, choices) => carry|merge(choices), [])
 %}
 {% set preferred_choices = preferred_choices|default([]) %}
-{% set custom_form = custom_form|default(false) %}
+{% set custom_form = custom_form is defined ? custom_form : true %}
+{% set translation_domain = translation_domain|default(false) %}
 
-<div class="ibexa-dropdown {{ multiple|default(false) ? "ibexa-dropdown--multi" : "ibexa-dropdown--single" }}">
+<div
+    class="ibexa-dropdown
+        {{ multiple|default(false) ? "ibexa-dropdown--multi" : "ibexa-dropdown--single" }}
+        {{ custom_init|default(false) ? "ibexa-dropdown--custom-init" }}
+        {{ class|default('') }}
+    ">
     <div class="ibexa-dropdown__source">
         {{ source|default(null)|raw }}
     </div>
-    <div class="ibexa-dropdown__wrapper {{ class|default('') }}">
+    <div class="ibexa-dropdown__wrapper">
         <ul
             class="ibexa-dropdown__selection-info"
             data-template="{{ include('@ezdesign/ui/component/dropdown_selected_item.html.twig', {
@@ -23,7 +29,7 @@
                     {% if custom_form ? choice.value == value : choice is selectedchoice(value) %}
                         {% include '@ezdesign/ui/component/dropdown_selected_item.html.twig' with {
                             value: choice.value,
-                            label: choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain),
+                            label: translation_domain is same as(false) ? choice.label : choice.label|trans({}, translation_domain),
                         } %}
                     {% endif %}
                 {% endfor %}
@@ -34,7 +40,7 @@
             {% set label = placeholder %}
 
             {% if placeholder != '' %}
-                {% if translation_domain|default(false) is same as(false) %}
+                {% if translation_domain is same as(false) %}
                     {% set label = placeholder %}
                 {% else %}
                     {% set label = placeholder|trans({}, translation_domain) %}

@@ -56,11 +56,6 @@
         <target state="new">Object state '%name%' created.</target>
         <note>key: object_state.create.success</note>
       </trans-unit>
-      <trans-unit id="0480844e257807b48dbf75fa7a374ceb7649ec5c" resname="object_state.delete.bulk_delete.submit">
-        <source>Delete Object state</source>
-        <target state="new">Delete Object state</target>
-        <note>key: object_state.delete.bulk_delete.submit</note>
-      </trans-unit>
       <trans-unit id="cd20ab0806780f115ec08655d9e44e0c31d0fecd" resname="object_state.delete.success">
         <source>Object state '%name%' deleted.</source>
         <target state="new">Object state '%name%' deleted.</target>
@@ -81,20 +76,10 @@
         <target state="new">There are no Object states yet. Object states you create will show up here.</target>
         <note>key: object_state.list.empty</note>
       </trans-unit>
-      <trans-unit id="2331731a1072a77f20ceef81614545768fc1d446" resname="object_state.modal.message">
-        <source>Do you want to delete the Object state(s)?</source>
-        <target state="new">Do you want to delete the Object state(s)?</target>
-        <note>key: object_state.modal.message</note>
-      </trans-unit>
       <trans-unit id="43f30c3071d6d33cf13e43c9cee1cda16e87200a" resname="object_state.name">
         <source>Object state name</source>
         <target state="new">Object state name</target>
         <note>key: object_state.name</note>
-      </trans-unit>
-      <trans-unit id="85cbd870cb6255f3d3d481ece6c23e6e2117e91e" resname="object_state.new">
-        <source>Create a new Object state</source>
-        <target state="new">Create a new Object state</target>
-        <note>key: object_state.new</note>
       </trans-unit>
       <trans-unit id="fabfbcda1358cae555b0b005a386cf6b20ade908" resname="object_state.update.identifier">
         <source>Identifier</source>
@@ -196,11 +181,6 @@
         <target state="new">Object state group '%name%' created.</target>
         <note>key: object_state_group.create.success</note>
       </trans-unit>
-      <trans-unit id="0f857d4dff9c8232ede300a39010d289d31c2937" resname="object_state_group.delete.bulk_delete.submit">
-        <source>Delete Object state group</source>
-        <target state="new">Delete Object state group</target>
-        <note>key: object_state_group.delete.bulk_delete.submit</note>
-      </trans-unit>
       <trans-unit id="0f40fde6bdaed4741d571b9ffdcc04e3be8ec3c9" resname="object_state_group.delete.submit">
         <source>Delete</source>
         <target state="new">Delete</target>
@@ -226,20 +206,10 @@
         <target state="new">There are no Object state groups yet. Object state groups you create will show up here.</target>
         <note>key: object_state_group.list.empty</note>
       </trans-unit>
-      <trans-unit id="5696f8cad271e56ef0e2661b314fa31b70a81bb3" resname="object_state_group.modal.message">
-        <source>Do you want to delete the Object state group(s)?</source>
-        <target state="new">Do you want to delete the Object state group(s)?</target>
-        <note>key: object_state_group.modal.message</note>
-      </trans-unit>
       <trans-unit id="4964317987d129f6c5beeebca699f8fd62867216" resname="object_state_group.name">
         <source>Object state group name</source>
         <target state="new">Object state group name</target>
         <note>key: object_state_group.name</note>
-      </trans-unit>
-      <trans-unit id="1cbfb4528f41be4d8de98fa4f81c26b41f8ffad9" resname="object_state_group.new">
-        <source>Create a new Object state group</source>
-        <target state="new">Create a new Object state group</target>
-        <note>key: object_state_group.new</note>
       </trans-unit>
       <trans-unit id="2db8c3e77568f759b118b23aec8cfacaca3d96c0" resname="object_state_group.update.identifier">
         <source>Identifier</source>

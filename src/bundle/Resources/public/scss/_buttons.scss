@@ -202,6 +202,13 @@
         margin-right: calculateRem(12px);
     }
 
+    &--icon-right {
+        .ibexa-icon {
+            margin-right: 0;
+            margin-left: calculateRem(12px);
+        }
+    }
+
     &--no-text {
         .ibexa-icon {
             margin-right: 0;

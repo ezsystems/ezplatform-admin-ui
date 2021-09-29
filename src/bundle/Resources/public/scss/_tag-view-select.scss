@@ -1,0 +1,58 @@
+.ibexa-tag-view-select {
+    border: calculateRem(1px) solid $ibexa-color-dark-200;
+    border-radius: $ibexa-border-radius;
+    padding: calculateRem(24px);
+    letter-spacing: calculateRem(0.12px);
+
+    &__info {
+        @include ibexa-font-sans-serif();
+
+        font-size: $ibexa-text-font-size-medium;
+        color: $ibexa-black;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__selected-list {
+        display: flex;
+        margin: calculateRem(10px) 0;
+    }
+
+    &__selected-item-tag {
+        display: inline-flex;
+        align-items: center;
+        height: calculateRem(24px);
+        padding: 0 calculateRem(8px);
+        border-radius: $ibexa-border-radius;
+        background-color: $ibexa-color-light-400;
+        font-size: $ibexa-text-font-size-small;
+        line-height: calculateRem(18px);
+
+        &:not(:first-of-type) {
+            margin-left: calculateRem(8px);
+        }
+    }
+
+    &__selected-item-tag-remove-btn {
+        padding: 0;
+        margin-left: calculateRem(12px);
+        display: flex;
+    }
+
+    &:disabled {
+        border-color: $ibexa-color-light;
+
+        .ibexa-tag-view-select {
+            &__info {
+                color: $ibexa-color-dark-300;
+            }
+
+            &__selected_item {
+                color: $ibexa-color-dark-400;
+                fill: $ibexa-color-dark-400;
+                background-color: $ibexa-color-light-300;
+            }
+        }
+    }
+}

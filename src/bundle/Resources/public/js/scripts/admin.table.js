@@ -1,5 +1,5 @@
 (function(global, doc, $, eZ) {
-    const tables = doc.querySelectorAll('.ibexa-table');
+    const tablesWithBulkCheckbox = doc.querySelectorAll('.ibexa-table.ibexa-table--has-bulk-checkbox');
     const setMainCheckboxState = (mainCheckbox, subCheckboxes, event) => {
         const isFromJS = event?.detail?.isFromJS ?? false;
 
@@ -90,7 +90,7 @@
         tablesCheckboxesChangeListeners.delete(table);
     };
 
-    tables.forEach((table) => {
+    tablesWithBulkCheckbox.forEach((table) => {
         addTableCheckboxesListeners(table);
 
         table.addEventListener(

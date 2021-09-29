@@ -58,10 +58,12 @@ class AdminUpdateItemPage extends Page
 
     public function clickButton(string $label): void
     {
-        $this->getHTMLPage()
+        $button = $this->getHTMLPage()
             ->findAll($this->getLocator('button'))
-            ->getByCriterion(new ElementTextCriterion($label))
-            ->click();
+            ->getByCriterion(new ElementTextCriterion($label));
+
+        $button->mouseOver();
+        $button->find(new VisibleCSSLocator('label', 'span'))->click();
     }
 
     public function verifyIsLoaded(): void
@@ -75,7 +77,7 @@ class AdminUpdateItemPage extends Page
         return [
             new VisibleCSSLocator('formElement', '.ibexa-main-container '),
             new VisibleCSSLocator('closeButton', '.ez-content-edit-container__close'),
-            new VisibleCSSLocator('button', 'button'),
+            new VisibleCSSLocator('button', '.container button'),
             new VisibleCSSLocator('fieldInput', 'input'),
         ];
     }

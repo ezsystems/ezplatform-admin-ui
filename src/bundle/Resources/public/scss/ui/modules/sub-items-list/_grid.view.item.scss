@@ -1,20 +1,23 @@
 .c-grid-view-item {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: calculateRem(20px);
-    cursor: pointer;
-    color: $ibexa-color-font;
-    text-decoration: none;
-    transition: all 0.3s $ibexa-admin-transition;
-    background: $ibexa-white;
-    border: calculateRem(1px) solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: calculateRem(16px);
+    min-height: calculateRem(238px);
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: calculateRem(5px);
+    box-shadow: calculateRem(4px) calculateRem(2px) calculateRem(17px) 0 rgba($ibexa-color-black, 0.05);
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
+    &:link {
+        text-decoration: none;
+    }
+
+    &:active,
     &:hover,
     &:focus {
-        color: $ibexa-color-primary;
-        font-weight: bold;
+        color: $ibexa-color-dark;
+        border-color: $ibexa-color-dark;
         text-decoration: none;
-        border: calculateRem(1px) solid $ibexa-color-primary;
     }
 
     &__content-type {
@@ -43,21 +46,23 @@
     }
 
     &__image-wrapper {
-        height: calculateRem(248px);
-        width: calculateRem(248px);
-        max-width: 100%;
+        flex-grow: 1;
+        border-radius: calculateRem(5px);
+        margin-bottom: calculateRem(16px);
         background: $ibexa-color-base-light;
+
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     &__title {
-        display: flex;
-        align-items: center;
-        width: calculateRem(248px);
-        height: calculateRem(54px);
-        font-size: calculateRem(16px);
-        margin: calculateRem(5px) calculateRem(8px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: calculateRem(0.12px);
+        line-height: calculateRem(24px);
     }
 }

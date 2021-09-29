@@ -16,6 +16,7 @@
     &__navbar {
         position: relative;
         overflow: hidden;
+        font-size: $ibexa-text-font-size-medium;
 
         &--first-level {
             width: calculateRem(276px);
@@ -48,7 +49,7 @@
                 }
 
                 &__item-text-column {
-                    padding: calculateRem(10px)
+                    padding: calculateRem(10px);
                 }
             }
 
@@ -134,7 +135,7 @@
 
         &--bottom {
             width: calc(100% - #{calculateRem(24px)});
-            margin: 0 auto;          
+            margin: 0 auto;
         }
     }
 

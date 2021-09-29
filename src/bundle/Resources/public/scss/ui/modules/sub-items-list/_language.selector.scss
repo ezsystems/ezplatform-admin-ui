@@ -4,9 +4,9 @@
             margin-top: calculateRem(5px);
             max-height: calc(100vh - #{calculateRem(220px)});
             overflow: auto;
-    
+
             .form-check-label {
-                font-size: calculateRem(16px);
+                font-size: $ibexa-text-font-size;
                 line-height: calculateRem(50px);
             }
         }
