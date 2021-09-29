@@ -104,11 +104,11 @@ class SubItemsList extends Component
         return [
             new VisibleCSSLocator('table', '.m-sub-items'),
             new VisibleCSSLocator('empty', '.c-no-items'),
-            new VisibleCSSLocator('horizontalHeaders', '.m-sub-items .c-table-view__cell--head'),
+            new VisibleCSSLocator('horizontalHeaders', '.m-sub-items .ibexa-table__header-cell'),
             new VisibleCSSLocator('paginationInfo', '.m-sub-items__pagination-info'),
             new CSSLocator('spinner', '.m-sub-items__spinner-wrapper'),
-            new CSSLocator('sortingOrderAscending', '.m-sub-items .c-table-view__cell--head.c-table-view__cell--sorted-asc'),
-            new CSSLocator('sortingOrderDescending', '.m-sub-items .c-table-view__cell--head.c-table-view__cell--sorted-desc'),
+            new CSSLocator('sortingOrderAscending', '.m-sub-items .ibexa-table__header-cell .ibexa-table__sort-column--sorted-asc'),
+            new CSSLocator('sortingOrderDescending', '.m-sub-items .ibexa-table__header-cell .ibexa-table__sort-column--desc'),
         ];
     }
 }

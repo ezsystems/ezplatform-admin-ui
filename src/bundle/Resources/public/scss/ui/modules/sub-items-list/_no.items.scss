@@ -1,6 +1,6 @@
 .c-no-items {
     padding: 0 calculateRem(32px);
     font-style: italic;
-    font-size: calculateRem(14px);
+    font-size: $ibexa-text-font-size-medium;
     color: $ibexa-black;
 }

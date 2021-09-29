@@ -6,11 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="e55cc61e6e0bcd97f329c00790704a381212f55b" resname="bookmark.list.empty">
-        <source>You have no notifications.</source>
-        <target state="new">You have no notifications.</target>
-        <note>key: bookmark.list.empty</note>
-      </trans-unit>
       <trans-unit id="2e6761d0506e8b330fe5e2350a82f7e2e74b13ee" resname="menu.notification">
         <source>View Notifications</source>
         <target state="new">View Notifications</target>
@@ -31,20 +26,10 @@
         <target state="new">Description</target>
         <note>key: notification.description</note>
       </trans-unit>
-      <trans-unit id="5b03625b8de51d296ad7f4bc980e631c964185d8" resname="notification.no_longer_available">
-        <source>The Content item is no longer available</source>
-        <target state="new">The Content item is no longer available</target>
-        <note>key: notification.no_longer_available</note>
-      </trans-unit>
       <trans-unit id="d7fd0c0dc2a4267ebb5bca828e42812fded59ebb" resname="notification.permanently_deleted">
         <source>Deleted</source>
         <target state="new">Deleted</target>
         <note>key: notification.permanently_deleted</note>
-      </trans-unit>
-      <trans-unit id="1c91fe849525c315015b2e765f6600fd199e78a0" resname="notification.title">
-        <source>Title:</source>
-        <target state="new">Title:</target>
-        <note>key: notification.title</note>
       </trans-unit>
       <trans-unit id="dda5c8f76779648fe17e298aaae2ea426df3f85e" resname="notification.trashed">
         <source>Sent to Trash</source>

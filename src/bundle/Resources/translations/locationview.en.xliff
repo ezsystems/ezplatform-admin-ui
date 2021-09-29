@@ -21,6 +21,11 @@
         <target state="new">Create content</target>
         <note>key: content.create.choose_content_type</note>
       </trans-unit>
+      <trans-unit id="a68fa29f2de8a9e5a1a533e7240b0b667651c4d5" resname="content.create.input.placeholder">
+        <source>Type to refine</source>
+        <target state="new">Type to refine</target>
+        <note>key: content.create.input.placeholder</note>
+      </trans-unit>
       <trans-unit id="f599001c1ab9442f20e23d535e1dad8f3b75c337" resname="content.create.select_content_type">
         <source>Select a Content Type:</source>
         <target state="new">Select a Content Type:</target>
@@ -395,21 +400,6 @@
         <source>Published version</source>
         <target state="new">Published version</target>
         <note>key: tab.versions.published_version</note>
-      </trans-unit>
-      <trans-unit id="d2e707023baa6830915c5d12b915974d627522e4" resname="tab.versions.table.action.archived.edit">
-        <source>Restore archived version</source>
-        <target state="new">Restore archived version</target>
-        <note>key: tab.versions.table.action.archived.edit</note>
-      </trans-unit>
-      <trans-unit id="97721a4a6c33834bb6421c29ef72e8654f39a4ab" resname="tab.versions.table.action.draft.edit">
-        <source>Edit draft</source>
-        <target state="new">Edit draft</target>
-        <note>key: tab.versions.table.action.draft.edit</note>
-      </trans-unit>
-      <trans-unit id="a602612589c6e902caaf8acf1fd51fcd215955f1" resname="tab.versions.table.author.not_found">
-        <source>Can't fetch contributor</source>
-        <target state="new">Can't fetch contributor</target>
-        <note>key: tab.versions.table.author.not_found</note>
       </trans-unit>
       <trans-unit id="4c27637d649c221e58c6a9629f14a2f75aeed151" resname="tab.versions.table.contributor">
         <source>Contributor</source>

@@ -5,41 +5,22 @@
     background: $ibexa-white;
     border-radius: $ibexa-border-radius;
 
-    &,
-    & * {
-        box-sizing: border-box;
+    .table .ibexa-table__header-cell {
+        border-top-width: 0;
     }
 
-    &__header {
-        width: 100%;
-        padding: 0 calculateRem(8px) calculateRem(32px);
-        font-weight: bold;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    &__title {
-        font-size: calculateRem(16px);
-        color: $ibexa-black;
-        flex: 1 1 auto;
-    }
-
-    &__actions {
-        display: flex;
-    }
-
-    &__actions .m-mfu {
-        margin-right: calculateRem(24px);
-        display: flex;
+    .ibexa-table-header {
+        margin-bottom: 0;
+        padding-bottom: calculateRem(20px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-dark-200;
     }
 
     &__list {
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size;
         line-height: calculateRem(40px);
         text-align: left;
         position: relative;
+        margin-bottom: calculateRem(16px);
     }
 
     &__list--processing:after {

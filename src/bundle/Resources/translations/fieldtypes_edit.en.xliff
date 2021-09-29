@@ -6,6 +6,16 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="6e348032e081597394411395f7fce3700da6f4d4" resname="ezimage.dimensions.height">
+        <source>H:%height% px</source>
+        <target state="new">H:%height% px</target>
+        <note>key: ezimage.dimensions.height</note>
+      </trans-unit>
+      <trans-unit id="cc4b26a9652d9bcfff2d5627d7e34b2fe9eb99b6" resname="ezimage.dimensions.width">
+        <source>W:%width% px</source>
+        <target state="new">W:%width% px</target>
+        <note>key: ezimage.dimensions.width</note>
+      </trans-unit>
       <trans-unit id="dc2dfb4a937fee7119e733e0b6715a09320d5078" resname="ezimageasset.create.message.error">
         <source>Error while creating Image Asset: %error%</source>
         <target state="new">Error while creating Image Asset: %error%</target>

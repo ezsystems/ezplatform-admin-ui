@@ -21,11 +21,6 @@
         <target state="new">Language '%name%' created.</target>
         <note>key: language.create.success</note>
       </trans-unit>
-      <trans-unit id="8390c7c1adbff8a264583f6f060256c993023787" resname="language.delete">
-        <source>Delete language</source>
-        <target state="new">Delete language</target>
-        <note>key: language.delete</note>
-      </trans-unit>
       <trans-unit id="7c8fcdc1c11d3c1cf2a4380f440ef3d157b68c12" resname="language.delete.success">
         <source>Language '%name%' removed.</source>
         <target state="new">Language '%name%' removed.</target>
