@@ -18,9 +18,15 @@
         font-size: calculateRem(22px);
         font-weight: 600;
         color: $ibexa-color-dark;
+        flex: 1;
     }
 
     &__actions-wrapper {
         display: flex;
+    }
+
+    .ibexa-input-text-wrapper--search {
+        min-width: calculateRem(200px);
+        margin-left: calculateRem(40px);
     }
 }
