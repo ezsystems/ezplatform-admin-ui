@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Policy;
+namespace Ibexa\AdminUi\Form\Type\Policy;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
+use Ibexa\AdminUi\Form\Data\Policy\PolicyDeleteData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -45,3 +45,5 @@ class PolicyDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(PolicyDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType');

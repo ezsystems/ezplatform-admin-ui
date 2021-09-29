@@ -4,11 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Section;
+namespace Ibexa\AdminUi\Form\Type\Section;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Embedded\SectionType;
-use EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
+use Ibexa\AdminUi\Form\Data\Section\SectionContentAssignData;
+use Ibexa\AdminUi\Form\Type\Embedded\SectionType;
+use Ibexa\AdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -56,3 +56,5 @@ class SectionContentAssignType extends AbstractType
         ]);
     }
 }
+
+class_alias(SectionContentAssignType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionContentAssignType');

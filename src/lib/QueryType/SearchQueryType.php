@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\QueryType;
+namespace Ibexa\AdminUi\QueryType;
 
 use function class_alias;
 
@@ -24,3 +24,5 @@ if (false) {
     {
     }
 }
+
+class_alias(SearchQueryType::class, 'EzSystems\EzPlatformAdminUi\QueryType\SearchQueryType');

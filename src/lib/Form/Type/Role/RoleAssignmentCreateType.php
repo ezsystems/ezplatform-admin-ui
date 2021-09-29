@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
+namespace Ibexa\AdminUi\Form\Type\Role;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserCollectionType;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserGroupCollectionType;
+use Ibexa\AdminUi\Form\Data\Role\RoleAssignmentCreateData;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Form\Type\Section\SectionChoiceType;
+use Ibexa\AdminUi\Form\Type\User\UserCollectionType;
+use Ibexa\AdminUi\Form\Type\User\UserGroupCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -80,3 +80,5 @@ class RoleAssignmentCreateType extends AbstractType
         ]);
     }
 }
+
+class_alias(RoleAssignmentCreateType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType');
