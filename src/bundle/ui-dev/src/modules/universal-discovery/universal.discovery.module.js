@@ -17,31 +17,42 @@ const CLASS_SCROLL_DISABLED = 'ez-scroll-disabled';
 
 export const SORTING_OPTIONS = [
     {
-        label: Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget'),
-        tooltipLabel: Translator.trans(/*@Desc("Sort by Date")*/ 'sorting.date.tooltip', {}, 'universal_discovery_widget'),
+        id: 'date:asc',
+        label: Translator.trans(/*@Desc("Sort by Date (Ascending)")*/ 'sorting.date.asc.label', {}, 'universal_discovery_widget'),
         sortClause: 'DatePublished',
+        sortOrder: 'ascending',
     },
     {
-        label: Translator.trans(/*@Desc("Name")*/ 'sorting.name.label', {}, 'universal_discovery_widget'),
-        tooltipLabel: Translator.trans(/*@Desc("Sort by Name")*/ 'sorting.name.tooltip', {}, 'universal_discovery_widget'),
+        id: 'date:desc',
+        label: Translator.trans(/*@Desc("Sort by Date (Descending)")*/ 'sorting.date.desc.label', {}, 'universal_discovery_widget'),
+        sortClause: 'DatePublished',
+        sortOrder: 'descending',
+    },
+    {
+        id: 'name:asc',
+        label: Translator.trans(/*@Desc("Sort by Name (Ascending)")*/ 'sorting.name.asc.label', {}, 'universal_discovery_widget'),
         sortClause: 'ContentName',
+        sortOrder: 'ascending',
+    },
+    {
+        id: 'name:desc',
+        label: Translator.trans(/*@Desc("Sort by Name (Descending)")*/ 'sorting.name.desc.label', {}, 'universal_discovery_widget'),
+        sortClause: 'ContentName',
+        sortOrder: 'descending',
     },
 ];
 export const VIEWS = [
     {
         id: 'grid',
-        icon: 'view-grid',
-        tooltipLabel: Translator.trans(/*@Desc("Grid view")*/ 'sorting.grid.view', {}, 'universal_discovery_widget'),
+        label: Translator.trans(/*@Desc("Grid view")*/ 'sorting.grid.view', {}, 'universal_discovery_widget'),
     },
     {
         id: 'finder',
-        icon: 'panels',
-        tooltipLabel: Translator.trans(/*@Desc("Panels view")*/ 'sorting.panels.view', {}, 'universal_discovery_widget'),
+        label: Translator.trans(/*@Desc("Panels view")*/ 'sorting.panels.view', {}, 'universal_discovery_widget'),
     },
     {
         id: 'tree',
-        icon: 'content-tree',
-        tooltipLabel: Translator.trans(/*@Desc("Tree view")*/ 'sorting.tree.view', {}, 'universal_discovery_widget'),
+        label: Translator.trans(/*@Desc("Tree view")*/ 'sorting.tree.view', {}, 'universal_discovery_widget'),
     },
 ];
 

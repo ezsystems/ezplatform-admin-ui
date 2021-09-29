@@ -1,39 +1,25 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from '../../../common/icon/icon';
-import MenuButton from '../menu-button/menu.button';
+import Dropdown from '../dropdown/dropdown';
 
-import { createCssClassNames } from '../../../common/helpers/css.class.names';
 import { CurrentViewContext, VIEWS } from '../../universal.discovery.module';
 
 const ViewSwitcher = ({ isDisabled }) => {
     const [currentView, setCurrentView] = useContext(CurrentViewContext);
-    const className = createCssClassNames({
-        'c-udw-view-switcher': true,
-        'c-udw-view-switcher--disabled': isDisabled,
-    });
+    const onOptionClick = (view) => {
+        setCurrentView(view.id);
+    }
+    const selectedOption = VIEWS.find((view) => view.id === currentView);
 
     return (
-        <div className={className}>
-            {VIEWS.map((view) => {
-                const extraClasses = view.id === currentView ? 'c-menu-button--selected' : '';
-                const onClick = () => {
-                    setCurrentView(view.id);
-                    window.eZ.helpers.tooltips.hideAll();
-                };
-
-                return (
-                    <MenuButton
-                        key={view.id}
-                        extraClasses={extraClasses}
-                        onClick={onClick}
-                        isDisabled={isDisabled}
-                        title={view.tooltipLabel}>
-                        <Icon name={view.icon} extraClasses="ibexa-icon--small-medium" />
-                    </MenuButton>
-                );
-            })}
+        <div className="c-udw-view-switcher">
+            <Dropdown
+                options={VIEWS}
+                selectedOption={selectedOption}
+                onOptionClick={onOptionClick}
+                isDisabled={isDisabled}
+            />
         </div>
     );
 };
