@@ -87,7 +87,6 @@ class ContentTypeRightSidebarBuilder extends AbstractBuilder implements Translat
             $this->createMenuItem(
                 self::ITEM__EDIT,
                 [
-                    'extras' => ['icon' => 'edit'],
                     'attributes' => $canEdit
                         ? $editAttributes
                         : array_merge($editAttributes, ['disabled' => 'disabled']),
