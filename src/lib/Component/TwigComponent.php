@@ -6,8 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Component;
+namespace Ibexa\AdminUi\Component;
 
+use Ibexa\Contracts\AdminUi\Component\Renderable;
 use Twig\Environment;
 
 class TwigComponent implements Renderable
@@ -46,3 +47,5 @@ class TwigComponent implements Renderable
         return $this->twig->render($this->template, $parameters + $this->parameters);
     }
 }
+
+class_alias(TwigComponent::class, 'EzSystems\EzPlatformAdminUi\Component\TwigComponent');

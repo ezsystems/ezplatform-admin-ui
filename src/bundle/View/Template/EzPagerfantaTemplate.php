@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\View\Template;
+namespace Ibexa\Bundle\AdminUi\View\Template;
 
 use Pagerfanta\View\Template\TwitterBootstrap4Template;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -31,3 +31,5 @@ class EzPagerfantaTemplate extends TwitterBootstrap4Template
         ]);
     }
 }
+
+class_alias(EzPagerfantaTemplate::class, 'EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate');

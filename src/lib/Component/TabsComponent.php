@@ -6,13 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Component;
+namespace Ibexa\AdminUi\Component;
 
-use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvent;
-use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
-use EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent;
-use EzSystems\EzPlatformAdminUi\Tab\TabGroup;
-use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
+use Ibexa\AdminUi\Tab\Event\TabEvent;
+use Ibexa\AdminUi\Tab\Event\TabEvents;
+use Ibexa\AdminUi\Tab\Event\TabGroupEvent;
+use Ibexa\AdminUi\Tab\TabGroup;
+use Ibexa\Contracts\AdminUi\Component\Renderable;
+use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
 
@@ -92,3 +93,5 @@ class TabsComponent implements Renderable
         ];
     }
 }
+
+class_alias(TabsComponent::class, 'EzSystems\EzPlatformAdminUi\Component\TabsComponent');

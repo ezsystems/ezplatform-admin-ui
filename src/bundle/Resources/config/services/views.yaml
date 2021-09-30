@@ -7,7 +7,7 @@ services:
     #
     # ContentTranslateView
     #
-    EzSystems\EzPlatformAdminUi\View\Builder\ContentTranslateViewBuilder:
+    Ibexa\AdminUi\View\Builder\ContentTranslateViewBuilder:
         arguments:
             $repository: '@ezpublish.api.repository'
             $viewConfigurator: '@ezpublish.view.configurator'
@@ -16,11 +16,11 @@ services:
         tags:
             - { name: ibexa.view_builder }
 
-    EzSystems\EzPlatformAdminUi\View\Provider\ContentTranslateView\Configured:
+    Ibexa\AdminUi\View\Provider\ContentTranslateView\Configured:
         arguments:
             $matcherFactory: '@ezplatform.admin_ui.view.content_translate.matcher_factory'
         tags:
-            - { name: ezpublish.view_provider, type: EzSystems\EzPlatformAdminUi\View\ContentTranslateView, priority: 10 }
+            - { name: ezpublish.view_provider, type: Ibexa\AdminUi\View\ContentTranslateView, priority: 10 }
 
     ezplatform.admin_ui.view.content_translate.matcher_factory:
         class: '%ezpublish.view.matcher_factory.class%'
@@ -37,17 +37,17 @@ services:
             $configResolver: '@ezpublish.config.resolver'
             $parameterName: content_translate_view
 
-    EzSystems\EzPlatformAdminUi\View\Filter\ContentTranslateViewFilter:
+    Ibexa\AdminUi\View\Filter\ContentTranslateViewFilter:
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\Limitation\Templating\LimitationBlockRenderer:
+    Ibexa\AdminUi\Limitation\Templating\LimitationBlockRenderer:
         arguments:
             $valueMapperRegistry: '@ezplatform.content_forms.limitation_value_mapper.registry'
             $twig: '@twig'
             $configResolver: '@ezpublish.config.resolver'
 
-    EzSystems\EzPlatformAdminUi\View\Filter\AdminSearchViewFilter:
+    Ibexa\AdminUi\View\Filter\AdminSearchViewFilter:
         decorates: Ibexa\Platform\Search\View\SearchViewFilter
         arguments:
             $configResolver: '@ezpublish.config.resolver'
@@ -55,7 +55,7 @@ services:
             $sectionService: '@ezpublish.api.service.section'
             $contentTypeService: '@ezpublish.api.service.content_type'
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
-            $innerFilter: '@EzSystems\EzPlatformAdminUi\View\Filter\AdminSearchViewFilter.inner'
+            $innerFilter: '@Ibexa\AdminUi\View\Filter\AdminSearchViewFilter.inner'
             $urlGenerator: '@router'
         tags:
             - { name: kernel.event_subscriber }

@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Security;
+namespace Ibexa\AdminUi\REST\Security;
 
-use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
+use Ibexa\AdminUi\Specification\SiteAccess\IsAdmin;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 
@@ -34,3 +34,5 @@ final class NonAdminRESTRequestMatcher implements RequestMatcherInterface
         return (new IsAdmin($this->siteAccessGroups))->isSatisfiedBy($request->attributes->get('siteaccess'));
     }
 }
+
+class_alias(NonAdminRESTRequestMatcher::class, 'EzSystems\EzPlatformAdminUi\REST\Security\NonAdminRESTRequestMatcher');

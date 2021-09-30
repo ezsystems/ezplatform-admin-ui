@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\Specification\Location\IsWithinCopySubtreeLimit;
+use Ibexa\AdminUi\Specification\Location\IsWithinCopySubtreeLimit;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -63,3 +63,5 @@ class LocationIsWithinCopySubtreeLimitValidator extends ConstraintValidator
         }
     }
 }
+
+class_alias(LocationIsWithinCopySubtreeLimitValidator::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsWithinCopySubtreeLimitValidator');
