@@ -2,13 +2,14 @@
     display: flex;
     flex-wrap: nowrap;
     overflow: hidden;
-    min-height: calc(100vh - #{calculateRem(200px)});
+    height: calc(100vh - #{calculateRem(73px)});
 
     &__content-column {
         display: flex;
         flex-direction: column;
         width: 100%;
-        overflow: hidden;
+        height: 100%;
+        overflow-y: auto;
     }
 
     &--without-anchor-menu-items {

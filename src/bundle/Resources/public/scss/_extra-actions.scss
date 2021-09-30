@@ -194,7 +194,7 @@
 }
 
 .ibexa-main-container {
-    &--edit-content {
+    &--edit-container {
         .ibexa-extra-actions {
             top: calculateRem(16px);
             height: calc(100vh - #{calculateRem(16px)});

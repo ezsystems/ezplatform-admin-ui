@@ -191,11 +191,6 @@
         <target state="new">Autosave is on</target>
         <note>key: content_edit.autosave.status_on</note>
       </trans-unit>
-      <trans-unit id="5626938e64bdad8be0c090d0018c868960859d0a" resname="content_type.breadcrumb.view">
-        <source>%identifier%</source>
-        <target state="new">%identifier%</target>
-        <note>key: content_type.breadcrumb.view</note>
-      </trans-unit>
       <trans-unit id="02f6ddfcdd8bbd05cdd1b954503a3801288b74eb" resname="content_type.modal.message">
         <source>Do you want to delete the Content Type?</source>
         <target state="new">Do you want to delete the Content Type?</target>
@@ -245,21 +240,6 @@
         <source>Delete Content Type</source>
         <target state="new">Delete Content Type</target>
         <note>key: content_type.view.list.action.delete</note>
-      </trans-unit>
-      <trans-unit id="dc7335e54d834bb6a342bf0bcb113850de4b69f9" resname="content_type.view.view.title">
-        <source>%name%</source>
-        <target state="new">%name%</target>
-        <note>key: content_type.view.view.title</note>
-      </trans-unit>
-      <trans-unit id="83a16866c8ff14a4966553088657aafbb9db8edb" resname="content_type_group.breadcrumb.list">
-        <source>Content Types</source>
-        <target state="new">Content Types</target>
-        <note>key: content_type_group.breadcrumb.list</note>
-      </trans-unit>
-      <trans-unit id="541e02854f7e561d84637ce99ec6fd6e8404bce4" resname="content_type_group.breadcrumb.view">
-        <source>%identifier%</source>
-        <target state="new">%identifier%</target>
-        <note>key: content_type_group.breadcrumb.view</note>
       </trans-unit>
       <trans-unit id="09f63694559a9149fb1297e33be843cf54788b95" resname="content_type_group.modal.message">
         <source>Do you want to delete the Content Type group?</source>
@@ -718,6 +698,26 @@
         <source>Preview</source>
         <target state="new">Preview</target>
         <note>key: tab.view.preview</note>
+      </trans-unit>
+      <trans-unit id="021066e1b5ed5c74ef8d23b0a14f9f6038280f56" resname="tag_view_select.change">
+        <source>Change %type%</source>
+        <target state="new">Change %type%</target>
+        <note>key: tag_view_select.change</note>
+      </trans-unit>
+      <trans-unit id="1afca7f8ad50f67317805611658838e9963275fc" resname="tag_view_select.default_type">
+        <source>path</source>
+        <target state="new">path</target>
+        <note>key: tag_view_select.default_type</note>
+      </trans-unit>
+      <trans-unit id="7c1fd46c63208f07c7483fe8c332b13a404f39fa" resname="tag_view_select.info">
+        <source>Select location</source>
+        <target state="new">Select location</target>
+        <note>key: tag_view_select.info</note>
+      </trans-unit>
+      <trans-unit id="0b84a57c1ad7cdb9faf22abbc3e03a0d2285b699" resname="tag_view_select.select">
+        <source>Select %type%</source>
+        <target state="new">Select %type%</target>
+        <note>key: tag_view_select.select</note>
       </trans-unit>
       <trans-unit id="5254d6524746a8c9cd0be82fc006baa2fa037198" resname="toggle_widget.label.off">
         <source>Off</source>
