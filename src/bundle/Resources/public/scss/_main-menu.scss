@@ -9,23 +9,18 @@
     }
 
     display: flex;
-    height: 100%;
-    min-height: calc(100vh - #{calculateRem(72px)});
-    background-color: $ibexa-color-black;
+    height: calc(100vh - #{calculateRem(72px)});
 
     &__navbar {
-        position: relative;
-        overflow: hidden;
         font-size: $ibexa-text-font-size-medium;
+        background-color: $ibexa-color-black;
+        transition: width $ibexa-admin-transition-duration;
 
         &--first-level {
+            display: flex;
             width: calculateRem(276px);
             background-color: $ibexa-color-dark;
-            transition: all $ibexa-admin-transition-duration;
-
-            .ibexa-main-menu__items-list {
-                height: calc(100vh - #{calculateRem(72px)});
-            }
+            overflow: hidden;
 
             &.ibexa-main-menu__navbar--collapsed {
                 width: calculateRem(72px);
@@ -33,15 +28,13 @@
         }
 
         &--second-level {
+            position: relative;
             width: calculateRem(220px);
-            background-color: rgba($ibexa-color-dark, 0.8);
-            border-left: calculateRem(1px) solid $ibexa-color-info-800;
-            transition: all $ibexa-admin-transition-duration;
+            padding-bottom: calculateRem(32px);
 
             .ibexa-main-menu {
                 &__items-list {
                     width: calculateRem(210px);
-                    transition: all $ibexa-admin-transition-duration;
                 }
 
                 &__item {
@@ -74,6 +67,10 @@
                             opacity: 1;
                         }
                     }
+
+                    &__toggler {
+                        margin-right: calculateRem(6px);
+                    }
                 }
             }
         }
@@ -94,8 +91,6 @@
     }
 
     &__items-list {
-        position: fixed;
-        z-index: 10;
         display: flex;
         flex-direction: column;
         flex: 1;
@@ -119,32 +114,17 @@
 
         .ibexa-popup-menu {
             width: calculateRem(250px);
-            top: calculateRem(32px);
-            left: calculateRem(24px);
-        }
-    }
-
-    &__separator {
-        width: 100%;
-        height: calculateRem(1px);
-        background: $ibexa-color-info-800;
-
-        &--top {
-            margin-top: auto;
-        }
-
-        &--bottom {
-            width: calc(100% - #{calculateRem(24px)});
-            margin: 0 auto;
+            top: calculateRem(12px);
+            left: calculateRem(48px);
         }
     }
 
     &__item-action {
         display: flex;
         margin: 0 calculateRem(12px);
+        text-decoration: none;
         border-radius: $ibexa-border-radius;
         border: calculateRem(2px) solid transparent;
-        text-decoration: none;
 
         &:focus {
             border-color: $ibexa-color-info-800;
@@ -184,6 +164,10 @@
 
     &__item-icon-column {
         padding: calculateRem(10px);
+
+        .ibexa-icon {
+            fill: $ibexa-color-white;
+        }
     }
 
     &__item-text-column {
@@ -194,45 +178,26 @@
         color: $ibexa-color-white;
     }
 
-    &__item-icon {
-        fill: $ibexa-color-white;
-    }
+    &__separator {
+        width: 100%;
+        height: calculateRem(1px);
+        background: $ibexa-color-info-800;
 
-    &__tab-content {
-        height: calc(100vh - #{calculateRem(120px)});
-        overflow-y: auto;
-    }
+        &--top {
+            margin-top: auto;
+        }
 
-    &__tooltip-trigger {
-        height: calculateRem(44px);
-        justify-content: center;
-        align-items: center;
+        &--bottom {
+            width: calc(100% - #{calculateRem(24px)});
+            margin: 0 auto;          
+        }
     }
-
-    &__toggler-container {
-        position: fixed;
-        bottom: calculateRem(4px);
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        width: inherit;
-        height: calculateRem(48px);
-        margin-top: auto;
-    }
-
-    &__toggler {
-        height: calculateRem(44px);
-        margin-right: calculateRem(8px);
-        padding: calculateRem(5px);
-        justify-content: center;
-        align-items: center;
-    }
-
+    
     &__resizer {
         position: absolute;
         top: 0;
         right: 0;
-        width: 6px;
+        width: calculateRem(6px);
         height: 100%;
         background-color: rgba($ibexa-color-dark, 0.8);
 
@@ -240,5 +205,23 @@
             background-color: $ibexa-color-info;
             cursor: col-resize;
         }
+    }
+
+    &__toggler-container {
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: inherit;
+        height: calculateRem(48px);
+    }
+
+    &__toggler {
+        height: calculateRem(44px);
+        margin-right: calculateRem(16px);
+        padding: calculateRem(5px);
+        justify-content: center;
+        align-items: center;
     }
 }

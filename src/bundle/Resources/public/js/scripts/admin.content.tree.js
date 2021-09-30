@@ -94,6 +94,5 @@
     contentTreeContainer.addEventListener('transitioncancel', handleContainerTransitionStop, false);
     contentTreeContainer.addEventListener('transitionend', handleContainerTransitionStop, false);
 
-    doc.addEventListener('scroll', handleViewportChange, { capture: false, passive: true });
     window.addEventListener('resize', handleViewportChange, { capture: false, passive: true });
 })(window, window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);

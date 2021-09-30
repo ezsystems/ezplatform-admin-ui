@@ -76,7 +76,11 @@ class SubItemsList extends Component
         $this->getHTMLPage()->setTimeout(5)->waitUntilCondition(
             new ElementNotExistsCondition($this->getHTMLPage(), $this->getLocator('spinner'))
         );
-        $this->getHTMLPage()->find($this->getLocator('paginationInfo'))->assert()->textContains('Viewing');
+        $this->getHTMLPage()->find($this->getLocator('paginationInfo'))->mouseOver();
+        $this->getHTMLPage()
+            ->setTimeout(3)
+            ->find(new VisibleCSSLocator('paginationInfoVisible', $this->getLocator('paginationInfo')->getSelector()))
+            ->assert()->textContains('Viewing');
     }
 
     public function clickListElement(string $contentName, string $contentType)
