@@ -18,7 +18,7 @@ class SubitemsGrid extends Component implements TableInterface
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('listElement', '.m-sub-items .c-grid-view-item'),
+            new VisibleCSSLocator('listElement', '.m-sub-items .ibexa-grid-view-item'),
             new VisibleCSSLocator('parent', '.m-sub-items'),
         ];
     }
