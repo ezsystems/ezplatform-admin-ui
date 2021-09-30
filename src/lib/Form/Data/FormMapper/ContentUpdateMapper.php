@@ -6,12 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\FormMapper;
+namespace Ibexa\AdminUi\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
+use Ibexa\Contracts\AdminUi\Form\Data\FormMapper\FormDataMapperInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContentUpdateMapper implements FormDataMapperInterface
@@ -55,3 +56,5 @@ class ContentUpdateMapper implements FormDataMapperInterface
             ->setAllowedTypes('contentType', ContentType::class);
     }
 }
+
+class_alias(ContentUpdateMapper::class, 'EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentUpdateMapper');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup;
+namespace Ibexa\AdminUi\Form\Data\ContentTypeGroup;
 
 /**
  * @todo Add validation
@@ -40,3 +40,5 @@ class ContentTypeGroupsDeleteData
         $this->contentTypeGroups = $contentTypeGroups;
     }
 }
+
+class_alias(ContentTypeGroupsDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupsDeleteData');

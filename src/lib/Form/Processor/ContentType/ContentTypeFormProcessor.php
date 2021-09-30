@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Processor\ContentType;
+namespace Ibexa\AdminUi\Form\Processor\ContentType;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
@@ -12,8 +12,8 @@ use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinitionCreateStruct;
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
-use EzSystems\EzPlatformAdminUi\Event\FormEvents;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use Ibexa\Contracts\AdminUi\Event\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
@@ -189,3 +189,5 @@ class ContentTypeFormProcessor implements EventSubscriberInterface
         return $fieldDefinitionIdentifier;
     }
 }
+
+class_alias(ContentTypeFormProcessor::class, 'EzSystems\EzPlatformAdminUi\Form\Processor\ContentType\ContentTypeFormProcessor');

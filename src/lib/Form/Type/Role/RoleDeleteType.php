@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
+namespace Ibexa\AdminUi\Form\Type\Role;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
+use Ibexa\AdminUi\Form\Data\Role\RoleDeleteData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,3 +39,5 @@ class RoleDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(RoleDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType');

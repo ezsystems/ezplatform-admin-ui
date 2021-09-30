@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Content;
+namespace Ibexa\AdminUi\Form\Data\Content;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -87,3 +87,5 @@ class ContentVisibilityUpdateData
         $this->location = $location;
     }
 }
+
+class_alias(ContentVisibilityUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData');

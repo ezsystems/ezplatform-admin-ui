@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
+namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Relation;
-use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 final class RelationListDataset
 {
@@ -65,3 +65,5 @@ final class RelationListDataset
         return $this->relations;
     }
 }
+
+class_alias(RelationListDataset::class, 'EzSystems\EzPlatformAdminUi\UI\Dataset\RelationListDataset');

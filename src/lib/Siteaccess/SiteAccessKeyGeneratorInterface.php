@@ -6,9 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Siteaccess;
+namespace Ibexa\AdminUi\Siteaccess;
 
 interface SiteAccessKeyGeneratorInterface
 {
     public function generate(string $siteAccessIdentifier): string;
 }
+
+class_alias(SiteAccessKeyGeneratorInterface::class, 'EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessKeyGeneratorInterface');

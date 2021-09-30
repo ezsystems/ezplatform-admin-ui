@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Policy;
+namespace Ibexa\AdminUi\Form\Data\Policy;
 
 class PolicyCreateData
 {
@@ -99,3 +99,5 @@ class PolicyCreateData
         $this->limitations = $limitations;
     }
 }
+
+class_alias(PolicyCreateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData');

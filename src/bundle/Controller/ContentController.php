@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions as ApiException;
@@ -20,25 +20,26 @@ use eZ\Publish\Core\Base\Exceptions\BadStateException;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target;
-use EzSystems\EzPlatformAdminUi\Event\ContentProxyCreateEvent;
-use EzSystems\EzPlatformAdminUi\Event\Options;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper;
-use EzSystems\EzPlatformAdminUi\Form\DataMapper\MainTranslationUpdateMapper;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
-use EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessNameGeneratorInterface;
-use EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface;
-use EzSystems\EzPlatformAdminUi\Specification\ContentIsUser;
-use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
+use Ibexa\AdminUi\Event\Options;
+use Ibexa\AdminUi\Form\Data\Content\ContentVisibilityUpdateData;
+use Ibexa\AdminUi\Form\Data\Content\Draft\ContentCreateData;
+use Ibexa\AdminUi\Form\Data\Content\Draft\ContentEditData;
+use Ibexa\AdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
+use Ibexa\AdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
+use Ibexa\AdminUi\Form\DataMapper\ContentMainLocationUpdateMapper;
+use Ibexa\AdminUi\Form\DataMapper\MainTranslationUpdateMapper;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\AdminUi\Form\Type\Content\ContentVisibilityUpdateType;
+use Ibexa\AdminUi\Form\Type\Content\Translation\MainTranslationUpdateType;
+use Ibexa\AdminUi\Permission\LookupLimitationsTransformer;
+use Ibexa\AdminUi\Siteaccess\SiteAccessNameGeneratorInterface;
+use Ibexa\AdminUi\Siteaccess\SiteaccessResolverInterface;
+use Ibexa\AdminUi\Specification\ContentIsUser;
+use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUser;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Event\ContentProxyCreateEvent;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -562,3 +563,5 @@ class ContentController extends Controller
         ]);
     }
 }
+
+class_alias(ContentController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentController');

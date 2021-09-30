@@ -4,9 +4,9 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
+namespace Ibexa\AdminUi\UI\Config\Provider;
 
-use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 /**
  * Class responsible for generating PlatformUI configuration for Multi File Upload functionality.
@@ -105,3 +105,5 @@ class ContentTypeMappings implements ProviderInterface
         ];
     }
 }
+
+class_alias(ContentTypeMappings::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings');
