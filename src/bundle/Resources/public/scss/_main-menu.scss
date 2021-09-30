@@ -119,21 +119,6 @@
         }
     }
 
-    &__separator {
-        width: 100%;
-        height: calculateRem(1px);
-        background: $ibexa-color-info-800;
-
-        &--top {
-            margin-top: auto;
-        }
-
-        &--bottom {
-            width: calc(100% - #{calculateRem(24px)});
-            margin: 0 auto;
-        }
-    }
-
     &__item-action {
         display: flex;
         margin: 0 calculateRem(12px);
