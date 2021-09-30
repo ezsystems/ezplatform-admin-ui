@@ -134,7 +134,7 @@
     background-color: $ibexa-color-white;
 
     &__single-tab {
-        border-radius: calculateRem(10px);
+        border-radius: $ibexa-border-radius;
     }
 
     &__pane {
