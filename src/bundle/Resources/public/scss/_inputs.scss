@@ -123,6 +123,7 @@
         height: calculateRem(16px);
         border-radius: calculateRem(2px);
         margin-bottom: calculateRem(3px);
+        background-color: transparent;
 
         &.form-check-input {
             float: none;
