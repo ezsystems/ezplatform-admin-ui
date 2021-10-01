@@ -47,9 +47,11 @@
     {% endblock %}
     {% block close_btn %}
         {% if show_close_btn|default(false) %}
-            <svg class="ibexa-icon ibexa-alert__close-btn">
-                <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
-            </svg>
+            <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-alert__close-btn">
+                <svg class="ibexa-icon ibexa-icon--tiny-small">
+                    <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
+                </svg>
+            </button>
         {% endif %}
     {% endblock %}
 </div>

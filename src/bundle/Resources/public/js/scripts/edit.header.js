@@ -3,6 +3,11 @@
     const MIN_HEIGHT_DIFF_FOR_FITTING_HEADER = 150;
     const headerNode = doc.querySelector('.ibexa-edit-header');
     const contentNode = doc.querySelector('.ibexa-edit-content');
+
+    if (!headerNode || contentNode) {
+        return;
+    }
+
     const contextMenuNode = headerNode.querySelector('.ibexa-context-menu');
     const { height: expandedHeaderHeight } = headerNode.getBoundingClientRect();
     const form = doc.querySelector('.ibexa-form');
