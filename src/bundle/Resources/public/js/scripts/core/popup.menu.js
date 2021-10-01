@@ -1,4 +1,4 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const CLASS_POPUP_MENU_HIDDEN = 'ibexa-popup-menu--hidden';
     class PopupMenu {
         constructor(config) {
@@ -27,7 +27,7 @@
 
                 container.insertAdjacentHTML('beforeend', renderedItem);
 
-                const popupMenuItem = container.querySelector('button');
+                const popupMenuItem = container.querySelector('.ibexa-popup-menu__item');
 
                 processAfterCreated(popupMenuItem, item);
 
