@@ -1,6 +1,7 @@
 .ibexa-grid-view-item {
     display: flex;
     flex-direction: column;
+    position: relative;
     padding: calculateRem(16px);
     min-height: calculateRem(238px);
     border: calculateRem(1px) solid $ibexa-color-light;

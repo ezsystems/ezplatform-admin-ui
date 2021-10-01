@@ -45,7 +45,11 @@ const FinderLeaf = ({ location }) => {
         }
     };
     const renderToggleSelectionCheckbox = () => {
-        return <ToggleSelectionCheckbox location={location} isDisabled={!multiple || isNotSelectable} />;
+        if (!multiple) {
+            return null;
+        }
+
+        return <ToggleSelectionCheckbox location={location} isDisabled={isNotSelectable} />;
     };
     const className = createCssClassNames({
         'c-finder-leaf': true,
