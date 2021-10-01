@@ -1,5 +1,5 @@
 .c-selected-locations {
-    background-color: $ibexa-white;
+    background-color: $ibexa-color-white;
     position: fixed;
     top: calculateRem(65px);
     right: 0;
@@ -25,7 +25,7 @@
             }
 
             &__selection-count-label {
-                font-size: calculateRem(16px);
+                font-size: $ibexa-text-font-size;
             }
 
             &__selection-counter {
@@ -44,7 +44,7 @@
 
     &__actions-wrapper {
         padding: calculateRem(14px) calculateRem(10px);
-        border-bottom: calculateRem(1px) solid $ibexa-color-base;
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
     }
 
     &__toggle-button,
@@ -61,7 +61,7 @@
     }
 
     &__selection-counter {
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size;
         text-align: center;
         height: calculateRem(60px);
         width: calculateRem(60px);
@@ -72,7 +72,7 @@
     }
 
     &__selection-count {
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size;
         margin-right: calculateRem(4px);
     }
 }

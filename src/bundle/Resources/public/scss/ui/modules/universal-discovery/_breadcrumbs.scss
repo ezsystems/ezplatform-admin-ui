@@ -20,7 +20,7 @@
             padding-left: 0;
             display: block;
             list-style: none;
-            background-color: $ibexa-white;
+            background-color: $ibexa-color-white;
             box-shadow: 0 calculateRem(4px) calculateRem(6px) 0 rgba(135, 135, 135, 0.35);
             color: $ibexa-color-primary;
             padding: calculateRem(16px);
@@ -39,7 +39,7 @@
     &__hidden-list-toggler {
         height: calculateRem(20px);
         width: calculateRem(26px);
-        border: calculateRem(1px) solid $ibexa-color-base-dark;
+        border: calculateRem(1px) solid $ibexa-color-dark-300;
         border-radius: $ibexa-border-radius;
         display: flex;
         padding: 0;
@@ -49,14 +49,14 @@
         .ibexa-icon {
             transform: rotate(90deg);
             transform-origin: center center;
-            fill: $ibexa-color-base-dark;
+            fill: $ibexa-color-dark-300;
         }
 
         &--active {
-            background-color: $ibexa-color-base-dark;
+            background-color: $ibexa-color-dark-300;
 
             .ibexa-icon {
-                fill: $ibexa-white;
+                fill: $ibexa-color-white;
             }
         }
     }
@@ -77,22 +77,22 @@
         overflow: hidden;
         white-space: nowrap;
         cursor: pointer;
-        color: $ibexa-color-font;
+        color: $ibexa-color-dark;
     }
 
     &__list-item {
         max-width: calc(100% / 3);
         display: flex;
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size;
 
         &--last {
             .c-breadcrumbs__list-item-text {
                 cursor: not-allowed;
-                color: $ibexa-color-font-pale;
+                color: $ibexa-color-dark-300;
                 text-decoration: none;
 
                 &:hover {
-                    color: $ibexa-color-font-pale;
+                    color: $ibexa-color-dark-300;
                 }
             }
         }

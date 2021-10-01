@@ -20,7 +20,7 @@
         width: 0;
         height: 0;
         border-top: calculateRem(4px) solid transparent;
-        border-left: calculateRem(6px) solid $ibexa-black;
+        border-left: calculateRem(6px) solid $ibexa-color-dark;
         border-bottom: calculateRem(4px) solid transparent;
         position: absolute;
         right: calculateRem(15px);
@@ -50,7 +50,7 @@
                 background-color: $ibexa-color-primary;
 
                 .ibexa-icon {
-                    fill: $ibexa-white;
+                    fill: $ibexa-color-white;
                 }
             }
         }
@@ -60,21 +60,21 @@
         }
 
         .c-finder-leaf__name {
-            color: $ibexa-black;
+            color: $ibexa-color-dark;
             font-weight: 600;
 
             .ibexa-icon {
-                fill: $ibexa-black;
+                fill: $ibexa-color-dark;
             }
         }
     }
 
     &--not-selectable {
-        background-color: $ibexa-color-base-light;
+        background-color: $ibexa-color-light-200;
         cursor: not-allowed;
 
         &:hover {
-            background-color: $ibexa-color-base-light;
+            background-color: $ibexa-color-light-200;
         }
     }
 

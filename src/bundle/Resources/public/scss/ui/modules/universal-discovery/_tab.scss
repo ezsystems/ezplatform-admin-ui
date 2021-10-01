@@ -5,7 +5,7 @@
     transition: all 0.4s ease-in;
 
     &__top-bar {
-        background-color: $ibexa-white;
+        background-color: $ibexa-color-white;
     }
 
     &__content {
@@ -20,7 +20,7 @@
         overflow: hidden;
         margin-top: calculateRem(-1px);
         width: calculateRem(66px);
-        background-color: $ibexa-white;
+        background-color: $ibexa-color-white;
         border: calculateRem(1px) solid $ibexa-color-light;
         border-top-right-radius: calculateRem(10px);
         border-bottom-right-radius: calculateRem(10px);
@@ -29,13 +29,13 @@
 
     &__main {
         flex: 1;
-        background-color: $ibexa-white;
+        background-color: $ibexa-color-white;
         overflow: auto;
     }
 
     &__right-sidebar {
         width: calculateRem(491px);
-        background-color: $ibexa-white;
+        background-color: $ibexa-color-white;
         border-left: calculateRem(1px) solid $ibexa-color-light;
     }
 }

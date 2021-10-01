@@ -1,6 +1,6 @@
 .c-bookmarks-list {
     width: calculateRem(215px);
-    background-color: $ibexa-color-base-light;
+    background-color: $ibexa-color-light-200;
     overflow: auto;
     flex-shrink: 0;
     margin-left: calculateRem(1px);
@@ -10,15 +10,15 @@
         display: flex;
         align-items: center;
         padding: calculateRem(7px) calculateRem(12px);
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size;
 
         &--not-selectable {
-            background-color: $ibexa-color-base-medium;
+            background-color: $ibexa-color-light-500;
             cursor: not-allowed;
         }
 
         &--marked {
-            background-color: $ibexa-color-base-medium;
+            background-color: $ibexa-color-light-500;
             color: $ibexa-color-primary;
             font-weight: bold;
             

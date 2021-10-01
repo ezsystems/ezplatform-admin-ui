@@ -8,7 +8,7 @@
     width: calculateRem(400px);
     z-index: 1;
     padding: calculateRem(16px);
-    background-color: $ibexa-white;
+    background-color: $ibexa-color-white;
     transform: scaleX(1);
     transform-origin: left center;
     opacity: 1;
@@ -24,7 +24,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: calculateRem(1px) solid $ibexa-color-base;
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
         padding-top: calculateRem(8px);
         padding-bottom: calculateRem(24px);
         margin-bottom: calculateRem(32px);
@@ -33,14 +33,14 @@
     &__header-title {
         color: $ibexa-color-primary;
         font-weight: bold;
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size;
     }
 
     &__close-button {
         border: none;
 
         .ibexa-icon {
-            fill: $ibexa-color-base-dark;
+            fill: $ibexa-color-dark-300;
         }
     }
 
@@ -52,8 +52,8 @@
     &__language-selector-label,
     &__select-content-type-label {
         padding: 0 0 calculateRem(12px) calculateRem(8px);
-        color: $ibexa-color-font-pale;
-        font-size: calculateRem(16px);
+        color: $ibexa-color-dark-300;
+        font-size: $ibexa-text-font-size;
     }
 
     &__content-type-list {
@@ -72,7 +72,7 @@
 
     &__group-name {
         margin-bottom: calculateRem(8px);
-        color: $ibexa-color-font-pale;
+        color: $ibexa-color-dark-300;
     }
 
     &__group-item {
@@ -86,7 +86,7 @@
         }
 
         &--selected {
-            background: $ibexa-color-base-pale;
+            background: $ibexa-color-light-300;
         }
     }
 
