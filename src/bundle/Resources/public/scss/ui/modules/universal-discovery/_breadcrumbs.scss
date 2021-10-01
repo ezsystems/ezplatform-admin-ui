@@ -83,7 +83,7 @@
     &__list-item {
         max-width: calc(100% / 3);
         display: flex;
-        font-size: $ibexa-text-font-size;
+        font-size: $ibexa-text-font-size-small;
 
         &--last {
             .c-breadcrumbs__list-item-text {
