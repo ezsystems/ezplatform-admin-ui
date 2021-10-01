@@ -65,4 +65,11 @@
         letter-spacing: calculateRem(0.12px);
         line-height: calculateRem(24px);
     }
+
+    &__checkbox {
+        position: absolute;
+        top: calculateRem(8px);
+        right: calculateRem(8px);
+        line-height: 1;
+    }
 }
