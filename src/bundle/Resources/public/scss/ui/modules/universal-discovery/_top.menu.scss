@@ -14,11 +14,14 @@
     }
 
     &__title-wrapper {
-        min-width: calculateRem(500px);
         font-size: calculateRem(22px);
         font-weight: 600;
         color: $ibexa-color-dark;
         flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: calculateRem(40px);
     }
 
     &__actions-wrapper {

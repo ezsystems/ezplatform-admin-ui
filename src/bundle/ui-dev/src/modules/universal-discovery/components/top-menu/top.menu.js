@@ -20,7 +20,13 @@ const TopMenu = ({ actionsDisabledMap }) => {
 
     return (
         <div className="c-top-menu">
-            <span className="c-top-menu__title-wrapper">{title}</span>
+            <span
+                className="c-top-menu__title-wrapper"
+                data-tooltip-container-selector=".c-udw-tab"
+                title={title}
+            >
+                {title}
+            </span>
             <div className="c-top-menu__actions-wrapper">
                 {sortedActions.map((action) => {
                     const Component = action.component;

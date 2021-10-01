@@ -10,6 +10,14 @@ const ENDPOINT_BOOKMARK = '/api/ezp/v2/bookmark';
 
 export const QUERY_LIMIT = 50;
 
+const showErrorNotificationAbortWrapper = (error) => {
+    if (error?.name === 'AbortError') {
+        return;
+    }
+
+    return showErrorNotification(error);
+}
+
 const mapSubitems = (subitems) => {
     return subitems.locations.map((location) => {
         const mappedSubitems = {
@@ -60,7 +68,7 @@ export const findLocationsByParentLocationId = (
 
             callback(locationData);
         })
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };
 
 export const loadAccordionData = (
@@ -127,7 +135,7 @@ export const loadAccordionData = (
 
             callback(mappedItems);
         })
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };
 
 export const findLocationsBySearchQuery = ({ token, siteaccess, query, limit = QUERY_LIMIT, offset = 0, languageCode = null }, callback) => {
@@ -166,7 +174,7 @@ export const findLocationsBySearchQuery = ({ token, siteaccess, query, limit = Q
                 count,
             });
         })
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };
 
 export const findLocationsById = ({ token, siteaccess, id, limit = QUERY_LIMIT, offset = 0 }, callback) => {
@@ -198,7 +206,7 @@ export const findLocationsById = ({ token, siteaccess, id, limit = QUERY_LIMIT, 
 
             callback(items);
         })
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };
 
 export const findContentInfo = ({ token, siteaccess, contentId, limit = QUERY_LIMIT, offset = 0 }, callback) => {
@@ -230,7 +238,7 @@ export const findContentInfo = ({ token, siteaccess, contentId, limit = QUERY_LI
 
             callback(items);
         })
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };
 
 export const loadBookmarks = ({ token, siteaccess, limit, offset }, callback) => {
@@ -253,7 +261,7 @@ export const loadBookmarks = ({ token, siteaccess, limit, offset }, callback) =>
 
             callback({ count, items });
         })
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };
 
 const toggleBookmark = ({ siteaccess, token, locationId }, callback, method) => {
@@ -270,7 +278,7 @@ const toggleBookmark = ({ siteaccess, token, locationId }, callback, method) => 
     fetch(request)
         .then(handleRequestResponseStatus)
         .then(callback)
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };
 
 export const addBookmark = (options, callback) => {
@@ -296,7 +304,7 @@ export const loadContentTypes = ({ token, siteaccess }, callback) => {
     fetch(request)
         .then(handleRequestResponse)
         .then(callback)
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };
 
 export const createDraft = ({ token, siteaccess, contentId }, callback) => {
@@ -314,10 +322,10 @@ export const createDraft = ({ token, siteaccess, contentId }, callback) => {
     fetch(request)
         .then(handleRequestResponse)
         .then(callback)
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };
 
-export const loadContentInfo = ({ token, siteaccess, contentId, limit = QUERY_LIMIT, offset = 0 }, callback) => {
+export const loadContentInfo = ({ token, siteaccess, contentId, limit = QUERY_LIMIT, offset = 0, signal }, callback) => {
     const body = JSON.stringify({
         ViewInput: {
             identifier: `udw-load-content-info-${contentId}`,
@@ -342,17 +350,17 @@ export const loadContentInfo = ({ token, siteaccess, contentId, limit = QUERY_LI
         credentials: 'same-origin',
     });
 
-    fetch(request)
+    fetch(request, { signal })
         .then(handleRequestResponse)
         .then((response) => {
             const items = response.View.Result.searchHits.searchHit.map((searchHit) => searchHit.value.Content);
 
             callback(items);
         })
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };
 
-export const loadLocationsWithPermissions = ({ locationIds }, callback) => {
+export const loadLocationsWithPermissions = ({ locationIds, signal }, callback) => {
     const url = window.Routing.generate('ezplatform.udw.locations.data');
     const request = new Request(`${url}?locationIds=${locationIds}`, {
         method: 'GET',
@@ -360,8 +368,8 @@ export const loadLocationsWithPermissions = ({ locationIds }, callback) => {
         credentials: 'same-origin',
     });
 
-    fetch(request)
+    fetch(request, { signal })
         .then(handleRequestResponse)
         .then(callback)
-        .catch(showErrorNotification);
+        .catch(showErrorNotificationAbortWrapper);
 };

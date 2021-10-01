@@ -171,10 +171,15 @@
         <target state="new">Could not fetch content names</target>
         <note>key: limitation.pick.error</note>
       </trans-unit>
-      <trans-unit id="87994bd9606f86f5999597107b8782ae5018a5ea" resname="meta_preview.bookmark">
-        <source>Bookmark</source>
-        <target state="new">Bookmark</target>
-        <note>key: meta_preview.bookmark</note>
+      <trans-unit id="0f210f900ee1af5ef500a8d309d6823def77d58a" resname="meta_preview.bookmarks_add">
+        <source>Add to bookmarks</source>
+        <target state="new">Add to bookmarks</target>
+        <note>key: meta_preview.bookmarks_add</note>
+      </trans-unit>
+      <trans-unit id="dfe72cc9455aaece44c7bba3028161dbe3e35393" resname="meta_preview.bookrmarks_remove">
+        <source>Remove from bookmarks</source>
+        <target state="new">Remove from bookmarks</target>
+        <note>key: meta_preview.bookrmarks_remove</note>
       </trans-unit>
       <trans-unit id="5e42fe3d48d64c1c9a735ac6286d3b0c06a008a0" resname="meta_preview.creation_date">
         <source>Creation Date</source>
@@ -306,30 +311,30 @@
         <target state="new">selected</target>
         <note>key: selected_locations.selected</note>
       </trans-unit>
-      <trans-unit id="6b02292efbef3c6800f618acb3c41f968d9ea305" resname="sorting.date.label">
-        <source>Date</source>
-        <target state="new">Date</target>
-        <note>key: sorting.date.label</note>
+      <trans-unit id="a415a39905852c083fcb3fcfa02c44ef995920a2" resname="sorting.date.asc.label">
+        <source>Sort by Date (Ascending)</source>
+        <target state="new">Sort by Date (Ascending)</target>
+        <note>key: sorting.date.asc.label</note>
       </trans-unit>
-      <trans-unit id="a3253454c09869d111cc52367a11b7d419819a8a" resname="sorting.date.tooltip">
-        <source>Sort by Date</source>
-        <target state="new">Sort by Date</target>
-        <note>key: sorting.date.tooltip</note>
+      <trans-unit id="ac64f4f911d4efe7ca9f33ff286da7f16e48e73e" resname="sorting.date.desc.label">
+        <source>Sort by Date (Descending)</source>
+        <target state="new">Sort by Date (Descending)</target>
+        <note>key: sorting.date.desc.label</note>
       </trans-unit>
       <trans-unit id="7e978afd229113429d273612c01318f09e3f3e5e" resname="sorting.grid.view">
         <source>Grid view</source>
         <target state="new">Grid view</target>
         <note>key: sorting.grid.view</note>
       </trans-unit>
-      <trans-unit id="c06c6d1c4592ee395e16fc267b514ee167146886" resname="sorting.name.label">
-        <source>Name</source>
-        <target state="new">Name</target>
-        <note>key: sorting.name.label</note>
+      <trans-unit id="32479b70654e401597b4bb3cb4a18bd7bbf24ba6" resname="sorting.name.asc.label">
+        <source>Sort by Name (Ascending)</source>
+        <target state="new">Sort by Name (Ascending)</target>
+        <note>key: sorting.name.asc.label</note>
       </trans-unit>
-      <trans-unit id="2ef6e531e02791b42911cf5f7279f9bedebb3fb2" resname="sorting.name.tooltip">
-        <source>Sort by Name</source>
-        <target state="new">Sort by Name</target>
-        <note>key: sorting.name.tooltip</note>
+      <trans-unit id="e0373d48c538c2f5ae4a1d735763336ad2f2ed3f" resname="sorting.name.desc.label">
+        <source>Sort by Name (Descending)</source>
+        <target state="new">Sort by Name (Descending)</target>
+        <note>key: sorting.name.desc.label</note>
       </trans-unit>
       <trans-unit id="27c00b5da502fe6afe6b76e59ddeb951bbbf2c6f" resname="sorting.panels.view">
         <source>Panels view</source>
