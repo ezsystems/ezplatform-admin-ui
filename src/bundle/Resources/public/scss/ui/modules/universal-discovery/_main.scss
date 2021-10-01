@@ -1,5 +1,5 @@
 .m-ud {
-    background-color: $ibexa-white;
+    background-color: $ibexa-color-white;
     position: fixed;
     z-index: 99999;
     top: 0;
@@ -15,7 +15,7 @@
                 .ibexa-icon {
                     width: calculateRem(80px);
                     height: calculateRem(80px);
-                    fill: $ibexa-color-base-dark;
+                    fill: $ibexa-color-dark-300;
                 }
             }
         }
@@ -23,7 +23,7 @@
         &--marked {
             .c-thumbnail {
                 .ibexa-icon {
-                    fill: $ibexa-black;
+                    fill: $ibexa-color-dark;
                 }
             }
         }
@@ -32,7 +32,7 @@
     .c-selected-locations-item {
         .c-thumbnail {
             .ibexa-icon {
-                fill: $ibexa-color-base-dark;
+                fill: $ibexa-color-dark-300;
             }
         }
     }

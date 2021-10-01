@@ -1,12 +1,12 @@
 .c-menu-button {
     border: none;
-    color: $ibexa-color-base-dark;
+    color: $ibexa-color-dark-300;
     border-radius: $ibexa-border-radius;
     padding: 0 calculateRem(14px);
     display: flex;
 
     .ibexa-icon {
-        fill: $ibexa-color-base-dark;
+        fill: $ibexa-color-dark-300;
     }
 
     &--selected {

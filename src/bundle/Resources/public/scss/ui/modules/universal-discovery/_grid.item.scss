@@ -16,11 +16,11 @@
         width: calculateRem(180px);
         height: calculateRem(54px);
         padding: calculateRem(5px);
-        color: $ibexa-color-font;
-        font-size: calculateRem(16px);
+        color: $ibexa-color-dark;
+        font-size: $ibexa-text-font-size;
         border-bottom-left-radius: $ibexa-border-radius;
         border-bottom-right-radius: $ibexa-border-radius;
-        background: $ibexa-white;
+        background: $ibexa-color-white;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -31,7 +31,7 @@
     &__preview {
         width: calculateRem(180px);
         height: calculateRem(180px);
-        background-color: rgba($ibexa-color-base, 0.23);
+        background-color: rgba($ibexa-color-light, 0.23);
         border-top-left-radius: $ibexa-border-radius;
         border-top-right-radius: $ibexa-border-radius;
         display: flex;
@@ -43,7 +43,7 @@
         position: absolute;
         top: calculateRem(5px);
         right: calculateRem(5px);
-        background: $ibexa-color-base-dark;
+        background: $ibexa-color-dark-300;
 
         &--selected {
             background-color: $ibexa-color-primary;
@@ -56,13 +56,13 @@
         .c-grid-item {
             &__name {
                 background-color: $ibexa-color-primary;
-                color: $ibexa-white;
+                color: $ibexa-color-white;
             }
         }
     }
 
     &--not-selectable {
-        background-color: $ibexa-color-base-light;
+        background-color: $ibexa-color-light-200;
         cursor: not-allowed;
     }
 

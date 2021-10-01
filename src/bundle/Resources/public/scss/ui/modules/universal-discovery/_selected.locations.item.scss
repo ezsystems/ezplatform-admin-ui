@@ -10,7 +10,7 @@
     &__image-wrapper {
         width: calculateRem(64px);
         height: calculateRem(64px);
-        background-color: rgba($ibexa-color-base, 0.31);
+        background-color: rgba($ibexa-color-light, 0.31);
         border-radius: $ibexa-border-radius;
         display: flex;
         justify-content: center;
@@ -25,12 +25,12 @@
     }
 
     &__info-name {
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size;
     }
 
     &__info-description {
         font-size: calculateRem(13px);
-        color: $ibexa-color-font-pale;
+        color: $ibexa-color-dark-300;
     }
 
     &__actions-wrapper {
@@ -44,7 +44,7 @@
         border: none;
 
         .ibexa-icon {
-            fill: $ibexa-black;
+            fill: $ibexa-color-dark;
         }
     }
 }
