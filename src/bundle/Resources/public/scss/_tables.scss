@@ -269,6 +269,7 @@
     &__cell.ibexa-table__cell {
         vertical-align: middle;
         padding: calculateRem(12px) calculateRem(16px);
+        height: calculateRem(68px);
 
         .form-check {
             display: flex;
