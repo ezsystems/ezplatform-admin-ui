@@ -281,10 +281,10 @@
         <target state="new">Cannot find children Locations with ID %idList%</target>
         <note>key: select_location.error</note>
       </trans-unit>
-      <trans-unit id="1e503a68093242d42791b3ce4572f246b994d303" resname="selected_locations.clear_all">
-        <source>Clear all</source>
-        <target state="new">Clear all</target>
-        <note>key: selected_locations.clear_all</note>
+      <trans-unit id="d36dc1b82f519bf7d199b89e6ef738beaa3c7387" resname="selected_locations.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: selected_locations.cancel</note>
       </trans-unit>
       <trans-unit id="f57171aaa260d58b75c085d5606779e75a97751f" resname="selected_locations.clear_selection">
         <source>Clear selection</source>
@@ -296,20 +296,25 @@
         <target state="new">Collapse sidebar</target>
         <note>key: selected_locations.collapse.sidebar</note>
       </trans-unit>
-      <trans-unit id="6e6722ce3ff968c64d765d570209299cd6628024" resname="selected_locations.confirm_selection">
-        <source>Confirm selection</source>
-        <target state="new">Confirm selection</target>
-        <note>key: selected_locations.confirm_selection</note>
+      <trans-unit id="caf006efdc92c9342e605510301213f008f4b31b" resname="selected_locations.confirm">
+        <source>Confirm</source>
+        <target state="new">Confirm</target>
+        <note>key: selected_locations.confirm</note>
       </trans-unit>
       <trans-unit id="19700661da70137e52d0009660c9a87f5bcb99bd" resname="selected_locations.expand.sidebar">
         <source>Expand sidebar</source>
         <target state="new">Expand sidebar</target>
         <note>key: selected_locations.expand.sidebar</note>
       </trans-unit>
-      <trans-unit id="49f1cbcf4bdd5ba51b7f17dc8dfe93d95cbd4795" resname="selected_locations.selected">
-        <source>selected</source>
-        <target state="new">selected</target>
-        <note>key: selected_locations.selected</note>
+      <trans-unit id="01e881354bb5e776ed6f3fd36360f8f3c06a5fd7" resname="selected_locations.remove_all">
+        <source>Remove all</source>
+        <target state="new">Remove all</target>
+        <note>key: selected_locations.remove_all</note>
+      </trans-unit>
+      <trans-unit id="fe05e738022445778cb775ca099ba54291ae88e9" resname="selected_locations.selected_items">
+        <source>%count% selected item(s)</source>
+        <target state="new">%count% selected item(s)</target>
+        <note>key: selected_locations.selected_items</note>
       </trans-unit>
       <trans-unit id="a415a39905852c083fcb3fcfa02c44ef995920a2" resname="sorting.date.asc.label">
         <source>Sort by Date (Ascending)</source>

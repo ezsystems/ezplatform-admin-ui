@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import TopMenu from '../top-menu/top.menu';
+import BottomMenu from '../bottom-menu/bottom.menu';
 import TabSelector from '../tab-selector/tab.selector';
 import SelectedLocations from '../selected-locations/selected.locations';
 import ContentCreateWidget from '../content-create-widget/content.create.widget';
@@ -28,6 +29,9 @@ const Tab = ({ children, actionsDisabledMap }) => {
                     {ContentMetaPreview && <ContentMetaPreview />}
                     {selectedLocationsComponent}
                 </div>
+            </div>
+            <div className="c-udw-tab__bottom-bar">
+                <BottomMenu />
             </div>
         </div>
     );
