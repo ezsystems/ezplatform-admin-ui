@@ -30,7 +30,7 @@ const BottomMenu = () => {
                 <button
                     className="c-bottom-menu__confirm-btn btn ibexa-btn ibexa-btn--primary"
                     type="button"
-                    onClick={onConfirm}
+                    onClick={() => onConfirm()}
                     disabled={isConfirmDisabled}
                 >
                     {confirmLabel}
