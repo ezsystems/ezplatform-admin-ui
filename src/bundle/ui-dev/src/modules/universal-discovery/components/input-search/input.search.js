@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { createCssClassNames } from '../helpers/css.class.names';
-import Icon from '../icon/icon';
+import { createCssClassNames } from '../../../common/helpers/css.class.names';
+import Icon from '../../../common/icon/icon';
 
 const ENTER_CHAR_CODE = 13;
 
@@ -41,16 +41,14 @@ const InputText = ({ extraClasses, hasSearch, placeholder, search }) => {
                 >
                     <Icon name="discard" />
                 </button>
-                { hasSearch && (
-                    <button
-                        type="button"
-                        class="btn ibexa-input-text-wrapper__action-btn ibexa-input-text-wrapper__action-btn--search"
-                        tabindex="-1"
-                        onClick={searchWrapper}
-                    >
-                        <Icon name="search" extraClasses="ibexa-icon--small" />
-                    </button>
-                )}
+                <button
+                    type="button"
+                    class="btn ibexa-input-text-wrapper__action-btn ibexa-input-text-wrapper__action-btn--search"
+                    tabindex="-1"
+                    onClick={searchWrapper}
+                >
+                    <Icon name="search" extraClasses="ibexa-icon--small" />
+                </button>
             </div>
         </div>
     );
@@ -58,7 +56,6 @@ const InputText = ({ extraClasses, hasSearch, placeholder, search }) => {
 
 InputText.propTypes = {
     extraClasses: PropTypes.string,
-    hasSearch: PropTypes.bool,
     placeholder: PropTypes.string,
     search: PropTypes.func,
     small: PropTypes.bool,
@@ -66,8 +63,7 @@ InputText.propTypes = {
 
 InputText.defaultProps = {
     extraClasses: null,
-    hasSearch: true,
-    placeholder: Translator.trans(/*@Desc("Search...")*/ 'input.text.placeholder.default', {}, 'common'),
+    placeholder: Translator.trans(/*@Desc("Search...")*/ 'input.search.placeholder.default', {}, 'universal_discovery_widget'),
     search: () => {},
 };
 

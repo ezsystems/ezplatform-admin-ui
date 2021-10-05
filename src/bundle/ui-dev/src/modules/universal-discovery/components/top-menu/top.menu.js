@@ -1,8 +1,8 @@
 import React, { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
+import InputSearch from '../input-search/input.search';
 import Icon from '../../../common/icon/icon';
-import InputText from '../../../common/inputs/input.text';
 
 import { TitleContext, CancelContext } from '../../universal.discovery.module';
 
@@ -34,7 +34,7 @@ const TopMenu = ({ actionsDisabledMap }) => {
                     return <Component key={action.id} isDisabled={actionsDisabledMap[action.id]} />;
                 })}
             </div>
-            <InputText />
+            <InputSearch />
             <span className="c-top-menu__cancel-btn-wrapper">
                 <button
                     className="c-top-menu__cancel-btn btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
