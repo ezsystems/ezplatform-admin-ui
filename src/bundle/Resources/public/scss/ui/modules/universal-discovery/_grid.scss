@@ -9,12 +9,18 @@
 
     .ibexa-grid-view-item {
         &--marked {
-            border: calculateRem(1px) solid $ibexa-color-primary;
+            border: calculateRem(1px) solid $ibexa-color-dark;
     
             .ibexa-grid-view-item {
                 &__name {
-                    background-color: $ibexa-color-primary;
+                    background-color: $ibexa-color-dark;
                     color: $ibexa-color-white;
+                }
+            }
+
+            .c-thumbnail {
+                .ibexa-icon {
+                    fill: $ibexa-color-dark;
                 }
             }
         }
