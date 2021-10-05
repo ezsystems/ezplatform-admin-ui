@@ -2,6 +2,7 @@
     width: calculateRem(36px);
     height: calculateRem(36px);
     margin-top: calculateRem(-4px);
+    position: relative;
 
     &__icon-wrapper {
         &--add,
