@@ -50,8 +50,9 @@
 
             .ibexa-icon {
                 position: absolute;
-                top: calculateRem(4px);
+                top: 50%;
                 right: calculateRem(16px);
+                margin-top: calculateRem(-8px);
             }
         }
     }
