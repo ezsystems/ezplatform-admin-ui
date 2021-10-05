@@ -166,6 +166,11 @@
         <target state="new">Subtree</target>
         <note>key: filters.subtree</note>
       </trans-unit>
+      <trans-unit id="cb5a597ae90cf47cd069feb1efabc3f69674cd3c" resname="input.search.placeholder.default">
+        <source>Search...</source>
+        <target state="new">Search...</target>
+        <note>key: input.search.placeholder.default</note>
+      </trans-unit>
       <trans-unit id="2d4febe56a341671c069ff47b6e6adfd2bba005c" resname="limitation.pick.error">
         <source>Could not fetch content names</source>
         <target state="new">Could not fetch content names</target>
