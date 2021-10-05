@@ -10,71 +10,121 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Factory\:
-        resource: '../../../lib/Form/Factory'
+    EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\:
-        resource: '../../../lib/Form/DataMapper'
+    EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\:
-        resource: '../../../lib/Form/Type'
+    EzSystems\EzPlatformAdminUi\Form\Factory\TrashFormFactory: ~
 
-    EzSystems\EzPlatformAdminUi\Form\EventListener\:
-        resource: '../../../lib/Form/EventListener'
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\:
-        resource: '../../../lib/Form/TrashLocationOptionProvider'
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory:
-        arguments: [!tagged ezplatform.form.trash_location_option]
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\MainTranslationUpdateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
-        tags:
-            - { name: form.type_extension }
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper: ~
+
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCopyMapper: ~
+
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper: ~
+
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper: ~
+
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper: ~
+
+    EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Bookmark\BookmarkRemoveType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\AvailableTranslationLanguageChoiceLoader: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\BaseTranslationLanguageChoiceLoader: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader:
         arguments:
-            $policyMap: "%ezpublish.api.role.policy_map%"
+            $configResolver: "@ezpublish.config.resolver"
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentCreateContentTypeChoiceLoader: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentCreateLanguageChoiceLoader: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentEditTranslationChoiceLoader: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\DatePeriodChoiceLoader: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader:
+        arguments:
+            $configResolver: "@ezpublish.config.resolver"
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\SiteAccessChoiceLoader: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeSubmitType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlAddType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlRemoveType: ~
 
     EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType:
         arguments:
             $contentTypeChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader'
             $languageChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader'
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader: ~
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentEditType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader:
-        arguments:
-            $configResolver: "@ezpublish.config.resolver"
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentRemoveType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader:
-        arguments:
-            $configResolver: "@ezpublish.config.resolver"
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\TimePeriodChoiceLoader: ~
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Extension\RichTextTypeExtension:
-        public: true
-        tags:
-            - { name: form.type_extension }
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentMainLocationUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType:
-        arguments: ["@ezplatform.content_forms.limitation_form_mapper.registry", "@ezplatform.content_forms.limitation.form_mapper.null"]
-        tags:
-            - { name: form.type, alias: ezplatform_content_forms_policy_limitation_edit }
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\SwitcherType: ~
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\SortType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\LocationType: ~
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationAddType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Content\VersionInfoType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCopyType: ~
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCreateType:
         arguments: ["@ezpublish.api.service.content_type"]
         tags:
             - {name: form.type, alias: ezplatform_content_forms_contenttype_create}
 
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeEditType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeGroupDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeGroupType: ~
+
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType:
         tags:
             - {name: form.type, alias: ezplatform_content_forms_contenttype_update}
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypesDeleteType: ~
 
     EzSystems\EzPlatformAdminUi\Form\Type\ContentType\FieldTypeChoiceType:
         arguments: ['@eZ\Publish\Core\FieldType\FieldTypeRegistry', '@translator']
@@ -91,6 +141,32 @@ services:
         tags:
             - { name: form.type, alias: ezplatform_content_forms_contenttype_sort_order_choice }
 
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation\TranslationAddType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation\TranslationRemoveType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupsDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Date\DateIntervalType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\DateTimeIntervalType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\DateTimePickerType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Embedded\SectionType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
+        tags:
+            - { name: form.type_extension }
+
     EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\FieldDefinitionType:
         arguments:
             $fieldTypeService: "@ezpublish.api.service.field_type"
@@ -100,35 +176,110 @@ services:
         tags:
             - { name: form.type, alias: ezplatform_content_forms_fielddefinition_update }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\URL\URLListType:
+    EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\User\PasswordConstraintCheckboxType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Language\ConfiguredLanguagesChoiceType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguagesDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopySubtreeType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\LocationType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateChoiceType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateCreateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupCreateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupsDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PoliciesDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
         arguments:
-            - '@translator'
-        tags:
-            - { name: form.type, alias: ezplatform_content_forms_url_list }
+            $policyMap: "%ezpublish.api.role.policy_map%"
 
-    EzSystems\EzPlatformAdminUi\Form\Type\URL\URLEditType:
-        tags:
-            - { name: form.type, alias: ezplatform_content_forms_url_edit }
+    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Extension\HelpMultilineMessageExtension:
-        tags:
-            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateWithLimitationType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasReverseRelations:
-        tags:
-            - { name: 'ezplatform.form.trash_location_option', priority: 100 }
+    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasChildren:
-        tags:
-            - { name: 'ezplatform.form.trash_location_option', priority: 80 }
+    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation:
-        tags:
-            - { name: 'ezplatform.form.trash_location_option', priority: 60 }
+    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasAssetRelation:
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType:
+        arguments:
+            - "@ezplatform.content_forms.limitation_form_mapper.registry"
+            - "@ezplatform.content_forms.limitation.form_mapper.null"
         tags:
-            - { name: 'ezplatform.form.trash_location_option', priority: 40 }
+            - { name: form.type, alias: ezplatform_content_forms_policy_limitation_edit }
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentsDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCopyType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Role\RolesDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\RoleAssignment\RoleAssignmentType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Search\DateIntervalType: ~
 
     EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType:
         arguments:
@@ -136,3 +287,113 @@ services:
             $translator: '@translator'
         tags:
             - { name: form.type, alias: EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType }
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Search\TrashSearchType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionContentAssignType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionCreateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionsDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\SwitcherType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Trash\ChoiceList\Loader\SearchContentTypeChoiceLoader: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemCheckboxType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\URL\URLEditType:
+        tags:
+            - { name: form.type, alias: ezplatform_content_forms_url_edit }
+
+    EzSystems\EzPlatformAdminUi\Form\Type\URL\URLListType:
+        arguments:
+            - '@translator'
+        tags:
+            - { name: form.type, alias: ezplatform_content_forms_url_list }
+
+    EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardUpdateType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\User\UserCollectionType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\User\UserEditType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\User\UserGroupCollectionType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\User\UserType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\UserChoiceType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\UserGroupChoiceType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType: ~
+
+    EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener: ~
+
+    EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener: ~
+
+    EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener: ~
+
+    EzSystems\EzPlatformAdminUi\Form\EventListener\SelectionMultilingualOptionsDataListener: ~
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasAssetRelation:
+        tags:
+            - { name: 'ezplatform.form.trash_location_option', priority: 40 }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasChildren:
+        tags:
+            - { name: 'ezplatform.form.trash_location_option', priority: 80 }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasReverseRelations:
+        tags:
+            - { name: 'ezplatform.form.trash_location_option', priority: 100 }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation:
+        tags:
+            - { name: 'ezplatform.form.trash_location_option', priority: 60 }
+
+    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory:
+        arguments: [!tagged ezplatform.form.trash_location_option]
+
+    EzSystems\EzPlatformAdminUi\Form\Extension\RichTextTypeExtension:
+        public: true
+        tags:
+              - { name: form.type_extension }
+
+    EzSystems\EzPlatformAdminUi\Form\Extension\HelpMultilineMessageExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentTypeDispatcher: ~
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher: ~
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateUserOnTheFlyDispatcher: ~
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditContentOnTheFlyDispatcher: ~
+
+    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditUserOnTheFlyDispatcher: ~
+
+    EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper: ~
