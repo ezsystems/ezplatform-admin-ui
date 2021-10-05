@@ -13,7 +13,7 @@ cache:
   directories:
     - $HOME/.composer/cache
 
-#A test only master and stable branches (+ Pull requests)
+# test only master and stable branches (+ Pull requests)
 branches:
   only:
     - master
@@ -40,13 +40,13 @@ notifications:
     on_pull_requests: false
 
 before_install:
-  #A Disable XDebug for performance
+  # Disable XDebug for performance
   - phpenv config-rm xdebug.ini
-  #A Disable expired certificate
+  # Disable expired certificate
   - sed -i '/mozilla\/DST_Root_CA_X3.crt/ s/./!&/' /etc/ca-certificates.conf \ && update-ca-certificates --verbose
-  #A Get latest composer build
+  # Get latest composer build
   - travis_retry composer selfupdate
-  #A Avoid memory issues on composer install
+  # Avoid memory issues on composer install
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 install:
@@ -59,11 +59,11 @@ script:
   - cd "$HOME/build/ezplatform"; docker-compose exec --user www-data app sh -c "bin/ezbehat ${BEHAT_OPTS}" ;
 
 after_failure:
-  #A Will show us the last bit of the log of container's main processes
-  #A (not counting shell process above running php and behat)
-  #A NOTE: errors during docker setup of travis build won't show up here (can't output all as it is too much in debug/verbose mode)
+  # Will show us the last bit of the log of container's main processes
+  # (not counting shell process above running php and behat)
+  # NOTE: errors during docker setup of travis build won't show up here (can't output all as it is too much in debug/verbose mode)
   - docker-compose logs -t --tail=15
-  #A Will show us what is up, and how long it's been up
+  # Will show us what is up, and how long it's been up
   - docker ps -s
 
 after_script:
