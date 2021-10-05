@@ -84,7 +84,7 @@
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
     }
 
-    &__location {
+    &__subtitle {
         opacity: 1;
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
     }
@@ -129,7 +129,7 @@
                 transform: scaleX(1);
             }
 
-            &__location {
+            &__subtitle {
                 opacity: 0;
             }
         }
