@@ -255,13 +255,14 @@ final class Table extends Component implements TableInterface
     {
         foreach ($this->parentElement->setTimeout(3)->findAll($this->getLocator('row')) as $row) {
             foreach ($foundHeaders as $headerPosition => $header) {
-                try {
-                    $cellValue = $row->setTimeout(0)->find($this->getTableCellLocator($headerPosition))->getText();
-                } catch (\Exception $exception) {
+                $foundHeader = $row->setTimeout(0)->findAll($this->getTableCellLocator($headerPosition));
+
+                if ($foundHeader->empty()) {
                     // value not found, skip row
                     continue 2;
                 }
 
+                $cellValue = $foundHeader->first()->getText();
                 if ($cellValue !== $elementData[$header]) {
                     // if any of the values do not match we skip the entire row
                     continue 2;

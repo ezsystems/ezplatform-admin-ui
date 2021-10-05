@@ -1,4 +1,4 @@
-(function(global, doc, eZ, bootstrap) {
+(function (global, doc, eZ, bootstrap) {
     let lastInsertTooltipTarget = null;
     const TOOLTIPS_SELECTOR = '[title]';
     const observerConfig = {
@@ -23,6 +23,45 @@
             });
         }
     });
+    const modifyPopperConfig = (iframe, defaultBsPopperConfig) => {
+        if (!iframe) {
+            return defaultBsPopperConfig;
+        }
+
+        const iframeDOMRect = iframe.getBoundingClientRect();
+        const offsetX = iframeDOMRect.x;
+        const offsetY = iframeDOMRect.y;
+        const offsetModifier = {
+            name: 'offset',
+            options: {
+                offset: ({ placement }) => {
+                    const basePlacement = placement.split('-')[0];
+
+                    switch (basePlacement) {
+                        case 'top':
+                            return [offsetX, -offsetY];
+                        case 'bottom':
+                            return [offsetX, offsetY];
+                        case 'right':
+                            return [offsetY, offsetX];
+                        case 'left':
+                            return [offsetY, -offsetX];
+                        default:
+                            return [];
+                    }
+                },
+            },
+        };
+        const offsetModifierIndex = defaultBsPopperConfig.modifiers.findIndex((modifier) => modifier.name == 'offset');
+
+        if (offsetModifierIndex != -1) {
+            defaultBsPopperConfig.modifiers[offsetModifierIndex] = offsetModifier;
+        } else {
+            defaultBsPopperConfig.modifiers.push(offsetModifier);
+        }
+
+        return defaultBsPopperConfig;
+    };
     const parse = (baseElement = doc) => {
         if (!baseElement) {
             return;
@@ -41,10 +80,13 @@
                 const container = tooltipNode.dataset.tooltipContainerSelector
                     ? tooltipNode.closest(tooltipNode.dataset.tooltipContainerSelector)
                     : 'body';
-                const tooltip = new bootstrap.Tooltip(tooltipNode, {
+                const iframe = document.querySelector(tooltipNode.dataset.tooltipIframeSelector);
+
+                new bootstrap.Tooltip(tooltipNode, {
                     delay,
                     placement,
                     container,
+                    popperConfig: modifyPopperConfig.bind(null, iframe),
                     html: true,
                     template: `<div class="tooltip ibexa-tooltip ${extraClass}">
                                     <div class="arrow ibexa-tooltip__arrow"></div>

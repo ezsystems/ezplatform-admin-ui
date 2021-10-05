@@ -7,7 +7,8 @@
         {% endfor %}
 
         <li class="ibexa-context-menu__item ibexa-context-menu__item--more ibexa-adaptive-items__item ibexa-adaptive-items__item--selector">
-            <button class="ibexa-btn ibexa-btn--secondary ibexa-btn--no-text ibexa-btn--more">
+            {% set selector_btn_classes = item.extras.adaptiveItemsSelectorBtnClass|default('btn ibexa-btn ibexa-btn--secondary ibexa-btn--no-text') %}
+            <button class="{{ selector_btn_classes ~ ' ibexa-btn--more' }}">
                 <svg class="ibexa-icon ibexa-icon--small">
                     <use xlink:href="{{ ibexa_icon_path('options') }}"></use>
                 </svg>
@@ -24,13 +25,20 @@
 
     {%- set default_classes = 'btn ibexa-btn' -%}
 
-    {%  if item.extras.primary|default(false) %}
-        {%- set default_classes = default_classes ~ ' ibexa-btn--primary' -%}
-    {% else %}
-        {%- set default_classes = default_classes ~ ' ibexa-btn--secondary' -%}
+    {% if not item.extras.noDefaultBtnStyling|default(false) %}
+        {% if item.extras.primary|default(false) %}
+            {%- set default_classes = default_classes ~ ' ibexa-btn--primary' -%}
+        {% else %}
+            {%- set default_classes = default_classes ~ ' ibexa-btn--secondary' -%}
+        {% endif %}
     {% endif %}
 
-    <li class="ibexa-context-menu__item ibexa-adaptive-items__item">
+    {%- set list_item_default_classes = 'ibexa-context-menu__item ibexa-adaptive-items__item' -%}
+    {% if item.extras.adaptiveItemsForceHide|default(false) %}
+        {%- set list_item_default_classes = list_item_default_classes ~ ' ibexa-adaptive-items__item--force-hide ibexa-context-menu__item--hidden' -%}
+    {% endif %}
+
+    <li class="{{ list_item_default_classes }}">
         {%- if item.displayed -%}
             {%- set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' ' ~ default_classes|default('btn btn-secondary btn-block'))|trim}) -%}
             {%- set attributes = attributes|merge({'id': item.name ~ '-tab'}) -%}
