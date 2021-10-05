@@ -173,6 +173,25 @@
             }
         }
     }
+
+    &--attributes-definition {
+        #{$block}__header {
+            padding: calculateRem(24px) calculateRem(24px);
+        }
+
+        #{$block}__content {
+            padding: calculateRem(36px) calculateRem(54px);
+            width: 75%;
+        }
+
+        #{$block}__pre-form {
+            margin-bottom: calculateRem(16px) calculateRem(8px);
+        }
+
+        #{$block}__pre-form-btns {
+            margin-top: calculateRem(42px);
+        }
+    }
 }
 
 .ibexa-extra-actions-container {
