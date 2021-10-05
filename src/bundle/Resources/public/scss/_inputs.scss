@@ -77,6 +77,14 @@
             border-color: $ibexa-color-danger;
             background-color: $ibexa-color-danger-100;
         }
+
+        &::placeholder {
+            @include ibexa-font-sans-serif();
+
+            color: $ibexa-color-dark-400;
+            font-size: $ibexa-text-font-size-medium;
+            line-height: calculateRem(21px);
+        }
     }
 
     &--text,

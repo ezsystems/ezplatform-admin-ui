@@ -7,7 +7,6 @@
     &__title {
         white-space: nowrap;
         overflow: hidden;
-        font-weight: normal;
         text-overflow: ellipsis;
         margin-bottom: calculateRem(16px);
     }

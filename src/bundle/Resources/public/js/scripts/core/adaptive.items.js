@@ -24,6 +24,13 @@
 
             for (let i = 0; i < this.items.length; i++) {
                 const item = this.items[i];
+                const isForceHide = item.classList.contains('ibexa-adaptive-items__item--force-hide');
+
+                if (isForceHide) {
+                    hiddenItemsWithoutSelector.add(item);
+
+                    continue;
+                }
 
                 if (item === activeItem) {
                     continue;
