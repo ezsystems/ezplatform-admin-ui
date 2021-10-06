@@ -16,10 +16,8 @@
     }
 
     &__content-name {
-        overflow: hidden;
         font-weight: normal;
         font-size: calculateRem(26px);
-        text-overflow: ellipsis;
         width: calc(100% - #{calculateRem(36px)});
         margin-bottom: calculateRem(16px);
     }
