@@ -348,7 +348,7 @@
                 {% for contentId in field.value.destinationContentIds %}
                     {% embed '@ezdesign/ui/component/table/table_body_row.html.twig' %}
                         {% block body_row_cells %}
-                            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
+                            {{ render(controller('Ibexa\\Bundle\\AdminUi\\Controller\\ContentController::relationViewAction', {
                                     'contentId': contentId,
                             } )) }}
                         {% endblock %}
@@ -492,7 +492,7 @@
             {% block tbody %}
                 {% embed '@ezdesign/ui/component/table/table_body_row.html.twig' with { field: field } %}
                     {% block body_row_cells %}
-                        {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
+                        {{ render(controller('Ibexa\\Bundle\\AdminUi\\Controller\\ContentController::relationViewAction', {
                             'contentId': field.value.destinationContentId,
                         } )) }}
                     {% endblock %}

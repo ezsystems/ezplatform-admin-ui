@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType;
+namespace Ibexa\AdminUi\Form\DataTransformer\FieldType;
 
 use eZ\Publish\API\Repository\FieldType;
 use eZ\Publish\Core\FieldType\Value;
@@ -80,3 +80,5 @@ abstract class AbstractBinaryBaseTransformer
         return new $this->valueClass($properties);
     }
 }
+
+class_alias(AbstractBinaryBaseTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType\AbstractBinaryBaseTransformer');

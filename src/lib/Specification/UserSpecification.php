@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Specification;
+namespace Ibexa\AdminUi\Specification;
 
 interface UserSpecification
 {
@@ -17,3 +17,5 @@ interface UserSpecification
      */
     public function isSatisfiedBy($userId): bool;
 }
+
+class_alias(UserSpecification::class, 'EzSystems\EzPlatformAdminUi\Specification\UserSpecification');

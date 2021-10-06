@@ -4,9 +4,9 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler;
+namespace Ibexa\Bundle\AdminUi\DependencyInjection\Compiler;
 
-use EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher;
+use Ibexa\AdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcher;
 use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -75,3 +75,5 @@ class FieldTypeFormMapperDispatcherPass implements CompilerPassInterface
         );
     }
 }
+
+class_alias(FieldTypeFormMapperDispatcherPass::class, 'EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Compiler\FieldTypeFormMapperDispatcherPass');

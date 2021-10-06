@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\User;
+namespace Ibexa\AdminUi\Form\Data\User;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
@@ -103,3 +103,5 @@ class UserEditData
         $this->location = $location;
     }
 }
+
+class_alias(UserEditData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\User\UserEditData');

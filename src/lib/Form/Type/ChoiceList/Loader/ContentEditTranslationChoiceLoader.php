@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
+namespace Ibexa\AdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\LocationService;
@@ -16,7 +16,7 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\SPI\Limitation\Target;
-use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
+use Ibexa\AdminUi\Permission\LookupLimitationsTransformer;
 
 class ContentEditTranslationChoiceLoader extends BaseChoiceLoader
 {
@@ -115,3 +115,5 @@ class ContentEditTranslationChoiceLoader extends BaseChoiceLoader
         return $languages;
     }
 }
+
+class_alias(ContentEditTranslationChoiceLoader::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentEditTranslationChoiceLoader');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation;
+namespace Ibexa\AdminUi\Form\Data\ContentType\Translation;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
@@ -106,3 +106,5 @@ class TranslationRemoveData
         $this->languageCodes = $languageCodes;
     }
 }
+
+class_alias(TranslationRemoveData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationRemoveData');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Role;
+namespace Ibexa\AdminUi\Form\Data\Role;
 
 use eZ\Publish\API\Repository\Values\User\Role;
 
@@ -71,3 +71,5 @@ class RoleUpdateData
         return $this;
     }
 }
+
+class_alias(RoleUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData');

@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Location;
+namespace Ibexa\AdminUi\Form\Type\Content\Location;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use Ibexa\AdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use Ibexa\AdminUi\Form\Type\Content\ContentInfoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -57,3 +57,5 @@ class ContentLocationRemoveType extends AbstractType
         ]);
     }
 }
+
+class_alias(ContentLocationRemoveType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType');

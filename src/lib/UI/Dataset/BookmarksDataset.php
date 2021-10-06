@@ -4,11 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
+namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\BookmarkService;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 class BookmarksDataset
 {
@@ -61,3 +61,5 @@ class BookmarksDataset
         return $this->data;
     }
 }
+
+class_alias(BookmarksDataset::class, 'EzSystems\EzPlatformAdminUi\UI\Dataset\BookmarksDataset');
