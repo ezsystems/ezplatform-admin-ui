@@ -51,29 +51,27 @@
 
             <li class="ibexa-dropdown__selected-item ibexa-dropdown__selected-item--predefined ibexa-dropdown__selected-overflow-number" hidden></li>
         </ul>
-        <div class="ibexa-dropdown__items-fixed-wrapper">
-            <div class="ibexa-dropdown__items">
-                {%- embed '@ezdesign/ui/component/input_text.html.twig' with { has_search: true } -%}
-                    {% block content %}
-                        <input
-                            type="text"
-                            placeholder="{{ 'dropdown.search'|trans|desc('Search...') }}"
-                            class="ibexa-dropdown__items-filter ibexa-input ibexa-input--text ibexa-input--small form-control"
-                        />
-                    {% endblock %}
-                {%- endembed -%}
-                <ul class="ibexa-dropdown__items-list">
-                    {% for choice in preferred_choices %}
-                        {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice, preferred_choice: true, custom_form } %}
-                    {% endfor %}
-                    {% if preferred_choices|length > 0 %}
-                        <hr class="ibexa-dropdown__separator"/>
-                    {% endif %}
-                    {% for choice in choices %}
-                        {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice, custom_form } %}
-                    {% endfor %}
-                </ul>
-            </div>
+        <div class="ibexa-dropdown__items">
+            {%- embed '@ezdesign/ui/component/input_text.html.twig' with { has_search: true } -%}
+                {% block content %}
+                    <input
+                        type="text"
+                        placeholder="{{ 'dropdown.search'|trans|desc('Search...') }}"
+                        class="ibexa-dropdown__items-filter ibexa-input ibexa-input--text ibexa-input--small form-control"
+                    />
+                {% endblock %}
+            {%- endembed -%}
+            <ul class="ibexa-dropdown__items-list">
+                {% for choice in preferred_choices %}
+                    {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice, preferred_choice: true, custom_form } %}
+                {% endfor %}
+                {% if preferred_choices|length > 0 %}
+                    <hr class="ibexa-dropdown__separator"/>
+                {% endif %}
+                {% for choice in choices %}
+                    {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice, custom_form } %}
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
