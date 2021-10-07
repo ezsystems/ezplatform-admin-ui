@@ -32,7 +32,7 @@ class Country extends FieldTypeComponent
         return [
             new VisibleCSSLocator('fieldInput', 'select'),
             new VisibleCSSLocator('dropdownSelector', '.ibexa-dropdown__selection-info'),
-            new VisibleCSSLocator('dropdownExpanded', '.ibexa-dropdown .ibexa-dropdown__items'),
+            new VisibleCSSLocator('dropdownExpanded', '.ibexa-dropdown-popover .ibexa-dropdown__items'),
             new VisibleCSSLocator('dropdownItem', '.ibexa-dropdown__item'),
         ];
     }

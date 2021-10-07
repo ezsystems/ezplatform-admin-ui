@@ -1,9 +1,27 @@
-(function(global, doc, eZ) {
+(function(global, doc, eZ, bootstrap) {
     const EVENT_VALUE_CHANGED = 'change';
-    const ITEMS_LIST_MIN_HEIGHT = 300;
     const RESTRICTED_AREA_ITEMS_CONTAINER = 190;
     const MINIMUM_LETTERS_TO_FILTER = 3;
 
+    class DropdownPopover extends bootstrap.Popover {
+        constructor(...args) {
+            const { dropdown } = args.pop();
+
+            super(...args);
+
+            this.dropdown = dropdown;
+        }
+
+        toggle(event) {
+            if (event.target.classList.contains('ibexa-dropdown__remove-selection')) {
+                this.dropdown.deselectOption(event.target.closest('.ibexa-dropdown__selected-item'));
+
+                return;
+            }
+
+            super.toggle(event);
+        }
+    }
     class Dropdown {
         constructor(config = {}) {
             this.container = config.container.classList.contains('ibexa-dropdown')
@@ -29,14 +47,15 @@
             this.selectFirstItem = this.selectFirstItem.bind(this);
             this.hideOptions = this.hideOptions.bind(this);
             this.fitItems = this.fitItems.bind(this);
-            this.onInputClick = this.onInputClick.bind(this);
             this.clearCurrentSelection = this.clearCurrentSelection.bind(this);
             this.onSelect = this.onSelect.bind(this);
             this.onInteractionOutside = this.onInteractionOutside.bind(this);
             this.onOptionClick = this.onOptionClick.bind(this);
             this.fireValueChangedEvent = this.fireValueChangedEvent.bind(this);
             this.filterItems = this.filterItems.bind(this);
-            this.removeExpandingClass = this.removeExpandingClass.bind(this);
+            this.onPopoverShow = this.onPopoverShow.bind(this);
+            this.onPopoverHide = this.onPopoverHide.bind(this);
+            this.itemsPopoverContent = this.itemsPopoverContent.bind(this);
         }
 
         getSelectedItems() {
@@ -82,7 +101,7 @@
         hideOptions() {
             doc.body.removeEventListener('click', this.onClickOutside);
 
-            return this.container.classList.remove('ibexa-dropdown--is-expanded');
+            this.itemsPopover.hide();
         }
 
         onSelect(element, selected) {
@@ -132,7 +151,7 @@
         }
 
         onInteractionOutside(event) {
-            if (this.container.contains(event.target)) {
+            if (this.itemsPopover.tip.contains(event.target)) {
                 return;
             }
 
@@ -144,81 +163,22 @@
             this.sourceInput.dispatchEvent(new CustomEvent(EVENT_VALUE_CHANGED));
         }
 
-        getItemsContainerHeight(isItemsContainerAbove) {
+        getItemsContainerHeight() {
             const DROPDOWN_MARGIN = 32;
             const documentElementHeight = global.innerHeight;
             const { top, bottom } = this.selectedItemsContainer.getBoundingClientRect();
+            const topHeight = top;
+            const bottomHeight = documentElementHeight - bottom;
 
-            if (isItemsContainerAbove) {
-                return top - DROPDOWN_MARGIN;
-            }
-
-            return documentElementHeight - bottom - DROPDOWN_MARGIN;
+            return Math.max(topHeight, bottomHeight) - DROPDOWN_MARGIN;
         }
 
-        removeExpandingClass(event) {
-            if (event.propertyName === 'opacity') {
-                this.container.classList.remove('ibexa-dropdown--is-expanding');
-                this.itemsContainer.removeEventListener('transitionend', this.removeExpandingClass, false);
-            }
+        onPopoverShow() {
+            doc.body.addEventListener('click', this.onInteractionOutside, false);
         }
 
-        collapseDropdown() {
-            this.itemsContainer.addEventListener('transitionend', this.removeExpandingClass, false);
-
-            setTimeout(() => {
-                this.container.classList.remove('ibexa-dropdown--is-expanded');
-                this.hideOptions();
-                this.fireValueChangedEvent();
-            }, 1);
-        }
-
-        expandDropdown() {
-            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-            const { left, top, bottom, width } = this.selectedItemsContainer.getBoundingClientRect();
-            const shouldItemsContainerBeAbove = bottom + ITEMS_LIST_MIN_HEIGHT > viewportHeight;
-
-            this.itemsFixedWrapperContainer.style.left = `${left}px`;
-            this.itemsFixedWrapperContainer.style.top = `${shouldItemsContainerBeAbove ? top : bottom}px`;
-
-            this.itemsFixedWrapperContainer.classList.toggle(
-                'ibexa-dropdown__items-fixed-wrapper--position-top',
-                shouldItemsContainerBeAbove
-            );
-
-            this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight(shouldItemsContainerBeAbove)}px`;
-            this.itemsContainer.style.width = `${width}px`;
-
-            this.container.classList.add('ibexa-dropdown--is-expanding');
-            this.itemsFilterInput
-                .closest('.ibexa-input-text-wrapper')
-                .querySelector('.ibexa-input-text-wrapper__action-btn--clear')
-                .click();
-            this.itemsFilterInput.focus();
-
-            setTimeout(() => {
-                this.container.classList.add('ibexa-dropdown--is-expanded');
-            }, 1);
-        }
-
-        onInputClick(event) {
-            if (event.target.classList.contains('ibexa-dropdown__remove-selection')) {
-                this.deselectOption(event.target.closest('.ibexa-dropdown__selected-item'));
-
-                return;
-            }
-
-            const shouldExpandDropdown = !this.container.classList.contains('ibexa-dropdown--is-expanded');
-            const bodyMethodName = shouldExpandDropdown ? 'addEventListener' : 'removeEventListener';
-
-            if (shouldExpandDropdown) {
-                this.expandDropdown();
-            } else {
-                this.collapseDropdown();
-            }
-
-            doc.body[bodyMethodName]('click', this.onInteractionOutside, false);
-            doc[bodyMethodName]('scroll', this.onInteractionOutside, true);
+        onPopoverHide() {
+            doc.body.removeEventListener('click', this.onInteractionOutside, false);
         }
 
         onOptionClick({ target }) {
@@ -329,6 +289,15 @@
             }
         }
 
+        itemsPopoverContent() {
+            const { width } = this.selectedItemsContainer.getBoundingClientRect();
+
+            this.itemsContainer.style['max-height'] = `${this.getItemsContainerHeight()}px`;
+            this.itemsContainer.style.width = `${width}px`;
+
+            return this.itemsContainer;
+        }
+
         init() {
             const selectedItems = this.getSelectedItems();
             const isEmpty = !selectedItems.length;
@@ -337,10 +306,21 @@
                 this.selectFirstItem();
             }
 
+            this.itemsPopover = new DropdownPopover(this.selectedItemsContainer, {
+                html: true,
+                placement: 'bottom',
+                customClass: 'ibexa-dropdown-popover',
+                content: this.itemsPopoverContent,
+                container: 'body'
+            }, { dropdown: this });
+            this.itemsPopover._element.removeAttribute('data-bs-original-title');
+            this.itemsPopover._element.removeAttribute('title');
+
             this.hideOptions();
             this.fitItems();
 
-            this.selectedItemsContainer.addEventListener('click', this.onInputClick, false);
+            this.itemsPopover._element.addEventListener('shown.bs.popover', this.onPopoverShow);
+            this.itemsPopover._element.addEventListener('hidden.bs.popover', this.onPopoverHide);
             this.itemsListContainer
                 .querySelectorAll('.ibexa-dropdown__item:not([disabled])')
                 .forEach((option) => option.addEventListener('click', this.onOptionClick, false));
@@ -350,4 +330,4 @@
     }
 
     eZ.addConfig('core.Dropdown', Dropdown);
-})(window, window.document, window.eZ);
+})(window, window.document, window.eZ, window.bootstrap);

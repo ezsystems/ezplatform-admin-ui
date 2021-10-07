@@ -22,9 +22,9 @@ class IbexaDropdown extends Component
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('ibexaDropdownExtended', '.ibexa-dropdown--is-expanded .ibexa-dropdown__items .ibexa-dropdown__item'),
+            new VisibleCSSLocator('ibexaDropdownExtended', '.ibexa-dropdown-popover .ibexa-dropdown__items .ibexa-dropdown__item'),
             new VisibleCSSLocator('ibexaDropdownLabel', '.ibexa-dropdown__item-label'),
-            new VisibleCSSLocator('isIbexaDropdownVisible', '.ibexa-dropdown--is-expanded '),
+            new VisibleCSSLocator('isIbexaDropdownVisible', '.ibexa-dropdown-popover'),
         ];
     }
 
