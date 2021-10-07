@@ -28,7 +28,7 @@ Feature: Content types management
         | Name                 | Test Content Type         |
         | Identifier           | TestContentTypeIdentifier |
         | Content name pattern | <name>                    |
-      And I select "content" category to Content Type definition
+      And I select "Content" category to Content Type definition
       And I add field "Country" to Content Type definition
       And I set "Name" to "Country field" for "Country" field
       And I click on the edit action bar button "Create"
