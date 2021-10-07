@@ -62,7 +62,7 @@ const Dropdown = ({ options, selectedOption, onOptionClick, isDisabled }) => {
                         return (
                             <li className={optionClass} onClick={onOptionClickWrapper.bind(null, option)}>
                                 <span>{option.label}</span>
-                                {isOptionSelected && <Icon name="checkmark" extraClasses="ibexa-icon--small" />}
+                                {isOptionSelected && <Icon name="checkmark" extraClasses="c-udw-dropdown__list-item-checkmark ibexa-icon--small" />}
                             </li>
                         );
                     })}

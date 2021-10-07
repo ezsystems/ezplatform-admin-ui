@@ -48,13 +48,26 @@
             background-color: $ibexa-color-light-400;
             position: relative;
 
-            .ibexa-icon {
+            .c-udw-dropdown__list-item-checkmark {
                 position: absolute;
                 top: 50%;
                 right: calculateRem(16px);
                 margin-top: calculateRem(-8px);
             }
         }
+    }
+
+    &__arrow-down,
+    &__arrow-up {
+        margin-left: calculateRem(4px);
+    }
+
+    &__arrow-down {
+        transform: rotate(270deg);
+    }
+
+    &__arrow-up {
+        transform: rotate(90deg);
     }
 
     &--is-expanded &__items {

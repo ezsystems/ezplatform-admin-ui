@@ -321,15 +321,10 @@
         <target state="new">%count% selected item(s)</target>
         <note>key: selected_locations.selected_items</note>
       </trans-unit>
-      <trans-unit id="a415a39905852c083fcb3fcfa02c44ef995920a2" resname="sorting.date.asc.label">
-        <source>Sort by Date (Ascending)</source>
-        <target state="new">Sort by Date (Ascending)</target>
-        <note>key: sorting.date.asc.label</note>
-      </trans-unit>
-      <trans-unit id="ac64f4f911d4efe7ca9f33ff286da7f16e48e73e" resname="sorting.date.desc.label">
-        <source>Sort by Date (Descending)</source>
-        <target state="new">Sort by Date (Descending)</target>
-        <note>key: sorting.date.desc.label</note>
+      <trans-unit id="6b02292efbef3c6800f618acb3c41f968d9ea305" resname="sorting.date.label">
+        <source>Date</source>
+        <target state="new">Date</target>
+        <note>key: sorting.date.label</note>
       </trans-unit>
       <trans-unit id="7e978afd229113429d273612c01318f09e3f3e5e" resname="sorting.grid.view">
         <source>Grid view</source>
@@ -337,13 +332,13 @@
         <note>key: sorting.grid.view</note>
       </trans-unit>
       <trans-unit id="32479b70654e401597b4bb3cb4a18bd7bbf24ba6" resname="sorting.name.asc.label">
-        <source>Sort by Name (Ascending)</source>
-        <target state="new">Sort by Name (Ascending)</target>
+        <source>Name A-Z</source>
+        <target state="new">Name A-Z</target>
         <note>key: sorting.name.asc.label</note>
       </trans-unit>
       <trans-unit id="e0373d48c538c2f5ae4a1d735763336ad2f2ed3f" resname="sorting.name.desc.label">
-        <source>Sort by Name (Descending)</source>
-        <target state="new">Sort by Name (Descending)</target>
+        <source>Name Z-A</source>
+        <target state="new">Name Z-A</target>
         <note>key: sorting.name.desc.label</note>
       </trans-unit>
       <trans-unit id="27c00b5da502fe6afe6b76e59ddeb951bbbf2c6f" resname="sorting.panels.view">

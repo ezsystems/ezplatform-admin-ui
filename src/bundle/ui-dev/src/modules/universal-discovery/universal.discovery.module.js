@@ -1,6 +1,7 @@
 import React, { useEffect, useState, createContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from '../common/icon/icon';
 import deepClone from '../common/helpers/deep.clone.helper';
 import { createCssClassNames } from '../common/helpers/css.class.names';
 import { useLoadedLocationsReducer } from './hooks/useLoadedLocationsReducer';
@@ -18,25 +19,35 @@ const CLASS_SCROLL_DISABLED = 'ez-scroll-disabled';
 export const SORTING_OPTIONS = [
     {
         id: 'date:asc',
-        label: Translator.trans(/*@Desc("Sort by Date (Ascending)")*/ 'sorting.date.asc.label', {}, 'universal_discovery_widget'),
+        label: (
+            <>
+                {Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget')}
+                <Icon name="back" extraClasses="c-udw-dropdown__arrow-down ibexa-icon--tiny-small" />
+            </>
+        ),
         sortClause: 'DatePublished',
         sortOrder: 'ascending',
     },
     {
         id: 'date:desc',
-        label: Translator.trans(/*@Desc("Sort by Date (Descending)")*/ 'sorting.date.desc.label', {}, 'universal_discovery_widget'),
+        label: (
+            <>
+                {Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget')}
+                <Icon name="back" extraClasses="c-udw-dropdown__arrow-up ibexa-icon--tiny-small" />
+            </>
+        ),
         sortClause: 'DatePublished',
         sortOrder: 'descending',
     },
     {
         id: 'name:asc',
-        label: Translator.trans(/*@Desc("Sort by Name (Ascending)")*/ 'sorting.name.asc.label', {}, 'universal_discovery_widget'),
+        label: Translator.trans(/*@Desc("Name A-Z")*/ 'sorting.name.asc.label', {}, 'universal_discovery_widget'),
         sortClause: 'ContentName',
         sortOrder: 'ascending',
     },
     {
         id: 'name:desc',
-        label: Translator.trans(/*@Desc("Sort by Name (Descending)")*/ 'sorting.name.desc.label', {}, 'universal_discovery_widget'),
+        label: Translator.trans(/*@Desc("Name Z-A")*/ 'sorting.name.desc.label', {}, 'universal_discovery_widget'),
         sortClause: 'ContentName',
         sortOrder: 'descending',
     },
