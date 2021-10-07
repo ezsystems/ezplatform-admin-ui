@@ -3,6 +3,25 @@
     const RESTRICTED_AREA_ITEMS_CONTAINER = 190;
     const MINIMUM_LETTERS_TO_FILTER = 3;
 
+    class DropdownPopover extends bootstrap.Popover {
+        constructor(...args) {
+            const { dropdown } = args.pop();
+
+            super(...args);
+
+            this.dropdown = dropdown;
+        }
+
+        toggle(event) {
+            if (event.target.classList.contains('ibexa-dropdown__remove-selection')) {
+                this.dropdown.deselectOption(event.target.closest('.ibexa-dropdown__selected-item'));
+
+                return;
+            }
+
+            super.toggle(event);
+        }
+    }
     class Dropdown {
         constructor(config = {}) {
             this.container = config.container.classList.contains('ibexa-dropdown')
@@ -287,13 +306,15 @@
                 this.selectFirstItem();
             }
 
-            this.itemsPopover = new bootstrap.Popover(this.selectedItemsContainer, {
+            this.itemsPopover = new DropdownPopover(this.selectedItemsContainer, {
                 html: true,
                 placement: 'bottom',
                 customClass: 'ibexa-dropdown-popover',
                 content: this.itemsPopoverContent,
                 container: 'body'
-            });
+            }, { dropdown: this });
+            this.itemsPopover._element.removeAttribute('data-bs-original-title');
+            this.itemsPopover._element.removeAttribute('title');
 
             this.hideOptions();
             this.fitItems();
