@@ -10,3 +10,10 @@ services:
             - '@ez_pagination_template'
         tags:
             - { name: 'pagerfanta.view', alias: 'ez' }
+
+    Ibexa\AdminUi\Pagination\Mapper\AbstractPagerContentToDataMapper:
+        abstract: true
+        autowire: true
+        public: false
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
