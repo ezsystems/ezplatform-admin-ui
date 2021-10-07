@@ -1,4 +1,5 @@
 .ez-add-to-bookmarks {
+    position: relative;
     width: calculateRem(36px);
     height: calculateRem(36px);
     margin-top: calculateRem(-4px);
@@ -6,12 +7,14 @@
     &__icon-wrapper {
         &--add,
         &--remove {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 0;
             width: calculateRem(36px);
             height: calculateRem(36px);
             padding: calculateRem(5px);
-            position: absolute;
             transition: $ibexa-admin-widget-open-transition;
-            z-index: 2;
         }
     }
 
