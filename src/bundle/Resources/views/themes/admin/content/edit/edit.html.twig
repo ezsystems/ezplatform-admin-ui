@@ -21,7 +21,7 @@
         icon_name: 'content-type',
         show_autosave_status: true,
         description: content_type.description,
-        location_name: 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%'),
+        subtitle: 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%'),
         context_actions: knp_menu_render(content_edit_sidebar_right, { 'template': '@ezdesign/ui/menu/context_menu.html.twig' })
     } %}
 {% endblock %}

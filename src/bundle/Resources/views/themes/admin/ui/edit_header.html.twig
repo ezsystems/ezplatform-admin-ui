@@ -39,8 +39,8 @@
             <div class="col-8 offset-1 ibexa-edit-header__column ibexa-edit-header__column--left">
                 <h1 class="ibexa-edit-header__title">{{ title }}</h1>
 
-                {% if location_name is defined %}
-                    <div class="ibexa-edit-header__location">{{ location_name|raw }}</div>
+                {% if subtitle is defined %}
+                    <div class="ibexa-edit-header__location">{{ subtitle|raw }}</div>
                 {% endif %}
             </div>
             <div class="col-3 ibexa-edit-header__column ibexa-edit-header__column--right">
