@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Location;
+namespace Ibexa\AdminUi\Form\Type\Location;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopySubtreeData;
+use Ibexa\AdminUi\Form\Data\Location\LocationCopySubtreeData;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LocationCopySubtreeType extends AbstractLocationCopyType
@@ -21,3 +21,5 @@ class LocationCopySubtreeType extends AbstractLocationCopyType
         ]);
     }
 }
+
+class_alias(LocationCopySubtreeType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopySubtreeType');

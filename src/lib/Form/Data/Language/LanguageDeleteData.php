@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Language;
+namespace Ibexa\AdminUi\Form\Data\Language;
 
 use eZ\Publish\API\Repository\Values\Content\Language;
 
@@ -34,3 +34,5 @@ class LanguageDeleteData
         $this->language = $language;
     }
 }
+
+class_alias(LanguageDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageDeleteData');

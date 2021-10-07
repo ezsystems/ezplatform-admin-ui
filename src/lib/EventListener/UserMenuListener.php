@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\EventListener;
+namespace Ibexa\AdminUi\EventListener;
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\UserService;
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -72,3 +72,5 @@ final class UserMenuListener implements EventSubscriberInterface, TranslationCon
         ];
     }
 }
+
+class_alias(UserMenuListener::class, 'EzSystems\EzPlatformAdminUi\EventListener\UserMenuListener');

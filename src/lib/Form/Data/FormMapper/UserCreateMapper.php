@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\FormMapper;
+namespace Ibexa\AdminUi\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
@@ -61,3 +61,5 @@ class UserCreateMapper
         $optionsResolver->setRequired('mainLanguageCode');
     }
 }
+
+class_alias(UserCreateMapper::class, 'EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\UserCreateMapper');

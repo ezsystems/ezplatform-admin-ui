@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\View;
+namespace Ibexa\AdminUi\View;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
@@ -155,3 +155,5 @@ class ContentTranslateView extends BaseView implements ContentTypeValueView
         $this->contentType = $contentType;
     }
 }
+
+class_alias(ContentTranslateView::class, 'EzSystems\EzPlatformAdminUi\View\ContentTranslateView');

@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use DateInterval;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -137,3 +137,5 @@ class DateIntervalToArrayTransformer implements DataTransformerInterface
         return $dateInterval;
     }
 }
+
+class_alias(DateIntervalToArrayTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\DateIntervalToArrayTransformer');

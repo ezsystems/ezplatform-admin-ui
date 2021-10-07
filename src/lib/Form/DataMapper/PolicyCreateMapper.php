@@ -4,12 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
+namespace Ibexa\AdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\Repository\Values\User\PolicyCreateStruct;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Form\Data\Policy\PolicyCreateData;
+use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 
 /**
  * Maps between PolicyCreateStruct and LanguageCreateData objects.
@@ -69,3 +70,5 @@ class PolicyCreateMapper implements DataMapperInterface
         return $policyCreateStruct;
     }
 }
+
+class_alias(PolicyCreateMapper::class, 'EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper');

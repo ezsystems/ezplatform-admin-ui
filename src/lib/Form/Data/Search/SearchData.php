@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Search;
+namespace Ibexa\AdminUi\Form\Data\Search;
 
 use function class_alias;
 
@@ -24,3 +24,5 @@ if (false) {
     {
     }
 }
+
+class_alias(SearchData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Search\SearchData');

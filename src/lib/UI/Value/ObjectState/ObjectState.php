@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\ObjectState;
+namespace Ibexa\AdminUi\UI\Value\ObjectState;
 
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState as APIObjectState;
 use eZ\Publish\Core\Repository\Values\ObjectState\ObjectState as CoreObjectState;
@@ -32,3 +32,5 @@ class ObjectState extends CoreObjectState
         parent::__construct(get_object_vars($objectState) + $properties);
     }
 }
+
+class_alias(ObjectState::class, 'EzSystems\EzPlatformAdminUi\UI\Value\ObjectState\ObjectState');
