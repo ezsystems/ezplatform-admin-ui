@@ -28,12 +28,9 @@
         btn.addEventListener(
             'click',
             () => {
-                const actions = doc.querySelector(`.ibexa-extra-actions[data-actions="${btn.dataset.actions}"]`);
-
-                if (btn.dataset.validate && !parseInt(btn.dataset.isFormValid, 10)) {
+                const actions = doc.querySelector(`.ibexa-extra-actions[data-actions="${btn.dataset.actions}"]`);if (btn.dataset.validate && !parseInt(btn.dataset.isFormValid, 10)) {
                     return;
                 }
-                
                 const isHidden = haveHiddenPart(actions);
                 const methodNameButton = isHidden ? 'add' : 'remove';
                 const methodNameContainer = isHidden ? 'remove' : 'add';
