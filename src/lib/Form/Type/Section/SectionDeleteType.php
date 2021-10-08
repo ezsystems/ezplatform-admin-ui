@@ -4,10 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Section;
+namespace Ibexa\AdminUi\Form\Type\Section;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Embedded\SectionType;
+use Ibexa\AdminUi\Form\Data\Section\SectionDeleteData;
+use Ibexa\AdminUi\Form\Type\Embedded\SectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,3 +41,5 @@ class SectionDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(SectionDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType');

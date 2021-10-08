@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content;
+namespace Ibexa\AdminUi\Form\Type\Content;
 
 use eZ\Publish\API\Repository\ContentService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\ContentTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\ContentTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,3 +43,5 @@ class ContentType extends AbstractType
         return HiddenType::class;
     }
 }
+
+class_alias(ContentType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentType');

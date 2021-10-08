@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\LanguageService;
@@ -81,3 +81,5 @@ class LanguageTransformer implements DataTransformerInterface
         }
     }
 }
+
+class_alias(LanguageTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\LanguageTransformer');

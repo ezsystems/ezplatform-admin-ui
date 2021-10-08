@@ -6,10 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Menu;
+namespace Ibexa\AdminUi\Menu;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -94,3 +95,5 @@ class UserPasswordChangeRightSidebarBuilder extends AbstractBuilder implements T
         ];
     }
 }
+
+class_alias(UserPasswordChangeRightSidebarBuilder::class, 'EzSystems\EzPlatformAdminUi\Menu\UserPasswordChangeRightSidebarBuilder');

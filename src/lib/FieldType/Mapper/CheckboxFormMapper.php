@@ -4,11 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\FieldType\Mapper;
+namespace Ibexa\AdminUi\FieldType\Mapper;
 
-use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
 use EzSystems\EzPlatformContentForms\Form\Type\FieldType\CheckboxFieldType;
+use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -43,3 +43,5 @@ class CheckboxFormMapper implements FieldDefinitionFormMapperInterface
             ]);
     }
 }
+
+class_alias(CheckboxFormMapper::class, 'EzSystems\EzPlatformAdminUi\FieldType\Mapper\CheckboxFormMapper');

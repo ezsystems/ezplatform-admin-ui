@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values;
+namespace Ibexa\AdminUi\UI\Module\Subitems\Values;
 
 use EzSystems\EzPlatformRest\Value as RestValue;
 
@@ -23,3 +23,5 @@ class ContentTypeRemoteIdList extends RestValue
         $this->contentTypes = $contentTypes;
     }
 }
+
+class_alias(ContentTypeRemoteIdList::class, 'EzSystems\EzPlatformAdminUi\UI\Module\Subitems\Values\ContentTypeRemoteIdList');

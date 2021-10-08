@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation;
+namespace Ibexa\AdminUi\Form\Type\Content\Translation;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
@@ -18,9 +18,9 @@ use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\SPI\Limitation\Target;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\TranslationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
-use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
+use Ibexa\AdminUi\Form\Data\Content\Translation\TranslationAddData;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Permission\LookupLimitationsTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -257,3 +257,5 @@ class TranslationAddType extends AbstractType
             );
     }
 }
+
+class_alias(TranslationAddType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationAddType');
