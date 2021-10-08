@@ -13,8 +13,9 @@
             display: flex;
         }
 
-        input[type="search"] {
-            max-width: calculateRem(410px);
+        input[type="search"],
+        .ibexa-input-text-wrapper {
+            width: calculateRem(410px);
         }
     }
 
