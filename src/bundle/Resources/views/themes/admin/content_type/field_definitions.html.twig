@@ -55,7 +55,7 @@
 
         {{ include('@ezdesign/ui/component/popup_menu/popup_menu.html.twig', {
             'items': grouped_field_defintions|keys|map(group => {
-                'label': group,
+                'label': group | ibexa_field_group_name,
                 'content_class': grouped_field_defintions[group] is not empty ? 'ibexa-popup-menu__item-content--disabled ' : '',
                 'action_data_attr': {
                     'data-related-collapse-selector': '.ibexa-field-definitions-group-' ~ group
