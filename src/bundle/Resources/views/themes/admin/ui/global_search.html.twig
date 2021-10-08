@@ -1,0 +1,8 @@
+{{ form_start(form, { attr: { class: 'form-inline' }}) }}
+    {{ form_widget(form.query, {
+        attr: {
+            class: 'ibexa-main-header__search',
+            placeholder: 'header.search'|trans|desc('Search...')
+        }
+    }) }}
+{{ form_end(form) }}

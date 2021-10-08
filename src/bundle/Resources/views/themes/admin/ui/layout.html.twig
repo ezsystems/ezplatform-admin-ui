@@ -126,7 +126,7 @@
                     </a>
                 </div>
                 <div class="ibexa-main-header__search-column">
-                    <input class="ibexa-main-header__search form-control" type="text" placeholder="{{ 'header.search'|trans|desc('Search...') }}"/>
+                    {{ ez_render_component_group('global-search') }}
                 </div>
                 <div class="ibexa-main-header__user-menu-column">
                     {{ knp_menu_render('ezplatform_admin_ui.menu.user', {
