@@ -25,10 +25,14 @@
         flex: 3;
         display: flex;
         justify-content: center;
+
+        form {
+            width: 100%;
+            max-width: calculateRem(670px);
+        }
     }
 
     &__search {
-        max-width: calculateRem(670px);
         height: calculateRem(48px);
         color: $ibexa-color-white;
         border-color: $ibexa-color-info-800;
