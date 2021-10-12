@@ -39,7 +39,9 @@
             }) }}
         {% endfor %}
     </div>
-    {{ form_widget(form) }}
+    {{ form_widget(form, { 
+        attr: { hidden: true } 
+    }) }}
     <button
         type="button"
         {{ html.attributes(attr|default({})) }}

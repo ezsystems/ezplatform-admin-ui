@@ -50,7 +50,7 @@
 
         addItems(items, forceRecreate) {
             if (this.isSingleSelect) {
-                this.inputField.value = items[0].id;
+                this.inputField.value = items[0]?.id ?? '';
                 this.listContainer.textContent = '';
             } else {
                 const newItemsIds = items.map((item) => item.id);
@@ -83,8 +83,8 @@
             this.adjustButtonLabel();
         }
 
-        addItem(id, name) {
-            this.addItems([id, name]);
+        addItem(id, name, forceRecreate) {
+            this.addItems([{id, name}], forceRecreate);
         }
 
         removeItems(items) {
