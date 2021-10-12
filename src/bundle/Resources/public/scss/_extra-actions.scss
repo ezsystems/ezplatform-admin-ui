@@ -46,12 +46,20 @@
         font-weight: bold;
         border-bottom: calculateRem(1px) solid $ibexa-color-base;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: flex-start;
 
         .ibexa-btn {
             padding: 0;
         }
+    }
+
+    &__header-subtitle {
+        width: 100%;
+        color: $ibexa-color-dark-400;
+        font-size: $ibexa-text-font-size;
+        font-weight: normal;
     }
 
     &__content {
@@ -112,7 +120,7 @@
     }
 
     &__section-header {
-        margin: 0 calculateRem(8px) calculateRem(12px);
+        margin-bottom: calculateRem(12px);
         color: $ibexa-color-base-dark;
         font-size: calculateRem(16px);
         padding-top: calculateRem(32px);

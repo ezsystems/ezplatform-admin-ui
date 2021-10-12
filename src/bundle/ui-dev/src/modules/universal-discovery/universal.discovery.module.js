@@ -20,10 +20,10 @@ export const SORTING_OPTIONS = [
     {
         id: 'date:asc',
         label: (
-            <>
+            <div class="c-udw-dropdown__option-label">
                 {Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget')}
                 <Icon name="back" extraClasses="c-udw-dropdown__arrow-down ibexa-icon--tiny-small" />
-            </>
+            </div>
         ),
         sortClause: 'DatePublished',
         sortOrder: 'ascending',
@@ -31,10 +31,10 @@ export const SORTING_OPTIONS = [
     {
         id: 'date:desc',
         label: (
-            <>
+            <div class="c-udw-dropdown__option-label">
                 {Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget')}
                 <Icon name="back" extraClasses="c-udw-dropdown__arrow-up ibexa-icon--tiny-small" />
-            </>
+            </div>
         ),
         sortClause: 'DatePublished',
         sortOrder: 'descending',

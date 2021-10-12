@@ -46,6 +46,16 @@
         <target state="new">Selected</target>
         <note>key: browser.selected</note>
       </trans-unit>
+      <trans-unit id="90210d6d68a4c36d75906bd4fea9194a88988205" resname="content.create.editing_details">
+        <source>under %content_name%</source>
+        <target state="new">under %content_name%</target>
+        <note>key: content.create.editing_details</note>
+      </trans-unit>
+      <trans-unit id="a443a2a76348e8431df4346c11079f9e56735473" resname="content.create.filters.desc">
+        <source>Or choose from list</source>
+        <target state="new">Or choose from list</target>
+        <note>key: content.create.filters.desc</note>
+      </trans-unit>
       <trans-unit id="1713d0deb6344882cf915babb2df574556a3f82c" resname="content_create.cancel.label">
         <source>Cancel</source>
         <target state="new">Cancel</target>
@@ -60,6 +70,11 @@
         <source>Content create</source>
         <target state="new">Content create</target>
         <note>key: content_create.label</note>
+      </trans-unit>
+      <trans-unit id="64f19d8055dc93bc222ddb63342200d68bf47958" resname="content_create.placeholder">
+        <source>Type to refine</source>
+        <target state="new">Type to refine</target>
+        <note>key: content_create.placeholder</note>
       </trans-unit>
       <trans-unit id="9e0bf845dd4ce60013f7ee92eaac76a2d0a5253a" resname="content_edit.cancel.label">
         <source>Cancel</source>

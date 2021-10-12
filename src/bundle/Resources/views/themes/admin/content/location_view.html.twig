@@ -53,7 +53,7 @@
     {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
 
     <div class="ibexa-extra-actions-container">
-        {% include '@ezdesign/content/widget/content_create.html.twig' with {'form': form_content_create} only %}
+        {% include '@ezdesign/content/widget/content_create.html.twig' with {'form': form_content_create, content } only %}
         {% if form_content_edit is defined and form_user_edit is not defined %}
             {% include '@ezdesign/content/widget/content_edit.html.twig' with {'form': form_content_edit} only %}
         {% endif %}
