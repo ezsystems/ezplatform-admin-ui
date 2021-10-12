@@ -4,7 +4,7 @@
     const headerNode = doc.querySelector('.ibexa-edit-header');
     const contentNode = doc.querySelector('.ibexa-edit-content');
 
-    if (!headerNode || contentNode) {
+    if (!headerNode || !contentNode) {
         return;
     }
 

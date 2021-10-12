@@ -4,7 +4,7 @@
         constructor(config) {
             this.popupMenuElement = config.popupMenuElement;
             this.triggerElement = config.triggerElement;
-            this.onItemClick = config.onItemClick;
+            this.onItemClick = config.onItemClick || (() => {});
             this.position = config.position || (() => {});
 
             this.attachOnClickToItem = this.attachOnClickToItem.bind(this);

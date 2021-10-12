@@ -1,0 +1,41 @@
+.ibexa-list-search {
+    display: flex;
+    justify-content: space-between;
+    padding: calculateRem(24px);
+    border-radius: $ibexa-border-radius;
+    border: calculateRem(1px) solid $ibexa-color-light;
+    box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
+
+    &__form-wrapper {
+        flex: 3;
+
+        form {
+            display: flex;
+        }
+
+        input[type="search"],
+        .ibexa-input-text-wrapper {
+            width: calculateRem(410px);
+        }
+    }
+
+    &__search-button {
+        position: relative;
+        margin-left: calculateRem(-48px);
+    }
+
+    &__pagination-wrapper {
+        display: flex;
+        flex: 2;
+        justify-content: flex-end;
+        border-left: calculateRem(1px) solid $ibexa-color-light;
+    }
+
+    &--empty-pagination {
+        .ibexa-list-search {
+            &__pagination-wrapper {
+                border-left: none;
+            }
+        }
+    }
+}
