@@ -47,17 +47,6 @@
     }
 }
 
-.m-ud--locations-selected {
-    .c-udw-tab {
-        grid-template-columns: calculateRem(220px) 1fr calculateRem(350px);
-
-        &__right-sidebar {
-            position: relative;
-            padding-right: calculateRem(60px);
-        }
-    }
-}
-
 .m-bookmarks-tab {
     .c-udw-tab__main {
         display: flex;
