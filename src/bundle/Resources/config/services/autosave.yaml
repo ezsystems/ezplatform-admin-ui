@@ -4,9 +4,9 @@ services:
         autowire: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\EventListener\ContentProxyCreateDraftListener: ~
+    Ibexa\AdminUi\EventListener\ContentProxyCreateDraftListener: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\Content\AutosaveProcessor:
+    Ibexa\AdminUi\Form\Processor\Content\AutosaveProcessor:
         arguments:
             $innerContentFormProcessor: '@ezplatform.content_forms.form_processor.content'
         tags:

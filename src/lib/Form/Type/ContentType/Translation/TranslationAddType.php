@@ -6,16 +6,16 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation;
+namespace Ibexa\AdminUi\Form\Type\ContentType\Translation;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\LanguageService;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\Translation\TranslationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\AvailableTranslationLanguageChoiceLoader;
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\BaseTranslationLanguageChoiceLoader;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
+use Ibexa\AdminUi\Form\Data\ContentType\Translation\TranslationAddData;
+use Ibexa\AdminUi\Form\Type\ChoiceList\Loader\AvailableTranslationLanguageChoiceLoader;
+use Ibexa\AdminUi\Form\Type\ChoiceList\Loader\BaseTranslationLanguageChoiceLoader;
+use Ibexa\AdminUi\Form\Type\Content\ContentTypeType;
+use Ibexa\AdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -202,3 +202,5 @@ class TranslationAddType extends AbstractType
             );
     }
 }
+
+class_alias(TranslationAddType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation\TranslationAddType');

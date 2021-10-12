@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace Ibexa\Bundle\AdminUi\Templating\Twig;
 
 use eZ\Publish\Core\MVC\Symfony\Templating\Exception\MissingFieldBlockException;
 use eZ\Publish\Core\MVC\Symfony\Templating\FieldBlockRendererInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -60,3 +60,5 @@ class FieldEditRenderingExtension extends AbstractExtension
         }
     }
 }
+
+class_alias(FieldEditRenderingExtension::class, 'EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FieldEditRenderingExtension');

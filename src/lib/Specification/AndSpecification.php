@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification;
+namespace Ibexa\AdminUi\Specification;
 
 class AndSpecification extends AbstractSpecification
 {
@@ -36,3 +36,5 @@ class AndSpecification extends AbstractSpecification
         return $this->one->isSatisfiedBy($item) && $this->two->isSatisfiedBy($item);
     }
 }
+
+class_alias(AndSpecification::class, 'EzSystems\EzPlatformAdminUi\Specification\AndSpecification');

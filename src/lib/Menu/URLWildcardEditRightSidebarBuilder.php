@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Menu;
+namespace Ibexa\AdminUi\Menu;
 
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use EzSystems\EzPlatformAdminUi\Tab\URLManagement\URLWildcardsTab;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Tab\URLManagement\URLWildcardsTab;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -80,3 +81,5 @@ final class URLWildcardEditRightSidebarBuilder extends AbstractBuilder implement
         return $menu;
     }
 }
+
+class_alias(URLWildcardEditRightSidebarBuilder::class, 'EzSystems\EzPlatformAdminUi\Menu\URLWildcardEditRightSidebarBuilder');

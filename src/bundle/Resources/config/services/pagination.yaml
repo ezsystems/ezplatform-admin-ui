@@ -1,10 +1,10 @@
 services:
     ez_pagination_template:
-        class: EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate
+        class: Ibexa\Bundle\AdminUi\View\Template\EzPagerfantaTemplate
         arguments:
             - '@translator'
 
-    EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView:
+    Ibexa\Bundle\AdminUi\View\EzPagerfantaView:
         public: false
         arguments:
             - '@ez_pagination_template'

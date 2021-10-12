@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Permission;
+namespace Ibexa\AdminUi\Permission;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -27,6 +27,7 @@ use eZ\Publish\API\Repository\Values\User\Limitation\SubtreeLimitation;
 use eZ\Publish\API\Repository\Values\User\LookupLimitationResult;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\SPI\Limitation\Target\Builder\VersionBuilder;
+use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
 
 class PermissionChecker implements PermissionCheckerInterface
 {
@@ -328,3 +329,5 @@ class PermissionChecker implements PermissionCheckerInterface
         return $contentTypeIds;
     }
 }
+
+class_alias(PermissionChecker::class, 'EzSystems\EzPlatformAdminUi\Permission\PermissionChecker');
