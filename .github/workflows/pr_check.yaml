@@ -16,7 +16,7 @@ jobs:
         name: Get PR's composer.json
         id: pr
         with:
-          branch: ${{ github.event.pull_request.head.ref }}
+          branch: "!!str ${{ github.event.pull_request.head.ref }}"
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           route: /repos/{repository}/contents/composer.json?ref={branch}
         env:
@@ -25,7 +25,7 @@ jobs:
         name: Get base's composer.json
         id: base
         with:
-          branch: ${{ github.event.pull_request.base.ref }}
+          branch: "!!str ${{ github.event.pull_request.base.ref }}"
           repository: ${{ github.event.pull_request.base.repo.full_name }}
           route: /repos/{repository}/contents/composer.json?ref={branch}
         env:
