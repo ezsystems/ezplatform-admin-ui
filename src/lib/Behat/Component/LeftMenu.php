@@ -33,6 +33,7 @@ class LeftMenu extends Component
     public function goToSubTab(string $tabName): void
     {
         $this->getHTMLPage()
+            ->setTimeout(3)
             ->waitUntil(function () {
                 return $this->getMenuWidth() < 100;
             }, sprintf("Left menu did not collapse in time. Current width: %d", $this->getMenuWidth()));
