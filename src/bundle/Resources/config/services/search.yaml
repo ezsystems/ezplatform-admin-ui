@@ -10,3 +10,9 @@ services:
     parent: Ibexa\Platform\Search\Mapper\PagerSearchContentToDataMapper
     autowire: true
     public: false
+
+  Ibexa\AdminUi\Component\Search\GlobalSearchTwigComponent:
+    autowire: true
+    public: false
+    tags:
+      - { name: ezplatform.admin_ui.component, group: global-search }
