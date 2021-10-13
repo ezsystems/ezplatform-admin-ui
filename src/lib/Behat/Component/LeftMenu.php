@@ -36,7 +36,7 @@ class LeftMenu extends Component
             ->setTimeout(3)
             ->waitUntil(function () {
                 return $this->getMenuWidth() < 100;
-            }, sprintf("Left menu did not collapse in time. Current width: %d", $this->getMenuWidth()));
+            }, sprintf('Left menu did not collapse in time. Current width: %d', $this->getMenuWidth()));
 
         $this->getHTMLPage()
             ->findAll($this->getLocator('expandedMenuItem'))
