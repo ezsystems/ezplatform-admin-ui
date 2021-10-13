@@ -1,11 +1,34 @@
 services:
-    EzSystems\EzPlatformAdminUiBundle\Controller\:
-        resource: "../../Controller/*"
-        exclude: "../../Controller/{FieldDefinitionController.php}"
+    _defaults:
+        autowire: true
+        tags:
+            - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\AssetController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         tags:
             - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\BookmarkController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
+        arguments:
+            $configResolver: '@ezpublish.config.resolver'
+        tags:
+            - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation\BulkOperationController:
+        parent: ezpublish_rest.controller.base
+        tags: [ 'controller.service_arguments' ]
+        autowire: true
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\Content\ContentTreeController:
+        parent: ezpublish_rest.controller.base
+        tags: [ 'controller.service_arguments' ]
+        autowire: true
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\Content\VersionDraftConflictController: ~
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
@@ -18,10 +41,15 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\LocationController:
+    EzSystems\EzPlatformAdminUiBundle\Controller\ContentDraftController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
         arguments:
-            $translationHelper: '@ezpublish.translation_helper'
+            $configResolver: '@ezpublish.config.resolver'
+        tags:
+            - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController: ~
 
     EzSystems\EzPlatformAdminUiBundle\Controller\ContentOnTheFlyController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
@@ -29,12 +57,6 @@ services:
         arguments:
             $configResolver: '@ezpublish.config.resolver'
             $contentActionDispatcher: '@ezplatform.content_forms.action_dispatcher.content'
-        tags:
-            - controller.service_arguments
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
         tags:
             - controller.service_arguments
 
@@ -55,27 +77,9 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserDeleteController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        tags:
-            - controller.service_arguments
+    EzSystems\EzPlatformAdminUiBundle\Controller\ContentViewController: ~
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\TrashController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        arguments:
-            $configResolver: '@ezpublish.config.resolver'
-        tags:
-            - controller.service_arguments
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\SectionController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        arguments:
-            $configResolver: '@ezpublish.config.resolver'
-        tags:
-            - controller.service_arguments
+    EzSystems\EzPlatformAdminUiBundle\Controller\DashboardController: ~
 
     EzSystems\EzPlatformAdminUiBundle\Controller\LanguageController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
@@ -85,23 +89,14 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\RoleController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        arguments:
-            $configResolver: '@ezpublish.config.resolver'
-        tags:
-            - controller.service_arguments
+    EzSystems\EzPlatformAdminUiBundle\Controller\LinkManagerController: ~
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\RoleAssignmentController:
+    EzSystems\EzPlatformAdminUiBundle\Controller\LocationController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
         arguments:
-            $configResolver: '@ezpublish.config.resolver'
-        tags:
-            - controller.service_arguments
+            $translationHelper: '@ezpublish.translation_helper'
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\PolicyController:
+    EzSystems\EzPlatformAdminUiBundle\Controller\NotificationController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
@@ -125,13 +120,7 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        tags:
-            - controller.service_arguments
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\BookmarkController:
+    EzSystems\EzPlatformAdminUiBundle\Controller\PolicyController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
@@ -139,13 +128,7 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\AssetController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        tags:
-            - controller.service_arguments
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\NotificationController:
+    EzSystems\EzPlatformAdminUiBundle\Controller\RoleAssignmentController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
@@ -153,7 +136,28 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\ContentDraftController:
+    EzSystems\EzPlatformAdminUiBundle\Controller\RoleController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
+        arguments:
+            $configResolver: '@ezpublish.config.resolver'
+        tags:
+            - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\SectionController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
+        arguments:
+            $configResolver: '@ezpublish.config.resolver'
+        tags:
+            - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\TranslationController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\TrashController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         autowire: true
         arguments:
@@ -173,29 +177,34 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\TranslationController:
+    EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        arguments:
-            $translationHelper: '@ezpublish.translation_helper'
+        autowire: true
+        tags:
+            - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\UrlAliasController: ~
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserDeleteController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
+        tags:
+            - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController:
+        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+        autowire: true
+        tags:
+            - controller.service_arguments
+
+    EzSystems\EzPlatformAdminUiBundle\Controller\Version\VersionConflictController: ~
 
     EzSystems\EzPlatformAdminUiBundle\Controller\VersionController:
         parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
         arguments:
             $translationHelper: '@ezpublish.translation_helper'
 
-    #
-    # REST
-    #
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\Content\ContentTreeController:
-        parent: ezpublish_rest.controller.base
-        tags: ['controller.service_arguments']
-        autowire: true
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation\BulkOperationController:
-        parent: ezpublish_rest.controller.base
-        tags: ['controller.service_arguments']
-        autowire: true
+    EzSystems\EzPlatformAdminUiBundle\Controller\Controller: ~
 
     Ibexa\Bundle\AdminUi\Controller\FieldDefinitionController:
         parent: ezpublish_rest.controller.base
