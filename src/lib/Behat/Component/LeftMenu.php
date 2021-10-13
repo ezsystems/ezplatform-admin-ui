@@ -34,7 +34,7 @@ class LeftMenu extends Component
     public function goToSubTab(string $tabName): void
     {
         $this->getHTMLPage()
-            ->setTimeout(3)
+            ->setTimeout(5)
             ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), new VisibleCSSLocator('collapsedMenu', '.ibexa-main-menu__navbar--collapsed')))
             ->findAll($this->getLocator('expandedMenuItem'))
             ->getByCriterion(new ElementTextCriterion($tabName))
