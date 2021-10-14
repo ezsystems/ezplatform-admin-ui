@@ -219,4 +219,14 @@ class ContentTypeContext implements Context
     {
         Assert::assertFalse($this->contentTypeGroupsPage->canBeSelected($contentTypeGroupName));
     }
+
+    /**
+     * @Given I check :blockName block in ezlandingpage field blocks section
+     */
+    public function iCheckBlockInField($blockName)
+    {
+        $this->contentTypeUpdatePage->expandFieldDefinition('Landing Page');
+        $this->contentTypeUpdatePage->expandDefaultBlocksOption();
+        $this->contentTypeUpdatePage->selectBlock($blockName);
+    }
 }
