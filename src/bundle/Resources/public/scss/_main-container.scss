@@ -47,6 +47,24 @@
                 background-color: $ibexa-color-light-100;
             }
         }
+
+        &.ibexa-main-container {
+            &--no-border {
+                padding: 0;
+
+                .ibexa-main-container {
+                    &__side-column {
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                    }
+
+                    &__content-column {
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                    }
+                }
+            }
+        }
     }
 
     .ez-content-container {

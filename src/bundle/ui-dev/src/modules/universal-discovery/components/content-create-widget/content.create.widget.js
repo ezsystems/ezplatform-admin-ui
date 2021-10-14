@@ -198,7 +198,7 @@ const ContentCreateWidget = () => {
                         <button className="c-content-create__confirm-button btn ibexa-btn ibexa-btn--primary" onClick={createContent} disabled={isConfirmDisabled}>
                             {createLabel}
                         </button>
-                        <button className="btn ibexa-btn ibexa-btn--ghost" onClick={close}>
+                        <button className="btn ibexa-btn ibexa-btn--secondary" onClick={close}>
                             {cancelLabel}
                         </button>
                     </div>

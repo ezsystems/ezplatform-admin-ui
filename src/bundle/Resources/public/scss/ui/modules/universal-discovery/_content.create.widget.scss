@@ -7,5 +7,9 @@
             display: flex;
             margin-top: calculateRem(20px);
         }
+
+        &__confirm-button {
+            margin-right: calculateRem(16px);
+        }
     }
 }
