@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ObjectState;
+namespace Ibexa\AdminUi\Form\Type\ObjectState;
 
 use eZ\Publish\API\Repository\ObjectStateService;
 use Symfony\Component\Form\AbstractType;
@@ -51,3 +51,5 @@ class ObjectStateChoiceType extends AbstractType
             ]);
     }
 }
+
+class_alias(ObjectStateChoiceType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateChoiceType');

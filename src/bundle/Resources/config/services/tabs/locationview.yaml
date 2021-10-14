@@ -1,26 +1,26 @@
 services:
-    EzSystems\EzPlatformAdminUi\Tab\LocationView\:
+    Ibexa\AdminUi\Tab\LocationView\:
         resource: "../../../lib/Tab/LocationView/*"
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         public: true
         tags:
             - { name: ezplatform.tab, group: location-view }
 
-    EzSystems\EzPlatformAdminUi\Tab\LocationView\RolesTab:
+    Ibexa\AdminUi\Tab\LocationView\RolesTab:
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: ezplatform.tab, group: location-view }
 
-    EzSystems\EzPlatformAdminUi\Tab\LocationView\PoliciesTab:
+    Ibexa\AdminUi\Tab\LocationView\PoliciesTab:
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: ezplatform.tab, group: location-view }
 
-    EzSystems\EzPlatformAdminUi\Tab\LocationView\ContentTab:
+    Ibexa\AdminUi\Tab\LocationView\ContentTab:
         public: true
         autowire: true
         arguments:
@@ -29,15 +29,15 @@ services:
             - { name: ezplatform.tab, group: location-view }
 
     ezplatform.adminui.location_view.tab_groups:
-        parent: EzSystems\EzPlatformAdminUi\Component\TabsComponent
+        parent: Ibexa\AdminUi\Component\TabsComponent
         arguments:
             $template: '@@ezdesign/ui/tab/location_view.html.twig'
             $groupIdentifier: 'location-view'
         tags:
             - { name: ezplatform.admin_ui.component, group: 'location-view-tab-groups' }
 
-    EzSystems\EzPlatformAdminUi\Tab\LocationView\UrlsTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab
+    Ibexa\AdminUi\Tab\LocationView\UrlsTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab
         arguments:
             $translationHelper: '@ezpublish.translation_helper'
         tags:

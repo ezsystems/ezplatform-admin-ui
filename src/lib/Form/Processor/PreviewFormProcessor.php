@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Processor;
+namespace Ibexa\AdminUi\Form\Processor;
 
 use Exception;
 use eZ\Publish\API\Repository\ContentService;
@@ -14,10 +14,10 @@ use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\ContentStruct;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformAdminUi\Form\Event\ContentEditEvents;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
 use EzSystems\EzPlatformContentForms\Data\NewnessCheckable;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use Ibexa\AdminUi\Form\Event\ContentEditEvents;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -194,3 +194,5 @@ class PreviewFormProcessor implements EventSubscriberInterface
         return $referrerLocation ?? $this->locationService->loadLocation($content->contentInfo->mainLocationId);
     }
 }
+
+class_alias(PreviewFormProcessor::class, 'EzSystems\EzPlatformAdminUi\Form\Processor\PreviewFormProcessor');

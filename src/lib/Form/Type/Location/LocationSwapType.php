@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Location;
+namespace Ibexa\AdminUi\Form\Type\Location;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Form\Data\Location\LocationSwapData;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -45,3 +45,5 @@ class LocationSwapType extends AbstractType
         ]);
     }
 }
+
+class_alias(LocationSwapType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType');

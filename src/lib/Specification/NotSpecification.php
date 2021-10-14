@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification;
+namespace Ibexa\AdminUi\Specification;
 
 class NotSpecification extends AbstractSpecification
 {
@@ -33,3 +33,5 @@ class NotSpecification extends AbstractSpecification
         return !$this->specification->isSatisfiedBy($item);
     }
 }
+
+class_alias(NotSpecification::class, 'EzSystems\EzPlatformAdminUi\Specification\NotSpecification');

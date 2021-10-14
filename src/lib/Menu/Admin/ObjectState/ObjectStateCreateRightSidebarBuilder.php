@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState;
+namespace Ibexa\AdminUi\Menu\Admin\ObjectState;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
-use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -85,3 +85,5 @@ class ObjectStateCreateRightSidebarBuilder extends AbstractBuilder implements Tr
         ];
     }
 }
+
+class_alias(ObjectStateCreateRightSidebarBuilder::class, 'EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState\ObjectStateCreateRightSidebarBuilder');

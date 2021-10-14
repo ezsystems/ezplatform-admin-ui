@@ -4,14 +4,14 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Processor;
+namespace Ibexa\AdminUi\Form\Processor;
 
 use eZ\Publish\API\Repository\ContentService;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
 use EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
 use EzSystems\EzPlatformContentForms\Event\ContentFormEvents;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use Ibexa\AdminUi\Form\Data\ContentTranslationData;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -70,3 +70,5 @@ class TranslationFormProcessor implements EventSubscriberInterface
         $event->setData($contentUpdateData);
     }
 }
+
+class_alias(TranslationFormProcessor::class, 'EzSystems\EzPlatformAdminUi\Form\Processor\TranslationFormProcessor');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl;
+namespace Ibexa\AdminUi\Form\Data\Content\CustomUrl;
 
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
@@ -159,3 +159,5 @@ class CustomUrlAddData
         return $this;
     }
 }
+
+class_alias(CustomUrlAddData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlAddData');

@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber;
+namespace Ibexa\AdminUi\UniversalDiscovery\Event\Subscriber;
 
 use eZ\Publish\Core\FieldType\ImageAsset\AssetMapper;
-use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
+use Ibexa\AdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 final class ImageAssetAllowedContentTypes implements EventSubscriberInterface
@@ -41,3 +41,5 @@ final class ImageAssetAllowedContentTypes implements EventSubscriberInterface
         $event->setConfig($config);
     }
 }
+
+class_alias(ImageAssetAllowedContentTypes::class, 'EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\ImageAssetAllowedContentTypes');

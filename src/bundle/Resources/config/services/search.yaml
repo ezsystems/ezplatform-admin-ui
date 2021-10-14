@@ -1,12 +1,12 @@
 services:
-  EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper:
+  Ibexa\AdminUi\Search\AbstractPagerContentToDataMapper:
     abstract: true
     autowire: true
     public: false
     arguments:
       $translationHelper: '@ezpublish.translation_helper'
 
-  EzSystems\EzPlatformAdminUi\Search\PagerSearchContentToDataMapper:
+  Ibexa\AdminUi\Search\PagerSearchContentToDataMapper:
     parent: Ibexa\Platform\Search\Mapper\PagerSearchContentToDataMapper
     autowire: true
     public: false

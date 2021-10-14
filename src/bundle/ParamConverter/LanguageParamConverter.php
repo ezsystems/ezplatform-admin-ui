@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
+namespace Ibexa\Bundle\AdminUi\ParamConverter;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\LanguageService;
@@ -72,3 +72,5 @@ class LanguageParamConverter implements ParamConverterInterface
         return Language::class === $configuration->getClass();
     }
 }
+
+class_alias(LanguageParamConverter::class, 'EzSystems\EzPlatformAdminUiBundle\ParamConverter\LanguageParamConverter');
