@@ -14,7 +14,7 @@
     </div>
 
     <div class="ibexa-anchor-navigation-menu__body">
-        {% if items|length > 1 %}
+        {% if items|default([])|length > 1 %}
             <ul class="ibexa-anchor-navigation-menu__items">
                 {% for item in items %}
                     {% set sanitized_item = item|slug %}
