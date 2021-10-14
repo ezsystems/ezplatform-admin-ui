@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Service;
+namespace Ibexa\AdminUi\Service;
 
 use eZ\Publish\API\Repository;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
@@ -106,3 +106,5 @@ class ContentTypeService
         return $contentType->mainLanguageCode;
     }
 }
+
+class_alias(ContentTypeService::class, 'EzSystems\EzPlatformAdminUi\Service\ContentTypeService');

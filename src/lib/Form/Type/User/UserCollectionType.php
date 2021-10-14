@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\User;
+namespace Ibexa\AdminUi\Form\Type\User;
 
 use eZ\Publish\API\Repository\UserService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\UserCollectionTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\UserCollectionTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,3 +37,5 @@ class UserCollectionType extends AbstractType
         return HiddenType::class;
     }
 }
+
+class_alias(UserCollectionType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\User\UserCollectionType');

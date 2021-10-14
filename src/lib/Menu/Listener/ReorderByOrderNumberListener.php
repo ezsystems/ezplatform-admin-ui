@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Menu\Listener;
+namespace Ibexa\AdminUi\Menu\Listener;
 
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use Knp\Menu\ItemInterface;
 
 final class ReorderByOrderNumberListener
@@ -50,3 +50,5 @@ final class ReorderByOrderNumberListener
         );
     }
 }
+
+class_alias(ReorderByOrderNumberListener::class, 'EzSystems\EzPlatformAdminUi\Menu\Listener\ReorderByOrderNumberListener');

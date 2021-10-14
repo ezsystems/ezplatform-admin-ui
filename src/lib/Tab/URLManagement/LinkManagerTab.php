@@ -6,21 +6,21 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\URLManagement;
+namespace Ibexa\AdminUi\Tab\URLManagement;
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\URLService;
 use eZ\Publish\API\Repository\Values\URL\Query\Criterion;
 use eZ\Publish\API\Repository\Values\URL\Query\SortClause;
 use eZ\Publish\API\Repository\Values\URL\URLQuery;
-use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLListData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\URLSearchAdapter;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
-use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
-use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use Ibexa\AdminUi\Form\Data\URL\URLListData;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\AdminUi\Pagination\Pagerfanta\URLSearchAdapter;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\Contracts\AdminUi\Tab\AbstractTab;
+use Ibexa\Contracts\AdminUi\Tab\ConditionalTabInterface;
+use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -162,3 +162,5 @@ class LinkManagerTab extends AbstractTab implements OrderedTabInterface, Conditi
         return $query;
     }
 }
+
+class_alias(LinkManagerTab::class, 'EzSystems\EzPlatformAdminUi\Tab\URLManagement\LinkManagerTab');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Bookmark;
+namespace Ibexa\AdminUi\Form\Type\Bookmark;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -40,3 +40,5 @@ class BookmarkRemoveType extends AbstractType
             );
     }
 }
+
+class_alias(BookmarkRemoveType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Bookmark\BookmarkRemoveType');

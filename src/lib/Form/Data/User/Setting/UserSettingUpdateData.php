@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\User\Setting;
+namespace Ibexa\AdminUi\Form\Data\User\Setting;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -66,3 +66,5 @@ class UserSettingUpdateData
         $this->value = $value;
     }
 }
+
+class_alias(UserSettingUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\User\Setting\UserSettingUpdateData');

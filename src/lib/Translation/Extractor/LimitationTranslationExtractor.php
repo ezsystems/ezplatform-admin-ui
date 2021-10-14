@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Translation\Extractor;
+namespace Ibexa\AdminUi\Translation\Extractor;
 
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
@@ -88,3 +88,5 @@ class LimitationTranslationExtractor implements ExtractorInterface
         return $limitationTypes;
     }
 }
+
+class_alias(LimitationTranslationExtractor::class, 'EzSystems\EzPlatformAdminUi\Translation\Extractor\LimitationTranslationExtractor');

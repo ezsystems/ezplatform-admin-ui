@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
+namespace Ibexa\AdminUi\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\BookmarkService;
-use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\AdapterInterface;
 
 class BookmarkAdapter implements AdapterInterface
@@ -60,3 +60,5 @@ class BookmarkAdapter implements AdapterInterface
             ->getBookmarks();
     }
 }
+
+class_alias(BookmarkAdapter::class, 'EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\BookmarkAdapter');

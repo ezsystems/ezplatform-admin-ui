@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Language;
+namespace Ibexa\AdminUi\Form\Data\Language;
 
 /**
  * @todo Add validation
@@ -40,3 +40,5 @@ class LanguagesDeleteData
         $this->languages = $languages;
     }
 }
+
+class_alias(LanguagesDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguagesDeleteData');

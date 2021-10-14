@@ -4,25 +4,25 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension:
+    Ibexa\Bundle\AdminUi\Templating\Twig\UniversalDiscoveryExtension:
         tags:
             - { name: twig.extension }
 
-    EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\:
+    Ibexa\AdminUi\UniversalDiscovery\Event\Subscriber\:
         resource: "../../../lib/UniversalDiscovery/Event/Subscriber/*"
         public: true
         tags: ['kernel.event_subscriber']
 
-    EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver: ~
+    Ibexa\AdminUi\UniversalDiscovery\ConfigResolver: ~
 
-    EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\UserSelectionAllowedContentTypes:
+    Ibexa\AdminUi\UniversalDiscovery\Event\Subscriber\UserSelectionAllowedContentTypes:
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\UniversalDiscovery\UniversalDiscoveryProvider:
+    Ibexa\AdminUi\UniversalDiscovery\UniversalDiscoveryProvider:
         arguments:
             $visitor: '@ezpublish_rest.output.visitor.json'
 
-    EzSystems\EzPlatformAdminUi\UniversalDiscovery\Provider: '@EzSystems\EzPlatformAdminUi\UniversalDiscovery\UniversalDiscoveryProvider'
+    Ibexa\Contracts\AdminUi\UniversalDiscovery\Provider: '@Ibexa\AdminUi\UniversalDiscovery\UniversalDiscoveryProvider'

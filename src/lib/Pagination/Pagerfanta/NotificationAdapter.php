@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
+namespace Ibexa\AdminUi\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\NotificationService;
 use eZ\Publish\API\Repository\Values\Notification\NotificationList;
@@ -64,3 +64,5 @@ class NotificationAdapter implements AdapterInterface
         return $notifications;
     }
 }
+
+class_alias(NotificationAdapter::class, 'EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\NotificationAdapter');

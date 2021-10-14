@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\User;
+namespace Ibexa\AdminUi\Form\Type\User;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use Ibexa\AdminUi\Form\Data\User\UserDeleteData;
+use Ibexa\AdminUi\Form\Type\Content\ContentInfoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,3 +40,5 @@ class UserDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(UserDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType');

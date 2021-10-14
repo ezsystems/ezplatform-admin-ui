@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace Ibexa\Bundle\AdminUi\Templating\Twig;
 
 use DateInterval;
 use JMS\TranslationBundle\Model\Message;
@@ -72,3 +72,5 @@ class FormatIntervalExtension extends AbstractExtension implements TranslationCo
         ];
     }
 }
+
+class_alias(FormatIntervalExtension::class, 'EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FormatIntervalExtension');

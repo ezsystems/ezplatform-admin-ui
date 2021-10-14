@@ -4,9 +4,9 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
+namespace Ibexa\AdminUi\Form\Type\Language;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguageCreateData;
+use Ibexa\AdminUi\Form\Data\Language\LanguageCreateData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -51,3 +51,5 @@ class LanguageCreateType extends AbstractType
         ]);
     }
 }
+
+class_alias(LanguageCreateType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType');

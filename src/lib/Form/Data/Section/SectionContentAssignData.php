@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
+namespace Ibexa\AdminUi\Form\Data\Section;
 
 use eZ\Publish\API\Repository\Values\Content\Section;
 
@@ -63,3 +63,5 @@ class SectionContentAssignData
         $this->locations = $locations;
     }
 }
+
+class_alias(SectionContentAssignData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionContentAssignData');
