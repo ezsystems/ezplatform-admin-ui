@@ -15,13 +15,7 @@
     }
 
     &__cancel-button {
-        background-color: $ibexa-color-dark-300;
-        color: $ibexa-color-white;
         margin-right: calculateRem(16px);
-
-        &:hover {
-            color: $ibexa-color-white;
-        }
     }
 
     &--footer-visible {
