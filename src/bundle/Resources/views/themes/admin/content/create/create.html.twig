@@ -20,7 +20,7 @@
         title: 'new_content_item'|trans({'%contentType%': content_type.name})|desc('New %contentType%'),
         icon_name: content_type.name,
         show_autosave_status: true,
-        location_name: 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%'),
+        subtitle: 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%'),
         context_actions: knp_menu_render(content_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
     } %}
 {% endblock %}

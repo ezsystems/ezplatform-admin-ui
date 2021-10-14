@@ -1,5 +1,4 @@
 .ibexa-extra-actions {
-    $block: '.ibexa-extra-actions';
     @include container-box-shadow-left;
 
     background-color: $ibexa-white;
@@ -65,7 +64,7 @@
 
     &--edit-user,
     &--edit {
-        #{$block}__content {
+        .ibexa-extra-actions__content {
             padding: calculateRem(32px);
             width: 75%;
         }
@@ -132,15 +131,17 @@
     }
 
     &--create {
-        #{$block}__content {
-            max-height: calc(100% - #{calculateRem(89px)});
-            overflow: auto;
-        }
+        .ibexa-extra-actions {
+            &__content {
+                max-height: calc(100% - #{calculateRem(89px)});
+                overflow: auto;
+            }
 
-        #{$block}__section-content--content-type {
-            padding: 0;
-            border: none;
-            width: 75%;
+            &__section-content--content-type {
+                padding: 0;
+                border: none;
+                width: 75%;
+            }
         }
 
         .form-check {
@@ -170,6 +171,27 @@
                 &[type='submit'] {
                     display: none;
                 }
+            }
+        }
+    }
+
+    &--attributes-definition {
+        .ibexa-extra-actions {
+            &__header {
+                padding: calculateRem(24px) calculateRem(24px);
+            }
+
+            &__content {
+                padding: calculateRem(36px) calculateRem(54px);
+                width: 75%;
+            }
+
+            &__pre-form {
+                margin-bottom: calculateRem(16px) calculateRem(8px);
+            }
+
+            &__pre-form-btns {
+                margin-top: calculateRem(42px);
             }
         }
     }
