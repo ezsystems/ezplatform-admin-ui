@@ -36,20 +36,17 @@
 @mixin drag-item {
     display: flex;
     align-items: center;
-    overflow: hidden;
-    margin: calculateRem(8px) 0;
+    margin-bottom: calculateRem(8px);
     height: calculateRem(48px);
     border: calculateRem(1px) solid $ibexa-color-light;
     border-radius: $ibexa-border-radius;
+    background: $ibexa-color-white;
     box-shadow: $ibexa-content-type-edit-field-shadow;
     transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+    cursor: grab;
 
     &:first-child {
         margin-top: 0;
-    }
-
-    &:hover {
-        cursor: grab;
     }
 
     &--hidden {
@@ -62,27 +59,77 @@
     &--is-dragged-out {
         background: $ibexa-color-light-400;
         opacity: 0.5;
+    }
 
-        .ibexa-icon {
-            &--field-icon {
-                fill: $ibexa-color-dark-200;
-            }
-        }
+    &--no-drag {
+        cursor: unset;
     }
 
     .ibexa-icon {
         &--drag-icon {
+            flex-shrink: 0;
             fill: $ibexa-color-dark-200;
             margin: 0 calculateRem(16px);
         }
+    }
+}
 
-        &--field-icon {
-            margin-right: calculateRem(8px);
+@mixin drag-item-btns-wrapper {
+    display: flex;
+    margin-left: auto;
+}
+
+@mixin drag-item-label {
+    @include ibexa-font-sans-serif();
+
+    font-size: $ibexa-text-font-size-medium;
+    font-weight: 600;
+}
+
+@mixin drag-item-placeholder {
+    display: flex;
+    align-items: center;
+    height: calculateRem(48px);
+    margin: 0 0 calculateRem(8px) 0;
+    padding: 0 calculateRem(14px);
+    border-radius: $ibexa-border-radius;
+    border: calculateRem(1px) dashed $ibexa-color-light;
+
+    &__item-wrapper {
+        flex-grow: 1;
+
+        &:not(:first-child) {
+            margin-left: calculateRem(8px);
+        }
+
+        &--short {
+            flex-grow: 0;
+            flex-shrink: 0;
         }
     }
 
-    .ibexa-label {
-        margin: calculateRem(8px) 0;
-        font-weight: 600;
+    &__item {
+        @include ibexa-font-sans-serif();
+
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        white-space: nowrap;
+        padding: 0 calculateRem(16px);
+        border-radius: $ibexa-border-radius;
+        background-color: $ibexa-color-light-300;
+        color: $ibexa-color-dark-400;
+        font-size: $ibexa-text-font-size-medium;
+        height: calculateRem(24px);
+        width: 75%;
+
+        &--short {
+            width: calculateRem(24px);
+            padding: 0;
+        }
+    }
+
+    &--hidden {
+        display: none;
     }
 }
