@@ -41,12 +41,26 @@
                 cursor: pointer;
             }
 
+            .form-check {
+                width: 100%;
+            }
+
             .ibexa-icon {
                 fill: $ibexa-black;
                 position: absolute;
                 left: calculateRem(20px);
                 width: calculateRem(16px);
                 height: calculateRem(16px);
+            }
+
+            &:hover {
+                .ibexa-label--checkbox-radio {
+                    color: $ibexa-color-primary;
+                }
+
+                .ibexa-icon {
+                    fill: $ibexa-color-primary;
+                }
             }
 
             &--selected {
