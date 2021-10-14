@@ -15,10 +15,11 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    Ibexa\AdminUi\Form\Processor\ContentEditNotificationFormProcessor:
-        public: true
+    Ibexa\AdminUi\Form\Processor\Content\AutosaveProcessor: ~
+
+    Ibexa\AdminUi\Form\Processor\Content\ContentOnTheFlyProcessor:
         arguments:
-            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+            $innerContentFormProcessor: '@ezplatform.content_forms.form_processor.content'
 
     Ibexa\AdminUi\Form\Processor\Content\UrlRedirectProcessor:
         public: true
@@ -27,10 +28,25 @@ services:
             $siteaccessGroups: '%ezpublish.siteaccess.groups%'
             $systemUrlRedirectProcessor: '@Ibexa\AdminUi\Form\Processor\Content\UrlRedirectProcessor.inner'
 
+    Ibexa\AdminUi\Form\Processor\ContentEditNotificationFormProcessor:
+        public: true
+        arguments:
+            $siteAccessGroups: '%ezpublish.siteaccess.groups%'
+
+    Ibexa\AdminUi\Form\Processor\ContentType\ContentTypeDiscardChangesFormProcessor: ~
 
     Ibexa\AdminUi\Form\Processor\ContentType\ContentTypeFormProcessor:
-        arguments: ["@ezpublish.api.service.content_type", "@router", "%ezplatform.content_forms.form_processor.content_type.options%"]
+        arguments:
+            - "@ezpublish.api.service.content_type"
+            - "@router"
+            - "%ezplatform.content_forms.form_processor.content_type.options%"
         calls:
-            - [setGroupsList, ["@ezpublish.fields_groups.list"]]
-        tags:
-            - { name: kernel.event_subscriber }
+            - [ setGroupsList, [ "@ezpublish.fields_groups.list" ] ]
+
+    Ibexa\AdminUi\Form\Processor\PreviewFormProcessor: ~
+
+    Ibexa\AdminUi\Form\Processor\TranslationFormProcessor: ~
+
+    Ibexa\AdminUi\Form\Processor\User\UserOnTheFlyProcessor:
+        arguments:
+            $innerUserUpdateFormProcessor: '@ezplatform.content_forms.form_processor.user_update'
