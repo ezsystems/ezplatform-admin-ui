@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content;
+namespace Ibexa\AdminUi\Form\Type\Content;
 
 use eZ\Publish\API\Repository\ContentTypeService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\ContentTypeTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\ContentTypeTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,3 +37,5 @@ class ContentTypeSubmitType extends AbstractType
         return SubmitType::class;
     }
 }
+
+class_alias(ContentTypeSubmitType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeSubmitType');

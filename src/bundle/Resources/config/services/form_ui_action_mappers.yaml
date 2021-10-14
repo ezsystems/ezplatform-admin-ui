@@ -4,17 +4,17 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\UI\Action\EventDispatcher: ~
-    EzSystems\EzPlatformAdminUi\UI\Action\EventDispatcherInterface: '@EzSystems\EzPlatformAdminUi\UI\Action\EventDispatcher'
+    Ibexa\AdminUi\UI\Action\EventDispatcher: ~
+    Ibexa\Contracts\AdminUi\UI\Action\EventDispatcherInterface: '@Ibexa\AdminUi\UI\Action\EventDispatcher'
 
-    EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapper:
+    Ibexa\AdminUi\UI\Action\FormUiActionMapper:
         tags:
             - { name: ezplatform.admin_ui.form_ui_action_mapper }
 
-    EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapperInterface:
-        alias: 'EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapper'
+    Ibexa\Contracts\AdminUi\UI\Action\FormUiActionMapperInterface:
+        alias: 'Ibexa\AdminUi\UI\Action\FormUiActionMapper'
 
-    EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMappingDispatcher:
+    Ibexa\AdminUi\UI\Action\FormUiActionMappingDispatcher:
         arguments:
             $mappers: !tagged ezplatform.admin_ui.form_ui_action_mapper
-            $defaultMapper: '@EzSystems\EzPlatformAdminUi\UI\Action\FormUiActionMapper'
+            $defaultMapper: '@Ibexa\AdminUi\UI\Action\FormUiActionMapper'

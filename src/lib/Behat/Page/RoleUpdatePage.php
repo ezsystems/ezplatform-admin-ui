@@ -22,9 +22,8 @@ class RoleUpdatePage extends AdminUpdateItemPage
 {
     /** @var \Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget */
     private $universalDiscoveryWidget;
-    /**
-     * @var \Ibexa\AdminUi\Behat\Component\IbexaDropdown
-     */
+
+    /** @var \Ibexa\AdminUi\Behat\Component\IbexaDropdown */
     private $ibexaDropdown;
 
     public function __construct(Session $session, Router $router, ContentActionsMenu $contentActionsMenu, UniversalDiscoveryWidget $universalDiscoveryWidget, IbexaDropdown $ibexaDropdown)

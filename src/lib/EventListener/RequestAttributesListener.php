@@ -4,14 +4,14 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\EventListener;
+namespace Ibexa\AdminUi\EventListener;
 
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewBuilderParametersEvent;
 use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
-use EzSystems\EzPlatformAdminUiBundle\EzPlatformAdminUiBundle;
+use Ibexa\Bundle\AdminUi\IbexaAdminUiBundle;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -125,6 +125,8 @@ class RequestAttributesListener implements EventSubscriberInterface
     {
         $siteAccess = $request->attributes->get('siteaccess');
 
-        return \in_array($siteAccess->name, $this->siteAccessGroups[EzPlatformAdminUiBundle::ADMIN_GROUP_NAME], true);
+        return \in_array($siteAccess->name, $this->siteAccessGroups[IbexaAdminUiBundle::ADMIN_GROUP_NAME], true);
     }
 }
+
+class_alias(RequestAttributesListener::class, 'EzSystems\EzPlatformAdminUi\EventListener\RequestAttributesListener');

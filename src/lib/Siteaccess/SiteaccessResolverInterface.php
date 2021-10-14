@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Siteaccess;
+namespace Ibexa\AdminUi\Siteaccess;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 
@@ -45,3 +45,5 @@ interface SiteaccessResolverInterface
      */
     public function getSiteaccesses(): array;
 }
+
+class_alias(SiteaccessResolverInterface::class, 'EzSystems\EzPlatformAdminUi\Siteaccess\SiteaccessResolverInterface');
