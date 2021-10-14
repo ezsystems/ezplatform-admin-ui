@@ -234,7 +234,7 @@ class ContentTypeContext implements Context
      */
     public function iCheckBlockInField($blockName)
     {
-        $this->contentTypeUpdatePage->expandFieldDefinition('Landing Page');
+        $this->contentTypeUpdatePage->expandLastFieldDefinition();
         $this->contentTypeUpdatePage->expandDefaultBlocksOption();
         $this->contentTypeUpdatePage->selectBlock($blockName);
     }
