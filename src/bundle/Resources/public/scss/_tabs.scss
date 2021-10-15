@@ -126,15 +126,19 @@
 .ibexa-tab-content {
     width: calc(100% - #{calculateRem(30px)});
     padding: 0;
-    margin: calculateRem(-1px) calculateRem(15px) calculateRem(80px) calculateRem(15px);
+    margin: calculateRem(-1px) calculateRem(15px) calculateRem(15px);
     border: calculateRem(1px) solid $ibexa-color-light;
     border-radius: 0 calculateRem(10px) calculateRem(10px) calculateRem(10px);
     overflow: hidden;
     box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.1);
     background-color: $ibexa-color-white;
 
+    &__single-tab {
+        border-radius: $ibexa-border-radius;
+    }
+
     &__pane {
-        padding: calculateRem(10px) calculateRem(40px) calculateRem(40px);
+        padding: calculateRem(10px) calculateRem(24px) calculateRem(24px);
 
         &--no-padding {
             padding: 0;
