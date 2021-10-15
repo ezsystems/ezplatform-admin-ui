@@ -1,7 +1,7 @@
 import React, { useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import ToggleSelectionCheckbox from '../toggle-selection-checkbox/toggle.selection.checkbox';
+import ToggleSelection from '../toggle-selection/toggle.selection';
 import Icon from '../../../common/icon/icon';
 import Thumbnail from '../../../common/thumbnail/thumbnail';
 
@@ -56,14 +56,10 @@ const GridViewItem = ({ location, version }) => {
 
         dispatchLoadedLocationsAction({ type: 'UPDATE_LOCATIONS', data: { parentLocationId: location.id, subitems: [] } });
     };
-    const renderToggleSelectionCheckbox = () => {
-        if (!multiple) {
-            return null;
-        }
-
+    const renderToggleSelection = () => {
         return (
             <div class="ibexa-grid-view-item__checkbox">
-                <ToggleSelectionCheckbox location={location} isDisabled={isNotSelectable} />
+                <ToggleSelection location={location} multiple={multiple} isHidden={isNotSelectable} />
             </div>
         );;
     };
@@ -80,7 +76,7 @@ const GridViewItem = ({ location, version }) => {
             <div className="ibexa-grid-view-item__title-wrapper">
                 <div className="ibexa-grid-view-item__title">{location.ContentInfo.Content.TranslatedName}</div>
             </div>
-            {renderToggleSelectionCheckbox()}
+            {renderToggleSelection()}
         </div>
     );
 };

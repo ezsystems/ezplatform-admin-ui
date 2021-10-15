@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useContext, createContext } from 'react';
+import React, { useState, useEffect, useReducer, useContext, createContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 export const SelectedContentTypesContext = createContext();
@@ -6,10 +6,11 @@ export const SelectedSectionContext = createContext();
 export const SelectedSubtreeContext = createContext();
 
 import Icon from '../../../common/icon/icon';
+import InputSearch from '../input-search/input.search';
 import ContentTable from '../content-table/content.table';
 import Filters from '../filters/filters';
 import { useSearchByQueryFetch } from '../../hooks/useSearchByQueryFetch';
-import { AllowedContentTypesContext } from '../../universal.discovery.module';
+import { AllowedContentTypesContext, SearchTextContext } from '../../universal.discovery.module';
 
 const ENTER_CHAR_CODE = 13;
 
@@ -32,7 +33,7 @@ const Search = ({ itemsPerPage }) => {
     const filtersLabel = Translator.trans(/*@Desc("Filters")*/ 'search.filters', {}, 'universal_discovery_widget');
     const searchLabel = Translator.trans(/*@Desc("Search")*/ 'search.search', {}, 'universal_discovery_widget');
     const allowedContentTypes = useContext(AllowedContentTypesContext);
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useContext(SearchTextContext);
     const [offset, setOffset] = useState(0);
     const [filtersCollapsed, setFiltersCollapsed] = useState(true);
     const [selectedContentTypes, dispatchSelectedContentTypesAction] = useReducer(selectedContentTypesReducer, []);
@@ -40,16 +41,21 @@ const Search = ({ itemsPerPage }) => {
     const [selectedSubtree, setSelectedSubtree] = useState('');
     const firstLanguageCode = languages.length ? languages[0].languageCode : '';
     const [selectedLanguage, setSelectedLanguage] = useState(firstLanguageCode);
+    const prevSearchText = useRef(null);
+    const searchActionRef = useRef(null);
     const updateSelectedLanguage = (event) => setSelectedLanguage(event.target.value);
     const [isLoading, data, searchByQuery] = useSearchByQueryFetch();
-    const updateSearchQuery = ({ target: { value } }) => setSearchText(value);
-    const search = (forcedOffset) => {
+    const search = () => {
+        const shouldResetOffset = prevSearchText.current !== searchText && offset !== 0;
+
+        prevSearchText.current = searchText;
+
         if (!searchText) {
             return;
         }
 
-        if (forcedOffset !== undefined && forcedOffset !== offset) {
-            setOffset(forcedOffset);
+        if (shouldResetOffset) {
+            setOffset(0);
 
             return;
         }
@@ -58,11 +64,9 @@ const Search = ({ itemsPerPage }) => {
 
         searchByQuery(searchText, contentTypes, selectedSection, selectedSubtree, itemsPerPage, offset, selectedLanguage);
     };
-    const handleKeyPressed = ({ charCode }) => {
-        if (charCode === ENTER_CHAR_CODE) {
-            search(0);
-        }
-    };
+    const searchSubmit = () => {
+        searchActionRef.current();
+    }
     const changePage = (pageIndex) => setOffset(pageIndex * itemsPerPage);
     const toggleFiltersCollapsed = () => setFiltersCollapsed((prevState) => !prevState);
     const renderSearchResults = () => {
@@ -131,19 +135,13 @@ const Search = ({ itemsPerPage }) => {
         }
     };
 
-    useEffect(search, [offset]);
+    useEffect(search, [searchText, offset]);
 
     return (
         <div className="c-search">
             <div className="c-search__tools-wrapper">
                 <div className="c-search__input-wrapper">
-                    <input
-                        type="search"
-                        className="c-search__input form-control"
-                        onChange={updateSearchQuery}
-                        onKeyPress={handleKeyPressed}
-                        value={searchText}
-                    />
+                    <InputSearch ref={searchActionRef} />
                 </div>
                 {languages.length > 1 ? (
                     <div className="c-search__selector-wrapper">
@@ -165,7 +163,7 @@ const Search = ({ itemsPerPage }) => {
                         </select>
                     </div>
                 ) : null}
-                <button className="c-search__search-btn btn ibexa-btn ibexa-btn--primary" onClick={search.bind(this, 0)}>
+                <button className="c-search__search-btn btn ibexa-btn ibexa-btn--primary" onClick={searchSubmit}>
                     {searchLabel}
                 </button>
                 <div className="c-search__filters-btn-wrapper">
