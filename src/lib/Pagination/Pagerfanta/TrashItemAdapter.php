@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
+namespace Ibexa\AdminUi\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\TrashService;
 use eZ\Publish\API\Repository\Values\Content\Query;
@@ -78,3 +78,5 @@ class TrashItemAdapter implements AdapterInterface
         return $trashItems->items;
     }
 }
+
+class_alias(TrashItemAdapter::class, 'EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\TrashItemAdapter');

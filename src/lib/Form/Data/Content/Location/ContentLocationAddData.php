@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Location;
+namespace Ibexa\AdminUi\Form\Data\Content\Location;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 
@@ -62,3 +62,5 @@ class ContentLocationAddData
         $this->newLocations = $newLocations;
     }
 }
+
+class_alias(ContentLocationAddData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData');

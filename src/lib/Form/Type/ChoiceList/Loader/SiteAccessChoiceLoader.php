@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
+namespace Ibexa\AdminUi\Form\Type\ChoiceList\Loader;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver;
+use Ibexa\AdminUi\Siteaccess\NonAdminSiteaccessResolver;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 
@@ -86,3 +86,5 @@ class SiteAccessChoiceLoader implements ChoiceLoaderInterface
         return $this->loadChoiceList($value)->getValuesForChoices($choices);
     }
 }
+
+class_alias(SiteAccessChoiceLoader::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\SiteAccessChoiceLoader');

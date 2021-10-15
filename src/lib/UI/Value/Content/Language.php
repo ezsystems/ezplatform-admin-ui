@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
+namespace Ibexa\AdminUi\UI\Value\Content;
 
 use eZ\Publish\API\Repository\Values\Content\Language as APILanguage;
 
@@ -62,3 +62,5 @@ class Language extends APILanguage
         return $this->userCanEdit;
     }
 }
+
+class_alias(Language::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Content\Language');

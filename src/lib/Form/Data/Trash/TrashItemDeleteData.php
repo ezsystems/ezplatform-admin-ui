@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Trash;
+namespace Ibexa\AdminUi\Form\Data\Trash;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -46,3 +46,5 @@ class TrashItemDeleteData
         $this->trashItems = $trashItems;
     }
 }
+
+class_alias(TrashItemDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData');

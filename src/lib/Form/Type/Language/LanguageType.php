@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
+namespace Ibexa\AdminUi\Form\Type\Language;
 
 use eZ\Publish\API\Repository\LanguageService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\LanguageTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\LanguageTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,3 +37,5 @@ class LanguageType extends AbstractType
         return HiddenType::class;
     }
 }
+
+class_alias(LanguageType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageType');

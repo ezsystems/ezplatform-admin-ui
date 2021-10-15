@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UserSetting;
+namespace Ibexa\AdminUi\UserSetting;
 
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
@@ -121,3 +121,5 @@ class Autosave implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 }
+
+class_alias(Autosave::class, 'EzSystems\EzPlatformAdminUi\UserSetting\Autosave');
