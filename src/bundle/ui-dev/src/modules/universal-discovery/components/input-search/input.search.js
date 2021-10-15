@@ -1,26 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
 import Icon from '../../../common/icon/icon';
 
-const ENTER_CHAR_CODE = 13;
+import { ActiveTabContext, SearchTextContext } from '../../universal.discovery.module';
 
-const InputText = ({ extraClasses, hasSearch, placeholder, search }) => {
-    const [inputValue, setInputValue] = useState('');
+const ENTER_CHAR_CODE = 13;
+const SEARCH_TAB_ID = 'search';
+
+const InputSearch = forwardRef(({ extraClasses, placeholder, search }, searchActionRef) => {
+    const [activeTab, setActiveTab] = useContext(ActiveTabContext);
+    const [searchText, setSearchText] = useContext(SearchTextContext);
+    const [inputValue, setInputValue] = useState(searchText);
     const className = createCssClassNames({
         'ibexa-input-text-wrapper': true,
-        'ibexa-input-text-wrapper--search': hasSearch,
+        'ibexa-input-text-wrapper--search': true,
         [extraClasses]: extraClasses,
     });
     const updateInputValue = ({ target: { value } }) => setInputValue(value);
     const resetInputValue = () => setInputValue('');
-    const searchWrapper = () => search(inputValue);
+    const searchWrapper = () => {
+        if (search) {
+            search(inputValue);
+        } else {
+            if (activeTab !== SEARCH_TAB_ID) {
+                setActiveTab('search');
+            }
+
+            setSearchText(inputValue);
+        }
+    };
     const handleKeyPressed = ({ charCode }) => {
-        if (hasSearch && charCode === ENTER_CHAR_CODE) {
+        if (charCode === ENTER_CHAR_CODE) {
             searchWrapper();
         }
     };
+    if (searchActionRef) {
+        searchActionRef.current = searchWrapper;
+    }
 
     return (
         <div class={className}>
@@ -52,19 +70,20 @@ const InputText = ({ extraClasses, hasSearch, placeholder, search }) => {
             </div>
         </div>
     );
-};
+});
 
-InputText.propTypes = {
+InputSearch.displayName = 'InputSearch';
+
+InputSearch.propTypes = {
     extraClasses: PropTypes.string,
     placeholder: PropTypes.string,
     search: PropTypes.func,
-    small: PropTypes.bool,
 };
 
-InputText.defaultProps = {
+InputSearch.defaultProps = {
     extraClasses: null,
     placeholder: Translator.trans(/*@Desc("Search...")*/ 'input.search.placeholder.default', {}, 'universal_discovery_widget'),
-    search: () => {},
+    search: null,
 };
 
-export default InputText;
+export default InputSearch;

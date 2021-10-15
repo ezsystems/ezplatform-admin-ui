@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import ToggleSelectionCheckbox from '../toggle-selection-checkbox/toggle.selection.checkbox';
+import ToggleSelection from '../toggle-selection/toggle.selection';
 import Icon from '../../../common/icon/icon';
 
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
@@ -71,18 +71,14 @@ const ContentTableItem = ({ location }) => {
             dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
         }
     };
-    const renderToggleSelectionCheckbox = () => {
-        if (!multiple) {
-            return null;
-        }
-
-        return <ToggleSelectionCheckbox location={location} isDisabled={isNotSelectable} />;
+    const renderToggleSelection = () => {
+        return <ToggleSelection location={location} multiple={multiple} isHidden={isNotSelectable} />;
     };
 
     return (
         <tr className={className} onClick={markLocation}>
             <td className="ibexa-table__cell ibexa-table__cell--has-checkbox">
-                {renderToggleSelectionCheckbox()}
+                {renderToggleSelection()}
             </td>
             <td className="ibexa-table__cell c-content-table-item__icon-wrapper">
                 <Icon extraClasses="ibexa-icon--small" customPath={contentTypeInfo.thumbnail} />

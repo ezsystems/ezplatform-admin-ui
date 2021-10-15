@@ -1,4 +1,20 @@
 .c-finder-leaf {
+    @mixin hover {
+        &:hover {
+            .c-finder-leaf__name {
+                color: $ibexa-color-primary;
+
+                .ibexa-icon {
+                    fill: $ibexa-color-primary;
+                }
+            }
+
+            &.c-finder-leaf--has-children:after {
+                border-left: calculateRem(6px) solid $ibexa-color-primary;
+            }
+        }
+    }
+
     cursor: pointer;
     display: flex;
     justify-content: flex-start;
@@ -7,13 +23,7 @@
     border-radius: $ibexa-border-radius;
     position: relative;
 
-    &:hover {
-        background-color: $ibexa-color-light-300;
-
-        .c-toggle-selection-button {
-            opacity: 1;
-        }
-    }
+    @include hover();
 
     &--has-children:after {
         content: '';
@@ -33,32 +43,6 @@
         background-color: $ibexa-color-light-300;
         color: $ibexa-color-primary;
 
-        &:hover {
-            background-color: $ibexa-color-light-300;
-        }
-
-        &.c-finder-leaf--not-selectable {
-            background-color: $ibexa-color-light-300;
-
-            &:hover {
-                background-color: $ibexa-color-light-300;
-            }
-        }
-
-        .c-toggle-selection-button {
-            &--selected {
-                background-color: $ibexa-color-primary;
-
-                .ibexa-icon {
-                    fill: $ibexa-color-white;
-                }
-            }
-        }
-
-        &.c-finder-leaf--has-children:after {
-            border-left-color: $ibexa-color-primary;
-        }
-
         .c-finder-leaf__name {
             color: $ibexa-color-dark;
             font-weight: 600;
@@ -67,14 +51,8 @@
                 fill: $ibexa-color-dark;
             }
         }
-    }
 
-    &--not-selectable {
-        cursor: not-allowed;
-
-        &:hover {
-            background-color: $ibexa-color-light-200;
-        }
+        @include hover();
     }
 
     &__name {
@@ -83,7 +61,7 @@
         text-overflow: ellipsis;
         font-size: $ibexa-text-font-size-medium;
         line-height: calculateRem(21px);
-        color: $ibexa-color-dark-400;
+        color: $ibexa-color-dark;
         margin-left: calculateRem(16px);
         flex: 1;
 
@@ -102,7 +80,7 @@
             top: 50%;
             transform: translateY(-50%);
             margin-top: calculateRem(-1px);
-            fill: $ibexa-color-dark-400;
+            fill: $ibexa-color-dark;
         }
     }
 }

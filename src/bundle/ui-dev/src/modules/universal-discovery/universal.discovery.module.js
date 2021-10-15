@@ -105,6 +105,7 @@ export const CreateContentWidgetContext = createContext();
 export const ContentOnTheFlyDataContext = createContext();
 export const ContentOnTheFlyConfigContext = createContext();
 export const EditOnTheFlyDataContext = createContext();
+export const SearchTextContext = createContext();
 
 const UniversalDiscoveryModule = (props) => {
     const tabs = window.eZ.adminUiConfig.universalDiscoveryWidget.tabs;
@@ -119,6 +120,7 @@ const UniversalDiscoveryModule = (props) => {
     const [contentOnTheFlyData, setContentOnTheFlyData] = useState({});
     const [editOnTheFlyData, setEditOnTheFlyData] = useState({});
     const [contentTypesInfoMap, setContentTypesInfoMap] = useState({});
+    const [searchText, setSearchText] = useState('');
     const [loadedLocationsMap, dispatchLoadedLocationsAction] = useLoadedLocationsReducer([
         { parentLocationId: props.rootLocationId, subitems: [] },
     ]);
@@ -363,7 +365,13 @@ const UniversalDiscoveryModule = (props) => {
                                                                                                                         editOnTheFlyData,
                                                                                                                         setEditOnTheFlyData,
                                                                                                                     ]}>
-                                                                                                                    <Tab />
+                                                                                                                    <SearchTextContext.Provider
+                                                                                                                        value={[
+                                                                                                                            searchText,
+                                                                                                                            setSearchText
+                                                                                                                        ]}>
+                                                                                                                        <Tab />
+                                                                                                                    </SearchTextContext.Provider>
                                                                                                                 </EditOnTheFlyDataContext.Provider>
                                                                                                             </ContentOnTheFlyConfigContext.Provider>
                                                                                                         </ContentOnTheFlyDataContext.Provider>

@@ -16,7 +16,7 @@ const SearchTabModule = () => {
     return (
         <div className="m-search-tab">
             <Tab actionsDisabledMap={actionsDisabledMap}>
-                <Search itemsPerPage={tabsConfig.search.itemsPerPage} />
+                <Search itemsPerPage={1} />
             </Tab>
         </div>
     );

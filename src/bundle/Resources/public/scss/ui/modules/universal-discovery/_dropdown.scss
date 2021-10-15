@@ -84,5 +84,11 @@
     &--is-disabled {
         opacity: 0.3;
         cursor: not-allowed;
+
+        .c-udw-dropdown {
+            &__selected {
+                cursor: not-allowed;
+            }
+        }
     }
 }
