@@ -285,15 +285,12 @@
         text-align: center;
     }
 
-    &__empty-table-image {
-        margin-bottom: calculateRem(28px);
-    }
-
     &__empty-table-text {
         @include ibexa-font-sans-serif();
 
         font-size: $ibexa-text-font-size;
         line-height: calculateRem(24px);
+        color: $ibexa-color-dark-400;
 
         strong {
             font-size: $ibexa-text-font-size-large;

@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component;
 
 use Ibexa\Behat\Browser\Component\Component;
-use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementAttributeCriterion;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\Criterion\LogicalOrCriterion;
@@ -34,7 +33,12 @@ class LeftMenu extends Component
     public function goToSubTab(string $tabName): void
     {
         $this->getHTMLPage()
-            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), new VisibleCSSLocator('collapsedMenu', '.ibexa-main-menu__navbar--collapsed')))
+            ->setTimeout(3)
+            ->waitUntil(function () {
+                return $this->getMenuWidth() < 100;
+            }, sprintf('Left menu did not collapse in time. Current width: %d', $this->getMenuWidth()));
+
+        $this->getHTMLPage()
             ->findAll($this->getLocator('expandedMenuItem'))
             ->getByCriterion(new ElementTextCriterion($tabName))
             ->click();
@@ -52,5 +56,10 @@ class LeftMenu extends Component
             new VisibleCSSLocator('expandedMenuItem', '.ibexa-main-menu__item-action--second-level .ibexa-main-menu__item-text-column'),
             new VisibleCSSLocator('menuSelector', '.ibexa-main-menu'),
         ];
+    }
+
+    private function getMenuWidth(): int
+    {
+        return (int) $this->getHTMLPage()->executeJavaScript("return document.querySelector('.ibexa-main-menu__navbar--collapsed').clientWidth.toString()");
     }
 }

@@ -1,5 +1,7 @@
 {% import "@ezdesign/ui/component/macros.html.twig" as html %}
 
+{% set show_head_cols_if_empty = show_head_cols_if_empty|default(false) %}
+
 {% block header %}
     {% if headline is defined %}
         {% include '@ezdesign/ui/component/table/table_header.html.twig' with {
@@ -21,7 +23,7 @@
         >
             <thead>
                 {% block thead %}
-                    {% if head_cols is defined %}
+                    {% if head_cols is defined and body_rows is defined and body_rows is not empty or head_cols is defined and show_head_cols_if_empty %}
                         {% include '@ezdesign/ui/component/table/table_head_row.html.twig' with {
                             head_cols: head_cols,
                         } %}
