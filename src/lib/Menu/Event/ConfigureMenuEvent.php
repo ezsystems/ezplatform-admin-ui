@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Menu\Event;
+namespace Ibexa\AdminUi\Menu\Event;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -95,3 +95,5 @@ class ConfigureMenuEvent extends Event
         return $this->options ?? [];
     }
 }
+
+class_alias(ConfigureMenuEvent::class, 'EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent');

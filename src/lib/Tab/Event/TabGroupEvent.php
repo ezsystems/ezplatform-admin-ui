@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\Event;
+namespace Ibexa\AdminUi\Tab\Event;
 
-use EzSystems\EzPlatformAdminUi\Tab\TabGroup;
+use Ibexa\AdminUi\Tab\TabGroup;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class TabGroupEvent extends Event
@@ -51,3 +51,5 @@ class TabGroupEvent extends Event
         $this->parameters = $parameters;
     }
 }
+
+class_alias(TabGroupEvent::class, 'EzSystems\EzPlatformAdminUi\Tab\Event\TabGroupEvent');

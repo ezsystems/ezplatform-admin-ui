@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
+namespace Ibexa\AdminUi\Form\Type\ContentType;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypesDeleteData;
+use Ibexa\AdminUi\Form\Data\ContentType\ContentTypesDeleteData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -42,3 +42,5 @@ class ContentTypesDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(ContentTypesDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypesDeleteType');

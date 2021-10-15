@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\Event;
+namespace Ibexa\AdminUi\Tab\Event;
 
 class TabEvents
 {
@@ -32,3 +32,5 @@ class TabEvents
      */
     const TAB_RENDER = 'ezplatform.tab.render';
 }
+
+class_alias(TabEvents::class, 'EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents');

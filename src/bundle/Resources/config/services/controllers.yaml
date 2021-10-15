@@ -4,55 +4,55 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\AssetController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\AssetController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\BookmarkController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\BookmarkController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation\BulkOperationController:
+    Ibexa\Bundle\AdminUi\Controller\BulkOperation\BulkOperationController:
         parent: ezpublish_rest.controller.base
         tags: [ 'controller.service_arguments' ]
         autowire: true
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\Content\ContentTreeController:
+    Ibexa\Bundle\AdminUi\Controller\Content\ContentTreeController:
         parent: ezpublish_rest.controller.base
         tags: [ 'controller.service_arguments' ]
         autowire: true
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\Content\VersionDraftConflictController: ~
+    Ibexa\Bundle\AdminUi\Controller\Content\VersionDraftConflictController: ~
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\ContentController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\ContentController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
-            $siteaccessResolver: '@EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver'
+            $siteaccessResolver: '@Ibexa\AdminUi\Siteaccess\NonAdminSiteaccessResolver'
             $translationHelper: '@ezpublish.translation_helper'
             $configResolver: '@ezpublish.config.resolver'
-            $siteAccessNameGenerator: '@EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessNameGenerator'
+            $siteAccessNameGenerator: '@Ibexa\AdminUi\Siteaccess\SiteAccessNameGenerator'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\ContentDraftController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\ContentDraftController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController: ~
+    Ibexa\Bundle\AdminUi\Controller\ContentEditController: ~
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\ContentOnTheFlyController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\ContentOnTheFlyController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
@@ -60,151 +60,151 @@ services:
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\ContentTypeController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
-            $contentTypeActionDispatcher: '@EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentTypeDispatcher'
+            $contentTypeActionDispatcher: '@Ibexa\AdminUi\Form\ActionDispatcher\ContentTypeDispatcher'
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\ContentTypeGroupController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
-        autowire: true
-        arguments:
-            $configResolver: '@ezpublish.config.resolver'
-        tags:
-            - controller.service_arguments
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\ContentViewController: ~
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\DashboardController: ~
-
-    EzSystems\EzPlatformAdminUiBundle\Controller\LanguageController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\ContentTypeGroupController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\LinkManagerController: ~
+    Ibexa\Bundle\AdminUi\Controller\ContentViewController: ~
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\LocationController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\DashboardController: ~
+
+    Ibexa\Bundle\AdminUi\Controller\LanguageController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
+        autowire: true
+        arguments:
+            $configResolver: '@ezpublish.config.resolver'
+        tags:
+            - controller.service_arguments
+
+    Ibexa\Bundle\AdminUi\Controller\LinkManagerController: ~
+
+    Ibexa\Bundle\AdminUi\Controller\LocationController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         arguments:
             $translationHelper: '@ezpublish.translation_helper'
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\NotificationController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\NotificationController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\ObjectStateController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\ObjectStateController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\ObjectStateGroupController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\ObjectStateGroupController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\PolicyController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\PolicyController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\RoleAssignmentController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\RoleAssignmentController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\RoleController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\RoleController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\SectionController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\SectionController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\TranslationController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\TranslationController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         arguments:
             $translationHelper: '@ezpublish.translation_helper'
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\TrashController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\TrashController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\URLManagementController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\URLManagementController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\URLWildcardController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\URLWildcardController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\UniversalDiscoveryController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\UniversalDiscoveryController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\UrlAliasController: ~
+    Ibexa\Bundle\AdminUi\Controller\UrlAliasController: ~
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\User\UserDeleteController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\User\UserDeleteController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\UserOnTheFlyController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         autowire: true
         tags:
             - controller.service_arguments
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\Version\VersionConflictController: ~
+    Ibexa\Bundle\AdminUi\Controller\Version\VersionConflictController: ~
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\VersionController:
-        parent: EzSystems\EzPlatformAdminUiBundle\Controller\Controller
+    Ibexa\Bundle\AdminUi\Controller\VersionController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
         arguments:
             $translationHelper: '@ezpublish.translation_helper'
 
-    EzSystems\EzPlatformAdminUiBundle\Controller\Controller: ~
+    Ibexa\Contracts\AdminUi\Controller\Controller: ~
 
     Ibexa\Bundle\AdminUi\Controller\FieldDefinitionController:
         parent: ezpublish_rest.controller.base

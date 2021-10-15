@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup;
+namespace Ibexa\AdminUi\Form\Data\ContentTypeGroup;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
 
@@ -36,3 +36,5 @@ class ContentTypeGroupDeleteData
         $this->contentTypeGroup = $contentTypeGroup;
     }
 }
+
+class_alias(ContentTypeGroupDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupDeleteData');

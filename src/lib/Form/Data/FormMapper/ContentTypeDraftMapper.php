@@ -6,14 +6,15 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\FormMapper;
+namespace Ibexa\AdminUi\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList;
-use EzSystems\EzPlatformAdminUi\Event\FieldDefinitionMappingEvent;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\AdminUi\Form\Data\ContentTypeData;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\Contracts\AdminUi\Event\FieldDefinitionMappingEvent;
+use Ibexa\Contracts\AdminUi\Form\Data\FormMapper\FormDataMapperInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -119,3 +120,5 @@ class ContentTypeDraftMapper implements FormDataMapperInterface
             ->setAllowedTypes('language', Language::class);
     }
 }
+
+class_alias(ContentTypeDraftMapper::class, 'EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper');

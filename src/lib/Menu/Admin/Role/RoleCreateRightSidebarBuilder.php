@@ -4,12 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Menu\Admin\Role;
+namespace Ibexa\AdminUi\Menu\Admin\Role;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
-use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\MenuItemFactory;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -94,3 +94,5 @@ class RoleCreateRightSidebarBuilder extends AbstractBuilder implements Translati
         ];
     }
 }
+
+class_alias(RoleCreateRightSidebarBuilder::class, 'EzSystems\EzPlatformAdminUi\Menu\Admin\Role\RoleCreateRightSidebarBuilder');

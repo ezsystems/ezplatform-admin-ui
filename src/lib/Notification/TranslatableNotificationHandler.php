@@ -6,9 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Notification;
+namespace Ibexa\AdminUi\Notification;
 
 use EzSystems\EzPlatformUser\ExceptionHandler\ActionResultHandler;
+use Ibexa\Contracts\AdminUi\Notification\NotificationHandlerInterface;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class TranslatableNotificationHandler implements TranslatableNotificationHandlerInterface, ActionResultHandler
@@ -75,3 +77,5 @@ final class TranslatableNotificationHandler implements TranslatableNotificationH
         $this->notificationHandler->error(/** @Ignore */ $translatedMessage);
     }
 }
+
+class_alias(TranslatableNotificationHandler::class, 'EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandler');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
+namespace Ibexa\AdminUi\UI\Value\Content;
 
 use eZ\Publish\API\Repository\Values\Content\RelationList\Item\UnauthorizedRelationListItem;
 
@@ -39,3 +39,5 @@ final class UnauthorizedRelation implements RelationInterface
         return false;
     }
 }
+
+class_alias(UnauthorizedRelation::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Content\UnauthorizedRelation');
