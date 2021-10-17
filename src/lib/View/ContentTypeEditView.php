@@ -77,7 +77,7 @@ final class ContentTypeEditView extends BaseView
             'content_type_group' => $this->contentTypeGroup,
             'content_type' => $this->contentTypeDraft,
             'form' => $this->form ? $this->form->createView() : null,
-            'language_code' => $this->language->languageCode,
+            'language_code' => $this->language !== null ? $this->language->languageCode : null,
         ];
     }
 }
