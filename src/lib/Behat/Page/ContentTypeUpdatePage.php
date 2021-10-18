@@ -103,4 +103,11 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
         $scriptToExecute = sprintf($blockFindingScript, $blockName);
         $this->getSession()->executeScript($scriptToExecute);
     }
+
+    public function selectEditorLaunchMode(string $viewMode): void
+    {
+        $viewModeFindingScript = "document.querySelector('.form-check-label .ez-input--radio[value=\'%s\']').click()";
+        $scriptToExecute = sprintf($viewModeFindingScript, $viewMode);
+        $this->getSession()->executeScript($scriptToExecute);
+    }
 }
