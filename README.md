@@ -1,9 +1,7 @@
 # Ibexa Admin UI
 
 This repository is dedicated to the Ibexa Admin UI Bundle, which contains all the necessary
-parts to run the [Ibexa DXP](https://developers.ibexa.co/) administration interface Back Office.
-
-## Installation
+parts to run the [Ibexa DXP](https://developers.ibexa.co/) Back Office interface.
 
 This package is part of [Ibexa DXP](https://ibexa.co).
 To use this package, [install Ibexa DXP](https://doc.ibexa.co/en/latest/install/).
