@@ -6,6 +6,7 @@
 {% set preferred_choices = preferred_choices|default([]) %}
 {% set custom_form = custom_form is defined ? custom_form : true %}
 {% set translation_domain = translation_domain|default(false) %}
+{% set value = value is defined ? value : null %}
 
 <div
     class="ibexa-dropdown
@@ -24,16 +25,14 @@
                 label: '{{ label }}',
             })|e('html_attr') }}"
         >
-            {% if value is defined %}
-                {% for choice in choices_flat %}
-                    {% if custom_form ? choice.value == value : choice is selectedchoice(value) %}
-                        {% include '@ezdesign/ui/component/dropdown_selected_item.html.twig' with {
-                            value: choice.value,
-                            label: translation_domain is same as(false) ? choice.label : choice.label|trans({}, translation_domain),
-                        } %}
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
+            {% for choice in choices_flat %}
+                {% if custom_form ? choice.value == value : choice is selectedchoice(value) %}
+                    {% include '@ezdesign/ui/component/dropdown_selected_item.html.twig' with {
+                        value: choice.value,
+                        label: translation_domain is same as(false) ? choice.label : choice.label|trans({}, translation_domain),
+                    } %}
+                {% endif %}
+            {% endfor %}
 
             {% set default_placeholder = 'dropdown.placeholder'|trans|desc("Choose an option") %}
             {% set placeholder = placeholder|default(default_placeholder) %}

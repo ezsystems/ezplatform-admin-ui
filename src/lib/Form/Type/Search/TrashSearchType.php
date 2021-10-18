@@ -98,6 +98,7 @@ class TrashSearchType extends AbstractType
             'data_class' => TrashSearchData::class,
             'method' => Request::METHOD_GET,
             'csrf_protection' => false,
+            'translation_domain' => 'trash',
         ]);
     }
 }
