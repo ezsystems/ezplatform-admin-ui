@@ -74,6 +74,7 @@ final class SearchType extends AbstractType
                 'created' => 'created_select',
                 'last_modified' => 'last_modified_select',
             ],
+            'translation_domain' => 'search',
         ]);
     }
 
