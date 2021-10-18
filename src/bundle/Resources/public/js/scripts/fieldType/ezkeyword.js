@@ -1,8 +1,8 @@
 (function(global, doc, eZ) {
-    const SELECTOR_FIELD = '.ez-field-edit--ezkeyword';
-    const SELECTOR_TAGGIFY = '.ez-data-source__taggify';
-    const SELECTOR_ERROR_NODE = '.ez-data-source'
-    const CLASS_TAGGIFY_FOCUS = 'ez-data-source__taggify--focused';
+    const SELECTOR_FIELD = '.ibexa-field-edit--ezkeyword';
+    const SELECTOR_TAGGIFY = '.ibexa-data-source__taggify';
+    const SELECTOR_ERROR_NODE = '.ibexa-form-error';
+    const CLASS_TAGGIFY_FOCUS = 'ibexa-data-source__taggify--focused';
 
     class EzKeywordValidator extends eZ.BaseFieldValidator {
         /**
@@ -15,8 +15,8 @@
          */
         validateKeywords(event) {
             const fieldContainer = event.currentTarget.closest(SELECTOR_FIELD);
-            const input = fieldContainer.querySelector('.ez-data-source__input-wrapper .ez-data-source__input');
-            const label = fieldContainer.querySelector('.ez-field-edit__label').innerHTML;
+            const input = fieldContainer.querySelector('.ibexa-data-source__input-wrapper .ibexa-data-source__input');
+            const label = fieldContainer.querySelector('.ibexa-field-edit__label').innerHTML;
             const isRequired = input.required;
             const isEmpty = !input.value.trim().length;
             const isError = isEmpty && isRequired;
@@ -58,7 +58,7 @@
                     invalidStateSelectors: [SELECTOR_TAGGIFY],
                 },
                 {
-                    selector: `${SELECTOR_FIELD} .ez-data-source__input.form-control`,
+                    selector: `${SELECTOR_FIELD} .ibexa-data-source__input.form-control`,
                     eventName: 'change',
                     callback: 'validateKeywords',
                     errorNodeSelectors: [SELECTOR_ERROR_NODE],
@@ -73,7 +73,7 @@
             // The "," key code
             hotKeys: [188],
         });
-        const keywordInput = field.querySelector('.ez-data-source__input-wrapper .ez-data-source__input.form-control');
+        const keywordInput = field.querySelector('.ibexa-data-source__input-wrapper .ibexa-data-source__input.form-control');
         const updateKeywords = updateValue.bind(this, keywordInput);
         const addFocusState = () => taggifyContainer.classList.add(CLASS_TAGGIFY_FOCUS);
         const removeFocusState = () => taggifyContainer.classList.remove(CLASS_TAGGIFY_FOCUS);

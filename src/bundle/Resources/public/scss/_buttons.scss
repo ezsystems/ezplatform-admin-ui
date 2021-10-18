@@ -1,107 +1,230 @@
 @import 'extra-actions';
 
-.ez-btn {
-    display: inline-block;
-    padding: calculateRem(11px) calculateRem(16px);
+.ibexa-btn {
+    display: inline-flex;
+    white-space: nowrap;
+    padding: calculateRem(15px);
     outline: none;
-    border: none;
+    border: calculateRem(1px) solid transparent;
     border-radius: $ibexa-border-radius;
     text-decoration: none;
-    font-size: calculateRem(15px);
-    line-height: calculateRem(16px);
-    transition: all 0.2s $ibexa-admin-transition;
+    font-size: calculateRem(14px);
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
-    &:hover,
-    &:focus,
-    &:active {
-        border: none;
-        outline: none;
-        text-decoration: none;
+    &:focus {
+        box-shadow: $ibexa-btn-focus-box-shadow;
     }
 
     &--primary {
-        color: $ibexa-white;
-        background-color: $ibexa-color-primary;
+        color: $ibexa-color-white;
+        fill: $ibexa-color-white;
+        background-image: $ibexa-gradient-danger-primary;
+        border-width: 0;
+        padding: calculateRem(16px);
 
         &:hover {
-            color: $ibexa-white;
-            background-color: darken($ibexa-color-primary, 7.5%);
+            color: $ibexa-color-white;
+            box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow;
         }
 
-        &:active {
-            background-color: darken($ibexa-color-primary, 7.5%);
+        &:hover:focus {
+            box-shadow: $ibexa-btn-focus-box-shadow, $ibexa-btn-hover-box-shadow;
         }
 
-        &:focus {
-            background-color: darken($ibexa-color-primary, 7.5%);
-            box-shadow: 0 0 0 calculateRem(4px) rgba($ibexa-color-primary, 0.5);
-        }
-
-        &.btn:disabled,
-        &.btn.disabled {
-            opacity: 1;
-        }
-
-        &:disabled,
-        &.disabled {
-            background-color: $ibexa-color-base;
-            color: $ibexa-color-base-dark;
-            fill: $ibexa-color-base-dark;
+        &:disabled {
+            color: $ibexa-color-dark-400;
+            fill: $ibexa-color-dark-400;
+            background-image: none;
+            background-color: $ibexa-color-light;
             box-shadow: none;
         }
     }
 
-    &--base-dark {
-        color: $ibexa-color-base-dark;
+    &--secondary {
+        color: $ibexa-color-primary;
+        fill: $ibexa-color-primary;
         background-color: transparent;
-        box-shadow: inset 0 0 0 calculateRem(1px) $ibexa-color-base-dark;
+        border-color: $ibexa-color-primary;
 
-        &:hover {
-            color: $ibexa-color-base-dark;
-            background-color: $ibexa-color-base-light;
+        &:focus {
+            color: $ibexa-color-primary;
         }
 
-        &:active {
-            color: $ibexa-white;
-            fill: $ibexa-white;
-            background-color: $ibexa-color-base-dark;
-            box-shadow: inset 0 0 0 calculateRem(2px) $ibexa-color-base-dark;
+        &:hover {
+            color: $ibexa-color-dark;
+            border-color: $ibexa-color-dark;
+            background-color: rgba($ibexa-color-primary, 0.2);
+        }
 
-            .ez-icon {
-                fill: inherit;
-            }
+        &:disabled {
+            color: $ibexa-color-dark-400;
+            fill: $ibexa-color-dark-400;
+            border-color: $ibexa-color-dark-200;
+            background-color: rgba($ibexa-color-light, 0.4);
+        }
+    }
+
+    &--tertiary {
+        color: $ibexa-color-dark;
+        fill: $ibexa-color-dark;
+        background-color: transparent;
+        border-color: $ibexa-color-light;
+
+        &:hover {
+            border-color: $ibexa-color-dark;
         }
 
         &:focus {
-            box-shadow: inset 0 0 0 calculateRem(1px) $ibexa-color-base-dark;
+            border-color: $ibexa-color-light;
         }
 
-        &:disabled,
-        &.disabled {
-            opacity: 0.3;
-            color: $ibexa-color-base-dark;
-            background-color: transparent;
-            fill: $ibexa-color-base-dark;
-            box-shadow: inset 0 0 0 calculateRem(1px) $ibexa-color-base-dark;
-        }
-
-        .ez-icon {
-            fill: $ibexa-color-base-dark;
+        &:disabled {
+            color: $ibexa-color-dark-300;
+            fill: $ibexa-color-dark-300;
+            border-color: $ibexa-color-light;
+            background-color: $ibexa-color-light-300;
         }
     }
 
-    &--no-border {
-        color: $ibexa-color-primary;
+    &--ghost {
+        color: $ibexa-color-dark;
+        fill: $ibexa-color-dark;
+
+        &:hover {
+            color: $ibexa-color-primary;
+            fill: $ibexa-color-primary;
+        }
+
+        &:focus {
+            border-color: $ibexa-color-primary;
+        }
+
+        &:disabled {
+            color: $ibexa-color-dark-300;
+            fill: $ibexa-color-dark-300;
+        }
     }
 
-    &--action-icon {
-        .ez-icon {
-            fill: $ibexa-color-base-dark;
+    &--dark {
+        color: $ibexa-color-white;
+        fill: $ibexa-color-white;
+        background-color: $ibexa-color-dark;
+        border-color: $ibexa-color-dark;
+
+        &:hover {
+            color: $ibexa-color-white;
+            fill: $ibexa-color-white;
+            background-color: $ibexa-color-dark;
+            box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-dark;
+
+            &:focus {
+                box-shadow: $ibexa-btn-focus-box-shadow, $ibexa-btn-hover-box-shadow-dark;
+            }
+        }
+
+        &:disabled {
+            color: $ibexa-color-dark-400;
+            fill: $ibexa-color-dark-400;
+            background-color: $ibexa-color-light;
+            border-color: $ibexa-color-light;
+            box-shadow: none;
+        }
+    }
+
+    &--filled-info {
+        color: $ibexa-color-white;
+        fill: $ibexa-color-white;
+        border-color: $ibexa-color-info;
+        background-color: $ibexa-color-info;
+
+        &:hover {
+            color: $ibexa-color-white;
+            box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-info;
+
+            &:focus {
+                box-shadow: $ibexa-btn-focus-box-shadow-info, $ibexa-btn-hover-box-shadow-info;
+            }
+        }
+    }
+
+    &--info {
+        color: $ibexa-color-info;
+        fill: $ibexa-color-info;
+        border-color: $ibexa-color-info;
+
+        &:hover {
+            color: $ibexa-color-dark;
+            fill: $ibexa-color-dark;
+            border-color: $ibexa-color-dark;
+        }
+
+        &:focus {
+            box-shadow: $ibexa-btn-focus-box-shadow-info;
+        }
+    }
+
+    &--neon-info {
+        border-radius: $ibexa-border-radius;
+
+        .ibexa-icon {
+            fill: $ibexa-color-info;
+        }
+
+        &:hover {
+            border-color: $ibexa-color-info;
+            box-shadow: 0 0 0 transparent, $ibexa-btn-hover-box-shadow-info;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    &--selector {
+        color: $ibexa-color-dark;
+        fill: $ibexa-color-dark;
+        padding: calculateRem(12px);
+
+        &.ibexa-btn--selected {
+            background-color: $ibexa-color-info-200;
+            fill: $ibexa-color-info;
+        }
+
+        &:hover,
+        &:focus {
+            border-color: $ibexa-color-info;
+        }
+
+        &:focus {
+            box-shadow: $ibexa-btn-focus-box-shadow-info;
+        }
+    }
+
+    &--small {
+        padding-top: calculateRem(7px);
+        padding-bottom: calculateRem(7px);
+        height: calculateRem(32px);
+
+        &.ibexa-btn--primary {
+            padding-top: calculateRem(8px);
+            padding-bottom: calculateRem(8px);
+        }
+    }
+
+    &--no-text {
+        &.ibexa-btn--small {
+            padding-left: calculateRem(7px);
+            padding-right: calculateRem(7px);
+
+            &.ibexa-btn--primary {
+                padding-left: calculateRem(8px);
+                padding-right: calculateRem(8px);
+            }
         }
     }
 
     &--add-translation {
-        .ez-icon {
+        .ibexa-icon {
             margin-right: 0;
         }
     }
@@ -112,129 +235,28 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
-}
 
-.btn-icon {
-    padding: 0;
-}
+    .ibexa-icon {
+        margin-right: calculateRem(12px);
+    }
 
-.ez-side-menu,
-.ez-context-menu {
-    .ez-sticky-container > .btn {
-        width: 100%;
-        height: calculateRem(80px);
-        padding: calculateRem(2px) calculateRem(4px);
-        border: 0;
-        border-radius: 0;
-        text-decoration: none;
-        font-size: calculateRem(13px);
-        line-height: calculateRem(18px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        &:hover,
-        &:focus {
-            box-shadow: none;
-            outline: none;
-        }
-
-        &:first-child {
-            border-top-left-radius: $ibexa-border-radius;
-            border-top-right-radius: $ibexa-border-radius;
-        }
-
-        &:last-child {
-            border-bottom-left-radius: $ibexa-border-radius;
-            border-bottom-right-radius: $ibexa-border-radius;
-        }
-
-        .ez-icon {
-            display: block;
-            width: calculateRem(24px);
-            height: calculateRem(24px);
-            margin: 0 auto calculateRem(5px);
-        }
-
-        &.ez-btn--active-button {
-            &:hover {
-                @extend .ez-btn--active-button;
-            }
+    &--icon-right {
+        .ibexa-icon {
+            margin-right: 0;
+            margin-left: calculateRem(12px);
         }
     }
-}
 
-.ez-side-menu {
-    .btn-dark {
-        &:hover {
-            background-color: lighten($ibexa-color-base-black, 7.5%);
-        }
-
-        &.ez-btn--content-tree-expanded {
-            &:hover {
-                @extend .ez-btn--content-tree-expanded;
-            }
-        }
-    }
-}
-
-.ez-context-menu {
-    .ez-sticky-container > .btn.disabled,
-    .ez-sticky-container > .btn[disabled] {
-        opacity: 1;
-        color: rgba($ibexa-white, 0.5);
-        background-color: $ibexa-color-primary;
-
-        .ez-icon {
-            opacity: 0.5;
+    &--no-text {
+        .ibexa-icon {
+            margin-right: 0;
         }
     }
 }
 
 .btn.disabled,
 .btn[disabled] {
-    opacity: 0.3;
-}
-
-.btn.btn-primary.disabled,
-.btn.btn-primary[disabled] {
     opacity: 1;
-    background-color: $ibexa-color-base;
-    color: $ibexa-color-base-dark;
-    fill: $ibexa-color-base-dark;
-}
-
-.btn.btn-secondary.disabled,
-.btn.btn-secondary[disabled] {
-    opacity: 1;
-    background-color: rgba($ibexa-color-base-deep, 0.3);
-    color: $ibexa-color-base-dark;
-    fill: $ibexa-color-base-dark;
-}
-
-.ez-btn--select-subtree {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    .ez-icon {
-        margin-right: calculateRem(8px);
-    }
-}
-
-.ez-modal--trash-with-asset {
-    .modal-footer {
-        .btn-secondary {
-            background-color: $ibexa-color-base-dark;
-            border-color: $ibexa-color-base-dark;
-
-            &:hover {
-                background-color: $ibexa-color-base-dark;
-                border-color: $ibexa-color-base-dark;
-            }
-        }
-    }
 }
 
 .ez-content-view,
@@ -252,35 +274,15 @@
     }
 }
 
-.ez-btn--content-edit {
+.ibexa-btn--content-edit {
     background-color: transparent;
     cursor: pointer;
 }
 
-.ez-btn--cotf-create {
-    display: flex;
-    align-items: center;
-}
-
-.ez-btn--content-tree-expanded {
+.ibexa-btn--content-tree-expanded {
     background: $ibexa-white;
     border-color: $ibexa-white;
     color: $ibexa-black;
-}
-
-.ez-btn--wide,
-.ez-btn.ez-btn--wide {
-    padding: calculateRem(8px) calculateRem(48px);
-}
-
-.ez-btn--active-button {
-    background-color: $ibexa-white;
-    color: $ibexa-color-primary;
-    border-color: $ibexa-white;
-
-    .ez-icon {
-        fill: $ibexa-color-primary;
-    }
 }
 
 button:focus {

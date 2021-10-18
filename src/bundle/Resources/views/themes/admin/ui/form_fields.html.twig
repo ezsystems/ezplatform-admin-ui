@@ -1,9 +1,20 @@
-{% extends 'bootstrap_4_layout.html.twig' %}
+{% extends 'bootstrap_5_layout.html.twig' %}
+
+{% use '@ezdesign/ui/form_fields/toggle_widget.html.twig' %}
+{% use '@ezdesign/ui/form_fields/dropdown_widget.html.twig' %}
 
 {% block form_label -%}
-    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ez-label')|trim}) -%}
-    {{ parent() }}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ibexa-label')|trim}) -%}
+    {%- set is_only_errors = label is same as(false) -%}
+    {% if not is_only_errors -%}
+        {{ parent() }}
+    {%- endif -%}
 {%- endblock form_label %}
+
+{% block checkbox_radio_label -%}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ibexa-label ibexa-label--checkbox-radio')|trim}) -%}
+    {{ parent() }}
+{%- endblock checkbox_radio_label %}
 
 {% block ezsystems_ezplatform_type_udw_widget %}
     {{ form_widget(form.location) }}
@@ -35,7 +46,7 @@
             </div>
         {%- else -%}
             <div class="ez-instant-filter__group-item">
-                <svg class="ez-icon ez-icon--small">
+                <svg class="ibexa-icon ibexa-icon--small">
                     <use xlink:href="{{ ez_content_type_icon(choice.value) }}"></use>
                 </svg>
                 {{ form_widget(form[choice.value]) }}
@@ -64,13 +75,18 @@
 {%- block search_type_choice_widget_options -%}
     {%- for group_label, choice in options -%}
         <li class="ez-content-type-selector__item">
-            {{ form_widget(form[choice.value], {'attr': {'class': 'ez-input ez-input--checkbox', 'data-name': choice.label}, 'label_attr': {'class': 'checkbox-inline'}}) }}
+            {{ form_widget(form[choice.value], {'attr': {'data-name': choice.label}, 'label_attr': {'class': 'checkbox-inline'}}) }}
         </li>
     {%- endfor -%}
 {%- endblock -%}
 
 {%- block checkbox_widget -%}
-    {%- set attr = attr|merge({class: 'ez-input ez-input--checkbox'}) -%}
+    {%- set attr = attr|merge({class: 'ibexa-input ibexa-input--checkbox ' ~ attr.class|default('') }) -%}
+    {{ parent() }}
+{%- endblock -%}
+
+{%- block radio_widget -%}
+    {%- set attr = attr|merge({class: 'ibexa-input ibexa-input--radio ' ~ attr.class|default('') }) -%}
     {{ parent() }}
 {%- endblock -%}
 
@@ -91,8 +107,8 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore'|trans({},'trash')|desc('Restore') }}">
-        <svg class="ez-icon">
-            <use xlink:href="{{ ez_icon_path('restore') }}"></use>
+        <svg class="ibexa-icon ibexa-icon--small">
+            <use xlink:href="{{ ibexa_icon_path('restore') }}"></use>
         </svg>
         {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
     </button>
@@ -111,8 +127,8 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{'trash.button.restore_new_location'|trans({},'trash')|desc("Restore in a new Location") }}">
-        <svg class="ez-icon">
-            <use xlink:href="{{ ez_icon_path('restore-parent') }}"></use>
+        <svg class="ibexa-icon ibexa-icon--small">
+            <use xlink:href="{{ ibexa_icon_path('restore-parent') }}"></use>
         </svg>
         {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
     </button>
@@ -120,8 +136,20 @@
 
 {%- block number_widget -%}
     {%- set type = type|default('number') -%}
-    {{ block('form_widget_simple') }}
+    {{ parent() }}
 {%- endblock number_widget -%}
+
+{%- block password_widget -%}
+    {% set force_text = true %}
+    {%- set type = type|default('password') -%}
+    {{ block('form_widget_simple') }}
+{%- endblock password_widget -%}
+
+{%- block email_widget -%}
+    {% set force_text = true %}
+    {%- set type = type|default('email') -%}
+    {{ parent() }}
+{%- endblock email_widget -%}
 
 {%- block table_header_tool_btn -%}
     {%- set type = type|default('submit') -%}
@@ -136,8 +164,8 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type }}" {{ block('button_attributes') }} title="{{ title|default('') }}">
-        <svg class="ez-icon">
-            <use xlink:href="{{ ez_icon_path(icon|default('')) }}"></use>
+        <svg class="ibexa-icon ibexa-icon--small">
+            <use xlink:href="{{ ibexa_icon_path(icon|default('')) }}"></use>
         </svg>
     </button>
 {%- endblock table_header_tool_btn -%}
@@ -158,14 +186,19 @@
     <div class="ez-picker">
         <input type="text" class="ez-picker__input form-control" readonly="readonly">
         <button type="button" class="ez-picker__btn--clear-input">
-            <svg class="ez-icon ez-icon--medium">
-                <use xlink:href="{{ ez_icon_path('circle-close') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--medium">
+                <use xlink:href="{{ ibexa_icon_path('circle-close') }}"></use>
             </svg>
         </button>
         {% set attr = attr|merge({ 'hidden': true, 'class': 'ez-picker__form-input' }) %}
         {{ block('form_widget') }}
     </div>
 {%- endblock -%}
+
+{% block textarea_widget -%}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input ibexa-input--textarea')|trim}) %}
+    {{- parent() -}}
+{%- endblock textarea_widget %}
 
 {%- block richtext_widget -%}
     {% set attr = attr|merge({ 'hidden': true }) %}
@@ -174,13 +207,13 @@
         <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
         <div class="hidden" data-udw-config-name="richtext_embed" data-udw-config="{{ ez_udw_config('richtext_embed', udw_context) }}"></div>
         <div class="hidden" data-udw-config-name="richtext_embed_image" data-udw-config="{{ ez_udw_config('richtext_embed_image', udw_context) }}"></div>
-        <div class="ez-data-source__richtext" id="{{ form.vars.id }}__editable"></div>
-        <div class="ez-richtext-tools">
-            <ul class="ez-elements-path"></ul>
+        <div class="ibexa-data-source__richtext" id="{{ form.vars.id }}__editable"></div>
+        <div class="ibexa-richtext-tools">
+            <ul class="ibexa-elements-path"></ul>
             {% if ez_user_settings['character_counter'] == 'enabled' %}
-                <div class="ez-character-counter">
-                    <span class="ez-character-counter__word-count">0</span> {{ 'character_counter.words'|trans|desc('words') }}
-                    <span class="ez-character-counter__character-count">0</span> {{ 'character_counter.characters'|trans|desc('characters') }}
+                <div class="ibexa-character-counter">
+                    <span class="ibexa-character-counter__word-count">0</span> {{ 'character_counter.words'|trans|desc('words') }}
+                    <span class="ibexa-character-counter__character-count">0</span> {{ 'character_counter.characters'|trans|desc('characters') }}
                 </div>
             {% endif %}
         </div>
@@ -242,10 +275,75 @@
 
 {% block form_errors -%}
     {%- if errors|length > 0 -%}
+        {%- set form_errors_attr = form_errors_attr|default({})|merge({class: (form_errors_attr.class|default('') ~ ' ibexa-form-error')|trim}) -%}
         {%- for error in errors -%}
-            <em class="ez-block-config__error">{{ error.message }}</em>
+            <em {% with { attr: form_errors_attr } %}{{ block('attributes') }}{% endwith %}>
+                <svg class="ibexa-icon ibexa-icon--small ibexa-form-error__icon">
+                    <use xlink:href="{{ ibexa_icon_path('warning-triangle') }}"></use>
+                </svg> 
+                {{ error.message }}
+            </em>
         {%- endfor -%}
     {%- endif -%}
 {%- endblock form_errors %}
 
 {% block form_label_errors %}{% endblock form_label_errors %}
+
+{%- block form_widget_simple -%}
+    {%- set is_text_input = type|default('text') == 'text' or force_text|default(false) -%}
+    {%- if is_text_input -%}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input ibexa-input--text')|trim}) -%}
+        {%- set empty_placeholder_for_hiding_clear_btn_with_css = ' ' -%}
+        {%- set attr = attr|merge({placeholder: (attr.placeholder is defined) ? attr.placeholder : empty_placeholder_for_hiding_clear_btn_with_css}) -%}
+        {%- set input_html -%}
+            {{ parent() }}
+        {%- endset -%}
+        {%- embed '@ezdesign/ui/component/input_text.html.twig' -%}
+            {% block content %}
+                {{ input_html }}
+            {% endblock %}
+        {%- endembed -%}
+    {%- else -%}
+        {{ parent() }}
+    {%- endif -%}
+{%- endblock form_widget_simple -%}
+
+{% block form_help -%}
+    {%- if help is not empty -%}
+        {%- set help_attr = help_attr|merge({class: (help_attr.class|default('') ~ ' ibexa-form-help')|trim}) -%}
+        <small id="{{ id }}_help"{% with { attr: help_attr } %}{{ block('attributes') }}{% endwith %}>
+            <svg class="ibexa-icon ibexa-icon--small ibexa-form-help__icon">
+                <use xlink:href="{{ ibexa_icon_path('system-information') }}"></use>
+            </svg>
+            {%- if translation_domain is same as(false) -%}
+                {%- if help_html is same as(false) -%}
+                    {{- help -}}
+                {%- else -%}
+                    {{- help|raw -}}
+                {%- endif -%}
+            {%- else -%}
+                {%- if help_html is same as(false) -%}
+                    {{- help|trans(help_translation_parameters, translation_domain) -}}
+                {%- else -%}
+                    {{- help|trans(help_translation_parameters, translation_domain)|raw -}}
+                {%- endif -%}
+            {%- endif -%}
+        </small>
+    {%- endif -%}
+{%- endblock form_help %}
+
+{% block form_row -%}
+    {%- if compound is defined and compound -%}
+        {%- set element = 'fieldset' -%}
+    {%- endif -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <{{ element|default('div') }}{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' form-group')|trim})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form, widget_attr) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </{{ element|default('div') }}>
+{%- endblock form_row %}

@@ -4,13 +4,20 @@
 }
 
 @mixin input-invalid {
-    background: $ibexa-white;
-    border-width: calculateRem(1px) calculateRem(1px) calculateRem(1px) calculateRem(3px);
-    border-color: $ibexa-color-base-dark $ibexa-color-base-dark $ibexa-color-base-dark $ibexa-color-danger;
+    color: $ibexa-color-danger;
+    background-image: none;
+    border-color: $ibexa-color-danger;
+    background-color: $ibexa-color-danger-100;
 }
 
 @mixin area-invalid {
-    border-left: calculateRem(3px) solid $ibexa-color-danger;
+    color: $ibexa-color-danger;
+    border-color: $ibexa-color-danger;
+    background-color: $ibexa-color-danger-100;
+
+    .ibexa-btn {
+        background-color: $ibexa-color-danger-100;
+    }
 }
 
 @mixin error-input {
@@ -47,27 +54,4 @@
 
     flex-basis: 100%;
     margin: 0 0 calculateRem(10px) calculateRem(2px);
-}
-
-@mixin radio-input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    position: relative;
-    display: inline-block;
-    width: calculateRem(16px);
-    height: calculateRem(16px);
-    background-color: $ibexa-white;
-    border-radius: calculateRem(16px);
-    border: calculateRem(1px) solid $ibexa-color-base-dark;
-    outline: none;
-
-    &:active {
-        @include input-active;
-    }
-
-    &:checked {
-        border: calculateRem(1px) solid $ibexa-color-primary;
-        box-shadow: inset 0 0 0 calculateRem(4px) $ibexa-color-primary;
-    }
 }

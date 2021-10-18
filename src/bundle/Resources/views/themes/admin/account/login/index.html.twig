@@ -1,8 +1,7 @@
 {% extends '@ezdesign/account/base.html.twig' %}
 
 {%- block content -%}
-    <h2 class="ez-login__actions-headline">{{ 'base.sign_in'|trans|desc('Sign in to IBEXA DXP') }}</h2>
-    <p class="ez-login__actions-subheadline">{{ 'base.enter_credentials'|trans|desc('Enter your login credentials below.') }}</p>
+    <h2 class="ibexa-login__actions-headline">{{ 'base.get_started'|trans|desc('Get started') }}</h2>
 
     {% block login_form %}
         {{ ez_render_component_group('login-form-before') }}
@@ -11,19 +10,19 @@
             <fieldset>
                 {% block login_form_errors %}
                     {% if error %}
-                        <span class="ez-login__errors-container">{{ error.message|trans }}</span>
+                        <span class="ibexa-login__errors-container">{{ error.message|trans }}</span>
                     {% endif %}
                 {% endblock %}
 
                 {% block login_form_fields %}
                     <div class="form-group{% if error %} has-error{% endif %}">
-                        <div class="ez-login__input-label-wrapper">
-                            <label class="ez-login__input-label" for="username">{{ 'authentication.username'|trans|desc('Username') }}</label>
+                        <div class="ibexa-login__input-label-wrapper">
+                            <label class="ibexa-label" for="username">{{ 'authentication.username'|trans|desc('Username') }}</label>
                         </div>
                         <input
                             type="text"
                             id="username"
-                            class="form-control ez-login__input ez-login__input--username"
+                            class="form-control ibexa-input ibexa-input--text ibexa-login__input"
                             name="_username"
                             value="{{ last_username }}"
                             required="required"
@@ -33,24 +32,23 @@
                         />
                     </div>
                     <div class="form-group{% if error %} has-error{% endif %} position-relative">
-                        <div class="ez-login__input-label-wrapper">
-                            <label class="ez-login__input-label" for="password">{{ 'authentication.password'|trans|desc('Password') }}</label>
-                            <a href="{{ path('ezplatform.user.forgot_password') }}" tabindex="4">{{ 'authentication.forgot_password'|trans|desc('Forgot password?') }}</a>
+                        <div class="ibexa-login__input-label-wrapper">
+                            <label class="ibexa-label" for="password">{{ 'authentication.password'|trans|desc('Password') }}</label>
                         </div>
                         <input
                             type="password"
                             id="password"
-                            class="form-control ez-login__input ez-login__input--password"
+                            class="form-control ibexa-input ibexa-input--text ibexa-login__input--password"
                             name="_password"
                             required="required"
                             tabindex="2"
                         />
-                        <button type="button" class="ez-login__password-visibility-toggler" tabindex="5">
-                            <svg class="ez-icon ez-icon--medium ez-icon--dark ez-icon--view">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ ez_icon_path('view') }}"></use>
+                        <button type="button" class="ibexa-login__password-visibility-toggler" tabindex="5">
+                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--dark ibexa-icon--view">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ ibexa_icon_path('view') }}"></use>
                             </svg>
-                            <svg class="ez-icon ez-icon--medium ez-icon--dark ez-icon--view-hide d-none">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ ez_icon_path('view-hide') }}"></use>
+                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--dark ibexa-icon--view-hide d-none">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ ibexa_icon_path('view-hide') }}"></use>
                             </svg>
                         </button>
                     </div>
@@ -59,9 +57,12 @@
                 {% endblock %}
 
                 {% block login_form_buttons %}
-                    <button type="submit" class="btn btn-primary ez-login__btn ez-login__btn--sign-in" tabindex="3">
-                        {{ 'authentication.sign_in'|trans|desc('Sign in') }}
+                    <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-login__btn ibexa-login__btn--sign-in" tabindex="3">
+                        {{ 'authentication.login'|trans|desc('Login') }}
                     </button>
+                    <div class="ibexa-login__link-wrapper">
+                        <a href="{{ path('ezplatform.user.forgot_password') }}" tabindex="4">{{ 'authentication.forgot_password'|trans|desc('Forgot your password?') }}</a>
+                    </div>
                 {% endblock %}
             </fieldset>
         </form>

@@ -12,9 +12,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">{{ 'url_wildcard.modal.create.title'|trans|desc('Create a new URL wildcard') }}</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'url_wildcard.modal.create.close'|trans|desc('Close') }}">
-                    <svg class="ez-icon ez-icon--small" aria-hidden="true">
-                        <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="{{ 'url_wildcard.modal.create.close'|trans|desc('Close') }}">
+                    <svg class="ibexa-icon ibexa-icon--small" aria-hidden="true">
+                        <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                     </svg>
                 </button>
             </div>
@@ -30,8 +30,8 @@
                 <div class="ez-modal__info-text">{{ 'url_wildcard.modal.create.redirect.helper'|trans|desc('When checked, the URL displayed will be the URL of the destination. When unchecked, the wildcard will not redirect to the destination and the URL will stay the same.') }}</div>
             </div>
             <div class="modal-footer">
-                {{ form_widget(form.create, {'attr': {'class': 'btn btn-primary', 'disabled': 'disabled'}}) }}
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                {{ form_widget(form.create, {'attr': {'class': 'btn ibexa-btn ibexa-btn--primary', 'disabled': 'disabled'}}) }}
+                <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
                     {{ 'url_wildcard.modal.create.cancel'|trans|desc('Cancel') }}
                 </button>
             </div>

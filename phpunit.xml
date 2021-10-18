@@ -1,4 +1,5 @@
 <phpunit
+
         backupGlobals="false"
         backupStaticAttributes="false"
         bootstrap="bootstrap.php"
@@ -10,8 +11,11 @@
         <testsuite name="EzSystems\EzPlatformAdminUiBundle">
             <directory>src/bundle/Tests/</directory>
         </testsuite>
-        <testsuite name="EzSystems\EzPlatformAdminUi">
-            <directory>src/lib/Tests/</directory>
+        <testsuite name="EzSystems\EzPlatformAdminUiBundle">
+            <directory>src/bundle/Tests/</directory>
+        </testsuite>
+        <testsuite name="Ibexa\Tests\AdminUi">
+            <directory>tests/lib/</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -20,6 +24,7 @@
             <exclude>
                 <directory>src/bundle/Tests/</directory>
                 <directory>src/lib/Tests/</directory>
+                <directory>tests/lib/</directory>
             </exclude>
         </whitelist>
     </filter>

@@ -1,22 +1,22 @@
 {% trans_default_domain 'content_type' %}
 
-<div class="ez-extra-actions ez-extra-actions--edit ez-extra-actions--hidden {% if form.language.vars.choices|length == 1 %} ez-extra-actions--prevent-show {% endif %}" data-actions="edit">
-    <div class="ez-extra-actions__header">{{ 'content_type.edit.select_language'|trans|desc('Select a language:') }}</div>
-    <div class="ez-extra-actions__content">
+<div class="ibexa-extra-actions ibexa-extra-actions--edit ibexa-extra-actions--hidden {% if form.language.vars.choices|length == 1 %} ibexa-extra-actions--prevent-show {% endif %}" data-actions="edit">
+    <div class="ibexa-extra-actions__header">{{ 'content_type.edit.select_language'|trans|desc('Select a language:') }}</div>
+    <div class="ibexa-extra-actions__content">
         {{ form_start(form, { 'action': path('ezplatform.content_type.edit', {
             'contentTypeGroupId': form.vars.value.contentTypeGroup.id,
             'contentTypeId': form.vars.value.contentType.id
         }) }) }}
         {{ form_widget(form.content_type, { 'attr': {
             'hidden': 'hidden',
-            'class': 'ez-extra-actions__form-field'
+            'class': 'ibexa-extra-actions__form-field'
         } }) }}
         {{ form_widget(form.content_type_group, { 'attr': {
             'hidden': 'hidden',
-            'class': 'ez-extra-actions__form-field'
+            'class': 'ibexa-extra-actions__form-field'
         } }) }}
         {{ form_widget(form.language, { 'attr': {
-            'class': 'ez-extra-actions__form-values'
+            'class': 'ibexa-extra-actions__form-values'
         } }) }}
         {{ form_end(form) }}
     </div>

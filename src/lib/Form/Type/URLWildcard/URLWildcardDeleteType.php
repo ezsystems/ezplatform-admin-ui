@@ -29,6 +29,7 @@ final class URLWildcardDeleteType extends AbstractType
                 'required' => false,
                 'allow_add' => true,
                 'label' => false,
+                'entry_options' => ['label' => false],
             ])
             ->add('delete', SubmitType::class, [
                 'attr' => ['hidden' => true],

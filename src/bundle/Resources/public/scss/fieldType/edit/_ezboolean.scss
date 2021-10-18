@@ -1,7 +1,5 @@
-.ez-field-edit--ezboolean {
-    @include checkbox-switcher();
-
-    .ez-data-source__label:after {
+.ibexa-field-edit--ezboolean {
+    .ibexa-data-source__label:after {
         display: none;
     }
 }

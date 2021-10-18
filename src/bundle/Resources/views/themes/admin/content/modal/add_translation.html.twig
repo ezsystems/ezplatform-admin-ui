@@ -1,6 +1,6 @@
 {% trans_default_domain 'locationview' %}
 
-{% form_theme form '@ezdesign/ui/form_fields.html.twig' '@ezdesign/content/translation_add_form_fields.html.twig' %}
+{% form_theme form '@ezdesign/content/translation_add_form_fields.html.twig' %}
 
 <div class="modal fade ez-modal ez-translation" id="add-translation-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -9,35 +9,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ 'tab.translations.add.title'|trans|desc('Create a new translation') }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'translation.modal_close'|trans|desc('Close') }}">
-                        <svg class="ez-icon ez-icon--medium" aria-hidden="true">
-                            <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="{{ 'translation.modal_close'|trans|desc('Close') }}">
+                        <svg class="ibexa-icon ibexa-icon--medium" aria-hidden="true">
+                            <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                         </svg>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="ez-translation__title">{{ 'tab.translations.add.language'|trans|desc('Select a language for the new translation') }}</div>
-                    {{ form_widget(form.language, {'attr': {'hidden': 'hidden', 'class': 'ez-translation__language-wrapper ez-translation__language-wrapper--language'}}) }}
-                    {% include '@ezdesign/ui/component/custom_dropdown.html.twig' with {
-                        choices: form.language.vars.choices,
-                        value: form.language.vars.value,
-                        source_selector: '.ez-translation__language-wrapper--language',
-                        choice_translation_domain: false
-                    } %}
-
+                    {{ form_widget(form.language, {'attr': {'class': 'ez-translation__language-wrapper ez-translation__language-wrapper--language'}}) }}
                     <div class="ez-translation__title mt-4">{{ 'tab.translations.add.base_language'|trans|desc('Base this translation on an existing translation') }}</div>
-                    {{ form_widget(form.base_language, {'attr': {'hidden': 'hidden', 'class': 'ez-translation__language-wrapper ez-translation__language-wrapper--base-language'}}) }}
-                    {% include '@ezdesign/ui/component/custom_dropdown.html.twig' with {
-                        choices: form.base_language.vars.choices,
-                        value: form.base_language.vars.value,
-                        source_selector: '.ez-translation__language-wrapper--base-language',
-                        choice_translation_domain: false
-                    } %}
-
+                    {{ form_widget(form.base_language, {'attr': {'class': 'ez-translation__language-wrapper ez-translation__language-wrapper--base-language'}}) }}
                 </div>
                 <div class="modal-footer">
-                    {{ form_widget(form.add, {'attr': {'class': 'btn btn-primary ez-btn--create-translation', 'disabled': 'disabled'}}) }}
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    {{ form_widget(form.add, {'attr': {'class': 'btn ibexa-btn ibexa-btn--primary ibexa-btn--create-translation', 'disabled': 'disabled'}}) }}
+                    <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
                         {{ 'tab.translations.add.cancel'|trans|desc('Cancel') }}
                     </button>
                 </div>

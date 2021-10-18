@@ -1,0 +1,41 @@
+{% trans_default_domain 'content' %}
+
+{% set is_autosave_enabled = ez_user_settings['autosave'] is same as('enabled') %}
+{% set form_has_autosave = form.autosave is defined %}
+
+<div class="ibexa-content-edit-header">
+	<div class="container">
+		<div class="row ibexa-content-edit-header__row ibexa-content-edit-header__row--top">
+			<div class="col-6 offset-6 ibexa-content-edit-header__column ibexa-context-menu-wrapper">
+				<div class="ibexa-content-edit-header__context-actions">
+					{% if (description is defined and description|length) or content is defined %}
+						<div class="ibexa-content-edit-header__tooltip" title="{% include '@ezdesign/content/edit/content_header_tooltip.html.twig' %}">
+							<svg class="ibexa-icon ibexa-icon--small">
+								<use xlink:href="{{ ibexa_icon_path('about') }}"></use>
+							</svg>
+						</div>
+					{% endif %}
+
+					{{ context_actions|default('')|raw }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="ibexa-content-edit-header__separate-div"></div>
+
+	<div class="container">
+		<div class="row ibexa-content-edit-header__row ibexa-content-edit-header__row--bottom">
+			<div class="col-5 offset-1 ibexa-content-edit-header__column ibexa-content-edit-header__column--left">
+				<label class="ibexa-content-edit-header__action-name">{{ action_name }}</label>
+				<h1>{{ title }}</h1>
+				<div class="ibexa-content-edit-header__location">
+					{{ 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%')|raw }}
+				</div>
+			</div>
+			<div class="col-6 ibexa-content-edit-header__column ibexa-content-edit-header__column--right">
+				{% include '@ezdesign/ui/autosave.html.twig' %}
+			</div>
+		</div>
+	</div>
+</div>

@@ -3,13 +3,13 @@
 {% form_theme form_reset_user_password '@ezdesign/account/form_fields.html.twig'  %}
 
 {%- block content -%}
-    <h2 class="ez-login__actions-headline">{{ 'ezplatform.reset_user_password.change_password'|trans|desc('Change password') }}</h2>
+    <h2 class="ibexa-login__actions-headline">{{ 'ezplatform.reset_user_password.change_password'|trans|desc('Change password') }}</h2>
     {% if form_reset_user_password is defined %}
         {{ form_start(form_reset_user_password, {'attr': {'class': 'ez-form-validate'}}) }}
         <fieldset>
             {{ form_widget(form_reset_user_password.new_password) }}
         </fieldset>
-        {{ form_widget(form_reset_user_password.update, {'attr': {'class': 'btn btn-primary'}}) }}
+        {{ form_widget(form_reset_user_password.update, {'attr': {'class': 'btn ibexa-btn ibexa-btn--primary'}}) }}
         {{ form_end(form_reset_user_password) }}
     {% endif %}
 

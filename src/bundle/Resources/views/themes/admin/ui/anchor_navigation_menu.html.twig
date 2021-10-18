@@ -1,0 +1,34 @@
+<div class="ibexa-anchor-navigation-menu">
+    <div class="ibexa-anchor-navigation-menu__header">
+        {% if close_href is defined %}
+            <a
+                class="btn ibexa-btn ibexa-btn--no-text ibexa-anchor-navigation-menu__back"
+                href="{{ close_href }}"
+                title="{{ 'anchor_navigation.close'|trans|desc('Close') }}"
+            >
+                <svg class="ibexa-icon ibexa-icon--small">
+                    <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
+                </svg>
+            </a>
+        {% endif %}
+    </div>
+
+    <div class="ibexa-anchor-navigation-menu__body">
+        {% if items|default([])|length > 1 %}
+            <ul class="ibexa-anchor-navigation-menu__items">
+                {% for item in items %}
+                    {% set sanitized_item = item|slug %}
+
+                    <li class="ibexa-anchor-navigation-menu__item">
+                        <button
+                            class="ibexa-anchor-navigation-menu__item-btn {% if loop.first %}ibexa-anchor-navigation-menu__item-btn--active{% endif %}" 
+                            data-anchor-target-section-id="#{{ sanitized_item }}"
+                        >
+                            {{ item }}
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>

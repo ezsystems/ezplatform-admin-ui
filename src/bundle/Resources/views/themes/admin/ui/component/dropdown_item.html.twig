@@ -1,0 +1,24 @@
+{% set item_label = translation_domain is same as(false) ? choice.label : choice.label|trans({}, translation_domain) %}
+{% set preferred_choice = preferred_choice|default(false) %}
+
+{% if choice.choices is defined %}
+    <li class="ibexa-dropdown__item-group">
+        <label class="ibexa-dropdown__item-group-label">{{ item_label }}</label>
+        <ul class="ibexa-dropdown__item-group-list">
+            {% for child in choice.choices %}
+                {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice: child, preferred_choice, custom_form } %}
+            {% endfor %}
+        </ul>
+    </li>
+{% else %}
+    <li
+        data-value="{{ choice.value }}"
+        data-filter-value="{{ item_label }}"
+        class="ibexa-dropdown__item {% if preferred_choice %}ibexa-dropdown__item--preferred-choice{% endif %} {% if custom_form ? choice.value == value : choice is selectedchoice(value) %}ibexa-dropdown__item--selected{% endif %}"
+    >
+        {% if multiple is defined and multiple %}
+            <input type="checkbox" name="dropdown-checkbox" class="ibexa-input ibexa-input--checkbox" {% if custom_form ? choice.value == value : choice is selectedchoice(value) %}checked{% endif %} />
+        {% endif %}
+        <span class="ibexa-dropdown__item-label">{{ item_label }}</span>
+    </li>
+{% endif %}

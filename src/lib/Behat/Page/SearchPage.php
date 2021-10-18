@@ -66,10 +66,10 @@ class SearchPage extends Page
     {
         return [
             new VisibleCSSLocator('inputField', '.ez-search-form #search_query'),
-            new VisibleCSSLocator('buttonSearch', '.ez-btn--search'),
-            new VisibleCSSLocator('pageTitle', '.ez-page-title .ez-page-title__content-name'),
+            new VisibleCSSLocator('buttonSearch', '.ibexa-btn--search'),
+            new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
             new VisibleCSSLocator('table', '.ez-content-container table.table'),
-            new VisibleCSSLocator('emptyTable', '.ez-table-header__headline'),
+            new VisibleCSSLocator('emptyTable', '.ibexa-table-header__headline'),
         ];
     }
 }

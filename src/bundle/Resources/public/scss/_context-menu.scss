@@ -1,0 +1,41 @@
+.ibexa-context-menu-wrapper {
+    display: flex;
+}
+
+.ibexa-context-menu {
+    display: flex;
+    justify-content: flex-end;
+    height: calculateRem(48px);
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    &__item {
+        padding-left: calculateRem(16px);
+
+        &--hidden {
+            width: 0;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: none;
+            overflow: hidden;
+        }
+
+        &--more {
+            position: relative;
+        }
+    }
+
+    .ibexa-popup-menu {
+        position: absolute;
+        right: 0;
+        top: calculateRem(70px);
+        z-index: 50;
+
+        &--hidden {
+            display: none;
+        }
+    }
+}

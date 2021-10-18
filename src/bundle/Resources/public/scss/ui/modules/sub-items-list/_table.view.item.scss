@@ -3,28 +3,15 @@
         display: block;
     }
 
-    &__text-wrapper {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-
     &__cell {
-        padding-top: calculateRem(8px);
-        padding-bottom: calculateRem(8px);
-        padding-left: calculateRem(16px);
-        border-top: calculateRem(1px) solid transparent;
-        border-bottom: calculateRem(1px) solid transparent;
-        font-size: calculateRem(16px);
-        line-height: calculateRem(20px);
-        vertical-align: middle;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
-        &:first-child {
-            border-left: calculateRem(1px) solid transparent;
+        .ibexa-table.table &--shadow-left {
+            box-shadow: calculateRem(-13px) calculateRem(5px) calculateRem(20px) 0 rgba($ibexa-color-info, 0.1);
         }
 
-        &:last-child {
-            border-right: calculateRem(1px) solid transparent;
+        .ibexa-table.table &--shadow-right {
+            box-shadow: calculateRem(13px) calculateRem(5px) calculateRem(20px) 0 rgba($ibexa-color-info, 0.1);
         }
 
         &--content-type {
@@ -32,7 +19,7 @@
         }
 
         &--name .c-table-view-item__text-wrapper {
-            max-width: calculateRem(260px);
+            min-width: calculateRem(120px);
         }
 
         &--modified .c-table-view-item__text-wrapper {
@@ -45,30 +32,13 @@
             left: 0;
             width: calculateRem(30px);
             line-height: 0;
-            margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
             background: $ibexa-white;
-        }
-
-        &--icon {
-            position: sticky;
-            z-index: 1;
-            left: calculateRem(34px);
-            padding-right: calculateRem(8px);
-            width: calculateRem(24px);
-            text-align: right;
-            line-height: 0;
-            height: calculateRem(47px);
-            background: $ibexa-white;
-
-            .ez-icon {
-                fill: $ibexa-color-base-dark;
-            }
         }
 
         &--name {
             position: sticky;
             z-index: 1;
-            left: calculateRem(78px);
+            left: calculateRem(48px);
             padding-left: 0;
             padding-right: calculateRem(5px);
             background: $ibexa-white;
@@ -84,8 +54,13 @@
             right: 0;
             width: calculateRem(70px);
             padding: 0;
-            margin-top: -0.5px; // Fixes borders alignment on Safari and Edge
             background: $ibexa-white;
+        }
+
+        &--toggler {
+            position: absolute;
+            height: calculateRem(55px);
+            width: calculateRem(80px);
         }
     }
 
@@ -99,14 +74,7 @@
 
     &__priority-wrapper {
         position: relative;
-        min-width: calculateRem(140px);
-
-        &--focused {
-            .ez-input {
-                border-radius: $ibexa-border-radius;
-                border: calculateRem(2px) solid $ibexa-color-primary;
-            }
-        }
+        min-width: calculateRem(145px);
     }
 
     &__priority-actions {
@@ -116,22 +84,13 @@
         justify-content: center;
         right: 0;
         top: 0;
-        width: calculateRem(62px);
-        height: calculateRem(44px);
-        background: $ibexa-white;
     }
 
     &__priority-value {
         max-width: 100%;
-        height: calculateRem(40px);
-        margin: calculateRem(2px) 0;
         padding: 0 calculateRem(10px);
-        border: none;
-        border-radius: $ibexa-border-radius;
 
         &[readonly] {
-            background-color: $ibexa-white;
-            color: $ibexa-color-font;
             cursor: pointer;
         }
 
@@ -159,34 +118,8 @@
     }
 
     &__btn {
-        color: $ibexa-white;
-        border: calculateRem(1px) solid transparent;
-        width: calculateRem(48px);
-        height: calculateRem(48px);
-        transition: background 0.3s $ibexa-admin-transition;
-        cursor: pointer;
-
         &--submit {
-            margin-right: calculateRem(4px);
-            padding: 0;
-            border-radius: $ibexa-border-radius;
-            background: $ibexa-color-primary;
-        }
-
-        &--submit:hover,
-        &--submit:focus {
-            background: $ibexa-color-primary-hover;
-        }
-
-        &--cancel {
-            padding: 0;
-            border-radius: $ibexa-border-radius;
-            background: $ibexa-color-base-dark;
-        }
-
-        &--cancel:hover,
-        &--cancel:focus {
-            background: darken($ibexa-color-base-dark, 15%);
+            margin-right: calculateRem(8px);
         }
 
         &--edit {
@@ -201,30 +134,21 @@
                 display: flex;
                 align-items: center;
             }
-
-            .ez-icon {
-                fill: $ibexa-black;
-            }
-
-            &:hover,
-            &:focus {
-                .ez-icon {
-                    fill: $ibexa-color-primary;
-                }
-            }
         }
     }
 
     &__link {
         display: inline-block;
-        color: $ibexa-color-font;
         cursor: pointer;
-        transition: color 0.3s $ibexa-admin-transition;
-        text-decoration: underline;
+    }
 
-        &:hover,
-        &:focus {
-            color: $ibexa-color-primary;
+    &__icon-with-name-wrapper {
+        display: flex;
+        align-items: center;
+
+        .ibexa-icon {
+            flex-shrink: 0;
+            margin-right: calculateRem(16px);
         }
     }
 
@@ -233,19 +157,6 @@
             &__cell,
             &__priority-actions {
                 background: $ibexa-color-base-light;
-            }
-        }
-    }
-}
-
-.c-table-view--hoverable {
-    .c-table-view-item:hover {
-        .c-table-view-item__cell {
-            &--checkbox,
-            &--icon,
-            &--name,
-            &--actions {
-                background-color: $ibexa-color-base-pale;
             }
         }
     }

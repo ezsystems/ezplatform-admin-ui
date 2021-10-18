@@ -65,7 +65,7 @@ class Date extends FieldTypeComponent
     public function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('fieldInput', 'input.flatpickr-input.ez-data-source__input'),
+            new VisibleCSSLocator('fieldInput', 'input.flatpickr-input.ibexa-data-source__input'),
         ];
     }
 

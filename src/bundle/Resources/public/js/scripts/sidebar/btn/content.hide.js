@@ -1,5 +1,5 @@
-(function(global, doc, $) {
-    const hideButton = doc.querySelector('.ez-btn--hide');
+(function(global, doc, bootstrap) {
+    const hideButton = doc.querySelector('.ibexa-btn--hide');
     const modal = doc.querySelector('#hide-content-modal');
     const form = doc.querySelector('form[name="content_visibility_update"]');
     const visiblity = doc.querySelector('#content_visibility_update_visible');
@@ -9,7 +9,7 @@
     }
 
     if (modal) {
-        modal.querySelector('.btn-confirm').addEventListener('click', () => {
+        modal.querySelector('.ibexa-btn--confirm').addEventListener('click', () => {
             visiblity.value = 0;
             form.submit();
         });
@@ -19,7 +19,7 @@
         'click',
         () => {
             if (modal) {
-                $(modal).modal('show');
+                bootstrap.Modal.getOrCreateInstance(modal).show();
             } else {
                 visiblity.value = 0;
                 form.submit();
@@ -27,4 +27,4 @@
         },
         false
     );
-})(window, window.document, window.jQuery);
+})(window, window.document, window.bootstrap);

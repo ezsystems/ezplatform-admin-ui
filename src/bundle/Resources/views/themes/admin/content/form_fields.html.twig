@@ -1,4 +1,4 @@
-{% use 'bootstrap_4_layout.html.twig' %}
+{% extends '@ezdesign/ui/form_fields.html.twig' %}
 
 {# specific fieldtypes theming #}
 {% use '@ezdesign/ui/field_type/edit/ezauthor.html.twig' %}
@@ -26,7 +26,7 @@
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {%- for error in errors -%}
-            <em class="ez-field-edit__error">{{ error.message }}</em>
+            <em class="ibexa-field-edit__error ez-field-edit__error">{{ error.message }}</em>
         {%- endfor -%}
     {%- endif -%}
 {%- endblock -%}
@@ -42,24 +42,28 @@
 {%- endblock %}
 
 {% block form_row_subfield -%}
-    {% set wrapper_class = 'ez-data-source__field ez-data-source__field--' ~ name %}
+    {% set wrapper_class = 'ibexa-data-source__field ibexa-data-source__field--' ~ name ~ ' ez-data-source__field ez-data-source__field--' ~ name %}
     {% set wrapper_class = wrapper_class|replace({'___name___': name}) %}
-    {% if required %}{% set wrapper_class = (wrapper_class ~ ' ez-data-source__field--required')|trim %}{% endif %}
+    {% if required %}{% set wrapper_class = (wrapper_class ~ ' ibexa-data-source__field--required ez-data-source__field--required')|trim %}{% endif %}
     {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' is-invalid')|trim %}{% endif %}
 
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ez-data-source__label')|trim}) %}
-    {% set label_wrapper_attr = label_wrapper_attr|default({})|merge({'class': (label_wrapper_attr.class|default('') ~ ' ez-data-source__label-wrapper')|trim}) %}
-    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-data-source__input')|trim}) %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ibexa-label ibexa-data-source__label ez-data-source__label')|trim}) %}
+    {% set label_wrapper_attr = label_wrapper_attr|default({})|merge({'class': (label_wrapper_attr.class|default('') ~ ' ibexa-data-source__label-wrapper ez-data-source__label-wrapper')|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ibexa-data-source__input ez-data-source__input ibexa-input--small')|trim}) %}
     {% set wrapper_attr = wrapper_attr|default({})|merge({class: (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
-    {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({class: (widget_wrapper_attr.class|default('') ~ ' ez-data-source__input-wrapper')|trim}) %}
+    {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({class: (widget_wrapper_attr.class|default('') ~ ' ibexa-data-source__input-wrapper ez-data-source__input-wrapper')|trim}) %}
+
+    {% if required %}{% set label_attr = label_attr|merge({'class': label_attr.class ~ ' required' }) %}{% endif %}
 
     <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
         <div{% with { attr: label_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
             {{- block('form_label') }}
-            {{- block('form_errors') -}}
         </div>
         <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
             {{- form_widget(form, {'attr': attr}) -}}
+        </div>
+        <div class="ibexa-form-error">
+            {{- block('form_errors') -}}
         </div>
     </div>
 {%- endblock %}
@@ -70,11 +74,11 @@
     {% set translation_mode = fieldtype.vars.mainLanguageCode != fieldtype.vars.languageCode %}
     {% set fieldtype_is_not_translatable = translation_mode and not fieldtype.vars.value.fieldDefinition.isTranslatable %}
 
-    {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({'class': (widget_wrapper_attr.class|default('') ~ ' ez-field-edit__data')|trim}) %}
-    {% set wrapper_class = 'ez-field-edit ez-field-edit--' ~ fieldtype_identifier %}
+    {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({'class': (widget_wrapper_attr.class|default('') ~ ' ibexa-field-edit__data ez-field-edit__data')|trim}) %}
+    {% set wrapper_class = 'ibexa-field-edit ibexa-field-edit--' ~ fieldtype_identifier ~ ' ez-field-edit ez-field-edit--' ~ fieldtype_identifier %}
 
     {% if fieldtype.vars.disabled %}
-        {% set wrapper_class = wrapper_class ~ ' ez-field-edit--disabled' %}
+        {% set wrapper_class = wrapper_class ~ ' ibexa-field-edit--disabled ez-field-edit--disabled' %}
         {% set attr = attr|merge({'readonly': 'readonly'}) %}
     {% endif %}
 
@@ -85,46 +89,49 @@
         {% endif %}
     {% endfor %}
 
-    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ez-field-edit--required')|trim %}{% endif %}
+    {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ibexa-field-edit--required ez-field-edit--required')|trim %}{% endif %}
     {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' is-invalid')|trim %}{% endif %}
     {% if fieldtype_is_not_translatable %}
-        {% set wrapper_class = (wrapper_class|default('') ~ ' ez-field-edit--nontranslatable')|trim %}
+        {% set wrapper_class = (wrapper_class|default('') ~ ' ibexa-field-edit--nontranslatable ez-field-edit--nontranslatable')|trim %}
         {% set attr = attr|merge({'readonly': 'readonly'}) %}
     {% endif %}
-
-    {% set label_wrapper_attr = label_wrapper_attr|default({})|merge({'class': (label_wrapper_attr.class|default('') ~ 'ez-field-edit__label-wrapper')|trim}) %}
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ez-field-edit__label')|trim}) %}
-    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-data-source__input')|trim}) %}
+    {% set label_wrapper_attr = label_wrapper_attr|default({})|merge({'class': (label_wrapper_attr.class|default('') ~ 'ibexa-field-edit__label-wrapper ez-field-edit__label-wrapper')|trim}) %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ibexa-label ibexa-field-edit__label ez-field-edit__label')|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ibexa-data-source__input ez-data-source__input')|trim}) %}
     {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
 
     {% set field_type_descriptions = fieldtype.vars.value.fieldDefinition.descriptions %}
 
+    {% if required %}{% set label_attr = label_attr|merge({'class': label_attr.class ~ ' required' }) %}{% endif %}
+    {% if compound %}{% set widget_wrapper_attr = widget_wrapper_attr|merge({'class': widget_wrapper_attr.class ~ ' ibexa-field-edit__data--compound' }) %}{% endif %}
+
     <div {% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
         <div{% with { attr: label_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
             {% with { 'compound': false } %}{{- block('form_label') }}{% endwith %}
-            {% if field_type_descriptions[fieldtype.vars.languageCode] is defined and field_type_descriptions[fieldtype.vars.languageCode] != '' %}
-                <span class="ez-field-edit__icon-wrapper" title="{{ field_type_descriptions[fieldtype.vars.languageCode] }}">
-                    <svg class="ez-icon ez-icon--medium">
-                        <use xlink:href="{{ ez_icon_path('system-information') }}"></use>
-                    </svg>
-                </span>
-            {% endif %}
-            {{ block('form_errors') }}
         </div>
 
         {% if widget_container_block is defined %}
             {{ widget_container_block|raw }}
         {% else %}
             <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
-                <div class="ez-data-source">
+                <div class="ibexa-data-source ez-data-source">
                     {{- form_widget(form, {'attr': attr}) -}}
                 </div>
             </div>
         {% endif %}
 
         {% if fieldtype_is_not_translatable %}
-            <p class="ez-field-edit__nontranslatable text-secondary">{{ 'fieldtype.translation_is_disabled'|trans({'%fieldName%': label})|desc('Translating the %fieldName% Field is disabled. See Content Type definition for details.') }}</p>
+            <p class="ibexa-field-edit__nontranslatable ez-field-edit__nontranslatable text-secondary">{{ 'fieldtype.translation_is_disabled'|trans({'%fieldName%': label})|desc('Translating the %fieldName% Field is disabled. See Content Type definition for details.') }}</p>
         {% endif %}
+
+        {% if field_type_descriptions[fieldtype.vars.languageCode] is defined and field_type_descriptions[fieldtype.vars.languageCode] != '' %}
+            {% with { help: field_type_descriptions[fieldtype.vars.languageCode] } %}
+                {{ block('form_help') }}
+            {% endwith %}
+        {% endif %}
+        <div class="ibexa-form-error">
+            {{ block('form_errors') }}
+        </div>
     </div>
 {% endblock %}
 

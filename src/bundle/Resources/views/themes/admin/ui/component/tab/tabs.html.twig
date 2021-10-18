@@ -1,0 +1,25 @@
+{% import "@ezdesign/ui/component/macros.html.twig" as html %}
+
+{% set active_tab = tabs|filter(t => t.active|default(false))|first %}
+{% if not active_tab %}
+    {% set active_tab = tabs|first %}
+{% endif %}
+
+{% include '@ezdesign/ui/component/tab/tabs_header.html.twig' with {
+    tabs: tabs,
+    active_tab: active_tab,
+    hide_toggler: hide_toggler|default(false),
+    include_tab_more: include_tab_more|default(false),
+} %}
+
+<div class="tab-content ibexa-tab-content {{ tab_content_class|default('') }}" {{ html.attributes(tab_content_attributes|default({})) }}>
+    {% block tab_content %}
+        {% for tab in tabs %}
+            {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with tab|merge({ active: tab == active_tab }) %}
+                {% block content %}
+                    {{ tab.content|default('')|raw }}
+                {% endblock %}
+            {% endembed %}
+        {% endfor %}
+    {% endblock %}
+</div>

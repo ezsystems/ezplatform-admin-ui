@@ -7,10 +7,25 @@ html {
 body {
     position: relative;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 a {
-    transition: color 0.3s $ibexa-admin-transition;
+    transition: color $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+    &[disabled] {
+        color: $ibexa-color-dark-300;
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+        color: $ibexa-color-primary;
+    }
+
+    &:focus {
+        outline: none;
+    }
 }
 
 button {
@@ -33,12 +48,6 @@ img {
 
     &--edit {
         background: $ibexa-white;
-
-        .ez-context-menu {
-            .ez-sticky-container {
-                top: calculateRem(50px);
-            }
-        }
     }
 }
 
@@ -46,10 +55,6 @@ img {
     .ez-main-row {
         min-height: 100vh;
     }
-}
-
-.ez-dashboard .ez-main-row {
-    background-color: $ibexa-color-base-pale;
 }
 
 .btn {
@@ -79,7 +84,7 @@ img {
     }
 }
 
-.ez-login-view {
+.ibexa-login-view {
     .ez-main-container {
         height: 100vh;
     }
@@ -97,7 +102,7 @@ img {
     z-index: 0;
 }
 
-.ez-spin {
+.ibexa-spin {
     animation: spin 1.75s linear infinite;
 }
 
@@ -142,8 +147,15 @@ select {
 .ez-section-view,
 .ez-section-list-view,
 .ez-trash-list-view,
-.ez-bookmark-list-view {
-    background-color: $ibexa-color-base-pale;
+.ez-bookmark-list-view,
+.ez-object-state-group-list-view,
+.ez-workflow-list-view,
+.ez-segment-group-list-view {
+    background-color: $ibexa-color-white;
+
+    .ibexa-main-container {
+        background-color: $ibexa-color-white;
+    }
 }
 
 .ez-sticky-container {
@@ -152,17 +164,17 @@ select {
     top: calculateRem(16px);
 
     > .btn {
-        .ez-icon {
+        .ibexa-icon {
             margin-bottom: calculateRem(3px);
         }
     }
 }
 
-.ez-dashboard-row {
+.ibexa-dashboard-row {
     flex-direction: column;
 }
 
-.ez-scrollable-wrapper {
+.ibexa-scrollable-wrapper {
     max-height: 60vh;
     overflow: auto;
 }

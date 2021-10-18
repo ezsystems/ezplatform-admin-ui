@@ -93,7 +93,7 @@ Feature: Content fields setting and editing
       | value     | false                        |            |                          |         |           | 1                         | 0                            |
       | value     | Media/Files                  |            |                          |         |           | Images                    | Files                        |
       | firstItem | Users/Editors                | secondItem | Media/Multimedia         |         |           | Images Files              | Editors Multimedia           |
-      | value     | Argentina                    |            |                          |         |           | Angola                    | Argentina                    |
+      | value     | Albania                      |            |                          |         |           | Angola                    | Albania                      |
       | value     | 12/30/2019                   |            |                          |         |           | Saturday 23 November 2019 | Monday 30 December 2019      |
       | date      | 12/30/2019                   | time       | 15:15                    |         |           | Sat 2019-23-11 14:45:00   | Mon 2019-30-12 15:15:00      |
       | value     | edited.email@example.com     |            |                          |         |           | email@example.com         | edited.email@example.com     |

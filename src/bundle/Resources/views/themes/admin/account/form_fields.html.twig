@@ -1,4 +1,4 @@
-{% use 'bootstrap_4_layout.html.twig' %}
+{% use 'bootstrap_5_layout.html.twig' %}
 
 {% trans_default_domain 'change_user_password' %}
 
@@ -37,8 +37,8 @@
     {% if required %}{% set wrapper_class = (wrapper_class|default('') ~ ' ez-field--required')|trim %}{% endif %}
     {% if errors|length > 0 %}{% set wrapper_class = (wrapper_class|default('') ~ ' is-invalid')|trim %}{% endif %}
 
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ez-login__form-label')|trim}) %}
-    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-login__form-input')|trim}) %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ibexa-label')|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ibexa-input ibexa-login__form-input')|trim}) %}
     {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
     <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
         {{ block('form_errors') }}

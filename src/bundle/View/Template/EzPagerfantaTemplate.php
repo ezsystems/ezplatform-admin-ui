@@ -23,20 +23,11 @@ class EzPagerfantaTemplate extends TwitterBootstrap4Template
     {
         parent::__construct();
 
-        $prevMessage = $translator->trans(
-            /** @Desc("Back") */
-            'pagination.prev_message',
-            [],
-            'pagination'
-        );
-
-        $nextMessage = $translator->trans(
-            /** @Desc("Next") */
-            'pagination.next_message',
-            [],
-            'pagination'
-        );
-
-        $this->setOptions(['prev_message' => $prevMessage, 'next_message' => $nextMessage, 'css_container_class' => 'pagination ez-pagination__btns']);
+        $this->setOptions([
+            'prev_message' => '',
+            'next_message' => '',
+            'active_suffix' => '',
+            'css_container_class' => 'pagination ibexa-pagination__navigation',
+        ]);
     }
 }

@@ -2,7 +2,7 @@
     background: $ibexa-white;
     box-shadow: 0 0 calculateRem(30px) 0 rgba($ibexa-black, 0.35);
     position: relative;
-    border-radius: $ibexa-border-radius;
+    border-radius: calculateRem(4px);
     overflow: hidden;
 }
 
@@ -39,12 +39,13 @@
     right: 0;
     cursor: pointer;
     opacity: 1;
+    border: none;
 
-    .ez-icon {
+    .ibexa-icon {
         width: calculateRem(20px);
         height: calculateRem(20px);
         margin: 0;
-        fill: $ibexa-black;
+        fill: $ibexa-color-danger;
         opacity: 1;
     }
 }

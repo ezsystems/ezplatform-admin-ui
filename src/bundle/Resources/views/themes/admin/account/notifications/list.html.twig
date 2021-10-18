@@ -1,31 +1,31 @@
 {% trans_default_domain 'notifications' %}
 
-<table
-    data-notifications="{{ path('ezplatform.notifications.render.page') }}"
-    data-notifications-count="{{ path('ezplatform.notifications.count') }}"
-    data-notifications-total="{{ pager.nbResults }}"
-    class="table table-hover n-table--notifications">
-    <thead>
-    <tr>
-        <th>{{ 'notification.type'|trans|desc('Type') }}</th>
-        <th>{{ 'notification.description'|trans|desc('Description') }}</th>
-        <th>{{ 'notification.date'|trans|desc('Date') }}</th>
-    </tr>
-    </thead>
-    <tbody class="n-table__body">
-    {% if pager.count is same as(0) %}
-        <tr>
-            <td colspan="3">
-                <span class="ez-table-no-content mb-0 py-1 pl-0">
-                    {{ 'bookmark.list.empty'|trans|desc('You have no notifications.') }}
-                </span>
-            </td>
-        </tr>
-    {% else %}
-        {{ notifications|raw }}
-    {% endif %}
-    </tbody>
-</table>
+{% embed '@ezdesign/ui/component/table/table.html.twig' with {
+    head_cols: [
+        { content: 'notification.type'|trans|desc('Type') },
+        { content: 'notification.description'|trans|desc('Description') },
+        { content: 'notification.date'|trans|desc('Date') },
+    ],
+    class: 'ibexa-table--notifications',
+    attr: {
+        'data-notifications': path('ezplatform.notifications.render.page'),
+        'data-notifications-count': path('ezplatform.notifications.count'),
+        'data-notifications-total': pager.nbResults,
+    }
+} %}
+    {% block tbody %}
+        {% if pager.count is same as(0) %}
+            {% include '@ezdesign/ui/component/table/empty_table_body_row.html.twig' with {
+                colspan: 3,
+                empty_table_info_text: 'bookmark.list.empty'|trans|desc('You have no notifications.'),
+            } %}
+        {% else %}
+            {% block tbody_not_empty %}
+                {{ notifications|raw }}
+            {% endblock %}
+        {% endif %}
+    {% endblock %}
+{% endembed %}
 
 {% if pager.haveToPaginate %}
     <div class="ez-pagination">

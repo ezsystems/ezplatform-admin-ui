@@ -12,10 +12,14 @@
     ]} %}
 {% endblock %}
 
-{% block page_title_admin %}
+{% block context_menu_admin %}
+    {% set language_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.language_create.sidebar_right') %}
+    {{ knp_menu_render(language_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+{% endblock %}
+
+{% block header_admin %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'language.new.title'|trans|desc('Creating a new language'),
-        icon_name: 'languages'
     } %}
 {% endblock %}
 
@@ -25,11 +29,11 @@
     {{ form_start(form, {'action': actionUrl}) }}
 
     <section>
-        <div class="card ez-card ez-card--light">
-            <div class="card-body ez-card__body">
-                {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
-                {{ form_row(form.languageCode, {'label_attr': {'class': 'ez-label'}}) }}
-                {{ form_row(form.enabled, {'attr': {'class': 'ez-input ez-input--checkbox'}, 'label_attr': {'class': 'checkbox-inline ez-label'}}) }}
+        <div class="card ibexa-card ibexa-card--light">
+            <div class="card-body ibexa-card__body">
+                {{ form_row(form.name, {'attr': {'autofocus': 'autofocus'}}) }}
+                {{ form_row(form.languageCode) }}
+                {{ form_row(form.enabled, {'label_attr': {'class': 'checkbox-inline'}}) }}
             </div>
         </div>
     </section>
@@ -37,9 +41,4 @@
     {{ form_widget(form.save, {"attr": {"hidden": "hidden"}}) }}
 
     {{ form_end(form) }}
-{% endblock %}
-
-{% block right_sidebar %}
-    {% set language_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.language_create.sidebar_right') %}
-    {{ knp_menu_render(language_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

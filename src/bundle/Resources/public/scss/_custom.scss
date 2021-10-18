@@ -2,43 +2,186 @@
 
 // Ibexa transition function
 $ibexa-admin-transition: cubic-bezier(0.25, 0.8, 0.25, 1);
+$ibexa-admin-transition-duration: 0.4s;
 $ibexa-admin-widget-open-transition: all 0.3s ease-in;
 $ibexa-admin-widget-close-transition: all 0.3s ease-out;
 
 // Ibexa colors
-$ibexa-white: #fff;
-$ibexa-black: #131c26;
-
 $ibexa-color-primary: #ae1164;
-$ibexa-color-primary-pale: #f3e4e7;
-$ibexa-color-primary-light: #e75476;
-$ibexa-color-deep-black: #222222;
+$ibexa-color-primary-900: #230314;
+$ibexa-color-primary-800: #460728;
+$ibexa-color-primary-700: #780c45;
+$ibexa-color-primary-600: #8b0e50;
+$ibexa-color-primary-500: #b7397c;
+$ibexa-color-primary-400: #ce70a2;
+$ibexa-color-primary-300: #de9fc1;
+$ibexa-color-primary-200: #eecfe0;
+$ibexa-color-primary-100: #f6e7ef;
 
-$ibexa-color-base: #e0e0e8;
-$ibexa-color-base-pale: #f5f5f5;
-$ibexa-color-base-light: #f7f7f9;
-$ibexa-color-base-medium: #ececf1;
-$ibexa-color-base-dark: #878b90;
-$ibexa-color-base-deep: #656565;
-$ibexa-color-base-black: #131c26;
+$ibexa-color-danger: #db0032;
+$ibexa-color-danger-900: #2c000a;
+$ibexa-color-danger-800: #580014;
+$ibexa-color-danger-700: #990023;
+$ibexa-color-danger-600: #af0028;
+$ibexa-color-danger-500: #db2c54;
+$ibexa-color-danger-400: #e96684;
+$ibexa-color-danger-300: #f099ad;
+$ibexa-color-danger-200: #f7ccd6;
+$ibexa-color-danger-100: #fbe5ea;
 
-$ibexa-color-ground-dark: #004d5d;
+$ibexa-color-warning: #ff4713;
+$ibexa-color-warning-900: #330e04;
+$ibexa-color-warning-800: #661c08;
+$ibexa-color-warning-700: #992b0b;
+$ibexa-color-warning-600: #cc390f;
+$ibexa-color-warning-500: #f7633a;
+$ibexa-color-warning-400: #ff9071;
+$ibexa-color-warning-300: #ffb5a0;
+$ibexa-color-warning-200: #ffdacf;
+$ibexa-color-warning-100: #ffece7;
 
-$ibexa-color-font: #131c26;
-$ibexa-color-font-light: #fff;
-$ibexa-color-font-pale: #878b90;
-$ibexa-color-font-black: #222222;
-$ibexa-color-font-danger: #d92d42;
-$ibexa-color-border-light: #ecdfd1;
+$ibexa-color-success: #00a42b;
+$ibexa-color-success-900: #002109;
+$ibexa-color-success-800: #004211;
+$ibexa-color-success-700: #00621a;
+$ibexa-color-success-600: #008322;
+$ibexa-color-success-500: #33b655;
+$ibexa-color-success-400: #66c880;
+$ibexa-color-success-300: #99dbaa;
+$ibexa-color-success-200: #ccedd5;
+$ibexa-color-success-100: #e5f5e9;
 
-$ibexa-color-info: #47bedb;
-$ibexa-color-positive: #00825c;
-$ibexa-color-warning: #f7d000;
-$ibexa-color-danger: #d92d42;
-$ibexa-color-warning-dark: #aa0000;
-$ibexa-color-warning-pale: #fceaec;
+$ibexa-color-info: #4191ff;
+$ibexa-color-info-900: #0d1d33;
+$ibexa-color-info-800: #1a3a66;
+$ibexa-color-info-700: #275799;
+$ibexa-color-info-600: #3474cc;
+$ibexa-color-info-500: #619eff;
+$ibexa-color-info-400: #8dbdff;
+$ibexa-color-info-300: #b3d3ff;
+$ibexa-color-info-200: #d9e9ff;
+$ibexa-color-info-100: #ecf4ff;
 
-$ibexa-color-primary-hover: #e75476;
+$ibexa-color-black: #000000;
+$ibexa-color-black-900: #040608;
+$ibexa-color-black-800: #080b0f;
+$ibexa-color-black-700: #0b1117;
+$ibexa-color-black-600: #0f161e;
+$ibexa-color-black-500: #2c2c2c;
+$ibexa-color-black-400: #666666;
+$ibexa-color-black-300: #999999;
+$ibexa-color-black-200: #cccccc;
+$ibexa-color-black-100: #e5e5e5;
+
+$ibexa-color-dark: #131c26;
+$ibexa-color-dark-500: #3b424a;
+$ibexa-color-dark-400: #71767c;
+$ibexa-color-dark-300: #a0a4a8;
+$ibexa-color-dark-200: #cfd1d3;
+$ibexa-color-dark-100: #e7e8e9;
+
+$ibexa-color-light: #e0e0e8;
+$ibexa-color-light-900: #2d2d2e;
+$ibexa-color-light-800: #5a5a5d;
+$ibexa-color-light-700: #86868b;
+$ibexa-color-light-600: #b3b3ba;
+$ibexa-color-light-500: #e6e6ed;
+$ibexa-color-light-400: #ececf1;
+$ibexa-color-light-300: #f3f3f6;
+$ibexa-color-light-200: #f9f9fa;
+$ibexa-color-light-100: #fbfbfc;
+
+$ibexa-color-white: #ffffff;
+$ibexa-color-white-900: #333333;
+$ibexa-color-white-800: #666666;
+$ibexa-color-white-700: #999999;
+$ibexa-color-white-600: #cccccc;
+
+$ibexa-color-accent-soft: #ecdfd1;
+$ibexa-color-accent-soft-900: #2f2d2a;
+$ibexa-color-accent-soft-800: #5e5954;
+$ibexa-color-accent-soft-700: #8e867d;
+$ibexa-color-accent-soft-600: #bdb2a7;
+$ibexa-color-accent-soft-500: #f0e5da;
+$ibexa-color-accent-soft-400: #f4ece3;
+$ibexa-color-accent-soft-300: #f7f2ed;
+$ibexa-color-accent-soft-200: #fbf9f6;
+$ibexa-color-accent-soft-100: #fbf9f6;
+
+$ibexa-color-accent: #fcae42;
+$ibexa-color-accent-900: #32230d;
+$ibexa-color-accent-800: #65461a;
+$ibexa-color-accent-700: #976828;
+$ibexa-color-accent-600: #ca8b35;
+$ibexa-color-accent-500: #f4b65f;
+$ibexa-color-accent-400: #fdce8d;
+$ibexa-color-accent-300: #fddeb3;
+$ibexa-color-accent-200: #feeed9;
+$ibexa-color-accent-100: #fff7ec;
+
+$ibexa-color-accent-strong: #f18a6b;
+$ibexa-color-accent-strong-900: #301c15;
+$ibexa-color-accent-strong-800: #60372b;
+$ibexa-color-accent-strong-700: #915340;
+$ibexa-color-accent-strong-600: #c16e56;
+$ibexa-color-accent-strong-500: #eb9980;
+$ibexa-color-accent-strong-400: #f6b8a6;
+$ibexa-color-accent-strong-300: #f9d0c3;
+$ibexa-color-accent-strong-200: #fce7e1;
+$ibexa-color-accent-strong-100: #fdf3f0;
+
+$ibexa-color-complementary: #47bedb;
+$ibexa-color-complementary-900: #0e262c;
+$ibexa-color-complementary-800: #1c4c58;
+$ibexa-color-complementary-700: #2b7283;
+$ibexa-color-complementary-600: #2e7a8c;
+$ibexa-color-complementary-500: #63c3da;
+$ibexa-color-complementary-400: #90d8e9;
+$ibexa-color-complementary-300: #b5e5f0;
+$ibexa-color-complementary-200: #daf2f7;
+$ibexa-color-complementary-100: #ecf8fb;
+
+$ibexa-color-complementary-strong: #004d5d;
+$ibexa-color-complementary-strong-900: #000f13;
+$ibexa-color-complementary-strong-800: #001f25;
+$ibexa-color-complementary-strong-700: #002e38;
+$ibexa-color-complementary-strong-600: #003e4a;
+$ibexa-color-complementary-strong-500: #2b6875;
+$ibexa-color-complementary-strong-400: #66949d;
+$ibexa-color-complementary-strong-300: #99b7be;
+$ibexa-color-complementary-strong-200: #ccdbde;
+$ibexa-color-complementary-strong-100: #e5edee;
+
+/* TODO: below $ibexa-color* variables should be removed in 4.0 */
+$ibexa-white: $ibexa-color-white;
+$ibexa-black: $ibexa-color-dark;
+
+$ibexa-color-primary-pale: $ibexa-color-primary-100;
+$ibexa-color-primary-light: $ibexa-color-primary-500;
+$ibexa-color-deep-black: $ibexa-color-black-500;
+
+$ibexa-color-base: $ibexa-color-light;
+$ibexa-color-base-pale: $ibexa-color-light-300;
+$ibexa-color-base-light: $ibexa-color-light-200;
+$ibexa-color-base-medium: $ibexa-color-light-500;
+$ibexa-color-base-dark: $ibexa-color-dark-300;
+$ibexa-color-base-deep: $ibexa-color-dark-400;
+$ibexa-color-base-black: $ibexa-color-dark;
+
+$ibexa-color-ground-dark: $ibexa-color-complementary-strong;
+
+$ibexa-color-font: $ibexa-color-dark;
+$ibexa-color-font-light: $ibexa-color-white;
+$ibexa-color-font-pale: $ibexa-color-dark-300;
+$ibexa-color-font-black: $ibexa-color-black-500;
+$ibexa-color-font-danger: $ibexa-color-danger;
+$ibexa-color-border-light: $ibexa-color-accent-200;
+
+$ibexa-color-positive: $ibexa-color-success;
+$ibexa-color-warning-dark: darken($ibexa-color-warning, 20%);
+$ibexa-color-warning-pale: $ibexa-color-warning-100;
+
+$ibexa-color-primary-hover: $ibexa-color-primary-500;
 
 /* eZ variables: These variables are deprecated, please use variables with the "ibexa" prefix */
 $ez-admin-transition: $ibexa-admin-transition;
@@ -76,17 +219,17 @@ $ez-ground-primary: $ibexa-white;
 $ez-secondary-ground: $ibexa-color-primary;
 $ez-secondary-ground-medium: $ibexa-color-primary;
 $ez-secondary-ground-dark: $ibexa-color-primary;
-$ez-ground-primary-inverted-light: #445a64;
+
+$ez-ground-primary-inverted-light: $ibexa-color-complementary-strong;
 $ez-ground-primary-inverted: $ibexa-color-base;
 
 $ez-color-warning-pale: $ibexa-color-warning-pale;
 $ez-color-warning-dark: $ibexa-color-warning-dark;
 
-$ez-alloyeditor-color-hover: #65b6f0;
+$ez-alloyeditor-color-hover: $ibexa-color-info-400;
 
 $ez-pagination-bg: transparent;
 $ez-pagination-margin: 0.25rem;
-$ez-pagination-font-size: 1rem;
 $ez-pagination-page-link-radius: 50%;
 $ez-pagination-border-radius: 0.3rem;
 
@@ -155,33 +298,36 @@ $theme-colors: (
 
 // Typography
 $base-font-size: 16px;
-$small-font-size: 0.8rem !default;
-$h1-font-size: 1.75rem !default;
-$h2-font-size: 1.5rem !default;
-$h3-font-size: 1.375rem !default;
-$h4-font-size: 1.25rem !default;
-$h5-font-size: 1.125rem !default;
-$h6-font-size: 1.0625rem !default;
+$small-font-size: 14px !default;
+$h1-font-size: 28px !default;
+$h2-font-size: 22px !default;
+$h3-font-size: 18px !default;
+$h4-font-size: 16px !default;
+$h5-font-size: 14px !default;
+$h6-font-size: 12px !default;
 
 $headings-font-weight: 700;
+$headings-font-family: 'Work Sans SemiBold', sans-serif;
+
+$text-muted: $ibexa-color-dark-400 !default;
 
 // Fonts
 $font-family-sans-serif: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
 
 //Border
-$ibexa-border-radius: calculateRem(2px);
+$ibexa-border-radius: 10px;
 
 // Tables
-$table-cell-padding: calculateRem(12px) calculateRem(16px);
+$table-cell-padding: 12px 16px;
 $table-bg: $white;
 $table-border-width: 0;
 $table-hover-bg: $ibexa-color-base-pale;
 
 // Breadcrumbs
-$breadcrumb-font-size: calculateRem(14px);
+$breadcrumb-font-size: 12px;
 $breadcrumb-padding-y: 0;
 $breadcrumb-padding-x: 0;
-$breadcrumb-item-padding: calculateRem(8px);
+$breadcrumb-item-padding: 8px;
 $breadcrumb-bg: transparent;
 $breadcrumb-divider: quote('>');
 
@@ -192,45 +338,49 @@ $link-hover-decoration: underline;
 $link-hover-color: $ibexa-color-primary;
 
 // Body
-$body-bg: $ibexa-color-base-light;
+$body-bg: $ibexa-color-white;
 $body-color: $ibexa-black;
 
 // Pagination
-$pagination-color: $ibexa-color-font;
+$pagination-color: $ibexa-color-dark;
 $pagination-bg: $ibexa-white;
-
+$pagination-border-width: 1px;
+$pagination-border-color: transparent;
 $pagination-padding-y: 0;
 $pagination-padding-x: 0;
 
-$pagination-active-color: $ibexa-color-font;
-$pagination-active-bg: $ibexa-color-base;
+$pagination-focus-color: $ibexa-color-dark;
+$pagination-focus-bg: transparent;
+
+$pagination-active-color: $ibexa-color-dark;
+$pagination-active-bg: $ibexa-color-light-300;
 $pagination-active-border-color: transparent;
 
-$pagination-hover-color: $ibexa-color-font;
-$pagination-hover-bg: $ibexa-color-base;
-$pagination-hover-border-width: 0;
-$pagination-hover-border-color: transparent;
+$pagination-hover-bg: transparent;
+$pagination-hover-color: $ibexa-color-dark;
+$pagination-hover-border-color: $ibexa-color-dark;
 
-$pagination-disabled-color: $ibexa-color-font-pale;
+$pagination-disabled-color: $ibexa-color-dark-200;
 $pagination-disabled-bg: transparent;
 $pagination-disabled-border-color: transparent;
 
-$pagination-border-width: 0;
-$pagination-border-color: transparent;
-
 // Modals
-$modal-header-padding-y: calculateRem(24px);
+$modal-header-padding-y: 24px;
 $modal-header-padding-x: 0;
-$modal-header-border-width: calculateRem(1px);
+$modal-header-border-width: 1px;
 $modal-header-border-color: $ibexa-color-base-medium;
-$modal-title-font-size: calculateRem(20px);
+$modal-title-font-size: 20px;
 $modal-content-border-width: 0;
 $modal-content-border-radius: $ibexa-border-radius;
-$modal-inner-padding: calculateRem(24px) 0;
-$modal-footer-padding: calculateRem(24px) 0;
+$modal-inner-padding: 24px 0;
+$modal-footer-padding: 24px 0;
 $modal-footer-border-width: 0;
 //Components
 $border-radius: $ibexa-border-radius;
+
+//Offcanvas
+$offcanvas-padding-y: 24px;
+$offcanvas-padding-x: 0;
 
 //Cards
 $card-spacer-x: 0;
@@ -252,12 +402,33 @@ $input-box-shadow: none;
 $input-focus-bg: transparent;
 $input-focus-border-color: $ibexa-color-primary;
 $input-focus-color: $ibexa-color-font-pale;
-$input-focus-box-shadow: 0 0 calculateRem(2px) 0 rgba($ibexa-color-primary, 0.75);
+$input-focus-box-shadow: 0 0 2px 0 rgba($ibexa-color-primary, 0.75);
 
 //Buttons
-$btn-line-height: calculateRem(16px);
-$btn-font-size: calculateRem(15px);
-$btn-padding-y: calculateRem(11px);
-$btn-padding-x: 1rem;
+$btn-line-height: 16px;
+$btn-font-size: 15px;
+$btn-padding-y: 11px;
+$btn-padding-x: 16px;
 $btn-border-width: 0;
 $btn-focus-box-shadow: none;
+
+// Ibexa fonts
+$ibexa-text-font-size-large: calculateRem(18px);
+$ibexa-text-font-size: calculateRem(16px);
+$ibexa-text-font-size-medium: calculateRem(14px);
+$ibexa-text-font-size-small: calculateRem(12px);
+
+// Ibexa shadows
+$ibexa-btn-focus-box-shadow: 0 0 0 calculateRem(3px) rgba($ibexa-color-primary, 0.2);
+$ibexa-btn-focus-box-shadow-info: 0 0 0 calculateRem(3px) rgba($ibexa-color-info, 0.2);
+$ibexa-btn-hover-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-danger, 0.2);
+$ibexa-btn-hover-box-shadow-dark: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-dark, 0.2);
+$ibexa-btn-hover-box-shadow-info: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-info, 0.5);
+$ibexa-edit-header-box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.15);
+$ibexa-edit-content-box-shadow: calculateRem(4px) calculateRem(35px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.15);
+$ibexa-anchor-btn-hover-box-shadow: 0 0 calculateRem(14px) 0 rgba($ibexa-color-black, 0.05);
+$ibexa-context-menu-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-info, 0.15);
+$ibexa-content-type-edit-field-shadow: calculateRem(4px) calculateRem(22px) calculateRem(19px) calculateRem(-10px) rgba($ibexa-color-info, 0.05);
+
+// Ibexa gradients
+$ibexa-gradient-danger-primary: linear-gradient(to right, $ibexa-color-danger 0%, $ibexa-color-primary 100%);

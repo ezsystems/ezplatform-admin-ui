@@ -22,13 +22,17 @@ const PureToggleSelectionButton = ({ isSelected, toggleSelection }) => {
     useEffect(() => {
         window.eZ.helpers.tooltips.hideAll(window.document.querySelector('.c-udw-tab'));
 
-        // Title on toggler selection button is dynamic, for this we have to change 'data-original-title'.
+        if (!refPureToggleSelectionButton.current) {
+            return;
+        }
+
+        // Title on toggler selection button is dynamic, for this we have to change 'data-bs-original-title'.
         // Remove title is neccessary to prevent situation when we have bootsrap and native title.
-        if (refPureToggleSelectionButton.current.getAttribute('data-original-title')) {
+        if (refPureToggleSelectionButton.current.getAttribute('data-bs-original-title')) {
             refPureToggleSelectionButton.current.removeAttribute('title');
         }
 
-        refPureToggleSelectionButton.current.setAttribute('data-original-title', toggleSelectionLabel);
+        refPureToggleSelectionButton.current.setAttribute('data-bs-original-title', toggleSelectionLabel);
     }, [isSelected]);
 
     if (multiple && !isSelected && selectedLocations.length >= multipleItemsLimit && multipleItemsLimit !== 0) {
@@ -42,7 +46,7 @@ const PureToggleSelectionButton = ({ isSelected, toggleSelection }) => {
             onClick={toggleSelection}
             title={toggleSelectionLabel}
             data-tooltip-container-selector=".c-udw-tab">
-            <Icon name={iconName} extraClasses="ez-icon--small" />
+            <Icon name={iconName} extraClasses="ibexa-icon--small" />
         </button>
     );
 };

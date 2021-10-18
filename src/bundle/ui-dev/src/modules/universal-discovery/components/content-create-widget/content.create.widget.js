@@ -91,7 +91,7 @@ const ContentCreateWidget = () => {
                     onClick={close}
                     title={closeLabel}
                     data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="discard" extraClasses="ez-icon--small" />
+                    <Icon name="discard" extraClasses="ibexa-icon--small" />
                 </button>
             </div>
             <div className="c-content-create__language-selector-wrapper">
@@ -148,7 +148,7 @@ const ContentCreateWidget = () => {
                                     return (
                                         <div hidden={isHidden} key={identifier} className={className} onClick={updateSelectedContentType}>
                                             <div className="c-content-create__group-item-icon">
-                                                <Icon customPath={thumbnail} extraClasses="ez-icon--small" />
+                                                <Icon customPath={thumbnail} extraClasses="ibexa-icon--small" />
                                             </div>
                                             <div className="c-content-create__group-item-name">{name}</div>
                                         </div>
@@ -160,10 +160,10 @@ const ContentCreateWidget = () => {
                 </div>
             </div>
             <div className="c-content-create__confirm-wrapper">
-                <button className="c-content-create__confirm-button btn btn-primary" onClick={createContent} disabled={isConfirmDisabled}>
+                <button className="c-content-create__confirm-button btn ibexa-btn ibexa-btn--primary" onClick={createContent} disabled={isConfirmDisabled}>
                     {createLabel}
                 </button>
-                <button className="ez-btn ez-btn--no-border" onClick={close}>
+                <button className="btn ibexa-btn ibexa-btn--ghost" onClick={close}>
                     {cancelLabel}
                 </button>
             </div>

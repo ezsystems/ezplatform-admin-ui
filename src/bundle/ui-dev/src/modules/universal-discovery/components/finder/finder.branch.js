@@ -92,7 +92,7 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
         return (
             <div className="c-finder-branch__info-wrapper">
                 <span className="c-finder-branch__icon-wrapper">
-                    <Icon extraClasses="ez-icon--small ez-icon--primary" customPath={iconPath} />
+                    <Icon extraClasses="ibexa-icon--small ibexa-icon--primary" customPath={iconPath} />
                 </span>
                 <span className="c-finder-branch__name">{contentName}</span>
             </div>
@@ -128,7 +128,7 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
 
         return (
             <div className="c-finder-branch__loading-spinner">
-                <Icon name="spinner" extraClasses="ez-icon--medium ez-spin" />
+                <Icon name="spinner" extraClasses="ibexa-icon--medium ibexa-spin" />
             </div>
         );
     }

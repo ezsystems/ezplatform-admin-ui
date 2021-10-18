@@ -1,6 +1,6 @@
-.ez-card {
+.ibexa-card {
     border: none;
-    background-color: $ibexa-color-base-pale;
+    background-color: $ibexa-color-white;
 
     .form-group {
         width: 70%;
@@ -16,7 +16,6 @@
 
     &__header {
         display: flex;
-        background-color: $ibexa-white;
         color: $ibexa-black;
         border-radius: $ibexa-border-radius $ibexa-border-radius 0 0;
         padding: calculateRem(8px);
@@ -54,9 +53,9 @@
     }
 
     &__title {
-        padding: calculateRem(24px) 0 calculateRem(16px) calculateRem(24px);
+        padding: calculateRem(24px) 0 calculateRem(16px) 0;
         font-weight: bold;
-        background: $ibexa-white;
+        font-size: $h2-font-size;
     }
 
     &__body {
@@ -78,7 +77,7 @@
     }
 
     &--no-padding {
-        .ez-card__body {
+        .ibexa-card__body {
             padding: 0;
         }
     }
@@ -88,18 +87,29 @@
     }
 
     &--more-space {
-        .ez-card__body {
+        .ibexa-card__body {
             padding-left: calculateRem(16px);
             padding-right: calculateRem(16px);
         }
     }
+
+    .ez-header,
+    .ibexa-tab-content {
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
 }
 
-.ez-card--toggle-group {
+.ibexa-card--toggle-group {
     background: $ibexa-white;
 
-    &.ez-card--collapsed {
-        .ez-card {
+    &.ibexa-card--collapsed {
+        .ibexa-card {
             &__header {
                 &:hover {
                     background: $ibexa-color-base-light;
@@ -114,15 +124,15 @@
             }
 
             &__body-display-toggler {
-                .ez-icon--caret-down {
+                .ibexa-icon--caret-down {
                     display: none;
                 }
             }
         }
     }
 
-    &:not(.ez-card--collapsed) {
-        .ez-card {
+    &:not(.ibexa-card--collapsed) {
+        .ibexa-card {
             &__header {
                 background-color: $ibexa-color-base-medium;
                 font-weight: bold;
@@ -133,14 +143,14 @@
             }
 
             &__body-display-toggler {
-                .ez-icon--caret-next {
+                .ibexa-icon--caret-next {
                     display: none;
                 }
             }
         }
     }
 
-    .ez-card {
+    .ibexa-card {
         &__header {
             line-height: calculateRem(40px);
             padding: calculateRem(12px) calculateRem(8px);
@@ -162,7 +172,7 @@
                 font-size: calculateRem(16px);
             }
 
-            .ez-card__body-display-toggler {
+            .ibexa-card__body-display-toggler {
                 margin: calculateRem(4px) calculateRem(4px) calculateRem(4px) 0;
                 height: calculateRem(32px);
                 width: calculateRem(32px);
@@ -178,7 +188,7 @@
                     box-shadow: none;
                 }
 
-                .ez-icon {
+                .ibexa-icon {
                     fill: $ibexa-black;
                 }
             }
@@ -190,7 +200,7 @@
     }
 
     & + & {
-        .ez-card__header {
+        .ibexa-card__header {
             border-top: calculateRem(1px) solid $ibexa-color-base;
         }
     }

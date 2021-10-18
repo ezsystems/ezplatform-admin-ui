@@ -39,8 +39,8 @@ class TableNavigationTab extends Component
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('activeNavLink', '.ez-tabs .active'),
-            new VisibleCSSLocator('navLink', '.ez-tabs .nav-link'),
+            new VisibleCSSLocator('activeNavLink', '.ibexa-tabs .active'),
+            new VisibleCSSLocator('navLink', '.ibexa-tabs .nav-link'),
         ];
     }
 }

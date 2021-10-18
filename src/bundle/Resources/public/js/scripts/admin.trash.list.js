@@ -1,7 +1,7 @@
 (function (global, doc, eZ, React, ReactDOM, Translator) {
     let getUsersTimeout;
-    const CLASS_SORTED_ASC = 'ez-table__sort-column--asc';
-    const CLASS_SORTED_DESC = 'ez-table__sort-column--desc';
+    const CLASS_SORTED_ASC = 'ibexa-table__sort-column--asc';
+    const CLASS_SORTED_DESC = 'ibexa-table__sort-column--desc';
     const CLASS_VISIBLE_DATE_RANGE = 'ez-trash-search-form__range-wrapper--visible';
     const sortedActiveField = doc.querySelector('#trash_search_sort_field').value;
     const sortedActiveDirection = doc.querySelector('#trash_search_sort_direction').value;
@@ -14,10 +14,10 @@
     const sortDirection = doc.querySelector('#trash_search_sort_direction');
     const creatorInput = doc.querySelector('.ez-trash-search-form__item--creator .ez-trash-search-form__input');
     const usersList = doc.querySelector('.ez-trash-search-form__item--creator .ez-trash-search-form__user-list');
-    const resetCreatorBtn = doc.querySelector('.ez-btn--reset-creator');
+    const resetCreatorBtn = doc.querySelector('.ibexa-btn--reset-creator');
     const searchCreatorInput = doc.querySelector('#trash_search_creator');
-    const sortableColumns = doc.querySelectorAll('.ez-table__sort-column');
-    const btns = doc.querySelectorAll('.btn--open-udw');
+    const sortableColumns = doc.querySelectorAll('.ibexa-table__sort-column');
+    const btns = doc.querySelectorAll('.ibexa-btn--open-udw');
     const udwContainer = doc.getElementById('react-udw');
     const autoSendNodes = doc.querySelectorAll('.ez-trash-search-form__item--auto-send');
     const errorMessage = Translator.trans(/*@Desc("Cannot fetch user list")*/ 'trash.user_list.error', {}, 'trash_ui');
@@ -246,12 +246,12 @@
         }
     };
     const setSortedClass = () => {
-        doc.querySelectorAll('.ez-table__sort-column').forEach((node) => {
+        doc.querySelectorAll('.ibexa-table__sort-column').forEach((node) => {
             node.classList.remove(CLASS_SORTED_ASC, CLASS_SORTED_DESC);
         });
 
         if (sortedActiveField) {
-            const sortedFieldNode = doc.querySelector(`.ez-table__sort-column--${sortedActiveField}`);
+            const sortedFieldNode = doc.querySelector(`.ibexa-table__sort-column--${sortedActiveField}`);
 
             if (parseInt(sortedActiveDirection) === 1) {
                 sortedFieldNode.classList.add(CLASS_SORTED_ASC);

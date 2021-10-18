@@ -1,0 +1,49 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+
+{% block root %}
+    {% set user = ez_admin_ui_config.user.user %}
+    {% set user_image = user.content.thumbnail %}
+
+    <div class="ibexa-header-user-menu">
+        <img 
+            class="ibexa-header-user-menu__image" 
+            src="{{ user_image.resource }}" 
+            alt="{{ user.name }}" 
+            data-bs-toggle="modal"
+            data-bs-target="#view-notifications"
+        />
+        <span
+            class="ibexa-header-user-menu__notice-dot ibexa-header-user-menu__notice-dot--no-notice"
+            data-bs-toggle="modal"
+            data-bs-target="#view-notifications"
+        ></span>
+        <button class="ibexa-header-user-menu__name">{{ user.name }}</button>
+
+        {% do item.setChildrenAttribute('class', 'ibexa-header-user-menu__popup-menu ibexa-popup-menu ibexa-popup-menu--hidden') %}
+        {{ include('@ezdesign/account/notifications/modal.html.twig') }}
+    </div>
+
+    {{ parent() }}
+{% endblock %}
+
+{% block item %}
+    {% if item.name != 'root' %}
+        {% set link_attributes = item.linkAttributes|merge({'class': (item.linkAttributes.class|default('') ~ ' ibexa-popup-menu__item-content')|trim}) %}
+        {% set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' ibexa-popup-menu__item')|trim}) %}
+        
+        {% do item.setLinkAttributes(link_attributes) %}
+        {% do item.setAttributes(attributes) %}
+    {% endif %}
+
+    {% if item.getExtra('template') is not null %}
+        {% include item.getExtra('template') ignore missing with options only %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block linkElement %}
+    {% import _self as knp_menu %}
+    
+    <a href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes) }}>{{ block('label') }}</a>
+{% endblock %}

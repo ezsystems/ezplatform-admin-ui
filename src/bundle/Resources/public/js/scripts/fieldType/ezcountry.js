@@ -1,9 +1,8 @@
 (function(global, doc, eZ) {
-    const SELECTOR_FIELD = '.ez-field-edit--ezcountry';
-    const SELECTOR_SELECTED = '.ez-custom-dropdown__selection-info';
-    const SELECTOR_SOURCE_INPUT = '.ez-data-source__input';
-    const EVENT_VALUE_CHANGED = 'valueChanged';
-    const SELECTOR_ERROR_NODE = '.ez-data-source';
+    const SELECTOR_FIELD = '.ibexa-field-edit--ezcountry';
+    const SELECTOR_SELECTED = '.ibexa-dropdown__selection-info';
+    const EVENT_VALUE_CHANGED = 'change';
+    const SELECTOR_ERROR_NODE = '.ibexa-form-error';
 
     class EzCountryValidator extends eZ.BaseFieldValidator {
         /**
@@ -16,10 +15,10 @@
          */
         validateInput(event) {
             const fieldContainer = event.currentTarget.closest(SELECTOR_FIELD);
-            const hasSelectedOptions = !!fieldContainer.querySelectorAll('.ez-custom-dropdown__selected-item').length;
-            const isRequired = fieldContainer.classList.contains('ez-field-edit--required');
+            const hasSelectedOptions = !!fieldContainer.querySelector('.ibexa-data-source__input').value;
+            const isRequired = fieldContainer.classList.contains('ibexa-field-edit--required');
             const isError = isRequired && !hasSelectedOptions;
-            const label = fieldContainer.querySelector('.ez-field-edit__label').innerHTML;
+            const label = fieldContainer.querySelector('.ibexa-field-edit__label').innerHTML;
             const errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
 
             return {
@@ -33,7 +32,7 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-data-source__input--ezcountry',
+                selector: '.ibexa-data-source__input--ezcountry',
                 eventName: EVENT_VALUE_CHANGED,
                 callback: 'validateInput',
                 errorNodeSelectors: [SELECTOR_ERROR_NODE],
@@ -44,13 +43,4 @@
 
     validator.init();
     eZ.addConfig('fieldTypeValidators', [validator], true);
-    doc.querySelectorAll(SELECTOR_FIELD).forEach((container) => {
-        const dropdown = new eZ.core.CustomDropdown({
-            container,
-            itemsContainer: container.querySelector('.ez-custom-dropdown__items'),
-            sourceInput: container.querySelector(SELECTOR_SOURCE_INPUT),
-        });
-
-        dropdown.init();
-    });
 })(window, window.document, window.eZ);

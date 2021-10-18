@@ -1,7 +1,5 @@
-.ez-field-edit--ezcountry {
-    @include checkbox-switcher();
-
-    .ez-data-source__input {
+.ibexa-field-edit--ezcountry {
+    .ibexa-data-source__input {
         max-width: calculateRem(400px);
     }
 }

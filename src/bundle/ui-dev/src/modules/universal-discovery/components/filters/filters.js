@@ -80,7 +80,7 @@ const Filters = ({ isCollapsed, search }) => {
         }
 
         return (
-            <button className="btn btn-secondary ez-btn--udw-select-location" type="button" onClick={openUdw}>
+            <button className="btn ibexa-btn ibexa-btn--secondary ibexa-btn--udw-select-location" type="button" onClick={openUdw}>
                 Select content
             </button>
         );
@@ -94,7 +94,7 @@ const Filters = ({ isCollapsed, search }) => {
             <div className="ez-tag">
                 <div className="ez-tag__content">{subtreeBreadcrumbs}</div>
                 <button type="button" className="ez-tag__remove-btn" onClick={clearSelectedSubree}>
-                    <Icon name="discard" extraClasses="ez-icon--small ez-icon--dark" />
+                    <Icon name="discard" extraClasses="ibexa-icon--small ibexa-icon--dark" />
                 </button>
             </div>
         );
@@ -117,13 +117,13 @@ const Filters = ({ isCollapsed, search }) => {
         <div className={wrapperClassName}>
             <div className="ez-filters__row">
                 <div className="ez-filters__item ez-filters__item--content-type">
-                    <label className="ez-label">{contentTypeLabel}</label>
+                    <label className="ibexa-label">{contentTypeLabel}</label>
                     <ContentTypeSelector />
                 </div>
             </div>
             <div className="ez-filters__row">
                 <div className="ez-filters__item ez-filters__item--section">
-                    <label className="ez-label">{sectionLabel}</label>
+                    <label className="ibexa-label">{sectionLabel}</label>
                     <select className="ez-filters__select form-control" onChange={updateSection} value={selectedSection}>
                         <option value={''}>{anySectionLabel}</option>
                         {Object.entries(window.eZ.adminUiConfig.sections).map(([sectionIdentifier, sectionName]) => {
@@ -136,7 +136,7 @@ const Filters = ({ isCollapsed, search }) => {
                     </select>
                 </div>
                 <div className="ez-filters__item ez-filters__item--subtree">
-                    <label className="ez-label">{subtreeLabel}:</label>
+                    <label className="ibexa-label">{subtreeLabel}:</label>
                     <div>
                         {renderSelectContentButton()}
                         {renderSubtreeBreadcrumbs()}
@@ -144,10 +144,10 @@ const Filters = ({ isCollapsed, search }) => {
                 </div>
             </div>
             <div className="ez-filters__btns">
-                <button type="submit" className="btn btn-primary ez-btn-apply" onClick={makeSearch} disabled={!isApplyButtonEnabled}>
+                <button type="submit" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--apply" onClick={makeSearch} disabled={!isApplyButtonEnabled}>
                     {applyLabel}
                 </button>
-                <button className="ez-btn ez-btn--no-border" onClick={clearFilters}>
+                <button className="btn ibexa-btn ibexa-btn--ghost" onClick={clearFilters}>
                     {clearLabel}
                 </button>
             </div>

@@ -1,84 +1,21 @@
-.ez-field-edit--ezmedia {
-    .ez-field-edit__error {
-        @include error-under-label();
-    }
-
-    .ez-field-edit-preview {
-        &__media-wrapper {
-            position: relative;
-            display: inline-block;
-            float: left;
-            width: calculateRem(520px);
-            height: auto;
-            margin: 0 calculateRem(24px) calculateRem(16px) 0;
-        }
-
-        &__media {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        &__actions {
-            position: absolute;
-            z-index: 1;
-            top: calculateRem(16px);
-            right: calculateRem(16px);
-            width: calculateRem(40px);
-            height: calculateRem(90px);
-        }
-
-        &__action--remove,
-        &__action--preview {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: calculateRem(40px);
-            height: calculateRem(40px);
-            margin-bottom: calculateRem(12px);
-            background: $ibexa-color-primary;
-            border: none;
-            outline: none;
-
-            .ez-icon {
-                fill: $ibexa-white;
-                width: calculateRem(20px);
-            }
-        }
-
-        &__control {
-            display: inline-block;
-            width: calculateRem(300px);
-
-            .ez-field-edit-preview__section-title {
-                margin-bottom: calculateRem(32px);
-                font-size: calculateRem(16px);
-                color: $ibexa-color-font;
-            }
-
-            .ez-data-source__label-text {
-                display: inline-block;
-                width: calculateRem(130px);
-            }
-        }
-
+.ibexa-field-edit--ezmedia {
+    .ibexa-field-edit-preview {
         &__details {
-            color: $ibexa-color-font;
-            padding-top: calculateRem(16px);
+            display: flex;
+            flex-wrap: wrap;
         }
 
-        &__file-name,
-        &__file-size {
-            display: inline-block;
-            margin-bottom: calculateRem(32px);
+        &__file-name-wrapper,
+        &__file-size-wrapper,
+        &__control,
+        &__settings {
+            flex-basis: 50%;
+            padding: calculateRem(8px);
 
-            &:first-child {
-                margin-right: calculateRem(32px);
+            .ibexa-label {
+                margin-top: 0;
+                margin-bottom: 0;
             }
-        }
-
-        &__file-name {
-            min-width: calculateRem(270px);
         }
 
         &__spinner {
@@ -86,81 +23,39 @@
         }
 
         &__media-wrapper--loading {
-            .ez-field-edit-preview__spinner {
+            .ibexa-field-edit-preview__spinner {
                 display: inline-block;
                 width: calculateRem(32px);
                 height: calculateRem(32px);
             }
 
-            .ez-field-edit-preview__media {
+            .ibexa-field-edit-preview__media {
                 display: none;
             }
         }
 
         &__info {
-            & + .ez-field-edit-preview__info {
+            & + .ibexa-field-edit-preview__info {
                 margin-top: calculateRem(12px);
             }
         }
 
         &__dimensions {
-            display: flex;
+            input[type='number'] {
+                width: 10ch;
 
-            .ez-field-edit-preview__info {
-                margin-right: calculateRem(24px);
-                margin-top: 0;
+                &.is-invalid {
+                    @include input-invalid;
 
-                .ez-field-edit-preview__label {
-                    margin-bottom: calculateRem(12px);
-                    font-size: calculateRem(16px);
-                    color: $ibexa-color-base-dark;
-
-                    &:after {
-                        content: ': ';
-                    }
+                    padding-right: calculateRem(12px);
                 }
-
-                .ez-field-edit-preview__input {
-                    width: calculateRem(220px);
-                }
-            }
-        }
-
-        &__settings {
-            .ez-field-edit-preview__input-wrapper {
-                display: flex;
-                align-items: center;
-                cursor: pointer;
             }
         }
     }
 
     &.is-invalid {
-        .ez-data-source {
+        .ibexa-data-source {
             @include area-invalid();
         }
-
-        .ez-field-edit-preview {
-            position: relative;
-
-            &:before {
-                content: '!';
-                position: absolute;
-                top: 0;
-                left: -20px;
-                width: 20px;
-                background: $ibexa-color-danger;
-                color: white;
-                text-align: center;
-                font-size: 1.5rem;
-                border-top-left-radius: 5px;
-                border-bottom-left-radius: 5px;
-            }
-        }
-    }
-
-    .ez-data-source {
-        padding: calculateRem(16px) calculateRem(30px);
-        background: $ibexa-color-base-light;
     }
 }

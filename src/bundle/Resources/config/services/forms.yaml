@@ -397,3 +397,7 @@ services:
     EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditUserOnTheFlyDispatcher: ~
 
     EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper: ~
+
+    Ibexa\AdminUi\Form\Type\ContentType\FieldDefinitionsCollectionType:
+        tags:
+            - { name: form.type }

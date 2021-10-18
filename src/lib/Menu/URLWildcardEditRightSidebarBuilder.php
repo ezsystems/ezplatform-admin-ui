@@ -61,10 +61,9 @@ final class URLWildcardEditRightSidebarBuilder extends AbstractBuilder implement
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => $options['submit_selector'],
                     ],
-                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
@@ -74,7 +73,6 @@ final class URLWildcardEditRightSidebarBuilder extends AbstractBuilder implement
                     'routeParameters' => [
                         '_fragment' => URLWildcardsTab::URI_FRAGMENT,
                     ],
-                    'extras' => ['icon' => 'circle-close'],
                 ]
             ),
         ]);

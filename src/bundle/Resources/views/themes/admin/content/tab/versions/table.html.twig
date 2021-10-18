@@ -6,115 +6,148 @@
 {% set custom_actions = custom_actions|default(false) %}
 {% set have_actions = (is_draft or is_archived) or custom_actions %}
 
-<div class="ez-scrollable-table-wrapper">
-    <table class="table table-hover {% if is_draft and have_to_paginate %} mb-3 {% endif %} {% if is_draft_conflict %} ez-table__draft-conflict {% endif %}">
+<div class="ibexa-scrollable-wrapper">
+    <table class="ibexa-table table ibexa-table--draft-conflict {{ (is_draft and have_to_paginate ? 'mb-3' : '') }}">
         <thead>
-        <tr>
-            {% if form is defined %}
-                <th></th>
-            {% endif %}
-            <th>{{ 'tab.versions.table.version'|trans()|desc('Version') }}</th>
-            <th>{{ 'tab.versions.table.modified_language'|trans()|desc('Modified language') }}</th>
-            {% block custom_column_headers %}{% endblock %}
-            <th>{{ 'tab.versions.table.contributor'|trans()|desc('Contributor') }}</th>
-            {% if not is_draft_conflict %}
-            <th>{{ 'tab.versions.table.created'|trans()|desc('Created') }}</th>
-            {% endif %}
-            <th>{{ 'tab.versions.table.last_saved'|trans()|desc('Last saved') }}</th>
-            {% block custom_actions_column_headers %}{% endblock %}
-            {% if have_actions %}
-                <th></th>
-            {% endif %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for version in versions %}
-
-            {% set edit_url = content_is_user is defined and content_is_user ?
-                path('ezplatform.user.update', {
-                'contentId': version.contentInfo.id,
-                'versionNo': version.versionNo,
-                'language': version.initialLanguageCode,
-            }) : path('ezplatform.content.draft.edit', {
-                'contentId': version.contentInfo.id,
-                'versionNo': version.versionNo,
-                'language': version.initialLanguageCode,
-                'locationId': location.id ?? null
-            })
-            %}
-
-            <tr>
+            <tr class="ibexa-table__head-row">
                 {% if form is defined %}
-                    <td class="ez-table__cell ez-table__cell--has-checkbox">{{ form_widget(form.versions[version.versionNo], {'attr': {'class': 'ez-input ez-input--checkbox', 'disabled': not version.canDelete}}) }}</td>
+                    {% include '@ezdesign/ui/component/table/table_head_cell.html.twig' with {
+                        has_checkbox: true,
+                        content: null,
+                    } %}
                 {% endif %}
-                <td class="ez-table__cell">
-                    {{ version.versionNo }}
-                </td>
-                <td class="ez-table__cell">
-                    {{ ez_admin_ui_config.languages.mappings[version.initialLanguageCode].name }}
-                </td>
-                {% block custom_columns %}{% endblock %}
-                <td class="ez-table__cell">
-                    {% if version.author is not empty %}
-                        {{ ez_content_name(version.author) }}
-                    {% else %}
-                        {{ 'tab.versions.table.author.not_found'|trans|desc('Can\'t fetch contributor') }}
-                    {% endif %}
-                </td>
+                {% include '@ezdesign/ui/component/table/table_head_cell.html.twig' with {
+                    is_close_left: form is defined,
+                    content: 'tab.versions.table.version'|trans()|desc('Version'),
+                } %}
+                {% include '@ezdesign/ui/component/table/table_head_cell.html.twig' with {
+                    content: 'tab.versions.table.modified_language'|trans()|desc('Modified language'),
+                } %}
+                {% block custom_column_headers %}{% endblock %}
+                {% include '@ezdesign/ui/component/table/table_head_cell.html.twig' with {
+                    content: 'tab.versions.table.contributor'|trans()|desc('Contributor'),
+                } %}
                 {% if not is_draft_conflict %}
-                <td class="ez-table__cell">
-                    {{ version.creationDate|ez_full_datetime }}
-                </td>
+                    {% include '@ezdesign/ui/component/table/table_head_cell.html.twig' with {
+                        content: 'tab.versions.table.created'|trans()|desc('Created'),
+                    } %}
                 {% endif %}
-                <td class="ez-table__cell">
-                    {{ version.modificationDate|ez_full_datetime }}
-                </td>
+                {% include '@ezdesign/ui/component/table/table_head_cell.html.twig' with {
+                    content: 'tab.versions.table.last_saved'|trans()|desc('Last saved'),
+                } %}
+                {% block custom_actions_column_headers %}{% endblock %}
                 {% if have_actions %}
-                    <td class="ez-table__cell ez-table__cell--has-action-btns">
-                        {% block custom_actions_column %}
-                        {% endblock %}
-                        {% if is_draft_conflict %}
-                            {% set edit_draft_disabled = (version.author and version.author.id != ez_admin_ui_config.user.user.id) %}
-                            <a href="{{ edit_url }}"
-                               class="btn btn-icon {% if edit_draft_disabled %}ez-btn--prevented{% endif %}"
-                               title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}"
-                               {% if edit_draft_disabled %}disabled{% endif %}>
-                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                    <use xlink:href="{{ ez_icon_path('edit') }}"></use>
-                                </svg>
-                            </a>
-                        {% elseif is_draft %}
-                            <button
-                                    data-content-draft-edit-url="{{ edit_url }}"
-                                    data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
-                                        'contentId': version.contentInfo.id,
-                                        'versionNo': version.versionNo,
-                                        'languageCode': version.initialLanguageCode
-                                    }) }}"
-                                    data-content-id="{{ version.contentInfo.id }}"
-                                    data-language-code="{{ version.initialLanguageCode }}"
-                                    class="btn btn-icon mx-2 ez-btn--content-draft-edit"
-                                    title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}">
-                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                    <use xlink:href="{{ ez_icon_path('edit') }}"></use>
-                                </svg>
-                            </button>
-                        {% endif %}
-                        {% if is_archived %}
-                            <button class="btn btn-icon mx-2 ez-btn--content-edit"
-                                    title="{{ 'tab.versions.table.action.archived.edit'|trans|desc('Restore archived version') }}"
-                                    data-content-id="{{ version.contentInfo.id }}"
-                                    data-version-no="{{ version.versionNo }}"
-                                    data-language-code="{{ version.initialLanguageCode }}">
-                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                    <use xlink:href="{{ ez_icon_path('archive-restore') }}"></use>
-                                </svg>
-                            </button>
-                        {% endif %}
-                    </td>
+                    {% include '@ezdesign/ui/component/table/table_head_cell.html.twig' with { content: null } %}
                 {% endif %}
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody class="ibexa-table__body">
+            {% for version in versions %}
+                {% set edit_url = content_is_user is defined and content_is_user ?
+                        path('ezplatform.user.update', {
+                        'contentId': version.contentInfo.id,
+                        'versionNo': version.versionNo,
+                        'language': version.initialLanguageCode,
+                    }) : path('ezplatform.content.draft.edit', {
+                        'contentId': version.contentInfo.id,
+                        'versionNo': version.versionNo,
+                        'language': version.initialLanguageCode,
+                        'locationId': location.id ?? null
+                    })
+                %}
+
+                {% set custom_columns %}
+                    {% block custom_columns %}{% endblock %}
+                {% endset %}
+
+                {% set custom_actions_column %}
+                    {% block custom_actions_column %}{% endblock %}
+                {% endset %}
+
+                {% embed '@ezdesign/ui/component/table/table_body_row.html.twig' %}
+                    {% block body_row_cells %}
+                        {% if form is defined %}
+                            {% embed '@ezdesign/ui/component/table/table_body_cell.html.twig' with { has_checkbox: true } %}
+                                {% block content %}
+                                    {{ form_widget(form.versions[version.versionNo], {'attr': {'disabled': not version.canDelete}}) }}
+                                {% endblock %}
+                            {% endembed %}
+                        {% endif %}
+                        {% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with {
+                            is_close_left: form is defined,
+                            content: version.versionNo,
+                        } %}
+                        {% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with {
+                            content: ez_admin_ui_config.languages.mappings[version.initialLanguageCode].name,
+                        } %}
+                        {{ custom_columns }}
+                        {% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with {
+                            content: version.author is not empty
+                                ? ez_content_name(version.author)
+                                : 'tab.versions.table.author.not_found'|trans|desc('Can\'t fetch contributor'),
+                        } %}
+                        {% if not is_draft_conflict %}
+                            {% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with {
+                                content: version.creationDate|ez_full_datetime,
+                            } %}
+                        {% endif %}
+                        {% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with {
+                            content: version.modificationDate|ez_full_datetime,
+                        } %}
+
+                        {% if have_actions %}
+                            {% embed '@ezdesign/ui/component/table/table_body_cell.html.twig' with { has_action_btns: true } %}
+                                {% block action_btns_content %}
+                                    {{ custom_actions_column }}
+                                    {% if is_draft_conflict %}
+                                        {% set edit_draft_disabled = (version.author and version.author.id != ez_admin_ui_config.user.user.id) %}
+                                        <a
+                                            href="{{ edit_url }}"
+                                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text {% if edit_draft_disabled %}ibexa-btn--prevented{% endif %}"
+                                            title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}"
+                                            {% if edit_draft_disabled %}disabled{% endif %}
+                                        >
+                                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                                <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                                            </svg>
+                                        </a>
+                                    {% elseif is_draft %}
+                                        <button
+                                            data-content-draft-edit-url="{{ edit_url }}"
+                                            data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
+                                                'contentId': version.contentInfo.id,
+                                                'versionNo': version.versionNo,
+                                                'languageCode': version.initialLanguageCode
+                                            }) }}"
+                                            data-content-id="{{ version.contentInfo.id }}"
+                                            data-language-code="{{ version.initialLanguageCode }}"
+                                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--content-draft-edit"
+                                            title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}"
+                                        >
+                                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                                <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                                            </svg>
+                                        </button>
+                                    {% endif %}
+                                    {% if is_archived %}
+                                        <button
+                                            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--content-edit"
+                                            title="{{ 'tab.versions.table.action.archived.edit'|trans|desc('Restore archived version') }}"
+                                            data-content-id="{{ version.contentInfo.id }}"
+                                            data-version-no="{{ version.versionNo }}"
+                                            data-language-code="{{ version.initialLanguageCode }}"
+                                        >
+                                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                                                <use xlink:href="{{ ibexa_icon_path('archive-restore') }}"></use>
+                                            </svg>
+                                        </button>
+                                    {% endif %}
+                                {% endblock %}
+                            {% endembed %}
+                        {% endif %}
+                    {% endblock %}
+                {% endembed %}
+            {% endfor %}
         </tbody>
     </table>
 </div>

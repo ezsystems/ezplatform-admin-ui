@@ -1,0 +1,9 @@
+{% import '@ezdesign/ui/component/macros.html.twig' as macros %}
+
+<li class="ibexa-popup-menu__item {{ class|default('') }}">
+    {% if action_attr.href is defined %}
+        <a class="ibexa-popup-menu__item-content {{ content_class|default('') }}" {{ macros.attributes(action_attr|default({})) }}>{{ label }}</a>
+    {% else %}
+        <button type="button" class="ibexa-popup-menu__item-content {{ content_class|default('') }}" {{ macros.attributes(action_attr|default({})) }}>{{ label }}</button>
+    {% endif %}
+</li>

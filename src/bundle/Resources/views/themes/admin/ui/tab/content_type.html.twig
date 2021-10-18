@@ -2,67 +2,24 @@
     {% form_theme form_content_type_edit '@ezdesign/ui/form_fields.html.twig' %}
 {% endif %}
 
-<div class="row align-items-stretch ez-main-row">
-    <div class="px-0 pb-4 ez-content-container">
-        <div class="ez-header">
-            <div class="container">
-                {% block breadcrumbs %}
-                    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
-                        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') , },
-                        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
-                        { url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }), value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%') },
-                        { value: 'content_type.breadcrumb.view'|trans({ '%identifier%': content_type.name })|desc('%identifier%') }
-                    ]} %}
-                {% endblock %}
-                {% block page_title %}
-                    {% include '@ezdesign/ui/page_title.html.twig' with {
-                        title: 'content_type.view.view.title'|trans({ '%name%': content_type.name })|desc('%name%'),
-                        content_type_identifier: content_type.identifier
-                    } %}
-                {% endblock %}
-            </div>
-        </div>
+<div class="row align-items-stretch ibexa-main-row">
+    <div class="px-0 pb-4 ibexa-content-container">
         <div class="panel panel-primary">
             <div class="panel-body">
-                <div class="ez-header">
-                    <div class="container">
-                        <ul class="nav nav-tabs ez-tabs ez-nav-tabs--{{ group }}" role="tablist" id="ez-tab-list-{{ group }}">
-                            {% for tab in tabs %}
-                                {% set id = group ~ '-' ~ tab.identifier %}
-                                {% set active = loop.first %}
-                                <li class="nav-item">
-                                    <a class="nav-link{% if active %} active{% endif %}" id="ez-tab-label-{{ group }}"
-                                    data-toggle="tab" href="#ez-tab-{{ id }}" role="tab" aria-controls="ez-tab-{{ id }}"
-                                    aria-expanded="{{ active }}">{{ tab.name }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                <div class="tab-content container ez-tab-content" id="ez-tab-list-content-{{ group }}">
-                    {% for tab in tabs %}
-                        {% set id = group ~ '-' ~ tab.identifier %}
-                        {% set active = loop.first %}
-
-                        <div class="tab-pane{% if active %} active{% endif %}" id="ez-tab-{{ id }}" role="tabpanel"
-                            aria-labelledby="ez-tab-label-{{ group }}">
-                            {{ tab.view|raw }}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="ez-context-menu">
-        <div class="ez-sticky-container">
-            {% set content_type_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type.sidebar_right', [], {'content_type': content_type}) %}
-            {{ knp_menu_render(content_type_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
-
-            <div class="ez-extra-actions-container">
-                {% include '@ezdesign/content_type/widget/content_type_edit.html.twig' with {
-                    'form': form_content_type_edit
-                } only %}
+                {% set tabs_to_show = tabs|map((tab, index) => {
+                    id: group ~ '-' ~ tab.identifier,
+                    label: tab.name,
+                    content: tab.view,
+                    active: index == 0,
+                }) %}
+                {% include '@ezdesign/ui/component/tab/tabs.html.twig' with {
+                    tabs: tabs_to_show,
+                } %}
             </div>
         </div>
     </div>
 </div>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-tabs-js', null, 'ezplatform') }}
+{% endblock %}

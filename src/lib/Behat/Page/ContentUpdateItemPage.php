@@ -9,8 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 use Ibexa\AdminUi\Behat\Component\Fields\FieldTypeComponent;
-use Ibexa\AdminUi\Behat\Component\RightMenu;
+use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Routing\Router;
@@ -19,8 +20,8 @@ use Traversable;
 
 class ContentUpdateItemPage extends Page
 {
-    /** @var \Ibexa\AdminUi\Behat\Component\RightMenu */
-    private $rightMenu;
+    /** @var \Ibexa\AdminUi\Behat\Component\ContentActionsMenu */
+    private $contentActionsMenu;
 
     private $pageTitle;
 
@@ -30,11 +31,11 @@ class ContentUpdateItemPage extends Page
     public function __construct(
         Session $session,
         Router $router,
-        RightMenu $rightMenu,
+        ContentActionsMenu $contentActionsMenu,
         Traversable $fieldTypeComponents
     ) {
         parent::__construct($session, $router);
-        $this->rightMenu = $rightMenu;
+        $this->contentActionsMenu = $contentActionsMenu;
         $this->fieldTypeComponents = iterator_to_array($fieldTypeComponents);
     }
 
@@ -49,7 +50,7 @@ class ContentUpdateItemPage extends Page
             );
         }
         $this->getHTMLPage()->setTimeout(10)->find($this->getLocator('formElement'))->assert()->isVisible();
-        $this->rightMenu->verifyIsLoaded();
+        $this->contentActionsMenu->verifyIsLoaded();
     }
 
     public function setExpectedPageTitle(string $title): void
@@ -69,18 +70,20 @@ class ContentUpdateItemPage extends Page
 
     public function close(): void
     {
+        $this->getHTMLPage()->setTimeout(3)
+            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('closeButton')));
         $this->getHTMLPage()->find($this->getLocator('closeButton'))->click();
     }
 
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('pageTitle', '.ez-content-edit-page-title__title'),
+            new VisibleCSSLocator('pageTitle', '.ibexa-edit-header__title'),
             new VisibleCSSLocator('formElement', '[name=ezplatform_content_forms_content_edit]'),
-            new VisibleCSSLocator('closeButton', '.ez-content-edit-container__close'),
-            new VisibleCSSLocator('fieldLabel', '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ez-card > .card-body > div > div > legend'),
-            new VisibleCSSLocator('nthField', '.ez-card .card-body > div > div:nth-of-type(%s)'),
-            new VisibleCSSLocator('noneditableFieldClass', 'ez-field-edit--eznoneditable'),
+            new VisibleCSSLocator('closeButton', '.ibexa-anchor-navigation-menu__back'),
+            new VisibleCSSLocator('fieldLabel', '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ibexa-card > .card-body > div > div > legend, .ibexa-field-edit--eznoneditable > legend.col-form-label'),
+            new VisibleCSSLocator('nthField', '.ibexa-card .card-body > div > div > div:nth-of-type(%s)'),
+            new VisibleCSSLocator('noneditableFieldClass', 'ibexa-field-edit--eznoneditable'),
             new VisibleCSSLocator('fieldOfType', '.ez-field-edit--%s'),
         ];
     }

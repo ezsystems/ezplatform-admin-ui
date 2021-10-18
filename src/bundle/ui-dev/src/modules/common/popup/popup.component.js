@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import PropTypes from 'prop-types';
 import Icon from '../icon/icon';
 
@@ -31,7 +30,12 @@ class Popup extends Component {
         const { isVisible: show } = this.state;
 
         if (show) {
-            $(this._refModal).modal({ ...MODAL_CONFIG, show, focus: this.props.hasFocus });
+            const bootstrapModal = window.bootstrap.Modal.getOrCreateInstance(this._refModal, {
+                ...MODAL_CONFIG,
+                focus: this.props.hasFocus,
+            });
+
+            bootstrapModal.show();
 
             this.attachModalEventHandlers();
         }
@@ -40,15 +44,21 @@ class Popup extends Component {
     componentDidUpdate() {
         const { isVisible: show } = this.state;
 
-        $(this._refModal).modal({ ...MODAL_CONFIG, show, focus: this.props.hasFocus });
+        const bootstrapModal = window.bootstrap.Modal.getOrCreateInstance(this._refModal, {
+            ...MODAL_CONFIG,
+            focus: this.props.hasFocus,
+        });
 
         if (show) {
+            bootstrapModal.show();
             this.attachModalEventHandlers();
+        } else {
+            bootstrapModal.hide();
         }
     }
 
     componentWillUnmount() {
-        $(this._refModal).modal('hide');
+        window.bootstrap.Modal.getOrCreateInstance(this._refModal).hide();
         document.body.classList.remove(CLASS_MODAL_OPEN, CLASS_NON_SCROLLABLE);
     }
 
@@ -57,10 +67,8 @@ class Popup extends Component {
     }
 
     attachModalEventHandlers() {
-        const modal = $(this._refModal);
-
-        modal.on('keyup', this.onKeyUp);
-        modal.one('hidden.bs.modal', this.props.onClose);
+        this._refModal.addEventListener('keyup', this.onKeyUp);
+        this._refModal.addEventListener('hidden.bs.modal', this.props.onClose);
     }
 
     onKeyUp(event) {
@@ -95,10 +103,10 @@ class Popup extends Component {
             <button
                 type="button"
                 className="close c-popup__btn--close"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label={closeBtnLabel}
                 onClick={this.props.onClose}>
-                <Icon name="discard" extraClasses="ez-icon--small" />
+                <Icon name="discard" extraClasses="ibexa-icon--small" />
             </button>
         );
     }
@@ -193,7 +201,7 @@ Popup.defaultProps = {
     hasFocus: true,
     size: 'large',
     noHeader: false,
-    onConfigIframeLoad: () => { },
+    onConfigIframeLoad: () => {},
 };
 
 export default Popup;

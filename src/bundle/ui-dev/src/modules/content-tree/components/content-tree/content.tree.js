@@ -162,7 +162,7 @@ export default class ContentTree extends Component {
 
         return (
             <div className="m-tree__loading-spinner">
-                <Icon name="spinner" extraClasses="ez-icon--medium ez-spin" />
+                <Icon name="spinner" extraClasses="ibexa-icon--medium ibexa-spin" />
             </div>
         );
     }

@@ -205,3 +205,8 @@ services:
             $translationHelper: '@ezpublish.translation_helper'
 
     EzSystems\EzPlatformAdminUiBundle\Controller\Controller: ~
+
+    Ibexa\Bundle\AdminUi\Controller\FieldDefinitionController:
+        parent: ezpublish_rest.controller.base
+        tags: ['controller.service_arguments']
+        autowire: true

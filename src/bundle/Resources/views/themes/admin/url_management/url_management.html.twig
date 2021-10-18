@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'ezplatform_url_management' %}
 
-{% block body_class %}ez-url-management ez-has-full-width-footer{% endblock %}
+{% block body_class %}ez-url-management{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
@@ -15,10 +15,9 @@
     {{ 'url_management.view.list.title'|trans|desc('URL Management') }}
 {% endblock %}
 
-{% block page_title %}
+{% block header %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'url_management.view.list.title'|trans|desc('URL Management'),
-        icon_name: 'link'
     } %}
 {% endblock %}
 

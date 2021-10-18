@@ -30,7 +30,7 @@ use Twig\Environment;
 
 class UrlsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
-    const URI_FRAGMENT = 'ez-tab-location-view-urls';
+    const URI_FRAGMENT = 'ibexa-tab-location-view-urls';
 
     /** @var \eZ\Publish\API\Repository\URLAliasService */
     protected $urlAliasService;

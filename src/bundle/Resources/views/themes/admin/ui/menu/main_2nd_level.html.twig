@@ -1,0 +1,98 @@
+{% extends '@ezdesign/ui/menu/main_base.html.twig' %}
+
+{% block root %}
+    {% set resizer_width = 10 %}
+    {% set second_level_manual_resize_min_width = 80 %}
+    {% set second_level_menu_width = app.request.cookies.get('second_menu_width') %}
+    {% set second_menu_width_style = '' %}
+    {% set second_menu_list_width_style = '' %}
+    {% set extra_class = 'ibexa-main-menu__navbar--hidden' %}
+    {% set list_attributes = item.childrenAttributes %}
+    {% set current_item = item %}
+
+    {% for child in current_item.children %}
+        {% if matcher.isAncestor(child, options.matchingDepth) %}
+            {% set extra_class = '' %}
+        {% endif %}
+    {% endfor %}
+
+    {% if second_level_menu_width and extra_class != 'ibexa-main-menu__navbar--hidden' %}
+        {% if second_level_menu_width <= second_level_manual_resize_min_width %}
+            {% set extra_class = extra_class ~ ' ibexa-main-menu__navbar--collapsed' %}
+        {% else %}
+            {% set second_menu_width_style = 'width: %spx;'|format(second_level_menu_width) %}
+            {% set second_menu_list_width_style = 'width: %spx'|format(second_level_menu_width - resizer_width) %}
+        {% endif %}
+    {% endif %}
+
+    <div class="ibexa-main-menu__navbar ibexa-main-menu__navbar--second-level {{ extra_class }}" style="{{ second_menu_width_style }}">
+        <div class="tab-content ibexa-main-menu__tab-content">
+            {% for child in current_item.children %}
+                <div class="tab-pane fade ibexa-main-menu__tab-pane {{ matcher.isAncestor(child, options.matchingDepth) or matcher.isCurrent(child) ? ' show active' }}" id="{{ child.name }}">
+                    <ul class="ibexa-main-menu__items-list" style="{{ second_menu_list_width_style }}">
+                        <li class="ibexa-main-menu__item ibexa-main-menu__item--popup-container">
+                            <button
+                                class="ibexa-main-menu__tooltip-trigger ibexa-btn ibexa-btn--small ibexa-btn--no-text ibexa-btn--neon-info"
+                                data-popup-target-selector="#{{ child.name }}-popup"
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small">
+                                    <use xlink:href="{{ ibexa_icon_path('menu') }}"></use>
+                                </svg>
+                            </button>
+
+                            <ul id="{{ child.name }}-popup" class="ibexa-popup-menu ibexa-popup-menu--info-neon ibexa-popup-menu--hidden">
+                                {% for item in child.children %}
+                                    {{ block('popupItem') }}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% for item in child.children %}
+                            {{ block('item') }}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="ibexa-main-menu__toggler-container">
+            <button class="ibexa-main-menu__toggler ibexa-btn ibexa-btn--small ibexa-btn--no-text ibexa-btn--neon-info">
+                <svg class="ibexa-icon ibexa-icon--small">
+                    <use xlink:href="{{ ibexa_icon_path('vertical-left-right') }}"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="ibexa-main-menu__resizer"></div>
+    </div>
+{% endblock %}
+
+{% block linkElement %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+
+    {% set classes = [
+        'ibexa-main-menu__item-action',
+        'ibexa-main-menu__item-action--second-level',
+        (matcher.isCurrent(item) ? options.currentClass|trim),
+        (item.linkAttributes.class is defined ?  item.linkAttributes.class|trim)
+    ] %}
+
+    {% set linkAttributes = {
+        'href': item.uri,
+        'aria-controls': item.name,
+        'class': classes|join(' ')
+    } %}
+
+    {% if item.extras.title is defined %}
+        {% set linkAttributes = linkAttributes|merge({
+            'title': item.extras.title
+        })  %}
+    {% endif %}
+
+    {% set link_attributes = item.linkAttributes|merge(linkAttributes) %}
+
+    <a{{ knp_menu.attributes(link_attributes) }}>
+        <div class="ibexa-main-menu__item-text-column">{{ block('label') }}</div>
+    </a>
+{% endblock %}
+
+{% block spanElement %}
+    {{ block('linkElement') }}
+{% endblock %}

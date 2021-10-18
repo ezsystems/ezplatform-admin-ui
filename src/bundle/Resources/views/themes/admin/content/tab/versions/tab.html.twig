@@ -17,9 +17,9 @@
                     'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_draft.remove.vars.id }
                 }) }}
                 {% block table_drafts %}
-                    {% include '@ezdesign/ui/table_header.html.twig' with {
-                        'header_text': 'tab.versions.draft_under_edit'|trans()|desc('Open drafts'),
-                        'tools': tab.table_header_tools(form_version_remove_draft)
+                    {% include '@ezdesign/ui/component/table/table_header.html.twig' with {
+                        headline: 'tab.versions.draft_under_edit'|trans()|desc('Open drafts'),
+                        actions: tab.table_header_tools(form_version_remove_draft),
                     } %}
                     {% include table_template_path with {
                         'versions': draft_pager.currentPageResults,
@@ -52,8 +52,8 @@
         {% if published_versions is not empty %}
             <section>
                 {% block table_published %}
-                    {% include '@ezdesign/ui/table_header.html.twig' with {
-                        'header_text': 'tab.versions.published_version'|trans()|desc('Published version')
+                    {% include '@ezdesign/ui/component/table/table_header.html.twig' with {
+                        headline: 'tab.versions.published_version'|trans()|desc('Published version'),
                     } %}
                     {% include table_template_path with { 'versions': published_versions } %}
                 {% endblock %}
@@ -69,9 +69,9 @@
                     'attr': { 'class': 'ez-toggle-btn-state', 'data-toggle-button-id': '#delete-translations-' ~ form_version_remove_archived.remove.vars.id }
                 }) }}
                 {% block table_archived %}
-                    {% include '@ezdesign/ui/table_header.html.twig' with {
-                        'header_text': 'tab.versions.archived_versions'|trans()|desc('Archived versions'),
-                        'tools': tab.table_header_tools(form_version_remove_archived)
+                    {% include '@ezdesign/ui/component/table/table_header.html.twig' with {
+                        headline: 'tab.versions.archived_versions'|trans()|desc('Archived versions'),
+                        actions: tab.table_header_tools(form_version_remove_archived),
                     } %}
                     {% include table_template_path with {
                         'versions': archived_versions,
@@ -96,17 +96,17 @@
 
 {% macro table_header_tools(form) %}
     {% set modal_data_target = 'modal-' ~ form.remove.vars.id %}
-    <button 
-        id="delete-translations-{{ form.remove.vars.id }}" 
-        type="button" 
-        class="btn btn-icon" 
-        disabled 
-        data-toggle="modal"
-        data-target="#{{ modal_data_target }}" 
+    <button
+        id="delete-translations-{{ form.remove.vars.id }}"
+        type="button"
+        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text"
+        disabled
+        data-bs-toggle="modal"
+        data-bs-target="#{{ modal_data_target }}"
         title="{{ 'tab.versions.action.delete'|trans|desc('Delete version') }}"
     >
-        <svg class="ez-icon ez-icon--small ez-icon-trash">
-            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
         </svg>
     </button>
     {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {

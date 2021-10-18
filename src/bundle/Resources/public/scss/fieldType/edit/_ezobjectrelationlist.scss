@@ -1,75 +1,66 @@
-.ez-field-edit--ezobjectrelation,
-.ez-field-edit--ezobjectrelationlist {
-    .ez-field-edit__error {
-        @include error-under-label();
-    }
-
+.ibexa-field-edit--ezobjectrelation,
+.ibexa-field-edit--ezobjectrelationlist {
     &.is-invalid {
-        .ez-relations__cta {
+        .ibexa-data-source {
             @include area-invalid();
+
+            .ibexa-table-header__headline {
+                color: $ibexa-color-danger;
+            }
         }
     }
 
-    .ez-relations {
+    .ibexa-data-source {
+        border: calculateRem(1px) solid $ibexa-color-dark-200;
+        border-radius: $ibexa-border-radius;
+        padding: calculateRem(24px);
+    }
+
+    .ibexa-relations {
         &__cta {
             width: 100%;
-            padding: calculateRem(16px) calculateRem(30px);
-            background: $ibexa-color-base-light;
         }
 
-        &__cta-text,
+        &__info-text {
+            margin-bottom: 0;
+            font-weight: normal;
+            font-size: $ibexa-text-font-size-medium;
+        }
+
+        &__info-sub-text {
+            margin-bottom: 0;
+            font-weight: normal;
+            font-size: $ibexa-text-font-size-small;
+            color: $ibexa-color-dark-400;
+        }
+
         &__helper-text {
             margin: 0;
             width: 100%;
-        }
-
-        &__helper-text {
             font-size: calculateRem(14px);
         }
 
         &__cta-btn {
-            margin: calculateRem(32px) 0;
+            margin-bottom: calculateRem(16px);
+        }
+
+        &__order-wrapper {
+            display: flex;
+            align-items: center;
         }
 
         &__order-input {
-            width: 6ch;
-            text-align: center;
-        }
-
-        &__table {
+            width: 7ch;
             margin-bottom: 0;
-            word-break: break-all;
         }
 
-        &__table-header {
-            th {
-                color: $ibexa-color-font;
-                padding: 0 0 calculateRem(25px);
-                border: none;
-            }
-        }
-
-        &__table-actions {
-            width: calculateRem(170px);
-            text-align: right;
-
-            .btn {
-                margin-left: calculateRem(2px);
-                margin-right: 0;
-            }
-        }
-
-        &__item-name {
-            max-width: 25vw;
-        }
-
-        &__hidden-column {
-            display: none;
+        &__table-action--remove-item {
+            padding: calculateRem(4px);
         }
     }
 
     .btn {
-        .ez-icon {
+        .ibexa-icon {
             margin-right: calculateRem(4px);
         }
     }

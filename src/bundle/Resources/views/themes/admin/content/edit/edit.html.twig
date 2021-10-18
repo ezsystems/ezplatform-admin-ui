@@ -1,4 +1,4 @@
-{% extends '@ezdesign/content/edit/base.html.twig' %}
+{% extends '@ezdesign/content/edit_base.html.twig' %}
 
 {% trans_default_domain 'content_edit' %}
 
@@ -6,62 +6,24 @@
     <meta name="LanguageCode" content="{{ language.languageCode }}"/>
 {% endblock %}
 
-{% block page_title %}
-    {% embed '@ezdesign/content/page_title_edit.html.twig' with {
-        action_name: 'editing'|trans|desc('Editing'),
-        title: content.name,
-        content: content,
-        description: content_type.description
-    } %}
-        {% block close_button %}
-            {% if without_close_button is not defined or without_close_button != true %}
-                {% set referrer_location = is_published ? location : parent_location %}
-                {% set cancel_path = path('ibexa.content.draft.edit.cancel', {
-                    'contentId': content.id,
-                    'referrerLocationId': referrer_location.id,
-                    'versionNo': content.versionInfo.versionNo,
-                    'languageCode': language.languageCode
-                }) %}
-                <a class="ez-content-edit-container__close"
-                   href="{{ cancel_path }}"
-                   title="{{ 'tooltip.exit_label'|trans({}, 'content')|desc('Exit') }}"
-                >
-                    <svg class="ez-icon ez-icon--small ez-icon--primary">
-                        <use xlink:href="{{ ez_icon_path('discard') }}"></use>
-                    </svg>
-                </a>
-            {% endif %}
-        {% endblock %}
-    {% endembed %}
-
-    <div class="ez-content-item__errors-wrapper" hidden>
-        {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
-    </div>
-{% endblock %}
-
-{% block details %}{% endblock %}
-
-{% block form_fields %}
-    <section class="container">
-        <div class="card ez-card ez-card--light">
-            <div class="card-body">
-                {{ parent() }}
-                {{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}
-                {{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}
-                {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
-            </div>
-        </div>
-    </section>
-{% endblock %}
-{% block right_sidebar %}
+{% block header %}
     {% set content_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_edit.sidebar_right', [], {
         'content': content,
         'content_type': content_type,
         'location': location,
         'parent_location': parent_location,
-        'language': language
+        'language': language,
     }) %}
-    {{ knp_menu_render(content_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
+
+    {% include '@ezdesign/ui/edit_header.html.twig' with {
+        action_name: 'editing'|trans|desc('Editing'),
+        title: content.name,
+        icon_name: 'content-type',
+        show_autosave_status: true,
+        description: content_type.description,
+        subtitle: 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%'),
+        context_actions: knp_menu_render(content_edit_sidebar_right, { 'template': '@ezdesign/ui/menu/context_menu.html.twig' })
+    } %}
 {% endblock %}
 
 {% block form_before %}
@@ -73,6 +35,20 @@
         'language': language
     }) }}
 {% endblock %}
+
+{% block form_fields %}
+    <section class="container">
+        <div class="card ibexa-card ibexa-card--light">
+            <div class="card-body">
+                {{ parent() }}
+                {{ form_widget(form.publish, {'attr': {'hidden': 'hidden'}}) }}
+                {{ form_widget(form.saveDraft, {'attr': {'hidden': 'hidden'}}) }}
+                {{ form_widget(form.cancel, {'attr': {'hidden': 'hidden'}}) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
 {% block form_after %}
     {{ ez_render_component_group('content-edit-form-after', {
         'content': content,

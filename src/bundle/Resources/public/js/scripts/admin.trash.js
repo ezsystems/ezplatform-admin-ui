@@ -15,7 +15,7 @@
         const { numberOfSubitems } = event.detail;
         const sendToTrashModal = document.querySelector('.ez-modal--trash-location');
         const modalBody = sendToTrashModal.querySelector('.modal-body');
-        const modalSendToTrashButton = sendToTrashModal.querySelector('.modal-footer .ez-modal-button--send-to-trash');
+        const modalSendToTrashButton = sendToTrashModal.querySelector('.modal-footer .ibexa-btn--confirm-send-to-trash');
         const { contentName } = sendToTrashModal.dataset;
 
         if (numberOfSubitems) {

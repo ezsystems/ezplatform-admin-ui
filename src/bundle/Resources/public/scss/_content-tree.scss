@@ -9,13 +9,15 @@
 
     .ez-content-tree-container {
         position: relative;
-        top: calculateRem(8px);
+        top: 0;
         flex: 0 0 auto;
-        max-width: 0;
+        width: calculateRem(50px);
         background: $ibexa-white;
         color: inherit;
-        transform: scaleX(0);
-        transform-origin: left;
+
+        .c-list {
+            display: none;
+        }
 
         &--animate {
             transition: $ibexa-admin-widget-close-transition;
@@ -26,16 +28,24 @@
         }
 
         &--expanded {
-            transform-origin: left;
-            transform: scaleX(1);
             display: initial;
-            max-width: 33vw;
+            width: 15vw;
+
+            .c-list {
+                display: block;
+            }
+
+            .ez-content-tree-container__wrapper {
+                opacity: 1;
+            }
         }
 
         &__wrapper {
             position: -webkit-sticky;
             position: sticky;
             top: 0;
+            opacity: 0;
+            overflow: auto;
         }
     }
 

@@ -2,9 +2,36 @@
 
 {% trans_default_domain 'content_type' %}
 
-{% block body_class %}ez-content-type-view ez-has-full-width-footer{% endblock %}
+{% block body_class %}ez-content-type-view{% endblock %}
 
 {% set language_code = content_type.mainLanguageCode %}
+{% form_theme form_content_type_edit '@ezdesign/ui/form_fields.html.twig' %}
+
+{% block breadcrumbs %}
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') , },
+        { url: path('ezplatform.content_type_group.list'), value: 'content_type_group.breadcrumb.list'|trans|desc('Content Types') },
+        { url: path('ezplatform.content_type_group.view', { contentTypeGroupId: content_type_group.id }), value: 'content_type_group.breadcrumb.view'|trans({ '%identifier%': content_type_group.identifier })|desc('%identifier%') },
+        { value: 'content_type.breadcrumb.view'|trans({ '%identifier%': content_type.name })|desc('%identifier%') }
+    ]} %}
+{% endblock %}
+
+{% block header %}
+    {% include '@ezdesign/ui/page_title.html.twig' with {
+        title: 'content_type.view.view.title'|trans({ '%name%': content_type.name })|desc('%name%'),
+    } %}
+{% endblock %}
+
+{% block context_menu %}
+    {% set content_type_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type.sidebar_right', [], {'content_type': content_type}) %}
+    {{ knp_menu_render(content_type_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+
+    <div class="ibexa-extra-actions-container">
+        {% include '@ezdesign/content_type/widget/content_type_edit.html.twig' with {
+            'form': form_content_type_edit
+        } only %}
+    </div>
+{% endblock %}
 
 {% block content %}
     {{ ez_render_component_group('content-type-tab-groups', {

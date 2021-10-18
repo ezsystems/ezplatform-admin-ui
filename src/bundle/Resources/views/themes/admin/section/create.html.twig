@@ -12,10 +12,14 @@
     ]} %}
 {% endblock %}
 
-{% block page_title_admin %}
+{% block context_menu_admin %}
+    {% set section_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.section_create.sidebar_right') %}
+    {{ knp_menu_render(section_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+{% endblock %}
+
+{% block header_admin %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'section.new.title'|trans|desc('Creating a new Section'),
-        icon_name: 'sections'
     } %}
 {% endblock %}
 
@@ -23,10 +27,10 @@
     {{ form_start(form_section_create) }}
 
     <section class="container mt-4">
-        <div class="card ez-card ez-card--light">
+        <div class="card ibexa-card ibexa-card--light">
             <div class="card-body">
-                {{ form_row(form_section_create.name, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
-                {{ form_row(form_section_create.identifier, {'label_attr': {'class': 'ez-label'}}) }}
+                {{ form_row(form_section_create.name, {'attr': {'autofocus': 'autofocus'}}) }}
+                {{ form_row(form_section_create.identifier) }}
             </div>
         </div>
     </section>
@@ -34,9 +38,4 @@
     {{ form_widget(form_section_create.create, {'attr': {'hidden': 'hidden'}}) }}
 
     {{ form_end(form_section_create) }}
-{% endblock %}
-
-{% block right_sidebar %}
-    {% set section_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.section_create.sidebar_right') %}
-    {{ knp_menu_render(section_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

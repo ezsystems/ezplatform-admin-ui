@@ -8,7 +8,7 @@
 
 {% block item -%}
     {%- if item.displayed -%}
-        {%- set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' ' ~ default_classes|default('btn btn-secondary btn-block'))|trim}) -%}
+        {%- set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' ' ~ default_classes|default('btn ibexa-btn ibexa-btn--secondary btn-block'))|trim}) -%}
         {%- set attributes = attributes|merge({'id': item.name ~ '-tab'}) -%}
 
         {%- if item.uri is not empty %}
@@ -35,12 +35,12 @@
 
 {% block label %}
     {% set icon_path = null %}
-    {% set icon_class = (item_class|default('ez-icon ') ~ item.extras.icon_class|default(''))|trim %}
+    {% set icon_class = (item_class|default('ibexa-icon ') ~ item.extras.icon_class|default(''))|trim %}
     {% if item.extras.icon_path|default %}
         {% set icon_path = item.extras.icon_path %}
     {% elseif item.extras.icon is defined and item.extras.icon is not empty %}
-        {% set icon_path = ez_icon_path(item.extras.icon) %}
-        {% set icon_class = (icon_class ~ ' ez-icon-' ~ item.extras.icon)|trim %}
+        {% set icon_path = ibexa_icon_path(item.extras.icon) %}
+        {% set icon_class = (icon_class ~ ' ibexa-icon--' ~ item.extras.icon)|trim %}
     {% endif %}
 
     {% if icon_path is not empty %}
@@ -48,5 +48,5 @@
             <use xlink:href="{{ icon_path }}"></use>
         </svg>
     {% endif %}
-    <span class="ez-btn__label">{{ parent() }}</span>
+    <span class="ibexa-btn__label">{{ parent() }}</span>
 {% endblock %}

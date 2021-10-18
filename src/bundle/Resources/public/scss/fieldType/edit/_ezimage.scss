@@ -1,99 +1,27 @@
-.ez-field-edit--ezimage {
-    .ez-field-edit__error {
-        @include error-under-label();
-    }
-
-    .ez-field-edit-preview {
-        &__media-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        &__media {
-            max-width: 100%;
-            width: auto;
-            height: auto;
-            display: block;
-        }
-
-        &__actions {
-            position: absolute;
-            top: calculateRem(16px);
-            right: calculateRem(16px);
-            width: calculateRem(40px);
-            height: calculateRem(90px);
-        }
-
-        &__action--remove,
-        &__action--preview {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: calculateRem(40px);
-            height: calculateRem(40px);
-            margin-bottom: calculateRem(12px);
-            background: $ibexa-color-primary;
-            border: none;
-            outline: none;
-
-            .ez-icon {
-                fill: $ibexa-white;
+.ibexa-field-edit--ezimage {
+    .ibexa-field-edit-preview {
+        &__file-name-wrapper,
+        &__dimensions-wrapper,
+        &__file-size-wrapper {
+            .ibexa-label {
+                margin-top: 0;
+                margin-bottom: 0;
             }
         }
 
-        &__details {
-            color: $ibexa-color-font;
-            padding-top: calculateRem(16px);
-        }
-
-        &__file-name,
-        &__file-size {
-            display: inline-block;
-
-            &:first-child {
-                margin-right: calculateRem(32px);
-            }
-        }
-
-        &__image-alt {
-            margin-top: calculateRem(8px);
+        &__dimension--width {
+            margin-right: calculateRem(8px);
         }
     }
 
     &.is-invalid {
-        .ez-data-source {
+        .ibexa-data-source {
             @include area-invalid();
         }
-
-        .ez-field-edit-preview {
-            position: relative;
-
-            &:before {
-                content: '!';
-                position: absolute;
-                top: 0;
-                left: calculateRem(-20px);
-                width: calculateRem(20px);
-                background: $ibexa-color-danger;
-                color: $ibexa-white;
-                text-align: center;
-                border-top-left-radius: $ibexa-border-radius;
-                border-bottom-left-radius: $ibexa-border-radius;
-            }
-        }
     }
 
-    .ez-data-source {
-        padding: calculateRem(16px) calculateRem(30px);
-        background: $ibexa-color-base-light;
-
-        &__label {
-            margin-top: calculateRem(24px);
-        }
-    }
-
-    .ez-data-source__field--alternativeText {
-        .ez-data-source__label {
+    .ibexa-data-source__field--alternativeText {
+        .ibexa-data-source__label {
             @include label-required();
         }
     }

@@ -1,74 +1,76 @@
-.ez-field-edit--ezgmaplocation {
-    .ez-field-edit__error {
-        @include error-under-label();
-    }
-
-    .ez-data-source {
-        display: grid;
-        grid-template-columns: calculateRem(520px) calculateRem(16px) calculateRem(220px);
-        grid-template-rows: repeat(5, minmax(50, auto));
-        grid-template-areas:
-            'addr . .'
-            'map . side1'
-            'map . side2'
-            'map . side3';
+.ibexa-field-edit--ezgmaplocation {
+    .ibexa-data-source {
+        display: flex;
 
         &__map {
-            grid-area: map;
             z-index: 0;
+            width: 50%;
+            height: calculateRem(400px);
+            border-top-left-radius: $ibexa-border-radius;
+            border-bottom-left-radius: $ibexa-border-radius;
         }
 
-        &__field--address {
-            grid-area: addr;
+        &__coordinates {
+            display: flex;
+            justify-content: space-between;
 
-            .ez-data-source__label {
-                margin-top: 0;
+            .ibexa-data-source__field {
+                width: 45%;
             }
 
-            .ez-data-source__input-wrapper {
-                padding-bottom: calculateRem(8px);
-                display: flex;
-            }
+            .ibexa-data-source__input {
+                &.is-invalid {
+                    @include input-invalid;
 
-            .ez-data-source__input {
-                margin-bottom: 0;
-            }
-
-            .ez-field-edit__error {
-                margin-bottom: calculateRem(10px);
-            }
-        }
-
-        &__locate-me {
-            grid-area: side1;
-
-            .form-control-label {
-                &:after {
-                    content: ': ';
+                    padding-right: calculateRem(12px);
                 }
             }
+        }
 
-            .ez-btn {
-                margin-bottom: calculateRem(32px);
+        &__options {
+            width: 50%;
+            padding: calculateRem(24px);
+
+            .ibexa-input {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                margin-bottom: 0;
+                padding-left: calculateRem(48px);
             }
         }
 
-        &__field--latitude {
-            @include input-invalid();
-
-            grid-area: side2;
-            margin-bottom: calculateRem(15px);
+        &__text-info {
+            margin-top: calculateRem(20px);
+            color: $ibexa-color-dark-400;
         }
 
-        &__field--longitude {
-            @include input-invalid();
+        &__input-wrapper {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
 
-            grid-area: side3;
-            margin-bottom: calculateRem(70px);
+            .ibexa-input-text-wrapper {
+                width: 100%;
+            }
+
+            .ibexa-btn--locate-me {
+                padding: calculateRem(13px);
+                border: calculateRem(1px) solid $ibexa-color-dark-200;
+                border-left: none;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+            .ibexa-btn--search-by-address {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: calculateRem(13px);
+            }
         }
     }
 
-    .btn--search-by-address {
-        margin-left: calculateRem(8px);
+    .ibexa-field-edit__data {
+        padding: 0;
     }
 }

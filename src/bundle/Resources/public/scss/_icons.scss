@@ -1,7 +1,17 @@
-.ez-icon {
+.ibexa-icon {
     width: calculateRem(32px);
     height: calculateRem(32px);
     transition: fill 0.3s $ibexa-admin-transition;
+
+    &--tiny {
+        width: calculateRem(8px);
+        height: calculateRem(8px);
+    }
+
+    &--tiny-small {
+        width: calculateRem(12px);
+        height: calculateRem(12px);
+    }
 
     &--small {
         width: calculateRem(16px);
@@ -54,52 +64,13 @@
     }
 }
 
-.btn-icon {
-    .ez-icon {
-        width: calculateRem(20px);
-        height: calculateRem(20px);
-        fill: $ibexa-color-primary;
-
-        &--secondary {
-            fill: $ibexa-black;
-        }
-
-        &--dark {
-            fill: $ibexa-black;
-        }
-
-        &--base-dark {
-            fill: $ibexa-color-base-dark;
-        }
-
-        &--copy {
-            fill: $ibexa-color-base-dark;
-        }
-    }
-
-    &:not([disabled]):hover {
-        .ez-icon {
-            &--secondary {
-                fill: $ibexa-color-primary;
-            }
-        }
-    }
-}
-
-.ez-side-menu,
-.ez-context-menu {
-    .ez-icon {
-        fill: $ibexa-white;
-    }
-}
-
-.ez-btn--extra-actions {
-    .ez-icon {
+.ibexa-btn--extra-actions {
+    .ibexa-icon {
         pointer-events: none;
     }
 }
 
-.ez-icon--logo {
+.ibexa-icon--logo {
     width: calculateRem(128px);
     height: calculateRem(112px);
     display: block;
@@ -107,7 +78,7 @@
 }
 
 .ez-preview__action {
-    .ez-icon {
+    .ibexa-icon {
         width: calculateRem(24px);
         height: calculateRem(24px);
         fill: $ibexa-color-base-dark;
@@ -115,47 +86,24 @@
 
     &:hover,
     &:focus {
-        .ez-icon {
+        .ibexa-icon {
             fill: $ibexa-white;
         }
     }
 
     &.ez-preview__action--selected {
-        .ez-icon {
+        .ibexa-icon {
             fill: $ibexa-white;
         }
     }
 }
 
-.ez-field-edit--ezdate,
-.ez-field-edit--ezdatetime,
-.ez-field-edit--eztime {
-    .ez-data-source__btn--clear-input {
-        .ez-icon {
-            width: calculateRem(16px);
-            height: calculateRem(16px);
-        }
-    }
-}
-
-.ez-btn--select-subtree {
-    .ez-icon {
-        margin-right: calculateRem(8px);
-    }
-}
-
-.ez-alert--info {
-    .ez-icon-warning {
-        fill: $ibexa-color-primary;
-    }
-}
-
-.ez-btn--content-tree-expanded {
-    .ez-icon {
+.ibexa-btn--content-tree-expanded {
+    .ibexa-icon {
         fill: $ibexa-black;
     }
 }
 
-.ez-icon--hidden {
+.ibexa-icon--hidden {
     display: none;
 }

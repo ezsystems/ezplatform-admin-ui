@@ -1,0 +1,58 @@
+.ibexa-chart {
+    max-height: calculateRem(1000px);
+    border: calculateRem(1px) solid $ibexa-color-light-500;
+    border-radius: $ibexa-border-radius;
+
+    &--no-data {
+        .ibexa-chart {
+            &__canvas,
+            &__legend,
+            &__summary {
+                opacity: 0.4;
+            }
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        padding: calculateRem(16px);
+    }
+
+    &__time-range,
+    &__time-period {
+        color: $ibexa-color-dark-300;
+    }
+
+    &__message {
+        position: absolute;
+        z-index: 1;
+        top: calc(50% - #{calculateRem(150px)});
+        left: calc(50% - #{calculateRem(190px)});
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-weight: bold;
+        width: calculateRem(400px);
+        height: calculateRem(226px);
+        border-radius: $ibexa-border-radius;
+        border: calculateRem(1px) solid $ibexa-color-light;
+        background: $ibexa-color-white;
+
+        .ibexa-icon {
+            margin-bottom: calculateRem(12px);
+        }
+    }
+
+    &__body {
+        position: relative;
+        padding: 0 calculateRem(14px) calculateRem(14px) calculateRem(12px);
+    }
+
+    &__canvas {
+        max-height: calculateRem(350px);
+        width: 100%;
+    }
+}

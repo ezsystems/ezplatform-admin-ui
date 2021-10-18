@@ -218,18 +218,15 @@ export default class MultiFileUploadModule extends Component {
         }
 
         const uploadDisabled = this.state.uploadDisabled;
-        const title = Translator.trans(/*@Desc("Upload sub-items")*/ 'multi_file_upload_open_btn.label', {}, 'multi_file_upload');
-        const attrs = { className: 'm-mfu__btn--upload', title, onClick: this.showUploadPopup, type: 'button' };
-
-        if (uploadDisabled) {
-            delete attrs.onClick;
-
-            attrs.disabled = true;
-        }
+        const label = Translator.trans(/*@Desc("Upload")*/ 'multi_file_upload_open_btn.label', {}, 'multi_file_upload');
 
         return (
-            <button {...attrs}>
-                <Icon name="upload" extraClasses="ez-icon--base-dark ez-icon--small-medium" />
+            <button
+                type="button"
+                className="btn ibexa-btn ibexa-btn--ghost"
+                onClick={this.showUploadPopup}
+                disabled={uploadDisabled}>
+                <Icon name="upload" extraClasses="ibexa-icon--small" /> {label}
             </button>
         );
     }

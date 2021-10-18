@@ -4,9 +4,9 @@
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <svg class="ez-icon ez-icon--medium" aria-hidden="true">
-                    <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <svg class="ibexa-icon ibexa-icon--medium" aria-hidden="true">
+                    <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                 </svg>
             </button>
             <div class="modal-body">
@@ -21,8 +21,8 @@
                 {{ form_start(form, {
                     'action': path('ezplatform.trash.empty')
                 }) }}
-                {{ form_widget(form.empty, {'attr': {'class': 'btn btn-primary'}}) }}
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                {{ form_widget(form.empty, {'attr': {'class': 'btn ibexa-btn ibexa-btn--primary'}}) }}
+                <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
                     {{ 'trash.delete.button.cancel'|trans|desc('Cancel') }}
                 </button>
                 {{ form_widget(form.empty_trash, {'label_attr': {'class': 'checkbox-inline'}, 'attr': {'hidden': true}}) }}

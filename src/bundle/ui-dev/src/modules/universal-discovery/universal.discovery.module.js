@@ -154,6 +154,7 @@ const UniversalDiscoveryModule = (props) => {
 
         return () => {
             window.document.body.dispatchEvent(new CustomEvent('ez-udw-closed'));
+            window.eZ.helpers.tooltips.hideAll();
         };
     }, []);
 

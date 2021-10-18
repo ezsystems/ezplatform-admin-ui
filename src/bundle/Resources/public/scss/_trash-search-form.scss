@@ -4,6 +4,7 @@
     &__inputs-group {
         display: flex;
         justify-content: space-between;
+        flex-flow: wrap;
     }
 
     &__item {
@@ -23,7 +24,7 @@
                 }
 
                 &__input {
-                    + .ez-icon {
+                    + .ibexa-icon {
                         display: none;
                     }
 
@@ -34,7 +35,7 @@
                         padding-right: calculateRem(32px);
                         text-overflow: ellipsis;
 
-                        & + .ez-icon {
+                        & + .ibexa-icon {
                             display: block;
                             position: absolute;
                             bottom: calculateRem(7px);
@@ -73,12 +74,12 @@
     }
 
     &__input {
-        &:disabled + .ez-btn--reset-creator {
+        &:disabled + .ibexa-btn--reset-creator {
             display: block;
         }
     }
 
-    .ez-btn--reset-creator {
+    .ibexa-btn--reset-creator {
         display: none;
         position: absolute;
         right: calculateRem(5px);

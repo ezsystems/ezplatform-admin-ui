@@ -1,0 +1,61 @@
+{% import '@ezdesign/ui/component/macros.html.twig' as macros %}
+
+<div
+    class="ibexa-collapse {{ is_hidden|default(false) ? 'ibexa-collapse--hidden' }} {{ class|default('') }}"
+    draggable="{{ is_draggable|default(false) ? 'true' : 'false' }}"
+    {{ macros.attributes(data_attr|default({})) }}
+>
+    {% block header %}
+        <div class="ibexa-collapse__header {{ header_class|default('') }}">
+            {% block header_content %}
+                {% if is_draggable|default(false) %}
+                    <button type="button" class="btn ibexa-btn ibexa-btn--no-text ibexa-collapse__draggable-btn">
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path("drag") }}"></use>
+                        </svg>
+                    </button>
+                {% endif %}
+
+                <button
+                    class="btn ibexa-btn ibexa-collapse__toggle-btn {{ not is_expanded|default(false) ? 'collapsed' }} {{ label_button_class|default('') }}"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#{{ body_id }}"
+                >
+                    <span class="ibexa-collapse__header-label">{{ header_label|default('') }}</span>
+                </button>
+
+                {% if extra_actions is defined %}
+                    {% for action in extra_actions %}
+                        <button type="button" class="ibexa-collapse__extra-action-button btn ibexa-btn ibexa-btn--no-text {{ action.button_class|default('') }}">
+                            <svg class="ibexa-icon ibexa-icon--small">
+                                <use xlink:href="{{ ibexa_icon_path(action.icon_name) }}"></use>
+                            </svg>
+                        </button>
+                    {% endfor %}
+                {% endif %}
+
+                <button
+                    class="btn ibexa-btn ibexa-btn--no-text ibexa-collapse__toggle-btn ibexa-collapse__toggle-btn--status"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#{{ body_id }}"
+                >
+                    <svg class="ibexa-icon ibexa-icon--tiny-small ibexa-icon--toggle-status-icon {{ status_icon_class|default('') }}">
+                        <use xlink:href="{{ ibexa_icon_path(status_icon|default('caret-down')) }}"></use>
+                    </svg>
+                </button>
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {% block body %}
+        <div class="ibexa-collapse__body collapse {{ is_expanded|default(false) ? 'show' }} {{ body_class|default('') }}" id="{{ body_id }}">
+            {% block body_content_wrapper %}
+                <div class="ibexa-collapse__body-content">
+                    {% block body_content %}{% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+</div>

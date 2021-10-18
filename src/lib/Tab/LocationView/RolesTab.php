@@ -25,7 +25,7 @@ use Twig\Environment;
 
 class RolesTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
 {
-    const URI_FRAGMENT = 'ez-tab-location-view-roles';
+    const URI_FRAGMENT = 'ibexa-tab-location-view-roles';
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     protected $datasetFactory;

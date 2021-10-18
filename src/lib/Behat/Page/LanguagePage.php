@@ -54,7 +54,7 @@ class LanguagePage extends Page
         $hasExpectedEnabledFieldValue = true;
         if (array_key_exists('Enabled', $data)) {
             // Table does not handle returning non-string values
-            $hasEnabledField = $this->getHTMLPage()->find($this->getLocator('enabledField'))->hasAttribute('checked');
+            $hasEnabledField = $this->getHTMLPage()->find($this->getLocator('enabledField'))->getValue() === 'on';
             $shouldHaveEnabledField = 'true' === $data['Enabled'];
             $hasExpectedEnabledFieldValue = $hasEnabledField === $shouldHaveEnabledField;
             unset($data['Enabled']);
@@ -106,10 +106,10 @@ class LanguagePage extends Page
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('pageTitle', '.ez-header h1'),
-            new VisibleCSSLocator('deleteButton', 'button[data-original-title="Delete language"]'),
-            new VisibleCSSLocator('editButton', '[data-original-title="Edit"]'),
-            new VisibleCSSLocator('enabledField', 'input[data-original-title="Enabled"]'),
+            new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
+            new VisibleCSSLocator('deleteButton', 'button[data-bs-original-title="Delete language"]'),
+            new VisibleCSSLocator('editButton', '[data-bs-original-title="Edit"]'),
+            new VisibleCSSLocator('enabledField', 'input[data-bs-original-title="Enabled"]'),
         ];
     }
 }

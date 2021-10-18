@@ -1,26 +1,29 @@
-{% extends '@ezdesign/content/edit/base.html.twig' %}
+{% extends '@ezdesign/content/edit_base.html.twig' %}
 
 {% trans_default_domain 'user_edit' %}
 
+{% block header %}
+    {% set user_content_edit_menu = knp_menu_get('ezplatform_admin_ui.menu.user_edit.sidebar_right', [], {
+        'user': user,
+        'content_type': content_type,
+    }) %}
 
-{% block page_title %}
-    {% include '@ezdesign/content/page_title_edit.html.twig' with { 
+    {% include '@ezdesign/ui/edit_header.html.twig' with {
         action_name: 'editing'|trans|desc('Editing'),
+        content_type_name: content_type.name,
+        icon_name: content_type.name,
+        show_autosave_status: true,
         title: content_type.name,
-        description: content_type.description,
-        content: user.content
+        subtitle: 'editing_details'|trans({ '%location_name%': parent_location.contentInfo.name })|desc('under %location_name%'),
+        context_actions: knp_menu_render(user_content_edit_menu, {'template': '@ezdesign/ui/menu/context_menu.html.twig'})
     } %}
-
-    <div class="ez-content-item__errors-wrapper" hidden>
-        {{ 'errors.in.the.form'|trans({},'content_edit')|desc('Cannot save the form. Check required Fields or validation errors.') }}
-    </div>
 {% endblock %}
 
 {% block details %}{% endblock %}
 
 {% block form_fields %}
-    <section class="container mt-4 mb-5 px-5">
-        <div class="card ez-card ez-card--light">
+    <section class="container">
+        <div class="card ibexa-card ibexa-card--light">
             <div class="card-body">
                 {{ parent() }}
                 {{ form_widget(form.update, {'attr': {'hidden': 'hidden'}}) }}
@@ -28,11 +31,6 @@
             </div>
         </div>
     </section>
-{% endblock %}
-
-{% block right_sidebar %}
-    {% set user_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.user_edit.sidebar_right', [], {'user': user, 'content_type': content_type}) %}
-    {{ knp_menu_render(user_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
 {% block form_before %}

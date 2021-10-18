@@ -122,3 +122,259 @@
         background: $ibexa-white;
     }
 }
+
+.ibexa-tab-content {
+    width: calc(100% - #{calculateRem(30px)});
+    padding: 0;
+    margin: calculateRem(-1px) calculateRem(15px) calculateRem(15px);
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: 0 calculateRem(10px) calculateRem(10px) calculateRem(10px);
+    overflow: hidden;
+    box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.1);
+    background-color: $ibexa-color-white;
+
+    &__single-tab {
+        border-radius: $ibexa-border-radius;
+    }
+
+    &__pane {
+        padding: calculateRem(10px) calculateRem(24px) calculateRem(24px);
+
+        &--no-padding {
+            padding: 0;
+        }
+    }
+}
+
+.ibexa-tabs {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    user-select: none;
+
+    .nav-item {
+        position: relative;
+        margin-bottom: calculateRem(-1px);
+    }
+
+    .nav-link {
+        margin-left: calculateRem(16px);
+        padding: calculateRem(14px) calculateRem(8px);
+        color: $ibexa-black;
+        border-radius: 0;
+        text-decoration: none;
+    }
+
+    &--hidden {
+        display: none;
+    }
+
+    &__list {
+        overflow: hidden;
+        width: calc(100% - #{calculateRem(50px)});
+        height: calculateRem(47px);
+        border: 0;
+    }
+
+    &__toggler-show,
+    &__toggler-hide {
+        pointer-events: none;
+    }
+
+    &__toggler {
+        padding-top: calculateRem(20px);
+        padding-right: calculateRem(15px);
+        color: $ibexa-color-dark;
+        font-size: calculateRem(14px);
+        cursor: pointer;
+        font-family: 'Noto Sans';
+
+        .ibexa-tabs__toggler-show {
+            display: none;
+        }
+
+        &::after {
+            position: absolute;
+            bottom: calculateRem(13px);
+            right: 0;
+            content: '';
+            border-left: calculateRem(5px) solid transparent;
+            border-right: calculateRem(5px) solid transparent;
+            border-top: calculateRem(5px) solid $ibexa-color-black;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+
+        &--rolled-up {
+            &::after {
+                transform: rotate(180deg);
+            }
+
+            .ibexa-tabs__toggler-hide {
+                display: none;
+            }
+
+            .ibexa-tabs__toggler-show {
+                display: unset;
+            }
+        }
+    }
+
+    &__tab-corner {
+        width: calculateRem(43px);
+        height: calculateRem(50px);
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin-top: calculateRem(-1px);
+        z-index: 2;
+
+        .ibexa-svg-tab-corner-border {
+            stroke: $ibexa-color-light-300;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+
+        .ibexa-svg-tab-corner-inside {
+            fill: $ibexa-color-light-300;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+    }
+
+    &__tab {
+        height: calculateRem(48px);
+        display: flex;
+        align-items: center;
+        color: $ibexa-black;
+        background-color: transparent;
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+        outline: none;
+        font-size: calculateRem(14px);
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        margin-left: calculateRem(-3px);
+
+        &:first-of-type {
+            margin-left: 0;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            right: calculateRem(43px);
+            left: 0;
+            top: 0;
+            bottom: 0;
+            margin-bottom: calculateRem(1px);
+            border: calculateRem(1px) solid $ibexa-color-light;
+            border-radius: $ibexa-border-radius 0 0 0;
+            border-bottom-width: 0;
+            border-right-width: 0;
+            background-color: $ibexa-color-light-300;
+            border-color: $ibexa-color-light-300;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+
+        &::after {
+            content: '';
+            width: calculateRem(44px);
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            border-bottom: calculateRem(1px) solid $ibexa-color-light;
+            z-index: 3;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+
+        &:hover:not([disabled]) {
+            &::before {
+                border-color: $ibexa-color-dark;
+            }
+
+            .ibexa-tabs__tab-corner {
+                .ibexa-svg-tab-corner-border {
+                    stroke: $ibexa-color-dark;
+                }
+            }
+        }
+
+        &[disabled] {
+            color: $ibexa-color-dark-300;
+            cursor: not-allowed;
+
+            .ibexa-tabs__link {
+                pointer-events: none;
+            }
+
+            .ibexa-icon {
+                fill: $ibexa-color-dark-300;
+            }
+        }
+
+        &--active {
+            z-index: 4;
+
+            &::before {
+                background-color: $ibexa-color-white;
+                border: calculateRem(1px) solid $ibexa-color-light;
+                border-bottom-width: 0;
+                border-right-width: 0;
+                z-index: 2;
+                margin-bottom: -0.1px;
+            }
+
+            &::after {
+                border-color: $ibexa-color-white;
+                right: calculateRem(2px);
+            }
+
+            &:hover:not([disabled]) {
+                &::before {
+                    border-color: $ibexa-color-light;
+                }
+
+                .ibexa-tabs__tab-corner {
+                    .ibexa-svg-tab-corner-border {
+                        stroke: $ibexa-color-light;
+                    }
+                }
+            }
+
+            .ibexa-tabs__tab-corner {
+                .ibexa-svg-tab-corner-border {
+                    stroke: $ibexa-color-light;
+                }
+
+                .ibexa-svg-tab-corner-inside {
+                    fill: $ibexa-white;
+                }
+            }
+        }
+
+        &--hidden {
+            display: none;
+        }
+
+        &--more {
+            cursor: pointer;
+        }
+    }
+
+    &__link {
+        &.nav-link,
+        &.nav-link.active {
+            display: flex;
+            align-items: center;
+            height: calculateRem(47px);
+            padding: 0 calculateRem(40px) 0 calculateRem(24px);
+            margin-right: calculateRem(3px);
+            margin-left: 0;
+            color: inherit;
+            background: transparent;
+            border-width: 0;
+            z-index: 5;
+        }
+    }
+
+    &__popup-menu {
+        top: calculateRem(35px);
+    }
+}

@@ -1,14 +1,11 @@
 {% trans_default_domain 'content_url' %}
 {% import _self as tab %}
-{% include '@ezdesign/ui/table_header.html.twig' with {
-    header_text: 'tab.urls.custom_url_aliases'|trans({'%contentName%' : ez_content_name(content)})|desc('Custom URL aliases for %contentName%'),
-    tools: tab.table_header_tools(form_custom_url_remove, can_edit_custom_url)
-} %}
 
 {{  include('@ezdesign/content/tab/url/custom_urls_table.html.twig', {
         'custom_urls_pager': custom_urls_pager,
         'form_custom_url_remove': form_custom_url_remove,
         'can_edit_custom_url': can_edit_custom_url,
+        actions: tab.table_header_tools(form_custom_url_remove, can_edit_custom_url),
 }) }}
 
 {% if custom_urls_pager.haveToPaginate %}
@@ -24,8 +21,6 @@
         }
     } %}
 {% endif %}
-
-{% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.urls.system.title'|trans|desc('System URL') } %}
 
 {{  include('@ezdesign/content/tab/url/system_urls_table.html.twig', {
         'system_urls_pager': system_urls_pager,
@@ -55,12 +50,12 @@
 {% macro table_header_tools(form_custom_url_remove, can_edit_custom_url) %}
     {% if can_edit_custom_url %}
         <button
-            class="btn btn-icon ez-btn--prevented"
-            data-toggle="modal"
-            data-target="#ez-modal--custom-url-alias"
+            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-btn--prevented"
+            data-bs-toggle="modal"
+            data-bs-target="#ez-modal--custom-url-alias"
             title="{{ 'tab.urls.action.add'|trans|desc('Add a custom URL alias') }}">
-            <svg class="ez-icon ez-icon-create">
-                <use xlink:href="{{ ez_icon_path('create') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
             </svg>
         </button>
 
@@ -68,13 +63,13 @@
         <button
             id="delete-custom-urls"
             type="button"
-            class="btn btn-icon"
+            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text"
             disabled
-            data-toggle="modal"
-            data-target="#{{ modal_data_target }}"
+            data-bs-toggle="modal"
+            data-bs-target="#{{ modal_data_target }}"
             title="{{ 'tab.urls.action.delete'|trans|desc('Delete custom URL alias') }}">
-            <svg class="ez-icon ez-icon-trash">
-                <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+                <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
             </svg>
         </button>
         {% include '@ezdesign/ui/modal/bulk_delete_confirmation.html.twig' with {

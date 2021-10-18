@@ -1,0 +1,111 @@
+.ibexa-grid-view-item {
+    display: flex;
+    flex-direction: column;
+    padding: calculateRem(16px);
+    min-height: calculateRem(238px);
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: calculateRem(5px);
+    box-shadow: calculateRem(4px) calculateRem(2px) calculateRem(17px) 0 rgba($ibexa-color-black, 0.05);
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+    &:link {
+        text-decoration: none;
+    }
+
+    &:active,
+    &:hover,
+    &:focus {
+        color: $ibexa-color-dark;
+        border-color: $ibexa-color-dark;
+        text-decoration: none;
+    }
+
+    &__content-type {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: calculateRem(30px);
+        height: calculateRem(30px);
+        background: $ibexa-white;
+    }
+
+    &__content-type .ibexa-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__image {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: calculateRem(184px);
+        max-height: calculateRem(248px);
+    }
+
+    &__image-wrapper {
+        flex-grow: 1;
+        border-radius: calculateRem(5px);
+        margin-bottom: calculateRem(16px);
+        background: $ibexa-color-base-light;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: calculateRem(0.12px);
+        line-height: calculateRem(21px);
+    }
+
+    &__sub-title {
+        margin-top: calculateRem(4px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        font-size: $ibexa-text-font-size-small;
+        letter-spacing: calculateRem(0.12px);
+        line-height: calculateRem(24px);
+    }
+
+    &__checkbox {
+        position: absolute;
+        top: calculateRem(8px);
+        right: calculateRem(8px);
+        line-height: 1;
+    }
+
+    &__info {
+        display: flex;
+        height: calculateRem(64px);
+    }
+
+    &__status-container {
+        width: calculateRem(20px);
+        display: flex;
+    }
+
+    &__title-container {
+        width: calc(100% - #{calculateRem(40px)});
+    }
+
+    &__actions-container {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        width: calculateRem(20px);
+
+        .ibexa-popup-menu {
+            left: calculateRem(22px);
+        }
+    }
+}

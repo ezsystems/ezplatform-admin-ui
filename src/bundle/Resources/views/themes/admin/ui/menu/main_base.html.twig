@@ -1,0 +1,83 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+{% import 'knp_menu.html.twig' as knp_menu %}
+
+{% block popupItem %}
+    {% if item.displayed %}
+        {% set node_attributes = {
+            'class': 'ibexa-popup-menu__item',
+        } %}
+
+        <li {{ knp_menu.attributes(node_attributes) }}>
+            {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
+                {{ block('popupLinkElement') }}
+            {%- else %}
+                {{ block('popupSpanElement') }}
+            {%- endif %}
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block popupLinkElement %}
+    {% set classes = [
+        'ibexa-popup-menu__item-content',
+        ((matcher.isCurrent(item) ? 'ibexa-popup-menu__item-content--current')),
+    ] %}
+
+    {% set link_attributes = {
+        'href': item.uri,
+        'class': classes|join(' '),
+    } %}
+
+    <a {{ knp_menu.attributes(link_attributes) }}>{{ block('label') }}</a>
+{% endblock %}
+
+{% block popupSpanElement %}
+    {{ block('label') }}
+{% endblock %}
+
+{% block item %}
+    {% if item.displayed %}
+        {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+        {%- set classes = classes|merge(['ibexa-main-menu__item']) %}
+
+        {%- if item.extras.separate is defined and item.extras.separate -%}
+            {%- set classes = classes|merge(['ibexa-main-menu__item--separator']) -%}
+        {%- endif -%}
+
+        {% if item.hasChildren and options.depth is not same as(0) %}
+            {% if options.branch_class is not empty and item.displayChildren %}
+                {%- set classes = classes|merge([options.branch_class]) %}
+            {% endif %}
+        {% elseif options.leaf_class is not empty %}
+            {%- set classes = classes|merge([options.leaf_class]) %}
+        {%- endif %}
+
+        {%- set attributes = item.attributes %}
+
+        {%- if classes is not empty %}
+            {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+        {%- endif %}
+
+        {% import 'knp_menu.html.twig' as knp_menu %}
+
+        {%- if item.extras.separate is defined and item.extras.separate -%}
+            <li class="ibexa-main-menu__separator ibexa-main-menu__separator--top"></li>
+        {%- endif -%}
+
+        <li{{ knp_menu.attributes(attributes) }}>
+            {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
+                {{ block('linkElement') }}
+            {%- else %}
+                {{ block('spanElement') }}
+            {%- endif %}
+        </li>
+
+        {%- if item.extras.separate is defined and item.extras.separate -%}
+            <li class="ibexa-main-menu__separator ibexa-main-menu__separator--bottom"></li>
+        {%- endif -%}
+
+        {%- if item.extras.template is defined -%}
+            {% include(item.extras.template) %}
+        {%- endif -%}
+    {% endif %}
+{% endblock %}

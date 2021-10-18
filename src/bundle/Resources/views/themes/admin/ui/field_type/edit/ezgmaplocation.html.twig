@@ -1,21 +1,31 @@
 {% trans_default_domain 'ezplatform_content_forms_content' %}
 
 {%- block ezplatform_fieldtype_ezgmaplocation_widget -%}
-    <div class="ez-data-source__map"></div>
-    <div class="ez-data-source__locate-me">
-        <button type="button" class="btn btn-secondary">{{ 'content.field_type.ezgmaplocation.locate_me'|trans|desc('Locate me') }}</button>
-    </div>
-    {{ form_row(form.latitude, { 'attr': { 'data-value': form.latitude.vars.value }}) }}
-    {{ form_row(form.longitude, { 'attr': { 'data-value': form.longitude.vars.value }}) }}
-    <div class="ez-data-source__field ez-data-source__field--address">
-        <div class="ez-data-source__label-wrapper">
-            {{ form_label(form.address, form.address.vars.label, {'label_attr': {'class': 'ez-data-source__label'}}) }}
+    <div class="ibexa-data-source__map"></div>
+    <div class="ibexa-data-source__options">
+        <div class="ibexa-data-source__field ibexa-data-source__field--address">
+            <div class="ibexa-data-source__input-wrapper">
+                {{ form_widget(form.address, {'attr': {'class': 'ibexa-data-source__input', 'placeholder': 'ezgmaplocation.input.placeholder'|trans|desc('Search address')}}) }}
+                <div class="ibexa-data-source__locate-me">
+                    <button type="button" class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--locate-me">
+                        <svg class="ibexa-icon ibexa-icon--small-medium">
+                            <use xlink:href="{{ ibexa_icon_path('localize') }}"></use>
+                        </svg>
+                    </button>
+                </div>
+                <button type="button" class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--search-by-address">
+                    <svg class="ibexa-icon ibexa-icon--small-medium">
+                        <use xlink:href="{{ ibexa_icon_path('search') }}"></use>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="ez-data-source__input-wrapper">
-            {{ form_widget(form.address, {'attr': {'class': 'ez-data-source__input'}}) }}
-            <button type="button" class="btn btn-primary btn--search-by-address">
-                {{ 'ezgmaplocation.action.search'|trans|desc('Search') }}
-            </button>
+        <div class="ibexa-data-source__text-info">
+            {{ 'ezgmaplocation.text.info'|trans|desc('or enter geographical coordinates') }}
+        </div>
+        <div class="ibexa-data-source__coordinates">
+            {{ form_row(form.latitude, { 'attr': { 'data-value': form.latitude.vars.value }}) }}
+            {{ form_row(form.longitude, { 'attr': { 'data-value': form.longitude.vars.value }}) }}
         </div>
     </div>
 {%- endblock -%}

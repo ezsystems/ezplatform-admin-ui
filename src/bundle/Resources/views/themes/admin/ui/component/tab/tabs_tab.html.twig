@@ -1,0 +1,11 @@
+{% set active = active|default(false) %}
+
+<li class="nav-item ibexa-tabs__tab ibexa-adaptive-items__item {% if active %}ibexa-tabs__tab--active{% endif %}">
+    {% block tab_link %}
+        {% include '@ezdesign/ui/component/tab/tabs_link.html.twig' with {
+            id: tab.id,
+            label: tab.label,
+        } %}
+    {% endblock %}
+    {% include '@ezdesign/ui/component/tab/tab_corner.html.twig' %}
+</li>

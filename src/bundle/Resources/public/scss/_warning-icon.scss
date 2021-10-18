@@ -1,5 +1,5 @@
-.ez-tabs {
-    &__nav-item {
+.ibexa-tabs {
+    &__tab {
         .ez-warning-icon {
             position: absolute;
             top: 0;
@@ -13,7 +13,7 @@
             justify-content: center;
             display: none;
 
-            .ez-icon.ez-icon--warning {
+            .ibexa-icon.ibexa-icon--warning {
                 height: calculateRem(12px);
                 width: calculateRem(12px);
                 margin: calculateRem(-10px) calculateRem(4px) 0;

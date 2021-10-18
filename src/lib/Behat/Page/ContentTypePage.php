@@ -106,9 +106,9 @@ class ContentTypePage extends Page
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('createButton', '.btn-icon .ez-icon-create'),
-            new VisibleCSSLocator('pageTitle', '.ez-header h1'),
-            new VisibleCSSLocator('contentTypeDataTable', '.ez-fieldgroup .ez-fieldgroup__content .ez-table'),
+            new VisibleCSSLocator('createButton', '.btn-icon .ibexa-icon--create'),
+            new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
+            new VisibleCSSLocator('contentTypeDataTable', '.ez-fieldgroup .ez-fieldgroup__content .ibexa-table'),
             new VisibleCSSLocator('contentFieldsTable', '.ez-fieldgroup:nth-of-type(2)'),
             new VisibleCSSLocator('globalPropertiesRow', '.ez-fieldgroup__content .ez-table__row'),
             new VisibleCSSLocator('globalPropertiesLabel', '.ez-table__cell:nth-of-type(1)'),

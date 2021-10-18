@@ -69,16 +69,14 @@ class ObjectStateGroupCreateRightSidebarBuilder extends AbstractBuilder implemen
                 self::ITEM__CREATE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => '#object_state_group_create_create',
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.object_state.groups.list',
                 ]
             ),

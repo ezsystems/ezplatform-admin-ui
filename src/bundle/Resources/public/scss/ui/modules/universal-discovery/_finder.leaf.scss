@@ -48,7 +48,7 @@
             &--selected {
                 background-color: $ibexa-color-primary;
 
-                .ez-icon {
+                .ibexa-icon {
                     fill: $ibexa-white;
                 }
             }
@@ -59,7 +59,7 @@
         }
 
         .c-finder-leaf__name {
-            .ez-icon {
+            .ibexa-icon {
                 fill: $ibexa-color-primary;
             }
         }
@@ -80,7 +80,7 @@
         text-overflow: ellipsis;
         font-size: calculateRem(16px);
 
-        .ez-icon {
+        .ibexa-icon {
             margin-right: calculateRem(5px);
         }
     }
@@ -90,7 +90,7 @@
         margin-right: calculateRem(20px);
         text-align: center;
 
-        .ez-icon {
+        .ibexa-icon {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);

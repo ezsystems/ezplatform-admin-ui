@@ -9,8 +9,8 @@
 <div class="form-group mt-4">
     <div class="input-group">
         <div class="ez-search-form__icon">
-            <svg class="ez-icon ez-icon--medium">
-                <use xlink:href="{{ ez_icon_path('search') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--medium">
+                <use xlink:href="{{ ibexa_icon_path('search') }}"></use>
             </svg>
         </div>
         <div class="ez-search-form__input-wrapper">
@@ -20,8 +20,8 @@
             <div class="ez-search-form__language-wrapper" {% if form.search_language.vars.choices|length == 1 %} hidden {% endif %}>
                 {{ form_widget(form.search_language, {'attr': {'class': 'ez-search-form__language-selector'}}) }}
             </div>
-            <button type="submit" class="ez-btn ez-btn--primary ez-btn--search">{{ 'search.perform'|trans|desc('Search') }}</button>
-            <button type="button" class="btn btn-secondary ez-btn ez-btn--filter">{{ 'search.filters'|trans|desc('Filters') }}</button>
+            <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--search">{{ 'search.perform'|trans|desc('Search') }}</button>
+            <button type="button" class="btn ibexa-btn ibexa-btn--tertiary ibexa-btn--filter">{{ 'search.filters'|trans|desc('Filters') }}</button>
         </span>
     </div>
 </div>
@@ -96,7 +96,7 @@
 <div class="ez-filters ez-filters--collapsed">
     <div class="ez-filters__row">
         <div class="ez-filters__item ez-filters__item--content-type">
-            <label class="ez-label">{{ 'search.content.type'|trans|desc('Content Type') }}</label>
+            <label class="ibexa-label">{{ 'search.content.type'|trans|desc('Content Type') }}</label>
             <select class="form-control ez-filters__select ez-filters__select--content-type" hidden>
                 <option class="ez-filters__option ez-filters__option--hidden" data-default="{{ 'search.any.content.type'|trans|desc('Any Content Type') }}" value="">{{ 'search.any.content.type'|trans|desc('Any Content Type') }}</option>
             </select>
@@ -106,14 +106,14 @@
     <div class="ez-filters__row">
         {% if form.section is defined %}
             <div class="ez-filters__item ez-filters__item--section">
-                <label class="ez-label">{{ 'search.section'|trans|desc('Section') }}</label>
+                <label class="ibexa-label">{{ 'search.section'|trans|desc('Section') }}</label>
                 {{ form_widget(form.section, {'attr': {'class': 'ez-filters__select'}}) }}
             </div>
         {% endif %}
         <div class="ez-filters__item ez-filters__item--subtree">
-            <label class="ez-label">{{ 'search.subtree'|trans|desc('Subtree') }}</label>
+            <label class="ibexa-label">{{ 'search.subtree'|trans|desc('Subtree') }}</label>
             <div>
-                <button class="ez-btn btn btn-secondary ez-btn--udw-select-location"
+                <button class="btn ibexa-btn ibexa-btn--secondary ibexa-btn--udw-select-location"
                     type="button"
                     {% if form.subtree.vars.value is not empty %} hidden {% endif %}
                     data-universal-discovery-title="{{'search.udw.select_content'|trans|desc('Select Content')}}"
@@ -136,17 +136,17 @@
     </div>
     <div class="ez-filters__row">
         <div class="ez-filters__item ez-filters__item--modified">
-            <label class="ez-label">{{ 'search.last.modified'|trans|desc('Last modified') }}</label>
+            <label class="ibexa-label">{{ 'search.last.modified'|trans|desc('Last modified') }}</label>
             {{ form_widget(form.last_modified_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-filters__range-wrapper--select-modified-range'}}) }}
             {{ form_errors(form.last_modified_select) }}
         </div>
         <div class="ez-filters__item ez-filters__item--created">
-            <label class="ez-label">{{ 'search.created'|trans|desc('Created') }}</label>
+            <label class="ibexa-label">{{ 'search.created'|trans|desc('Created') }}</label>
             {{ form_widget(form.created_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-filters__range-wrapper--select-created-range'}}) }}
             {{ form_errors(form.created_select) }}
         </div>
         <div class="ez-filters__item ez-filters__item--creator">
-            <label class="ez-label">{{ 'search.creator'|trans|desc('Creator') }}</label>
+            <label class="ibexa-label">{{ 'search.creator'|trans|desc('Creator') }}</label>
             {% set creator = form.vars.data.creator %}
             <div class="ez-filters__input-wrapper">
                 <input type="text"
@@ -156,16 +156,16 @@
                     placeholder="{{ 'search.creator_input.placeholder'|trans|desc('Type creator\'s name') }}"
                     {{ creator is not empty ? 'disabled'  }}
                 >
-                <svg class="ez-icon ez-icon--dark ez-icon--medium ez-icon--reset">
-                    <use xlink:href="{{ ez_icon_path('circle-close') }}"></use>
+                <svg class="ibexa-icon ibexa-icon--dark ibexa-icon--medium ibexa-icon--reset">
+                    <use xlink:href="{{ ibexa_icon_path('circle-close') }}"></use>
                 </svg>
             </div>
             <ul class="ez-filters__user-list ez-filters__user-list--hidden"></ul>
         </div>
     </div>
     <div class="ez-filters__btns">
-        <button type="submit" class="ez-btn ez-btn--primary ez-btn-apply" disabled>{{ 'search.apply'|trans|desc('Apply') }}</button>
-        <button class="btn btn-secondary ez-btn-clear">{{ 'search.clear'|trans|desc('Clear') }}</button>
+        <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--apply" disabled>{{ 'search.apply'|trans|desc('Apply') }}</button>
+        <button class="btn ibexa-btn ibexa-btn--secondary ibexa-btn--clear">{{ 'search.clear'|trans|desc('Clear') }}</button>
     </div>
 </div>
 {{ form_widget(form.last_modified, {'attr': {'hidden': 'hidden'}}) }}

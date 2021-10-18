@@ -21,30 +21,31 @@
 {%- endblock -%}
 
 {% block ezplatform_fieldtype_ezimageasset_widget_container %}
-    <div class="ez-field-edit-spinner">
-        <svg class="ez-icon ez-spin">
-            <use xlink:href="{{ ez_icon_path('spinner') }}"></use>
+    <div class="ibexa-field-edit-spinner">
+        <svg class="ibexa-icon ibexa-spin">
+            <use xlink:href="{{ ibexa_icon_path('spinner') }}"></use>
         </svg>
     </div>
     <div{% with { attr: preview_attr } %}{{ block('attributes') }}{% endwith %}>
         {{ block(preview_block_name) }}
     </div>
     <div{% with { attr: widget_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
-        <div class="ez-data-source">
+        <div class="ibexa-data-source">
             {{ block('ezplatform_fieldtype_ezimageasset_widget') }}
         </div>
     </div>
 {% endblock %}
 
 {% block ezplatform_fieldtype_ezimageasset_widget %}
-    <div class="ez-data-source__message--main">
-        {{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag your files to the browser window or select them') }}
+    <div class="ibexa-data-source__message--main">
+        {{ 'fieldtype.binary_base.drag_drop'|trans|desc('Drag and drop file') }}
     </div>
-
-    {{ block('ezimageasset_source_buttons') }}
-
+    <div class="ibexa-data-source__message--separator">{{ 'fieldtype.binary_base.drag_drop.or'|trans|desc('or') }}</div>
+    <div class="ibexa-data-source__actions">
+        {{ block('ezimageasset_source_buttons') }}
+    </div>
     {% if max_file_size is defined and max_file_size > 0 %}
-        <div class="ez-data-source__message--filesize">
+        <div class="ibexa-data-source__message--filesize">
             {{ 'fieldtype.binary_base.max_file_size'|trans({'%size%': max_file_size|ez_file_size(2)})|desc('Max file size: %size%') }}
         </div>
     {% endif %}
@@ -52,22 +53,22 @@
     {{- form_widget(form.file, {'attr': attr}) -}}
     {{- form_widget(form.remove, {'attr': {
         'hidden': 'hidden',
-        'class': 'ez-field-edit__option--remove-media'
+        'class': 'ibexa-field-edit__option--remove-media'
     }, 'label_attr': {'hidden': 'hidden', 'class': 'checkbox-inline'}}) -}}
     {{- form_widget(form.destinationContentId, {'attr': {
-        'class': 'ez-data-source__destination-content-id'
+        'class': 'ibexa-data-source__destination-content-id'
     }}) -}}
 {% endblock %}
 
 {% block ezimageasset_source_buttons %}
-    <button class="btn ez-data-source__btn-add btn-secondary">
+    <button class="btn ibexa-btn ibexa-btn--secondary ibexa-data-source__btn-add">
         {{ 'fieldtype.ezimageasset.upload.label'|trans|desc('Upload image') }}
     </button>
     <button
-        class="btn ez-data-source__btn-select btn-secondary"
+        class="btn ibexa-btn ibexa-btn--secondary ibexa-data-source__btn-select"
         data-udw-config="{{ ez_udw_config('image_asset', {}) }}"
     >
-        {{ 'fieldtype.ezimageasset.select.label'|trans|desc('Select from your Repository') }}
+        {{ 'fieldtype.ezimageasset.select.label'|trans|desc('Select from library') }}
     </button>
 {% endblock %}
 
@@ -92,28 +93,28 @@
 
     {% set has_additional_data = additional_data is not null and additional_data is not empty %}
 
-    <div class="ez-field-edit-preview">
-        <div class="ez-field-edit-preview__visual" data-additional-data="{{ has_additional_data ? additional_data|json_encode(): '{}' }}">
-            <div class="ez-field-edit-preview__media-wrapper">
-                <div class="ez-field-edit-preview__actions">
+    <div class="ibexa-field-edit-preview">
+        <div class="ibexa-field-edit-preview__visual" data-additional-data="{{ has_additional_data ? additional_data|json_encode(): '{}' }}">
+            <div class="ibexa-field-edit-preview__media-wrapper">
+                <div class="ibexa-field-edit-preview__actions">
                     <button
                         type="button"
-                        class="ez-field-edit-preview__action--remove"
-                        title="{{ 'fieldtype.ezimageasset.delete'|trans|desc('Delete image') }}"
+                        class="ibexa-field-edit-preview__action--remove btn ibexa-btn ibexa-btn--ghost ibexa-btn--small"
                     >
-                        <svg class="ez-icon ez-icon--small-medium">
-                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                         </svg>
+                        <span class="ibexa-btn__label">{{ 'fieldtype.ezimageasset.delete'|trans|desc('Delete') }}</span>
                     </button>
                     <a
-                        class="ez-field-edit-preview__action--preview"
+                        class="ibexa-field-edit-preview__action--preview btn ibexa-btn ibexa-btn--ghost ibexa-btn--small"
                         href="{{ destination_content_url }}"
-                        title="{{ 'fieldtype.ezimageasset.open'|trans|desc('Open') }}"
                         target="_blank"
                     >
-                        <svg class="ez-icon ez-icon--small-medium">
-                            <use xlink:href="{{ ez_icon_path('open-newtab') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('open-newtab') }}"></use>
                         </svg>
+                        <span class="ibexa-btn__label">{{ 'content.field_type.ezimage.preview'|trans|desc('Preview') }}</span>
                     </a>
                     {{ ez_render_component_group(
                         'image-edit-actions-after',
@@ -124,19 +125,22 @@
                     ) }}
                 </div>
                 <img
-                    class="ez-field-edit-preview__media {{ image_uri ? '' : 'd-none' }}"
+                    class="ibexa-field-edit-preview__media {{ image_uri ? '' : 'd-none' }}"
                     src="{{ image_uri|default('//:0') }}"
                     alt="{{ 'content.field_type.ezimageasset.img_alt'|trans({'%label%': form.vars.label})|desc("Image stored in Field '%label%'") }}"
                 />
             </div>
-            <div class="ez-field-edit-preview__details">
-                <span class="ez-field-edit-preview__asset-name">
-                    <a href="{{ destination_content_url }}" target="_blank">
-                        {{ destination_content_name }}
-                    </a>
-                </span>
+            <div class="ibexa-field-edit-preview__details">
+                <div class="ibexa-field-edit-preview__file-name-wrapper">
+                    <label class="ibexa-label form-label">{{ 'content.field_type.ezimageasset.file_name.label'|trans|desc('File name') }}</label>
+                    <p>
+                        <a class="ibexa-field-edit-preview__file-name" href="{{ destination_content_url }}" target="_blank">
+                            {{ destination_content_name }}
+                        </a>
+                    </p>
+                </div>
             </div>
-            <div class="ez-field-edit-preview__image-alt">
+            <div class="ibexa-field-edit-preview__image-alt">
                 {{ form_row(form.alternativeText) }}
             </div>
         </div>

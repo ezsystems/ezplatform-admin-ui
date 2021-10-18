@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
-use Ibexa\AdminUi\Behat\Component\RightMenu;
+use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
@@ -20,13 +20,13 @@ use PHPUnit\Framework\Assert;
 
 class AdminUpdateItemPage extends Page
 {
-    /** @var \Ibexa\AdminUi\Behat\Component\RightMenu */
-    protected $rightMenu;
+    /** @var \Ibexa\AdminUi\Behat\Component\ContentActionsMenu */
+    protected $contentActionsMenu;
 
-    public function __construct(Session $session, Router $router, RightMenu $rightMenu)
+    public function __construct(Session $session, Router $router, ContentActionsMenu $contentActionsMenu)
     {
         parent::__construct($session, $router);
-        $this->rightMenu = $rightMenu;
+        $this->contentActionsMenu = $contentActionsMenu;
     }
 
     public function getFieldValue($label)
@@ -58,25 +58,26 @@ class AdminUpdateItemPage extends Page
 
     public function clickButton(string $label): void
     {
-        $this->getHTMLPage()
+        $button = $this->getHTMLPage()
             ->findAll($this->getLocator('button'))
-            ->getByCriterion(new ElementTextCriterion($label))
-            ->click();
+            ->getByCriterion(new ElementTextCriterion($label));
+
+        $button->mouseOver();
+        $button->find(new VisibleCSSLocator('label', 'span'))->click();
     }
 
     public function verifyIsLoaded(): void
     {
-        $this->rightMenu->verifyIsLoaded();
+        $this->contentActionsMenu->verifyIsLoaded();
         Assert::assertTrue($this->getHTMLPage()->find($this->getLocator('formElement'))->isVisible());
     }
 
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('formElement', '.form-group'),
+            new VisibleCSSLocator('formElement', '.ibexa-main-container '),
             new VisibleCSSLocator('closeButton', '.ez-content-edit-container__close'),
-            new VisibleCSSLocator('button', 'button'),
-            new VisibleCSSLocator('field', '.form-group'),
+            new VisibleCSSLocator('button', '.container button'),
             new VisibleCSSLocator('fieldInput', 'input'),
         ];
     }

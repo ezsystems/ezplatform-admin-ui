@@ -11,6 +11,7 @@ namespace Ibexa\AdminUi\Behat\Page;
 use Behat\Mink\Session;
 use Ibexa\AdminUi\Behat\Component\Dialog;
 use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
+use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Routing\Router;
@@ -62,6 +63,12 @@ class RolesPage extends Page
 
     public function deleteRole(string $roleName)
     {
+        $roleLabelLocator = $this->getLocator('roleLabel');
+        $listElement = $this->getHTMLPage()
+            ->findAll($roleLabelLocator)
+            ->getByCriterion(new ElementTextCriterion($roleName));
+        usleep(1000000); //TODO : refactor after redesign
+        $listElement->mouseOver();
         $this->table->getTableRow(['Name' => $roleName])->select();
         $this->getHTMLPage()->find($this->getLocator('deleteRoleButton'))->click();
         $this->dialog->verifyIsLoaded();
@@ -89,9 +96,10 @@ class RolesPage extends Page
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('createButton', '.ez-icon-create'),
-            new VisibleCSSLocator('pageTitle', '.ez-header h1'),
+            new VisibleCSSLocator('createButton', '.ibexa-icon--create'),
+            new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
             new VisibleCSSLocator('deleteRoleButton', '#delete-roles'),
+            new VisibleCSSLocator('roleLabel', '.ibexa-table__cell--close-left > a'),
         ];
     }
 }

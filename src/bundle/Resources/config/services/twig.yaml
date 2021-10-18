@@ -10,6 +10,12 @@ services:
         tags:
             - { name: twig.extension }
 
+    Ibexa\Bundle\AdminUi\Templating\Twig\FieldGroupRenderingExtension:
+        arguments:
+            - '@ezpublish.fields_groups.list'
+        tags:
+            - { name: twig.extension }
+
     EzSystems\EzPlatformAdminUiBundle\Templating\Twig\FormatIntervalExtension:
         tags:
             - { name: twig.extension }

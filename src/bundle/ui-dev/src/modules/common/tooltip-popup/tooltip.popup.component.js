@@ -42,14 +42,14 @@ const TooltipPopupComponent = (props) => {
                     onClick={props.onClose}
                     tabIndex="-1"
                     data-tooltip-container-selector=".c-tooltip-popup__header">
-                    <Icon name="discard" extraClasses="ez-icon--small" />
+                    <Icon name="discard" extraClasses="ibexa-icon--small" />
                 </div>
             </div>
             <div className="c-tooltip-popup__content" ref={contentRef} style={contentStyle}>
                 {props.children}
             </div>
             <div className="c-tooltip-popup__footer">
-                <button class="btn btn-secondary" onClick={props.onClose}>
+                <button className="btn ibexa-btn ibexa-btn--secondary" onClick={props.onClose}>
                     {closeLabel}
                 </button>
             </div>

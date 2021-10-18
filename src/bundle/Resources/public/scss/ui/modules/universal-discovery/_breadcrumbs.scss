@@ -46,7 +46,7 @@
         justify-content: center;
         align-items: center;
 
-        .ez-icon {
+        .ibexa-icon {
             transform: rotate(90deg);
             transform-origin: center center;
             fill: $ibexa-color-base-dark;
@@ -55,7 +55,7 @@
         &--active {
             background-color: $ibexa-color-base-dark;
 
-            .ez-icon {
+            .ibexa-icon {
                 fill: $ibexa-white;
             }
         }

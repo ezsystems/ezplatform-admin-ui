@@ -13,7 +13,121 @@
 {% endif %}
 {% form_theme form_content_create '@ezdesign/ui/form_fields.html.twig' %}
 
-{% block body_class %}ez-content-view ez-has-two-sidebars ez-has-full-width-footer{% endblock %}
+{% block body_class %}ez-content-view{% endblock %}
+
+{% block content_tree %}
+    <div class="ez-content-tree-container ez-content-tree-container--expanded"
+        data-tree-root-location-id="{{ content_tree_module_root|default(ez_admin_ui_config['contentTree']['treeRootLocationId']) }}"
+        data-current-location-path="{{ location_path|default('') }}"
+    >
+        <button class="ibexa-btn btn ibexa-btn--no-text ibexa-btn--toggle-content-tree">
+            <svg class="ibexa-icon ibexa-icon--small">
+                <use xlink:href="{{ ibexa_icon_path('caret-next') }}"></use>
+            </svg>
+        </button>
+        <div class="ez-content-tree-container__wrapper"></div>
+    </div>
+{% endblock %}
+
+{% block breadcrumbs %}
+    {% set items = [] %}
+    {% for path_location in path_locations %}
+        {% if not loop.last %}
+            {% set items = items|merge([{
+                'value': ez_content_name(path_location.contentInfo),
+                'url': path('_ez_content_view', {
+                    'contentId': path_location.contentId,
+                    'locationId': path_location.id
+                })
+            }]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% set items = items|merge([{ 'value': ez_content_name(content) }]) %}
+
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: items } %}
+{% endblock %}
+
+{% block context_menu %}
+    {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': content_type}) %}
+    {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+
+    <div class="ibexa-extra-actions-container">
+        {% include '@ezdesign/content/widget/content_create.html.twig' with {'form': form_content_create} only %}
+        {% if form_content_edit is defined and form_user_edit is not defined %}
+            {% include '@ezdesign/content/widget/content_edit.html.twig' with {'form': form_content_edit} only %}
+        {% endif %}
+        {% if form_user_edit is defined %}
+            {% include '@ezdesign/content/widget/user_edit.html.twig' with {'form': form_user_edit} only %}
+        {% endif %}
+    </div>
+    {% if form_location_trash is defined and form_user_delete is not defined %}
+        {% include '@ezdesign/content/modal/location_trash.html.twig' with {
+            'form': form_location_trash,
+            'content_name': ez_content_name(content)
+        } only %}
+    {% endif %}
+    {% if form_user_delete is defined %}
+        {% include '@ezdesign/content/modal/user_delete.html.twig' with {'form': form_user_delete} only %}
+    {% endif %}
+    {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
+    {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
+    {{ form(form_location_copy_subtree, {'action': path('ezplatform.location.copy_subtree')}) }}
+    {{ form(form_content_visibility_update, {'action': path('ezplatform.content.update_visibility')}) }}
+{% endblock %}
+
+{% block header %}
+    {% set icon_name = content_type.identifier %}
+    {% set content_type_name = content_type.name %}
+    {% embed '@ezdesign/ui/page_title.html.twig' with {
+        title: ez_content_name(content),
+    } %}
+        {% block top_side %}
+            {% if location is defined and location_is_bookmarked is defined %}
+                {% include '@ezdesign/account/bookmarks/toggle_switch.html.twig' with {
+                    location: location,
+                    location_is_bookmarked: location_is_bookmarked
+                } %}
+            {% endif %}
+        {% endblock %}
+        {% block bottom %}
+            {% if content_type_name is defined %}
+                <span class="ibexa-icon-tag">
+                    {% if icon_name is defined%}
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--base-dark ibexa-icon--{{ icon_name }}">
+                            <use xlink:href="{{ ibexa_icon_path(icon_name) }}"></use>
+                        </svg>
+                    {% elseif content_type_identifier is defined %}
+                        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--base-dark ibexa-icon--{{ content_type_identifier }}">
+                            <use xlink:href="{{ ez_content_type_icon(content_type_identifier) }}"></use>
+                        </svg>
+                    {% endif %}
+                    {{ content_type_name }}
+                </span>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+
+    <div class="container">
+        {% if location.hidden or location.invisible %}
+            <div class="pb-4">
+                {% include '@ezdesign/ui/component/alert/alert.html.twig' with {
+                    type: 'info',
+                    title: 'content.hidden.message'|trans()|desc('This Content item or its Location is hidden.'),
+                    icon_path: ibexa_icon_path('hide'),
+                    class: 'mb-4',
+                } only %}
+            </div>
+        {% endif %}
+        {{ ez_render_component_group(
+            'location-view-content-alerts',
+            {
+                'versionInfo': content.versionInfo,
+                'location': location,
+            }
+        ) }}
+    </div>
+{% endblock %}
 
 {% block content %}
     <div id="ez-mfu"
@@ -21,58 +135,10 @@
         data-parent-location-path="{{ location.pathString }}"
         data-parent-content-type-identifier="{{ content_type.identifier }}"
         data-parent-content-type-id="{{ content_type.id }}"
-        data-current-language="{{ app.request.get('languageCode') ?: content.prioritizedFieldLanguageCode }}"></div>
-
+        data-current-language="{{ app.request.get('languageCode') ?: content.prioritizedFieldLanguageCode }}"
+    ></div>
     <div class="row align-items-stretch ez-main-row">
-        {% block left_sidebar %}
-            {{ parent() }}
-        {% endblock left_sidebar %}
-
         <div class="px-0 ez-content-container">
-            <div class="ez-header">
-                <div class="container">
-                    {% set items = [] %}
-                    {% for path_location in path_locations %}
-                        {% if not loop.last %}
-                            {% set items = items|merge([{
-                                'value': ez_content_name(path_location.contentInfo),
-                                'url': path('_ez_content_view', {
-                                    'contentId': path_location.contentId,
-                                    'locationId': path_location.id
-                                })
-                            }]) %}
-                        {% endif %}
-                    {% endfor %}
-
-                    {% set items = items|merge([{ 'value': ez_content_name(content) }]) %}
-
-                    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: items } %}
-
-                    {% include '@ezdesign/ui/page_title.html.twig' with {
-                        title: ez_content_name(content),
-                        icon_name: content_type.identifier,
-                        content_type_name: content_type.name
-                    } %}
-
-                    {% if location.hidden or location.invisible %}
-                        <div class="pb-4">
-                            <div class="ez-alert ez-alert--info">
-                                <svg class="ez-icon ez-icon--small-medium">
-                                    <use xlink:href="{{ ez_icon_path('hide') }}"></use>
-                                </svg>
-                                {{ 'content.hidden.message'|trans()|desc('This Content item or its Location is hidden.') }}
-                            </div>
-                        </div>
-                    {% endif %}
-                    {{ ez_render_component_group(
-                        'location-view-content-alerts',
-                        {
-                            'versionInfo': content.versionInfo,
-                            'location': location,
-                        }
-                    ) }}
-                </div>
-            </div>
             <div class="panel panel-primary">
                 <div class="panel-body">
                     {# 'is_location_visible': location.invisible - param deprecated since EZP-32395 #}
@@ -92,52 +158,20 @@
                     {% if content_type.isContainer %}
                     {{ form_start(form_subitems_content_edit, { 'action': path('ezplatform.content.edit'), 'attr': { 'hidden': 'hidden' }}) }}
                     {{ form_end(form_subitems_content_edit) }}
-                    <div class="container">
-                        {% set udwConfigSingle = ez_udw_config('single_container', {}) %}
-                        <div class="ez-sil"
-                            data-location="{{ location.id }}"
-                            data-mfu-create-permissions-config="{{ subitems_module.content_create_permissions_for_mfu|json_encode() }}"
-                            data-items="{{ subitems_module.items }}"
-                            data-content-types="{{ subitems_module.content_type_info_list }}"
-                            data-udw-config-bulk-move-items="{{ udwConfigSingle }}"
-                            data-udw-config-bulk-add-location="{{ udwConfigSingle }}"
-                        ></div>
-                        {% include '@ezdesign/content/modal/location_bulk_action_failed.html.twig' only %}
-                    </div>
+                    {% set udwConfigSingle = ez_udw_config('single_container', {}) %}
+                    <div class="ez-sil"
+                        data-location="{{ location.id }}"
+                        data-mfu-create-permissions-config="{{ subitems_module.content_create_permissions_for_mfu|json_encode() }}"
+                        data-items="{{ subitems_module.items }}"
+                        data-content-types="{{ subitems_module.content_type_info_list }}"
+                        data-udw-config-bulk-move-items="{{ udwConfigSingle }}"
+                        data-udw-config-bulk-add-location="{{ udwConfigSingle }}"
+                    ></div>
+                    {% include '@ezdesign/content/modal/location_bulk_action_failed.html.twig' only %}
                     {% endif %}
                 </div>
             </div>
         </div>
-        <div class="ez-context-menu">
-            <div class="ez-sticky-container">
-                {% set content_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content.sidebar_right', [], {'location': location, 'content': content, 'content_type': content_type}) %}
-                {{ knp_menu_render(content_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
-
-                <div class="ez-extra-actions-container">
-                    {% include '@ezdesign/content/widget/content_create.html.twig' with {'form': form_content_create} only %}
-                    {% if form_content_edit is defined and form_user_edit is not defined %}
-                        {% include '@ezdesign/content/widget/content_edit.html.twig' with {'form': form_content_edit} only %}
-                    {% endif %}
-                    {% if form_user_edit is defined %}
-                        {% include '@ezdesign/content/widget/user_edit.html.twig' with {'form': form_user_edit} only %}
-                    {% endif %}
-                </div>
-            </div>
-            {%  if form_location_trash is defined and form_user_delete is not defined %}
-                {% include '@ezdesign/content/modal/location_trash.html.twig' with {
-                    'form': form_location_trash,
-                    'content_name': ez_content_name(content)
-                } only %}
-            {% endif %}
-            {%  if form_user_delete is defined %}
-                {% include '@ezdesign/content/modal/user_delete.html.twig' with {'form': form_user_delete} only %}
-            {% endif %}
-            {{ form(form_location_copy, {'action': path('ezplatform.location.copy')}) }}
-            {{ form(form_location_move, {'action': path('ezplatform.location.move')}) }}
-            {{ form(form_location_copy_subtree, {'action': path('ezplatform.location.copy_subtree')}) }}
-            {{ form(form_content_visibility_update, {'action': path('ezplatform.content.update_visibility')}) }}
-        </div>
-    </div>
     {% if content_has_reverse_relations and not location.contentInfo.isHidden %}
         {% include '@ezdesign/content/modal/hide_confirmation.html.twig' %}
     {% endif %}
@@ -156,4 +190,5 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('ezplatform-admin-ui-location-view-js', null, 'ezplatform') }}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-tabs-js', null, 'ezplatform') }}
 {% endblock %}

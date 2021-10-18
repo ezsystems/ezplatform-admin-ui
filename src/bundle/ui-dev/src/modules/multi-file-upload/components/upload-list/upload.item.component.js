@@ -375,7 +375,7 @@ export default class UploadItemComponent extends Component {
 
         const contentTypeIconUrl = eZ.helpers.contentType.getContentTypeIconUrl(contentTypeIdentifier);
 
-        return <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--small-medium ez-icon--base-dark" />;
+        return <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--small-medium ibexa-icon--base-dark" />;
     }
 
     /**
@@ -476,7 +476,7 @@ export default class UploadItemComponent extends Component {
                 onClick={this.abortUploading}
                 title={label}
                 tabIndex="-1">
-                <Icon name="circle-close" extraClasses="ez-icon--small-medium" />
+                <Icon name="circle-close" extraClasses="ibexa-icon--small-medium" />
             </div>
         );
     }
@@ -527,7 +527,7 @@ export default class UploadItemComponent extends Component {
                 title={label}
                 onClick={this.handleEditBtnClick}
                 tabIndex="-1">
-                <Icon name="edit" extraClasses="ez-icon--small-medium" />
+                <Icon name="edit" extraClasses="ibexa-icon--small-medium" />
             </div>
         );
     }
@@ -555,7 +555,7 @@ export default class UploadItemComponent extends Component {
                 onClick={this.deleteFile}
                 title={label}
                 tabIndex="-1">
-                <Icon name="trash" extraClasses="ez-icon--small-medium" />
+                <Icon name="trash" extraClasses="ibexa-icon--small-medium" />
             </div>
         );
     }

@@ -1,0 +1,72 @@
+.ibexa-collapse {
+    overflow: hidden;
+    height: auto;
+    opacity: 1;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+    &__header {
+        display: flex;
+        height: calculateRem(53px);
+        align-items: center;
+        padding: 0 calculateRem(4px);
+        background-color: $ibexa-color-white;
+        border-top-right-radius: $ibexa-border-radius;
+        border-top-left-radius: $ibexa-border-radius;
+    }
+
+    &__header-label {
+        margin: 0;
+        font-size: $ibexa-text-font-size;
+    }
+
+    &__toggle {
+        &--status {
+            margin-left: auto;
+        }
+    }
+
+    &__body {
+        background-color: $ibexa-color-white;
+        border-bottom-right-radius: $ibexa-border-radius;
+        border-bottom-left-radius: $ibexa-border-radius;
+    }
+
+    &--hidden {
+        height: 0;
+        opacity: 0;
+    }
+
+    &--collapsed {
+        .ibexa-collapse {
+            &__header {
+                border-color: $ibexa-color-white;
+            }
+        }
+    }
+
+    &--heavy {
+        box-shadow: inset 0 0 0 calculateRem(1px) $ibexa-color-light, calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
+        border-radius: $ibexa-border-radius;
+        transition: all $ibexa-admin-transition-duration;
+
+        .ibexa-collapse {
+            &__header {
+                border: calculateRem(1px) solid $ibexa-color-light;
+                border-radius: $ibexa-border-radius;
+                box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(19px) calculateRem(-10px) rgba($ibexa-color-info, 0.05);
+            }
+
+            &__body {
+                background: transparent;
+            }
+        }
+        &.ibexa-collapse--collapsed {
+            box-shadow: none;
+        }
+    }
+
+    &.is-invalid {
+        box-shadow: none;
+        border: calculateRem(1px) solid $ibexa-color-danger;
+    }
+}

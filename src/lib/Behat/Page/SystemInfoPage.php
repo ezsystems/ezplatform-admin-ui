@@ -80,7 +80,6 @@ class SystemInfoPage extends Page
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('pageTitle', '.ez-header h1'),
             new VisibleCSSLocator('tableTitle', '.tab-pane.active .ez-fieldgroup__name'),
             new VisibleCSSLocator('packagesTable', '.tab-pane.active .ez-fieldgroup:nth-of-type(2)'),
         ];

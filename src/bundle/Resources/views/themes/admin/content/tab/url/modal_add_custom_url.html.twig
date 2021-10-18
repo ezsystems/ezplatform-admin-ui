@@ -7,9 +7,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">{{ 'tab.urls.add.title'|trans|desc('Create a new URL alias') }}</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'tab.urls.modal_close'|trans|desc('Close') }}">
-                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
-                        <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="{{ 'tab.urls.modal_close'|trans|desc('Close') }}">
+                    <svg class="ibexa-icon ibexa-icon--medium" aria-hidden="true">
+                        <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                     </svg>
                 </button>
             </div>
@@ -44,8 +44,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                {{ form_widget(form.add, {'attr': {'class': 'btn btn-primary', 'disabled': 'disabled'}}) }}
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                {{ form_widget(form.add, {'attr': {'class': 'btn ibexa-btn ibexa-btn--primary', 'disabled': 'disabled'}}) }}
+                <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
                     {{ 'tab.urls.add.cancel'|trans|desc('Cancel') }}
                 </button>
             </div>

@@ -2,27 +2,28 @@
 
 {% trans_default_domain 'dashboard' %}
 
-{% block body_class %}ez-dashboard ez-has-full-width-footer{% endblock %}
+{% block body_class %}ibexa-dashboard{% endblock %}
+
+{% block content_header %}{% endblock %}
 
 {% block content %}
-    <div class="row align-items-stretch ez-main-row ez-dashboard-row">
-        {% block left_sidebar %}{% endblock left_sidebar %}
+    <div class="row align-items-stretch ez-main-row ibexa-dashboard-row">
         <div class="ez-content-container">
-            <div class="container-fluid ez-header ez-header--light">
-                <div class="container ez-dashboard__header">
-                    <h1 class="py-3">{{ 'my.dashboard'|trans|desc('My dashboard') }}</h1>
-                    <div class="ez-dashboard__create">
+            <div class="container ez-header ez-header--light">
+                <div class="container ibexa-dashboard__header">
+                    <div class="ibexa-dashboard__create">
                         <button
-                            class="btn btn-link ez-btn--cotf-create"
+                            class="btn ibexa-btn ibexa-btn--primary ibexa-btn--cotf-create"
                             data-udw-config="{{ ez_udw_config('create', {'type': 'content_create'}) }}"
                             {% if not can_create_content %}disabled{% endif %}
                         >
-                            <svg class="ez-icon ez-icon--small-medium ez-icon--primary ez-icon-create">
-                                <use xlink:href="{{ ez_icon_path('create') }}"></use>
+                            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                                <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
                             </svg>
                             <span>{{ 'dashboard.create'|trans|desc('Create') }}</span>
                         </button>
                     </div>
+                    <h1 class="py-3">{{ 'my.dashboard'|trans|desc('My dashboard') }}</h1>
                 </div>
             </div>
             <div class="container">

@@ -1,0 +1,82 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+
+{% block root %}
+    <ul class="ibexa-context-menu">
+        {% for item in item.children %}
+            {{ block('item') }}
+        {% endfor %}
+
+        <li class="ibexa-context-menu__item ibexa-context-menu__item--more ibexa-adaptive-items__item ibexa-adaptive-items__item--selector">
+            {% set selector_btn_classes = item.extras.adaptiveItemsSelectorBtnClass|default('btn ibexa-btn ibexa-btn--secondary ibexa-btn--no-text') %}
+            <button class="{{ selector_btn_classes ~ ' ibexa-btn--more' }}">
+                <svg class="ibexa-icon ibexa-icon--small">
+                    <use xlink:href="{{ ibexa_icon_path('options') }}"></use>
+                </svg>
+            </button>
+
+            {{ include('@ezdesign/ui/component/popup_menu/popup_menu.html.twig', {
+                'items': [],
+            }) }}
+        </li>
+    </ul>
+{% endblock %}
+
+{% block item -%}
+
+    {%- set default_classes = 'btn ibexa-btn' -%}
+
+    {% if not item.extras.noDefaultBtnStyling|default(false) %}
+        {% if item.extras.primary|default(false) %}
+            {%- set default_classes = default_classes ~ ' ibexa-btn--primary' -%}
+        {% else %}
+            {%- set default_classes = default_classes ~ ' ibexa-btn--secondary' -%}
+        {% endif %}
+    {% endif %}
+
+    {%- set list_item_default_classes = 'ibexa-context-menu__item ibexa-adaptive-items__item' -%}
+    {% if item.extras.adaptiveItemsForceHide|default(false) %}
+        {%- set list_item_default_classes = list_item_default_classes ~ ' ibexa-adaptive-items__item--force-hide ibexa-context-menu__item--hidden' -%}
+    {% endif %}
+
+    <li class="{{ list_item_default_classes }}">
+        {%- if item.displayed -%}
+            {%- set attributes = item.attributes|merge({'class': (item.attributes.class|default('') ~ ' ' ~ default_classes|default('btn btn-secondary btn-block'))|trim}) -%}
+            {%- set attributes = attributes|merge({'id': item.name ~ '-tab'}) -%}
+
+            {%- if item.uri is not empty %}
+                {% set attributes = attributes|merge({'href': item.uri}) %}
+                {% set element = 'a' %}
+
+                {{ block('element') }}
+            {%- else %}
+                {% set element = 'button' %}
+
+                {{ block('element') }}
+            {%- endif %}
+
+            {%- if item.extras.template is defined -%}
+                {% include item.extras.template with item.extras.template_parameters|default({}) %}
+            {%- endif -%}
+        {%- endif -%}
+    </li>
+{%- endblock %}
+
+{% block element %}
+    {% import 'knp_menu.html.twig' as macros %}
+
+    {% set element = element|default('a') %}
+
+    <{{element}}{{macros.attributes(attributes)}}>
+        {% if item.extras.icon is defined %}
+            <svg class="ibexa-icon ibexa-icon--small">
+                <use xlink:href="{{ ibexa_icon_path(item.extras.icon) }}"></use>
+            </svg>
+        {% endif %}
+
+        {{ block('label') }}
+    </{{element}}>
+{% endblock %}
+
+{% block label %}
+    <span class="ibexa-btn__label">{{ parent() }}</span>
+{% endblock %}

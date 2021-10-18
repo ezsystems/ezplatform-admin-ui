@@ -1,26 +1,41 @@
-.ez-field-edit--ezauthor {
-    .ez-data-source__author {
-        padding: calculateRem(16px) calculateRem(16px) calculateRem(20px) calculateRem(16px);
+.ibexa-field-edit--ezauthor {
+    .ibexa-data-source__author {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
     }
 
-    .ez-data-source__actions {
+    .ibexa-data-source__main-actions {
         display: flex;
+        justify-content: flex-end;
+        padding: calculateRem(24px) 0 calculateRem(16px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+    }
 
-        button {
-            margin: calculateRem(33px) calculateRem(6px) 0;
-            height: calculateRem(40px);
-            width: calculateRem(40px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    .ibexa-data-source__labels {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0 calculateRem(30px) 0 calculateRem(52px);
+
+        .ibexa-label {
+            flex-basis: 50%;
         }
     }
-}
 
-.ez-content-edit {
-    .ez-field-edit--ezauthor {
-        .ez-data-source__author {
-            padding: 0;
+    .ibexa-data-source__field {
+        flex: 0 0 40%;
+    }
+
+    .ibexa-data-source__checkbox {
+        padding: calculateRem(4px);
+    }
+
+    .ibexa-data-source__actions {
+        display: flex;
+
+        .ibexa-btn {
+            padding: calculateRem(6px);
         }
     }
 }

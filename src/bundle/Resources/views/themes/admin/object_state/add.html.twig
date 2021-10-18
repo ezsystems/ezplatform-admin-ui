@@ -13,10 +13,14 @@
     ]} %}
 {% endblock %}
 
-{% block page_title_admin %}
+{% block context_menu_admin %}
+    {% set object_state_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.object_state_create.sidebar_right', [], {'group_id': object_state_group.id}) %}
+    {{ knp_menu_render(object_state_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+{% endblock %}
+
+{% block header_admin %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'object_state.view.add.title'|trans|desc('Creating a new Object state'),
-        icon_name: 'object-state'
     } %}
 {% endblock %}
 
@@ -24,10 +28,10 @@
     {{ form_start(form) }}
 
     <section>
-        <div class="card ez-card ez-card--light">
-            <div class="card-body ez-card__body">
-                {{ form_row(form.name, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
-                {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
+        <div class="card ibexa-card ibexa-card--light">
+            <div class="card-body ibexa-card__body">
+                {{ form_row(form.name, {'attr': {'autofocus': 'autofocus'}}) }}
+                {{ form_row(form.identifier) }}
             </div>
         </div>
     </section>
@@ -35,9 +39,4 @@
     {{ form_widget(form.create, { 'attr': { 'hidden': 'hidden' } }) }}
 
     {{ form_end(form) }}
-{% endblock %}
-
-{% block right_sidebar %}
-    {% set object_state_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.object_state_create.sidebar_right', [], {'group_id': object_state_group.id}) %}
-    {{ knp_menu_render(object_state_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

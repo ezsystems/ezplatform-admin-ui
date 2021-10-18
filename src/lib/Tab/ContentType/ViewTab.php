@@ -13,7 +13,7 @@ use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 
 class ViewTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
-    const URI_FRAGMENT = 'ez-tab-content-type-view-details';
+    const URI_FRAGMENT = 'ibexa-tab-content-type-view-details';
 
     /**
      * @return string

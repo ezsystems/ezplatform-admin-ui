@@ -74,7 +74,7 @@ class ContentTypeRightSidebarBuilder extends AbstractBuilder implements Translat
         $menu = $this->factory->createItem('root');
 
         $editAttributes = [
-            'class' => 'ez-btn--extra-actions ez-btn--edit',
+            'class' => 'ibexa-btn--extra-actions ibexa-btn--edit',
             'data-actions' => 'edit',
         ];
         $canEdit = $this->permissionResolver->canUser(
@@ -87,7 +87,6 @@ class ContentTypeRightSidebarBuilder extends AbstractBuilder implements Translat
             $this->createMenuItem(
                 self::ITEM__EDIT,
                 [
-                    'extras' => ['icon' => 'edit'],
                     'attributes' => $canEdit
                         ? $editAttributes
                         : array_merge($editAttributes, ['disabled' => 'disabled']),

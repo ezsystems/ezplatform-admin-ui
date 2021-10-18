@@ -36,9 +36,9 @@ class ContentPreviewPage extends Page
             new VisibleCSSLocator('previewNav', '.ez-preview__nav'),
             new VisibleCSSLocator('backToEdit', '.ez-preview__nav .ez-preview__item--back a'),
             new VisibleCSSLocator('title', '.ez-preview__nav .ez-preview__item--description'),
-            new VisibleCSSLocator('desktop', '.ez-preview__nav .ez-preview__item--actions .ez-icon-desktop'),
-            new VisibleCSSLocator('tablet', '.ez-preview__nav .ez-preview__item--actions .ez-icon-tablet'),
-            new VisibleCSSLocator('mobile', '.ez-preview__nav .ez-preview__item--actions .ez-icon-mobile'),
+            new VisibleCSSLocator('desktop', '.ez-preview__nav .ez-preview__item--actions .ibexa-icon--desktop'),
+            new VisibleCSSLocator('tablet', '.ez-preview__nav .ez-preview__item--actions .ibexa-icon--tablet'),
+            new VisibleCSSLocator('mobile', '.ez-preview__nav .ez-preview__item--actions .ibexa-icon--mobile'),
             new VisibleCSSLocator('selectedView', '.ez-preview__action--selected'),
         ];
     }

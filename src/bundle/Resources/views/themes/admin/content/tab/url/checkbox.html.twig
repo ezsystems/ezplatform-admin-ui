@@ -1,3 +1,5 @@
+{% use '@ezdesign/ui/form_fields/toggle_widget.html.twig' %}
+
 {%- block checkbox_widget -%}
     {% if value is defined %}
         {% set attr = attr|merge({'value': value}) %}
@@ -9,9 +11,6 @@
         {% set attr = attr|merge({'disabled': disabled}) %}
     {% endif %}
     <div class="ez-field-edit--ezboolean">
-        <label class="ez-data-source__label{% if checked %} is-checked{% endif %}{% if disabled %} is-disabled{% endif %}">
-            <span class="ez-data-source__indicator"></span>
-            <input type="checkbox" {{ block('widget_attributes') }} />
-        </label>
+        {{ block('toggle_widget') }}
     </div>
 {%- endblock -%}

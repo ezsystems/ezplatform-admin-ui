@@ -103,7 +103,7 @@ class MapLocation extends FieldTypeComponent
             new VisibleCSSLocator('latitude', '#ezplatform_content_forms_content_edit_fieldsData_ezgmaplocation_value_latitude'),
             new VisibleCSSLocator('longitude', '#ezplatform_content_forms_content_edit_fieldsData_ezgmaplocation_value_longitude'),
             new VisibleCSSLocator('address', '#ezplatform_content_forms_content_edit_fieldsData_ezgmaplocation_value_address'),
-            new VisibleCSSLocator('searchButton', '.btn--search-by-address'),
+            new VisibleCSSLocator('searchButton', '.ibexa-btn--search-by-address'),
         ];
     }
 

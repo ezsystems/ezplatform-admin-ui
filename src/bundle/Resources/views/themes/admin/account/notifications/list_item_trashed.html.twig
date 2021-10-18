@@ -4,8 +4,8 @@
 
 {% block icon %}
     <span class="type__icon">
-        <svg class="ez-icon">
-            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+        <svg class="ibexa-icon">
+            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
         </svg>
     </span>
 {% endblock %}
@@ -14,11 +14,4 @@
     <span class="type__text">
         {{ 'notification.trashed'|trans|desc('Sent to Trash')}}
     </span>
-{% endblock %}
-
-{% block message %}
-    <td class="ez-notifications-modal__description">
-        <p class="description__title">{{ 'notification.title'|trans|desc('Title:') }} <span class="description__title__item">{{ title }}</span></p>
-        <p class="description__text">{{ message }}</p>
-    </td>
 {% endblock %}

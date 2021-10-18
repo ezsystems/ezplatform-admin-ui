@@ -2,27 +2,24 @@
 
 {% trans_default_domain 'object_state' %}
 
+{% block breadcrumbs %}
+    {% block breadcrumbs_admin %}{% endblock %}
+{% endblock %}
+
+{% block context_menu %}
+    {% block context_menu_admin %}{% endblock %}
+{% endblock %}
+
+{% block header %}
+    {% block header_admin %}{% endblock %}
+{% endblock %}
+
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
         <div class="px-0 pb-4 ez-content-container">
-            <div class="ez-header">
-                <div class="container">
-                    {% block breadcrumbs_admin %}
-                    {% endblock %}
-
-                    {% block page_title_admin %}
-                    {% endblock %}
-                </div>
-            </div>
-
             <div class="container ez-container">
                 {% block form %}
                 {% endblock %}
-            </div>
-        </div>
-        <div class="ez-context-menu">
-            <div class="ez-sticky-container">
-                {% block right_sidebar %}{% endblock %}
             </div>
         </div>
     </div>

@@ -1,0 +1,32 @@
+.ibexa-autosave {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    color: $ibexa-color-dark-400;
+    font-size: $ibexa-text-font-size-small;
+
+    &--not-saved {
+        .ibexa-autosave {
+            &__autosave-failed,
+            &__last-saved {
+                display: none;
+            }
+        }
+    }
+
+    &--saved {
+        .ibexa-autosave {
+            &__autosave-failed {
+                display: none;
+            }       
+        }
+    }
+
+    &--failed {
+        .ibexa-autosave {
+            &__autosave-failed {
+                color: $ibexa-color-danger;
+            }
+        }
+    }
+}

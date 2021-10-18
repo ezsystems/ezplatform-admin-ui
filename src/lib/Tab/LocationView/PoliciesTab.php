@@ -25,7 +25,7 @@ use Twig\Environment;
 
 class PoliciesTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
 {
-    const URI_FRAGMENT = 'ez-tab-location-view-policies';
+    const URI_FRAGMENT = 'ibexa-tab-location-view-policies';
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     protected $datasetFactory;

@@ -5,36 +5,35 @@
         <title>Ibexa DXP</title>
         {{ encore_entry_link_tags('ezplatform-admin-ui-security-base-css', null, 'ezplatform') }}
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
+
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/@popperjs/core/dist/umd/popper.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     </head>
-    <body class="ez-login-view">
+    <body class="ibexa-login-view">
         <div class="container-fluid ez-main-container">
-            <div class="row ez-login">
-                <div class="col-5 ez-login__image-col">
-                    <div class="ez-login__support-wrapper">
-                        <h2 class="ez-login__support-headline">{{ 'base.need_assistance'|trans|desc('Get to know Ibexa DXP') }}</h2>
-                        <span class="ez-login__support-content">{{ 'base.visit_support'|trans({
-                                '%ez_documentation_link%': '<a class="ez-link ez-link--light ez-link--no-hover-color" href="https://developers.ibexa.co/documentation-hub">https://developers.ibexa.co/documentation-hub</a>',
-                                '%ez_contact_link%': '<a class="ez-link ez-link--light ez-link--no-hover-color" href="https://www.ibexa.co/about-ibexa/contact-us">https://www.ibexa.co/about-ibexa/contact-us</a>'
-                              })| desc('Visit the official documentation %ez_documentation_link%<br/>or get in touch with us: %ez_contact_link%')|raw }}</span>
-                    </div>
-                </div>
-                <div class="col-7 ez-login__actions-col">
-                    <img class="ez-login__logo" src="{{ asset('/bundles/ezplatformadminui/img/ibexa-logo.svg') }}" alt="ibexa" />
-                    <div class="ez-login__actions-wrapper">
-                        {%- block content -%} {%- endblock content -%}
-                    </div>
-                    <div class="ez-login__copright">
-                        {{ 'base.footer_copyright'|trans({
-                                    '%current_year%': "now"|date("Y")
-                        }) |desc('Copyright &#169; IBEXA 1999-%current_year%')|raw }}
+            <div class="row ibexa-login">
+                <img class="ibexa-login__logo" src="{{ asset('bundles/ezplatformadminui/img/ibexa-logo.svg') }}" alt="ibexa" />
+                <div class="container ibexa-login__content-wrapper">
+                    <div class="row ibexa-login__content-row">
+                        <div class="col-4 ibexa-login__info-col">
+                            <h1 class="ibexa-login__info-headline">{{ 'base.welcome'|trans|desc('Welcome to<br/> Ibexa DXP')|raw }}</h1>
+                            <div class="ibexa-login__support-wrapper">
+                                <h3 class="ibexa-login__support-headline">{{ 'base.need_assistance'|trans|desc('Get to know Ibexa DXP') }}</h3>
+                                <span class="ibexa-login__support-content">
+                                    {{ 'base.visit_support'|trans({
+                                        '%ez_documentation_link%': '<a class="ibexa-link ibexa-link--light ibexa-link--no-hover-color" href="https://developers.ibexa.co/documentation-hub">official documentation</a>',
+                                        '%ez_contact_link%': '<a class="ibexa-link ibexa-link--light ibexa-link--no-hover-color" href="https://www.ibexa.co/about-ibexa/contact-us">Contact us</a>'
+                                    })| desc('See the %ez_documentation_link%<br/>or %ez_contact_link%')|raw }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-4 ibexa-login__actions-col">
+                            {%- block content -%} {%- endblock content -%}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
         {% if app.request.locale == 'ach_UG' %}
             <script type="text/javascript">

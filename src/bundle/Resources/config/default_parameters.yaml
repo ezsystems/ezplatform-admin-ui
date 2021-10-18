@@ -1,38 +1,38 @@
 parameters:
     ezsettings.default.content_type.about:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#about'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#about'
     ezsettings.default.content_type.article:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#article'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#article'
     ezsettings.default.content_type.blog:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#blog'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#blog'
     ezsettings.default.content_type.blog_post:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#blog_post'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#blog_post'
     ezsettings.default.content_type.folder:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#folder'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#folder'
     ezsettings.default.content_type.form:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#form'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#form'
     ezsettings.default.content_type.place:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#place'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#place'
     ezsettings.default.content_type.product:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#product'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#product'
     ezsettings.default.content_type.field:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#field'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#field'
     ezsettings.default.content_type.user:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#user'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#user'
     ezsettings.default.content_type.user_group:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#user_group'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#user_group'
     ezsettings.default.content_type.file:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#file'
     ezsettings.default.content_type.gallery:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#gallery'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#gallery'
     ezsettings.default.content_type.image:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#image'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#image'
     ezsettings.default.content_type.video:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#video'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#video'
     ezsettings.default.content_type.landing_page:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#landing_page'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#landing_page'
     ezsettings.default.content_type.default-config:
-        thumbnail: '/bundles/ezplatformadminui/img/ez-icons.svg#file'
+        thumbnail: '/bundles/ezplatformadminui/img/ibexa-icons.svg#file'
 
     ezplatform.content_view.tabs.default_template: '@@ezdesign/ui/tab/default.html.twig'
 

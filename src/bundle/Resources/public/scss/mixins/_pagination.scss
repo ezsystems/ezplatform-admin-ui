@@ -1,63 +1,67 @@
 @mixin pagination-main-container {
     display: flex;
-    justify-content: space-between;
     background: $ibexa-white;
 }
 
 @mixin pagination-info {
-    color: $ibexa-color-font-pale;
-    font-size: calculateRem(14px);
-
-    strong {
-        color: $ibexa-color-font;
-    }
+    color: $ibexa-color-dark;
+    font-size: $ibexa-text-font-size-medium;
+    margin-right: calculateRem(24px);
 }
 
 @mixin pagination-link {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: calculateRem(25px);
-    height: calculateRem(25px);
-    border-radius: 50%;
+    justify-content: center;
+    width: calculateRem(44px);
+    height: calculateRem(44px);
+    border-radius: $ibexa-border-radius;
+    font-size: $ibexa-text-font-size-medium;
 }
 
-@mixin pagination-prev-btn {
-    .page-link {
-        justify-content: flex-end;
-        padding-right: calculateRem(10px);
+@mixin pagination-item {
+    padding: calculateRem(1px);
+    border: calculateRem(1px) solid transparent;
 
-        &:before {
+    &.active {
+        font-weight: 600;
+    }
+
+    &.prev {
+        .page-link:before {
             content: '';
-            position: absolute;
-            left: calculateRem(9px);
-            top: calculateRem(9px);
+            margin-left: calculateRem(7px);
             display: block;
-            border-right: calculateRem(2px) solid $ibexa-black;
-            border-bottom: calculateRem(2px) solid $ibexa-black;
-            width: calculateRem(8px);
-            height: calculateRem(8px);
+            border-right: calculateRem(1px) solid $ibexa-color-dark;
+            border-bottom: calculateRem(1px) solid $ibexa-color-dark;
+            width: calculateRem(16px);
+            height: calculateRem(16px);
             transform: rotate(135deg);
         }
     }
-}
 
-@mixin pagination-next-btn {
-    .page-link {
-        justify-content: flex-start;
-        padding-left: calculateRem(10px);
-
-        &:after {
+    &.next {
+        .page-link:after {
             content: '';
-            position: absolute;
-            right: calculateRem(9px);
-            top: calculateRem(9px);
             display: block;
-            border-right: calculateRem(2px) solid $ibexa-black;
-            border-bottom: calculateRem(2px) solid $ibexa-black;
-            width: calculateRem(8px);
-            height: calculateRem(8px);
+            margin-right: calculateRem(7px);
+            border-right: calculateRem(1px) solid $ibexa-color-dark;
+            border-bottom: calculateRem(1px) solid $ibexa-color-dark;
+            width: calculateRem(16px);
+            height: calculateRem(16px);
             transform: rotate(-45deg);
         }
+    }
+
+    &.disabled {
+        .page-link:before,
+        .page-link:after {
+            border-right-color: $ibexa-color-dark-200;
+            border-bottom-color: $ibexa-color-dark-200;
+        }
+    }
+
+    .page-link:focus {
+        border: calculateRem(1px) solid $ibexa-color-primary;
     }
 }

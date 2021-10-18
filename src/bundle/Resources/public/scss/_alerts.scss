@@ -1,58 +1,83 @@
-.ez-alert {
-    &--info {
-        background: $ibexa-color-base-medium;
-        color: $ibexa-color-font;
-        padding: calculateRem(12px) calculateRem(20px);
-        border: 0;
-        fill: currentColor;
-        vertical-align: middle;
-        border-radius: $ibexa-border-radius;
+.ibexa-alert {
+    display: grid;
+    grid-template: 'icon content close-btn';
+    grid-template-columns: calculateRem(32px) auto calculateRem(32px);
+    padding: calculateRem(16px) calculateRem(19px);
+    border-radius: 0 calculateRem(10px) calculateRem(10px) 0;
+    border-width: calculateRem(1px) calculateRem(1px) calculateRem(1px) calculateRem(3px);
+    border-left-style: solid;
 
-        .ez-icon {
-            margin-right: calculateRem(12px);
-            fill: $ibexa-color-primary;
-        }
+    &__icon {
+        grid-area: icon;
+        margin-top: calculateRem(2px);
     }
 
-    &--icon {
-        background-color: $ibexa-white;
-        border-color: $ibexa-white;
-        color: $ibexa-color-font;
-
-        .ez-icon {
-            display: block;
-            float: left;
-            border-radius: 50%;
-            padding: calculateRem(3px);
-            margin-top: calculateRem(5px);
-        }
-
-        &.alert-info {
-            .ez-icon {
-                background-color: $ibexa-color-info;
-            }
-        }
-
-        &.alert-success {
-            .ez-icon {
-                background-color: $ibexa-color-positive;
-            }
-        }
-
-        &.alert-warning {
-            .ez-icon {
-                background-color: $ibexa-color-warning;
-            }
-        }
-
-        &.alert-danger {
-            .ez-icon {
-                background-color: $ibexa-color-danger;
-            }
-        }
+    &__close-btn {
+        grid-area: close-btn;
+        fill: inherit;
+        width: calculateRem(28px);
+        height: calculateRem(28px);
+        margin-left: calculateRem(17px);
+        margin-top: calculateRem(-6px);
     }
 
     &__content {
-        margin-left: calculateRem(30px);
+        grid-area: content;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+
+        &--subtitle-below {
+            flex-direction: column;
+            flex-wrap: nowrap;
+        }
+    }
+
+    &__title {
+        grid-area: title;
+        font-size: calculateRem(14px);
+        font-weight: 600;
+        margin-right: calculateRem(8px);
+    }
+
+    &__subtitle {
+        font-size: calculateRem(12px);
+    }
+
+    &__title,
+    &__subtitle {
+        @include ibexa-font-sans-serif();
+    }
+
+    &__extra_content {
+        width: 100%;
+    }
+
+    &--info {
+        color: $ibexa-color-info;
+        fill: $ibexa-color-info;
+        background-color: $ibexa-color-info-100;
+        border-color: $ibexa-color-info-300 $ibexa-color-info-300 $ibexa-color-info-300 $ibexa-color-info;
+    }
+
+    &--error {
+        color: $ibexa-color-danger;
+        fill: $ibexa-color-danger;
+        background-color: $ibexa-color-danger-100;
+        border-color: $ibexa-color-danger-300 $ibexa-color-danger-300 $ibexa-color-danger-300 $ibexa-color-danger;
+    }
+
+    &--warning {
+        color: $ibexa-color-accent-600;
+        fill: $ibexa-color-accent;
+        background-color: $ibexa-color-accent-100;
+        border-color: $ibexa-color-accent-300 $ibexa-color-accent-300 $ibexa-color-accent-300 $ibexa-color-accent;
+    }
+
+    &--success {
+        color: $ibexa-color-success-600;
+        fill: $ibexa-color-success;
+        background-color: $ibexa-color-success-100;
+        border-color: $ibexa-color-success-300 $ibexa-color-success-300 $ibexa-color-success-300 $ibexa-color-success;
     }
 }

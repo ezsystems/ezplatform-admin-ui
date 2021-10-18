@@ -1,0 +1,69 @@
+.ibexa-popup-menu {
+    padding: calculateRem(8px);
+    background: $ibexa-color-white;
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: $ibexa-border-radius;
+    box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(67px) 0 rgba($ibexa-color-info, 0.2);
+    position: absolute;
+    z-index: 10;
+
+    &--hidden {
+        display: none;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        height: calculateRem(40px);
+        min-width: calculateRem(150px);
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+        &--hidden {
+            display: none;
+        }
+    }
+
+    .ibexa-popup-menu__item-content {
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        padding: calculateRem(9px) calculateRem(15px);
+        color: $ibexa-color-black;
+        font-size: calculateRem(14px);
+        text-align: left;
+        text-decoration: none;
+        border: none;
+        border-radius: $ibexa-border-radius;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
+
+        &:hover {
+            background-color: $ibexa-color-light-300;
+            color: $ibexa-color-black;
+            text-decoration: none;
+        }
+
+        &--disabled {
+            opacity: 0.2;
+            cursor: default;
+        }
+    }
+
+    &--info-neon {
+        background-color: $ibexa-color-dark;
+        border-color: $ibexa-color-info-800;
+
+        a.ibexa-popup-menu__item-content {
+            color: $ibexa-color-white;
+
+            &:hover {
+                color: $ibexa-color-info;
+                background-color: $ibexa-color-dark;
+            }
+
+            &--current {
+                color: $ibexa-color-info;
+                background-color: $ibexa-color-info-800;
+            }
+        }
+    }
+}

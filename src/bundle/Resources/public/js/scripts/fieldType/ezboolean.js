@@ -1,6 +1,6 @@
 (function(global, doc, eZ) {
-    const SELECTOR_FIELD = '.ez-field-edit--ezboolean';
-    const SELECTOR_ERROR_NODE = '.ez-data-source';
+    const SELECTOR_FIELD = '.ibexa-field-edit--ezboolean';
+    const SELECTOR_ERROR_NODE = '.ibexa-form-error';
 
     class EzBooleanValidator extends eZ.BaseFieldValidator {
         /**
@@ -13,26 +13,13 @@
          */
         validateInput(event) {
             const isError = !event.target.checked && event.target.required;
-            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
+            const label = event.target.closest(SELECTOR_FIELD).querySelector('.ibexa-field-edit__label').innerHTML;
             const errorMessage = eZ.errors.emptyField.replace('{fieldName}', label);
 
             return {
                 isError,
                 errorMessage,
             };
-        }
-
-        /**
-         * Updates the state of checkbox indicator.
-         *
-         * @method updateState
-         * @param {Event} event
-         * @memberof EzBooleanValidator
-         */
-        updateState(event) {
-            const methodName = event.target.checked ? 'add' : 'remove';
-
-            event.target.closest('.ez-data-source__label').classList[methodName]('is-checked');
         }
     }
 
@@ -41,16 +28,10 @@
         fieldSelector: SELECTOR_FIELD,
         eventsMap: [
             {
-                selector: '.ez-field-edit--ezboolean input',
+                selector: '.ibexa-field-edit--ezboolean input',
                 eventName: 'change',
                 callback: 'validateInput',
                 errorNodeSelectors: [SELECTOR_ERROR_NODE],
-            },
-            {
-                isValueValidator: false,
-                selector: '.ez-field-edit--ezboolean input',
-                eventName: 'change',
-                callback: 'updateState',
             },
         ],
     });

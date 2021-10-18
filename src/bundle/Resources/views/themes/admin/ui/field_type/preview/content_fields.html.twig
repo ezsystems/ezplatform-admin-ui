@@ -70,9 +70,11 @@
         {% set field_value = field.value.value|ez_full_datetime %}
         {{ block( 'simple_block_field' ) }}
         {% if fieldSettings.useSeconds %}
-            <div class="ez-alert ez-alert--info mt-2">
-                {{ 'ezdatetime.useseconds.enabled'|trans()|desc('`The date format is based on your user preferences and does not include seconds even if the Field allows it`') }}
-            </div>
+            {% include '@ezdesign/ui/component/alert/alert.html.twig' with {
+                type: 'info',
+                title: 'ezdatetime.useseconds.enabled'|trans()|desc('`The date format is based on your user preferences and does not include seconds even if the Field allows it`'),
+                class: 'mt-2',
+            } only %}
         {% endif %}
     {% endif %}
 {% endapply %}
@@ -93,9 +95,11 @@
         {% set field_value = field.value.time|ez_full_time('UTC') %}
         {{ block( 'simple_block_field' ) }}
         {% if fieldSettings.useSeconds %}
-            <div class="ez-alert ez-alert--info mt-2">
-                {{ 'ezdatetime.useseconds.enabled'|trans()|desc('`The date format is based on your user preferences and does not include seconds even if the Field allows it`') }}
-            </div>
+            {% include '@ezdesign/ui/component/alert/alert.html.twig' with {
+                type: 'info',
+                title: 'ezdatetime.useseconds.enabled'|trans()|desc('`The date format is based on your user preferences and does not include seconds even if the Field allows it`'),
+                class: 'mt-2',
+            } only %}
         {% endif %}
     {% endif %}
 {% endapply %}
@@ -242,14 +246,14 @@
         } ) %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezbinaryfile')|trim}) %}
         <div {{ block( 'field_attributes' ) }}>
-            <svg class="ez-icon ez-icon--file">
-                <use xlink:href="{{ ez_icon_path('file') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--file">
+                <use xlink:href="{{ ibexa_icon_path('file') }}"></use>
             </svg>
             {{ field.value.fileName }}
             {{ field.value.fileSize|ez_file_size( 1 ) }}
-            <a class="btn btn-icon ml-4" download href="{{ path( route_reference.getRoute(), route_reference.getParams() ) }}">
-                <svg class="ez-icon ez-icon--download ez-icon--small-medium">
-                    <use xlink:href="{{ ez_icon_path('download') }}"></use>
+            <a class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ml-4" download href="{{ path( route_reference.getRoute(), route_reference.getParams() ) }}">
+                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--download">
+                    <use xlink:href="{{ ibexa_icon_path('download') }}"></use>
                 </svg>
             </a>
         </div>
@@ -332,27 +336,26 @@
     {% if not ez_field_is_empty( content, field ) %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezobjectrelationlist')|trim}) %}
     <div {{ block( 'field_attributes' ) }}>
-        <div class="ez-table-header ">
-            <div class="ez-table-header__headline">{{ 'ezobjectrelationlist.multiple_relations'|trans|desc('Multiple relations') }}:</div>
-        </div>
-        <div class="ez-scrollable-table-wrapper mb-0">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>{{ 'ezobjectrelationlist.name'|trans|desc('Name') }}</th>
-                        <th>{{ 'ezobjectrelationlist.content_type'|trans|desc('Content Type') }}</th>
-                        <th>{{ 'ezobjectrelationlist.created'|trans|desc('Created') }}</th>
-                    </tr>
-                </thead>
+        {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'ezobjectrelationlist.multiple_relations'|trans|desc('Multiple relations'),
+            head_cols: [
+                { content: 'ezobjectrelationlist.name'|trans|desc('Name') },
+                { content: 'ezobjectrelationlist.content_type'|trans|desc('Content Type') },
+                { content: 'ezobjectrelationlist.created'|trans|desc('Created') },
+            ],
+        } %}
+            {% block tbody %}
                 {% for contentId in field.value.destinationContentIds %}
-                <tr>
-                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
-                            'contentId': contentId,
-                    } )) }}
-                </tr>
+                    {% embed '@ezdesign/ui/component/table/table_body_row.html.twig' %}
+                        {% block body_row_cells %}
+                            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
+                                    'contentId': contentId,
+                            } )) }}
+                        {% endblock %}
+                    {% endembed %}
                 {% endfor %}
-            </table>
-        </div>
+            {% endblock %}
+        {% endembed %}
     </div>
     {% endif %}
 {% endapply %}
@@ -443,8 +446,8 @@
     </div>
     <div class="ez-field-preview__actions-wrapper">
         <a class="ez-field-preview__action ez-field-preview__action--preview" href="{{ field.value.uri }}" target="_blank">
-            <svg class="ez-icon ez-icon--medium ez-icon--light">
-                <use xlink:href="{{ ez_icon_path('open-newtab') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--light">
+                <use xlink:href="{{ ibexa_icon_path('open-newtab') }}"></use>
             </svg>
         </a>
     </div>
@@ -478,25 +481,24 @@
 {% if not ez_field_is_empty( content, field ) %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-preview ez-field-preview--ezobjectrelationlist')|trim}) %}
     <div {{ block( 'field_attributes' ) }}>
-        <div class="ez-table-header ">
-            <div class="ez-table-header__headline">{{ 'ezobjectrelation.single_relation'|trans|desc('Single relation') }}:</div>
-        </div>
-        <div class="ez-scrollable-table-wrapper mb-0">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>{{ 'ezobjectrelation.name'|trans|desc('Name') }}</th>
-                        <th>{{ 'ezobjectrelation.content_type'|trans|desc('Content Type') }}</th>
-                        <th>{{ 'ezobjectrelation.created'|trans|desc('Created') }}</th>
-                    </tr>
-                </thead>
-                <tr>
-                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
-                        'contentId': field.value.destinationContentId,
-                    })) }}
-                </tr>
-            </table>
-        </div>
+        {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'ezobjectrelation.single_relation'|trans|desc('Single relation'),
+            head_cols: [
+                { content: 'ezobjectrelation.name'|trans|desc('Name') },
+                { content: 'ezobjectrelation.content_type'|trans|desc('Content Type') },
+                { content: 'ezobjectrelation.created'|trans|desc('Created') },
+            ],
+        } %}
+            {% block tbody %}
+                {% embed '@ezdesign/ui/component/table/table_body_row.html.twig' with { field: field } %}
+                    {% block body_row_cells %}
+                        {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\ContentController::relationViewAction', {
+                            'contentId': field.value.destinationContentId,
+                        } )) }}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
     </div>
 {% endif %}
 {% endapply %}

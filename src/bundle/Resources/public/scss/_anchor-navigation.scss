@@ -1,0 +1,91 @@
+.ibexa-anchor-navigation-menu {
+    &__header {
+        height: calculateRem(87px);
+        padding: calculateRem(17px) 0 0 calculateRem(17px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+    }
+
+    &__body {
+        height: calc(100% - #{calculateRem(87px)});
+        overflow: auto;
+    }
+
+    &__back {
+        font-weight: 600;
+    }
+
+    &__items {
+        margin: 0;
+        padding: calculateRem(16px);
+        list-style: none;
+    }
+
+    &__item-btn {
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+        padding: calculateRem(11px) calculateRem(15px);
+        border: calculateRem(1px) solid transparent;
+        border-radius: $ibexa-border-radius;
+
+        &::before {
+            content: ' ';
+            display: inline-block;
+            width: calculateRem(16px);
+            height: calculateRem(16px);
+            margin-right: calculateRem(10px);
+            border-radius: 50%;
+            border: calculateRem(2px) solid transparent;
+            background-color: $ibexa-color-light;
+        }
+
+        &::after {
+            content: '*';
+            display: inline-block;
+            opacity: 0;
+            margin-left: calculateRem(4px);
+            color: $ibexa-color-danger;
+            font-size: $ibexa-text-font-size-small;
+        }
+
+        &:hover {
+            color: $ibexa-color-info;
+            background-color: $ibexa-color-white;
+            box-shadow: $ibexa-anchor-btn-hover-box-shadow;
+            border-color: $ibexa-color-light-400;
+            font-weight: 600;
+
+            &:before {
+                background-color: $ibexa-color-info-100;
+                border-color: transparent;
+            }
+        }
+
+        &--active {
+            color: $ibexa-color-info;
+            background: $ibexa-color-info-100;
+            font-weight: 600;
+
+            &:before {
+                background-color: transparent;
+                border-color: $ibexa-color-info;
+            }
+        }
+
+        &--invalid {
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.ibexa-anchor-navigation-sections {
+    &__section {
+        opacity: 0.2;
+
+        &--active {
+            opacity: 1;
+        }
+    }
+}

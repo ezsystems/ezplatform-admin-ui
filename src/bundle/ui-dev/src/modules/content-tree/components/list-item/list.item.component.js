@@ -101,7 +101,7 @@ class ListItem extends Component {
     renderIcon() {
         const { contentTypeIdentifier, selected, locationId } = this.props;
         const iconAttrs = {
-            extraClasses: `ez-icon--small ez-icon--${selected ? 'primary' : 'dark'}`,
+            extraClasses: `ibexa-icon--small ibexa-icon--${selected ? 'primary' : 'dark'}`,
         };
 
         if (!this.state.isLoading || this.props.subitems.length) {
@@ -114,7 +114,7 @@ class ListItem extends Component {
             }
         } else {
             iconAttrs.name = 'spinner';
-            iconAttrs.extraClasses = `${iconAttrs.extraClasses} ez-spin`;
+            iconAttrs.extraClasses = `${iconAttrs.extraClasses} ibexa-spin`;
         }
 
         return (
@@ -139,11 +139,11 @@ class ListItem extends Component {
         let loadingSpinner = null;
 
         if (isLoading) {
-            loadingSpinner = <Icon name="spinner" extraClasses="ez-spin ez-icon--small c-list-item__load-more-btn-spinner" />;
+            loadingSpinner = <Icon name="spinner" extraClasses="ibexa-spin ibexa-icon--small c-list-item__load-more-btn-spinner" />;
         }
 
         return (
-            <button type="button" className="c-list-item__load-more-btn btn ez-btn" onClick={this.loadMoreSubitems}>
+            <button type="button" className="c-list-item__load-more-btn btn ibexa-btn" onClick={this.loadMoreSubitems}>
                 {loadingSpinner} {btnLabel}
             </button>
         );

@@ -41,11 +41,6 @@
         <target state="new">Sent to trash date</target>
         <note>key: trash.date</note>
       </trans-unit>
-      <trans-unit id="7ffaa1444a83e959f8de3c2410bb65acdd3e3ff0" resname="trash.delete">
-        <source>Delete</source>
-        <target state="new">Delete</target>
-        <note>key: trash.delete</note>
-      </trans-unit>
       <trans-unit id="45548aed8adb5019c3b806992e903965699c7e08" resname="trash.deleted.success">
         <source>Deleted selected item(s) from Trash.</source>
         <target state="new">Deleted selected item(s) from Trash.</target>
@@ -76,11 +71,6 @@
         <target state="new">Deleted user</target>
         <note>key: trash.item.deleted_user</note>
       </trans-unit>
-      <trans-unit id="2720e3018fc8b1158cb728b1d5dc377ef7293b57" resname="trash.modal.message">
-        <source>Do you want to delete the selected item(s) from Trash?</source>
-        <target state="new">Do you want to delete the selected item(s) from Trash?</target>
-        <note>key: trash.modal.message</note>
-      </trans-unit>
       <trans-unit id="34525fc5da381111c2104d20a55021eb8b698c7c" resname="trash.name">
         <source>Name</source>
         <target state="new">Name</target>
@@ -100,6 +90,21 @@
         <source>Restored content to its original Location.</source>
         <target state="new">Restored content to its original Location.</target>
         <note>key: trash.restore_original_location.success</note>
+      </trans-unit>
+      <trans-unit id="3a46b65a9b678fb947285b2c9509943ee6764195" resname="trash.search.any_content_types">
+        <source>Any Content Types</source>
+        <target state="new">Any Content Types</target>
+        <note>key: trash.search.any_content_types</note>
+      </trans-unit>
+      <trans-unit id="9a88e9a17cd461dcd7d54dca50c6d3b981aba7fc" resname="trash.search.any_time">
+        <source>Any time</source>
+        <target state="new">Any time</target>
+        <note>key: trash.search.any_time</note>
+      </trans-unit>
+      <trans-unit id="c2b2679781ad4a22bb232e2ab34669ffe49c760b" resname="trash.search.section.any">
+        <source>Any Section</source>
+        <target state="new">Any Section</target>
+        <note>key: trash.search.section.any</note>
       </trans-unit>
       <trans-unit id="8b64a1510f907791766cbccffcff7898bda76bde" resname="trash.section">
         <source>Section</source>

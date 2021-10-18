@@ -1,151 +1,129 @@
 {% trans_default_domain 'locationview' %}
 
-{% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.details.content_details'|trans()|desc('Content details') } %}
-
 {% form_theme form_location_update '@ezdesign/ui/form_fields.html.twig' %}
 
-<div class="ez-scrollable-table-wrapper">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>{{ 'tab.details.creator'|trans()|desc('Creator') }}</th>
-            <th>{{ 'tab.details.last_contributor'|trans()|desc('Last contributor') }}</th>
-            <th>{{ 'tab.details.published_version'|trans()|desc('Published version') }}</th>
-            <th>{{ 'tab.details.translations'|trans()|desc('Translations') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                {% if creator is not empty %}
-                    {{ ez_content_name(creator) }}
-                {% else %}
-                    {{ 'tab.details.creator.not_found'|trans|desc('Can\'t fetch creator') }}
-                {% endif %}
-                ({{ content_info.publishedDate|ez_full_datetime }})
-            </td>
-            <td>
-                {% if last_contributor is not empty %}
-                    {{ ez_content_name(last_contributor) }}
-                {% else %}
-                    {{ 'tab.details.last_contributor.not_found'|trans|desc('Can\'t fetch last contributor') }}
-                {% endif %}
-                ({{ version_info.modificationDate|ez_full_datetime }})
-            </td>
-            <td>{{ version_info.versionNo }}</td>
-            <td>
-                {% for translation in translations %}
-                    {{ translation.name }}<br>
-                {% endfor %}
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+{% set body_row_cols = [
+    { content: creator is not empty ? ez_content_name(creator) : 'tab.details.creator.not_found'|trans|desc('Can\'t fetch creator') },
+    { content: last_contributor is not empty ? ez_content_name(last_contributor) : 'tab.details.last_contributor.not_found'|trans|desc('Can\'t fetch last contributor') },
+    { content: version_info.versionNo },
+] %}
+{% set col_raw %}
+    {% for translation in translations %}
+        {{ translation.name }}<br>
+    {% endfor %}
+{% endset %}
+{% set body_row_cols = body_row_cols|merge([{ content: col_raw }]) %}
+{% include '@ezdesign/ui/component/table/table.html.twig' with {
+    headline: 'tab.details.content_details'|trans()|desc('Content details'),
+    head_cols: [
+        { content: 'tab.details.creator'|trans()|desc('Creator') },
+        { content: 'tab.details.last_contributor'|trans()|desc('Last contributor') },
+        { content: 'tab.details.published_version'|trans()|desc('Published version') },
+        { content: 'tab.details.translations'|trans()|desc('Translations') },
+    ],
+    body_rows: [{
+        cols: body_row_cols
+    }],
+} %}
 
-{% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.details.technical_details'|trans()|desc('Technical details') } %}
-
-<div class="ez-scrollable-table-wrapper">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>{{ 'tab.details.content_id'|trans()|desc('Content ID') }}</th>
-            <th>{{ 'tab.details.location_id'|trans()|desc('Location ID') }}</th>
-            <th>{{ 'tab.details.content_remote_id'|trans()|desc('Content remote ID') }}</th>
-            <th>{{ 'tab.details.location_remote_id'|trans()|desc('Location remote ID') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>{{ content_info.id }}</td>
-            <td>{{ location.id }}</td>
-            <td>{{ content_info.remoteId }}</td>
-            <td>{{ location.remoteId }}</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+{% include '@ezdesign/ui/component/table/table.html.twig' with {
+    headline: 'tab.details.technical_details'|trans()|desc('Technical details'),
+    head_cols: [
+        { content: 'tab.details.content_id'|trans()|desc('Content ID') },
+        { content: 'tab.details.location_id'|trans()|desc('Location ID') },
+        { content: 'tab.details.content_remote_id'|trans()|desc('Content remote ID') },
+        { content: 'tab.details.location_remote_id'|trans()|desc('Location remote ID') },
+    ],
+    body_rows: [{
+        cols: [
+            { content: content_info.id },
+            { content: location.id },
+            { content: content_info.remoteId },
+            { content: location.remoteId },
+        ]
+    }],
+} %}
 
 {% if can_see_section %}
-    {% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.details.section_details'|trans()|desc('Section details') } %}
+    {% set body_row_cols = [
+        { content: section.name },
+    ] %}
+    {% set col_raw %}
+        {% if form_assign_section %}
+            {% form_theme form_assign_section '@ezdesign/ui/form_fields.html.twig' %}
 
-    <div class="ez-scrollable-table-wrapper">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>{{ 'tab.details.section_name'|trans()|desc('Section name') }}</th>
-                <th>{{ 'tab.details.change_section '|trans()|desc('Change Section') }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>{{ section.name }}</td>
-                <td>
-                    {% if form_assign_section %}
-                        {% form_theme form_assign_section '@ezdesign/ui/form_fields.html.twig' %}
+            {{ form_start(form_assign_section, {
+                'action': path('ezplatform.location.assign_section'),
+                'attr': {
+                    'class': 'form-inline ez-form-inline ez-form-inline--align-left'
+                }
+            }) }}
+            {{ form_row(form_assign_section.section, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
 
-                        {{ form_start(form_assign_section, {
-                            'action': path('ezplatform.location.assign_section'),
-                            'attr': {
-                                'class': 'form-inline ez-form-inline ez-form-inline--align-left'
-                            }
-                        }) }}
-                        {{ form_row(form_assign_section.section, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
-                        
-                        {% do form_assign_section.assign.setRendered() %}
-                        {{ form_end(form_assign_section) }}
-                    {% endif %}
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+            {% do form_assign_section.assign.setRendered() %}
+            {{ form_end(form_assign_section) }}
+        {% endif %}
+    {% endset %}
+    {% set body_row_cols = body_row_cols|merge([{ content: col_raw }]) %}
+    {% include '@ezdesign/ui/component/table/table.html.twig' with {
+        headline: 'tab.details.section_details'|trans()|desc('Section details'),
+        head_cols: [
+            { content: 'tab.details.section_name'|trans()|desc('Section name') },
+            { content: 'tab.details.change_section '|trans()|desc('Change Section') },
+        ],
+        body_rows: [{
+            cols: body_row_cols
+        }],
+    } %}
 {% endif %}
 
-{% include '@ezdesign/ui/table_header.html.twig' with { header_text: 'tab.details.state_details'|trans()|desc('Object state details') } %}
+{% set body_rows = [] %}
+{% for object_state in object_states %}
+    {% set body_row_cols = [] %}
 
-<div class="ez-scrollable-table-wrapper">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>{{ 'tab.details.state_group_name'|trans()|desc('Group name') }}</th>
-            <th>{{ 'tab.details.state_name'|trans()|desc('Current Object state') }}</th>
-            <th>{{ 'tab.details.change_state'|trans()|desc('Change Object state') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for object_state in object_states %}
-            <tr>
-                <td>{{ object_state.objectStateGroup.name }}</td>
-                <td>{{ object_state.name }}</td>
-                <td>
-                    {% if can_assign and form_state_update[object_state.objectStateGroup.id].objectState.vars.choices|length != 0 %}
-                        {% form_theme form_state_update[object_state.objectStateGroup.id] '@ezdesign/ui/form_fields.html.twig' %}
-                        {{ form_start(form_state_update[object_state.objectStateGroup.id], {
-                            'method': 'POST',
-                            'action': path('ezplatform.object_state.contentstate.update', {
-                                'contentInfoId': content_info.id,
-                                'objectStateGroupId': object_state.objectStateGroup.id
-                            }),
-                            'attr': {'class': 'form-inline ez-form-inline ez-form-inline--align-left'}
-                        }) }}
-                            {{ form_row(form_state_update[object_state.objectStateGroup.id].contentInfo) }}
-                            {{ form_row(form_state_update[object_state.objectStateGroup.id].objectStateGroup) }}
-                            {{ form_row(form_state_update[object_state.objectStateGroup.id].objectState, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
-                            {% do form_state_update[object_state.objectStateGroup.id].set.setRendered %}
-                        {{ form_end(form_state_update[object_state.objectStateGroup.id]) }}
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
+    {% set body_row_cols = body_row_cols|merge([
+        { content: object_state.objectStateGroup.name },
+        { content: object_state.name },
+    ]) %}
 
-{% include '@ezdesign/ui/table_header.html.twig' with {
-    header_text: 'tab.details.sub_items_sorting_order'|trans|desc('Sub-item sorting order'),
-    ground: 'ground-base'
+    {% set col_raw %}
+        {% if can_assign and form_state_update[object_state.objectStateGroup.id].objectState.vars.choices|length != 0 %}
+            {% form_theme form_state_update[object_state.objectStateGroup.id] '@ezdesign/ui/form_fields.html.twig' %}
+            {{ form_start(form_state_update[object_state.objectStateGroup.id], {
+                'method': 'POST',
+                'action': path('ezplatform.object_state.contentstate.update', {
+                    'contentInfoId': content_info.id,
+                    'objectStateGroupId': object_state.objectStateGroup.id
+                }),
+                'attr': {'class': 'form-inline ez-form-inline ez-form-inline--align-left'}
+            }) }}
+                {{ form_row(form_state_update[object_state.objectStateGroup.id].contentInfo) }}
+                {{ form_row(form_state_update[object_state.objectStateGroup.id].objectStateGroup) }}
+                {{ form_row(form_state_update[object_state.objectStateGroup.id].objectState, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
+                {% do form_state_update[object_state.objectStateGroup.id].set.setRendered %}
+            {{ form_end(form_state_update[object_state.objectStateGroup.id]) }}
+        {% endif %}
+    {% endset %}
+    {% set body_row_cols = body_row_cols|merge([{
+        content: col_raw,
+    }]) %}
+
+    {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+{% endfor %}
+
+{% include '@ezdesign/ui/component/table/table.html.twig' with {
+    headline: 'tab.details.state_details'|trans()|desc('Object state details'),
+    head_cols: [
+        { content: 'tab.details.state_group_name'|trans()|desc('Group name') },
+        { content: 'tab.details.state_name'|trans()|desc('Current Object state') },
+        { content: 'tab.details.change_state'|trans()|desc('Change Object state') },
+    ],
+    body_rows: body_rows,
 } %}
+
+{% include '@ezdesign/ui/component/table/table_header.html.twig' with {
+    headline: 'tab.details.sub_items_sorting_order'|trans|desc('Sub-item sorting order'),
+} only %}
 
 <div class="bg-white ml-4" data-sort-field="{{ sort_field_clause_map[location.sortField] }}" data-sort-order="{{ location.sortOrder ? 'ascending' : 'descending' }}">
     {{ form_start(form_location_update, {

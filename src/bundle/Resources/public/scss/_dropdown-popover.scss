@@ -1,0 +1,16 @@
+.ibexa-dropdown-popover {
+    &.popover {
+        max-width: initial;
+        background: initial;
+        border: 0;
+    }
+
+    .popover-arrow {
+        display: none;
+    }
+
+    .popover-body {
+        padding: 0;
+        color: initial;
+    }
+}

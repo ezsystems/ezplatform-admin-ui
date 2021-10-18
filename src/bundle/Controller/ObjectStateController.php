@@ -346,7 +346,7 @@ class ObjectStateController extends Controller
         return $this->redirectToRoute('_ez_content_view', [
             'contentId' => $contentInfo->id,
             'locationId' => $contentInfo->mainLocationId,
-            '_fragment' => 'ez-tab-location-view-details',
+            '_fragment' => 'ibexa-tab-location-view-details',
         ]);
     }
 

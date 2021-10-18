@@ -67,16 +67,14 @@ class RoleCreateRightSidebarBuilder extends AbstractBuilder implements Translati
                 self::ITEM__CREATE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => '#role_create_save',
                     ],
-                    'extras' => ['icon' => 'publish'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
                 self::ITEM__CANCEL,
                 [
-                    'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.role.list',
                 ]
             ),

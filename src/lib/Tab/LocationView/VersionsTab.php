@@ -31,7 +31,7 @@ class VersionsTab extends AbstractEventDispatchingTab implements OrderedTabInter
 {
     public const FORM_REMOVE_DRAFT = 'version_remove_draft';
     public const FORM_REMOVE_ARCHIVED = 'version_remove_archived';
-    const URI_FRAGMENT = 'ez-tab-location-view-versions';
+    const URI_FRAGMENT = 'ibexa-tab-location-view-versions';
 
     /** @var \EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory */
     protected $datasetFactory;

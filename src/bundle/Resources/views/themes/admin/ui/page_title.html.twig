@@ -1,29 +1,13 @@
 {% if title is defined %}
     <div class="ez-page-title">
-        <h1 class="ez-page-title__content-item">
-            <div class="ez-page-title__content-name">
+        <div class="ez-page-title__top">
+            <h1 class="ez-page-title__title">
                 {{ title }}
-            </div>
-        </h1>
-        {% if content_type_name is defined %}
-            <h4 class="ez-page-title__content-type-name">
-                {% if icon_name is defined%}
-                    <svg class="ez-icon ez-icon--small ez-icon--base-dark ez-icon-{{ icon_name }}">
-                        <use xlink:href="{{ ez_icon_path(icon_name) }}"></use>
-                    </svg>
-                {% elseif content_type_identifier is defined %}
-                    <svg class="ez-icon ez-icon--small ez-icon--base-dark ez-icon-{{ content_type_identifier }}">
-                        <use xlink:href="{{ ez_content_type_icon(content_type_identifier) }}"></use>
-                    </svg>
-                {% endif %}
-                {{ content_type_name }}
-            </h4>
-        {% endif %}
-        {% if location is defined and location_is_bookmarked is defined %}
-            {% include '@ezdesign/account/bookmarks/toggle_switch.html.twig' with {
-                location: location,
-                location_is_bookmarked: location_is_bookmarked
-            } %}
-        {% endif %}
+            </h1>
+            {% block top_side %}{% endblock %}
+        </div>
+        <div class="ez-page-title__bottom">
+            {% block bottom %}{% endblock %}
+        </div>
     </div>
 {% endif %}

@@ -34,7 +34,7 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
     const ITEM__PREVIEW = 'content_create__sidebar_right__preview';
     const ITEM__CANCEL = 'content_create__sidebar_right__cancel';
 
-    const BTN_TRIGGER_CLASS = 'btn--trigger';
+    const BTN_TRIGGER_CLASS = 'ibexa-btn--trigger';
     const BTN_DISABLED_ATTR = ['disabled' => 'disabled'];
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
@@ -124,7 +124,6 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         ? $publishAttributes
                         : array_merge($publishAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => [
-                        'icon' => 'publish',
                         'orderNumber' => 10,
                     ],
                 ]
@@ -136,7 +135,6 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         ? $createAttributes
                         : array_merge($createAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => [
-                        'icon' => 'save',
                         'orderNumber' => 50,
                     ],
                 ]
@@ -148,7 +146,6 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         ? $previewAttributes
                         : array_merge($previewAttributes, self::BTN_DISABLED_ATTR),
                     'extras' => [
-                        'icon' => 'view-desktop',
                         'orderNumber' => 60,
                     ],
                 ]
@@ -161,7 +158,6 @@ class ContentCreateRightSidebarBuilder extends AbstractBuilder implements Transl
                         'data-click' => '#ezplatform_content_forms_content_edit_cancel',
                     ],
                     'extras' => [
-                        'icon' => 'circle-close',
                         'orderNumber' => 70,
                     ],
                 ]

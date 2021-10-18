@@ -1,0 +1,7 @@
+.ibexa-grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(calculateRem(217px), 1fr));
+    row-gap: calculateRem(32px);
+    column-gap: calculateRem(24px);
+    padding-top: calculateRem(24px);
+}

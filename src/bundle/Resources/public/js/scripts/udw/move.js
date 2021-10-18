@@ -1,5 +1,5 @@
 (function(global, doc, eZ, React, ReactDOM, Translator) {
-    const btns = doc.querySelectorAll('.btn--udw-move');
+    const btns = doc.querySelectorAll('.ibexa-btn--udw-move');
     const form = doc.querySelector('form[name="location_move"]');
     const input = form.querySelector('#location_move_new_parent_location');
     const udwContainer = doc.getElementById('react-udw');

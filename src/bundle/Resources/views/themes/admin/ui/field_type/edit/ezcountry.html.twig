@@ -1,11 +1,6 @@
-{%- block ezplatform_fieldtype_ezcountry_widget -%}
-    {% set attr = attr|merge({'hidden': 'hidden', 'class': 'ez-data-source__input ez-data-source__input--ezcountry'}) %}
-    {{ block('choice_widget') }}
+{% use '@ezdesign/ui/form_fields/dropdown_widget.html.twig' %}
 
-    {% include '@ezdesign/ui/component/custom_dropdown.html.twig' with {
-        choices: choices,
-        value: value,
-        source_selector: '.ez-data-source__input--ezcountry',
-        choice_translation_domain: choice_translation_domain
-    } %}
+{%- block ezplatform_fieldtype_ezcountry_widget -%}
+    {% set attr = attr|merge({'class': 'ibexa-data-source__input ibexa-data-source__input--ezcountry'}) %}
+    {{ block('choice_widget') }}
 {%- endblock -%}

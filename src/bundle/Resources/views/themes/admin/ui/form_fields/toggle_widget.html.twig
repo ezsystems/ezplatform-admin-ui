@@ -1,0 +1,48 @@
+{%- block toggle_widget -%}
+    {% set field_type = block_prefixes[1]|default('choice') %}
+    {% set main_class = 'ibexa-toggle' %}
+    {% set attr = attr|default({})|merge({
+        'class': (attr.class|default('') ~ ' ibexa-toggle__input ibexa-input ibexa-input--toggle')|trim,
+    }) %}
+
+    {% if small|default(false) %}
+        {% set main_class = main_class ~ ' ibexa-toggle--small' %}
+    {% endif %}
+    {% if field_type == 'choice' %}
+        {% set main_class = main_class ~ ' ibexa-toggle--radio' %}
+    {% else %}
+        {% set main_class = main_class ~ ' ibexa-toggle--checkbox' %}
+        {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-check-input')|trim }) %}
+    {% endif %}
+    {% if checked|default(false) %}
+        {% set main_class = main_class ~ ' ibexa-toggle--is-checked' %}
+        {% set attr = attr|merge({ 'checked': 'checked' }) %}
+    {% endif %}
+    {% if disabled|default(false) %}
+        {% set main_class = main_class ~ ' ibexa-toggle--is-disabled' %}
+    {% endif %}
+    {% if value is defined %}
+        {% set attr = attr|merge({ 'value': value }) %}
+    {% endif %}
+
+    <div class="{{ main_class }}">
+        <label class="ibexa-toggle__switcher">
+            <span class="ibexa-toggle__indicator"></span>
+            {% if custom_inputs is defined %}
+                {{ custom_inputs }}
+            {% elseif field_type == 'choice' %}
+                {{ block('choice_widget') }}
+            {% else %}
+                <input type="checkbox" {% with attr %}{{ block('widget_attributes') }}{% endwith %} />
+            {% endif %}
+        </label>
+        {% if label|default(true) %}
+            <span class="ibexa-toggle__label ibexa-toggle__label--on">
+                {{ 'toggle_widget.label.on'|trans|desc('On') }}
+            </span>
+            <span class="ibexa-toggle__label ibexa-toggle__label--off">
+                {{ 'toggle_widget.label.off'|trans|desc('Off') }}
+            </span>
+        {% endif %}
+    </div>
+{%- endblock -%}

@@ -91,11 +91,6 @@
         <target state="new">Name</target>
         <note>key: search.name</note>
       </trans-unit>
-      <trans-unit id="8c11cc36acf58db9ff898f3a4cf02fd0fc293f67" resname="search.no_result">
-        <source>No results found for "%query%".</source>
-        <target state="new">No results found for "%query%".</target>
-        <note>key: search.no_result</note>
-      </trans-unit>
       <trans-unit id="6fa93ef4dfbce97076a254427bb30bf7c5819c5d" resname="search.perform">
         <source>Search</source>
         <target state="new">Search</target>
@@ -115,31 +110,6 @@
         <source>Subtree</source>
         <target state="new">Subtree</target>
         <note>key: search.subtree</note>
-      </trans-unit>
-      <trans-unit id="777cc1ef279096d5a978aa3553e9434d828f8248" resname="search.tips.check_spelling">
-        <source>Check the spelling of keywords.</source>
-        <target state="new">Check the spelling of keywords.</target>
-        <note>key: search.tips.check_spelling</note>
-      </trans-unit>
-      <trans-unit id="d89a8ff5c4b03f1dd7bd1ce3e3306862e1855751" resname="search.tips.different_keywords">
-        <source>Try different keywords.</source>
-        <target state="new">Try different keywords.</target>
-        <note>key: search.tips.different_keywords</note>
-      </trans-unit>
-      <trans-unit id="013ced9a3284ecebf5a5356397dc9a79eaf76496" resname="search.tips.fewer_keywords">
-        <source>Try fewer keywords. Reducing keywords results in more matches.</source>
-        <target state="new">Try fewer keywords. Reducing keywords results in more matches.</target>
-        <note>key: search.tips.fewer_keywords</note>
-      </trans-unit>
-      <trans-unit id="4af1e76946070e5f61320621d12a171f4206e06c" resname="search.tips.headline">
-        <source>Some helpful search tips:</source>
-        <target state="new">Some helpful search tips:</target>
-        <note>key: search.tips.headline</note>
-      </trans-unit>
-      <trans-unit id="dd61516edc919235a13e3cfadb5d961b8614b744" resname="search.tips.more_general_keywords">
-        <source>Try more general keywords.</source>
-        <target state="new">Try more general keywords.</target>
-        <note>key: search.tips.more_general_keywords</note>
       </trans-unit>
       <trans-unit id="e477a87ca96bb3e22e8eed710e54e9a6bffefc52" resname="search.translations">
         <source>Translations</source>

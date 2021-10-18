@@ -1,0 +1,53 @@
+<div class="ibexa-edit-header">
+    <div class="container">
+        <div class="row ibexa-edit-header__row ibexa-edit-header__row--top">
+            <div class="col-8 offset-1 ibexa-edit-header__column ibexa-edit-header__column--main">
+                <div class="ibexa-edit-header__action-name-container">
+                    {% if icon_name %}
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path(icon_name|lower) }}"></use>
+                        </svg>
+                    {% endif %}
+
+                    <label class="ibexa-label ibexa-label--small ibexa-edit-header__action-name">
+                        {{ action_name|default('') }}
+                        {{ action_object|default('') }}
+                        {{ content_type_name|default('') }}
+                    </label>
+                </div>
+            </div>
+            <div class="col-3 ibexa-edit-header__column ibexa-context-menu-wrapper">
+                <div class="ibexa-edit-header__context-actions">
+                    {% if (description is defined and description|length) or content is defined %}
+                        <div class="ibexa-edit-header__tooltip" title="{% include '@ezdesign/ui/edit_header_tooltip.html.twig' %}">
+                            <svg class="ibexa-icon ibexa-icon--small">
+                                <use xlink:href="{{ ibexa_icon_path('about') }}"></use>
+                            </svg>
+                        </div>
+                    {% endif %}
+
+                    {{ context_actions|default('')|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ibexa-edit-header__separate-div"></div>
+
+    <div class="container">
+        <div class="row ibexa-edit-header__row ibexa-edit-header__row--bottom">
+            <div class="col-8 offset-1 ibexa-edit-header__column ibexa-edit-header__column--left">
+                <h1 class="ibexa-edit-header__title">{{ title }}</h1>
+
+                {% if subtitle is defined %}
+                    <div class="ibexa-edit-header__location">{{ subtitle|raw }}</div>
+                {% endif %}
+            </div>
+            <div class="col-3 ibexa-edit-header__column ibexa-edit-header__column--right">
+                {% if show_autosave_status %}
+                    {% include '@ezdesign/ui/autosave.html.twig' %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

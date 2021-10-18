@@ -80,8 +80,8 @@ class ObjectStatePage extends Page
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('pageTitle', '.ez-header h1'),
-            new VisibleCSSLocator('editButton', '.ez-icon-edit'),
+            new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
+            new VisibleCSSLocator('editButton', '.ibexa-icon--edit'),
         ];
     }
 

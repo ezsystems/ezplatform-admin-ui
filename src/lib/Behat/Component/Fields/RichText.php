@@ -8,97 +8,103 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Behat\Component\Fields;
 
-use Exception;
+use Behat\Mink\Session;
+use EzSystems\EzPlatformRichText\Configuration\Provider\CustomStyle;
+use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
-use Ibexa\Behat\Browser\Locator\CSSLocatorBuilder;
+use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use PHPUnit\Framework\Assert;
 
 class RichText extends FieldTypeComponent
 {
-    private $setAlloyEditorValueScript = 'CKEDITOR.instances.%s.setData(\'%s\')';
-    private $insertAlloyEditorValueScript = 'CKEDITOR.instances.%s.insertText(\'%s\')';
-    private $executeAlloyEditorScript = 'CKEDITOR.instances.%s.execCommand(\'%s\')';
-    protected $richtextId;
-    protected const ALLOWED_STYLE_OPTIONS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre'];
-    protected const ALLOWED_MOVE_OPTIONS = ['up', 'down'];
+    private const STYLE_MAPPING = [
+        'Paragraph' => 'p',
+        'Heading 1' => 'h1',
+        'Heading 2' => 'h2',
+        'Heading 3' => 'h3',
+        'Heading 4' => 'h4',
+        'Heading 5' => 'h5',
+        'Heading 6' => 'h6',
+    ];
 
-    public function setValue(array $parameters): void
+    /** @var \EzSystems\EzPlatformRichText\Configuration\Provider\CustomStyle */
+    private $customStyleProvider;
+
+    public function __construct(Session $session, CustomStyle $customStyleProvider)
     {
-        $this->getFieldInput();
-        $this->getSession()->getDriver()->executeScript(
-            sprintf($this->setAlloyEditorValueScript, $this->richtextId, $parameters['value'])
-        );
-    }
-
-    public function getValue(): array
-    {
-        $fieldInput = $this->getFieldInput();
-
-        return [$fieldInput->getText()];
-    }
-
-    public function openElementsToolbar(): void
-    {
-        $this->getHTMLPage()->find($this->getLocator('addButton'))->click();
-        usleep(200 * 1000); // wait until the transition animations ends
-        Assert::assertTrue($this->getHTMLPage()->setTimeout(3)->find($this->getLocator('toolbarButton'))->isVisible());
-    }
-
-    public function changeStyle(string $style): void
-    {
-        if (!in_array($style, self::ALLOWED_STYLE_OPTIONS)) {
-            throw new Exception(sprintf('Unsupported style: %s', $style));
-        }
-
-        $this->getHTMLPage()->find($this->getLocator('styleDropdown'))->click();
-
-        $blockStyleLocator = new VisibleCSSLocator('blockStyle', sprintf($this->getLocator('blockStyle')->getSelector(), $style));
-        $this->getHTMLPage()->find($blockStyleLocator)->click();
-    }
-
-    public function insertNewLine(): void
-    {
-        $this->getFieldInput();
-        $this->getSession()->getDriver()->executeScript(
-            sprintf($this->executeAlloyEditorScript, $this->richtextId, 'enter')
-        );
-    }
-
-    public function insertLine($value, $style = ''): void
-    {
-        $this->getFieldInput();
-        $this->getSession()->getDriver()->executeScript(
-            sprintf($this->insertAlloyEditorValueScript, $this->richtextId, $value)
-        );
-
-        if ($style === '') {
-            return;
-        }
-
-        $this->changeStyle($style);
-
-        $selector = CSSLocatorBuilder::base($this->getLocator('fieldInput'))->withDescendant(new VisibleCSSLocator('style', $style))->build();
-
-        Assert::assertStringContainsString(
-            sprintf('%s%s</%s>', $value, '<br>', $style),
-            $this->getHTMLPage()->find($selector)->getOuterHtml()
-        );
+        parent::__construct($session);
+        $this->customStyleProvider = $customStyleProvider;
     }
 
     private function getFieldInput(): ElementInterface
     {
-        $fieldInput = $this->getHTMLPage()->find($this->getLocator('fieldInput'));
-        $this->richtextId = $fieldInput->getAttribute('id');
+        return $this->getHTMLPage()->find($this->parentLocator)->find($this->getLocator('fieldInput'));
+    }
 
-        return $fieldInput;
+    private function focusFieldInput(): void
+    {
+        $this->getFieldInput()->click();
+    }
+
+    public function setValue(array $parameters): void
+    {
+        $this->executeCommand('selectAll');
+        $this->executeCommand('delete');
+        $this->getFieldInput()->setValue($parameters['value']);
+    }
+
+    public function getValue(): array
+    {
+        return [$this->getFieldInput()->getText()];
+    }
+
+    public function openElementsToolbar(): void
+    {
+        $this->focusFieldInput();
+        $script = "document.querySelector('.ck-toolbar__grouped-dropdown > .ck-dropdown__button').click()";
+        $this->getSession()->executeScript($script);
+    }
+
+    public function changeStyle(string $style): void
+    {
+        $this->focusFieldInput();
+        $this->getHTMLPage()
+            ->findAll($this->getLocator('toolbarElement'))
+            ->getByCriterion(new ElementTextCriterion('Paragraph'))
+            ->click();
+        $this->getHTMLPage()
+            ->findAll($this->getLocator('styleDropdownItem'))
+            ->getByCriterion(new ElementTextCriterion($style))
+            ->click();
+    }
+
+    public function insertNewLine(): void
+    {
+        $this->executeCommand('enter');
+    }
+
+    public function insertLine($value, $style = ''): void
+    {
+        $this->getFieldInput()->setValue($value);
+
+        if ($style === '') {
+            return;
+        }
+        $this->changeStyle($style);
+
+        $styleHTMLTag = self::STYLE_MAPPING[$style];
+
+        Assert::assertStringContainsString(
+            sprintf('%s</%s>', $value, $styleHTMLTag),
+            $this->getHTMLPage()->find($this->parentLocator)->find(new VisibleCSSLocator('style', $styleHTMLTag))->getOuterHtml()
+        );
     }
 
     public function addUnorderedList(array $listElements): void
     {
-        $this->getFieldInput();
-        $this->openElementsToolbar();
-        $this->getHTMLPage()->find($this->getLocator('unorderedListButton'))->click();
+        $this->focusFieldInput();
+        $this->executeCommand('bulletedList');
 
         foreach ($listElements as $listElement) {
             $this->insertLine($listElement);
@@ -108,23 +114,29 @@ class RichText extends FieldTypeComponent
             }
         }
 
-        $actualListElements = $this->getHTMLPage()->findAll($this->getLocator('unorderedListElement'));
-        $listElementsText = [];
-        foreach ($actualListElements as $actualListElement) {
-            $listElementsText[] = $actualListElement->getText();
-        }
+        $actualListElements = $this->getHTMLPage()
+            ->find($this->parentLocator)
+            ->findAll($this->getLocator('unorderedListElement'))
+            ->mapBy(new ElementTextMapper());
 
-        Assert::assertEquals($listElements, $listElementsText);
+        Assert::assertEquals($listElements, $actualListElements);
+
+        $this->insertNewLine();
+        $this->executeCommand('outdentList');
     }
 
     public function clickEmbedInlineButton(): void
     {
-        $this->getHTMLPage()->find($this->getLocator('embedInlineButton'))->click();
+        $buttonPosition = 11 + $this->getCustomStylesOffset();
+        $this->openElementsToolbar();
+        $this->clickElementsToolbarButton($buttonPosition);
     }
 
     public function clickEmbedButton(): void
     {
-        $this->getHTMLPage()->find($this->getLocator('embedButton'))->click();
+        $buttonPosition = 9 + $this->getCustomStylesOffset();
+        $this->openElementsToolbar();
+        $this->clickElementsToolbarButton($buttonPosition);
     }
 
     public function equalsEmbedInlineItem($itemName): bool
@@ -137,37 +149,50 @@ class RichText extends FieldTypeComponent
         return $itemName === $this->getHTMLPage()->find($this->getLocator('embedTitle'))->getText();
     }
 
-    public function moveElement($direction): void
-    {
-        if (!in_array($direction, self::ALLOWED_MOVE_OPTIONS)) {
-            throw new Exception(sprintf('Unsupported direction: %s', $direction));
-        }
-
-        $moveLocator = new VisibleCSSLocator('moveButton', sprintf($this->getLocator('moveButton')->getSelector(), $direction));
-        $this->getHTMLPage()->find($moveLocator)->click();
-    }
-
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('fieldInput', '.ez-data-source__richtext'),
-            new VisibleCSSLocator('textarea', 'textarea'),
-            new VisibleCSSLocator('embedInlineButton', '.ez-btn-ae--embed-inline'),
-            new VisibleCSSLocator('embedButton', '.ez-btn-ae--embed'),
-            new VisibleCSSLocator('addButton', '.ae-button-add'),
-            new VisibleCSSLocator('embedTitle', '.cke_widget_ezembed .ez-embed-content__title'),
-            new VisibleCSSLocator('embedInlineTitle', '.cke_widget_ezembedinline .ez-embed-content__title'),
-            new VisibleCSSLocator('unorderedListButton', '.ez-btn-ae--unordered-list'),
-            new VisibleCSSLocator('unorderedListElement', '.ez-data-source__richtext ul li'),
-            new VisibleCSSLocator('styleDropdown', '.ae-toolbar-element'),
-            new VisibleCSSLocator('blockStyle', '.ae-listbox li %s'),
-            new VisibleCSSLocator('moveButton', '.ez-btn-ae--move-%s'),
-            new VisibleCSSLocator('toolbarButton', '.ae-toolbar .ez-btn-ae'),
+            new VisibleCSSLocator('fieldInput', '.ck-editor__editable'),
+            new VisibleCSSLocator('additionalToolbar', '.ck-dropdown__panel-visible .ck-toolbar'),
+            new VisibleCSSLocator('toolbarElement', '.ck-button'),
+            new VisibleCSSLocator('toolbarDropdown', '.ck-dropdown'),
+            new VisibleCSSLocator('styleDropdownItem', '.ck-list__item'),
+            new VisibleCSSLocator('unorderedListElement', '.ibexa-data-source__richtext ul li'),
+            new VisibleCSSLocator('embedInlineTitle', '.ibexa-embed-inline .ibexa-embed-content__title'),
+            new VisibleCSSLocator('embedTitle', '.ibexa-embed .ibexa-embed-content__title'),
         ];
     }
 
     public function getFieldTypeIdentifier(): string
     {
         return 'ezrichtext';
+    }
+
+    private function executeCommand(string $commandName): void
+    {
+        $script = sprintf(
+            "document.querySelector('%s %s').ckeditorInstance.execute('%s')",
+            $this->parentLocator->getSelector(),
+            $this->getLocator('fieldInput')->getSelector(),
+            $commandName
+        );
+        $this->getSession()->executeScript($script);
+    }
+
+    private function getCustomStylesOffset(): int
+    {
+        return count($this->customStyleProvider->getConfiguration());
+    }
+
+    private function clickElementsToolbarButton(int $buttonPosition): void
+    {
+        $script = sprintf(
+            "document.querySelectorAll('%s %s')[%d].click()",
+            $this->getLocator('additionalToolbar')->getSelector(),
+            $this->getLocator('toolbarElement')->getSelector(),
+            $buttonPosition,
+        );
+
+        $this->getSession()->executeScript($script);
     }
 }

@@ -1,6 +1,7 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../../../common/icon/icon';
+import { createCssClassNames } from '../../../common/helpers/css.class.names';
 
 const { formatShortDateTime } = window.eZ.helpers.timezone;
 
@@ -157,12 +158,19 @@ export default class TableViewItemComponent extends PureComponent {
     renderNameCell() {
         const { item, generateLink } = this.props;
         const contentName = item.content._name;
+        const contentTypeIdentifier = item.content._info.contentType.identifier;
+        const contentTypeIconUrl = eZ.helpers.contentType.getContentTypeIconUrl(contentTypeIdentifier);
         const linkAttrs = {
             className: 'c-table-view-item__link c-table-view-item__text-wrapper',
             href: generateLink(item.id, item.content._info.id),
         };
 
-        return <a {...linkAttrs}>{contentName}</a>;
+        return (
+            <span className="c-table-view-item__icon-with-name-wrapper">
+                <Icon customPath={contentTypeIconUrl} extraClasses="ibexa-icon--small" />
+                <a {...linkAttrs}>{contentName}</a>
+            </span>
+        );
     }
 
     /**
@@ -193,17 +201,23 @@ export default class TableViewItemComponent extends PureComponent {
             <div className="c-table-view-item__priority-wrapper" {...priorityWrapperAttrs}>
                 <div className="c-table-view-item__inner-wrapper c-table-view-item__inner-wrapper--input">
                     <input
-                        className="c-table-view-item__priority-value ez-input ez-input--text"
+                        className="ibexa-input ibexa-input--text ibexa-input--small c-table-view-item__priority-value ibexa-input"
                         ref={this.setPriorityInputRef}
                         {...inputAttrs}
                     />
                 </div>
                 <div className="c-table-view-item__priority-actions" {...innerWrapperAttrs}>
-                    <button type="button" className="c-table-view-item__btn c-table-view-item__btn--submit" onClick={this.handleSubmit}>
-                        <Icon name="checkmark" extraClasses="ez-icon--small ez-icon--light" />
+                    <button
+                        type="button"
+                        className="btn ibexa-btn ibexa-btn--primary ibexa-btn--no-text ibexa-btn--small c-table-view-item__btn c-table-view-item__btn--submit"
+                        onClick={this.handleSubmit}>
+                        <Icon name="checkmark" extraClasses="ibexa-icon--small" />
                     </button>
-                    <button type="button" className="c-table-view-item__btn c-table-view-item__btn--cancel" onClick={this.handleCancel}>
-                        <Icon name="discard" extraClasses="ez-icon--small ez-icon--light" />
+                    <button
+                        type="button"
+                        className="btn ibexa-btn ibexa-btn--secondary ibexa-btn--no-text ibexa-btn--small"
+                        onClick={this.handleCancel}>
+                        <Icon name="discard" extraClasses="ibexa-icon--small" />
                     </button>
                 </div>
             </div>
@@ -232,13 +246,13 @@ export default class TableViewItemComponent extends PureComponent {
         const { item, languages } = this.props;
 
         return (
-            <Fragment>
+            <>
                 {item.content._info.currentVersion.languageCodes.map((languageCode) => (
                     <span key={languageCode} className="c-table-view-item__translation">
                         {languages.mappings[languageCode].name}
                     </span>
                 ))}
-            </Fragment>
+            </>
         );
     }
 
@@ -280,7 +294,7 @@ export default class TableViewItemComponent extends PureComponent {
     }
 
     renderBasicColumns() {
-        const { columnsVisibility } = this.props;
+        const { columnsVisibility, showScrollShadowLeft } = this.props;
         const columnsToRender = {
             name: true,
             ...columnsVisibility,
@@ -291,8 +305,17 @@ export default class TableViewItemComponent extends PureComponent {
                 return null;
             }
 
+            const isNameColumn = columnKey === 'name';
+            const className = createCssClassNames({
+                'ibexa-table__cell': true,
+                'c-table-view-item__cell': true,
+                [`c-table-view-item__cell--${columnKey}`]: true,
+                'c-table-view__cell--shadow-right': isNameColumn & showScrollShadowLeft,
+                'ibexa-table__cell--close-left': isNameColumn,
+            });
+
             return (
-                <td key={columnKey} className={`c-table-view-item__cell c-table-view-item__cell--${columnKey}`}>
+                <td key={columnKey} className={className}>
                     {this.columnsRenderers[columnKey]()}
                 </td>
             );
@@ -339,30 +362,31 @@ export default class TableViewItemComponent extends PureComponent {
     }
 
     componentDidMount() {
-        eZ.helpers.table.parseCheckbox('.c-table-view-item__cell .ez-input--checkbox', 'c-table-view-item--active');
+        eZ.helpers.table.parseCheckbox('.c-table-view-item__cell .ibexa-input--checkbox', 'c-table-view-item--active');
     }
 
     render() {
-        const { item, isSelected } = this.props;
+        const { isSelected, showScrollShadowRight } = this.props;
         const editLabel = Translator.trans(/*@Desc("Edit")*/ 'edit_item_btn.label', {}, 'sub_items');
-        const contentTypeIdentifier = item.content._info.contentType.identifier;
-        const contentTypeIconUrl = eZ.helpers.contentType.getContentTypeIconUrl(contentTypeIdentifier);
+        const actionCellClassName = createCssClassNames({
+            'ibexa-table__cell': true,
+            'c-table-view-item__cell': true,
+            'c-table-view-item__cell--actions': true,
+            'c-table-view-item__cell--shadow-left': showScrollShadowRight,
+        });
 
         return (
-            <tr className="c-table-view-item">
-                <td className="c-table-view-item__cell c-table-view-item__cell--checkbox">
+            <tr className="ibexa-table__row c-table-view-item">
+                <td className="ibexa-table__cell c-table-view-item__cell c-table-view-item__cell--checkbox">
                     <input
                         type="checkbox"
-                        class="ez-input ez-input--checkbox"
+                        className="ibexa-input ibexa-input--checkbox"
                         checked={isSelected}
                         onChange={this.onSelectCheckboxChange}
                     />
                 </td>
-                <td className="c-table-view-item__cell c-table-view-item__cell--icon">
-                    <Icon customPath={contentTypeIconUrl} extraClasses="ez-icon--small-medium" />
-                </td>
                 {this.renderBasicColumns()}
-                <td className="c-table-view-item__cell c-table-view-item__cell--actions">
+                <td className={actionCellClassName}>
                     <span
                         title={editLabel}
                         data-extra-classes="c-table-view-item__tooltip"
@@ -370,7 +394,7 @@ export default class TableViewItemComponent extends PureComponent {
                         className="c-table-view-item__btn c-table-view-item__btn--edit"
                         tabIndex={-1}>
                         <div className="c-table-view-item__btn-inner">
-                            <Icon name="edit" extraClasses="ez-icon--small-medium" />
+                            <Icon name="edit" extraClasses="ibexa-icon--small-medium" />
                         </div>
                     </span>
                 </td>
@@ -388,4 +412,6 @@ TableViewItemComponent.propTypes = {
     languages: PropTypes.object.isRequired,
     onItemSelect: PropTypes.func.isRequired,
     columnsVisibility: PropTypes.object.isRequired,
+    showScrollShadowLeft: PropTypes.bool.isRequired,
+    showScrollShadowRight: PropTypes.bool.isRequired,
 };

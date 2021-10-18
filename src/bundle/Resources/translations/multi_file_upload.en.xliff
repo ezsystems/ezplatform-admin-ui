@@ -52,8 +52,8 @@
         <note>key: max_file_size.message</note>
       </trans-unit>
       <trans-unit id="412c9936722fbbcd34664fdbfe33880fad7ef998" resname="multi_file_upload_open_btn.label">
-        <source>Upload sub-items</source>
-        <target state="new">Upload sub-items</target>
+        <source>Upload</source>
+        <target state="new">Upload</target>
         <note>key: multi_file_upload_open_btn.label</note>
       </trans-unit>
       <trans-unit id="76d7ffabd7e8c5d27a9b732dd5f15d1da68ff00c" resname="upload.success.message">

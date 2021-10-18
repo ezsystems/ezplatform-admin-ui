@@ -1,7 +1,7 @@
 {% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
 
 <div
-    class="modal fade ez-modal ez-modal--send-to-trash ez-modal--trash-location"
+    class="modal fade ez-modal ez-modal--no-header ez-modal--send-to-trash ez-modal--trash-location"
     id="trash-location-modal"
     tabindex="-1"
     role="dialog"
@@ -9,15 +9,15 @@
 >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" title="{{ 'trash.modal.close'|trans|desc('Close') }}">
-                <svg class="ez-icon ez-icon--small-medium" aria-hidden="true">
-                    <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+            <button type="button" class="close" data-bs-dismiss="modal" title="{{ 'trash.modal.close'|trans|desc('Close') }}">
+                <svg class="ibexa-icon ibexa-icon--small-medium" aria-hidden="true">
+                    <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                 </svg>
             </button>
 
             {{ form_start(form, {'action': path('ezplatform.location.trash')}) }}
             <div class="modal-body">
-                {{ 'trash.modal.message'|trans|desc('Are you sure you want to send this Content item to Trash?') }}
+                {{ 'trash.modal.send_to_trash.message'|trans|desc('Are you sure you want to send this Content item to Trash?') }}
 
                 {% for option in form.trash_options %}
                     <div class="ez-modal__trash-option">
@@ -46,9 +46,9 @@
             </div>
             <div class="modal-footer">
                 {{ form_widget(form.trash,
-                    {'attr': {'class': 'btn-danger font-weight-bold disabled ez-modal-button ez-modal-button--send-to-trash', 'disabled': true}})
+                    {'attr': {'class': 'btn ibexa-btn ibexa-btn--primary disabled ibexa-btn--confirm-send-to-trash', 'disabled': true}})
                 }}
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
                     {{ 'trash.form.cancel'|trans|desc('Cancel') }}
                 </button>
             </div>

@@ -9,30 +9,36 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ 'content.view.subitems.bulk_action.limited_permissions'|trans|desc('Limited user permissions') }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
-                        <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="ibexa-icon ibexa-icon--medium" aria-hidden="true">
+                        <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                     </svg>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="ez-table-header">
-                    <div class="ez-table-header__headline"></div>
-                </div>
-                <table
-                    data-table-row-template="{{ include('@ezdesign/content/modal/location_bulk_action_failed_row.html.twig', {
-                        'content_name': '{{ content_name }}',
-                        'content_type_name': '{{ content_type_name }}'
-                    })|e('html_attr') }}"
-                    class="table table-hover ez-bulk-action-failed-modal__table mb-0">
-                    <thead>
-                        <tr>
-                            <th>{{ 'bulk_action.failed.modal.content_name'|trans|desc('Name') }}</th>
-                            <th>{{ 'bulk_action.failed.modal.content_type_name'|trans|desc('Content Type') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody class="ez-bulk-action-failed-modal__table-body"></tbody>
-                </table>
+                {% set table_row_template %}
+                    {{ include('@ezdesign/ui/component/table/table_body_row.html.twig', {
+                        body_row_cols: [
+                            { content: '{{ content_name }}' },
+                            { content: '{{ content_type_name }}' },
+                        ],
+                    }) }}
+                {% endset %}
+
+                {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+                    headline: ' ',
+                    head_cols: [
+                        { content: 'bulk_action.failed.modal.content_name'|trans|desc('Name') },
+                        { content: 'bulk_action.failed.modal.content_type_name'|trans|desc('Content Type') },
+                    ],
+                    class: 'ez-bulk-action-failed-modal__table',
+                    table_body_class: 'ez-bulk-action-failed-modal__table-body',
+                    attr: {
+                        'data-row-template': table_row_template,
+                    },
+                } %}
+                    {% block tbody %}{% endblock %}
+                {% endembed %}
             </div>
         </div>
     </div>

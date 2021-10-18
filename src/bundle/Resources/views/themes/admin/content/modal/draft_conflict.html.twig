@@ -7,15 +7,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ 'draft.conflict.header'|trans|desc('Draft conflict') }}</h5>
-                <button 
-                    type="button" 
-                    class="close" 
-                    data-dismiss="modal" 
+                <button
+                    type="button"
+                    class="close"
+                    data-bs-dismiss="modal"
                     aria-label={{ 'draft.conflict.close'|trans|desc('Close') }}
                     title={{ 'draft.conflict.close'|trans|desc('Close') }}
                 >
-                    <svg class="ez-icon ez-icon--small" aria-hidden="true">
-                        <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+                    <svg class="ibexa-icon ibexa-icon--small" aria-hidden="true">
+                        <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                     </svg>
                 </button>
             </div>
@@ -35,17 +35,18 @@
                     {% endif %}
                 </div>
                 {% set show_add_draft_button = (not content_is_user) %}
-                {% include '@ezdesign/ui/table_header.html.twig' with { header_text: null, tools: version_modal_draft_conflict.table_header_tools(show_add_draft_button) } %}
-                <div class="ez-scrollable-wrapper">
-                    {{ include('@ezdesign/content/tab/versions/table.html.twig', {
-                        'versions': conflicted_drafts,
-                        'location': location,
-                        'is_draft': true,
-                        'have_to_paginate': false,
-                        'is_draft_conflict': true,
-                        'content_is_user': content_is_user
-                    }) }}
-                </div>
+                {% include '@ezdesign/ui/component/table/table_header.html.twig' with {
+                    headline: '',
+                    actions: version_modal_draft_conflict.table_header_tools(show_add_draft_button),
+                } only %}
+                {{ include('@ezdesign/content/tab/versions/table.html.twig', {
+                    'versions': conflicted_drafts,
+                    'location': location,
+                    'is_draft': true,
+                    'have_to_paginate': false,
+                    'is_draft_conflict': true,
+                    'content_is_user': content_is_user
+                }) }}
             </div>
         </div>
     </div>
@@ -53,13 +54,13 @@
 
 {% macro table_header_tools(show_add_button) %}
     {% if show_add_button %}
-        <button 
-            type="button" 
-            class="btn btn-icon ez-btn--add-draft"
+        <button
+            type="button"
+            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--add-draft"
             title="{{ 'tab.versions.action.delete'|trans|desc('Create a draft') }}"
         >
-            <svg class="ez-icon ez-icon-create">
-                <use xlink:href="{{ ez_icon_path('create') }}"></use>
+            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
             </svg>
         </button>
     {% endif %}

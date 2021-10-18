@@ -16,13 +16,11 @@ services:
 
   Ibexa\AdminUi\Behat\BrowserContext\DashboardContext: ~
 
-  Ibexa\AdminUi\Behat\BrowserContext\RightMenuContext: ~
+  Ibexa\AdminUi\Behat\BrowserContext\ContentActionsMenuContext: ~
 
   Ibexa\AdminUi\Behat\BrowserContext\TrashContext: ~
 
   Ibexa\AdminUi\Behat\BrowserContext\ContentPreviewContext: ~
-
-  Ibexa\AdminUi\Behat\BrowserContext\LeftMenuContext: ~
 
   Ibexa\AdminUi\Behat\BrowserContext\RolesContext: ~
 

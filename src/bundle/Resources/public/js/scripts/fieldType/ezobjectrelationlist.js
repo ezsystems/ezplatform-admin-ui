@@ -1,11 +1,10 @@
 (function(global, doc, eZ, React, ReactDOM, Translator) {
-    const CLASS_FIELD_SINGLE = 'ez-field-edit--ezobjectrelation';
-    const SELECTOR_FIELD_MULTIPLE = '.ez-field-edit--ezobjectrelationlist';
-    const SELECTOR_FIELD_SINGLE = '.ez-field-edit--ezobjectrelation';
-    const SELECTOR_INPUT = '.ez-data-source__input';
-    const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
-    const SELECTOR_BTN_ADD = '.ez-relations__table-action--create';
-    const SELECTOR_ROW = '.ez-relations__item';
+    const CLASS_FIELD_SINGLE = 'ibexa-field-edit--ezobjectrelation';
+    const SELECTOR_FIELD_MULTIPLE = '.ibexa-field-edit--ezobjectrelationlist';
+    const SELECTOR_FIELD_SINGLE = '.ibexa-field-edit--ezobjectrelation';
+    const SELECTOR_INPUT = '.ibexa-data-source__input';
+    const SELECTOR_BTN_ADD = '.ibexa-relations__table-action--create';
+    const SELECTOR_ROW = '.ibexa-relations__item';
     const EVENT_CUSTOM = 'validateInput';
 
     class EzObjectRelationListValidator extends eZ.BaseFieldValidator {
@@ -22,7 +21,7 @@
             const isEmpty = !currentTarget.value.length;
             const hasCorrectValues = currentTarget.value.split(',').every((id) => !isNaN(parseInt(id, 10)));
             const fieldContainer = currentTarget.closest(SELECTOR_FIELD_MULTIPLE) || currentTarget.closest(SELECTOR_FIELD_SINGLE);
-            const label = fieldContainer.querySelector('.ez-field-edit__label').innerHTML;
+            const label = fieldContainer.querySelector('.ibexa-field-edit__label').innerHTML;
             const result = { isError: false };
 
             if (isRequired && isEmpty) {
@@ -37,13 +36,7 @@
         }
     }
 
-    const singleObjectRelationFields = doc.querySelectorAll(SELECTOR_FIELD_SINGLE);
-
-    if (singleObjectRelationFields.length) {
-        console.warn('EzObjectRelation fieldtype is deprecated. Please, use EzObjectRelationList fieldtype instead.');
-    }
-
-    [...doc.querySelectorAll(SELECTOR_FIELD_MULTIPLE), ...singleObjectRelationFields].forEach((fieldContainer) => {
+    [...doc.querySelectorAll(SELECTOR_FIELD_MULTIPLE), ...doc.querySelectorAll(SELECTOR_FIELD_SINGLE)].forEach((fieldContainer) => {
         const validator = new EzObjectRelationListValidator({
             classInvalid: 'is-invalid',
             fieldContainer,
@@ -52,31 +45,44 @@
                     selector: SELECTOR_INPUT,
                     eventName: 'blur',
                     callback: 'validateInput',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: ['.ibexa-form-error'],
                 },
                 {
                     isValueValidator: false,
                     selector: SELECTOR_INPUT,
                     eventName: EVENT_CUSTOM,
                     callback: 'validateInput',
-                    errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                    errorNodeSelectors: ['.ibexa-form-error'],
                 },
             ],
         });
         const udwContainer = doc.getElementById('react-udw');
         const sourceInput = fieldContainer.querySelector(SELECTOR_INPUT);
-        const relationsContainer = fieldContainer.querySelector('.ez-relations__list');
-        const relationsWrapper = fieldContainer.querySelector('.ez-relations__wrapper');
-        const relationsCTA = fieldContainer.querySelector('.ez-relations__cta');
+        const relationsContainer = fieldContainer.querySelector('.ibexa-relations__list');
+        const relationsWrapper = fieldContainer.querySelector('.ibexa-relations__wrapper');
+        const relationsCTA = fieldContainer.querySelector('.ibexa-relations__cta');
         const addBtn = fieldContainer.querySelector(SELECTOR_BTN_ADD);
-        const trashBtn = fieldContainer.querySelector('.ez-relations__table-action--remove');
+        const trashBtn = fieldContainer.querySelector('.ibexa-relations__table-action--remove');
         const isSingle = fieldContainer.classList.contains(CLASS_FIELD_SINGLE);
         const selectedItemsLimit = isSingle ? 1 : parseInt(relationsContainer.dataset.limit, 10);
+        const relationsTable = relationsWrapper.querySelector('.ibexa-table');
         const startingLocationId =
             relationsContainer.dataset.defaultLocation !== '0' ? parseInt(relationsContainer.dataset.defaultLocation, 10) : null;
-        const allowedContentTypes = relationsContainer.dataset.allowedContentTypes.split(',').filter((item) => item.length);
         const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
-        const renderRows = (items) => items.forEach((...args) => relationsContainer.insertAdjacentHTML('beforeend', renderRow(...args)));
+        const renderRows = (items) => {
+            items.forEach((item, index) => {
+                relationsContainer.insertAdjacentHTML('beforeend', renderRow(item, index));
+
+                const { escapeHTML } = eZ.helpers.text;
+                const itemNodes = relationsContainer.querySelectorAll('.ibexa-relations__item');
+                const itemNode = itemNodes[itemNodes.length - 1];
+
+                itemNode.setAttribute('data-content-id', escapeHTML(item.ContentInfo.Content._id));
+                itemNode.querySelector('.ibexa-relations__table-action--remove-item').addEventListener('click', removeItem, false);
+            });
+
+            eZ.helpers.tooltips.parse();
+        };
         const updateInputValue = (items) => {
             sourceInput.value = items.join();
             sourceInput.dispatchEvent(new CustomEvent(EVENT_CUSTOM));
@@ -93,25 +99,6 @@
             closeUDW();
             updateFieldState();
             updateAddBtnState();
-        };
-        const canSelectContent = ({ item, itemsCount }, callback) => {
-            const isAllowedContentType = allowedContentTypes.length
-                ? allowedContentTypes.includes(item.ContentInfo.Content.ContentTypeInfo.identifier)
-                : true;
-
-            if (!isAllowedContentType) {
-                return callback(false);
-            }
-
-            const isAlreadySelected = !!selectedItems.find((id) => id === item.ContentInfo.Content._id);
-
-            if (!selectedItemsLimit) {
-                return callback(!isAlreadySelected);
-            }
-
-            const canSelect = selectedItems.length + itemsCount < selectedItemsLimit && !isAlreadySelected;
-
-            callback(canSelect);
         };
         const openUDW = (event) => {
             event.preventDefault();
@@ -136,11 +123,10 @@
                     onConfirm,
                     onCancel: closeUDW,
                     title,
-                    multiple: isSingle ? false : selectedItemsLimit !== 1,
-                    multipleItemsLimit: selectedItemsLimit,
                     startingLocationId,
-                    canSelectContent,
                     ...config,
+                    multiple: isSingle ? false : selectedItemsLimit !== 1,
+                    multipleItemsLimit: selectedItemsLimit > 1 ? selectedItemsLimit - selectedItems.length : selectedItemsLimit,
                 }),
                 udwContainer
             );
@@ -155,34 +141,44 @@
             const { formatShortDateTime } = eZ.helpers.timezone;
             const contentTypeName = eZ.helpers.contentType.getContentTypeName(item.ContentInfo.Content.ContentTypeInfo.identifier);
             const contentName = escapeHTML(item.ContentInfo.Content.TranslatedName);
-            const contentId = escapeHTML(item.ContentInfo.Content._id);
+            const { rowTemplate } = relationsWrapper.dataset;
 
-            return `
-                <tr class="ez-relations__item" data-content-id="${contentId}">
-                    <td><input class="ez-input ez-input--checkbox" type="checkbox" value="${contentId}" /></td>
-                    <td class="ez-relations__item-name">${contentName}</td>
-                    <td>${contentTypeName}</td>
-                    <td>${formatShortDateTime(item.ContentInfo.Content.publishedDate)}</td>
-                    <td colspan="2"><input class="ez-relations__order-input" type="number" value="${selectedItems.length +
-                        index +
-                        1}" /></td>
-                </tr>
-            `;
+            return rowTemplate
+                .replace('{{ content_name }}', contentName)
+                .replace('{{ content_type_name }}', contentTypeName)
+                .replace('{{ published_date }}', formatShortDateTime(item.ContentInfo.Content.publishedDate))
+                .replace('{{ order }}', selectedItems.length + index + 1);
         };
         const updateFieldState = () => {
-            const wrapperMethod = selectedItems.length ? 'removeAttribute' : 'setAttribute';
-            const ctaMethod = selectedItems.length ? 'setAttribute' : 'removeAttribute';
+            const tableHideMethod = selectedItems.length ? 'removeAttribute' : 'setAttribute';
+            const ctaHideMethod = selectedItems.length ? 'setAttribute' : 'removeAttribute';
 
-            relationsWrapper[wrapperMethod]('hidden', true);
-            relationsCTA[ctaMethod]('hidden', true);
+            relationsTable[tableHideMethod]('hidden', true);
+
+            if (trashBtn) {
+                trashBtn[tableHideMethod]('hidden', true);
+            }
+
+            if (addBtn) {
+                addBtn[tableHideMethod]('hidden', true);
+            }
+
+            relationsCTA[ctaHideMethod]('hidden', true);
         };
         const updateAddBtnState = () => {
+            if (!addBtn) {
+                return;
+            }
+
             const methodName = !selectedItemsLimit || selectedItems.length < selectedItemsLimit ? 'removeAttribute' : 'setAttribute';
 
             addBtn[methodName]('disabled', true);
         };
         const updateTrashBtnState = (event) => {
-            if ((!event.target.hasAttribute('type') || event.target.type !== 'checkbox') && event.currentTarget !== trashBtn) {
+            if (
+                !trashBtn ||
+                ((!event.target.hasAttribute('type') || event.target.type !== 'checkbox') && event.currentTarget !== trashBtn)
+            ) {
                 return;
             }
 
@@ -191,7 +187,7 @@
 
             trashBtn[methodName]('disabled', true);
         };
-        const removeItem = (event) => {
+        const removeItems = (event) => {
             event.preventDefault();
 
             const removedItems = [];
@@ -208,8 +204,20 @@
             updateFieldState();
             updateAddBtnState();
         };
+        const removeItem = (event) => {
+            const row = event.target.closest('.ibexa-relations__item');
+            const contentId = parseInt(row.dataset.contentId, 10);
+
+            row.remove();
+
+            selectedItems = selectedItems.filter((item) => contentId !== item);
+
+            updateInputValue(selectedItems);
+            updateFieldState();
+            updateAddBtnState();
+        };
         const findOrderInputs = () => {
-            return [...relationsContainer.querySelectorAll('.ez-relations__order-input')];
+            return [...relationsContainer.querySelectorAll('.ibexa-relations__order-input')];
         };
         const findCheckboxes = () => {
             return [...relationsContainer.querySelectorAll('[type="checkbox"]')];
@@ -269,13 +277,19 @@
         updateAddBtnState();
         attachRowsEventHandlers();
 
-        [
-            ...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD),
-            ...fieldContainer.querySelectorAll('.ez-relations__cta-btn'),
-        ].forEach((btn) => btn.addEventListener('click', openUDW, false));
+        [...fieldContainer.querySelectorAll(SELECTOR_BTN_ADD), ...fieldContainer.querySelectorAll('.ibexa-relations__cta-btn')].forEach(
+            (btn) => btn.addEventListener('click', openUDW, false)
+        );
 
-        trashBtn.addEventListener('click', removeItem, false);
-        trashBtn.addEventListener('click', updateTrashBtnState, false);
+        [...fieldContainer.querySelectorAll('.ibexa-relations__table-action--remove-item')].forEach((btn) =>
+            btn.addEventListener('click', removeItem, false)
+        );
+
+        if (trashBtn) {
+            trashBtn.addEventListener('click', removeItems, false);
+            trashBtn.addEventListener('click', updateTrashBtnState, false);
+        }
+
         relationsContainer.addEventListener('change', updateTrashBtnState, false);
 
         validator.init();

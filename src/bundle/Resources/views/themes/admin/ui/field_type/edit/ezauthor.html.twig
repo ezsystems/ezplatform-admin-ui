@@ -9,34 +9,55 @@
 {% endblock %}
 
 {% block ezplatform_fieldtype_ezauthor_widget %}
+    <div class="ibexa-data-source__main-actions">
+        <button
+            type="button"
+            class="btn ibexa-btn ibexa-btn--secondary ibexa-btn--small ibexa-btn--add-author"
+            title="{{ 'ezauthor.action.add'|trans|desc('Add') }}"
+        >
+            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--create">
+                <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+            </svg>
+            <span class="ibexa-btn__label">{{ 'ezauthor.action.add'|trans|desc('Add') }}</span>
+        </button>
+        <button
+            type="button"
+            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--bulk-remove-author"
+            title="{{ 'ezauthor.action.delete'|trans|desc('Delete') }}"
+            disabled
+        >
+            <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+                <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
+            </svg>
+            <span class="ibexa-btn__label">{{ 'ezauthor.action.delete'|trans|desc('Delete') }}</span>
+        </button>
+    </div>
+    <div class="ibexa-data-source__labels">
+        <label class="ibexa-label form-label">{{ 'ezauthor.name'|trans|desc('Name') }}</label>
+        <label class="ibexa-label form-label">{{ 'ezauthor.Email'|trans|desc('Email') }}</label>
+    </div>
     {% for child in form.authors %}
         {{ form_row(child) }}
     {% endfor %}
 {% endblock %}
 
 {% block ezplatform_fieldtype_ezauthor_authors_entry_row -%}
-    <div class="ez-data-source__author form-row">
+    <div class="ibexa-data-source__author form-row">
         {{- form_widget(form.id) -}}
-        {{- form_row(form.name, {'wrapper_attr': {'class': 'col'}}) -}}
-        {{- form_row(form.email, {'wrapper_attr': {'class': 'col'}}) -}}
-        <div class="col ez-data-source__actions">
+        <div class="ibexa-data-source__checkbox">
+            <input type="checkbox" class="ibexa-input ibexa-input--checkbox" />
+        </div>
+        {{- form_row(form.name, { label_wrapper_attr: { 'hidden': 'hidden' }}) -}}
+        {{- form_row(form.email, { label_wrapper_attr: { 'hidden': 'hidden' }, attr: {'class': 'ibexa-input--text'}}) -}}
+        <div class="ibexa-data-source__actions">
             <button 
                 type="button" 
-                class="btn btn-icon ez-btn ez-btn--remove-author"
-                title="{{ 'ezauthor.action.delete'|trans|desc('Remove author') }}" 
+                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--remove-author"
+                title="{{ 'ezauthor.action.delete'|trans|desc('Delete') }}"
                 disabled
             >
-                <svg class="ez-icon ez-icon-trash ez-icon--small-medium">
-                    <use xlink:href="{{ ez_icon_path('trash') }}"></use>
-                </svg>
-            </button>
-            <button 
-                type="button" 
-                class="btn btn-icon ez-btn ez-btn--add-author"
-                title="{{ 'ezauthor.action.add'|trans|desc('Add author') }}"
-            >
-                <svg class="ez-icon ez-icon-create ez-icon--small-medium">
-                    <use xlink:href="{{ ez_icon_path('create') }}"></use>
+                <svg class="ibexa-icon ibexa-icon--small ibexa-icon--trash">
+                    <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                 </svg>
             </button>
         </div>

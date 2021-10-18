@@ -165,11 +165,11 @@ const Search = ({ itemsPerPage }) => {
                         </select>
                     </div>
                 ) : null}
-                <button className="c-search__search-btn btn btn-primary" onClick={search.bind(this, 0)}>
+                <button className="c-search__search-btn btn ibexa-btn ibexa-btn--primary" onClick={search.bind(this, 0)}>
                     {searchLabel}
                 </button>
                 <div className="c-search__filters-btn-wrapper">
-                    <button className="c-search__toggle-filters-btn btn btn-secondary" onClick={toggleFiltersCollapsed}>
+                    <button className="c-search__toggle-filters-btn btn ibexa-btn ibexa-btn--secondary" onClick={toggleFiltersCollapsed}>
                         {filtersLabel}
                     </button>
                 </div>

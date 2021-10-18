@@ -79,7 +79,7 @@ class ContentTypeFormProcessor implements EventSubscriberInterface
         /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData $contentTypeData */
         $contentTypeData = $event->getData();
         $contentTypeDraft = $contentTypeData->contentTypeDraft;
-        foreach ($contentTypeData->fieldDefinitionsData as $fieldDefData) {
+        foreach ($contentTypeData->getFlatFieldDefinitionsData() as $fieldDefData) {
             $this->contentTypeService->updateFieldDefinition($contentTypeDraft, $fieldDefData->fieldDefinition, $fieldDefData);
         }
         $contentTypeData->sortFieldDefinitions();

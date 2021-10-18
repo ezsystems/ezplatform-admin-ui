@@ -4,7 +4,7 @@
 
 {% trans_default_domain 'language' %}
 
-{% block body_class %}ez-language-view ez-has-full-width-footer{% endblock %}
+{% block body_class %}ez-language-view{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
@@ -16,78 +16,89 @@
 
 {% block title %}{{ 'language.view.title.identifier'|trans({ '%language%': language.name })|desc('Language "%language%"') }}{% endblock %}
 
-{% block page_title %}
+{% block header %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'language.view.title.identifier'|trans({ '%language%': language.name })|desc('Language "%language%"'),
-        icon_name: 'languages'
     } %}
 {% endblock %}
 
 {% block content %}
     <section class="container ez-container">
-        <header class="ez-table-header">
-            <div class="ez-table-header__headline">
-                {{ 'language.information.header'|trans|desc('Language information') }}
-            </div>
-            <div class="ez-table-header__tools">
-                {% if can_administrate %}
-                    {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id, "redirectErrorsTo": "view"})}) }}
+        {% set body_row_cols = [] %}
 
-                    {{ form_widget(deleteForm.language) }}
-                    <button
-                        type="button"
-                        class="btn btn-icon"
-                        data-toggle="modal"
-                        title="{{ 'language.delete'|trans|desc('Delete language') }}"
-                        data-target="#delete-language-modal">
-                        <svg class="ez-icon">
-                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
-                        </svg>
-                    </button>
+        {% set body_row_cols = body_row_cols|merge([
+            { content: language.name },
+            { content: language.languageCode },
+            { content: language.id },
+        ]) %}
 
-                    {% include '@ezdesign/language/modal/delete_confirmation.html.twig' with {'deleteForm': deleteForm} %}
+        {% set col_raw %}
+            <input
+                type="checkbox"
+                title="{{ language.enabled ? 'language.enabled'|trans|desc('Enabled') : 'language.enabled'|trans|desc('Enabled') }}"
+                disabled
+                {% if language.enabled %}checked{% endif %}
+            >
+        {% endset %}
+        {% set body_row_cols = body_row_cols|merge([{
+            content: col_raw,
+        }]) %}
 
-                    {{ form_end(deleteForm) }}
-                {% endif %}
-            </div>
-        </header>
+        {% set col_raw %}
+            {% if can_administrate %}
+                <a
+                    href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
+                    class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                    title="{{ 'language.edit'|trans|desc('Edit') }}"
+                >
+                    <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+                        <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
+                    </svg>
+                </a>
+            {% endif %}
+        {% endset %}
+        {% set body_row_cols = body_row_cols|merge([{
+            has_action_btns: true,
+            content: col_raw,
+        }]) %}
 
-        <table class="ez-table table table-hover">
-            <thead>
-                <tr>
-                    <th>{{ 'language.name.label'|trans|desc('Name') }}</th>
-                    <th>{{ 'language.code.label'|trans|desc('Language code') }}</th>
-                    <th>{{ 'language.id.label'|trans|desc('ID') }}</th>
-                    <th>{{ 'language.enabled.label'|trans|desc('Enabled') }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="ez-table__cell">{{ language.name }}</td>
-                    <td class="ez-table__cell">{{ language.languageCode }}</td>
-                    <td class="ez-table__cell">{{ language.id }}</td>
-                    <td class="ez-table__cell">
-                        <input
-                            type="checkbox"
-                            title="{{ language.enabled ? 'language.enabled'|trans|desc('Enabled') : 'language.enabled'|trans|desc('Enabled') }}"
-                            disabled
-                            {% if language.enabled %}checked{% endif %}>
-                    </td>
-                    <td class="ez-table__cell ez-table__cell--has-action-btns">
+        {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+            headline: 'language.information.header'|trans|desc('Language information'),
+            head_cols: [
+                { content: 'language.name.label'|trans|desc('Name') },
+                { content: 'language.code.label'|trans|desc('Language code') },
+                { content: 'language.id.label'|trans|desc('ID') },
+                { content: 'language.enabled.label'|trans|desc('Enabled') },
+                { },
+            ],
+            body_rows: [{ cols: body_row_cols }],
+        } %}
+            {% block header %}
+                {% embed '@ezdesign/ui/component/table/table_header.html.twig' %}
+                    {% block actions %}
                         {% if can_administrate %}
-                            <a
-                                href="{{ path('ezplatform.language.edit', {'languageId': language.id}) }}"
-                                class="btn btn-icon mx-2"
-                                title="{{ 'language.edit'|trans|desc('Edit') }}">
-                                <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-                                    <use xlink:href="{{ ez_icon_path('edit') }}"></use>
+                            {{ form_start(deleteForm, {"action": path("ezplatform.language.delete", {"languageId": language.id, "redirectErrorsTo": "view"})}) }}
+
+                            {{ form_widget(deleteForm.language) }}
+                            <button
+                                type="button"
+                                class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                                data-bs-toggle="modal"
+                                data-bs-target="#delete-language-modal"
+                                title="{{ 'language.delete'|trans|desc('Delete language') }}"
+                            >
+                                <svg class="ibexa-icon ibexa-icon--small">
+                                    <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                                 </svg>
-                            </a>
+                            </button>
+
+                            {% include '@ezdesign/language/modal/delete_confirmation.html.twig' with {'deleteForm': deleteForm} %}
+
+                            {{ form_end(deleteForm) }}
                         {% endif %}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
     </section>
 {% endblock %}

@@ -1,5 +1,5 @@
 (function(global, doc, eZ, React, ReactDOM, Translator) {
-    const btns = doc.querySelectorAll('.ez-btn--udw-select-location');
+    const btns = doc.querySelectorAll('.ibexa-btn--udw-select-location');
     const udwContainer = doc.getElementById('react-udw');
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;

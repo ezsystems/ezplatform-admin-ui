@@ -2,12 +2,9 @@
 
 <section class="container mt-3">
     <div class="px-3">
-        <div class="alert alert-info ez-alert ez-alert--info" role="alert">
-            <svg class="ez-icon ez-icon--small ez-icon-warning">
-                <use xlink:href="{{ ez_icon_path('warning') }}"></use>
-            </svg>
-
-            {{ 'preview_unavailable'|trans|desc('You cannot preview this translation because there is no site available for this language. Contact your Administrator.') }}
-        </div>
+        {% include '@ezdesign/ui/component/alert/alert.html.twig' with {
+            type: 'warning',
+            title: 'preview_unavailable'|trans|desc('You cannot preview this translation because there is no site available for this language. Contact your Administrator.'),
+        } only %}
     </div>
 </section>

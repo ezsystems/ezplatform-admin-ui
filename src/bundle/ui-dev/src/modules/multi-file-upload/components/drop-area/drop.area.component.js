@@ -61,7 +61,7 @@ export default class DropAreaComponent extends Component {
         return (
             <form className="c-drop-area" multiple onDrop={this.handleUpload}>
                 <div className="c-drop-area__message c-drop-area__message--main">{dropActionMessage}</div>
-                <button type="button" class="btn btn-primary c-drop-area__btn-select" onClick={this.openFileSelector} tabIndex="-1">
+                <button type="button" className="btn ibexa-btn ibexa-btn--primary c-drop-area__btn-select" onClick={this.openFileSelector} tabIndex="-1">
                     {uploadBtnLabel}
                 </button>
                 <div className="c-drop-area__message c-drop-area__message--filesize">

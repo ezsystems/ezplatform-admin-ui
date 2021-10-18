@@ -1,10 +1,20 @@
 .ez-header {
+    &,
+    & + .container {
+        padding: 0;
+        margin-right: calculateRem(15px);
+        margin-left: calculateRem(15px);
+    }
+
     .container {
-    	position: relative;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        max-width: none;
     }
 
     &--light {
-        background: $ibexa-white;
+        background: $ibexa-color-white;
     }
 
     &--content-edit {
@@ -12,5 +22,26 @@
         padding-bottom: calculateRem(24px);
         background: $ibexa-white;
         border-bottom: calculateRem(1px) solid $ibexa-color-base;
+    }
+}
+
+.ibexa-page-header-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: calculateRem(20px) 0;
+
+    .ibexa-breadcrums-wrapper,
+    .ibexa-content-menu-wrapper {
+        flex-basis: 50%;
+        max-width: 50%;
+    }
+
+    .breadcrumb,
+    .ibexa-context-menu {
+        min-height: calculateRem(64px);
+    }
+
+    .ibexa-header-wrapper {
+        width: 100%;
     }
 }

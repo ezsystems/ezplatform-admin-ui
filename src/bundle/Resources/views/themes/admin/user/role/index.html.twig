@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'role' %}
 
-{% block body_class %}ez-role-view ez-has-full-width-footer{% endblock %}
+{% block body_class %}ez-role-view{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: [
@@ -12,54 +12,48 @@
     ]} %}
 {% endblock %}
 
-{% block page_title %}
+{% block header %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'role.view.view.title'|trans({'%identifier%': role.identifier})|desc('Role "%identifier%"'),
-        icon_name: 'roles'
     } %}
 {% endblock %}
 
 {% block content %}
+
     <div class="panel panel-primary">
         <div class="panel-body">
-            <div class="ez-header">
-                <div class="container">
-                    <ul class="nav nav-tabs ez-nav-tabs--role ez-tabs" role="tablist">
-                        <li role="presentation" class="nav-item">
-                            <a href="#policies" class="nav-link active" role="tab" data-toggle="tab">
-                                {{ 'policy.view.list.title'|trans|desc('Policies') }}
-                            </a>
-                        </li>
-                        <li role="presentation" class="nav-item">
-                            <a href="#users-and-groups" class="nav-link" role="tab" data-toggle="tab">
-                                {{ 'role_assignment.view.list.title.count'|trans({'%count%': assignments|length})|desc('Assignments (%count%)') }}
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tab-content container ez-tab-content">
-                <div role="tabpanel" class="tab-pane active" id="policies">
-                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\PolicyController::listAction', {
-                        roleId: role.id,
-                        policyPage: policy_page,
-                        routeName: route_name
-                    })) }}
-                </div>
-                <div role="tabpanel" class="tab-pane" id="users-and-groups">
-                    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\RoleAssignmentController::listAction', {
-                        roleId: role.id,
-                        assignmentPage: assignment_page,
-                        routeName: route_name
-                    })) }}
-                </div>
-            </div>
+            {% embed '@ezdesign/ui/component/tab/tabs.html.twig' with {
+                tabs: [
+                    { id: 'policies', label: 'policy.view.list.title'|trans|desc('Policies'), active: true },
+                    { id: 'users-and-groups', label: 'role_assignment.view.list.title.count'|trans({'%count%': assignments|length})|desc('Assignments (%count%)') },
+                ]
+            } %}
+                {% block tab_content %}
+                    {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with { id: 'policies', active: true } %}
+                        {% block content %}
+                            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\PolicyController::listAction', {
+                                roleId: role.id,
+                                policyPage: policy_page,
+                                routeName: route_name
+                            })) }}
+                        {% endblock %}
+                    {% endembed %}
+                    {% embed '@ezdesign/ui/component/tab/tab_pane.html.twig' with { id: 'users-and-groups', active: false } %}
+                        {% block content %}
+                            {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\RoleAssignmentController::listAction', {
+                                roleId: role.id,
+                                assignmentPage: assignment_page,
+                                routeName: route_name
+                            })) }}
+                        {% endblock %}
+                    {% endembed %}
+                {% endblock %}
+            {% endembed %}
         </div>
     </div>
-    
 {% endblock %}
 
 {% block javascripts %}
     {{ encore_entry_script_tags('ezplatform-admin-ui-role-view-js', null, 'ezplatform') }}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-tabs-js', null, 'ezplatform') }}
 {% endblock %}

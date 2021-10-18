@@ -12,10 +12,14 @@
     ]} %}
 {% endblock %}
 
-{% block page_title_admin %}
+{% block context_menu_admin %}
+    {% set role_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.role_create.sidebar_right') %}
+    {{ knp_menu_render(role_create_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+{% endblock %}
+
+{% block header_admin %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'role.view.add.title'|trans|desc('Creating a new Role'),
-        icon_name: 'roles'
     } %}
 {% endblock %}
 
@@ -23,9 +27,9 @@
     {{ form_start(form) }}
 
     <section class="container ez-container">
-        <div class="card ez-card ez-card--light">
+        <div class="card ibexa-card ibexa-card--light">
             <div class="card-body">
-                {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}, 'attr': {'autofocus': 'autofocus'}}) }}
+                {{ form_row(form.identifier, {'attr': {'autofocus': 'autofocus'}}) }}
             </div>
         </div>
     </section>
@@ -33,9 +37,4 @@
     {{ form_widget(form.save, { 'attr': { 'hidden': 'hidden' } }) }}
 
     {{ form_end(form) }}
-{% endblock %}
-
-{% block right_sidebar %}
-    {% set role_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.role_create.sidebar_right') %}
-    {{ knp_menu_render(role_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

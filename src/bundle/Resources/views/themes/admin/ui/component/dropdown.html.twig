@@ -1,0 +1,76 @@
+
+{% set choices_flat = choices
+    | map(choice => choice.choices is defined ? choice.choices : [choice])
+    | reduce((carry, choices) => carry|merge(choices), [])
+%}
+{% set preferred_choices = preferred_choices|default([]) %}
+{% set custom_form = custom_form is defined ? custom_form : true %}
+{% set translation_domain = translation_domain|default(false) %}
+{% set value = value is defined ? value : null %}
+
+<div
+    class="ibexa-dropdown
+        {{ multiple|default(false) ? "ibexa-dropdown--multi" : "ibexa-dropdown--single" }}
+        {{ custom_init|default(false) ? "ibexa-dropdown--custom-init" }}
+        {{ class|default('') }}
+    ">
+    <div class="ibexa-dropdown__source">
+        {{ source|default(null)|raw }}
+    </div>
+    <div class="ibexa-dropdown__wrapper">
+        <ul
+            class="ibexa-dropdown__selection-info"
+            data-template="{{ include('@ezdesign/ui/component/dropdown_selected_item.html.twig', {
+                value: '{{ value }}',
+                label: '{{ label }}',
+            })|e('html_attr') }}"
+        >
+            {% for choice in choices_flat %}
+                {% if custom_form ? choice.value == value : choice is selectedchoice(value) %}
+                    {% include '@ezdesign/ui/component/dropdown_selected_item.html.twig' with {
+                        value: choice.value,
+                        label: translation_domain is same as(false) ? choice.label : choice.label|trans({}, translation_domain),
+                    } %}
+                {% endif %}
+            {% endfor %}
+
+            {% set default_placeholder = 'dropdown.placeholder'|trans|desc("Choose an option") %}
+            {% set placeholder = placeholder|default(default_placeholder) %}
+            {% set label = placeholder %}
+
+            {% if placeholder != '' %}
+                {% if translation_domain is same as(false) %}
+                    {% set label = placeholder %}
+                {% else %}
+                    {% set label = placeholder|trans({}, translation_domain) %}
+                {% endif %}
+            {% endif %}
+
+            <li class="ibexa-dropdown__selected-item ibexa-dropdown__selected-item--predefined ibexa-dropdown__selected-placeholder ">{{ label }}</li>
+
+            <li class="ibexa-dropdown__selected-item ibexa-dropdown__selected-item--predefined ibexa-dropdown__selected-overflow-number" hidden></li>
+        </ul>
+        <div class="ibexa-dropdown__items">
+            {%- embed '@ezdesign/ui/component/input_text.html.twig' with { has_search: true } -%}
+                {% block content %}
+                    <input
+                        type="text"
+                        placeholder="{{ 'dropdown.search'|trans|desc('Search...') }}"
+                        class="ibexa-dropdown__items-filter ibexa-input ibexa-input--text ibexa-input--small form-control"
+                    />
+                {% endblock %}
+            {%- endembed -%}
+            <ul class="ibexa-dropdown__items-list">
+                {% for choice in preferred_choices %}
+                    {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice, preferred_choice: true, custom_form } %}
+                {% endfor %}
+                {% if preferred_choices|length > 0 %}
+                    <hr class="ibexa-dropdown__separator"/>
+                {% endif %}
+                {% for choice in choices %}
+                    {% include '@ezdesign/ui/component/dropdown_item.html.twig' with { choice, custom_form } %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

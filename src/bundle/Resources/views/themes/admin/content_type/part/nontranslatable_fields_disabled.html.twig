@@ -1,9 +1,7 @@
 {% trans_default_domain 'content_type' %}
 
-<div class="alert alert-info mt-3 mx-5 ez-alert ez-alert--info" role="alert">
-    <svg class="ez-icon ez-icon--small ez-icon-warning">
-        <use xlink:href="{{ ez_icon_path('warning') }}"></use>
-    </svg>
-
-    {{ 'content_type.view.edit.notranslatable_fields_disabled'|trans|desc('Some of the Fields are disabled when translating a Content Type. To modify them, edit the Content Type in the main language.') }}
-</div>
+{% include '@ezdesign/ui/component/alert/alert.html.twig' with {
+    type: 'warning',
+    title: 'content_type.view.edit.notranslatable_fields_disabled'|trans|desc('Some of the Fields are disabled when translating a Content Type. To modify them, edit the Content Type in the main language.'),
+    class: 'mt-3 mx-5',
+} only %}

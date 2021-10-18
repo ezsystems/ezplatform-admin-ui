@@ -57,7 +57,7 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
                 self::ITEM__SAVE,
                 [
                     'attributes' => [
-                        'class' => 'btn--trigger',
+                        'class' => 'ibexa-btn--trigger',
                         'data-click' => '#role_copy_copy',
                         'data-extra-classes' => 'ez-tooltip--medium',
                         'data-placement' => 'left',
@@ -67,7 +67,6 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
                             'menu'
                         ),
                     ],
-                    'extras' => ['icon' => 'save'],
                 ]
             ),
             self::ITEM__CANCEL => $this->createMenuItem(
@@ -82,7 +81,6 @@ class RoleCopyRightSidebarBuilder extends AbstractBuilder implements Translation
                             'menu'
                         ),
                     ],
-                    'extras' => ['icon' => 'circle-close'],
                     'route' => 'ezplatform.role.list',
                 ]
             ),

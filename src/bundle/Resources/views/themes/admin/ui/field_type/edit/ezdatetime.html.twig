@@ -1,12 +1,15 @@
 {% block ezplatform_fieldtype_ezdatetime_widget %}
-    <div class="ez-data-source__input-wrapper">
-        <input type="text" class="flatpickr flatpickr-input ez-data-source__input form-control" readonly="readonly">
-        <button type="button" class="ez-data-source__btn--clear-input">
-            <svg class="ez-icon">
-                <use xlink:href="{{ ez_icon_path('circle-close') }}"></use>
+    <div class="ibexa-data-source__input-wrapper">
+        <input type="text" class="flatpickr flatpickr-input ibexa-data-source__input ibexa-input ibexa-input--date form-control" readonly="readonly">
+        <button type="button" class="ibexa-data-source__btn--clear-input">
+            <svg class="ibexa-icon">
+                <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
             </svg>
         </button>
+        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--date">
+            <use xlink:href="{{ ibexa_icon_path('date') }}"></use>
+        </svg>
     </div>
-    {% set attr = attr|merge({'class': 'ez-data-source__input', 'hidden': 'hidden'}) %}
+    {% set attr = attr|merge({'class': 'ibexa-data-source__input', 'hidden': 'hidden'}) %}
     {{ block('form_widget') }}
 {% endblock %}

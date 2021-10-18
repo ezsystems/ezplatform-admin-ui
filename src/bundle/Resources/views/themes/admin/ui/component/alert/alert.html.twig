@@ -1,0 +1,57 @@
+{% import "@ezdesign/ui/component/macros.html.twig" as html %}
+
+{% set icon_name_map = {
+    info: 'system-information',
+    error: 'circle-close',
+    warning: 'warning-triangle',
+    success: 'checkbox',
+} %}
+
+<div
+    class="alert ibexa-alert ibexa-alert--{{ type }} {{ class|default('') -}}"
+    role="alert"
+    {{ html.attributes(attr|default({})) }}
+>
+    {% block icon %}
+        {% set icon = icon_name_map[type] %}
+        <svg class="ibexa-icon ibexa-icon--small ibexa-alert__icon">
+            <use xlink:href="{{ icon_path is defined ? icon_path : ibexa_icon_path(icon) }}"></use>
+        </svg>
+    {% endblock %}
+    {% block content %}
+        <div class="ibexa-alert__content {% if show_subtitle_below|default(false) %}ibexa-alert__content--subtitle-below{% endif %}">
+            {% block title %}
+                {% if title is defined %}
+                    <div class="ibexa-alert__title">
+                        {{ title }}
+                    </div>
+                {% endif %}
+            {% endblock %}
+            {% block subtitle %}
+                {% if subtitle is defined %}
+                    <div class="ibexa-alert__subtitle">
+                        {{ subtitle }}
+                    </div>
+                {% endif %}
+            {% endblock %}
+            {% block extra_content_wrapper %}
+                <div class="ibexa-alert__extra_content">
+                    {% block extra_content %}
+                        {% if extra_content is defined %}
+                            {{ extra_content|raw }}
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+    {% block close_btn %}
+        {% if show_close_btn|default(false) %}
+            <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--no-text ibexa-alert__close-btn">
+                <svg class="ibexa-icon ibexa-icon--tiny-small">
+                    <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
+                </svg>
+            </button>
+        {% endif %}
+    {% endblock %}
+</div>

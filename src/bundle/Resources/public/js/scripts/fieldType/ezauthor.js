@@ -1,10 +1,10 @@
 (function(global, doc, eZ) {
-    const SELECTOR_REMOVE_AUTHOR = '.ez-btn--remove-author';
-    const SELECTOR_AUTHOR = '.ez-data-source__author';
-    const SELECTOR_FIELD = '.ez-field-edit--ezauthor';
-    const SELECTOR_LABEL = '.ez-data-source__label';
-    const SELECTOR_FIELD_EMAIL = '.ez-data-source__field--email';
-    const SELECTOR_FIELD_NAME = '.ez-data-source__field--name';
+    const SELECTOR_REMOVE_AUTHOR = '.ibexa-btn--remove-author';
+    const SELECTOR_AUTHOR = '.ibexa-data-source__author';
+    const SELECTOR_FIELD = '.ibexa-field-edit--ezauthor';
+    const SELECTOR_LABEL = '.ibexa-data-source__label';
+    const SELECTOR_FIELD_EMAIL = '.ibexa-data-source__field--email';
+    const SELECTOR_FIELD_NAME = '.ibexa-data-source__field--name';
 
     class EzAuthorValidator extends eZ.MultiInputFieldValidator {
         /**
@@ -100,6 +100,28 @@
             this.reinit();
         }
 
+        toggleBulkDeleteButtonState(event) {
+            const container = event.target.closest(SELECTOR_FIELD);
+            const checkboxes = container.querySelectorAll('.ibexa-input--checkbox');
+            const isAnyCheckboxSelected = [...checkboxes].some((checkbox) => checkbox.checked);
+            const bulkDeleteButton = container.querySelector('.ibexa-btn--bulk-remove-author');
+
+            bulkDeleteButton.toggleAttribute('disabled', !isAnyCheckboxSelected);
+        }
+
+        removeSelectedItems(event) {
+            const container = event.target.closest(SELECTOR_FIELD);
+            const selectedCheckboxes = container.querySelectorAll('.ibexa-input--checkbox:checked');
+            const bulkDeleteButton = container.querySelector('.ibexa-btn--bulk-remove-author');
+
+            selectedCheckboxes.forEach((checkbox) => checkbox.closest(SELECTOR_AUTHOR).remove());
+
+            bulkDeleteButton.setAttribute('disabled', 'disabled');
+
+            this.updateDisabledState(container);
+            this.reinit();
+        }
+
         /**
          * Adds an item.
          *
@@ -110,7 +132,7 @@
         addItem(event) {
             const authorNode = event.target.closest(SELECTOR_FIELD);
             const template = authorNode.dataset.template;
-            const node = event.target.closest('.ez-field-edit__data .ez-data-source');
+            const node = event.target.closest('.ibexa-field-edit__data .ibexa-data-source');
 
             node.insertAdjacentHTML('beforeend', this.setIndex(authorNode, template));
             authorNode.dataset.nextAuthorId++;
@@ -184,29 +206,29 @@
     const validator = new EzAuthorValidator({
         classInvalid: 'is-invalid',
         fieldSelector: SELECTOR_FIELD,
-        containerSelectors: ['.ez-data-source__author', '.ez-field-edit--ezauthor'],
+        containerSelectors: ['.ibexa-data-source__author', '.ibexa-field-edit--ezauthor'],
         eventsMap: [
             {
-                selector: `.ez-data-source__author ${SELECTOR_FIELD_NAME} .ez-data-source__input`,
+                selector: `.ibexa-data-source__author ${SELECTOR_FIELD_NAME} .ibexa-data-source__input`,
                 eventName: 'blur',
                 callback: 'validateName',
                 invalidStateSelectors: [
                     SELECTOR_FIELD_NAME,
-                    `${SELECTOR_FIELD_NAME} .ez-data-source__input`,
-                    `${SELECTOR_FIELD_NAME} .ez-data-source__label`,
+                    `${SELECTOR_FIELD_NAME} .ibexa-data-source__input`,
+                    `${SELECTOR_FIELD_NAME} .ibexa-data-source__label`,
                 ],
-                errorNodeSelectors: [SELECTOR_FIELD_NAME],
+                errorNodeSelectors: [`${SELECTOR_FIELD_NAME} .ibexa-form-error`],
             },
             {
-                selector: `.ez-data-source__author ${SELECTOR_FIELD_EMAIL} .ez-data-source__input`,
+                selector: `.ibexa-data-source__author ${SELECTOR_FIELD_EMAIL} .ibexa-data-source__input`,
                 eventName: 'blur',
                 callback: 'validateEmail',
                 invalidStateSelectors: [
                     SELECTOR_FIELD_EMAIL,
-                    `${SELECTOR_FIELD_EMAIL} .ez-data-source__input`,
-                    `${SELECTOR_FIELD_EMAIL} .ez-data-source__label`,
+                    `${SELECTOR_FIELD_EMAIL} .ibexa-data-source__input`,
+                    `${SELECTOR_FIELD_EMAIL} .ibexa-data-source__label`,
                 ],
-                errorNodeSelectors: [SELECTOR_FIELD_EMAIL],
+                errorNodeSelectors: [`${SELECTOR_FIELD_EMAIL} .ibexa-form-error`],
             },
             {
                 isValueValidator: false,
@@ -216,7 +238,19 @@
             },
             {
                 isValueValidator: false,
-                selector: '.ez-btn--add-author',
+                selector: '.ibexa-data-source__author .ibexa-input--checkbox',
+                eventName: 'change',
+                callback: 'toggleBulkDeleteButtonState',
+            },
+            {
+                isValueValidator: false,
+                selector: '.ibexa-btn--bulk-remove-author',
+                eventName: 'click',
+                callback: 'removeSelectedItems',
+            },
+            {
+                isValueValidator: false,
+                selector: '.ibexa-btn--add-author',
                 eventName: 'click',
                 callback: 'addItem',
             },

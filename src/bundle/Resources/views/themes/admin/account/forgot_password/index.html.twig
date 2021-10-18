@@ -3,17 +3,17 @@
 {% form_theme form_forgot_user_password '@ezdesign/account/form_fields.html.twig'  %}
 
 {%- block content -%}
-    <h2 class="ez-login__actions-headline">{{ 'authentication.reset_your_password'|trans|desc('Reset your password') }}</h2>
+    <h2 class="ibexa-login__actions-headline">{{ 'authentication.reset_your_password'|trans|desc('Reset your password') }}</h2>
     {% if reason == userForgotPasswordReasonMigration %}
         <p>{{ 'ezplatform.forgot_password.reset_your_password.reason.migration'|trans|desc('Your password has expired, change it.') }}</p>
     {% endif %}
     {% if form_forgot_user_password is defined %}
         {{ form_start(form_forgot_user_password, {'attr': {'class': 'ez-form-validate'}}) }}
         <fieldset>
-            {{ form_row(form_forgot_user_password.email, {'attr': {'class': 'form-control ez-login__input'}}) }}
+            {{ form_row(form_forgot_user_password.email, {'attr': {'class': 'form-control ibexa-input ibexa-login__input'}}) }}
         </fieldset>
-        {{ form_widget(form_forgot_user_password.reset, {'attr': {'class': 'btn btn-primary ez-login__btn--reset-password'}}) }}
-        <a href="{{ path('login') }}" class="btn btn-secondary ez-login__btn--cancel">
+        {{ form_widget(form_forgot_user_password.reset, {'attr': {'class': 'btn ibexa-btn ibexa-btn--primary ibexa-login__btn--reset-password'}}) }}
+        <a href="{{ path('login') }}" class="btn ibexa-btn ibexa-btn--secondary ibexa-login__btn--cancel">
             {{ 'authentication.reset_your_password.cancel'|trans|desc('Cancel') }}
         </a>
         {{ form_end(form_forgot_user_password) }}

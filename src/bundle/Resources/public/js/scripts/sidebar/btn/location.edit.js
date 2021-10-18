@@ -1,5 +1,5 @@
-(function(global, doc, eZ, $, Routing) {
-    const editActions = doc.querySelector('.ez-extra-actions--edit') || doc.querySelector('.ez-extra-actions--edit-user');
+(function(global, doc, eZ, bootstrap, Routing) {
+    const editActions = doc.querySelector('.ibexa-extra-actions--edit') || doc.querySelector('.ibexa-extra-actions--edit-user');
     const btns = [...editActions.querySelectorAll('.form-check [type="radio"]')];
     const form = editActions.querySelector('form');
     const contentIdInput = form.querySelector('#content_edit_content_info') || form.querySelector('#user_edit_content_info');
@@ -12,7 +12,7 @@
         });
     const addDraft = () => {
         form.submit();
-        $('#version-draft-conflict-modal').modal('hide');
+        bootstrap.Modal.getOrCreateInstance(doc.querySelector('#version-draft-conflict-modal')).hide();
     };
     const redirectToUserEdit = (languageCode) => {
         const versionNo = form.querySelector('#user_edit_version_info_version_no').value;
@@ -27,20 +27,23 @@
         doc.body.dispatchEvent(event);
     };
     const attachModalListeners = (wrapper) => {
-        const addDraftButton = wrapper.querySelector('.ez-btn--add-draft');
+        const addDraftButton = wrapper.querySelector('.ibexa-btn--add-draft');
+        const conflictModal = doc.querySelector('#version-draft-conflict-modal');
 
         if (addDraftButton) {
             addDraftButton.addEventListener('click', addDraft, false);
         }
 
         wrapper
-            .querySelectorAll('.ez-btn--prevented')
+            .querySelectorAll('.ibexa-btn--prevented')
             .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
 
-        $('#version-draft-conflict-modal')
-            .modal('show')
-            .on('hidden.bs.modal', onModalHidden)
-            .on('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+        if (conflictModal) {
+            bootstrap.Modal.getOrCreateInstance(conflictModal).show();
+
+            conflictModal.addEventListener('hidden.bs.modal', onModalHidden);
+            conflictModal.addEventListener('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+        }
     };
     const showModal = (modalHtml) => {
         const wrapper = doc.querySelector('.ez-modal-wrapper');
@@ -51,10 +54,7 @@
     const changeHandler = (event) => {
         const checkedBtn = event.currentTarget;
         const languageCode = checkedBtn.value;
-        const checkVersionDraftLink = Routing.generate(
-            'ezplatform.version_draft.has_no_conflict',
-            { contentId, languageCode, locationId }
-        );
+        const checkVersionDraftLink = Routing.generate('ezplatform.version_draft.has_no_conflict', { contentId, languageCode, locationId });
 
         fetch(checkVersionDraftLink, {
             credentials: 'same-origin',
@@ -74,4 +74,4 @@
     };
 
     btns.forEach((btn) => btn.addEventListener('change', changeHandler, false));
-})(window, window.document, window.eZ, window.jQuery, window.Routing);
+})(window, window.document, window.eZ, window.bootstrap, window.Routing);

@@ -12,10 +12,14 @@
     ]} %}
 {% endblock %}
 
-{% block page_title_admin %}
+{% block context_menu_admin %}
+    {% set section_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.section_edit.sidebar_right', [], {'section': section}) %}
+    {{ knp_menu_render(section_edit_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+{% endblock %}
+
+{% block header_admin %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'section.update.title'|trans({ '%identifier%': section.name })|desc('Editing Section \'%identifier%\''),
-        icon_name: 'sections'
     } %}
 {% endblock %}
 
@@ -23,10 +27,10 @@
     {{ form_start(form_section_update, {'attr': {'class': 'update-section'}}) }}
 
         <section>
-            <div class="card ez-card ez-card--light">
-                <div class="card-body ez-card__body">
-                    {{ form_row(form_section_update.name, {'label_attr': {'class': 'ez-label'}}) }}
-                    {{ form_row(form_section_update.identifier, {'label_attr': {'class': 'ez-label'}}) }}
+            <div class="card ibexa-card ibexa-card--light">
+                <div class="card-body ibexa-card__body">
+                    {{ form_row(form_section_update.name) }}
+                    {{ form_row(form_section_update.identifier) }}
                 </div>
             </div>
         </section>
@@ -34,9 +38,4 @@
     {{ form_widget(form_section_update.update, {'attr': {'hidden': 'hidden'}}) }}
 
     {{ form_end(form_section_update) }}
-{% endblock %}
-
-{% block right_sidebar %}
-    {% set section_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.section_edit.sidebar_right', [], {'section': section}) %}
-    {{ knp_menu_render(section_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}

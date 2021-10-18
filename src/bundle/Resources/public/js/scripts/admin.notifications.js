@@ -1,4 +1,4 @@
-(function(global, doc, eZ, $) {
+(function(global, doc, eZ, bootstrap) {
     const notificationsContainer = doc.querySelector('.ez-notifications-container');
     const notifications = JSON.parse(notificationsContainer.dataset.notifications);
     const template = notificationsContainer.dataset.template;
@@ -26,7 +26,7 @@
         notificationsContainer.append(notificationNode);
 
         if (timeout) {
-            global.setTimeout(() => $(notificationNode).alert('close'), timeout);
+            global.setTimeout(() => notificationNode.querySelector('.close').click(), timeout);
         }
 
         if (typeof onShow === 'function') {
@@ -39,4 +39,4 @@
     });
 
     doc.body.addEventListener('ez-notify', addNotification, false);
-})(window, window.document, window.eZ, window.jQuery);
+})(window, window.document, window.eZ, window.bootstrap);

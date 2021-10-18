@@ -1,4 +1,4 @@
-(function (global, doc, localStorage, $) {
+(function(global, doc, localStorage, bootstrap) {
     const CONTENT_PREVIEW_COLLAPSE_SELECTOR = '.ez-content-preview-collapse';
     const DEFAULT_CONTENT_PREVIEW_TOGGLE_STATE_KEY = 'ez-content-preview-collapsed';
     const getStateKey = (collapseTarget) => {
@@ -16,11 +16,11 @@
     };
 
     doc.querySelectorAll(CONTENT_PREVIEW_COLLAPSE_SELECTOR).forEach((collapsable) => {
-        collapsable = $(collapsable).collapse({
+        const bootstrapCollapsable = new bootstrap.Collapse(collapsable, {
             toggle: getContentPreviewToggleState(collapsable),
         });
 
-        collapsable.on('hide.bs.collapse', (event) => setContentPreviewToggleState(event, true));
-        collapsable.on('show.bs.collapse', (event) => setContentPreviewToggleState(event, false));
+        collapsable.addEventListener('hide.bs.collapse', (event) => setContentPreviewToggleState(event, true));
+        collapsable.addEventListener('show.bs.collapse', (event) => setContentPreviewToggleState(event, false));
     });
-})(window, window.document, window.localStorage, window.jQuery);
+})(window, window.document, window.localStorage, window.bootstrap);

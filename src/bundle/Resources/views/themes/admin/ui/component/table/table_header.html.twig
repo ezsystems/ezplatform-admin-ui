@@ -1,0 +1,15 @@
+<div class="ibexa-table-header {{ class|default('') -}}">
+    <div
+        class="ibexa-table-header__headline"
+        title="{{ headline_title|default(headline|default('')) }}"
+    >
+        {% block headline %}
+            {{ headline|default('') }}
+        {% endblock %}
+    </div>
+    <div class="ibexa-table-header__actions">
+        {% block actions %}
+            {{ actions|default('')|raw }}
+        {% endblock %}
+    </div>
+</div>

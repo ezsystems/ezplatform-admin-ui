@@ -12,10 +12,14 @@
     ]} %}
 {% endblock %}
 
-{% block page_title_admin %}
+{% block context_menu_admin %}
+    {% set content_type_group_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_group_edit.sidebar_right', [], {'save_id': form.update.vars.id}) %}
+    {{ knp_menu_render(content_type_group_edit_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
+{% endblock %}
+
+{% block header_admin %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'content_type_group.view.edit.title'|trans({'%identifier%': content_type_group.identifier})|desc('Editing Content Type group \'%identifier%\''),
-        icon_name: 'content-types'
     } %}
 {% endblock %}
 
@@ -23,9 +27,9 @@
     {{ form_start(form) }}
 
     <section>
-        <div class="card ez-card ez-card--light">
-            <div class="card-body ez-card__body">
-                {{ form_row(form.identifier, {'label_attr': {'class': 'ez-label'}}) }}
+        <div class="card ibexa-card ibexa-card--light">
+            <div class="card-body ibexa-card__body">
+                {{ form_row(form.identifier) }}
             </div>
         </div>
     </section>
@@ -37,5 +41,5 @@
 
 {% block right_sidebar %}
     {% set content_type_group_edit_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_group_edit.sidebar_right', [], {'save_id': form.update.vars.id}) %}
-    {{ knp_menu_render(content_type_group_edit_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
+    {{ knp_menu_render(content_type_group_edit_sidebar_right, {'template': '@ezdesign/ui/menu/context_menu.html.twig'}) }}
 {% endblock %}

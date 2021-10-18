@@ -32,7 +32,7 @@ use Twig\Environment;
 
 class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterface
 {
-    const URI_FRAGMENT = 'ez-tab-location-view-details';
+    const URI_FRAGMENT = 'ibexa-tab-location-view-details';
 
     /** @var \eZ\Publish\Core\Helper\FieldsGroups\FieldsGroupsList */
     protected $fieldsGroupsListHelper;

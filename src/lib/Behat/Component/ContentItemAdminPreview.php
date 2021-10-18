@@ -78,14 +78,13 @@ class ContentItemAdminPreview extends Component
     {
         $fieldClass = $this->getHTMLPage()
             ->find(CSSLocatorBuilder::base($fieldValueLocator)->withDescendant($this->getLocator('fieldValueContainer'))->build())
-            ->getAttribute('class')
-        ;
+            ->getAttribute('class');
 
         if ('ez-scrollable-table-wrapper mb-0' === $fieldClass) {
             return 'ezuser';
         }
 
-        if (false !== strpos($fieldClass, 'ez-scrollable-table-wrapper')) {
+        if (false !== strpos($fieldClass, 'ibexa-table-header')) {
             return 'ezmatrix';
         }
 

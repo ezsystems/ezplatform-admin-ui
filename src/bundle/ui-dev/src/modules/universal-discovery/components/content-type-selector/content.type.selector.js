@@ -62,7 +62,7 @@ const ContentTypeSelector = () => {
                                             <input
                                                 type="checkbox"
                                                 id={`ez-search-content-type-${contentType.identifier}`}
-                                                className="ez-input ez-input--checkbox"
+                                                className="ibexa-input ibexa-input--checkbox"
                                                 value={contentType.identifier}
                                                 data-content-type-identifier={contentType.identifier}
                                                 onChange={handleContentTypeSelect}

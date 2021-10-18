@@ -1,0 +1,61 @@
+.ibexa-header-user-menu {
+    display: flex;
+    justify-content: flex-end;
+
+    &__image {
+        max-width: calculateRem(32px);
+        max-height: calculateRem(32px);
+        border: calculateRem(3px) solid $ibexa-color-black;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    &__notice-dot {
+        width: calculateRem(6px);
+        height: calculateRem(6px);
+        margin-left: calculateRem(-4px);
+        margin-top: calculateRem(8px);
+        border-radius: 50%;
+        background: $ibexa-color-danger;
+        opacity: 1;
+        cursor: pointer;
+
+        &--no-notice {
+            opacity: 0;
+        }
+    }
+
+    &__name {
+        display: flex;
+        align-items: center;
+        margin-left: calculateRem(8px);
+        color: $ibexa-color-white;
+        font-size: $ibexa-text-font-size-small;
+        border: none;
+
+        &:after {
+            content: '';
+            width: 0;
+            height: 0;
+            margin-left: calculateRem(8px);
+            border-left: calculateRem(4px) solid transparent;
+            border-right: calculateRem(4px) solid transparent;
+            border-top: calculateRem(4px) solid $ibexa-color-white;
+        }
+
+        &:hover {
+            color: $ibexa-color-primary;
+
+            &:after {
+                border-top: calculateRem(4px) solid $ibexa-color-primary;
+            }
+        }
+    }
+
+    &__popup-menu {
+        z-index: 1060;
+        top: calculateRem(65px);
+        right: calculateRem(24px);
+        min-width: calculateRem(200px);
+    }
+}

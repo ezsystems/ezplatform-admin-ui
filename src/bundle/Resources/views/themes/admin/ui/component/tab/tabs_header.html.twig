@@ -1,0 +1,48 @@
+<div class="ez-header">
+    <div class="container">
+        <div class="ibexa-tabs">
+            <ul class="nav nav-tabs ibexa-tabs__list ibexa-adaptive-items" role="tablist">
+                {% block tabs_list %}
+                    {% for tab in tabs %}
+                        {% include '@ezdesign/ui/component/tab/tabs_tab.html.twig' with {
+                            id: tab.id,
+                            label: tab.label,
+                            active: tab == active_tab,
+                        } %}
+                    {% endfor %}
+                {% endblock %}
+                {% if include_tab_more|default(false) %}
+                    <li class="nav-item ibexa-tabs__tab ibexa-tabs__tab--more ibexa-adaptive-items__item  ibexa-adaptive-items__item--selector"
+                        data-item-template="{{ include('@ezdesign/ui/component/popup_menu/popup_menu_item.html.twig', {
+                                'label': '{{ label }}',
+                            })|e('html_attr') }}"
+                        tabindex="0"
+                    >
+                        <a class="nav-link ibexa-tabs__link" role="button">
+                            <svg class="ibexa-icon ibexa-icon--small">
+                                <use xlink:href="{{ ibexa_icon_path('options') }}"></use>
+                            </svg>
+                        </a>
+                        {% include '@ezdesign/ui/component/tab/tab_corner.html.twig' %}
+                    </li>
+                {% endif %}
+            </ul>
+            {% if include_tab_more|default(false) %}
+                {{ include('@ezdesign/ui/component/popup_menu/popup_menu.html.twig', {
+                    'class': 'ibexa-tabs__popup-menu',
+                    'items': [],
+                }) }}
+            {% endif %}
+            {% if not hide_toggler|default(false) %}
+                <div class="ibexa-tabs__toggler">
+                    <span class="ibexa-tabs__toggler-show">
+                        {{ 'ui.component.tab.tabs_toggler.show'|trans|desc('Show') }}
+                    </span>
+                    <span class="ibexa-tabs__toggler-hide">
+                        {{ 'ui.component.tab.tabs_toggler.hide'|trans|desc('Hide') }}
+                    </span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

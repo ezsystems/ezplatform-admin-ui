@@ -5,9 +5,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ 'version.conflict.header'|trans|desc('Version conflict') }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
-                        <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="ibexa-icon ibexa-icon--medium" aria-hidden="true">
+                        <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                     </svg>
                 </button>
             </div>
@@ -31,10 +31,10 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <a id="edit-conflicted-draft" class="btn btn-primary" href="#">
+                <a id="edit-conflicted-draft" class="btn ibexa-btn ibexa-btn--primary" href="#">
                     {{ 'version.conflict.form.continue'|trans|desc('Continue') }}
                 </a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
                     {{ 'version.conflict.form.cancel'|trans|desc('Cancel') }}
                 </button>
             </div>

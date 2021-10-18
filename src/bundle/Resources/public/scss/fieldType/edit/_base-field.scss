@@ -1,69 +1,58 @@
-.ez-field-edit {
+.ibexa-field-edit {
     &__label {
         @include label-required();
     }
 
-    &__label-wrapper {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-
-    &__icon-wrapper {
-        width: calculateRem(16px);
-        height: calculateRem(16px);
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: calculateRem(4px);
-
-        .ez-icon {
-            fill: $ibexa-color-base-dark;
+    &__data {
+        &--compound {
+            border: calculateRem(1px) solid $ibexa-color-dark-200;
+            border-radius: $ibexa-border-radius;
+            padding: 0 calculateRem(23px) calculateRem(4px);
         }
     }
 
-    &__data,
-    &__preview {
-        padding-top: calculateRem(8px);
+    &__error {
+        color: $ibexa-color-danger;
     }
 
-    .ez-data-description {
-        margin-bottom: calculateRem(16px);
-        color: $ibexa-color-base-dark;
+    .ibexa-input-text-wrapper {
+        width: auto;
     }
 
-    .ez-data-source__label {
-        &:after {
-            content: ': ';
-        }
+    .ibexa-form-help {
+        margin-top: calculateRem(8px);
+    }
+
+    .ibexa-form-error {
+        min-height: calculateRem(18px);
+        margin: calculateRem(4px) 0;
     }
 
     &--nontranslatable,
     &--disabled {
-        opacity: 0.4;
         pointer-events: none;
-    }
 
-    &__error {
-        @include error-under-input();
-    }
+        .ibexa-label {
+            color: $ibexa-color-black-300;
+        }
 
-    .ez-data-source__input {
-        &.is-invalid {
-            @include input-invalid;
+        &__data {
+            &--compound {
+                border-color: $ibexa-color-light-400;
+            }
         }
     }
 }
 
-.ez-content-edit {
-    .ez-field-edit {
+.ibexa-content-edit {
+    .ibexa-field-edit {
         padding: calculateRem(24px) 0;
         border-bottom: calculateRem(1px) solid $ibexa-color-base;
 
         &__label-wrapper {
             flex: 0 0 calculateRem(200px);
 
-            .ez-field-edit__label {
+            .ibexa-field-edit__label {
                 margin: 0;
                 font-size: calculateRem(16px);
                 font-weight: normal;
@@ -71,7 +60,7 @@
             }
         }
 
-        .ez-data-source__label {
+        .ibexa-data-source__label {
             margin-bottom: calculateRem(10px);
             color: $ibexa-color-font-pale;
         }

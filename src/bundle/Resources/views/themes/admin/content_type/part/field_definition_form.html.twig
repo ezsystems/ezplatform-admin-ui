@@ -1,0 +1,60 @@
+{% trans_default_domain 'content_type' %}
+
+{% form_theme form '@ezdesign/ui/form_fields.html.twig' %}
+
+{% set name = '' %}
+{% set value = form.vars.value %}
+
+{% if value.names[language_code] and value.names[content_type.mainLanguageCode] %}
+    {% set name = value.names[content_type.mainLanguageCode] %}
+{% endif %}
+
+{%- embed "@ezdesign/ui/component/collapse.html.twig" with {
+    'body_id': form.vars.id ~ '_collapse',
+    'header_label': name,
+    'is_expanded': false,
+    'is_draggable': true,
+    'class': 'ibexa-collapse--field-definition ibexa-field-definition-' ~ form.identifier.vars.value,
+    'data_attr': {
+        'data-is-new-field': true,
+        'data-field-definition-identifier': form.identifier.vars.value
+    },
+    'extra_actions': [
+        {
+            'icon_name': 'trash',
+            'button_class': 'ibexa-collapse__extra-action-button--remove-field-definitions',
+        }
+    ]
+} -%}
+    {%- block body_content -%}
+        <div class="ibexa-content-type-edit__field-definition-content">
+            {{ form_row(form.name) }}
+            {{ form_row(form.identifier) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.isRequired) }}
+            {{ form_row(form.isSearchable) }}
+            {{ form_row(form.isTranslatable) }}
+            {{ form_row(form.isThumbnail) }}
+            {{ form_row(form.fieldGroup, { attr: {
+                class: "ibexa-input ibexa-input--field-group"
+            }}) }}
+            {{ form_widget(form.position, { attr: {
+                hidden: 'hidden',
+                class: "ibexa-input ibexa-input--position"
+            }}) }}
+
+            {# Field type specific fields below #}
+            {{ ez_render_field_definition_edit(value, {
+                'languageCode': language_code,
+                'form': form,
+                'group_class': value.group_class|default(''),
+                'is_translation': is_translation,
+            }) }}
+
+            {# Default rendering #}
+            {% for child in form|filter(child => child.isRendered() == false) %}
+                {{ form_row(child) }}
+            {% endfor %}
+        </div>
+    {%- endblock -%}
+{%- endembed -%}

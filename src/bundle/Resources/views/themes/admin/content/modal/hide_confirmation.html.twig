@@ -3,9 +3,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ 'content.hide.modal.title'|trans()|desc('Content hide conflict') }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <svg class="ez-icon ez-icon--medium" aria-hidden="true">
-                        <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="ibexa-icon ibexa-icon--medium" aria-hidden="true">
+                        <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                     </svg>
                 </button>
             </div>
@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="modal-footer" data-backdrop="true">
-                <button class="btn btn-primary btn-confirm">{{ 'content.hide.modal.confirm'|trans()|desc('Confirm') }}</button>
-                <button class="ez-btn ez-btn--no-border btn btn-cancel" data-dismiss="modal">{{ 'content.hide.modal.cancel'|trans()|desc('Cancel') }}</button>
+                <button class="btn ibexa-btn ibexa-btn--primary ibexa-btn--confirm">{{ 'content.hide.modal.confirm'|trans()|desc('Confirm') }}</button>
+                <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--cancel" data-bs-dismiss="modal">{{ 'content.hide.modal.cancel'|trans()|desc('Cancel') }}</button>
             </div>
         </div>
     </div>

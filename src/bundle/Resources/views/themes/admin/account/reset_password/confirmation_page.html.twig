@@ -1,9 +1,9 @@
 {% extends '@ezdesign/account/base.html.twig' %}
 
 {%- block content -%}
-    <h2 class="ez-login__actions-headline">{{ 'ezplatform.reset_user_password.change_password'|trans|desc('Change password') }}</h2>
+    <h2 class="ibexa-login__actions-headline">{{ 'ezplatform.reset_user_password.change_password'|trans|desc('Change password') }}</h2>
     <p>
         {{ 'ezplatform.reset_user_password.success'|trans({ '%login%': path('login') })
-        |desc('Your password has been changed. You can <a class="ez-link" href="%login%">log in</a> to eZ Platform.')|raw }}
+        |desc('Your password has been changed. You can <a href="%login%">log in</a> to eZ Platform.')|raw }}
     </p>
 {%- endblock content -%}

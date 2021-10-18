@@ -1,18 +1,17 @@
 (function(global, doc, eZ, Leaflet) {
-    const SELECTOR_FIELD = '.ez-field-edit--ezgmaplocation';
-    const SELECTOR_ADDRESS_INPUT = '.ez-data-source__field--address .ez-data-source__input';
-    const SELECTOR_LAT_FIELD = '.ez-data-source__field--latitude';
-    const SELECTOR_LON_FIELD = '.ez-data-source__field--longitude';
-    const SELECTOR_LAT_INPUT = '.ez-data-source__field--latitude .ez-data-source__input';
-    const SELECTOR_LON_INPUT = '.ez-data-source__field--longitude .ez-data-source__input';
-    const SELECTOR_LABEL_WRAPPER = '.ez-field-edit__label-wrapper';
-    const SELECTOR_ADDRESS_ERROR_NODE = '.ez-data-source__field--address';
-    const SELECTOR_LAT_ERROR_NODE = '.ez-data-source__field--latitude';
-    const SELECTOR_LON_ERROR_NODE = '.ez-data-source__field--longitude';
+    const SELECTOR_FIELD = '.ibexa-field-edit--ezgmaplocation';
+    const SELECTOR_ADDRESS_INPUT = '.ibexa-data-source__field--address .ibexa-data-source__input';
+    const SELECTOR_LAT_FIELD = '.ibexa-data-source__field--latitude';
+    const SELECTOR_LON_FIELD = '.ibexa-data-source__field--longitude';
+    const SELECTOR_LAT_INPUT = '.ibexa-data-source__field--latitude .ibexa-data-source__input';
+    const SELECTOR_LON_INPUT = '.ibexa-data-source__field--longitude .ibexa-data-source__input';
+    const SELECTOR_ADDRESS_ERROR_NODE = '.ibexa-data-source__field--address';
+    const SELECTOR_LAT_ERROR_NODE = '.ibexa-data-source__field--latitude';
+    const SELECTOR_LON_ERROR_NODE = '.ibexa-data-source__field--longitude';
     const EVENT_BLUR = 'blur';
     const EVENT_KEYUP = 'keyup';
-    const EVENT_CANCEL_ERRORS = 'ez-cancel-errors';
-    const EVENT_ADDRESS_NOT_FOUND = 'ez-address-not-found';
+    const EVENT_CANCEL_ERRORS = 'ibexa-cancel-errors';
+    const EVENT_ADDRESS_NOT_FOUND = 'ibexa-address-not-found';
     const POSITION_TYPE_LONGITUDE = 'longitude';
     const POSITION_TYPE_LATITUDE = 'latitude';
     const VALIDATE_LONGITUDE = 'validateLongitude';
@@ -31,7 +30,7 @@
         validateCoordInput(input, { min, max }) {
             const value = parseFloat(input.value.replace(',', '.'));
             const result = { isError: false };
-            const label = input.closest('.ez-data-source__field').querySelector('.ez-data-source__label').innerHTML;
+            const label = input.closest('.ibexa-data-source__field').querySelector('.ibexa-data-source__label').innerHTML;
             const isNumber = !isNaN(value);
             const isInRange = value <= max && value >= min;
 
@@ -311,7 +310,7 @@
                 );
                 const allFieldsResult = { isError: true, errorMessage: errorMessage };
 
-                config.errorNodeSelectors = [SELECTOR_LABEL_WRAPPER];
+                config.errorNodeSelectors = [`${SELECTOR_FIELD} > .ibexa-form-error`];
                 this.toggleInvalidState(true, config, event.target);
                 this.toggleErrorMessage(allFieldsResult, config, event.target);
             }
@@ -329,14 +328,14 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
                 eventName: EVENT_ADDRESS_NOT_FOUND,
                 callback: 'showNotFoundError',
-                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                errorNodeSelectors: [`${SELECTOR_FIELD} > .ibexa-form-error`],
             },
             {
                 isValueValidator: false,
                 selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
                 eventName: EVENT_CANCEL_ERRORS,
                 callback: 'cancelErrors',
-                errorNodeSelectors: [SELECTOR_LABEL_WRAPPER],
+                errorNodeSelectors: [`${SELECTOR_FIELD} > .ibexa-form-error`],
             },
             {
                 selector: `${SELECTOR_FIELD} ${SELECTOR_ADDRESS_INPUT}`,
@@ -349,7 +348,7 @@
                 positionType: POSITION_TYPE_LONGITUDE,
                 eventName: EVENT_BLUR,
                 callback: VALIDATE_LONGITUDE,
-                errorNodeSelectors: [SELECTOR_LON_ERROR_NODE],
+                errorNodeSelectors: [`${SELECTOR_LON_ERROR_NODE} .ibexa-form-error`],
                 invalidStateSelectors: [SELECTOR_LON_FIELD],
             },
             {
@@ -357,7 +356,7 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
                 eventName: EVENT_KEYUP,
                 callback: 'validateLongitudeOnEnter',
-                errorNodeSelectors: [SELECTOR_LON_ERROR_NODE],
+                errorNodeSelectors: [`${SELECTOR_LON_ERROR_NODE} .ibexa-form-error`],
                 invalidStateSelectors: [SELECTOR_LON_FIELD],
             },
             {
@@ -365,7 +364,7 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LON_INPUT}`,
                 eventName: EVENT_CANCEL_ERRORS,
                 callback: 'cancelErrors',
-                errorNodeSelectors: [SELECTOR_LON_ERROR_NODE],
+                errorNodeSelectors: [`${SELECTOR_LON_ERROR_NODE} .ibexa-form-error`],
                 invalidStateSelectors: [SELECTOR_LON_FIELD],
             },
             {
@@ -373,7 +372,7 @@
                 positionType: POSITION_TYPE_LATITUDE,
                 eventName: EVENT_BLUR,
                 callback: VALIDATE_LATITUDE,
-                errorNodeSelectors: [SELECTOR_LAT_ERROR_NODE],
+                errorNodeSelectors: [`${SELECTOR_LAT_ERROR_NODE} .ibexa-form-error`],
                 invalidStateSelectors: [SELECTOR_LAT_FIELD],
             },
             {
@@ -381,7 +380,7 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
                 eventName: EVENT_KEYUP,
                 callback: 'validateLatitudeOnEnter',
-                errorNodeSelectors: [SELECTOR_LAT_ERROR_NODE],
+                errorNodeSelectors: [`${SELECTOR_LAT_ERROR_NODE} .ibexa-form-error`],
                 invalidStateSelectors: [SELECTOR_LAT_FIELD],
             },
             {
@@ -389,7 +388,7 @@
                 selector: `${SELECTOR_FIELD} ${SELECTOR_LAT_INPUT}`,
                 eventName: EVENT_CANCEL_ERRORS,
                 callback: 'cancelErrors',
-                errorNodeSelectors: [SELECTOR_LAT_ERROR_NODE],
+                errorNodeSelectors: [`${SELECTOR_LAT_ERROR_NODE} .ibexa-form-error`],
                 invalidStateSelectors: [SELECTOR_LAT_FIELD],
             },
         ],
@@ -455,13 +454,13 @@
         const longitudeInput = field.querySelector(SELECTOR_LON_INPUT);
         const latitudeInput = field.querySelector(SELECTOR_LAT_INPUT);
         const areCoordsSet = !!longitudeInput.value.length && !!latitudeInput.value.length;
-        const locateMeBtn = field.querySelector('.ez-data-source__locate-me .btn');
-        const searchBtn = field.querySelector('.btn--search-by-address');
+        const locateMeBtn = field.querySelector('.ibexa-data-source__locate-me .btn');
+        const searchBtn = field.querySelector('.ibexa-btn--search-by-address');
         const mapConfig = {
             zoom: areCoordsSet ? 15 : 1,
             center: areCoordsSet ? [parseFloat(latitudeInput.value), parseFloat(longitudeInput.value)] : [0, 0],
         };
-        const map = Leaflet.map(field.querySelector('.ez-data-source__map'), mapConfig);
+        const map = Leaflet.map(field.querySelector('.ibexa-data-source__map'), mapConfig);
 
         longitudeInput.value = longitudeInput.dataset.value.replace(',', '.');
         latitudeInput.value = latitudeInput.dataset.value.replace(',', '.');

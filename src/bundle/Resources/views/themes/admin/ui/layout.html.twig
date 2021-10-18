@@ -97,13 +97,13 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('bundles/ezplatformadminui/img/favicon-16x16.png') }}" />
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bundles/ezplatformadminui/img/favicon-32x32.png') }}" />
+
         {{ ez_render_component_group('stylesheet-head') }}
         {{ ez_render_component_group('script-head') }}
 
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react/umd/react.production.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/react-dom/umd/react-dom.production.min.js') }}"></script>
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/@popperjs/core/dist/umd/popper.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/create-react-class/create-react-class.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/prop-types/prop-types.min.js') }}"></script>
@@ -112,47 +112,83 @@
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/moment-timezone/builds/moment-timezone-with-data.min.js') }}"></script>
         <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
         <script src="{{ asset('assets/translations/config.js') }}"></script>
-        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/alloyeditor/dist/alloy-editor/alloy-editor-no-react-min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/chart-js/dist/Chart.min.js') }}"></script>
         <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/js-md5/build/md5.min.js') }}"></script>
     </head>
     <body class="{% block body_class %}{% endblock %}">
         <div id="react-udw" data-filter-subtree-udw-config="{{ ez_udw_config('single_container', {}) }}"></div>
 
-        {% block navigation %}
-            {% include '@ezdesign/ui/menu/top_navigation.html.twig' %}
-        {% endblock %}
-        {% block header %}
-            <div class="container-fluid ez-header {% block header_class %}{% endblock %}">
-                <div class="container">
-                    {% block breadcrumbs %}{% endblock %}
-                    {% block page_title %}{% endblock %}
+        {% block header_row %}
+            <div class="ibexa-main-header">
+                <div class="ibexa-main-header__brand-column">
+                    <a class="ibexa-main-header__brand" href="{{ url('ezplatform.dashboard') }}">
+                        <img class="ibexa-main-header__brand-image" src="{{ asset('bundles/ezplatformadminui/img/ibexa-logo.svg') }}" alt="Ibexa" />
+                    </a>
+                </div>
+                <div class="ibexa-main-header__search-column">
+                    {{ ez_render_component_group('global-search') }}
+                </div>
+                <div class="ibexa-main-header__user-menu-column">
+                    {{ knp_menu_render('ezplatform_admin_ui.menu.user', {
+                        'depth': 1,
+                        'template': '@ezdesign/ui/menu/user.html.twig'
+                    }) }}
                 </div>
             </div>
         {% endblock %}
 
-        <div class="container-fluid ez-main-container">
-            {% block content %}
+        <div class="ibexa-main-container {% block main_container_class %}{% endblock %}">
+            {% block side_column %}
+                <div class="ibexa-main-container__side-column">
+                    {% block left_sidebar %}
+                        {% set main_menu_context = {
+                            'location': location ?? null,
+                            'content': content ?? null
+                        } %}
+                        {% set main_menu = knp_menu_get('ezplatform_admin_ui.menu.main', [], main_menu_context) %}
 
-                {% block left_sidebar %}
-                    <div class="ez-side-menu">
-                        <div class="ez-sticky-container">
-                            {{ knp_menu_render('ezplatform_admin_ui.menu.content.sidebar_left', {'template': '@ezdesign/ui/menu/sidebar_left.html.twig'}) }}
-                        </div>
-                    </div>
-                    <div class="ez-content-tree-container"
-                        data-tree-root-location-id="{{ content_tree_module_root|default(ez_admin_ui_config['contentTree']['treeRootLocationId']) }}"
-                        data-current-location-path="{{ location_path|default('') }}">
-                        <div class="ez-content-tree-container__wrapper"></div>
-                    </div>
-                {% endblock left_sidebar %}
+                        <nav class="ibexa-main-menu">
+                            {{ knp_menu_render(main_menu, {
+                                'depth': 1,
+                                'template': '@ezdesign/ui/menu/main.html.twig',
+                                'currentClass': 'active',
+                                'ancestorClass': 'active'
+                            }) }}
+                        
+                            {{ knp_menu_render(main_menu, {
+                                'depth': 2,
+                                'template': '@ezdesign/ui/menu/main_2nd_level.html.twig',
+                                'currentClass': 'active',
+                                'ancestorClass': 'active'
+                            }) }}
+                            
+                            {% block content_tree %}{% endblock %}
+                        </nav>
+                    {% endblock %}
+                </div>
+            {% endblock %}
 
-            {% endblock content %}
+            {% block content_column %}
+                <div class="ibexa-main-container__content-column">
+                    <div class="container">
+                        {% block content_header %}
+                            <div class="ibexa-page-header-wrapper">
+                                <div class="ibexa-breadcrums-wrapper">
+                                    {% block breadcrumbs %}{% endblock %}
+                                </div>
+                                <div class="ibexa-content-menu-wrapper">
+                                    {% block context_menu %}{% endblock %}
+                                </div>
+                                <div class="ibexa-header-wrapper">
+                                    {% block header %}{% endblock %}
+                                </div>
+                            </div>
+                        {% endblock %}
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            {% endblock %}
         </div>
-
-        {% block footer %}
-            {% include '@ezdesign/ui/footer.html.twig' %}
-        {% endblock %}
 
         <div
             class="ez-notifications-container"

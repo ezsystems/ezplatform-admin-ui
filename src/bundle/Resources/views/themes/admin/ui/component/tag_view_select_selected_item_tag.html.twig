@@ -1,0 +1,17 @@
+{% set is_deletable = is_deletable is defined ? is_deletable : true %}
+{% set is_disabled = is_disabled is defined ? is_disabled : false %}
+
+<div class="ibexa-tag-view-select__selected-item-tag" data-id="{{ id }}">
+    {{ name }}
+    <button
+        type="button"
+        class="btn ibexa-tag-view-select__selected-item-tag-remove-btn"
+        tabindex="-1"
+        {% if not is_deletable %}hidden{% endif %}
+        {% if is_disabled %}disabled{% endif %}
+    >
+        <svg class="ibexa-icon ibexa-icon--tiny">
+            <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
+        </svg>
+    </button>
+</div>

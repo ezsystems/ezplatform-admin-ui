@@ -1,18 +1,33 @@
-.ez-label {
+.ibexa-label {
     @include label-required();
+    @include ibexa-font-sans-serif();
+
+    font-size: $ibexa-text-font-size-small;
+    color: $ibexa-color-dark-400;
+    line-height: calculateRem(18px);
+    margin-top: calculateRem(20px);
     margin-bottom: calculateRem(8px);
-    color: $ibexa-color-font-pale;
+    padding-top: 0;
+    padding-bottom: 0;
 
-    &.checkbox-inline,
-    &.form-check-label {
-        margin-bottom: .0625rem;
+    &--checkbox-radio {
+        font-size: calculateRem(14px);
+        line-height: calculateRem(21px);
+        color: $ibexa-color-dark;
+        margin: 0 0 calculateRem(9px);
 
-        &:after {
-            content: '';
+        &.required {
+            &:after {
+                content: '';
+            }
         }
     }
+}
 
-    &.form-check-label:not(.checkbox-inline) {
-        font-weight: 400;
+.form-check-inline {
+    .ibexa-label {
+        &--checkbox-radio {
+            margin: 0;
+        }
     }
 }

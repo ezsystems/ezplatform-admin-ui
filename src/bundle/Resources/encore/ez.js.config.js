@@ -12,10 +12,17 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/helpers/user.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/helpers/tooltips.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/helpers/table.helper.js'),
+    path.resolve(__dirname, '../public/js/scripts/helpers/cookies.helper.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.format.date.js'),
     path.resolve(__dirname, '../public/js/scripts/core/draggable.js'),
-    path.resolve(__dirname, '../public/js/scripts/core/custom.dropdown.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/dropdown.js'),
     path.resolve(__dirname, '../public/js/scripts/core/custom.tooltip.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/base.chart.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/line.chart.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/pie.chart.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/adaptive.items.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/popup.menu.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/tag.view.select.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.notifications.js'),
     path.resolve(__dirname, '../public/js/scripts/button.trigger.js'),
     path.resolve(__dirname, '../public/js/scripts/button.prevent.default.js'),
@@ -26,6 +33,13 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.notifications.modal.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.location.add.translation.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.form.autosubmit.js'),
+    path.resolve(__dirname, '../public/js/scripts/admin.anchor.navigation'),
+    path.resolve(__dirname, '../public/js/scripts/admin.context.menu'),
+    path.resolve(__dirname, '../public/js/scripts/sidebar/main.menu.js'),
+    path.resolve(__dirname, '../public/js/scripts/admin.input.text.js'),
+    path.resolve(__dirname, '../public/js/scripts/admin.table.js'),
+    path.resolve(__dirname, '../public/js/scripts/core/collapse.js'),
+    path.resolve(__dirname, '../public/js/scripts/admin.dropdown.js'),
 ];
 const fieldTypes = [];
 
@@ -53,16 +67,19 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-create-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.edit'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-edit-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.relation.default.location.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.contenttype.edit'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-list-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
@@ -87,10 +104,7 @@ module.exports = (Encore) => {
         ])
         .addEntry('ezplatform-admin-ui-policy-edit-js', [path.resolve(__dirname, '../public/js/scripts/admin.limitation.pick.js')])
         .addEntry('ezplatform-admin-ui-role-list-js', [path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js')])
-        .addEntry('ezplatform-admin-ui-role-view-js', [
-            path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
-        ])
+        .addEntry('ezplatform-admin-ui-role-view-js', [path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js')])
         .addEntry('ezplatform-admin-ui-role-assignment-create-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.role_assignment.add.js'),
         ])
@@ -99,7 +113,6 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.search.filters.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.search.js'),
             path.resolve(__dirname, '../public/js/scripts/udw/select.location.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
             path.resolve(__dirname, '../public/js/scripts/button.translation.edit.js'),
         ])
         .addEntry('ezplatform-admin-ui-section-list-js', [
@@ -107,17 +120,12 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-section-view-js', [path.resolve(__dirname, '../public/js/scripts/admin.section.view.js')])
-        .addEntry('ezplatform-admin-ui-trash-list-js', [
-            path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
-        ])
+        .addEntry('ezplatform-admin-ui-trash-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.list.js')])
         .addEntry('ezplatform-admin-ui-content-preview-js', [path.resolve(__dirname, '../public/js/scripts/admin.preview.js')])
         .addEntry('ezplatform-admin-ui-location-view-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.location.change.language.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.content.tree.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.view.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.location.adaptive.tabs.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.visibility.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.update.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.tooglecontentpreview.js'),
@@ -142,7 +150,6 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.bookmark.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.main.translation.update.js'),
-            path.resolve(__dirname, '../public/js/scripts/table.checkbox.js'),
         ])
         .addEntry('ezplatform-admin-ui-modal-location-trash-js', [path.resolve(__dirname, '../public/js/scripts/admin.trash.js')])
         .addEntry('ezplatform-admin-ui-modal-location-trash-container-js', [
@@ -158,14 +165,12 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.version.edit.conflict.js'),
             path.resolve(__dirname, '../public/js/scripts/button.translation.edit.js'),
-            path.resolve(__dirname, '../public/js/scripts/table.checkbox.js'),
         ])
         .addEntry('ezplatform-admin-ui-link-manager-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.linkmanager.list.js')])
         .addEntry('ezplatform-admin-ui-link-manager-view-js', [path.resolve(__dirname, '../public/js/scripts/button.content.edit.js')])
         .addEntry('ezplatform-admin-ui-change-user-password-js', [path.resolve(__dirname, '../public/js/scripts/user_password.change.js')])
         .addEntry('ezplatform-admin-ui-content-edit-parts-js', [
             path.resolve('./vendor/ezsystems/ezplatform-admin-ui-assets/Resources/public/vendors/leaflet/dist/leaflet.js'),
-            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-field.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-file-field.js'),
@@ -173,6 +178,8 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/multi-input-field.js'),
             ...fieldTypes,
             path.resolve(__dirname, '../public/js/scripts/sidebar/extra.actions.js'),
+            path.resolve(__dirname, '../public/js/scripts/toggle.button.state.toggle.js'),
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
         ])
         .addEntry('ezplatform-admin-ui-settings-datetime-format-update-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.settings.datetimeformat.update.js'),
@@ -212,12 +219,16 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../../ui-dev/src/modules/content-tree/content.tree.module.js'),
         ])
         .addEntry('ezplatform-admin-ui-url-management-js', [
-            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.url.wildcards.create.js'),
+            path.resolve(__dirname, '../public/js/scripts/toggle.button.state.toggle.js'),
         ])
         .addEntry('ezplatform-admin-ui-url-management-update-js', [
-            path.resolve(__dirname, '../public/js/scripts/admin.url.wildcards.update.js'),
+            path.resolve(__dirname, '../public/js/scripts/toggle.button.state.toggle.js'),
         ])
-        .addEntry('ezplatform-admin-ui-login-js', [path.resolve(__dirname, '../public/js/scripts/login.js')]);
+        .addEntry('ezplatform-admin-ui-login-js', [path.resolve(__dirname, '../public/js/scripts/login.js')])
+        .addEntry('ezplatform-admin-ui-tabs-js', [
+            path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
+            path.resolve(__dirname, '../public/js/scripts/admin.location.adaptive.tabs.js'),
+        ]);
 };

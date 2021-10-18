@@ -1,23 +1,25 @@
 {% block checkbox_row %}
-    <div class="ez-field-edit-preview__info ez-field-edit-preview__info--{{ name }}">
-        <div class="ez-field-edit-preview__input-wrapper">
-            <span class="ez-data-source__label-text">{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</span>
-            <input class="ez-input ez-input--checkbox" type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %}>
+    <div class="ibexa-field-edit-preview__info ibexa-field-edit-preview__info--{{ name }}">
+        <div class="ibexa-field-edit-preview__input-wrapper">
+            <input class="ibexa-input ibexa-input--checkbox" type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %}>
+            <span class="ibexa-data-source__label-text">{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</span>
         </div>
     </div>
 {% endblock %}
 
 {% block integer_row %}
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ez-field-edit-preview__label')|trim}) %}
-    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-field-edit-preview__input')|trim}) %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ibexa-field-edit-preview__label')|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ibexa-field-edit-preview__input')|trim}) %}
 
-    <div class="ez-field-edit-preview__info ez-field-edit-preview__info--{{ name }}">
-        <div class="ez-field-edit-preview__label-wrapper">
+    <div class="ibexa-field-edit-preview__info ibexa-field-edit-preview__info--{{ name }}">
+        <div class="ibexa-field-edit-preview__label-wrapper">
             {{ form_label(form) }}
-            {{ block('form_errors') }}
         </div>
-        <div class="ez-field-edit-preview__input-wrapper">
+        <div class="ibexa-field-edit-preview__input-wrapper">
             {{ form_widget(form) }}
+        </div>
+        <div class="ibexa-form-error">
+            {{ block('form_errors') }}
         </div>
     </div>
 {% endblock %}

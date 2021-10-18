@@ -1,34 +1,6 @@
+{% use '@ezdesign/ui/form_fields/dropdown_widget.html.twig' %}
+
 {%- block ezplatform_fieldtype_ezselection_widget -%}
-    {% set attr = attr|merge({'hidden': 'hidden', 'class': 'ez-data-source__input ez-data-source__input--selection'}) %}
+    {% set attr = attr|merge({'class': 'ibexa-data-source__input ibexa-data-source__input--selection'}) %}
     {{ block('choice_widget') }}
-
-    <div class="ez-custom-dropdown__wrapper">
-        <ul class="ez-custom-dropdown__selection-info">
-            {% for choice in choices %}
-                {% if choice is selectedchoice(value) %}
-                    <li class="ez-custom-dropdown__selected-item" data-value="{{ choice.value }}">
-                        {{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
-                        <span class="ez-custom-dropdown__remove-selection"></span>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-        <ul class="ez-custom-dropdown__items ez-custom-dropdown__items--hidden">
-            {%- if placeholder is not none -%}
-                <li data-value="" class="ez-custom-dropdown__item"{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</li>
-            {%- endif -%}
-            {% for choice in choices %}
-                <li data-value="{{ choice.value }}" class="ez-custom-dropdown__item{% if choice is selectedchoice(value) %} ez-custom-dropdown__item--selected{% endif %}">
-                    {% if multiple %}
-                        <input type="checkbox" name="{{ id }}-checkbox" class="ez-input ez-input--checkbox" {% if choice is selectedchoice(value) %}checked{% endif %} />
-                    {% else %}
-                        <input type="radio" name="{{ id }}-radio" class="ez-input ez-input--radio" {% if choice is selectedchoice(value) %}checked{% endif %} />
-                    {% endif %}
-
-                    <span class="ez-custom-dropdown__item-label">{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-        <div class="ez-custom-dropdown__selected-overflow-number" hidden></div>
-    </div>
 {%- endblock -%}

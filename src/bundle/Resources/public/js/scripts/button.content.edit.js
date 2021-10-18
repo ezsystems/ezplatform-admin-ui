@@ -1,4 +1,4 @@
-(function(global, doc, $, eZ, Translator, Routing) {
+(function(global, doc, bootstrap, eZ, Translator, Routing) {
     const FORM_EDIT = 'form.ez-edit-content-form';
     const showErrorNotification = eZ.helpers.notification.showErrorNotification;
     const editVersion = (event) => {
@@ -27,23 +27,23 @@
         };
         const addDraft = () => {
             submitVersionEditForm();
-            $('#version-draft-conflict-modal').modal('hide');
+            bootstrap.Modal.getOrCreateInstance(doc.querySelector('#version-draft-conflict-modal')).hide();
         };
         const showModal = (modalHtml) => {
             const wrapper = doc.querySelector('.ez-modal-wrapper');
 
             wrapper.innerHTML = modalHtml;
 
-            const addDraftButton = wrapper.querySelector('.ez-btn--add-draft');
+            const addDraftButton = wrapper.querySelector('.ibexa-btn--add-draft');
 
             if (addDraftButton) {
                 addDraftButton.addEventListener('click', addDraft, false);
             }
 
             wrapper
-                .querySelectorAll('.ez-btn--prevented')
+                .querySelectorAll('.ibexa-btn--prevented')
                 .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
-            $('#version-draft-conflict-modal').modal('show');
+            bootstrap.Modal.getOrCreateInstance(doc.querySelector('#version-draft-conflict-modal')).show();
         };
         const handleCanEditCheck = (response) => {
             if (response.canEdit) {
@@ -73,5 +73,5 @@
             .catch(showErrorNotification);
     };
 
-    doc.querySelectorAll('.ez-btn--content-edit').forEach((button) => button.addEventListener('click', editVersion, false));
-})(window, window.document, window.jQuery, window.eZ, window.Translator, window.Routing);
+    doc.querySelectorAll('.ibexa-btn--content-edit').forEach((button) => button.addEventListener('click', editVersion, false));
+})(window, window.document, window.bootstrap, window.eZ, window.Translator, window.Routing);

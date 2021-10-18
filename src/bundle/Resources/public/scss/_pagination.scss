@@ -1,53 +1,29 @@
-.ez-pagination {
-    @include pagination-main-container();
-    padding: calculateRem(24px) calculateRem(16px);
+.ibexa-pagination {
+    display: flex;
+    justify-content: space-between;
 
-    &__text {
-        @include pagination-info();
+    &__info {
+        font-size: $ibexa-text-font-size-medium;
+        display: flex;
+        align-items: center;
+
+        & > * {
+            margin: 0 calculateRem(4px);
+        }
     }
 
-    &__btns {
+    &__navigation {
+        display: flex;
         margin: 0;
-        font-size: calculateRem(14px);
+        padding: 0;
+        list-style: none;
 
         .page-item {
-            position: relative;
-            margin: 0 calculateRem(2px);
+            @include pagination-item();
         }
 
         .page-link {
             @include pagination-link();
-        }
-
-        .page-item.prev {
-            @include pagination-prev-btn();
-
-            .page-link {
-                padding-left: calculateRem(20px);
-            }
-        }
-
-        .page-item.next {
-            @include pagination-next-btn();
-
-            .page-link {
-                padding-right: calculateRem(20px);
-            }
-        }
-
-        .page-item.prev,
-        .page-item.next {
-            &.disabled {
-                .page-link {
-                    color: $ibexa-color-font-pale;
-                    cursor: not-allowed;
-                }
-            }
-
-            .page-link {
-                width: initial;
-                border-radius: 0;
-            }
         }
     }
 }

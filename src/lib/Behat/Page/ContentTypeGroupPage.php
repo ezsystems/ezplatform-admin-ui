@@ -12,6 +12,7 @@ use Behat\Mink\Session;
 use eZ\Publish\API\Repository\ContentTypeService;
 use Ibexa\AdminUi\Behat\Component\Dialog;
 use Ibexa\AdminUi\Behat\Component\Table\TableBuilder;
+use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Routing\Router;
@@ -71,6 +72,12 @@ class ContentTypeGroupPage extends Page
 
     public function delete(string $contentTypeName)
     {
+        $contentTypeLabelLocator = $this->getLocator('contentTypeLabel');
+        $listElement = $this->getHTMLPage()
+            ->findAll($contentTypeLabelLocator)
+            ->getByCriterion(new ElementTextCriterion($contentTypeName));
+        usleep(1000000); //TODO : refactor after redesign
+        $listElement->mouseOver();
         $this->table->getTableRow(['Name' => $contentTypeName])->select();
         $this->getHTMLPage()->find($this->getLocator('deleteButton'))->click();
         $this->dialog->verifyIsLoaded();
@@ -119,12 +126,13 @@ class ContentTypeGroupPage extends Page
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('pageTitle', '.ez-header h1'),
-            new VisibleCSSLocator('createButton', '.ez-icon-create'),
-            new VisibleCSSLocator('listHeader', '.ez-table-header .ez-table-header__headline, header .ez-table__headline, header h5'),
+            new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
+            new VisibleCSSLocator('createButton', '.ibexa-icon--create'),
+            new VisibleCSSLocator('listHeader', '.ibexa-table-header .ibexa-table-header__headline, header .ibexa-table__headline, header h5'),
             new VisibleCSSLocator('tableContainer', '.ez-container'),
-            new VisibleCSSLocator('deleteButton', '.ez-icon-trash,button[data-original-title^="Delete"]'),
+            new VisibleCSSLocator('deleteButton', '.ibexa-icon--trash,button[data-bs-original-title^="Delete"]'),
             new VisibleCSSLocator('tableItem', '.ez-main-container tbody tr'),
+            new VisibleCSSLocator('contentTypeLabel', '.ibexa-table__cell > a'),
         ];
     }
 }

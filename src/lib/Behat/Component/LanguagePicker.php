@@ -43,8 +43,8 @@ class LanguagePicker extends Component
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('languagePickerSelector', '.ez-extra-actions--edit:not(.ez-extra-actions--hidden) #content_edit_language'),
-            new VisibleCSSLocator('languageSelector', '.ez-extra-actions--edit:not(.ez-extra-actions--hidden) #content_edit_language .form-check-label'),
+            new VisibleCSSLocator('languagePickerSelector', '.ibexa-extra-actions--edit:not(.ibexa-extra-actions--hidden) #content_edit_language'),
+            new VisibleCSSLocator('languageSelector', '.ibexa-extra-actions--edit:not(.ibexa-extra-actions--hidden) #content_edit_language .form-check-label'),
         ];
     }
 }

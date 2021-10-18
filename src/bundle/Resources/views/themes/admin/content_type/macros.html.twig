@@ -9,8 +9,8 @@
     <a title="{{ 'content_type.action.edit'|trans|desc('Edit') }}"
        href="{{ edit_url }}"
         {% if class_name %}class="{{ class_name }}"{% endif %}>
-        <svg class="ez-icon ez-icon--secondary ez-icon-edit">
-            <use xlink:href="{{ ez_icon_path('edit') }}"></use>
+        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
+            <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
         </svg>
     </a>
 {% endmacro %}
@@ -23,8 +23,8 @@
         data-content-type-identifier="{{ content_type.identifier }}"
         data-content-type-group-id="{{ content_type_group.id }}"
         {% if class_name %}class="{{ class_name }}"{% endif %}>
-        <svg class="ez-icon ez-icon--secondary ez-icon-copy">
-            <use xlink:href="{{ ez_icon_path('copy') }}"></use>
+        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--copy">
+            <use xlink:href="{{ ibexa_icon_path('copy') }}"></use>
         </svg>
     </button>
 {% endmacro %}

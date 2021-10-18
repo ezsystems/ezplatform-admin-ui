@@ -1,9 +1,9 @@
 (function(global, doc) {
-    const togglers = doc.querySelectorAll('.ez-card__body-display-toggler');
+    const togglers = doc.querySelectorAll('.ibexa-card__body-display-toggler');
     const toggleFieldTypeView = (event) => {
         event.preventDefault();
 
-        event.currentTarget.closest('.ez-card--toggle-group').classList.toggle('ez-card--collapsed');
+        event.currentTarget.closest('.ibexa-card--toggle-group').classList.toggle('ibexa-card--collapsed');
     };
     const attachToggleField = (btn) => btn.addEventListener('click', toggleFieldTypeView);
 

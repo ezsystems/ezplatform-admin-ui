@@ -2,52 +2,55 @@
 
 {% import _self as macros %}
 
-<div class="ez-scrollable-table-wrapper">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>{{ 'tab.relations.table.name'|trans()|desc('Name') }}</th>
-            <th>{{ 'tab.relations.table.content_type'|trans()|desc('Content type') }}</th>
-            <th>{{ 'tab.relations.table.relation_type'|trans()|desc('Relation type') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-            {% if relations is not empty %}
-                {% for relation in relations %}
-                    {% set destination = relation.destinationContentInfo %}
-                    <tr>
-                        <td>
-                            {% if destination.mainLocationId is not null %}
-                                <a href="{{ path('_ez_content_view',
-                                    { 'contentId': destination.id, 'locationId': relation.resolvedDestinationLocation.id }) }}"
-                                >
-                                    {{ ez_content_name(destination) }}
-                                </a>
-                            {% else %}
-                                {{ ez_content_name(destination) }}
-                            {% endif %}
-                        </td>
-                        <td>{{ content_types[destination.contentTypeId].name }}</td>
-                        <td>
-                            {{ macros.relation_type(relation) }}
-                            {% if (relation.relationFieldDefinitionName) %}
-                                ({{ relation.relationFieldDefinitionName }})
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
+{% set body_rows = [] %}
+{% if relations is not empty %}
+    {% for relation in relations %}
+        {% set body_row_cols = [] %}
+        {% set destination = relation.destinationContentInfo %}
+
+        {% set col_raw %}
+            {% if destination.mainLocationId is not null %}
+                <a href="{{ path('_ez_content_view', { 'contentId': destination.id, 'locationId': relation.resolvedDestinationLocation.id }) }}">
+                    {{ ez_content_name(destination) }}
+                </a>
             {% else %}
-                <tr>
-                    <td class="ez-table__cell ez-table__cell--no-content" colspan="3">
-                        <p class="ez-table-no-content mb-0 py-0">
-                            {{ 'tab.relations.no_relations'|trans()|desc('This Content item has no related content.') }}
-                        </p>
-                    </td>
-                </tr>
+                {{ ez_content_name(destination) }}
             {% endif %}
-        </tbody>
-    </table>
-</div>
+        {% endset %}
+        {% set body_row_cols = body_row_cols|merge([{
+            content: col_raw,
+        }]) %}
+
+        {% set body_row_cols = body_row_cols|merge([
+            { content: content_types[destination.contentTypeId].name },
+        ]) %}
+
+        {% set col_raw %}
+            {{ macros.relation_type(relation) }}
+            {% if (relation.relationFieldDefinitionName) %}
+                ({{ relation.relationFieldDefinitionName }})
+            {% endif %}
+        {% endset %}
+        {% set body_row_cols = body_row_cols|merge([{
+            content: col_raw,
+        }]) %}
+
+        {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+    {% endfor %}
+{% endif %}
+
+{% include '@ezdesign/ui/component/table/table.html.twig' with {
+    headline: 'tab.relations.related_content'|trans({
+            '%contentName%' : ez_content_name(content)
+        })|desc('Related content (Content items used by %contentName%)'),
+    head_cols: [
+        { content: 'tab.relations.table.name'|trans()|desc('Name') },
+        { content: 'tab.relations.table.content_type'|trans()|desc('Content type') },
+        { content: 'tab.relations.table.relation_type'|trans()|desc('Relation type') },
+    ],
+    body_rows: body_rows,
+    empty_table_info_text: 'tab.relations.no_relations'|trans()|desc('This Content item has no related content.'),
+} %}
 
 {% macro relation_type(relation) %}
     {% if relation.type == constant('eZ\\Publish\\API\\Repository\\Values\\Content\\Relation::COMMON') %}

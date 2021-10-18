@@ -3,9 +3,9 @@
 <div class="modal fade ez-modal ez-modal--no-header ez-modal--send-to-trash" id="delete-section-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <svg class="ez-icon ez-icon--medium" aria-hidden="true">
-                    <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <svg class="ibexa-icon ibexa-icon--medium" aria-hidden="true">
+                    <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                 </svg>
             </button>
             <div class="modal-body">
@@ -18,8 +18,8 @@
                     "action": path('ezplatform.section.delete', {'sectionId': section.id}),
                     'attr': {'class': 'd-inline-block'}
                 }) }}
-                {{ form_widget(form.delete, {'attr': {'class': 'btn btn-primary', 'disabled': not deletable}}) }}
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                {{ form_widget(form.delete, {'attr': {'class': 'btn ibexa-btn ibexa-btn--primary', 'disabled': not deletable}}) }}
+                <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
                     {{ 'form.cancel'|trans|desc('Cancel') }}
                 </button>
                 {{ form_end(form) }}

@@ -9,23 +9,35 @@
 {%- endblock -%}
 
 {% block ezbinaryfile_preview %}
-    <div class="ez-field-edit-preview">
-        <div class="ez-field-edit-preview__visual">
-            <div class="ez-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</div>
-            <div class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</div>
+    <div class="ibexa-field-edit-preview">
+        <div class="ibexa-field-edit-preview__visual">
+            <div class="ibexa-field-edit-preview__media-wrapper">
+                <div class="ibexa-field-edit-preview__actions">
+                    <a class="ibexa-field-edit-preview__action--preview btn ibexa-btn ibexa-btn--ghost ibexa-btn--small" href="{{ form.parent.vars.value.value.uri }}"
+                        download>
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('download') }}"></use>
+                        </svg>
+                        <span class="ibexa-btn__label">{{ 'ezbinaryfile.action.download'|trans|desc('Download') }}</span>
+                    </a>
+                    <button type="button" class="ibexa-field-edit-preview__action--remove btn ibexa-btn ibexa-btn--ghost ibexa-btn--small" >
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
+                        </svg>
+                        <span class="ibexa-btn__label">{{ 'ezbinaryfile.action.remove'|trans|desc('Delete') }}</span>
+                    </button>
+                </div>
+                <div class="ibexa-field-edit-preview__file-name-wrapper">
+                    <label class="ibexa-label form-label">{{ 'ezbinaryfile.file_name.label'|trans|desc('File name') }}</label>
+                    <p class="ibexa-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</p>
+                </div>
+                <div class="ibexa-field-edit-preview__file-size-wrapper">
+                    <label class="ibexa-label form-label">{{ 'ezbinaryfile.file_size.label'|trans|desc('Size') }}</label>
+                    <p class="ibexa-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</p>
+                </div>
+            </div>
+
         </div>
-        <div class="ez-field-edit-preview__actions">
-            <a class="ez-field-edit-preview__action--preview btn btn-icon" href="{{ form.parent.vars.value.value.uri }}"
-               title="{{ 'ezbinaryfile.action.download'|trans|desc('Download') }}" download>
-                <svg class="ez-icon ez-icon--small-medium">
-                    <use xlink:href="{{ ez_icon_path('download') }}"></use>
-                </svg>
-            </a>
-            <button type="button" class="ez-field-edit-preview__action--remove btn btn-icon" title="{{ 'ezbinaryfile.action.remove'|trans|desc('Remove') }}">
-                <svg class="ez-icon ez-icon--small-medium">
-                    <use xlink:href="{{ ez_icon_path('trash') }}"></use>
-                </svg>
-            </button>
-        </div>
+
     </div>
 {% endblock %}

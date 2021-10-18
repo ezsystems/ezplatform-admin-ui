@@ -21,7 +21,7 @@ const TranslationSelectorButton = ({ hideTranslationSelector, selectTranslation,
             <div className="c-translation-selector__header">
                 <span className="c-translation-selector__title">{`${editTranslationLabel} (${languageCodes.length})`}</span>
                 <button className="c-translation-selector__close-button btn" onClick={hideTranslationSelector}>
-                    <Icon name="discard" extraClasses="ez-icon--small" />
+                    <Icon name="discard" extraClasses="ibexa-icon--small" />
                 </button>
             </div>
             <div className="c-translation-selector__languages-wrapper">

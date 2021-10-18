@@ -5,41 +5,22 @@
     background: $ibexa-white;
     border-radius: $ibexa-border-radius;
 
-    &,
-    & * {
-        box-sizing: border-box;
+    .table .ibexa-table__header-cell {
+        border-top-width: 0;
     }
 
-    &__header {
-        width: 100%;
-        padding: 0 calculateRem(8px) calculateRem(32px);
-        font-weight: bold;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    &__title {
-        font-size: calculateRem(16px);
-        color: $ibexa-black;
-        flex: 1 1 auto;
-    }
-
-    &__actions {
-        display: flex;
-    }
-
-    &__actions .m-mfu {
-        margin-right: calculateRem(24px);
-        display: flex;
+    .ibexa-table-header {
+        margin-bottom: 0;
+        padding-bottom: calculateRem(20px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-dark-200;
     }
 
     &__list {
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size;
         line-height: calculateRem(40px);
         text-align: left;
         position: relative;
+        margin-bottom: calculateRem(16px);
     }
 
     &__list--processing:after {
@@ -63,59 +44,5 @@
     &__spinner {
         display: block;
         margin: calculateRem(20px);
-    }
-
-    &__pagination-container {
-        @include pagination-main-container();
-        padding: calculateRem(24px) 0 calculateRem(12px);
-
-        .c-pagination {
-            margin: 0;
-            font-size: calculateRem(14px);
-
-            .c-pagination-button {
-                position: relative;
-                margin: 0 calculateRem(2px);
-            }
-
-            .page-link {
-                @include pagination-link();
-            }
-
-            .c-pagination-button.prev {
-                @include pagination-prev-btn();
-
-                .page-link {
-                    padding-left: calculateRem(20px);
-                }
-            }
-
-            .c-pagination-button.next {
-                @include pagination-next-btn();
-
-                .page-link {
-                    padding-right: calculateRem(20px);
-                }
-            }
-
-            .c-pagination-button.prev,
-            .c-pagination-button.next {
-                &.disabled {
-                    .page-link {
-                        color: $ibexa-color-font-pale;
-                        cursor: not-allowed;
-                    }
-                }
-
-                .page-link {
-                    width: initial;
-                    border-radius: 0;
-                }
-            }
-        }
-    }
-
-    &__pagination-info {
-        @include pagination-info();
     }
 }

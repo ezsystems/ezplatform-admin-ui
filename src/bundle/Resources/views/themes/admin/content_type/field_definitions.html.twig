@@ -1,0 +1,65 @@
+<div class="ibexa-content-type-edit__field-definitions-group">
+    <div class="ibexa-content-type-edit__field-definitions-group-list">
+        {% for id, field_defintions in grouped_field_defintions %}
+            {% set field_definitions_group_class = [
+                'ibexa-collapse--field-definitions-group ibexa-field-definitions-group-%s'|format(id),
+                field_defintions is empty ? 'ibexa-collapse--hidden'
+            ] %}
+
+            {%- embed "@ezdesign/ui/component/collapse.html.twig" with {
+                'class': field_definitions_group_class|join(' '),
+                'body_id': '%s_collapse'|format(id),
+                'header_label': id | ibexa_field_group_name,
+                'is_expanded': true,
+                'extra_actions': [
+                    { 'icon_name': 'trash', 'button_class':  'ibexa-collapse__extra-action-button--remove-field-definitions-group'}
+                ],
+                'data_attr': {
+                    'data-fields-group-id':  id
+                }
+            } -%}
+                {% block body_content_wrapper %}
+                    <div
+                        class="ibexa-collapse__body-content ibexa-content-type-edit__field-definition-drop-zone"
+                        data-placeholder="{{ include('@ezdesign/content_type/field_definitions_placeholder.html.twig')|e('html_attr') }}"
+                    >
+                        {% block body_content %}
+                            {%- include "@ezdesign/content_type/field_definitions_empty_group.html.twig" -%}
+
+                            {% for field_definition in field_defintions %}
+                                {%- include "@ezdesign/content_type/field_definition.html.twig" -%}
+                            {% endfor %}
+
+                            {% set field_definitions_placeholder_class = [
+                                'ibexa-field-definitions-placeholder--anchored',
+                                not field_defintions|length ? 'ibexa-field-definitions-placeholder--hidden'
+                            ] %}
+
+                            {%- include "@ezdesign/content_type/field_definitions_placeholder.html.twig" with {
+                                'field_definitions_placeholder_class': field_definitions_placeholder_class|join(' ')
+                            } -%}
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            {%- endembed -%}
+        {% endfor %}
+    </div>
+
+    <div class="ibexa-content-type-edit__add-field-definitions-group">
+        <button type="button" class="ibexa-content-type-edit__add-field-definitions-group-btn btn ibexa-btn ibexa-btn ibexa-btn--info">
+            <svg class="ibexa-icon ibexa-icon--small">
+                <use xlink:href="{{ ibexa_icon_path('create') }}"></use>
+            </svg>
+            {{ 'content_type.view.edit.add'|trans|desc('Add') }}
+        </button>
+
+        {{ include('@ezdesign/ui/component/popup_menu/popup_menu.html.twig', {
+            'items': grouped_field_defintions|keys|map(group => {
+                'label': group | ibexa_field_group_name,
+                'content_class': grouped_field_defintions[group] is not empty ? 'ibexa-popup-menu__item-content--disabled ' : '',
+                'action_attr': {
+                    'data-related-collapse-selector': '.ibexa-field-definitions-group-' ~ group
+            }})
+        }) }}
+    </div>
+</div>

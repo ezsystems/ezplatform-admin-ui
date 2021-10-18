@@ -5,9 +5,9 @@
 <div class="modal fade ez-modal ez-modal--no-header ez-modal--send-to-trash" id="delete-user-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <svg class="ez-icon ez-icon--medium" aria-hidden="true">
-                    <use xlink:href="{{ ez_icon_path('discard') }}"></use>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <svg class="ibexa-icon ibexa-icon--medium" aria-hidden="true">
+                    <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
                 </svg>
             </button>
             <div class="modal-body">
@@ -17,8 +17,8 @@
             </div>
             <div class="modal-footer">
                 {{ form_start(form, {'action': path('ezplatform.user.delete')}) }}
-                {{ form_widget(form.delete, {'attr': {'class': 'btn btn-primary'}}) }}
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                {{ form_widget(form.delete, {'attr': {'class': 'btn ibexa-btn ibexa-btn--primary'}}) }}
+                <button type="button" class="btn ibexa-btn ibexa-btn--secondary" data-bs-dismiss="modal">
                     {{ 'delete.form.cancel'|trans|desc('Cancel') }}
                 </button>
                 {{ form_end(form) }}

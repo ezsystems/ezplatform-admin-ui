@@ -1,19 +1,26 @@
 {% trans_default_domain 'locationview' %}
 
-<div class="ez-extra-actions ez-extra-actions--edit ez-extra-actions--hidden {% if form.language.vars.choices|length == 1 %} ez-extra-actions--prevent-show {% endif %}" data-actions="edit">
-    <div class="ez-extra-actions__header">{{ 'content.edit.select_language'|trans|desc('Select translation') }} ({{ form.language.vars.choices|length }})</div>
-    <div class="ez-extra-actions__content">
+<div class="ibexa-extra-actions ibexa-extra-actions--edit ibexa-extra-actions--hidden {% if form.language.vars.choices|length == 1 %} ibexa-extra-actions--prevent-show {% endif %}" data-actions="edit">
+    <div class="ibexa-extra-actions__header">
+        <h3>{{ 'content.edit.select_language'|trans|desc('Select translation') }} ({{ form.language.vars.choices|length }})</h3>
+        <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--close">
+            <svg class="ibexa-icon ibexa-icon--small">
+                <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
+            </svg>
+        </button>
+    </div>
+    <div class="ibexa-extra-actions__content">
         {{ form_start(form, { 'action': path('ezplatform.content.edit') }) }}
         {{ form_widget(form.content_info, { 'attr': {
             'hidden': 'hidden',
-            'class': 'ez-extra-actions__form-field'
+            'class': 'ibexa-extra-actions__form-field'
         } }) }}
         {{ form_widget(form.version_info, { 'attr': {
             'hidden': 'hidden',
-            'class': 'ez-extra-actions__form-field'
+            'class': 'ibexa-extra-actions__form-field'
         } }) }}
         {{ form_widget(form.language, { 'attr': {
-            'class': 'ez-extra-actions__form-values'
+            'class': 'ibexa-extra-actions__form-values'
         } }) }}
         {{ form_end(form) }}
     </div>

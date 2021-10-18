@@ -10,7 +10,7 @@
     .c-grid {
         &__items-wrapper {
             .c-thumbnail {
-                .ez-icon {
+                .ibexa-icon {
                     width: calculateRem(80px);
                     height: calculateRem(80px);
                     fill: $ibexa-color-base-dark;
@@ -20,7 +20,7 @@
 
         &--marked {
             .c-thumbnail {
-                .ez-icon {
+                .ibexa-icon {
                     fill: $ibexa-black;
                 }
             }
@@ -29,7 +29,7 @@
 
     .c-selected-locations-item {
         .c-thumbnail {
-            .ez-icon {
+            .ibexa-icon {
                 fill: $ibexa-color-base-dark;
             }
         }

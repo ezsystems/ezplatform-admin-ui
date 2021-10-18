@@ -1,33 +1,25 @@
 .ez-add-to-bookmarks {
-    width: 2.25rem;
-    height: 2.25rem;
-    transform: translateY(3%);
-    grid-area: bookmark;
-    justify-self: center;
     position: relative;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.25s ease-in;
+    width: calculateRem(36px);
+    height: calculateRem(36px);
+    margin-top: calculateRem(-4px);
 
     &__icon-wrapper {
         &--add,
         &--remove {
-            width: 2.25rem;
-            height: 2.25rem;
-            padding: 0.25rem;
             position: absolute;
-            transition: all 0.25s ease-in;
             z-index: 2;
-        }
-
-        .ez-icon--secondary {
-            width: 1.75rem;
-            height: 1.75rem;
+            top: 0;
+            left: 0;
+            width: calculateRem(36px);
+            height: calculateRem(36px);
+            padding: calculateRem(5px);
+            transition: $ibexa-admin-widget-open-transition;
         }
     }
 
-    &--checked &__icon-wrapper.ez-add-to-bookmarks__icon-wrapper--add,
-    &:not(.ez-add-to-bookmarks--checked) &__icon-wrapper.ez-add-to-bookmarks__icon-wrapper--remove {
+    &--checked .ez-add-to-bookmarks__icon-wrapper--add,
+    &:not(.ez-add-to-bookmarks--checked) .ez-add-to-bookmarks__icon-wrapper--remove {
         opacity: 0;
         transform: scale(0);
     }

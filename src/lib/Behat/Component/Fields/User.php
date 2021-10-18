@@ -7,6 +7,7 @@
 namespace Ibexa\AdminUi\Behat\Component\Fields;
 
 use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
+use Ibexa\Behat\Browser\Locator\CSSLocator;
 use Ibexa\Behat\Browser\Locator\CSSLocatorBuilder;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use PHPUnit\Framework\Assert;
@@ -93,20 +94,16 @@ class User extends FieldTypeComponent
             new VisibleCSSLocator('password', '#ezplatform_content_forms_user_create_fieldsData_user_account_value_password_first,#ezplatform_content_forms_user_update_fieldsData_user_account_value_password_first'),
             new VisibleCSSLocator('confirmPassword', '#ezplatform_content_forms_user_create_fieldsData_user_account_value_password_second,#ezplatform_content_forms_user_update_fieldsData_user_account_value_password_second'),
             new VisibleCSSLocator('email', '#ezplatform_content_forms_user_create_fieldsData_user_account_value_email,#ezplatform_content_forms_user_update_fieldsData_user_account_value_email'),
-            new VisibleCSSLocator('buttonEnabled', '#ezplatform_content_forms_user_create_fieldsData_user_account_value_enabled,#ezplatform_content_forms_user_update_fieldsData_user_account_value_enabled'),
+            new CSSLocator('buttonEnabledState', '#ezplatform_content_forms_user_create_fieldsData_user_account_value_enabled,#ezplatform_content_forms_user_update_fieldsData_user_account_value_enabled'),
+            new VisibleCSSLocator('buttonEnabledToggle', '.ibexa-toggle__switcher'),
         ];
     }
 
     private function setEnabledField(bool $enabled)
     {
-        $fieldLocator = CSSLocatorBuilder::base($this->parentLocator)
-            ->withDescendant($this->getLocator('buttonEnabled'))
-            ->build();
-
-        $field = $this->getHTMLPage()->find($fieldLocator);
-        $isCurrentlyEnabled = $field->hasClass('is-checked');
+        $isCurrentlyEnabled = $this->getHTMLPage()->find($this->parentLocator)->find($this->getLocator('buttonEnabledState'))->getValue() === '1';
         if ($isCurrentlyEnabled !== $enabled) {
-            $field->click();
+            $this->getHTMLPage()->find($this->parentLocator)->find($this->getLocator('buttonEnabledToggle'))->click();
         }
     }
 }

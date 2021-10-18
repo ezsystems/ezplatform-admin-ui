@@ -7,7 +7,7 @@ env:
   global:
     - APP_ENV=behat
     - APP_DEBUG=1
-    - PROJECT_VERSION=^3.3.x-dev
+    - PROJECT_VERSION=^4.0.x-dev
 
 cache:
   directories:

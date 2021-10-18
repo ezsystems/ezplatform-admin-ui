@@ -1,10 +1,3 @@
 {% block switcher_widget %}
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ez-data-source__label')|trim }) %}
-    {% if checked %}
-        {% set label_attr = label_attr|merge({'class': (label_attr.class ~ ' is-checked')|trim }) %}
-    {% endif %}
-    <label {% with {'attr': label_attr} %}{{ block('widget_attributes') }}{% endwith %}>
-        <span class="ez-data-source__indicator"></span>
-        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-    </label>
+    {{ block('toggle_widget') }}
 {% endblock %}

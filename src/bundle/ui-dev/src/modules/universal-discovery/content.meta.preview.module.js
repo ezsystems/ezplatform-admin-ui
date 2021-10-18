@@ -59,11 +59,11 @@ const ContentMetaPreview = () => {
     const renderActions = () => {
         const previewButton = allowRedirects ? (
             <button
-                className="c-content-meta-preview__preview-button btn btn-icon"
+                className="c-content-meta-preview__preview-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                 onClick={previewContent}
                 data-tooltip-container-selector=".c-udw-tab"
                 title={previewLabel}>
-                <Icon name="view" extraClasses="ez-icon--small-medium ez-icon--secondary" />
+                <Icon name="view" extraClasses="ibexa-icon--small" />
             </button>
         ) : null;
         const hasAccess = permissions && permissions.edit.hasAccess;
@@ -82,17 +82,17 @@ const ContentMetaPreview = () => {
     return (
         <div className="c-content-meta-preview" ref={refContentMetaPreview}>
             <div className="c-content-meta-preview__preview">
-                <Thumbnail thumbnailData={version.Thumbnail} iconExtraClasses="ez-icon--extra-large" />
+                <Thumbnail thumbnailData={version.Thumbnail} iconExtraClasses="ibexa-icon--extra-large" />
             </div>
             <div className="c-content-meta-preview__header">
                 <span className="c-content-meta-preview__content-name">{location.ContentInfo.Content.TranslatedName}</span>
                 <button
-                    className="c-content-meta-preview__toggle-bookmark-button btn btn-icon"
+                    className="c-content-meta-preview__toggle-bookmark-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                     onClick={toggleBookmarked}
                     title={bookmarkLabel}
                     data-placement="left"
                     data-tooltip-container-selector=".c-content-meta-preview">
-                    <Icon name={bookmarkIconName} extraClasses="ez-icon--small ez-icon--secondary" />
+                    <Icon name={bookmarkIconName} extraClasses="ibexa-icon--small" />
                 </button>
             </div>
             {renderActions()}

@@ -1,26 +1,10 @@
-<div class="ez-header">
-    <div class="container">
-        <ul class="nav nav-tabs ez-tabs" role="tablist" id="ez-tab-list-{{ group }}">
-            {% for tab in tabs %}
-                {% set id = group ~ '-' ~ tab.identifier %}
-                {% set active = loop.first %}
-                <li class="nav-item ez-tabs__tab ez-tabs__tab--primary">
-                    <a class="nav-link{% if active %} active{% endif %}" id="ez-tab-label-{{ group }}"
-                        data-toggle="tab" href="#ez-tab-{{ id }}" role="tab" aria-controls="ez-tab-{{ id }}"
-                        aria-expanded="{{ active }}">{{ tab.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
-<div class="tab-content container ez-tab-content" id="ez-tab-list-content-{{ group }}">
-    {% for tab in tabs %}
-        {% set id = group ~ '-' ~ tab.identifier %}
-        {% set active = loop.first %}
-
-        <div class="tab-pane{% if active %} active{% endif %} ez-tab-content__pane" id="ez-tab-{{ id }}" role="tabpanel"
-                aria-labelledby="ez-tab-label-{{ group }}">
-            {{ tab.view|raw }}
-        </div>
-    {% endfor %}
-</div>
+{% set tabs_to_show = tabs|map((tab, index) => {
+    id: group ~ '-' ~ tab.identifier,
+    label: tab.name,
+    content: tab.view,
+    active: index == 0
+}) %}
+{% include '@ezdesign/ui/component/tab/tabs.html.twig' with { 
+    tabs: tabs_to_show,
+    include_tab_more: true,
+} %}

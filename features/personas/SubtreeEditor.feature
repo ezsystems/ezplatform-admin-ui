@@ -24,7 +24,7 @@ Feature: Verify that an Editor with Subtree limitations can perform all his task
       | FolderChild1          | root/FolderGrandParent/FolderParent | NewContent2 | root/FolderGrandParent/FolderParent/FolderChild1 |
 
   Scenario Outline: I can edit Content in locations I'm allowed
-    Given I open UDW and go to "<contentPath>"
+    Given I navigate to content "<contentName>" of type "DedicatedFolder" in "<contentPath>"
     When I click on the edit action bar button "Edit"
     And I set content fields
       | label      | value         |
@@ -38,9 +38,9 @@ Feature: Verify that an Editor with Subtree limitations can perform all his task
       | Name     | <newFieldValue> |
 
     Examples:
-      | contentPath                                                  | newFieldValue       | parentContentPath                                |
-      | root/FolderGrandParent/FolderParent/FolderChild1/NewContent2 | NewContent2Edited   | root/FolderGrandParent/FolderParent/FolderChild1 |
-      | root/FolderGrandParent/FolderParent/NewContent1              | NewContent1Edited   | root/FolderGrandParent/FolderParent              |
+      | contentPath                                      | contentName | newFieldValue       | parentContentPath                                |
+      | root/FolderGrandParent/FolderParent/FolderChild1 | NewContent2 | NewContent2Edited   | root/FolderGrandParent/FolderParent/FolderChild1 |
+      | root/FolderGrandParent/FolderParent              | NewContent1 | NewContent1Edited   | root/FolderGrandParent/FolderParent              |
 
   Scenario: I can move Content to Trash in locations I'm allowed
     Given I navigate to content "NewContent1Edited" of type "DedicatedFolder" in "root/FolderGrandParent/FolderParent"
@@ -56,15 +56,17 @@ Feature: Verify that an Editor with Subtree limitations can perform all his task
     Then success notification that "'ContentToMove' moved to 'FolderParent'" appears
     And I should be on Content view Page for "root/FolderGrandParent/FolderParent/ContentToMove"
 
-  Scenario Outline: I cannot edit, create or send to trash Content outside my permissions
-    When I open UDW and go to "<contentPath>"
+  Scenario: I cannot edit, create or send to trash Content in root location
     Then the buttons are disabled
-      | buttonName |
-      | Create     |
-      | Edit       |
+      | buttonName     |
+      | Create content |
+      | Edit           |
     And the "Send to Trash" button is not visible
 
-    Examples:
-      | contentPath            |
-      | root                   |
-      | root/FolderGrandParent |
+  Scenario: I cannot edit, create or send to trash Content outside my permissions
+    Given I navigate to content "FolderGrandParent" of type "DedicatedFolder" in "root"
+    Then the buttons are disabled
+      | buttonName     |
+      | Create content |
+      | Edit           |
+    And the "Send to Trash" button is not visible

@@ -4,32 +4,58 @@
     {% set wrapper_class_list = 'ez-notifications-modal__item' ~ (notification.isPending == 0 ? ' ez-notifications-modal__item--read') %}
 {% endif %}
 
-<tr
-    data-notification-id="{{ notification.id }}"
-    data-notification-read="{{ path('ezplatform.notifications.mark_as_read', { 'notificationId': notification.id }) }}"
-    class="{{ wrapper_class_list ~ (wrapper_additional_classes is defined ? ' ' ~ wrapper_additional_classes) }}">
-    <td class="ez-notifications-modal__type">
-        {% block icon %}
-            <span class="type__icon">
-                <svg class="ez-icon">
-                    <use xlink:href="{{ ez_icon_path('warning') }}"></use>
-                </svg>
-            </span>
-        {% endblock %}
-        {% block notification_type %}
-            <span class="type__text">
-            </span>
-        {% endblock %}
-    </td>
+{% set icon %}
+    {% block icon %}
+        <span class="type__icon">
+            <svg class="ibexa-icon">
+                <use xlink:href="{{ ibexa_icon_path('warning') }}"></use>
+            </svg>
+        </span>
+    {% endblock %}
+{% endset %}
+
+{% set notification_type %}
+    {% block notification_type %}
+        <span class="type__text">
+        </span>
+    {% endblock %}
+{% endset %}
+
+{% set message %}
     {% block message %}
-        <td class="ez-notifications-modal__description">
-            <p class="description__title">{{ 'notification.title'|trans|desc('Title:') }} <span class="description__title__item">{{ title }}</span></p>
-            <p class="description__text">{{ message }}</p>
-        </td>
+        {% embed '@ezdesign/ui/component/table/table_body_cell.html.twig' with { class: 'ez-notifications-modal__description' } %}
+            {% block content %}
+                <p class="description__title">{{ 'notification.title'|trans|desc('Title:') }} <span class="description__title__item">{{ title }}</span></p>
+                <p class="description__text">{{ message }}</p>
+            {% endblock %}
+        {% endembed %}
     {% endblock %}
+{% endset %}
+
+{% set date %}
     {% block date %}
-    <td class="ez-notifications-modal__time">
-        {{ notification.created|ez_full_datetime }}
-    </td>
+        {% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with {
+            class: 'ez-notifications-modal__description',
+            content: notification.created|ez_full_datetime,
+        } %}
     {% endblock %}
-</tr>
+{% endset %}
+
+{% embed '@ezdesign/ui/component/table/table_body_row.html.twig' with {
+    class: wrapper_class_list ~ (wrapper_additional_classes is defined ? ' ' ~ wrapper_additional_classes),
+    attr: {
+        'data-notification-id': notification.id,
+        'data-notification-read': path('ezplatform.notifications.mark_as_read', { 'notificationId': notification.id }),
+    }
+} %}
+    {% block body_row_cells %}
+        {% embed '@ezdesign/ui/component/table/table_body_cell.html.twig' with { class: 'ez-notifications-modal__type' } %}
+            {% block content %}
+                {{ icon }}
+                {{ notification_type }}
+            {% endblock %}
+        {% endembed %}
+        {{ message }}
+        {{ date }}
+    {% endblock %}
+{% endembed %}

@@ -1,0 +1,17 @@
+<tr class="ibexa-table__row">
+    <td class="ibexa-table__empty-table-cell" colspan="{{ colspan|default(9999) }}">
+        <img
+            class="ibexa-table__empty-table-image"
+            src="/bundles/ezplatformadminui/img/ibexa-empty-table.svg"
+            alt="{{ empty_table_info_text|default('Table is empty') }}"
+        />
+        <div class="ibexa-table__empty-table-text">
+            {% if empty_table_info_text is defined %}
+                <strong>{{ empty_table_info_text }}</strong>
+            {% endif %}
+            {% if empty_table_action_text is defined %}
+                <br>{{ empty_table_action_text }}
+            {% endif %}
+        </div>
+    </td>
+</tr>

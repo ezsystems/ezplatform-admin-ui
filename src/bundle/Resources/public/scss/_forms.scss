@@ -1,20 +1,4 @@
 form:not(.form-inline) {
-    .ez-field-edit__label {
-        font-weight: 700;
-        font-size: calculateRem(16px);
-        color: $ibexa-black;
-        margin-bottom: 0;
-        margin-top: calculateRem(20px);
-
-        &:after {
-            content: ': ';
-        }
-
-        &:not(.ez-data-source__label) {
-            @include label-required();
-        }
-    }
-
     .col-form-legend {
         @include label-required();
 
@@ -62,40 +46,9 @@ form:not(.form-inline) {
     }
 }
 
-.ez-field {
-    .ez-field__label {
+.ibexa-field {
+    &__label {
         @include label-required();
-    }
-
-    &.is-invalid {
-        .ez-field__label-wrapper,
-        .ez-field__label {
-            color: $ibexa-color-danger;
-        }
-
-        .ez-field__data {
-            position: relative;
-
-            &:before {
-                content: '!';
-                position: absolute;
-                top: 0;
-                left: calculateRem(-20px);
-                width: calculateRem(20px);
-                background: $ibexa-color-primary;
-                color: $ibexa-white;
-                text-align: center;
-                font-size: calculateRem(16px);
-                border-top-left-radius: $ibexa-border-radius;
-                border-bottom-left-radius: $ibexa-border-radius;
-            }
-        }
-    }
-
-    &__error {
-        display: inline-block;
-        margin-left: calculateRem(8px);
-        color: $ibexa-color-danger;
     }
 }
 
@@ -107,4 +60,36 @@ form:not(.form-inline) {
 
 .ez-content-create[readonly] {
     pointer-events: none;
+}
+
+.ibexa-form-error {
+    @include ibexa-font-sans-serif();
+
+    display: flex;
+    font-size: $ibexa-text-font-size-small;
+    font-style: normal;
+    color: $ibexa-color-danger;
+    line-height: calculateRem(18px);
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: calculateRem(4px);
+
+    &__icon {
+        fill: $ibexa-color-danger;
+        margin-right: calculateRem(4px);
+    }
+}
+
+.ibexa-form-help {
+    @include ibexa-font-sans-serif();
+
+    display: flex;
+    font-size: $ibexa-text-font-size-small;
+    color: $ibexa-color-dark-400;
+    line-height: calculateRem(18px);
+
+    &__icon {
+        fill: $ibexa-color-dark-400;
+        margin-right: calculateRem(4px);
+    }
 }

@@ -50,7 +50,7 @@ const Breadcrumbs = () => {
         return (
             <div className="c-breadcrumbs__hidden-list-wrapper">
                 <button className={toggleClassNames} onClick={toggleHiddenListVisible}>
-                    <Icon name="options" extraClasses="ez-icon--small-medium" />
+                    <Icon name="options" extraClasses="ibexa-icon--small-medium" />
                 </button>
                 <ul className={hiddenListClassNames}>
                     {hiddenItems.map((item) => {

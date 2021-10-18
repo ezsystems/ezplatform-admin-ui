@@ -34,16 +34,16 @@ class ContentTypePicker extends Component
 
     public function verifyIsLoaded(): void
     {
-        $this->getHTMLPage()->find($this->getLocator('headerSelector'))->assert()->textEquals('Create content');
+        $this->getHTMLPage()->setTimeout(3)->find($this->getLocator('header'))->assert()->textEquals('Create content');
         $this->getHTMLPage()->find($this->getLocator('filterInput'))->clear();
     }
 
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('filterInput', '.ez-extra-actions__section-content--content-type .ez-instant-filter__input'),
-            new VisibleCSSLocator('filteredItem', '.ez-extra-actions__section-content--content-type .ez-instant-filter__group-item:not([hidden])'),
-            new VisibleCSSLocator('headerSelector', '.ez-extra-actions--create .ez-extra-actions__header'),
+            new VisibleCSSLocator('filterInput', '.ibexa-extra-actions__section-content--content-type .ez-instant-filter__input'),
+            new VisibleCSSLocator('filteredItem', '.ibexa-extra-actions__section-content--content-type .ez-instant-filter__group-item:not([hidden]) .form-check-label'),
+            new VisibleCSSLocator('header', '.ibexa-extra-actions--create .ibexa-extra-actions__header'),
         ];
     }
 }

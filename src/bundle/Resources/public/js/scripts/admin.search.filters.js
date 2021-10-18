@@ -1,15 +1,15 @@
-(function (global, doc, eZ, $, flatpickr) {
+(function(global, doc, eZ, flatpickr) {
     let getUsersTimeout;
     const CLASS_DATE_RANGE = 'ez-filters__range-wrapper';
     const CLASS_VISIBLE_DATE_RANGE = 'ez-filters__range-wrapper--visible';
     const SELECTOR_TAG = '.ez-tag';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
-    const filterBtn = doc.querySelector('.ez-btn--filter');
+    const filterBtn = doc.querySelector('.ibexa-btn--filter');
     const filters = doc.querySelector('.ez-filters');
     const searchCriteriaTags = doc.querySelector('.ez-search-criteria-tags');
-    const clearBtn = filters.querySelector('.ez-btn-clear');
-    const applyBtn = filters.querySelector('.ez-btn-apply');
+    const clearBtn = filters.querySelector('.ibexa-btn--clear');
+    const applyBtn = filters.querySelector('.ibexa-btn--apply');
     const dateFields = doc.querySelectorAll('.ez-filters__range-select');
     const contentTypeSelector = doc.querySelector('.ez-content-type-selector');
     const contentTypeSelect = doc.querySelector('.ez-filters__item--content-type .ez-filters__select');
@@ -21,7 +21,7 @@
     const creatorInput = doc.querySelector('.ez-filters__item--creator .ez-filters__input');
     const searchCreatorInput = doc.querySelector('#search_creator');
     const usersList = doc.querySelector('.ez-filters__item--creator .ez-filters__user-list');
-    const resetCreatorBtn = doc.querySelector('.ez-filters__item--creator .ez-icon--reset');
+    const resetCreatorBtn = doc.querySelector('.ez-filters__item--creator .ibexa-icon--reset');
     const listGroupsTitle = doc.querySelectorAll('.ez-content-type-selector__group-title');
     const contentTypeCheckboxes = doc.querySelectorAll('.ez-content-type-selector__item [type="checkbox"]');
     const subtreeInput = doc.querySelector('#search_subtree');
@@ -297,7 +297,7 @@
     };
     const clearSubtree = (event) => {
         doc.querySelector('#search_subtree-content-breadcrumbs').hidden = true;
-        doc.querySelector('.ez-btn--udw-select-location').hidden = false;
+        doc.querySelector('.ibexa-btn--udw-select-location').hidden = false;
         subtreeInput.value = '';
         removeSearchTag(event);
     };
@@ -351,4 +351,4 @@
     resetCreatorBtn.addEventListener('click', handleResetUser, false);
     listGroupsTitle.forEach((group) => group.addEventListener('click', toggleGroupState, false));
     contentTypeCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', filterByContentType, false));
-})(window, window.document, window.eZ, window.jQuery, window.flatpickr);
+})(window, window.document, window.eZ, window.flatpickr);

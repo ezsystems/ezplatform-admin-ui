@@ -93,7 +93,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     'extras' => ['icon' => 'browse'],
                     'attributes' => [
                         'type' => 'button',
-                        'class' => 'btn--udw-browse',
+                        'class' => 'ibexa-btn--udw-browse',
                         'data-udw-config' => $this->udwExtension->renderUniversalDiscoveryWidgetConfig('browse', [
                             'type' => 'content_create',
                         ]),
@@ -107,7 +107,7 @@ class LeftSidebarBuilder extends AbstractBuilder implements TranslationContainer
                     'extras' => ['icon' => 'content-tree'],
                     'attributes' => [
                         'type' => 'button',
-                        'class' => 'ez-btn ez-btn--toggle-content-tree',
+                        'class' => 'btn ibexa-btn ibexa-btn--toggle-content-tree',
                     ],
                 ]
             ),

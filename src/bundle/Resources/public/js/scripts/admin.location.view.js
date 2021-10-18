@@ -1,4 +1,4 @@
-(function(global, doc, localStorage, $, React, ReactDOM, eZ, Routing, Translator) {
+(function(global, doc, localStorage, bootstrap, React, ReactDOM, eZ, Routing, Translator) {
     const SELECTOR_MODAL_BULK_ACTION_FAIL = '#bulk-action-failed-modal';
     const listContainers = doc.querySelectorAll('.ez-sil');
     const mfuContainer = doc.querySelector('#ez-mfu');
@@ -33,22 +33,24 @@
         };
         const addDraft = () => {
             submitVersionEditForm();
-            $('#version-draft-conflict-modal').modal('hide');
+            bootstrap.Modal.getOrCreateInstance(doc.querySelector('#version-draft-conflict-modal')).hide();
         };
         const attachModalListeners = (wrapper) => {
-            const addDraftButton = wrapper.querySelector('.ez-btn--add-draft');
+            const addDraftButton = wrapper.querySelector('.ibexa-btn--add-draft');
+            const conflictModal = doc.querySelector('#version-draft-conflict-modal');
 
             if (addDraftButton) {
                 addDraftButton.addEventListener('click', addDraft, false);
             }
 
             wrapper
-                .querySelectorAll('.ez-btn--prevented')
+                .querySelectorAll('.ibexa-btn--prevented')
                 .forEach((btn) => btn.addEventListener('click', (event) => event.preventDefault(), false));
 
-            $('#version-draft-conflict-modal')
-                .modal('show')
-                .on('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+            if (conflictModal) {
+                bootstrap.Modal.getOrCreateInstance(conflictModal).show();
+                conflictModal.addEventListener('shown.bs.modal', () => eZ.helpers.tooltips.parse());
+            }
         };
         const showModal = (modalHtml) => {
             const wrapper = doc.querySelector('.ez-modal-wrapper');
@@ -89,20 +91,22 @@
     };
     const generateLink = (locationId, contentId) => Routing.generate('_ez_content_view', { contentId, locationId });
     const setModalTableTitle = (title) => {
-        const modalTableTitleNode = doc.querySelector(`${SELECTOR_MODAL_BULK_ACTION_FAIL} .ez-table-header__headline`);
+        const modalTableTitleNode = doc.querySelector(`${SELECTOR_MODAL_BULK_ACTION_FAIL} .ibexa-table-header__headline`);
 
         modalTableTitleNode.innerHTML = title;
+        modalTableTitleNode.setAttribute('title', title);
+        modalTableTitleNode.dataset.originalTitle = title;
     };
     const setModalTableBody = (failedItemsData) => {
         const modal = doc.querySelector(SELECTOR_MODAL_BULK_ACTION_FAIL);
         const table = modal.querySelector('.ez-bulk-action-failed-modal__table');
         const tableBody = table.querySelector('.ez-bulk-action-failed-modal__table-body');
-        const tableRowTemplate = table.dataset.tableRowTemplate;
+        const { rowTemplate } = table.dataset;
         const fragment = doc.createDocumentFragment();
 
         failedItemsData.forEach(({ contentName, contentTypeName }) => {
             const container = doc.createElement('tbody');
-            const renderedItem = tableRowTemplate
+            const renderedItem = rowTemplate
                 .replace('{{ content_name }}', contentName)
                 .replace('{{ content_type_name }}', contentTypeName);
 
@@ -125,7 +129,7 @@
         setModalTableBody(failedItemsData);
         setModalTableTitle(tableTitle);
 
-        $(SELECTOR_MODAL_BULK_ACTION_FAIL).modal('show');
+        bootstrap.Modal.getOrCreateInstance(doc.querySelector(SELECTOR_MODAL_BULK_ACTION_FAIL)).show();
     };
     const getLocationActiveView = (parentLocationId) => {
         const mediaLocationId = eZ.adminUiConfig.locations.media;
@@ -192,7 +196,7 @@
     window,
     window.document,
     window.localStorage,
-    window.jQuery,
+    window.bootstrap,
     window.React,
     window.ReactDOM,
     window.eZ,

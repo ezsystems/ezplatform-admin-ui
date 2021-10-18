@@ -11,60 +11,70 @@
 {% block ezmedia_preview %}
     {% form_theme form '@ezdesign/ui/field_type/edit/binary_base_fields.html.twig' %}
 
-    <div class="ez-field-edit-preview">
-        <div class="ez-field-edit-preview__visual">
-            <div class="ez-field-edit-preview__media-wrapper ez-field-edit-preview__media-wrapper--loading">
-                <div class="ez-field-edit-preview__actions">
+    <div class="ibexa-field-edit-preview">
+        <div class="ibexa-field-edit-preview__visual">
+            <div class="ibexa-field-edit-preview__media-wrapper ibexa-field-edit-preview__media-wrapper--loading">
+                <div class="ibexa-field-edit-preview__actions">
                     <button 
                         type="button" 
-                        class="ez-field-edit-preview__action--remove"
-                        title="{{ 'content.field_type.ezmedia.delete'|trans|desc('Delete media') }}"
+                        class="ibexa-field-edit-preview__action--remove btn ibexa-btn ibexa-btn--ghost ibexa-btn--small"
                     >
-                        <svg class="ez-icon ez-icon--small-medium">
-                            <use xlink:href="{{ ez_icon_path('trash') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('trash') }}"></use>
                         </svg>
+                        <span class="ibexa-btn__label">{{ 'content.field_type.ezmedia.delete'|trans|desc('Delete') }}</span>
                     </button>
                     <a 
-                        class="ez-field-edit-preview__action--preview" 
-                        href="{{ form.parent.vars.value.value.uri }}" 
-                        title="{{ 'content.field_type.ezmedia.download'|trans|desc('Download media') }}"
+                        class="ibexa-field-edit-preview__action--preview btn ibexa-btn ibexa-btn--ghost ibexa-btn--small"
+                        href="{{ form.parent.vars.value.value.uri }}"
                         target="_blank"
                     >
-                        <svg class="ez-icon ez-icon--small-medium">
-                            <use xlink:href="{{ ez_icon_path('open-newtab') }}"></use>
+                        <svg class="ibexa-icon ibexa-icon--small">
+                            <use xlink:href="{{ ibexa_icon_path('open-newtab') }}"></use>
                         </svg>
+                        <span class="ibexa-btn__label">{{ 'content.field_type.ezmedia.download'|trans|desc('Download') }}</span>
                     </a>
                 </div>
-                <svg class="ez-field-edit-preview__spinner ez-icon ez-spin">
-                    <use xlink:href="{{ ez_icon_path('spinner') }}"></use>
+                <svg class="ibexa-field-edit-preview__spinner ibexa-icon ibexa-spin">
+                    <use xlink:href="{{ ibexa_icon_path('spinner') }}"></use>
                 </svg>
                 <video
-                    class="ez-field-edit-preview__media"
+                    class="ibexa-field-edit-preview__media"
                     src="{{ form.parent.vars.value.value.uri }}"
                     preload="metadata"
                     controls>
                 </video>
             </div>
 
-            <div class="ez-field-edit-preview__control">
-                <div class="ez-field-edit-preview__section-title form-control-label">{{ 'content.field_type.ezmedia.player_settings'|trans({}, 'ezplatform_content_forms_content')|desc('Player settings') }}</div>
-                <div class="ez-field-edit-preview__toggles">
-                    {{ form_row(form.hasController, {'label_attr': {'class': 'checkbox-inline'}}) }}
-                    {{ form_row(form.autoplay, {'label_attr': {'class': 'checkbox-inline'}}) }}
-                    {{ form_row(form.loop, {'label_attr': {'class': 'checkbox-inline'}}) }}
+
+
+            <div class="ibexa-field-edit-preview__details">
+                <span class="ibexa-field-edit-preview__file-name-wrapper">
+                    <label class="ibexa-label form-label">{{ 'content.field_type.ezmedia.file_name.label'|trans|desc('File name') }}</label>
+                    <p class="ibexa-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</p>
+                </span>
+                <span class="ibexa-field-edit-preview__file-size-wrapper">
+                    <label class="ibexa-label form-label">{{ 'content.field_type.ezmedia.file_size.label'|trans|desc('Size') }}</label>
+                    <p class="ibexa-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</p>
+                </span>
+                <div class="ibexa-field-edit-preview__settings">
+                    <div class="ibexa-field-edit-preview__dimensions">
+                        {{ form_row(form.width, {'label_attr': {'class': 'ibexa-field-edit-preview__label'}}) }}
+                        {{ form_row(form.height, {'label_attr': {'class': 'ibexa-field-edit-preview__label'}}) }}
+                    </div>
+                </div>
+                <div class="ibexa-field-edit-preview__control">
+                    <label class="ibexa-label form-label">
+                        {{ 'content.field_type.ezmedia.player_settings'|trans({}, 'ezplatform_content_forms_content')|desc('Player settings') }}
+                    </label>
+                    <div class="ibexa-field-edit-preview__toggles">
+                        {{ form_row(form.hasController, {'label_attr': {'class': 'checkbox-inline'}}) }}
+                        {{ form_row(form.autoplay, {'label_attr': {'class': 'checkbox-inline'}}) }}
+                        {{ form_row(form.loop, {'label_attr': {'class': 'checkbox-inline'}}) }}
+                    </div>
                 </div>
             </div>
 
-            <div class="ez-field-edit-preview__details">
-                <span class="ez-field-edit-preview__file-name">{{ form.parent.vars.value.value.fileName }}</span>
-                <span class="ez-field-edit-preview__file-size">{{ form.parent.vars.value.value.fileSize|ez_file_size(2) }}</span>
-            </div>
-            <div class="ez-field-edit-preview__settings">
-                <div class="ez-field-edit-preview__dimensions">
-                    {{ form_row(form.width, {'label_attr': {'class': 'ez-field-edit-preview__label'}}) }}
-                    {{ form_row(form.height, {'label_attr': {'class': 'ez-field-edit-preview__label'}}) }}
-                </div>
-            </div>
         </div>
     </div>
 {% endblock %}

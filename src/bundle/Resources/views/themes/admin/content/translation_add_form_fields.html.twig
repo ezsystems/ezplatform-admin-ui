@@ -1,12 +1,12 @@
-{% extends 'form_div_layout.html.twig' %}
+{% extends '@ezdesign/ui/form_fields.html.twig' %}
 
 {% block radio_widget %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-translation__input')|trim}) %}
     <div class="radio ez-translation__input-wrapper">
         <label class="ez-translation__label">
             {{ parent() }}
-            <svg class="ez-icon">
-                <use xlink:href="{{ ez_icon_path('checkmark') }}"></use>
+            <svg class="ibexa-icon">
+                <use xlink:href="{{ ibexa_icon_path('checkmark') }}"></use>
             </svg>
             {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
         </label>

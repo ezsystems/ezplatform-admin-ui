@@ -1,0 +1,3 @@
+<div id="ibexa-tab-{{ id }}" class="tab-pane ibexa-tab-content__pane {% if active|default(false) %}active{% endif %} {{ tab_pane_class|default('') }}" role="tabpanel" aria-labelledby="ibexa-tab-label-{{ id }}">
+    {% block content %}{% endblock %}
+</div>
