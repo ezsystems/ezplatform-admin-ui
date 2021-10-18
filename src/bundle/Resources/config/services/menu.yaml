@@ -8,183 +8,183 @@ services:
     # Menu Item Factory
     #
 
-    EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory: ~
+    Ibexa\AdminUi\Menu\MenuItemFactory: ~
 
     #
     # Menu Builders
     #
 
-    EzSystems\EzPlatformAdminUi\Menu\MainMenuBuilder:
+    Ibexa\AdminUi\Menu\MainMenuBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.main }
 
-    EzSystems\EzPlatformAdminUi\Menu\UserMenuBuilder:
+    Ibexa\AdminUi\Menu\UserMenuBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user }
 
-    EzSystems\EzPlatformAdminUi\Menu\LeftSidebarBuilder:
+    Ibexa\AdminUi\Menu\LeftSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content.sidebar_left }
 
-    EzSystems\EzPlatformAdminUi\Menu\ContentRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\ContentRightSidebarBuilder:
         public: true
         lazy: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\TrashRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\TrashRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.trash.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\ContentEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\ContentEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\ContentCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\ContentCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\SectionEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\SectionEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.section_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\SectionCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\SectionCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.section_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\Role\PolicyEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\Role\PolicyEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.policy_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\Role\PolicyCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\Role\PolicyCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.policy_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\Role\RoleEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\Role\RoleEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.role_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\Role\RoleCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\Role\RoleCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.role_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\Role\RoleCopyRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\Role\RoleCopyRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.role_copy.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\UserCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\UserCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\UserEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\UserEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\Role\RoleAssignmentCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\Role\RoleAssignmentCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.role_assignment_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\Language\LanguageCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\Language\LanguageCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.language_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\Language\LanguageEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\Language\LanguageEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.language_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\ContentType\ContentTypeGroupCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\ContentType\ContentTypeGroupCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content_type_group_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\ContentType\ContentTypeGroupEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\ContentType\ContentTypeGroupEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content_type_group_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\ContentType\ContentTypeCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\ContentType\ContentTypeCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content_type_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\ContentType\ContentTypeEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\ContentType\ContentTypeEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content_type_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\URLEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\URLEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.url_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\URLWildcardEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\URLWildcardEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu_configure.url_wildcard_edit_sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\UserPasswordChangeRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\UserPasswordChangeRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user_password_change.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState\ObjectStateGroupCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\ObjectState\ObjectStateGroupCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.object_state_group_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState\ObjectStateGroupEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\ObjectState\ObjectStateGroupEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.object_state_group_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState\ObjectStateCreateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\ObjectState\ObjectStateCreateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.object_state_create.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\ObjectState\ObjectStateEditRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\Admin\ObjectState\ObjectStateEditRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.object_state_edit.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\UserSetting\UserSettingUpdateRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\UserSetting\UserSettingUpdateRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.user_setting_update.sidebar_right }
 
-    EzSystems\EzPlatformAdminUi\Menu\Admin\ReorderMenuListener:
+    Ibexa\AdminUi\Menu\Admin\ReorderMenuListener:
         tags:
             - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: moveAdminToLast, priority: -50 }
 
     ezplatform.adminui.listener.menu.reorder_by_order_number:
-        class: EzSystems\EzPlatformAdminUi\Menu\Listener\ReorderByOrderNumberListener
+        class: Ibexa\AdminUi\Menu\Listener\ReorderByOrderNumberListener
         tags:
             - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: reorderMenuItems, priority: -50 }
 
     ezplatform.adminui.listener.user_menu.reorder_by_order_number:
-        class: EzSystems\EzPlatformAdminUi\Menu\Listener\ReorderByOrderNumberListener
+        class: Ibexa\AdminUi\Menu\Listener\ReorderByOrderNumberListener
         tags:
             - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.user_menu, method: reorderMenuItems, priority: -50 }
 
-    EzSystems\EzPlatformAdminUi\Menu\ContentTypeRightSidebarBuilder:
+    Ibexa\AdminUi\Menu\ContentTypeRightSidebarBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: build, alias: ezplatform_admin_ui.menu.content_type.sidebar_right }

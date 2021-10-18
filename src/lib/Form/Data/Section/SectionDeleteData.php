@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
+namespace Ibexa\AdminUi\Form\Data\Section;
 
 use eZ\Publish\API\Repository\Values\Content\Section;
 
@@ -42,3 +42,5 @@ class SectionDeleteData
         $this->section = $section;
     }
 }
+
+class_alias(SectionDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionDeleteData');

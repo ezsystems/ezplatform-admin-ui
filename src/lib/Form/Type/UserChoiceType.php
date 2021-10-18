@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type;
+namespace Ibexa\AdminUi\Form\Type;
 
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
@@ -85,3 +85,5 @@ class UserChoiceType extends AbstractType
         });
     }
 }
+
+class_alias(UserChoiceType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\UserChoiceType');

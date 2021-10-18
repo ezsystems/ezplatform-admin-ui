@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification\Version;
+namespace Ibexa\AdminUi\Specification\Version;
 
 use eZ\Publish\API\Repository\ContentService;
-use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
+use Ibexa\AdminUi\Specification\AbstractSpecification;
 
 class VersionHasConflict extends AbstractSpecification
 {
@@ -54,3 +54,5 @@ class VersionHasConflict extends AbstractSpecification
         return false;
     }
 }
+
+class_alias(VersionHasConflict::class, 'EzSystems\EzPlatformAdminUi\Specification\Version\VersionHasConflict');

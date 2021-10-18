@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification\Content;
+namespace Ibexa\AdminUi\Specification\Content;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\Content\Relation;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
-use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Specification\AbstractSpecification;
 
 class ContentHaveAssetRelation extends AbstractSpecification
 {
@@ -52,3 +52,5 @@ class ContentHaveAssetRelation extends AbstractSpecification
         return false;
     }
 }
+
+class_alias(ContentHaveAssetRelation::class, 'EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveAssetRelation');

@@ -1,13 +1,13 @@
 services:
-    EzSystems\EzPlatformAdminUi\Tab\ContentType\:
+    Ibexa\AdminUi\Tab\ContentType\:
         resource: "../../../lib/Tab/ContentType/*"
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab
         public: true
         tags:
             - { name: ezplatform.tab, group: content-type }
 
     ezplatform.adminui.content_type.tab_groups:
-        parent: EzSystems\EzPlatformAdminUi\Component\TabsComponent
+        parent: Ibexa\AdminUi\Component\TabsComponent
         arguments:
             $template: '@@ezdesign/ui/tab/content_type.html.twig'
             $groupIdentifier: 'content-type'

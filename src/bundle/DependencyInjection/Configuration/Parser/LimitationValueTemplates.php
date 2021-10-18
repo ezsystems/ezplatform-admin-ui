@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser;
+namespace Ibexa\Bundle\AdminUi\DependencyInjection\Configuration\Parser;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\Parser\Templates;
 
@@ -14,3 +14,5 @@ class LimitationValueTemplates extends Templates
     const INFO = 'Settings for limitation value templates';
     const INFO_TEMPLATE_KEY = 'Template file where to find block definition to display limitation values';
 }
+
+class_alias(LimitationValueTemplates::class, 'EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\LimitationValueTemplates');

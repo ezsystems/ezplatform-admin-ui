@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
+namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
-use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 class VersionsDataset
 {
@@ -125,3 +125,5 @@ class VersionsDataset
         return array_values(array_filter($versions, $callable));
     }
 }
+
+class_alias(VersionsDataset::class, 'EzSystems\EzPlatformAdminUi\UI\Dataset\VersionsDataset');

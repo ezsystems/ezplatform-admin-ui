@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
+namespace Ibexa\AdminUi\Tab\LocationView;
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
@@ -15,15 +15,15 @@ use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\Pagination\Pagerfanta\LocationSearchAdapter;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationAddData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateVisibilityData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
-use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
-use EzSystems\EzPlatformAdminUi\UI\Value\Content\Location\Mapper;
+use Ibexa\AdminUi\Form\Data\Content\Location\ContentLocationAddData;
+use Ibexa\AdminUi\Form\Data\Content\Location\ContentLocationRemoveData;
+use Ibexa\AdminUi\Form\Data\Content\Location\ContentMainLocationUpdateData;
+use Ibexa\AdminUi\Form\Data\Location\LocationSwapData;
+use Ibexa\AdminUi\Form\Data\Location\LocationUpdateVisibilityData;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\UI\Value\Content\Location\Mapper;
+use Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab;
+use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
@@ -277,3 +277,5 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         );
     }
 }
+
+class_alias(LocationsTab::class, 'EzSystems\EzPlatformAdminUi\Tab\LocationView\LocationsTab');

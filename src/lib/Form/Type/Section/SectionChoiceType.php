@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Section;
+namespace Ibexa\AdminUi\Form\Type\Section;
 
 use eZ\Publish\API\Repository\SectionService;
 use Symfony\Component\Form\AbstractType;
@@ -48,3 +48,5 @@ class SectionChoiceType extends AbstractType
         return ChoiceType::class;
     }
 }
+
+class_alias(SectionChoiceType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType');

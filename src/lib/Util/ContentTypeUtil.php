@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Util;
+namespace Ibexa\AdminUi\Util;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 
@@ -47,3 +47,5 @@ class ContentTypeUtil
         return $fieldTypes;
     }
 }
+
+class_alias(ContentTypeUtil::class, 'EzSystems\EzPlatformAdminUi\Util\ContentTypeUtil');
