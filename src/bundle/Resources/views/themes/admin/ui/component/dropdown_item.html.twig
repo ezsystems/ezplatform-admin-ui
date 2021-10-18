@@ -17,7 +17,7 @@
         class="ibexa-dropdown__item {% if preferred_choice %}ibexa-dropdown__item--preferred-choice{% endif %} {% if custom_form ? choice.value == value : choice is selectedchoice(value) %}ibexa-dropdown__item--selected{% endif %}"
     >
         {% if multiple is defined and multiple %}
-            <input type="checkbox" name="dropdown-checkbox" class="ibexa-input ibexa-input--checkbox" {% if choice is selectedchoice(value) %}checked{% endif %} />
+            <input type="checkbox" name="dropdown-checkbox" class="ibexa-input ibexa-input--checkbox" {% if custom_form ? choice.value == value : choice is selectedchoice(value) %}checked{% endif %} />
         {% endif %}
         <span class="ibexa-dropdown__item-label">{{ item_label }}</span>
     </li>
