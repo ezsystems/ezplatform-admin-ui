@@ -8,7 +8,7 @@
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const sectionsNode = doc.querySelector('.ibexa-content-type-edit__sections');
-    const searchFieldInput = doc.querySelector('.ibexa-available-field-types__search');
+    const filterFieldInput = doc.querySelector('.ibexa-available-field-types__sidebar-filter');
     const popupMenuElement = sectionsNode.querySelector('.ibexa-popup-menu');
     const addGroupTriggerBtn = sectionsNode.querySelector('.ibexa-content-type-edit__add-field-definitions-group-btn');
     const endpoints = {
@@ -40,14 +40,14 @@
     });
     const searchField = (event) => {
         const fieldFilterQueryLowerCase = event.currentTarget.value.toLowerCase();
-        const fields = doc.querySelectorAll('.ibexa-available-field-types__fields .ibexa-available-field-types__field');
+        const fields = doc.querySelectorAll('.ibexa-available-field-types__list .ibexa-available-field-type');
 
         fields.forEach((field) => {
-            const fieldNameNode = field.querySelector('.ibexa-label');
+            const fieldNameNode = field.querySelector('.ibexa-available-field-type__label');
             const fieldNameLowerCase = fieldNameNode.innerText.toLowerCase();
             const isFieldHidden = !fieldNameLowerCase.includes(fieldFilterQueryLowerCase);
 
-            field.classList.toggle('ibexa-available-field-types__field--hidden', isFieldHidden);
+            field.classList.toggle('ibexa-available-field-type--hidden', isFieldHidden);
         });
     };
     const removeDragPlaceholders = () => {
@@ -159,7 +159,7 @@
         submitBtn.toggleAttribute('disabled', !fieldsDefinitionCount);
     };
     const addField = () => {
-        if (!sourceContainer.classList.contains('ibexa-available-field-types__fields')) {
+        if (!sourceContainer.classList.contains('ibexa-available-field-types__list')) {
             insertFieldDefinitionNode(currentDraggedItem);
             afterChangeGroup();
 
@@ -280,7 +280,7 @@
         }
     }
 
-    searchFieldInput.addEventListener('keyup', searchField, false);
+    filterFieldInput.addEventListener('keyup', searchField, false);
 
     doc.querySelectorAll('.ibexa-collapse__extra-action-button--remove-field-definitions').forEach((removeFieldDefinitionsButton) => {
         removeFieldDefinitionsButton.addEventListener('click', removeField, false);
@@ -291,20 +291,20 @@
         }
     );
 
-    doc.querySelectorAll('.ibexa-available-field-types__fields .ibexa-available-field-types__field').forEach((availableField) => {
+    doc.querySelectorAll('.ibexa-available-field-types__list .ibexa-available-field-type').forEach((availableField) => {
         availableField.addEventListener(
             'dragstart',
             (event) => {
                 currentDraggedItem = event.currentTarget;
                 sourceContainer = currentDraggedItem.parentNode;
-                currentDraggedItem.classList.add('ibexa-available-field-types__field--is-dragged-out');
+                currentDraggedItem.classList.add('ibexa-available-field-type--is-dragged-out');
             },
             false
         );
         availableField.addEventListener(
             'dragend',
             () => {
-                currentDraggedItem.classList.remove('ibexa-available-field-types__field--is-dragged-out');
+                currentDraggedItem.classList.remove('ibexa-available-field-type--is-dragged-out');
             },
             false
         );

@@ -1,49 +1,11 @@
 .ibexa-available-field-types {
-    @include drag-items-container();
+    @include sidebar-drag-items();
 
-    &__action-header {
-        @include drag-items-action-header();
-    }
+    margin-left: calculateRem(32px);
+}
 
-    &__header {
-        @include drag-items-header();
-    }
-
-    &__search-container {
-        padding: calculateRem(24px);
-        background: $ibexa-color-white;
-
-        .ibexa-input {
-            height: calculateRem(48px);
-        }
-    }
-
-    &__fields {
-        @include drag-items-list();
-    }
-
-    &__field {
-        @include drag-item();
-
-        .ibexa-icon {
-            &--field-icon {
-                flex-shrink: 0;
-                margin-right: calculateRem(8px);
-            }
-        }
-
-        &--is-dragged-out {
-            .ibexa-icon {
-                &--field-icon {
-                    fill: $ibexa-color-dark-200;
-                }
-            }
-        }
-    }
-
-    &__field-label {
-        @include drag-item-label();
-    }
+.ibexa-available-field-type {
+    @include sidebar-drag-item;
 }
 
 .ibexa-content-type-edit {
@@ -170,7 +132,7 @@
 }
 
 .ibexa-field-definitions-placeholder {
-    @include drag-item-placeholder();
+    @include drag-item-placeholder;
 }
 
 .ibexa-field-definitions-empty-group {

@@ -47,7 +47,7 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             new VisibleCSSLocator('field', '.form-group'),
             new VisibleCSSLocator('contentTypeAddButton', '.ibexa-content-type-edit__add-field-definitions-group-btn'),
             new VisibleCSSLocator('contentTypeCategoryList', ' div.ibexa-content-type-edit__add-field-definitions-group > ul > li:nth-child(n):not(.ibexa-popup-menu__item-action--disabled)'),
-            new VisibleCSSLocator('availableFieldLabelList', '.ibexa-available-field-types__fields > li'),
+            new VisibleCSSLocator('availableFieldLabelList', '.ibexa-available-field-types__list > li'),
             new VisibleCSSLocator('workspace', '#content_collapse > div.ibexa-collapse__body-content > div'),
             new VisibleCSSLocator('fieldDefinitionToggle', '.ibexa-collapse:nth-last-child(2) > div.ibexa-collapse__header > button:last-child:not([data-bs-target="#content_collapse"])'),
             new VisibleCSSLocator('fieldDefinitionOpenContainer', '[data-collapsed="false"] .ibexa-content-type-edit__field-definition-content'),
@@ -69,7 +69,7 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             true
         ) + 1; // CSS selectors are 1-indexed
 
-        $availableFieldLabelsScript = "document.querySelector('.ibexa-available-field-types__fields > li:nth-child(%d) > .ibexa-available-field-types__field-label')";
+        $availableFieldLabelsScript = "document.querySelector('.ibexa-available-field-types__list > li:nth-child(%d) > .ibexa-available-field-type__label')";
         $scriptToExecute = sprintf($availableFieldLabelsScript, $fieldPosition);
         $this->getSession()->executeScript($scriptToExecute);
 

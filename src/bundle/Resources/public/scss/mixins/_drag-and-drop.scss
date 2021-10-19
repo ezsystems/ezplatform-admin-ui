@@ -1,75 +1,205 @@
-@mixin drag-items-container() {
-    display: flex;
-    flex-direction: column;
-    max-width: calculateRem(340px);
-    max-height: calculateRem(700px);
-    margin-left: calculateRem(24px);
-    padding-top: calculateRem(16px);
+@mixin drag-module-backdrop-background {
+    background-image: radial-gradient(
+        $ibexa-color-light 0.5px,
+        transparent 0
+    ); // 0.5px is needed so that both on HD and Retina we have 1px
+    background-color: $ibexa-color-light-200;
+    background-position: 0 0, calculateRem(5px) calculateRem(5px);
+    background-size: calculateRem(5px) calculateRem(5px);
+}
+
+@mixin sidebar-drag-items {
+    $ibexa-sidebar-width: calculateRem(356px);
+    
+    width: $ibexa-sidebar-width;
+    min-height: calculateRem(700px);
+    max-height: calc(100vh - #{calculateRem(300px)});
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: calculateRem(5px);
     overflow: hidden;
-    border: calculateRem(1px) solid $ibexa-color-light;
-    border-radius: $ibexa-border-radius;
-    background-color: $ibexa-color-light-400;
-    box-shadow: calculateRem(-4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
-    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
-}
-
-@mixin drag-items-action-header() {
-    display: flex;
-    justify-content: space-between;
-    height: calculateRem(16px);
-    background-color: $ibexa-color-light-400;
-}
-
-@mixin drag-items-header() {
-    margin: 0;
-    padding: calculateRem(12px) calculateRem(24px);
     background: $ibexa-color-white;
-    border-bottom: calculateRem(1px) solid $ibexa-color-light;
+    box-shadow: $ibexa-edit-header-box-shadow;
+    transition-property: opacity, transform;
+    transition-duration: $ibexa-admin-transition-duration;
+    transition-timing-function: $ibexa-admin-transition;
+    transform-origin: top center;
+
+    &__action-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: calculateRem(8px) calculateRem(16px);
+        background-color: $ibexa-color-light-400;
+    }
+
+    &__title-bar {
+        padding: calculateRem(10px) calculateRem(32px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-dark-200;
+    }
+
+    &__title {
+        margin: 0;
+        padding: 0;
+        font-weight: 400;
+    }
+
+    &__search-bar {
+        padding: calculateRem(18px) calculateRem(32px);
+    }
+
+    &__list {
+        padding: calculateRem(4px) calculateRem(32px);
+        height: calculateRem(560px);
+        overflow: auto;
+    }
+
+    &--is-draggable {
+        position: fixed;
+        z-index: 500;
+        top: calculateRem(130px);
+        left: calc(100% - #{$ibexa-sidebar-width} - #{calculateRem(5px)});
+    }
 }
 
-@mixin drag-items-list {
-    background: $ibexa-color-white;
-    overflow: auto;
-    padding: 0 calculateRem(24px) calculateRem(24px);
+@mixin sidebar-drag-items-group {
+    height: auto;
+    margin-bottom: calculateRem(16px);
+    padding-bottom: calculateRem(16px);
+    overflow: hidden;
+
+    &__title-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: calculateRem(36px);
+        border-top: calculateRem(1px) solid $ibexa-color-light;
+
+        .ibexa-icon {
+            transition: transform $ibexa-admin-transition-duration $ibexa-admin-transition;
+        }
+    }
+
+    &__title {
+        font-size: $ibexa-text-font-size-medium;
+        font-weight: 400;
+    }
+
+    &--collapsed {
+        height: calculateRem(34px);
+    }
 }
 
-@mixin drag-item {
+@mixin sidebar-drag-item {
     display: flex;
-    align-items: center;
+    width: 100%;
     margin-bottom: calculateRem(8px);
-    height: calculateRem(48px);
+    padding: calculateRem(11px) 0;
     border: calculateRem(1px) solid $ibexa-color-light;
     border-radius: $ibexa-border-radius;
-    background: $ibexa-color-white;
-    box-shadow: $ibexa-content-type-edit-field-shadow;
-    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
-    cursor: grab;
+    box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(20px) calculateRem(-7px) rgba($ibexa-color-info, 0.05);
 
-    &:first-child {
-        margin-top: 0;
+    &:hover {
+        cursor: grab;
+    }
+
+    &__drag {
+        display: flex;
+        align-items: center;
+        padding: 0 calculateRem(8px) 0 calculateRem(16px);
+    }
+
+    &__drag-icon {
+        fill: $ibexa-color-light;
+    }
+
+    &__type {
+        display: flex;
+        align-items: center;
+        padding: 0 calculateRem(8px)
+    }
+
+    &__label {
+        font-size: $ibexa-text-font-size-medium;
+    }
+
+    &__collapse {
+        padding: 0 calculateRem(9px);
     }
 
     &--hidden {
         height: 0;
-        opacity: 0;
         margin: 0;
+        padding: 0;
+        opacity: 0;
         border: none;
     }
 
+    &--unavailable,
     &--is-dragged-out {
         background: $ibexa-color-light-400;
         opacity: 0.5;
     }
+}
 
-    &--no-drag {
-        cursor: unset;
+@mixin drag-item {
+    display: flex;
+    width: 100%;
+    padding: calculateRem(12px) calculateRem(16px);
+    background-color: $ibexa-color-white;
+    border-radius: $ibexa-border-radius;
+    border: calculateRem(1px) solid $ibexa-color-light;
+    box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(20px) calculateRem(-7px) rgba($ibexa-color-info, 0.05);
+
+    &__left-col {
+        display: flex;
+        width: calc(100% - #{calculateRem(64px)});
     }
 
-    .ibexa-icon {
-        &--drag-icon {
-            flex-shrink: 0;
+    &__right-col {
+        display: flex;
+        justify-content: flex-end;
+        width: calculateRem(64px);
+    }
+
+    &__drag-handler {
+        display: flex;
+        align-items: center;
+        height: calculateRem(32px);
+        padding-right: calculateRem(16px);
+
+        .ibexa-icon {
             fill: $ibexa-color-dark-200;
-            margin: 0 calculateRem(16px);
+        }
+    }
+
+    &__label {
+        padding-top: calculateRem(4px);
+    }
+
+    &--invalid {
+        border-color: $ibexa-color-danger;
+    }
+}
+
+@mixin drag-item-placeholder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: calculateRem(48px);
+    margin: 0 0 calculateRem(10px) 0;
+    padding: 0 calculateRem(14px);
+    border-radius: $ibexa-border-radius;
+    border: calculateRem(1px) dashed $ibexa-color-light;
+
+    &__item {
+        height: calculateRem(24px);
+        width: calculateRem(24px);
+        background-color: $ibexa-color-light-300;
+
+        &:nth-child(1) {
+            width: 55%;
+            border-radius: $ibexa-border-radius;
         }
     }
 }
@@ -102,30 +232,14 @@
             margin-left: calculateRem(8px);
         }
 
-        &--short {
-            flex-grow: 0;
-            flex-shrink: 0;
+        &:nth-child(2) {
+            margin-left: auto;
+            border-radius: 50%;
         }
-    }
 
-    &__item {
-        @include ibexa-font-sans-serif();
-
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        white-space: nowrap;
-        padding: 0 calculateRem(16px);
-        border-radius: $ibexa-border-radius;
-        background-color: $ibexa-color-light-300;
-        color: $ibexa-color-dark-400;
-        font-size: $ibexa-text-font-size-medium;
-        height: calculateRem(24px);
-        width: 75%;
-
-        &--short {
-            width: calculateRem(24px);
-            padding: 0;
+        &:nth-child(3) {
+            margin-left: calculateRem(8px);
+            border-radius: 50%;
         }
     }
 
