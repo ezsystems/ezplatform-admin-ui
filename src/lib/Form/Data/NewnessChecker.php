@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data;
+namespace Ibexa\AdminUi\Form\Data;
 
 /**
  * Trait for repository data objects, provides a test for if they are newly created, based on identifier.
@@ -27,3 +27,5 @@ trait NewnessChecker
      */
     abstract protected function getIdentifierValue(): string;
 }
+
+class_alias(NewnessChecker::class, 'EzSystems\EzPlatformAdminUi\Form\Data\NewnessChecker');

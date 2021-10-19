@@ -6,7 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab;
+namespace Ibexa\AdminUi\Tab;
+
+use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 
 class TabRegistry
 {
@@ -16,7 +18,7 @@ class TabRegistry
     /**
      * @param string $group
      *
-     * @return TabInterface[]
+     * @return \Ibexa\Contracts\AdminUi\Tab\TabInterface[]
      */
     public function getTabsByGroupName(string $group): array
     {
@@ -41,7 +43,7 @@ class TabRegistry
      * @param string $name
      * @param string $group
      *
-     * @return TabInterface
+     * @return \Ibexa\Contracts\AdminUi\Tab\TabInterface
      */
     public function getTabFromGroup(string $name, string $group): TabInterface
     {
@@ -67,7 +69,7 @@ class TabRegistry
     }
 
     /**
-     * @param TabInterface $tab
+     * @param \Ibexa\Contracts\AdminUi\Tab\TabInterface $tab
      * @param string $group
      */
     public function addTab(TabInterface $tab, string $group)
@@ -79,3 +81,5 @@ class TabRegistry
         $this->tabGroups[$group]->addTab($tab);
     }
 }
+
+class_alias(TabRegistry::class, 'EzSystems\EzPlatformAdminUi\Tab\TabRegistry');

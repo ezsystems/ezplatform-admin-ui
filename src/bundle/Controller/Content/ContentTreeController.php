@@ -6,16 +6,16 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller\Content;
+namespace Ibexa\Bundle\AdminUi\Controller\Content;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Query;
-use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
-use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Node;
-use EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Root;
-use EzSystems\EzPlatformAdminUi\UI\Module\ContentTree\NodeFactory;
 use EzSystems\EzPlatformRest\Message;
 use EzSystems\EzPlatformRest\Server\Controller as RestController;
+use Ibexa\AdminUi\REST\Value\ContentTree\LoadSubtreeRequestNode;
+use Ibexa\AdminUi\REST\Value\ContentTree\Node;
+use Ibexa\AdminUi\REST\Value\ContentTree\Root;
+use Ibexa\AdminUi\UI\Module\ContentTree\NodeFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 class ContentTreeController extends RestController
@@ -111,3 +111,5 @@ class ContentTreeController extends RestController
         return new Root($elements);
     }
 }
+
+class_alias(ContentTreeController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\Content\ContentTreeController');

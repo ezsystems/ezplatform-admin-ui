@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification;
+namespace Ibexa\AdminUi\Specification;
 
 abstract class AbstractSpecification implements SpecificationInterface
 {
@@ -45,3 +45,5 @@ abstract class AbstractSpecification implements SpecificationInterface
         return new NotSpecification($this);
     }
 }
+
+class_alias(AbstractSpecification::class, 'EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification');

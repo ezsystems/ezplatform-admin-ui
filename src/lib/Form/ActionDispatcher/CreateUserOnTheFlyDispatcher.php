@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\ActionDispatcher;
+namespace Ibexa\AdminUi\Form\ActionDispatcher;
 
-use EzSystems\EzPlatformAdminUi\Event\UserOnTheFlyEvents;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ContentDispatcher;
+use Ibexa\Contracts\AdminUi\Event\UserOnTheFlyEvents;
 
 class CreateUserOnTheFlyDispatcher extends ContentDispatcher
 {
@@ -18,3 +18,5 @@ class CreateUserOnTheFlyDispatcher extends ContentDispatcher
         return UserOnTheFlyEvents::USER_CREATE;
     }
 }
+
+class_alias(CreateUserOnTheFlyDispatcher::class, 'EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateUserOnTheFlyDispatcher');

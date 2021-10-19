@@ -1,4 +1,4 @@
-EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData:
+Ibexa\AdminUi\Form\Data\Section\SectionCreateData:
     properties:
         identifier:
             - NotBlank: ~
@@ -8,7 +8,7 @@ EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionCreateData:
         name:
             - NotBlank: ~
 
-EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionUpdateData:
+Ibexa\AdminUi\Form\Data\Section\SectionUpdateData:
     properties:
         identifier:
             - NotBlank: ~

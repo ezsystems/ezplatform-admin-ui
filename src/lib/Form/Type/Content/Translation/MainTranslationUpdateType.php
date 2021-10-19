@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation;
+namespace Ibexa\AdminUi\Form\Type\Content\Translation;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentType;
+use Ibexa\AdminUi\Form\Data\Content\Translation\MainTranslationUpdateData;
+use Ibexa\AdminUi\Form\Type\Content\ContentType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -56,3 +56,5 @@ class MainTranslationUpdateType extends AbstractType
         ]);
     }
 }
+
+class_alias(MainTranslationUpdateType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType');

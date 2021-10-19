@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
+namespace Ibexa\AdminUi\Form\Type\Role;
 
 use eZ\Publish\API\Repository\RoleService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\RoleTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\RoleTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,3 +37,5 @@ class RoleType extends AbstractType
         return HiddenType::class;
     }
 }
+
+class_alias(RoleType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleType');

@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
-use EzSystems\EzPlatformAdminUi\Specification\Content\ContentHaveUniqueRelation;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Specification\Content\ContentHaveUniqueRelation;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -54,3 +54,5 @@ class LocationHaveUniqueAssetRelationValidator extends ConstraintValidator
         }
     }
 }
+
+class_alias(LocationHaveUniqueAssetRelationValidator::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationHaveUniqueAssetRelationValidator');

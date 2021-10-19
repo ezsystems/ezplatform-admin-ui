@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\EventListener;
+namespace Ibexa\AdminUi\Form\EventListener;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormEvent;
@@ -33,3 +33,5 @@ class DisableSiteRootCheckboxIfRootLocationListener
         }
     }
 }
+
+class_alias(DisableSiteRootCheckboxIfRootLocationListener::class, 'EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener');
