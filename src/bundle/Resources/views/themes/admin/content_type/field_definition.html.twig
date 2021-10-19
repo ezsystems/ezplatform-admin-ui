@@ -34,7 +34,7 @@
             'languageCode': language_code,
             'form': field_definition,
             'group_class': value.group_class|default(''),
-            'is_translation': is_translation,
+            'is_translation': is_translation ?? false,
         }) }}
 
         {% for child in field_definition|filter(child => child.isRendered() == false) %}
