@@ -175,7 +175,7 @@ const Search = ({ itemsPerPage }) => {
                         </SelectedSectionContext.Provider>
                     </SelectedContentTypesContext.Provider>
                 </div>
-                <div class="c-search__xontent">
+                <div class="c-search__content">
                     {renderSearchResults()}
                 </div>
             </div>
