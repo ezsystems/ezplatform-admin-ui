@@ -12,6 +12,7 @@ use Behat\Mink\Session;
 use EzSystems\Behat\API\ContentData\FieldTypeNameConverter;
 use Ibexa\AdminUi\Behat\Component\Notification;
 use Ibexa\AdminUi\Behat\Component\RightMenu;
+use Ibexa\Behat\Browser\Element\Criterion\ElementAttributeCriterion;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
@@ -61,6 +62,7 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             new VisibleCSSLocator('fieldBody', 'ez-card__body'),
             new VisibleCSSLocator('fieldCollapsed', 'ez-card--collapsed'),
             new VisibleCSSLocator('fieldDefinitionToggler', '.ez-card__body-display-toggler'),
+            new VisibleCSSLocator('selectLaunchEditorMode', '.form-check-label .ez-input--radio'),
             new XPathLocator('ezlandingpageFieldDisplayButton', '//*[@id="field-definition-page"]/button'),
             new XPathLocator('selectBlocksDropdown', '//div[contains(@class,"ez-page-select-items")]/a[contains(text(),"Select blocks")]'),
             new XPathLocator('selectBlocksDropdownDefault', '//div[contains(@class,"ez-page-select-items__group")]/a[contains(text(),"default")]'),
@@ -106,8 +108,7 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
 
     public function selectEditorLaunchMode(string $viewMode): void
     {
-        $viewModeFindingScript = "document.querySelector('.form-check-label .ez-input--radio[value=\'%s\']').click()";
-        $scriptToExecute = sprintf($viewModeFindingScript, $viewMode);
-        $this->getSession()->executeScript($scriptToExecute);
+        $this->getHTMLPage()->findAll($this->getLocator('selectLaunchEditorMode'))
+            ->getByCriterion(new ElementAttributeCriterion('value', $viewMode))->click();
     }
 }

@@ -233,7 +233,7 @@ class ContentTypeContext implements Context
     /**
      * @Given I select :viewMode editor launch mode in ezlandingpage field options
      */
-    public function iCheckEditorLaunchModeOption($viewMode)
+    public function iCheckEditorLaunchModeOption(string $viewMode): void
     {
         $this->contentTypeUpdatePage->expandFieldDefinition('Landing Page');
         $this->contentTypeUpdatePage->selectEditorLaunchMode($viewMode);
