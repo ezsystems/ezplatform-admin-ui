@@ -16,6 +16,11 @@
         <target state="new">Any Content Type</target>
         <note>key: search.any.content.type</note>
       </trans-unit>
+      <trans-unit id="08232f4c5c3ca88a7f2fd8e29eda7e20ec346aae" resname="search.any_time">
+        <source>Any time</source>
+        <target state="new">Any time</target>
+        <note>key: search.any_time</note>
+      </trans-unit>
       <trans-unit id="8605c5030193beebc7097a652f6c9dcb648cccec" resname="search.apply">
         <source>Apply</source>
         <target state="new">Apply</target>

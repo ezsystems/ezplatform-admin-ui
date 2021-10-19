@@ -634,11 +634,6 @@
         <target state="new">Do you want to unassign the Users/Groups?</target>
         <note>key: role_assignments.modal.message</note>
       </trans-unit>
-      <trans-unit id="08232f4c5c3ca88a7f2fd8e29eda7e20ec346aae" resname="search.any_time">
-        <source>Any time</source>
-        <target state="new">Any time</target>
-        <note>key: search.any_time</note>
-      </trans-unit>
       <trans-unit id="f32993c555744e5c203137f3ee0e380d27e9cfef" resname="search.date.range">
         <source>From date - to date</source>
         <target state="new">From date - to date</target>
