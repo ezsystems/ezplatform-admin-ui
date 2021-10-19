@@ -67,12 +67,12 @@
                     {% endset %}
 
                     {% set body_rows = body_rows|merge([{ cols: [
-                        { has_checkbox: true, content: col_checkbox },
-                        { has_icon: true, content: col_icon },
+                        { has_checkbox: true, content: col_checkbox, no_escape: true },
+                        { has_icon: true, content: col_icon, no_escape: true },
                         { content: col_name },
                         { content: bookmark.contentType.name },
                         { content: col_path },
-                        { has_action_btns: true, content: col_action_btns },
+                        { has_action_btns: true, content: col_action_btns, no_escape: true },
                     ]}]) %}
                 {% endfor %}
 
@@ -90,7 +90,7 @@
                         { content: 'bookmark.list.path'|trans|desc('Path') },
                         { },
                     ],
-                    body_rows: body_rows,
+                    body_rows,
                     actions: form_widget(form_remove.remove, {'attr': {'class': 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text', 'disabled': true}}),
                     empty_table_info_text: 'bookmark.list.empty'|trans|desc('You have no bookmarks yet. Your bookmarks will show up here.'),
                 } %}

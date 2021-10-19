@@ -42,6 +42,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            no_escape: true,
         }]) %}
 
         {% set col_raw %}
@@ -60,6 +61,7 @@
         {% set body_row_cols = body_row_cols|merge([{
             has_action_btns: true,
             content: col_raw,
+            no_escape: true,
         }]) %}
 
         {% embed '@ezdesign/ui/component/table/table.html.twig' with {

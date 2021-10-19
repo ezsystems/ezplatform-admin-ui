@@ -18,6 +18,7 @@
             {% set body_row_cols = body_row_cols|merge([{
                 has_checkbox: true,
                 content: col_raw,
+                no_escape: true,
             }]) %}
 
             {% set col_raw %}
@@ -27,6 +28,7 @@
             {% endset %}
             {% set body_row_cols = body_row_cols|merge([{
                 content: col_raw,
+                no_escape: true,
             }]) %}
 
             {% set body_row_cols = body_row_cols|merge([
@@ -50,6 +52,7 @@
             {% set body_row_cols = body_row_cols|merge([{
                 has_action_btns: true,
                 content: col_raw,
+                no_escape: true,
             }]) %}
 
             {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -64,7 +67,7 @@
                 { content: 'object_state.id'|trans|desc('ID') },
                 { },
             ],
-            body_rows: body_rows,
+            body_rows,
             empty_table_info_text: 'object_state.list.empty'|trans|desc('There are no Object states yet. Object states you create will show up here.'),
         } %}
             {% block header %}

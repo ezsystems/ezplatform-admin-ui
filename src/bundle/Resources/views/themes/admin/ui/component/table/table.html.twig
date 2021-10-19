@@ -25,7 +25,7 @@
                 {% block thead %}
                     {% if head_cols is defined and body_rows is defined and body_rows is not empty or head_cols is defined and show_head_cols_if_empty %}
                         {% include '@ezdesign/ui/component/table/table_head_row.html.twig' with {
-                            head_cols: head_cols,
+                            head_cols,
                         } %}
                     {% endif %}
                 {% endblock %}
@@ -46,7 +46,6 @@
                         {% else %}
                             {% block tbody_not_empty %}
                                 {% for row in body_rows %}
-                                    {# TODO: do we need to pass tab explicitely??? #}
                                     {% include '@ezdesign/ui/component/table/table_body_row.html.twig' with {
                                         body_row_cols: row.cols,
                                         class: row.class|default(''),

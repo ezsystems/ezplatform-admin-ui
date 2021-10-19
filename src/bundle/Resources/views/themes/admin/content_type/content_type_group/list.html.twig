@@ -38,6 +38,7 @@
             {% set body_row_cols = body_row_cols|merge([{
                 has_checkbox: true,
                 content: col_raw,
+                no_escape: true,
             }]) %}
 
             {% set col_raw %}
@@ -49,6 +50,7 @@
             {% endset %}
             {% set body_row_cols = body_row_cols|merge([{
                 content: col_raw,
+                no_escape: true,
             }]) %}
 
             {% set body_row_cols = body_row_cols|merge([
@@ -75,6 +77,7 @@
             {% set body_row_cols = body_row_cols|merge([{
                 has_action_btns: true,
                 content: col_raw,
+                no_escape: true,
             }]) %}
 
             {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -89,7 +92,7 @@
                 { content: 'content_type_group.view.list.column.content_types_count'|trans|desc('Number of Content Types') },
                 { },
             ],
-            body_rows: body_rows,
+            body_rows,
         } %}
             {% block header %}
                 {% embed '@ezdesign/ui/component/table/table_header.html.twig' %}

@@ -78,10 +78,10 @@
             {% endset %}
 
             {% set body_rows = body_rows|merge([{ cols: [
-                { has_checkbox: true, content: col_checkbox },
-                { content: col_name },
-                { content: role.id },
-                { has_action_btns: true, content: col_action_btns },
+                { has_checkbox: true, content: col_checkbox, no_escape: true },
+                { content: col_name, no_escape: true },
+                { content: role.id, no_escape: true },
+                { has_action_btns: true, content: col_action_btns, no_escape: true },
             ] }]) %}
         {% endfor %}
 
@@ -93,7 +93,7 @@
                 { content: 'role.view.list.column.id'|trans|desc('Role ID') },
                 { },
             ],
-            body_rows: body_rows,
+            body_rows,
         } %}
             {% block header %}
                 {% embed '@ezdesign/ui/component/table/table_header.html.twig' %}

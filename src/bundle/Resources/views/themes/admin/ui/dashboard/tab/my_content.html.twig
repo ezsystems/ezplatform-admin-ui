@@ -14,6 +14,7 @@
     {% set body_row_cols = body_row_cols|merge([{
         has_icon: true,
         content: col_raw,
+        no_escape: true,
     }]) %}
 
     {% set col_raw %}
@@ -23,12 +24,13 @@
     {% endset %}
     {% set body_row_cols = body_row_cols|merge([{
         content: col_raw,
+        no_escape: true,
     }]) %}
 
     {% set body_row_cols = body_row_cols|merge([
         { content: row.type },
         { content: row.modified|ez_full_datetime },
-        { has_action_btns: true, content: macros.edit_content_button(row, 'dashboard.table.content.edit'|trans|desc('Edit Content')) },
+        { has_action_btns: true, content: macros.edit_content_button(row, 'dashboard.table.content.edit'|trans|desc('Edit Content')), no_escape: true },
     ]) %}
 
     {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -42,6 +44,6 @@
         { content: 'dashboard.table.last_saved'|trans|desc('Last Saved') },
         { },
     ],
-    body_rows: body_rows,
+    body_rows,
     empty_table_info_text: 'dashboard.tab.my_content.empty'|trans|desc('No content. Content items you create will show up here'),
 } %}

@@ -14,6 +14,7 @@
         {% set body_row_cols = body_row_cols|merge([{
             has_icon: true,
             content: col_raw,
+            no_escape: true,
         }]) %}
 
         {% set body_row_cols = body_row_cols|merge([
@@ -49,6 +50,7 @@
         {% set body_row_cols = body_row_cols|merge([{
             has_action_btns: true,
             content: col_raw,
+            no_escape: true,
         }]) %}
     {% else %}
         {% set body_row_cols = body_row_cols|merge([{
@@ -74,7 +76,7 @@
         { content: 'dashboard.table.last_saved'|trans|desc('Last Saved') },
         { },
     ],
-    body_rows: body_rows,
+    body_rows,
     empty_table_info_text: 'dashboard.tab.my_drafts.empty'|trans|desc('No content. Drafts you create will show up here'),
 } %}
 

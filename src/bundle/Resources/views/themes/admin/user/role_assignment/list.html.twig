@@ -17,6 +17,7 @@
         {% set body_row_cols = body_row_cols|merge([{
             has_checkbox: true,
             content: col_raw,
+            no_escape: true,
         }]) %}
 
         {% set body_row_cols = body_row_cols|merge([
@@ -40,6 +41,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            no_escape: true,
         }]) %}
 
         {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -52,7 +54,7 @@
             { content: 'role_assignment.view.list.panel.assignments.column.user_group'|trans|desc('User/Group') },
             { content: 'role_assignment.view.list.panel.assignments.column.limitation'|trans|desc('Limitation') },
         ],
-        body_rows: body_rows,
+        body_rows,
     } %}
         {% block header %}
             {% embed '@ezdesign/ui/component/table/table_header.html.twig' %}

@@ -24,6 +24,7 @@
         {% set body_row_cols = body_row_cols|merge([{
             has_checkbox: true,
             content: col_raw,
+            no_escape: true,
         }]) %}
 
         {% set body_row_cols = body_row_cols|merge([
@@ -44,6 +45,7 @@
             {% endset %}
             {% set body_row_cols = body_row_cols|merge([{
                 content: col_raw,
+                no_escape: true,
             }]) %}
         {% endif %}
 
@@ -63,8 +65,8 @@
 
     {% include '@ezdesign/ui/component/table/table.html.twig' with {
         headline: 'tab.translations.translation_manger'|trans|desc('Translation manager'),
-        head_cols: head_cols,
-        body_rows: body_rows,
+        head_cols,
+        body_rows,
         actions: tab.table_header_tools(form_translation_remove, can_translate),
     } %}
 

@@ -19,6 +19,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            no_escape: true,
         }]) %}
 
         {% set body_row_cols = body_row_cols|merge([
@@ -33,6 +34,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            no_escape: true,
         }]) %}
 
         {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -48,7 +50,7 @@
         { content: 'tab.relations.table.content_type'|trans()|desc('Content type') },
         { content: 'tab.relations.table.relation_type'|trans()|desc('Relation type') },
     ],
-    body_rows: body_rows,
+    body_rows,
     empty_table_info_text: 'tab.relations.no_relations'|trans()|desc('This Content item has no related content.'),
 } %}
 

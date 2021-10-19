@@ -1,6 +1,7 @@
 {% import "@ezdesign/ui/component/macros.html.twig" as html %}
+{% import "@ezdesign/ui/component/table/table_macros.html.twig" as table_macros %}
 
-<th 
+<th
     class="ibexa-table__header-cell
         {%- if has_checkbox|default(false) %} ibexa-table__header-cell--checkbox{%- endif -%}
         {%- if has_icon|default(false) %} ibexa-table__header-cell--has-icon{%- endif -%}
@@ -10,14 +11,14 @@
 >
     {%- block content -%}
         {%- if has_checkbox|default(false) -%}
-            <input class="ibexa-input ibexa-input--checkbox ibexa-table__header-cell-checkbox" type="checkbox">  
+            <input class="ibexa-input ibexa-input--checkbox ibexa-table__header-cell-checkbox" type="checkbox">
         {%- endif -%}
         <span
             class="ibexa-table__header-cell-text-wrapper
             {%- if sort_column is defined and sort_column is not null %} ibexa-table__sort-column ibexa-table__sort-column--{{ sort_column }}{%- endif -%}"
             {{ html.attributes(wrapper_attr|default({})) }}
         >
-            {{- content|raw -}}
+            {{ table_macros.conditional_escape(content, no_escape|default(false)) }}
         </span>
     {%- endblock -%}
 </th>

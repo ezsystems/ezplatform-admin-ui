@@ -36,6 +36,7 @@
             {% endset %}
             {% set body_row_cols = body_row_cols|merge([{
                 content: col_raw,
+                no_escape: true,
             }]) %}
 
             {% set body_row_cols = body_row_cols|merge([
@@ -60,6 +61,7 @@
             {% set body_row_cols = body_row_cols|merge([{
                 has_action_btns: true,
                 content: col_raw,
+                no_escape: true,
             }]) %}
 
             {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -74,7 +76,7 @@
                 { content: 'url.label.modified'|trans },
                 { },
             ],
-            body_rows: body_rows,
+            body_rows,
             empty_table_info_text: 'url.list.no_urls'|trans,
         } %}
 

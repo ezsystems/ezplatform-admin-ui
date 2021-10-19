@@ -39,9 +39,12 @@
                         { content: content_type.names[current_language] },
                         { content: content_type.identifier },
                         { content: content_type.descriptions[current_language]|default('') },
-                        { content: can_update
-                            ? macros.content_type_edit(content_type, content_type_group, 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2')
-                            : null },
+                        {
+                            content: can_update
+                                ? macros.content_type_edit(content_type, content_type_group, 'btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2')
+                                : null,
+                            no_escape: true,
+                        },
                     ]
                 }],
             } %}
@@ -114,7 +117,7 @@
                         { content: 'Identifier', class: 'ibexa-table__head-cell--field-definitions-head' },
                         { content: 'Type', class: 'ibexa-table__head-cell--field-definitions-head' },
                     ],
-                    body_rows: body_rows,
+                    body_rows,
                 } %}
             {% endfor %}
         </div>
