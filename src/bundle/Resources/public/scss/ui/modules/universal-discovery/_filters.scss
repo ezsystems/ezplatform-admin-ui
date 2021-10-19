@@ -1,3 +1,99 @@
 .c-filters {
-    margin: calculateRem(24px) 0;
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: calculateRem(14px);
+        margin-bottom: calculateRem(16px);
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+    }
+
+    &__header-content {
+        font-size: $ibexa-text-font-size-large;
+        font-weight: 600;
+        margin-right: calculateRem(8px);
+    }
+
+    &__header-actions {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    &__collapsible {
+        &--is-hidden {
+            .c-filters {
+                &__collapsible-title {
+                    &:before {
+                        transform: rotate(135deg);
+                    }
+
+                    &:after {
+                        transform: rotate(-135deg);
+                    }
+                }
+
+                &__collapsible-content {
+                    transform: scaleY(0);
+                    opacity: 0;
+                    height: 0;
+                }
+            }
+        }
+    }
+
+    &__collapsible-title {
+        position: relative;
+        cursor: pointer;
+        padding-right: calculateRem(24px);
+        font-size: $ibexa-text-font-size-medium;
+        min-height: calculateRem(40px);
+        display: flex;
+        align-items: center;
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+        margin-bottom: calculateRem(12px);
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            width: calculateRem(10px);
+            height: calculateRem(1px);
+            background: $ibexa-color-dark;
+        }
+
+        &:before {
+            transform: rotate(225deg);
+            right: calculateRem(12px);
+        }
+
+        &:after {
+            transform: rotate(-225deg);
+            right: calculateRem(19px);
+        }
+    }
+
+    &__collapsible-content {
+        transform: scaleY(1);
+        transform-origin: top center;
+        transition: all 0.2s $ibexa-admin-transition;
+    }
+
+    &__collapsible-list {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    &__collapsible-list-item {
+        padding: calculateRem(6px) 0;
+
+        .form-check {
+            padding: 0;
+        }
+
+        .ibexa-input--checkbox {
+            margin-right: calculateRem(8px);
+        }
+    }
 }

@@ -181,6 +181,11 @@
         <target state="new">Subtree</target>
         <note>key: filters.subtree</note>
       </trans-unit>
+      <trans-unit id="d4243297721bb92848a26161f2effe427171e26f" resname="filters.title">
+        <source>Filters</source>
+        <target state="new">Filters</target>
+        <note>key: filters.title</note>
+      </trans-unit>
       <trans-unit id="cb5a597ae90cf47cd069feb1efabc3f69674cd3c" resname="input.search.placeholder.default">
         <source>Search...</source>
         <target state="new">Search...</target>

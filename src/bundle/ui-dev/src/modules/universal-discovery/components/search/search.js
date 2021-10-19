@@ -35,7 +35,6 @@ const Search = ({ itemsPerPage }) => {
     const allowedContentTypes = useContext(AllowedContentTypesContext);
     const [searchText, setSearchText] = useContext(SearchTextContext);
     const [offset, setOffset] = useState(0);
-    const [filtersCollapsed, setFiltersCollapsed] = useState(true);
     const [selectedContentTypes, dispatchSelectedContentTypesAction] = useReducer(selectedContentTypesReducer, []);
     const [selectedSection, setSelectedSection] = useState('');
     const [selectedSubtree, setSelectedSubtree] = useState('');
@@ -68,7 +67,6 @@ const Search = ({ itemsPerPage }) => {
         searchActionRef.current();
     }
     const changePage = (pageIndex) => setOffset(pageIndex * itemsPerPage);
-    const toggleFiltersCollapsed = () => setFiltersCollapsed((prevState) => !prevState);
     const renderSearchResults = () => {
         const searchResultsLabel = Translator.trans(/*@Desc("Search results")*/ 'search.search_results', {}, 'universal_discovery_widget');
         const noResultsLabel = Translator.trans(
@@ -139,11 +137,11 @@ const Search = ({ itemsPerPage }) => {
 
     return (
         <div className="c-search">
-            <div className="c-search__tools-wrapper">
+            <div className="c-search__topbar">
                 <div className="c-search__input-wrapper">
-                    <InputSearch ref={searchActionRef} />
+                    <InputSearch small={false} ref={searchActionRef} />
                 </div>
-                {languages.length > 1 ? (
+                {languages.length > 1 || true ? (
                     <div className="c-search__selector-wrapper">
                         <select
                             className="form-control c-search__select-language"
@@ -166,20 +164,21 @@ const Search = ({ itemsPerPage }) => {
                 <button className="c-search__search-btn btn ibexa-btn ibexa-btn--primary" onClick={searchSubmit}>
                     {searchLabel}
                 </button>
-                <div className="c-search__filters-btn-wrapper">
-                    <button className="c-search__toggle-filters-btn btn ibexa-btn ibexa-btn--secondary" onClick={toggleFiltersCollapsed}>
-                        {filtersLabel}
-                    </button>
+            </div>
+            <div className="c-search__main">
+                <div class="c-search__sidebar">
+                    <SelectedContentTypesContext.Provider value={[selectedContentTypes, dispatchSelectedContentTypesAction]}>
+                        <SelectedSectionContext.Provider value={[selectedSection, setSelectedSection]}>
+                            <SelectedSubtreeContext.Provider value={[selectedSubtree, setSelectedSubtree]}>
+                                <Filters isCollapsed={false} search={search} />
+                            </SelectedSubtreeContext.Provider>
+                        </SelectedSectionContext.Provider>
+                    </SelectedContentTypesContext.Provider>
+                </div>
+                <div class="c-search__xontent">
+                    {renderSearchResults()}
                 </div>
             </div>
-            <SelectedContentTypesContext.Provider value={[selectedContentTypes, dispatchSelectedContentTypesAction]}>
-                <SelectedSectionContext.Provider value={[selectedSection, setSelectedSection]}>
-                    <SelectedSubtreeContext.Provider value={[selectedSubtree, setSelectedSubtree]}>
-                        <Filters isCollapsed={filtersCollapsed} search={search} />
-                    </SelectedSubtreeContext.Provider>
-                </SelectedSectionContext.Provider>
-            </SelectedContentTypesContext.Provider>
-            {renderSearchResults()}
         </div>
     );
 };

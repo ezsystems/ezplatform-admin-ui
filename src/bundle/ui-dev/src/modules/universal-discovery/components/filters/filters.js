@@ -7,10 +7,11 @@ import { SelectedContentTypesContext, SelectedSectionContext, SelectedSubtreeCon
 import { findLocationsById } from '../../services/universal.discovery.service';
 import { RestInfoContext } from '../../universal.discovery.module';
 
+import Collapsible from '../collapsible/collapsible';
 import ContentTypeSelector from '../content-type-selector/content.type.selector';
 import Icon from '../../../common/icon/icon';
 
-const Filters = ({ isCollapsed, search }) => {
+const Filters = ({ search }) => {
     const [selectedContentTypes, dispatchSelectedContentTypesAction] = useContext(SelectedContentTypesContext);
     const [selectedSection, setSelectedSection] = useContext(SelectedSectionContext);
     const [selectedSubtree, setSelectedSubtree] = useContext(SelectedSubtreeContext);
@@ -30,7 +31,6 @@ const Filters = ({ isCollapsed, search }) => {
     const wrapperClassName = createCssClassNames({
         'c-filters': true,
         'ez-filters': true,
-        'ez-filters--collapsed': isCollapsed,
     });
     const updateSection = (event) => {
         const value = event.target.value;
@@ -99,6 +99,7 @@ const Filters = ({ isCollapsed, search }) => {
             </div>
         );
     };
+    const filtersLabel = Translator.trans(/*@Desc("Filters")*/ 'filters.title', {}, 'universal_discovery_widget');
     const contentTypeLabel = Translator.trans(/*@Desc("Content Type")*/ 'filters.content_type', {}, 'universal_discovery_widget');
     const sectionLabel = Translator.trans(/*@Desc("Section")*/ 'filters.section', {}, 'universal_discovery_widget');
     const anySectionLabel = Translator.trans(/*@Desc("Any section")*/ 'filters.any_section', {}, 'universal_discovery_widget');
@@ -115,48 +116,55 @@ const Filters = ({ isCollapsed, search }) => {
 
     return (
         <div className={wrapperClassName}>
-            <div className="ez-filters__row">
-                <div className="ez-filters__item ez-filters__item--content-type">
-                    <label className="ibexa-label">{contentTypeLabel}</label>
-                    <ContentTypeSelector />
+            <div className="c-filters__header">
+                <div className="c-filters__header-content">
+                    {filtersLabel}
+                </div>
+                <div className="c-filters__header-actions">
+                    <button
+                        type="submit"
+                        className="btn ibexa-btn ibexa-btn--secondary ibexa-btn--small ibexa-btn--apply"
+                        onClick={makeSearch}
+                        disabled={!isApplyButtonEnabled}
+                    >
+                        {applyLabel}
+                    </button>
+                    <button
+                        className="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small "
+                        onClick={clearFilters}
+                    >
+                        {clearLabel}
+                    </button>
                 </div>
             </div>
-            <div className="ez-filters__row">
-                <div className="ez-filters__item ez-filters__item--section">
-                    <label className="ibexa-label">{sectionLabel}</label>
-                    <select className="ez-filters__select form-control" onChange={updateSection} value={selectedSection}>
-                        <option value={''}>{anySectionLabel}</option>
-                        {Object.entries(window.eZ.adminUiConfig.sections).map(([sectionIdentifier, sectionName]) => {
-                            return (
-                                <option key={sectionIdentifier} value={sectionIdentifier}>
-                                    {sectionName}
-                                </option>
-                            );
-                        })}
-                    </select>
+            <ContentTypeSelector />
+            <Collapsible title={sectionLabel}>
+                <select
+                    className="ez-filters__select form-control"
+                    onChange={updateSection}
+                    value={selectedSection}
+                >
+                    <option value={''}>{anySectionLabel}</option>
+                    {Object.entries(window.eZ.adminUiConfig.sections).map(([sectionIdentifier, sectionName]) => {
+                        return (
+                            <option key={sectionIdentifier} value={sectionIdentifier}>
+                                {sectionName}
+                            </option>
+                        );
+                    })}
+                </select>
+            </Collapsible>
+            <Collapsible title={subtreeLabel}>
+                <div>
+                    {renderSelectContentButton()}
+                    {renderSubtreeBreadcrumbs()}
                 </div>
-                <div className="ez-filters__item ez-filters__item--subtree">
-                    <label className="ibexa-label">{subtreeLabel}:</label>
-                    <div>
-                        {renderSelectContentButton()}
-                        {renderSubtreeBreadcrumbs()}
-                    </div>
-                </div>
-            </div>
-            <div className="ez-filters__btns">
-                <button type="submit" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--apply" onClick={makeSearch} disabled={!isApplyButtonEnabled}>
-                    {applyLabel}
-                </button>
-                <button className="btn ibexa-btn ibexa-btn--ghost" onClick={clearFilters}>
-                    {clearLabel}
-                </button>
-            </div>
+            </Collapsible>
         </div>
     );
 };
 
 Filters.propTypes = {
-    isCollapsed: PropTypes.bool.isRequired,
     search: PropTypes.func.isRequired,
 };
 

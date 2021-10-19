@@ -11,6 +11,7 @@
     &__content {
         display: flex;
         height: 100%;
+        flex-shrink: 1;
         border-top: calculateRem(1px) solid $ibexa-color-light;
         box-shadow: calculateRem(4px) calculateRem(2px) calculateRem(17px) 0 rgba($ibexa-color-black, 0.05);
     }
