@@ -1,4 +1,4 @@
-import React, { useState, useContext, forwardRef } from 'react';
+import React, { useState, useContext, useEffect, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
@@ -43,6 +43,10 @@ const InputSearch = forwardRef(({ extraClasses, placeholder, search, small }, se
     if (searchActionRef) {
         searchActionRef.current = searchWrapper;
     }
+
+    useEffect(() => {
+        setInputValue(searchText)
+    }, [searchText])
 
     return (
         <div class={className}>

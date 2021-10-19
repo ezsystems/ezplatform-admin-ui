@@ -20,7 +20,7 @@
 
     &__sidebar {
         display: flex;
-        min-width: calculateRem(300px);
+        min-width: calculateRem(270px);
         padding: calculateRem(16px) calculateRem(28px);
         margin-right: calculateRem(44px);
         border: calculateRem(1px) solid $ibexa-color-light;

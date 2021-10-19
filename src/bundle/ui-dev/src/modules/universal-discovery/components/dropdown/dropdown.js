@@ -6,7 +6,6 @@ import Icon from '../../../common/icon/icon';
 
 const Dropdown = ({ options, selectedOption, onOptionClick, isDisabled }) => {
     const containerRef = useRef();
-    const onInteractionOutsideRef = useRef
     const [isExpanded, setIsExpanded] = useState(false);
     const dropdownClass = createCssClassNames({
         'c-udw-dropdown': true,
@@ -30,18 +29,25 @@ const Dropdown = ({ options, selectedOption, onOptionClick, isDisabled }) => {
 
         setIsExpanded(false);
     }
-    const onInteractionOutside = (event) => {
-        if (containerRef.current.contains(event.target)) {
+
+    useEffect(() => {
+        if (!isExpanded) {
             return;
         }
 
-        setIsExpanded(false);
-    }
+        const onInteractionOutside = (event) => {
+            if (containerRef.current.contains(event.target)) {
+                return;
+            }
 
-    useEffect(() => {
-        const bodyMethodName = isExpanded ? 'addEventListener' : 'removeEventListener';
+            setIsExpanded(false);
+        }
 
-        document.body[bodyMethodName]('click', onInteractionOutside, false);
+        document.body.addEventListener('click', onInteractionOutside, false);
+
+        return () => {
+            document.body.removeEventListener('click', onInteractionOutside, false);
+        }
     }, [isExpanded]);
 
     return (
