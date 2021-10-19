@@ -30,6 +30,7 @@ eZ.addConfig(
             component: SearchTabModule,
             label: Translator.trans(/*@Desc("Search")*/ 'search.label', {}, 'universal_discovery_widget'),
             icon: window.eZ.helpers.icon.getIconPath('search'),
+            isHiddenOnList: true,
         },
     ],
     true
