@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Bookmark;
+namespace Ibexa\AdminUi\Form\Data\Bookmark;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -43,3 +43,5 @@ class BookmarkRemoveData
         $this->bookmarks = $bookmarks;
     }
 }
+
+class_alias(BookmarkRemoveData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Bookmark\BookmarkRemoveData');

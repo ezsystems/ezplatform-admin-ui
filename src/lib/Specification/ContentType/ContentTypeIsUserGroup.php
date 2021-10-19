@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification\ContentType;
+namespace Ibexa\AdminUi\Specification\ContentType;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
-use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Specification\AbstractSpecification;
 
 class ContentTypeIsUserGroup extends AbstractSpecification
 {
@@ -43,3 +43,5 @@ class ContentTypeIsUserGroup extends AbstractSpecification
         return in_array($contentType->identifier, $this->userGroupContentTypeIdentifier, true);
     }
 }
+
+class_alias(ContentTypeIsUserGroup::class, 'EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUserGroup');

@@ -6,8 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Location;
+namespace Ibexa\AdminUi\Form\Data\Location;
 
 class LocationCopyData extends AbstractLocationCopyData
 {
 }
+
+class_alias(LocationCopyData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData');

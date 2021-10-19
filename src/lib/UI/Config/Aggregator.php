@@ -6,22 +6,23 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config;
+namespace Ibexa\AdminUi\UI\Config;
 
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 /**
  * Aggregates a set of ApplicationConfig Providers.
  */
 class Aggregator
 {
-    /** @var ProviderInterface[] ApplicationConfigProviders, indexed by namespace string */
+    /** @var \Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface[] ApplicationConfigProviders, indexed by namespace string */
     protected $providers;
 
     /**
      * Aggregator constructor.
      *
-     * @param ProviderInterface[] $providers
+     * @param \Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface[] $providers
      */
     public function __construct(array $providers = [])
     {
@@ -32,7 +33,7 @@ class Aggregator
      * Adds an Provider to the aggregator.
      *
      * @param string $key
-     * @param ProviderInterface $provider
+     * @param \Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface $provider
      */
     public function addProvider(string $key, ProviderInterface $provider)
     {
@@ -42,7 +43,7 @@ class Aggregator
     /**
      * @param string $key
      *
-     * @return ProviderInterface
+     * @return \Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface
      *
      * @throws \EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException
      */
@@ -56,7 +57,7 @@ class Aggregator
     }
 
     /**
-     * @return ProviderInterface[]
+     * @return \Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface[]
      */
     public function getProviders(): array
     {
@@ -64,7 +65,7 @@ class Aggregator
     }
 
     /**
-     * @param ProviderInterface[] $providers
+     * @param \Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface[] $providers
      */
     public function setProviders(array $providers)
     {
@@ -84,3 +85,5 @@ class Aggregator
         return $config;
     }
 }
+
+class_alias(Aggregator::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Aggregator');

@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\EventListener;
+namespace Ibexa\AdminUi\EventListener;
 
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -73,3 +73,5 @@ class UserPasswordChangeRightSidebarListener implements EventSubscriberInterface
         ];
     }
 }
+
+class_alias(UserPasswordChangeRightSidebarListener::class, 'EzSystems\EzPlatformAdminUi\EventListener\UserPasswordChangeRightSidebarListener');

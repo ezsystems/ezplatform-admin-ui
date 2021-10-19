@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
+namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\BookmarkService;
 use eZ\Publish\API\Repository\ContentService;
@@ -18,7 +18,7 @@ use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 class DatasetFactory
 {
@@ -222,3 +222,5 @@ class DatasetFactory
         );
     }
 }
+
+class_alias(DatasetFactory::class, 'EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory');

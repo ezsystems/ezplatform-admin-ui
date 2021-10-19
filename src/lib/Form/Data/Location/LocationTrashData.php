@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Location;
+namespace Ibexa\AdminUi\Form\Data\Location;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 
@@ -62,3 +62,5 @@ class LocationTrashData
         $this->trashOptions = $trashOptions;
     }
 }
+
+class_alias(LocationTrashData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData');
