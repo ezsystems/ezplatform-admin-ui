@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Extension;
+namespace Ibexa\AdminUi\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -31,3 +31,5 @@ final class HelpMultilineMessageExtension extends AbstractTypeExtension
         $resolver->setDefaults(['help_multiline' => null]);
     }
 }
+
+class_alias(HelpMultilineMessageExtension::class, 'EzSystems\EzPlatformAdminUi\Form\Extension\HelpMultilineMessageExtension');

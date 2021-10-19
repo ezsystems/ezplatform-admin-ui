@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Language;
+namespace Ibexa\AdminUi\Form\Type\Language;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Language\LanguagesDeleteData;
+use Ibexa\AdminUi\Form\Data\Language\LanguagesDeleteData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -42,3 +42,5 @@ class LanguagesDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(LanguagesDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguagesDeleteType');

@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft;
+namespace Ibexa\AdminUi\Form\Type\Content\Draft;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentRemoveData;
+use Ibexa\AdminUi\Form\Data\Content\Draft\ContentRemoveData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -53,3 +53,5 @@ class ContentRemoveType extends AbstractType
         ]);
     }
 }
+
+class_alias(ContentRemoveType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentRemoveType');

@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content;
+namespace Ibexa\AdminUi\Form\Type\Content;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\ContentVisibilityUpdateData;
+use Ibexa\AdminUi\Form\Data\Content\ContentVisibilityUpdateData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,3 +48,5 @@ class ContentVisibilityUpdateType extends AbstractType
         ]);
     }
 }
+
+class_alias(ContentVisibilityUpdateType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType');

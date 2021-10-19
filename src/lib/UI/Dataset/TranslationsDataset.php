@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
+namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 class TranslationsDataset
 {
@@ -97,3 +97,5 @@ class TranslationsDataset
         return array_column($this->data, 'languageCode');
     }
 }
+
+class_alias(TranslationsDataset::class, 'EzSystems\EzPlatformAdminUi\UI\Dataset\TranslationsDataset');

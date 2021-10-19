@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\User;
+namespace Ibexa\AdminUi\Form\Data\User;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 
@@ -39,3 +39,5 @@ class UserDeleteData
         $this->contentInfo = $contentInfo;
     }
 }
+
+class_alias(UserDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\User\UserDeleteData');

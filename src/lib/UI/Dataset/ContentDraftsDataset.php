@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
+namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -15,7 +15,7 @@ use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\User\User;
-use EzSystems\EzPlatformAdminUi\UI\Value\Content\VersionId;
+use Ibexa\AdminUi\UI\Value\Content\VersionId;
 
 /**
  * @deprecated Please move to use ContentDraftListDataset to get a paginated list of content drafts
@@ -129,3 +129,5 @@ class ContentDraftsDataset
         ];
     }
 }
+
+class_alias(ContentDraftsDataset::class, 'EzSystems\EzPlatformAdminUi\UI\Dataset\ContentDraftsDataset');

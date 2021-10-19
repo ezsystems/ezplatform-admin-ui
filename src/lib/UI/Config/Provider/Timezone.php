@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
+namespace Ibexa\AdminUi\UI\Config\Provider;
 
-use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 class Timezone implements ProviderInterface
 {
@@ -39,3 +39,5 @@ class Timezone implements ProviderInterface
         return $timezone->value;
     }
 }
+
+class_alias(Timezone::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Provider\Timezone');

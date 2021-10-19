@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
+namespace Ibexa\AdminUi\UI\Value\Content;
 
 interface ContentDraftInterface
 {
@@ -15,3 +15,5 @@ interface ContentDraftInterface
      */
     public function isAccessible(): bool;
 }
+
+class_alias(ContentDraftInterface::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Content\ContentDraftInterface');

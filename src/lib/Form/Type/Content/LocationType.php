@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content;
+namespace Ibexa\AdminUi\Form\Type\Content;
 
 use eZ\Publish\API\Repository\LocationService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\LocationsTransformer;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\LocationTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\LocationsTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\LocationTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -49,3 +49,5 @@ class LocationType extends AbstractType
         return HiddenType::class;
     }
 }
+
+class_alias(LocationType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType');

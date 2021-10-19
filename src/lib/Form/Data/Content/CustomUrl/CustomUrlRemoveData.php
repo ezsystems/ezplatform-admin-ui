@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl;
+namespace Ibexa\AdminUi\Form\Data\Content\CustomUrl;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 
@@ -70,3 +70,5 @@ class CustomUrlRemoveData
         return $this;
     }
 }
+
+class_alias(CustomUrlRemoveData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Content\CustomUrl\CustomUrlRemoveData');
