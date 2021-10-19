@@ -10,19 +10,3 @@
         color: $ibexa-black;;
     }
 }
-
-.m-tree__scrollable-wrapper {
-    > .c-list {
-        display: none;
-    }
-}
-
-.ez-content-tree-container--expanded {
-    .m-tree__scrollable-wrapper {
-        > .c-list {
-            display: table;
-            width: 100%;
-            padding: 0;
-        }
-    }
-}
