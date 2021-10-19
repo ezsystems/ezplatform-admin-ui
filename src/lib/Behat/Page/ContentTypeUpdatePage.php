@@ -33,7 +33,8 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             ->findAll($fieldToggleLocator)
             ->last();
         usleep(500000);
-        $lastFieldAdded->mouseOver();
+        $this->getHTMLPage()->find($this->getLocator(contentTypeAddButton))->mouseOver();
+        usleep(500000);
         $lastFieldAdded->click();
         usleep(500000);
     }
