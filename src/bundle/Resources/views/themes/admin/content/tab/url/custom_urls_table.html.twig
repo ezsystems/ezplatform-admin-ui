@@ -15,7 +15,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
-            no_escape: true,
+            raw: true,
         }]) %}
 
         {% set body_row_cols = body_row_cols|merge([
@@ -29,7 +29,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
-            no_escape: true,
+            raw: true,
         }]) %}
 
         {% set body_row_cols = body_row_cols|merge([

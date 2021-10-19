@@ -42,7 +42,7 @@
                         {% set body_rows = [{
                             cols: [
                                 { content: value_definitions[user_setting.identifier].getDisplayValue(user_setting.value) },
-                                { has_action_btns: true, content: col_raw, no_escape: true },
+                                { has_action_btns: true, content: col_raw, raw: true },
                             ]
                         }] %}
 
@@ -83,7 +83,7 @@
                         body_rows: [{
                             cols: [
                                 { content: 'my_account_settings.password.description'|trans|desc('Current password') },
-                                { has_action_btns: true, content: col_raw, no_escape: true },
+                                { has_action_btns: true, content: col_raw, raw: true },
                             ]
                         }],
                     } %}

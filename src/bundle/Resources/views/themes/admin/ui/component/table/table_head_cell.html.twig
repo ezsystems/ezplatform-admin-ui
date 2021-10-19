@@ -18,7 +18,7 @@
             {%- if sort_column is defined and sort_column is not null %} ibexa-table__sort-column ibexa-table__sort-column--{{ sort_column }}{%- endif -%}"
             {{ html.attributes(wrapper_attr|default({})) }}
         >
-            {{ table_macros.conditional_escape(content, no_escape|default(false)) }}
+            {{ table_macros.conditional_escape(content, raw|default(false)) }}
         </span>
     {%- endblock -%}
 </th>

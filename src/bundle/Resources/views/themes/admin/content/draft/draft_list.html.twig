@@ -32,7 +32,7 @@
                         {% set body_row_cols = body_row_cols|merge([{
                             has_checkbox: true,
                             content: col_raw,
-                            no_escape: true,
+                            raw: true,
                         }]) %}
 
                         {% set col_raw %}
@@ -43,7 +43,7 @@
                         {% set body_row_cols = body_row_cols|merge([{
                             has_checkbox: true,
                             content: col_raw
-                            no_escape: true,
+                            raw: true,
                         }]) %}
 
                         {% set col_raw %}
@@ -53,7 +53,7 @@
                         {% endset %}
                         {% set body_row_cols = body_row_cols|merge([{
                             content: col_raw
-                            no_escape: true,
+                            raw: true,
                         }]) %}
 
                         {% set body_row_cols = body_row_cols|merge([
@@ -88,7 +88,7 @@
                         {% set body_row_cols = body_row_cols|merge([{
                             has_action_btns: true,
                             content: col_raw
-                            no_escape: true,
+                            raw: true,
                         }]) %}
 
                         {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}

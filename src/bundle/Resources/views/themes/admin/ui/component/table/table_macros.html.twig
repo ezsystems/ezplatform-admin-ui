@@ -1,5 +1,5 @@
-{% macro conditional_escape(content, no_escape) %}
-    {% if no_escape %}
+{% macro conditional_escape(content, raw) %}
+    {% if raw %}
         {{ content|raw }}
     {% else %}
         {{ content }}

@@ -13,7 +13,7 @@
     {% set body_row_cols = body_row_cols|merge([{
         has_icon: true,
         content: col_raw,
-        no_escape: true,
+        raw: true,
     }]) %}
 
     {% set col_raw %}
@@ -23,14 +23,14 @@
     {% endset %}
     {% set body_row_cols = body_row_cols|merge([{
         content: col_raw,
-        no_escape: true,
+        raw: true,
     }]) %}
 
     {% set body_row_cols = body_row_cols|merge([
         { content: row.type },
         { content: row.modified|ez_full_datetime },
         { content: row.contributor is not null ? row.contributor.name : 'dashboard.table.contributor.not_found'|trans|desc('Can\'t fetch contributor') },
-        { has_action_btns: true, content: macros.edit_content_button(row, 'dashboard.table.all.content.edit'|trans|desc('Edit Content')), no_escape: true },
+        { has_action_btns: true, content: macros.edit_content_button(row, 'dashboard.table.all.content.edit'|trans|desc('Edit Content')), raw: true },
     ]) %}
 
     {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}

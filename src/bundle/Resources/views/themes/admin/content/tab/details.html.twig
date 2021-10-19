@@ -12,7 +12,7 @@
         {{ translation.name }}<br>
     {% endfor %}
 {% endset %}
-{% set body_row_cols = body_row_cols|merge([{ content: col_raw, no_escape: true }]) %}
+{% set body_row_cols = body_row_cols|merge([{ content: col_raw, raw: true }]) %}
 {% include '@ezdesign/ui/component/table/table.html.twig' with {
     headline: 'tab.details.content_details'|trans()|desc('Content details'),
     head_cols: [
@@ -64,7 +64,7 @@
             {{ form_end(form_assign_section) }}
         {% endif %}
     {% endset %}
-    {% set body_row_cols = body_row_cols|merge([{ content: col_raw, no_escape: true }]) %}
+    {% set body_row_cols = body_row_cols|merge([{ content: col_raw, raw: true }]) %}
     {% include '@ezdesign/ui/component/table/table.html.twig' with {
         headline: 'tab.details.section_details'|trans()|desc('Section details'),
         head_cols: [
@@ -106,7 +106,7 @@
     {% endset %}
     {% set body_row_cols = body_row_cols|merge([{
         content: col_raw,
-        no_escape: true,
+        raw: true,
     }]) %}
 
     {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}

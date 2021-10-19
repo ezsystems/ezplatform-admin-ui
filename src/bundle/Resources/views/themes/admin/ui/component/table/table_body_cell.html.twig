@@ -14,11 +14,11 @@
         {% if has_action_btns|default(false) %}
             <div class="ibexa-table__cell-btns-wrapper">
                 {% block action_btns_content %}
-                    {{ table_macros.conditional_escape(content, no_escape|default(false)) }}
+                    {{ table_macros.conditional_escape(content, raw|default(false)) }}
                 {% endblock %}
             </div>
         {% else %}
-            {{ table_macros.conditional_escape(content, no_escape|default(false)) }}
+            {{ table_macros.conditional_escape(content, raw|default(false)) }}
         {% endif %}
     {% endblock %}
 </td>

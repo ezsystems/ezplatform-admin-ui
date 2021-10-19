@@ -67,12 +67,12 @@
                     {% endset %}
 
                     {% set body_rows = body_rows|merge([{ cols: [
-                        { has_checkbox: true, content: col_checkbox, no_escape: true },
-                        { has_icon: true, content: col_icon, no_escape: true },
+                        { has_checkbox: true, content: col_checkbox, raw: true },
+                        { has_icon: true, content: col_icon, raw: true },
                         { content: col_name },
                         { content: bookmark.contentType.name },
                         { content: col_path },
-                        { has_action_btns: true, content: col_action_btns, no_escape: true },
+                        { has_action_btns: true, content: col_action_btns, raw: true },
                     ]}]) %}
                 {% endfor %}
 
