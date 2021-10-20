@@ -1,19 +1,6 @@
 name: PR check
 on:
-  workflow_call:
-    inputs:
-      head_repository:
-        required: true
-        type: string
-      base_repository:
-        required: true
-        type: string
-      head_branch:
-        required: true
-        type: string
-      base_branch:
-        required: true
-        type: string
+  workflow_call: ~
 
 jobs:
   test-base-branch:
@@ -24,8 +11,8 @@ jobs:
         name: Get PR's composer.json
         id: pr
         with:
-          branch: "!!str ${{ inputs.head_branch }}"
-          repository: ${{ inputs.head_repository }}
+          branch: "!!str ${{ github.event.pull_request.head.ref }}"
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
           route: /repos/{repository}/contents/composer.json?ref={branch}
         env:
           GITHUB_TOKEN: ${{ github.token }}  
@@ -33,8 +20,8 @@ jobs:
         name: Get base's composer.json
         id: base
         with:
-          branch: "!!str ${{ inputs.base_branch }}"
-          repository: ${{ inputs.base_repository }}
+          branch: "!!str ${{ github.event.pull_request.base.ref }}"
+          repository: ${{ github.event.pull_request.base.repo.full_name }}
           route: /repos/{repository}/contents/composer.json?ref={branch}
         env:
           GITHUB_TOKEN: ${{ github.token }}  

@@ -10,8 +10,3 @@ on:
 jobs:
   test-base-branch:
     uses: ezsystems/ezplatform-admin-ui/.github/workflows/test.yaml@ci-pr-verification-reusable
-    with:
-      head_repository: ${{ github.event.pull_request.head.repo.full_name }}
-      base_repository: ${{ github.event.pull_request.base.repo.full_name }}
-      head_branch: ${{ github.event.pull_request.head.ref }}
-      base_branch: ${{ github.event.pull_request.base.ref }}
