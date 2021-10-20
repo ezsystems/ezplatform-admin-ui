@@ -106,11 +106,13 @@ export const ContentOnTheFlyDataContext = createContext();
 export const ContentOnTheFlyConfigContext = createContext();
 export const EditOnTheFlyDataContext = createContext();
 export const SearchTextContext = createContext();
+export const DropdownPortalRefContext = createContext();
 
 const UniversalDiscoveryModule = (props) => {
     const tabs = window.eZ.adminUiConfig.universalDiscoveryWidget.tabs;
     const defaultMarkedLocationId = props.startingLocationId || props.rootLocationId;
     const abortControllerRef = useRef();
+    const dropdownPortalRef = useRef();
     const [activeTab, setActiveTab] = useState(props.activeTab);
     const [sorting, setSorting] = useState(props.activeSortClause);
     const [sortOrder, setSortOrder] = useState(props.activeSortOrder);
@@ -121,6 +123,7 @@ const UniversalDiscoveryModule = (props) => {
     const [editOnTheFlyData, setEditOnTheFlyData] = useState({});
     const [contentTypesInfoMap, setContentTypesInfoMap] = useState({});
     const [searchText, setSearchText] = useState('');
+    // const [dropdownPortalRefState, setDropdownPortalRefState] = useState(dropdownPortalRef);
     const [loadedLocationsMap, dispatchLoadedLocationsAction] = useLoadedLocationsReducer([
         { parentLocationId: props.rootLocationId, subitems: [] },
     ]);
@@ -370,7 +373,10 @@ const UniversalDiscoveryModule = (props) => {
                                                                                                                             searchText,
                                                                                                                             setSearchText
                                                                                                                         ]}>
-                                                                                                                        <Tab />
+                                                                                                                        <DropdownPortalRefContext.Provider
+                                                                                                                            value={dropdownPortalRef}>
+                                                                                                                            <Tab />
+                                                                                                                        </DropdownPortalRefContext.Provider>
                                                                                                                     </SearchTextContext.Provider>
                                                                                                                 </EditOnTheFlyDataContext.Provider>
                                                                                                             </ContentOnTheFlyConfigContext.Provider>

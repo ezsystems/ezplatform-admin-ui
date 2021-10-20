@@ -7,6 +7,7 @@ import { SelectedContentTypesContext, SelectedSectionContext, SelectedSubtreeCon
 import { findLocationsById } from '../../services/universal.discovery.service';
 import { RestInfoContext } from '../../universal.discovery.module';
 
+import Dropdown from '../dropdown/dropdown';
 import Collapsible from '../collapsible/collapsible';
 import ContentTypeSelector from '../content-type-selector/content.type.selector';
 import Icon from '../../../common/icon/icon';
@@ -32,11 +33,7 @@ const Filters = ({ search }) => {
         'c-filters': true,
         'ez-filters': true,
     });
-    const updateSection = (event) => {
-        const value = event.target.value;
-
-        setSelectedSection(value);
-    };
+    const updateSection = (value) => setSelectedSection(value);
     const openUdw = () => {
         const udwContainer = window.document.createElement('div');
         const config = JSON.parse(window.document.querySelector('#react-udw').dataset.filterSubtreeUdwConfig);
@@ -148,20 +145,18 @@ const Filters = ({ search }) => {
             </div>
             <ContentTypeSelector />
             <Collapsible title={sectionLabel}>
-                <select
-                    className="ez-filters__select form-control"
+                <Dropdown
+                    small={true}
                     onChange={updateSection}
                     value={selectedSection}
-                >
-                    <option value={''}>{anySectionLabel}</option>
-                    {Object.entries(window.eZ.adminUiConfig.sections).map(([sectionIdentifier, sectionName]) => {
-                        return (
-                            <option key={sectionIdentifier} value={sectionIdentifier}>
-                                {sectionName}
-                            </option>
-                        );
-                    })}
-                </select>
+                    options={
+                        Object.entries(window.eZ.adminUiConfig.sections)
+                            .map(([sectionIdentifier, sectionName]) => ({
+                                value: sectionIdentifier,
+                                label: sectionName,
+                            }))
+                    }
+                />
             </Collapsible>
             <Collapsible title={subtreeLabel}>
                 <div class="ibexa-tag-view-select">
