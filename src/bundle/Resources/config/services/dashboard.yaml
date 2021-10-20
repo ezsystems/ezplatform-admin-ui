@@ -40,7 +40,7 @@ services:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
     Ibexa\AdminUi\Tab\Dashboard\PagerContentToDataMapper:
-        parent: Ibexa\AdminUi\Search\AbstractPagerContentToDataMapper
+        parent: Ibexa\AdminUi\Pagination\Mapper\AbstractPagerContentToDataMapper
         autowire: true
         public: false
 
