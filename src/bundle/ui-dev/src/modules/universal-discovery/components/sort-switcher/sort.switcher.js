@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import Dropdown from '../dropdown/dropdown';
+import SimpleDropdown from '../simple-dropdown/simple.dropdown';
 
 import { SortingContext, SortOrderContext, SORTING_OPTIONS } from '../../universal.discovery.module';
 
@@ -16,7 +16,7 @@ const SortSwitcher = ({ isDisabled }) => {
 
     return (
         <div className="c-sort-switcher">
-            <Dropdown
+            <SimpleDropdown
                 options={SORTING_OPTIONS}
                 selectedOption={selectedOption}
                 onOptionClick={onOptionClick}

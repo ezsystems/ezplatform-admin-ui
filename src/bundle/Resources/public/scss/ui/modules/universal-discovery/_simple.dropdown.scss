@@ -1,4 +1,4 @@
-.c-udw-dropdown {
+.c-udw-simple-dropdown {
     position: relative;
     min-width: calculateRem(120px);
 
@@ -48,7 +48,7 @@
             background-color: $ibexa-color-light-400;
             position: relative;
 
-            .c-udw-dropdown__list-item-checkmark {
+            .c-udw-simple-dropdown__list-item-checkmark {
                 position: absolute;
                 top: 50%;
                 right: calculateRem(16px);
@@ -85,7 +85,7 @@
         opacity: 0.3;
         cursor: not-allowed;
 
-        .c-udw-dropdown {
+        .c-udw-simple-dropdown {
             &__selected {
                 cursor: not-allowed;
             }

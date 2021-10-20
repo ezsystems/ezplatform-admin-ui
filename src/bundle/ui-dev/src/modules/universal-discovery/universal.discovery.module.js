@@ -20,9 +20,9 @@ export const SORTING_OPTIONS = [
     {
         id: 'date:asc',
         label: (
-            <div class="c-udw-dropdown__option-label">
+            <div class="c-udw-simple-dropdown__option-label">
                 {Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget')}
-                <Icon name="back" extraClasses="c-udw-dropdown__arrow-down ibexa-icon--tiny-small" />
+                <Icon name="back" extraClasses="c-udw-simple-dropdown__arrow-down ibexa-icon--tiny-small" />
             </div>
         ),
         sortClause: 'DatePublished',
@@ -31,9 +31,9 @@ export const SORTING_OPTIONS = [
     {
         id: 'date:desc',
         label: (
-            <div class="c-udw-dropdown__option-label">
+            <div class="c-udw-simple-dropdown__option-label">
                 {Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget')}
-                <Icon name="back" extraClasses="c-udw-dropdown__arrow-up ibexa-icon--tiny-small" />
+                <Icon name="back" extraClasses="c-udw-simple-dropdown__arrow-up ibexa-icon--tiny-small" />
             </div>
         ),
         sortClause: 'DatePublished',
