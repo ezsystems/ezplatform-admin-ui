@@ -16,4 +16,4 @@ jobs:
       head_branch: ${{ github.event.pull_request.head.ref }}
       base_branch: ${{ github.event.pull_request.base.ref }}
     secrets:
-      token: ${{ secrets.TOKEN }}
+      github_token: ${{ secrets.GITHUB_TOKEN }}

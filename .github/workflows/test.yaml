@@ -15,9 +15,8 @@ on:
         required: true
         type: string
     secrets:
-      token:
+      github_token:
         required: true
-
 
 jobs:
   test-base-branch:
@@ -32,7 +31,7 @@ jobs:
           repository: ${{ inputs.head_repository }}
           route: /repos/{repository}/contents/composer.json?ref={branch}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.github_token }}  
       - uses: octokit/request-action@v2.x
         name: Get base's composer.json
         id: base
@@ -41,7 +40,7 @@ jobs:
           repository: ${{ inputs.base_repository }}
           route: /repos/{repository}/contents/composer.json?ref={branch}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.github_token }}  
       - name: Verify base branch
         run: |
           PR_BRANCH_ALIAS=$(echo $PR_DATA | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
