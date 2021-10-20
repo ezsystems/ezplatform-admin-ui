@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation;
+namespace Ibexa\Bundle\AdminUi\Controller\BulkOperation;
 
-use EzSystems\EzPlatformAdminUi\REST\Value\BulkOperationResponse;
-use EzSystems\EzPlatformAdminUi\REST\Value\Operation;
-use EzSystems\EzPlatformAdminUi\REST\Value\OperationResponse;
 use EzSystems\EzPlatformRest\Message;
 use EzSystems\EzPlatformRest\Server\Controller as RestController;
+use Ibexa\AdminUi\REST\Value\BulkOperationResponse;
+use Ibexa\AdminUi\REST\Value\Operation;
+use Ibexa\AdminUi\REST\Value\OperationResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -92,3 +92,5 @@ class BulkOperationController extends RestController
         return $subRequest;
     }
 }
+
+class_alias(BulkOperationController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation\BulkOperationController');

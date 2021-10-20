@@ -21,7 +21,7 @@ services:
 
 
     # Repository Forms
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType: '@ezplatform.content_forms.policy.limitation.form'
+    Ibexa\AdminUi\Form\Type\Role\LimitationType: '@ezplatform.content_forms.policy.limitation.form'
 
     # Symfony
     Symfony\Contracts\Translation\TranslatorInterface: '@translator'

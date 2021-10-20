@@ -4,12 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Limitation\Mapper;
+namespace Ibexa\AdminUi\Limitation\Mapper;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
-use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperInterface;
-use EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessKeyGeneratorInterface;
+use Ibexa\AdminUi\Limitation\LimitationValueMapperInterface;
+use Ibexa\AdminUi\Siteaccess\SiteAccessKeyGeneratorInterface;
 
 class SiteAccessLimitationMapper extends MultipleSelectionBasedMapper implements LimitationValueMapperInterface
 {
@@ -49,3 +49,5 @@ class SiteAccessLimitationMapper extends MultipleSelectionBasedMapper implements
         return $values;
     }
 }
+
+class_alias(SiteAccessLimitationMapper::class, 'EzSystems\EzPlatformAdminUi\Limitation\Mapper\SiteAccessLimitationMapper');

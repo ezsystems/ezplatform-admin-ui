@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Limitation;
+namespace Ibexa\AdminUi\Limitation;
 
 /**
  * Interface for Limitation value mappers registry.
@@ -51,3 +51,5 @@ class_alias(
     LimitationValueMapperRegistryInterface::class,
     \EzSystems\RepositoryForms\Limitation\LimitationValueMapperRegistryInterface::class
 );
+
+class_alias(LimitationValueMapperRegistryInterface::class, 'EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistryInterface');

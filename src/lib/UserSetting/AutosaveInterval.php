@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UserSetting;
+namespace Ibexa\AdminUi\UserSetting;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
@@ -87,3 +87,5 @@ class AutosaveInterval implements ValueDefinitionInterface, FormMapperInterface
         );
     }
 }
+
+class_alias(AutosaveInterval::class, 'EzSystems\EzPlatformAdminUi\UserSetting\AutosaveInterval');

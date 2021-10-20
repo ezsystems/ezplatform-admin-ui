@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config;
+namespace Ibexa\AdminUi\UI\Config;
 
 use RuntimeException;
 
@@ -48,3 +48,5 @@ class ConfigWrapper implements \ArrayAccess, \JsonSerializable
         return $this->config;
     }
 }
+
+class_alias(ConfigWrapper::class, 'EzSystems\EzPlatformAdminUi\UI\Config\ConfigWrapper');
