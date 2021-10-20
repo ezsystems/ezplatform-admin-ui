@@ -167,13 +167,13 @@
         const userPreferredTimezone = eZ.adminUiConfig.timezone;
         const saveDate = eZ.helpers.timezone.convertDateToTimezone(new Date(), userPreferredTimezone);
         const saveTime = moment(saveDate).formatICU('HH:mm');
-        const savedMessage = Translator.trans(
+        const saveMessage = Translator.trans(
             /*@Desc("Draft saved %time%")*/ 'content_edit.autosave.status_saved.message.full',
             { time: saveTime },
             'content'
         );
 
-        autosaveStatusSavedNode.innerHTML = savedMessage;
+        autosaveStatusSavedNode.innerHTML = saveMessage;
         setDelayedDraftSavedSimplifiedMessage();
     };
     const setDelayedDraftSavedSimplifiedMessage = () => {
