@@ -166,11 +166,6 @@
         <target state="new">Clear</target>
         <note>key: filters.clear</note>
       </trans-unit>
-      <trans-unit id="906871e66216a97a8033d2e86819150c141cb92a" resname="filters.content_type">
-        <source>Content Type</source>
-        <target state="new">Content Type</target>
-        <note>key: filters.content_type</note>
-      </trans-unit>
       <trans-unit id="15135a98864ffb3f0f889577ad962bf3817fea6f" resname="filters.section">
         <source>Section</source>
         <target state="new">Section</target>
@@ -180,6 +175,16 @@
         <source>Subtree</source>
         <target state="new">Subtree</target>
         <note>key: filters.subtree</note>
+      </trans-unit>
+      <trans-unit id="a033033bf14700d9cc112784687f5ddbfaf491ea" resname="filters.tag_view_change.select">
+        <source>Change content</source>
+        <target state="new">Change content</target>
+        <note>key: filters.tag_view_change.select</note>
+      </trans-unit>
+      <trans-unit id="92d63a744c29f4be477f21fc81dd19b74ebb7bf2" resname="filters.tag_view_select.select">
+        <source>Select content</source>
+        <target state="new">Select content</target>
+        <note>key: filters.tag_view_select.select</note>
       </trans-unit>
       <trans-unit id="d4243297721bb92848a26161f2effe427171e26f" resname="filters.title">
         <source>Filters</source>

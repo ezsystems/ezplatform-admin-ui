@@ -74,33 +74,42 @@ const Filters = ({ search }) => {
     };
     const makeSearch = useCallback(() => search(0), [search]);
     const isApplyButtonEnabled = !!selectedContentTypes.length || !!selectedSection || !!selectedSubtree;
-    const renderSelectContentButton = () => {
-        if (selectedSubtree) {
-            return null;
-        }
-
-        return (
-            <button className="btn ibexa-btn ibexa-btn--secondary ibexa-btn--udw-select-location" type="button" onClick={openUdw}>
-                Select content
-            </button>
-        );
-    };
     const renderSubtreeBreadcrumbs = () => {
         if (!subtreeBreadcrumbs) {
             return null;
         }
 
         return (
-            <div className="ez-tag">
-                <div className="ez-tag__content">{subtreeBreadcrumbs}</div>
-                <button type="button" className="ez-tag__remove-btn" onClick={clearSelectedSubree}>
-                    <Icon name="discard" extraClasses="ibexa-icon--small ibexa-icon--dark" />
-                </button>
+            <div className="ibexa-tag-view-select__selected-list">
+                <div className="ibexa-tag-view-select__selected-item-tag">
+                    {subtreeBreadcrumbs}
+                    <button
+                        type="button"
+                        className="btn ibexa-tag-view-select__selected-item-tag-remove-btn"
+                        onClick={clearSelectedSubree}
+                    >
+                        <Icon name="discard" extraClasses="ibexa-icon--tiny" />
+                    </button>
+                </div>
             </div>
         );
     };
+    const renderSelectContentButton = () => {
+        const selectLabel = Translator.trans(/*@Desc("Select content")*/ 'filters.tag_view_select.select', {}, 'universal_discovery_widget');
+        const changeLabel = Translator.trans(/*@Desc("Change content")*/ 'filters.tag_view_change.select', {}, 'universal_discovery_widget');
+
+
+        return (
+            <button
+                className="ibexa-tag-view-select__btn-select-path btn ibexa-btn ibexa-btn--secondary"
+                type="button"
+                onClick={openUdw}
+            >
+                { selectedSubtree ? changeLabel : selectLabel }
+            </button>
+        );
+    };
     const filtersLabel = Translator.trans(/*@Desc("Filters")*/ 'filters.title', {}, 'universal_discovery_widget');
-    const contentTypeLabel = Translator.trans(/*@Desc("Content Type")*/ 'filters.content_type', {}, 'universal_discovery_widget');
     const sectionLabel = Translator.trans(/*@Desc("Section")*/ 'filters.section', {}, 'universal_discovery_widget');
     const anySectionLabel = Translator.trans(/*@Desc("Any section")*/ 'filters.any_section', {}, 'universal_discovery_widget');
     const subtreeLabel = Translator.trans(/*@Desc("Subtree")*/ 'filters.subtree', {}, 'universal_discovery_widget');
@@ -155,9 +164,9 @@ const Filters = ({ search }) => {
                 </select>
             </Collapsible>
             <Collapsible title={subtreeLabel}>
-                <div>
-                    {renderSelectContentButton()}
+                <div class="ibexa-tag-view-select">
                     {renderSubtreeBreadcrumbs()}
+                    {renderSelectContentButton()}
                 </div>
             </Collapsible>
         </div>
