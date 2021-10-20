@@ -1,18 +1,3 @@
-<div 
-	class="ibexa-autosave ibexa-autosave--not-saved" 
-	title="{{ 'content.autosave.turn_of.message'|trans()|desc('You can turn autosave off in your user settings') }}"
->
-	{% if is_autosave_enabled and form_has_autosave %}
-		<div class="ibexa-autosave__status">
-			{{ 'content_edit.autosave.status_on'|trans()|desc('Autosave is on')|raw }}
-		</div>
-		<div class="ibexa-autosave__autosave-failed">
-			{{ 'content.autosave.failed.message'|trans()|desc('Autosave failed') }}
-		</div>
-		<div class="ibexa-autosave__last-saved"></div>
-	{% else %}
-		<div class="ibexa-autosave__status">
-			{{ 'content_edit.autosave.status_off'|trans()|desc('Autosave is off')|raw }}
-		</div>
-	{% endif %}
-</div>
+{% include '@ezdesign/ui/component/autosave/autosave.html.twig' with {
+    is_enabled: is_autosave_enabled and form_has_autosave,
+} only %}

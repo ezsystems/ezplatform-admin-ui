@@ -306,6 +306,36 @@
         <target>Content / View embed</target>
         <note>key: role.policy.content.view_embed</note>
       </trans-unit>
+      <trans-unit id="db177b099d9b5b0999743c67123b420af739ada4" resname="role.policy.customer_group">
+        <source>Customer group</source>
+        <target>Customer group</target>
+        <note>key: role.policy.customer_group</note>
+      </trans-unit>
+      <trans-unit id="6d2cde60346839f94de083cfc7937e437d85d726" resname="role.policy.customer_group.all_functions">
+        <source>Customer group / All functions</source>
+        <target>Customer group / All functions</target>
+        <note>key: role.policy.customer_group.all_functions</note>
+      </trans-unit>
+      <trans-unit id="cedd0dc3d0fc2e8b92452b2d3dd0349d945d6896" resname="role.policy.customer_group.create">
+        <source>Customer group / Create</source>
+        <target>Customer group / Create</target>
+        <note>key: role.policy.customer_group.create</note>
+      </trans-unit>
+      <trans-unit id="aa3d667594c6ada5d00ac8577d8956bff773f5bd" resname="role.policy.customer_group.delete">
+        <source>Customer group / Delete</source>
+        <target>Customer group / Delete</target>
+        <note>key: role.policy.customer_group.delete</note>
+      </trans-unit>
+      <trans-unit id="77103c77012fbfb57e2f042714bcc8641e51c67c" resname="role.policy.customer_group.edit">
+        <source>Customer group / Edit</source>
+        <target>Customer group / Edit</target>
+        <note>key: role.policy.customer_group.edit</note>
+      </trans-unit>
+      <trans-unit id="24d592ca917cb069849dd655cf9c48293bb7e3c1" resname="role.policy.customer_group.view">
+        <source>Customer group / View</source>
+        <target>Customer group / View</target>
+        <note>key: role.policy.customer_group.view</note>
+      </trans-unit>
       <trans-unit id="15c3ffad9d90e7d492d275a9ea05ecdcdedaace5" resname="role.policy.personalization">
         <source>Personalization</source>
         <target>Personalization</target>
@@ -325,6 +355,66 @@
         <source>Personalization / View</source>
         <target>Personalization / View</target>
         <note>key: role.policy.personalization.view</note>
+      </trans-unit>
+      <trans-unit id="f8af6833d99ffb0184d98ec0a984fa3229693af4" resname="role.policy.product">
+        <source>Product</source>
+        <target>Product</target>
+        <note>key: role.policy.product</note>
+      </trans-unit>
+      <trans-unit id="fbdc425c2a0a2d696e378c83bdd97e908de1fec9" resname="role.policy.product.all_functions">
+        <source>Product / All functions</source>
+        <target>Product / All functions</target>
+        <note>key: role.policy.product.all_functions</note>
+      </trans-unit>
+      <trans-unit id="7b07e310db09008272a277766dc242f872bd86a5" resname="role.policy.product.create">
+        <source>Product / Create</source>
+        <target>Product / Create</target>
+        <note>key: role.policy.product.create</note>
+      </trans-unit>
+      <trans-unit id="84f7eebccd0ee967723c472d2d8705b8c31ec071" resname="role.policy.product.delete">
+        <source>Product / Delete</source>
+        <target>Product / Delete</target>
+        <note>key: role.policy.product.delete</note>
+      </trans-unit>
+      <trans-unit id="affc63805a89db08aea4669b900c2dfe405e2756" resname="role.policy.product.edit">
+        <source>Product / Edit</source>
+        <target>Product / Edit</target>
+        <note>key: role.policy.product.edit</note>
+      </trans-unit>
+      <trans-unit id="398a24b5e722cb05e8523c1c2c5e5e5bd7cb0637" resname="role.policy.product.view">
+        <source>Product / View</source>
+        <target>Product / View</target>
+        <note>key: role.policy.product.view</note>
+      </trans-unit>
+      <trans-unit id="363c8eef46263015281d7d7b3b82f6e174da3b45" resname="role.policy.product_type">
+        <source>Product type</source>
+        <target>Product type</target>
+        <note>key: role.policy.product_type</note>
+      </trans-unit>
+      <trans-unit id="166efe5c95e9e566d91365300bdbb10c055efccd" resname="role.policy.product_type.all_functions">
+        <source>Product type / All functions</source>
+        <target>Product type / All functions</target>
+        <note>key: role.policy.product_type.all_functions</note>
+      </trans-unit>
+      <trans-unit id="b33796576af978f3b6f8649a74c4810bde23eed1" resname="role.policy.product_type.create">
+        <source>Product type / Create</source>
+        <target>Product type / Create</target>
+        <note>key: role.policy.product_type.create</note>
+      </trans-unit>
+      <trans-unit id="7da7c8e897757512eee1e32cbd44aacffb67a4f9" resname="role.policy.product_type.delete">
+        <source>Product type / Delete</source>
+        <target>Product type / Delete</target>
+        <note>key: role.policy.product_type.delete</note>
+      </trans-unit>
+      <trans-unit id="4ef2f329a551dac823ad95fa7579b3b78db83a0b" resname="role.policy.product_type.edit">
+        <source>Product type / Edit</source>
+        <target>Product type / Edit</target>
+        <note>key: role.policy.product_type.edit</note>
+      </trans-unit>
+      <trans-unit id="60dfe8cdc2e019be786afee8fb967f4a1dbd44ee" resname="role.policy.product_type.view">
+        <source>Product type / View</source>
+        <target>Product type / View</target>
+        <note>key: role.policy.product_type.view</note>
       </trans-unit>
       <trans-unit id="6ff0bcc1b70d0dbde113af7649393f667612cace" resname="role.policy.role">
         <source>Role</source>
