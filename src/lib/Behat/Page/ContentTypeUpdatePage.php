@@ -12,7 +12,6 @@ use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
-use Ibexa\Behat\Browser\Locator\XPathLocator;
 
 class ContentTypeUpdatePage extends AdminUpdateItemPage
 {
@@ -49,8 +48,7 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             new VisibleCSSLocator('workspace', '#content_collapse > div.ibexa-collapse__body-content > div'),
             new VisibleCSSLocator('fieldDefinitionToggle', '.ibexa-collapse:nth-last-child(2) > div.ibexa-collapse__header > button:last-child:not([data-bs-target="#content_collapse"])'),
             new VisibleCSSLocator('fieldDefinitionOpenContainer', '[data-collapsed="false"] .ibexa-content-type-edit__field-definition-content'),
-            new XPathLocator('selectBlocksDropdown', '//div[contains(@class,"ez-page-select-items")]/a[contains(text(),"Select blocks")]'),
-            new XPathLocator('selectBlocksDropdownDefault', '//div[contains(@class,"ez-page-select-items__group")]/a[contains(text(),"default")]'),
+            new VisibleCSSLocator('selectBlocksDropdown', '.ez-page-select-items__toggler'),
         ]);
     }
 
@@ -105,8 +103,11 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
 
     public function expandDefaultBlocksOption(): void
     {
-        $this->getHTMLPage()->find($this->getLocator('selectBlocksDropdown'))->click();
-        $this->getHTMLPage()->find($this->getLocator('selectBlocksDropdownDefault'))->click();
+        $dropdownLocator = $this->getLocator('selectBlocksDropdown');
+        $this->getHTMLPage()
+            ->findAll($dropdownLocator)->getByCriterion(new ElementTextCriterion('Select blocks'))->click();
+        $this->getHTMLPage()
+            ->findAll($dropdownLocator)->getByCriterion(new ElementTextCriterion('default'))->click();
     }
 
     public function selectBlock(string $blockName): void
