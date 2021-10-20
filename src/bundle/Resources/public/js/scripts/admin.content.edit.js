@@ -2,6 +2,7 @@
     const ENTER_KEY_CODE = 13;
     const SIMPLIFIED_MESSAGE_TIMEOUT = 3000;
     const STATUS_ERROR = 'error';
+    const STATUS_OFF = 'off';
     const STATUS_ON = 'on';
     const STATUS_SAVED = 'saved';
     const STATUS_SAVING = 'saving';
@@ -32,7 +33,7 @@
     const fields = doc.querySelectorAll('.ez-field-edit');
     const autosave = doc.querySelector('.ibexa-autosave');
     const autosaveStatusSavedNode = autosave.querySelector('.ibexa-autosave__status-saved');
-    let currentAutosaveStatus = STATUS_ON;
+    let currentAutosaveStatus = autosave.classList.contains('ibexa-autosave--status-on') ? STATUS_ON : STATUS_OFF;
     let simplifiedMessageTimeout = null;
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
