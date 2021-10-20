@@ -1,0 +1,57 @@
+name: PR check
+on:
+  workflow_call:
+    inputs:
+      head_repository:
+        required: true
+        type: string
+      base_repository:
+        required: true
+        type: string
+      head_branch:
+        required: true
+        type: string
+      base_branch:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+
+jobs:
+  test-base-branch:
+    name: Pull Request base branch verification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: octokit/request-action@v2.x
+        name: Get PR's composer.json
+        id: pr
+        with:
+          branch: "!!str ${{ inputs.head_branch }}"
+          repository: ${{ inputs.head_repository }}
+          route: /repos/{repository}/contents/composer.json?ref={branch}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: octokit/request-action@v2.x
+        name: Get base's composer.json
+        id: base
+        with:
+          branch: "!!str ${{ inputs.base_branch }}"
+          repository: ${{ inputs.base_repository }}
+          route: /repos/{repository}/contents/composer.json?ref={branch}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify base branch
+        run: |
+          PR_BRANCH_ALIAS=$(echo $PR_DATA | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
+          BASE_BRANCH_ALIAS=$(echo $BASE_DATA | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
+          if [ "$PR_BRANCH_ALIAS" != "$BASE_BRANCH_ALIAS" ]; then 
+            echo "Base branch has different branch-alias than PR."
+            echo "Pull Request: $PR_BRANCH_ALIAS"
+            echo "Base branch: $BASE_BRANCH_ALIAS"
+            exit 1; 
+          fi
+        env:
+          PR_DATA: ${{ steps.pr.outputs.data }}
+          BASE_DATA: ${{ steps.base.outputs.data }}

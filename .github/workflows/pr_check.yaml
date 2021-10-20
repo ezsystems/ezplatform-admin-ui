@@ -9,37 +9,11 @@ on:
 
 jobs:
   test-base-branch:
-    name: Pull Request base branch verification
-    runs-on: ubuntu-latest
-    steps:
-      - uses: octokit/request-action@v2.x
-        name: Get PR's composer.json
-        id: pr
-        with:
-          branch: "!!str ${{ github.event.pull_request.head.ref }}"
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          route: /repos/{repository}/contents/composer.json?ref={branch}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: octokit/request-action@v2.x
-        name: Get base's composer.json
-        id: base
-        with:
-          branch: "!!str ${{ github.event.pull_request.base.ref }}"
-          repository: ${{ github.event.pull_request.base.repo.full_name }}
-          route: /repos/{repository}/contents/composer.json?ref={branch}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Verify base branch
-        run: |
-          PR_BRANCH_ALIAS=$(echo $PR_DATA | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
-          BASE_BRANCH_ALIAS=$(echo $BASE_DATA | jq -r '.["content"]' | base64 --decode | jq -r '.["extra"]["branch-alias"] | flatten | .[0]')
-          if [ "$PR_BRANCH_ALIAS" != "$BASE_BRANCH_ALIAS" ]; then 
-            echo "Base branch has different branch-alias than PR."
-            echo "Pull Request: $PR_BRANCH_ALIAS"
-            echo "Base branch: $BASE_BRANCH_ALIAS"
-            exit 1; 
-          fi
-        env:
-          PR_DATA: ${{ steps.pr.outputs.data }}
-          BASE_DATA: ${{ steps.base.outputs.data }}
+    uses: ezsystems/ezplatform-admin-ui/.github/workflows/test.yaml@ci-pr-verification-reusable
+    with:
+      head_repository: ${{ github.event.pull_request.head.repo.full_name }}
+      base_repository: ${{ github.event.pull_request.base.repo.full_name }}
+      head_branch: ${{ github.event.pull_request.head.ref }}
+      base_branch: ${{ github.event.pull_request.base.ref }}
+    secrets:
+      token: ${{ secrets.TOKEN }}
