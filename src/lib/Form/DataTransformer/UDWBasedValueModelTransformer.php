@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
@@ -85,3 +85,5 @@ class UDWBasedValueModelTransformer implements DataTransformerInterface
         return (int)$locationId;
     }
 }
+
+class_alias(UDWBasedValueModelTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\UDWBasedValueModelTransformer');

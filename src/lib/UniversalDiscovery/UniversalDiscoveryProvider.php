@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UniversalDiscovery;
+namespace Ibexa\AdminUi\UniversalDiscovery;
 
 use eZ\Publish\API\Repository\BookmarkService;
 use eZ\Publish\API\Repository\ContentService;
@@ -18,11 +18,12 @@ use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\API\Repository\Values\User\Limitation;
-use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
-use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
-use EzSystems\EzPlatformAdminUi\QueryType\LocationPathQueryType;
 use EzSystems\EzPlatformRest\Output\Visitor;
 use EzSystems\EzPlatformRest\Server\Values\Version;
+use Ibexa\AdminUi\Permission\LookupLimitationsTransformer;
+use Ibexa\AdminUi\QueryType\LocationPathQueryType;
+use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
+use Ibexa\Contracts\AdminUi\UniversalDiscovery\Provider;
 
 class UniversalDiscoveryProvider implements Provider
 {
@@ -371,3 +372,5 @@ class UniversalDiscoveryProvider implements Provider
         return $locations;
     }
 }
+
+class_alias(UniversalDiscoveryProvider::class, 'EzSystems\EzPlatformAdminUi\UniversalDiscovery\UniversalDiscoveryProvider');

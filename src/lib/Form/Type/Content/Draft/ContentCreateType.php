@@ -6,19 +6,19 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft;
+namespace Ibexa\AdminUi\Form\Type\Content\Draft;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\User\Limitation;
-use EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentCreateContentTypeChoiceLoader;
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentCreateLanguageChoiceLoader;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType;
-use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
-use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
+use Ibexa\AdminUi\Form\Data\Content\Draft\ContentCreateData;
+use Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ContentCreateContentTypeChoiceLoader;
+use Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ContentCreateLanguageChoiceLoader;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Form\Type\ContentType\ContentTypeChoiceType;
+use Ibexa\AdminUi\Form\Type\Language\LanguageChoiceType;
+use Ibexa\AdminUi\Permission\LookupLimitationsTransformer;
+use Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -150,3 +150,5 @@ class ContentCreateType extends AbstractType
         );
     }
 }
+
+class_alias(ContentCreateType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType');

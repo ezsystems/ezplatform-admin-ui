@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Menu\UserSetting;
+namespace Ibexa\AdminUi\Menu\UserSetting;
 
-use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use EzSystems\EzPlatformAdminUi\Menu\MenuItemFactory;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\MenuItemFactory;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -93,3 +93,5 @@ class UserSettingUpdateRightSidebarBuilder extends AbstractBuilder implements Tr
         ];
     }
 }
+
+class_alias(UserSettingUpdateRightSidebarBuilder::class, 'EzSystems\EzPlatformAdminUi\Menu\UserSetting\UserSettingUpdateRightSidebarBuilder');

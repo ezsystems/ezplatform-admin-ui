@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\EventListener;
+namespace Ibexa\AdminUi\Form\EventListener;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LanguageService;
@@ -92,3 +92,5 @@ class AddLanguageFieldBasedOnContentListener
         );
     }
 }
+
+class_alias(AddLanguageFieldBasedOnContentListener::class, 'EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener');

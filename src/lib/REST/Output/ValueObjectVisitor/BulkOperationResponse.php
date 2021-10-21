@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor;
+namespace Ibexa\AdminUi\REST\Output\ValueObjectVisitor;
 
 use EzSystems\EzPlatformRest\Output\Generator;
 use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
@@ -56,3 +56,5 @@ class BulkOperationResponse extends ValueObjectVisitor
         $generator->endObjectElement('BulkOperationResponse');
     }
 }
+
+class_alias(BulkOperationResponse::class, 'EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\BulkOperationResponse');

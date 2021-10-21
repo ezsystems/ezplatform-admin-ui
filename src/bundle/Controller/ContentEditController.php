@@ -4,14 +4,15 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\LocationService;
-use EzSystems\EzPlatformAdminUi\Event\ContentProxyTranslateEvent;
-use EzSystems\EzPlatformAdminUi\View\ContentTranslateSuccessView;
-use EzSystems\EzPlatformAdminUi\View\ContentTranslateView;
 use Ibexa\AdminUi\Event\CancelEditVersionDraftEvent;
+use Ibexa\AdminUi\View\ContentTranslateSuccessView;
+use Ibexa\AdminUi\View\ContentTranslateView;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Event\ContentProxyTranslateEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -104,3 +105,5 @@ class ContentEditController extends Controller
         return $response ?? $this->redirectToLocation($referrerlocation);
     }
 }
+
+class_alias(ContentEditController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController');

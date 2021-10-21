@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\EventListener;
+namespace Ibexa\AdminUi\EventListener;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
@@ -62,3 +62,5 @@ class ViewTemplatesListener implements EventSubscriberInterface
         ];
     }
 }
+
+class_alias(ViewTemplatesListener::class, 'EzSystems\EzPlatformAdminUi\EventListener\ViewTemplatesListener');

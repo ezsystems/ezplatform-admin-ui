@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
+namespace Ibexa\AdminUi\UI\Config\Provider;
 
-use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 use EzSystems\EzPlatformUser\UserSetting\Setting\DateTimeFormatSerializer;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 class DateFormat implements ProviderInterface
 {
@@ -55,3 +55,5 @@ class DateFormat implements ProviderInterface
         ];
     }
 }
+
+class_alias(DateFormat::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Provider\DateFormat');

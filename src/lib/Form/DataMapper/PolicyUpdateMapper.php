@@ -4,11 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\DataMapper;
+namespace Ibexa\AdminUi\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\Repository\Values\User\PolicyUpdateStruct;
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
+use Ibexa\AdminUi\Form\Data\Policy\PolicyUpdateData;
+use Ibexa\Contracts\AdminUi\Form\DataMapper\DataMapperInterface;
 
 /**
  * Maps between PolicyUpdateStruct and PolicyUpdateData objects.
@@ -53,3 +54,5 @@ class PolicyUpdateMapper implements DataMapperInterface
         return $policyUpdateStruct;
     }
 }
+
+class_alias(PolicyUpdateMapper::class, 'EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper');

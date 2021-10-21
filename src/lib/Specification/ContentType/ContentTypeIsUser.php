@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification\ContentType;
+namespace Ibexa\AdminUi\Specification\ContentType;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
-use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Specification\AbstractSpecification;
 
 class ContentTypeIsUser extends AbstractSpecification
 {
@@ -49,3 +49,5 @@ class ContentTypeIsUser extends AbstractSpecification
         return $contentType->hasFieldDefinitionOfType(self::EZUSER_FIELD_TYPE_IDENTIFIER);
     }
 }
+
+class_alias(ContentTypeIsUser::class, 'EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser');

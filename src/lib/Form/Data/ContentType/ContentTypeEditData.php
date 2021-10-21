@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ContentType;
+namespace Ibexa\AdminUi\Form\Data\ContentType;
 
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
@@ -86,3 +86,5 @@ class ContentTypeEditData
         $this->language = $language;
     }
 }
+
+class_alias(ContentTypeEditData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeEditData');

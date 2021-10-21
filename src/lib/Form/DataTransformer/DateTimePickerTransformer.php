@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use DateTime;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -63,3 +63,5 @@ class DateTimePickerTransformer implements DataTransformerInterface
         return DateTime::createFromFormat('U', (string)$value);
     }
 }
+
+class_alias(DateTimePickerTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\DateTimePickerTransformer');

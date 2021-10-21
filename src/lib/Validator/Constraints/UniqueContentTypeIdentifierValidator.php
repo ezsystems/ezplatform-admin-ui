@@ -4,11 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
+use Ibexa\AdminUi\Form\Data\ContentTypeData;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -57,3 +57,5 @@ class UniqueContentTypeIdentifierValidator extends ConstraintValidator
         }
     }
 }
+
+class_alias(UniqueContentTypeIdentifierValidator::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueContentTypeIdentifierValidator');

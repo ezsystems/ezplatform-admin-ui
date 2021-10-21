@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
+namespace Ibexa\AdminUi\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\AdapterInterface;
 
 final class ReverseRelationAdapter implements AdapterInterface
@@ -65,3 +65,5 @@ final class ReverseRelationAdapter implements AdapterInterface
             ->getReverseRelations();
     }
 }
+
+class_alias(ReverseRelationAdapter::class, 'EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\ReverseRelationAdapter');
