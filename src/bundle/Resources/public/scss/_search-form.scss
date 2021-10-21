@@ -1,33 +1,88 @@
-.ez-search-form {
-    &__icon {
+.ibexa-search-form {
+    display: grid;
+    grid-template-areas:
+        'search search'
+        'filters results'
+        '. results';
+    grid-template-columns: calculateRem(270px) auto;
+    grid-column-gap: calculateRem(44px);
+    grid-row-gap: calculateRem(32px);
+    padding-bottom: calculateRem(32px);
+
+    &__search-wrapper {
         display: flex;
-        align-items: center;
-        padding-right: calculateRem(8px);
+        justify-content: flex-start;
+        align-items: flex-start;
+        border: calculateRem(1px) solid $ibexa-color-light;
+        padding: calculateRem(24px);
+        border-radius: $ibexa-border-radius;
+        grid-area: search;
     }
 
-    &__input-wrapper {
-        width: 50%;
+    &__filters {
+        grid-area: filters;
     }
 
-    &__language-wrapper {
-        padding-left: calculateRem(8px);
-        display: inline-block;
-    }
+    &__results {
+        grid-area: results;
 
-    .input-group-btn {
-        display: flex;
+        .ibexa-scrollable-wrapper {
+            max-height: initial;
+        }
 
-        .ibexa-btn {
-            margin-left: calculateRem(8px);
+        .ibexa-table-header {
+            border-bottom: none;
+            padding-bottom: calculateRem(4px);
         }
     }
 
-    .form-group {
-        margin-bottom: calculateRem(32px);
+    &__input-wrapper {
+        margin-right: calculateRem(28px);
+        width: calculateRem(430px);
+
+        .ibexa-input-text-wrapper {
+            width: auto;
+        }
     }
 
-    .ez-filters {
-        padding-top: calculateRem(32px);
-        border-top: calculateRem(1px) solid $ibexa-color-base;
+    &__language-wrapper {
+        margin-right: calculateRem(28px);
+        width: calculateRem(330px);
+
+        .ibexa-dropdown__selection-info {
+            margin-bottom: 0;
+        }
+    }
+
+    &__empty,
+    &__no-results {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: calculateRem(100px);
+    }
+
+    &__empty-title,
+    &__empty-subtitle,
+    &__no-results-title,
+    &__no-results-subtitle {
+        color: $ibexa-color-dark-400;
+    }
+
+    &__no-results-subtitle {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 60%;
+        margin-top: calculateRem(30px);
+
+        .ibexa-icon {
+            margin-right: calculateRem(16px);
+        }
+    }
+
+    &__no-results-hint {
+        flex-basis: 50%;
+        padding: calculateRem(8px);
+        display: flex;
     }
 }

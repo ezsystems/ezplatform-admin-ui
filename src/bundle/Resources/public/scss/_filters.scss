@@ -1,3 +1,4 @@
+// TODO: remove when commerce is redesigned
 .ez-filters {
     transform: scaleY(1);
     transform-origin: top center;
@@ -154,5 +155,133 @@
 
     &__range-select {
         outline: none;
+    }
+}
+// TODOEND;
+
+.ibexa-filters {
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: $ibexa-border-radius;
+    padding-bottom: calculateRem(24px);
+
+    &__item {
+        &--creator {
+            position: relative;
+
+            .ibexa-filters {
+                &__input-wrapper {
+                    position: relative;
+                }
+
+                &__input {
+                    height: calculateRem(32px);
+                    border-radius: calculateRem(5px);
+                    border-color: $ibexa-color-dark-200;
+
+                    + .ibexa-icon {
+                        display: none;
+                    }
+
+                    &:disabled {
+                        cursor: auto;
+                        background-color: $ibexa-white;
+                        color: $ibexa-black;
+                        padding-right: calculateRem(32px);
+                        text-overflow: ellipsis;
+
+                        & + .ibexa-icon {
+                            display: block;
+                            position: absolute;
+                            bottom: calculateRem(8px);
+                            right: calculateRem(6px);
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+
+        &--subtree {
+            .ibexa-tag-view-select {
+                &__selected-list {
+                    margin: 0;
+                }
+
+                &__selected-item-tag {
+                    margin-bottom: calculateRem(8px);
+                }
+            }
+        }
+
+        .ibexa-dropdown__selection-info {
+            margin-bottom: 0;
+        }
+
+        .ibexa-label {
+            font-size: $ibexa-text-font-size-medium;
+            color: $ibexa-color-dark;
+        }
+    }
+
+    &__range-wrapper {
+        height: 0;
+        opacity: 0;
+        background: $ibexa-white;
+        transition: all 0.2s ease-in;
+        pointer-events: none;
+
+        &--visible {
+            height: calculateRem(40px);
+            opacity: 1;
+            pointer-events: auto;
+            margin-top: calculateRem(16px);
+        }
+    }
+
+    &__range-select {
+        outline: none;
+        border-radius: calculateRem(5px);
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+        padding: calculateRem(16px) 0;
+        margin: 0 calculateRem(24px);
+    }
+
+    &__user-list {
+        padding: 0;
+        list-style: none;
+        position: absolute;
+        right: 0;
+        min-width: 100%;
+        border-radius: calculateRem(5px);
+        margin-bottom: 0;
+        background-color: $ibexa-color-base-light;
+        max-height: calculateRem(300px);
+        overflow: auto;
+        transform: scaleY(1);
+        transform-origin: top center;
+        transition: transform 0.2s $ibexa-admin-transition;
+
+        &--hidden {
+            transform: scaleY(0);
+        }
+    }
+
+    &__user-item {
+        padding: calculateRem(8px) calculateRem(16px);
+        cursor: pointer;
+    }
+
+    &__title {
+        margin-bottom: 0;
+    }
+
+    &__items {
+        padding: 0 calculateRem(24px);
     }
 }
