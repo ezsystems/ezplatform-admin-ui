@@ -53,7 +53,7 @@ class UniversalDiscoveryWidget extends Component
 
     public function verifyIsLoaded(): void
     {
-        $this->getHTMLPage()->find($this->getLocator('header'))->assert()->textContains('Select');
+        $this->getHTMLPage()->find($this->getLocator('udw'))->assert()->isVisible();
     }
 
     protected function isMultiSelect(): bool
@@ -116,8 +116,8 @@ class UniversalDiscoveryWidget extends Component
     {
         return [
             // general selectors
+            new VisibleCSSLocator('udw', '.m-ud'),
             new CSSLocator('confirmButton', '.c-bottom-menu__confirm-btn'),
-            new VisibleCSSLocator('header', '.m-ud .c-top-menu__title-wrapper'),
             new CSSLocator('cancelButton', '.c-top-menu__cancel-btn'),
             new CSSLocator('mainWindow', '.m-ud'),
             new CSSLocator('selectedLocationsTab', '.c-selected-locations'),
