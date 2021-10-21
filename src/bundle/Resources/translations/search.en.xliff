@@ -56,15 +56,30 @@
         <target state="new">Custom range</target>
         <note>key: search.custom_range</note>
       </trans-unit>
-      <trans-unit id="bf24ae2c9083c948931ad1b4d4405b6261eb9bc6" resname="search.filters">
+      <trans-unit id="72ba560fb6de0836dac4bd05c9692323f88012c1" resname="search.empty.subtitle">
+        <source>Enter the phrase to find</source>
+        <target state="new">Enter the phrase to find</target>
+        <note>key: search.empty.subtitle</note>
+      </trans-unit>
+      <trans-unit id="feb01adadec58a2cf48dfac371aa421fc5003a9e" resname="search.empty.title">
+        <source>No search items</source>
+        <target state="new">No search items</target>
+        <note>key: search.empty.title</note>
+      </trans-unit>
+      <trans-unit id="ad392277a93c08e1ad4d8f2fe0711994944689ee" resname="search.filters.title">
         <source>Filters</source>
         <target state="new">Filters</target>
-        <note>key: search.filters</note>
+        <note>key: search.filters.title</note>
       </trans-unit>
       <trans-unit id="0ec8148d681b43e87a6d0751fff188517be1ea26" resname="search.header">
         <source>Search results (%total%)</source>
         <target state="new">Search results (%total%)</target>
         <note>key: search.header</note>
+      </trans-unit>
+      <trans-unit id="e41974f1fced70af58e6ef20715b34e477ef2c38" resname="search.input.placeholder">
+        <source>Search by name</source>
+        <target state="new">Search by name</target>
+        <note>key: search.input.placeholder</note>
       </trans-unit>
       <trans-unit id="c2e9df867c114a94918c00f775d3a54d24358dfa" resname="search.last.modified">
         <source>Last modified</source>
@@ -96,6 +111,31 @@
         <target state="new">Name</target>
         <note>key: search.name</note>
       </trans-unit>
+      <trans-unit id="8e6ab4762a411e3cd2c37181b29a9f5e21bea482" resname="search.no_results.hint.check_spelling">
+        <source>Check the spelling of keywords.</source>
+        <target state="new">Check the spelling of keywords.</target>
+        <note>key: search.no_results.hint.check_spelling</note>
+      </trans-unit>
+      <trans-unit id="608a71644cef183ce01ff02f1c2f1805f13c0678" resname="search.no_results.hint.different_kewords">
+        <source>Try different keywords.</source>
+        <target state="new">Try different keywords.</target>
+        <note>key: search.no_results.hint.different_kewords</note>
+      </trans-unit>
+      <trans-unit id="8e21115785735225359ccc0ab394af1242ad3862" resname="search.no_results.hint.fewer_keywords">
+        <source>Try fewer keywords. Reducing keywords results in more matches.</source>
+        <target state="new">Try fewer keywords. Reducing keywords results in more matches.</target>
+        <note>key: search.no_results.hint.fewer_keywords</note>
+      </trans-unit>
+      <trans-unit id="559bdc2720dbe0b6327fd25f533a4bc66c28c05a" resname="search.no_results.hint.more_general">
+        <source>Try more general keywords.</source>
+        <target state="new">Try more general keywords.</target>
+        <note>key: search.no_results.hint.more_general</note>
+      </trans-unit>
+      <trans-unit id="3cda85a3d6f81d71d24c9a518007b45423c9d8a7" resname="search.no_results.title">
+        <source>No results found for "%query%"</source>
+        <target state="new">No results found for "%query%"</target>
+        <note>key: search.no_results.title</note>
+      </trans-unit>
       <trans-unit id="6fa93ef4dfbce97076a254427bb30bf7c5819c5d" resname="search.perform">
         <source>Search</source>
         <target state="new">Search</target>
@@ -106,15 +146,15 @@
         <target state="new">Section</target>
         <note>key: search.section</note>
       </trans-unit>
-      <trans-unit id="1ac4d5da88d06451590cade73ec7e2c4a8b98c2e" resname="search.select_content">
-        <source>Select Content</source>
-        <target state="new">Select Content</target>
-        <note>key: search.select_content</note>
-      </trans-unit>
       <trans-unit id="b484be9d33f5cd9961f4ddd89c628f2cbca2a6a1" resname="search.subtree">
         <source>Subtree</source>
         <target state="new">Subtree</target>
         <note>key: search.subtree</note>
+      </trans-unit>
+      <trans-unit id="3209d598bc6f0467adcef77f0e5c9ac3d1d074d0" resname="search.subtree.label">
+        <source>Subtree</source>
+        <target state="new">Subtree</target>
+        <note>key: search.subtree.label</note>
       </trans-unit>
       <trans-unit id="e477a87ca96bb3e22e8eed710e54e9a6bffefc52" resname="search.translations">
         <source>Translations</source>
@@ -125,11 +165,6 @@
         <source>Content Type</source>
         <target state="new">Content Type</target>
         <note>key: search.type</note>
-      </trans-unit>
-      <trans-unit id="c33e03cc28d02c59ac241dba3a1bb3ea0ab1f358" resname="search.udw.select_content">
-        <source>Select Content</source>
-        <target state="new">Select Content</target>
-        <note>key: search.udw.select_content</note>
       </trans-unit>
     </body>
   </file>

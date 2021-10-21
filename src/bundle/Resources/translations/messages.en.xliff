@@ -256,6 +256,11 @@
         <target state="new">Delete Content Type group(s)</target>
         <note>key: content_type_group.view.list.action.delete</note>
       </trans-unit>
+      <trans-unit id="4bbd55638dc95b087b2c020f64f29ffed12b0688" resname="content_type_selector.list.show_more">
+        <source>See more</source>
+        <target state="new">See more</target>
+        <note>key: content_type_selector.list.show_more</note>
+      </trans-unit>
       <trans-unit id="ad4e9a4e42b99d945f972bab5a2eff694d283793" resname="creating">
         <source>Creating Content type</source>
         <target state="new">Creating Content type</target>
