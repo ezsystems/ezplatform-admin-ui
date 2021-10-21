@@ -22,7 +22,7 @@ const SimpleDropdown = ({ options, selectedOption, onOptionClick, isDisabled }) 
             return;
         }
 
-        setIsExpanded(!isExpanded);
+        setIsExpanded((prevState) => !prevState);
     };
     const onOptionClickWrapper = (option) => {
         onOptionClick(option);
@@ -37,7 +37,7 @@ const SimpleDropdown = ({ options, selectedOption, onOptionClick, isDisabled }) 
         });
 
         return (
-            <li className={itemClass} onClick={onOptionClickWrapper.bind(null, item)}>
+            <li className={itemClass} onClick={() => onOptionClickWrapper(item)}>
                 <span>{item.label}</span>
                 {isItemSelected && <Icon name="checkmark" extraClasses="c-udw-simple-dropdown__list-item-checkmark ibexa-icon--small" />}
             </li>
