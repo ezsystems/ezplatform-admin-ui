@@ -10,6 +10,7 @@ import {
     ContentOnTheFlyConfigContext,
     SelectedLocationsContext,
     MultipleConfigContext,
+    ContentTypesMapContext,
 } from '../../universal.discovery.module';
 
 const ContentCreateButton = ({ isDisabled }) => {
@@ -19,6 +20,7 @@ const ContentCreateButton = ({ isDisabled }) => {
     const [selectedLocations, dispatchSelectedLocationsAction] = useContext(SelectedLocationsContext);
     const [multiple, multipleItemsLimit] = useContext(MultipleConfigContext);
     const { hidden, allowedLocations } = useContext(ContentOnTheFlyConfigContext);
+    const contentTypesMap = useContext(ContentTypesMapContext);
     const createLabel = Translator.trans(/*@Desc("Create")*/ 'create_content.create', {}, 'universal_discovery_widget');
     const toggleContentCreateVisibility = () => {
         window.eZ.helpers.tooltips.hideAll();
@@ -32,12 +34,14 @@ const ContentCreateButton = ({ isDisabled }) => {
         );
     }
 
+    const contentTypeInfo = contentTypesMap[selectedLocation?.location?.ContentInfo.Content.ContentType._href];
     const isAllowedLocation = selectedLocation && (!allowedLocations || allowedLocations.includes(selectedLocation.parentLocationId));
     const hasAccess =
         !selectedLocation ||
         !selectedLocation.permissions ||
         (selectedLocation.permissions && selectedLocation.permissions.create.hasAccess);
     const isLimitReached = multiple && multipleItemsLimit !== 0 && selectedLocations.length >= multipleItemsLimit;
+    const isContainer = contentTypeInfo?.isContainer ?? true;
 
     if (hidden) {
         return null;
@@ -47,7 +51,7 @@ const ContentCreateButton = ({ isDisabled }) => {
         <div className="c-content-create-button">
             <button
                 className="c-content-create-button__btn btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                disabled={isDisabled || !hasAccess || !isAllowedLocation || isLimitReached}
+                disabled={isDisabled || !hasAccess || !isAllowedLocation || isLimitReached || !isContainer}
                 onClick={toggleContentCreateVisibility}
                 data-tooltip-container-selector=".c-top-menu"
                 title={createLabel}>
