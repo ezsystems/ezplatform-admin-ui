@@ -43,7 +43,7 @@ class ContentTypePicker extends Component
         return [
             new VisibleCSSLocator('filterInput', '.ibexa-extra-actions__section-content--content-type .ez-instant-filter__input'),
             new VisibleCSSLocator('filteredItem', '.ibexa-extra-actions__section-content--content-type .ez-instant-filter__group-item:not([hidden]) .form-check-label'),
-            new VisibleCSSLocator('header', '.ibexa-extra-actions--create .ibexa-extra-actions__header'),
+            new VisibleCSSLocator('header', '.ibexa-extra-actions--create .ibexa-extra-actions__header h2'),
         ];
     }
 }

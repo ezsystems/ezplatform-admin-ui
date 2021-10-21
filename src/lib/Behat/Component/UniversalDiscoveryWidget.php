@@ -13,7 +13,6 @@ use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
-use PHPUnit\Framework\Assert;
 
 class UniversalDiscoveryWidget extends Component
 {
@@ -33,7 +32,7 @@ class UniversalDiscoveryWidget extends Component
         $itemName = $pathParts[count($pathParts) - 1];
 
         if ($this->isMultiSelect()) {
-            $this->addItemToMultiselection($itemName, count($pathParts));
+            $this->addItemToMultiSelection($itemName, count($pathParts));
         }
     }
 
@@ -54,39 +53,19 @@ class UniversalDiscoveryWidget extends Component
 
     public function verifyIsLoaded(): void
     {
-        $expectedTabTitles = ['Browse', 'Bookmarks', 'Search'];
-
-        $tabs = $this->getHTMLPage()->findAll($this->getLocator('categoryTabSelector'));
-        $foundExpectedTitles = [];
-        foreach ($tabs as $tab) {
-            $tabText = $tab->getText();
-            if (in_array($tabText, $expectedTabTitles)) {
-                $foundExpectedTitles[] = $tabText;
-            }
-        }
-
-        Assert::assertEquals($expectedTabTitles, $foundExpectedTitles);
+        $this->getHTMLPage()->find($this->getLocator('header'))->assert()->textContains('Select');
     }
 
     protected function isMultiSelect(): bool
     {
-        return $this->getHTMLPage()
-            ->setTimeout(self::SHORT_TIMEOUT)
-            ->findAll($this->getLocator('multiSelectAddButton'))
-            ->any()
-        ;
+        return $this->getHTMLPage()->find($this->getLocator('header'))->getText()
+                === 'Select Content item(s)';
     }
 
     protected function addItemToMultiSelection(string $itemName, int $level): void
     {
-        $currentSelectedItemLocator = new CSSLocator('currentSelectedItem', sprintf($this->getLocator('treeLevelSelectedFormat')->getSelector(), $level));
-        $this->getHTMLPage()->findAll($currentSelectedItemLocator)->getByCriterion(new ElementTextCriterion($itemName))->mouseOver();
-
-        $addItemLocator = new CSSLocator('addItemLocator', sprintf($this->getLocator('currentlySelectedAddItemButtonFormat')->getSelector(), $level));
-        $this->getHTMLPage()->find($addItemLocator)->click();
-
-        $addedItemLocator = new CSSLocator('addedItemLocator', sprintf($this->getLocator('currentlySelectedItemAddedFormat')->getSelector(), $level));
-        Assert::assertTrue($this->getHTMLPage()->find($addedItemLocator)->isVisible());
+        $treeElementsLocator = new CSSLocator('', sprintf($this->getLocator('treeLevelElementsFormat')->getSelector(), $level));
+        $this->getHTMLPage()->findAll($treeElementsLocator)->getByCriterion(new ElementTextCriterion($itemName))->find($this->getLocator('input'))->click();
     }
 
     protected function selectTreeBranch(string $itemName, int $level): void
@@ -112,7 +91,7 @@ class UniversalDiscoveryWidget extends Component
         $treeElementsLocator = new CSSLocator('', sprintf($this->getLocator('treeLevelElementsFormat')->getSelector(), $level));
         $selectedTreeElementLocator = new CSSLocator('', sprintf($this->getLocator('treeLevelSelectedFormat')->getSelector(), $level));
 
-        $this->getHTMLPage()->findAll($treeElementsLocator)->getByCriterion(new ElementTextCriterion($itemName))->click();
+        $this->getHTMLPage()->findAll($treeElementsLocator)->getByCriterion(new ElementTextCriterion($itemName))->find($this->getLocator('elementName'))->click();
         $this->getHTMLPage()->findAll($selectedTreeElementLocator)->getByCriterion(new ElementTextCriterion($itemName))->assert()->isVisible();
 
         if ($willNextLevelBeReloaded) {
@@ -138,21 +117,19 @@ class UniversalDiscoveryWidget extends Component
     {
         return [
             // general selectors
-            new CSSLocator('confirmButton', '.c-selected-locations__confirm-button'),
-            new CSSLocator('categoryTabSelector', '.c-tab-selector__item'),
+            new CSSLocator('confirmButton', '.c-bottom-menu__confirm-btn'),
+            new VisibleCSSLocator('header', '.m-ud .c-top-menu__title-wrapper'),
             new CSSLocator('cancelButton', '.c-top-menu__cancel-btn'),
             new CSSLocator('mainWindow', '.m-ud'),
             new CSSLocator('selectedLocationsTab', '.c-selected-locations'),
             // selectors for path traversal
             new CSSLocator('treeLevelFormat', '.c-finder-branch:nth-child(%d)'),
             new CSSLocator('treeLevelElementsFormat', '.c-finder-branch:nth-of-type(%d) .c-finder-leaf'),
+            new CSSLocator('elementName', '.c-finder-leaf__name'),
+            new CSSLocator('input', '.c-udw-toggle-selection'),
             new CSSLocator('treeLevelSelectedFormat', '.c-finder-branch:nth-of-type(%d) .c-finder-leaf--marked'),
-            // selectors for multiitem selection
-            new CSSLocator('multiSelectAddButton', '.c-toggle-selection-button'),
             // itemActions
             new CSSLocator('previewButton', '.c-content-meta-preview__preview-button'),
-            new CSSLocator('currentlySelectedItemAddedFormat', '.c-finder-branch:nth-of-type(%d) .c-finder-leaf--marked .c-toggle-selection-button.c-toggle-selection-button--selected'),
-            new CSSLocator('currentlySelectedAddItemButtonFormat', '.c-finder-branch:nth-of-type(%d) .c-finder-leaf--marked .c-toggle-selection-button'),
         ];
     }
 
