@@ -127,14 +127,14 @@ class RichText extends FieldTypeComponent
 
     public function clickEmbedInlineButton(): void
     {
-        $buttonPosition = 11 + $this->getCustomStylesOffset();
+        $buttonPosition = 10 + $this->getCustomStylesOffset();
         $this->openElementsToolbar();
         $this->clickElementsToolbarButton($buttonPosition);
     }
 
     public function clickEmbedButton(): void
     {
-        $buttonPosition = 9 + $this->getCustomStylesOffset();
+        $buttonPosition = 8 + $this->getCustomStylesOffset();
         $this->openElementsToolbar();
         $this->clickElementsToolbarButton($buttonPosition);
     }
