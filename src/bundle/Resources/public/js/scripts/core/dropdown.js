@@ -299,6 +299,14 @@
         }
 
         init() {
+            if (this.container.dataset.initialized) {
+                console.warn("Dropdown has already been initialized!");
+
+                return;
+            }
+
+            this.container.dataset.initialized = true;
+
             const selectedItems = this.getSelectedItems();
             const isEmpty = !selectedItems.length;
 
