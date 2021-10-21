@@ -58,8 +58,7 @@ class UniversalDiscoveryWidget extends Component
 
     protected function isMultiSelect(): bool
     {
-        return $this->getHTMLPage()->find($this->getLocator('header'))->getText()
-                === 'Select Content item(s)';
+        return $this->getHTMLPage()->setTimeout(0)->findAll($this->getLocator('multiselect'))->any();
     }
 
     protected function addItemToMultiSelection(string $itemName, int $level): void
@@ -122,6 +121,7 @@ class UniversalDiscoveryWidget extends Component
             new CSSLocator('cancelButton', '.c-top-menu__cancel-btn'),
             new CSSLocator('mainWindow', '.m-ud'),
             new CSSLocator('selectedLocationsTab', '.c-selected-locations'),
+            new VisibleCSSLocator('multiselect', '.m-ud .c-finder-leaf .ibexa-input--checkbox'),
             // selectors for path traversal
             new CSSLocator('treeLevelFormat', '.c-finder-branch:nth-child(%d)'),
             new CSSLocator('treeLevelElementsFormat', '.c-finder-branch:nth-of-type(%d) .c-finder-leaf'),
