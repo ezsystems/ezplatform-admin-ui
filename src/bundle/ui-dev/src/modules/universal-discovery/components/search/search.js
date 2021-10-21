@@ -5,7 +5,7 @@ export const SelectedContentTypesContext = createContext();
 export const SelectedSectionContext = createContext();
 export const SelectedSubtreeContext = createContext();
 
-import Icon from '../../../common/icon/icon';
+import Dropdown from '../dropdown/dropdown';
 import InputSearch from '../input-search/input.search';
 import ContentTable from '../content-table/content.table';
 import Filters from '../filters/filters';
@@ -42,7 +42,7 @@ const Search = ({ itemsPerPage }) => {
     const [selectedLanguage, setSelectedLanguage] = useState(firstLanguageCode);
     const prevSearchText = useRef(null);
     const searchActionRef = useRef(null);
-    const updateSelectedLanguage = (event) => setSelectedLanguage(event.target.value);
+    const updateSelectedLanguage = (value) => setSelectedLanguage(value);
     const [isLoading, data, searchByQuery] = useSearchByQueryFetch();
     const search = () => {
         const shouldResetOffset = prevSearchText.current !== searchText && offset !== 0;
@@ -132,6 +132,10 @@ const Search = ({ itemsPerPage }) => {
             );
         }
     };
+    const languageOptions = languages.filter(((language) => language.enabled)).map((language) => ({
+        value: language.languageCode,
+        label: language.name,
+    }));
 
     useEffect(search, [searchText, offset]);
 
@@ -141,24 +145,13 @@ const Search = ({ itemsPerPage }) => {
                 <div className="c-search__input-wrapper">
                     <InputSearch small={false} ref={searchActionRef} />
                 </div>
-                {languages.length > 1 || true ? (
+                {languages.length > 1 ? (
                     <div className="c-search__selector-wrapper">
-                        <select
-                            className="form-control c-search__select-language"
+                        <Dropdown
                             onChange={updateSelectedLanguage}
-                            value={selectedLanguage}>
-                            {languages.map((language) => {
-                                if (!language.enabled) {
-                                    return null;
-                                }
-
-                                return (
-                                    <option key={language.id} value={language.languageCode} onChange={updateSelectedLanguage}>
-                                        {language.name}
-                                    </option>
-                                );
-                            })}
-                        </select>
+                            value={selectedLanguage}
+                            options={languageOptions}
+                        />
                     </div>
                 ) : null}
                 <button className="c-search__search-btn btn ibexa-btn ibexa-btn--primary" onClick={searchSubmit}>

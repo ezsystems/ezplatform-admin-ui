@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import Dropdown from '../dropdown/dropdown';
+import SimpleDropdown from '../simple-dropdown/simple.dropdown';
 
 import { CurrentViewContext, VIEWS } from '../../universal.discovery.module';
 
@@ -14,7 +14,7 @@ const ViewSwitcher = ({ isDisabled }) => {
 
     return (
         <div className="c-udw-view-switcher">
-            <Dropdown
+            <SimpleDropdown
                 options={VIEWS}
                 selectedOption={selectedOption}
                 onOptionClick={onOptionClick}

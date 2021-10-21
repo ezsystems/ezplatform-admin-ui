@@ -7,7 +7,7 @@ import TabSelector from '../tab-selector/tab.selector';
 import SelectedLocations from '../selected-locations/selected.locations';
 import ContentCreateWidget from '../content-create-widget/content.create.widget';
 
-import { SelectedLocationsContext } from '../../universal.discovery.module';
+import { SelectedLocationsContext, DropdownPortalRefContext } from '../../universal.discovery.module';
 
 const Tab = ({ children, actionsDisabledMap }) => {
     const topBarRef = useRef();
@@ -15,6 +15,7 @@ const Tab = ({ children, actionsDisabledMap }) => {
     const [contentHeight, setContentHeight] = useState('100%');
     const ContentMetaPreview = window.eZ.adminUiConfig.universalDiscoveryWidget.contentMetaPreview;
     const [selectedLocations, dispatchSelectedLocationsAction] = useContext(SelectedLocationsContext);
+    const dropdownPortalRef = useContext(DropdownPortalRefContext);
     const selectedLocationsComponent = !!selectedLocations.length ? <SelectedLocations /> : null;
     const contentStyles = {
         height: contentHeight,
@@ -47,6 +48,7 @@ const Tab = ({ children, actionsDisabledMap }) => {
             <div className="c-udw-tab__bottom-bar" ref={bottomBarRef}>
                 <BottomMenu />
             </div>
+            <div class="c-udw-tab__dropdown-portal" ref={dropdownPortalRef} />
         </div>
     );
 };

@@ -39,6 +39,7 @@
     }
 
     &__select-language {
+        width: calculateRem(335px);
         height: calculateRem(48px);
         border-color: $ibexa-color-dark-200;
     }

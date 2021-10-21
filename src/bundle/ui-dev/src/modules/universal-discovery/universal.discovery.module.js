@@ -20,9 +20,9 @@ export const SORTING_OPTIONS = [
     {
         id: 'date:asc',
         label: (
-            <div class="c-udw-dropdown__option-label">
+            <div class="c-udw-simple-dropdown__option-label">
                 {Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget')}
-                <Icon name="back" extraClasses="c-udw-dropdown__arrow-down ibexa-icon--tiny-small" />
+                <Icon name="back" extraClasses="c-udw-simple-dropdown__arrow-down ibexa-icon--tiny-small" />
             </div>
         ),
         sortClause: 'DatePublished',
@@ -31,9 +31,9 @@ export const SORTING_OPTIONS = [
     {
         id: 'date:desc',
         label: (
-            <div class="c-udw-dropdown__option-label">
+            <div class="c-udw-simple-dropdown__option-label">
                 {Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget')}
-                <Icon name="back" extraClasses="c-udw-dropdown__arrow-up ibexa-icon--tiny-small" />
+                <Icon name="back" extraClasses="c-udw-simple-dropdown__arrow-up ibexa-icon--tiny-small" />
             </div>
         ),
         sortClause: 'DatePublished',
@@ -106,11 +106,13 @@ export const ContentOnTheFlyDataContext = createContext();
 export const ContentOnTheFlyConfigContext = createContext();
 export const EditOnTheFlyDataContext = createContext();
 export const SearchTextContext = createContext();
+export const DropdownPortalRefContext = createContext();
 
 const UniversalDiscoveryModule = (props) => {
     const tabs = window.eZ.adminUiConfig.universalDiscoveryWidget.tabs;
     const defaultMarkedLocationId = props.startingLocationId || props.rootLocationId;
     const abortControllerRef = useRef();
+    const dropdownPortalRef = useRef();
     const [activeTab, setActiveTab] = useState(props.activeTab);
     const [sorting, setSorting] = useState(props.activeSortClause);
     const [sortOrder, setSortOrder] = useState(props.activeSortOrder);
@@ -370,7 +372,10 @@ const UniversalDiscoveryModule = (props) => {
                                                                                                                             searchText,
                                                                                                                             setSearchText
                                                                                                                         ]}>
-                                                                                                                        <Tab />
+                                                                                                                        <DropdownPortalRefContext.Provider
+                                                                                                                            value={dropdownPortalRef}>
+                                                                                                                            <Tab />
+                                                                                                                        </DropdownPortalRefContext.Provider>
                                                                                                                     </SearchTextContext.Provider>
                                                                                                                 </EditOnTheFlyDataContext.Provider>
                                                                                                             </ContentOnTheFlyConfigContext.Provider>
