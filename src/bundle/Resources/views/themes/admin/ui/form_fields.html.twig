@@ -63,31 +63,31 @@
 
 {%- block _search_content_types_widget -%}
     <div class="ibexa-content-type-selector accordion">
-    {%- set groups = choices -%}
-    {%- for group_label, group_choices in groups -%}
-        <div class="ibexa-content-type-selector__group accordion-item">
-            <span class="ibexa-content-type-selector__group-title accordion-header">
-                <button type="button" class="accordion-button {% if not loop.first %} collapsed{% endif %}" data-bs-toggle="collapse" data-bs-target="#{{ group_label }}">
-                    {{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}
-                </button>
-            </span>
-            <div class="ibexa-content-type-selector__list-wrapper accordion-collapse collapse{% if loop.first %} show{% endif %}" id="{{ group_label }}">
-                <ul class="ibexa-content-type-selector__list">
-                    {%- for choice in group_choices|slice(0, 3) -%}
-                        {{- block('search_type_choice_widget_options') -}}
-                    {%- endfor -%}
-                </ul>
-                {% if group_choices|length > 3 %}
-                    <a href="#" class="ibexa-content-type-selector__show-more">{{ 'content_type_selector.list.show_more'|trans|desc('See more') }}</a>
-                    <ul class="ibexa-content-type-selector__list" hidden>
-                        {%- for choice in group_choices|slice(3) -%}
+        {%- set groups = choices -%}
+        {%- for group_label, group_choices in groups -%}
+            <div class="ibexa-content-type-selector__group accordion-item">
+                <span class="ibexa-content-type-selector__group-title accordion-header">
+                    <button type="button" class="accordion-button {% if not loop.first %} collapsed{% endif %}" data-bs-toggle="collapse" data-bs-target="#{{ group_label }}">
+                        {{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}
+                    </button>
+                </span>
+                <div class="ibexa-content-type-selector__list-wrapper accordion-collapse collapse{% if loop.first %} show{% endif %}" id="{{ group_label }}">
+                    <ul class="ibexa-content-type-selector__list">
+                        {%- for choice in group_choices|slice(0, 3) -%}
                             {{- block('search_type_choice_widget_options') -}}
                         {%- endfor -%}
                     </ul>
-                {% endif %}
+                    {% if group_choices|length > 3 %}
+                        <a href="#" class="ibexa-content-type-selector__show-more">{{ 'content_type_selector.list.show_more'|trans|desc('See more') }}</a>
+                        <ul class="ibexa-content-type-selector__list" hidden>
+                            {%- for choice in group_choices|slice(3) -%}
+                                {{- block('search_type_choice_widget_options') -}}
+                            {%- endfor -%}
+                        </ul>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-    {%- endfor -%}
+        {%- endfor -%}
     </div>
 {%- endblock -%}
 

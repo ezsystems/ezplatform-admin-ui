@@ -226,8 +226,8 @@
     &__range-wrapper {
         height: 0;
         opacity: 0;
-        background: $ibexa-white;
-        transition: all 0.2s ease-in;
+        background: $ibexa-color-white;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
         pointer-events: none;
 
         &--visible {
@@ -265,7 +265,7 @@
         overflow: auto;
         transform: scaleY(1);
         transform-origin: top center;
-        transition: transform 0.2s $ibexa-admin-transition;
+        transition: transform $ibexa-admin-transition-duration $ibexa-admin-transition;
 
         &--hidden {
             transform: scaleY(0);

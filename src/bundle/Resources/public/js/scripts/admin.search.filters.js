@@ -295,7 +295,9 @@
     };
     const showMoreContentTypes = (event) => {
         const btn = event.currentTarget;
-        const contentTypesList = btn.nextElementSibling;
+        const contentTypesList = btn
+            .closest('.ibexa-content-type-selector__list-wrapper')
+            .querySelector('.ibexa-content-type-selector__list[hidden]');
 
         btn.setAttribute('hidden', true);
         contentTypesList.removeAttribute('hidden');

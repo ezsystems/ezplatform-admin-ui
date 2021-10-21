@@ -1,5 +1,5 @@
 .ibexa-tag {
-    border-radius: 18px;
+    border-radius: calculateRem(18px);
     background: $ibexa-color-light-300;
     font-size: $ibexa-text-font-size-small;
     padding: calculateRem(2px) calculateRem(28px) calculateRem(2px) calculateRem(8px);
