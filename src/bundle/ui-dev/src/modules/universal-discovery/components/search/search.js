@@ -132,6 +132,10 @@ const Search = ({ itemsPerPage }) => {
             );
         }
     };
+    const languageOptions = languages.filter(((language) => language.enabled)).map((language) => ({
+        value: language.languageCode,
+        label: language.name,
+    }));
 
     useEffect(search, [searchText, offset]);
 
@@ -144,17 +148,10 @@ const Search = ({ itemsPerPage }) => {
                 {languages.length > 1 ? (
                     <div className="c-search__selector-wrapper">
                         <Dropdown
-                        onChange={updateSelectedLanguage}
-                        value={selectedLanguage}
-                        options={
-                            languages
-                                .filter(((language) => language.enabled))
-                                .map((language) => ({
-                                    value: language.languageCode,
-                                    label: language.name
-                                }))
-                        }
-                    />
+                            onChange={updateSelectedLanguage}
+                            value={selectedLanguage}
+                            options={languageOptions}
+                        />
                     </div>
                 ) : null}
                 <button className="c-search__search-btn btn ibexa-btn ibexa-btn--primary" onClick={searchSubmit}>

@@ -123,7 +123,6 @@ const UniversalDiscoveryModule = (props) => {
     const [editOnTheFlyData, setEditOnTheFlyData] = useState({});
     const [contentTypesInfoMap, setContentTypesInfoMap] = useState({});
     const [searchText, setSearchText] = useState('');
-    // const [dropdownPortalRefState, setDropdownPortalRefState] = useState(dropdownPortalRef);
     const [loadedLocationsMap, dispatchLoadedLocationsAction] = useLoadedLocationsReducer([
         { parentLocationId: props.rootLocationId, subitems: [] },
     ]);

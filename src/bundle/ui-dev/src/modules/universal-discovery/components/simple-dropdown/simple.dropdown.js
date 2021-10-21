@@ -29,6 +29,20 @@ const SimpleDropdown = ({ options, selectedOption, onOptionClick, isDisabled }) 
 
         setIsExpanded(false);
     }
+    const renderItem = (item) => {
+        const isItemSelected = item.id === selectedOption.id;
+        const itemClass = createCssClassNames({
+            'c-udw-simple-dropdown__list-item': true,
+            'c-udw-simple-dropdown__list-item--selected': isItemSelected
+        });
+
+        return (
+            <li className={itemClass} onClick={onOptionClickWrapper.bind(null, item)}>
+                <span>{item.label}</span>
+                {isItemSelected && <Icon name="checkmark" extraClasses="c-udw-simple-dropdown__list-item-checkmark ibexa-icon--small" />}
+            </li>
+        );
+    }
 
     useEffect(() => {
         if (!isExpanded) {
@@ -58,20 +72,7 @@ const SimpleDropdown = ({ options, selectedOption, onOptionClick, isDisabled }) 
             </div>
             <div className="c-udw-simple-dropdown__items">
                 <ul className="c-udw-simple-dropdown__list-items">
-                    {options.map((option) => {
-                        const isOptionSelected = option.id === selectedOption.id;
-                        const optionClass = createCssClassNames({
-                            'c-udw-simple-dropdown__list-item': true,
-                            'c-udw-simple-dropdown__list-item--selected': isOptionSelected
-                        });
-
-                        return (
-                            <li className={optionClass} onClick={onOptionClickWrapper.bind(null, option)}>
-                                <span>{option.label}</span>
-                                {isOptionSelected && <Icon name="checkmark" extraClasses="c-udw-simple-dropdown__list-item-checkmark ibexa-icon--small" />}
-                            </li>
-                        );
-                    })}
+                    {options.map(renderItem)}
                 </ul>
             </div>
         </div>

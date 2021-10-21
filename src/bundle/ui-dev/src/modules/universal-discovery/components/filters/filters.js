@@ -108,10 +108,13 @@ const Filters = ({ search }) => {
     };
     const filtersLabel = Translator.trans(/*@Desc("Filters")*/ 'filters.title', {}, 'universal_discovery_widget');
     const sectionLabel = Translator.trans(/*@Desc("Section")*/ 'filters.section', {}, 'universal_discovery_widget');
-    const anySectionLabel = Translator.trans(/*@Desc("Any section")*/ 'filters.any_section', {}, 'universal_discovery_widget');
     const subtreeLabel = Translator.trans(/*@Desc("Subtree")*/ 'filters.subtree', {}, 'universal_discovery_widget');
     const clearLabel = Translator.trans(/*@Desc("Clear")*/ 'filters.clear', {}, 'universal_discovery_widget');
     const applyLabel = Translator.trans(/*@Desc("Apply")*/ 'filters.apply', {}, 'universal_discovery_widget');
+    const sectionOptions = Object.entries(window.eZ.adminUiConfig.sections).map(([sectionIdentifier, sectionName]) => ({
+        value: sectionIdentifier,
+        label: sectionName,
+    }));
 
     useEffect(() => {
         if (filtersCleared) {
@@ -149,13 +152,7 @@ const Filters = ({ search }) => {
                     small={true}
                     onChange={updateSection}
                     value={selectedSection}
-                    options={
-                        Object.entries(window.eZ.adminUiConfig.sections)
-                            .map(([sectionIdentifier, sectionName]) => ({
-                                value: sectionIdentifier,
-                                label: sectionName,
-                            }))
-                    }
+                    options={sectionOptions}
                 />
             </Collapsible>
             <Collapsible title={subtreeLabel}>

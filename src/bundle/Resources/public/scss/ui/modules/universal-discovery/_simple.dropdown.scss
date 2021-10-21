@@ -25,9 +25,9 @@
         padding: calculateRem(6px) 0;
         background: $ibexa-color-white;
         border: calculateRem(1px) solid $ibexa-color-light;
-        border-radius: calculateRem(6px);
+        border-radius: $ibexa-border-radius;
         box-shadow: calculateRem(4px) calculateRem(32px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.1);
-        transition: opacity 0.3s $ibexa-admin-transition;
+        transition: opacity $ibexa-admin-transition-duration $ibexa-admin-transition;
         opacity: 0;
         height: 0;
         overflow: hidden;
