@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Page;
 
 use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
+use Ibexa\Behat\Browser\Element\Condition\ElementTransitionHasEndedCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\Mapper\ElementTextMapper;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
@@ -35,6 +36,8 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
         $lastFieldAdded->mouseOver();
         $lastFieldAdded->click();
         usleep(500000);
+        $this->getHTMLPage()->setTimeout(5)
+            ->waitUntilCondition(new ElementTransitionHasEndedCondition($this->getHTMLPage(), $fieldToggleLocator));
     }
 
     public function specifyLocators(): array
@@ -104,6 +107,11 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
     public function expandDefaultBlocksOption(): void
     {
         $dropdownLocator = $this->getLocator('selectBlocksDropdown');
+        $this->getHTMLPage()
+            ->setTimeout(3)
+            ->waitUntilCondition(
+                new ElementExistsCondition($this->getHTMLPage(), $dropdownLocator)
+            );
         $this->getHTMLPage()
             ->findAll($dropdownLocator)->getByCriterion(new ElementTextCriterion('Select blocks'))->click();
         $this->getHTMLPage()
