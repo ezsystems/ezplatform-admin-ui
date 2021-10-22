@@ -14,6 +14,7 @@ use Ibexa\Behat\Browser\Element\Criterion\ElementAttributeCriterion;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\Criterion\LogicalOrCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
+use PHPUnit\Framework\Assert;
 
 class LeftMenu extends Component
 {
@@ -24,20 +25,27 @@ class LeftMenu extends Component
             new ElementTextCriterion($tabName),
         ]);
 
+        $isCollapsed = $this->isCollapsed();
+
         $menuButton = $this->getHTMLPage()
             ->findAll($this->getLocator('menuItem'))
             ->getByCriterion($buttonCriteron);
         $menuButton->click();
         $menuButton->find(new VisibleCSSLocator('activeMarker', '.ibexa-main-menu__item-action.active'))->assert()->isVisible();
+
+        if (!$isCollapsed) {
+            $this->getHTMLPage()
+                ->setTimeout(3)
+                ->waitUntilCondition(
+                    new ElementTransitionHasEndedCondition($this->getHTMLPage(), $this->getLocator('menuFirstLevel'))
+                );
+            Assert::assertTrue($this->isCollapsed());
+        }
     }
 
     public function goToSubTab(string $tabName): void
     {
         $this->getHTMLPage()
-            ->setTimeout(3)
-            ->waitUntilCondition(
-                new ElementTransitionHasEndedCondition($this->getHTMLPage(), $this->getLocator('menuFirstLevel'))
-                )
             ->findAll($this->getLocator('expandedMenuItem'))
             ->getByCriterion(new ElementTextCriterion($tabName))
             ->click();
@@ -56,5 +64,13 @@ class LeftMenu extends Component
             new VisibleCSSLocator('menuSelector', '.ibexa-main-menu'),
             new VisibleCSSLocator('menuFirstLevel', '.ibexa-main-menu__navbar--first-level'),
         ];
+    }
+
+    private function isCollapsed(): bool
+    {
+        return $this->getHTMLPage()
+            ->setTimeout(0)
+            ->find($this->getLocator('menuFirstLevel'))
+            ->hasClass('ibexa-main-menu__navbar--collapsed');
     }
 }
