@@ -65,7 +65,7 @@ class SearchPage extends Page
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('inputField', '.ez-search-form #search_query'),
+            new VisibleCSSLocator('inputField', '.ibexa-search-form #search_query'),
             new VisibleCSSLocator('buttonSearch', '.ibexa-btn--search'),
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
             new VisibleCSSLocator('table', '.ez-content-container table.table'),
