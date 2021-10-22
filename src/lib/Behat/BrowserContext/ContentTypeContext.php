@@ -229,4 +229,13 @@ class ContentTypeContext implements Context
         $this->contentTypeUpdatePage->expandDefaultBlocksOption();
         $this->contentTypeUpdatePage->selectBlock($blockName);
     }
+
+    /**
+     * @Given I select :viewMode editor launch mode in ezlandingpage field options
+     */
+    public function iCheckEditorLaunchModeOption(string $viewMode): void
+    {
+        $this->contentTypeUpdatePage->expandFieldDefinition('Landing Page');
+        $this->contentTypeUpdatePage->selectEditorLaunchMode($viewMode);
+    }
 }
