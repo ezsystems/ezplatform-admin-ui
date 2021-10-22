@@ -20,7 +20,7 @@
                     <div class="ibexa-search-form__no-results-hint">
                         <div class="ibexa-search-form__no-results-hint-icon-wrapper">
                             <svg class="ibexa-icon ibexa-icon--small-medium">
-                            <use xlink:href="{{ ibexa_icon_path('approved') }}"></use>
+                                <use xlink:href="{{ ibexa_icon_path('approved') }}"></use>
                             </svg>
                         </div>
                         <div class="ibexa-search-form__no-results-hint-text">{{ hint }}</div>
@@ -118,11 +118,9 @@
                 head_cols: head_cols,
                 body_rows: body_rows,
             } %}
-
                 {% block between_header_and_table %}
                     {% include '@ezdesign/ui/search/criteria_tags.html.twig' %}
                 {% endblock %}
-
             {% endembed %}
 
             {% if pager.haveToPaginate %}

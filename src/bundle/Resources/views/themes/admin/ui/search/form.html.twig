@@ -17,7 +17,7 @@
         {{ form_widget(form.query, { attr: { placeholder: 'search.input.placeholder'|trans|desc('Search by name') }}) }}
     </div>
     <div class="ibexa-search-form__language-wrapper" {% if form.search_language.vars.choices|length == 1 %} hidden {% endif %}>
-        {{ form_widget(form.search_language, {'attr': {'class': 'ez-search-form__language-selector'}}) }}
+        {{ form_widget(form.search_language, {'attr': {'class': 'ibexa-search-form__language-selector'}}) }}
     </div>
     <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--search">{{ 'search.perform'|trans|desc('Search') }}</button>
 </div>
