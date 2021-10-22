@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\View\Filter;
+namespace Ibexa\AdminUi\View\Filter;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -17,9 +17,9 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\Event\FilterViewBuilderParametersEvent;
 use eZ\Publish\Core\MVC\Symfony\View\ViewEvents;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
-use EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTranslationMapper;
 use EzSystems\EzPlatformContentForms\Form\Type\Content\ContentEditType;
+use Ibexa\AdminUi\Form\Data\ContentTranslationData;
+use Ibexa\AdminUi\Form\Data\FormMapper\ContentTranslationMapper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -179,3 +179,5 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
         );
     }
 }
+
+class_alias(ContentTranslateViewFilter::class, 'EzSystems\EzPlatformAdminUi\View\Filter\ContentTranslateViewFilter');

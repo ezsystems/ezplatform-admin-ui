@@ -4,11 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
+namespace Ibexa\AdminUi\Form\Type\Role;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
-use EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperInterface;
-use EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperRegistryInterface;
+use Ibexa\AdminUi\Limitation\LimitationFormMapperInterface;
+use Ibexa\AdminUi\Limitation\LimitationFormMapperRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -90,3 +90,5 @@ class LimitationType extends AbstractType
         return 'ezplatform_content_forms_policy_limitation_edit';
     }
 }
+
+class_alias(LimitationType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType');

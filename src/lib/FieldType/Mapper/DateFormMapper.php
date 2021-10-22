@@ -4,11 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\FieldType\Mapper;
+namespace Ibexa\AdminUi\FieldType\Mapper;
 
 use eZ\Publish\Core\FieldType\Date\Type;
-use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -50,3 +50,5 @@ class DateFormMapper implements FieldDefinitionFormMapperInterface
             ]);
     }
 }
+
+class_alias(DateFormMapper::class, 'EzSystems\EzPlatformAdminUi\FieldType\Mapper\DateFormMapper');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft;
+namespace Ibexa\AdminUi\Form\Data\Content\Draft;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Language;
@@ -128,3 +128,5 @@ class ContentEditData
         return $this;
     }
 }
+
+class_alias(ContentEditData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Content\Draft\ContentEditData');

@@ -1,20 +1,25 @@
 {
-    "name": "ezsystems/ezplatform-admin-ui",
+    "name": "ibexa/admin-ui",
     "license": "GPL-2.0-only",
     "type": "project",
-    "description": "eZ Platform Admin v2",
+    "description": "Ibexa Admin Ui",
+    "replace": {
+        "ezsystems/ezplatform-admin-ui": "*"
+    },
     "autoload": {
         "psr-4": {
-          "EzSystems\\EzPlatformAdminUiBundle\\": "src/bundle/",
-          "EzSystems\\EzPlatformAdminUi\\": "src/lib/",
-          "Ibexa\\Bundle\\AdminUi\\": "src/bundle/",
-          "Ibexa\\AdminUi\\": "src/lib/"
+            "EzSystems\\EzPlatformAdminUiBundle\\": "src/bundle/",
+            "EzSystems\\EzPlatformAdminUi\\": "src/lib/",
+            "Ibexa\\AdminUi\\": "src/lib/",
+            "Ibexa\\Bundle\\AdminUi\\": "src/bundle/",
+            "Ibexa\\Contracts\\AdminUi\\": "src/contracts/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "EzSystems\\EzPlatformAdminUi\\Tests\\": "src/lib/Tests",
-            "Ibexa\\Tests\\AdminUi\\": "tests/lib"
+            "EzSystems\\EzPlatformAdminUi\\Tests\\": "tests/lib/",
+            "Ibexa\\Tests\\Bundle\\AdminUi\\": "tests/bundle/",
+            "Ibexa\\Tests\\AdminUi\\": "tests/lib/"
         }
     },
     "require": {
@@ -69,7 +74,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.0.x-dev"
+            "dev-main": "4.0.x-dev"
         }
     }
 }

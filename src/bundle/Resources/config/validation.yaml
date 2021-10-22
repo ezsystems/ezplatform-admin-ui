@@ -1,6 +1,6 @@
-EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData:
+Ibexa\AdminUi\Form\Data\ContentTypeData:
     constraints:
-        - EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueContentTypeIdentifier: ~
+        - Ibexa\AdminUi\Validator\Constraints\UniqueContentTypeIdentifier: ~
     properties:
         identifier:
             - NotBlank: ~
@@ -34,12 +34,12 @@ EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData:
         fieldDefinitionsData:
             - Valid: ~
 
-EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData:
+Ibexa\AdminUi\Form\Data\FieldDefinitionData:
     constraints:
-        - EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueFieldDefinitionIdentifier: ~
-        - EzSystems\EzPlatformAdminUi\Validator\Constraints\ValidatorConfiguration: ~
-        - EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldSettings: ~
-        - EzSystems\EzPlatformAdminUi\Validator\Constraints\FieldDefinitionDefaultValue: ~
+        - Ibexa\AdminUi\Validator\Constraints\UniqueFieldDefinitionIdentifier: ~
+        - Ibexa\AdminUi\Validator\Constraints\ValidatorConfiguration: ~
+        - Ibexa\AdminUi\Validator\Constraints\FieldSettings: ~
+        - Ibexa\AdminUi\Validator\Constraints\FieldDefinitionDefaultValue: ~
     properties:
         identifier:
             - NotBlank: ~
@@ -75,7 +75,7 @@ EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData:
         fieldsData:
             - Valid: ~
 
-EzSystems\EzPlatformAdminUi\Form\Data\User\UserCreateData:
+Ibexa\AdminUi\Form\Data\User\UserCreateData:
     properties:
         login:
             - NotBlank: ~
@@ -86,18 +86,18 @@ EzSystems\EzPlatformAdminUi\Form\Data\User\UserCreateData:
         fieldsData:
             - Valid: ~
 
-EzSystems\EzPlatformAdminUi\Form\Data\User\UserUpdateData:
+Ibexa\AdminUi\Form\Data\User\UserUpdateData:
     properties:
         fieldsData:
             - Valid: ~
 
-EzSystems\EzPlatformAdminUi\Form\Data\User\UserAccountFieldData:
+Ibexa\AdminUi\Form\Data\User\UserAccountFieldData:
     properties:
         username:
             - Valid: ~
             - NotBlank: ~
 
-EzSystems\EzPlatformAdminUi\Form\Data\URLListData:
+Ibexa\AdminUi\Form\Data\URLListData:
     properties:
         url:
             searchQuery:
@@ -107,7 +107,7 @@ EzSystems\EzPlatformAdminUi\Form\Data\URLListData:
 
 eZ\Publish\API\Repository\Values\URL\URLUpdateStruct:
     constraints:
-        - EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueURL: ~
+        - Ibexa\AdminUi\Validator\Constraints\UniqueURL: ~
     properties:
         url:
             - NotBlank: ~

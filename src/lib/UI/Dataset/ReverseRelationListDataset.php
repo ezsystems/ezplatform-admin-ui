@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
+namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\RelationList\RelationListItemInterface;
-use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 final class ReverseRelationListDataset
 {
@@ -84,3 +84,5 @@ final class ReverseRelationListDataset
         return $this->reverseRelations;
     }
 }
+
+class_alias(ReverseRelationListDataset::class, 'EzSystems\EzPlatformAdminUi\UI\Dataset\ReverseRelationListDataset');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\EventListener;
+namespace Ibexa\AdminUi\Form\EventListener;
 
 use Symfony\Component\Form\FormEvent;
 
@@ -32,3 +32,5 @@ class SelectionMultilingualOptionsDataListener
         $event->setData($data[$this->languageCode] ?? []);
     }
 }
+
+class_alias(SelectionMultilingualOptionsDataListener::class, 'EzSystems\EzPlatformAdminUi\Form\EventListener\SelectionMultilingualOptionsDataListener');

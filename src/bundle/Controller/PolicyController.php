@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\RoleService;
@@ -14,15 +14,16 @@ use eZ\Publish\API\Repository\Values\User\Policy;
 use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PoliciesDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper;
-use EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\AdminUi\Form\Data\Policy\PoliciesDeleteData;
+use Ibexa\AdminUi\Form\Data\Policy\PolicyCreateData;
+use Ibexa\AdminUi\Form\Data\Policy\PolicyDeleteData;
+use Ibexa\AdminUi\Form\Data\Policy\PolicyUpdateData;
+use Ibexa\AdminUi\Form\DataMapper\PolicyCreateMapper;
+use Ibexa\AdminUi\Form\DataMapper\PolicyUpdateMapper;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -438,3 +439,5 @@ class PolicyController extends Controller
         return array_combine($policiesNumbers, array_fill_keys($policiesNumbers, false));
     }
 }
+
+class_alias(PolicyController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\PolicyController');

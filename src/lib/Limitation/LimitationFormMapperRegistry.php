@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Limitation;
+namespace Ibexa\AdminUi\Limitation;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use InvalidArgumentException;
@@ -61,3 +61,5 @@ class LimitationFormMapperRegistry implements LimitationFormMapperRegistryInterf
         return isset($this->limitationFormMappers[$limitationIdentifier]);
     }
 }
+
+class_alias(LimitationFormMapperRegistry::class, 'EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperRegistry');

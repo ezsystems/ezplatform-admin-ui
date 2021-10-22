@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Menu;
+namespace Ibexa\AdminUi\Menu;
 
 use eZ\Publish\API\Repository\Exceptions as ApiExceptions;
 use eZ\Publish\API\Repository\LocationService;
@@ -13,8 +13,9 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\SPI\Limitation\Target;
-use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver;
+use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Siteaccess\NonAdminSiteaccessResolver;
+use Ibexa\Contracts\AdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Knp\Menu\ItemInterface;
@@ -232,3 +233,5 @@ class ContentEditRightSidebarBuilder extends AbstractBuilder implements Translat
         );
     }
 }
+
+class_alias(ContentEditRightSidebarBuilder::class, 'EzSystems\EzPlatformAdminUi\Menu\ContentEditRightSidebarBuilder');

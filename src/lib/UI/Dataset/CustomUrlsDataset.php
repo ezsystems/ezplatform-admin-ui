@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
+namespace Ibexa\AdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\URLAlias;
-use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
+use Ibexa\AdminUi\UI\Value\ValueFactory;
 
 class CustomUrlsDataset
 {
@@ -62,3 +62,5 @@ class CustomUrlsDataset
         return $this->data;
     }
 }
+
+class_alias(CustomUrlsDataset::class, 'EzSystems\EzPlatformAdminUi\UI\Dataset\CustomUrlsDataset');

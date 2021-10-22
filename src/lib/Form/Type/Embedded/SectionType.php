@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Embedded;
+namespace Ibexa\AdminUi\Form\Type\Embedded;
 
 use eZ\Publish\API\Repository\SectionService;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\SectionsTransformer;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\SectionTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\SectionsTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\SectionTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -49,3 +49,5 @@ class SectionType extends AbstractType
         return HiddenType::class;
     }
 }
+
+class_alias(SectionType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Embedded\SectionType');

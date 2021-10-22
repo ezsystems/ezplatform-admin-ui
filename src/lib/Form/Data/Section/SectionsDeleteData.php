@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Section;
+namespace Ibexa\AdminUi\Form\Data\Section;
 
 /**
  * @todo Add validation
@@ -40,3 +40,5 @@ class SectionsDeleteData
         $this->sections = $sections;
     }
 }
+
+class_alias(SectionsDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Section\SectionsDeleteData');

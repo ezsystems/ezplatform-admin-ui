@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Limitation;
+namespace Ibexa\AdminUi\Limitation;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use Symfony\Component\Form\FormInterface;
@@ -49,3 +49,5 @@ class_alias(
     LimitationFormMapperInterface::class,
     \EzSystems\RepositoryForms\Limitation\LimitationFormMapperInterface::class
 );
+
+class_alias(LimitationFormMapperInterface::class, 'EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperInterface');

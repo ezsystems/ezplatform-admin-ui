@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
+namespace Ibexa\AdminUi\Form\Type\ContentType;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\Form\AbstractType;
@@ -70,3 +70,5 @@ class SortOrderChoiceType extends AbstractType
         ];
     }
 }
+
+class_alias(SortOrderChoiceType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortOrderChoiceType');

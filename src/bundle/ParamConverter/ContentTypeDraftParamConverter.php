@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
+namespace Ibexa\Bundle\AdminUi\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeDraft;
@@ -55,3 +55,5 @@ class ContentTypeDraftParamConverter implements ParamConverterInterface
         return ContentTypeDraft::class === $configuration->getClass();
     }
 }
+
+class_alias(ContentTypeDraftParamConverter::class, 'EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentTypeDraftParamConverter');
