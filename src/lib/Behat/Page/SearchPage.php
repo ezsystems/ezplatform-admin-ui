@@ -25,8 +25,6 @@ class SearchPage extends Page
         parent::__construct($session, $router);
         $this->table = $tableBuilder
             ->newTable()
-            ->withParentLocator($this->getLocator('table'))
-            ->withEmptyLocator($this->getLocator('emptyTable'))
             ->build()
         ;
     }
@@ -68,8 +66,7 @@ class SearchPage extends Page
             new VisibleCSSLocator('inputField', '.ibexa-search-form #search_query'),
             new VisibleCSSLocator('buttonSearch', '.ibexa-btn--search'),
             new VisibleCSSLocator('pageTitle', '.ez-page-title h1'),
-            new VisibleCSSLocator('table', '.ez-content-container table.table'),
-            new VisibleCSSLocator('emptyTable', '.ibexa-table-header__headline'),
+            new VisibleCSSLocator('table', '.ibexa-search'),
         ];
     }
 }
