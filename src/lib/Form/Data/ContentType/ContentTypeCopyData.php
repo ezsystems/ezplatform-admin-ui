@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ContentType;
+namespace Ibexa\AdminUi\Form\Data\ContentType;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
@@ -63,3 +63,5 @@ class ContentTypeCopyData
         $this->contentTypeGroup = $contentTypeGroup;
     }
 }
+
+class_alias(ContentTypeCopyData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeCopyData');

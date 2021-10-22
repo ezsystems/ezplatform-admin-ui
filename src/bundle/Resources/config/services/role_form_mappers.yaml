@@ -1,17 +1,17 @@
 parameters:
-    ezplatform.content_forms.limitation_form_mapper.registry.class: EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperRegistry
-    ezplatform.content_forms.limitation_value_mapper.registry.class: EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistry
-    ezplatform.content_forms.limitation.form_mapper.null.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\NullLimitationMapper
-    ezplatform.content_forms.limitation.form_mapper.siteaccess.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\SiteAccessLimitationMapper
-    ezplatform.content_forms.limitation.form_mapper.content_type.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\ContentTypeLimitationMapper
-    ezplatform.content_forms.limitation.form_mapper.section.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\SectionLimitationMapper
-    ezplatform.content_forms.limitation.form_mapper.object_state.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\ObjectStateLimitationMapper
-    ezplatform.content_forms.limitation.form_mapper.language.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\LanguageLimitationMapper
-    ezplatform.content_forms.limitation.form_mapper.owner.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\OwnerLimitationMapper
-    ezplatform.content_forms.limitation.form_mapper.group.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\GroupLimitationMapper
-    ezplatform.content_forms.limitation.form_mapper.parent_depth.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\ParentDepthLimitationMapper
+    ezplatform.content_forms.limitation_form_mapper.registry.class: Ibexa\AdminUi\Limitation\LimitationFormMapperRegistry
+    ezplatform.content_forms.limitation_value_mapper.registry.class: Ibexa\AdminUi\Limitation\LimitationValueMapperRegistry
+    ezplatform.content_forms.limitation.form_mapper.null.class: Ibexa\AdminUi\Limitation\Mapper\NullLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.siteaccess.class: Ibexa\AdminUi\Limitation\Mapper\SiteAccessLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.content_type.class: Ibexa\AdminUi\Limitation\Mapper\ContentTypeLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.section.class: Ibexa\AdminUi\Limitation\Mapper\SectionLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.object_state.class: Ibexa\AdminUi\Limitation\Mapper\ObjectStateLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.language.class: Ibexa\AdminUi\Limitation\Mapper\LanguageLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.owner.class: Ibexa\AdminUi\Limitation\Mapper\OwnerLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.group.class: Ibexa\AdminUi\Limitation\Mapper\GroupLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.parent_depth.class: Ibexa\AdminUi\Limitation\Mapper\ParentDepthLimitationMapper
     ezplatform.content_forms.limitation.form_mapper.parent_depth.max_depth: 20
-    ezplatform.content_forms.limitation.form_mapper.subtree.class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\SubtreeLimitationMapper
+    ezplatform.content_forms.limitation.form_mapper.subtree.class: Ibexa\AdminUi\Limitation\Mapper\SubtreeLimitationMapper
 
 services:
     _defaults:
@@ -20,13 +20,13 @@ services:
         public: false
 
     ezplatform.content_forms.limitation_form_mapper.registry:
-        class: EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperRegistry
+        class: Ibexa\AdminUi\Limitation\LimitationFormMapperRegistry
 
     ezplatform.content_forms.limitation_value_mapper.registry:
-        class: EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistry
+        class: Ibexa\AdminUi\Limitation\LimitationValueMapperRegistry
 
     ezplatform.content_forms.limitation.form_mapper.multiple_selection:
-        class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\MultipleSelectionBasedMapper
+        class: Ibexa\AdminUi\Limitation\Mapper\MultipleSelectionBasedMapper
         abstract: true
         calls:
             - [setFormTemplate, ["%ezplatform.content_forms.limitation.multiple_selection.template%"]]
@@ -39,7 +39,7 @@ services:
         class: "%ezplatform.content_forms.limitation.form_mapper.siteaccess.class%"
         arguments:
             - '@ezpublish.siteaccess_service'
-            - '@EzSystems\EzPlatformAdminUi\Siteaccess\SiteAccessKeyGenerator'
+            - '@Ibexa\AdminUi\Siteaccess\SiteAccessKeyGenerator'
         tags:
             - { name: ez.limitation.formMapper, limitationType: SiteAccess }
             - { name: ez.limitation.valueMapper, limitationType: SiteAccess }
@@ -198,7 +198,7 @@ services:
             - { name: ez.limitation.valueMapper, limitationType: ParentDepth }
 
     ezplatform.content_forms.limitation.form_mapper.udw_based:
-        class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\UDWBasedMapper
+        class: Ibexa\AdminUi\Limitation\Mapper\UDWBasedMapper
         arguments:
             - "@ezpublish.api.service.location"
             - "@ezpublish.api.service.search"

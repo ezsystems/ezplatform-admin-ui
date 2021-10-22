@@ -6,15 +6,15 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl;
+namespace Ibexa\AdminUi\Form\Type\Content\CustomUrl;
 
 use eZ\Publish\API\Repository\LanguageService;
-use EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener;
-use EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener;
-use EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener;
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\SiteAccessChoiceLoader;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
-use EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver;
+use Ibexa\AdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener;
+use Ibexa\AdminUi\Form\EventListener\BuildPathFromRootListener;
+use Ibexa\AdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener;
+use Ibexa\AdminUi\Form\Type\ChoiceList\Loader\SiteAccessChoiceLoader;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Siteaccess\NonAdminSiteaccessResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -133,3 +133,5 @@ class CustomUrlAddType extends AbstractType
         ]);
     }
 }
+
+class_alias(CustomUrlAddType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlAddType');

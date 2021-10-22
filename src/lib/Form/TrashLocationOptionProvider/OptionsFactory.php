@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider;
+namespace Ibexa\AdminUi\Form\TrashLocationOptionProvider;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\Form\FormInterface;
@@ -34,3 +34,5 @@ final class OptionsFactory
         }
     }
 }
+
+class_alias(OptionsFactory::class, 'EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory');

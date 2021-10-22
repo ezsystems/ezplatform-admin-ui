@@ -6,14 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Limitation\Templating;
+namespace Ibexa\AdminUi\Limitation\Templating;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\Exception\MissingLimitationBlockException;
-use EzSystems\EzPlatformAdminUi\Exception\ValueMapperNotFoundException;
-use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperRegistryInterface;
+use Ibexa\AdminUi\Exception\MissingLimitationBlockException;
+use Ibexa\AdminUi\Exception\ValueMapperNotFoundException;
+use Ibexa\AdminUi\Limitation\LimitationValueMapperRegistryInterface;
 use Twig\Environment;
 
 class LimitationBlockRenderer implements LimitationBlockRendererInterface
@@ -161,3 +161,5 @@ class LimitationBlockRenderer implements LimitationBlockRendererInterface
         return array_column($resources, 'template');
     }
 }
+
+class_alias(LimitationBlockRenderer::class, 'EzSystems\EzPlatformAdminUi\Limitation\Templating\LimitationBlockRenderer');

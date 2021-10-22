@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
+namespace Ibexa\Bundle\AdminUi\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
@@ -76,3 +76,5 @@ class ContentTypeParamConverter implements ParamConverterInterface
         return ContentType::class === $configuration->getClass();
     }
 }
+
+class_alias(ContentTypeParamConverter::class, 'EzSystems\EzPlatformAdminUiBundle\ParamConverter\ContentTypeParamConverter');
