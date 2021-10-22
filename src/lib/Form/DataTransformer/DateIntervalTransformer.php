@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -66,3 +66,5 @@ class DateIntervalTransformer implements DataTransformerInterface
         return ['start_date' => $startDate, 'end_date' => $endDate];
     }
 }
+
+class_alias(DateIntervalTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\DateIntervalTransformer');

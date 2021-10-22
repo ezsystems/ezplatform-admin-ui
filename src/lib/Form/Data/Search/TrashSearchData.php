@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Search;
+namespace Ibexa\AdminUi\Form\Data\Search;
 
 use eZ\Publish\API\Repository\Values\Content\Section;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
@@ -155,3 +155,5 @@ class TrashSearchData
             !empty($trashed);
     }
 }
+
+class_alias(TrashSearchData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Search\TrashSearchData');

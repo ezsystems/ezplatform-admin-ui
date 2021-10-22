@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
+namespace Ibexa\AdminUi\Tab\LocationView;
 
 use ArrayObject;
 use eZ\Publish\API\Repository\PermissionResolver;
@@ -15,16 +15,16 @@ use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationAssignSubtreeData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType;
-use EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
-use EzSystems\EzPlatformAdminUi\Specification\UserExists;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
-use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
-use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\AdminUi\Form\Data\Location\LocationAssignSubtreeData;
+use Ibexa\AdminUi\Form\Data\Location\LocationUpdateData;
+use Ibexa\AdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
+use Ibexa\AdminUi\Form\Type\Location\LocationAssignSectionType;
+use Ibexa\AdminUi\Form\Type\Location\LocationUpdateType;
+use Ibexa\AdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType;
+use Ibexa\AdminUi\Specification\UserExists;
+use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab;
+use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -282,3 +282,5 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
         $parameters['translations'] = $translationsDataset->getTranslations();
     }
 }
+
+class_alias(DetailsTab::class, 'EzSystems\EzPlatformAdminUi\Tab\LocationView\DetailsTab');

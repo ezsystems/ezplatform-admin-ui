@@ -4,32 +4,32 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\EventListener\:
+    Ibexa\AdminUi\EventListener\:
         resource: "../../../lib/EventListener/*"
         public: true
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\EventListener\RequestListener:
+    Ibexa\AdminUi\EventListener\RequestListener:
         arguments:
             - '%ezpublish.siteaccess.groups_by_siteaccess%'
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\EventListener\RequestLocaleListener:
+    Ibexa\AdminUi\EventListener\RequestLocaleListener:
         arguments:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
             $availableTranslations: '%available_translations%'
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\EventListener\RequestAttributesListener:
+    Ibexa\AdminUi\EventListener\RequestAttributesListener:
         arguments:
             - '%ezpublish.siteaccess.groups%'
         tags:
             - {name: kernel.event_subscriber}
 
-    EzSystems\EzPlatformAdminUi\EventListener\AdminExceptionListener:
+    Ibexa\AdminUi\EventListener\AdminExceptionListener:
         arguments:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
             $kernelProjectDir: '%kernel.project_dir%'
@@ -39,15 +39,15 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
-    EzSystems\EzPlatformAdminUi\EventListener\MenuPermissionsListener:
+    Ibexa\AdminUi\EventListener\MenuPermissionsListener:
         tags:
             - {name: kernel.event_subscriber, priority: -250}
 
-    EzSystems\EzPlatformAdminUi\EventListener\ViewTemplatesListener:
+    Ibexa\AdminUi\EventListener\ViewTemplatesListener:
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\EventListener\ContentDownloadRouteReferenceListener:
+    Ibexa\AdminUi\EventListener\ContentDownloadRouteReferenceListener:
         arguments:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
         tags:

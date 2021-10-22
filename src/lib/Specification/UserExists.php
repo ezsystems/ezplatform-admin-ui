@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification;
+namespace Ibexa\AdminUi\Specification;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\UserService;
@@ -42,3 +42,5 @@ class UserExists implements UserSpecification
         }
     }
 }
+
+class_alias(UserExists::class, 'EzSystems\EzPlatformAdminUi\Specification\UserExists');

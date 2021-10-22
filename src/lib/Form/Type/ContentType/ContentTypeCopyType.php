@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
+namespace Ibexa\AdminUi\Form\Type\ContentType;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentType\ContentTypeCopyData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeType;
+use Ibexa\AdminUi\Form\Data\ContentType\ContentTypeCopyData;
+use Ibexa\AdminUi\Form\Type\Content\ContentTypeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -51,3 +51,5 @@ class ContentTypeCopyType extends AbstractType
             ]);
     }
 }
+
+class_alias(ContentTypeCopyType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCopyType');

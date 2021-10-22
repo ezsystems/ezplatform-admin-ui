@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\FormMapper;
+namespace Ibexa\AdminUi\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\User\User;
@@ -66,3 +66,5 @@ class UserUpdateMapper
             ->setRequired(['languageCode']);
     }
 }
+
+class_alias(UserUpdateMapper::class, 'EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\UserUpdateMapper');

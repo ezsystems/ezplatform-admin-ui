@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Strategy;
+namespace Ibexa\AdminUi\Strategy;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Repository;
-use EzSystems\EzPlatformAdminUi\Exception\NoValidResultException;
+use Ibexa\AdminUi\Exception\NoValidResultException;
 
 class NotificationTwigStrategy
 {
@@ -96,3 +96,5 @@ class NotificationTwigStrategy
         return $contentInfo->isTrashed();
     }
 }
+
+class_alias(NotificationTwigStrategy::class, 'EzSystems\EzPlatformAdminUi\Strategy\NotificationTwigStrategy');

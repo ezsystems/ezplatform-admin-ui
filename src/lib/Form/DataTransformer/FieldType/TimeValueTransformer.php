@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType;
+namespace Ibexa\AdminUi\Form\DataTransformer\FieldType;
 
 use eZ\Publish\Core\FieldType\Time\Value;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -60,3 +60,5 @@ class TimeValueTransformer implements DataTransformerInterface
         return new Value($value);
     }
 }
+
+class_alias(TimeValueTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType\TimeValueTransformer');

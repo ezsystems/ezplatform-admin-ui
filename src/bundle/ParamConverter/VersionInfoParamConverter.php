@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
+namespace Ibexa\Bundle\AdminUi\ParamConverter;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
@@ -63,3 +63,5 @@ class VersionInfoParamConverter implements ParamConverterInterface
         return VersionInfo::class === $configuration->getClass();
     }
 }
+
+class_alias(VersionInfoParamConverter::class, 'EzSystems\EzPlatformAdminUiBundle\ParamConverter\VersionInfoParamConverter');
