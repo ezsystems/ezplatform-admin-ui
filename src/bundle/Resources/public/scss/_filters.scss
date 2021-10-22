@@ -175,7 +175,7 @@
 
                 &__input {
                     height: calculateRem(32px);
-                    border-radius: calculateRem(5px);
+                    border-radius: $ibexa-border-radius-small;
                     border-color: $ibexa-color-dark-200;
 
                     + .ibexa-icon {
@@ -240,7 +240,7 @@
 
     &__range-select {
         outline: none;
-        border-radius: calculateRem(5px);
+        border-radius: $ibexa-border-radius-small;
     }
 
     &__header {
@@ -258,7 +258,7 @@
         position: absolute;
         right: 0;
         min-width: 100%;
-        border-radius: calculateRem(5px);
+        border-radius: $ibexa-border-radius-small;
         margin-bottom: 0;
         background-color: $ibexa-color-base-light;
         max-height: calculateRem(300px);

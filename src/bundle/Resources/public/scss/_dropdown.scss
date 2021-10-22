@@ -293,7 +293,7 @@
                 height: calculateRem(32px);
                 padding-top: 0;
                 padding-bottom: 0;
-                border-radius: calculateRem(5px);
+                border-radius: $ibexa-border-radius-small;
             }
         }
     }
