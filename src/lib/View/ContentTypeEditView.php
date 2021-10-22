@@ -28,6 +28,24 @@ final class ContentTypeEditView extends BaseView
     /** @var \Symfony\Component\Form\FormInterface */
     private $form;
 
+    /**
+     * @param string|\Closure $templateIdentifier Valid path to the template. Can also be a closure.
+     */
+    public function __construct(
+        $template,
+        ContentTypeGroup $contentTypeGroup,
+        ContentTypeDraft $contentTypeDraft,
+        Language $language,
+        FormInterface $form
+    ) {
+        parent::__construct($template);
+
+        $this->contentTypeGroup = $contentTypeGroup;
+        $this->contentTypeDraft = $contentTypeDraft;
+        $this->language = $language;
+        $this->form = $form;
+    }
+
     public function getContentTypeGroup(): ContentTypeGroup
     {
         return $this->contentTypeGroup;

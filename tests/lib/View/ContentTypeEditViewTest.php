@@ -31,11 +31,13 @@ final class ContentTypeEditViewTest extends TestCase
         $language = $this->createMock(Language::class);
         $language->method('__get')->with('languageCode')->willReturn('eng-GB');
 
-        $view = new ContentTypeEditView();
-        $view->setForm($form);
-        $view->setContentTypeDraft($contentTypeDraft);
-        $view->setContentTypeGroup($contentTypeGroup);
-        $view->setLanguage($language);
+        $view = new ContentTypeEditView(
+            'edit.html.twig',
+            $contentTypeGroup,
+            $contentTypeDraft,
+            $language,
+            $form
+        );
 
         self::assertEquals(
             [

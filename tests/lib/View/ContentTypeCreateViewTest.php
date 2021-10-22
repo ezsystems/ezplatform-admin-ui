@@ -27,10 +27,12 @@ final class ContentTypeCreateViewTest extends TestCase
         $contentTypeDraft = $this->createMock(ContentTypeDraft::class);
         $contentTypeGroup = $this->createMock(ContentTypeGroup::class);
 
-        $view = new ContentTypeCreateView();
-        $view->setForm($form);
-        $view->setContentTypeDraft($contentTypeDraft);
-        $view->setContentTypeGroup($contentTypeGroup);
+        $view = new ContentTypeCreateView(
+            'create.html.twig',
+            $contentTypeGroup,
+            $contentTypeDraft,
+            $form
+        );
 
         self::assertEquals(
             [

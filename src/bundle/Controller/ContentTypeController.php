@@ -205,10 +205,7 @@ class ContentTypeController extends Controller
         $language = $this->languageService->loadLanguage($mainLanguageCode);
         $form = $this->createUpdateForm($group, $contentTypeDraft, $language);
 
-        $view = new ContentTypeCreateView('@ezdesign/content_type/create.html.twig');
-        $view->setContentTypeGroup($group);
-        $view->setContentTypeDraft($contentTypeDraft);
-        $view->setForm($form);
+        $view = new ContentTypeCreateView('@ezdesign/content_type/create.html.twig', $group, $contentTypeDraft, $form);
         $view->setParameters([
             'field_type_toolbar' => $this->fieldTypeToolbarFactory->create(),
         ]);
@@ -530,11 +527,13 @@ class ContentTypeController extends Controller
             }
         }
 
-        $view = new ContentTypeEditView('@ezdesign/content_type/edit.html.twig');
-        $view->setContentTypeGroup($group);
-        $view->setContentTypeDraft($contentTypeDraft);
-        $view->setForm($form);
-        $view->setLanguage($baseLanguage ?? $language);
+        $view = new ContentTypeEditView(
+            '@ezdesign/content_type/edit.html.twig',
+            $group,
+            $contentTypeDraft,
+            $baseLanguage ?? $language,
+            $form
+        );
         $view->addParameters([
             'field_type_toolbar' => $this->fieldTypeToolbarFactory->create(),
         ]);
