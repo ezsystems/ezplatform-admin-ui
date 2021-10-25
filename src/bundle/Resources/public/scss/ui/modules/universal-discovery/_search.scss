@@ -51,15 +51,33 @@
         height: calculateRem(48px);
     }
 
-    &__no-results-title {
+    &__no-results {
         display: flex;
-        justify-content: space-between;
-        background-color: $ibexa-color-white;
+        flex-direction: column;
         align-items: center;
-        padding: 0 calculateRem(20px);
-        min-height: calculateRem(50px);
-        border-radius: $ibexa-border-radius-small $ibexa-border-radius-small 0 0;
-        font-weight: bold;
+        padding-top: calculateRem(100px);
+    }
+
+    &__no-results-title,
+    &__no-results-subtitle {
+        color: $ibexa-color-dark-400;
+    }
+
+    &__no-results-subtitle {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 60%;
+        margin-top: calculateRem(30px);
+
+        .ibexa-icon {
+            margin-right: calculateRem(16px);
+        }
+    }
+
+    &__no-results-hint {
+        flex-basis: 50%;
+        padding: calculateRem(8px);
+        display: flex;
     }
 
     .c-content-table {

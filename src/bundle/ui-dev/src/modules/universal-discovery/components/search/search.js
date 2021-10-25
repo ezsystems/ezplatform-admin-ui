@@ -5,6 +5,7 @@ export const SelectedContentTypesContext = createContext();
 export const SelectedSectionContext = createContext();
 export const SelectedSubtreeContext = createContext();
 
+import Icon from '../../../common/icon/icon';
 import Dropdown from '../dropdown/dropdown';
 import InputSearch from '../input-search/input.search';
 import ContentTable from '../content-table/content.table';
@@ -68,32 +69,6 @@ const Search = ({ itemsPerPage }) => {
     const changePage = (pageIndex) => setOffset(pageIndex * itemsPerPage);
     const renderSearchResults = () => {
         const searchResultsLabel = Translator.trans(/*@Desc("Search results")*/ 'search.search_results', {}, 'universal_discovery_widget');
-        const noResultsLabel = Translator.trans(
-            /*@Desc("Sorry, no results were found for")*/ 'search.no_results',
-            {},
-            'universal_discovery_widget'
-        );
-        const tipsLabel = Translator.trans(/*@Desc("Some helpful search tips")*/ 'search.tips', {}, 'universal_discovery_widget');
-        const checkSpellingLabel = Translator.trans(
-            /*@Desc("Check spelling of keywords.")*/ 'search.check_spelling',
-            {},
-            'universal_discovery_widget'
-        );
-        const differentKeywordsLabel = Translator.trans(
-            /*@Desc("Try different keywords.")*/ 'search.different_keywords',
-            {},
-            'universal_discovery_widget'
-        );
-        const moreGeneralLabel = Translator.trans(
-            /*@Desc("Try more general keywords.")*/ 'search.more_general',
-            {},
-            'universal_discovery_widget'
-        );
-        const fewerKeywordsLabel = Translator.trans(
-            /*@Desc("Try fewer keywords. Reducing keywords result in more matches.")*/ 'search.fewer_keywords',
-            {},
-            'universal_discovery_widget'
-        );
         const title = `${searchResultsLabel} (${data.count})`;
 
         if (data.count) {
@@ -108,25 +83,53 @@ const Search = ({ itemsPerPage }) => {
                 />
             );
         } else if (!!data.items) {
+            const noResultsLabel = Translator.trans(
+                /*@Desc("No results found for %query%")*/ 'search.no_results',
+                { query: searchText },
+                'universal_discovery_widget'
+            );
+            const noResultsHints = [
+                Translator.trans(
+                    /*@Desc("Check the spelling of keywords.")*/'search.no_results.hint.check_spelling',
+                    {},
+                    'universal_discovery_widget',
+                ),
+                Translator.trans(
+                    /*@Desc("Try more general keywords.")*/'search.no_results.hint.more_general',
+                    {},
+                    'universal_discovery_widget',
+                ),
+                Translator.trans(
+                    /*@Desc("Try different keywords.")*/'search.no_results.hint.different_kewords',
+                    {},
+                    'universal_discovery_widget',
+                ),
+                Translator.trans(
+                    /*@Desc("Try fewer keywords. Reducing keywords results in more matches.")*/'search.no_results.hint.fewer_keywords',
+                    {},
+                    'universal_discovery_widget',
+                ),
+            ];
+
             return (
                 <div className="c-search__no-results">
-                    <div className="c-search__no-results-title">{title}</div>
-                    <table className="table table-hover">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <span>{`${noResultsLabel} "${searchText}".`}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h6>{tipsLabel}:</h6>
-                    <ul>
-                        <li>{checkSpellingLabel}</li>
-                        <li>{differentKeywordsLabel}</li>
-                        <li>{moreGeneralLabel}</li>
-                        <li>{fewerKeywordsLabel}</li>
-                    </ul>
+                    <img
+                        className=""
+                        src="/bundles/ezplatformadminui/img/no-results.svg"
+                    />
+                    <h2 className="c-search__no-results-title">
+                        {noResultsLabel}
+                    </h2>
+                    <div className="c-search__no-results-subtitle">
+                        {noResultsHints.map((hint) => (
+                            <div className="c-search__no-results-hint">
+                                <div className="c-search__no-results-hint-icon-wrapper">
+                                    <Icon name="approved" extraClasses="ibexa-icon--small-medium" />
+                                </div>
+                                <div class="c-search__no-results-hint-text">{hint}</div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             );
         }

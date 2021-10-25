@@ -292,9 +292,29 @@
         <note>key: search.more_general</note>
       </trans-unit>
       <trans-unit id="8a3a6b538d81237dcb9533496c691a7685e456de" resname="search.no_results">
-        <source>Sorry, no results were found for</source>
-        <target state="new">Sorry, no results were found for</target>
+        <source>No results found for %query%</source>
+        <target state="new">No results found for %query%</target>
         <note>key: search.no_results</note>
+      </trans-unit>
+      <trans-unit id="8e6ab4762a411e3cd2c37181b29a9f5e21bea482" resname="search.no_results.hint.check_spelling">
+        <source>Check the spelling of keywords.</source>
+        <target state="new">Check the spelling of keywords.</target>
+        <note>key: search.no_results.hint.check_spelling</note>
+      </trans-unit>
+      <trans-unit id="608a71644cef183ce01ff02f1c2f1805f13c0678" resname="search.no_results.hint.different_kewords">
+        <source>Try different keywords.</source>
+        <target state="new">Try different keywords.</target>
+        <note>key: search.no_results.hint.different_kewords</note>
+      </trans-unit>
+      <trans-unit id="8e21115785735225359ccc0ab394af1242ad3862" resname="search.no_results.hint.fewer_keywords">
+        <source>Try fewer keywords. Reducing keywords results in more matches.</source>
+        <target state="new">Try fewer keywords. Reducing keywords results in more matches.</target>
+        <note>key: search.no_results.hint.fewer_keywords</note>
+      </trans-unit>
+      <trans-unit id="559bdc2720dbe0b6327fd25f533a4bc66c28c05a" resname="search.no_results.hint.more_general">
+        <source>Try more general keywords.</source>
+        <target state="new">Try more general keywords.</target>
+        <note>key: search.no_results.hint.more_general</note>
       </trans-unit>
       <trans-unit id="6ffbb9b14f98e94b8dda5418ef3910942b42c44e" resname="search.search">
         <source>Search</source>
