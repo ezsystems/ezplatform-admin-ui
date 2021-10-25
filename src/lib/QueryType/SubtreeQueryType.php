@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\QueryType;
+namespace Ibexa\AdminUi\QueryType;
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\Content\Query;
@@ -72,3 +72,5 @@ abstract class SubtreeQueryType extends OptionsResolverBasedQueryType implements
 
     abstract protected function getSubtreePathFromConfiguration(): string;
 }
+
+class_alias(SubtreeQueryType::class, 'EzSystems\EzPlatformAdminUi\QueryType\SubtreeQueryType');

@@ -4,13 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
+namespace Ibexa\AdminUi\UI\Config\Provider;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
-use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
-use EzSystems\EzPlatformAdminUi\UI\Service\ContentTypeIconResolver;
+use Ibexa\AdminUi\UI\Service\ContentTypeIconResolver;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ContentTypes implements ProviderInterface
@@ -83,3 +83,5 @@ class ContentTypes implements ProviderInterface
         return $contentTypeGroups;
     }
 }
+
+class_alias(ContentTypes::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypes');

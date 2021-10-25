@@ -6,8 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Action;
+namespace Ibexa\AdminUi\UI\Action;
 
+use Ibexa\Contracts\AdminUi\UI\Action\EventDispatcherInterface;
+use Ibexa\Contracts\AdminUi\UI\Action\UiActionEventInterface;
 use Symfony\Component\EventDispatcher as SymfonyEventDispatcher;
 
 class EventDispatcher implements EventDispatcherInterface
@@ -35,3 +37,5 @@ class EventDispatcher implements EventDispatcherInterface
         $this->eventDispatcher->dispatch($event, sprintf('%s.%s.%s', EventDispatcherInterface::EVENT_NAME_PREFIX, $action, $event->getType()));
     }
 }
+
+class_alias(EventDispatcher::class, 'EzSystems\EzPlatformAdminUi\UI\Action\EventDispatcher');

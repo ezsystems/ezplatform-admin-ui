@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\User;
+namespace Ibexa\AdminUi\Form\Type\FieldDefinition\User;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -65,3 +65,5 @@ class PasswordConstraintCheckboxType extends AbstractType
         return strtolower(preg_replace('/[A-Z]/', '_\\0', lcfirst($string)));
     }
 }
+
+class_alias(PasswordConstraintCheckboxType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\User\PasswordConstraintCheckboxType');

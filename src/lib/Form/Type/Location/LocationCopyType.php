@@ -4,9 +4,9 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Location;
+namespace Ibexa\AdminUi\Form\Type\Location;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationCopyData;
+use Ibexa\AdminUi\Form\Data\Location\LocationCopyData;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LocationCopyType extends AbstractLocationCopyType
@@ -19,3 +19,5 @@ class LocationCopyType extends AbstractLocationCopyType
         ]);
     }
 }
+
+class_alias(LocationCopyType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType');

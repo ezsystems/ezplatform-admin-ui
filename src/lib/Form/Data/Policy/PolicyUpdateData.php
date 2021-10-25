@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Policy;
+namespace Ibexa\AdminUi\Form\Data\Policy;
 
 use eZ\Publish\API\Repository\Values\User\Policy;
 
@@ -100,3 +100,5 @@ class PolicyUpdateData
         ];
     }
 }
+
+class_alias(PolicyUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Policy\PolicyUpdateData');

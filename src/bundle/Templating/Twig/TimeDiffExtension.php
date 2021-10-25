@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
+namespace Ibexa\Bundle\AdminUi\Templating\Twig;
 
 use DateTime;
 use DateTimeInterface;
-use EzSystems\EzPlatformAdminUi\UI\Service\DateTimeFormatter;
+use Ibexa\AdminUi\UI\Service\DateTimeFormatter;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -40,3 +40,5 @@ class TimeDiffExtension extends AbstractExtension
         return $this->dateTimeFormatter->formatDiff($from, $to ?? new DateTime());
     }
 }
+
+class_alias(TimeDiffExtension::class, 'EzSystems\EzPlatformAdminUiBundle\Templating\Twig\TimeDiffExtension');
