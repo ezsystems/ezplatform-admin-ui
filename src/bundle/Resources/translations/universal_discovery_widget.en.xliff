@@ -156,11 +156,6 @@
         <target state="new">Select a Content item</target>
         <note>key: ezobjectrelationlist.title.single</note>
       </trans-unit>
-      <trans-unit id="8616b7656ef9370ffa5e42c399e615eaccccb00c" resname="filters.any_section">
-        <source>Any section</source>
-        <target state="new">Any section</target>
-        <note>key: filters.any_section</note>
-      </trans-unit>
       <trans-unit id="b01a58cb9736974403f9f94ecce5180fb95a9627" resname="filters.apply">
         <source>Apply</source>
         <target state="new">Apply</target>
@@ -275,11 +270,6 @@
         <source>Try fewer keywords. Reducing keywords result in more matches.</source>
         <target state="new">Try fewer keywords. Reducing keywords result in more matches.</target>
         <note>key: search.fewer_keywords</note>
-      </trans-unit>
-      <trans-unit id="bf24ae2c9083c948931ad1b4d4405b6261eb9bc6" resname="search.filters">
-        <source>Filters</source>
-        <target state="new">Filters</target>
-        <note>key: search.filters</note>
       </trans-unit>
       <trans-unit id="5ab8b9fc463113f18cb6826034b6ef21342bb73d" resname="search.label">
         <source>Search</source>
