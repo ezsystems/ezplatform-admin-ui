@@ -33,7 +33,7 @@
     const fields = doc.querySelectorAll('.ez-field-edit');
     const autosave = doc.querySelector('.ibexa-autosave');
     const autosaveStatusSavedNode = autosave.querySelector('.ibexa-autosave__status-saved');
-    let currentAutosaveStatus = autosave.classList.contains('ibexa-autosave--status-on') ? STATUS_ON : STATUS_OFF;
+    let currentAutosaveStatus = autosave.classList.contains('ibexa-autosave--on') ? STATUS_ON : STATUS_OFF;
     let simplifiedMessageTimeout = null;
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();

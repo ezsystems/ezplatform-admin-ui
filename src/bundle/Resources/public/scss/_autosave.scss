@@ -12,11 +12,6 @@
         fill: $ibexa-color-white;
     }
 
-    &__spinning-arrows {
-        transform-origin: center;
-        transform-box: fill-box;
-    }
-
     $states: 'error', 'off', 'on', 'saved', 'saving';
 
     @each $state in $states {
