@@ -81,6 +81,11 @@
         <target state="new">Search by name</target>
         <note>key: search.input.placeholder</note>
       </trans-unit>
+      <trans-unit id="90fa144118285f5076416f9e92a89dd94c9406e4" resname="search.language">
+        <source>Language</source>
+        <target state="new">Language</target>
+        <note>key: search.language</note>
+      </trans-unit>
       <trans-unit id="c2e9df867c114a94918c00f775d3a54d24358dfa" resname="search.last.modified">
         <source>Last modified</source>
         <target state="new">Last modified</target>
@@ -100,6 +105,11 @@
         <source>Last year</source>
         <target state="new">Last year</target>
         <note>key: search.last_year</note>
+      </trans-unit>
+      <trans-unit id="65ed24966c829b5013a9832dd40fce3a3ee53e91" resname="search.location">
+        <source>Location</source>
+        <target state="new">Location</target>
+        <note>key: search.location</note>
       </trans-unit>
       <trans-unit id="0ea91510ce49731de30d4d412dc62c83c91b359d" resname="search.modified">
         <source>Modified</source>
@@ -155,11 +165,6 @@
         <source>Subtree</source>
         <target state="new">Subtree</target>
         <note>key: search.subtree.label</note>
-      </trans-unit>
-      <trans-unit id="e477a87ca96bb3e22e8eed710e54e9a6bffefc52" resname="search.translations">
-        <source>Translations</source>
-        <target state="new">Translations</target>
-        <note>key: search.translations</note>
       </trans-unit>
       <trans-unit id="0c9866a19fd5d3074bdb05b339df05b7c05a5661" resname="search.type">
         <source>Content Type</source>
