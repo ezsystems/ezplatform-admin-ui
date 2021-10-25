@@ -76,12 +76,12 @@
         transform: rotate(90deg);
     }
 
-    &--is-expanded &__items {
+    &--expanded &__items {
         opacity: 1;
         height: auto;
     }
 
-    &--is-disabled {
+    &--disabled {
         opacity: 0.3;
         cursor: not-allowed;
 

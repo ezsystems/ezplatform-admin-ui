@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
 
-const Collapsible = ({ initiallyExpanded, title, children }) => {
-    const [isExpanded, setIsExpanded] = useState(initiallyExpanded);
+const Collapsible = ({ isInitiallyExpanded, title, children }) => {
+    const [isExpanded, setIsExpanded] = useState(isInitiallyExpanded);
     const className = createCssClassNames({
         'c-filters__collapsible': true,
-        'c-filters__collapsible--is-hidden': !isExpanded,
+        'c-filters__collapsible--hidden': !isExpanded,
     });
     const toggleCollapsed = () => setIsExpanded((prevState) => !prevState);
 
@@ -25,11 +25,11 @@ const Collapsible = ({ initiallyExpanded, title, children }) => {
 Collapsible.propTypes = {
     title: PropTypes.node.isRequired,
     children: PropTypes.node.isRequired,
-    initiallyExpanded: PropTypes.bool,
+    isInitiallyExpanded: PropTypes.bool,
 }
 
 Collapsible.defaultProps = {
-    initiallyExpanded: false,
+    isInitiallyExpanded: false,
 }
 
 export default Collapsible;

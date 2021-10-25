@@ -12,7 +12,7 @@ const ToggleSelection = ({ multiple, location, isHidden }) => {
         'c-udw-toggle-selection ibexa-input': true,
         'ibexa-input--checkbox': multiple,
         'ibexa-input--radio': !multiple,
-        'c-udw-toggle-selection--is-hidden': isHidden,
+        'c-udw-toggle-selection--hidden': isHidden,
     });
     const toggleSelection = () => {
         if (!multiple) {

@@ -22,7 +22,7 @@
     }
 
     &__collapsible {
-        &--is-hidden {
+        &--hidden {
             .c-filters {
                 &__collapsible-title {
                     &:before {
@@ -79,7 +79,7 @@
     &__collapsible-content {
         transform: scaleY(1);
         transform-origin: top center;
-        transition: all 0.2s $ibexa-admin-transition;
+        transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
     }
 
     &__collapsible-list {

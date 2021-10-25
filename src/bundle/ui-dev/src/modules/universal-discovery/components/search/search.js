@@ -141,7 +141,7 @@ const Search = ({ itemsPerPage }) => {
 
     return (
         <div className="c-search">
-            <div className="c-search__topbar">
+            <div className="c-search__top-bar">
                 <div className="c-search__input-wrapper">
                     <InputSearch small={false} ref={searchActionRef} />
                 </div>

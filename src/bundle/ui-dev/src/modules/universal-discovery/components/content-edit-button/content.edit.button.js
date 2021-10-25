@@ -23,7 +23,7 @@ const ContentEditButton = ({ version, location, isDisabled, label }) => {
     const contentTypeInfo = contentTypesMap[location.ContentInfo.Content.ContentType._href];
     const isUserContentType = window.eZ.adminUiConfig.userContentTypes.includes(contentTypeInfo.identifier);
     const editLabel = Translator.trans(/*@Desc("Edit")*/ 'meta_preview.edit', {}, 'universal_discovery_widget');
-    const buttonClassName = createCssClassNames({
+    const btnClassName = createCssClassNames({
         'c-content-edit-button__btn btn ibexa-btn ibexa-btn--ghost': true,
         'ibexa-btn--no-text': label !== null,
     });
@@ -111,7 +111,7 @@ const ContentEditButton = ({ version, location, isDisabled, label }) => {
     return (
         <div className="c-content-edit-button">
             <button
-                className={buttonClassName}
+                className={btnClassName}
                 disabled={!version || isDisabled}
                 onClick={toggleTranslationSelectorVisibility}
                 data-tooltip-container-selector=".c-udw-tab"

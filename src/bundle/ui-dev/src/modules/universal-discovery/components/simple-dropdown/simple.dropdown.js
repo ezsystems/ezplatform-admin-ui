@@ -9,8 +9,8 @@ const SimpleDropdown = ({ options, selectedOption, onOptionClick, isDisabled }) 
     const [isExpanded, setIsExpanded] = useState(false);
     const dropdownClass = createCssClassNames({
         'c-udw-simple-dropdown': true,
-        'c-udw-simple-dropdown--is-expanded': isExpanded,
-        'c-udw-simple-dropdown--is-disabled': isDisabled,
+        'c-udw-simple-dropdown--expanded': isExpanded,
+        'c-udw-simple-dropdown--disabled': isDisabled,
     });
     const getCaretIcon = () => {
         const iconName = isExpanded ? 'caret-up' : 'caret-down';

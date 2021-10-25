@@ -79,7 +79,8 @@ const ContentCreateWidget = () => {
         { content_name: selectedLocation?.location?.ContentInfo.Content.TranslatedName },
         'universal_discovery_widget');
     const widgetClassName = createCssClassNames({
-        'ibexa-extra-actions ibexa-extra-actions--create': true,
+        'ibexa-extra-actions': true,
+        'ibexa-extra-actions--create': true,
         'ibexa-extra-actions--hidden': !createContentVisible,
         'c-content-create': true,
     });
@@ -115,7 +116,7 @@ const ContentCreateWidget = () => {
                                 }
 
                                 return (
-                                    <option key={language.id} value={language.languageCode} onChange={updateSelectedLanguage}>
+                                    <option key={language.id} value={language.languageCode}>
                                         {language.name}
                                     </option>
                                 );

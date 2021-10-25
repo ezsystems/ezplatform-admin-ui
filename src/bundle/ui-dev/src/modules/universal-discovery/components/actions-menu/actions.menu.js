@@ -7,7 +7,7 @@ import {
     SelectedLocationsContext,
  } from '../../universal.discovery.module';
 
-const BottomMenu = () => {
+const ActionsMenu = () => {
     const onConfirm = useContext(ConfirmContext);
     const cancelUDW = useContext(CancelContext);
     const allowConfirmation = useContext(AllowConfirmationContext);
@@ -25,10 +25,10 @@ const BottomMenu = () => {
     const isConfirmDisabled = !allowConfirmation || selectedLocations.length === 0;
 
     return (
-        <div className="c-bottom-menu">
-            <span className="c-bottom-menu__confirm-btn-wrapper">
+        <div className="c-actions-menu">
+            <span className="c-actions-menu__confirm-btn-wrapper">
                 <button
-                    className="c-bottom-menu__confirm-btn btn ibexa-btn ibexa-btn--primary"
+                    className="c-actions-menu__confirm-btn btn ibexa-btn ibexa-btn--primary"
                     type="button"
                     onClick={() => onConfirm()}
                     disabled={isConfirmDisabled}
@@ -36,9 +36,9 @@ const BottomMenu = () => {
                     {confirmLabel}
                 </button>
             </span>
-            <span className="c-bottom-menu__cancel-btn-wrapper">
+            <span className="c-actions-menu__cancel-btn-wrapper">
                 <button
-                    className="c-bottom-menu__cancel-btn btn ibexa-btn ibexa-btn--secondary"
+                    className="c-actions-menu__cancel-btn btn ibexa-btn ibexa-btn--secondary"
                     type="button"
                     onClick={cancelUDW}
                 >
@@ -49,4 +49,4 @@ const BottomMenu = () => {
     );
 };
 
-export default BottomMenu;
+export default ActionsMenu;

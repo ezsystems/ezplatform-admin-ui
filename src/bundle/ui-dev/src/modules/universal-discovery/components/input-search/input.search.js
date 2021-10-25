@@ -16,7 +16,7 @@ const InputSearch = forwardRef(({ extraClasses, placeholder, search, small }, se
     const className = createCssClassNames({
         'ibexa-input-text-wrapper': true,
         'ibexa-input-text-wrapper--search': true,
-        [extraClasses]: extraClasses,
+        [extraClasses]: true,
     });
     const inputClassName = createCssClassNames({
         'ibexa-dropdown__items-filter ibexa-input ibexa-input--text form-control': true,
@@ -40,13 +40,14 @@ const InputSearch = forwardRef(({ extraClasses, placeholder, search, small }, se
             searchWrapper();
         }
     };
+
     if (searchActionRef) {
         searchActionRef.current = searchWrapper;
     }
 
     useEffect(() => {
-        setInputValue(searchText)
-    }, [searchText])
+        setInputValue(searchText);
+    }, [searchText]);
 
     return (
         <div class={className}>

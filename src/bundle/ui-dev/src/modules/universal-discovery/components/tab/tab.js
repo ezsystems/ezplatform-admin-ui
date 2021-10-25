@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import TopMenu from '../top-menu/top.menu';
-import BottomMenu from '../bottom-menu/bottom.menu';
+import ActionsMenu from '../actions-menu/actions.menu';
 import TabSelector from '../tab-selector/tab.selector';
 import SelectedLocations from '../selected-locations/selected.locations';
 import ContentCreateWidget from '../content-create-widget/content.create.widget';
@@ -46,7 +46,7 @@ const Tab = ({ children, actionsDisabledMap }) => {
                 </div>
             </div>
             <div className="c-udw-tab__bottom-bar" ref={bottomBarRef}>
-                <BottomMenu />
+                <ActionsMenu />
             </div>
             <div class="c-udw-tab__dropdown-portal" ref={dropdownPortalRef} />
         </div>
