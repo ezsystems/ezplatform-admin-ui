@@ -42,7 +42,7 @@
                         {% set body_rows = [{
                             cols: [
                                 { content: value_definitions[user_setting.identifier].getDisplayValue(user_setting.value) },
-                                { has_action_btns: true, content: col_raw },
+                                { has_action_btns: true, content: col_raw, raw: true },
                             ]
                         }] %}
 
@@ -52,8 +52,8 @@
 
                         {% include '@ezdesign/ui/component/table/table.html.twig' with {
                             headline: user_setting.name,
-                            head_cols: head_cols,
-                            body_rows: body_rows,
+                            head_cols,
+                            body_rows,
                         } %}
                     {% endfor %}
 
@@ -83,7 +83,7 @@
                         body_rows: [{
                             cols: [
                                 { content: 'my_account_settings.password.description'|trans|desc('Current password') },
-                                { has_action_btns: true, content: col_raw },
+                                { has_action_btns: true, content: col_raw, raw: true },
                             ]
                         }],
                     } %}

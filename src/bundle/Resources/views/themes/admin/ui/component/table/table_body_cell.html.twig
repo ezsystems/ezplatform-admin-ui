@@ -1,6 +1,7 @@
 {% import "@ezdesign/ui/component/macros.html.twig" as html %}
+{% import "@ezdesign/ui/component/table/table_macros.html.twig" as table_macros %}
 
-<td 
+<td
     class="ibexa-table__cell
         {%- if has_checkbox|default(false) %} ibexa-table__cell--has-checkbox{% endif -%}
         {%- if has_action_btns|default(false) %} ibexa-table__cell--has-action-btns{% endif -%}
@@ -9,15 +10,15 @@
         {{ class|default('') -}}"
     {{ html.attributes(attr|default({})) }}
 >
-    {% block content %}
-        {% if has_action_btns|default(false) %}
+    {%- block content -%}
+        {%- if has_action_btns|default(false) -%}
             <div class="ibexa-table__cell-btns-wrapper">
-                {% block action_btns_content %}
-                    {{ content|raw }}
-                {% endblock %}
+                {%- block action_btns_content -%}
+                    {{- table_macros.conditional_escape(content, raw|default(false)) -}}
+                {%- endblock -%}
             </div>
-        {% else %}
-            {{ content|raw }}
-        {% endif %}
-    {% endblock %}
+        {%- else -%}
+            {{- table_macros.conditional_escape(content, raw|default(false)) -}}
+        {%- endif -%}
+    {%- endblock -%}
 </td>

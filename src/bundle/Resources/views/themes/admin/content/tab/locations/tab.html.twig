@@ -16,6 +16,7 @@
             {% set body_row_cols = body_row_cols|merge([{
                 has_checkbox: true,
                 content: col_raw,
+                raw: true,
             }]) %}
 
             {% set col_raw %}
@@ -23,6 +24,7 @@
             {% endset %}
             {% set body_row_cols = body_row_cols|merge([{
                 content: col_raw,
+                raw: true,
             }]) %}
 
             {% set body_row_cols = body_row_cols|merge([
@@ -57,6 +59,7 @@
             {% endset %}
             {% set body_row_cols = body_row_cols|merge([{
                 content: col_raw,
+                raw: true,
             }]) %}
 
             {% set body_row_cols = body_row_cols|merge([
@@ -75,6 +78,7 @@
             {% endset %}
             {% set body_row_cols = body_row_cols|merge([{
                 content: col_raw,
+                raw: true,
             }]) %}
 
             {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -90,7 +94,7 @@
             { content: 'tab.locations.visibility'|trans|desc('Visibility'), attr: { colspan: 2 } },
             { content: 'tab.locations.main'|trans|desc('Main') },
         ],
-        body_rows: body_rows,
+        body_rows,
         actions: tab.table_header_tools(form_content_location_add, form_content_location_remove, can_add),
     } %}
         {% block between_header_and_table %}
