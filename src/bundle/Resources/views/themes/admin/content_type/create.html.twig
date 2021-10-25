@@ -25,40 +25,42 @@
             data-content-type-group-id="{{ content_type_group.id }}"
             data-content-type-id="{{ content_type.id }}"
         >
-            {% embed "@ezdesign/content_type/edit_section.html.twig" with { section_id: '#Global-properties',  is_active: true } %}
-                {% block title %}
-                    {{ 'content_type.view.edit.global_properties'|trans|desc('Global properties') }}
-                {% endblock %}
+            {% block form_sections %}
+                {% embed "@ezdesign/content_type/edit_section.html.twig" with { section_id: '#Global-properties',  is_active: true } %}
+                    {% block title %}
+                        {{ 'content_type.view.edit.global_properties'|trans|desc('Global properties') }}
+                    {% endblock %}
 
-                {% block left_column %}
-                    {{ form_row(form.name) }}
-                    {{ form_row(form.identifier) }}
-                    {{ form_row(form.description) }}
-                    {{ form_row(form.nameSchema) }}
-                    {{ form_row(form.urlAliasSchema) }}
-                    {{ form_row(form.isContainer) }}
-                    {{ form_row(form.defaultSortField) }}
-                    {{ form_row(form.defaultSortOrder) }}
-                    {{ form_row(form.defaultAlwaysAvailable) }}
-                {% endblock %}
-            {% endembed %}
+                    {% block left_column %}
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.identifier) }}
+                        {{ form_row(form.description) }}
+                        {{ form_row(form.nameSchema) }}
+                        {{ form_row(form.urlAliasSchema) }}
+                        {{ form_row(form.isContainer) }}
+                        {{ form_row(form.defaultSortField) }}
+                        {{ form_row(form.defaultSortOrder) }}
+                        {{ form_row(form.defaultAlwaysAvailable) }}
+                    {% endblock %}
+                {% endembed %}
 
-            {% embed "@ezdesign/content_type/edit_section.html.twig" with {
-                section_id: '#Field-definitions',
-                left_column_class: 'ibexa-content-type-edit__section-column--field-definitions'
-            } %}
-                {% block title %}
-                    {{ 'content_type.view.edit.content_field_definitions'|trans|desc('Field definitions') }}
-                {% endblock %}
+                {% embed "@ezdesign/content_type/edit_section.html.twig" with {
+                    section_id: '#Field-definitions',
+                    left_column_class: 'ibexa-content-type-edit__section-column--field-definitions'
+                } %}
+                    {% block title %}
+                        {{ 'content_type.view.edit.content_field_definitions'|trans|desc('Field definitions') }}
+                    {% endblock %}
 
-                {% block left_column %}
-                    {{ include('@ezdesign/content_type/field_definitions.html.twig', { grouped_field_defintions: form.fieldDefinitionsData }) }}
-                {% endblock %}
+                    {% block left_column %}
+                        {{ include('@ezdesign/content_type/field_definitions.html.twig', { grouped_field_defintions: form.fieldDefinitionsData }) }}
+                    {% endblock %}
 
-                {% block right_column %}
-                    {{ include('@ezdesign/content_type/available_field_types.html.twig') }}
-                {% endblock %}
-            {% endembed %}
+                    {% block right_column %}
+                        {{ include('@ezdesign/content_type/available_field_types.html.twig') }}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
         </div>
 
         {{ form_widget(form.saveContentType, { attr: { hidden: 'hidden' }}) }}
