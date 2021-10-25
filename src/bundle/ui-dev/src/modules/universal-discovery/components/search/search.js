@@ -30,7 +30,6 @@ const selectedContentTypesReducer = (state, action) => {
 const languages = Object.values(window.eZ.adminUiConfig.languages.mappings);
 
 const Search = ({ itemsPerPage }) => {
-    const filtersLabel = Translator.trans(/*@Desc("Filters")*/ 'search.filters', {}, 'universal_discovery_widget');
     const searchLabel = Translator.trans(/*@Desc("Search")*/ 'search.search', {}, 'universal_discovery_widget');
     const allowedContentTypes = useContext(AllowedContentTypesContext);
     const [searchText, setSearchText] = useContext(SearchTextContext);

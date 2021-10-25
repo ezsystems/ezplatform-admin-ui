@@ -21,7 +21,7 @@ const Dropdown = ({ value, options, onChange, small }) => {
     const toggleExpanded = () => {
         setIsExpanded((prevState) => !prevState);
     };
-    const updateFilterValue = ({ target: { value } }) => setFilterText(value);
+    const updateFilterValue = (event) => setFilterText(event.target.value);
     const resetInputValue = () => setFilterText('');
     const showItem = (itemValue, searchedTerm) => {
         if (searchedTerm.length < 3) {

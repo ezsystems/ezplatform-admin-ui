@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
-import { createCssClassNames } from '../../../common/helpers/css.class.names';
 import { SelectedContentTypesContext } from '../search/search';
 import { AllowedContentTypesContext } from '../../universal.discovery.module';
 

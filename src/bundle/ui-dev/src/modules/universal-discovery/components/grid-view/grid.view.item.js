@@ -61,7 +61,7 @@ const GridViewItem = ({ location, version }) => {
             <div class="ibexa-grid-view-item__checkbox">
                 <ToggleSelection location={location} multiple={multiple} isHidden={isNotSelectable} />
             </div>
-        );;
+        );
     };
 
     return (

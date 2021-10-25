@@ -1,17 +1,16 @@
-import React, { useContext, useState, useEffect, useRef, Fragment } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 
 import Icon from '../../../common/icon/icon';
 import SelectedLocationsItem from './selected.locations.item';
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
 
-import { SelectedLocationsContext, ConfirmContext, AllowConfirmationContext } from '../../universal.discovery.module';
+import { SelectedLocationsContext, AllowConfirmationContext } from '../../universal.discovery.module';
 
 const SelectedLocations = () => {
     const refSelectedLocations = useRef(null);
     const refTogglerButton = useRef(null);
     const [selectedLocations, dispatchSelectedLocationsAction] = useContext(SelectedLocationsContext);
     const allowConfirmation = useContext(AllowConfirmationContext);
-    const onConfirm = useContext(ConfirmContext);
     const [isExpanded, setIsExpanded] = useState(false);
     const className = createCssClassNames({
         'c-selected-locations': true,
