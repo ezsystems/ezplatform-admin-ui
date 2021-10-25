@@ -33,6 +33,8 @@ use Ibexa\AdminUi\Form\SubmitHandler;
 use Ibexa\AdminUi\Form\Type\ContentType\ContentTypeUpdateType;
 use Ibexa\AdminUi\Tab\ContentType\TranslationsTab;
 use Ibexa\AdminUi\UI\Module\FieldTypeToolbar\FieldTypeToolbarFactory;
+use Ibexa\AdminUi\View\ContentTypeCreateView;
+use Ibexa\AdminUi\View\ContentTypeEditView;
 use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -171,13 +173,13 @@ class ContentTypeController extends Controller
     /**
      * @param \eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup $group
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Ibexa\AdminUi\View\ContentTypeCreateView
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
      */
-    public function addAction(ContentTypeGroup $group): Response
+    public function addAction(ContentTypeGroup $group)
     {
         $this->denyAccessUnlessGranted(new Attribute('class', 'create'));
         $languages = $this->configResolver->getParameter('languages');
@@ -204,12 +206,12 @@ class ContentTypeController extends Controller
         $language = $this->languageService->loadLanguage($mainLanguageCode);
         $form = $this->createUpdateForm($group, $contentTypeDraft, $language);
 
-        return $this->render('@ezdesign/content_type/create.html.twig', [
-            'content_type_group' => $group,
-            'content_type' => $contentTypeDraft,
-            'form' => $form->createView(),
+        $view = new ContentTypeCreateView('@ezdesign/content_type/create.html.twig', $group, $contentTypeDraft, $form);
+        $view->setParameters([
             'field_type_toolbar' => $this->fieldTypeToolbarFactory->create(),
         ]);
+
+        return $view;
     }
 
     /**
@@ -461,7 +463,7 @@ class ContentTypeController extends Controller
      * @param \eZ\Publish\API\Repository\Values\Content\Language|null $language
      * @param \eZ\Publish\API\Repository\Values\Content\Language|null $baseLanguage
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response|\Ibexa\AdminUi\View\ContentTypeEditView
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
@@ -471,7 +473,7 @@ class ContentTypeController extends Controller
         ContentTypeDraft $contentTypeDraft,
         Language $language = null,
         Language $baseLanguage = null
-    ): Response {
+    ) {
         if (!$language) {
             $language = $this->getDefaultLanguage($contentTypeDraft);
         }
@@ -526,13 +528,18 @@ class ContentTypeController extends Controller
             }
         }
 
-        return $this->render('@ezdesign/content_type/edit.html.twig', [
-            'content_type_group' => $group,
-            'content_type' => $contentTypeDraft,
-            'form' => $form->createView(),
-            'language_code' => $baseLanguage ? $baseLanguage->languageCode : $language->languageCode,
+        $view = new ContentTypeEditView(
+            '@ezdesign/content_type/edit.html.twig',
+            $group,
+            $contentTypeDraft,
+            $baseLanguage ?? $language,
+            $form
+        );
+        $view->addParameters([
             'field_type_toolbar' => $this->fieldTypeToolbarFactory->create(),
         ]);
+
+        return $view;
     }
 
     public function addFieldDefinitionFormAction(
