@@ -117,7 +117,7 @@ class UniversalDiscoveryWidget extends Component
         return [
             // general selectors
             new VisibleCSSLocator('udw', '.m-ud'),
-            new CSSLocator('confirmButton', '.c-bottom-menu__confirm-btn'),
+            new CSSLocator('confirmButton', '.c-actions-menu__confirm-btn'),
             new CSSLocator('cancelButton', '.c-top-menu__cancel-btn'),
             new CSSLocator('mainWindow', '.m-ud'),
             new CSSLocator('selectedLocationsTab', '.c-selected-locations'),
