@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useReducer, useContext, createContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+export const SelectedLanguageContext = createContext();
 export const SelectedContentTypesContext = createContext();
 export const SelectedSectionContext = createContext();
 export const SelectedSubtreeContext = createContext();
 
 import Icon from '../../../common/icon/icon';
-import Dropdown from '../dropdown/dropdown';
 import InputSearch from '../input-search/input.search';
 import ContentTable from '../content-table/content.table';
 import Filters from '../filters/filters';
 import { useSearchByQueryFetch } from '../../hooks/useSearchByQueryFetch';
 import { AllowedContentTypesContext, SearchTextContext } from '../../universal.discovery.module';
-
-const ENTER_CHAR_CODE = 13;
 
 const selectedContentTypesReducer = (state, action) => {
     switch (action.type) {
@@ -42,7 +40,6 @@ const Search = ({ itemsPerPage }) => {
     const [selectedLanguage, setSelectedLanguage] = useState(firstLanguageCode);
     const prevSearchText = useRef(null);
     const searchActionRef = useRef(null);
-    const updateSelectedLanguage = (value) => setSelectedLanguage(value);
     const [isLoading, data, searchByQuery] = useSearchByQueryFetch();
     const search = () => {
         const shouldResetOffset = prevSearchText.current !== searchText && offset !== 0;
@@ -134,10 +131,6 @@ const Search = ({ itemsPerPage }) => {
             );
         }
     };
-    const languageOptions = languages.filter(((language) => language.enabled)).map((language) => ({
-        value: language.languageCode,
-        label: language.name,
-    }));
 
     useEffect(search, [searchText, offset]);
 
@@ -147,15 +140,6 @@ const Search = ({ itemsPerPage }) => {
                 <div className="c-search__input-wrapper">
                     <InputSearch small={false} ref={searchActionRef} />
                 </div>
-                {languages.length > 1 ? (
-                    <div className="c-search__selector-wrapper">
-                        <Dropdown
-                            onChange={updateSelectedLanguage}
-                            value={selectedLanguage}
-                            options={languageOptions}
-                        />
-                    </div>
-                ) : null}
                 <button className="c-search__search-btn btn ibexa-btn ibexa-btn--primary" onClick={searchSubmit}>
                     {searchLabel}
                 </button>
@@ -165,7 +149,9 @@ const Search = ({ itemsPerPage }) => {
                     <SelectedContentTypesContext.Provider value={[selectedContentTypes, dispatchSelectedContentTypesAction]}>
                         <SelectedSectionContext.Provider value={[selectedSection, setSelectedSection]}>
                             <SelectedSubtreeContext.Provider value={[selectedSubtree, setSelectedSubtree]}>
-                                <Filters isCollapsed={false} search={search} />
+                                <SelectedLanguageContext.Provider value={[selectedLanguage, setSelectedLanguage]}>
+                                    <Filters isCollapsed={false} search={search} />
+                                </SelectedLanguageContext.Provider>
                             </SelectedSubtreeContext.Provider>
                         </SelectedSectionContext.Provider>
                     </SelectedContentTypesContext.Provider>

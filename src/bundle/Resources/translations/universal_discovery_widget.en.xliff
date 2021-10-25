@@ -176,6 +176,11 @@
         <target state="new">Clear</target>
         <note>key: filters.clear</note>
       </trans-unit>
+      <trans-unit id="c229e2e0f497278dd01d57fbefb8839e4449a981" resname="filters.language">
+        <source>Language</source>
+        <target state="new">Language</target>
+        <note>key: filters.language</note>
+      </trans-unit>
       <trans-unit id="15135a98864ffb3f0f889577ad962bf3817fea6f" resname="filters.section">
         <source>Section</source>
         <target state="new">Section</target>
@@ -266,30 +271,10 @@
         <target state="new">Select a Location to restore the Content item(s)</target>
         <note>key: restore_under_new_location.title</note>
       </trans-unit>
-      <trans-unit id="007b9245e1a34e3ea3515ebe69767f07379edcae" resname="search.check_spelling">
-        <source>Check spelling of keywords.</source>
-        <target state="new">Check spelling of keywords.</target>
-        <note>key: search.check_spelling</note>
-      </trans-unit>
-      <trans-unit id="536d54d0a1d9dffd70df6d5d9e1b32d6e99fdbb3" resname="search.different_keywords">
-        <source>Try different keywords.</source>
-        <target state="new">Try different keywords.</target>
-        <note>key: search.different_keywords</note>
-      </trans-unit>
-      <trans-unit id="fa40054e85b4179a9351672f51d70044a0de2741" resname="search.fewer_keywords">
-        <source>Try fewer keywords. Reducing keywords result in more matches.</source>
-        <target state="new">Try fewer keywords. Reducing keywords result in more matches.</target>
-        <note>key: search.fewer_keywords</note>
-      </trans-unit>
       <trans-unit id="5ab8b9fc463113f18cb6826034b6ef21342bb73d" resname="search.label">
         <source>Search</source>
         <target state="new">Search</target>
         <note>key: search.label</note>
-      </trans-unit>
-      <trans-unit id="9fade0c452653d162e3689cd888c984ac34b3b2b" resname="search.more_general">
-        <source>Try more general keywords.</source>
-        <target state="new">Try more general keywords.</target>
-        <note>key: search.more_general</note>
       </trans-unit>
       <trans-unit id="8a3a6b538d81237dcb9533496c691a7685e456de" resname="search.no_results">
         <source>No results found for %query%</source>
@@ -325,11 +310,6 @@
         <source>Search results</source>
         <target state="new">Search results</target>
         <note>key: search.search_results</note>
-      </trans-unit>
-      <trans-unit id="3d38ca81487735c8b506fb4523e02256fd8821b1" resname="search.tips">
-        <source>Some helpful search tips</source>
-        <target state="new">Some helpful search tips</target>
-        <note>key: search.tips</note>
       </trans-unit>
       <trans-unit id="5b8a9a5fceb4991b77b50983c34df8a18a900a09" resname="select_location.error">
         <source>Cannot find children Locations with ID %idList%</source>
