@@ -34,7 +34,7 @@
     const autosave = doc.querySelector('.ibexa-autosave');
     const autosaveStatusSavedNode = autosave.querySelector('.ibexa-autosave__status-saved');
     let currentAutosaveStatus = autosave.classList.contains('ibexa-autosave--on') ? STATUS_ON : STATUS_OFF;
-    let simplifiedMessageTimeout = null;
+    let simplifiedMessageTimeoutId = null;
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
         const validatorName = validator.constructor.name;
@@ -177,7 +177,7 @@
         setDelayedDraftSavedSimplifiedMessage();
     };
     const setDelayedDraftSavedSimplifiedMessage = () => {
-        simplifiedMessageTimeout = setTimeout(() => {
+        simplifiedMessageTimeoutId = setTimeout(() => {
             const savedMessage = Translator.trans(
                 /*@Desc("Saved")*/ 'content_edit.autosave.status_saved.message.simplified',
                 {},
@@ -196,7 +196,7 @@
             const formData = new FormData(form);
 
             formData.set(AUTOSAVE_SUBMIT_BUTTON_NAME, true);
-            clearTimeout(simplifiedMessageTimeout);
+            clearTimeout(simplifiedMessageTimeoutId);
             setAutosaveStatus(STATUS_SAVING);
 
             fetch(form.target || window.location.href, { method: 'POST', body: formData })

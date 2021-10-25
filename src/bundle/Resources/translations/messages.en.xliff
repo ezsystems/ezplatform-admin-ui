@@ -116,10 +116,10 @@
         <target state="new">words</target>
         <note>key: character_counter.words</note>
       </trans-unit>
-      <trans-unit id="d5ff5360463d166a9b190aaade8acd1973875f97" resname="content.autosave.turn_of.message">
+      <trans-unit id="0c103b4bcaaca67202176e8f5be544eb4c307e8e" resname="content.autosave.turn_off.message">
         <source>You can turn autosave off in your user settings</source>
         <target state="new">You can turn autosave off in your user settings</target>
-        <note>key: content.autosave.turn_of.message</note>
+        <note>key: content.autosave.turn_off.message</note>
       </trans-unit>
       <trans-unit id="21e7545fc420d95a59a713437d9dc28d85d82ceb" resname="content.details.content_id">
         <source>Content ID: %contentId%</source>

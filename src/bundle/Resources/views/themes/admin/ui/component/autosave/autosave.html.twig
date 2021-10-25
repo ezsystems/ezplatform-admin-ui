@@ -1,8 +1,8 @@
 <div
     class="ibexa-autosave
         {{ is_enabled ? 'ibexa-autosave--on' : 'ibexa-autosave--off' }}
-        {{ is_dark_mode|default(false) ? 'ibexa-autosave--dark-mode' }}"
-    {% if is_enabled %}title="{{ 'content.autosave.turn_of.message'|trans()|desc('You can turn autosave off in your user settings') }}"{% endif %}
+        {{ is_dark_mode|default(false) ? 'ibexa-autosave--light' }}"
+    {% if is_enabled %}title="{{ 'content.autosave.turn_off.message'|trans()|desc('You can turn autosave off in your user settings') }}"{% endif %}
 >
     <svg class="ibexa-icon ibexa-icon--small ibexa-autosave__icon-error">
         <use xlink:href="{{ ibexa_icon_path('autosave-error') }}"></use>
