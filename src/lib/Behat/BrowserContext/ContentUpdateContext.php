@@ -95,4 +95,13 @@ class ContentUpdateContext implements Context
     {
         $this->contentUpdateItemPage->close();
     }
+
+    /**
+     * @When I switch to :tabName field group
+     */
+    public function iSwitchToContentTab(string $tabName)
+    {
+        $this->contentUpdateItemPage->verifyIsLoaded();
+        $this->contentUpdateItemPage->switchToFieldGroup($tabName);
+    }
 }
