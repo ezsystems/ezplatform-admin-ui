@@ -1,5 +1,5 @@
 (function(global, doc) {
-    const languageSelector = doc.querySelector('.ez-search-form__language-selector');
+    const languageSelector = doc.querySelector('.ibexa-filters__item--language-selector .ibexa-filters__select');
     const submitForm = (event) => {
         event.target.closest('form').submit();
     };

@@ -9,6 +9,10 @@
         </div>
     </div>
     <div class="ibexa-filters__items">
+        <div class="ibexa-filters__item ibexa-filters__item--language-selector" {% if form.search_language.vars.choices|length == 1 %} hidden {% endif %}>
+            <label class="ibexa-label">{{ 'search.language'|trans|desc('Language') }}</label>
+            {{ form_widget(form.search_language, {'attr': {'class': 'ibexa-filters__select'}}) }}
+        </div>
         <div class="ibexa-filters__item ibexa-filters__item--content-type">
             <select class="form-control ibexa-filters__select ibexa-filters__select--content-type" hidden>
                 <option class="ibexa-filters__option ibexa-filters__option--hidden" data-default="{{ 'search.any.content.type'|trans|desc('Any Content Type') }}" value="">{{ 'search.any.content.type'|trans|desc('Any Content Type') }}</option>

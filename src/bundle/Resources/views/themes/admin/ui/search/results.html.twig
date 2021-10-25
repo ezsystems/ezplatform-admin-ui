@@ -69,19 +69,24 @@
                     { content: result.type },
                 ]) %}
 
-                {% if form.search_language.vars.choices|length > 1 %}
-                    {% set col_raw %}
-                        {% for language in result.available_translations %}
-                            {{ language.name }}{% if not loop.last %}, {% endif %}
-                        {% endfor %}
-                    {% endset %}
+                {% set col_raw %}
+                    {% set path_locations = ez_path_to_locations(result.resolvedLocation.pathString) %}
+                    {% set result_breadcrumbs = '' %}
 
-                    {% set body_row_cols = body_row_cols|merge([{
-                        content: col_raw,
-                        raw: true,
-                    }]) %}
-                {% endif %}
+                    {% for location in path_locations %}
+                        {% set result_breadcrumbs = result_breadcrumbs ~ ez_content_name(location.contentInfo) %}
+                        {% if not loop.last %}
+                            {% set result_breadcrumbs = result_breadcrumbs ~ ' / ' %}
+                        {% endif %}
+                    {% endfor %}
 
+                    {{ result_breadcrumbs }}
+                {% endset %}
+
+                {% set body_row_cols = body_row_cols|merge([{
+                    content: col_raw,
+                    raw: true,
+                }]) %}
                 {% set col_raw %}
                     {% if result.mainLocationId is not null %}
                         {% include '@ezdesign/ui/edit_translation_button.html.twig' with {
@@ -105,12 +110,8 @@
                 { content: 'search.name'|trans|desc('Name') },
                 { content: 'search.modified'|trans|desc('Modified') },
                 { content: 'search.type'|trans|desc('Content Type') },
+                { content: 'search.location'|trans|desc('Location') },
             ] %}
-            {% if form.search_language.vars.choices|length > 1 %}
-                {% set head_cols = head_cols|merge([{
-                    content: 'search.translations'|trans|desc('Translations'),
-                }]) %}
-            {% endif %}
             {% set head_cols = head_cols|merge([{ }]) %}
 
             {% embed '@ezdesign/ui/component/table/table.html.twig' with {
