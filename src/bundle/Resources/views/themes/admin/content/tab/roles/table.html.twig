@@ -12,6 +12,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            raw: true,
         }]) %}
 
         {% set col_raw %}
@@ -27,6 +28,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            raw: true,
         }]) %}
 
         {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -39,6 +41,6 @@
         { content: 'tab.roles.name'|trans|desc('Name') },
         { content: 'tab.roles.limitation'|trans|desc('Limitation') },
     ],
-    body_rows: body_rows,
+    body_rows,
     empty_table_info_text: 'tab.roles.no_roles'|trans|desc('This Content item has no Roles.'),
 } %}

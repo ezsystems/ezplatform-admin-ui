@@ -34,6 +34,7 @@
             {
                 has_checkbox: true,
                 content: col_raw_checkbox_template|raw,
+                raw: true,
             },
         ]) %}
     {% endif %}
@@ -51,6 +52,7 @@
         {% set body_row_cols_template = body_row_cols_template|merge([
             {
                 content: col_raw_order_input_template|raw,
+                raw: true,
                 attr: { class: 'ibexa-relations__order-wrapper' }
             },
         ]) %}
@@ -59,6 +61,7 @@
     {% set body_row_cols_template = body_row_cols_template|merge([
         {
             content: col_raw_actions,
+            raw: true,
             has_icon: true,
         },
     ]) %}
@@ -98,6 +101,7 @@
                         {
                             has_checkbox: true,
                             content: col_raw_checkbox,
+                            raw: true,
                         },
                     ]) %}
                 {% endif %}
@@ -115,6 +119,7 @@
                     {% set body_row_cols = body_row_cols|merge([
                         {
                             content: col_raw_order_input,
+                            raw: true,
                             attr: { class: 'ibexa-relations__order-wrapper' }
                         }
                     ]) %}
@@ -123,6 +128,7 @@
                 {% set body_row_cols = body_row_cols|merge([
                     {
                         content: col_raw_actions,
+                        raw: true,
                         has_icon: true,
                     },
                 ]) %}
@@ -149,8 +155,8 @@
 
                 {% set body_rows = body_rows|merge([{
                     cols: [
-                        { content: col_raw_unauthorised, attr: { colspan: 5 } },
-                        { content: col_raw_order_input, attr: { class: 'ibexa-relations__order-wrapper' } }
+                        { content: col_raw_unauthorised, raw: true, attr: { colspan: 5 } },
+                        { content: col_raw_order_input, raw: true, attr: { class: 'ibexa-relations__order-wrapper' } }
                     ],
                     class: 'ibexa-relations__item',
                     attr: { 'data-content-id': relation.contentId },
@@ -181,13 +187,13 @@
         {% set head_cols = head_cols|merge([{ }]) %}
 
         {% embed '@ezdesign/ui/component/table/table.html.twig' with {
-            head_cols: head_cols,
+            head_cols,
             attr: {
                 hidden: not has_relations,
             },
             class: 'ibexa-table--not-striped',
             show_head_cols_if_empty: true,
-            body_rows: body_rows,
+            body_rows,
             table_body_class: 'ibexa-relations__list',
             table_body_attr: {
                 'data-limit': limit,

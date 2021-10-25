@@ -31,6 +31,7 @@
         {% set body_row_cols = body_row_cols|merge([{
             has_checkbox: true,
             content: col_raw,
+            raw: true,
         }]) %}
 
         {% set body_row_cols = body_row_cols|merge([
@@ -64,6 +65,7 @@
         {% set body_row_cols = body_row_cols|merge([{
             has_action_btns: true,
             content: col_raw,
+            raw: true,
         }]) %}
 
         {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -78,7 +80,7 @@
             { content: 'url_wildcard.label.type'|trans|desc('Type') },
             { },
         ],
-        body_rows: body_rows,
+        body_rows,
         empty_table_info_text: 'url_wildcard.empty'|trans|desc('No URL wildcards.'),
     } %}
         {% set modal_create_data_target = 'create-wildcards-modal' %}

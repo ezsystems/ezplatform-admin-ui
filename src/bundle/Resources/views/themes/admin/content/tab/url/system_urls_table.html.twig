@@ -14,6 +14,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            raw: true,
         }]) %}
 
         {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -26,6 +27,6 @@
         { content: 'tab.urls.url'|trans|desc('URL') },
         { content: 'tab.urls.language'|trans|desc('Language') },
     ],
-    body_rows: body_rows,
+    body_rows,
     empty_table_info_text: 'tab.urls.no_system_urls'|trans|desc('This Content item has no system URLs.'),
 } %}

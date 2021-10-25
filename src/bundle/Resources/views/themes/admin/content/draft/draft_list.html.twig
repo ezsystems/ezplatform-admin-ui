@@ -32,6 +32,7 @@
                         {% set body_row_cols = body_row_cols|merge([{
                             has_checkbox: true,
                             content: col_raw,
+                            raw: true,
                         }]) %}
 
                         {% set col_raw %}
@@ -41,7 +42,8 @@
                         {% endset %}
                         {% set body_row_cols = body_row_cols|merge([{
                             has_checkbox: true,
-                            content: col_raw,
+                            content: col_raw
+                            raw: true,
                         }]) %}
 
                         {% set col_raw %}
@@ -50,7 +52,8 @@
                             </span>
                         {% endset %}
                         {% set body_row_cols = body_row_cols|merge([{
-                            content: col_raw,
+                            content: col_raw
+                            raw: true,
                         }]) %}
 
                         {% set body_row_cols = body_row_cols|merge([
@@ -84,12 +87,12 @@
                         {% endset %}
                         {% set body_row_cols = body_row_cols|merge([{
                             has_action_btns: true,
-                            content: col_raw,
+                            content: col_raw
+                            raw: true,
                         }]) %}
 
                         {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
                     {% else %}
-                        {# TODO: add CSS class to center text ??? #}
                         {% set body_row_cols = body_row_cols|merge([{
                             attr: { colspan: 8 },
                             content: 'dashboard.table.draft.unauthorized'|trans({
@@ -124,7 +127,7 @@
                         { content: 'drafts.list.last_saved'|trans|desc('Last Saved') },
                         { },
                     ],
-                    body_rows: body_rows,
+                    body_rows,
                     actions: macros.table_header_tools(form_remove),
                     empty_table_info_text: 'drafts.list.empty'|trans|desc('You have no drafts yet. Your drafts will show up here.'),
                 } %}

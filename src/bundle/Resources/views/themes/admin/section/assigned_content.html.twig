@@ -15,6 +15,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            raw: true,
         }]) %}
 
         {% set body_row_cols = body_row_cols|merge([ { content: content.type } ]) %}
@@ -36,6 +37,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            raw: true,
         }]) %}
 
         {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -51,7 +53,7 @@
             { content: 'section.assigned_content.type'|trans|desc('Content Type') },
             { content: 'section.assigned_content.path'|trans|desc('Path') },
         ],
-        body_rows: body_rows,
+        body_rows,
         empty_table_info_text: 'section.assigned_content.empty'|trans|desc('No Content items.'),
         empty_table_action_text: 'section.assigned_content.empty_desc'|trans|desc('Content items you assign to this Section will show up here.'),
     } %}

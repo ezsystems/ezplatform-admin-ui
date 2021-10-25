@@ -1,0 +1,7 @@
+{%- macro conditional_escape(content, raw) -%}
+    {%- if raw -%}
+        {{- content|raw -}}
+    {%- else -%}
+        {{- content -}}
+    {%- endif -%}
+{%- endmacro -%}

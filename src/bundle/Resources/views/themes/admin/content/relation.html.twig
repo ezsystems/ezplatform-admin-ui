@@ -11,6 +11,6 @@
     {% endif %}
 {% endset %}
 
-{% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with { content: name_cell_raw } %}
+{% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with { content: name_cell_raw, raw: true } %}
 {% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with { content: contentType.getName() } %}
 {% include '@ezdesign/ui/component/table/table_body_cell.html.twig' with { content: content.versionInfo.creationDate|ez_short_datetime } %}

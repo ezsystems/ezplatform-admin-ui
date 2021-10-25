@@ -108,6 +108,7 @@
                     {% set body_row_cols = body_row_cols|merge([{
                         has_checkbox: true,
                         content: col_raw,
+                        raw: true,
                     }]) %}
 
                     {% set col_raw %}
@@ -118,6 +119,7 @@
                     {% set body_row_cols = body_row_cols|merge([{
                         has_icon: true,
                         content: col_raw,
+                        raw: true,
                     }]) %}
 
                     {% set col_raw %}
@@ -127,6 +129,7 @@
                     {% endset %}
                     {% set body_row_cols = body_row_cols|merge([{
                         content: col_raw,
+                        raw: true,
                     }]) %}
 
                     {% set body_row_cols = body_row_cols|merge([
@@ -146,6 +149,7 @@
                     {% endset %}
                     {% set body_row_cols = body_row_cols|merge([{
                         content: col_raw,
+                        raw: true,
                     }]) %}
 
                     {% set body_row_cols = body_row_cols|merge([
@@ -202,7 +206,7 @@
                             }
                         },
                     ],
-                    body_rows: body_rows,
+                    body_rows,
                     empty_table_info_text: 'trash.empty'|trans|desc('Trash is empty. Content you send to Trash will show up here.'),
                 } %}
                     {% set modal_create_data_target = 'create-wildcards-modal' %}

@@ -32,6 +32,7 @@
                         {% set body_row_cols = body_row_cols|merge([{
                             has_icon: true,
                             content: col_raw,
+                            raw: true,
                         }]) %}
 
                         {% set col_raw %}
@@ -51,6 +52,7 @@
                         {% endset %}
                         {% set body_row_cols = body_row_cols|merge([{
                             content: col_raw,
+                            raw: true,
                         }]) %}
 
                         {% set body_row_cols = body_row_cols|merge([
@@ -68,6 +70,7 @@
                             {% set body_row_cols = body_row_cols|merge([{
                                 has_icon: true,
                                 content: col_raw,
+                                raw: true,
                             }]) %}
                         {% endif %}
 
@@ -83,6 +86,7 @@
                         {% set body_row_cols = body_row_cols|merge([{
                             has_action_btns: true,
                             content: col_raw,
+                            raw: true,
                         }]) %}
 
                         {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
@@ -103,8 +107,8 @@
 
                     {% include '@ezdesign/ui/component/table/table.html.twig' with {
                         headline: 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)'),
-                        head_cols: head_cols,
-                        body_rows: body_rows,
+                        head_cols,
+                        body_rows,
                     } %}
 
                     {% if pager.haveToPaginate %}

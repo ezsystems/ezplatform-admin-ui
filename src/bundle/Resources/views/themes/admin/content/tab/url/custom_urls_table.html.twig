@@ -15,6 +15,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            raw: true,
         }]) %}
 
         {% set body_row_cols = body_row_cols|merge([
@@ -28,6 +29,7 @@
         {% endset %}
         {% set body_row_cols = body_row_cols|merge([{
             content: col_raw,
+            raw: true,
         }]) %}
 
         {% set body_row_cols = body_row_cols|merge([
@@ -46,7 +48,7 @@
         { content: 'tab.urls.language'|trans|desc('Language') },
         { content: 'tab.urls.type'|trans|desc('Type') },
     ],
-    body_rows: body_rows,
+    body_rows,
     empty_table_info_text: 'tab.urls.no_custom_urls'|trans|desc('This Content item has no custom URL aliases.'),
     actions: actions,
 } %}
