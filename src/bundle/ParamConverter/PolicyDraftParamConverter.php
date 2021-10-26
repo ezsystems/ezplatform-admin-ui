@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\ParamConverter;
+namespace Ibexa\Bundle\AdminUi\ParamConverter;
 
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\PolicyDraft;
@@ -77,3 +77,5 @@ class PolicyDraftParamConverter implements ParamConverterInterface
         return PolicyDraft::class === $configuration->getClass();
     }
 }
+
+class_alias(PolicyDraftParamConverter::class, 'EzSystems\EzPlatformAdminUiBundle\ParamConverter\PolicyDraftParamConverter');

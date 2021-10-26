@@ -4,11 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Limitation\Mapper;
+namespace Ibexa\AdminUi\Limitation\Mapper;
 
 use eZ\Publish\API\Repository\Values\User\Limitation;
-use EzSystems\EzPlatformAdminUi\Limitation\LimitationFormMapperInterface;
-use EzSystems\EzPlatformAdminUi\Limitation\LimitationValueMapperInterface;
+use Ibexa\AdminUi\Limitation\LimitationFormMapperInterface;
+use Ibexa\AdminUi\Limitation\LimitationValueMapperInterface;
 use Symfony\Component\Form\FormInterface;
 
 class NullLimitationMapper implements LimitationFormMapperInterface, LimitationValueMapperInterface
@@ -41,3 +41,5 @@ class NullLimitationMapper implements LimitationFormMapperInterface, LimitationV
         return $limitation->limitationValues;
     }
 }
+
+class_alias(NullLimitationMapper::class, 'EzSystems\EzPlatformAdminUi\Limitation\Mapper\NullLimitationMapper');

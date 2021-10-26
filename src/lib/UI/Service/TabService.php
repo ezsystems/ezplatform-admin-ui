@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Service;
+namespace Ibexa\AdminUi\UI\Service;
 
-use EzSystems\EzPlatformAdminUi\Tab\TabGroup;
-use EzSystems\EzPlatformAdminUi\Tab\TabInterface;
-use EzSystems\EzPlatformAdminUi\Tab\TabRegistry;
+use Ibexa\AdminUi\Tab\TabGroup;
+use Ibexa\AdminUi\Tab\TabRegistry;
+use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 
 class TabService
 {
@@ -65,3 +65,5 @@ class TabService
         return $tabs[$tabIdentifier];
     }
 }
+
+class_alias(TabService::class, 'EzSystems\EzPlatformAdminUi\UI\Service\TabService');

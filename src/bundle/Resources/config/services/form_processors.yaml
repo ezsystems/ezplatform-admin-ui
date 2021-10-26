@@ -8,30 +8,34 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+
+    Ibexa\AdminUi\Form\Processor\:
+        resource: "../../../lib/Form/Processor/*"
+        public: true
         tags:
             - { name: kernel.event_subscriber }
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\Content\AutosaveProcessor: ~
+    Ibexa\AdminUi\Form\Processor\Content\AutosaveProcessor: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\Content\ContentOnTheFlyProcessor:
+    Ibexa\AdminUi\Form\Processor\Content\ContentOnTheFlyProcessor:
         arguments:
             $innerContentFormProcessor: '@ezplatform.content_forms.form_processor.content'
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\Content\UrlRedirectProcessor:
+    Ibexa\AdminUi\Form\Processor\Content\UrlRedirectProcessor:
         public: true
         decorates: EzSystems\EzPlatformContentForms\Form\Processor\SystemUrlRedirectProcessor
         arguments:
             $siteaccessGroups: '%ezpublish.siteaccess.groups%'
-            $systemUrlRedirectProcessor: '@EzSystems\EzPlatformAdminUi\Form\Processor\Content\UrlRedirectProcessor.inner'
+            $systemUrlRedirectProcessor: '@Ibexa\AdminUi\Form\Processor\Content\UrlRedirectProcessor.inner'
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\ContentEditNotificationFormProcessor:
+    Ibexa\AdminUi\Form\Processor\ContentEditNotificationFormProcessor:
         public: true
         arguments:
             $siteAccessGroups: '%ezpublish.siteaccess.groups%'
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\ContentType\ContentTypeDiscardChangesFormProcessor: ~
+    Ibexa\AdminUi\Form\Processor\ContentType\ContentTypeDiscardChangesFormProcessor: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\ContentType\ContentTypeFormProcessor:
+    Ibexa\AdminUi\Form\Processor\ContentType\ContentTypeFormProcessor:
         arguments:
             - "@ezpublish.api.service.content_type"
             - "@router"
@@ -39,10 +43,10 @@ services:
         calls:
             - [ setGroupsList, [ "@ezpublish.fields_groups.list" ] ]
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\PreviewFormProcessor: ~
+    Ibexa\AdminUi\Form\Processor\PreviewFormProcessor: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\TranslationFormProcessor: ~
+    Ibexa\AdminUi\Form\Processor\TranslationFormProcessor: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Processor\User\UserOnTheFlyProcessor:
+    Ibexa\AdminUi\Form\Processor\User\UserOnTheFlyProcessor:
         arguments:
             $innerUserUpdateFormProcessor: '@ezplatform.content_forms.form_processor.user_update'

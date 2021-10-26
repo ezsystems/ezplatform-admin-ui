@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type;
+namespace Ibexa\AdminUi\Form\Type;
 
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\DateTimePickerTransformer;
+use Ibexa\AdminUi\Form\DataTransformer\DateTimePickerTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,3 +41,5 @@ class DateTimePickerType extends AbstractType
             ->setAllowedTypes('with_seconds', 'bool');
     }
 }
+
+class_alias(DateTimePickerType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\DateTimePickerType');

@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
+namespace Ibexa\AdminUi\UI\Config\Provider;
 
 use eZ\Publish\API\Repository\SectionService;
-use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 /**
  * Provides information about sections.
@@ -38,3 +38,5 @@ class Sections implements ProviderInterface
         return $config;
     }
 }
+
+class_alias(Sections::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Provider\Sections');

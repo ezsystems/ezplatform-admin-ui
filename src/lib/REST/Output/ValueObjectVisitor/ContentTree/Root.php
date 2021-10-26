@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\ContentTree;
+namespace Ibexa\AdminUi\REST\Output\ValueObjectVisitor\ContentTree;
 
 use EzSystems\EzPlatformRest\Output\Generator;
 use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
@@ -39,3 +39,5 @@ class Root extends ValueObjectVisitor
         $generator->endObjectElement('ContentTreeRoot');
     }
 }
+
+class_alias(Root::class, 'EzSystems\EzPlatformAdminUi\REST\Output\ValueObjectVisitor\ContentTree\Root');
