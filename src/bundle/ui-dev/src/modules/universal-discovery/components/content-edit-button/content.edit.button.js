@@ -22,7 +22,6 @@ const ContentEditButton = ({ version, location, isDisabled, label }) => {
     const [isTranslationSelectorVisible, setIsTranslationSelectorVisible] = useState(false);
     const contentTypeInfo = contentTypesMap[location.ContentInfo.Content.ContentType._href];
     const isUserContentType = window.eZ.adminUiConfig.userContentTypes.includes(contentTypeInfo.identifier);
-    const editLabel = Translator.trans(/*@Desc("Edit")*/ 'meta_preview.edit', {}, 'universal_discovery_widget');
     const btnClassName = createCssClassNames({
         'c-content-edit-button__btn btn ibexa-btn ibexa-btn--ghost': true,
         'ibexa-btn--no-text': label !== null,
@@ -48,24 +47,24 @@ const ContentEditButton = ({ version, location, isDisabled, label }) => {
         if (allowRedirects) {
             const href = isUserContentType
                 ? window.Routing.generate(
-                      'ezplatform.user.update',
-                      {
-                          contentId,
-                          versionNo,
-                          language,
-                      },
-                      true
-                  )
+                    'ezplatform.user.update',
+                    {
+                        contentId,
+                        versionNo,
+                        language,
+                    },
+                    true
+                )
                 : window.Routing.generate(
-                      'ezplatform.content.draft.edit',
-                      {
-                          contentId,
-                          versionNo,
-                          language,
-                          locationId,
-                      },
-                      true
-                  );
+                    'ezplatform.content.draft.edit',
+                    {
+                        contentId,
+                        versionNo,
+                        language,
+                        locationId,
+                    },
+                    true
+                );
 
             window.location.href = href;
 
@@ -115,7 +114,6 @@ const ContentEditButton = ({ version, location, isDisabled, label }) => {
                 disabled={!version || isDisabled}
                 onClick={toggleTranslationSelectorVisibility}
                 data-tooltip-container-selector=".c-udw-tab"
-                title={editLabel}
             >
                 <Icon name="edit" extraClasses="ibexa-icon--small" />
                 {label}

@@ -125,11 +125,11 @@ const ContentCreateWidget = () => {
                     </div>
                     <div className="ibexa-extra-actions__section-header">{selectContentType}</div>
                     <div class="ibexa-extra-actions__section-content ibexa-extra-actions__section-content--content-type">
-                        <div class="ez-instant-filter">
-                            <div class="ez-instant-filter__input-wrapper">
+                        <div class="ibexa-instant-filter">
+                            <div class="ibexa-instant-filter__input-wrapper">
                                 <input
                                     autoFocus
-                                    className="ez-instant-filter__input ibexa-input ibexa-input--text form-control"
+                                    className="ibexa-instant-filter__input ibexa-input ibexa-input--text form-control"
                                     type="text"
                                     placeholder={placeholder}
                                     onChange={updateFilterQuery}
@@ -137,10 +137,10 @@ const ContentCreateWidget = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="ez-instant-filter__desc">
+                    <div class="ibexa-instant-filter__desc">
                         {filtersDescLabel}
                     </div>
-                    <div className="ez-instant-filter__items">
+                    <div className="ibexa-instant-filter__items">
                         {contentTypes.map(([groupName, groupItems]) => {
                             const isHidden = groupItems.every((groupItem) => {
                                 return (
@@ -158,8 +158,8 @@ const ContentCreateWidget = () => {
                             }
 
                             return (
-                                <div className="ez-instant-filter__group" key={groupName}>
-                                    <div className="ez-instant-filter__group-name">
+                                <div className="ibexa-instant-filter__group" key={groupName}>
+                                    <div className="ibexa-instant-filter__group-name">
                                         {groupName}
                                     </div>
                                     {groupItems.map(({ name, thumbnail, identifier, id }) => {
@@ -171,8 +171,8 @@ const ContentCreateWidget = () => {
                                                 !selectedLocation.permissions.create.restrictedContentTypeIds.includes(id.toString())) ||
                                             (allowedContentTypes && !allowedContentTypes.includes(identifier));
                                         const className = createCssClassNames({
-                                            'ez-instant-filter__group-item': true,
-                                            'ez-instant-filter__group-item--selected': identifier === selectedContentType,
+                                            'ibexa-instant-filter__group-item': true,
+                                            'ibexa-instant-filter__group-item--selected': identifier === selectedContentType,
                                         });
                                         const updateSelectedContentType = () => setSelectedContentType(identifier);
 

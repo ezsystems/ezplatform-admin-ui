@@ -2,7 +2,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: all 0.4s ease-in;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
     &__top-bar {
         background-color: $ibexa-color-white;
@@ -24,7 +24,7 @@
         background-color: $ibexa-color-white;
         border: calculateRem(1px) solid $ibexa-color-light;
         border-bottom: 0;
-        border-top-right-radius: calculateRem(10px);
+        border-top-right-radius: $ibexa-border-radius;
         box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
     }
 
@@ -43,7 +43,7 @@
     &__bottom-bar {
         background-color: $ibexa-color-white;
         border-top: calculateRem(1px) solid $ibexa-color-light;
-        border-top-right-radius: calculateRem(5px);
+        border-top-right-radius: $ibexa-border-radius-small;
         box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-black, 0.05);
     }
 }

@@ -13,12 +13,12 @@ const ActionsMenu = () => {
     const allowConfirmation = useContext(AllowConfirmationContext);
     const [selectedLocations, dispatchSelectedLocationsAction] = useContext(SelectedLocationsContext);
     const confirmLabel = Translator.trans(
-        /*@Desc("Confirm")*/ 'selected_locations.confirm',
+        /*@Desc("Confirm")*/ 'actions_menu.confirm',
         {},
         'universal_discovery_widget'
     );
     const cancelLabel = Translator.trans(
-        /*@Desc("Cancel")*/ 'selected_locations.cancel',
+        /*@Desc("Cancel")*/ 'actions_menu.cancel',
         {},
         'universal_discovery_widget'
     );

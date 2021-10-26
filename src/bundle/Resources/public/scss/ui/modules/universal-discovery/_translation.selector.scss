@@ -10,13 +10,12 @@
     transform: scaleX(1);
     transform-origin: right center;
     opacity: 1;
-    transition: all 0.4s ease-in;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
     padding: calculateRem(16px);
 
     &--hidden {
         transform: scaleX(0);
         opacity: 0;
-        transition: all 0.2s ease-out;
     }
 
     &__header {

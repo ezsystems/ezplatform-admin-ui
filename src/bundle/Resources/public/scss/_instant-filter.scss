@@ -1,3 +1,6 @@
+// TODO: remove ez-instant-filter class after redesign in all places
+
+.ibexa-instant-filter,
 .ez-instant-filter {
     &__input {
         display: block;
@@ -6,6 +9,7 @@
 }
 
 .ibexa-extra-actions--create {
+    .ibexa-instant-filter,
     .ez-instant-filter {
         &__desc {
             color: $ibexa-color-dark-400;

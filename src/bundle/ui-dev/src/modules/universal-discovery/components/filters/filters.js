@@ -139,7 +139,7 @@ const Filters = ({ search }) => {
                         {applyLabel}
                     </button>
                     <button
-                        className="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small "
+                        className="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small"
                         onClick={clearFilters}
                     >
                         {clearLabel}

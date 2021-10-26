@@ -91,7 +91,7 @@ InputSearch.propTypes = {
 };
 
 InputSearch.defaultProps = {
-    extraClasses: null,
+    extraClasses: '',
     placeholder: Translator.trans(/*@Desc("Search...")*/ 'input.search.placeholder.default', {}, 'universal_discovery_widget'),
     search: null,
     small: true,
