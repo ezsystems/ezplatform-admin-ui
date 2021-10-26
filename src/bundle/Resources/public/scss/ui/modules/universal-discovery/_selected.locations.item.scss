@@ -11,7 +11,7 @@
         width: calculateRem(42px);
         height: calculateRem(42px);
         background-color: $ibexa-color-light-300;
-        border-radius: calculateRem(5px);
+        border-radius: $ibexa-border-radius-small;
         display: flex;
         justify-content: center;
         align-items: center;

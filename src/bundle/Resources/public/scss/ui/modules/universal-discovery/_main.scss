@@ -7,7 +7,7 @@
     height: 100vh;
     width: 100vw;
     border: calculateRem(1px) solid $ibexa-color-light;
-    border-radius: calculateRem(4px);
+    border-radius: $ibexa-border-radius-small;
 
     .c-grid {
         &__items-wrapper {
