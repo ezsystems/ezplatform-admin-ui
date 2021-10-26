@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Section;
+namespace Ibexa\AdminUi\Form\Type\Section;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -33,3 +33,5 @@ class SectionType extends AbstractType
         ]);
     }
 }
+
+class_alias(SectionType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionType');

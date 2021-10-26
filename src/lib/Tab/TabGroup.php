@@ -6,14 +6,16 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab;
+namespace Ibexa\AdminUi\Tab;
+
+use Ibexa\Contracts\AdminUi\Tab\TabInterface;
 
 class TabGroup
 {
     /** @var string */
     protected $identifier;
 
-    /** @var TabInterface[] */
+    /** @var \Ibexa\Contracts\AdminUi\Tab\TabInterface[] */
     protected $tabs;
 
     /**
@@ -43,7 +45,7 @@ class TabGroup
     }
 
     /**
-     * @return TabInterface[]
+     * @return \Ibexa\Contracts\AdminUi\Tab\TabInterface[]
      */
     public function getTabs(): array
     {
@@ -51,7 +53,7 @@ class TabGroup
     }
 
     /**
-     * @param TabInterface[] $tabs
+     * @param \Ibexa\Contracts\AdminUi\Tab\TabInterface[] $tabs
      */
     public function setTabs(array $tabs)
     {
@@ -59,7 +61,7 @@ class TabGroup
     }
 
     /**
-     * @param TabInterface $tab
+     * @param \Ibexa\Contracts\AdminUi\Tab\TabInterface $tab
      */
     public function addTab(TabInterface $tab)
     {
@@ -78,3 +80,5 @@ class TabGroup
         unset($this->tabs[$identifier]);
     }
 }
+
+class_alias(TabGroup::class, 'EzSystems\EzPlatformAdminUi\Tab\TabGroup');

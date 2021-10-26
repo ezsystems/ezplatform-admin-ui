@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer;
+namespace Ibexa\AdminUi\Form\DataTransformer;
 
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\RoleService;
@@ -79,3 +79,5 @@ class RoleAssignmentTransformer implements DataTransformerInterface
         }
     }
 }
+
+class_alias(RoleAssignmentTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\RoleAssignmentTransformer');

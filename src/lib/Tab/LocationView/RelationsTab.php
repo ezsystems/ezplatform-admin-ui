@@ -6,16 +6,16 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Tab\LocationView;
+namespace Ibexa\AdminUi\Tab\LocationView;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\PermissionResolver;
-use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\ReverseRelationAdapter;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
-use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
-use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
-use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\AdminUi\Pagination\Pagerfanta\ReverseRelationAdapter;
+use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab;
+use Ibexa\Contracts\AdminUi\Tab\ConditionalTabInterface;
+use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -168,3 +168,5 @@ class RelationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
         return array_replace($contextParameters, $viewParameters);
     }
 }
+
+class_alias(RelationsTab::class, 'EzSystems\EzPlatformAdminUi\Tab\LocationView\RelationsTab');

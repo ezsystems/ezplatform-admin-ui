@@ -4,15 +4,10 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\QueryType\LocationPathQueryType: ~
+    Ibexa\AdminUi\QueryType\LocationPathQueryType: ~
 
-    EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType: ~
+    Ibexa\AdminUi\QueryType\ContentSubtreeQueryType: ~
 
-    EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType: ~
+    Ibexa\AdminUi\QueryType\MediaSubtreeQueryType: ~
 
-    EzSystems\EzPlatformAdminUi\QueryType\SearchQueryType:
-        deprecated: 'Service "%service_id%" is deprecated since 3.1 and will be removed in 3.2. Use "Ibexa\Platform\Search\QueryType\SearchQueryType" instead'
-        arguments:
-            $searchService: '@ezpublish.api.service.search'
-
-    EzSystems\EzPlatformAdminUi\QueryType\TrashSearchQueryType: ~
+    Ibexa\AdminUi\QueryType\TrashSearchQueryType: ~

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Content;
+namespace Ibexa\AdminUi\Form\Type\Content;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -44,3 +44,5 @@ class SortType extends AbstractType
         $optionsResolver->setAllowedTypes('default', 'array');
     }
 }
+
+class_alias(SortType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Content\SortType');

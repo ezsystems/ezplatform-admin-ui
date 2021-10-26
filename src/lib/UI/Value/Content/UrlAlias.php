@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
+namespace Ibexa\AdminUi\UI\Value\Content;
 
 use eZ\Publish\API\Repository\Values\Content\URLAlias as CoreURLAlias;
 
@@ -21,3 +21,5 @@ class UrlAlias extends CoreURLAlias
         parent::__construct(get_object_vars($urlAlias) + $properties);
     }
 }
+
+class_alias(UrlAlias::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Content\UrlAlias');

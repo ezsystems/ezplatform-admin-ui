@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup;
+namespace Ibexa\AdminUi\Form\Data\ContentTypeGroup;
 
 class ContentTypeGroupCreateData
 {
@@ -29,3 +29,5 @@ class ContentTypeGroupCreateData
         $this->identifier = $identifier;
     }
 }
+
+class_alias(ContentTypeGroupCreateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeGroup\ContentTypeGroupCreateData');
