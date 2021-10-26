@@ -17,7 +17,7 @@
     const confirmSubtreeUDW = (data) => {
         const items = data.map((item) => ({
             id: item.id,
-            name: item.ContentInfo.Content.TranslatedName,
+            name: eZ.helpers.text.escapeHTML(item.ContentInfo.Content.TranslatedName),
         }));
 
         selectSubtreeWidget.addItems(items, true);

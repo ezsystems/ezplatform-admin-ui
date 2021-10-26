@@ -1,0 +1,92 @@
+{% trans_default_domain 'search' %}
+
+<div class="ibexa-filters ibexa-search-form__filters">
+    <div class="ibexa-filters__header">
+        <h3 class="ibexa-filters__title">{{ 'search.filters.title'|trans|desc('Filters') }}</h3>
+        <div class="ibexa-filters__btns">
+            <button type="submit" class="btn ibexa-btn ibexa-btn--secondary ibexa-btn--small ibexa-btn--apply" disabled>{{ 'search.apply'|trans|desc('Apply') }}</button>
+            <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small ibexa-btn--clear">{{ 'search.clear'|trans|desc('Clear') }}</button>
+        </div>
+    </div>
+    <div class="ibexa-filters__items">
+        <div class="ibexa-filters__item ibexa-filters__item--language-selector" {% if form.search_language.vars.choices|length == 1 %} hidden {% endif %}>
+            <label class="ibexa-label">{{ 'search.language'|trans|desc('Language') }}</label>
+            {{ form_widget(form.search_language, {'attr': {'class': 'ibexa-filters__select'}}) }}
+        </div>
+        <div class="ibexa-filters__item ibexa-filters__item--content-type">
+            <select class="form-control ibexa-filters__select ibexa-filters__select--content-type" hidden>
+                <option class="ibexa-filters__option ibexa-filters__option--hidden" data-default="{{ 'search.any.content.type'|trans|desc('Any Content Type') }}" value="">{{ 'search.any.content.type'|trans|desc('Any Content Type') }}</option>
+            </select>
+            {{ form_widget(form.content_types, {'attr': {'class': 'ibexa-filters__select'}}) }}
+        </div>
+        {% if form.section is defined %}
+            <div class="ibexa-filters__item ibexa-filters__item--section">
+                <label class="ibexa-label">{{ 'search.section'|trans|desc('Section') }}</label>
+                {{ form_widget(form.section, {'attr': {'class': 'ibexa-filters__select'}}) }}
+            </div>
+        {% endif %}
+        <div class="ibexa-filters__item ibexa-filters__item--modified">
+            <label class="ibexa-label">{{ 'search.last.modified'|trans|desc('Last modified') }}</label>
+            {{ form_widget(form.last_modified_select, {
+                'attr': {
+                    'class': 'ibexa-filters__select',
+                    'data-target-selector': '.ibexa-filters__range-wrapper--select-modified-range'
+                }
+            }) }}
+            {{ form_errors(form.last_modified_select) }}
+        </div>
+        <div class="ibexa-filters__item ibexa-filters__item--created">
+            <label class="ibexa-label">{{ 'search.created'|trans|desc('Created') }}</label>
+            {{ form_widget(form.created_select, {
+                'attr': {
+                    'class': 'ibexa-filters__select',
+                    'data-target-selector': '.ibexa-filters__range-wrapper--select-created-range'
+                }
+            }) }}
+            {{ form_errors(form.created_select) }}
+        </div>
+        <div class="ibexa-filters__item ibexa-filters__item--creator">
+            <label class="ibexa-label">{{ 'search.creator'|trans|desc('Creator') }}</label>
+            {% set creator = form.vars.data.creator %}
+            <div class="ibexa-filters__input-wrapper">
+                <input type="text"
+                    class="form-control ibexa-filters__input"
+                    data-content-type-identifiers="{{ user_content_type_identifier|join(',') }}"
+                    value="{{ creator is not empty ? ez_content_name(creator) }}"
+                    placeholder="{{ 'search.creator_input.placeholder'|trans|desc('Type creator\'s name') }}"
+                    {{ creator is not empty ? 'disabled'  }}
+                >
+                <svg class="ibexa-icon ibexa-icon--dark ibexa-icon--small ibexa-icon--reset">
+                    <use xlink:href="{{ ibexa_icon_path('circle-close') }}"></use>
+                </svg>
+            </div>
+            <ul class="ibexa-filters__user-list ibexa-filters__user-list--hidden"></ul>
+        </div>
+        <div class="ibexa-filters__item ibexa-filters__item--subtree">
+            <label class="ibexa-label">{{ 'search.subtree'|trans|desc('Subtree') }}</label>
+            {% set items = [] %}
+
+            {% if content_breadcrumbs is not empty %}
+                {% set items = [{
+                    id: 'selected-subtree',
+                    name: content_breadcrumbs
+                }] %}
+            {% endif %}
+
+            {{ include('@ezdesign/ui/component/tag_view_select.html.twig', {
+                form: form.subtree,
+                items,
+                attr: {
+                    'id': form.subtree.vars.id ~ '__btn',
+                    'data-input-selector': '#' ~ form.subtree.vars.id,
+                    'data-selected-content-list-selector': '#' ~ form.subtree.vars.id ~ '-selected-content',
+                    'data-udw-config': ez_udw_config('single_container', {}),
+                },
+                is_single_select: true,
+                can_be_empty: true,
+                type: 'search.subtree.label'|trans|desc('Subtree'),
+                show_title: false,
+            }) }}
+        </div>
+    </div>
+</div>

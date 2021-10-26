@@ -4,10 +4,13 @@
 
 {% if translations|length == 1 %}
     {% set language = translations|first %}
-    <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--content-edit"
-            title="{{ title }}"
-            data-content-id="{{ contentId }}"
-            data-language-code="{{ language.languageCode }}">
+    <button
+        class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--content-edit"
+        title="{{ title }}"
+        type="button"
+        data-content-id="{{ contentId }}"
+        data-language-code="{{ language.languageCode }}"
+    >
         <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
             <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
         </svg>
@@ -15,7 +18,11 @@
 {% else %}
     {% set top_offset = top_offset is defined ? top_offset : 120 %}
     <div class="ez-translation-selector">
-        <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--translations-list-toggler" title="{{ title }}">
+        <button
+            class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text mx-2 ibexa-btn--translations-list-toggler"
+            title="{{ title }}"
+            type="button"
+        >
             <svg class="ibexa-icon ibexa-icon--small ibexa-icon--edit">
                 <use xlink:href="{{ ibexa_icon_path('edit') }}"></use>
             </svg>

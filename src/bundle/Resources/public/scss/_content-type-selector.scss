@@ -1,76 +1,32 @@
-.ez-content-type-selector {
-    $selector: '.ez-content-type-selector';
-    padding-left: calculateRem(38px);
-
-    &__list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, 150px);
-        justify-content: space-between;
-        list-style: none;
-        padding: 0;
-        margin-top: calculateRem(12px);
-    }
-
-    &__item {
-        display: flex;
-
-        .form-check-inline {
-            margin: calculateRem(4px);
-
-            .form-check-label {
-                font-size: calculateRem(16px);
-                margin-left: calculateRem(4px);
-            }
-        }
+.ibexa-content-type-selector {
+    &__group {
+        margin-top: calculateRem(8px);
     }
 
     &__group-title {
-        color: $ibexa-color-font;
-        position: relative;
-        cursor: pointer;
-        padding-right: calculateRem(24px);
-
-        &:before {
-            content: '';
-            width: 0;
-            height: 0;
-            position: absolute;
-            top: 40%;
-            left: calculateRem(-16px);
-
-            border-left: calculateRem(4px) solid transparent;
-            border-right: calculateRem(4px) solid transparent;
-            border-top: calculateRem(7px) solid $ibexa-black;
-        }
-
-        &:before {
-            transform: rotate(-90deg);
+        .accordion-button {
+            border-bottom: calculateRem(1px) solid $ibexa-color-dark-200;
+            padding-left: 0;
+            font-size: $ibexa-text-font-size-medium;
         }
     }
 
-    &__group {
-        #{$selector}__list {
-            transform: scaleY(1);
-            transform-origin: top center;
-            transition: all 0.2s $ibexa-admin-transition;
-        }
+    &__list {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
 
-        &--collapsed {
-            #{$selector}__list {
-                transform: scaleY(0);
-                opacity: 0;
-                height: 0;
-            }
+    &__item {
+        margin-top: calculateRem(12px);
 
-            #{$selector}__group-title:before {
-                transform: rotate(0deg);
-            }
+        .form-check {
+            display: block;
         }
+    }
 
-        &:last-of-type {
-            .ez-content-type-selector__list {
-                margin-bottom: calculateRem(8px);
-            }
-        }
+    &__show-more {
+        display: inline-block;
+        margin-top: calculateRem(12px);
     }
 }

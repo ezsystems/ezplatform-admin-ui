@@ -29,6 +29,14 @@
         form {
             width: 100%;
             max-width: calculateRem(670px);
+
+            .ibexa-input-text-wrapper--search {
+                width: auto;
+
+                .ibexa-icon {
+                    fill: $ibexa-color-light;
+                }
+            }
         }
     }
 
@@ -37,6 +45,10 @@
         color: $ibexa-color-white;
         border-color: $ibexa-color-info-800;
         background: $ibexa-color-info-800;
+
+        &.form-control:focus {
+            color: $ibexa-color-light;
+        }
     }
 
     &__user-menu-column {

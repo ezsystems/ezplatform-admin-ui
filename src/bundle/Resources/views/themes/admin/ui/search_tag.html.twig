@@ -3,16 +3,16 @@
 {% set target_selector = target_selector|default('') %}
 {% set title = title|default('') %}
 
-<div class="ez-tag ez-search-criteria-tags__tag"{% if title %} title="{{ title }}{% endif %}">
-    <div class="ez-tag__content">
+<div class="ibexa-tag ibexa-search-criteria-tags__tag"{% if title %} title="{{ title }}{% endif %}">
+    <div class="ibexa-tag__content">
         {{ content }}
     </div>
     <button 
         type="button" 
-        class="ez-tag__remove-btn {{ btn_class }}"
+        class="ibexa-tag__remove-btn {{ btn_class }}"
         data-target-selector="{{ target_selector }}"
     >
-        <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--dark">
+        <svg class="ibexa-icon ibexa-icon--small">
             <use xlink:href="{{ ibexa_icon_path('circle-close') }}"></use>
         </svg>
     </button>

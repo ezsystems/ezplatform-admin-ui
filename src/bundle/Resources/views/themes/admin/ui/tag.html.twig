@@ -1,4 +1,4 @@
-{% set tag_attributes = tag_attributes|default({})|merge({'class': (tag_attributes.class|default('') ~ ' ez-tag')|trim}) %}
+{% set tag_attributes = tag_attributes|default({})|merge({'class': (tag_attributes.class|default('') ~ ' ibexa-tag')|trim}) %}
 
 <div {% for attribute_name, attribute_value in tag_attributes %}
         {% if attribute_value is not same as(false) %}
@@ -9,16 +9,16 @@
             {% endif %}
         {% endif %}
     {% endfor %}>
-    <div class="ez-tag__content" {% if is_loading_state %} hidden {% endif %}>
+    <div class="ibexa-tag__content" {% if is_loading_state %} hidden {% endif %}>
         {{ content }}
     </div>
-    <div class="ez-tag__spinner" {% if not is_loading_state %} hidden {% endif %}>
-        <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--dark ibexa-spin">
+    <div class="ibexa-tag__spinner" {% if not is_loading_state %} hidden {% endif %}>
+        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--dark ibexa-spin">
             <use xlink:href="{{ ibexa_icon_path('spinner') }}"></use>
         </svg>
     </div>
-    <button type="button" class="ez-tag__remove-btn">
-        <svg class="ibexa-icon ibexa-icon--medium ibexa-icon--dark">
+    <button type="button" class="ibexa-tag__remove-btn">
+        <svg class="ibexa-icon ibexa-icon--small ibexa-icon--dark">
             <use xlink:href="{{ ibexa_icon_path('circle-close') }}"></use>
         </svg>
     </button>

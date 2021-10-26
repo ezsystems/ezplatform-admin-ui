@@ -1,0 +1,146 @@
+{% trans_default_domain 'search' %}
+
+{% if results is defined %}
+    {% if results is empty %}
+        {% set no_results_hints = [
+            'search.no_results.hint.check_spelling'|trans|desc('Check the spelling of keywords.'),
+            'search.no_results.hint.more_general'|trans|desc('Try more general keywords.'),
+            'search.no_results.hint.different_kewords'|trans|desc('Try different keywords.'),
+            'search.no_results.hint.fewer_keywords'|trans|desc('Try fewer keywords. Reducing keywords results in more matches.'),
+        ] %}
+
+        <div class="ibexa-search-form__no-results">
+            <img
+                class=""
+                src="/bundles/ezplatformadminui/img/no-results.svg"
+            />
+            <h2 class="ibexa-search-form__no-results-title">{{ 'search.no_results.title'|trans({'%query%': form.query.vars.value})|desc('No results found for "%query%"') }}</h2>
+            <div class="ibexa-search-form__no-results-subtitle">
+                {% for hint in no_results_hints %}
+                    <div class="ibexa-search-form__no-results-hint">
+                        <div class="ibexa-search-form__no-results-hint-icon-wrapper">
+                            <svg class="ibexa-icon ibexa-icon--small-medium">
+                                <use xlink:href="{{ ibexa_icon_path('approved') }}"></use>
+                            </svg>
+                        </div>
+                        <div class="ibexa-search-form__no-results-hint-text">{{ hint }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="ibexa-search-form__results">
+            {% set body_rows = [] %}
+            {% for result in results %}
+                {% set body_row_cols = [] %}
+                {% set col_raw %}
+                    <svg class="ibexa-icon ibexa-icon--small">
+                        <use xlink:href="{{ ez_content_type_icon(result.content_type.identifier) }}"></use>
+                    </svg>
+                {% endset %}
+                {% set body_row_cols = body_row_cols|merge([{
+                    has_icon: true,
+                    content: col_raw,
+                    raw: true,
+                }]) %}
+
+                {% set col_raw %}
+                    {% if result.mainLocationId is not null %}
+                        <a
+                            href="{{ path('_ez_content_view', {
+                                'contentId': result.contentId,
+                                'locationId': result.resolvedLocation.id,
+                                'languageCode': result.translation_language_code,
+                            }) }}"
+                        >
+                            {{ result.name }}
+                        </a>
+                    {% else %}
+                        {{ result.name }}
+                    {% endif %}
+                {% endset %}
+                {% set body_row_cols = body_row_cols|merge([{
+                    content: col_raw,
+                    raw: true,
+                }]) %}
+
+                {% set body_row_cols = body_row_cols|merge([
+                    { content: result.modified|ez_full_datetime },
+                    { content: result.type },
+                ]) %}
+
+                {% set col_raw %}
+                    {% set path_locations = ez_path_to_locations(result.resolvedLocation.pathString) %}
+                    {% set result_breadcrumbs = '' %}
+
+                    {% for location in path_locations %}
+                        {% set result_breadcrumbs = result_breadcrumbs ~ ez_content_name(location.contentInfo) %}
+                        {% if not loop.last %}
+                            {% set result_breadcrumbs = result_breadcrumbs ~ ' / ' %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {{ result_breadcrumbs }}
+                {% endset %}
+
+                {% set body_row_cols = body_row_cols|merge([{
+                    content: col_raw,
+                    raw: true,
+                }]) %}
+                {% set col_raw %}
+                    {% if result.mainLocationId is not null %}
+                        {% include '@ezdesign/ui/edit_translation_button.html.twig' with {
+                            'contentId': result.contentId,
+                            'translations': result.available_enabled_translations,
+                            'top_offset': 100
+                        }%}
+                    {% endif %}
+                {% endset %}
+                {% set body_row_cols = body_row_cols|merge([{
+                    has_action_btns: true,
+                    content: col_raw,
+                    raw: true,
+                }]) %}
+
+                {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
+            {% endfor %}
+
+            {% set head_cols = [
+                { has_icon: true },
+                { content: 'search.name'|trans|desc('Name') },
+                { content: 'search.modified'|trans|desc('Modified') },
+                { content: 'search.type'|trans|desc('Content Type') },
+                { content: 'search.location'|trans|desc('Location') },
+            ] %}
+            {% set head_cols = head_cols|merge([{ }]) %}
+
+            {% embed '@ezdesign/ui/component/table/table.html.twig' with {
+                headline: 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)'),
+                head_cols: head_cols,
+                body_rows: body_rows,
+            } %}
+                {% block between_header_and_table %}
+                    {% include '@ezdesign/ui/search/criteria_tags.html.twig' %}
+                {% endblock %}
+            {% endembed %}
+
+            {% if pager.haveToPaginate %}
+                {% include '@ezdesign/ui/pagination.html.twig' with {
+                    'pager': pager,
+                    'paginaton_params' : {
+                        'pageParameter': '[search][page]'
+                    }
+                } %}
+            {% endif %}
+        </div>
+    {% endif %}
+{% else %}
+    <div class="ibexa-search-form__empty">
+        <img
+            class=""
+            src="/bundles/ezplatformadminui/img/no-search-items.svg"
+        />
+        <h2 class="ibexa-search-form__empty-title">{{ 'search.empty.title'|trans|desc('No search items') }}</h2>
+        <div class="ibexa-search-form__empty-subtitle">{{ 'search.empty.subtitle'|trans|desc('Enter the phrase to find') }}</div>
+    </div>
+{% endif %}

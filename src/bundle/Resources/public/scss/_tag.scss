@@ -1,8 +1,8 @@
-.ez-tag {
-    border: calculateRem(1px) solid $ibexa-color-base-dark;
-    border-radius: $ibexa-border-radius;
-    background: $ibexa-color-base;
-    padding: calculateRem(8px) calculateRem(48px) calculateRem(8px) calculateRem(8px);
+.ibexa-tag {
+    border-radius: calculateRem(18px);
+    background: $ibexa-color-light-300;
+    font-size: $ibexa-text-font-size-small;
+    padding: calculateRem(2px) calculateRem(28px) calculateRem(2px) calculateRem(8px);
     display: inline-block;
     position: relative;
 
@@ -17,16 +17,12 @@
 
     &__remove-btn {
         position: absolute;
-        top: calc(50% - #{calculateRem(12px)});
+        top: calc(50% - #{calculateRem(8px)});
         right: calculateRem(6px);
         cursor: pointer;
         border: 0;
         padding: 0;
         outline: none;
         line-height: 0;
-
-        .ibexa-icon {
-            fill: $ibexa-color-base-black;
-        }
     }
 }

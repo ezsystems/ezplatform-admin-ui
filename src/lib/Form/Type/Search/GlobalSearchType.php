@@ -10,7 +10,7 @@ namespace Ibexa\AdminUi\Form\Type\Search;
 
 use Ibexa\Platform\Bundle\Search\Form\Data\SearchData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +18,7 @@ final class GlobalSearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('query', SearchType::class, [
+        $builder->add('query', TextType::class, [
             'required' => false,
         ]);
     }

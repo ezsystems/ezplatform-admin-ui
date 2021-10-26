@@ -1,16 +1,8 @@
-.ez-search-criteria-tags {
-    transform: scaleY(1);
-    transform-origin: top center;
-    transition: all 0.2s $ibexa-admin-transition;
-
-    &--collapsed {
-        transform: scaleY(0);
-        height: 0;
-        opacity: 0;
-    }
+.ibexa-search-criteria-tags {
+    border-bottom: calculateRem(1px) solid $ibexa-color-dark-200;
+    padding-bottom: calculateRem(8px);
 
     &__tag {
-        margin-top: calculateRem(10px);
         margin-right: calculateRem(10px);
     }
 }
