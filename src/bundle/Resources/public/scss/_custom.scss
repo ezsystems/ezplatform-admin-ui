@@ -316,6 +316,7 @@ $font-family-sans-serif: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe 
 
 //Border
 $ibexa-border-radius: 10px;
+$ibexa-border-radius-small: 5px;
 
 // Tables
 $table-cell-padding: 12px 16px;
@@ -412,6 +413,14 @@ $btn-padding-x: 16px;
 $btn-border-width: 0;
 $btn-focus-box-shadow: none;
 
+//Accordion
+$accordion-border-width: 0;
+$accordion-border-radius: 0;
+$accordion-button-padding-y: 8px;
+$accordion-button-padding-x: 12px;
+$accordion-button-active-bg: $ibexa-color-white;
+$accordion-button-active-color: $ibexa-color-dark;
+
 // Ibexa fonts
 $ibexa-text-font-size-large: calculateRem(18px);
 $ibexa-text-font-size: calculateRem(16px);
@@ -428,7 +437,8 @@ $ibexa-edit-header-box-shadow: calculateRem(4px) calculateRem(22px) calculateRem
 $ibexa-edit-content-box-shadow: calculateRem(4px) calculateRem(35px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.15);
 $ibexa-anchor-btn-hover-box-shadow: 0 0 calculateRem(14px) 0 rgba($ibexa-color-black, 0.05);
 $ibexa-context-menu-box-shadow: 0 calculateRem(22px) calculateRem(24px) 0 rgba($ibexa-color-info, 0.15);
-$ibexa-content-type-edit-field-shadow: calculateRem(4px) calculateRem(22px) calculateRem(19px) calculateRem(-10px) rgba($ibexa-color-info, 0.05);
+$ibexa-content-type-edit-field-shadow: calculateRem(4px) calculateRem(22px) calculateRem(19px) calculateRem(-10px)
+    rgba($ibexa-color-info, 0.05);
 
 // Ibexa gradients
 $ibexa-gradient-danger-primary: linear-gradient(to right, $ibexa-color-danger 0%, $ibexa-color-primary 100%);

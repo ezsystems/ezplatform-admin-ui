@@ -1,6 +1,6 @@
 (function(global, doc, eZ, React, ReactDOM, Translator) {
     const SELECTOR_LOCATION_LIMITATION_BTN = '.ez-pick-location-limitation-button';
-    const SELECTOR_EZ_TAG = '.ez-tag';
+    const SELECTOR_EZ_TAG = '.ibexa-tag';
     const IDS_SEPARATOR = ',';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
@@ -116,8 +116,8 @@
             Object.entries(operations).forEach(([locationId, { content }]) => {
                 const viewData = JSON.parse(content);
                 const tag = tagsList.querySelector(`[data-location-id="${locationId}"]`);
-                const tagContent = tag.querySelector('.ez-tag__content');
-                const tagSpinner = tag.querySelector('.ez-tag__spinner');
+                const tagContent = tag.querySelector('.ibexa-tag__content');
+                const tagSpinner = tag.querySelector('.ibexa-tag__spinner');
 
                 tagContent.innerText = buildContentBreadcrumbs(viewData);
 
@@ -140,7 +140,7 @@
         tag.remove();
     };
     const attachTagEventHandlers = (limitationBtn, tag) => {
-        const removeTagBtn = tag.querySelector('.ez-tag__remove-btn');
+        const removeTagBtn = tag.querySelector('.ibexa-tag__remove-btn');
 
         removeTagBtn.addEventListener('click', () => handleTagRemove(limitationBtn, tag), false);
     };

@@ -55,29 +55,46 @@
     {%- endfor -%}
 {%- endblock -%}
 
+{%- block _search_query_widget -%}
+    {% set has_search = true %}
+
+    {{ block('form_widget_simple') }}
+{%- endblock -%}
+
 {%- block _search_content_types_widget -%}
-    <div class="ez-content-type-selector">
-    {%- set options = choices -%}
-    {%- for group_label, choice in options -%}
-        <div class="ez-content-type-selector__group {% if not loop.first %}ez-content-type-selector__group--collapsed{% endif %}">
-            <span class="ez-content-type-selector__group-title">
-                {{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}
-            </span>
-            <ul class="ez-content-type-selector__list">
-            {%- set options = choice -%}
-            {{- block('search_type_choice_widget_options') -}}
-            </ul>
-        </div>
-    {%- endfor -%}
+    <div class="ibexa-content-type-selector accordion">
+        {%- set groups = choices -%}
+        {%- for group_label, group_choices in groups -%}
+            <div class="ibexa-content-type-selector__group accordion-item">
+                <span class="ibexa-content-type-selector__group-title accordion-header">
+                    <button type="button" class="accordion-button {% if not loop.first %} collapsed{% endif %}" data-bs-toggle="collapse" data-bs-target="#{{ group_label }}">
+                        {{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}
+                    </button>
+                </span>
+                <div class="ibexa-content-type-selector__list-wrapper accordion-collapse collapse{% if loop.first %} show{% endif %}" id="{{ group_label }}">
+                    <ul class="ibexa-content-type-selector__list">
+                        {%- for choice in group_choices|slice(0, 3) -%}
+                            {{- block('search_type_choice_widget_options') -}}
+                        {%- endfor -%}
+                    </ul>
+                    {% if group_choices|length > 3 %}
+                        <a href="#" class="ibexa-content-type-selector__show-more">{{ 'content_type_selector.list.show_more'|trans|desc('See more') }}</a>
+                        <ul class="ibexa-content-type-selector__list" hidden>
+                            {%- for choice in group_choices|slice(3) -%}
+                                {{- block('search_type_choice_widget_options') -}}
+                            {%- endfor -%}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        {%- endfor -%}
     </div>
 {%- endblock -%}
 
 {%- block search_type_choice_widget_options -%}
-    {%- for group_label, choice in options -%}
-        <li class="ez-content-type-selector__item">
-            {{ form_widget(form[choice.value], {'attr': {'data-name': choice.label}, 'label_attr': {'class': 'checkbox-inline'}}) }}
-        </li>
-    {%- endfor -%}
+    <li class="ibexa-content-type-selector__item">
+        {{ form_widget(form[choice.value], {'attr': {'data-name': choice.label}, 'label_attr': {'class': 'checkbox-inline'}}) }}
+    </li>
 {%- endblock -%}
 
 {%- block checkbox_widget -%}
@@ -220,16 +237,24 @@
     </div>
 {%- endblock -%}
 
+{%- block _search_section_widget -%}
+    {{ form_widget(form, { attr: { dropdown_class: 'ibexa-dropdown--small' }}) }}
+{%- endblock -%}
+
+{%- block _search_search_language_widget -%}
+    {{ form_widget(form, { attr: { dropdown_class: 'ibexa-dropdown--small' }}) }}
+{%- endblock -%}
+
 {%- block _search_last_modified_select_widget -%}
-    {{ form_widget(form) }}
+    {{ form_widget(form, { attr: { dropdown_class: 'ibexa-dropdown--small' }}) }}
     <div 
-        class="ez-filters__range-wrapper ez-filters__range-wrapper--select-modified-range {% if form.vars.data == "custom_range" %}ez-filters__range-wrapper--visible{% endif %}" 
+        class="ibexa-filters__range-wrapper ibexa-filters__range-wrapper--select-modified-range {% if form.vars.data == "custom_range" %}ibexa-filters__range-wrapper--visible{% endif %}"
         data-period-selector="#search_last_modified_date_interval" 
         data-end-selector="#search_last_modified_end_date"
     >
         <input 
             type="text"
-            class="ez-filters__range-select form-control"
+            class="ibexa-filters__range-select form-control"
             placeholder="{{ 'search.date.range'|trans(domain='search')|desc('From date - to date') }}"
             data-start="{{ form.parent.vars.data.lastModified.start_date is defined ? form.parent.vars.data.lastModified.start_date|date("Y-m-d") : '' }}"
             data-end="{{ form.parent.vars.data.lastModified.end_date is defined ? form.parent.vars.data.lastModified.end_date|date("Y-m-d") : '' }}"
@@ -238,15 +263,15 @@
 {%- endblock -%}
 
 {%- block _search_created_select_widget -%}
-    {{ form_widget(form) }}
+    {{ form_widget(form, { attr: { dropdown_class: 'ibexa-dropdown--small' }}) }}
     <div 
-        class="ez-filters__range-wrapper ez-filters__range-wrapper--select-created-range {% if form.vars.data == "custom_range" %}ez-filters__range-wrapper--visible{% endif %}" 
+        class="ibexa-filters__range-wrapper ibexa-filters__range-wrapper--select-created-range {% if form.vars.data == "custom_range" %}ez-filters__range-wrapper--visible{% endif %}"
         data-period-selector="#search_created_date_interval" 
         data-end-selector="#search_created_end_date"
     >
         <input 
             type="text"
-            class="ez-filters__range-select form-control"
+            class="ibexa-filters__range-select form-control"
             placeholder="{{ 'search.date.range'|trans(domain='search')|desc('From date - to date') }}"
             data-start="{{ form.parent.vars.data.created.start_date is defined ? form.parent.vars.data.created.start_date|date("Y-m-d") : '' }}"
             data-end="{{ form.parent.vars.data.created.end_date is defined ? form.parent.vars.data.created.end_date|date("Y-m-d") : '' }}"
@@ -290,6 +315,7 @@
 {% block form_label_errors %}{% endblock form_label_errors %}
 
 {%- block form_widget_simple -%}
+    {%- set has_search = has_search|default(false) -%}
     {%- set is_text_input = type|default('text') == 'text' or force_text|default(false) -%}
     {%- if is_text_input -%}
         {%- set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input ibexa-input--text')|trim}) -%}
@@ -298,7 +324,7 @@
         {%- set input_html -%}
             {{ parent() }}
         {%- endset -%}
-        {%- embed '@ezdesign/ui/component/input_text.html.twig' -%}
+        {%- embed '@ezdesign/ui/component/input_text.html.twig' with { has_search } -%}
             {% block content %}
                 {{ input_html }}
             {% endblock %}

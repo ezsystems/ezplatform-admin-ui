@@ -5,170 +5,24 @@
 {% set content_breadcrumbs = '' %}
 {% set subtree_selected = form.subtree.vars.value is not empty %}
 
-{{ form_start(form, {'attr': {'class': 'ez-search-form'}}) }}
-<div class="form-group mt-4">
-    <div class="input-group">
-        <div class="ez-search-form__icon">
-            <svg class="ibexa-icon ibexa-icon--medium">
-                <use xlink:href="{{ ibexa_icon_path('search') }}"></use>
-            </svg>
-        </div>
-        <div class="ez-search-form__input-wrapper">
-            {{ form_widget(form.query) }}
-        </div>
-        <span class="input-group-btn">
-            <div class="ez-search-form__language-wrapper" {% if form.search_language.vars.choices|length == 1 %} hidden {% endif %}>
-                {{ form_widget(form.search_language, {'attr': {'class': 'ez-search-form__language-selector'}}) }}
-            </div>
-            <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--search">{{ 'search.perform'|trans|desc('Search') }}</button>
-            <button type="button" class="btn ibexa-btn ibexa-btn--tertiary ibexa-btn--filter">{{ 'search.filters'|trans|desc('Filters') }}</button>
-        </span>
+{% if subtree_selected %}
+    {% set path_locations = ez_path_to_locations(form.subtree.vars.value) %}
+    {% set location = path_locations|last %}
+    {% set content_breadcrumbs = ez_content_name(location.contentInfo) %}
+{% endif %}
+
+{{ form_start(form, {'attr': {'class': 'ibexa-search-form'}}) }}
+<div class="ibexa-search-form__search-wrapper">
+    <div class="ibexa-search-form__input-wrapper">
+        {{ form_widget(form.query, { attr: { placeholder: 'search.input.placeholder'|trans|desc('Search by name') }}) }}
     </div>
+    <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--search">{{ 'search.perform'|trans|desc('Search') }}</button>
 </div>
 
-<div class="ez-search-criteria-tags">
-    {% if form.content_types.vars.data is not empty %}
-        {% for content_type in form.content_types.vars.data %}
-            {{ include('@ezdesign/ui/search_tag.html.twig', {
-                'content': content_type.name,
-                'title': "#{'search.content.type'|trans|desc('Content Type')}: #{content_type.name}",
-                'target_selector': "#search_content_types_#{content_type.identifier}",
-                'btn_class': "ez-tag__remove-btn--content-types",
-            }) }}
-        {% endfor %}
-    {% endif %}
-
-    {% if form.section is defined and form.section.vars.data is not empty %}
-        {{ include('@ezdesign/ui/search_tag.html.twig', {
-            'content': form.section.vars.data.name,
-            'title': "#{'search.section'|trans|desc('Section')}: #{form.section.vars.data.name}",
-            'btn_class': "ez-tag__remove-btn--section",
-        }) }}
-    {% endif %}
-
-    {% if form.subtree.vars.value is not empty %}
-        {% if subtree_selected %}
-            {% set path_locations = ez_path_to_locations(form.subtree.vars.value) %}
-            {% for location in path_locations %}
-                {% set content_breadcrumbs = content_breadcrumbs ~ ez_content_name(location.contentInfo) %}
-                {% if not loop.last %}
-                    {% set content_breadcrumbs = content_breadcrumbs ~ ' / ' %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-
-        {{ include('@ezdesign/ui/search_tag.html.twig', {
-            'content': content_breadcrumbs,
-            'title':  "#{'search.subtree'|trans|desc('Subtree')}: #{content_breadcrumbs}",
-            'btn_class': "ez-tag__remove-btn--subtree",
-        }) }}
-    {% endif %}
-
-    {% if form.vars.value.lastModified is not empty %}
-        {% set start_date = form.vars.value.lastModified.start_date|ez_short_date %}
-        {% set end_date = form.vars.value.lastModified.end_date|ez_short_date %}
-
-        {{ include('@ezdesign/ui/search_tag.html.twig', {
-            'content': "#{'search.last.modified'|trans|desc('Last modified')}: #{start_date} - #{end_date}",
-            'btn_class': "ez-tag__remove-btn--last-modified",
-        }) }}
-    {% endif %}
-
-    {% if form.vars.value.created is not empty %}
-        {% set start_date = form.vars.value.created.start_date|ez_short_date %}
-        {% set end_date = form.vars.value.created.end_date|ez_short_date %}
-
-        {{ include('@ezdesign/ui/search_tag.html.twig', {
-            'content': "#{'search.created'|trans|desc('Created')}: #{start_date} - #{end_date}",
-            'btn_class': "ez-tag__remove-btn--last-created",
-        }) }}
-    {% endif %}
-
-    {% if form.creator.vars.data is not empty %}
-        {{ include('@ezdesign/ui/search_tag.html.twig', {
-            'content': form.creator.vars.data.name,
-            'title': "#{'search.creator'|trans|desc('Creator')}: #{form.creator.vars.data.name}",
-            'btn_class': "ez-tag__remove-btn--creator",
-        }) }}
-    {% endif %}
-</div>
-
-<div class="ez-filters ez-filters--collapsed">
-    <div class="ez-filters__row">
-        <div class="ez-filters__item ez-filters__item--content-type">
-            <label class="ibexa-label">{{ 'search.content.type'|trans|desc('Content Type') }}</label>
-            <select class="form-control ez-filters__select ez-filters__select--content-type" hidden>
-                <option class="ez-filters__option ez-filters__option--hidden" data-default="{{ 'search.any.content.type'|trans|desc('Any Content Type') }}" value="">{{ 'search.any.content.type'|trans|desc('Any Content Type') }}</option>
-            </select>
-            {{ form_widget(form.content_types, {'attr': {'class': 'ez-filters__select'}}) }}
-        </div>
-    </div>
-    <div class="ez-filters__row">
-        {% if form.section is defined %}
-            <div class="ez-filters__item ez-filters__item--section">
-                <label class="ibexa-label">{{ 'search.section'|trans|desc('Section') }}</label>
-                {{ form_widget(form.section, {'attr': {'class': 'ez-filters__select'}}) }}
-            </div>
-        {% endif %}
-        <div class="ez-filters__item ez-filters__item--subtree">
-            <label class="ibexa-label">{{ 'search.subtree'|trans|desc('Subtree') }}</label>
-            <div>
-                <button class="btn ibexa-btn ibexa-btn--secondary ibexa-btn--udw-select-location"
-                    type="button"
-                    {% if form.subtree.vars.value is not empty %} hidden {% endif %}
-                    data-universal-discovery-title="{{'search.udw.select_content'|trans|desc('Select Content')}}"
-                    data-location-path-input-selector="#{{form.subtree.vars.id}}"
-                    data-content-breadcrumbs-selector="#{{form.subtree.vars.id}}-content-breadcrumbs"
-                    data-udw-config="{{ ez_udw_config('single_container', {}) }}"
-                    >{{'search.select_content'|trans|desc('Select Content')}}</button>
-
-                {{ include('@ezdesign/ui/tag.html.twig', {
-                    'content': content_breadcrumbs,
-                    'is_loading_state': false,
-                    'tag_attributes': {
-                        'hidden': not subtree_selected,
-                        'id': form.subtree.vars.id ~ '-content-breadcrumbs',
-                    }
-                }) }}
-            </div>
-            {{ form_widget(form.subtree) }}
-        </div>
-    </div>
-    <div class="ez-filters__row">
-        <div class="ez-filters__item ez-filters__item--modified">
-            <label class="ibexa-label">{{ 'search.last.modified'|trans|desc('Last modified') }}</label>
-            {{ form_widget(form.last_modified_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-filters__range-wrapper--select-modified-range'}}) }}
-            {{ form_errors(form.last_modified_select) }}
-        </div>
-        <div class="ez-filters__item ez-filters__item--created">
-            <label class="ibexa-label">{{ 'search.created'|trans|desc('Created') }}</label>
-            {{ form_widget(form.created_select, {'attr': {'class': 'ez-filters__select', 'data-target-selector': '.ez-filters__range-wrapper--select-created-range'}}) }}
-            {{ form_errors(form.created_select) }}
-        </div>
-        <div class="ez-filters__item ez-filters__item--creator">
-            <label class="ibexa-label">{{ 'search.creator'|trans|desc('Creator') }}</label>
-            {% set creator = form.vars.data.creator %}
-            <div class="ez-filters__input-wrapper">
-                <input type="text"
-                    class="form-control ez-filters__input"
-                    data-content-type-identifiers="{{ user_content_type_identifier|join(',') }}"
-                    value="{{ creator is not empty ? ez_content_name(creator) }}"
-                    placeholder="{{ 'search.creator_input.placeholder'|trans|desc('Type creator\'s name') }}"
-                    {{ creator is not empty ? 'disabled'  }}
-                >
-                <svg class="ibexa-icon ibexa-icon--dark ibexa-icon--medium ibexa-icon--reset">
-                    <use xlink:href="{{ ibexa_icon_path('circle-close') }}"></use>
-                </svg>
-            </div>
-            <ul class="ez-filters__user-list ez-filters__user-list--hidden"></ul>
-        </div>
-    </div>
-    <div class="ez-filters__btns">
-        <button type="submit" class="btn ibexa-btn ibexa-btn--primary ibexa-btn--apply" disabled>{{ 'search.apply'|trans|desc('Apply') }}</button>
-        <button class="btn ibexa-btn ibexa-btn--secondary ibexa-btn--clear">{{ 'search.clear'|trans|desc('Clear') }}</button>
-    </div>
-</div>
 {{ form_widget(form.last_modified, {'attr': {'hidden': 'hidden'}}) }}
 {{ form_widget(form.created, {'attr': {'hidden': 'hidden'}}) }}
 {{ form_widget(form.creator, {'attr': {'hidden': 'hidden'}}) }}
+
+{% include '@ezdesign/ui/search/filters.html.twig' %}
+{% include '@ezdesign/ui/search/results.html.twig' %}
 {{ form_end(form) }}

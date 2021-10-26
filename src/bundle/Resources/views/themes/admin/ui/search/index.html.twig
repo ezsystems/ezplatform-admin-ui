@@ -6,6 +6,15 @@
 
 {% block title %}{{ 'search'|trans|desc('Search') }}{% endblock %}
 
+{% block breadcrumbs %}
+    {% set items = [{
+        'value': 'search'|trans|desc('Search'),
+        'url': path('ezplatform.search')
+    }] %}
+
+    {% include '@ezdesign/ui/breadcrumbs.html.twig' with { items: items } %}
+{% endblock %}
+
 {% block header %}
     {% include '@ezdesign/ui/page_title.html.twig' with {
         title: 'search'|trans|desc('Search'),
@@ -13,122 +22,20 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row align-items-stretch ez-main-row">
-        <div class="container ez-content-container">
-            <section class="container ez-container">
+    <div class="row align-items-stretch ibexa-main-row">
+        <div class="ibexa-search">
+            <div class="ibexa-search__form">
                 {% include '@ezdesign/ui/search/form.html.twig' with { form: form } %}
-            </section>
-
-            {% if results is defined %}
-                <section class="container ez-container mt-4">
-                    {% set body_rows = [] %}
-                    {% for result in results %}
-                        {% set body_row_cols = [] %}
-                        {% set col_raw %}
-                            <svg class="ibexa-icon ibexa-icon--small">
-                                <use xlink:href="{{ ez_content_type_icon(result.content_type.identifier) }}"></use>
-                            </svg>
-                        {% endset %}
-                        {% set body_row_cols = body_row_cols|merge([{
-                            has_icon: true,
-                            content: col_raw,
-                            raw: true,
-                        }]) %}
-
-                        {% set col_raw %}
-                            {% if result.mainLocationId is not null %}
-                                <a
-                                    href="{{ path('_ez_content_view', {
-                                        'contentId': result.contentId,
-                                        'locationId': result.resolvedLocation.id,
-                                        'languageCode': result.translation_language_code,
-                                    }) }}"
-                                >
-                                    {{ result.name }}
-                                </a>
-                            {% else %}
-                                {{ result.name }}
-                            {% endif %}
-                        {% endset %}
-                        {% set body_row_cols = body_row_cols|merge([{
-                            content: col_raw,
-                            raw: true,
-                        }]) %}
-
-                        {% set body_row_cols = body_row_cols|merge([
-                            { content: result.modified|ez_full_datetime },
-                            { content: result.type },
-                        ]) %}
-
-                        {% if form.search_language.vars.choices|length > 1 %}
-                            {% set col_raw %}
-                                {% for language in result.available_translations %}
-                                    {{ language.name }}{% if not loop.last %}, {% endif %}
-                                {% endfor %}
-                            {% endset %}
-
-                            {% set body_row_cols = body_row_cols|merge([{
-                                has_icon: true,
-                                content: col_raw,
-                                raw: true,
-                            }]) %}
-                        {% endif %}
-
-                        {% set col_raw %}
-                            {% if result.mainLocationId is not null %}
-                                {% include '@ezdesign/ui/edit_translation_button.html.twig' with {
-                                    'contentId': result.contentId,
-                                    'translations': result.available_enabled_translations,
-                                    'top_offset': 100
-                                }%}
-                            {% endif %}
-                        {% endset %}
-                        {% set body_row_cols = body_row_cols|merge([{
-                            has_action_btns: true,
-                            content: col_raw,
-                            raw: true,
-                        }]) %}
-
-                        {% set body_rows = body_rows|merge([{ cols: body_row_cols }]) %}
-                    {% endfor %}
-
-                    {% set head_cols = [
-                        { has_icon: true },
-                        { content: 'search.name'|trans|desc('Name') },
-                        { content: 'search.modified'|trans|desc('Modified') },
-                        { content: 'search.type'|trans|desc('Content Type') },
-                    ] %}
-                    {% if form.search_language.vars.choices|length > 1 %}
-                        {% set head_cols = head_cols|merge([{
-                            content: 'search.translations'|trans|desc('Translations'),
-                        }]) %}
-                    {% endif %}
-                    {% set head_cols = head_cols|merge([{ }]) %}
-
-                    {% include '@ezdesign/ui/component/table/table.html.twig' with {
-                        headline: 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)'),
-                        head_cols,
-                        body_rows,
-                    } %}
-
-                    {% if pager.haveToPaginate %}
-                        {% include '@ezdesign/ui/pagination.html.twig' with {
-                            'pager': pager,
-                            'paginaton_params' : {
-                                'pageParameter': '[search][page]'
-                            }
-                        } %}
-                    {% endif %}
-
-                    {% form_theme form_edit '@ezdesign/ui/form/flat_widgets.html.twig' %}
-                    {{ form_start(form_edit, {
-                        'action': path('ezplatform.content.edit'),
-                        'attr': { 'class': 'ez-edit-content-form'}
-                    }) }}
-                    {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
-                    {{ form_end(form_edit) }}
-                </section>
-            {% endif %}
+            </div>
+            <div class="ibexa-search__edit-form">
+                {% form_theme form_edit '@ezdesign/ui/form/flat_widgets.html.twig' %}
+                {{ form_start(form_edit, {
+                    'action': path('ezplatform.content.edit'),
+                    'attr': { 'class': 'ez-edit-content-form'}
+                }) }}
+                {{ form_widget(form_edit.language, {'attr': {'hidden': 'hidden', 'class': 'language-input'}}) }}
+                {{ form_end(form_edit) }}
+            </div>
         </div>
     </div>
 {% endblock %}

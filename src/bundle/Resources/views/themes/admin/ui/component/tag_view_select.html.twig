@@ -13,6 +13,7 @@
 {% set is_disabled = attr.disabled is defined ? attr.disabled : false %}
 {% set default_type = 'tag_view_select.default_type'|trans|desc('path') %}
 {% set type = type|default(default_type) %}
+{% set show_title = show_title ?? true %}
 
 <div
     class="ibexa-tag-view-select"
@@ -20,9 +21,11 @@
     data-can-be-empty="{{ can_be_empty }}"
     {% if is_disabled %}disabled{% endif %}
 >
-    <div class="ibexa-tag-view-select__info">
-        {{ title|default(default_title) }}
-    </div>
+    {% if show_title %}
+        <div class="ibexa-tag-view-select__info">
+            {{ title|default(default_title) }}
+        </div>
+    {% endif %}
     <div
         class="ibexa-tag-view-select__selected-list"
         data-template="{{ include('@ezdesign/ui/component/tag_view_select_selected_item_tag.html.twig', {
