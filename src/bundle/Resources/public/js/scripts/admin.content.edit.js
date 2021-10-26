@@ -1,5 +1,11 @@
 (function(global, doc, eZ, Translator) {
     const ENTER_KEY_CODE = 13;
+    const SIMPLIFIED_MESSAGE_TIMEOUT = 3000;
+    const STATUS_ERROR = 'error';
+    const STATUS_OFF = 'off';
+    const STATUS_ON = 'on';
+    const STATUS_SAVED = 'saved';
+    const STATUS_SAVING = 'saving';
     const inputTypeToPreventSubmit = [
         'checkbox',
         'color',
@@ -24,6 +30,11 @@
     const form = doc.querySelector('.ez-form-validate');
     const submitBtns = form.querySelectorAll('[type="submit"]:not([formnovalidate])');
     const menuButtonsToValidate = doc.querySelectorAll('button[data-validate]');
+    const fields = doc.querySelectorAll('.ez-field-edit');
+    const autosave = doc.querySelector('.ibexa-autosave');
+    const autosaveStatusSavedNode = autosave.querySelector('.ibexa-autosave__status-saved');
+    let currentAutosaveStatus = autosave.classList.contains('ibexa-autosave--on') ? STATUS_ON : STATUS_OFF;
+    let simplifiedMessageTimeoutId = null;
     const getValidationResults = (validator) => {
         const isValid = validator.isValid();
         const validatorName = validator.constructor.name;
@@ -42,7 +53,6 @@
             return invalidSections;
         }, new Set());
     };
-    const fields = doc.querySelectorAll('.ez-field-edit');
     const focusOnFirstError = () => {
         const invalidFields = doc.querySelectorAll('.ez-field-edit.is-invalid');
         const invalidSection = invalidFields[0].closest('.ibexa-anchor-navigation-sections__section');
@@ -97,8 +107,8 @@
 
         const allValidatorsWithErrors = validationResults.filter((result) => !result.isValid).map((result) => result.validatorName);
 
-            btn.dataset.validatorsWithErrors = [...new Set(allValidatorsWithErrors)].join();
-            fields.forEach((field) => field.removeAttribute('id'));
+        btn.dataset.validatorsWithErrors = [...new Set(allValidatorsWithErrors)].join();
+        fields.forEach((field) => field.removeAttribute('id'));
 
         doc.querySelectorAll('.ibexa-anchor-navigation-menu__btn').forEach((anchorBtn) => {
             anchorBtn.classList.remove('ibexa-anchor-navigation-menu__btn--invalid');
@@ -107,14 +117,15 @@
         invalidSections.forEach((sections) => {
             sections.forEach((invalidSectionId) => {
                 doc.querySelector(`[data-anchor-target-section='${invalidSectionId}']`).classList.add(
-                        'ibexa-anchor-navigation-menu__btn--invalid'
-                    );
-                });
+                    'ibexa-anchor-navigation-menu__btn--invalid'
+                );
             });
+        });
 
         focusOnFirstError();
 
-        return false;};
+        return false;
+    };
     const isAutosaveEnabled = () => {
         return eZ.adminUiConfig.autosave.enabled && form.querySelector('[name="ezplatform_content_forms_content_edit[autosave]"]');
     };
@@ -133,43 +144,69 @@
             }
         }
     };
+    const generateCssStatusClass = (status) => `ibexa-autosave--${status}`;
+    const setAutosaveStatus = (newStatus) => {
+        if (!autosave) {
+            return;
+        }
+
+        const oldCssStatusClass = generateCssStatusClass(currentAutosaveStatus);
+        const newCssStatusClass = generateCssStatusClass(newStatus);
+
+        autosave.classList.remove(oldCssStatusClass);
+        autosave.classList.remove('ibexa-autosave--saved-simplified');
+        autosave.classList.add(newCssStatusClass);
+
+        currentAutosaveStatus = newStatus;
+    };
+    const setDraftSavedMessage = () => {
+        if (!autosave) {
+            return;
+        }
+
+        const userPreferredTimezone = eZ.adminUiConfig.timezone;
+        const saveDate = eZ.helpers.timezone.convertDateToTimezone(new Date(), userPreferredTimezone);
+        const saveTime = moment(saveDate).formatICU('HH:mm');
+        const saveMessage = Translator.trans(
+            /*@Desc("Draft saved %time%")*/ 'content_edit.autosave.status_saved.message.full',
+            { time: saveTime },
+            'content'
+        );
+
+        autosaveStatusSavedNode.innerHTML = saveMessage;
+        setDelayedDraftSavedSimplifiedMessage();
+    };
+    const setDelayedDraftSavedSimplifiedMessage = () => {
+        simplifiedMessageTimeoutId = setTimeout(() => {
+            const savedMessage = Translator.trans(
+                /*@Desc("Saved")*/ 'content_edit.autosave.status_saved.message.simplified',
+                {},
+                'content'
+            );
+
+            autosaveStatusSavedNode.innerHTML = savedMessage;
+            autosave.classList.add('ibexa-autosave--saved-simplified');
+        }, SIMPLIFIED_MESSAGE_TIMEOUT);
+    };
 
     if (isAutosaveEnabled()) {
-        const autosaveWrapper = doc.querySelector('.ibexa-autosave');
         const AUTOSAVE_SUBMIT_BUTTON_NAME = 'ezplatform_content_forms_content_edit[autosave]';
-        let lastSuccessfulAutosave = null;
 
         setInterval(() => {
             const formData = new FormData(form);
 
             formData.set(AUTOSAVE_SUBMIT_BUTTON_NAME, true);
+            clearTimeout(simplifiedMessageTimeoutId);
+            setAutosaveStatus(STATUS_SAVING);
 
             fetch(form.target || window.location.href, { method: 'POST', body: formData })
                 .then(eZ.helpers.request.getStatusFromResponse)
                 .then(() => {
-                    lastSuccessfulAutosave = eZ.helpers.timezone.formatFullDateTime(new Date());
-
-                    autosaveWrapper?.classList.remove('ibexa-autosave--failed');
-                    autosaveWrapper?.classList.add('ibexa-autosave--saved');
+                    setAutosaveStatus(STATUS_SAVED);
+                    setDraftSavedMessage();
                 })
                 .catch(() => {
-                    autosaveWrapper?.classList.remove('ibexa-autosave--saved');
-                    autosaveWrapper?.classList.add('ibexa-autosave--failed');
-                })
-                .finally(() => {
-                    autosaveWrapper?.classList.remove('ibexa-autosave--not-saved');
-
-                    if (lastSuccessfulAutosave) {
-                        const lastSavedText = Translator.trans(
-                            /*@Desc("Last saved draft was on %date%")*/ 'content_edit.last_saved',
-                            { date: lastSuccessfulAutosave },
-                            'content'
-                        );
-
-                        if (autosaveWrapper) {
-                            autosaveWrapper.querySelector('.ibexa-autosave__last-saved').innerHTML = lastSavedText;
-                        }
-                    }
+                    setAutosaveStatus(STATUS_ERROR);
                 });
         }, eZ.adminUiConfig.autosave.interval);
     }
@@ -194,5 +231,4 @@
     menuButtonsToValidate.forEach((btn) => {
         btn.addEventListener('click', validateHandler, false);
     });
-
 })(window, window.document, window.eZ, window.Translator);

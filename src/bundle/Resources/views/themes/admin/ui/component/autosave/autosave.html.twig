@@ -1,0 +1,36 @@
+<div
+    class="ibexa-autosave
+        {{ is_enabled ? 'ibexa-autosave--on' : 'ibexa-autosave--off' }}
+        {{ is_dark_mode|default(false) ? 'ibexa-autosave--light' }}"
+    {% if is_enabled %}title="{{ 'content.autosave.turn_off.message'|trans()|desc('You can turn autosave off in your user settings') }}"{% endif %}
+>
+    <svg class="ibexa-icon ibexa-icon--small ibexa-autosave__icon-error">
+        <use xlink:href="{{ ibexa_icon_path('autosave-error') }}"></use>
+    </svg>
+    <svg class="ibexa-icon ibexa-icon--small ibexa-autosave__icon-off">
+        <use xlink:href="{{ ibexa_icon_path('autosave-off') }}"></use>
+    </svg>
+    <svg class="ibexa-icon ibexa-icon--small ibexa-autosave__icon-on">
+        <use xlink:href="{{ ibexa_icon_path('autosave-on') }}"></use>
+    </svg>
+    <svg class="ibexa-icon ibexa-icon--small ibexa-autosave__icon-saved">
+        <use xlink:href="{{ ibexa_icon_path('autosave-saved') }}"></use>
+    </svg>
+    <svg class="ibexa-icon ibexa-icon--small ibexa-autosave__icon-saving">
+        <use xlink:href="{{ ibexa_icon_path('autosave-saving') }}"></use>
+    </svg>
+
+    <div class="ibexa-autosave__status-error">
+        {{ 'content_edit.autosave.status_error.message'|trans()|desc('Saving error') }}
+    </div>
+    <div class="ibexa-autosave__status-off">
+        {{ 'content_edit.autosave.status_off.message'|trans()|desc('Autosave is off') }}
+    </div>
+    <div class="ibexa-autosave__status-on">
+        {{ 'content_edit.autosave.status_on.message'|trans()|desc('Autosave is on') }}
+    </div>
+    <div class="ibexa-autosave__status-saved"></div>
+    <div class="ibexa-autosave__status-saving">
+        {{ 'content_edit.autosave.status_saving.message'|trans()|desc('Saving') }}
+    </div>
+</div>

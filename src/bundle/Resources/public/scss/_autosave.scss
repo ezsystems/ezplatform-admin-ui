@@ -1,32 +1,54 @@
 .ibexa-autosave {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     color: $ibexa-color-dark-400;
     font-size: $ibexa-text-font-size-small;
+    fill: $ibexa-color-dark;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
-    &--not-saved {
-        .ibexa-autosave {
-            &__autosave-failed,
-            &__last-saved {
-                display: none;
+    &--light {
+        color: $ibexa-color-white;
+        fill: $ibexa-color-white;
+    }
+
+    $states: 'error', 'off', 'on', 'saved', 'saving';
+
+    @each $state in $states {
+        &__icon-#{$state} {
+            margin-right: calculateRem(8px);
+        }
+
+        &__status-#{$state} {
+            white-space: nowrap;
+        }
+
+        &__icon-#{$state},
+        &__status-#{$state} {
+            display: none;
+        }
+
+        &--#{$state} {
+            .ibexa-autosave__icon-#{$state},
+            .ibexa-autosave__status-#{$state} {
+                display: initial;
             }
         }
     }
 
-    &--saved {
-        .ibexa-autosave {
-            &__autosave-failed {
-                display: none;
-            }       
+    &--saved-simplified {
+        color: $ibexa-color-success;
+
+        .ibexa-autosave__icon-saved {
+            fill: $ibexa-color-success;
         }
     }
 
-    &--failed {
-        .ibexa-autosave {
-            &__autosave-failed {
-                color: $ibexa-color-danger;
-            }
+    &--error {
+        color: $ibexa-color-danger;
+
+        .ibexa-autosave__icon-error {
+            fill: $ibexa-color-danger;
         }
     }
 }
