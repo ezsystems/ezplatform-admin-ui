@@ -4,7 +4,7 @@
     position: relative;
 
     .m-tree {
-        width: initial !important;
+        width: initial !important; // TODO: remove when Content Tree refactored
         max-width: initial;
         border-radius: $ibexa-border-radius;
         

@@ -142,15 +142,13 @@ const ContentCreateWidget = () => {
                     </div>
                     <div className="ibexa-instant-filter__items">
                         {contentTypes.map(([groupName, groupItems]) => {
+                            const restrictedContentTypeIds = selectedLocation?.permissions?.create.restrictedContentTypeIds ?? [];
                             const isHidden = groupItems.every((groupItem) => {
-                                return (
-                                    (filterQuery && !groupItem.name.toLowerCase().includes(filterQuery)) ||
-                                    (selectedLocation &&
-                                        selectedLocation.permissions &&
-                                        selectedLocation.permissions.create.restrictedContentTypeIds.length &&
-                                        !selectedLocation.permissions.create.restrictedContentTypeIds.includes(groupItem.id.toString())) ||
-                                    (allowedContentTypes && !allowedContentTypes.includes(groupItem.identifier))
-                                );
+                                const isNotSearchedName = filterQuery && !groupItem.name.toLowerCase().includes(filterQuery);
+                                const hasNotPermission = restrictedContentTypeIds.length && !restrictedContentTypeIds.includes(groupItem.id.toString());
+                                const isNotAllowedContentType = allowedContentTypes && !allowedContentTypes.includes(groupItem.identifier);
+
+                                return isNotSearchedName || hasNotPermission || isNotAllowedContentType;
                             });
 
                             if (isHidden) {

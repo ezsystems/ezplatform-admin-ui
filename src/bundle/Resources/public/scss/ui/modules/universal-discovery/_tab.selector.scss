@@ -24,10 +24,10 @@
 
         &:not(:first-of-type) {
             &:before {
+                content: '';
                 position: absolute;
                 top: calculateRem(-12px);
                 left: calculateRem(12px);
-                content: '';
                 height: calculateRem(1.5px);
                 width: calculateRem(24px);
                 background-color: $ibexa-color-dark-200;

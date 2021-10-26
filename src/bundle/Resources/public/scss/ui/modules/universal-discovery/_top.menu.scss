@@ -14,14 +14,13 @@
     }
 
     &__title-wrapper {
-        margin: 0;
+        margin: 0 0 calculateRem(40px);
         font-weight: 600;
         color: $ibexa-color-dark;
         flex: 1;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin-right: calculateRem(40px);
     }
 
     &__actions-wrapper {
