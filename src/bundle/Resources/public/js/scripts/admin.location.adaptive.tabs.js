@@ -48,7 +48,7 @@
                 popupMenuElement,
                 triggerElement: tabMore,
                 onItemClick: (event) => {
-                    const itemElement = event.target;
+                    const itemElement = event.currentTarget;
                     const tabLinkId = itemElement.dataset.tabLinkId;
                     const tabToShow = tabsList.querySelector(`.ibexa-tabs__link#${tabLinkId}`);
 
