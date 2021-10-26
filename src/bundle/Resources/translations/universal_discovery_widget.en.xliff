@@ -6,6 +6,16 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="653b9891e9f38d7f9f56485fb0fe26250c3b1ac3" resname="actions_menu.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: actions_menu.cancel</note>
+      </trans-unit>
+      <trans-unit id="5042ae08713a600d25e4ddded7e9334daf182bbf" resname="actions_menu.confirm">
+        <source>Confirm</source>
+        <target state="new">Confirm</target>
+        <note>key: actions_menu.confirm</note>
+      </trans-unit>
       <trans-unit id="f3902e2cf1dc7593d56db51492f2c93763e17550" resname="add_location.title">
         <source>Select Location</source>
         <target state="new">Select Location</target>
@@ -306,11 +316,6 @@
         <target state="new">Cannot find children Locations with ID %idList%</target>
         <note>key: select_location.error</note>
       </trans-unit>
-      <trans-unit id="d36dc1b82f519bf7d199b89e6ef738beaa3c7387" resname="selected_locations.cancel">
-        <source>Cancel</source>
-        <target state="new">Cancel</target>
-        <note>key: selected_locations.cancel</note>
-      </trans-unit>
       <trans-unit id="f57171aaa260d58b75c085d5606779e75a97751f" resname="selected_locations.clear_selection">
         <source>Clear selection</source>
         <target state="new">Clear selection</target>
@@ -320,11 +325,6 @@
         <source>Collapse sidebar</source>
         <target state="new">Collapse sidebar</target>
         <note>key: selected_locations.collapse.sidebar</note>
-      </trans-unit>
-      <trans-unit id="caf006efdc92c9342e605510301213f008f4b31b" resname="selected_locations.confirm">
-        <source>Confirm</source>
-        <target state="new">Confirm</target>
-        <note>key: selected_locations.confirm</note>
       </trans-unit>
       <trans-unit id="19700661da70137e52d0009660c9a87f5bcb99bd" resname="selected_locations.expand.sidebar">
         <source>Expand sidebar</source>
