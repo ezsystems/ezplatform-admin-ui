@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect, useCallback, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
-import { SelectedContentTypesContext, SelectedSectionContext, SelectedSubtreeContext } from '../search/search';
+import { SelectedContentTypesContext, SelectedSectionContext, SelectedSubtreeContext, SelectedLanguageContext } from '../search/search';
 import { findLocationsById } from '../../services/universal.discovery.service';
 import { RestInfoContext } from '../../universal.discovery.module';
 
@@ -12,13 +12,18 @@ import Collapsible from '../collapsible/collapsible';
 import ContentTypeSelector from '../content-type-selector/content.type.selector';
 import Icon from '../../../common/icon/icon';
 
+const languages = Object.values(window.eZ.adminUiConfig.languages.mappings);
+
 const Filters = ({ search }) => {
     const [selectedContentTypes, dispatchSelectedContentTypesAction] = useContext(SelectedContentTypesContext);
     const [selectedSection, setSelectedSection] = useContext(SelectedSectionContext);
     const [selectedSubtree, setSelectedSubtree] = useContext(SelectedSubtreeContext);
+    const [selectedLanguage, setSelectedLanguage] = useContext(SelectedLanguageContext);
+    const prevSelectedLanguage = useRef(selectedLanguage);
     const [subtreeBreadcrumbs, setSubtreeBreadcrumbs] = useState('');
     const [filtersCleared, setFiltersCleared] = useState(false);
     const restInfo = useContext(RestInfoContext);
+    const updateSelectedLanguage = (value) => setSelectedLanguage(value);
     const clearFilters = () => {
         dispatchSelectedContentTypesAction({ type: 'CLEAR_CONTENT_TYPES' });
         setSelectedSection('');
@@ -70,7 +75,7 @@ const Filters = ({ search }) => {
         ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, mergedConfig), udwContainer);
     };
     const makeSearch = useCallback(() => search(0), [search]);
-    const isApplyButtonEnabled = !!selectedContentTypes.length || !!selectedSection || !!selectedSubtree;
+    const isApplyButtonEnabled = !!selectedContentTypes.length || !!selectedSection || !!selectedSubtree || prevSelectedLanguage.current !== selectedLanguage;
     const renderSubtreeBreadcrumbs = () => {
         if (!subtreeBreadcrumbs) {
             return null;
@@ -107,10 +112,15 @@ const Filters = ({ search }) => {
         );
     };
     const filtersLabel = Translator.trans(/*@Desc("Filters")*/ 'filters.title', {}, 'universal_discovery_widget');
+    const languageLabel = Translator.trans(/*@Desc("Language")*/ 'filters.language', {}, 'universal_discovery_widget');
     const sectionLabel = Translator.trans(/*@Desc("Section")*/ 'filters.section', {}, 'universal_discovery_widget');
     const subtreeLabel = Translator.trans(/*@Desc("Subtree")*/ 'filters.subtree', {}, 'universal_discovery_widget');
     const clearLabel = Translator.trans(/*@Desc("Clear")*/ 'filters.clear', {}, 'universal_discovery_widget');
     const applyLabel = Translator.trans(/*@Desc("Apply")*/ 'filters.apply', {}, 'universal_discovery_widget');
+    const languageOptions = languages.filter(((language) => language.enabled)).map((language) => ({
+        value: language.languageCode,
+        label: language.name,
+    }));
     const sectionOptions = Object.entries(window.eZ.adminUiConfig.sections).map(([sectionIdentifier, sectionName]) => ({
         value: sectionIdentifier,
         label: sectionName,
@@ -145,6 +155,17 @@ const Filters = ({ search }) => {
                         {clearLabel}
                     </button>
                 </div>
+            </div>
+            <div className="c-filters__row">
+                <div className="c-filters__row-title">
+                    {languageLabel}
+                </div>
+                <Dropdown
+                    small={true}
+                    onChange={updateSelectedLanguage}
+                    value={selectedLanguage}
+                    options={languageOptions}
+                />
             </div>
             <ContentTypeSelector />
             <Collapsible title={sectionLabel}>

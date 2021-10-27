@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useReducer, useContext, createContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+export const SelectedLanguageContext = createContext();
 export const SelectedContentTypesContext = createContext();
 export const SelectedSectionContext = createContext();
 export const SelectedSubtreeContext = createContext();
 
-import Dropdown from '../dropdown/dropdown';
+import Icon from '../../../common/icon/icon';
 import InputSearch from '../input-search/input.search';
 import ContentTable from '../content-table/content.table';
 import Filters from '../filters/filters';
 import { useSearchByQueryFetch } from '../../hooks/useSearchByQueryFetch';
 import { AllowedContentTypesContext, SearchTextContext } from '../../universal.discovery.module';
-
-const ENTER_CHAR_CODE = 13;
 
 const selectedContentTypesReducer = (state, action) => {
     switch (action.type) {
@@ -41,7 +40,6 @@ const Search = ({ itemsPerPage }) => {
     const [selectedLanguage, setSelectedLanguage] = useState(firstLanguageCode);
     const prevSearchText = useRef(null);
     const searchActionRef = useRef(null);
-    const updateSelectedLanguage = (value) => setSelectedLanguage(value);
     const [isLoading, data, searchByQuery] = useSearchByQueryFetch();
     const search = () => {
         const shouldResetOffset = prevSearchText.current !== searchText && offset !== 0;
@@ -68,32 +66,6 @@ const Search = ({ itemsPerPage }) => {
     const changePage = (pageIndex) => setOffset(pageIndex * itemsPerPage);
     const renderSearchResults = () => {
         const searchResultsLabel = Translator.trans(/*@Desc("Search results")*/ 'search.search_results', {}, 'universal_discovery_widget');
-        const noResultsLabel = Translator.trans(
-            /*@Desc("Sorry, no results were found for")*/ 'search.no_results',
-            {},
-            'universal_discovery_widget'
-        );
-        const tipsLabel = Translator.trans(/*@Desc("Some helpful search tips")*/ 'search.tips', {}, 'universal_discovery_widget');
-        const checkSpellingLabel = Translator.trans(
-            /*@Desc("Check spelling of keywords.")*/ 'search.check_spelling',
-            {},
-            'universal_discovery_widget'
-        );
-        const differentKeywordsLabel = Translator.trans(
-            /*@Desc("Try different keywords.")*/ 'search.different_keywords',
-            {},
-            'universal_discovery_widget'
-        );
-        const moreGeneralLabel = Translator.trans(
-            /*@Desc("Try more general keywords.")*/ 'search.more_general',
-            {},
-            'universal_discovery_widget'
-        );
-        const fewerKeywordsLabel = Translator.trans(
-            /*@Desc("Try fewer keywords. Reducing keywords result in more matches.")*/ 'search.fewer_keywords',
-            {},
-            'universal_discovery_widget'
-        );
         const title = `${searchResultsLabel} (${data.count})`;
 
         if (data.count) {
@@ -108,33 +80,57 @@ const Search = ({ itemsPerPage }) => {
                 />
             );
         } else if (!!data.items) {
+            const noResultsLabel = Translator.trans(
+                /*@Desc("No results found for %query%")*/ 'search.no_results',
+                { query: searchText },
+                'universal_discovery_widget'
+            );
+            const noResultsHints = [
+                Translator.trans(
+                    /*@Desc("Check the spelling of keywords.")*/'search.no_results.hint.check_spelling',
+                    {},
+                    'universal_discovery_widget',
+                ),
+                Translator.trans(
+                    /*@Desc("Try more general keywords.")*/'search.no_results.hint.more_general',
+                    {},
+                    'universal_discovery_widget',
+                ),
+                Translator.trans(
+                    /*@Desc("Try different keywords.")*/'search.no_results.hint.different_kewords',
+                    {},
+                    'universal_discovery_widget',
+                ),
+                Translator.trans(
+                    /*@Desc("Try fewer keywords. Reducing keywords results in more matches.")*/'search.no_results.hint.fewer_keywords',
+                    {},
+                    'universal_discovery_widget',
+                ),
+            ];
+
             return (
                 <div className="c-search__no-results">
-                    <div className="c-search__no-results-title">{title}</div>
-                    <table className="table table-hover">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <span>{`${noResultsLabel} "${searchText}".`}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h6>{tipsLabel}:</h6>
-                    <ul>
-                        <li>{checkSpellingLabel}</li>
-                        <li>{differentKeywordsLabel}</li>
-                        <li>{moreGeneralLabel}</li>
-                        <li>{fewerKeywordsLabel}</li>
-                    </ul>
+                    <img
+                        className=""
+                        src="/bundles/ezplatformadminui/img/no-results.svg"
+                    />
+                    <h2 className="c-search__no-results-title">
+                        {noResultsLabel}
+                    </h2>
+                    <div className="c-search__no-results-subtitle">
+                        {noResultsHints.map((hint) => (
+                            <div className="c-search__no-results-hint">
+                                <div className="c-search__no-results-hint-icon-wrapper">
+                                    <Icon name="approved" extraClasses="ibexa-icon--small-medium" />
+                                </div>
+                                <div class="c-search__no-results-hint-text">{hint}</div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             );
         }
     };
-    const languageOptions = languages.filter(((language) => language.enabled)).map((language) => ({
-        value: language.languageCode,
-        label: language.name,
-    }));
 
     useEffect(search, [searchText, offset]);
 
@@ -144,15 +140,6 @@ const Search = ({ itemsPerPage }) => {
                 <div className="c-search__input-wrapper">
                     <InputSearch small={false} ref={searchActionRef} />
                 </div>
-                {languages.length > 1 ? (
-                    <div className="c-search__selector-wrapper">
-                        <Dropdown
-                            onChange={updateSelectedLanguage}
-                            value={selectedLanguage}
-                            options={languageOptions}
-                        />
-                    </div>
-                ) : null}
                 <button className="c-search__search-btn btn ibexa-btn ibexa-btn--primary" onClick={searchSubmit}>
                     {searchLabel}
                 </button>
@@ -162,7 +149,9 @@ const Search = ({ itemsPerPage }) => {
                     <SelectedContentTypesContext.Provider value={[selectedContentTypes, dispatchSelectedContentTypesAction]}>
                         <SelectedSectionContext.Provider value={[selectedSection, setSelectedSection]}>
                             <SelectedSubtreeContext.Provider value={[selectedSubtree, setSelectedSubtree]}>
-                                <Filters isCollapsed={false} search={search} />
+                                <SelectedLanguageContext.Provider value={[selectedLanguage, setSelectedLanguage]}>
+                                    <Filters isCollapsed={false} search={search} />
+                                </SelectedLanguageContext.Provider>
                             </SelectedSubtreeContext.Provider>
                         </SelectedSectionContext.Provider>
                     </SelectedContentTypesContext.Provider>
