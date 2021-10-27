@@ -23,7 +23,6 @@ const Filters = ({ search }) => {
     const [subtreeBreadcrumbs, setSubtreeBreadcrumbs] = useState('');
     const [filtersCleared, setFiltersCleared] = useState(false);
     const restInfo = useContext(RestInfoContext);
-    console.log(prevSelectedLanguage.current);
     const updateSelectedLanguage = (value) => setSelectedLanguage(value);
     const clearFilters = () => {
         dispatchSelectedContentTypesAction({ type: 'CLEAR_CONTENT_TYPES' });
@@ -157,19 +156,17 @@ const Filters = ({ search }) => {
                     </button>
                 </div>
             </div>
-            {languages.length > 1 ? (
-                <div className="c-filters__row">
-                    <div className="c-filters__row-title">
-                        {languageLabel}
-                    </div>
-                    <Dropdown
-                        small={true}
-                        onChange={updateSelectedLanguage}
-                        value={selectedLanguage}
-                        options={languageOptions}
-                    />
+            <div className="c-filters__row">
+                <div className="c-filters__row-title">
+                    {languageLabel}
                 </div>
-            ) : null}
+                <Dropdown
+                    small={true}
+                    onChange={updateSelectedLanguage}
+                    value={selectedLanguage}
+                    options={languageOptions}
+                />
+            </div>
             <ContentTypeSelector />
             <Collapsible title={sectionLabel}>
                 <Dropdown
