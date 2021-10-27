@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Processor;
+namespace Ibexa\AdminUi\Form\Processor;
 
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use EzSystems\EzPlatformContentForms\Event\ContentFormEvents;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
+use Ibexa\AdminUi\Specification\SiteAccess\IsAdmin;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -101,3 +101,5 @@ class ContentEditNotificationFormProcessor implements EventSubscriberInterface
         return (new IsAdmin($this->siteAccessGroups))->isSatisfiedBy($request->attributes->get('siteaccess'));
     }
 }
+
+class_alias(ContentEditNotificationFormProcessor::class, 'EzSystems\EzPlatformAdminUi\Form\Processor\ContentEditNotificationFormProcessor');

@@ -7,7 +7,7 @@ ezplatform.bulk_operation:
     options:
         expose: true
     defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\BulkOperation\BulkOperationController::bulkAction'
+        _controller: 'Ibexa\Bundle\AdminUi\Controller\BulkOperation\BulkOperationController::bulkAction'
     methods: ['POST']
 
 #
@@ -23,7 +23,7 @@ ezplatform.location.tree.load_children:
     requirements:
         parentLocationId: \d+
     defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\Content\ContentTreeController::loadChildrenAction'
+        _controller: 'Ibexa\Bundle\AdminUi\Controller\Content\ContentTreeController::loadChildrenAction'
         limit: 10
         offset: 0
 
@@ -34,7 +34,7 @@ ezplatform.location.tree.load_subtree:
     options:
         expose: true
     defaults:
-        _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\Content\ContentTreeController::loadSubtreeAction'
+        _controller: 'Ibexa\Bundle\AdminUi\Controller\Content\ContentTreeController::loadSubtreeAction'
 
 #
 # Content type create/edit form

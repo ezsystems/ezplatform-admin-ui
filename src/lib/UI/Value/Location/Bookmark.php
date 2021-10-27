@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Location;
+namespace Ibexa\AdminUi\UI\Value\Location;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\Repository\Values\Content\Location as CoreLocation;
@@ -29,3 +29,5 @@ class Bookmark extends CoreLocation
         parent::__construct(get_object_vars($location) + $properties);
     }
 }
+
+class_alias(Bookmark::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Location\Bookmark');

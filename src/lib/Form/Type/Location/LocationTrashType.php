@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Location;
+namespace Ibexa\AdminUi\Form\Type\Location;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationTrashData;
-use EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Form\Data\Location\LocationTrashData;
+use Ibexa\AdminUi\Form\TrashLocationOptionProvider\OptionsFactory;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -111,3 +111,5 @@ class LocationTrashType extends AbstractType
         ]);
     }
 }
+
+class_alias(LocationTrashType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType');

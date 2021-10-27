@@ -4,11 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ContentType;
+namespace Ibexa\AdminUi\Form\Type\ContentType;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTypeData;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\TranslatablePropertyTransformer;
-use Ibexa\AdminUi\Form\Type\ContentType\FieldDefinitionsCollectionType;
+use Ibexa\AdminUi\Form\Data\ContentTypeData;
+use Ibexa\AdminUi\Form\DataTransformer\TranslatablePropertyTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -114,3 +113,5 @@ class ContentTypeUpdateType extends AbstractType
         ;
     }
 }
+
+class_alias(ContentTypeUpdateType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType');

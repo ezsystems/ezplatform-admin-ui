@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\QueryType;
+namespace Ibexa\AdminUi\QueryType;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
@@ -52,3 +52,5 @@ final class LocationPathQueryType extends OptionsResolverBasedQueryType
         return array_map('intval', $parentPath);
     }
 }
+
+class_alias(LocationPathQueryType::class, 'EzSystems\EzPlatformAdminUi\QueryType\LocationPathQueryType');

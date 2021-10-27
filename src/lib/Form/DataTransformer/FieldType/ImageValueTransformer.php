@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType;
+namespace Ibexa\AdminUi\Form\DataTransformer\FieldType;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -53,3 +53,5 @@ class ImageValueTransformer extends AbstractBinaryBaseTransformer implements Dat
         return $valueObject;
     }
 }
+
+class_alias(ImageValueTransformer::class, 'EzSystems\EzPlatformAdminUi\Form\DataTransformer\FieldType\ImageValueTransformer');

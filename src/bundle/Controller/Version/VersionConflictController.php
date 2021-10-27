@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller\Version;
+namespace Ibexa\Bundle\AdminUi\Controller\Version;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\Core\Base\Exceptions\BadStateException;
-use EzSystems\EzPlatformAdminUi\Specification\Version\VersionHasConflict;
-use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
+use Ibexa\AdminUi\Specification\Version\VersionHasConflict;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class VersionConflictController extends Controller
@@ -59,3 +59,5 @@ class VersionConflictController extends Controller
         return new Response();
     }
 }
+
+class_alias(VersionConflictController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\Version\VersionConflictController');

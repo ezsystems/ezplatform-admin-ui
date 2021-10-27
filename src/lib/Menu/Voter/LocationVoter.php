@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Menu\Voter;
+namespace Ibexa\AdminUi\Menu\Voter;
 
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use Knp\Menu\ItemInterface;
@@ -52,3 +52,5 @@ class LocationVoter implements VoterInterface
         return null;
     }
 }
+
+class_alias(LocationVoter::class, 'EzSystems\EzPlatformAdminUi\Menu\Voter\LocationVoter');

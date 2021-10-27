@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser;
+namespace Ibexa\Bundle\AdminUi\DependencyInjection\Configuration\Parser;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\AbstractParser;
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
@@ -57,3 +57,5 @@ class UserGroupIdentifier extends AbstractParser
         );
     }
 }
+
+class_alias(UserGroupIdentifier::class, 'EzSystems\EzPlatformAdminUiBundle\DependencyInjection\Configuration\Parser\UserGroupIdentifier');
