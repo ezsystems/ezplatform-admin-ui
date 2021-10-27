@@ -14,7 +14,7 @@
     }
 
     &__title-wrapper {
-        margin: 0 0 calculateRem(40px);
+        margin: 0 calculateRem(40px) 0 0;
         font-weight: 600;
         color: $ibexa-color-dark;
         flex: 1;
