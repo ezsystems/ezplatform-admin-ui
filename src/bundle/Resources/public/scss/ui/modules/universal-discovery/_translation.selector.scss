@@ -6,17 +6,16 @@
     top: 0;
     height: 100%;
     width: calculateRem(360px);
-    background-color: $ibexa-white;
+    background-color: $ibexa-color-white;
     transform: scaleX(1);
     transform-origin: right center;
     opacity: 1;
-    transition: all 0.4s ease-in;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
     padding: calculateRem(16px);
 
     &--hidden {
         transform: scaleX(0);
         opacity: 0;
-        transition: all 0.2s ease-out;
     }
 
     &__header {
@@ -25,7 +24,7 @@
         justify-content: space-between;
         padding: calculateRem(4px) calculateRem(8px) calculateRem(24px) calculateRem(8px);
         margin-bottom: calculateRem(24px);
-        border-bottom: calculateRem(1px) solid $ibexa-color-base;
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
     }
 
     &__title {

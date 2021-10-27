@@ -1,78 +1,59 @@
 .c-selected-locations {
-    background-color: $ibexa-white;
+    background-color: $ibexa-color-white;
     position: fixed;
-    top: calculateRem(65px);
+    top: calculateRem(95px);
     right: 0;
-    height: 100%;
-    width: calculateRem(60px);
-    box-shadow: 0 calculateRem(2px) calculateRem(4px) 0 rgba(0, 0, 0, 0.45);
+    min-height: calculateRem(60px);
+    min-width: calculateRem(390px);
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-top-left-radius: $ibexa-border-radius;
+    border-bottom-left-radius: $ibexa-border-radius;
+    box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.15);
     z-index: 1;
-    transition: all 0.2s ease-out;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
-    &__selection-count-label {
-        font-size: calculateRem(13px);
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: calculateRem(12px) calculateRem(12px) calculateRem(12px) calculateRem(32px);
+
+    }
+
+    &__selection-counter {
+        font-size: calculateRem(22px);
+        font-weight: 600;
+        padding-right: calculateRem(16px);
+    }
+
+    &__toggle-button {
+        .ibexa-icon:first-child {
+            margin-right: calculateRem(-6px);
+        }
     }
 
     &--expanded {
-        transition: all 0.4s ease-in;
-        width: calculateRem(340px);
-        box-shadow: none;
+        top: calculateRem(73px);
+        bottom: calculateRem(100px);
+        min-width: calculateRem(491px);
 
         .c-selected-locations {
-            &__actions-wrapper {
-                display: flex;
-                align-items: center;
-            }
-
-            &__selection-count-label {
-                font-size: calculateRem(16px);
-            }
-
-            &__selection-counter {
-                height: auto;
-                width: calculateRem(185px);
-                flex-direction: row;
-                justify-content: flex-start;
+            &__items-wrapper {
+                display: block;
             }
         }
     }
 
     &__items-wrapper {
+        display: none;
         overflow: auto;
-        max-height: calc(100% - #{calculateRem(60px)});
+        padding: 0 calculateRem(38px) calculateRem(16px) calculateRem(22px);
+        border-top: calculateRem(1px) solid $ibexa-color-light;
     }
 
-    &__actions-wrapper {
-        padding: calculateRem(14px) calculateRem(10px);
-        border-bottom: calculateRem(1px) solid $ibexa-color-base;
-    }
-
-    &__toggle-button,
-    &__confirm-button,
-    &__clear-selection-button {
-        padding: 0;
-        margin: 0;
+    &__actions {
+        padding: calculateRem(16px) 0;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: calculateRem(32px);
-        height: calculateRem(32px);
-        border: none;
-    }
-
-    &__selection-counter {
-        font-size: calculateRem(16px);
-        text-align: center;
-        height: calculateRem(60px);
-        width: calculateRem(60px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-
-    &__selection-count {
-        font-size: calculateRem(16px);
-        margin-right: calculateRem(4px);
+        justify-content: flex-end;
     }
 }

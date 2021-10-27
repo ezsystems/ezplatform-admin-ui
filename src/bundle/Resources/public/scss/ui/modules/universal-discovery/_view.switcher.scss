@@ -1,15 +1,5 @@
 .c-udw-view-switcher {
-    @include toggler-wrapper();
-
-    .c-menu-button {
-        @include toggler-icon-btn();
-
-        &--selected {
-            @include toggler-selected-btn();
-        }
-    }
-
-    &--disabled {
-        opacity: 0.3;
-    }
+    padding: calculateRem(8px);
+    display: flex;
+    align-items: center;
 }

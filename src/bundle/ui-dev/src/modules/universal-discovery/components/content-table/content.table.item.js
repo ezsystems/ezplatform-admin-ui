@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import ToggleSelectionButton from '../toggle-selection-button/toggle.selection.button';
+import ToggleSelection from '../toggle-selection/toggle.selection';
 import Icon from '../../../common/icon/icon';
 
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
@@ -40,7 +40,7 @@ const ContentTableItem = ({ location }) => {
     const isNotSelectable =
         (containersOnly && !isContainer) || (allowedContentTypes && !allowedContentTypes.includes(contentTypeInfo.identifier));
     const className = createCssClassNames({
-        'c-content-table-item': true,
+        'ibexa-table__row c-content-table-item': true,
         'c-content-table-item--marked': markedLocationId === location.id,
         'c-content-table-item--not-selectable': isNotSelectable,
     });
@@ -71,23 +71,27 @@ const ContentTableItem = ({ location }) => {
             dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
         }
     };
-    const renderToggleSelectionButton = () => {
-        if (!multiple || isNotSelectable) {
-            return null;
-        }
-
-        return <ToggleSelectionButton location={location} />;
+    const renderToggleSelection = () => {
+        return <ToggleSelection location={location} multiple={multiple} isHidden={isNotSelectable} />;
     };
 
     return (
         <tr className={className} onClick={markLocation}>
-            <td className="c-content-table-item__icon-wrapper">
+            <td className="ibexa-table__cell ibexa-table__cell--has-checkbox">
+                {renderToggleSelection()}
+            </td>
+            <td className="ibexa-table__cell c-content-table-item__icon-wrapper">
                 <Icon extraClasses="ibexa-icon--small" customPath={contentTypeInfo.thumbnail} />
             </td>
-            <td>{location.ContentInfo.Content.TranslatedName}</td>
-            <td>{formatShortDateTime(new Date(location.ContentInfo.Content.lastModificationDate))}</td>
-            <td>{contentTypeInfo.name}</td>
-            <td className="c-content-table-item__toggle-button-wrapper">{renderToggleSelectionButton()}</td>
+            <td className="ibexa-table__cell">
+                {location.ContentInfo.Content.TranslatedName}
+            </td>
+            <td className="ibexa-table__cell">
+                {formatShortDateTime(new Date(location.ContentInfo.Content.lastModificationDate))}
+            </td>
+            <td className="ibexa-table__cell">
+                {contentTypeInfo.name}
+            </td>
         </tr>
     );
 };

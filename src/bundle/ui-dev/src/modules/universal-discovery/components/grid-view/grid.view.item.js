@@ -1,7 +1,7 @@
 import React, { useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import ToggleSelectionButton from '../toggle-selection-button/toggle.selection.button';
+import ToggleSelection from '../toggle-selection/toggle.selection';
 import Icon from '../../../common/icon/icon';
 import Thumbnail from '../../../common/thumbnail/thumbnail';
 
@@ -33,9 +33,9 @@ const GridViewItem = ({ location, version }) => {
     const isNotSelectable =
         (containersOnly && !isContainer) || (allowedContentTypes && !allowedContentTypes.includes(contentTypeInfo.identifier));
     const className = createCssClassNames({
-        'c-grid-item': true,
-        'c-grid-item--marked': markedLocationId === location.id,
-        'c-grid-item--not-selectable': isNotSelectable,
+        'ibexa-grid-view-item': true,
+        'ibexa-grid-view-item--marked': markedLocationId === location.id,
+        'ibexa-grid-view-item--not-selectable': isNotSelectable,
     });
     const markLocation = ({ nativeEvent }) => {
         if (isSelectionButtonClicked(nativeEvent)) {
@@ -56,25 +56,27 @@ const GridViewItem = ({ location, version }) => {
 
         dispatchLoadedLocationsAction({ type: 'UPDATE_LOCATIONS', data: { parentLocationId: location.id, subitems: [] } });
     };
-    const renderToggleSelectionButton = () => {
-        if (!multiple || isNotSelectable) {
-            return null;
-        }
-
-        return <ToggleSelectionButton location={location} />;
+    const renderToggleSelection = () => {
+        return (
+            <div class="ibexa-grid-view-item__checkbox">
+                <ToggleSelection location={location} multiple={multiple} isHidden={isNotSelectable} />
+            </div>
+        );
     };
 
     return (
         <div className={className} onClick={markLocation} onDoubleClick={loadLocation}>
-            <div className="c-grid-item__preview">
+            <div className="ibexa-grid-view-item__image-wrapper">
                 <Thumbnail
                     thumbnailData={version.Thumbnail}
                     iconExtraClasses="ibexa-icon--extra-large"
                     contentTypeIconPath={contentTypesMap[location.ContentInfo.Content.ContentType._href].thumbnail}
                 />
             </div>
-            <div className="c-grid-item__name">{location.ContentInfo.Content.TranslatedName}</div>
-            {renderToggleSelectionButton()}
+            <div className="ibexa-grid-view-item__title-wrapper">
+                <div className="ibexa-grid-view-item__title">{location.ContentInfo.Content.TranslatedName}</div>
+            </div>
+            {renderToggleSelection()}
         </div>
     );
 };

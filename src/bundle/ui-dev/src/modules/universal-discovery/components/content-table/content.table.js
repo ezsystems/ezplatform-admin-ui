@@ -10,6 +10,11 @@ const ContentTable = ({ count, itemsPerPage, items, activePageIndex, title, onPa
     const nameLabel = Translator.trans(/*@Desc("Name")*/ 'content_table.name', {}, 'universal_discovery_widget');
     const modifiedLabel = Translator.trans(/*@Desc("Modified")*/ 'content_table.modified', {}, 'universal_discovery_widget');
     const contentTypeLabel = Translator.trans(/*@Desc("Content Type")*/ 'content_table.content_type', {}, 'universal_discovery_widget');
+    const renderHeaderCell = (label) => (
+        <th class="ibexa-table__header-cell">
+            <span class="ibexa-table__header-cell-text-wrapper">{label}</span>
+        </th>
+    )
 
     useEffect(() => {
         window.eZ.helpers.tooltips.parse(refContentTable.current);
@@ -17,19 +22,23 @@ const ContentTable = ({ count, itemsPerPage, items, activePageIndex, title, onPa
 
     return (
         <div className="c-content-table" ref={refContentTable}>
-            <div className="c-content-table__title">{title}</div>
-            <div className="c-content-table__items">
-                <table className="table table-hover">
+            <div className="ibexa-table-header">
+                <div class="ibexa-table-header__headline">
+                    {title}
+                </div>
+            </div>
+            <div className="ibexa-scrollable-wrapper">
+                <table className="ibexa-table table">
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th>{nameLabel}</th>
-                            <th>{modifiedLabel}</th>
-                            <th>{contentTypeLabel}</th>
-                            <th></th>
+                        <tr class="ibexa-table__head-row">
+                            {renderHeaderCell()}
+                            {renderHeaderCell()}
+                            {renderHeaderCell(nameLabel)}
+                            {renderHeaderCell(modifiedLabel)}
+                            {renderHeaderCell(contentTypeLabel)}
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="ibexa-table__body">
                         {items.map((item) => (
                             <ContentTableItem key={item.id} location={item} />
                         ))}

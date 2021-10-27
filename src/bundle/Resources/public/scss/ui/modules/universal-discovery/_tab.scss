@@ -1,44 +1,50 @@
 .c-udw-tab {
     height: 100vh;
-    display: grid;
-    grid-template-areas:
-        'top-bar top-bar top-bar'
-        'left-sidebar main right-sidebar';
-    grid-template-rows: auto 1fr;
-    grid-template-columns: calculateRem(220px) 1fr calculateRem(285px);
-    transition: all 0.4s ease-in;
+    display: flex;
+    flex-direction: column;
+    transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
     &__top-bar {
-        grid-area: top-bar;
-        background-color: $ibexa-white;
+        background-color: $ibexa-color-white;
+    }
+
+    &__content {
+        display: flex;
+        height: 100%;
+        flex-shrink: 1;
+        border-top: calculateRem(1px) solid $ibexa-color-light;
+        box-shadow: calculateRem(4px) calculateRem(2px) calculateRem(17px) 0 rgba($ibexa-color-black, 0.05);
     }
 
     &__left-sidebar {
-        grid-area: left-sidebar;
-        background-color: $ibexa-white;
         position: relative;
+        overflow: hidden;
+        margin-top: calculateRem(-1px);
+        width: calculateRem(66px);
+        background-color: $ibexa-color-white;
+        border: calculateRem(1px) solid $ibexa-color-light;
+        border-bottom: 0;
+        border-top-right-radius: $ibexa-border-radius;
+        box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
     }
 
     &__main {
-        grid-area: main;
-        background-color: $ibexa-color-base-light;
+        flex: 1;
+        background-color: $ibexa-color-white;
         overflow: auto;
     }
 
     &__right-sidebar {
-        grid-area: right-sidebar;
-        background-color: $ibexa-white;
+        width: calculateRem(491px);
+        background-color: $ibexa-color-white;
+        border-left: calculateRem(1px) solid $ibexa-color-light;
     }
-}
 
-.m-ud--locations-selected {
-    .c-udw-tab {
-        grid-template-columns: calculateRem(220px) 1fr calculateRem(350px);
-
-        &__right-sidebar {
-            position: relative;
-            padding-right: calculateRem(60px);
-        }
+    &__bottom-bar {
+        background-color: $ibexa-color-white;
+        border-top: calculateRem(1px) solid $ibexa-color-light;
+        border-top-right-radius: $ibexa-border-radius-small;
+        box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-black, 0.05);
     }
 }
 

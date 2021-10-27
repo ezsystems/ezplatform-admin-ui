@@ -2,6 +2,8 @@
 
 {% trans_default_domain 'content_edit' %}
 
+{% block main_container_class %}{{ parent() }} ibexa-main-container--no-border{% endblock %}
+
 {% block meta %}
     <meta name="LanguageCode" content="{{ language.languageCode }}" />
 {% endblock %}

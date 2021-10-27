@@ -1,104 +1,15 @@
-.c-content-create {
-    @include container-box-shadow-left;
+.ibexa-extra-actions-container {
+    .c-content-create {
+        top: 0;
+        height: 100vh;
 
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: calculateRem(400px);
-    z-index: 1;
-    padding: calculateRem(16px);
-    background-color: $ibexa-white;
-    transform: scaleX(1);
-    transform-origin: left center;
-    opacity: 1;
-    transition: all 0.4s ease-in;
-
-    &--hidden {
-        transform: scaleX(0);
-        opacity: 0;
-        transition: all 0.2s ease-out;
-    }
-
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: calculateRem(1px) solid $ibexa-color-base;
-        padding-top: calculateRem(8px);
-        padding-bottom: calculateRem(24px);
-        margin-bottom: calculateRem(32px);
-    }
-
-    &__header-title {
-        color: $ibexa-color-primary;
-        font-weight: bold;
-        font-size: calculateRem(16px);
-    }
-
-    &__close-button {
-        border: none;
-
-        .ibexa-icon {
-            fill: $ibexa-color-base-dark;
-        }
-    }
-
-    &__language-selector-wrapper,
-    &__select-content-type-wrapper {
-        margin-bottom: calculateRem(32px);
-    }
-
-    &__language-selector-label,
-    &__select-content-type-label {
-        padding: 0 0 calculateRem(12px) calculateRem(8px);
-        color: $ibexa-color-font-pale;
-        font-size: calculateRem(16px);
-    }
-
-    &__content-type-list {
-        overflow: auto;
-        max-height: calc(100vh - #{calculateRem(500px)});
-    }
-
-    &__group {
-        margin-bottom: calculateRem(24px);
-        padding: 0 calculateRem(8px);
-
-        &:first-child {
-            margin-top: calculateRem(32px);
-        }
-    }
-
-    &__group-name {
-        margin-bottom: calculateRem(8px);
-        color: $ibexa-color-font-pale;
-    }
-
-    &__group-item {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        padding-left: calculateRem(12px);
-
-        &:hover {
-            color: $ibexa-color-primary;
+        &__confirm-wrapper {
+            display: flex;
+            margin-top: calculateRem(20px);
         }
 
-        &--selected {
-            background: $ibexa-color-base-pale;
+        &__confirm-button {
+            margin-right: calculateRem(16px);
         }
-    }
-
-    &__group-item-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: calculateRem(6px);
-    }
-
-    &__confirm-wrapper {
-        display: flex;
-        margin-top: calculateRem(20px);
     }
 }

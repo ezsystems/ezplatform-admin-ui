@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import ToggleSelectionButton from '../toggle-selection-button/toggle.selection.button';
+import ToggleSelection from '../toggle-selection/toggle.selection';
 import Icon from '../../../common/icon/icon';
 
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
@@ -44,12 +44,8 @@ const FinderLeaf = ({ location }) => {
             dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
         }
     };
-    const renderToggleSelectionButton = () => {
-        if (!multiple || isNotSelectable) {
-            return null;
-        }
-
-        return <ToggleSelectionButton location={location} />;
+    const renderToggleSelection = () => {
+        return <ToggleSelection location={location} multiple={multiple} isHidden={isNotSelectable} />;
     };
     const className = createCssClassNames({
         'c-finder-leaf': true,
@@ -64,6 +60,7 @@ const FinderLeaf = ({ location }) => {
 
     return (
         <div className={className} onClick={markLocation}>
+            {renderToggleSelection()}
             <span className="c-finder-leaf__name">
                 <span className="c-finder-leaf__icon-wrapper">
                     <Icon
@@ -75,7 +72,6 @@ const FinderLeaf = ({ location }) => {
                     {location.ContentInfo.Content.TranslatedName}
                 </span>
             </span>
-            {renderToggleSelectionButton()}
         </div>
     );
 };

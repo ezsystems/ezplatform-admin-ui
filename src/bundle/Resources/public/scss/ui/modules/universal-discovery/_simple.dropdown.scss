@@ -1,0 +1,94 @@
+.c-udw-simple-dropdown {
+    position: relative;
+    min-width: calculateRem(120px);
+
+    &__selected {
+        font-size: $ibexa-text-font-size-medium;
+        padding: calculateRem(2px) calculateRem(30px) calculateRem(2px) 0;
+        min-height: calculateRem(21px);
+        cursor: pointer;
+        position: relative;
+    }
+
+    &__expand-icon {
+        position: absolute;
+        top: calculateRem(9px);
+        right: calculateRem(8px);
+    }
+
+    &__items {
+        position: absolute;
+        z-index: 200;
+        right: calculateRem(-10px);
+        top: calculateRem(30px);
+        min-width: calculateRem(170px);
+        padding: calculateRem(6px) 0;
+        background: $ibexa-color-white;
+        border: calculateRem(1px) solid $ibexa-color-light;
+        border-radius: $ibexa-border-radius;
+        box-shadow: calculateRem(4px) calculateRem(32px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.1);
+        transition: opacity $ibexa-admin-transition-duration $ibexa-admin-transition;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+    }
+
+    &__list-items {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__list-item {
+        font-size: $ibexa-text-font-size-medium;
+        padding: calculateRem(4px) calculateRem(40px) calculateRem(4px) calculateRem(16px);
+        cursor: pointer;
+
+        &--selected {
+            background-color: $ibexa-color-light-400;
+            position: relative;
+
+            .c-udw-simple-dropdown__list-item-checkmark {
+                position: absolute;
+                top: 50%;
+                right: calculateRem(16px);
+                margin-top: calculateRem(-8px);
+            }
+        }
+    }
+
+    &__option-label {
+        display: flex;
+        align-items: center;
+    }
+
+    &__arrow-down,
+    &__arrow-up {
+        margin-left: calculateRem(4px);
+        margin-bottom: 0;
+    }
+
+    &__arrow-down {
+        transform: rotate(270deg);
+    }
+
+    &__arrow-up {
+        transform: rotate(90deg);
+    }
+
+    &--expanded &__items {
+        opacity: 1;
+        height: auto;
+    }
+
+    &--disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+
+        .c-udw-simple-dropdown {
+            &__selected {
+                cursor: not-allowed;
+            }
+        }
+    }
+}

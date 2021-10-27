@@ -2,12 +2,32 @@
     height: 100%;
 
     &__items-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        padding: calculateRem(16px);
-        align-items: flex-start;
+        padding: 0 calculateRem(16px) calculateRem(16px);
         overflow: auto;
         max-height: calc(100% - #{calculateRem(30px)});
-        align-items: stretch;
+    }
+
+    .ibexa-grid-view-item {
+        &--marked {
+            border: calculateRem(1px) solid $ibexa-color-dark;
+    
+            .ibexa-grid-view-item {
+                &__name {
+                    background-color: $ibexa-color-dark;
+                    color: $ibexa-color-white;
+                }
+            }
+
+            .c-thumbnail {
+                .ibexa-icon {
+                    fill: $ibexa-color-dark;
+                }
+            }
+        }
+
+        &--not-selectable {
+            background-color: $ibexa-color-light-200;
+            cursor: not-allowed;
+        }
     }
 }

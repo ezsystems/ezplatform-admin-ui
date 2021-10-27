@@ -1,6 +1,7 @@
-import React, { useEffect, useState, createContext } from 'react';
+import React, { useEffect, useState, createContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from '../common/icon/icon';
 import deepClone from '../common/helpers/deep.clone.helper';
 import { createCssClassNames } from '../common/helpers/css.class.names';
 import { useLoadedLocationsReducer } from './hooks/useLoadedLocationsReducer';
@@ -17,31 +18,52 @@ const CLASS_SCROLL_DISABLED = 'ez-scroll-disabled';
 
 export const SORTING_OPTIONS = [
     {
-        label: Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget'),
-        tooltipLabel: Translator.trans(/*@Desc("Sort by Date")*/ 'sorting.date.tooltip', {}, 'universal_discovery_widget'),
+        id: 'date:asc',
+        label: (
+            <div class="c-udw-simple-dropdown__option-label">
+                {Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget')}
+                <Icon name="back" extraClasses="c-udw-simple-dropdown__arrow-down ibexa-icon--tiny-small" />
+            </div>
+        ),
         sortClause: 'DatePublished',
+        sortOrder: 'ascending',
     },
     {
-        label: Translator.trans(/*@Desc("Name")*/ 'sorting.name.label', {}, 'universal_discovery_widget'),
-        tooltipLabel: Translator.trans(/*@Desc("Sort by Name")*/ 'sorting.name.tooltip', {}, 'universal_discovery_widget'),
+        id: 'date:desc',
+        label: (
+            <div class="c-udw-simple-dropdown__option-label">
+                {Translator.trans(/*@Desc("Date")*/ 'sorting.date.label', {}, 'universal_discovery_widget')}
+                <Icon name="back" extraClasses="c-udw-simple-dropdown__arrow-up ibexa-icon--tiny-small" />
+            </div>
+        ),
+        sortClause: 'DatePublished',
+        sortOrder: 'descending',
+    },
+    {
+        id: 'name:asc',
+        label: Translator.trans(/*@Desc("Name A-Z")*/ 'sorting.name.asc.label', {}, 'universal_discovery_widget'),
         sortClause: 'ContentName',
+        sortOrder: 'ascending',
+    },
+    {
+        id: 'name:desc',
+        label: Translator.trans(/*@Desc("Name Z-A")*/ 'sorting.name.desc.label', {}, 'universal_discovery_widget'),
+        sortClause: 'ContentName',
+        sortOrder: 'descending',
     },
 ];
 export const VIEWS = [
     {
         id: 'grid',
-        icon: 'view-grid',
-        tooltipLabel: Translator.trans(/*@Desc("Grid view")*/ 'sorting.grid.view', {}, 'universal_discovery_widget'),
+        label: Translator.trans(/*@Desc("Grid view")*/ 'sorting.grid.view', {}, 'universal_discovery_widget'),
     },
     {
         id: 'finder',
-        icon: 'panels',
-        tooltipLabel: Translator.trans(/*@Desc("Panels view")*/ 'sorting.panels.view', {}, 'universal_discovery_widget'),
+        label: Translator.trans(/*@Desc("Panels view")*/ 'sorting.panels.view', {}, 'universal_discovery_widget'),
     },
     {
         id: 'tree',
-        icon: 'content-tree',
-        tooltipLabel: Translator.trans(/*@Desc("Tree view")*/ 'sorting.tree.view', {}, 'universal_discovery_widget'),
+        label: Translator.trans(/*@Desc("Tree view")*/ 'sorting.tree.view', {}, 'universal_discovery_widget'),
     },
 ];
 
@@ -83,10 +105,14 @@ export const CreateContentWidgetContext = createContext();
 export const ContentOnTheFlyDataContext = createContext();
 export const ContentOnTheFlyConfigContext = createContext();
 export const EditOnTheFlyDataContext = createContext();
+export const SearchTextContext = createContext();
+export const DropdownPortalRefContext = createContext();
 
 const UniversalDiscoveryModule = (props) => {
     const tabs = window.eZ.adminUiConfig.universalDiscoveryWidget.tabs;
     const defaultMarkedLocationId = props.startingLocationId || props.rootLocationId;
+    const abortControllerRef = useRef();
+    const dropdownPortalRef = useRef();
     const [activeTab, setActiveTab] = useState(props.activeTab);
     const [sorting, setSorting] = useState(props.activeSortClause);
     const [sortOrder, setSortOrder] = useState(props.activeSortOrder);
@@ -96,6 +122,7 @@ const UniversalDiscoveryModule = (props) => {
     const [contentOnTheFlyData, setContentOnTheFlyData] = useState({});
     const [editOnTheFlyData, setEditOnTheFlyData] = useState({});
     const [contentTypesInfoMap, setContentTypesInfoMap] = useState({});
+    const [searchText, setSearchText] = useState('');
     const [loadedLocationsMap, dispatchLoadedLocationsAction] = useLoadedLocationsReducer([
         { parentLocationId: props.rootLocationId, subitems: [] },
     ]);
@@ -118,24 +145,41 @@ const UniversalDiscoveryModule = (props) => {
 
         props.onConfirm(updatedLocations);
     };
-    const addPermissionsToSelectedLocations = (response) => {
-        const clonedSelectedLocation = deepClone(selectedLocations);
+    const loadPermissions = () => {
+        const locationIds = selectedLocations
+            .filter((item) => !item.permissions)
+            .map((item) => item.location.id)
+            .join(',');
 
-        response.forEach((item) => {
-            const locationWithoutPermissions = clonedSelectedLocation.find(
-                (selectedItem) => selectedItem.location.id === item.location.Location.id
+        if (!locationIds) {
+            return Promise.resolve([]);
+        }
+
+        return new Promise((resolve) => {
+            loadLocationsWithPermissions(
+                { locationIds, signal: abortControllerRef.current.signal },
+                (response) => resolve(response),
             );
-
-            if (locationWithoutPermissions) {
-                locationWithoutPermissions.permissions = item.permissions;
-            }
         });
+    }
+    const loadVersions = () => {
+        const locationsWithoutVersion = selectedLocations.filter(
+            (selectedItem) => !selectedItem.location.ContentInfo.Content.CurrentVersion.Version
+        );
 
-        dispatchSelectedLocationsAction({
-            type: 'REPLACE_SELECTED_LOCATIONS',
-            locations: clonedSelectedLocation,
+        if (!locationsWithoutVersion.length) {
+            return Promise.resolve([]);
+        }
+
+        const contentId = locationsWithoutVersion.map((item) => item.location.ContentInfo.Content._id).join(',');
+
+        return new Promise((resolve) => {
+            loadContentInfo(
+                { ...restInfo, contentId, signal: abortControllerRef.current.signal },
+                (response) => resolve(response),
+            );
         });
-    };
+    }
 
     useEffect(() => {
         const handleLoadContentTypes = (response) => {
@@ -175,50 +219,44 @@ const UniversalDiscoveryModule = (props) => {
     }, [props.selectedLocations]);
 
     useEffect(() => {
-        const locationIds = selectedLocations
-            .filter((item) => !item.permissions)
-            .map((item) => item.location.id)
-            .join(',');
+        abortControllerRef.current?.abort();
 
-        if (!locationIds) {
-            return;
-        }
+        abortControllerRef.current = new AbortController();
 
-        loadLocationsWithPermissions({ locationIds }, addPermissionsToSelectedLocations);
-    }, [selectedLocations]);
+        Promise.all([loadPermissions(), loadVersions()]).then((response) => {
+            const [locationsWithPermissions, locationsWithVersions] = response;
 
-    useEffect(() => {
-        const locationsWithoutVersion = selectedLocations.filter(
-            (selectedItem) => !selectedItem.location.ContentInfo.Content.CurrentVersion.Version
-        );
-
-        if (!locationsWithoutVersion.length) {
-            return;
-        }
-
-        const contentId = locationsWithoutVersion.map((item) => item.location.ContentInfo.Content._id).join(',');
-
-        loadContentInfo(
-            {
-                ...restInfo,
-                contentId,
-            },
-            (response) => {
-                const clonedLocations = selectedLocations;
-
-                response.forEach((content) => {
-                    const clonedLocation = clonedLocations.find(
-                        (clonedItem) => clonedItem.location.ContentInfo.Content._id === content._id
-                    );
-
-                    if (clonedLocation) {
-                        clonedLocation.location.ContentInfo.Content.CurrentVersion.Version = content.CurrentVersion.Version;
-                    }
-                });
-
-                dispatchSelectedLocationsAction({ type: 'REPLACE_SELECTED_LOCATIONS', locations: clonedLocations });
+            if (!locationsWithPermissions.length && !locationsWithVersions.length) {
+                return;
             }
-        );
+
+            const clonedSelectedLocation = deepClone(selectedLocations);
+
+            locationsWithPermissions.forEach((item) => {
+                const locationWithoutPermissions = clonedSelectedLocation.find(
+                    (selectedItem) => selectedItem.location.id === item.location.Location.id
+                );
+
+                if (locationWithoutPermissions) {
+                    locationWithoutPermissions.permissions = item.permissions;
+                }
+            });
+
+            locationsWithVersions.forEach((content) => {
+                const clonedLocation = clonedSelectedLocation.find(
+                    (clonedItem) => clonedItem.location.ContentInfo.Content._id === content._id
+                );
+
+                if (clonedLocation) {
+                    clonedLocation.location.ContentInfo.Content.CurrentVersion.Version = content.CurrentVersion.Version;
+                }
+            });
+
+            dispatchSelectedLocationsAction({
+                type: 'REPLACE_SELECTED_LOCATIONS',
+                locations: clonedSelectedLocation,
+            });
+        });
     }, [selectedLocations]);
 
     useEffect(() => {
@@ -329,7 +367,16 @@ const UniversalDiscoveryModule = (props) => {
                                                                                                                         editOnTheFlyData,
                                                                                                                         setEditOnTheFlyData,
                                                                                                                     ]}>
-                                                                                                                    <Tab />
+                                                                                                                    <SearchTextContext.Provider
+                                                                                                                        value={[
+                                                                                                                            searchText,
+                                                                                                                            setSearchText
+                                                                                                                        ]}>
+                                                                                                                        <DropdownPortalRefContext.Provider
+                                                                                                                            value={dropdownPortalRef}>
+                                                                                                                            <Tab />
+                                                                                                                        </DropdownPortalRefContext.Provider>
+                                                                                                                    </SearchTextContext.Provider>
                                                                                                                 </EditOnTheFlyDataContext.Provider>
                                                                                                             </ContentOnTheFlyConfigContext.Provider>
                                                                                                         </ContentOnTheFlyDataContext.Provider>
