@@ -6,6 +6,16 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="653b9891e9f38d7f9f56485fb0fe26250c3b1ac3" resname="actions_menu.cancel">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note>key: actions_menu.cancel</note>
+      </trans-unit>
+      <trans-unit id="5042ae08713a600d25e4ddded7e9334daf182bbf" resname="actions_menu.confirm">
+        <source>Confirm</source>
+        <target state="new">Confirm</target>
+        <note>key: actions_menu.confirm</note>
+      </trans-unit>
       <trans-unit id="f3902e2cf1dc7593d56db51492f2c93763e17550" resname="add_location.title">
         <source>Select Location</source>
         <target state="new">Select Location</target>
@@ -46,6 +56,16 @@
         <target state="new">Selected</target>
         <note>key: browser.selected</note>
       </trans-unit>
+      <trans-unit id="90210d6d68a4c36d75906bd4fea9194a88988205" resname="content.create.editing_details">
+        <source>under %content_name%</source>
+        <target state="new">under %content_name%</target>
+        <note>key: content.create.editing_details</note>
+      </trans-unit>
+      <trans-unit id="a443a2a76348e8431df4346c11079f9e56735473" resname="content.create.filters.desc">
+        <source>Or choose from list</source>
+        <target state="new">Or choose from list</target>
+        <note>key: content.create.filters.desc</note>
+      </trans-unit>
       <trans-unit id="1713d0deb6344882cf915babb2df574556a3f82c" resname="content_create.cancel.label">
         <source>Cancel</source>
         <target state="new">Cancel</target>
@@ -60,6 +80,11 @@
         <source>Content create</source>
         <target state="new">Content create</target>
         <note>key: content_create.label</note>
+      </trans-unit>
+      <trans-unit id="64f19d8055dc93bc222ddb63342200d68bf47958" resname="content_create.placeholder">
+        <source>Type to refine</source>
+        <target state="new">Type to refine</target>
+        <note>key: content_create.placeholder</note>
       </trans-unit>
       <trans-unit id="9e0bf845dd4ce60013f7ee92eaac76a2d0a5253a" resname="content_edit.cancel.label">
         <source>Cancel</source>
@@ -121,6 +146,11 @@
         <target state="new">Create content</target>
         <note>key: dashboard.create.title</note>
       </trans-unit>
+      <trans-unit id="a3390555f717ffd9b3560f17198e5a437899967f" resname="dropdown.placeholder">
+        <source>Search...</source>
+        <target state="new">Search...</target>
+        <note>key: dropdown.placeholder</note>
+      </trans-unit>
       <trans-unit id="bc4850e9ccff0c6effc58a089fe148c16689d8ee" resname="ezimageasset.title">
         <source>Select Image Asset</source>
         <target state="new">Select Image Asset</target>
@@ -136,11 +166,6 @@
         <target state="new">Select a Content item</target>
         <note>key: ezobjectrelationlist.title.single</note>
       </trans-unit>
-      <trans-unit id="8616b7656ef9370ffa5e42c399e615eaccccb00c" resname="filters.any_section">
-        <source>Any section</source>
-        <target state="new">Any section</target>
-        <note>key: filters.any_section</note>
-      </trans-unit>
       <trans-unit id="b01a58cb9736974403f9f94ecce5180fb95a9627" resname="filters.apply">
         <source>Apply</source>
         <target state="new">Apply</target>
@@ -150,11 +175,6 @@
         <source>Clear</source>
         <target state="new">Clear</target>
         <note>key: filters.clear</note>
-      </trans-unit>
-      <trans-unit id="906871e66216a97a8033d2e86819150c141cb92a" resname="filters.content_type">
-        <source>Content Type</source>
-        <target state="new">Content Type</target>
-        <note>key: filters.content_type</note>
       </trans-unit>
       <trans-unit id="15135a98864ffb3f0f889577ad962bf3817fea6f" resname="filters.section">
         <source>Section</source>
@@ -166,15 +186,40 @@
         <target state="new">Subtree</target>
         <note>key: filters.subtree</note>
       </trans-unit>
+      <trans-unit id="a033033bf14700d9cc112784687f5ddbfaf491ea" resname="filters.tag_view_change.select">
+        <source>Change content</source>
+        <target state="new">Change content</target>
+        <note>key: filters.tag_view_change.select</note>
+      </trans-unit>
+      <trans-unit id="92d63a744c29f4be477f21fc81dd19b74ebb7bf2" resname="filters.tag_view_select.select">
+        <source>Select content</source>
+        <target state="new">Select content</target>
+        <note>key: filters.tag_view_select.select</note>
+      </trans-unit>
+      <trans-unit id="d4243297721bb92848a26161f2effe427171e26f" resname="filters.title">
+        <source>Filters</source>
+        <target state="new">Filters</target>
+        <note>key: filters.title</note>
+      </trans-unit>
+      <trans-unit id="cb5a597ae90cf47cd069feb1efabc3f69674cd3c" resname="input.search.placeholder.default">
+        <source>Search...</source>
+        <target state="new">Search...</target>
+        <note>key: input.search.placeholder.default</note>
+      </trans-unit>
       <trans-unit id="2d4febe56a341671c069ff47b6e6adfd2bba005c" resname="limitation.pick.error">
         <source>Could not fetch content names</source>
         <target state="new">Could not fetch content names</target>
         <note>key: limitation.pick.error</note>
       </trans-unit>
-      <trans-unit id="87994bd9606f86f5999597107b8782ae5018a5ea" resname="meta_preview.bookmark">
-        <source>Bookmark</source>
-        <target state="new">Bookmark</target>
-        <note>key: meta_preview.bookmark</note>
+      <trans-unit id="0f210f900ee1af5ef500a8d309d6823def77d58a" resname="meta_preview.bookmarks_add">
+        <source>Add to bookmarks</source>
+        <target state="new">Add to bookmarks</target>
+        <note>key: meta_preview.bookmarks_add</note>
+      </trans-unit>
+      <trans-unit id="dfe72cc9455aaece44c7bba3028161dbe3e35393" resname="meta_preview.bookrmarks_remove">
+        <source>Remove from bookmarks</source>
+        <target state="new">Remove from bookmarks</target>
+        <note>key: meta_preview.bookrmarks_remove</note>
       </trans-unit>
       <trans-unit id="5e42fe3d48d64c1c9a735ac6286d3b0c06a008a0" resname="meta_preview.creation_date">
         <source>Creation Date</source>
@@ -236,11 +281,6 @@
         <target state="new">Try fewer keywords. Reducing keywords result in more matches.</target>
         <note>key: search.fewer_keywords</note>
       </trans-unit>
-      <trans-unit id="bf24ae2c9083c948931ad1b4d4405b6261eb9bc6" resname="search.filters">
-        <source>Filters</source>
-        <target state="new">Filters</target>
-        <note>key: search.filters</note>
-      </trans-unit>
       <trans-unit id="5ab8b9fc463113f18cb6826034b6ef21342bb73d" resname="search.label">
         <source>Search</source>
         <target state="new">Search</target>
@@ -276,11 +316,6 @@
         <target state="new">Cannot find children Locations with ID %idList%</target>
         <note>key: select_location.error</note>
       </trans-unit>
-      <trans-unit id="1e503a68093242d42791b3ce4572f246b994d303" resname="selected_locations.clear_all">
-        <source>Clear all</source>
-        <target state="new">Clear all</target>
-        <note>key: selected_locations.clear_all</note>
-      </trans-unit>
       <trans-unit id="f57171aaa260d58b75c085d5606779e75a97751f" resname="selected_locations.clear_selection">
         <source>Clear selection</source>
         <target state="new">Clear selection</target>
@@ -291,45 +326,40 @@
         <target state="new">Collapse sidebar</target>
         <note>key: selected_locations.collapse.sidebar</note>
       </trans-unit>
-      <trans-unit id="6e6722ce3ff968c64d765d570209299cd6628024" resname="selected_locations.confirm_selection">
-        <source>Confirm selection</source>
-        <target state="new">Confirm selection</target>
-        <note>key: selected_locations.confirm_selection</note>
-      </trans-unit>
       <trans-unit id="19700661da70137e52d0009660c9a87f5bcb99bd" resname="selected_locations.expand.sidebar">
         <source>Expand sidebar</source>
         <target state="new">Expand sidebar</target>
         <note>key: selected_locations.expand.sidebar</note>
       </trans-unit>
-      <trans-unit id="49f1cbcf4bdd5ba51b7f17dc8dfe93d95cbd4795" resname="selected_locations.selected">
-        <source>selected</source>
-        <target state="new">selected</target>
-        <note>key: selected_locations.selected</note>
+      <trans-unit id="01e881354bb5e776ed6f3fd36360f8f3c06a5fd7" resname="selected_locations.remove_all">
+        <source>Remove all</source>
+        <target state="new">Remove all</target>
+        <note>key: selected_locations.remove_all</note>
+      </trans-unit>
+      <trans-unit id="fe05e738022445778cb775ca099ba54291ae88e9" resname="selected_locations.selected_items">
+        <source>%count% selected item(s)</source>
+        <target state="new">%count% selected item(s)</target>
+        <note>key: selected_locations.selected_items</note>
       </trans-unit>
       <trans-unit id="6b02292efbef3c6800f618acb3c41f968d9ea305" resname="sorting.date.label">
         <source>Date</source>
         <target state="new">Date</target>
         <note>key: sorting.date.label</note>
       </trans-unit>
-      <trans-unit id="a3253454c09869d111cc52367a11b7d419819a8a" resname="sorting.date.tooltip">
-        <source>Sort by Date</source>
-        <target state="new">Sort by Date</target>
-        <note>key: sorting.date.tooltip</note>
-      </trans-unit>
       <trans-unit id="7e978afd229113429d273612c01318f09e3f3e5e" resname="sorting.grid.view">
         <source>Grid view</source>
         <target state="new">Grid view</target>
         <note>key: sorting.grid.view</note>
       </trans-unit>
-      <trans-unit id="c06c6d1c4592ee395e16fc267b514ee167146886" resname="sorting.name.label">
-        <source>Name</source>
-        <target state="new">Name</target>
-        <note>key: sorting.name.label</note>
+      <trans-unit id="32479b70654e401597b4bb3cb4a18bd7bbf24ba6" resname="sorting.name.asc.label">
+        <source>Name A-Z</source>
+        <target state="new">Name A-Z</target>
+        <note>key: sorting.name.asc.label</note>
       </trans-unit>
-      <trans-unit id="2ef6e531e02791b42911cf5f7279f9bedebb3fb2" resname="sorting.name.tooltip">
-        <source>Sort by Name</source>
-        <target state="new">Sort by Name</target>
-        <note>key: sorting.name.tooltip</note>
+      <trans-unit id="e0373d48c538c2f5ae4a1d735763336ad2f2ed3f" resname="sorting.name.desc.label">
+        <source>Name Z-A</source>
+        <target state="new">Name Z-A</target>
+        <note>key: sorting.name.desc.label</note>
       </trans-unit>
       <trans-unit id="27c00b5da502fe6afe6b76e59ddeb951bbbf2c6f" resname="sorting.panels.view">
         <source>Panels view</source>

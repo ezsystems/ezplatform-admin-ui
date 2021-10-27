@@ -1,17 +1,17 @@
 .c-selected-locations-item {
     display: flex;
     align-items: center;
-    padding: calculateRem(8px);
-
-    &:first-child {
-        padding-top: calculateRem(16px);
-    }
+    padding: calculateRem(5px);
+    margin-bottom: calculateRem(8px);
+    border-top: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: $ibexa-border-radius;
+    box-shadow: calculateRem(4px) calculateRem(2px) calculateRem(17px) 0 rgba($ibexa-color-black, 0.05);
 
     &__image-wrapper {
-        width: calculateRem(64px);
-        height: calculateRem(64px);
-        background-color: rgba($ibexa-color-base, 0.31);
-        border-radius: $ibexa-border-radius;
+        width: calculateRem(42px);
+        height: calculateRem(42px);
+        background-color: $ibexa-color-light-300;
+        border-radius: $ibexa-border-radius-small;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -20,17 +20,19 @@
     &__info {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        flex: 1;
         width: calculateRem(185px);
-        padding: calculateRem(10px);
+        padding: 0 calculateRem(15px);
     }
 
     &__info-name {
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size;
     }
 
     &__info-description {
-        font-size: calculateRem(13px);
-        color: $ibexa-color-font-pale;
+        font-size: $ibexa-text-font-size-small;
+        color: $ibexa-color-dark-400;
     }
 
     &__actions-wrapper {
@@ -41,10 +43,13 @@
     &__remove-button {
         width: calculateRem(32px);
         height: calculateRem(32px);
-        border: none;
+        padding: 0;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
 
         .ibexa-icon {
-            fill: $ibexa-black;
+            fill: $ibexa-color-dark;
         }
     }
 }

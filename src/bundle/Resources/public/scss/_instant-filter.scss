@@ -1,3 +1,6 @@
+// TODO: remove ez-instant-filter class after redesign in all places
+
+.ibexa-instant-filter,
 .ez-instant-filter {
     &__input {
         display: block;
@@ -6,17 +9,27 @@
 }
 
 .ibexa-extra-actions--create {
+    .ibexa-instant-filter,
     .ez-instant-filter {
+        &__desc {
+            color: $ibexa-color-dark-400;
+            font-size: $ibexa-text-font-size-small;
+            padding-top: calculateRem(14px);
+        }
+
         &__group {
             display: flex;
             flex-wrap: wrap;
             padding-bottom: calculateRem(16px);
-            border-bottom: calculateRem(1px) solid $ibexa-color-base;
+
+            &:not(:first-of-type) {
+                border-bottom: calculateRem(1px) solid $ibexa-color-base;
+            }
         }
 
         &__group-name {
-            margin: calculateRem(16px) calculateRem(8px) 0;
-            color: $ibexa-color-base-dark;
+            margin: calculateRem(16px) 0 calculateRem(8px);
+            color: $ibexa-color-dark;
             flex-basis: 100%;
             font-size: $ibexa-text-font-size-small;
         }
@@ -32,6 +45,10 @@
                 cursor: pointer;
             }
 
+            .form-check {
+                width: 100%;
+            }
+
             .ibexa-icon {
                 fill: $ibexa-black;
                 position: absolute;
@@ -39,10 +56,21 @@
                 width: calculateRem(16px);
                 height: calculateRem(16px);
             }
-        }
 
-        &__items {
-            padding-top: calculateRem(6px);
+            &:hover {
+                .ibexa-label--checkbox-radio {
+                    color: $ibexa-color-primary;
+                }
+
+                .ibexa-icon {
+                    fill: $ibexa-color-primary;
+                }
+            }
+
+            &--selected {
+                background: $ibexa-color-light-300;
+                border-radius: $ibexa-border-radius;
+            }
         }
     }
 }

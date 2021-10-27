@@ -5,7 +5,7 @@
     right: 0;
     bottom: 0;
     z-index: 5;
-    background-color: $ibexa-white;
+    background-color: $ibexa-color-white;
 
     &__iframe {
         width: 100%;
@@ -21,13 +21,7 @@
     }
 
     &__cancel-button {
-        background-color: $ibexa-color-base-dark;
-        color: $ibexa-white;
         margin-right: calculateRem(16px);
-
-        &:hover {
-            color: $ibexa-white;
-        }
     }
 
     &--footer-visible {

@@ -38,7 +38,8 @@ const ContentCreateTabModule = () => {
     const [multiple, multipleItemsLimit] = useContext(MultipleConfigContext);
     const iframeUrl = generateIframeUrl(contentOnTheFlyData);
     const iframeRef = createRef();
-    const cancelContentCreate = () => {
+    const cancelContentCreate = (event) => {
+        event.preventDefault();
         setCreateContentVisible(false);
         setContentOnTheFlyData({});
         setActiveTab(tabs[0].id);
@@ -78,8 +79,12 @@ const ContentCreateTabModule = () => {
             });
         }
 
-        iframeRef.current.contentWindow.document.body.addEventListener('ez-udw-opened', hideFooter, false);
-        iframeRef.current.contentWindow.document.body.addEventListener('ez-udw-closed', showFooter, false);
+        const iframeBody = iframeRef.current.contentWindow.document.body;
+        const iframeCancelButton = iframeBody.querySelector('.ibexa-anchor-navigation-menu__back');
+
+        iframeBody.addEventListener('ez-udw-opened', hideFooter, false);
+        iframeBody.addEventListener('ez-udw-closed', showFooter, false);
+        iframeCancelButton.addEventListener('click', cancelContentCreate, false);
     };
     const hideFooter = () => setFooterVisible(false);
     const showFooter = () => setFooterVisible(true);

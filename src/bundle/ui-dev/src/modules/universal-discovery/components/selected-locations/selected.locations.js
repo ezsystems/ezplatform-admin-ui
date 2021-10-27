@@ -1,17 +1,16 @@
-import React, { useContext, useState, useEffect, useRef, Fragment } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 
 import Icon from '../../../common/icon/icon';
 import SelectedLocationsItem from './selected.locations.item';
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
 
-import { SelectedLocationsContext, ConfirmContext, AllowConfirmationContext } from '../../universal.discovery.module';
+import { SelectedLocationsContext, AllowConfirmationContext } from '../../universal.discovery.module';
 
 const SelectedLocations = () => {
     const refSelectedLocations = useRef(null);
     const refTogglerButton = useRef(null);
     const [selectedLocations, dispatchSelectedLocationsAction] = useContext(SelectedLocationsContext);
     const allowConfirmation = useContext(AllowConfirmationContext);
-    const onConfirm = useContext(ConfirmContext);
     const [isExpanded, setIsExpanded] = useState(false);
     const className = createCssClassNames({
         'c-selected-locations': true,
@@ -32,12 +31,15 @@ const SelectedLocations = () => {
         setIsExpanded(!isExpanded);
     };
     const renderSelectionCounter = () => {
-        const selectedLabel = Translator.trans(/*@Desc("selected")*/ 'selected_locations.selected', {}, 'universal_discovery_widget');
+        const selectedLabel = Translator.trans(
+            /*@Desc("%count% selected item(s)")*/ 'selected_locations.selected_items',
+            { count: selectedLocations.length },
+            'universal_discovery_widget'
+        );
 
         return (
             <div className="c-selected-locations__selection-counter">
-                <span className="c-selected-locations__selection-count">{selectedLocations.length}</span>
-                <span className="c-selected-locations__selection-count-label">{selectedLabel}</span>
+                {selectedLabel}
             </div>
         );
     };
@@ -51,38 +53,26 @@ const SelectedLocations = () => {
                 className="c-selected-locations__toggle-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
                 onClick={toggleExpanded}
                 title={togglerLabel}
-                data-tooltip-container-selector=".c-udw-tab">
+                data-tooltip-container-selector=".c-udw-tab"
+            >
+                <Icon name={iconName} extraClasses="ibexa-icon--small" />
                 <Icon name={iconName} extraClasses="ibexa-icon--small" />
             </button>
         );
     };
     const renderActionButtons = () => {
-        const confirmSelectionLabel = Translator.trans(
-            /*@Desc("Confirm selection")*/ 'selected_locations.confirm_selection',
-            {},
-            'universal_discovery_widget'
-        );
-        const clearAllLabel = Translator.trans(/*@Desc("Clear all")*/ 'selected_locations.clear_all', {}, 'universal_discovery_widget');
+        const removeAllLabel = Translator.trans(/*@Desc("Remove all")*/ 'selected_locations.remove_all', {}, 'universal_discovery_widget');
 
         return (
-            <Fragment>
+            <div className="c-selected-locations__actions">
                 <button
                     type="button"
-                    className="c-selected-locations__confirm-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
-                    onClick={() => onConfirm()}
-                    title={confirmSelectionLabel}
-                    data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="checkmark" extraClasses="ibexa-icon--small" />
-                </button>
-                <button
-                    type="button"
-                    className="c-selected-locations__clear-selection-button btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text"
+                    className="c-selected-locations__clear-selection-button btn ibexa-btn ibexa-btn--secondary"
                     onClick={clearSelection}
-                    title={clearAllLabel}
-                    data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="trash" extraClasses="ibexa-icon--small" />
+                >
+                    {removeAllLabel}
                 </button>
-            </Fragment>
+            </div>
         );
     };
     const renderLocationsList = () => {
@@ -92,13 +82,16 @@ const SelectedLocations = () => {
 
         return (
             <div className="c-selected-locations__items-wrapper">
-                {selectedLocations.map((selectedLocation) => (
-                    <SelectedLocationsItem
-                        key={selectedLocation.location.id}
-                        location={selectedLocation.location}
-                        permissions={selectedLocation.permissions}
-                    />
-                ))}
+                {renderActionButtons()}
+                <div className="c-selected-locations__items-list">
+                    {selectedLocations.map((selectedLocation) => (
+                        <SelectedLocationsItem
+                            key={selectedLocation.location.id}
+                            location={selectedLocation.location}
+                            permissions={selectedLocation.permissions}
+                        />
+                    ))}
+                </div>
             </div>
         );
     };
@@ -119,13 +112,8 @@ const SelectedLocations = () => {
     return (
         <div className={className} ref={refSelectedLocations}>
             <div className="c-selected-locations__header">
-                <div className="c-selected-locations__actions-wrapper">
-                    {renderToggleButton()}
-                    {!isExpanded && renderActionButtons()}
-                    {isExpanded && renderSelectionCounter()}
-                    {isExpanded && renderActionButtons()}
-                </div>
-                {!isExpanded && renderSelectionCounter()}
+                {renderSelectionCounter()}
+                {renderToggleButton()}
             </div>
             {renderLocationsList()}
         </div>

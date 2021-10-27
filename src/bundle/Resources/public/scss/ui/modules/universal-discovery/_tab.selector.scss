@@ -1,24 +1,37 @@
 .c-tab-selector {
     &__item {
-        min-height: calculateRem(40px);
+        height: calculateRem(48px);
+        width: calculateRem(48px);
         display: flex;
         align-items: center;
-        padding: calculateRem(12px) calculateRem(16px) calculateRem(12px);
+        justify-content: center;
         cursor: pointer;
-        font-size: calculateRem(16px);
+        border-radius: $ibexa-border-radius;
+        margin: calculateRem(12px) calculateRem(8px) calculateRem(24px);
+        position: relative;
 
         .ibexa-icon {
-            margin-right: calculateRem(10px);
-            fill: $ibexa-black;
+            fill: $ibexa-color-black;
         }
 
         &--selected {
-            background-color: $ibexa-color-base-medium;
-            color: $ibexa-color-primary;
-            font-weight: bold;
+            background-color: $ibexa-color-light-400;
 
             .ibexa-icon {
-                fill: $ibexa-color-primary;
+                fill: $ibexa-color-black;
+            }
+        }
+
+        &:not(:first-of-type) {
+            &:before {
+                content: '';
+                position: absolute;
+                top: calculateRem(-12px);
+                left: calculateRem(12px);
+                height: calculateRem(1.5px);
+                width: calculateRem(24px);
+                background-color: $ibexa-color-dark-200;
+
             }
         }
     }

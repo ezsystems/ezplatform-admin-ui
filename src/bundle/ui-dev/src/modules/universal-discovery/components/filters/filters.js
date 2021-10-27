@@ -7,10 +7,12 @@ import { SelectedContentTypesContext, SelectedSectionContext, SelectedSubtreeCon
 import { findLocationsById } from '../../services/universal.discovery.service';
 import { RestInfoContext } from '../../universal.discovery.module';
 
+import Dropdown from '../dropdown/dropdown';
+import Collapsible from '../collapsible/collapsible';
 import ContentTypeSelector from '../content-type-selector/content.type.selector';
 import Icon from '../../../common/icon/icon';
 
-const Filters = ({ isCollapsed, search }) => {
+const Filters = ({ search }) => {
     const [selectedContentTypes, dispatchSelectedContentTypesAction] = useContext(SelectedContentTypesContext);
     const [selectedSection, setSelectedSection] = useContext(SelectedSectionContext);
     const [selectedSubtree, setSelectedSubtree] = useContext(SelectedSubtreeContext);
@@ -30,13 +32,8 @@ const Filters = ({ isCollapsed, search }) => {
     const wrapperClassName = createCssClassNames({
         'c-filters': true,
         'ez-filters': true,
-        'ez-filters--collapsed': isCollapsed,
     });
-    const updateSection = (event) => {
-        const value = event.target.value;
-
-        setSelectedSection(value);
-    };
+    const updateSection = (value) => setSelectedSection(value);
     const openUdw = () => {
         const udwContainer = window.document.createElement('div');
         const config = JSON.parse(window.document.querySelector('#react-udw').dataset.filterSubtreeUdwConfig);
@@ -74,37 +71,50 @@ const Filters = ({ isCollapsed, search }) => {
     };
     const makeSearch = useCallback(() => search(0), [search]);
     const isApplyButtonEnabled = !!selectedContentTypes.length || !!selectedSection || !!selectedSubtree;
-    const renderSelectContentButton = () => {
-        if (selectedSubtree) {
-            return null;
-        }
-
-        return (
-            <button className="btn ibexa-btn ibexa-btn--secondary ibexa-btn--udw-select-location" type="button" onClick={openUdw}>
-                Select content
-            </button>
-        );
-    };
     const renderSubtreeBreadcrumbs = () => {
         if (!subtreeBreadcrumbs) {
             return null;
         }
 
         return (
-            <div className="ez-tag">
-                <div className="ez-tag__content">{subtreeBreadcrumbs}</div>
-                <button type="button" className="ez-tag__remove-btn" onClick={clearSelectedSubree}>
-                    <Icon name="discard" extraClasses="ibexa-icon--small ibexa-icon--dark" />
-                </button>
+            <div className="ibexa-tag-view-select__selected-list">
+                <div className="ibexa-tag-view-select__selected-item-tag">
+                    {subtreeBreadcrumbs}
+                    <button
+                        type="button"
+                        className="btn ibexa-tag-view-select__selected-item-tag-remove-btn"
+                        onClick={clearSelectedSubree}
+                    >
+                        <Icon name="discard" extraClasses="ibexa-icon--tiny" />
+                    </button>
+                </div>
             </div>
         );
     };
-    const contentTypeLabel = Translator.trans(/*@Desc("Content Type")*/ 'filters.content_type', {}, 'universal_discovery_widget');
+    const renderSelectContentButton = () => {
+        const selectLabel = Translator.trans(/*@Desc("Select content")*/ 'filters.tag_view_select.select', {}, 'universal_discovery_widget');
+        const changeLabel = Translator.trans(/*@Desc("Change content")*/ 'filters.tag_view_change.select', {}, 'universal_discovery_widget');
+
+
+        return (
+            <button
+                className="ibexa-tag-view-select__btn-select-path btn ibexa-btn ibexa-btn--secondary"
+                type="button"
+                onClick={openUdw}
+            >
+                { selectedSubtree ? changeLabel : selectLabel }
+            </button>
+        );
+    };
+    const filtersLabel = Translator.trans(/*@Desc("Filters")*/ 'filters.title', {}, 'universal_discovery_widget');
     const sectionLabel = Translator.trans(/*@Desc("Section")*/ 'filters.section', {}, 'universal_discovery_widget');
-    const anySectionLabel = Translator.trans(/*@Desc("Any section")*/ 'filters.any_section', {}, 'universal_discovery_widget');
     const subtreeLabel = Translator.trans(/*@Desc("Subtree")*/ 'filters.subtree', {}, 'universal_discovery_widget');
     const clearLabel = Translator.trans(/*@Desc("Clear")*/ 'filters.clear', {}, 'universal_discovery_widget');
     const applyLabel = Translator.trans(/*@Desc("Apply")*/ 'filters.apply', {}, 'universal_discovery_widget');
+    const sectionOptions = Object.entries(window.eZ.adminUiConfig.sections).map(([sectionIdentifier, sectionName]) => ({
+        value: sectionIdentifier,
+        label: sectionName,
+    }));
 
     useEffect(() => {
         if (filtersCleared) {
@@ -115,48 +125,47 @@ const Filters = ({ isCollapsed, search }) => {
 
     return (
         <div className={wrapperClassName}>
-            <div className="ez-filters__row">
-                <div className="ez-filters__item ez-filters__item--content-type">
-                    <label className="ibexa-label">{contentTypeLabel}</label>
-                    <ContentTypeSelector />
+            <div className="c-filters__header">
+                <div className="c-filters__header-content">
+                    {filtersLabel}
+                </div>
+                <div className="c-filters__header-actions">
+                    <button
+                        type="submit"
+                        className="btn ibexa-btn ibexa-btn--secondary ibexa-btn--small ibexa-btn--apply"
+                        onClick={makeSearch}
+                        disabled={!isApplyButtonEnabled}
+                    >
+                        {applyLabel}
+                    </button>
+                    <button
+                        className="btn ibexa-btn ibexa-btn--ghost ibexa-btn--small"
+                        onClick={clearFilters}
+                    >
+                        {clearLabel}
+                    </button>
                 </div>
             </div>
-            <div className="ez-filters__row">
-                <div className="ez-filters__item ez-filters__item--section">
-                    <label className="ibexa-label">{sectionLabel}</label>
-                    <select className="ez-filters__select form-control" onChange={updateSection} value={selectedSection}>
-                        <option value={''}>{anySectionLabel}</option>
-                        {Object.entries(window.eZ.adminUiConfig.sections).map(([sectionIdentifier, sectionName]) => {
-                            return (
-                                <option key={sectionIdentifier} value={sectionIdentifier}>
-                                    {sectionName}
-                                </option>
-                            );
-                        })}
-                    </select>
+            <ContentTypeSelector />
+            <Collapsible title={sectionLabel}>
+                <Dropdown
+                    small={true}
+                    onChange={updateSection}
+                    value={selectedSection}
+                    options={sectionOptions}
+                />
+            </Collapsible>
+            <Collapsible title={subtreeLabel}>
+                <div class="ibexa-tag-view-select">
+                    {renderSubtreeBreadcrumbs()}
+                    {renderSelectContentButton()}
                 </div>
-                <div className="ez-filters__item ez-filters__item--subtree">
-                    <label className="ibexa-label">{subtreeLabel}:</label>
-                    <div>
-                        {renderSelectContentButton()}
-                        {renderSubtreeBreadcrumbs()}
-                    </div>
-                </div>
-            </div>
-            <div className="ez-filters__btns">
-                <button type="submit" className="btn ibexa-btn ibexa-btn--primary ibexa-btn--apply" onClick={makeSearch} disabled={!isApplyButtonEnabled}>
-                    {applyLabel}
-                </button>
-                <button className="btn ibexa-btn ibexa-btn--ghost" onClick={clearFilters}>
-                    {clearLabel}
-                </button>
-            </div>
+            </Collapsible>
         </div>
     );
 };
 
 Filters.propTypes = {
-    isCollapsed: PropTypes.bool.isRequired,
     search: PropTypes.func.isRequired,
 };
 

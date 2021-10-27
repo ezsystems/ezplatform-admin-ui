@@ -13,6 +13,7 @@
                 has_icon: body_col.has_icon|default(false),
                 is_close_left: body_col.is_close_left is defined ? body_col.is_close_left : next_is_close_left,
                 content: body_col.content,
+                raw: body_col.raw|default(false),
                 class: body_col.class|default(null),
                 attr: body_col.attr|default({}),
             } %}

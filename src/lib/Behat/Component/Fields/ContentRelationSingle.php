@@ -57,6 +57,7 @@ class ContentRelationSingle extends FieldTypeComponent
             )
             ->click();
 
+        $this->universalDiscoveryWidget->verifyIsLoaded();
         $this->universalDiscoveryWidget->selectContent($parameters['value']);
         $this->universalDiscoveryWidget->confirm();
     }

@@ -1,56 +1,68 @@
 .c-search {
     padding: calculateRem(16px);
 
-    &__tools-wrapper {
+    &__top-bar {
         display: flex;
         align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        padding: calculateRem(25px);
+        margin-bottom: calculateRem(32px);
+        border: calculateRem(1px) solid $ibexa-color-light;
+        border-radius: $ibexa-border-radius;
+        box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
     }
 
-    &__input-wrapper {
+    &__main {
         display: flex;
-        flex-grow: 1;
-        align-items: center;
-        margin-right: calculateRem(16px);
+        width: 100%;
     }
 
+    &__sidebar {
+        display: flex;
+        min-width: calculateRem(270px);
+        padding: calculateRem(16px) calculateRem(28px);
+        margin-right: calculateRem(44px);
+        border: calculateRem(1px) solid $ibexa-color-light;
+        border-radius: $ibexa-border-radius;
+    }
+
+    &__content {
+        display: flex;
+        width: 100%;
+        flex-shrink: 1;
+    }
+
+    &__input-wrapper,
     &__selector-wrapper {
-        display: flex;
-        flex-grow: 0.1;
-        margin-right: calculateRem(16px);
+        margin-right: calculateRem(29px);
     }
 
-    &__input {
-        background: $ibexa-white;
-
-        &:focus {
-            background: $ibexa-white;
-        }
-    }
-
-    &__search-btn,
-    &__toggle-filters-btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: calculateRem(34px);
+    &__select-language {
+        width: calculateRem(335px);
+        height: calculateRem(48px);
+        border-color: $ibexa-color-dark-200;
     }
 
     &__search-btn {
-        margin-right: calculateRem(16px);
-    }
-
-    &__selector-wrapper {
-        background: $ibexa-white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calculateRem(48px);
     }
 
     &__no-results-title {
         display: flex;
         justify-content: space-between;
-        background-color: $ibexa-white;
+        background-color: $ibexa-color-white;
         align-items: center;
         padding: 0 calculateRem(20px);
         min-height: calculateRem(50px);
-        border-radius: calculateRem(4px) calculateRem(4px) 0 0;
+        border-radius: $ibexa-border-radius-small $ibexa-border-radius-small 0 0;
         font-weight: bold;
+    }
+
+    .c-content-table {
+        width: 100%;
     }
 }

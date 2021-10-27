@@ -1,32 +1,5 @@
 .c-sort-switcher {
-    @include toggler-wrapper();
-    padding: calculateRem(4px);
-    
-    &--disabled {
-        opacity: 0.3;
-    }
-
-    .c-menu-button {
-        @include toggler-btn();
-
-        &--selected::after {
-            content: '';
-            width: 0;
-            height: 0;
-            margin: calculateRem(6px) 0 0 calculateRem(5px);
-            transform: translateY(-50%);
-        }
-
-        &--sorted-asc::after {
-            border-left: calculateRem(3px) solid transparent;
-            border-right: calculateRem(3px) solid transparent;
-            border-bottom: calculateRem(5px) solid $ibexa-white;
-        }
-
-        &--sorted-desc::after {
-            border-top: calculateRem(5px) solid $ibexa-white;
-            border-left: calculateRem(3px) solid transparent;
-            border-right: calculateRem(3px) solid transparent;
-        }
-    }
+    padding: calculateRem(8px);
+    display: flex;
+    align-items: center;
 }

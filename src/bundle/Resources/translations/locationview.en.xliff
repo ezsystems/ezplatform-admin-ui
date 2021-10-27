@@ -16,10 +16,20 @@
         <target state="new">Content Type</target>
         <note>key: bulk_action.failed.modal.content_type_name</note>
       </trans-unit>
-      <trans-unit id="a4b9e9b4898dd285237fc60130970ce7ed988871" resname="content.create.choose_content_type">
+      <trans-unit id="61c309bd68782746767f9165eb574f111b50a727" resname="content.create.create_content">
         <source>Create content</source>
         <target state="new">Create content</target>
-        <note>key: content.create.choose_content_type</note>
+        <note>key: content.create.create_content</note>
+      </trans-unit>
+      <trans-unit id="90210d6d68a4c36d75906bd4fea9194a88988205" resname="content.create.editing_details">
+        <source>under %content_name%</source>
+        <target state="new">under %content_name%</target>
+        <note>key: content.create.editing_details</note>
+      </trans-unit>
+      <trans-unit id="a443a2a76348e8431df4346c11079f9e56735473" resname="content.create.filters.desc">
+        <source>Or choose from list</source>
+        <target state="new">Or choose from list</target>
+        <note>key: content.create.filters.desc</note>
       </trans-unit>
       <trans-unit id="a68fa29f2de8a9e5a1a533e7240b0b667651c4d5" resname="content.create.input.placeholder">
         <source>Type to refine</source>

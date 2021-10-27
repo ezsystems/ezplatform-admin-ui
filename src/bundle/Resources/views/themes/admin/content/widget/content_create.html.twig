@@ -2,12 +2,17 @@
 
 <div class="ibexa-extra-actions ibexa-extra-actions--create ibexa-extra-actions--hidden" data-actions="create">
     <div class="ibexa-extra-actions__header">
-        <h3>{{ 'content.create.choose_content_type'|trans|desc('Create content') }}</h3>
+        <h2>{{ 'content.create.create_content'|trans|desc('Create content') }}</h2>
         <button class="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--close">
             <svg class="ibexa-icon ibexa-icon--small">
                 <use xlink:href="{{ ibexa_icon_path('discard') }}"></use>
             </svg>
         </button>
+        <div class="ibexa-extra-actions__header-subtitle">
+            {% if content is defined %}
+                {{ 'content.create.editing_details'|trans({ '%content_name%': ez_content_name(content) })|desc('under %content_name%') }}
+            {% endif %}
+        </div>
     </div>
     <div class="ibexa-extra-actions__content">
         {{ form_start(form, { 'action': path('ezplatform.content.create'), 'attr': { 'autocomplete': 'off' } }) }}
@@ -29,6 +34,9 @@
                             placeholder="{{ ('content.create.input.placeholder'|trans|desc('Type to refine')) }}"
                             value=""
                         />
+                    </div>
+                    <div class="ez-instant-filter__desc">
+                        {{ ('content.create.filters.desc'|trans|desc('Or choose from list')) }}
                     </div>
                     <div class="ez-instant-filter__items">
                         {{ form_widget(form.content_type) }}

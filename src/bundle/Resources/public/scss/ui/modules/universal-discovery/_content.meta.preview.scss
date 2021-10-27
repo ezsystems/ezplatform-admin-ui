@@ -2,46 +2,52 @@
     padding: calculateRem(10px) calculateRem(20px);
     position: relative;
     height: 100%;
+    letter-spacing: calculateRem(0.12px);
 
     &__preview {
-        width: calculateRem(248px);
-        height: calculateRem(248px);
-        margin-bottom: calculateRem(16px);
-        background-color: $ibexa-color-base-light;
-        border-radius: $ibexa-border-radius;
+        width: calculateRem(453px);
+        height: calculateRem(342px);
+        background-color: $ibexa-color-light-300;
+        border-radius: $ibexa-border-radius-small;
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    &__content-name {
-        font-size: calculateRem(16px);
-        line-height: calculateRem(16px);
-        font-weight: bold;
-    }
-
-    &__details-item {
-        display: flex;
-        font-size: calculateRem(13px);
-        justify-content: space-between;
-        color: $ibexa-color-font;
-        margin-top: calculateRem(4px);
-    }
-
-    &__info {
-        margin-top: calculateRem(20px);
-    }
-
-    &__content-type-name {
-        font-size: calculateRem(16px);
-        color: $ibexa-color-font;
     }
 
     &__header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: calculateRem(21px);
+    }
+
+    &__content-name {
+        font-size: $ibexa-text-font-size-large;
+        line-height: calculateRem(33px);
+        font-weight: 600;
+    }
+
+    &__content-type-name {
+        font-size: $ibexa-text-font-size;
+        color: $ibexa-color-dark-400;
+        line-height: calculateRem(24px);
+    }
+
+    &__details {
+        margin-top: calculateRem(16px);
+        border-top: calculateRem(1px) solid $ibexa-color-light;
+    }
+
+    &__details-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: $ibexa-text-font-size-medium;
+        line-height: calculateRem(21px);
+        color: $ibexa-color-dark;
+        margin-top: calculateRem(16px);
+    }
+
+    &__details-item-row {
+        width: 50%;
     }
 
     &__toggle-bookmark-button {
@@ -52,8 +58,7 @@
     &__translations-wrapper {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        padding-left: calculateRem(8px);
+        align-items: flex-start;
     }
 
     &__translation {
@@ -62,17 +67,31 @@
 
     &__actions {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         margin-bottom: calculateRem(21px);
+        font-size: $ibexa-text-font-size-medium;
+        line-height: calculateRem(21px);
+        color: $ibexa-color-dark;
+
+        .c-content-edit-button {
+            display: inline-block;
+        }
     }
 
-    &__edit-button,
-    &__preview-button {
-        padding: 0 calculateRem(8px);
-        line-height: 0.5;
-    }
+    &__action-item {
+        display: flex;
+        align-items: center;
 
-    &__edit-button {
-        padding: calculateRem(8px);
+        &:not(:first-of-type) {
+            margin-left: calculateRem(10px);
+        }
+
+        .c-content-edit-button__btn {
+            width: auto;
+        }
+
+        .ibexa-icon {
+            margin-right: calculateRem(8px);
+        }
     }
 }

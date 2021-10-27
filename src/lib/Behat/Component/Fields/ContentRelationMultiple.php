@@ -162,6 +162,8 @@ class ContentRelationMultiple extends FieldTypeComponent
 
     private function selectRelationsAndConfirm($items, $paths)
     {
+        $this->universalDiscoveryWidget->verifyIsLoaded();
+
         $itemsToSet = array_keys($items);
         foreach ($itemsToSet as $itemToSet) {
             $this->universalDiscoveryWidget->selectContent($paths[$itemToSet]);

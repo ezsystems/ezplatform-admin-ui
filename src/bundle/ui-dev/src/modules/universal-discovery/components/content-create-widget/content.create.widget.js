@@ -69,12 +69,20 @@ const ContentCreateWidget = () => {
         {},
         'universal_discovery_widget'
     );
-    const createLabel = Translator.trans(/*@Desc("Create")*/ 'create_content.create', {}, 'universal_discovery_widget');
+    const createLabel = Translator.trans(/*@Desc("Create new")*/ 'create_content.create', {}, 'universal_discovery_widget');
     const closeLabel = Translator.trans(/*@Desc("Close")*/ 'popup.close.label', {}, 'universal_discovery_widget');
     const cancelLabel = Translator.trans(/*@Desc("Cancel")*/ 'content_create.cancel.label', {}, 'universal_discovery_widget');
+    const placeholder = Translator.trans(/*@Desc("Type to refine")*/ 'content_create.placeholder', {}, 'universal_discovery_widget')
+    const filtersDescLabel = Translator.trans(/*@Desc("Or choose from list")*/ 'content.create.filters.desc', {}, 'universal_discovery_widget');
+    const createUnderLabel = Translator.trans(
+        /*@Desc("under %content_name%")*/ 'content.create.editing_details',
+        { content_name: selectedLocation?.location?.ContentInfo.Content.TranslatedName },
+        'universal_discovery_widget');
     const widgetClassName = createCssClassNames({
+        'ibexa-extra-actions': true,
+        'ibexa-extra-actions--create': true,
+        'ibexa-extra-actions--hidden': !createContentVisible,
         'c-content-create': true,
-        'c-content-create--hidden': !createContentVisible,
     });
 
     useEffect(() => {
@@ -82,90 +90,118 @@ const ContentCreateWidget = () => {
     }, []);
 
     return (
-        <div className={widgetClassName} ref={refContentTree}>
-            <div className="c-content-create__header">
-                <div className="c-content-create__header-title">{createContentLabel}</div>
-                <button
-                    type="button"
-                    className="c-content-create__close-button"
-                    onClick={close}
-                    title={closeLabel}
-                    data-tooltip-container-selector=".c-udw-tab">
-                    <Icon name="discard" extraClasses="ibexa-icon--small" />
-                </button>
-            </div>
-            <div className="c-content-create__language-selector-wrapper">
-                <div className="c-content-create__language-selector-label">{selectLanguageLabel}</div>
-                <select className="form-control" onChange={updateSelectedLanguage} value={selectedLanguage}>
-                    {filteredLanguages.map((language) => {
-                        if (!language.enabled) {
-                            return null;
-                        }
-
-                        return (
-                            <option key={language.id} value={language.languageCode} onChange={updateSelectedLanguage}>
-                                {language.name}
-                            </option>
-                        );
-                    })}
-                </select>
-            </div>
-            <div className="c-content-create__select-content-type-wrapper">
-                <div className="c-content-create__select-content-type-label">{selectContentType}</div>
-                <input autoFocus className="form-control" type="text" placeholder="Type to refine" onChange={updateFilterQuery} />
-                <div className="c-content-create__content-type-list">
-                    {contentTypes.map(([groupName, groupItems]) => {
-                        const isHidden = groupItems.every((groupItem) => {
-                            return (
-                                (filterQuery && !groupItem.name.toLowerCase().includes(filterQuery)) ||
-                                (selectedLocation &&
-                                    selectedLocation.permissions &&
-                                    selectedLocation.permissions.create.restrictedContentTypeIds.length &&
-                                    !selectedLocation.permissions.create.restrictedContentTypeIds.includes(groupItem.id.toString())) ||
-                                (allowedContentTypes && !allowedContentTypes.includes(groupItem.identifier))
-                            );
-                        });
-
-                        return (
-                            <div className="c-content-create__group" key={groupName}>
-                                <div className="c-content-create__group-name" hidden={isHidden}>
-                                    {groupName}
-                                </div>
-                                {groupItems.map(({ name, thumbnail, identifier, id }) => {
-                                    const isHidden =
-                                        (filterQuery && !name.toLowerCase().includes(filterQuery)) ||
-                                        (selectedLocation &&
-                                            selectedLocation.permissions &&
-                                            selectedLocation.permissions.create.restrictedContentTypeIds.length &&
-                                            !selectedLocation.permissions.create.restrictedContentTypeIds.includes(id.toString())) ||
-                                        (allowedContentTypes && !allowedContentTypes.includes(identifier));
-                                    const className = createCssClassNames({
-                                        'c-content-create__group-item': true,
-                                        'c-content-create__group-item--selected': identifier === selectedContentType,
-                                    });
-                                    const updateSelectedContentType = () => setSelectedContentType(identifier);
-
-                                    return (
-                                        <div hidden={isHidden} key={identifier} className={className} onClick={updateSelectedContentType}>
-                                            <div className="c-content-create__group-item-icon">
-                                                <Icon customPath={thumbnail} extraClasses="ibexa-icon--small" />
-                                            </div>
-                                            <div className="c-content-create__group-item-name">{name}</div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        );
-                    })}
+        <div class="ibexa-extra-actions-container">
+            <div className={widgetClassName} ref={refContentTree}>
+                <div className="ibexa-extra-actions__header">
+                    <h3>{createContentLabel}</h3>
+                    <button
+                        type="button"
+                        className="btn ibexa-btn ibexa-btn--ghost ibexa-btn--no-text ibexa-btn--close"
+                        onClick={close}
+                        title={closeLabel}
+                        data-tooltip-container-selector=".c-udw-tab">
+                        <Icon name="discard" extraClasses="ibexa-icon--small" />
+                    </button>
+                    <div className="ibexa-extra-actions__header-subtitle">
+                        {createUnderLabel}
+                    </div>
                 </div>
-            </div>
-            <div className="c-content-create__confirm-wrapper">
-                <button className="c-content-create__confirm-button btn ibexa-btn ibexa-btn--primary" onClick={createContent} disabled={isConfirmDisabled}>
-                    {createLabel}
-                </button>
-                <button className="btn ibexa-btn ibexa-btn--ghost" onClick={close}>
-                    {cancelLabel}
-                </button>
+                <div className="ibexa-extra-actions__content">
+                    <div className="ibexa-extra-actions__section-header">{selectLanguageLabel}</div>
+                    <div class="ibexa-extra-actions__section-content">
+                        <select className="form-control" onChange={updateSelectedLanguage} value={selectedLanguage}>
+                            {filteredLanguages.map((language) => {
+                                if (!language.enabled) {
+                                    return null;
+                                }
+
+                                return (
+                                    <option key={language.id} value={language.languageCode}>
+                                        {language.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </div>
+                    <div className="ibexa-extra-actions__section-header">{selectContentType}</div>
+                    <div class="ibexa-extra-actions__section-content ibexa-extra-actions__section-content--content-type">
+                        <div class="ibexa-instant-filter">
+                            <div class="ibexa-instant-filter__input-wrapper">
+                                <input
+                                    autoFocus
+                                    className="ibexa-instant-filter__input ibexa-input ibexa-input--text form-control"
+                                    type="text"
+                                    placeholder={placeholder}
+                                    onChange={updateFilterQuery}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibexa-instant-filter__desc">
+                        {filtersDescLabel}
+                    </div>
+                    <div className="ibexa-instant-filter__items">
+                        {contentTypes.map(([groupName, groupItems]) => {
+                            const restrictedContentTypeIds = selectedLocation?.permissions?.create.restrictedContentTypeIds ?? [];
+                            const isHidden = groupItems.every((groupItem) => {
+                                const isNotSearchedName = filterQuery && !groupItem.name.toLowerCase().includes(filterQuery);
+                                const hasNotPermission = restrictedContentTypeIds.length && !restrictedContentTypeIds.includes(groupItem.id.toString());
+                                const isNotAllowedContentType = allowedContentTypes && !allowedContentTypes.includes(groupItem.identifier);
+
+                                return isNotSearchedName || hasNotPermission || isNotAllowedContentType;
+                            });
+
+                            if (isHidden) {
+                                return null;
+                            }
+
+                            return (
+                                <div className="ibexa-instant-filter__group" key={groupName}>
+                                    <div className="ibexa-instant-filter__group-name">
+                                        {groupName}
+                                    </div>
+                                    {groupItems.map(({ name, thumbnail, identifier, id }) => {
+                                        const isHidden =
+                                            (filterQuery && !name.toLowerCase().includes(filterQuery)) ||
+                                            (selectedLocation &&
+                                                selectedLocation.permissions &&
+                                                selectedLocation.permissions.create.restrictedContentTypeIds.length &&
+                                                !selectedLocation.permissions.create.restrictedContentTypeIds.includes(id.toString())) ||
+                                            (allowedContentTypes && !allowedContentTypes.includes(identifier));
+                                        const className = createCssClassNames({
+                                            'ibexa-instant-filter__group-item': true,
+                                            'ibexa-instant-filter__group-item--selected': identifier === selectedContentType,
+                                        });
+                                        const updateSelectedContentType = () => setSelectedContentType(identifier);
+
+                                        if (isHidden) {
+                                            return null;
+                                        }
+
+                                        return (
+                                            <div hidden={isHidden} key={identifier} className={className} onClick={updateSelectedContentType}>
+                                                <Icon customPath={thumbnail} extraClasses="ibexa-icon--small" />
+                                                <div className="form-check">
+                                                    <div class="ibexa-label ibexa-label--checkbox-radio form-check-label">
+                                                        {name}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <div className="c-content-create__confirm-wrapper">
+                        <button className="c-content-create__confirm-button btn ibexa-btn ibexa-btn--primary" onClick={createContent} disabled={isConfirmDisabled}>
+                            {createLabel}
+                        </button>
+                        <button className="btn ibexa-btn ibexa-btn--secondary" onClick={close}>
+                            {cancelLabel}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );

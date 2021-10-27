@@ -1,6 +1,7 @@
 @import 'universal-discovery/main';
 @import 'universal-discovery/tab';
 @import 'universal-discovery/top.menu';
+@import 'universal-discovery/actions.menu';
 @import 'universal-discovery/content.create';
 @import 'universal-discovery/content.create.widget';
 @import 'universal-discovery/content.create.button';
@@ -8,7 +9,6 @@
 @import 'universal-discovery/content.edit.button';
 @import 'universal-discovery/sort.switcher';
 @import 'universal-discovery/view.switcher';
-@import 'universal-discovery/menu.button';
 @import 'universal-discovery/tab.selector';
 @import 'universal-discovery/finder';
 @import 'universal-discovery/finder.branch';
@@ -17,13 +17,14 @@
 @import 'universal-discovery/selected.locations';
 @import 'universal-discovery/selected.locations.item';
 @import 'universal-discovery/grid';
-@import 'universal-discovery/grid.item';
 @import 'universal-discovery/breadcrumbs';
 @import 'universal-discovery/search';
-@import 'universal-discovery/content.table';
 @import 'universal-discovery/content.table.item';
 @import 'universal-discovery/toggle.selection.button';
 @import 'universal-discovery/filters';
 @import 'universal-discovery/bookmarks.list';
 @import 'universal-discovery/translation.selector';
 @import 'universal-discovery/tree';
+@import 'universal-discovery/simple.dropdown';
+@import 'universal-discovery/toggle.selection';
+@import 'universal-discovery/dropdown';

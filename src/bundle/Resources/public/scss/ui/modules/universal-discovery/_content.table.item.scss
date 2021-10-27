@@ -1,23 +1,13 @@
 .c-content-table-item {
     cursor: pointer;
 
-    &:hover {
-        .c-toggle-selection-button {
-            opacity: 1;
-        }
-    }
-
     &--marked {
-        background-color: lighten($ibexa-white, 15%);
+        background-color: lighten($ibexa-color-white, 15%);
     }
 
     &--not-selectable {
-        background-color: $ibexa-color-base-light;
+        background-color: $ibexa-color-light-200;
         cursor: not-allowed;
-    }
-
-    &__toggle-button-wrapper {
-        width: calculateRem(20px);
     }
 
     .table &__icon-wrapper {

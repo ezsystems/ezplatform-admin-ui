@@ -51,10 +51,15 @@
         <target state="new">Content item '%name%' revealed.</target>
         <note>key: content.reveal.success</note>
       </trans-unit>
-      <trans-unit id="fab6f6efafaeec371aaa8302c82362846d2b8f69" resname="content_edit.last_saved">
-        <source>Last saved draft was on %date%</source>
-        <target state="new">Last saved draft was on %date%</target>
-        <note>key: content_edit.last_saved</note>
+      <trans-unit id="123a6cff0d98d08927f6666246d451da50941a7b" resname="content_edit.autosave.status_saved.message.full">
+        <source>Draft saved %time%</source>
+        <target state="new">Draft saved %time%</target>
+        <note>key: content_edit.autosave.status_saved.message.full</note>
+      </trans-unit>
+      <trans-unit id="6b9c71826cc703b6af425a6adedd71d90928821f" resname="content_edit.autosave.status_saved.message.simplified">
+        <source>Saved</source>
+        <target state="new">Saved</target>
+        <note>key: content_edit.autosave.status_saved.message.simplified</note>
       </trans-unit>
       <trans-unit id="750bead6705b295c7b7d66c27b2768c1b9329ed5" resname="editing_details">
         <source>under %location_name%</source>

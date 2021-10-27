@@ -1,87 +1,72 @@
 .c-finder-leaf {
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: calculateRem(7px) calculateRem(20px) calculateRem(7px) calculateRem(8px);
-    position: relative;
+    @mixin hover {
+        &:hover {
+            .c-finder-leaf__name {
+                color: $ibexa-color-primary;
 
-    &:hover {
-        background-color: $ibexa-color-base-medium;
+                .ibexa-icon {
+                    fill: $ibexa-color-primary;
+                }
+            }
 
-        .c-toggle-selection-button {
-            opacity: 1;
+            &.c-finder-leaf--has-children:after {
+                border-left: calculateRem(6px) solid $ibexa-color-primary;
+            }
         }
     }
+
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: calculateRem(10px) calculateRem(40px) calculateRem(10px) calculateRem(15px);
+    border-radius: $ibexa-border-radius;
+    position: relative;
+
+    @include hover();
 
     &--has-children:after {
         content: '';
         width: 0;
         height: 0;
-        border-top: calculateRem(5px) solid transparent;
-        border-left: calculateRem(8px) solid $ibexa-color-base-dark;
-        border-bottom: calculateRem(5px) solid transparent;
+        border-top: calculateRem(4px) solid transparent;
+        border-left: calculateRem(6px) solid $ibexa-color-dark;
+        border-bottom: calculateRem(4px) solid transparent;
         position: absolute;
-        right: calculateRem(5px);
+        right: calculateRem(15px);
         top: 50%;
         transform: translateY(-50%);
     }
 
     &--marked {
         font-weight: bold;
-        background-color: $ibexa-color-base-medium;
+        background-color: $ibexa-color-light-300;
         color: $ibexa-color-primary;
 
-        &:hover {
-            background-color: $ibexa-color-base-medium;
-        }
-
-        &.c-finder-leaf--not-selectable {
-            background-color: $ibexa-color-base-medium;
-
-            &:hover {
-                background-color: $ibexa-color-base-medium;
-            }
-        }
-
-        .c-toggle-selection-button {
-            &--selected {
-                background-color: $ibexa-color-primary;
-
-                .ibexa-icon {
-                    fill: $ibexa-white;
-                }
-            }
-        }
-
-        &.c-finder-leaf--has-children:after {
-            border-left-color: $ibexa-color-primary;
-        }
-
         .c-finder-leaf__name {
+            color: $ibexa-color-dark;
+            font-weight: 600;
+
             .ibexa-icon {
-                fill: $ibexa-color-primary;
+                fill: $ibexa-color-dark;
             }
         }
-    }
 
-    &--not-selectable {
-        background-color: $ibexa-color-base-light;
-        cursor: not-allowed;
-
-        &:hover {
-            background-color: $ibexa-color-base-light;
-        }
+        @include hover();
     }
 
     &__name {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: calculateRem(16px);
+        font-size: $ibexa-text-font-size-medium;
+        line-height: calculateRem(21px);
+        color: $ibexa-color-dark;
+        margin-left: calculateRem(16px);
+        flex: 1;
 
         .ibexa-icon {
-            margin-right: calculateRem(5px);
+            margin-right: calculateRem(8px);
         }
     }
 
@@ -95,6 +80,7 @@
             top: 50%;
             transform: translateY(-50%);
             margin-top: calculateRem(-1px);
+            fill: $ibexa-color-dark;
         }
     }
 }

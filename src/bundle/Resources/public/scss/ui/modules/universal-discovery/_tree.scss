@@ -1,9 +1,10 @@
 .c-tree {
     width: 100%;
     height: 100%;
+    position: relative;
 
     .m-tree {
-        width: initial;
+        width: initial !important; // TODO: remove when Content Tree refactored
         max-width: initial;
         border-radius: $ibexa-border-radius;
         
