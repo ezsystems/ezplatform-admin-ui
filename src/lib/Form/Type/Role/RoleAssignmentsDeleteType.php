@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Role;
+namespace Ibexa\AdminUi\Form\Type\Role;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
+use Ibexa\AdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -43,3 +43,5 @@ class RoleAssignmentsDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(RoleAssignmentsDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentsDeleteType');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Value\Content;
+namespace Ibexa\AdminUi\UI\Value\Content;
 
 use eZ\Publish\API\Repository\Values\Content\DraftList\Item\UnauthorizedContentDraftListItem;
 
@@ -39,3 +39,5 @@ class UnauthorizedContentDraft implements ContentDraftInterface
         return false;
     }
 }
+
+class_alias(UnauthorizedContentDraft::class, 'EzSystems\EzPlatformAdminUi\UI\Value\Content\UnauthorizedContentDraft');

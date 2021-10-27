@@ -1,72 +1,72 @@
 services:
-    EzSystems\EzPlatformAdminUi\Tab\Dashboard\MyDraftsTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+    Ibexa\AdminUi\Tab\Dashboard\MyDraftsTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         public: false
         arguments:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
-    EzSystems\EzPlatformAdminUi\Tab\Dashboard\MyContentTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+    Ibexa\AdminUi\Tab\Dashboard\MyContentTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         public: false
         arguments:
-            $contentSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType'
+            $contentSubtreeQueryType: '@Ibexa\AdminUi\QueryType\ContentSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
-    EzSystems\EzPlatformAdminUi\Tab\Dashboard\MyMediaTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+    Ibexa\AdminUi\Tab\Dashboard\MyMediaTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         public: false
         arguments:
-            $mediaSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType'
+            $mediaSubtreeQueryType: '@Ibexa\AdminUi\QueryType\MediaSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
-    EzSystems\EzPlatformAdminUi\Tab\Dashboard\EveryoneMediaTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+    Ibexa\AdminUi\Tab\Dashboard\EveryoneMediaTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         public: false
         arguments:
-            $mediaSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType'
+            $mediaSubtreeQueryType: '@Ibexa\AdminUi\QueryType\MediaSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
-    EzSystems\EzPlatformAdminUi\Tab\Dashboard\EveryoneContentTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+    Ibexa\AdminUi\Tab\Dashboard\EveryoneContentTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         public: false
         arguments:
-            $contentSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType'
+            $contentSubtreeQueryType: '@Ibexa\AdminUi\QueryType\ContentSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
-    EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper:
-        parent: EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper
+    Ibexa\AdminUi\Tab\Dashboard\PagerContentToDataMapper:
+        parent: Ibexa\AdminUi\Pagination\Mapper\AbstractPagerContentToDataMapper
         autowire: true
         public: false
 
     ezplatform.adminui.dashboard.me:
-        parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent
+        parent: Ibexa\AdminUi\Component\TwigComponent
         arguments:
             $template: '@@ezdesign/ui/dashboard/block/me.html.twig'
         tags:
             - { name: ezplatform.admin_ui.component, group: 'dashboard-blocks' }
 
     ezplatform.adminui.dashboard.all:
-        parent: EzSystems\EzPlatformAdminUi\Component\TwigComponent
+        parent: Ibexa\AdminUi\Component\TwigComponent
         arguments:
             $template: '@@ezdesign/ui/dashboard/block/all.html.twig'
         tags:
             - { name: ezplatform.admin_ui.component, group: 'dashboard-blocks' }
 
     ezplatform.adminui.dashboard.my.tab_groups:
-        parent: EzSystems\EzPlatformAdminUi\Component\TabsComponent
+        parent: Ibexa\AdminUi\Component\TabsComponent
         arguments:
             $groupIdentifier: 'dashboard-my'
         tags:
             - { name: ezplatform.admin_ui.component, group: 'dashboard-my-tab-groups' }
 
     ezplatform.adminui.dashboard.all.tab_groups:
-        parent: EzSystems\EzPlatformAdminUi\Component\TabsComponent
+        parent: Ibexa\AdminUi\Component\TabsComponent
         arguments:
             $groupIdentifier: 'dashboard-everyone'
         tags:

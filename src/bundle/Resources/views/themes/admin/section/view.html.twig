@@ -82,7 +82,7 @@
         {% endembed %}
     </section>
 
-    {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\SectionController::viewSectionContentAction', {
+    {{ render(controller('Ibexa\\Bundle\\AdminUi\\Controller\\SectionController::viewSectionContentAction', {
         'section': section,
         'page': app.request.query.getInt('page', 1)
     })) }}

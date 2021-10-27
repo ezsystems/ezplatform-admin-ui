@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraints\AbstractComparisonValidator;
 
@@ -25,3 +25,5 @@ class LocationIsNotSubLocationValidator extends AbstractComparisonValidator
         return stripos($targetLocation->pathString, $sourceLocation->pathString) === false;
     }
 }
+
+class_alias(LocationIsNotSubLocationValidator::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationIsNotSubLocationValidator');

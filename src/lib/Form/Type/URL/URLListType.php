@@ -4,9 +4,9 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\URL;
+namespace Ibexa\AdminUi\Form\Type\URL;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\URL\URLListData;
+use Ibexa\AdminUi\Form\Data\URL\URLListData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -84,3 +84,5 @@ class URLListType extends AbstractType
         return 'ezplatform_content_forms_url_list';
     }
 }
+
+class_alias(URLListType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\URL\URLListType');

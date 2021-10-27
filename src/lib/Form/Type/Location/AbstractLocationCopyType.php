@@ -4,9 +4,9 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Location;
+namespace Ibexa\AdminUi\Form\Type\Location;
 
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
+use Ibexa\AdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,3 +41,5 @@ abstract class AbstractLocationCopyType extends AbstractType
         ]);
     }
 }
+
+class_alias(AbstractLocationCopyType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Location\AbstractLocationCopyType');

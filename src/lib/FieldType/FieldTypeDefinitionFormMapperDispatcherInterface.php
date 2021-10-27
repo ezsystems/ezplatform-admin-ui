@@ -4,9 +4,9 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\FieldType;
+namespace Ibexa\AdminUi\FieldType;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
 use Symfony\Component\Form\FormInterface;
 
 /**
@@ -18,3 +18,5 @@ interface FieldTypeDefinitionFormMapperDispatcherInterface
 
     public function map(FormInterface $form, FieldDefinitionData $data): void;
 }
+
+class_alias(FieldTypeDefinitionFormMapperDispatcherInterface::class, 'EzSystems\EzPlatformAdminUi\FieldType\FieldTypeDefinitionFormMapperDispatcherInterface');

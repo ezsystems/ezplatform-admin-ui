@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module;
+namespace Ibexa\AdminUi\UI\Config\Provider\Module;
 
-use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 /**
  * Provides information about current setting for sub-items list.
@@ -40,3 +40,5 @@ class SubItemsList implements ProviderInterface
         ];
     }
 }
+
+class_alias(SubItemsList::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Provider\Module\SubItemsList');

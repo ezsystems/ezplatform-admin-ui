@@ -6,12 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Component\Renderer;
+namespace Ibexa\AdminUi\Component\Renderer;
 
-use EzSystems\EzPlatformAdminUi\Component\Event\RenderGroupEvent;
-use EzSystems\EzPlatformAdminUi\Component\Event\RenderSingleEvent;
-use EzSystems\EzPlatformAdminUi\Component\Registry;
-use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
+use Ibexa\AdminUi\Component\Event\RenderGroupEvent;
+use Ibexa\AdminUi\Component\Event\RenderSingleEvent;
+use Ibexa\AdminUi\Component\Registry;
+use Ibexa\AdminUi\Exception\InvalidArgumentException;
+use Ibexa\Contracts\AdminUi\Component\Renderer\RendererInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DefaultRenderer implements RendererInterface
@@ -62,3 +63,5 @@ class DefaultRenderer implements RendererInterface
         return $group[$name]->render($parameters);
     }
 }
+
+class_alias(DefaultRenderer::class, 'EzSystems\EzPlatformAdminUi\Component\Renderer\DefaultRenderer');

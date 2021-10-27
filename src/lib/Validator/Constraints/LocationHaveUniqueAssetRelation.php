@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -27,3 +27,5 @@ class LocationHaveUniqueAssetRelation extends Constraint implements TranslationC
         ];
     }
 }
+
+class_alias(LocationHaveUniqueAssetRelation::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\LocationHaveUniqueAssetRelation');

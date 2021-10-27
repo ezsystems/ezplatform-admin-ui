@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider;
+namespace Ibexa\AdminUi\Form\TrashLocationOptionProvider;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformAdminUi\Specification\Location\HasChildren as HasChildrenSpec;
+use Ibexa\AdminUi\Specification\Location\HasChildren as HasChildrenSpec;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -55,3 +55,5 @@ final class HasChildren implements TrashLocationOptionProvider
             ]);
     }
 }
+
+class_alias(HasChildren::class, 'EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasChildren');

@@ -9,28 +9,28 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\Tab\TabRegistry:
+    Ibexa\AdminUi\Tab\TabRegistry:
         lazy: true
 
-    EzSystems\EzPlatformAdminUi\Tab\Event\Subscriber\:
+    Ibexa\AdminUi\Tab\Event\Subscriber\:
         resource: "../../../lib/Tab/Event/Subscriber/*"
         public: true
         tags: ['kernel.event_subscriber']
 
-    EzSystems\EzPlatformAdminUi\Tab\AbstractTab:
+    Ibexa\Contracts\AdminUi\Tab\AbstractTab:
         abstract: true
         lazy: true
 
-    EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+    Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         abstract: true
         autowire: true
         autoconfigure: false
         public: false
         lazy: true
 
-    EzSystems\EzPlatformAdminUi\Tab\AbstractRouteBasedTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+    Ibexa\Contracts\AdminUi\Tab\AbstractRouteBasedTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         abstract: true
         autowire: true
         autoconfigure: false
@@ -39,8 +39,8 @@ services:
         arguments:
             $httpKernelRuntime: '@twig.runtime.httpkernel'
 
-    EzSystems\EzPlatformAdminUi\Tab\AbstractControllerBasedTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+    Ibexa\Contracts\AdminUi\Tab\AbstractControllerBasedTab:
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         abstract: true
         autowire: true
         autoconfigure: false

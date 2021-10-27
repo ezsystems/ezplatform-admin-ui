@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Specification;
+namespace Ibexa\AdminUi\Specification;
 
 interface SpecificationInterface
 {
@@ -36,3 +36,5 @@ interface SpecificationInterface
      */
     public function not(): SpecificationInterface;
 }
+
+class_alias(SpecificationInterface::class, 'EzSystems\EzPlatformAdminUi\Specification\SpecificationInterface');
