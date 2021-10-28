@@ -297,14 +297,14 @@
             (event) => {
                 currentDraggedItem = event.currentTarget;
                 sourceContainer = currentDraggedItem.parentNode;
-                currentDraggedItem.classList.add('ibexa-available-field-type--is-dragged-out');
+                currentDraggedItem.classList.add('ibexa-available-field-type--is-dragging-out');
             },
             false
         );
         availableField.addEventListener(
             'dragend',
             () => {
-                currentDraggedItem.classList.remove('ibexa-available-field-type--is-dragged-out');
+                currentDraggedItem.classList.remove('ibexa-available-field-type--is-dragging-out');
             },
             false
         );
