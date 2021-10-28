@@ -69,17 +69,13 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
             true
         ) + 1; // CSS selectors are 1-indexed
 
-        $availableFieldLabelsScript = "document.querySelector('.ibexa-available-field-types__fields > li:nth-child(%d) > .ibexa-label')";
+        $availableFieldLabelsScript = "document.querySelector('.ibexa-available-field-types__fields > li:nth-child(%d) > .ibexa-available-field-types__field-label')";
         $scriptToExecute = sprintf($availableFieldLabelsScript, $fieldPosition);
         $this->getSession()->executeScript($scriptToExecute);
 
         $workspace = sprintf('document.querySelector(\'%s\')', $this->getLocator('workspace')->getSelector());
         $this->getHTMLPage()->dragAndDrop($scriptToExecute, $workspace, $workspace);
-        $this->getHTMLPage()
-            ->setTimeout(3)
-            ->waitUntilCondition(
-                new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('fieldDefinitionContainer'))
-            );
+        usleep(1500000); //TODO: add proper wait condition
     }
 
     public function clickAddButton(): void

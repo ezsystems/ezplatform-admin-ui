@@ -6,7 +6,6 @@
         align-items: center;
         justify-content: space-between;
         padding-bottom: calculateRem(14px);
-        margin-bottom: calculateRem(16px);
         border-bottom: calculateRem(1px) solid $ibexa-color-light;
     }
 
@@ -19,6 +18,22 @@
     &__header-actions {
         display: flex;
         flex-wrap: nowrap;
+    }
+
+    &__row {
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+        padding-bottom: calculateRem(12px);
+        margin-bottom: calculateRem(12px);
+    }
+
+    &__row-title {
+        position: relative;
+        font-size: $ibexa-text-font-size-medium;
+        min-height: calculateRem(40px);
+        display: flex;
+        align-items: center;
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+        margin-bottom: calculateRem(12px);
     }
 
     &__collapsible {
