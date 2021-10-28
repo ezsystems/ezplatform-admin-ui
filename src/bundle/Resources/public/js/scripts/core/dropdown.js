@@ -156,7 +156,6 @@
             }
 
             this.hideOptions();
-            this.fireValueChangedEvent();
         }
 
         fireValueChangedEvent() {

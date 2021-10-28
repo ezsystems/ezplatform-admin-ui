@@ -31,7 +31,7 @@
         constructor(data, options = {}) {
             this.setData(data);
             this.setOptions(options);
-            this.lang = document.documentElement.lang.replace('_', '-'); // TO DO: Get this config from settings
+            this.lang = document.documentElement.lang.replace('_', '-'); // TODO: Get this config from settings
         }
 
         setData(data) {

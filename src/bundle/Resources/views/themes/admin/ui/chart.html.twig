@@ -1,11 +1,11 @@
-<div 
+<div
     class="ibexa-chart ibexa-chart--{{ chart_id }} {% block chart_class %}{% endblock %}"
     data-chart-data="{{ data|default({})|json_encode() }}"
 >
     {% block chart_header %}
         <div class="ibexa-chart__header {% block header_class %}{% endblock %}">
             {% block header %}
-                <div class="ibexa-chart__title">{% block title %}{% endblock %}</div>
+                <h3 class="ibexa-chart__title">{% block title %}{% endblock %}</h3>
                 <div class="ibexa-chart__time-range">{% block time_range %}{% endblock %}</div>
             {% endblock %}
         </div>
