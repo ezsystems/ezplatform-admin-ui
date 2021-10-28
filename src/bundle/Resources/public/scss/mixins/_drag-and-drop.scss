@@ -53,7 +53,7 @@
         overflow: auto;
     }
 
-    &--is-draggable {
+    &--draggable {
         position: fixed;
         z-index: 500;
         top: calculateRem(130px);
@@ -197,7 +197,7 @@
         width: calculateRem(24px);
         background-color: $ibexa-color-light-300;
 
-        &:nth-child(1) {
+        &:first-child {
             width: 55%;
             border-radius: $ibexa-border-radius;
         }
