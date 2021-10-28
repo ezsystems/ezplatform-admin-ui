@@ -225,19 +225,24 @@
     border-radius: $ibexa-border-radius;
     border: calculateRem(1px) dashed $ibexa-color-light;
 
-    &__item-wrapper {
-        flex-grow: 1;
+    &__item {
+        height: calculateRem(24px);
+        background: $ibexa-color-light-300;
 
-        &:not(:first-child) {
+        &:nth-child(1) {
+            width: 70%;
             margin-left: calculateRem(8px);
+            border-radius: $ibexa-border-radius;
         }
 
         &:nth-child(2) {
+            width: calculateRem(24px);
             margin-left: auto;
             border-radius: 50%;
         }
 
         &:nth-child(3) {
+            width: calculateRem(24px);
             margin-left: calculateRem(8px);
             border-radius: 50%;
         }
