@@ -1,12 +1,19 @@
 services:
     ez_pagination_template:
-        class: EzSystems\EzPlatformAdminUiBundle\View\Template\EzPagerfantaTemplate
+        class: Ibexa\Bundle\AdminUi\View\Template\EzPagerfantaTemplate
         arguments:
             - '@translator'
 
-    EzSystems\EzPlatformAdminUiBundle\View\EzPagerfantaView:
+    Ibexa\Bundle\AdminUi\View\EzPagerfantaView:
         public: false
         arguments:
             - '@ez_pagination_template'
         tags:
             - { name: 'pagerfanta.view', alias: 'ez' }
+
+    Ibexa\AdminUi\Pagination\Mapper\AbstractPagerContentToDataMapper:
+        abstract: true
+        autowire: true
+        public: false
+        arguments:
+            $translationHelper: '@ezpublish.translation_helper'

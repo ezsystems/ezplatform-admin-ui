@@ -6,15 +6,17 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Component;
+namespace Ibexa\AdminUi\Component;
+
+use Ibexa\Contracts\AdminUi\Component\Renderable;
 
 class Registry
 {
-    /** @var Renderable[] */
+    /** @var \Ibexa\Contracts\AdminUi\Component\Renderable[] */
     protected $components;
 
     /**
-     * @param Renderable[] $components
+     * @param \Ibexa\Contracts\AdminUi\Component\Renderable[] $components
      */
     public function __construct(array $components = [])
     {
@@ -24,7 +26,7 @@ class Registry
     /**
      * @param string $group
      * @param string $serviceId
-     * @param Renderable $component
+     * @param \Ibexa\Contracts\AdminUi\Component\Renderable $component
      */
     public function addComponent(string $group, string $serviceId, Renderable $component): void
     {
@@ -34,7 +36,7 @@ class Registry
     /**
      * @param string $group
      *
-     * @return Renderable[]
+     * @return \Ibexa\Contracts\AdminUi\Component\Renderable[]
      */
     public function getComponents(string $group): array
     {
@@ -50,3 +52,5 @@ class Registry
         $this->components[$group] = $components;
     }
 }
+
+class_alias(Registry::class, 'EzSystems\EzPlatformAdminUi\Component\Registry');

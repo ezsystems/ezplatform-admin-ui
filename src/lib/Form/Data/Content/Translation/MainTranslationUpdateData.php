@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation;
+namespace Ibexa\AdminUi\Form\Data\Content\Translation;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -71,3 +71,5 @@ class MainTranslationUpdateData
         $this->languageCode = $languageCode;
     }
 }
+
+class_alias(MainTranslationUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Content\Translation\MainTranslationUpdateData');

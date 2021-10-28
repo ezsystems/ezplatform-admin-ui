@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\ActionDispatcher;
+namespace Ibexa\AdminUi\Form\ActionDispatcher;
 
-use EzSystems\EzPlatformAdminUi\Event\ContentOnTheFlyEvents;
 use EzSystems\EzPlatformContentForms\Form\ActionDispatcher\ContentDispatcher;
+use Ibexa\Contracts\AdminUi\Event\ContentOnTheFlyEvents;
 
 class EditContentOnTheFlyDispatcher extends ContentDispatcher
 {
@@ -18,3 +18,5 @@ class EditContentOnTheFlyDispatcher extends ContentDispatcher
         return ContentOnTheFlyEvents::CONTENT_EDIT;
     }
 }
+
+class_alias(EditContentOnTheFlyDispatcher::class, 'EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditContentOnTheFlyDispatcher');

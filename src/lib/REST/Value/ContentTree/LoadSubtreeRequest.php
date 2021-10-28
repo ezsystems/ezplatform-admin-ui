@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Value\ContentTree;
+namespace Ibexa\AdminUi\REST\Value\ContentTree;
 
 use EzSystems\EzPlatformRest\Value as RestValue;
 
@@ -23,3 +23,5 @@ class LoadSubtreeRequest extends RestValue
         $this->nodes = $nodes;
     }
 }
+
+class_alias(LoadSubtreeRequest::class, 'EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\LoadSubtreeRequest');

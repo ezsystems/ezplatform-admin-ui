@@ -4,12 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\FieldType\Mapper;
+namespace Ibexa\AdminUi\FieldType\Mapper;
 
-use EzSystems\EzPlatformAdminUi\FieldType\FieldDefinitionFormMapperInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\FieldDefinitionData;
-use EzSystems\EzPlatformAdminUi\Form\DataTransformer\MultilingualSelectionTransformer;
-use EzSystems\EzPlatformAdminUi\Form\EventListener\SelectionMultilingualOptionsDataListener;
+use Ibexa\AdminUi\FieldType\FieldDefinitionFormMapperInterface;
+use Ibexa\AdminUi\Form\Data\FieldDefinitionData;
+use Ibexa\AdminUi\Form\DataTransformer\MultilingualSelectionTransformer;
+use Ibexa\AdminUi\Form\EventListener\SelectionMultilingualOptionsDataListener;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -95,3 +95,5 @@ class SelectionFormMapper implements FieldDefinitionFormMapperInterface
             ]);
     }
 }
+
+class_alias(SelectionFormMapper::class, 'EzSystems\EzPlatformAdminUi\FieldType\Mapper\SelectionFormMapper');

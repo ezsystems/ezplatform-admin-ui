@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
+namespace Ibexa\AdminUi\Form\Type\ChoiceList\Loader;
 
 class LanguageChoiceLoader extends ConfiguredLanguagesChoiceLoader
 {
@@ -27,3 +27,5 @@ class LanguageChoiceLoader extends ConfiguredLanguagesChoiceLoader
         return $enabledLanguages;
     }
 }
+
+class_alias(LanguageChoiceLoader::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader');

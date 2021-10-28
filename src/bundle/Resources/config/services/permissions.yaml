@@ -4,9 +4,9 @@ services:
         autoconfigure: true
         public: false
 
-    EzSystems\EzPlatformAdminUi\Permission\PermissionChecker: ~
+    Ibexa\AdminUi\Permission\PermissionChecker: ~
 
-    EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface:
-        alias: EzSystems\EzPlatformAdminUi\Permission\PermissionChecker
+    Ibexa\Contracts\AdminUi\Permission\PermissionCheckerInterface:
+        alias: Ibexa\AdminUi\Permission\PermissionChecker
 
-    EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer: ~
+    Ibexa\AdminUi\Permission\LookupLimitationsTransformer: ~

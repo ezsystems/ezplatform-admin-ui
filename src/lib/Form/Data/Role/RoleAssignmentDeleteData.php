@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Role;
+namespace Ibexa\AdminUi\Form\Data\Role;
 
 use eZ\Publish\API\Repository\Values\User\RoleAssignment;
 
@@ -36,3 +36,5 @@ class RoleAssignmentDeleteData
         $this->roleAssignment = $roleAssignment;
     }
 }
+
+class_alias(RoleAssignmentDeleteData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentDeleteData');

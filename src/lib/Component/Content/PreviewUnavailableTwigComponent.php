@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Component\Content;
+namespace Ibexa\AdminUi\Component\Content;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use EzSystems\EzPlatformAdminUi\Component\Renderable;
-use EzSystems\EzPlatformAdminUi\Siteaccess\NonAdminSiteaccessResolver;
+use Ibexa\AdminUi\Siteaccess\NonAdminSiteaccessResolver;
+use Ibexa\Contracts\AdminUi\Component\Renderable;
 use Twig\Environment;
 
 class PreviewUnavailableTwigComponent implements Renderable
@@ -78,3 +78,5 @@ class PreviewUnavailableTwigComponent implements Renderable
         return '';
     }
 }
+
+class_alias(PreviewUnavailableTwigComponent::class, 'EzSystems\EzPlatformAdminUi\Component\Content\PreviewUnavailableTwigComponent');
