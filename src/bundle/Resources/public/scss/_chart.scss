@@ -5,6 +5,7 @@
     max-height: calculateRem(1000px);
     border: calculateRem(1px) solid $ibexa-color-light;
     border-radius: $ibexa-border-radius;
+    padding: calculateRem(16px) calculateRem(32px);
     box-shadow: $ibexa-edit-header-box-shadow;
 
     &--no-data {
@@ -21,7 +22,6 @@
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        padding: calculateRem(16px) calculateRem(32px);
     }
 
     &__title {
@@ -37,8 +37,9 @@
     &__message {
         position: absolute;
         z-index: 1;
-        top: calc(50% - #{calculaterem(150px)});
-        left: calc(50% - #{calculaterem(190px)});
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -58,7 +59,7 @@
 
     &__body {
         position: relative;
-        padding: 0 calculateRem(33.5px);
+        padding: calculateRem(16px) 0;
     }
 
     &__canvas {
