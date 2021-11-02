@@ -42,9 +42,6 @@
         setOptions(options) {
             this.options = {
                 ...defaultOptions,
-                animation: {
-                    onComplete: this.onCompleteAnimationCallback,
-                },
                 ...options,
             };
         }
@@ -74,14 +71,6 @@
 
             this.updateChartMessageDisplay();
             this.callbackAfterRender();
-        }
-
-        onCompleteAnimationCallback(animation) {
-            const { chart } = animation;
-            const chartNode = chart.canvas.closest('.ibexa-chart');
-
-            chartNode.dispatchEvent(new CustomEvent('ibexa-chart-animation-complete'));
-            chartNode.classList.toggle('ibexa-chart--no-data', !chart.config.data.datasets.length);
         }
 
         render() {
