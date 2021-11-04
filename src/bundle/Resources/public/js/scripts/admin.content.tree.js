@@ -51,6 +51,9 @@
 
         return expandedState && expandedState[userId];
     };
+    const removeContentTreeCOntainerWidth = () => {
+        contentTreeContainer.style.width = null;
+    }
 
     ReactDOM.render(
         React.createElement(eZ.modules.ContentTree, {
@@ -62,11 +65,11 @@
         contentTreeWrapper
     );
 
-    btn.addEventListener('click', toggleContentTreePanel, false);
+    btn?.addEventListener('click', toggleContentTreePanel, false);
 
     if (isContentTreeExpanded(userId)) {
         contentTreeContainer.classList.add(CLASS_CONTENT_TREE_EXPANDED);
-        btn.classList.add(CLASS_BTN_CONTENT_TREE_EXPANDED);
+        btn?.classList.add(CLASS_BTN_CONTENT_TREE_EXPANDED);
     }
 
     updateContentTreeWrapperHeight();
@@ -94,5 +97,6 @@
     contentTreeContainer.addEventListener('transitioncancel', handleContainerTransitionStop, false);
     contentTreeContainer.addEventListener('transitionend', handleContainerTransitionStop, false);
 
-    window.addEventListener('resize', handleViewportChange, { capture: false, passive: true });
+    doc.body.addEventListener('ibexa-tb-rendered:ibexa-content-tree', removeContentTreeCOntainerWidth);
+    global.addEventListener('resize', handleViewportChange, { capture: false, passive: true });
 })(window, window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);
