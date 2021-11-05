@@ -39,8 +39,8 @@
             this.itemsListContainer = this.itemsContainer.querySelector('.ibexa-dropdown__items-list');
             this.itemsFilterInput = this.itemsContainer.querySelector('.ibexa-dropdown__items-filter');
 
-            this.hasDefaultSelection = config.hasDefaultSelection ?? false;
             this.canSelectOnlyOne = !this.sourceInput?.multiple;
+            this.hasDefaultSelection = config.hasDefaultSelection ?? this.canSelectOnlyOne;
             this.selectedItemTemplate = this.selectedItemsContainer.dataset.template;
 
             this.createSelectedItem = this.createSelectedItem.bind(this);
@@ -71,6 +71,11 @@
         selectFirstItem() {
             const items = this.itemsListContainer.querySelectorAll('.ibexa-dropdown__item:not(.ibexa-dropdown__item--preferred-choice)');
             const [firstItem] = items;
+
+            if (!firstItem) {
+                return;
+            }
+
             const label = firstItem.querySelector('.ibexa-dropdown__item-label').innerHTML;
 
             items.forEach((item) => item.classList.remove('ibexa-dropdown__item--selected'));
@@ -156,7 +161,6 @@
             }
 
             this.hideOptions();
-            this.fireValueChangedEvent();
         }
 
         fireValueChangedEvent() {
@@ -300,7 +304,7 @@
 
         init() {
             if (this.container.dataset.initialized) {
-                console.warn("Dropdown has already been initialized!");
+                console.warn('Dropdown has already been initialized!');
 
                 return;
             }
@@ -314,13 +318,17 @@
                 this.selectFirstItem();
             }
 
-            this.itemsPopover = new DropdownPopover(this.selectedItemsContainer, {
-                html: true,
-                placement: 'bottom',
-                customClass: 'ibexa-dropdown-popover',
-                content: this.itemsPopoverContent,
-                container: 'body'
-            }, { dropdown: this });
+            this.itemsPopover = new DropdownPopover(
+                this.selectedItemsContainer,
+                {
+                    html: true,
+                    placement: 'bottom',
+                    customClass: 'ibexa-dropdown-popover',
+                    content: this.itemsPopoverContent,
+                    container: 'body',
+                },
+                { dropdown: this }
+            );
             this.itemsPopover._element.removeAttribute('data-bs-original-title');
             this.itemsPopover._element.removeAttribute('title');
 

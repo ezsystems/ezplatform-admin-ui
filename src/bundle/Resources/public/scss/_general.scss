@@ -179,6 +179,7 @@ select {
 .ibexa-scrollable-wrapper {
     max-height: 60vh;
     overflow: auto;
+    margin-bottom: calculateRem(12px);
 }
 
 .ez-prevent-click,

@@ -97,6 +97,7 @@
         @include tag;
 
         margin-top: 0;
+        padding-left: 0;
         margin-right: calculateRem(8px);
         display: inline-block;
         max-width: calculateRem(380px);

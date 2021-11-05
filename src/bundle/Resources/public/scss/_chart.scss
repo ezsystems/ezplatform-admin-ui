@@ -1,0 +1,93 @@
+.ibexa-chart {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: calculateRem(1000px);
+    border: calculateRem(1px) solid $ibexa-color-light;
+    border-radius: $ibexa-border-radius;
+    padding: calculateRem(16px) calculateRem(32px);
+    box-shadow: $ibexa-edit-header-box-shadow;
+
+    &--no-data {
+        .ibexa-chart {
+            &__canvas,
+            &__legend,
+            &__summary {
+                opacity: 0.4;
+            }
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    &__title {
+        line-height: calculateRem(33px);
+    }
+
+    &__time-range,
+    &__time-period {
+        color: $ibexa-color-dark-500;
+        font-size: $ibexa-text-font-size-medium;
+    }
+
+    &__message {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-weight: bold;
+        width: calculateRem(400px);
+        height: calculateRem(226px);
+        border-radius: $ibexa-border-radius;
+        border: calculateRem(1px) solid $ibexa-color-light;
+        background: $ibexa-color-white;
+
+        .ibexa-icon {
+            margin-bottom: calculateRem(12px);
+        }
+    }
+
+    &__body {
+        position: relative;
+        padding: calculateRem(16px) 0;
+    }
+
+    &__canvas {
+        max-height: calculateRem(600px);
+        width: 100%;
+    }
+
+    &__legend {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: calculateRem(16px) calculateRem(2px) 0 calculateRem(4px);
+    }
+
+    &__legend-checkbox-label {
+        display: flex;
+        height: calculateRem(20px);
+        align-items: center;
+        margin-right: calculateRem(15px);
+        font-size: $ibexa-text-font-size-medium;
+
+        .ez-input {
+            margin-right: calculateRem(4px);
+
+            &--legend-checkbox {
+                width: calculateRem(16px);
+                height: calculateRem(16px);
+            }
+        }
+    }
+}
