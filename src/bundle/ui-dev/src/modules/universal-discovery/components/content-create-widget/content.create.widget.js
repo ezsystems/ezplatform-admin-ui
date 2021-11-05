@@ -12,6 +12,7 @@ import {
     ContentOnTheFlyConfigContext,
     AllowedContentTypesContext,
 } from '../../universal.discovery.module';
+import Dropdown from '../dropdown/dropdown';
 
 const languages = Object.values(window.eZ.adminUiConfig.languages.mappings);
 const contentTypes = Object.entries(window.eZ.adminUiConfig.contentTypes);
@@ -48,7 +49,7 @@ const ContentCreateWidget = () => {
 
         setFilterQuery(query);
     };
-    const updateSelectedLanguage = (event) => setSelectedLanguage(event.target.value);
+    const updateSelectedLanguage = (value) => setSelectedLanguage(value);
     const isConfirmDisabled = !selectedContentType || !selectedLanguage || markedLocationId === 1;
     const createContent = () => {
         setContentOnTheFlyData({
@@ -84,6 +85,10 @@ const ContentCreateWidget = () => {
         'ibexa-extra-actions--hidden': !createContentVisible,
         'c-content-create': true,
     });
+    const languageOptions = languages.filter(((language) => language.enabled)).map((language) => ({
+        value: language.languageCode,
+        label: language.name,
+    }));
 
     useEffect(() => {
         window.eZ.helpers.tooltips.parse(refContentTree.current);
@@ -109,19 +114,11 @@ const ContentCreateWidget = () => {
                 <div className="ibexa-extra-actions__content">
                     <div className="ibexa-extra-actions__section-header">{selectLanguageLabel}</div>
                     <div class="ibexa-extra-actions__section-content">
-                        <select className="form-control" onChange={updateSelectedLanguage} value={selectedLanguage}>
-                            {filteredLanguages.map((language) => {
-                                if (!language.enabled) {
-                                    return null;
-                                }
-
-                                return (
-                                    <option key={language.id} value={language.languageCode}>
-                                        {language.name}
-                                    </option>
-                                );
-                            })}
-                        </select>
+                        <Dropdown
+                            onChange={updateSelectedLanguage}
+                            value={selectedLanguage}
+                            options={languageOptions}
+                        />
                     </div>
                     <div className="ibexa-extra-actions__section-header">{selectContentType}</div>
                     <div class="ibexa-extra-actions__section-content ibexa-extra-actions__section-content--content-type">
