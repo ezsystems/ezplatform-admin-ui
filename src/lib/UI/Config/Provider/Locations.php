@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
+namespace Ibexa\AdminUi\UI\Config\Provider;
 
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
+use Ibexa\Contracts\AdminUi\UI\Config\ProviderInterface;
 
 final class Locations implements ProviderInterface
 {
@@ -35,3 +35,5 @@ final class Locations implements ProviderInterface
         ];
     }
 }
+
+class_alias(Locations::class, 'EzSystems\EzPlatformAdminUi\UI\Config\Provider\Locations');

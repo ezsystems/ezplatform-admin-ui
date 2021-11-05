@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Role;
+namespace Ibexa\AdminUi\Form\Data\Role;
 
 class RoleCreateData
 {
@@ -33,3 +33,5 @@ class RoleCreateData
         return $this;
     }
 }
+
+class_alias(RoleCreateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData');

@@ -14,7 +14,7 @@
         'paginaton_params': {
             'routeName': custom_urls_pagination_params.route_name,
             'routeParams': custom_urls_pagination_params.route_params|merge({
-                '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
+                '_fragment': constant('Ibexa\\AdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
                 'page[system_url]': system_urls_pagination_params.page
             }),
             'pageParameter': '[page][custom_url]'
@@ -32,7 +32,7 @@
         'paginaton_params': {
             'routeName': system_urls_pagination_params.route_name,
             'routeParams': system_urls_pagination_params.route_params|merge({
-                '_fragment': constant('EzSystems\\EzPlatformAdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
+                '_fragment': constant('Ibexa\\AdminUi\\Tab\\LocationView\\UrlsTab::URI_FRAGMENT'),
                 'page[custom_url]': custom_urls_pagination_params.page
             }),
             'pageParameter': '[page][system_url]'

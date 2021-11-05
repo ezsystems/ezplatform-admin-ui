@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Trash;
+namespace Ibexa\AdminUi\Form\Type\Trash;
 
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
+use Ibexa\AdminUi\Form\Data\Trash\TrashItemDeleteData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -49,3 +49,5 @@ class TrashItemDeleteType extends AbstractType
         ]);
     }
 }
+
+class_alias(TrashItemDeleteType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType');

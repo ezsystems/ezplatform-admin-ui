@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\REST\Value\ContentTree;
+namespace Ibexa\AdminUi\REST\Value\ContentTree;
 
 use EzSystems\EzPlatformRest\Value as RestValue;
 
@@ -23,3 +23,5 @@ class Root extends RestValue
         $this->elements = $elements;
     }
 }
+
+class_alias(Root::class, 'EzSystems\EzPlatformAdminUi\REST\Value\ContentTree\Root');

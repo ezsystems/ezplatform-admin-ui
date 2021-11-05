@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -22,15 +22,16 @@ use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
 use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\View\BaseView;
-use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateUserOnTheFlyDispatcher;
-use EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditUserOnTheFlyDispatcher;
-use EzSystems\EzPlatformAdminUi\View\CreateUserOnTheFlyView;
-use EzSystems\EzPlatformAdminUi\View\EditContentOnTheFlySuccessView;
-use EzSystems\EzPlatformAdminUi\View\EditUserOnTheFlyView;
 use EzSystems\EzPlatformContentForms\Data\Mapper\UserCreateMapper;
 use EzSystems\EzPlatformContentForms\Data\Mapper\UserUpdateMapper;
 use EzSystems\EzPlatformContentForms\Form\Type\User\UserCreateType;
 use EzSystems\EzPlatformContentForms\Form\Type\User\UserUpdateType;
+use Ibexa\AdminUi\Form\ActionDispatcher\CreateUserOnTheFlyDispatcher;
+use Ibexa\AdminUi\Form\ActionDispatcher\EditUserOnTheFlyDispatcher;
+use Ibexa\AdminUi\View\CreateUserOnTheFlyView;
+use Ibexa\AdminUi\View\EditContentOnTheFlySuccessView;
+use Ibexa\AdminUi\View\EditUserOnTheFlyView;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -275,3 +276,5 @@ class UserOnTheFlyController extends Controller
         return $view;
     }
 }
+
+class_alias(UserOnTheFlyController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\UserOnTheFlyController');

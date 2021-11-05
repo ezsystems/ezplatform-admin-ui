@@ -6,25 +6,26 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\RoleService;
 use eZ\Publish\API\Repository\Values\User\Role;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCopyData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleCreateData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RolesDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCopyMapper;
-use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper;
-use EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCopyType;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
+use Ibexa\AdminUi\Form\Data\Role\RoleCopyData;
+use Ibexa\AdminUi\Form\Data\Role\RoleCreateData;
+use Ibexa\AdminUi\Form\Data\Role\RoleDeleteData;
+use Ibexa\AdminUi\Form\Data\Role\RolesDeleteData;
+use Ibexa\AdminUi\Form\Data\Role\RoleUpdateData;
+use Ibexa\AdminUi\Form\DataMapper\RoleCopyMapper;
+use Ibexa\AdminUi\Form\DataMapper\RoleCreateMapper;
+use Ibexa\AdminUi\Form\DataMapper\RoleUpdateMapper;
+use Ibexa\AdminUi\Form\Factory\FormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\AdminUi\Form\Type\Role\RoleCopyType;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -351,3 +352,5 @@ class RoleController extends Controller
         return new RedirectResponse($this->generateUrl('ezplatform.role.list'));
     }
 }
+
+class_alias(RoleController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\RoleController');

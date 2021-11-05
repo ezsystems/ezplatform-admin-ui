@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader;
+namespace Ibexa\AdminUi\Form\Type\ChoiceList\Loader;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -43,3 +43,5 @@ class DatePeriodChoiceLoader extends BaseChoiceLoader
         ];
     }
 }
+
+class_alias(DatePeriodChoiceLoader::class, 'EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\DatePeriodChoiceLoader');

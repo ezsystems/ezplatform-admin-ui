@@ -6,15 +6,15 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Type\Search;
+namespace Ibexa\AdminUi\Form\Type\Search;
 
 use eZ\Publish\API\Repository\PermissionResolver;
-use EzSystems\EzPlatformAdminUi\Form\Data\Search\TrashSearchData;
-use EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\DatePeriodChoiceLoader;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\SortType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType;
-use EzSystems\EzPlatformAdminUi\Form\Type\Trash\ChoiceList\Loader\SearchContentTypeChoiceLoader;
-use EzSystems\EzPlatformAdminUi\Form\Type\User\UserType;
+use Ibexa\AdminUi\Form\Data\Search\TrashSearchData;
+use Ibexa\AdminUi\Form\Type\ChoiceList\Loader\DatePeriodChoiceLoader;
+use Ibexa\AdminUi\Form\Type\Content\SortType;
+use Ibexa\AdminUi\Form\Type\Section\SectionChoiceType;
+use Ibexa\AdminUi\Form\Type\Trash\ChoiceList\Loader\SearchContentTypeChoiceLoader;
+use Ibexa\AdminUi\Form\Type\User\UserType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -102,3 +102,5 @@ class TrashSearchType extends AbstractType
         ]);
     }
 }
+
+class_alias(TrashSearchType::class, 'EzSystems\EzPlatformAdminUi\Form\Type\Search\TrashSearchType');

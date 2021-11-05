@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Translation\Extractor;
+namespace Ibexa\AdminUi\Translation\Extractor;
 
 use Doctrine\Common\Annotations\DocParser;
 use JMS\TranslationBundle\Annotation\Desc;
@@ -199,3 +199,5 @@ class NotificationTranslationExtractor implements LoggerAwareInterface, FileVisi
         return null;
     }
 }
+
+class_alias(NotificationTranslationExtractor::class, 'EzSystems\EzPlatformAdminUi\Translation\Extractor\NotificationTranslationExtractor');
