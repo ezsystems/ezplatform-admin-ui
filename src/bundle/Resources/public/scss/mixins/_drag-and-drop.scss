@@ -1,8 +1,5 @@
 @mixin drag-module-backdrop-background {
-    background-image: radial-gradient(
-        $ibexa-color-light 0.5px,
-        transparent 0
-    ); // 0.5px is needed so that both on HD and Retina we have 1px
+    background-image: radial-gradient($ibexa-color-light 0.5px, transparent 0); // 0.5px is needed so that both on HD and Retina we have 1px
     background-color: $ibexa-color-light-200;
     background-position: 0 0, calculateRem(5px) calculateRem(5px);
     background-size: calculateRem(5px) calculateRem(5px);
@@ -10,10 +7,10 @@
 
 @mixin sidebar-drag-items {
     $ibexa-sidebar-width: calculateRem(356px);
-    
+
+    display: flex;
+    flex-direction: column;
     width: $ibexa-sidebar-width;
-    min-height: calculateRem(700px);
-    max-height: calc(100vh - #{calculateRem(300px)});
     border: calculateRem(1px) solid $ibexa-color-light;
     border-radius: calculateRem(5px);
     overflow: hidden;
@@ -49,7 +46,7 @@
 
     &__list {
         padding: calculateRem(4px) calculateRem(32px);
-        height: calculateRem(560px);
+        margin-bottom: 0;
         overflow: auto;
     }
 
@@ -63,8 +60,6 @@
 
 @mixin sidebar-drag-items-group {
     height: auto;
-    margin-bottom: calculateRem(16px);
-    padding-bottom: calculateRem(16px);
     overflow: hidden;
 
     &__title-bar {
@@ -102,6 +97,10 @@
         cursor: grab;
     }
 
+    &:last-of-type {
+        margin-bottom: calculateRem(24px);
+    }
+
     &__drag {
         display: flex;
         align-items: center;
@@ -115,7 +114,7 @@
     &__type {
         display: flex;
         align-items: center;
-        padding: 0 calculateRem(8px)
+        padding: 0 calculateRem(8px);
     }
 
     &__label {
