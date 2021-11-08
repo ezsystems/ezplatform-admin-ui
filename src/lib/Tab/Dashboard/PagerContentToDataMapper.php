@@ -29,6 +29,9 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
     /** @var \eZ\Publish\API\Repository\UserService */
     protected $userService;
 
+    /** @var \eZ\Publish\Core\Repository\LocationResolver\LocationResolver */
+    protected $locationResolver;
+
     /**
      * @param \eZ\Publish\API\Repository\ContentService $contentService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
@@ -36,6 +39,7 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
      * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \eZ\Publish\Core\Repository\LocationResolver\LocationResolver $locationResolver
      */
     public function __construct(
         ContentService $contentService,
@@ -49,6 +53,7 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->userService = $userService;
+        $this->locationResolver = $locationResolver;
 
         parent::__construct(
             $contentTypeService,
@@ -64,6 +69,10 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
      * @param \Pagerfanta\Pagerfanta $pager
      *
      * @return array
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ForbiddenException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function map(Pagerfanta $pager): array
     {
@@ -88,6 +97,7 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
                 'initialLanguageCode' => $content->versionInfo->initialLanguageCode,
                 'content_is_user' => $this->isContentIsUser($content),
                 'available_enabled_translations' => $this->getAvailableTranslations($content, true),
+                'resolvedLocation' => $this->locationResolver->resolveLocation($contentInfo),
             ];
         }
 
