@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
 import { SelectedContentTypesContext, SelectedSectionContext, SelectedSubtreeContext, SelectedLanguageContext } from '../search/search';
 import { findLocationsById } from '../../services/universal.discovery.service';
-import { RestInfoContext } from '../../universal.discovery.module';
+import { RestInfoContext, DropdownPortalRefContext } from '../../universal.discovery.module';
 
-import Dropdown from '../dropdown/dropdown';
+import Dropdown from '../../../common/dropdown/dropdown';
 import Collapsible from '../collapsible/collapsible';
 import ContentTypeSelector from '../content-type-selector/content.type.selector';
 import Icon from '../../../common/icon/icon';
@@ -170,6 +170,7 @@ const Filters = ({ search }) => {
             <ContentTypeSelector />
             <Collapsible title={sectionLabel}>
                 <Dropdown
+                    dropdownListRef={DropdownPortalRefContext}
                     small={true}
                     onChange={updateSection}
                     value={selectedSection}
