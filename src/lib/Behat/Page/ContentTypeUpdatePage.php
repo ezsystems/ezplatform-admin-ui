@@ -27,15 +27,12 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
 
     public function expandLastFieldDefinition(): void
     {
-        usleep(500000);
         $fieldToggleLocator = $this->getLocator('fieldDefinitionToggle');
-        $lastFieldAdded = $this->getHTMLPage()
+        $lastFieldDefinition = $this->getHTMLPage()
             ->findAll($fieldToggleLocator)
             ->last();
-        usleep(500000);
-        $lastFieldAdded->mouseOver();
-        $lastFieldAdded->click();
-        usleep(500000);
+        $lastFieldDefinition->mouseOver();
+        $lastFieldDefinition->click();
         $this->getHTMLPage()->setTimeout(5)
             ->waitUntilCondition(new ElementTransitionHasEndedCondition($this->getHTMLPage(), $fieldToggleLocator));
     }
@@ -119,5 +116,11 @@ class ContentTypeUpdatePage extends AdminUpdateItemPage
         $blockFindingScript = "document.querySelector('.ez-page-select-items__item .form-check .form-check-input[value=\'%s\']').click()";
         $scriptToExecute = sprintf($blockFindingScript, $blockName);
         $this->getSession()->executeScript($scriptToExecute);
+    }
+
+    public function verifyIsLoaded(): void
+    {
+        parent::verifyIsLoaded();
+        $this->getHTMLPage()->find($this->getLocator('contentTypeAddButton'))->assert()->isVisible();
     }
 }
