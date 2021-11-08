@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
+namespace Ibexa\AdminUi\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\ContentService;
-use EzSystems\EzPlatformAdminUi\UI\Dataset\DatasetFactory;
+use Ibexa\AdminUi\UI\Dataset\DatasetFactory;
 use Pagerfanta\Adapter\AdapterInterface;
 
 final class ContentDraftAdapter implements AdapterInterface
@@ -60,3 +60,5 @@ final class ContentDraftAdapter implements AdapterInterface
             ->getContentDrafts();
     }
 }
+
+class_alias(ContentDraftAdapter::class, 'EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\ContentDraftAdapter');

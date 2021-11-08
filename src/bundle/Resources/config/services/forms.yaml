@@ -5,169 +5,169 @@ services:
         public: false
 
     _instanceof:
-        EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\TrashLocationOptionProvider:
+        Ibexa\AdminUi\Form\TrashLocationOptionProvider\TrashLocationOptionProvider:
             tags: ['ezplatform.form.trash_location_option']
 
-    EzSystems\EzPlatformAdminUi\Form\SubmitHandler: ~
+    Ibexa\AdminUi\Form\SubmitHandler: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Factory\ContentTypeFormFactory: ~
+    Ibexa\AdminUi\Form\Factory\ContentTypeFormFactory: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory: ~
+    Ibexa\AdminUi\Form\Factory\FormFactory: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Factory\TrashFormFactory: ~
+    Ibexa\AdminUi\Form\Factory\TrashFormFactory: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\ContentMainLocationUpdateMapper: ~
+    Ibexa\AdminUi\Form\DataMapper\ContentMainLocationUpdateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\LanguageCreateMapper: ~
+    Ibexa\AdminUi\Form\DataMapper\LanguageCreateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\MainTranslationUpdateMapper: ~
+    Ibexa\AdminUi\Form\DataMapper\MainTranslationUpdateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyCreateMapper: ~
+    Ibexa\AdminUi\Form\DataMapper\PolicyCreateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\PolicyUpdateMapper: ~
+    Ibexa\AdminUi\Form\DataMapper\PolicyUpdateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCopyMapper: ~
+    Ibexa\AdminUi\Form\DataMapper\RoleCopyMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleCreateMapper: ~
+    Ibexa\AdminUi\Form\DataMapper\RoleCreateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\RoleUpdateMapper: ~
+    Ibexa\AdminUi\Form\DataMapper\RoleUpdateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionCreateMapper: ~
+    Ibexa\AdminUi\Form\DataMapper\SectionCreateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\DataMapper\SectionUpdateMapper: ~
+    Ibexa\AdminUi\Form\DataMapper\SectionUpdateMapper: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Bookmark\BookmarkRemoveType: ~
+    Ibexa\AdminUi\Form\Type\Bookmark\BookmarkRemoveType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\AvailableTranslationLanguageChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\AvailableTranslationLanguageChoiceLoader: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\BaseTranslationLanguageChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\BaseTranslationLanguageChoiceLoader: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader:
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ConfiguredLanguagesChoiceLoader:
         arguments:
             $configResolver: "@ezpublish.config.resolver"
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentCreateContentTypeChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ContentCreateContentTypeChoiceLoader: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentCreateLanguageChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ContentCreateLanguageChoiceLoader: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentEditTranslationChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ContentEditTranslationChoiceLoader: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\DatePeriodChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\DatePeriodChoiceLoader: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader:
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader:
         arguments:
             $configResolver: "@ezpublish.config.resolver"
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\SiteAccessChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\ChoiceList\Loader\SiteAccessChoiceLoader: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType: ~
+    Ibexa\AdminUi\Form\Type\Content\ContentInfoType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentType: ~
+    Ibexa\AdminUi\Form\Type\Content\ContentType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeSubmitType: ~
+    Ibexa\AdminUi\Form\Type\Content\ContentTypeSubmitType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentTypeType: ~
+    Ibexa\AdminUi\Form\Type\Content\ContentTypeType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentVisibilityUpdateType: ~
+    Ibexa\AdminUi\Form\Type\Content\ContentVisibilityUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlAddType: ~
+    Ibexa\AdminUi\Form\Type\Content\CustomUrl\CustomUrlAddType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\CustomUrl\CustomUrlRemoveType: ~
+    Ibexa\AdminUi\Form\Type\Content\CustomUrl\CustomUrlRemoveType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentCreateType:
+    Ibexa\AdminUi\Form\Type\Content\Draft\ContentCreateType:
         arguments:
-            $contentTypeChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader'
-            $languageChoiceLoader: '@EzSystems\EzPlatformAdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader'
+            $contentTypeChoiceLoader: '@Ibexa\AdminUi\Form\Type\ChoiceList\Loader\ContentTypeChoiceLoader'
+            $languageChoiceLoader: '@Ibexa\AdminUi\Form\Type\ChoiceList\Loader\LanguageChoiceLoader'
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentEditType: ~
+    Ibexa\AdminUi\Form\Type\Content\Draft\ContentEditType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Draft\ContentRemoveType: ~
+    Ibexa\AdminUi\Form\Type\Content\Draft\ContentRemoveType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationAddType: ~
+    Ibexa\AdminUi\Form\Type\Content\Location\ContentLocationAddType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentLocationRemoveType: ~
+    Ibexa\AdminUi\Form\Type\Content\Location\ContentLocationRemoveType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Location\ContentMainLocationUpdateType: ~
+    Ibexa\AdminUi\Form\Type\Content\Location\ContentMainLocationUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType: ~
+    Ibexa\AdminUi\Form\Type\Content\LocationType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\SortType: ~
+    Ibexa\AdminUi\Form\Type\Content\SortType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\MainTranslationUpdateType: ~
+    Ibexa\AdminUi\Form\Type\Content\Translation\MainTranslationUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationAddType: ~
+    Ibexa\AdminUi\Form\Type\Content\Translation\TranslationAddType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\Translation\TranslationDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Content\Translation\TranslationDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Content\VersionInfoType: ~
+    Ibexa\AdminUi\Form\Type\Content\VersionInfoType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeChoiceType: ~
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypeChoiceType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCopyType: ~
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypeCopyType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeCreateType:
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypeCreateType:
         arguments: ["@ezpublish.api.service.content_type"]
         tags:
             - {name: form.type, alias: ezplatform_content_forms_contenttype_create}
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeDeleteType: ~
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypeDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeEditType: ~
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypeEditType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeGroupDeleteType: ~
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypeGroupDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeGroupType: ~
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypeGroupType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypeUpdateType:
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypeUpdateType:
         tags:
             - {name: form.type, alias: ezplatform_content_forms_contenttype_update}
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\ContentTypesDeleteType: ~
+    Ibexa\AdminUi\Form\Type\ContentType\ContentTypesDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\FieldTypeChoiceType:
+    Ibexa\AdminUi\Form\Type\ContentType\FieldTypeChoiceType:
         arguments: ['@eZ\Publish\Core\FieldType\FieldTypeRegistry', '@translator']
         tags:
             - { name: form.type, alias: ezplatform_content_forms_contenttype_field_type_choice }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortFieldChoiceType:
+    Ibexa\AdminUi\Form\Type\ContentType\SortFieldChoiceType:
         arguments: ["@translator"]
         tags:
             - { name: form.type, alias: ezplatform_content_forms_contenttype_sort_field_choice }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\SortOrderChoiceType:
+    Ibexa\AdminUi\Form\Type\ContentType\SortOrderChoiceType:
         arguments: ["@translator"]
         tags:
             - { name: form.type, alias: ezplatform_content_forms_contenttype_sort_order_choice }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation\TranslationAddType: ~
+    Ibexa\AdminUi\Form\Type\ContentType\Translation\TranslationAddType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentType\Translation\TranslationRemoveType: ~
+    Ibexa\AdminUi\Form\Type\ContentType\Translation\TranslationRemoveType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType: ~
+    Ibexa\AdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupCreateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType: ~
+    Ibexa\AdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType: ~
+    Ibexa\AdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupUpdateType: ~
+    Ibexa\AdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupsDeleteType: ~
+    Ibexa\AdminUi\Form\Type\ContentTypeGroup\ContentTypeGroupsDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Date\DateIntervalType: ~
+    Ibexa\AdminUi\Form\Type\Date\DateIntervalType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\DateTimeIntervalType: ~
+    Ibexa\AdminUi\Form\Type\DateTimeIntervalType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\DateTimePickerType: ~
+    Ibexa\AdminUi\Form\Type\DateTimePickerType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Embedded\SectionType: ~
+    Ibexa\AdminUi\Form\Type\Embedded\SectionType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
+    Ibexa\AdminUi\Form\Type\Extension\Content\ContentEditTypeExtension:
         tags:
             - { name: form.type_extension }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\FieldDefinitionType:
+    Ibexa\AdminUi\Form\Type\FieldDefinition\FieldDefinitionType:
         arguments:
             $fieldTypeService: "@ezpublish.api.service.field_type"
             $thumbnailStrategy: '@eZ\Publish\Core\Repository\Strategy\ContentThumbnail\Field\ContentFieldStrategy'
@@ -176,227 +176,227 @@ services:
         tags:
             - { name: form.type, alias: ezplatform_content_forms_fielddefinition_update }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\FieldDefinition\User\PasswordConstraintCheckboxType: ~
+    Ibexa\AdminUi\Form\Type\FieldDefinition\User\PasswordConstraintCheckboxType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Language\ConfiguredLanguagesChoiceType: ~
+    Ibexa\AdminUi\Form\Type\Language\ConfiguredLanguagesChoiceType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageChoiceType: ~
+    Ibexa\AdminUi\Form\Type\Language\LanguageChoiceType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageCreateType: ~
+    Ibexa\AdminUi\Form\Type\Language\LanguageCreateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Language\LanguageDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageType: ~
+    Ibexa\AdminUi\Form\Type\Language\LanguageType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguageUpdateType: ~
+    Ibexa\AdminUi\Form\Type\Language\LanguageUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Language\LanguagesDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Language\LanguagesDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationAssignSectionType: ~
+    Ibexa\AdminUi\Form\Type\Location\LocationAssignSectionType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopySubtreeType: ~
+    Ibexa\AdminUi\Form\Type\Location\LocationCopySubtreeType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationCopyType: ~
+    Ibexa\AdminUi\Form\Type\Location\LocationCopyType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationMoveType: ~
+    Ibexa\AdminUi\Form\Type\Location\LocationMoveType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationSwapType: ~
+    Ibexa\AdminUi\Form\Type\Location\LocationSwapType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationTrashType: ~
+    Ibexa\AdminUi\Form\Type\Location\LocationTrashType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateType: ~
+    Ibexa\AdminUi\Form\Type\Location\LocationUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType: ~
+    Ibexa\AdminUi\Form\Type\Location\LocationUpdateVisibilityType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\LocationType: ~
+    Ibexa\AdminUi\Form\Type\LocationType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateChoiceType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateChoiceType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateCreateType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateCreateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateDeleteType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupCreateType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateGroupCreateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupDeleteType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateGroupDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateGroupType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupUpdateType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateGroupUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateGroupsDeleteType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateGroupsDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateUpdateType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStateUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStatesDeleteType: ~
+    Ibexa\AdminUi\Form\Type\ObjectState\ObjectStatesDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PoliciesDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Policy\PoliciesDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyChoiceType:
+    Ibexa\AdminUi\Form\Type\Policy\PolicyChoiceType:
         arguments:
             $policyMap: "%ezpublish.api.role.policy_map%"
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateType: ~
+    Ibexa\AdminUi\Form\Type\Policy\PolicyCreateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyCreateWithLimitationType: ~
+    Ibexa\AdminUi\Form\Type\Policy\PolicyCreateWithLimitationType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Policy\PolicyDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyType: ~
+    Ibexa\AdminUi\Form\Type\Policy\PolicyType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Policy\PolicyUpdateType: ~
+    Ibexa\AdminUi\Form\Type\Policy\PolicyUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\LimitationType:
+    Ibexa\AdminUi\Form\Type\Role\LimitationType:
         arguments:
             - "@ezplatform.content_forms.limitation_form_mapper.registry"
             - "@ezplatform.content_forms.limitation.form_mapper.null"
         tags:
             - { name: form.type, alias: ezplatform_content_forms_policy_limitation_edit }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentCreateType: ~
+    Ibexa\AdminUi\Form\Type\Role\RoleAssignmentCreateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Role\RoleAssignmentDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentType: ~
+    Ibexa\AdminUi\Form\Type\Role\RoleAssignmentType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleAssignmentsDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Role\RoleAssignmentsDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCopyType: ~
+    Ibexa\AdminUi\Form\Type\Role\RoleCopyType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleCreateType: ~
+    Ibexa\AdminUi\Form\Type\Role\RoleCreateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Role\RoleDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleType: ~
+    Ibexa\AdminUi\Form\Type\Role\RoleType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\RoleUpdateType: ~
+    Ibexa\AdminUi\Form\Type\Role\RoleUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Role\RolesDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Role\RolesDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\RoleAssignment\RoleAssignmentType: ~
+    Ibexa\AdminUi\Form\Type\RoleAssignment\RoleAssignmentType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Search\DateIntervalType: ~
+    Ibexa\AdminUi\Form\Type\Search\DateIntervalType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType:
+    Ibexa\AdminUi\Form\Type\Search\SearchType:
         arguments:
             $baseType: '@Ibexa\Platform\Bundle\Search\Form\Type\SearchType'
             $translator: '@translator'
         tags:
-            - { name: form.type, alias: EzSystems\EzPlatformAdminUi\Form\Type\Search\SearchType }
+            - { name: form.type, alias: Ibexa\AdminUi\Form\Type\Search\SearchType }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Search\TrashSearchType: ~
+    Ibexa\AdminUi\Form\Type\Search\TrashSearchType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionChoiceType: ~
+    Ibexa\AdminUi\Form\Type\Section\SectionChoiceType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionContentAssignType: ~
+    Ibexa\AdminUi\Form\Type\Section\SectionContentAssignType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionCreateType: ~
+    Ibexa\AdminUi\Form\Type\Section\SectionCreateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Section\SectionDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionType: ~
+    Ibexa\AdminUi\Form\Type\Section\SectionType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionUpdateType: ~
+    Ibexa\AdminUi\Form\Type\Section\SectionUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Section\SectionsDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Section\SectionsDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\SwitcherType: ~
+    Ibexa\AdminUi\Form\Type\SwitcherType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Trash\ChoiceList\Loader\SearchContentTypeChoiceLoader: ~
+    Ibexa\AdminUi\Form\Type\Trash\ChoiceList\Loader\SearchContentTypeChoiceLoader: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashEmptyType: ~
+    Ibexa\AdminUi\Form\Type\Trash\TrashEmptyType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemCheckboxType: ~
+    Ibexa\AdminUi\Form\Type\Trash\TrashItemCheckboxType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemDeleteType: ~
+    Ibexa\AdminUi\Form\Type\Trash\TrashItemDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Trash\TrashItemRestoreType: ~
+    Ibexa\AdminUi\Form\Type\Trash\TrashItemRestoreType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\URL\URLEditType:
+    Ibexa\AdminUi\Form\Type\URL\URLEditType:
         tags:
             - { name: form.type, alias: ezplatform_content_forms_url_edit }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\URL\URLListType:
+    Ibexa\AdminUi\Form\Type\URL\URLListType:
         arguments:
             - '@translator'
         tags:
             - { name: form.type, alias: ezplatform_content_forms_url_list }
 
-    EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType: ~
+    Ibexa\AdminUi\Form\Type\URLWildcard\URLWildcardDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType: ~
+    Ibexa\AdminUi\Form\Type\URLWildcard\URLWildcardType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardUpdateType: ~
+    Ibexa\AdminUi\Form\Type\URLWildcard\URLWildcardUpdateType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType: ~
+    Ibexa\AdminUi\Form\Type\UniversalDiscoveryWidget\UniversalDiscoveryWidgetType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\User\UserCollectionType: ~
+    Ibexa\AdminUi\Form\Type\User\UserCollectionType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\User\UserDeleteType: ~
+    Ibexa\AdminUi\Form\Type\User\UserDeleteType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\User\UserEditType: ~
+    Ibexa\AdminUi\Form\Type\User\UserEditType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\User\UserGroupCollectionType: ~
+    Ibexa\AdminUi\Form\Type\User\UserGroupCollectionType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\User\UserType: ~
+    Ibexa\AdminUi\Form\Type\User\UserType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\UserChoiceType: ~
+    Ibexa\AdminUi\Form\Type\UserChoiceType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\UserGroupChoiceType: ~
+    Ibexa\AdminUi\Form\Type\UserGroupChoiceType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType: ~
+    Ibexa\AdminUi\Form\Type\Version\VersionRemoveType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener: ~
+    Ibexa\AdminUi\Form\EventListener\AddLanguageFieldBasedOnContentListener: ~
 
-    EzSystems\EzPlatformAdminUi\Form\EventListener\BuildPathFromRootListener: ~
+    Ibexa\AdminUi\Form\EventListener\BuildPathFromRootListener: ~
 
-    EzSystems\EzPlatformAdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener: ~
+    Ibexa\AdminUi\Form\EventListener\DisableSiteRootCheckboxIfRootLocationListener: ~
 
-    EzSystems\EzPlatformAdminUi\Form\EventListener\SelectionMultilingualOptionsDataListener: ~
+    Ibexa\AdminUi\Form\EventListener\SelectionMultilingualOptionsDataListener: ~
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasAssetRelation:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasAssetRelation:
         tags:
             - { name: 'ezplatform.form.trash_location_option', priority: 40 }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasChildren:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasChildren:
         tags:
             - { name: 'ezplatform.form.trash_location_option', priority: 80 }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasReverseRelations:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasReverseRelations:
         tags:
             - { name: 'ezplatform.form.trash_location_option', priority: 100 }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\HasUniqueAssetRelation:
         tags:
             - { name: 'ezplatform.form.trash_location_option', priority: 60 }
 
-    EzSystems\EzPlatformAdminUi\Form\TrashLocationOptionProvider\OptionsFactory:
+    Ibexa\AdminUi\Form\TrashLocationOptionProvider\OptionsFactory:
         arguments: [!tagged ezplatform.form.trash_location_option]
 
-    EzSystems\EzPlatformAdminUi\Form\Extension\RichTextTypeExtension:
+    Ibexa\AdminUi\Form\Extension\RichTextTypeExtension:
         public: true
         tags:
               - { name: form.type_extension }
 
-    EzSystems\EzPlatformAdminUi\Form\Extension\HelpMultilineMessageExtension:
+    Ibexa\AdminUi\Form\Extension\HelpMultilineMessageExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
-    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\ContentTypeDispatcher: ~
+    Ibexa\AdminUi\Form\ActionDispatcher\ContentTypeDispatcher: ~
 
-    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher: ~
+    Ibexa\AdminUi\Form\ActionDispatcher\CreateContentOnTheFlyDispatcher: ~
 
-    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\CreateUserOnTheFlyDispatcher: ~
+    Ibexa\AdminUi\Form\ActionDispatcher\CreateUserOnTheFlyDispatcher: ~
 
-    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditContentOnTheFlyDispatcher: ~
+    Ibexa\AdminUi\Form\ActionDispatcher\EditContentOnTheFlyDispatcher: ~
 
-    EzSystems\EzPlatformAdminUi\Form\ActionDispatcher\EditUserOnTheFlyDispatcher: ~
+    Ibexa\AdminUi\Form\ActionDispatcher\EditUserOnTheFlyDispatcher: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTypeDraftMapper: ~
+    Ibexa\AdminUi\Form\Data\FormMapper\ContentTypeDraftMapper: ~
 
     Ibexa\AdminUi\Form\Type\ContentType\FieldDefinitionsCollectionType:
         tags:

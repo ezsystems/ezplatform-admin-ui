@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUiBundle\Controller;
+namespace Ibexa\Bundle\AdminUi\Controller;
 
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\TrashService;
@@ -16,19 +16,20 @@ use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
-use EzSystems\EzPlatformAdminUi\Form\Data\Search\TrashSearchData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashEmptyData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Data\Trash\TrashItemRestoreData;
-use EzSystems\EzPlatformAdminUi\Form\Data\TrashItemData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\TrashFormFactory;
-use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
-use EzSystems\EzPlatformAdminUi\Form\Type\Search\TrashSearchType;
-use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\TrashItemAdapter;
-use EzSystems\EzPlatformAdminUi\QueryType\TrashSearchQueryType;
-use EzSystems\EzPlatformAdminUi\Specification\UserExists;
-use EzSystems\EzPlatformAdminUi\UI\Service\PathService as UiPathService;
+use Ibexa\AdminUi\Form\Data\Search\TrashSearchData;
+use Ibexa\AdminUi\Form\Data\Trash\TrashEmptyData;
+use Ibexa\AdminUi\Form\Data\Trash\TrashItemDeleteData;
+use Ibexa\AdminUi\Form\Data\Trash\TrashItemRestoreData;
+use Ibexa\AdminUi\Form\Data\TrashItemData;
+use Ibexa\AdminUi\Form\Factory\TrashFormFactory;
+use Ibexa\AdminUi\Form\SubmitHandler;
+use Ibexa\AdminUi\Form\Type\Search\TrashSearchType;
+use Ibexa\AdminUi\Pagination\Pagerfanta\TrashItemAdapter;
+use Ibexa\AdminUi\QueryType\TrashSearchQueryType;
+use Ibexa\AdminUi\Specification\UserExists;
+use Ibexa\AdminUi\UI\Service\PathService as UiPathService;
+use Ibexa\Contracts\AdminUi\Controller\Controller;
+use Ibexa\Contracts\AdminUi\Notification\TranslatableNotificationHandlerInterface;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -343,3 +344,5 @@ class TrashController extends Controller
         return $this->userService->loadUser($trashItem->getContentInfo()->ownerId);
     }
 }
+
+class_alias(TrashController::class, 'EzSystems\EzPlatformAdminUiBundle\Controller\TrashController');

@@ -6,13 +6,13 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Processor\Content;
+namespace Ibexa\AdminUi\Form\Processor\Content;
 
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
 use EzSystems\EzPlatformContentForms\Event\ContentFormEvents;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use EzSystems\EzPlatformContentForms\Form\Processor\SystemUrlRedirectProcessor;
+use Ibexa\AdminUi\Specification\SiteAccess\IsAdmin;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UrlRedirectProcessor implements EventSubscriberInterface
@@ -98,3 +98,5 @@ class UrlRedirectProcessor implements EventSubscriberInterface
         return (new IsAdmin($this->siteaccessGroups))->isSatisfiedBy($this->siteaccess);
     }
 }
+
+class_alias(UrlRedirectProcessor::class, 'EzSystems\EzPlatformAdminUi\Form\Processor\Content\UrlRedirectProcessor');

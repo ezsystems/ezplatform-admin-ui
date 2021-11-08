@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\Location;
+namespace Ibexa\AdminUi\Form\Data\Location;
 
 use eZ\Publish\API\Repository\Values\Content\Location;
 
@@ -63,3 +63,5 @@ class LocationSwapData
         $this->newLocation = $newLocation;
     }
 }
+
+class_alias(LocationSwapData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\Location\LocationSwapData');

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\ObjectState;
+namespace Ibexa\AdminUi\Form\Data\ObjectState;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
@@ -92,3 +92,5 @@ class ContentObjectStateUpdateData
         $this->objectState = $objectState;
     }
 }
+
+class_alias(ContentObjectStateUpdateData::class, 'EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData');

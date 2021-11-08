@@ -6,13 +6,14 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Form\Data\FormMapper;
+namespace Ibexa\AdminUi\Form\Data\FormMapper;
 
 use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\ValueObject;
-use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
+use Ibexa\AdminUi\Form\Data\ContentTranslationData;
+use Ibexa\Contracts\AdminUi\Form\Data\FormMapper\FormDataMapperInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContentTranslationMapper implements FormDataMapperInterface
@@ -88,3 +89,5 @@ class ContentTranslationMapper implements FormDataMapperInterface
             ->setAllowedTypes('language', Language::class);
     }
 }
+
+class_alias(ContentTranslationMapper::class, 'EzSystems\EzPlatformAdminUi\Form\Data\FormMapper\ContentTranslationMapper');

@@ -4,7 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Validator\Constraints;
+namespace Ibexa\AdminUi\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
@@ -25,3 +25,5 @@ class UniqueFieldDefinitionIdentifier extends Constraint
         return self::CLASS_CONSTRAINT;
     }
 }
+
+class_alias(UniqueFieldDefinitionIdentifier::class, 'EzSystems\EzPlatformAdminUi\Validator\Constraints\UniqueFieldDefinitionIdentifier');
