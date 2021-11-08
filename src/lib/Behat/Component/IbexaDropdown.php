@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component;
 
 use Ibexa\Behat\Browser\Component\Component;
+use Ibexa\Behat\Browser\Element\Condition\ElementTransitionHasEndedCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 
@@ -16,7 +17,9 @@ class IbexaDropdown extends Component
 {
     public function verifyIsLoaded(): void
     {
-        $this->getHTMLPage()->find($this->getLocator('isIbexaDropdownVisible'))->assert()->isVisible();
+        $this->getHTMLPage()
+            ->setTimeout(2)
+            ->waitUntilCondition(new ElementTransitionHasEndedCondition($this->getHTMLPage(), $this->getLocator('isIbexaDropdownVisible')));
     }
 
     protected function specifyLocators(): array
@@ -30,9 +33,7 @@ class IbexaDropdown extends Component
 
     public function selectOption(string $value)
     {
-        //TODO: remove usleep
         $this->verifyIsLoaded();
-        usleep(1000000);
         $dropdownOptionLocator = $this->getLocator('ibexaDropdownExtended');
         $listElement = $this->getHTMLPage()
             ->findAll($dropdownOptionLocator)
