@@ -5,17 +5,18 @@ import PropTypes from 'prop-types';
 import { createCssClassNames } from '../../common/helpers/css.class.names';
 import Icon from '../../common/icon/icon';
 
-const Dropdown = ({ dropdownListRef, value, options, onChange, small, single, extraClass }) => {
+const Dropdown = ({ dropdownListRef, value, options, onChange, small, single, extraClasses }) => {
     const containerRef = useRef();
     const containerItemsRef = useRef();
     const [isExpanded, setIsExpanded] = useState(false);
     const [filterText, setFilterText] = useState('');
     const labelValue = options.find((option) => option.value === value)?.label;
-    const dropdownClasses = {
+    const dropdownClassName = createCssClassNames({
         'ibexa-dropdown': true,
         'ibexa-dropdown--single': single,
         'ibexa-dropdown--small': small,
-    };
+        [extraClasses]: !!extraClasses
+    });
     const toggleExpanded = () => {
         setIsExpanded((prevState) => !prevState);
     };
@@ -39,7 +40,14 @@ const Dropdown = ({ dropdownListRef, value, options, onChange, small, single, ex
         });
 
         return (
-            <li class={itemClassName} key={item.value} onClick={() => onChange(item.value)}>
+            <li
+                class={itemClassName}
+                key={item.value}
+                onClick={() => {
+                    onChange(item.value);
+                    toggleExpanded();
+                }}
+            >
                 <span class="ibexa-dropdown__item-label">{ item.label }</span>
             </li>
         )
@@ -91,10 +99,6 @@ const Dropdown = ({ dropdownListRef, value, options, onChange, small, single, ex
         )
     }
 
-    if (extraClass) {
-        dropdownClasses[extraClass] = true
-    }
-
     useEffect(() => {
         if (!isExpanded) {
             return;
@@ -122,7 +126,7 @@ const Dropdown = ({ dropdownListRef, value, options, onChange, small, single, ex
     return (
         <>
             <div
-                className={createCssClassNames(dropdownClasses)}
+                className={dropdownClassName}
                 ref={containerRef}
                 onClick={toggleExpanded}
             >
@@ -143,14 +147,18 @@ const Dropdown = ({ dropdownListRef, value, options, onChange, small, single, ex
 };
 
 Dropdown.propTypes = {
+    dropdownListRef: PropTypes.object.isRequired,
     value: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
     small: PropTypes.bool,
+    single: PropTypes.bool,
+    extraClasses: PropTypes.string,
 };
 
 Dropdown.defaultProps = {
     small: false,
+    single: false,
 };
 
 export default Dropdown;

@@ -46,6 +46,13 @@
         border-top-right-radius: $ibexa-border-radius-small;
         box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-black, 0.05);
     }
+
+    &__dropdown-portal {
+        .ibexa-dropdown__items {
+            position: fixed;
+            z-index: 250;
+        }
+    }
 }
 
 .m-bookmarks-tab {
