@@ -1,4 +1,4 @@
-(function (global, doc, eZ) {
+(function(global, doc, eZ) {
     const SCROLL_POSITION_TO_FIT = 50;
     const MIN_HEIGHT_DIFF_FOR_FITTING_HEADER = 150;
     const headerNode = doc.querySelector('.ibexa-edit-header');
