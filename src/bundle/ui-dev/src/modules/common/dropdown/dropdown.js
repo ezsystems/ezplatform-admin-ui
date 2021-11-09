@@ -15,7 +15,7 @@ const Dropdown = ({ dropdownListRef, value, options, onChange, small, single, ex
         'ibexa-dropdown': true,
         'ibexa-dropdown--single': single,
         'ibexa-dropdown--small': small,
-        [extraClasses]: !!extraClasses
+        [extraClasses]: true
     });
     const toggleExpanded = () => {
         setIsExpanded((prevState) => !prevState);
@@ -159,6 +159,7 @@ Dropdown.propTypes = {
 Dropdown.defaultProps = {
     small: false,
     single: false,
+    extraClasses: ''
 };
 
 export default Dropdown;
