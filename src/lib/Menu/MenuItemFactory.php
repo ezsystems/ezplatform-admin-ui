@@ -69,10 +69,13 @@ class MenuItemFactory implements FactoryInterface
 
     public function createItem($name, array $options = []): ItemInterface
     {
-        $defaults = [
-            'extras' => ['translation_domain' => 'menu'],
-        ];
+        if (empty($options['extras']['translation_domain'])) {
+            $options['extras']['translation_domain'] = 'menu';
+        }
 
-        return $this->factory->createItem($name, array_merge_recursive($defaults, $options));
+        $item = $this->factory->createItem($name, $options);
+        $item->setFactory($this);
+
+        return $item;
     }
 }

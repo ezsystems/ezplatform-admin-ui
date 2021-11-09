@@ -42,11 +42,13 @@
 
                             <ul id="{{ child.name }}-popup" class="ibexa-popup-menu ibexa-popup-menu--info-neon ibexa-popup-menu--hidden">
                                 {% for item in child.children %}
+                                    {% set renderItemAsGroup = item.children|length > 0 %}
                                     {{ block('popupItem') }}
                                 {% endfor %}
                             </ul>
                         </li>
                         {% for item in child.children %}
+                            {% set renderItemAsGroup = item.children|length > 0 %}
                             {{ block('item') }}
                         {% endfor %}
                     </ul>
@@ -88,9 +90,15 @@
 
     {% set link_attributes = item.linkAttributes|merge(linkAttributes) %}
 
-    <a{{ knp_menu.attributes(link_attributes) }}>
-        <div class="ibexa-main-menu__item-text-column">{{ block('label') }}</div>
-    </a>
+    {% if renderItemAsGroup|default() %}
+        <div {{ knp_menu.attributes(link_attributes) }}>
+            <span class="ibexa-main-menu__item-text-column ibexa-main-menu__item-text-column--group">{{ block('label') }}</span>
+        </div>
+    {% else %}
+        <a {{ knp_menu.attributes(link_attributes) }}>
+            <span class="ibexa-main-menu__item-text-column">{{ block('label') }}</span>
+        </a>
+    {% endif %}
 {% endblock %}
 
 {% block spanElement %}

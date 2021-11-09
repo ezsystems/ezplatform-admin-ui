@@ -29,6 +29,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
 
     /* Main Menu / Content */
     const ITEM_CONTENT = 'main__content';
+    const ITEM_CONTENT_GROUP_SETTINGS = 'main__content__group_settings';
     const ITEM_CONTENT__CONTENT_STRUCTURE = 'main__content__content_structure';
     const ITEM_CONTENT__MEDIA = 'main__content__media';
 
@@ -173,95 +174,85 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         $token = $this->tokenStorage->getToken();
 
         /** @var \Knp\Menu\ItemInterface|\Knp\Menu\ItemInterface[] $menu */
-        $menu = $this->factory->createItem('root');
+        $menu = $this->createMenuItem('root');
 
-        $menu->addChild($this->factory->createItem(self::ITEM_DASHBOARD, [
-                'route' => 'ezplatform.dashboard',
-                'attributes' => [
-                    'data-tooltip-placement' => 'right',
-                    'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
-                ],
-                'extras' => [
-                    'icon' => 'dashboard-clean',
-                    'orderNumber' => 20,
-                ],
-            ]
-        ));
+        $contentMenu = $menu->addChild(self::ITEM_CONTENT, [
+            'attributes' => [
+                'data-tooltip-placement' => 'right',
+                'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
+            ],
+            'extras' => [
+                'icon' => 'hierarchy',
+                'orderNumber' => 40,
+            ],
+        ]);
 
-        $menu->addChild($this->factory->createItem(self::ITEM_CONTENT, [
-                'attributes' => [
-                    'data-tooltip-placement' => 'right',
-                    'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
-                ],
-                'extras' => [
-                    'icon' => 'hierarchy',
-                    'orderNumber' => 40,
-                ],
-            ]
-        ));
+        $contentMenu->addChild(self::ITEM_DASHBOARD, [
+            'route' => 'ezplatform.dashboard',
+            'attributes' => [
+                'data-tooltip-placement' => 'right',
+                'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
+            ],
+            'extras' => [
+                'icon' => 'dashboard-clean',
+                'orderNumber' => 20,
+            ],
+        ]);
 
-        $menu->addChild($this->factory->createItem(self::ITEM_ADMIN, [
-                'attributes' => [
-                    'data-tooltip-placement' => 'right',
-                    'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
-                ],
-                'extras' => [
-                    'separate' => true,
-                    'bottom_item' => true,
-                    'icon' => 'settings-block',
-                    'orderNumber' => 140,
-                ],
-            ]
-        ));
+        $adminMenu = $menu->addChild(self::ITEM_ADMIN, [
+            'attributes' => [
+                'data-tooltip-placement' => 'right',
+                'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
+            ],
+            'extras' => [
+                'separate' => true,
+                'bottom_item' => true,
+                'icon' => 'settings-block',
+                'orderNumber' => 140,
+            ],
+        ]);
 
         if (null !== $token && is_object($token->getUser())) {
-            $menu->addChild($this->factory->createItem(self::ITEM_BOOKMARKS, [
-                    'route' => 'ezplatform.bookmark.list',
-                    'attributes' => [
-                        'data-tooltip-placement' => 'right',
-                        'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
-                    ],
-                    'extras' => [
-                        'bottom_item' => true,
-                        'icon' => 'bookmark',
-                        'orderNumber' => 160,
-                    ],
-                ]
-            ));
-        }
-
-        $menu->addChild($this->factory->createItem(self::ITEM_TRASH, [
-                'route' => 'ezplatform.trash.list',
+            $menu->addChild(self::ITEM_BOOKMARKS, [
+                'route' => 'ezplatform.bookmark.list',
                 'attributes' => [
                     'data-tooltip-placement' => 'right',
                     'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
                 ],
                 'extras' => [
                     'bottom_item' => true,
-                    'icon' => 'trash',
-                    'orderNumber' => 180,
+                    'icon' => 'bookmark',
+                    'orderNumber' => 160,
                 ],
-            ]
-        ));
+            ]);
+        }
 
-        $contentMenuItems = $this->getContentMenuItems();
-        $adminMenuItems = $this->getAdminMenuItems();
+        $menu->addChild(self::ITEM_TRASH, [
+            'route' => 'ezplatform.trash.list',
+            'attributes' => [
+                'data-tooltip-placement' => 'right',
+                'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
+            ],
+            'extras' => [
+                'bottom_item' => true,
+                'icon' => 'trash',
+                'orderNumber' => 180,
+            ],
+        ]);
 
-        $menu[self::ITEM_CONTENT]->setChildren($contentMenuItems);
-        $menu[self::ITEM_ADMIN]->setChildren($adminMenuItems);
+        $this->addContentMenuItems($contentMenu);
+        $this->addAdminMenuItems($adminMenu);
 
         return $menu;
     }
 
     /**
-     * @return array
+     * @param \Knp\Menu\ItemInterface $menu
      *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    private function getContentMenuItems(): array
+    private function addContentMenuItems(ItemInterface $menu): void
     {
-        $menuItems = [];
-
         $rootContentId = $this->configResolver->getParameter('location_ids.content_structure');
         $rootMediaId = $this->configResolver->getParameter('location_ids.media');
 
@@ -270,58 +261,79 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             $rootContentId,
             [
                 'label' => self::ITEM_CONTENT__CONTENT_STRUCTURE,
+                'extras' => [
+                    'orderNumber' => 25,
+                ],
             ]
         );
+
         $mediaItem = $this->factory->createLocationMenuItem(
             self::ITEM_CONTENT__MEDIA,
             $rootMediaId,
-            ['label' => self::ITEM_CONTENT__MEDIA]
+            [
+                'label' => self::ITEM_CONTENT__MEDIA,
+                'extras' => [
+                    'orderNumber' => 35,
+                ],
+            ]
         );
 
-        if (null !== $contentStructureItem) {
-            $menuItems[$contentStructureItem->getName()] = $contentStructureItem;
-        }
-
-        if (null !== $mediaItem) {
-            $menuItems[$mediaItem->getName()] = $mediaItem;
-        }
-
-        return $menuItems;
-    }
-
-    /**
-     * @return array
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     */
-    private function getAdminMenuItems(): array
-    {
-        $menuItems = [];
+        $contentGroupSettings = $menu->addChild(
+            self::ITEM_CONTENT_GROUP_SETTINGS,
+            [
+                'extras' => [
+                    'orderNumber' => 75,
+                ],
+            ],
+        );
 
         if ($this->permissionResolver->hasAccess('section', 'view') !== false) {
-            $menuItems[self::ITEM_ADMIN__SECTIONS] = $this->createMenuItem(
+            $contentGroupSettings->addChild(
                 self::ITEM_ADMIN__SECTIONS,
                 self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__SECTIONS]
             );
         }
 
+        $contentGroupSettings->addChild(
+            self::ITEM_ADMIN__CONTENT_TYPES,
+            self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__CONTENT_TYPES]
+        );
+
+        if ($this->permissionResolver->hasAccess('state', 'administrate')) {
+            $contentGroupSettings->addChild(
+                self::ITEM_ADMIN__OBJECT_STATES,
+                self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__OBJECT_STATES]
+            );
+        }
+
+        if (null !== $contentStructureItem) {
+            $menu->addChild($contentStructureItem);
+        }
+
+        if (null !== $mediaItem) {
+            $menu->addChild($mediaItem);
+        }
+    }
+
+    /**
+     * @param \Knp\Menu\ItemInterface $menu
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
+    private function addAdminMenuItems(ItemInterface $menu): void
+    {
         if ($this->permissionResolver->hasAccess('role', 'read')) {
-            $menuItems[self::ITEM_ADMIN__ROLES] = $this->createMenuItem(
+            $menu->addChild(
                 self::ITEM_ADMIN__ROLES,
                 self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__ROLES]
             );
         }
         if ($this->permissionResolver->hasAccess('setup', 'administrate')) {
-            $menuItems[self::ITEM_ADMIN__LANGUAGES] = $this->createMenuItem(
+            $menu->addChild(
                 self::ITEM_ADMIN__LANGUAGES,
                 self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__LANGUAGES]
             );
         }
-
-        $menuItems[self::ITEM_ADMIN__CONTENT_TYPES] = $this->createMenuItem(
-            self::ITEM_ADMIN__CONTENT_TYPES,
-            self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__CONTENT_TYPES]
-        );
 
         $rootUsersId = $this->configResolver->getParameter('location_ids.users');
         $usersItem = $this->factory->createLocationMenuItem(
@@ -336,22 +348,13 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
         );
 
         if (null !== $usersItem) {
-            $menuItems[$usersItem->getName()] = $usersItem;
+            $menu->addChild($usersItem);
         }
 
-        if ($this->permissionResolver->hasAccess('state', 'administrate')) {
-            $menuItems[self::ITEM_ADMIN__OBJECT_STATES] = $this->createMenuItem(
-                self::ITEM_ADMIN__OBJECT_STATES,
-                self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__OBJECT_STATES]
-            );
-        }
-
-        $menuItems[self::ITEM_ADMIN__URL_MANAGEMENT] = $this->createMenuItem(
+        $menu->addChild(
             self::ITEM_ADMIN__URL_MANAGEMENT,
             self::ITEM_ADMIN_OPTIONS[self::ITEM_ADMIN__URL_MANAGEMENT]
         );
-
-        return $menuItems;
     }
 
     /**
@@ -364,6 +367,7 @@ class MainMenuBuilder extends AbstractBuilder implements TranslationContainerInt
             (new Message(self::ITEM_BOOKMARKS, 'menu'))->setDesc('Bookmarks'),
             (new Message(self::ITEM_TRASH, 'menu'))->setDesc('Trash'),
             (new Message(self::ITEM_CONTENT, 'menu'))->setDesc('Content'),
+            (new Message(self::ITEM_CONTENT_GROUP_SETTINGS, 'menu'))->setDesc('Settings'),
             (new Message(self::ITEM_CONTENT__CONTENT_STRUCTURE, 'menu'))->setDesc('Content structure'),
             (new Message(self::ITEM_CONTENT__MEDIA, 'menu'))->setDesc('Media'),
             (new Message(self::ITEM_ADMIN, 'menu'))->setDesc('Admin'),

@@ -21,6 +21,19 @@
         &--hidden {
             display: none;
         }
+
+        &--group-name {
+            flex-direction: column;
+            height: 100%;
+            align-items: initial;
+
+            &:before {
+                content: "";
+                border-top: 1px solid $ibexa-color-info-800;
+                width: 100%;
+                display: block;
+            }
+        }
     }
 
     .ibexa-popup-menu__item-content {
@@ -46,6 +59,21 @@
             opacity: 0.2;
             cursor: default;
         }
+
+        &--group-name {
+            color: $ibexa-color-light-700;
+            font-size: $ibexa-text-font-size-small;
+            cursor: initial;
+
+            &:hover {
+                background-color: initial;
+                color: $ibexa-color-light-700;
+            }
+        }
+    }
+
+    .ibexa-popup-menu__items-list {
+        padding-left: 0;
     }
 
     &--info-neon {

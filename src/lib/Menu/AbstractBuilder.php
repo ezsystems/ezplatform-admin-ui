@@ -40,7 +40,7 @@ abstract class AbstractBuilder
      *
      * @return \Knp\Menu\ItemInterface
      */
-    protected function createMenuItem(string $id, array $options): ?ItemInterface
+    protected function createMenuItem(string $id, array $options = []): ?ItemInterface
     {
         return $this->factory->createItem($id, $options);
     }

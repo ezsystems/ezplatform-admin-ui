@@ -3,8 +3,13 @@
 
 {% block popupItem %}
     {% if item.displayed %}
+        {% set classes = [
+            'ibexa-popup-menu__item',
+            (renderItemAsGroup|default() ? 'ibexa-popup-menu__item--group-name')
+        ] %}
+
         {% set node_attributes = {
-            'class': 'ibexa-popup-menu__item',
+            'class': classes|join(' ')
         } %}
 
         <li {{ knp_menu.attributes(node_attributes) }}>
@@ -12,6 +17,15 @@
                 {{ block('popupLinkElement') }}
             {%- else %}
                 {{ block('popupSpanElement') }}
+
+                {% if item.children %}
+                    <ul class="ibexa-popup-menu__items-list">
+                        {% for item in item.children %}
+                            {% set renderItemAsGroup = item.children|length > 0 %}
+                            {{ block('popupItem') }}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             {%- endif %}
         </li>
     {% endif %}
@@ -32,13 +46,17 @@
 {% endblock %}
 
 {% block popupSpanElement %}
-    {{ block('label') }}
+    <div class="ibexa-popup-menu__item-content ibexa-popup-menu__item-content--group-name">{{ block('label') }}</div>
 {% endblock %}
 
 {% block item %}
     {% if item.displayed %}
         {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
         {%- set classes = classes|merge(['ibexa-main-menu__item']) %}
+
+        {% if renderItemAsGroup|default() %}
+            {%- set classes = classes|merge(['ibexa-main-menu__item--group-name']) -%}
+        {% endif %}
 
         {%- if item.extras.separate is defined and item.extras.separate -%}
             {%- set classes = classes|merge(['ibexa-main-menu__item--separator']) -%}
@@ -64,11 +82,20 @@
             <li class="ibexa-main-menu__separator ibexa-main-menu__separator--top"></li>
         {%- endif -%}
 
-        <li{{ knp_menu.attributes(attributes) }}>
+        <li {{ knp_menu.attributes(attributes) }}>
             {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
                 {{ block('linkElement') }}
             {%- else %}
                 {{ block('spanElement') }}
+
+                {% if item.children and options.depth == 2 %}
+                    <ul class="ibexa-main-menu__items-list">
+                        {% for item in item.children %}
+                            {% set renderItemAsGroup = item.children|length > 0 %}
+                            {{ block('item') }}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             {%- endif %}
         </li>
 

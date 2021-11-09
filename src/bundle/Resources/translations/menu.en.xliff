@@ -206,6 +206,11 @@
         <target state="new">Content</target>
         <note>key: main__content</note>
       </trans-unit>
+      <trans-unit id="17346107dfddb344b04c455b071d001dadf80d6f" resname="main__content__group_settings">
+        <source>Settings</source>
+        <target state="new">Settings</target>
+        <note>key: main__content__group_settings</note>
+      </trans-unit>
       <trans-unit id="1dd8b693879304af831a7adaf4ca59c7d8cb31b9" resname="main__content__content_structure">
         <source>Content structure</source>
         <target state="new">Content structure</target>
