@@ -10,10 +10,10 @@
 
     const contextMenuNode = headerNode.querySelector('.ibexa-context-menu');
     const { height: expandedHeaderHeight } = headerNode.getBoundingClientRect();
-    const form = doc.querySelector('.ibexa-form');
+    const scrolledContent = doc.querySelector('.ibexa-edit-content > :first-child');
     const tooltipNode = headerNode.querySelector('.ibexa-edit-header__tooltip');
     const fitHeader = (event) => {
-        const { height: formHeight } = form.getBoundingClientRect();
+        const { height: formHeight } = scrolledContent.getBoundingClientRect();
         const contentHeightWithExpandedHeader = formHeight + expandedHeaderHeight;
         const heightDiffBetweenWindowAndContent = contentHeightWithExpandedHeader - global.innerHeight;
 

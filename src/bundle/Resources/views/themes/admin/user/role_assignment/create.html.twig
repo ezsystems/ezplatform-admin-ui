@@ -47,7 +47,7 @@
                             |trans({}, "role")
                             |desc("Select Users to assign to the Role") %}
 
-                        {{ include('@ezdesign/ui/component/tag_view_select.html.twig', {
+                        {{ include('@ezdesign/ui/component/tag_view_select/tag_view_select.html.twig', {
                             form: form.users,
                             items,
                             attr: {
@@ -80,7 +80,7 @@
                             |trans({}, "role")
                             |desc("Select User Groups to assign to the Role") %}
 
-                        {{ include('@ezdesign/ui/component/tag_view_select.html.twig', {
+                        {{ include('@ezdesign/ui/component/tag_view_select/tag_view_select.html.twig', {
                             form: form.groups,
                             items,
                             attr: {
@@ -125,7 +125,7 @@
                                 name: ez_content_name(location.content)
                             }) %}
 
-                            {{ include('@ezdesign/ui/component/tag_view_select.html.twig', {
+                            {{ include('@ezdesign/ui/component/tag_view_select/tag_view_select.html.twig', {
                                 form: form.locations,
                                 items,
                                 attr: {

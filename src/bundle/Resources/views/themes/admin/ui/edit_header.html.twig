@@ -1,9 +1,9 @@
 <div class="ibexa-edit-header">
-    <div class="container">
-        <div class="row ibexa-edit-header__row ibexa-edit-header__row--top">
-            <div class="col-8 offset-1 ibexa-edit-header__column ibexa-edit-header__column--main">
+    <div class="container ibexa-edit-header__container">
+        <div class="offset-1 ibexa-edit-header__row ibexa-edit-header__row--top">
+            <div class="ibexa-edit-header__column ibexa-edit-header__column--main">
                 <div class="ibexa-edit-header__action-name-container">
-                    {% if icon_name %}
+                    {% if icon_name is defined %}
                         <svg class="ibexa-icon ibexa-icon--small">
                             <use xlink:href="{{ ibexa_icon_path(icon_name|lower) }}"></use>
                         </svg>
@@ -34,20 +34,25 @@
 
     <div class="ibexa-edit-header__separate-div"></div>
 
-    <div class="container">
-        <div class="row ibexa-edit-header__row ibexa-edit-header__row--bottom">
-            <div class="col-8 offset-1 ibexa-edit-header__column ibexa-edit-header__column--left">
+    <div class="container ibexa-edit-header__container">
+        <div class="offset-1 ibexa-edit-header__row ibexa-edit-header__row--bottom">
+            <div class="ibexa-edit-header__column ibexa-edit-header__column--left">
                 <h1 class="ibexa-edit-header__title">{{ title }}</h1>
 
                 {% if subtitle is defined %}
-                    <div class="ibexa-edit-header__location">{{ subtitle|raw }}</div>
+                    <div class="ibexa-edit-header__subtitle">{{ subtitle|raw }}</div>
                 {% endif %}
             </div>
-            <div class="col-3 ibexa-edit-header__column ibexa-edit-header__column--right">
-                {% if show_autosave_status %}
+            <div class="ibexa-edit-header__column ibexa-edit-header__column--right">
+                {% if show_autosave_status|default(false) %}
                     {% include '@ezdesign/ui/autosave.html.twig' %}
                 {% endif %}
             </div>
+            {% if block('extra_bottom_content') is defined %}
+                <div class="ibexa-edit-header__extra-bottom-content">
+                    {{ block('extra_bottom_content') }}
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

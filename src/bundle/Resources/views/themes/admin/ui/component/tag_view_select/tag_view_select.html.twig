@@ -1,5 +1,6 @@
 {% import "@ezdesign/ui/component/macros.html.twig" as html %}
 
+{# TOOD: rename to btn_attr #}
 {% set attr = attr|default({})|merge({
     class: 'ibexa-tag-view-select__btn-select-path btn ibexa-btn ibexa-btn--secondary ' ~ attr.class|default(''),
 }) %}
@@ -16,7 +17,7 @@
 {% set show_title = show_title ?? true %}
 
 <div
-    class="ibexa-tag-view-select"
+    class="ibexa-tag-view-select {{ class|default('') }}"
     data-is-single-select="{{ is_single_select }}"
     data-can-be-empty="{{ can_be_empty }}"
     {% if is_disabled %}disabled{% endif %}
@@ -28,13 +29,13 @@
     {% endif %}
     <div
         class="ibexa-tag-view-select__selected-list"
-        data-template="{{ include('@ezdesign/ui/component/tag_view_select_selected_item_tag.html.twig', {
+        data-template="{{ include('@ezdesign/ui/component/tag_view_select/tag_view_select_selected_item_tag.html.twig', {
             id: '{{ id }}',
             name: '{{ name }}',
         })|e('html_attr') }}"
     >
         {% for item in items %}
-            {{ include('@ezdesign/ui/component/tag_view_select_selected_item_tag.html.twig', {
+            {{ include('@ezdesign/ui/component/tag_view_select/tag_view_select_selected_item_tag.html.twig', {
                 id: item.id,
                 name: item.name,
                 is_deletable: is_delete_visible,
@@ -42,8 +43,8 @@
             }) }}
         {% endfor %}
     </div>
-    {{ form_widget(form, { 
-        attr: { hidden: true } 
+    {{ form_widget(form, {
+        attr: { hidden: true }
     }) }}
     <button
         type="button"

@@ -1,7 +1,7 @@
 .ibexa-edit-header {
-    height: calculateRem(241px);
+    display: flex;
+    flex-direction: column;
     background-color: $ibexa-color-white;
-    box-shadow: $ibexa-edit-header-box-shadow;
     border-width: calculateRem(1px) calculateRem(1px) 0;
     border-style: solid;
     border-color: $ibexa-color-light-400;
@@ -9,7 +9,14 @@
     border-top-right-radius: $ibexa-border-radius;
     transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
+    &__container {
+        display: flex;
+        flex-direction: column;
+    }
+
     &__row {
+        display: flex;
+        flex-wrap: nowrap;
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
 
         &--top {
@@ -22,7 +29,12 @@
         }
 
         &--bottom {
-            height: calculateRem(154px);
+            flex-direction: column;
+            border-bottom: calculateRem(1px) solid $ibexa-color-light;
+            min-width: 60%;
+            min-height: calculateRem(150px);
+            margin-left: 8.5%;
+            // margin-right: calculateRem(30px);
         }
     }
 
@@ -42,9 +54,6 @@
         }
 
         &--left {
-            padding-left: 0;
-            border-bottom: calculateRem(1px) solid $ibexa-color-light;
-
             .ibexa-label {
                 margin-bottom: 0;
                 color: $ibexa-color-dark-400;
@@ -99,25 +108,27 @@
         transition-duration: $ibexa-admin-transition-duration;
     }
 
+    &__extra-bottom-content {
+        margin-top: 10px;
+    }
+
     .ibexa-autosave {
         opacity: 1;
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
     }
 
     &--slim {
-        height: calculateRem(87px);
-
         .ibexa-edit-header {
             &__row {
                 &--bottom {
-                    height: calculateRem(85px);
                     margin-top: calculateRem(-45px);
                 }
             }
 
-            &__column {
-                &--left {
+            &__row {
+                &--bottom {
                     border-bottom: none;
+                    min-height: initial;
                 }
             }
 
@@ -131,6 +142,8 @@
 
             &__subtitle {
                 opacity: 0;
+                height: 0;
+                overflow: hidden;
             }
         }
 

@@ -1,6 +1,9 @@
-{% set has_search = has_search|default(false) %}
+{% import '@ezdesign/ui/component/macros.html.twig' as html %}
 
-<div class="ibexa-input-text-wrapper {{ has_search ? 'ibexa-input-text-wrapper--search' }}">
+{% set has_search = has_search|default(false) %}
+{% set wrapper_attr = wrapper_attr|default({})|merge({ class: (wrapper_attr.class|default('') ~ ' ibexa-input-text-wrapper')|trim }) %}
+
+<div {{ html.attributes(wrapper_attr|default({})) }}>
     {% block content %}{% endblock %}
     <div class="ibexa-input-text-wrapper__actions">
         <button type="button" class="btn ibexa-input-text-wrapper__action-btn ibexa-input-text-wrapper__action-btn--clear" tabindex="-1">

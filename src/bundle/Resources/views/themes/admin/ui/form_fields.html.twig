@@ -316,7 +316,8 @@
 
 {%- block form_widget_simple -%}
     {%- set has_search = has_search|default(false) -%}
-    {%- set is_text_input = type|default('text') == 'text' or force_text|default(false) -%}
+    {%- set type = type|default('text') -%}
+    {%- set is_text_input = type == 'text' or type == 'number' or force_text|default(false) -%}
     {%- if is_text_input -%}
         {%- set attr = attr|merge({class: (attr.class|default('') ~ ' ibexa-input ibexa-input--text')|trim}) -%}
         {%- set empty_placeholder_for_hiding_clear_btn_with_css = ' ' -%}

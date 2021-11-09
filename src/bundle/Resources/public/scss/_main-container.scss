@@ -10,6 +10,7 @@
         width: 100%;
         height: 100%;
         overflow-y: auto;
+        box-shadow: $ibexa-edit-content-box-shadow;
     }
 
     &--without-anchor-menu-items {

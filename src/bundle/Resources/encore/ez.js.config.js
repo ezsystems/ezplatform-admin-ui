@@ -71,14 +71,12 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-content-type-create-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
-            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.edit'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-edit-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.selection.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.card.toggle.group.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.relation.default.location.js'),
-            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.contenttype.edit'),
         ])
         .addEntry('ezplatform-admin-ui-content-type-list-js', [
@@ -230,5 +228,8 @@ module.exports = (Encore) => {
         .addEntry('ezplatform-admin-ui-tabs-js', [
             path.resolve(__dirname, '../public/js/scripts/admin.location.tab.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.adaptive.tabs.js'),
+        ])
+        .addEntry('ezplatform-admin-ui-edit-base-js', [
+            path.resolve(__dirname, '../public/js/scripts/edit.header.js'),
         ]);
 };

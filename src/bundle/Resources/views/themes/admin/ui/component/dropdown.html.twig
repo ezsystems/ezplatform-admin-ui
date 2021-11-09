@@ -51,7 +51,9 @@
             <li class="ibexa-dropdown__selected-item ibexa-dropdown__selected-item--predefined ibexa-dropdown__selected-overflow-number" hidden></li>
         </ul>
         <div class="ibexa-dropdown__items">
-            {%- embed '@ezdesign/ui/component/input_text.html.twig' with { has_search: true } -%}
+            {%- embed '@ezdesign/ui/component/input_text.html.twig' with {
+                wrapper_attr: { class: 'ibexa-input-text-wrapper--search' },
+            } -%}
                 {% block content %}
                     <input
                         type="text"

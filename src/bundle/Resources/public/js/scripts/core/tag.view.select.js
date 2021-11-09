@@ -2,15 +2,14 @@
     class TagViewSelect {
         constructor(config) {
             this.inputSelector = config.inputSelector || 'input';
-            this.fieldContainer = config.fieldContainer;
+            this.container = config.container || config.fieldContainer.querySelector('.ibexa-tag-view-select')
 
-            if (!this.fieldContainer) {
+            if (!this.container) {
                 throw new Error('Field Container doesn\'t exist!');
             }
 
-            this.container = this.fieldContainer.querySelector('.ibexa-tag-view-select');
             this.listContainer = this.container.querySelector('.ibexa-tag-view-select__selected-list');
-            this.inputField = this.fieldContainer.querySelector(this.inputSelector);
+            this.inputField = this.container.querySelector(this.inputSelector);
             this.selectBtn = this.container.querySelector('.ibexa-tag-view-select__btn-select-path')
             this.isSingleSelect = this.container.dataset.isSingleSelect === '1';
             this.canBeEmpty = this.container.dataset.canBeEmpty === '1';
