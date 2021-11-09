@@ -72,8 +72,8 @@
         <note>key: content_type.default_availability.available</note>
       </trans-unit>
       <trans-unit id="3b3fc626a669a5462ec9fa7c94280a3573d8b106" resname="content_type.default_availability.help">
-        <source>Content of this Content Type will be avalable in the main language even if there is no translation.</source>
-        <target state="new">Content of this Content Type will be avalable in the main language even if there is no translation.</target>
+        <source>Content of this Content Type will be available in the main language even if there is no translation.</source>
+        <target state="new">Content of this Content Type will be available in the main language even if there is no translation.</target>
         <note>key: content_type.default_availability.help</note>
       </trans-unit>
       <trans-unit id="da6afb475bbd2efbe3929af770d0fc17e6e86132" resname="content_type.default_availability.not_available">

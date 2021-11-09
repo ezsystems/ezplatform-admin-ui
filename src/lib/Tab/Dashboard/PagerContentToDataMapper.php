@@ -39,6 +39,7 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
      * @param \eZ\Publish\Core\MVC\Symfony\Locale\UserLanguagePreferenceProviderInterface $userLanguagePreferenceProvider
      * @param \eZ\Publish\Core\Helper\TranslationHelper $translationHelper
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
+     * @param \eZ\Publish\Core\Repository\LocationResolver\LocationResolver $locationResolver
      */
     public function __construct(
         ContentService $contentService,
@@ -67,6 +68,10 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
      * @param \Pagerfanta\Pagerfanta $pager
      *
      * @return array
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\ForbiddenException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function map(Pagerfanta $pager): array
     {
