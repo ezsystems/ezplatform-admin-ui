@@ -78,13 +78,13 @@
         flex-direction: column;
         margin-bottom: calculateRem(24px);
 
-        .ibexa-content-field-name {
+        &__name {
             margin-bottom: calculateRem(8px);
             color: $ibexa-color-base-dark;
             font-size: $ibexa-text-font-size-small;
         }
 
-        .ibexa-content-field-value {
+        &__value {
             width: 100%;
 
             .ezstring-field {
@@ -92,6 +92,10 @@
                 max-width: 100%;
                 overflow: hidden;
                 text-overflow: ellipsis;
+            }
+
+            .ezcountry-field {
+                margin-bottom: 0;
             }
 
             .ibexa-table-header {
@@ -118,12 +122,6 @@
             td {
                 padding-bottom: calculateRem(10px);
             }
-        }
-    }
-
-    .ibexa-content-field-value {
-        .ezcountry-field {
-            margin-bottom: 0;
         }
     }
 }
