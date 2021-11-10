@@ -52,8 +52,8 @@ class ContentItemAdminPreview extends Component
     {
         return [
             new VisibleCSSLocator('nthFieldContainer', 'div.ibexa-content-field:nth-of-type(%s)'),
-            new VisibleCSSLocator('fieldName', '.ibexa-content-field-name'),
-            new VisibleCSSLocator('fieldValue', '.ibexa-content-field-value'),
+            new VisibleCSSLocator('fieldName', '.ibexa-content-field__name'),
+            new VisibleCSSLocator('fieldValue', '.ibexa-content-field__value'),
             new VisibleCSSLocator('fieldValueContainer', ':first-child'),
         ];
     }
