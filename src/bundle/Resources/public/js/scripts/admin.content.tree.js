@@ -51,7 +51,7 @@
 
         return expandedState && expandedState[userId];
     };
-    const removeContentTreeCOntainerWidth = () => {
+    const removeContentTreeContainerWidth = () => {
         contentTreeContainer.style.width = null;
     }
 
@@ -97,6 +97,6 @@
     contentTreeContainer.addEventListener('transitioncancel', handleContainerTransitionStop, false);
     contentTreeContainer.addEventListener('transitionend', handleContainerTransitionStop, false);
 
-    doc.body.addEventListener('ibexa-tb-rendered:ibexa-content-tree', removeContentTreeCOntainerWidth);
+    doc.body.addEventListener('ibexa-tb-rendered:ibexa-content-tree', removeContentTreeContainerWidth);
     global.addEventListener('resize', handleViewportChange, { capture: false, passive: true });
 })(window, window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);
