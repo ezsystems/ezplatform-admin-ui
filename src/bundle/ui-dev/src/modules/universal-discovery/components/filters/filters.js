@@ -20,6 +20,7 @@ const Filters = ({ search }) => {
     const [selectedSubtree, setSelectedSubtree] = useContext(SelectedSubtreeContext);
     const [selectedLanguage, setSelectedLanguage] = useContext(SelectedLanguageContext);
     const prevSelectedLanguage = useRef(selectedLanguage);
+    const dropdownListRef = useContext(DropdownPortalRefContext);
     const [subtreeBreadcrumbs, setSubtreeBreadcrumbs] = useState('');
     const [filtersCleared, setFiltersCleared] = useState(false);
     const restInfo = useContext(RestInfoContext);
@@ -161,20 +162,25 @@ const Filters = ({ search }) => {
                     {languageLabel}
                 </div>
                 <Dropdown
+                    dropdownListRef={dropdownListRef}
                     small={true}
+                    single={true}
                     onChange={updateSelectedLanguage}
                     value={selectedLanguage}
                     options={languageOptions}
+                    extraClasses="c-udw-dropdown"
                 />
             </div>
             <ContentTypeSelector />
             <Collapsible title={sectionLabel}>
                 <Dropdown
-                    dropdownListRef={DropdownPortalRefContext}
+                    dropdownListRef={dropdownListRef}
                     small={true}
+                    single={true}
                     onChange={updateSection}
                     value={selectedSection}
                     options={sectionOptions}
+                    extraClasses="c-udw-dropdown"
                 />
             </Collapsible>
             <Collapsible title={subtreeLabel}>
