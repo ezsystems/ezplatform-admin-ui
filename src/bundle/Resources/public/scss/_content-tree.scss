@@ -11,34 +11,8 @@
         position: relative;
         top: 0;
         flex: 0 0 auto;
-        // width: calculateRem(50px);
         background: $ibexa-white;
         color: inherit;
-
-        // .c-list {
-        //     display: none;
-        // }
-
-        // &--animate {
-        //     transition: $ibexa-admin-widget-close-transition;
-
-        //     &.ez-content-tree-container--expanded {
-        //         transition: $ibexa-admin-widget-open-transition;
-        //     }
-        // }
-
-        // &--expanded {
-        //     display: initial;
-        //     width: 15vw;
-
-        //     .c-list {
-        //         display: block;
-        //     }
-
-        //     .ez-content-tree-container__wrapper {
-        //         opacity: 1;
-        //     }
-        // }
 
         &__wrapper {
             position: -webkit-sticky;
