@@ -10,15 +10,21 @@ namespace Ibexa\AdminUi\Behat\BrowserContext;
 
 use Behat\Behat\Context\Context;
 use PHPUnit\Framework\Assert;
+use Psr\Log\LoggerInterface;
 
 class TestContext implements Context
 {
     /** @var int */
     private $result;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
-    public function __construct()
+    public function __construct(LoggerInterface $logger)
     {
         $this->result = 0;
+        $this->logger = $logger;
     }
 
     /**
@@ -27,6 +33,7 @@ class TestContext implements Context
     public function setResult(string $number): void
     {
         $this->result = (int) $number;
+        $this->logger->critical('TEST CRITICAL');
     }
 
     /**
