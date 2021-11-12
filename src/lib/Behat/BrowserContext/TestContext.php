@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\BrowserContext;
 
 use Behat\Behat\Context\Context;
+use Ibexa\Behat\Browser\Page\LoginPage;
 use PHPUnit\Framework\Assert;
 use Psr\Log\LoggerInterface;
 
@@ -20,11 +21,16 @@ class TestContext implements Context
      * @var LoggerInterface
      */
     private $logger;
+    /**
+     * @var LoginPage
+     */
+    private $loginPage;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger, LoginPage $loginPage)
     {
         $this->result = 0;
         $this->logger = $logger;
+        $this->loginPage = $loginPage;
     }
 
     /**
@@ -34,6 +40,8 @@ class TestContext implements Context
     {
         $this->result = (int) $number;
         $this->logger->critical('TEST CRITICAL');
+        $this->loginPage->open('admin');
+        $this->loginPage->loginSuccessfully('admin', 'publish');
     }
 
     /**

@@ -1,4 +1,4 @@
-@test
+@test @javascript
 Feature: Example of BDD development
 
   Scenario: Example Scenario
