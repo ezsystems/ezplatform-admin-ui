@@ -57,8 +57,8 @@ class Matrix extends FieldTypeComponent
             new VisibleCSSLocator('matrixCellSelectorFormat', '[name="ezplatform_content_forms_content_edit[fieldsData][ezmatrix][value][entries][%d][%s]"]'),
             new VisibleCSSLocator('row', '.ibexa-table__row'),
             new VisibleCSSLocator('addRowButton', '.ibexa-btn--add-matrix-entry'),
-            new VisibleCSSLocator('viewModeTableHeaders', '.ez-content-field-value thead th'),
-            new VisibleCSSLocator('viewModeTableRow', '.ez-content-field-value tbody tr'),
+            new VisibleCSSLocator('viewModeTableHeaders', '.ibexa-content-field__value thead th'),
+            new VisibleCSSLocator('viewModeTableRow', '.ibexa-content-field__value tbody tr'),
             new VisibleCSSLocator('editModeTableHeaders', '.ibexa-table thead th[data-identifier]'),
             new VisibleCSSLocator('editModeTableRow', '.ibexa-table tr.ibexa-table__matrix-entry'),
         ];
