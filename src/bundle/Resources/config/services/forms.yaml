@@ -208,8 +208,6 @@ services:
 
     EzSystems\EzPlatformAdminUi\Form\Type\Location\LocationUpdateVisibilityType: ~
 
-    EzSystems\EzPlatformAdminUi\Form\Type\LocationType: ~
-
     EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ContentObjectStateUpdateType: ~
 
     EzSystems\EzPlatformAdminUi\Form\Type\ObjectState\ObjectStateChoiceType: ~
