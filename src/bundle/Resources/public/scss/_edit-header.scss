@@ -33,7 +33,6 @@
             border-bottom: calculateRem(1px) solid $ibexa-color-light;
             min-width: 60%;
             min-height: calculateRem(150px);
-            margin-left: 8.5%;
             // margin-right: calculateRem(30px);
         }
     }
@@ -109,7 +108,7 @@
     }
 
     &__extra-bottom-content {
-        margin-top: 10px;
+        margin-top: calculateRem(10px);
     }
 
     .ibexa-autosave {

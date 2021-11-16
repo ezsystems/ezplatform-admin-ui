@@ -1,14 +1,8 @@
+{% import '@ezdesign/ui/component/macros.html.twig' as html %}
+
 {% set tag_attributes = tag_attributes|default({})|merge({'class': (tag_attributes.class|default('') ~ ' ibexa-tag')|trim}) %}
 
-<div {% for attribute_name, attribute_value in tag_attributes %}
-        {% if attribute_value is not same as(false) %}
-            {% if attribute_value is not same as(true) %}
-                    {{ attribute_name }}="{{ attribute_value }}"
-            {% else %}
-                    {{ attribute_name }}
-            {% endif %}
-        {% endif %}
-    {% endfor %}>
+<div {{ html.attributes(tag_attributes) }}>
     <div class="ibexa-tag__content" {% if is_loading_state %} hidden {% endif %}>
         {{ content }}
     </div>
