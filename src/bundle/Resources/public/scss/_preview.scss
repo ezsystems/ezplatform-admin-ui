@@ -1,137 +1,34 @@
-.ez-preview {
-    .ez-preview__nav {
-        display: flex;
-        height: calculateRem(55px);
-        justify-content: space-between;
-        background-color: $ibexa-white;
-        padding: calculateRem(4px) calculateRem(16px);
-
-        .ez-preview__item {
-            flex-basis: 45%;
-
-            &--back {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                line-height: 0;
-                flex-basis: 3%;
-
-                .ez-preview__link {
-                    display: block;
-                    width: calculateRem(40px);
-                    height: calculateRem(40px);
-                    line-height: calculateRem(38px);
-                    text-align: center;
-
-                    &:hover {
-                        background: $ibexa-color-base-dark;
-                        border-radius: 50%;
-
-                        .ibexa-icon {
-                            fill: $ibexa-white;
-                        }
-                    }
-                }
-            }
-
-            &--actions {
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                max-width: calculateRem(118px);
-                height: calculateRem(44px);
-                border: calculateRem(2px) solid $ibexa-color-base-dark;
-                border-radius: calculateRem(4px);
-                background: $ibexa-white;
-                flex-basis: 9.5%;
-                margin-right: calculateRem(32px);
-            }
-
-            &--description {
-                flex-basis: 80%;
-                display: flex;
-                align-items: center;
-            }
-
-            &--siteaccess {
-                flex-basis: 10%;
-            }
-
-            &-label {
-                display: inline-block;
-                margin-right: calculateRem(8px);
-                color: $ibexa-color-base-dark;
-                font-size: calculateRem(14px);
-            }
-
-            &-text {
-                text-overflow: ellipsis;
-                width: 80%;
-                overflow: hidden;
-                display: inline-block;
-                white-space: nowrap;
-                font-weight: 700;
-                font-size: calculateRem(20px);
-            }
-
-            .ez-preview__action {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex: 0 0 calculateRem(34px);
-                margin: calculateRem(2px);
-                width: calculateRem(34px);
-                height: calculateRem(34px);
-                padding: 0;
-                border: 0;
-                cursor: pointer;
-                border-radius: calculateRem(4px);
-                background: none;
-                transition: background 0.2s $ibexa-admin-transition;
-
-                &:hover,
-                &:focus {
-                    background-color: darken($ibexa-color-base-dark, 15%);
-                    outline: none;
-                }
-
-                &.ez-preview__action--selected {
-                    background-color: $ibexa-color-base-dark;
-                }
-            }
-        }
-    }
-
-    .ez-preview__iframe {
+.ibexa-preview {
+    &__iframe {
         iframe {
             width: 100%;
             height: calc(100vh - 45px);
             display: block;
             margin: 0 auto;
             transition: all 0.2s $ibexa-admin-transition;
+            background: $ibexa-color-white;
+            border-radius: $ibexa-border-radius;
+        }
+
+        &--desktop {
+            padding-bottom: calculateRem(40px);
         }
 
         &--tablet {
-            background: url('/bundles/ezplatformadminui/img/preview-tablet.png') top center no-repeat;
             height: calculateRem(1250px);
-            margin-top: calculateRem(16px);
 
             iframe {
                 width: calculateRem(769px);
                 height: calculateRem(1157px);
-                padding-top: calculateRem(129px);
             }
         }
 
         &--mobile {
-            background: url('/bundles/ezplatformadminui/img/preview-mobile.png') top center no-repeat;
             height: calculateRem(900px);
-            margin-top: calculateRem(16px);
 
             iframe {
                 width: calculateRem(375px);
                 height: calculateRem(792px);
-                padding-top: calculateRem(123px);
             }
         }
     }

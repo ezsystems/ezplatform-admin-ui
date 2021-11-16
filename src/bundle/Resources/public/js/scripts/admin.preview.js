@@ -1,21 +1,21 @@
 (function(global, doc) {
-    const CLASS_BTN_SELECTED = 'ez-preview__action--selected';
-    const SELECTOR_BTN_ACTION = '.ez-preview__action';
-    const SELECTOR_PREVIEW_SITEACCESS_SELECT = '.ez-preview__item--siteaccess select';
+    const CLASS_BTN_SELECTED = 'ibexa-preview-header__action--selected';
+    const SELECTOR_BTN_ACTION = '.ibexa-preview-header__action';
+    const SELECTOR_PREVIEW_SITEACCESS_SELECT = '.ibexa-preview-header__item--siteaccess select';
     const removeSelectedState = () => doc.querySelectorAll(SELECTOR_BTN_ACTION).forEach((btn) => btn.classList.remove(CLASS_BTN_SELECTED));
     const changePreviewMode = (event) => {
         const btn = event.target.closest(SELECTOR_BTN_ACTION);
-        const iframeWrapper = doc.querySelector('.ez-preview__iframe');
+        const iframeWrapper = doc.querySelector('.ibexa-preview__iframe');
 
         removeSelectedState();
 
         btn.classList.add(CLASS_BTN_SELECTED);
 
-        iframeWrapper.classList.remove('ez-preview__iframe--desktop', 'ez-preview__iframe--tablet', 'ez-preview__iframe--mobile');
-        iframeWrapper.classList.add(`ez-preview__iframe--${btn.dataset.previewMode}`);
+        iframeWrapper.classList.remove('ibexa-preview__iframe--desktop', 'ibexa-preview__iframe--tablet', 'ibexa-preview__iframe--mobile');
+        iframeWrapper.classList.add(`ibexa-preview__iframe--${btn.dataset.previewMode}`);
     };
     const changePreviewSiteaccess = (event) => {
-        const iframeWrapper = doc.querySelector('.ez-preview__iframe iframe');
+        const iframeWrapper = doc.querySelector('.ibexa-preview__iframe iframe');
         const siteaccessPreviewUrl = event.target.value;
 
         iframeWrapper.setAttribute('src', siteaccessPreviewUrl);

@@ -117,11 +117,9 @@ img {
     }
 }
 
-.ez-content-preview {
-    margin: 0 calculateRem(16px);
-
-    .ez-main-container {
-        padding: 0;
+.ibexa-content-preview {
+    .ibexa-main-container__content-column {
+        @include drag-module-backdrop-background;
     }
 }
 
