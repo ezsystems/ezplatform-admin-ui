@@ -24,7 +24,7 @@ const TreeItemToggleSelection = ({ locationId, isContainer, contentTypeIdentifie
     }
 
     const [selectedLocations, dispatchSelectedLocationsAction] = useContext(SelectedLocationsContext);
-    const [multiple, multipleItemsLimit] = useContext(MultipleConfigContext);
+    const [multiple] = useContext(MultipleConfigContext);
     const containersOnly = useContext(ContainersOnlyContext);
     const allowedContentTypes = useContext(AllowedContentTypesContext);
     const restInfo = useContext(RestInfoContext);
@@ -35,8 +35,8 @@ const TreeItemToggleSelection = ({ locationId, isContainer, contentTypeIdentifie
     };
     const dispatchSelectedLocationsActionWrapper = (action) => {
         if (action.location !== undefined) {
-            findLocationsById({ ...restInfo, id: action.location.id }, ([location]) => {
-                dispatchSelectedLocationsAction({ ...action, location });
+            findLocationsById({ ...restInfo, id: action.location.id }, ([selectedLocation]) => {
+                dispatchSelectedLocationsAction({ ...action, location: selectedLocation });
             });
         } else {
             dispatchSelectedLocationsAction(action);

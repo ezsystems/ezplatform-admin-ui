@@ -109,7 +109,7 @@ class ListItem extends Component {
     }
 
     renderIcon() {
-        const { contentTypeIdentifier, selected, locationId } = this.props;
+        const { contentTypeIdentifier, locationId } = this.props;
         const iconAttrs = {
             extraClasses: 'ibexa-icon--small ibexa-icon--dark',
         };
@@ -191,11 +191,11 @@ class ListItem extends Component {
             <div className="c-list-item__row">
                 <div class="c-list-item__prefix-actions">
                     {this.prefixActions.map((action) => {
-                        const Component = action.component;
+                        const ActionComponent = action.component;
 
                         return (
                             <div class="c-list-item__prefix-actions-item">
-                                <Component key={action.id} {...this.props} />
+                                <ActionComponent key={action.id} {...this.props} />
                             </div>
                         );
                     })}
@@ -209,11 +209,11 @@ class ListItem extends Component {
                 </a>
                 <div class="c-list-item__actions">
                     {this.sortedActions.map((action) => {
-                        const Component = action.component;
+                        const ActionComponent = action.component;
 
                         return (
                             <div class="c-list-item__actions-item">
-                                <Component key={action.id} {...this.props} />
+                                <ActionComponent key={action.id} {...this.props} />
                             </div>
                         );
                     })}
