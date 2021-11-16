@@ -11,6 +11,11 @@
         <target state="new">Collapse all</target>
         <note>key: collapse_all</note>
       </trans-unit>
+      <trans-unit id="ede4f6caeae5d747bd990ce629afc0eb65e08663" resname="content_tree.header">
+        <source>Content tree</source>
+        <target state="new">Content tree</target>
+        <note>key: content_tree.header</note>
+      </trans-unit>
       <trans-unit id="0cba8ae8f7a758a11886b6be4e7ce7e570063f8f" resname="expand_item.limit.message">
         <source>Cannot load sub-items for this Location because you reached max tree depth.</source>
         <target state="new">Cannot load sub-items for this Location because you reached max tree depth.</target>

@@ -208,7 +208,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../../ui-dev/src/modules/universal-discovery/components/view-switcher/view.switcher.js'),
             path.resolve(
                 __dirname,
-                '../../ui-dev/src/modules/universal-discovery/components/tree-item-toggle-selection-button/tree.item.toggle.selection.button.js'
+                '../../ui-dev/src/modules/universal-discovery/components/tree-item-toggle-selection/tree.item.toggle.selection.js',
             ),
         ])
         .addEntry('ezplatform-admin-ui-mfu-js', [

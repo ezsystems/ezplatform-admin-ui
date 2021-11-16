@@ -37,7 +37,7 @@ const TreeView = ({ itemsPerPage }) => {
     const expandItem = (item, event) => {
         event.preventDefault();
         event.currentTarget
-            .closest('.c-list-item__label')
+            .closest('.c-list-item__row')
             .querySelector('.c-list-item__toggler')
             .click();
     };

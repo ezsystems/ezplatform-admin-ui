@@ -1,8 +1,5 @@
 .m-tree {
-    padding: 0 calculateRem(3px) calculateRem(30px) 0;
-    min-width: calculateRem(250px);
-    width: calculateRem(250px);
-    max-width: 33vw;
+    padding: calculateRem(8px);
     height: 100%;
 
     &__resize-handler {
@@ -16,7 +13,6 @@
     }
 
     &__scrollable-wrapper {
-        height: 100%;
         overflow: auto;
         padding: calculateRem(12px);
     }
@@ -31,8 +27,6 @@
 
     &__collapse-all-btn {
         width: 100%;
-        position: absolute;
-        bottom: 0;
         border-top: calculateRem(1px) solid $ibexa-white;
         height: calculateRem(30px);
         padding: calculateRem(7px);

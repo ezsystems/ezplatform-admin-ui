@@ -45,7 +45,7 @@ const ContentTableItem = ({ location }) => {
         'c-content-table-item--not-selectable': isNotSelectable,
     });
     const markLocation = ({ nativeEvent }) => {
-        const isSelectionButtonClicked = nativeEvent.target.closest('.c-toggle-selection-button');
+        const isSelectionButtonClicked = nativeEvent.target.closest('.c-udw-toggle-selection');
 
         if (isSelectionButtonClicked) {
             return;

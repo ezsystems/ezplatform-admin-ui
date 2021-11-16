@@ -10,9 +10,9 @@ import {
     AllowedContentTypesContext,
 } from '../../universal.discovery.module';
 import { findLocationsById } from '../../services/universal.discovery.service';
-import PureToggleSelectionButton from '../pure-toggle-selection-button/pure.toggle.selection.button';
+import ToggleSelection from '../toggle-selection/toggle.selection';
 
-const TreeItemToggleSelectionButton = ({ locationId, isContainer, contentTypeIdentifier }) => {
+const TreeItemToggleSelection = ({ locationId, isContainer, contentTypeIdentifier }) => {
     const isUDW = useContext(UDWContext);
 
     useEffect(() => {
@@ -30,40 +30,48 @@ const TreeItemToggleSelectionButton = ({ locationId, isContainer, contentTypeIde
     const restInfo = useContext(RestInfoContext);
     const isNotSelectable =
         (containersOnly && !isContainer) || (allowedContentTypes && !allowedContentTypes.includes(contentTypeIdentifier));
-    const isSelected = selectedLocations.some((selectedItem) => selectedItem.location.id === locationId);
-    const toggleSelection = () => {
-        if (isSelected) {
-            dispatchSelectedLocationsAction({ type: 'REMOVE_SELECTED_LOCATION', id: locationId });
-        } else {
-            findLocationsById({ ...restInfo, id: locationId }, ([location]) => {
-                dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
+    const location = {
+        id: locationId,
+    };
+    const dispatchSelectedLocationsActionWrapper = (action) => {
+        if (action.location !== undefined) {
+            findLocationsById({ ...restInfo, id: action.location.id }, ([location]) => {
+                dispatchSelectedLocationsAction({ ...action, location });
             });
+        } else {
+            dispatchSelectedLocationsAction(action);
         }
     };
 
-    if (!multiple || isNotSelectable) {
-        return null;
-    }
-
-    return <PureToggleSelectionButton isSelected={isSelected} toggleSelection={toggleSelection} />;
+    return (
+        <SelectedLocationsContext.Provider
+            value={[
+                selectedLocations,
+                dispatchSelectedLocationsActionWrapper,
+            ]}
+        >
+            <ToggleSelection location={location} multiple={multiple} isHidden={isNotSelectable} />
+            {isNotSelectable && <div class="c-list-item__prefix-actions-item-empty"></div>}
+        </SelectedLocationsContext.Provider>
+    );
 };
 
 eZ.addConfig(
-    'adminUiConfig.contentTreeWidget.itemActions',
+    'adminUiConfig.contentTreeWidget.prefixActions',
     [
         {
             id: 'toggle-selection-button',
             priority: 30,
-            component: TreeItemToggleSelectionButton,
+            component: TreeItemToggleSelection,
         },
     ],
     true
 );
 
-TreeItemToggleSelectionButton.propTypes = {
+TreeItemToggleSelection.propTypes = {
     locationId: PropTypes.number.isRequired,
     isContainer: PropTypes.bool.isRequired,
     contentTypeIdentifier: PropTypes.string.isRequired,
 };
 
-export default TreeItemToggleSelectionButton;
+export default TreeItemToggleSelection;

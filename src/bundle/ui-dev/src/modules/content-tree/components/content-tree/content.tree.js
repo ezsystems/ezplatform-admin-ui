@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import List from '../list/list.component';
+import Header from '../header/header';
 import Icon from '../../../common/icon/icon';
 
 const CLASS_IS_TREE_RESIZING = 'ez-is-tree-resizing';
+const MIN_CONTAINER_WIDTH = 200;
 
 export default class ContentTree extends Component {
     constructor(props) {
         super(props);
 
         this.changeContainerWidth = this.changeContainerWidth.bind(this);
+        this.toggleCollapseTree = this.toggleCollapseTree.bind(this);
         this.addWidthChangeListener = this.addWidthChangeListener.bind(this);
         this.handleResizeEnd = this.handleResizeEnd.bind(this);
+        this.isTreeCollapsed = this.isTreeCollapsed.bind(this);
         this._refTreeContainer = React.createRef();
         this.scrollTimeout = null;
         this.scrollPositionRestored = false;
@@ -40,6 +45,8 @@ export default class ContentTree extends Component {
                 event.currentTarget.scrollTop
             );
         });
+
+        document.body.dispatchEvent(new CustomEvent('ibexa-tb-rendered:ibexa-content-tree'));
     }
 
     componentDidUpdate(prevState) {
@@ -84,6 +91,15 @@ export default class ContentTree extends Component {
         }));
     }
 
+    toggleCollapseTree() {
+        const width = this.isTreeCollapsed() ? 320 : 96;
+
+        this.setState(() => ({
+            resizedContainerWidth: width,
+            containerWidth: width,
+        }));
+    }
+
     addWidthChangeListener({ nativeEvent }) {
         const resizeStartPositionX = nativeEvent.clientX;
         const containerWidth = this._refTreeContainer.current.getBoundingClientRect().width;
@@ -115,10 +131,27 @@ export default class ContentTree extends Component {
         const collapseAllLabel = Translator.trans(/*@Desc("Collapse all")*/ 'collapse_all', {}, 'content_tree');
 
         return (
-            <div tabIndex={-1} className="m-tree__collapse-all-btn" onClick={this.props.onCollapseAllItems}>
-                {collapseAllLabel}
+            <div
+                tabIndex={-1}
+                className="m-tree__collapse-all-btn"
+                onClick={this.props.onCollapseAllItems}
+                title={collapseAllLabel}
+            >
+                <Icon name="caret-up" extraClasses="ibexa-icon--small" />
             </div>
         );
+    }
+
+    renderHeader() {
+        return (
+            <Header
+                toggleCollapseTree={this.toggleCollapseTree}
+                isCollapsed={this.isTreeCollapsed()}
+                actions={[
+                    this.renderCollapseAllBtn()
+                ]}
+            />
+        )
     }
 
     renderList() {
@@ -148,7 +181,7 @@ export default class ContentTree extends Component {
 
         return (
             <div className="m-tree__scrollable-wrapper" ref={(ref) => (this.containerScrollRef = ref)}>
-                {!items || !items.length ? null : <List {...attrs} />}
+                {this.isTreeCollapsed() || !items || !items.length ? null : <List {...attrs} />}
             </div>
         );
     }
@@ -156,7 +189,7 @@ export default class ContentTree extends Component {
     renderLoadingSpinner() {
         const { items } = this.props;
 
-        if (items && items.length) {
+        if (this.isTreeCollapsed() || (items && items.length)) {
             return;
         }
 
@@ -165,6 +198,12 @@ export default class ContentTree extends Component {
                 <Icon name="spinner" extraClasses="ibexa-icon--medium ibexa-spin" />
             </div>
         );
+    }
+
+    isTreeCollapsed = () => {
+        const width = this.state.resizedContainerWidth || this.state.containerWidth;
+
+        return width <= MIN_CONTAINER_WIDTH;
     }
 
     render() {
@@ -178,9 +217,9 @@ export default class ContentTree extends Component {
 
         return (
             <div {...containerAttrs}>
+                {this.renderHeader()}
                 {this.renderList()}
                 {this.renderLoadingSpinner()}
-                {this.renderCollapseAllBtn()}
                 <div className="m-tree__resize-handler" onMouseDown={this.addWidthChangeListener} />
             </div>
         );

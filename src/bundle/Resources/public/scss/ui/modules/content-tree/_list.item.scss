@@ -1,32 +1,77 @@
 $list-item: '.c-list-item';
-$list-item-height: calculateRem(20px);
+$list-item-height: calculateRem(21px);
 
 #{$list-item} {
     line-height: $list-item-height;
-    max-height: $list-item-height;
+    min-height: $list-item-height;
     margin: calculateRem(2px);
+    position: relative;
+
+    &:not(&--is-root-item) {
+        &:after {
+            content: ' ';
+            display: block;
+            position: absolute;
+            z-index: 2;
+            border: calculateRem(1px) dashed $ibexa-color-dark-300;
+            width: calculateRem(12px);
+            height: calculateRem(1px);
+            left: calculateRem(-3px);
+            top: calculateRem(16px);
+        }
+    }
+
+    &__row {
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 0 calculateRem(8px) 0 calculateRem(16px);
+        border-radius: $ibexa-border-radius;
+        border: calculateRem(1px) solid transparent;
+
+        &:hover,
+        &:focus {
+            border-color: $ibexa-color-light;
+            box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
+
+            #{$list-item} {
+                &__actions {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &__prefix-actions-item {
+        position: relative;
+    }
+
+    &__prefix-actions-item-empty {
+        &:after {
+            content: ' ';
+            display: block;
+            position: absolute;
+            z-index: 2;
+            border: calculateRem(1px) dashed $ibexa-color-dark-300;
+            width: calculateRem(20px);
+            height: calculateRem(1px);
+            left: calculateRem(-6.5px);
+            top: calculateRem(10px);
+        }
+    }
 
     &__label {
         display: flex;
         align-items: center;
+        flex: 1;
         white-space: nowrap;
         position: relative;
         font-size: calculateRem(14px);
-        padding-left: calculateRem(14px);
-
-        &:hover,
-        &:focus {
-            outline: none;
-            text-decoration: underline;
-        }
-    }
-
-    &__link {
-        width: 100%;
-        color: inherit;
-        display: flex;
-        align-items: center;
-        background: none;
+        line-height: calculateRem(21px);
+        min-height: calculateRem(21px);
+        padding: calculateRem(5px) calculateRem(14px) calculateRem(5px) 0;
+        overflow: hidden;
+        color: $ibexa-color-dark;
         text-decoration: none;
 
         &:hover,
@@ -36,16 +81,20 @@ $list-item-height: calculateRem(20px);
         }
     }
 
+    &__label-content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     &__icon {
-        height: $list-item-height;
+        height: calculateRem(20px);
         display: inline-flex;
         align-items: center;
         margin-right: calculateRem(4px);
     }
 
     &__toggler {
-        position: absolute;
-        left: 0;
+        position: relative;
         height: 100%;
         width: calculateRem(16px);
 
@@ -53,12 +102,12 @@ $list-item-height: calculateRem(20px);
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: calculateRem(3px) 0 calculateRem(3px) calculateRem(6px);
+            border-width: calculateRem(4px) 0 calculateRem(4px) calculateRem(8px);
             border-color: transparent transparent transparent $ibexa-black;
             display: inline-block;
             position: absolute;
             top: 50%;
-            left: calculateRem(4px);
+            left: 0;
             transform: translateY(-50%);
             transform-origin: center center;
         }
@@ -67,11 +116,16 @@ $list-item-height: calculateRem(20px);
             border: none;
             outline: none;
         }
-        + &--light {
-            &:before {
-                border-color: transparent transparent transparent $ibexa-white;
-            }
-        }
+    }
+
+    &__actions {
+        display: flex;
+        opacity: 0;
+    }
+
+    &__actions-item {
+        display: flex;
+        padding-left: calculateRem(4px);
     }
 
     &__load-more-btn {
@@ -123,7 +177,7 @@ $list-item-height: calculateRem(20px);
     }
 
     &--has-sub-items {
-        > #{$list-item}__label {
+        > #{$list-item}__row {
             #{$list-item}__toggler {
                 cursor: pointer;
 
@@ -137,6 +191,18 @@ $list-item-height: calculateRem(20px);
     &--is-expanded {
         max-height: initial;
 
+        &:before {
+            content: ' ';
+            display: block;
+            position: absolute;
+            z-index: 2;
+            border: calculateRem(1px) dashed $ibexa-color-dark-300;
+            width: calculateRem(1px);
+            left: calculateRem(8px);
+            top: calculateRem(16px);
+            bottom: calculateRem(16px);
+        }
+
         > .c-list {
             opacity: 1;
             max-height: calculateRem(20000px);
@@ -145,10 +211,10 @@ $list-item-height: calculateRem(20px);
         }
 
         > #{$list-item} {
-            &__label {
+            &__row {
                 #{$list-item}__toggler {
                     &:before {
-                        border-width: calculateRem(6px) calculateRem(3px) 0 calculateRem(3px);
+                        border-width: calculateRem(8px) calculateRem(4px) 0 calculateRem(4px);
                         border-color: $ibexa-black transparent transparent transparent;
                         transform: translateY(-50%);
                     }
@@ -159,7 +225,7 @@ $list-item-height: calculateRem(20px);
 
     &--is-hidden {
         > #{$list-item} {
-            &__label {
+            &__row {
                 opacity: 0.3;
             }
         }
@@ -167,39 +233,13 @@ $list-item-height: calculateRem(20px);
 
     &--is-selected {
         > #{$list-item} {
-            &__label {
-                &,
+            &__row {
+                border-color: $ibexa-color-light-300;
+                background-color: $ibexa-color-light-300;
+
                 &:hover,
                 &:focus {
-                    color: $ibexa-color-primary;
-                }
-
-                #{$list-item}__toggler {
-                    &--light {
-                        &,
-                        &:hover,
-                        &:focus {
-                            &:before {
-                                border-color: transparent transparent transparent $ibexa-color-primary;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        &#{$list-item}--is-expanded > #{$list-item} {
-            &__label {
-                #{$list-item}__toggler {
-                    &--light {
-                        &,
-                        &:hover,
-                        &:focus {
-                            &:before {
-                                border-color: $ibexa-color-primary transparent transparent transparent;
-                            }
-                        }
-                    }
+                    border-color: $ibexa-color-light;
                 }
             }
         }

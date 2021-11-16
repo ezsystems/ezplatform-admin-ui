@@ -46,16 +46,6 @@
         <target state="new">Browse content</target>
         <note>key: browse.title</note>
       </trans-unit>
-      <trans-unit id="a35f9da1e68c9f811d1a0093f434bc32fd0d2b78" resname="browser.add">
-        <source>Add</source>
-        <target state="new">Add</target>
-        <note>key: browser.add</note>
-      </trans-unit>
-      <trans-unit id="ddff3bc3b7838c0c1e752a37cd40b4a6d537dcdd" resname="browser.selected">
-        <source>Selected</source>
-        <target state="new">Selected</target>
-        <note>key: browser.selected</note>
-      </trans-unit>
       <trans-unit id="90210d6d68a4c36d75906bd4fea9194a88988205" resname="content.create.editing_details">
         <source>under %content_name%</source>
         <target state="new">under %content_name%</target>

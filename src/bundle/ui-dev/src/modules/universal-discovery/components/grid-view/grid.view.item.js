@@ -17,7 +17,7 @@ import {
 } from '../../universal.discovery.module';
 
 const isSelectionButtonClicked = (event) => {
-    return event.target.closest('.c-toggle-selection-button');
+    return event.target.closest('.c-udw-toggle-selection');
 };
 
 const GridViewItem = ({ location, version }) => {

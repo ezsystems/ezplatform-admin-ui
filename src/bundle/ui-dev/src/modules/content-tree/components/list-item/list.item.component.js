@@ -11,12 +11,22 @@ class ListItem extends Component {
         this.loadMoreSubitems = this.loadMoreSubitems.bind(this);
         this.handleAfterExpandedStateChange = this.handleAfterExpandedStateChange.bind(this);
 
+        this.prefixActions = this.getPrefixActions();
         this.sortedActions = this.getSortedActions();
 
         this.state = {
             isExpanded: !!props.subitems.length,
             isLoading: false,
         };
+    }
+
+    getPrefixActions() {
+        const { prefixActions } = window.eZ.adminUiConfig.contentTreeWidget;
+        const prefixActionsArr = prefixActions ? [...prefixActions] : [];
+
+        return prefixActionsArr.sort((prefixActionA, prefixActionB) => {
+            return prefixActionsB.priority - prefixActionsA.priority;
+        });
     }
 
     getSortedActions() {
@@ -101,7 +111,7 @@ class ListItem extends Component {
     renderIcon() {
         const { contentTypeIdentifier, selected, locationId } = this.props;
         const iconAttrs = {
-            extraClasses: `ibexa-icon--small ibexa-icon--${selected ? 'primary' : 'dark'}`,
+            extraClasses: 'ibexa-icon--small ibexa-icon--dark',
         };
 
         if (!this.state.isLoading || this.props.subitems.length) {
@@ -163,7 +173,7 @@ class ListItem extends Component {
     }
 
     renderItemLabel() {
-        const { totalSubitemsCount, href, name, selected, locationId, onClick } = this.props;
+        const { totalSubitemsCount, href, name, locationId, onClick } = this.props;
 
         if (locationId === 1) {
             return null;
@@ -177,21 +187,37 @@ class ListItem extends Component {
             tabIndex: -1,
         };
 
-        if (selected) {
-            togglerAttrs.className = `${togglerAttrs.className} ${togglerClassName}--light`;
-        }
-
         return (
-            <div className="c-list-item__label">
-                <span {...togglerAttrs} />
-                <a className="c-list-item__link" href={href} onClick={onClick}>
-                    {this.renderIcon()} {name}
-                </a>
-                {this.sortedActions.map((action) => {
-                    const Component = action.component;
+            <div className="c-list-item__row">
+                <div class="c-list-item__prefix-actions">
+                    {this.prefixActions.map((action) => {
+                        const Component = action.component;
 
-                    return <Component key={action.id} {...this.props} />;
-                })}
+                        return (
+                            <div class="c-list-item__prefix-actions-item">
+                                <Component key={action.id} {...this.props} />
+                            </div>
+                        );
+                    })}
+                </div>
+                <span {...togglerAttrs} />
+                <a className="c-list-item__label" href={href} onClick={onClick}>
+                    {this.renderIcon()}
+                    <span class="c-list-item__label-content">
+                        {name}
+                    </span>
+                </a>
+                <div class="c-list-item__actions">
+                    {this.sortedActions.map((action) => {
+                        const Component = action.component;
+
+                        return (
+                            <div class="c-list-item__actions-item">
+                                <Component key={action.id} {...this.props} />
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         );
     }

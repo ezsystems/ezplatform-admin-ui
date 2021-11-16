@@ -54,16 +54,18 @@
     const removeContentTreeContainerWidth = () => {
         contentTreeContainer.style.width = null;
     }
+    const renderTree = () => {
+        ReactDOM.render(
+            React.createElement(eZ.modules.ContentTree, {
+                userId,
+                currentLocationPath,
+                rootLocationId: parseInt(treeRootLocationId, 10),
+                restInfo: { token, siteaccess },
+            }),
+            contentTreeWrapper
+        );
+    }
 
-    ReactDOM.render(
-        React.createElement(eZ.modules.ContentTree, {
-            userId,
-            currentLocationPath,
-            rootLocationId: parseInt(treeRootLocationId, 10),
-            restInfo: { token, siteaccess },
-        }),
-        contentTreeWrapper
-    );
 
     btn?.addEventListener('click', toggleContentTreePanel, false);
 
@@ -99,4 +101,6 @@
 
     doc.body.addEventListener('ibexa-tb-rendered:ibexa-content-tree', removeContentTreeContainerWidth);
     global.addEventListener('resize', handleViewportChange, { capture: false, passive: true });
+
+    renderTree();
 })(window, window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);

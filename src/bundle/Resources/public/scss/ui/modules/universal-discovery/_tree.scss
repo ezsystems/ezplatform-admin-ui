@@ -4,20 +4,14 @@
     position: relative;
 
     .m-tree {
-        width: initial !important; // TODO: remove when Content Tree refactored
+        width: initial !important;
         max-width: initial;
         border-radius: $ibexa-border-radius;
-        
-        .c-list-item {
-            &__label {
-                padding-right: calculateRem(8px);
+    }
 
-                &:hover {
-                    .c-toggle-selection-button {
-                        opacity: 1;
-                    }
-                }
-            }
+    .c-list-item__prefix-actions-item {
+        .c-udw-toggle-selection {
+            margin-right: calculateRem(8px);
         }
     }
 }
