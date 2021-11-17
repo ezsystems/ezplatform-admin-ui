@@ -29,6 +29,7 @@
 
     class BaseChart {
         constructor(data, options = {}) {
+            console.log(options)
             this.setData(data);
             this.setOptions(options);
             this.lang = document.documentElement.lang.replace('_', '-'); // TODO: Get this config from settings
