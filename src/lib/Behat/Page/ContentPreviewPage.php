@@ -33,13 +33,12 @@ class ContentPreviewPage extends Page
     protected function specifyLocators(): array
     {
         return [
-            new VisibleCSSLocator('previewNav', '.ez-preview__nav'),
-            new VisibleCSSLocator('backToEdit', '.ez-preview__nav .ez-preview__item--back a'),
-            new VisibleCSSLocator('title', '.ez-preview__nav .ez-preview__item--description'),
-            new VisibleCSSLocator('desktop', '.ez-preview__nav .ez-preview__item--actions .ibexa-icon--desktop'),
-            new VisibleCSSLocator('tablet', '.ez-preview__nav .ez-preview__item--actions .ibexa-icon--tablet'),
-            new VisibleCSSLocator('mobile', '.ez-preview__nav .ez-preview__item--actions .ibexa-icon--mobile'),
-            new VisibleCSSLocator('selectedView', '.ez-preview__action--selected'),
+            new VisibleCSSLocator('previewNav', '.ibexa-preview-header'),
+            new VisibleCSSLocator('backToEdit', '.ibexa-preview-header .ibexa-preview-header__item--back a'),
+            new VisibleCSSLocator('desktop', '.ibexa-preview-header .ibexa-preview-header__item--actions .ibexa-icon--desktop'),
+            new VisibleCSSLocator('tablet', '.ibexa-preview-header .ibexa-preview-header__item--actions .ibexa-icon--tablet'),
+            new VisibleCSSLocator('mobile', '.ibexa-preview-header .ibexa-preview-header__item--actions .ibexa-icon--mobile'),
+            new VisibleCSSLocator('selectedView', '.ibexa-preview-header__action--selected'),
         ];
     }
 

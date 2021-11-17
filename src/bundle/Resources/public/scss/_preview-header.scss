@@ -1,0 +1,66 @@
+.ibexa-preview-header {
+    display: grid;
+    grid-template-areas: 'back siteaccess actions';
+    grid-template-columns: auto 1fr 1fr;
+    border-bottom: calculateRem(1px) solid $ibexa-color-light;
+
+    &__item {
+        &--back {
+            grid-area: back;
+            padding: calculateRem(10px);
+            border-right: calculateRem(1px) solid $ibexa-color-light;
+        }
+
+        &--siteaccess {
+            grid-area: siteaccess;
+            padding: calculateRem(10px);
+            display: flex;
+            align-items: center;
+            margin-left: calculateRem(16px);
+
+            .ibexa-dropdown__selection-info {
+                margin-bottom: 0;
+            }
+        }
+
+        &--actions {
+            grid-area: actions;
+            padding: calculateRem(10px);
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+    }
+
+    &__action {
+        padding: calculateRem(10px);
+        margin-right: calculateRem(4px);
+
+        &:hover {
+            .ibexa-icon {
+                fill: $ibexa-color-info;
+            }
+        }
+
+        &:focus {
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        &--selected {
+            background-color: $ibexa-color-info-200;
+
+            .ibexa-icon {
+                fill: $ibexa-color-info;
+            }
+        }
+
+        .ibexa-icon {
+            margin-right: 0;
+        }
+    }
+}
