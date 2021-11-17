@@ -41,7 +41,9 @@
         margin-right: calculateRem(4px);
 
         &:hover {
-            fill: $ibexa-color-info;
+            .ibexa-icon {
+                fill: $ibexa-color-info;
+            }
         }
 
         &:focus {
@@ -51,7 +53,10 @@
 
         &--selected {
             background-color: $ibexa-color-info-200;
-            fill: $ibexa-color-info;
+
+            .ibexa-icon {
+                fill: $ibexa-color-info;
+            }
         }
 
         .ibexa-icon {
