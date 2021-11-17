@@ -5,7 +5,7 @@
             height: calc(100vh - 45px);
             display: block;
             margin: 0 auto;
-            transition: all 0.2s $ibexa-admin-transition;
+            transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
             background: $ibexa-color-white;
             border-radius: $ibexa-border-radius;
         }
