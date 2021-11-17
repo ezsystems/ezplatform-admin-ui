@@ -352,7 +352,7 @@ export default class ContentTreeModule extends Component {
     }
 
     render() {
-        const { onClickItem, subitemsLimit, subitemsLoadLimit, treeMaxDepth, userId } = this.props;
+        const { onClickItem, subitemsLimit, subitemsLoadLimit, treeMaxDepth, userId, resizable } = this.props;
         const attrs = {
             items: this.items,
             currentLocationId: this.getCurrentLocationId(),
@@ -364,6 +364,7 @@ export default class ContentTreeModule extends Component {
             onCollapseAllItems: this.handleCollapseAllItems,
             onClickItem,
             userId,
+            resizable,
         };
 
         return <ContentTree {...attrs} />;
@@ -391,6 +392,7 @@ ContentTreeModule.propTypes = {
         sortClause: PropTypes.string,
         sortOrder: PropTypes.string,
     }),
+    resizable: PropTypes.bool,
 };
 
 ContentTreeModule.defaultProps = {
@@ -401,4 +403,5 @@ ContentTreeModule.defaultProps = {
     treeMaxDepth: window.eZ.adminUiConfig.contentTree.treeMaxDepth,
     afterItemToggle: () => {},
     sort: {},
+    resizable: true,
 };

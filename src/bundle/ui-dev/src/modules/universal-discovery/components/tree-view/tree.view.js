@@ -107,6 +107,7 @@ const TreeView = ({ itemsPerPage }) => {
                         sortClause: sorting,
                         sortOrder,
                     }}
+                    resizable={false}
                 />
             )}
         </div>

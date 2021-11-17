@@ -1,12 +1,12 @@
 (function (global, doc, React, ReactDOM, eZ, localStorage) {
     const KEY_CONTENT_TREE_EXPANDED = 'ez-content-tree-expanded';
-    const CLASS_CONTENT_TREE_EXPANDED = 'ez-content-tree-container--expanded';
-    const CLASS_CONTENT_TREE_ANIMATE = 'ez-content-tree-container--animate';
+    const CLASS_CONTENT_TREE_EXPANDED = 'ibexa-content-tree-container--expanded';
+    const CLASS_CONTENT_TREE_ANIMATE = 'ibexa-content-tree-container--animate';
     const CLASS_BTN_CONTENT_TREE_EXPANDED = 'ibexa-btn--content-tree-expanded';
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
-    const contentTreeContainer = doc.querySelector('.ez-content-tree-container');
-    const contentTreeWrapper = doc.querySelector('.ez-content-tree-container__wrapper');
+    const contentTreeContainer = doc.querySelector('.ibexa-content-tree-container');
+    const contentTreeWrapper = doc.querySelector('.ibexa-content-tree-container__wrapper');
     const btn = doc.querySelector('.ibexa-btn--toggle-content-tree');
     const { currentLocationPath, treeRootLocationId } = contentTreeContainer.dataset;
     const userId = window.eZ.helpers.user.getId();

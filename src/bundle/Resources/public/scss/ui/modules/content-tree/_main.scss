@@ -21,7 +21,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100%;
+        height: calc(100% - #{calculateRem(100px)});
         width: 100%;
     }
 

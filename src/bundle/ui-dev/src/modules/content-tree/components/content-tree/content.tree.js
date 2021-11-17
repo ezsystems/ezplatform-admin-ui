@@ -7,6 +7,8 @@ import Icon from '../../../common/icon/icon';
 
 const CLASS_IS_TREE_RESIZING = 'ez-is-tree-resizing';
 const MIN_CONTAINER_WIDTH = 200;
+const COLLAPSED_WIDTH = 96;
+const EXPANDED_WIDTH = 320;
 
 export default class ContentTree extends Component {
     constructor(props) {
@@ -92,7 +94,7 @@ export default class ContentTree extends Component {
     }
 
     toggleCollapseTree() {
-        const width = this.isTreeCollapsed() ? 320 : 96;
+        const width = this.isTreeCollapsed() ? EXPANDED_WIDTH : COLLAPSED_WIDTH;
 
         this.setState(() => ({
             resizedContainerWidth: width,
@@ -207,11 +209,12 @@ export default class ContentTree extends Component {
     }
 
     render() {
+        const { resizable } = this.props;
         const { isResizing, containerWidth, resizedContainerWidth } = this.state;
         const width = isResizing ? resizedContainerWidth : containerWidth;
         const containerAttrs = { className: 'm-tree', ref: this._refTreeContainer };
 
-        if (width) {
+        if (width && resizable) {
             containerAttrs.style = { width: `${width}px` };
         }
 
@@ -237,4 +240,5 @@ ContentTree.propTypes = {
     onCollapseAllItems: PropTypes.func.isRequired,
     onClickItem: PropTypes.func,
     userId: PropTypes.number.isRequired,
+    resizable: PropTypes.bool.isRequired,
 };
