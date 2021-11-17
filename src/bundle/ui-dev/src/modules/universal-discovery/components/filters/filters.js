@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
 import { SelectedContentTypesContext, SelectedSectionContext, SelectedSubtreeContext, SelectedLanguageContext } from '../search/search';
 import { findLocationsById } from '../../services/universal.discovery.service';
-import { RestInfoContext } from '../../universal.discovery.module';
+import { RestInfoContext, DropdownPortalRefContext } from '../../universal.discovery.module';
 
-import Dropdown from '../dropdown/dropdown';
+import Dropdown from '../../../common/dropdown/dropdown';
 import Collapsible from '../collapsible/collapsible';
 import ContentTypeSelector from '../content-type-selector/content.type.selector';
 import Icon from '../../../common/icon/icon';
@@ -20,6 +20,7 @@ const Filters = ({ search }) => {
     const [selectedSubtree, setSelectedSubtree] = useContext(SelectedSubtreeContext);
     const [selectedLanguage, setSelectedLanguage] = useContext(SelectedLanguageContext);
     const prevSelectedLanguage = useRef(selectedLanguage);
+    const dropdownListRef = useContext(DropdownPortalRefContext);
     const [subtreeBreadcrumbs, setSubtreeBreadcrumbs] = useState('');
     const [filtersCleared, setFiltersCleared] = useState(false);
     const restInfo = useContext(RestInfoContext);
@@ -161,19 +162,25 @@ const Filters = ({ search }) => {
                     {languageLabel}
                 </div>
                 <Dropdown
+                    dropdownListRef={dropdownListRef}
                     small={true}
+                    single={true}
                     onChange={updateSelectedLanguage}
                     value={selectedLanguage}
                     options={languageOptions}
+                    extraClasses="c-udw-dropdown"
                 />
             </div>
             <ContentTypeSelector />
             <Collapsible title={sectionLabel}>
                 <Dropdown
+                    dropdownListRef={dropdownListRef}
                     small={true}
+                    single={true}
                     onChange={updateSection}
                     value={selectedSection}
                     options={sectionOptions}
+                    extraClasses="c-udw-dropdown"
                 />
             </Collapsible>
             <Collapsible title={subtreeLabel}>

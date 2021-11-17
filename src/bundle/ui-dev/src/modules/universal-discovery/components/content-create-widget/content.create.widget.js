@@ -4,6 +4,7 @@ import Icon from '../../../common/icon/icon';
 
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
 import {
+    DropdownPortalRefContext,
     CreateContentWidgetContext,
     ActiveTabContext,
     ContentOnTheFlyDataContext,
@@ -12,13 +13,14 @@ import {
     ContentOnTheFlyConfigContext,
     AllowedContentTypesContext,
 } from '../../universal.discovery.module';
-import Dropdown from '../dropdown/dropdown';
+import Dropdown from '../../../common/dropdown/dropdown';
 
 const languages = Object.values(window.eZ.adminUiConfig.languages.mappings);
 const contentTypes = Object.entries(window.eZ.adminUiConfig.contentTypes);
 
 const ContentCreateWidget = () => {
     const refContentTree = useRef(null);
+    const dropdownListRef = useContext(DropdownPortalRefContext);
     const [markedLocationId, setMarkedLocationId] = useContext(MarkedLocationIdContext);
     const [loadedLocationsMap, dispatchLoadedLocationsAction] = useContext(LoadedLocationsMapContext);
     const { allowedLanguages, preselectedLanguage, preselectedContentType } = useContext(ContentOnTheFlyConfigContext);
@@ -115,9 +117,12 @@ const ContentCreateWidget = () => {
                     <div className="ibexa-extra-actions__section-header">{selectLanguageLabel}</div>
                     <div class="ibexa-extra-actions__section-content">
                         <Dropdown
+                            dropdownListRef={dropdownListRef}
                             onChange={updateSelectedLanguage}
+                            single={true}
                             value={selectedLanguage}
                             options={languageOptions}
+                            extraClasses="c-udw-dropdown"
                         />
                     </div>
                     <div className="ibexa-extra-actions__section-header">{selectContentType}</div>

@@ -1,22 +1,21 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import { createCssClassNames } from '../../../common/helpers/css.class.names';
-import Icon from '../../../common/icon/icon';
+import { createCssClassNames } from '../../common/helpers/css.class.names';
+import Icon from '../../common/icon/icon';
 
-import { DropdownPortalRefContext } from '../../universal.discovery.module';
-
-const Dropdown = ({ value, options, onChange, small }) => {
+const Dropdown = ({ dropdownListRef, value, options, onChange, small, single, extraClasses }) => {
     const containerRef = useRef();
     const containerItemsRef = useRef();
-    const dropdownPortalRef = useContext(DropdownPortalRefContext);
     const [isExpanded, setIsExpanded] = useState(false);
     const [filterText, setFilterText] = useState('');
     const labelValue = options.find((option) => option.value === value)?.label;
     const dropdownClassName = createCssClassNames({
-        'c-udw-dropdown ibexa-dropdown ibexa-dropdown--single': true,
+        'ibexa-dropdown': true,
+        'ibexa-dropdown--single': single,
         'ibexa-dropdown--small': small,
+        [extraClasses]: true
     });
     const toggleExpanded = () => {
         setIsExpanded((prevState) => !prevState);
@@ -41,7 +40,14 @@ const Dropdown = ({ value, options, onChange, small }) => {
         });
 
         return (
-            <li class={itemClassName} key={item.value} onClick={() => onChange(item.value)}>
+            <li
+                class={itemClassName}
+                key={item.value}
+                onClick={() => {
+                    onChange(item.value);
+                    toggleExpanded();
+                }}
+            >
                 <span class="ibexa-dropdown__item-label">{ item.label }</span>
             </li>
         )
@@ -59,7 +65,7 @@ const Dropdown = ({ value, options, onChange, small }) => {
         }
 
         return (
-            <div class="c-udw-dropdown__items ibexa-dropdown__items" style={itemsStyles} ref={containerItemsRef} >
+            <div class="ibexa-dropdown__items" style={itemsStyles} ref={containerItemsRef} >
                 <div class="ibexa-input-text-wrapper">
                     <input
                         type="text"
@@ -134,21 +140,26 @@ const Dropdown = ({ value, options, onChange, small }) => {
             </div>
             {isExpanded && ReactDOM.createPortal(
                 renderItemsList(),
-                dropdownPortalRef.current,
+                dropdownListRef.current,
             )}
         </>
     );
 };
 
 Dropdown.propTypes = {
+    dropdownListRef: PropTypes.object.isRequired,
     value: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
     small: PropTypes.bool,
+    single: PropTypes.bool,
+    extraClasses: PropTypes.string,
 };
 
 Dropdown.defaultProps = {
     small: false,
+    single: false,
+    extraClasses: ''
 };
 
 export default Dropdown;
