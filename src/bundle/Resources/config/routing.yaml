@@ -548,6 +548,7 @@ ezplatform.content.preview:
         languageCode: ~
         locationId: ~
 
+# IBX-1079: Translate routes with proxy suffix have to be prioritized to avoid issues with URL generations
 ezplatform.content.translate.proxy:
     path: /content/{contentId}/translate/proxy/{toLanguageCode}/{fromLanguageCode}
     methods: ['GET', 'POST']
