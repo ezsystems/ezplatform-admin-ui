@@ -10,7 +10,13 @@
             display: block;
             position: absolute;
             z-index: 2;
-            border: calculateRem(1px) dashed $ibexa-color-dark-300;
+            background: repeating-linear-gradient(
+                90deg,
+                $ibexa-color-dark-300,
+                $ibexa-color-dark-300 calculateRem(2px),
+                transparent calculateRem(2px),
+                transparent calculateRem(4px)
+            );
             width: calculateRem(12px);
             height: calculateRem(1px);
             left: calculateRem(-3px);
@@ -49,7 +55,13 @@
             display: block;
             position: absolute;
             z-index: 2;
-            border: calculateRem(1px) dashed $ibexa-color-dark-300;
+            background: repeating-linear-gradient(
+                90deg,
+                $ibexa-color-dark-300,
+                $ibexa-color-dark-300 calculateRem(2px),
+                transparent calculateRem(2px),
+                transparent calculateRem(4px)
+            );
             width: calculateRem(20px);
             height: calculateRem(1px);
             left: calculateRem(-6.5px);
@@ -193,7 +205,12 @@
             display: block;
             position: absolute;
             z-index: 2;
-            border: calculateRem(1px) dashed $ibexa-color-dark-300;
+            background: repeating-linear-gradient(
+                $ibexa-color-dark-300,
+                $ibexa-color-dark-300 calculateRem(2px),
+                transparent calculateRem(2px),
+                transparent calculateRem(4px)
+            );
             width: calculateRem(1px);
             left: calculateRem(8px);
             top: calculateRem(16px);
