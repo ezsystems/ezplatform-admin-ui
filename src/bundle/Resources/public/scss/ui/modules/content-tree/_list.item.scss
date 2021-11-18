@@ -1,9 +1,6 @@
-$list-item: '.c-list-item';
-$list-item-height: calculateRem(21px);
-
-#{$list-item} {
-    line-height: $list-item-height;
-    min-height: $list-item-height;
+.c-list-item {
+    line-height: calculateRem(21px);
+    min-height: calculateRem(21px);
     margin: calculateRem(2px);
     position: relative;
 
@@ -34,7 +31,7 @@ $list-item-height: calculateRem(21px);
             border-color: $ibexa-color-light;
             box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(47px) 0 rgba($ibexa-color-info, 0.05);
 
-            #{$list-item} {
+            .c-list-item {
                 &__actions {
                     opacity: 1;
                 }
@@ -177,8 +174,8 @@ $list-item-height: calculateRem(21px);
     }
 
     &--has-sub-items {
-        > #{$list-item}__row {
-            #{$list-item}__toggler {
+        > .c-list-item__row {
+            .c-list-item__toggler {
                 cursor: pointer;
 
                 &:before {
@@ -210,9 +207,9 @@ $list-item-height: calculateRem(21px);
             overflow: initial;
         }
 
-        > #{$list-item} {
+        > .c-list-item {
             &__row {
-                #{$list-item}__toggler {
+                .c-list-item__toggler {
                     &:before {
                         border-width: calculateRem(8px) calculateRem(4px) 0 calculateRem(4px);
                         border-color: $ibexa-black transparent transparent transparent;
@@ -224,7 +221,7 @@ $list-item-height: calculateRem(21px);
     }
 
     &--is-hidden {
-        > #{$list-item} {
+        > .c-list-item {
             &__row {
                 opacity: 0.3;
             }
@@ -232,7 +229,7 @@ $list-item-height: calculateRem(21px);
     }
 
     &--is-selected {
-        > #{$list-item} {
+        > .c-list-item {
             &__row {
                 border-color: $ibexa-color-light-300;
                 background-color: $ibexa-color-light-300;

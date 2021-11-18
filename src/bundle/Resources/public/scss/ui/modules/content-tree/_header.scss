@@ -22,7 +22,7 @@
     &__name {
         display: flex;
         align-items: center;
-        font-size: calculateRem(18px);
+        font-size: $ibexa-text-font-size-large;
         font-weight: bold;
         line-height: calculateRem(33px);
         width: 100%;
