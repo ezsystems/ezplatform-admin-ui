@@ -1,56 +1,10 @@
-(function (global, doc, React, ReactDOM, eZ, localStorage) {
-    const KEY_CONTENT_TREE_EXPANDED = 'ez-content-tree-expanded';
-    const CLASS_CONTENT_TREE_EXPANDED = 'ibexa-content-tree-container--expanded';
-    const CLASS_CONTENT_TREE_ANIMATE = 'ibexa-content-tree-container--animate';
-    const CLASS_BTN_CONTENT_TREE_EXPANDED = 'ibexa-btn--content-tree-expanded';
+(function (global, doc, React, ReactDOM, eZ) {
     const token = doc.querySelector('meta[name="CSRF-Token"]').content;
     const siteaccess = doc.querySelector('meta[name="SiteAccess"]').content;
     const contentTreeContainer = doc.querySelector('.ibexa-content-tree-container');
     const contentTreeWrapper = doc.querySelector('.ibexa-content-tree-container__wrapper');
-    const btn = doc.querySelector('.ibexa-btn--toggle-content-tree');
     const { currentLocationPath, treeRootLocationId } = contentTreeContainer.dataset;
     const userId = window.eZ.helpers.user.getId();
-    let frame = null;
-    const toggleContentTreePanel = () => {
-        doc.activeElement.blur();
-        contentTreeContainer.classList.toggle(CLASS_CONTENT_TREE_EXPANDED);
-        contentTreeContainer.classList.add(CLASS_CONTENT_TREE_ANIMATE);
-        btn.classList.toggle(CLASS_BTN_CONTENT_TREE_EXPANDED);
-        updateContentTreeWrapperHeight();
-
-        const isContentTreeExpanded = contentTreeContainer.classList.contains(CLASS_CONTENT_TREE_EXPANDED);
-
-        saveContentTreeExpandedState(userId, isContentTreeExpanded);
-        eZ.helpers.tooltips.hideAll();
-    };
-    const updateContentTreeWrapperHeight = () => {
-        const height = Math.min(window.innerHeight - contentTreeContainer.getBoundingClientRect().top, window.innerHeight);
-
-        contentTreeWrapper.style.height = `${height}px`;
-    };
-    const handleViewportChange = () => {
-        if (frame) {
-            cancelAnimationFrame(frame);
-        }
-
-        frame = requestAnimationFrame(updateContentTreeWrapperHeight);
-    };
-    const saveContentTreeExpandedState = (userId, isExpanded) => {
-        let expandedState = JSON.parse(localStorage.getItem(KEY_CONTENT_TREE_EXPANDED));
-
-        if (!(expandedState instanceof Object)) {
-            expandedState = {};
-        }
-
-        expandedState[userId] = isExpanded;
-
-        localStorage.setItem(KEY_CONTENT_TREE_EXPANDED, JSON.stringify(expandedState));
-    };
-    const isContentTreeExpanded = (userId) => {
-        const expandedState = JSON.parse(localStorage.getItem(KEY_CONTENT_TREE_EXPANDED));
-
-        return expandedState && expandedState[userId];
-    };
     const removeContentTreeContainerWidth = () => {
         contentTreeContainer.style.width = null;
     }
@@ -66,41 +20,7 @@
         );
     }
 
-
-    btn?.addEventListener('click', toggleContentTreePanel, false);
-
-    if (isContentTreeExpanded(userId)) {
-        contentTreeContainer.classList.add(CLASS_CONTENT_TREE_EXPANDED);
-        btn?.classList.add(CLASS_BTN_CONTENT_TREE_EXPANDED);
-    }
-
-    updateContentTreeWrapperHeight();
-
-    let transitionCount = 0;
-    let transitionEventIntervalId = null;
-    const dispatchContentTreeResizeEvent = () => doc.body.dispatchEvent(new CustomEvent('ez-content-tree-resized'));
-    const handleContainerTransitionStart = () => {
-        if (transitionCount == 0) {
-            transitionEventIntervalId = setInterval(dispatchContentTreeResizeEvent, 30);
-        }
-
-        transitionCount += 1;
-    };
-    const handleContainerTransitionStop = () => {
-        transitionCount -= 1;
-
-        if (transitionCount == 0) {
-            clearInterval(transitionEventIntervalId);
-            dispatchContentTreeResizeEvent();
-        }
-    };
-
-    contentTreeContainer.addEventListener('transitionstart', handleContainerTransitionStart, false);
-    contentTreeContainer.addEventListener('transitioncancel', handleContainerTransitionStop, false);
-    contentTreeContainer.addEventListener('transitionend', handleContainerTransitionStop, false);
-
     doc.body.addEventListener('ibexa-tb-rendered:ibexa-content-tree', removeContentTreeContainerWidth);
-    global.addEventListener('resize', handleViewportChange, { capture: false, passive: true });
 
     renderTree();
-})(window, window.document, window.React, window.ReactDOM, window.eZ, window.localStorage);
+})(window, window.document, window.React, window.ReactDOM, window.eZ);
