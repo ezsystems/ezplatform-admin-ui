@@ -27,7 +27,7 @@ class Languages implements ProviderInterface
     /** @var string[] */
     private $siteAccesses;
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess  */
+    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess */
     private $siteAccess;
 
     /**
