@@ -36,6 +36,11 @@ class AdminUpdateForm extends Element
             'fieldDefinitionToggler' => '.ez-card__body-display-toggler',
             'closeButton' => '.ez-content-edit-container__close',
             'button' => 'button',
+            'ezlandingpageSelectBlocksToggle' => 'div:nth-child(9) > div > .ez-page-select-items__toggler',
+            'ezlandingpageSelectBlocksDefaultToggle' => 'div:nth-child(9) > div > div > div > .ez-page-select-items__toggler',
+            'ezlandingpageSelectBlocksBlockContainer' => '.ez-page-select-items__item .ez-page-select-items__item-label',
+            'ezlandingpageSelectBlocksBlockLabel' => '.ez-page-select-items__group-list--blocks .ez-page-select-items__item:nth-child(%s) .form-check .form-check-input',
+            'ezlandingpageSelectEditorLaunchModeToggle' => '.form-check-label .ez-input--radio[value=%s]',
         ];
     }
 
@@ -161,5 +166,24 @@ class AdminUpdateForm extends Element
         $containerIndex = $this->context->getElementPositionByText($containerName, $this->fields['fieldDefinitionName']);
 
         return sprintf($this->fields['fieldDefinitionContainer'], $containerIndex);
+    }
+
+    public function expandDefaultBlocksOption(): void
+    {
+        $this->context->findElement($this->fields['ezlandingpageSelectBlocksToggle'], $this->defaultTimeout)->click();
+        $this->context->findElement($this->fields['ezlandingpageSelectBlocksDefaultToggle'], $this->defaultTimeout)->click();
+    }
+
+    public function selectBlock(string $blockName): void
+    {
+        $blockIndex = $this->context->getElementPositionByText($blockName, $this->fields['ezlandingpageSelectBlocksBlockContainer']);
+        $elementWithBlockIndex = sprintf($this->fields['ezlandingpageSelectBlocksBlockLabel'], $blockIndex);
+        $this->context->findElement($elementWithBlockIndex)->click();
+    }
+
+    public function selectEditorLaunchMode(string $viewMode): void
+    {
+        $selectedEditorLaunchMode = sprintf($this->fields['ezlandingpageSelectEditorLaunchModeToggle'], $viewMode);
+        $this->context->findElement($selectedEditorLaunchMode)->click();
     }
 }

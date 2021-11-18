@@ -75,4 +75,25 @@ class AdminUpdateContext extends BusinessContext
             $this->utilityContext->additionallySelectOption($selectName, $optionsHash[$i]['option']);
         }
     }
+
+    /**
+     * @Given I check :blockName block in ezlandingpage field blocks section
+     */
+    public function iCheckBlockInField(string $blockName): void
+    {
+        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $updateItemPage->adminUpdateForm->expandFieldDefinition('Landing Page');
+        $updateItemPage->adminUpdateForm->expandDefaultBlocksOption();
+        $updateItemPage->adminUpdateForm->selectBlock($blockName);
+    }
+
+    /**
+     * @Given I select :viewMode editor launch mode in ezlandingpage field options
+     */
+    public function iCheckEditorLaunchModeOption(string $viewMode): void
+    {
+        $updateItemPage = PageObjectFactory::createPage($this->utilityContext, AdminUpdateItemPage::PAGE_NAME);
+        $updateItemPage->adminUpdateForm->expandFieldDefinition('Landing Page');
+        $updateItemPage->adminUpdateForm->selectEditorLaunchMode($viewMode);
+    }
 }
