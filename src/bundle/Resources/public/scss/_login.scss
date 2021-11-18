@@ -23,9 +23,9 @@
     }
 
     &__actions-col {
+        position: relative;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         color: $ibexa-color-font;
         background: $ibexa-white;
         min-height: calculateRem(600px);
@@ -93,6 +93,18 @@
             justify-content: center;
             margin-top: calculateRem(40px);
         }
+
+        &--back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        &--reset-password {
+            margin-top: calculateRem(32px);
+        }
     }
 
     &__link-wrapper {
@@ -106,5 +118,9 @@
         .ibexa-label {
             margin-top: calculateRem(40px);
         }
+    }
+
+    &__forgot-password-form {
+        margin-top: calculateRem(16px);
     }
 }

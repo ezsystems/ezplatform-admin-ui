@@ -1,12 +1,30 @@
 {% extends '@ezdesign/account/base.html.twig' %}
 
 {%- block content -%}
+    <a href="{{ path('login') }}" class="btn ibexa-btn ibexa-btn--ghost ibexa-login__btn--back">
+        <svg class="ibexa-icon ibexa-icon--small-medium">
+            <use xlink:href="{{ ibexa_icon_path('back') }}"></use>
+        </svg>
+        <span class="ibexa-btn__label">{{ 'authentication.reset_your_password.back'|trans|desc('Back') }}
+    </a>
     <h2 class="ibexa-login__actions-headline">{{ 'ezplatform.forgot_user_password.reset_your_password'|trans|desc('Reset your password') }}</h2>
+    {% embed '@ezdesign/ui/component/alert/alert.html.twig' with {
+        type: 'success',
+        title: 'ezplatform.forgot_user_password.success.alert'|trans|desc('We’ve sent to your email account a link to reset your password.'),
+        icon_path: ibexa_icon_path('checkmark'),
+        class: 'mt-4',
+    } only %}
+        {% block extra_content %}
+            <span class="ez-datetime-format-preview-value" />
+        {% endblock %}
+    {% endembed %}
     <p class="ibexa-login__actions-subheadline">
         {{ 'ezplatform.forgot_user_password.success'|trans|raw
-        |desc('<p>An email has been sent to the address you provided with instructions on how to reset your password.</p>
-            <p>If the email is slow to arrive, check your spam folders.</p>
-            <p>If you don\'t receive an email, make sure you\'ve entered the address you registered with, and check your spam folder.</p>
-            <p>If you reset your password multiple times, only the most recent email link will be valid.</p>') }}
+        |desc('<p>If you don’t receive the email, double check that you entered the correct email address and check your spam folder.</p>') }}
     </p>
+    <div class="ibexa-login__actions">
+        <a href="{{ path('login') }}" class="btn ibexa-btn ibexa-btn--primary">
+            <span class="ibexa-btn__label">{{ 'authentication.reset_your_password.back_to_sign_in'|trans|desc('Go back to Sign in') }}
+        </a>
+    </div>
 {%- endblock content -%}

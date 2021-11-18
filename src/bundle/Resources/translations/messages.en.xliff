@@ -449,14 +449,8 @@
         <note>key: ezplatform.forgot_user_password.reset_your_password</note>
       </trans-unit>
       <trans-unit id="36aa6723300a41ba80ee0096c0d2bcf34fd48aca" resname="ezplatform.forgot_user_password.success">
-        <source><![CDATA[<p>An email has been sent to the address you provided with instructions on how to reset your password.</p>
-            <p>If the email is slow to arrive, check your spam folders.</p>
-            <p>If you don't receive an email, make sure you've entered the address you registered with, and check your spam folder.</p>
-            <p>If you reset your password multiple times, only the most recent email link will be valid.</p>]]></source>
-        <target state="new"><![CDATA[<p>An email has been sent to the address you provided with instructions on how to reset your password.</p>
-            <p>If the email is slow to arrive, check your spam folders.</p>
-            <p>If you don't receive an email, make sure you've entered the address you registered with, and check your spam folder.</p>
-            <p>If you reset your password multiple times, only the most recent email link will be valid.</p>]]></target>
+        <source><![CDATA[<p>If you don’t receive the email, double check that you entered the correct email address and check your spam folder.</p>]]></source>
+        <target state="new"><![CDATA[<p>If you don’t receive the email, double check that you entered the correct email address and check your spam folder.</p>]]></target>
         <note>key: ezplatform.forgot_user_password.success</note>
       </trans-unit>
       <trans-unit id="40dd2934190789b016771a0fc3b41dcdfe0bb920" resname="ezplatform.reset_user_password.change_password">
