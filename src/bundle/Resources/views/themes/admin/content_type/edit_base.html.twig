@@ -24,5 +24,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
+
     {{ encore_entry_script_tags('ezplatform-admin-ui-content-type-edit-js', null, 'ezplatform') }}
 {% endblock %}

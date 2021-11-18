@@ -30,7 +30,6 @@
 
         &--bottom {
             flex-direction: column;
-            border-bottom: calculateRem(1px) solid $ibexa-color-light;
             min-width: 60%;
             min-height: calculateRem(150px);
         }
@@ -110,6 +109,12 @@
         margin-top: calculateRem(10px);
     }
 
+    &__bottom-row-line {
+        margin-top: auto;
+        width: 75%;
+        border-bottom: calculateRem(1px) solid $ibexa-color-light;
+    }
+
     .ibexa-autosave {
         opacity: 1;
         transition: all $ibexa-admin-transition-duration $ibexa-admin-transition;
@@ -125,9 +130,12 @@
 
             &__row {
                 &--bottom {
-                    border-bottom: none;
                     min-height: initial;
                 }
+            }
+
+            &__bottom-row-line {
+                border-bottom: none;
             }
 
             &__action-name-container {

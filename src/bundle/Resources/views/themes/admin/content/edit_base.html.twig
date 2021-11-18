@@ -91,8 +91,11 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
+
     {% include '@ezdesign/content/edit/javascripts.html.twig' %}
     {{ encore_entry_script_tags('ezplatform-admin-ui-tabs-js', null, 'ezplatform') }}
+    {{ encore_entry_script_tags('ezplatform-admin-ui-edit-base-js', null, 'ezplatform') }}
 {% endblock %}
 
 {% block stylesheets %}

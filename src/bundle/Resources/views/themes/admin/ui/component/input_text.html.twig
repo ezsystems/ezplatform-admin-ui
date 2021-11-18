@@ -1,7 +1,9 @@
 {% import '@ezdesign/ui/component/macros.html.twig' as html %}
 
 {% set has_search = has_search|default(false) %}
-{% set wrapper_attr = wrapper_attr|default({})|merge({ class: (wrapper_attr.class|default('') ~ ' ibexa-input-text-wrapper')|trim }) %}
+{% set wrapper_attr = wrapper_attr|default({})|merge({
+    class: (wrapper_attr.class|default('') ~ ' ibexa-input-text-wrapper' ~ (has_search ? ' ibexa-input-text-wrapper--search'))|trim
+}) %}
 
 <div {{ html.attributes(wrapper_attr) }}>
     {% block content %}{% endblock %}
