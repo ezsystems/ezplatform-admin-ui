@@ -11,6 +11,7 @@ const List = ({
     subitemsLimit,
     treeMaxDepth,
     afterItemToggle,
+    indent,
     isRoot,
     onClickItem,
 }) => {
@@ -49,9 +50,10 @@ const List = ({
                         href={locationHref}
                         isRootItem={isRoot}
                         onClick={onClickItem.bind(null, item)}
-                        path={itemPath}>
+                        path={itemPath}
+                        indent={indent}>
                         {subitems.length ? (
-                            <List path={itemPath} items={subitems} isRoot={false} {...listAttrs} />
+                            <List path={itemPath} items={subitems} isRoot={false} indent={indent + 1} {...listAttrs} />
                         ) : (
                             renderNoSubitemMessage()
                         )}
@@ -71,11 +73,13 @@ List.propTypes = {
     subitemsLoadLimit: PropTypes.number,
     treeMaxDepth: PropTypes.number.isRequired,
     afterItemToggle: PropTypes.func.isRequired,
+    indent: PropTypes.number,
     isRoot: PropTypes.bool.isRequired,
     onClickItem: PropTypes.func,
 };
 
 List.defaultProps = {
+    indent: 0,
     isRoot: false,
     onClickItem: () => {},
 };

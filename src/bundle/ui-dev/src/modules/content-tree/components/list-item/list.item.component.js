@@ -173,7 +173,7 @@ class ListItem extends Component {
     }
 
     renderItemLabel() {
-        const { totalSubitemsCount, href, name, locationId, onClick } = this.props;
+        const { totalSubitemsCount, href, name, locationId, indent, onClick } = this.props;
 
         if (locationId === 1) {
             return null;
@@ -188,7 +188,7 @@ class ListItem extends Component {
         };
 
         return (
-            <div className="c-list-item__row">
+            <div className="c-list-item__row" style={{'--indent': indent}}>
                 <div class="c-list-item__prefix-actions">
                     {this.prefixActions.map((action) => {
                         const ActionComponent = action.component;
