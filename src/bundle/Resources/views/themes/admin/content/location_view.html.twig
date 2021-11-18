@@ -17,7 +17,7 @@
 
 {% block content_tree %}
     {% set content_tree_width = app.request.cookies.get('ibexa-tb-ibexa-content-tree-container-width') %}
-    {% set content_tree_width_style = 'width: %spx;'|format(content_tree_width) %}
+    {% set content_tree_width_style = "width: #{content_tree_width}px;" %}
 
     <div class="ibexa-content-tree-container"
         data-tree-root-location-id="{{ content_tree_module_root|default(ez_admin_ui_config['contentTree']['treeRootLocationId']) }}"
