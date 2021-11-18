@@ -79,7 +79,7 @@
                 }
 
                 .ibexa-main-menu__item {
-                    &--group-name:before {
+                    &--group-name {
                         width: 0;
                     }
                 }
@@ -132,14 +132,7 @@
         &--group-name {
             color: $ibexa-color-light-700;
             font-size: $ibexa-text-font-size-small;
-
-            &:before {
-                content: "";
-                border-top: 1px solid $ibexa-color-info-800;
-                transition: width 0.30s linear;
-                width: 100%;
-                display: block;
-            }
+            border-top: calculateRem(1px) solid $ibexa-color-info-800;
         }
     }
 

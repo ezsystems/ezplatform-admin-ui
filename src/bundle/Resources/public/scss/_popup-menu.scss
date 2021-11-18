@@ -26,13 +26,7 @@
             flex-direction: column;
             height: 100%;
             align-items: initial;
-
-            &:before {
-                content: "";
-                border-top: 1px solid $ibexa-color-info-800;
-                width: 100%;
-                display: block;
-            }
+            border-top: calculateRem(1px) solid $ibexa-color-info-800;
         }
     }
 
