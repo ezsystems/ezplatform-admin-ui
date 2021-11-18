@@ -40,12 +40,6 @@ class ImageAsset extends Image
 
     public function setValue(array $parameters): void
     {
-        // close notification about new draft created successfully if it's still visible
-        if ($this->notification->isVisible()) {
-            $this->notification->verifyAlertSuccess();
-            $this->notification->closeAlert();
-        }
-
         $fieldSelector = CSSLocatorBuilder::base($this->getLocator('fieldInput'))
             ->withParent($this->parentLocator)
             ->build();

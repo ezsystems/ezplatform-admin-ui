@@ -8,15 +8,16 @@ namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
 use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
+use Ibexa\AdminUi\Behat\Component\Notification;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Routing\Router;
 use Traversable;
 
 class UserUpdatePage extends ContentUpdateItemPage
 {
-    public function __construct(Session $session, Router $router, ContentActionsMenu $contentActionsMenu, Traversable $fieldTypeComponents)
+    public function __construct(Session $session, Router $router, ContentActionsMenu $contentActionsMenu, Traversable $fieldTypeComponents, Notification $notification)
     {
-        parent::__construct($session, $router, $contentActionsMenu, $fieldTypeComponents);
+        parent::__construct($session, $router, $contentActionsMenu, $fieldTypeComponents, $notification);
         $this->locators->replace(
             new VisibleCSSLocator(
                 'formElement',

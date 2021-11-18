@@ -11,7 +11,9 @@ namespace Ibexa\AdminUi\Behat\Page;
 use Behat\Mink\Session;
 use Ibexa\AdminUi\Behat\Component\ContentActionsMenu;
 use Ibexa\AdminUi\Behat\Component\Fields\FieldTypeComponent;
+use Ibexa\AdminUi\Behat\Component\Notification;
 use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
+use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Routing\Router;
@@ -28,15 +30,20 @@ class ContentUpdateItemPage extends Page
     /** @var \Ibexa\AdminUi\Behat\Component\Fields\FieldTypeComponent[] */
     private $fieldTypeComponents;
 
+    /** @var \Ibexa\AdminUi\Behat\Component\Notification */
+    private $notification;
+
     public function __construct(
         Session $session,
         Router $router,
         ContentActionsMenu $contentActionsMenu,
-        Traversable $fieldTypeComponents
+        Traversable $fieldTypeComponents,
+        Notification $notification
     ) {
         parent::__construct($session, $router);
         $this->contentActionsMenu = $contentActionsMenu;
         $this->fieldTypeComponents = iterator_to_array($fieldTypeComponents);
+        $this->notification = $notification;
     }
 
     public function verifyIsLoaded(): void
@@ -51,6 +58,12 @@ class ContentUpdateItemPage extends Page
         }
         $this->getHTMLPage()->setTimeout(10)->find($this->getLocator('formElement'))->assert()->isVisible();
         $this->contentActionsMenu->verifyIsLoaded();
+
+        // close notification about new draft created successfully if it's still visible
+        if ($this->notification->isVisible()) {
+            $this->notification->verifyAlertSuccess();
+            $this->notification->closeAlert();
+        }
     }
 
     public function setExpectedPageTitle(string $title): void
@@ -81,10 +94,11 @@ class ContentUpdateItemPage extends Page
             new VisibleCSSLocator('pageTitle', '.ibexa-edit-header__title'),
             new VisibleCSSLocator('formElement', '[name=ezplatform_content_forms_content_edit]'),
             new VisibleCSSLocator('closeButton', '.ibexa-anchor-navigation-menu__back'),
-            new VisibleCSSLocator('fieldLabel', '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ibexa-card > .card-body > div > div > legend, .ibexa-field-edit--eznoneditable > legend.col-form-label'),
-            new VisibleCSSLocator('nthField', '.ibexa-card .card-body > div > div > div:nth-of-type(%s)'),
+            new VisibleCSSLocator('fieldLabel', '.ibexa-anchor-navigation-sections__section--active .ibexa-field-edit__label-wrapper label.ibexa-field-edit__label'),
+            new VisibleCSSLocator('nthField', '.ibexa-field-edit:nth-of-type(%s)'),
             new VisibleCSSLocator('noneditableFieldClass', 'ibexa-field-edit--eznoneditable'),
-            new VisibleCSSLocator('fieldOfType', '.ez-field-edit--%s'),
+            new VisibleCSSLocator('fieldOfType', '.ibexa-field-edit--%s'),
+            new VisibleCSSLocator('navigationTabs', '.ibexa-anchor-navigation-menu__item'),
         ];
     }
 
@@ -140,8 +154,16 @@ class ContentUpdateItemPage extends Page
         }
 
         $fieldClass = $this->getHTMLPage()->find($fieldLocator)->getAttribute('class');
-        preg_match('/ez-field-edit--ez[a-z]*/', $fieldClass, $matches);
+        preg_match('/ibexa-field-edit--ez[a-z]*/', $fieldClass, $matches);
 
         return explode('--', $matches[0])[1];
+    }
+
+    public function switchToFieldGroup(string $tabName): void
+    {
+        $this->getHTMLPage()
+            ->findAll($this->getLocator('navigationTabs'))
+            ->getByCriterion(new ElementTextCriterion($tabName))
+            ->click();
     }
 }
