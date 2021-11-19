@@ -25,7 +25,7 @@ class ListItem extends Component {
         const prefixActionsArr = prefixActions ? [...prefixActions] : [];
 
         return prefixActionsArr.sort((prefixActionA, prefixActionB) => {
-            return prefixActionsB.priority - prefixActionsA.priority;
+            return prefixActionB.priority - prefixActionA.priority;
         });
     }
 
@@ -143,9 +143,9 @@ class ListItem extends Component {
         }
 
         const { isLoading } = this.state;
-        const showMoreLabel = Translator.trans(/*@Desc("Show more")*/ 'show_more', {}, 'content_tree');
+        const seeMoreLabel = Translator.trans(/*@Desc("See more")*/ 'see_more', {}, 'content_tree');
         const loadingMoreLabel = Translator.trans(/*@Desc("Loading more...")*/ 'loading_more', {}, 'content_tree');
-        const btnLabel = isLoading ? loadingMoreLabel : showMoreLabel;
+        const btnLabel = isLoading ? loadingMoreLabel : seeMoreLabel;
         let loadingSpinner = null;
 
         if (isLoading) {
@@ -153,7 +153,7 @@ class ListItem extends Component {
         }
 
         return (
-            <button type="button" className="c-list-item__load-more-btn btn ibexa-btn" onClick={this.loadMoreSubitems}>
+            <button type="button" className="c-list-item__load-more-btn" onClick={this.loadMoreSubitems}>
                 {loadingSpinner} {btnLabel}
             </button>
         );

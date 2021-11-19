@@ -76,7 +76,7 @@
         flex: 1;
         white-space: nowrap;
         position: relative;
-        font-size: calculateRem(14px);
+        font-size: $ibexa-text-font-size-medium;
         line-height: calculateRem(21px);
         min-height: calculateRem(21px);
         padding: calculateRem(5px) calculateRem(14px) calculateRem(5px) 0;
@@ -113,7 +113,7 @@
             height: 0;
             border-style: solid;
             border-width: calculateRem(4px) 0 calculateRem(4px) calculateRem(6px);
-            border-color: transparent transparent transparent $ibexa-black;
+            border-color: transparent transparent transparent $ibexa-color-dark;
             display: inline-block;
             position: absolute;
             top: 50%;
@@ -139,31 +139,20 @@
     }
 
     &__load-more-btn {
+        position: relative;
+        z-index: 3;
         display: flex;
         align-items: center;
-        padding: 0 calculateRem(4px);
-        background: $ibexa-white;
-        color: $ibexa-black;
-        border: calculateRem(1px) solid $ibexa-black;
-        margin-left: calculateRem(26px);
+        padding: calculateRem(4px) calculateRem(8px);
+        background: $ibexa-color-white;
+        border: 0;
+        color: $ibexa-color-dark;
+        text-decoration: underline;
+        font-size: $ibexa-text-font-size-medium;
         transition: background 0.3s $ibexa-admin-transition, color 0.3s $ibexa-admin-transition;
-        font-size: calculateRem(12px);
-
-        &:focus {
-            box-shadow: 0 0 0 calculateRem(3px) rgba($ibexa-black, 0.25);
-        }
-
-        &:hover {
-            color: $ibexa-white;
-            background: $ibexa-black;
-
-            .ibexa-icon {
-                fill: $ibexa-white;
-            }
-        }
 
         .ibexa-icon {
-            fill: $ibexa-black;
+            fill: $ibexa-color-dark;
         }
     }
 
@@ -172,10 +161,14 @@
     }
 
     &__load-more-limit-info {
-        margin-left: calculateRem(26px);
-        color: $ibexa-color-primary;
-        font-size: calculateRem(14px);
-        font-style: italic;
+        position: relative;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        padding: calculateRem(4px) calculateRem(8px);
+        background: $ibexa-color-white;
+        color: $ibexa-color-danger;
+        font-size: $ibexa-text-font-size-small;
     }
 
     .c-list {

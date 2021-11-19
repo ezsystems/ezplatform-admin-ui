@@ -20,6 +20,7 @@ export default class ContentTree extends Component {
         this.handleResizeEnd = this.handleResizeEnd.bind(this);
         this.isTreeCollapsed = this.isTreeCollapsed.bind(this);
         this._refTreeContainer = React.createRef();
+        this._refPopupContainer = React.createRef();
         this.scrollTimeout = null;
         this.scrollPositionRestored = false;
 
@@ -110,7 +111,7 @@ export default class ContentTree extends Component {
         window.document.addEventListener('mouseup', this.handleResizeEnd, false);
         window.document.body.classList.add(CLASS_IS_TREE_RESIZING);
 
-        this.setState(() => ({ resizeStartPositionX, containerWidth, isResizing: true }));
+        this.setState(() => ({ resizeStartPositionX, containerWidth, resizedContainerWidth: containerWidth, isResizing: true }));
     }
 
     handleResizeEnd() {
@@ -129,29 +130,33 @@ export default class ContentTree extends Component {
         window.document.body.classList.remove(CLASS_IS_TREE_RESIZING);
     }
 
-    renderCollapseAllBtn() {
-        const collapseAllLabel = Translator.trans(/*@Desc("Collapse all")*/ 'collapse_all', {}, 'content_tree');
+    getCollapseAllBtn() {
+        const CollapseAction = () => {
+            const collapseAllLabel = Translator.trans(/*@Desc("Collapse all")*/ 'collapse_all', {}, 'content_tree');
 
-        return (
-            <div
-                tabIndex={-1}
-                className="m-tree__collapse-all-btn"
-                onClick={this.props.onCollapseAllItems}
-                title={collapseAllLabel}
-            >
-                <Icon name="caret-up" extraClasses="ibexa-icon--small" />
-            </div>
-        );
+            return (
+                <div onClick={this.props.onCollapseAllItems}>
+                    {collapseAllLabel}
+                </div>
+            );
+        }
+
+        return CollapseAction;
     }
 
     renderHeader() {
+        const actions = [{
+            id: 'collapse-all',
+            priority: 0,
+            component: this.getCollapseAllBtn(),
+        }];
+
         return (
             <Header
                 toggleCollapseTree={this.toggleCollapseTree}
                 isCollapsed={this.isTreeCollapsed()}
-                actions={[
-                    this.renderCollapseAllBtn()
-                ]}
+                popupRef={this._refPopupContainer}
+                actions={actions}
             />
         )
     }
@@ -211,6 +216,7 @@ export default class ContentTree extends Component {
     render() {
         const { resizable } = this.props;
         const { isResizing, containerWidth, resizedContainerWidth } = this.state;
+
         const width = isResizing ? resizedContainerWidth : containerWidth;
         const containerAttrs = { className: 'm-tree', ref: this._refTreeContainer };
 
@@ -219,12 +225,15 @@ export default class ContentTree extends Component {
         }
 
         return (
-            <div {...containerAttrs}>
-                {this.renderHeader()}
-                {this.renderList()}
-                {this.renderLoadingSpinner()}
-                <div className="m-tree__resize-handler" onMouseDown={this.addWidthChangeListener} />
-            </div>
+            <>
+                <div {...containerAttrs}>
+                    {this.renderHeader()}
+                    {this.renderList()}
+                    {this.renderLoadingSpinner()}
+                    <div className="m-tree__resize-handler" onMouseDown={this.addWidthChangeListener} />
+                </div>
+                <div ref={this._refPopupContainer} />
+            </>
         );
     }
 }

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
 import Icon from '../../../common/icon/icon';
+import PopupActions from '../popup-actions/popup.actions';
 
-const Header = ({ isCollapsed, toggleCollapseTree, actions }) => {
+const Header = ({ isCollapsed, toggleCollapseTree, actions, popupRef }) => {
     const headerTitle = Translator.trans(/*@Desc("Content tree")*/ 'content_tree.header', {}, 'content_tree');
     const renderCollapseButton = () => {
         const iconName = isCollapsed ? 'caret-next' : 'caret-back';
@@ -49,7 +50,7 @@ const Header = ({ isCollapsed, toggleCollapseTree, actions }) => {
                 {headerTitle}
             </div>
             <div className="c-tb-header__options">
-                {actions}
+                <PopupActions listRef={popupRef} options={actions} />
             </div>
         </div>
     );
@@ -59,6 +60,7 @@ Header.propTypes = {
     isCollapsed: PropTypes.bool.isRequired,
     toggleCollapseTree: PropTypes.func.isRequired,
     actions: PropTypes.array.isRequired,
+    popupRef: PropTypes.object.isRequired,
 };
 
 export default Header;
