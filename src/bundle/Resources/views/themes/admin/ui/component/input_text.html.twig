@@ -2,7 +2,11 @@
 
 {% set has_search = has_search|default(false) %}
 {% set wrapper_attr = wrapper_attr|default({})|merge({
-    class: (wrapper_attr.class|default('') ~ ' ibexa-input-text-wrapper' ~ (has_search ? ' ibexa-input-text-wrapper--search'))|trim
+    class: (wrapper_attr.class|default('')
+        ~ ' ibexa-input-text-wrapper'
+        ~ (has_search ? ' ibexa-input-text-wrapper--search')
+        ~ (type is defined ? " ibexa-input-text-wrapper--type-#{type}")
+    )|trim
 }) %}
 
 <div {{ html.attributes(wrapper_attr) }}>

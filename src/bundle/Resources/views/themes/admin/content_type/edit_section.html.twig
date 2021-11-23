@@ -1,7 +1,8 @@
-<div 
-    data-anchor-section-id="{{ section_id }}" 
-    class="ibexa-content-type-edit__section ibexa-anchor-navigation-sections__section row {% if is_active|default(false) %}ibexa-anchor-navigation-sections__section--active{% endif %}"
->
+{% extends '@ezdesign/ui/edit_section.html.twig' %}
+
+{% set attr = { class: 'ibexa-content-type-edit__section' } %}
+
+{% block content %}
     <div class="col-8 ibexa-content-type-edit__section-column {{ left_column_class|default('') }}">
         <h2 class="ibexa-content-type-edit__section-column-header">{% block title %}{% endblock %}</h2>
         <div class="ibexa-content-type-edit__section-column-body">
@@ -13,4 +14,4 @@
             {% block right_column %}{% endblock %}
         </div>
     </div>
-</div>
+{% endblock %}

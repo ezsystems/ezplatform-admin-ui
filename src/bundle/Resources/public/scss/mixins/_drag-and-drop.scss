@@ -88,14 +88,11 @@
     display: flex;
     width: 100%;
     margin-bottom: calculateRem(8px);
-    padding: calculateRem(11px) 0;
+    padding: calculateRem(11px);
     border: calculateRem(1px) solid $ibexa-color-light;
     border-radius: $ibexa-border-radius;
     box-shadow: calculateRem(4px) calculateRem(22px) calculateRem(20px) calculateRem(-7px) rgba($ibexa-color-info, 0.05);
-
-    &:hover {
-        cursor: grab;
-    }
+    cursor: grab;
 
     &:last-of-type {
         margin-bottom: calculateRem(24px);
@@ -104,7 +101,7 @@
     &__drag {
         display: flex;
         align-items: center;
-        padding: 0 calculateRem(8px) 0 calculateRem(16px);
+        padding: 0 calculateRem(8px) 0 calculateRem(5px);
     }
 
     &__drag-icon {

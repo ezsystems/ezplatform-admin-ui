@@ -1,0 +1,13 @@
+{% import '@ezdesign/ui/component/macros.html.twig' as html %}
+
+{% set attr = attr|default({})|merge({
+    class: (attr.class|default('')
+            ~ ' ibexa-anchor-navigation-sections__section row'
+            ~ (is_active|default(false) ? ' ibexa-anchor-navigation-sections__section--active')
+        )|trim,
+    'data-anchor-section-id': section_id,
+}) %}
+
+<div {{ html.attributes(attr) }}>
+    {% block content %}{% endblock %}
+</div>
