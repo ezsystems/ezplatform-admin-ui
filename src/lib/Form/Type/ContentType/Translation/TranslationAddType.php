@@ -192,7 +192,7 @@ class TranslationAddType extends AbstractType
                 ChoiceType::class,
                 [
                     'required' => false,
-                    'placeholder' => false,
+                    'placeholder' => true,
                     'multiple' => false,
                     'expanded' => false,
                     'choice_loader' => new BaseTranslationLanguageChoiceLoader($this->languageService, $contentLanguages),

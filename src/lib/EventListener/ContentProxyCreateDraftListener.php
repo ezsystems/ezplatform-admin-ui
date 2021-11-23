@@ -107,10 +107,11 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
             return;
         }
 
+        $fromLanguageCode = $event->getFromLanguageCode();
         $content = $this->contentService->loadContent(
             $event->getContentId(),
-            $event->getFromLanguageCode() !== null
-                ? [$event->getFromLanguageCode()]
+            $fromLanguageCode !== null
+                ? [$fromLanguageCode]
                 : null
         );
 
@@ -118,7 +119,9 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
 
         $contentUpdateStruct = $this->contentService->newContentUpdateStruct();
         $contentUpdateStruct->initialLanguageCode = $toLanguageCode;
-        $contentUpdateStruct->fields = $this->getTranslatedContentFields($content, $toLanguageCode);
+        if ($fromLanguageCode !== null) {
+            $contentUpdateStruct->fields = $this->getTranslatedContentFields($content, $toLanguageCode);
+        }
 
         $contentDraft = $this->contentService->createContentDraft($content->contentInfo);
 
