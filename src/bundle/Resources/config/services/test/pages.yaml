@@ -4,6 +4,8 @@ services:
     autoconfigure: true
     public: true
 
+  EzSystems\EzPlatformAdminUi\Behat\Page\MyDashboardPage: ~
+
   Ibexa\AdminUi\Behat\Page\AdminUpdateItemPage: ~
 
   Ibexa\AdminUi\Behat\Page\ContentUpdateItemPage:

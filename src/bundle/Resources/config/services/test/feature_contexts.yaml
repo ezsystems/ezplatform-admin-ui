@@ -4,6 +4,13 @@ services:
     autoconfigure: true
     public: true
 
+  EzSystems\EzPlatformAdminUi\Behat\BrowserContext\BasketLogic: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\CalculatorContext: ~
+
+
+
+
   Ibexa\AdminUi\Behat\BrowserContext\AdminUpdateContext: ~
 
   Ibexa\AdminUi\Behat\BrowserContext\ContentViewContext: ~
