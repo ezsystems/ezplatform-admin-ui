@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
 namespace Ibexa\AdminUi\Behat\BrowserContext;
 
 use Behat\Behat\Context\Context;
@@ -13,11 +17,11 @@ class CalculatorContext implements Context
     private $basketLogic;
 
     /**
-     * @var LoginPage
+     * @var \Ibexa\Behat\Browser\Page\LoginPage
      */
     private $loginPage;
     /**
-     * @var MyDashboardPage
+     * @var \EzSystems\EzPlatformAdminUi\Behat\Page\MyDashboardPage
      */
     private $dashboardPage;
 
