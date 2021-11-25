@@ -232,7 +232,12 @@ export default class EzBtnCustomTagUpdate extends EzWidgetButton {
      */
     createAttributes() {
         return Object.keys(this.attributes).reduce(
-            (total, attr) => `${total}<p>${this.attributes[attr].label}: ${this.state.values[attr].value}</p>`,
+            (total, attr) => {
+                const label = this.attributes[attr].label;
+                const value = window.eZ.helpers.text.escapeHTML(this.state.values[attr].value);
+
+                return `${total}<p>${label}: ${value}</p>`;
+            },
             ''
         );
     }

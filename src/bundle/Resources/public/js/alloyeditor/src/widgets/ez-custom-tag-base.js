@@ -203,7 +203,7 @@ const customTagBaseDefinition = {
             return;
         }
         const attributes = Object.keys(customTagConfig.attributes).reduce((total, attr) => {
-            const value = this.getConfig(attr);
+            const value = global.eZ.helpers.text.escapeHTML(this.getConfig(attr));
 
             return `${total}<p>${customTagConfig.attributes[attr].label}: ${value}</p>`;
         }, '');
