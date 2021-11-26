@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessService;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
 /**
@@ -27,7 +27,7 @@ class Languages implements ProviderInterface
     /** @var string[] */
     private $siteAccesses;
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessService */
+    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface */
     private $siteAccessService;
 
     /**
@@ -38,7 +38,7 @@ class Languages implements ProviderInterface
     public function __construct(
         LanguageService $languageService,
         ConfigResolverInterface $configResolver,
-        SiteAccessService $siteAccessService,
+        SiteAccessServiceInterface $siteAccessService,
         array $siteAccesses
     ) {
         $this->languageService = $languageService;
