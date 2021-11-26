@@ -136,6 +136,14 @@ class NavigationContext implements Context
     }
 
     /**
+     * @Given I log out of back office
+     */
+    public function iLogOutOfBackOffice()
+    {
+        $this->upperMenu->chooseFromUserDropdown('Logout');
+    }
+
+    /**
      * @Given I'm on Content view Page for :path
      * @Given there exists Content view Page for :path
      */
