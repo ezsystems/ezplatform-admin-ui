@@ -14,6 +14,8 @@ class ConfigResolveEvent extends Event
 {
     public const NAME = 'udw.resolve.config';
 
+    public const READ_SPECIFIC_CONFIGURATIONS = ['richtext_embed', 'richtext_embed_image', 'browse'];
+
     /** @var string */
     protected $configName;
 

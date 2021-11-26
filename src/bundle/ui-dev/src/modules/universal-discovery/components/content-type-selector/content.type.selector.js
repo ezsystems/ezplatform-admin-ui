@@ -2,9 +2,11 @@ import React, { useState, useContext } from 'react';
 
 import { createCssClassNames } from '../../../common/helpers/css.class.names';
 import { SelectedContentTypesContext } from '../search/search';
+import { AllowedContentTypesContext } from '../../universal.discovery.module';
 
 const ContentTypeSelector = () => {
     const { contentTypes: contentTypesMap } = window.eZ.adminUiConfig;
+    const allowedContentTypes = useContext(AllowedContentTypesContext);
     const [selectedContentTypes, dispatchSelectedContentTypesAction] = useContext(SelectedContentTypesContext);
     const [collapsedGroups, setCollapsedGroups] = useState(() => {
         return Object.keys(contentTypesMap).reduce((collapsedGroups, contentTypeGroup, index) => {
@@ -28,6 +30,14 @@ const ContentTypeSelector = () => {
     return (
         <div className="ez-content-type-selector c-content-type-selector">
             {Object.entries(contentTypesMap).map(([contentTypeGroup, contentTypes]) => {
+                const isHidden = contentTypes.every(
+                    (contentType) => allowedContentTypes && !allowedContentTypes.includes(contentType.identifier)
+                );
+
+                if (isHidden) {
+                    return null;
+                }
+
                 const groupSelectorClassName = createCssClassNames({
                     'ez-content-type-selector__group': true,
                     'ez-content-type-selector__group--collapsed': collapsedGroups[contentTypeGroup],
@@ -40,6 +50,11 @@ const ContentTypeSelector = () => {
                         </span>
                         <ul className="ez-content-type-selector__list">
                             {contentTypes.map((contentType) => {
+                                const isHidden = allowedContentTypes && !allowedContentTypes.includes(contentType.identifier);
+
+                                if (isHidden) {
+                                    return null;
+                                }
 
                                 return (
                                     <li key={contentType.identifier} className="ez-content-type-selector__item">
