@@ -46,6 +46,7 @@ class ContentCreateTest extends TestCase
     public function testUdwConfigResolveWithCreateTab(array $config): void
     {
         $event = new ConfigResolveEvent();
+        $event->setConfigName('some_config');
         $event->setConfig($config);
 
         $subscriber = $this->getSubscriberWithRestrictions();
@@ -68,6 +69,7 @@ class ContentCreateTest extends TestCase
     public function testUdwConfigResolveWithoutCreateTab($config): void
     {
         $event = new ConfigResolveEvent();
+        $event->setConfigName('some_config');
         $event->setConfig($config);
 
         $subscriber = $this->getSubscriberWithRestrictions();

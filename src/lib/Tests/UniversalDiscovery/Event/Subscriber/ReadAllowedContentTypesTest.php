@@ -14,10 +14,10 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
-use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\RichTextEmbedAllowedContentTypes;
+use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\ReadAllowedContentTypes;
 use PHPUnit\Framework\TestCase;
 
-final class RichTextEmbedAllowedContentTypesTest extends TestCase
+final class ReadAllowedContentTypesTest extends TestCase
 {
     private const EXAMPLE_LIMITATIONS = [/* Some limitations */];
 
@@ -35,7 +35,7 @@ final class RichTextEmbedAllowedContentTypesTest extends TestCase
     /** @var \eZ\Publish\API\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject */
     private $contentTypeService;
 
-    /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\RichTextEmbedAllowedContentTypes */
+    /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\Subscriber\ReadAllowedContentTypes */
     private $subscriber;
 
     protected function setUp(): void
@@ -44,7 +44,7 @@ final class RichTextEmbedAllowedContentTypesTest extends TestCase
         $this->permissionChecker = $this->createMock(PermissionCheckerInterface::class);
         $this->contentTypeService = $this->createMock(ContentTypeService::class);
 
-        $this->subscriber = new RichTextEmbedAllowedContentTypes(
+        $this->subscriber = new ReadAllowedContentTypes(
             $this->permissionResolver,
             $this->permissionChecker,
             $this->contentTypeService
