@@ -26,7 +26,10 @@ const selectedContentTypesReducer = (state, action) => {
     }
 };
 
-const languages = Object.values(window.eZ.adminUiConfig.languages.mappings);
+const configLanguages = window.eZ.adminUiConfig.languages;
+const languages = configLanguages.priority.map((value) => {
+    return configLanguages.mappings[value];
+});
 
 const Search = ({ itemsPerPage }) => {
     const filtersLabel = Translator.trans(/*@Desc("Filters")*/ 'search.filters', {}, 'universal_discovery_widget');
@@ -112,11 +115,11 @@ const Search = ({ itemsPerPage }) => {
                     <div className="c-search__no-results-title">{title}</div>
                     <table className="table table-hover">
                         <tbody>
-                            <tr>
-                                <td>
-                                    <span>{`${noResultsLabel} "${searchText}".`}</span>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                <span>{`${noResultsLabel} "${searchText}".`}</span>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                     <h6>{tipsLabel}:</h6>

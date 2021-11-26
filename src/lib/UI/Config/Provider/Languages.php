@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Config\Provider;
 
 use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\SiteAccess;
+use eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessService;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 
 /**
@@ -27,8 +27,8 @@ class Languages implements ProviderInterface
     /** @var string[] */
     private $siteAccesses;
 
-    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess */
-    private $siteAccess;
+    /** @var \eZ\Publish\Core\MVC\Symfony\SiteAccess\SiteAccessService */
+    private $siteAccessService;
 
     /**
      * @param \eZ\Publish\API\Repository\LanguageService $languageService
@@ -38,12 +38,12 @@ class Languages implements ProviderInterface
     public function __construct(
         LanguageService $languageService,
         ConfigResolverInterface $configResolver,
-        SiteAccess $siteAccess,
+        SiteAccessService $siteAccessService,
         array $siteAccesses
     ) {
         $this->languageService = $languageService;
         $this->configResolver = $configResolver;
-        $this->siteAccess = $siteAccess;
+        $this->siteAccessService = $siteAccessService;
         $this->siteAccesses = $siteAccesses;
     }
 
@@ -92,7 +92,8 @@ class Languages implements ProviderInterface
     {
         $priority = [];
         $fallback = [];
-        $siteAccesses = array_unique(array_merge([$this->siteAccess->name], $this->siteAccesses));
+        $siteAccessName = $this->siteAccessService->getCurrent()->name;
+        $siteAccesses = array_unique(array_merge([$siteAccessName], $this->siteAccesses));
 
         foreach ($siteAccesses as $siteAccess) {
             $siteAccessLanguages = $this->configResolver->getParameter('languages', null, $siteAccess);
