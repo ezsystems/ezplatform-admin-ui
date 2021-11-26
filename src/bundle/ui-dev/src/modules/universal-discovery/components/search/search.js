@@ -115,11 +115,11 @@ const Search = ({ itemsPerPage }) => {
                     <div className="c-search__no-results-title">{title}</div>
                     <table className="table table-hover">
                         <tbody>
-                        <tr>
-                            <td>
-                                <span>{`${noResultsLabel} "${searchText}".`}</span>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <span>{`${noResultsLabel} "${searchText}".`}</span>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <h6>{tipsLabel}:</h6>
