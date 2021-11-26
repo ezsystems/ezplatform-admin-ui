@@ -165,7 +165,7 @@ class TrashController extends Controller
             'can_delete' => $this->isGranted(new Attribute('content', 'remove')),
             'can_restore' => $this->isGranted(new Attribute('content', 'restore')),
             'can_cleantrash' => $this->isGranted(new Attribute('content', 'cleantrash')),
-            'can_section' => $this->isGranted(new Attribute('section', 'view')),
+            'can_view_section' => $this->isGranted(new Attribute('section', 'view')),
             'trash_items' => $trashItemsList,
             'pager' => $pagerfanta,
             'form_trash_item_restore' => $trashItemRestoreForm->createView(),

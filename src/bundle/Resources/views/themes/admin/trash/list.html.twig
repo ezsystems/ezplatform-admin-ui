@@ -34,7 +34,7 @@
                         {{ form_widget(form_search.content_type, {
                             'attr': {'class': 'ez-trash-search-form__item ez-trash-search-form__item--auto-send'}
                         }) }}
-                        {% if can_section %}
+                        {% if can_view_section %}
                             {{ form_widget(form_search.section, {
                                 'attr': {'class': 'ez-trash-search-form__item ez-trash-search-form__item--auto-send'}
                             }) }}
@@ -160,7 +160,7 @@
                                     data-direction="{{ sort_directions.creator }}"
                                 >{{ 'trash.creator'|trans|desc('Creator') }}</span>
                             </th>
-                            {% if can_section %}
+                            {% if can_view_section %}
                                 <th class="ez-table__header-cell">
                                     <span
                                         class="ez-table__sort-column ez-table__sort-column--section"
@@ -218,7 +218,7 @@
                                             'trash.item.deleted_user'|trans|desc('Deleted user')
                                         }}
                                     </td>
-                                    {% if can_section %}
+                                    {% if can_view_section %}
                                         <td class="ez-table__cell">{{ trash_item.location.contentInfo.section.name }}</td>
                                     {% endif %}
                                     <td class="ez-table__cell">
