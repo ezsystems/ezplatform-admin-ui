@@ -1,0 +1,21 @@
+name: Browser tests
+
+on:
+    push:
+        branches:
+            - master
+            - '[0-9]+.[0-9]+'
+    pull_request: ~
+
+jobs:
+    admin-ui:
+        name: "AdminUI"
+        uses: ibexa/gh-workflows/.github/workflows/browser-tests.yml@main
+        with:
+            project-edition: 'oss'
+            project-version: '^3.3.x-dev'
+            test-suite:  '--profile=browser --suite=admin-ui-full'
+            test-setup-phase-1: '--profile=setup --suite=personas --mode=standard'
+            composer-package-version: '2.3.x-dev'
+        secrets:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
