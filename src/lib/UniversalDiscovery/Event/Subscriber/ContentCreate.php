@@ -66,7 +66,7 @@ class ContentCreate implements EventSubscriberInterface
      */
     public function onUdwConfigResolve(ConfigResolveEvent $event): void
     {
-        if (in_array($event->getConfigName(), $event::READ_SPECIFIC_CONFIGURATIONS)) {
+        if ($event->isReadOnlyEvent()) {
             return;
         }
 

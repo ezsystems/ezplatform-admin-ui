@@ -72,4 +72,9 @@ class ConfigResolveEvent extends Event
     {
         $this->context = $context;
     }
+
+    public function isReadOnlyEvent(): bool
+    {
+        return in_array($this->getConfigName(), self::READ_SPECIFIC_CONFIGURATIONS, true);
+    }
 }
