@@ -53,6 +53,7 @@ services:
     EzSystems\EzPlatformAdminUi\UI\Config\Provider\Languages:
         arguments:
             $siteAccesses: '%ezpublish.siteaccess.list%'
+            $siteAccessService: '@ezpublish.siteaccess_service'
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'languages' }
 
