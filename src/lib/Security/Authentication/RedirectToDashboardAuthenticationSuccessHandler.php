@@ -32,8 +32,8 @@ class RedirectToDashboardAuthenticationSuccessHandler extends DefaultAuthenticat
      */
     public function __construct(
         HttpUtils $httpUtils,
-        array $options = [],
-        array $siteAccessGroups = [],
+        array $options,
+        array $siteAccessGroups,
         string $defaultTargetPath
     ) {
         parent::__construct($httpUtils, $options);
