@@ -15,7 +15,7 @@ use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformAdminUi\UniversalDiscovery\Event\ConfigResolveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
+final class ReadAllowedContentTypes implements EventSubscriberInterface
 {
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
@@ -79,7 +79,7 @@ final class RichTextEmbedAllowedContentTypes implements EventSubscriberInterface
     {
         $config = $event->getConfig();
 
-        if (!in_array($event->getConfigName(), ['richtext_embed', 'richtext_embed_image'])) {
+        if (!$event->isReadOnlyEvent()) {
             return;
         }
 
