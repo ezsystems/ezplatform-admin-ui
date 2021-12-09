@@ -89,7 +89,7 @@ Feature: Content types management
       | Field Type  | Name        | Identifier          | Required | Searchable | Translatable | Settings       |
       | Text line   | Name        | name	            | no      | yes	      | yes          |                  |
     And I'm on Content Type Page for "Content" group
-    And there's a "TestDiscard CT" on Content Types list
+    And there's a "TestDelete CT" on Content Types list
     When I delete "TestDelete CT" Content Type
     Then success notification that "Content Type 'TestDelete CT' deleted." appears
     And there's no "TestDelete CT" on Content Types list
