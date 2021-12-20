@@ -93,6 +93,7 @@ class ContentUpdateItemPage extends Page
             new VisibleCSSLocator('closeButton', '.ez-content-edit-container__close'),
             new VisibleCSSLocator('fieldLabel', '.ez-field-edit__label-wrapper label.ez-field-edit__label, .ez-field-edit__label-wrapper legend, .ez-card > .card-body > div > div > legend'),
             new VisibleCSSLocator('nthField', '.ez-field-edit:nth-of-type(%s)'),
+            new VisibleCSSLocator('activeNthField', '.active .ez-field-edit:nth-of-type(%s)'),
             new VisibleCSSLocator('noneditableFieldClass', 'ez-field-edit--eznoneditable'),
             new VisibleCSSLocator('fieldOfType', '.ez-field-edit--%s'),
             new VisibleCSSLocator('navigationTabs', '.nav-item.ez-tabs__nav-item'),
@@ -162,5 +163,11 @@ class ContentUpdateItemPage extends Page
             ->findAll($this->getLocator('navigationTabs'))
             ->getByCriterion(new ElementTextCriterion($tabName))
             ->click();
+    }
+
+    public function verifyFieldCannotBeEditedDueToLimitation(string $fieldName)
+    {
+        $fieldLocator = new VisibleCSSLocator('', sprintf($this->getLocator('activeNthField')->getSelector(), $this->getFieldPosition($fieldName)));
+        $this->getHTMLPage()->find($fieldLocator)->assert()->hasClass('ez-field-edit--disabled');
     }
 }
