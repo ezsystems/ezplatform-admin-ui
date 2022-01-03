@@ -74,3 +74,5 @@ system:
                     allowed_content_types: ['user_group']
                 add_location:
                     multiple: false
+                subtree_search:
+                    multiple: false
