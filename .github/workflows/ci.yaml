@@ -11,7 +11,7 @@ env:
   COMPOSER_ROOT_VERSION: 2.3.x-dev
 
 jobs:
-  cs_fix:
+  cs-fix:
     name: Run code style check
     runs-on: "ubuntu-20.04"
     strategy:
