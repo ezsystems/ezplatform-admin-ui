@@ -11,6 +11,31 @@ env:
   COMPOSER_ROOT_VERSION: 2.3.x-dev
 
 jobs:
+  cs-fix:
+    name: Run code style check
+    runs-on: "ubuntu-20.04"
+    strategy:
+      matrix:
+        php:
+          - '8.0'
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          extensions: 'pdo_sqlite, gd'
+          tools: cs2pr
+
+      - uses: "ramsey/composer-install@v1"
+        with:
+          dependency-versions: "highest"
+
+      - name: Run code style check
+        run: composer run-script check-cs -- --format=checkstyle | cs2pr
+
   tests:
     name: Tests
     runs-on: "ubuntu-20.04"
@@ -22,6 +47,8 @@ jobs:
         php:
           - '7.3'
           - '7.4'
+          - '8.0'
+          - '8.1'
 
     steps:
       - uses: actions/checkout@v2
@@ -41,9 +68,6 @@ jobs:
 
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
-      - name: Run code style check
-        run: composer run-script check-cs -- --format=checkstyle | cs2pr
 
       - name: Run test suite
         run: composer run-script --timeout=600 test
