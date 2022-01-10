@@ -1,0 +1,12 @@
+name: Ibexa Reusable / Cross Org PR
+
+on:
+  push:
+    branches-ignore:
+      - "temp_*"
+
+jobs:
+  call:
+    uses: ibexa/gh-workflows/.github/workflows/cross-merge.yml@main
+    secrets:
+      robot-token: ${{ secrets.EZROBOT_PAT }}
