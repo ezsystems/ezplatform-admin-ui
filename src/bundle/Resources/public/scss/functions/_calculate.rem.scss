@@ -1,4 +1,4 @@
-@import 'div';
+@import '../polyfill/div';
 
 @function calculateRem($size) {
     $remSize: div($size, $base-font-size);
