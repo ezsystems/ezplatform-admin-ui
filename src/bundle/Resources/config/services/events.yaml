@@ -3,6 +3,8 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            string $logLevel: 'error'
 
     EzSystems\EzPlatformAdminUi\EventListener\:
         resource: "../../../lib/EventListener/*"
@@ -38,6 +40,7 @@ services:
             $entrypointLookupCollection: '@webpack_encore.entrypoint_lookup_collection'
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
+            - { name: monolog.logger, channel: ibexa.admin }
 
     EzSystems\EzPlatformAdminUi\EventListener\MenuPermissionsListener:
         tags:

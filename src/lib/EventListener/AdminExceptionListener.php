@@ -11,6 +11,8 @@ namespace EzSystems\EzPlatformAdminUi\EventListener;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use EzSystems\EzPlatformAdminUiBundle\EzPlatformAdminUiBundle;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use SplFileInfo;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,8 +24,10 @@ use Throwable;
 use Twig\Environment;
 use Twig\Error\RuntimeError;
 
-class AdminExceptionListener
+class AdminExceptionListener implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /** @var \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface */
     protected $notificationHandler;
 
@@ -45,6 +49,9 @@ class AdminExceptionListener
     /** @var string */
     protected $kernelEnvironment;
 
+    /** @var \Psr\Log\LogLevel::* */
+    private $logLevel;
+
     /**
      * @param \Twig\Environment $twig
      * @param \EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface $notificationHandler
@@ -53,6 +60,7 @@ class AdminExceptionListener
      * @param array $siteAccessGroups
      * @param string $kernelRootDir
      * @param string $kernelEnvironment
+     * @param \Psr\Log\LogLevel::* $logLevel
      */
     public function __construct(
         Environment $twig,
@@ -61,7 +69,8 @@ class AdminExceptionListener
         EntrypointLookupCollectionInterface $entrypointLookupCollection,
         array $siteAccessGroups,
         string $kernelProjectDir,
-        string $kernelEnvironment
+        string $kernelEnvironment,
+        string $logLevel
     ) {
         $this->twig = $twig;
         $this->notificationHandler = $notificationHandler;
@@ -70,6 +79,7 @@ class AdminExceptionListener
         $this->siteAccessGroups = $siteAccessGroups;
         $this->rootDir = $kernelProjectDir;
         $this->kernelEnvironment = $kernelEnvironment;
+        $this->logLevel = $logLevel;
     }
 
     /**
@@ -99,6 +109,9 @@ class AdminExceptionListener
 
         // map exception to UI notification
         $this->notificationHandler->error(/** @Ignore */ $this->getNotificationMessage($exception));
+        $this->logger->log($this->logLevel, $exception->getMessage(), [
+            'exception' => $exception,
+        ]);
 
         if ($exception instanceof RuntimeError) {
             // If exception is coming from the template where encore already
