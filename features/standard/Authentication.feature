@@ -17,3 +17,9 @@ Feature: Verify that Admin Panel is available only for authenticated users
     Given I open Login page in admin SiteAccess
     When I log in as admin with password notpublish
     Then I should be on Login page
+
+  @javascript
+  Scenario: Should be redirected to the same page in back office after login
+    Given I try to open "System Information" page in admin SiteAccess
+    When I log in as admin with password publish
+    Then I should be on "System Information" page
