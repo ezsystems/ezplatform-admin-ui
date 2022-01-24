@@ -27,6 +27,11 @@ class ContentTypePicker extends Component
             ->click();
     }
 
+    public function selectLanguage(string $language): void
+    {
+        $this->getHTMLPage()->find($this->getLocator('languageSelectWhileCreatingItem'))->selectOption($language);
+    }
+
     protected function getDisplayedItemsCount(): int
     {
         return $this->getHTMLPage()->findAll($this->getLocator('filteredItem'))->count();
@@ -44,6 +49,7 @@ class ContentTypePicker extends Component
             new VisibleCSSLocator('filterInput', '.ez-extra-actions__section-content--content-type .ez-instant-filter__input'),
             new VisibleCSSLocator('filteredItem', '.ez-extra-actions__section-content--content-type .ez-instant-filter__group-item:not([hidden])'),
             new VisibleCSSLocator('headerSelector', '.ez-extra-actions--create .ez-extra-actions__header'),
+            new VisibleCSSLocator('languageSelectWhileCreatingItem', '#content_create_language'),
         ];
     }
 }

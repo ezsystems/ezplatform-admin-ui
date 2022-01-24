@@ -51,6 +51,14 @@ class ContentUpdateContext implements Context
     }
 
     /**
+     * @When the :fieldName field cannot be edited due to limitation
+     */
+    public function theFieldCannotBeEditedDueToLimitation(string $fieldName): void
+    {
+        $this->contentUpdateItemPage->verifyFieldCannotBeEditedDueToLimitation($fieldName);
+    }
+
+    /**
      * @When I set content fields for user
      */
     public function iSetFieldsForUser(TableNode $table): void
