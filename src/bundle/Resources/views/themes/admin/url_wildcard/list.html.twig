@@ -73,8 +73,8 @@
                 </tr>
             </thead>
             <tbody>
-                {% if url_wildcards|length %}
-                    {% for url_wildcard in url_wildcards %}
+                {% if pager.currentPageResults|length %}
+                    {% for url_wildcard in pager.currentPageResults %}
                         {% set edit_url = path('ezplatform.url_wildcard.update', {urlWildcardId: url_wildcard.id}) %}
                         <tr>
                             <td class="ez-table__cell ez-table__cell--has-checkbox">
@@ -119,5 +119,15 @@
                 {% endif %}
             </tbody>
         </table>
+    {% if pager.haveToPaginate %}
+        {% include '@ezdesign/ui/pagination.html.twig' with {
+            'pager': pager,
+            'paginaton_params' : pager_options|merge({
+                'routeParams': {
+                    '_fragment': 'ez-tab-link-manager-url-wildcards'
+                }
+            })
+        } %}
+    {% endif %}
     {{ form_end(form) }}
 </section>
