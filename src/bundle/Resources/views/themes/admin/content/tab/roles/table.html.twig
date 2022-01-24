@@ -4,6 +4,7 @@
     <table class="table table-hover">
         <thead>
         <tr>
+            <th>{{ 'tab.roles.id'|trans|desc('ID') }}</th>
             <th>{{ 'tab.roles.name'|trans|desc('Name') }}</th>
             <th>{{ 'tab.roles.limitation'|trans|desc('Limitation') }}</th>
         </tr>
@@ -12,6 +13,11 @@
             {% if roles_pager.currentPageResults is not empty %}
                 {% for role_assignment in roles_pager.currentPageResults %}
                     <tr>
+                        <td>
+                            <span>
+                                {{ role_assignment.role.id }}
+                            </span>
+                        </td>
                         <td>
                             <a href="{{ path('ezplatform.role.view', { roleId: role_assignment.role.id}) }}">
                                 {{ role_assignment.role.identifier }}
