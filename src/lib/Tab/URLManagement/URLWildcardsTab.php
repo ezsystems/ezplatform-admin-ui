@@ -13,9 +13,9 @@ use eZ\Publish\API\Repository\URLWildcardService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\URLWildcardAdapter;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
-use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -103,8 +103,8 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
         $limit = $this->configResolver->getParameter('pagination.url_wildcards');
 
         $pagerfanta = new Pagerfanta(
-            new ArrayAdapter(
-                $this->urlWildcardService->loadAll()
+            new URLWildcardAdapter(
+                $this->urlWildcardService
             )
         );
         $pagerfanta->setMaxPerPage($limit);
