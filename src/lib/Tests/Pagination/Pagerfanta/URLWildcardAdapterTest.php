@@ -7,9 +7,9 @@
 namespace EzSystems\EzPlatformAdminUi\Tests\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\URLWildcardService;
-use eZ\Publish\API\Repository\Values\Content\UrlWildcard;
 use Ibexa\AdminUi\Pagination\Pagerfanta\URLWildcardAdapter;
 use PHPUnit\Framework\TestCase;
+use eZ\Publish\API\Repository\Values\Content\UrlWildcard;
 
 class URLWildcardAdapterTest extends TestCase
 {
@@ -44,33 +44,38 @@ class URLWildcardAdapterTest extends TestCase
         $offset = 10;
         $limit = 25;
 
-        $urlWildcards = [
+        $this->urlWildcardService
+            ->expects($this->once())
+            ->method('loadAll')
+            ->with($offset, $limit)
+            ->willReturn([$this->urlWildcards()]);
+
+        $adapter = new URLWildcardAdapter($this->urlWildcardService);
+
+        $this->assertEquals(
+            [$this->urlWildcards()],
+            $adapter->getSlice($offset, $limit)
+        );
+    }
+
+    public function urlWildcards(): iterable
+    {
+        yield [
             new UrlWildcard([
                 'id' => 1,
                 'destinationUrl' => 'test',
                 'sourceUrl' => '/',
                 'forward' => true,
-            ]),
+            ])
+        ];
 
+        yield [
             new UrlWildcard([
                 'id' => 2,
                 'destinationUrl' => 'test2',
                 'sourceUrl' => '/test',
                 'forward' => false,
-            ]),
+            ])
         ];
-
-        $this->urlWildcardService
-            ->expects($this->once())
-            ->method('loadAll')
-            ->with($offset, $limit)
-            ->willReturn($urlWildcards);
-
-        $adapter = new URLWildcardAdapter($this->urlWildcardService);
-
-        $this->assertEquals(
-            $urlWildcards,
-            $adapter->getSlice($offset, $limit)
-        );
     }
 }
