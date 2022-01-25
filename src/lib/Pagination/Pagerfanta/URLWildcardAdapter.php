@@ -9,10 +9,6 @@ namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
 use eZ\Publish\API\Repository\URLWildcardService;
 use Pagerfanta\Adapter\AdapterInterface;
 
-/**
- * Pagerfanta adapter for eZ Publish content search.
- * Will return results as notification list.
- */
 class URLWildcardAdapter implements AdapterInterface
 {
     /** @var \eZ\Publish\API\Repository\URLWildcardService */
