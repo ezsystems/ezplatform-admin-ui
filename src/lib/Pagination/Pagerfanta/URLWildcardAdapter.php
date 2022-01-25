@@ -4,12 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta;
+namespace Ibexa\AdminUi\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\URLWildcardService;
 use Pagerfanta\Adapter\AdapterInterface;
 
-class URLWildcardAdapter implements AdapterInterface
+final class URLWildcardAdapter implements AdapterInterface
 {
     /** @var \eZ\Publish\API\Repository\URLWildcardService */
     private $urlWildcardService;

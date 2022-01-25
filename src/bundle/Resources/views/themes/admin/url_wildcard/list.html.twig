@@ -73,8 +73,16 @@
                 </tr>
             </thead>
             <tbody>
-                {% if pager.currentPageResults|length %}
-                    {% for url_wildcard in pager.currentPageResults %}
+                {% if url_wildcards.count is same as(0) %}
+                    <tr>
+                        <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
+                            <p class="ez-table-no-content mb-0 py-0">
+                                {{ 'url_wildcard.empty'|trans|desc('No URL wildcards.') }}
+                            </p>
+                        </td>
+                    </tr>
+                {% else %}
+                    {% for url_wildcard in url_wildcards %}
                         {% set edit_url = path('ezplatform.url_wildcard.update', {urlWildcardId: url_wildcard.id}) %}
                         <tr>
                             <td class="ez-table__cell ez-table__cell--has-checkbox">
@@ -108,20 +116,12 @@
                             </td>
                         </tr>
                     {% endfor %}
-                {% else %}
-                    <tr>
-                        <td class="ez-table__cell ez-table__cell--no-content" colspan="5">
-                            <p class="ez-table-no-content mb-0 py-0">
-                                {{ 'url_wildcard.empty'|trans|desc('No URL wildcards.') }}
-                            </p>
-                        </td>
-                    </tr>
                 {% endif %}
             </tbody>
         </table>
-    {% if pager.haveToPaginate %}
+    {% if url_wildcards.haveToPaginate %}
         {% include '@ezdesign/ui/pagination.html.twig' with {
-            'pager': pager,
+            'pager': url_wildcards,
             'paginaton_params' : pager_options|merge({
                 'routeParams': {
                     '_fragment': 'ez-tab-link-manager-url-wildcards'

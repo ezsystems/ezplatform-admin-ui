@@ -13,9 +13,9 @@ use eZ\Publish\API\Repository\URLWildcardService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
-use EzSystems\EzPlatformAdminUi\Pagination\Pagerfanta\URLWildcardAdapter;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use Ibexa\AdminUi\Pagination\Pagerfanta\URLWildcardAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -125,7 +125,7 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
         $canManageWildcards = $this->permissionResolver->hasAccess('content', 'urltranslator');
 
         return $this->twig->render('@ezdesign/url_wildcard/list.html.twig', [
-            'pager' => $pagerfanta,
+            'url_wildcards' => $pagerfanta,
             'pager_options' => [
                 'pageParameter' => '[' . self::PAGINATION_PARAM_NAME . ']',
             ],
