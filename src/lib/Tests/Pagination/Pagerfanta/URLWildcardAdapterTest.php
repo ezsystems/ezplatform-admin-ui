@@ -11,7 +11,7 @@ use eZ\Publish\API\Repository\Values\Content\URLWildcard;
 use Ibexa\AdminUi\Pagination\Pagerfanta\URLWildcardAdapter;
 use PHPUnit\Framework\TestCase;
 
-class URLWildcardAdapterTest extends TestCase
+final class URLWildcardAdapterTest extends TestCase
 {
     /** @var \eZ\Publish\API\Repository\Values\Content\URLWildcard|\PHPUnit\Framework\MockObject\MockObject */
     private $urlWildcardService;
@@ -38,7 +38,6 @@ class URLWildcardAdapterTest extends TestCase
         );
 
         $adapter->getNbResults();
-
     }
 
     public function testGetSlice(): void
