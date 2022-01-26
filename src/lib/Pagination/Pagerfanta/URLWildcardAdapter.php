@@ -42,7 +42,7 @@ final class URLWildcardAdapter implements AdapterInterface
      * @param int $offset the offset
      * @param int $length the length
      *
-     * @return \eZ\Publish\API\Repository\Values\Content\UrlWildcard[]
+     * @return \eZ\Publish\API\Repository\Values\Content\URLWildcard[]
      */
     public function getSlice($offset, $length): array
     {

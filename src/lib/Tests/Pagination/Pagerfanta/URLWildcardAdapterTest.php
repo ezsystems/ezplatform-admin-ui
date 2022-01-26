@@ -7,13 +7,13 @@
 namespace EzSystems\EzPlatformAdminUi\Tests\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\URLWildcardService;
-use eZ\Publish\API\Repository\Values\Content\UrlWildcard;
+use eZ\Publish\API\Repository\Values\Content\URLWildcard;
 use Ibexa\AdminUi\Pagination\Pagerfanta\URLWildcardAdapter;
 use PHPUnit\Framework\TestCase;
 
 class URLWildcardAdapterTest extends TestCase
 {
-    /** @var \eZ\Publish\API\Repository\Values\Content\UrlWildcard|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \eZ\Publish\API\Repository\Values\Content\URLWildcard|\PHPUnit\Framework\MockObject\MockObject */
     private $urlWildcardService;
 
     protected function setUp(): void
@@ -21,14 +21,13 @@ class URLWildcardAdapterTest extends TestCase
         $this->urlWildcardService = $this->createMock(URLWildcardService::class);
     }
 
-    public function testGetNbResults()
+    public function testGetNbResults(): void
     {
         $countAll = 5;
 
         $this->urlWildcardService
             ->expects($this->once())
             ->method('countAll')
-            ->with()
             ->willReturn($countAll);
 
         $adapter = new URLWildcardAdapter($this->urlWildcardService);
@@ -37,40 +36,46 @@ class URLWildcardAdapterTest extends TestCase
             $countAll,
             $adapter->getNbResults()
         );
+
+        $adapter->getNbResults();
+
     }
 
-    public function testGetSlice()
+    public function testGetSlice(): void
     {
         $offset = 10;
         $limit = 25;
+
+        $expectedResult = $this->urlWildcards();
 
         $this->urlWildcardService
             ->expects($this->once())
             ->method('loadAll')
             ->with($offset, $limit)
-            ->willReturn([$this->urlWildcards()]);
+            ->willReturn($expectedResult);
 
         $adapter = new URLWildcardAdapter($this->urlWildcardService);
 
         $this->assertEquals(
-            [$this->urlWildcards()],
+            $expectedResult,
             $adapter->getSlice($offset, $limit)
         );
     }
 
-    public function urlWildcards(): iterable
+    /**
+     * @return  \eZ\Publish\API\Repository\Values\Content\URLWildcard[]
+     */
+    public function urlWildcards(): array
     {
-        yield [
-            new UrlWildcard([
+        return [
+            new URLWildcard([
                 'id' => 1,
                 'destinationUrl' => 'test',
                 'sourceUrl' => '/',
                 'forward' => true,
             ]),
-        ];
 
-        yield [
-            new UrlWildcard([
+            new URLWildcard([
                 'id' => 2,
                 'destinationUrl' => 'test2',
                 'sourceUrl' => '/test',
