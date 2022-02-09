@@ -73,9 +73,10 @@
             return;
         }
 
-        const selectedDateWithUserTimezone = eZ.helpers.timezone.convertDateToTimezone(date[0], eZ.adminUiConfig.timezone, true);
+        date = new Date(date[0]);
+        date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
 
-        sourceInput.value = Math.floor(selectedDateWithUserTimezone.valueOf() / 1000);
+        sourceInput.value = Math.floor(date.valueOf() / 1000);
         sourceInput.dispatchEvent(event);
     };
     const clearValue = (sourceInput, flatpickrInstance, event) => {
@@ -99,7 +100,15 @@
             if (actionType === 'create') {
                 defaultDate.setTime(new Date().getTime());
             } else if (actionType === 'edit') {
-                defaultDate.setTime(defaultDate.getTime());
+                defaultDate = new Date(
+                    defaultDate.getUTCFullYear(),
+                    defaultDate.getUTCMonth(),
+                    defaultDate.getUTCDate(),
+                    0,
+                    0,
+                    0,
+                    0
+                );
             }
 
             updateInputValue(sourceInput, [defaultDate]);
