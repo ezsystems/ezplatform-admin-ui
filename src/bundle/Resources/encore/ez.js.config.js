@@ -29,17 +29,21 @@ const layout = [
 ];
 const fieldTypes = [];
 
-fs.readdirSync(translationsPath).forEach((file) => {
-    if (file !== 'config.js' && path.extname(file) === '.js') {
-        layout.push(path.resolve(translationsPath, file));
-    }
-});
+if (fs.existsSync(translationsPath)) {
+    fs.readdirSync(translationsPath).forEach((file) => {
+        if (file !== 'config.js' && path.extname(file) === '.js') {
+            layout.push(path.resolve(translationsPath, file));
+        }
+    });
+}
 
-fs.readdirSync(fieldTypesPath).forEach((file) => {
-    if (path.extname(file) === '.js') {
-        fieldTypes.push(path.resolve(fieldTypesPath, file));
-    }
-});
+if (fs.existsSync(fieldTypesPath)) {
+    fs.readdirSync(fieldTypesPath).forEach((file) => {
+        if (path.extname(file) === '.js') {
+            fieldTypes.push(path.resolve(fieldTypesPath, file));
+        }
+    });
+}
 
 module.exports = (Encore) => {
     Encore.addEntry('ezplatform-admin-ui-layout-js', layout)
