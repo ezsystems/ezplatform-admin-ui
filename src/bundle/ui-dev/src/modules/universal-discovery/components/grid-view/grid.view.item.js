@@ -44,9 +44,12 @@ const GridViewItem = ({ location, version }) => {
 
         setMarkedLocationId(location.id);
 
-        if (!multiple && !isNotSelectable) {
+        if (!multiple) {
             dispatchSelectedLocationsAction({ type: 'CLEAR_SELECTED_LOCATIONS' });
-            dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
+
+            if (!isNotSelectable) {
+                dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
+            }
         }
     };
     const loadLocation = ({ nativeEvent }) => {
