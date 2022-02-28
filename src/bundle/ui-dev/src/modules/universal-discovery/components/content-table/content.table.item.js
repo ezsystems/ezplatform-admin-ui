@@ -66,9 +66,12 @@ const ContentTableItem = ({ location }) => {
             }
         );
 
-        if (!multiple && !isNotSelectable) {
+        if (!multiple) {
             dispatchSelectedLocationsAction({ type: 'CLEAR_SELECTED_LOCATIONS' });
-            dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
+
+            if (!isNotSelectable) {
+                dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location: location });
+            }
         }
     };
     const renderToggleSelectionButton = () => {

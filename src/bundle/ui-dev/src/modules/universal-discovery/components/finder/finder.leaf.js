@@ -39,11 +39,14 @@ const FinderLeaf = ({ location }) => {
         dispatchLoadedLocationsAction({ type: 'CUT_LOCATIONS', locationId: location.id });
         dispatchLoadedLocationsAction({ type: 'UPDATE_LOCATIONS', data: { parentLocationId: location.id, subitems: [] } });
 
-        if (!multiple && !isNotSelectable) {
+        if (!multiple) {
             dispatchSelectedLocationsAction({ type: 'CLEAR_SELECTED_LOCATIONS' });
-            dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
+
+            if (!isNotSelectable) {
+                dispatchSelectedLocationsAction({ type: 'ADD_SELECTED_LOCATION', location });
+            }
         }
-    };
+    }
     const renderToggleSelectionButton = () => {
         if (!multiple || isNotSelectable) {
             return null;

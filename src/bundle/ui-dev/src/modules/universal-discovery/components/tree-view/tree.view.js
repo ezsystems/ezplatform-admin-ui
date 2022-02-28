@@ -66,8 +66,12 @@ const TreeView = ({ itemsPerPage }) => {
                 setMarkedLocationId(locationId);
                 dispatchLoadedLocationsAction({ type: 'SET_LOCATIONS', data: locationsMap });
 
-                if (!multiple && !isNotSelectable) {
-                    dispatchSelectedLocationsAction({ type: 'REPLACE_SELECTED_LOCATIONS', locations: [{ location }] });
+                if (!multiple) {
+                    dispatchSelectedLocationsAction({ type: 'CLEAR_SELECTED_LOCATIONS' });
+
+                    if (!isNotSelectable) {
+                        dispatchSelectedLocationsAction({ type: 'REPLACE_SELECTED_LOCATIONS', locations: [{ location }] });
+                    }
                 }
             }
         );
