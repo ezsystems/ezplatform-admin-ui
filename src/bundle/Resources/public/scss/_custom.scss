@@ -88,19 +88,19 @@ $purple: #6f42c1 !default;
 $cyan: #17a2b8 !default;
 
 $colors: (
-    blue: $ez-color-secondary,
-    red: $ez-color-danger,
-    orange: $ez-color-primary,
-    yellow: $ez-color-warning,
-    green: $ez-color-positive,
-    teal: $ez-ground-primary,
-    white: $white,
-    gray: $ez-color-base-light,
-    gray-dark: #e83e8c,
-    indigo: $indigo,
-    purple: $purple,
-    pink: $pink,
-    cyan: $cyan
+    "blue": $ez-color-secondary,
+    "red": $ez-color-danger,
+    "orange": $ez-color-primary,
+    "yellow": $ez-color-warning,
+    "green": $ez-color-positive,
+    "teal": $ez-ground-primary,
+    "white": $white,
+    "gray": $ez-color-base-light,
+    "gray-dark": #e83e8c,
+    "indigo": $indigo,
+    "purple": $purple,
+    "pink": $pink,
+    "cyan": $cyan
 );
 
 $theme-colors: (
