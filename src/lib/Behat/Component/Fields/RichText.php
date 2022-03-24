@@ -51,7 +51,7 @@ class RichText extends FieldTypeComponent
             throw new Exception(sprintf('Unsupported style: %s', $style));
         }
 
-        $this->getHTMLPage()->find($this->getLocator('styleDropdown'))->click();
+        $this->getHTMLPage()->setTimeout(3)->find($this->getLocator('styleDropdown'))->click();
 
         $blockStyleLocator = new VisibleCSSLocator('blockStyle', sprintf($this->getLocator('blockStyle')->getSelector(), $style));
         $this->getHTMLPage()->find($blockStyleLocator)->click();
@@ -76,6 +76,7 @@ class RichText extends FieldTypeComponent
             return;
         }
 
+        $this->getFieldInput()->click();
         $this->changeStyle($style);
 
         $selector = CSSLocatorBuilder::base($this->getLocator('fieldInput'))->withDescendant(new VisibleCSSLocator('style', $style))->build();
