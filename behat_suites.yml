@@ -27,11 +27,13 @@ browser:
                 - Ibexa\AdminUi\Behat\BrowserContext\ContentTypeContext
                 - Ibexa\AdminUi\Behat\BrowserContext\RolesContext
                 - Ibexa\AdminUi\Behat\BrowserContext\SystemInfoContext
+                - Ibexa\AdminUi\Behat\BrowserContext\LeftMenuContext
                 - Ibexa\AdminUi\Behat\BrowserContext\SectionsContext
                 - Ibexa\AdminUi\Behat\BrowserContext\LanguageContext
                 - Ibexa\AdminUi\Behat\BrowserContext\ObjectStatesContext
                 - Ibexa\AdminUi\Behat\BrowserContext\DashboardContext
                 - Ibexa\AdminUi\Behat\BrowserContext\SearchContext
+                - Ibexa\AdminUi\Behat\BrowserContext\BookmarkContext
                 - EzSystems\Behat\API\Context\RoleContext
 
         personas:
@@ -81,3 +83,4 @@ browser:
                 - Ibexa\AdminUi\Behat\BrowserContext\UserPreferencesContext
                 - Ibexa\Behat\Browser\Context\AuthenticationContext
                 - Ibexa\Behat\Browser\Context\DebuggingContext
+                - Ibexa\AdminUi\Behat\BrowserContext\BookmarkContext
