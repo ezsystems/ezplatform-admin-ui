@@ -1,0 +1,25 @@
+name: Browser tests
+
+on:
+    push:
+        branches:
+            - master
+            - "[0-9]+.[0-9]+"
+    pull_request: ~
+
+jobs:
+    admin-ui:
+        name: "Admin-UI tests on Clean Platform"
+        uses: ezsystems/ezplatform/.github/workflows/callable-browser-tests.yaml@2.5
+        with:
+            test-suite: "--profile=adminui --suite=adminui"
+        secrets:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    personas:
+        name: "BehatBundle personas tests"
+        uses: ezsystems/ezplatform/.github/workflows/callable-browser-tests.yaml@2.5
+        with:
+            test-setup-phase-1: "--profile=setup --suite=personas"
+            test-suite: "--profile=adminui --suite=personas"
+        secrets:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
