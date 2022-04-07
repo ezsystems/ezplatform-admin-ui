@@ -21,6 +21,7 @@ class ConfigResolveEvent extends Event
         'subtree_search',
         'single',
         'multiple',
+        'single_container',
     ];
 
     /** @var string */
