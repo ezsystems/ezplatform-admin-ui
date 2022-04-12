@@ -97,6 +97,8 @@ class ContentUpdateItemPage extends Page
             new VisibleCSSLocator('noneditableFieldClass', 'ez-field-edit--eznoneditable'),
             new VisibleCSSLocator('fieldOfType', '.ez-field-edit--%s'),
             new VisibleCSSLocator('navigationTabs', '.nav-item.ez-tabs__nav-item'),
+            new VisibleCSSLocator('autosaveInfo', '.ez-content-edit-page-title__autosave-info'),
+            new VisibleCSSLocator('autosaveLastSavedInfo', '.ez-content-edit-page-title__autosave-last-saved'),
         ];
     }
 
@@ -169,5 +171,19 @@ class ContentUpdateItemPage extends Page
     {
         $fieldLocator = new VisibleCSSLocator('', sprintf($this->getLocator('activeNthField')->getSelector(), $this->getFieldPosition($fieldName)));
         $this->getHTMLPage()->find($fieldLocator)->assert()->hasClass('ez-field-edit--disabled');
+    }
+
+    public function verifyAutosaveNotificationIsDisplayed(): void
+    {
+        $this->getHTMLPage()
+            ->find($this->getLocator('autosaveInfo'))
+            ->assert()->textContains('Autosave is on.');
+    }
+
+    public function verifyAutosaveDraftIsSavedNotificationIsDisplayed(): void
+    {
+        $this->getHTMLPage()
+            ->find($this->getLocator('autosaveLastSavedInfo'))
+            ->assert()->textContains('Last saved draft was on');
     }
 }
