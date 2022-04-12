@@ -22,6 +22,7 @@ use Ibexa\AdminUi\Behat\Component\RightMenu;
 use Ibexa\AdminUi\Behat\Component\SubItemsList;
 use Ibexa\AdminUi\Behat\Component\UniversalDiscoveryWidget;
 use Ibexa\AdminUi\Behat\Component\UpperMenu;
+use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
 use Ibexa\Behat\Browser\Page\Page;
@@ -274,6 +275,19 @@ class ContentViewPage extends Page
         $this->contentItemAdminPreview->verifyFieldHasValues($fieldLabel, $expectedFieldValues, $fieldTypeIdentifier);
     }
 
+    public function bookmarkContentItem(): void
+    {
+        $this->getHTMLPage()->find($this->getLocator('bookmarkButton'))->click();
+        $this->getHTMLPage()
+            ->setTimeout(3)
+            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('isBookmarked')));
+    }
+
+    public function isBookmarked(): bool
+    {
+        return $this->getHTMLPage()->find($this->getLocator('isBookmarked'))->isVisible();
+    }
+
     protected function specifyLocators(): array
     {
         return [
@@ -282,6 +296,8 @@ class ContentViewPage extends Page
             new VisibleCSSLocator('mainContainer', '#ez-tab-list-content-location-view'),
             new VisibleCSSLocator('tab', '#ez-tab-list-location-view .ez-tabs__tab'),
             new VisibleCSSLocator('addLocationButton', '#ez-tab-location-view-locations .ez-table-header__tools .btn--udw-add'),
+            new VisibleCSSLocator('bookmarkButton', '.ez-add-to-bookmarks'),
+            new VisibleCSSLocator('isBookmarked', '.ez-add-to-bookmarks--checked'),
         ];
     }
 

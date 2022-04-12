@@ -45,3 +45,5 @@ services:
   Ibexa\AdminUi\Behat\BrowserContext\LanguageContext: ~
 
   Ibexa\AdminUi\Behat\BrowserContext\UserPreferencesContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\BookmarkContext: ~
