@@ -14,16 +14,6 @@ class ConfigResolveEvent extends Event
 {
     public const NAME = 'udw.resolve.config';
 
-    private const READ_SPECIFIC_CONFIGURATIONS = [
-        'richtext_embed',
-        'richtext_embed_image',
-        'browse',
-        'subtree_search',
-        'single',
-        'multiple',
-        'single_container',
-    ];
-
     /** @var string */
     protected $configName;
 
@@ -79,10 +69,5 @@ class ConfigResolveEvent extends Event
     public function setContext(array $context): void
     {
         $this->context = $context;
-    }
-
-    public function isReadOnlyEvent(): bool
-    {
-        return in_array($this->getConfigName(), self::READ_SPECIFIC_CONFIGURATIONS, true);
     }
 }
