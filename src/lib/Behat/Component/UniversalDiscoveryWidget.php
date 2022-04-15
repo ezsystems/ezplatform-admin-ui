@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component;
 
 use Ibexa\Behat\Browser\Component\Component;
-use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Element\Condition\ElementNotExistsCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
@@ -119,7 +118,9 @@ class UniversalDiscoveryWidget extends Component
                     '.c-finder-branch:nth-of-type(%d) .c-finder-branch__items-wrapper', $level)
             );
             $this->getHTMLPage()->find($scrollableElement)->scrollToBottom($this->getSession());
-            $this->getHTMLPage()->waitUntilCondition(new ElementNotExistsCondition($this->getHTMLPage(), $this->getLocator('loadMoreSpinner')));
+            $this->getHTMLPage()
+                ->setTimeout(3)
+                ->waitUntilCondition(new ElementNotExistsCondition($this->getHTMLPage(), $this->getLocator('loadMoreSpinner')));
         }
 
         $this->getHTMLPage()->findAll($treeElementsLocator)->getByCriterion(new ElementTextCriterion($itemName))->click();
