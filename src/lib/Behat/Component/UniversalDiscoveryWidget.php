@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Behat\Component;
 
 use Ibexa\Behat\Browser\Component\Component;
+use Ibexa\Behat\Browser\Element\Condition\ElementNotExistsCondition;
 use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
 use Ibexa\Behat\Browser\Element\ElementInterface;
 use Ibexa\Behat\Browser\Locator\CSSLocator;
@@ -112,6 +113,16 @@ class UniversalDiscoveryWidget extends Component
         $treeElementsLocator = new CSSLocator('', sprintf($this->getLocator('treeLevelElementsFormat')->getSelector(), $level));
         $selectedTreeElementLocator = new CSSLocator('', sprintf($this->getLocator('treeLevelSelectedFormat')->getSelector(), $level));
 
+        if ($this->getHTMLPage()->findAll($treeElementsLocator)->count() % 50 === 0) {
+            $scrollableElement = new VisibleCSSLocator('scrollable', sprintf(
+                    '.c-finder-branch:nth-of-type(%d) .c-finder-branch__items-wrapper', $level)
+            );
+            $this->getHTMLPage()->find($scrollableElement)->scrollToBottom($this->getSession());
+            $this->getHTMLPage()
+                ->setTimeout(3)
+                ->waitUntilCondition(new ElementNotExistsCondition($this->getHTMLPage(), $this->getLocator('loadMoreSpinner')));
+        }
+
         $this->getHTMLPage()->findAll($treeElementsLocator)->getByCriterion(new ElementTextCriterion($itemName))->click();
         $this->getHTMLPage()->findAll($selectedTreeElementLocator)->getByCriterion(new ElementTextCriterion($itemName))->assert()->isVisible();
 
@@ -183,6 +194,7 @@ class UniversalDiscoveryWidget extends Component
             new CSSLocator('treeLevelFormat', '.c-finder-branch:nth-child(%d)'),
             new CSSLocator('treeLevelElementsFormat', '.c-finder-branch:nth-of-type(%d) .c-finder-leaf'),
             new CSSLocator('treeLevelSelectedFormat', '.c-finder-branch:nth-of-type(%d) .c-finder-leaf--marked'),
+            new VisibleCSSLocator('loadMoreSpinner', '.c-finder-branch__loading-spinner'),
             // selectors for multiitem selection
             new CSSLocator('multiSelectAddButton', '.c-toggle-selection-button'),
             // itemActions
