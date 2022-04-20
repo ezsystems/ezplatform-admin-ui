@@ -53,7 +53,7 @@ final class ReadAllowedContentTypesTest extends TestCase
 
     public function testUdwConfigResolveOnUnsupportedConfigName(): void
     {
-        $this->permissionResolver->expects($this->never())->method('hasAccess');
+        $this->permissionResolver->method('hasAccess')->with('content', 'read')->willReturn(true);
         $this->permissionChecker->expects($this->never())->method('getRestrictions');
         $this->contentTypeService->expects($this->never())->method('loadContentTypeList');
 
@@ -61,7 +61,11 @@ final class ReadAllowedContentTypesTest extends TestCase
 
         $this->subscriber->onUdwConfigResolve($event);
 
-        $this->assertEquals([], $event->getConfig());
+        $expectedConfig = [
+            'allowed_content_types' => null,
+        ];
+
+        $this->assertEquals($expectedConfig, $event->getConfig());
     }
 
     public function testUdwConfigResolveWhenThereIsNoContentReadLimitations(): void

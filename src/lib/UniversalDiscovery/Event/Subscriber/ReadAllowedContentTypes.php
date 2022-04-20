@@ -79,10 +79,6 @@ final class ReadAllowedContentTypes implements EventSubscriberInterface
     {
         $config = $event->getConfig();
 
-        if (!$event->isReadOnlyEvent()) {
-            return;
-        }
-
         $this->allowedContentTypesIdentifiers = $this->getAllowedContentTypesIdentifiers(
             $config['allowed_content_types'] ?? []
         );
