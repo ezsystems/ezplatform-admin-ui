@@ -132,6 +132,9 @@ use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordForgotWithLoginType;
 use EzSystems\EzPlatformAdminUi\Form\Type\User\UserPasswordResetType;
 use EzSystems\EzPlatformAdminUi\Form\Type\Version\VersionRemoveType;
 use EzSystems\EzPlatformUser\Form\Type\UserSettingUpdateType;
+use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardListData;
+use Ibexa\AdminUi\Form\Type\URLWildcard\URLWildcardListType;
+use Ibexa\Platform\Bundle\Search\Form\Data\SearchData as IbexaSearchData;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Util\StringUtil;
@@ -1170,6 +1173,21 @@ class FormFactory
         $name = $name ?: StringUtil::fqcnToBlockPrefix(ContentRemoveType::class);
 
         return $this->formFactory->createNamed($name, ContentRemoveType::class, $data);
+    }
+
+    public function createURLWildcardList(
+        ?URLWildcardListData $data = null,
+        ?string $name = null,
+        array $options = []
+    ): FormInterface {
+        $name = $name ?: StringUtil::fqcnToBlockPrefix(IbexaSearchData::class);
+
+        return $this->formFactory->createNamed(
+            $name,
+            URLWildcardListType::class,
+            $data ?? new URLWildcardListData(),
+            $options
+        );
     }
 
     /**

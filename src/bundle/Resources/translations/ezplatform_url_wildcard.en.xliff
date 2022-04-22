@@ -116,6 +116,11 @@
         <target state="new">Forward</target>
         <note>key: url_wildcard.type.forward</note>
       </trans-unit>
+      <trans-unit id="5646653e7d129c0a5c96b6b87e99eeb9d92a6fee" resname="url_wildcard.type.all">
+        <source>All</source>
+        <target state="new">All</target>
+        <note>key: url_wildcard.type.all</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
