@@ -4,4 +4,10 @@
 
         return null;
     };
+
+    global.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            doc.querySelector('body').classList.remove('ibexa-prevent-click');
+        }
+    });
 })(window, window.document);
