@@ -12,10 +12,10 @@ use eZ\Publish\Core\MVC\Symfony\Event\PreContentViewEvent;
 use eZ\Publish\Core\MVC\Symfony\MVCEvents;
 use eZ\Publish\Core\MVC\Symfony\View\LoginFormView;
 use EzSystems\EzPlatformAdminUi\Specification\SiteAccess\IsAdmin;
+use Ibexa\Core\MVC\Symfony\Security\Exception\PasswordExpiredException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Exception\CredentialsExpiredException;
 
 final class CredentialsExpiredListener implements EventSubscriberInterface
 {
@@ -54,7 +54,7 @@ final class CredentialsExpiredListener implements EventSubscriberInterface
             return;
         }
 
-        if ($view->getLastAuthenticationException() instanceof CredentialsExpiredException) {
+        if ($view->getLastAuthenticationException() instanceof PasswordExpiredException) {
             $view->setTemplateIdentifier('@ezdesign/account/error/credentials_expired.html.twig');
         }
     }
