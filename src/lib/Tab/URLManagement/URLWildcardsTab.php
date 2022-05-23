@@ -11,16 +11,20 @@ namespace EzSystems\EzPlatformAdminUi\Tab\URLManagement;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\URLWildcardService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardListData;
+use Ibexa\AdminUi\Form\Type\URLWildcard\URLWildcardListType;
 use Ibexa\AdminUi\Pagination\Pagerfanta\URLWildcardAdapter;
 use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\Query\Criterion;
 use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\Query\SortClause;
 use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\URLWildcardQuery;
 use Pagerfanta\Pagerfanta;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -45,7 +49,7 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
     /** @var \Symfony\Component\HttpFoundation\RequestStack */
     private $requestStack;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
+    /** @var \Symfony\Component\Form\FormFactoryInterface */
     private $formFactory;
 
     public function __construct(
@@ -55,7 +59,7 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
         ConfigResolverInterface $configResolver,
         RequestStack $requestStack,
         URLWildcardService $urlWildcardService,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($twig, $translator);
 
@@ -104,13 +108,17 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
     public function renderView(array $parameters): string
     {
         $limit = $this->configResolver->getParameter('pagination.url_wildcards');
-        $data = new URLWildcardListData(['limit' => $limit]);
+        $data = new URLWildcardListData();
+        $data->setLimit($limit);
 
-        $searchUrlWildcardForm = $this->formFactory->createURLWildcardList($data, 'urlwildcardSearchForm', [
-            'method' => Request::METHOD_GET,
-            'csrf_protection' => false,
-        ]);
-
+        $searchUrlWildcardForm = $this->formFactory->create(
+            URLWildcardListType::class,
+            $data,
+            [
+                'method' => Request::METHOD_GET,
+                'csrf_protection' => false,
+            ]
+        );
         $searchUrlWildcardForm->handleRequest($this->requestStack->getCurrentRequest());
 
         if ($searchUrlWildcardForm->isSubmitted() && !$searchUrlWildcardForm->isValid()) {
@@ -133,11 +141,15 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
             $urlWildcardsChoices[$urlWildcardItem->id] = false;
         }
 
-        $deleteUrlWildcardDeleteForm = $this->formFactory->deleteURLWildcard(
+        $deleteUrlWildcardDeleteForm = $this->formFactory->create(
+            URLWildcardDeleteType::class,
             new URLWildcardDeleteData($urlWildcardsChoices)
         );
 
-        $addUrlWildcardForm = $this->formFactory->createURLWildcard();
+        $addUrlWildcardForm = $this->formFactory->create(
+            URLWildcardType::class,
+            new URLWildcardData()
+        );
         $urlWildcardsEnabled = $this->configResolver->getParameter('url_wildcards.enabled');
         $canManageWildcards = $this->permissionResolver->hasAccess('content', 'urltranslator');
 
@@ -164,12 +176,12 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
         $criteria = [];
 
         if ($data->searchQuery !== null) {
-            $UrlCriterion = [];
+            $urlCriterion = [];
 
-            $UrlCriterion[] = new Criterion\DestinationUrl($data->searchQuery);
-            $UrlCriterion[] = new Criterion\SourceUrl($data->searchQuery);
+            $urlCriterion[] = new Criterion\DestinationUrl($data->searchQuery);
+            $urlCriterion[] = new Criterion\SourceUrl($data->searchQuery);
 
-            $criteria[] = new Criterion\LogicalOr($UrlCriterion);
+            $criteria[] = new Criterion\LogicalOr($urlCriterion);
         }
 
         if ($data->type !== null) {

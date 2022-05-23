@@ -4,6 +4,8 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace Ibexa\AdminUi\Form\Type\URLWildcard;
 
 use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardListData;
@@ -18,27 +20,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * URLWildcard list form.
  */
-class URLWildcardListType extends AbstractType
+final class URLWildcardListType extends AbstractType
 {
-    /**
-     * @var \Symfony\Contracts\Translation\TranslatorInterface
-     */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
-    /**
-     * URLListType constructor.
-     *
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     */
     public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('type', ChoiceType::class, [
             'choices' => [
@@ -57,10 +49,7 @@ class URLWildcardListType extends AbstractType
         $builder->add('page', HiddenType::class);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => URLWildcardListData::class,
