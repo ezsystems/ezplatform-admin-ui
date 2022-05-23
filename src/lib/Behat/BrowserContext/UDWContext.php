@@ -97,4 +97,20 @@ class UDWContext implements Context
     {
         $this->universalDiscoveryWidget->openPreview();
     }
+
+    /**
+     * @Given I search for content item :item through UDW
+     */
+    public function searchForContentItem(string $item): void
+    {
+        $this->universalDiscoveryWidget->searchForContent($item);
+    }
+
+    /**
+     * @Given I select :item (content) item in search results through UDW
+     */
+    public function selectItemInSearchResults(string $item): void
+    {
+        $this->universalDiscoveryWidget->selectInSearchResults($item);
+    }
 }

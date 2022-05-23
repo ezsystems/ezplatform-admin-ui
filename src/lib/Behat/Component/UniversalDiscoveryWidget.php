@@ -180,6 +180,25 @@ class UniversalDiscoveryWidget extends Component
         $this->getHTMLPage()->find($this->getLocator('markedBookmarkedItem'))->assert()->textEquals($bookmarkName);
     }
 
+    public function searchForContent(string $name): void
+    {
+        $this->getHTMLPage()->find($this->getLocator('inputField'))->setValue($name);
+        $this->getHTMLPage()->find($this->getLocator('searchButton'))->click();
+
+        $this->getHTMLPage()
+            ->setTimeout(self::SHORT_TIMEOUT)
+            ->find($this->getLocator('searchResults'))
+            ->assert()->textContains('Search results');
+    }
+
+    public function selectInSearchResults(string $name): void
+    {
+        $this->getHTMLPage()
+            ->find($this->getLocator('targetResult'))
+            ->assert()->textEquals($name)
+            ->click();
+    }
+
     protected function specifyLocators(): array
     {
         return [
@@ -205,6 +224,11 @@ class UniversalDiscoveryWidget extends Component
             new VisibleCSSLocator('bookmarkButton', '.c-content-meta-preview__toggle-bookmark-button'),
             new VisibleCSSLocator('bookmarkedItem', '.c-bookmarks-list__item-name'),
             new VisibleCSSLocator('markedBookmarkedItem', '.c-bookmarks-list__item--marked'),
+            // search
+            new VisibleCSSLocator('inputField', '.c-search__input'),
+            new VisibleCSSLocator('searchButton', '.c-search__search-btn'),
+            new VisibleCSSLocator('searchResults', '.c-content-table__title'),
+            new VisibleCSSLocator('targetResult', '.c-content-table-item td:nth-child(2)'),
         ];
     }
 
