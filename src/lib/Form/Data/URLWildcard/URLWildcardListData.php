@@ -8,9 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\Form\Data\URLWildcard;
 
-use eZ\Publish\API\Repository\Values\ValueObject;
-
-final class URLWildcardListData extends ValueObject
+final class URLWildcardListData
 {
     /** @var string|null */
     public $searchQuery;
@@ -19,19 +17,18 @@ final class URLWildcardListData extends ValueObject
     public $type;
 
     /** @var int */
-    public $page = 1;
-
-    /** @var int */
-    public $limit = 10;
+    public $limit;
 
     public function getSearchQuery(): ?string
     {
         return $this->searchQuery;
     }
 
-    public function setSearchQuery(?string $searchQuery): void
+    public function setSearchQuery(?string $searchQuery): self
     {
         $this->searchQuery = $searchQuery;
+
+        return $this;
     }
 
     public function getType(): ?bool
@@ -39,19 +36,11 @@ final class URLWildcardListData extends ValueObject
         return $this->type;
     }
 
-    public function setType(?bool $type): void
+    public function setType(?bool $type): self
     {
         $this->type = $type;
-    }
 
-    public function getPage(): int
-    {
-        return $this->page;
-    }
-
-    public function setPage(int $page): void
-    {
-        $this->page = $page;
+        return $this;
     }
 
     public function getLimit(): int
@@ -59,8 +48,10 @@ final class URLWildcardListData extends ValueObject
         return $this->limit;
     }
 
-    public function setLimit(int $limit): void
+    public function setLimit(int $limit): self
     {
         $this->limit = $limit;
+
+        return $this;
     }
 }

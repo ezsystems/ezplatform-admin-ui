@@ -108,6 +108,11 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
     public function renderView(array $parameters): string
     {
         $limit = $this->configResolver->getParameter('pagination.url_wildcards');
+        $currentRequest = $this->requestStack->getCurrentRequest();
+        $page = $this->requestStack->getCurrentRequest()->query->getInt(
+            self::PAGINATION_PARAM_NAME, 1
+        );
+
         $data = new URLWildcardListData();
         $data->setLimit($limit);
 
@@ -119,7 +124,8 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
                 'csrf_protection' => false,
             ]
         );
-        $searchUrlWildcardForm->handleRequest($this->requestStack->getCurrentRequest());
+
+        $searchUrlWildcardForm->handleRequest($currentRequest);
 
         if ($searchUrlWildcardForm->isSubmitted() && !$searchUrlWildcardForm->isValid()) {
             throw new BadRequestHttpException();
@@ -132,8 +138,8 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
             )
         );
 
-        $urlWildcardLists->setCurrentPage($data->page);
-        $urlWildcardLists->setMaxPerPage($data->limit);
+        $urlWildcardLists->setMaxPerPage($data->getLimit());
+        $urlWildcardLists->setCurrentPage(min($page, $urlWildcardLists->getNbPages()));
 
         $urlWildcards = $urlWildcardLists->getCurrentPageResults();
         $urlWildcardsChoices = [];

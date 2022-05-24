@@ -43,7 +43,6 @@ final class URLWildcardListType extends AbstractType implements TranslationConta
         ]);
 
         $builder->add('limit', HiddenType::class);
-        $builder->add('page', HiddenType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -53,7 +52,6 @@ final class URLWildcardListType extends AbstractType implements TranslationConta
             'translation_domain' => 'ezplatform_url_wildcard',
         ]);
     }
-
 
     /**
      * Returns an array of messages.
