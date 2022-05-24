@@ -18,9 +18,6 @@ use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * URLWildcard list form.
- */
 final class URLWildcardListType extends AbstractType implements TranslationContainerInterface
 {
     private const TYPE_DIRECT = 'url_wildcard.type.direct';
@@ -54,11 +51,9 @@ final class URLWildcardListType extends AbstractType implements TranslationConta
     }
 
     /**
-     * Returns an array of messages.
-     *
-     * @return array<Message>
+     * @return array<\JMS\TranslationBundle\Model\Message>
      */
-    public static function getTranslationMessages()
+    public static function getTranslationMessages(): array
     {
         return [
             (new Message(self::TYPE_DIRECT, 'ezplatform_url_wildcard'))->setDesc('Direct'),

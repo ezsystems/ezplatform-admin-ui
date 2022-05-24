@@ -11,7 +11,6 @@ namespace EzSystems\EzPlatformAdminUi\Tab\URLManagement;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\URLWildcardService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardData;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType;
 use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType;
@@ -128,7 +127,7 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
         $searchUrlWildcardForm->handleRequest($currentRequest);
 
         if ($searchUrlWildcardForm->isSubmitted() && !$searchUrlWildcardForm->isValid()) {
-            throw new BadRequestHttpException();
+            throw new BadRequestHttpException('The search form is not valid');
         }
 
         $urlWildcardLists = new Pagerfanta(
@@ -152,10 +151,7 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
             new URLWildcardDeleteData($urlWildcardsChoices)
         );
 
-        $addUrlWildcardForm = $this->formFactory->create(
-            URLWildcardType::class,
-            new URLWildcardData()
-        );
+        $addUrlWildcardForm = $this->formFactory->create(URLWildcardType::class);
         $urlWildcardsEnabled = $this->configResolver->getParameter('url_wildcards.enabled');
         $canManageWildcards = $this->permissionResolver->hasAccess('content', 'urltranslator');
 
@@ -182,10 +178,10 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
         $criteria = [];
 
         if ($data->searchQuery !== null) {
-            $urlCriterion = [];
-
-            $urlCriterion[] = new Criterion\DestinationUrl($data->searchQuery);
-            $urlCriterion[] = new Criterion\SourceUrl($data->searchQuery);
+            $urlCriterion = [
+                new Criterion\DestinationUrl($data->searchQuery),
+                new Criterion\SourceUrl($data->searchQuery),
+            ];
 
             $criteria[] = new Criterion\LogicalOr($urlCriterion);
         }
