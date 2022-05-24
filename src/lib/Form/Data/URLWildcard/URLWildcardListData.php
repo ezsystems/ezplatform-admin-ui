@@ -24,11 +24,9 @@ final class URLWildcardListData
         return $this->searchQuery;
     }
 
-    public function setSearchQuery(?string $searchQuery): self
+    public function setSearchQuery(?string $searchQuery): void
     {
         $this->searchQuery = $searchQuery;
-
-        return $this;
     }
 
     public function getType(): ?bool
@@ -36,11 +34,9 @@ final class URLWildcardListData
         return $this->type;
     }
 
-    public function setType(?bool $type): self
+    public function setType(?bool $type): void
     {
         $this->type = $type;
-
-        return $this;
     }
 
     public function getLimit(): int
@@ -48,10 +44,8 @@ final class URLWildcardListData
         return $this->limit;
     }
 
-    public function setLimit(int $limit): self
+    public function setLimit(int $limit): void
     {
         $this->limit = $limit;
-
-        return $this;
     }
 }
