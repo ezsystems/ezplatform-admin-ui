@@ -620,12 +620,12 @@
         }
     });
 
-    $('.ez-tabs a').on('shown.bs.tab', (event) => {
-        const id = event.target.getAttribute('href');
-        const element = doc.querySelector(id);
+    $('.ez-tabs .nav-link').on('shown.bs.tab', (event) => {
+        const tabPaneSelector = event.target.getAttribute('href');
+        const tabPane = doc.querySelector(tabPaneSelector);
 
-        if (element.querySelectorAll(SELECTOR_FIELD).length > 0) {
-            maps.forEach(map => map.invalidateSize(true));
+        if (tabPane.querySelectorAll(SELECTOR_FIELD).length > 0) {
+            maps.forEach((map) => map.invalidateSize(true));
         }
     });
 
