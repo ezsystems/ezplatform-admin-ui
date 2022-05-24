@@ -326,9 +326,7 @@ services:
         tags:
             - { name: form.type, alias: ezplatform_content_forms_url_list }
 
-    Ibexa\AdminUi\Form\Type\URLWildcard\URLWildcardListType:
-        arguments:
-            - '@translator'
+    Ibexa\AdminUi\Form\Type\URLWildcard\URLWildcardListType: ~
 
     EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType: ~
 

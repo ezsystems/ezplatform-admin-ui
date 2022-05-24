@@ -15,29 +15,20 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * URLWildcard list form.
  */
 final class URLWildcardListType extends AbstractType
 {
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    private $translator;
-
-    public function __construct(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('type', ChoiceType::class, [
             'choices' => [
-                $this->translator->trans(/** @Desc("Direct") */ 'url_wildcard.type.direct', [], 'ezplatform_url_wildcard') => true,
-                $this->translator->trans(/** @Desc("Forward") */ 'url_wildcard.type.forward', [], 'ezplatform_url_wildcard') => false,
+                'url_wildcard.type.direct' => true,
+                'url_wildcard.type.forward' => false,
             ],
-            'placeholder' => $this->translator->trans(/** @Desc("All") */ 'url_wildcard.type.all', [], 'ezplatform_url_wildcard'),
+            'placeholder' => 'url_wildcard.type.all',
             'required' => false,
         ]);
 
