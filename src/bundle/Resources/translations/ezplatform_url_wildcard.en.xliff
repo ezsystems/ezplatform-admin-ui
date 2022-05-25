@@ -116,6 +116,21 @@
         <target state="new">Forward</target>
         <note>key: url_wildcard.type.forward</note>
       </trans-unit>
+      <trans-unit id="5646653e7d129c0a5c96b6b87e99eeb9d92a6fee" resname="url_wildcard.type.all">
+        <source>All</source>
+        <target state="new">All</target>
+        <note>key: url_wildcard.type.all</note>
+      </trans-unit>
+      <trans-unit id="d5f8b02988ca5a63f52253b3eec84f9cc8f799cd" resname="url_wildcard.search.placeholder">
+        <source>Search for URL wildcards</source>
+        <target state="new">Search for URL wildcards</target>
+        <note>key: url_wildcard.search.placeholder</note>
+      </trans-unit>
+      <trans-unit id="fc64faec5bb26550f5008c70a89e7ba76f0d5dd1" resname="url_wildcard.search">
+        <source>Search</source>
+        <target state="new">Search</target>
+        <note>key: url_wildcard.search</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

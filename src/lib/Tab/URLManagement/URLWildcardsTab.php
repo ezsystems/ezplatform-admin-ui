@@ -12,12 +12,21 @@ use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\URLWildcardService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\Form\Data\URLWildcard\URLWildcardDeleteData;
-use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
+use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardDeleteType;
+use EzSystems\EzPlatformAdminUi\Form\Type\URLWildcard\URLWildcardType;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use Ibexa\AdminUi\Form\Data\URLWildcard\URLWildcardListData;
+use Ibexa\AdminUi\Form\Type\URLWildcard\URLWildcardListType;
 use Ibexa\AdminUi\Pagination\Pagerfanta\URLWildcardAdapter;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\Query\Criterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\Query\SortClause;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\URLWildcardQuery;
 use Pagerfanta\Pagerfanta;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
@@ -39,7 +48,7 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
     /** @var \Symfony\Component\HttpFoundation\RequestStack */
     private $requestStack;
 
-    /** @var \EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory */
+    /** @var \Symfony\Component\Form\FormFactoryInterface */
     private $formFactory;
 
     public function __construct(
@@ -49,7 +58,7 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
         ConfigResolverInterface $configResolver,
         RequestStack $requestStack,
         URLWildcardService $urlWildcardService,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         parent::__construct($twig, $translator);
 
@@ -97,42 +106,96 @@ class URLWildcardsTab extends AbstractTab implements OrderedTabInterface
      */
     public function renderView(array $parameters): string
     {
-        $currentPage = $this->requestStack->getCurrentRequest()->query->getInt(
+        $limit = $this->configResolver->getParameter('pagination.url_wildcards');
+        $currentRequest = $this->requestStack->getCurrentRequest();
+        $page = $this->requestStack->getCurrentRequest()->query->getInt(
             self::PAGINATION_PARAM_NAME, 1
         );
-        $limit = $this->configResolver->getParameter('pagination.url_wildcards');
 
-        $pagerfanta = new Pagerfanta(
+        $data = new URLWildcardListData();
+        $data->setLimit($limit);
+
+        $searchUrlWildcardForm = $this->formFactory->create(
+            URLWildcardListType::class,
+            $data,
+            [
+                'method' => Request::METHOD_GET,
+                'csrf_protection' => false,
+            ]
+        );
+
+        $searchUrlWildcardForm->handleRequest($currentRequest);
+
+        if ($searchUrlWildcardForm->isSubmitted() && !$searchUrlWildcardForm->isValid()) {
+            throw new BadRequestHttpException('The search form is not valid');
+        }
+
+        $urlWildcardLists = new Pagerfanta(
             new URLWildcardAdapter(
+                $this->buildListQuery($data),
                 $this->urlWildcardService
             )
         );
-        $pagerfanta->setMaxPerPage($limit);
-        $pagerfanta->setCurrentPage(min(max($currentPage, 1), $pagerfanta->getNbPages()));
 
-        $urlWildcards = $pagerfanta->getCurrentPageResults();
+        $urlWildcardLists->setMaxPerPage($data->getLimit());
+        $urlWildcardLists->setCurrentPage(min($page, $urlWildcardLists->getNbPages()));
+
+        $urlWildcards = $urlWildcardLists->getCurrentPageResults();
         $urlWildcardsChoices = [];
         foreach ($urlWildcards as $urlWildcardItem) {
             $urlWildcardsChoices[$urlWildcardItem->id] = false;
         }
 
-        $deleteUrlWildcardDeleteForm = $this->formFactory->deleteURLWildcard(
+        $deleteUrlWildcardDeleteForm = $this->formFactory->create(
+            URLWildcardDeleteType::class,
             new URLWildcardDeleteData($urlWildcardsChoices)
         );
 
-        $addUrlWildcardForm = $this->formFactory->createURLWildcard();
+        $addUrlWildcardForm = $this->formFactory->create(URLWildcardType::class);
         $urlWildcardsEnabled = $this->configResolver->getParameter('url_wildcards.enabled');
         $canManageWildcards = $this->permissionResolver->hasAccess('content', 'urltranslator');
 
         return $this->twig->render('@ezdesign/url_wildcard/list.html.twig', [
-            'url_wildcards' => $pagerfanta,
+            'url_wildcards' => $urlWildcardLists,
             'pager_options' => [
                 'pageParameter' => '[' . self::PAGINATION_PARAM_NAME . ']',
             ],
             'form' => $deleteUrlWildcardDeleteForm->createView(),
+            'form_list' => $searchUrlWildcardForm->createView(),
             'form_add' => $addUrlWildcardForm->createView(),
             'url_wildcards_enabled' => $urlWildcardsEnabled,
             'can_manage' => $canManageWildcards,
         ]);
+    }
+
+    private function buildListQuery(URLWildcardListData $data): URLWildcardQuery
+    {
+        $query = new URLWildcardQuery();
+        $query->sortClauses = [
+            new SortClause\DestinationUrl(),
+        ];
+
+        $criteria = [];
+
+        if ($data->searchQuery !== null) {
+            $urlCriterion = [
+                new Criterion\DestinationUrl($data->searchQuery),
+                new Criterion\SourceUrl($data->searchQuery),
+            ];
+
+            $criteria[] = new Criterion\LogicalOr($urlCriterion);
+        }
+
+        if ($data->type !== null) {
+            $criteria[] = new Criterion\Type($data->type);
+        }
+
+        if (empty($criteria)) {
+            $criteria[] = new Criterion\MatchAll();
+        }
+
+        $query->filter = new Criterion\LogicalAnd($criteria);
+
+        return $query;
     }
 }

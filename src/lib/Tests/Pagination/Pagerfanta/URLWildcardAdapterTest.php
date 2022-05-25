@@ -9,6 +9,10 @@ namespace EzSystems\EzPlatformAdminUi\Tests\Pagination\Pagerfanta;
 use eZ\Publish\API\Repository\URLWildcardService;
 use eZ\Publish\API\Repository\Values\Content\URLWildcard;
 use Ibexa\AdminUi\Pagination\Pagerfanta\URLWildcardAdapter;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\Query\Criterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\Query\SortClause;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\SearchResult;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\URLWildcardQuery;
 use PHPUnit\Framework\TestCase;
 
 final class URLWildcardAdapterTest extends TestCase
@@ -23,42 +27,56 @@ final class URLWildcardAdapterTest extends TestCase
 
     public function testGetNbResults(): void
     {
-        $countAll = 5;
+        $query = $this->createURLWildcardQuery();
+
+        $searchResults = new SearchResult([
+            'items' => [],
+            'totalCount' => 5,
+        ]);
 
         $this->urlWildcardService
             ->expects($this->once())
-            ->method('countAll')
-            ->willReturn($countAll);
+            ->method('findUrlWildcards')
+            ->willReturnCallback(function (URLWildcardQuery $q) use ($query, $searchResults) {
+                $this->assertEquals($query->filter, $q->filter);
+                $this->assertEquals($query->sortClauses, $q->sortClauses);
+                $this->assertEquals(0, $q->offset);
+                $this->assertEquals(0, $q->limit);
 
-        $adapter = new URLWildcardAdapter($this->urlWildcardService);
+                return $searchResults;
+            });
 
-        $this->assertEquals(
-            $countAll,
-            $adapter->getNbResults()
-        );
+        $adapter = new URLWildcardAdapter($query, $this->urlWildcardService);
 
-        $adapter->getNbResults();
+        $this->assertEquals($searchResults->totalCount, $adapter->getNbResults());
     }
 
     public function testGetSlice(): void
     {
+        $query = $this->createURLWildcardQuery();
         $offset = 10;
         $limit = 25;
 
-        $expectedResult = $this->urlWildcards();
+        $searchResults = new SearchResult([
+            'items' => $this->urlWildcards(),
+            'totalCount' => 5,
+        ]);
 
         $this->urlWildcardService
             ->expects($this->once())
-            ->method('loadAll')
-            ->with($offset, $limit)
-            ->willReturn($expectedResult);
+            ->method('findUrlWildcards')
+            ->willReturnCallback(function (URLWildcardQuery $q) use ($query, $limit, $offset, $searchResults) {
+                $this->assertEquals($query->filter, $q->filter);
+                $this->assertEquals($query->sortClauses, $q->sortClauses);
+                $this->assertEquals($limit, $q->limit);
+                $this->assertEquals($offset, $q->offset);
 
-        $adapter = new URLWildcardAdapter($this->urlWildcardService);
+                return $searchResults;
+            });
 
-        $this->assertEquals(
-            $expectedResult,
-            $adapter->getSlice($offset, $limit)
-        );
+        $adapter = new URLWildcardAdapter($query, $this->urlWildcardService);
+
+        $this->assertEquals($searchResults->items, $adapter->getSlice($offset, $limit));
     }
 
     /**
@@ -81,5 +99,16 @@ final class URLWildcardAdapterTest extends TestCase
                 'forward' => false,
             ]),
         ];
+    }
+
+    private function createURLWildcardQuery(): URLWildcardQuery
+    {
+        $query = new URLWildcardQuery();
+        $query->filter = new Criterion\MatchAll();
+        $query->sortClauses = [
+            new SortClause\Id(),
+        ];
+
+        return $query;
     }
 }

@@ -7,6 +7,7 @@
 namespace Ibexa\AdminUi\Pagination\Pagerfanta;
 
 use eZ\Publish\API\Repository\URLWildcardService;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\URLWildcardQuery;
 use Pagerfanta\Adapter\AdapterInterface;
 
 final class URLWildcardAdapter implements AdapterInterface
@@ -17,35 +18,43 @@ final class URLWildcardAdapter implements AdapterInterface
     /** @var int */
     private $nbResults;
 
-    public function __construct(URLWildcardService $urlWildcardService)
+    /** @var \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard\URLWildcardQuery */
+    private $query;
+
+    public function __construct(URLWildcardQuery $query, URLWildcardService $urlWildcardService)
     {
+        $this->query = $query;
         $this->urlWildcardService = $urlWildcardService;
     }
 
     /**
-     * Returns the number of results.
+     * @inheritdoc
      *
-     * @return int the number of results
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function getNbResults(): int
     {
-        if ($this->nbResults !== null) {
-            return $this->nbResults;
-        }
+        $query = clone $this->query;
+        $query->offset = 0;
+        $query->limit = 0;
 
-        return $this->nbResults = $this->urlWildcardService->countAll();
+        return $this->urlWildcardService->findUrlWildcards($query)->totalCount;
     }
 
     /**
-     * Returns a slice of the results.
-     *
-     * @param int $offset the offset
-     * @param int $length the length
+     * @inheritdoc
      *
      * @return \eZ\Publish\API\Repository\Values\Content\URLWildcard[]
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function getSlice($offset, $length): array
     {
-        return $this->urlWildcardService->loadAll($offset, $length);
+        $query = clone $this->query;
+        $query->offset = $offset;
+        $query->limit = $length;
+        $query->performCount = false;
+
+        return $this->urlWildcardService->findUrlWildcards($query)->items;
     }
 }
