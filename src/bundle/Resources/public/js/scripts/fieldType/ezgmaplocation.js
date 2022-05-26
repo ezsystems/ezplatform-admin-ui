@@ -1,4 +1,4 @@
-(function(global, doc, eZ, Leaflet) {
+(function(global, doc, eZ, Leaflet, $) {
     const SELECTOR_FIELD = '.ez-field-edit--ezgmaplocation';
     const SELECTOR_ADDRESS_INPUT = '.ez-data-source__field--address .ez-data-source__input';
     const SELECTOR_LAT_FIELD = '.ez-data-source__field--latitude';
@@ -18,6 +18,7 @@
     const VALIDATE_LONGITUDE = 'validateLongitude';
     const VALIDATE_LATITUDE = 'validateLatitude';
     const VALIDATE_ADDRESS = 'validateAddress';
+    const maps = [];
 
     class EzGMapLocationValidator extends eZ.BaseFieldValidator {
         /**
@@ -463,6 +464,7 @@
         };
         const map = Leaflet.map(field.querySelector('.ez-data-source__map'), mapConfig);
 
+        maps.push(map);
         longitudeInput.value = longitudeInput.dataset.value.replace(',', '.');
         latitudeInput.value = latitudeInput.dataset.value.replace(',', '.');
 
@@ -618,5 +620,14 @@
         }
     });
 
+    $('.ez-tabs .nav-link').on('shown.bs.tab', (event) => {
+        const tabPaneSelector = event.target.getAttribute('href');
+        const tabPane = doc.querySelector(tabPaneSelector);
+
+        if (tabPane.querySelectorAll(SELECTOR_FIELD).length > 0) {
+            maps.forEach((map) => map.invalidateSize(true));
+        }
+    });
+
     eZ.addConfig('fieldTypeValidators', [validator], true);
-})(window, window.document, window.eZ, window.L);
+})(window, window.document, window.eZ, window.L, window.jQuery);
