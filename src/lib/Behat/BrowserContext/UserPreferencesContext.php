@@ -17,7 +17,7 @@ class UserPreferencesContext implements Context
      */
     private $changePasswordPage;
     /**
-     * @var UserSettingsPage
+     * @var \Ibexa\AdminUi\Behat\Page\UserSettingsPage
      */
     private $userSettingsPage;
 
