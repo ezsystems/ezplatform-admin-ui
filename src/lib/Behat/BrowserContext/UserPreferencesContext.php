@@ -15,10 +15,15 @@ class UserPreferencesContext implements Context
      * @var \Ibexa\AdminUi\Behat\Page\ChangePasswordPage
      */
     private $changePasswordPage;
+    /**
+     * @var UserSettingsPage
+     */
+    private $userSettingsPage;
 
-    public function __construct(ChangePasswordPage $changePasswordPage)
+    public function __construct(ChangePasswordPage $changePasswordPage, UserSettingsPage $userSettingsPage)
     {
         $this->changePasswordPage = $changePasswordPage;
+        $this->userSettingsPage = $userSettingsPage;
     }
 
     /**
