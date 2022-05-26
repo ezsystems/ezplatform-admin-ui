@@ -8,6 +8,7 @@ namespace Ibexa\AdminUi\Behat\BrowserContext;
 
 use Behat\Behat\Context\Context;
 use Ibexa\AdminUi\Behat\Page\ChangePasswordPage;
+use Ibexa\AdminUi\Behat\Page\UserSettingsPage;
 
 class UserPreferencesContext implements Context
 {
