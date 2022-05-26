@@ -9,32 +9,35 @@ browser:
             filters:
                 tags: "~@broken"
             contexts: 
-                - EzSystems\Behat\API\Context\ContentTypeContext
                 - EzSystems\Behat\API\Context\ContentContext
+                - EzSystems\Behat\API\Context\ContentTypeContext
+                - EzSystems\Behat\API\Context\RoleContext
                 - EzSystems\Behat\API\Context\TestContext
                 - EzSystems\Behat\API\Context\TrashContext
-                - Ibexa\Behat\Browser\Context\DebuggingContext
-                - Ibexa\Behat\Browser\Context\AuthenticationContext
-                - Ibexa\AdminUi\Behat\BrowserContext\NavigationContext
-                - Ibexa\AdminUi\Behat\BrowserContext\RightMenuContext
-                - Ibexa\AdminUi\Behat\BrowserContext\UDWContext
-                - Ibexa\AdminUi\Behat\BrowserContext\ContentViewContext
+                - EzSystems\Behat\API\Context\UserContext
                 - Ibexa\AdminUi\Behat\BrowserContext\AdminUpdateContext
-                - Ibexa\AdminUi\Behat\BrowserContext\ContentUpdateContext
-                - Ibexa\AdminUi\Behat\BrowserContext\ContentPreviewContext
-                - Ibexa\AdminUi\Behat\BrowserContext\NotificationContext
-                - Ibexa\AdminUi\Behat\BrowserContext\TrashContext
-                - Ibexa\AdminUi\Behat\BrowserContext\ContentTypeContext
-                - Ibexa\AdminUi\Behat\BrowserContext\RolesContext
-                - Ibexa\AdminUi\Behat\BrowserContext\SystemInfoContext
-                - Ibexa\AdminUi\Behat\BrowserContext\LeftMenuContext
-                - Ibexa\AdminUi\Behat\BrowserContext\SectionsContext
-                - Ibexa\AdminUi\Behat\BrowserContext\LanguageContext
-                - Ibexa\AdminUi\Behat\BrowserContext\ObjectStatesContext
-                - Ibexa\AdminUi\Behat\BrowserContext\DashboardContext
-                - Ibexa\AdminUi\Behat\BrowserContext\SearchContext
                 - Ibexa\AdminUi\Behat\BrowserContext\BookmarkContext
-                - EzSystems\Behat\API\Context\RoleContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentPreviewContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentTypeContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentUpdateContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ContentViewContext
+                - Ibexa\AdminUi\Behat\BrowserContext\DashboardContext
+                - Ibexa\AdminUi\Behat\BrowserContext\LanguageContext
+                - Ibexa\AdminUi\Behat\BrowserContext\LeftMenuContext
+                - Ibexa\AdminUi\Behat\BrowserContext\NavigationContext
+                - Ibexa\AdminUi\Behat\BrowserContext\NotificationContext
+                - Ibexa\AdminUi\Behat\BrowserContext\ObjectStatesContext
+                - Ibexa\AdminUi\Behat\BrowserContext\RightMenuContext
+                - Ibexa\AdminUi\Behat\BrowserContext\RolesContext
+                - Ibexa\AdminUi\Behat\BrowserContext\SearchContext
+                - Ibexa\AdminUi\Behat\BrowserContext\SectionsContext
+                - Ibexa\AdminUi\Behat\BrowserContext\SystemInfoContext
+                - Ibexa\AdminUi\Behat\BrowserContext\TrashContext
+                - Ibexa\AdminUi\Behat\BrowserContext\UDWContext
+                - Ibexa\AdminUi\Behat\BrowserContext\UserPreferencesContext
+                - Ibexa\Behat\Browser\Context\AuthenticationContext
+                - Ibexa\Behat\Browser\Context\DebuggingContext
+                - Ibexa\User\Behat\Context\UserSettingsContext
 
         personas:
             paths:
@@ -62,7 +65,10 @@ browser:
                 - EzSystems\Behat\API\Context\RoleContext
                 - EzSystems\Behat\API\Context\TestContext
                 - EzSystems\Behat\API\Context\TrashContext
+                - EzSystems\Behat\API\Context\UserContext
+                - EzSystems\Behat\API\Context\UserContext
                 - Ibexa\AdminUi\Behat\BrowserContext\AdminUpdateContext
+                - Ibexa\AdminUi\Behat\BrowserContext\BookmarkContext
                 - Ibexa\AdminUi\Behat\BrowserContext\ContentPreviewContext
                 - Ibexa\AdminUi\Behat\BrowserContext\ContentTypeContext
                 - Ibexa\AdminUi\Behat\BrowserContext\ContentUpdateContext
@@ -83,4 +89,4 @@ browser:
                 - Ibexa\AdminUi\Behat\BrowserContext\UserPreferencesContext
                 - Ibexa\Behat\Browser\Context\AuthenticationContext
                 - Ibexa\Behat\Browser\Context\DebuggingContext
-                - Ibexa\AdminUi\Behat\BrowserContext\BookmarkContext
+                - Ibexa\User\Behat\Context\UserSettingsContext

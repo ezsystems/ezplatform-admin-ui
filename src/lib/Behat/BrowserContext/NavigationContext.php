@@ -144,6 +144,14 @@ class NavigationContext implements Context
     }
 
     /**
+     * @Given I go to user settings
+     */
+    public function iGoToUserSettings()
+    {
+        $this->upperMenu->chooseFromUserDropdown('User Settings');
+    }
+
+    /**
      * @Given I'm on Content view Page for :path
      * @Given there exists Content view Page for :path
      */

@@ -11,7 +11,9 @@ use Ibexa\AdminUi\Behat\Page\ChangePasswordPage;
 
 class UserPreferencesContext implements Context
 {
-    /** @var \Ibexa\AdminUi\Behat\Page\ChangePasswordPage */
+    /**
+     * @var \Ibexa\AdminUi\Behat\Page\ChangePasswordPage
+     */
     private $changePasswordPage;
 
     public function __construct(ChangePasswordPage $changePasswordPage)
@@ -28,5 +30,15 @@ class UserPreferencesContext implements Context
         $this->changePasswordPage->setOldPassword($oldPassword);
         $this->changePasswordPage->setNewPassword($newPassword);
         $this->changePasswordPage->setConfirmPassword($newPassword);
+    }
+
+    /**
+     * @When I disable autosave
+     */
+    public function iSetAutosaveDraftValue(): void
+    {
+        $this->userSettingsPage->verifyIsLoaded();
+        $this->userSettingsPage->openAutosaveDraftEditionPage();
+        $this->userSettingsPage->disableAutosave();
     }
 }
