@@ -21,7 +21,8 @@ class SecurityLoginPass implements CompilerPassInterface
     {
         $successHandlerDef = $container->getDefinition('security.authentication.success_handler');
         $successHandlerDef->setClass(RedirectToDashboardAuthenticationSuccessHandler::class);
-        $successHandlerDef->addArgument($container->getParameter('ezpublish.siteaccess.groups'));
-        $successHandlerDef->addArgument('ezplatform.dashboard');
+        $successHandlerDef->setArgument('$logger', $successHandlerDef->getArgument(2));
+        $successHandlerDef->setArgument('$siteAccessGroups', $container->getParameter('ezpublish.siteaccess.groups'));
+        $successHandlerDef->setArgument('$defaultTargetPath', 'ezplatform.dashboard');
     }
 }
