@@ -8,6 +8,7 @@ namespace Ibexa\AdminUi\Behat\BrowserContext;
 
 use Behat\Behat\Context\Context;
 use Ibexa\AdminUi\Behat\Page\ChangePasswordPage;
+use Ibexa\AdminUi\Behat\Page\UserSettingsPage;
 
 class UserPreferencesContext implements Context
 {
@@ -15,10 +16,15 @@ class UserPreferencesContext implements Context
      * @var \Ibexa\AdminUi\Behat\Page\ChangePasswordPage
      */
     private $changePasswordPage;
+    /**
+     * @var \Ibexa\AdminUi\Behat\Page\UserSettingsPage
+     */
+    private $userSettingsPage;
 
-    public function __construct(ChangePasswordPage $changePasswordPage)
+    public function __construct(ChangePasswordPage $changePasswordPage, UserSettingsPage $userSettingsPage)
     {
         $this->changePasswordPage = $changePasswordPage;
+        $this->userSettingsPage = $userSettingsPage;
     }
 
     /**
