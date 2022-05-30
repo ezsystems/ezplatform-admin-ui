@@ -102,8 +102,9 @@
     <div {% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
         <div{% with { attr: label_wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
             {% with { 'compound': false } %}{{- block('form_label') }}{% endwith %}
-            {% if field_type_descriptions[fieldtype.vars.languageCode] is defined and field_type_descriptions[fieldtype.vars.languageCode] != '' %}
-                <span class="ez-field-edit__icon-wrapper" title="{{ field_type_descriptions[fieldtype.vars.languageCode] }}">
+            {% set description = field_type_descriptions[fieldtype.vars.languageCode]|default(field_type_descriptions|first) %}
+            {% if description is not null %}
+                <span class="ez-field-edit__icon-wrapper" title="{{ description }}">
                     <svg class="ez-icon ez-icon--medium">
                         <use xlink:href="{{ ez_icon_path('system-information') }}"></use>
                     </svg>
