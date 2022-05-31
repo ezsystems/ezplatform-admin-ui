@@ -51,13 +51,15 @@
             </div>
         </div>
         <div class="ez-context-menu">
-            {% set url_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu_configure.url_wildcard_edit_sidebar_right', [], {
-                'submit_selector': '#url-update',
-            }) %}
-
-            {{ knp_menu_render(url_create_sidebar_right, {
-                'template': '@ezdesign/ui/menu/sidebar_right.html.twig'
-            }) }}
+	        <div class="ez-sticky-container">
+	            {% set url_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu_configure.url_wildcard_edit_sidebar_right', [], {
+	                'submit_selector': '#url-update',
+	            }) %}
+	
+	            {{ knp_menu_render(url_create_sidebar_right, {
+	                'template': '@ezdesign/ui/menu/sidebar_right.html.twig'
+	            }) }}
+	        </div>
         </div>
     </div>
 {%- endblock -%}
