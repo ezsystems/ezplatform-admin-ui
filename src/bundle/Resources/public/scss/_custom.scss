@@ -40,7 +40,7 @@ $ibexa-color-warning-pale: #fceaec;
 
 $ibexa-color-primary-hover: #e75476;
 
-/* eZ variables: These variables are deprecated, please use variables with the "ibexa" prefix */
+// eZ variables: These variables are deprecated, please use variables with the "ibexa" prefix
 $ez-admin-transition: $ibexa-admin-transition;
 $ez-admin-widget-open-transition: $ibexa-admin-widget-open-transition;
 $ez-admin-widget-close-transition: $ibexa-admin-widget-close-transition;
@@ -90,7 +90,7 @@ $ez-pagination-font-size: 1rem;
 $ez-pagination-page-link-radius: 50%;
 $ez-pagination-border-radius: 0.3rem;
 
-/* boostrap variables*/
+// boostrap variables
 $white: $ibexa-white;
 $gray-100: $ibexa-color-base-pale;
 $gray-200: $ibexa-color-base-pale;
@@ -112,7 +112,7 @@ $grays: (
     600: $ibexa-color-base-medium,
     700: $ibexa-color-base,
     800: $ibexa-color-base,
-    900: $ibexa-color-base-dark
+    900: $ibexa-color-base-dark,
 );
 
 $blue: $ibexa-color-primary;
@@ -127,19 +127,19 @@ $purple: #6f42c1 !default;
 $cyan: #17a2b8 !default;
 
 $colors: (
-    "blue": $ibexa-color-primary,
-    "red": $ibexa-color-primary,
-    "orange": $ibexa-color-primary,
-    "yellow": $ibexa-color-warning,
-    "green": $ibexa-color-positive,
-    "teal": $ibexa-white,
-    "white": $ibexa-white,
-    "gray": $ibexa-color-base-dark,
-    "gray-dark": $pink,
-    "indigo": $indigo,
-    "purple": $purple,
-    "pink": $pink,
-    "cyan": $cyan
+    'blue': $ibexa-color-primary,
+    'red': $ibexa-color-primary,
+    'orange': $ibexa-color-primary,
+    'yellow': $ibexa-color-warning,
+    'green': $ibexa-color-positive,
+    'teal': $ibexa-white,
+    'white': $ibexa-white,
+    'gray': $ibexa-color-base-dark,
+    'gray-dark': $pink,
+    'indigo': $indigo,
+    'purple': $purple,
+    'pink': $pink,
+    'cyan': $cyan,
 );
 
 $theme-colors: (
@@ -150,7 +150,7 @@ $theme-colors: (
     danger: $ibexa-color-danger,
     light: $ibexa-color-base-light,
     dark: $ibexa-color-base-black,
-    info: $cyan
+    info: $cyan,
 );
 
 // Typography
@@ -240,7 +240,7 @@ $container-max-widths: (
     sm: 540px,
     md: 720px,
     lg: 960px,
-    xl: 1470px
+    xl: 1470px,
 ) !default;
 
 //Inputs
