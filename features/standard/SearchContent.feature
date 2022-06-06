@@ -15,7 +15,7 @@ Feature: Searching for a Content item
     Then I should see in search results an item named "Searched folder"
 
   @javascript @APIUser:admin
-  Scenario: Content can be searcehd for in UDW
+  Scenario: Content can be searched for in UDW
     Given I create "folder" Content items in root in "eng-GB"
       | name      | short_name  |
       | folderUDW | folderUDW   |
