@@ -59,3 +59,7 @@ services:
   Ibexa\AdminUi\Behat\Page\BookmarksPage: ~
 
   Ibexa\AdminUi\Behat\Page\UserSettingsPage: ~
+
+  Ibexa\AdminUi\Behat\Page\SegmentsGroupPage: ~
+
+  Ibexa\AdminUi\Behat\Page\SegmentsEditPage: ~

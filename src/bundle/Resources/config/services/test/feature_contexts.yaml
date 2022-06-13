@@ -47,3 +47,5 @@ services:
   Ibexa\AdminUi\Behat\BrowserContext\UserPreferencesContext: ~
 
   Ibexa\AdminUi\Behat\BrowserContext\BookmarkContext: ~
+
+  Ibexa\AdminUi\Behat\BrowserContext\SegmentationContext: ~
