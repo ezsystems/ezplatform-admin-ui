@@ -18,7 +18,7 @@
             const isInteger = Number.isInteger(value);
             const isLess = value < parseInt(event.target.getAttribute('min'), 10);
             const isGreater = value > parseInt(event.target.getAttribute('max'), 10);
-            const isError = (isEmpty && isRequired) || !isInteger || isLess || isGreater;
+            const isError = (isEmpty && isRequired) || (!isEmpty && (!isInteger || isLess || isGreater));
             const label = event.target.closest(SELECTOR_FIELD).querySelector('.ez-field-edit__label').innerHTML;
             const result = { isError };
 
