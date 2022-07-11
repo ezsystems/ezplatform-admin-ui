@@ -15,24 +15,24 @@ Feature: Roles management
       | Name       | testname |
       | Identifier | testid     |
     And I confirm creation of new segment group
-    Then There's segment group with "test1" name and "testid" identifier in Segment Group Information section
+    Then There's segment group with "testname" name and "testid" identifier in Segment Group Information section
 
+  @javascript @testseg2
   Scenario: Create a segment group with segments under segments group
     Given I am logged as admin
     And I open "Segmentation" page in admin SiteAccess
     When I click on segment group creation popup button
     And I fill segment group configuration fields
-      | Name | Identifier |
-      | test | testid     |
-    And I add segment to segment group
-      | Name    | Identifier   |
-      | testseg | testsegid |
-  #  And I add "testseg" segment with "testsegid" identifier to Segments under segment group section
+      | label      | value     |
+      | Name       | testname2 |
+      | Identifier | testid2    |
+    And I add segment with "testsegname1" name and "testsegid1" identifier to segment group
     And I confirm creation of new segment group
-    And There's segment group with "test1" name and "testid" identifier in Segment Group Information section
-    Then There's segment with "testsegid" name  and "testsegid" identifier in Segments Under Segment Group section
+    And There's segment group with "testname2" name and "testid2" identifier in Segment Group Information section
+    Then There's segment with "testsegname1" name and "testsegid1" identifier in Segments Under Segment Group section
 
-  # scenariusze z API
+
+  # scenariusze z migracjami
 
 
 

@@ -10,20 +10,19 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Ibexa\AdminUi\Behat\Page\SegmentsEditPage;
 use Ibexa\AdminUi\Behat\Page\SegmentsGroupPage;
-use PHPUnit\Framework\Assert;
 
 class SegmentationContext implements Context
 {
     /**
-     * @var SegmentsGroupPage
+     * @var \Ibexa\AdminUi\Behat\Page\SegmentsGroupPage
      */
     private $segmentsGroupPage;
     /**
-     * @var SegmentsEditPage
+     * @var \Ibexa\AdminUi\Behat\Page\SegmentsEditPage
      */
     private $segmentsEditPage;
 
-    public function __construct (SegmentsGroupPage $segmentsGroupPage, SegmentsEditPage $segmentsEditPage)
+    public function __construct(SegmentsGroupPage $segmentsGroupPage, SegmentsEditPage $segmentsEditPage)
     {
         $this->segmentsGroupPage = $segmentsGroupPage;
         $this->segmentsEditPage = $segmentsEditPage;
@@ -42,18 +41,28 @@ class SegmentationContext implements Context
      */
     public function iFillSegmentGroupConfigurationFields(TableNode $table): void
     {
-        $this->segmentsGroupPage->verifyComponentIsLoaded();
+        $this->segmentsGroupPage->verifyIsLoaded();
         foreach ($table->getHash() as $row) {
             $this->segmentsGroupPage->fillFieldWithValue($row['label'], $row['value']);
         }
     }
 
-    /**
-     * @When I add segment to segment group
-     */
-    public function iAddSegmentToSegmentGroup(): void
-    {
+//    /**
+//     * @When I open segment creation popup
+//     */
+//    public function iOpenSegmentCreationPopupInSegmentGroupEditView(): void
+//    {
+//       // $this->segmentsGroupPage->clickOnAddSegmentButton();
+//    }
 
+    /**
+     * @When I add segment with :name name and :identifier identifier to segment group
+     */
+    public function iAddSegmentToSegmentGroup(string $name, string $identifier): void
+    {
+        $this->segmentsGroupPage->clickOnAddSegmentButton();
+        $this->segmentsGroupPage->verifyComponentIsLoaded();
+        $this->segmentsGroupPage->fillSegmentFieldWithValue($name, $identifier);
     }
 
     /**
@@ -65,22 +74,21 @@ class SegmentationContext implements Context
     }
 
     /**
-     * @When There's segment group with :name name and :identifier identifier in Segment Group Information section
+     * @When There's segment group with :segmentGroupName name and :segmentGroupIdentifier identifier in Segment Group Information section
      */
-    public function iAssertSegmentGroupInformationSection(): void
+    public function iVerifySegmentGroupInformationSection(string $segmentGroupName, string $segmentGroupIdentifier): void
     {
-usleep(23232323);
-//        Assert::assertFalse($this->rolesPage->isRoleOnTheList($roleName));
-  //      Assert::assertFalse($this->rolesPage->isRoleOnTheList($roleName));
+        $this->segmentsEditPage->verifyIsLoaded();
+        $this->segmentsEditPage->verifySegmentGroupNameInEditPage($segmentGroupName);
+        $this->segmentsEditPage->verifySegmentGroupIdentifierInEditPage($segmentGroupIdentifier);
     }
 
     /**
-     * @When There's segment with "testsegid" name  and "testsegid" identifier in Segments Under Segment Group section
+     * @When There's segment with :segmentName name and :segmentIdentifier identifier in Segments Under Segment Group section
      */
-    public function iAssertAddedSegmentInformationSection(): void
+    public function iVerifyAddedSegmentInformationSection(string $segmentName, string $segmentIdentifier): void
     {
-
+        $this->segmentsEditPage->verifySegmentNameInEditPage($segmentName);
+        $this->segmentsEditPage->verifySegmentIdentifierInEditPage($segmentIdentifier);
     }
-
-
 }
