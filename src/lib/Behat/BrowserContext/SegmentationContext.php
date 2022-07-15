@@ -43,26 +43,27 @@ class SegmentationContext implements Context
     {
         $this->segmentsGroupPage->verifyIsLoaded();
         foreach ($table->getHash() as $row) {
-            $this->segmentsGroupPage->fillFieldWithValue($row['label'], $row['value']);
+            $this->segmentsGroupPage->fillSegmentGroupFieldWithValue($row['label'], $row['value']);
         }
     }
 
-//    /**
-//     * @When I open segment creation popup
-//     */
-//    public function iOpenSegmentCreationPopupInSegmentGroupEditView(): void
-//    {
-//       // $this->segmentsGroupPage->clickOnAddSegmentButton();
-//    }
+    /**
+     * @When I add segment with :name name and :identifier identifier to segment group during segment group creation
+     */
+    public function iAddSegmentToSegmentGroupDuringCreation(string $name, string $identifier): void
+    {
+        $this->segmentsGroupPage->addNewSegmentRow();
+        $this->segmentsGroupPage->fillSegmentFieldWithValue($name, $identifier);
+    }
 
     /**
-     * @When I add segment with :name name and :identifier identifier to segment group
+     * @When I add segment with :name name and :identifier identifier to segment group during segment group edition
      */
-    public function iAddSegmentToSegmentGroup(string $name, string $identifier): void
+    public function iAddSegmentToSegmentGroupDuringEdition(string $name, string $identifier): void
     {
-        $this->segmentsGroupPage->clickOnAddSegmentButton();
-        $this->segmentsGroupPage->verifyComponentIsLoaded();
-        $this->segmentsGroupPage->fillSegmentFieldWithValue($name, $identifier);
+        $this->segmentsEditPage->openSegmentCreationWindow();
+        $this->segmentsEditPage->fillSegmentFieldWithValue($name, $identifier);
+        $this->segmentsEditPage->confirmNewSegmentAddition();
     }
 
     /**
@@ -70,7 +71,7 @@ class SegmentationContext implements Context
      */
     public function iConfirmNewSegmentGroupCreation(): void
     {
-        $this->segmentsGroupPage->clickOnCreateButton();
+        $this->segmentsGroupPage->confirmNewSegmentGroupCreation();
     }
 
     /**
@@ -90,5 +91,26 @@ class SegmentationContext implements Context
     {
         $this->segmentsEditPage->verifySegmentNameInEditPage($segmentName);
         $this->segmentsEditPage->verifySegmentIdentifierInEditPage($segmentIdentifier);
+    }
+
+    /**
+     * @When I delete segment from Segments group
+     */
+    public function iDeleteSegment(): void
+    {
+        $this->segmentsEditPage->verifyIsLoaded();
+        $this->segmentsEditPage->selectLastSegmentCheckbox();
+        $this->segmentsEditPage->openSegmentDeletionConfirmationWindow();
+        $this->segmentsEditPage->confirmSegmentDeletion();
+    }
+
+    /**
+     * @When I delete segment group
+     */
+    public function iDeleteSegmentGroup(): void
+    {
+       $this->segmentsGroupPage->selectLastSegmentGroupCheckbox();
+       $this->segmentsGroupPage->openSegmentGroupDeletionConfirmationWindow();
+       $this->segmentsGroupPage->confirmSegmentDeletion();
     }
 }

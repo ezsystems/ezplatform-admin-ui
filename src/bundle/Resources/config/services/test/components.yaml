@@ -47,3 +47,10 @@ services:
   Ibexa\AdminUi\Behat\Component\Table\TableRowFactory: ~
 
   Ibexa\AdminUi\Behat\Component\Table\SubitemsGrid: ~
+
+  Ibexa\AdminUi\Behat\Component\SegmentGroupCreatePopup: ~
+
+  Ibexa\AdminUi\Behat\Component\SegmentCreatePopup: ~
+
+
+

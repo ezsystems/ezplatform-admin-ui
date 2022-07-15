@@ -7,79 +7,44 @@
 namespace Ibexa\AdminUi\Behat\Page;
 
 use Behat\Mink\Session;
-use Ibexa\Behat\Browser\Element\Criterion\ElementTextCriterion;
-use Ibexa\Behat\Browser\Element\ElementInterface;
+use Ibexa\AdminUi\Behat\Component\SegmentGroupCreatePopup;
+use Ibexa\Behat\Browser\Element\Condition\ElementExistsCondition;
 use Ibexa\Behat\Browser\Locator\VisibleCSSLocator;
-use Ibexa\Behat\Browser\Locator\XPathLocator;
 use Ibexa\Behat\Browser\Page\Page;
 use Ibexa\Behat\Browser\Routing\Router;
 use PHPUnit\Framework\Assert;
 
 class SegmentsGroupPage extends Page
 {
-    public function __construct(Session $session, Router $router)
+    /**
+     * @var \Ibexa\AdminUi\Behat\Component\SegmentGroupCreatePopup
+     */
+    private $segmentGroupCreatePopup;
+
+    public function __construct(Session $session, Router $router, SegmentGroupCreatePopup $segmentGroupCreatePopup)
     {
         parent::__construct($session, $router);
+        $this->segmentGroupCreatePopup = $segmentGroupCreatePopup;
     }
 
-    public function fillFieldWithValue(string $fieldName, $value): void
+    public function fillSegmentGroupFieldWithValue(string $fieldName, $value): void
     {
-        $field = $this->getField($fieldName);
-        $fieldType = $field->getAttribute('type');
-
-        $this->getHTMLPage()->setTimeout(3)->waitUntil(static function () use ($field, $fieldType, $value) {
-            $field->setValue($value);
-
-            return $fieldType !== 'text' || $value === $field->getValue();
-        }, sprintf('Failed to set correct value in input field. Expected: %s. Actual: %s', $value, $field->getValue()));
+        $this->segmentGroupCreatePopup->fillFieldWithValue($fieldName, $value);
     }
 
     public function fillSegmentFieldWithValue(string $name, $identifier): void
     {
-        $lastrow = $this->getHTMLPage()
-            ->findAll(new VisibleCSSLocator('lastCell', '.ez-table--add-segments tbody tr'))->last();
-
-        $nameInput = $lastrow->find(new VisibleCSSLocator('nameInput', ' [id*=name]'));
-        $identifierInput = $lastrow->find(new VisibleCSSLocator('identifierInput', ' [id*=identifier]'));
-        $nameInput->setValue($name);
-        $identifierInput->setValue($identifier);
-
-
-//        $this->getHTMLPage()->find($this->getLocator($nameInput))->setValue($name);
-//        $this->getHTMLPage()->find($this->getHTMLPage()->find($identifierInput))->setValue($identifier);
-
-//
-//        $fieldType = $field->getAttribute('type');
-//
-//        $this->getHTMLPage()->setTimeout(3)->waitUntil(static function () use ($field, $fieldType, $value) {
-//            $field->setValue($value);
-//
-//            return $fieldType !== 'text' || $value === $field->getValue();
-//        }, sprintf('Failed to set correct value in input field. Expected: %s. Actual: %s', $value, $field->getValue()));
-    }
-
-    public function getFieldValue($label)
-    {
-        return $this->getField($label)->getValue();
-    }
-
-    private function getField(string $fieldName): ElementInterface
-    {
-        return $this->getHTMLPage()
-            ->findAll(new XPathLocator('input', '//label/..'))
-            ->getByCriterion(new ElementTextCriterion($fieldName))
-            ->find(new VisibleCSSLocator('input', 'input'));
+        $this->segmentGroupCreatePopup->fillSegmentFieldWithValue($name, $identifier);
     }
 
     protected function specifyLocators(): array
     {
         return [
             new VisibleCSSLocator('createSegmentGroupButton', '.ez-icon--create'),
-            new VisibleCSSLocator('createSegmentPopup', '#create-segment-group-modal > div > div'),
             new VisibleCSSLocator('fieldInput', 'input'),
-            new VisibleCSSLocator('createSegmentButton', '#segment_group_create_create'),
             new VisibleCSSLocator('title', '.ez-header h1'),
-            new VisibleCSSLocator('addSegmentButton', 'div.ez-table-header__tools > button.btn.btn-icon.ez-btn.ez-btn--add'),
+            new VisibleCSSLocator('segmentGroupTrashButton','button#bulk-delete-segment-group'),
+            new VisibleCSSLocator('segmentGroupDeleteButton','.btn.btn-primary.btn--trigger'),
         ];
     }
 
@@ -88,14 +53,35 @@ class SegmentsGroupPage extends Page
         $this->getHTMLPage()->find($this->getLocator('createSegmentGroupButton'))->click();
     }
 
-    public function clickOnAddSegmentButton(): void
+    public function addNewSegmentRow(): void
     {
-        $this->getHTMLPage()->find($this->getLocator('addSegmentButton'))->click();
+        $this->segmentGroupCreatePopup->addNewSegmentRow();
     }
 
-    public function clickOnCreateButton(): void
+    public function confirmNewSegmentGroupCreation(): void
     {
-        $this->getHTMLPage()->find($this->getLocator('createSegmentButton'))->click();
+        $this->segmentGroupCreatePopup->confirmSegmentGroupCreation();
+    }
+
+    public function selectLastSegmentGroupCheckbox(): void
+    {
+        $lastSegmentGroupRow = $this->getHTMLPage()
+            ->findAll(new VisibleCSSLocator('lastSegmentGroupRow', 'td input.ez-input--checkbox'))->last();
+        $lastSegmentGroupRow->click();
+    }
+
+    public function openSegmentGroupDeletionConfirmationWindow(): void
+    {
+        $this->getHTMLPage()
+            ->setTimeout(5)
+            ->waitUntilCondition(new ElementExistsCondition($this->getHTMLPage(), $this->getLocator('segmentGroupTrashButton')));
+        $this->getHTMLPage()
+            ->find($this->getLocator('segmentGroupTrashButton'))->click();
+    }
+
+    public function confirmSegmentDeletion(): void
+    {
+        $this->getHTMLPage()->find($this->getLocator('segmentGroupDeleteButton'))->click();
     }
 
     public function getName(): string
@@ -109,11 +95,6 @@ class SegmentsGroupPage extends Page
             'Segment Groups',
             $this->getHTMLPage()->find($this->getLocator('title'))->getText()
         );
-    }
-
-    public function verifyComponentIsLoaded(): void
-    {
-        $this->getHTMLPage()->setTimeout(5)->find($this->getLocator('createSegmentPopup'))->assert()->isVisible();
     }
 
     protected function getRoute(): string
