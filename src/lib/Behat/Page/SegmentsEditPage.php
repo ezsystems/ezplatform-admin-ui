@@ -17,7 +17,7 @@ use PHPUnit\Framework\Assert;
 class SegmentsEditPage extends Page
 {
     /**
-     * @var SegmentCreatePopup
+     * @var \Ibexa\AdminUi\Behat\Component\SegmentCreatePopup
      */
     private $segmentCreatePopup;
 
@@ -29,6 +29,7 @@ class SegmentsEditPage extends Page
 
     public function getName(): string
     {
+        return 'Segmentation';
     }
 
     public function verifyIsLoaded(): void

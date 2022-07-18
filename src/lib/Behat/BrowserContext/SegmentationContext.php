@@ -109,8 +109,8 @@ class SegmentationContext implements Context
      */
     public function iDeleteSegmentGroup(): void
     {
-       $this->segmentsGroupPage->selectLastSegmentGroupCheckbox();
-       $this->segmentsGroupPage->openSegmentGroupDeletionConfirmationWindow();
-       $this->segmentsGroupPage->confirmSegmentDeletion();
+        $this->segmentsGroupPage->selectLastSegmentGroupCheckbox();
+        $this->segmentsGroupPage->openSegmentGroupDeletionConfirmationWindow();
+        $this->segmentsGroupPage->confirmSegmentDeletion();
     }
 }

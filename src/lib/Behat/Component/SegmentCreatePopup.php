@@ -23,10 +23,10 @@ class SegmentCreatePopup extends Component
     {
         return
         [
-            new VisibleCSSLocator('creatingANewSegmentWindow','#add-segment-modal > div > div'),
-            new VisibleCSSLocator('identifierTextbox','#segment_create_identifier'),
-            new VisibleCSSLocator('nameTextbox','#segment_create_name'),
-            new VisibleCSSLocator('createButton','#segment_create_create'),
+            new VisibleCSSLocator('creatingANewSegmentWindow', '#add-segment-modal > div > div'),
+            new VisibleCSSLocator('identifierTextbox', '#segment_create_identifier'),
+            new VisibleCSSLocator('nameTextbox', '#segment_create_name'),
+            new VisibleCSSLocator('createButton', '#segment_create_create'),
         ];
     }
 

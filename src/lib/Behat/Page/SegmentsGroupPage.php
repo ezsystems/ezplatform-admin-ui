@@ -43,8 +43,8 @@ class SegmentsGroupPage extends Page
             new VisibleCSSLocator('createSegmentGroupButton', '.ez-icon--create'),
             new VisibleCSSLocator('fieldInput', 'input'),
             new VisibleCSSLocator('title', '.ez-header h1'),
-            new VisibleCSSLocator('segmentGroupTrashButton','button#bulk-delete-segment-group'),
-            new VisibleCSSLocator('segmentGroupDeleteButton','.btn.btn-primary.btn--trigger'),
+            new VisibleCSSLocator('segmentGroupTrashButton', 'button#bulk-delete-segment-group'),
+            new VisibleCSSLocator('segmentGroupDeleteButton', '.btn.btn-primary.btn--trigger'),
         ];
     }
 
