@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 
 import Tab from './components/tab/tab';
 import BookmarksList from './components/bookmarks-list/bookmarks.list';
@@ -19,6 +19,7 @@ import {
 import { loadAccordionData } from './services/universal.discovery.service';
 
 const BookmarksTabModule = () => {
+    const shouldRestorePreviousStateRef = useRef(true);
     const restInfo = useContext(RestInfoContext);
     const tabsConfig = useContext(TabsConfigContext);
     const [currentView, setCurrentView] = useContext(CurrentViewContext);
@@ -42,10 +43,23 @@ const BookmarksTabModule = () => {
     };
 
     useEffect(() => {
+        setMarkedLocationId(null);
+        dispatchLoadedLocationsAction({ type: 'CLEAR_LOCATIONS' });
+
+        return () => {
+            if (shouldRestorePreviousStateRef.current) {
+                setMarkedLocationId(markedLocationId);
+                dispatchLoadedLocationsAction({ type: 'SET_LOCATIONS', data: loadedLocationsMap });
+            }
+        };
+    }, []);
+
+    useEffect(() => {
         if (!bookmarkedLocationMarked) {
             return;
         }
 
+        shouldRestorePreviousStateRef.current = false;
         setMarkedLocationId(bookmarkedLocationMarked);
         loadAccordionData(
             {
