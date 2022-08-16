@@ -52,13 +52,11 @@
     }
 
     &__content {
+        max-height: calc(100% - #{calculateRem(90px)});
+        overflow: auto;
+
         .form-group {
             margin-bottom: 0;
-        }
-
-        &__scroller {
-            max-height: 90%;
-            overflow-x: auto;
         }
     }
 
