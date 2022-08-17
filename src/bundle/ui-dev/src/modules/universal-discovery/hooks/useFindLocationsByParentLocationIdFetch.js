@@ -1,7 +1,7 @@
 import { useEffect, useContext, useReducer } from 'react';
 
 import { findLocationsByParentLocationId } from '../services/universal.discovery.service';
-import { RestInfoContext } from '../universal.discovery.module';
+import { RestInfoContext, BlockFetchLocationHookContext } from '../universal.discovery.module';
 
 const fetchInitialState = {
     dataFetched: false,
@@ -21,15 +21,21 @@ const fetchReducer = (state, action) => {
 
 export const useFindLocationsByParentLocationIdFetch = (locationData, { sortClause, sortOrder }, limit, offset, gridView = false) => {
     const restInfo = useContext(RestInfoContext);
+    const [isFetchLocationHookBlocked] = useContext(BlockFetchLocationHookContext);
     const [state, dispatch] = useReducer(fetchReducer, fetchInitialState);
 
     useEffect(() => {
+        if (isFetchLocationHookBlocked) {
+            return;
+        }
+
         let effectCleaned = false;
 
         if (
             !locationData.parentLocationId ||
             locationData.collapsed ||
-            locationData.subitems.length >= locationData.totalCount || locationData.subitems.length >= limit + offset
+            locationData.subitems.length >= locationData.totalCount ||
+            locationData.subitems.length >= limit + offset
         ) {
             dispatch({ type: 'FETCH_END', data: {} });
 
@@ -69,7 +75,12 @@ export const useFindLocationsByParentLocationIdFetch = (locationData, { sortClau
         offset,
         gridView,
         locationData.collapsed,
+        isFetchLocationHookBlocked,
     ]);
+
+    if (isFetchLocationHookBlocked) {
+        return [{}, true];
+    }
 
     return [state.data, !state.dataFetched];
 };

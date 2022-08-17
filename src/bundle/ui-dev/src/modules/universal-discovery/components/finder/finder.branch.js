@@ -131,7 +131,7 @@ const FinderBranch = ({ locationData, itemsPerPage }) => {
                 <Icon name="spinner" extraClasses="ez-icon--medium ez-spin" />
             </div>
         );
-    }
+    };
 
     useEffect(() => {
         if (loadedLocations.subitems) {
