@@ -108,6 +108,7 @@ class LocationTrashType extends AbstractType
         $resolver->setDefaults([
             'data_class' => LocationTrashData::class,
             'translation_domain' => 'forms',
+            'allow_extra_fields' => true,
         ]);
     }
 }
