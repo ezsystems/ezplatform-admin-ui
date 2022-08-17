@@ -6,5 +6,4 @@ import flatpickrLanguages
     const flatpickrLanguage = flatpickrLanguages[backOfficeLanguage] ?? flatpickrLanguages.default;
 
     flatpickr.localize(flatpickrLanguage);
-
-})(global, doc, window.eZ, window.flatpickr);
+})(window, window.document, window.eZ, window.flatpickr);
