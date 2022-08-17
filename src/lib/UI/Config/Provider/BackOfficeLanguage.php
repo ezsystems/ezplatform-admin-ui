@@ -14,7 +14,7 @@ use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 final class BackOfficeLanguage implements ProviderInterface
 {
     /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
-    protected $userSettingService;
+    private $userSettingService;
 
     public function __construct(UserSettingService $userSettingService)
     {
