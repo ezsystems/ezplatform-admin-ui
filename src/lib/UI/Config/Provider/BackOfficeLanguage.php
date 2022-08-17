@@ -11,7 +11,7 @@ namespace Ibexa\AdminUi\UI\Config\Provider;
 use EzSystems\EzPlatformAdminUi\UI\Config\ProviderInterface;
 use EzSystems\EzPlatformUser\UserSetting\UserSettingService;
 
-class BackOfficeLanguage implements ProviderInterface
+final class BackOfficeLanguage implements ProviderInterface
 {
     /** @var \EzSystems\EzPlatformUser\UserSetting\UserSettingService */
     protected $userSettingService;
