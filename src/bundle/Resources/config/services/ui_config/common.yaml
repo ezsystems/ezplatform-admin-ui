@@ -117,3 +117,7 @@ services:
             $configResolver: '@ezpublish.config.resolver'
         tags:
             - { name: ezplatform.admin_ui.config_provider, key: 'iconPaths' }
+
+    Ibexa\AdminUi\UI\Config\Provider\BackOfficeLanguage:
+        tags:
+            - { name: ezplatform.admin_ui.config_provider, key: 'backOfficeLanguage' }

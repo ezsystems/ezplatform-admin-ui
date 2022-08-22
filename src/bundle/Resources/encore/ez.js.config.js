@@ -26,6 +26,7 @@ const layout = [
     path.resolve(__dirname, '../public/js/scripts/admin.notifications.modal.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.location.add.translation.js'),
     path.resolve(__dirname, '../public/js/scripts/admin.form.autosubmit.js'),
+    path.resolve(__dirname, '../public/js/scripts/widgets/flatpickr.js'),
 ];
 const fieldTypes = [];
 
