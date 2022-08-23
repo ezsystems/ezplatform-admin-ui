@@ -84,6 +84,7 @@
                                 </svg>
                             </a>
                         {% elseif is_draft %}
+                            {% set edit_draft_disabled = (version.author and version.author.id != ez_admin_ui_config.user.user.id) %}
                             <button
                                     data-content-draft-edit-url="{{ edit_url }}"
                                     data-version-has-conflict-url="{{ path('ezplatform.version.has_no_conflict', {
@@ -93,7 +94,8 @@
                                     }) }}"
                                     data-content-id="{{ version.contentInfo.id }}"
                                     data-language-code="{{ version.initialLanguageCode }}"
-                                    class="btn btn-icon mx-2 ez-btn--content-draft-edit"
+                                    class="btn btn-icon mx-2 ez-btn--content-draft-edit {% if edit_draft_disabled %}ez-btn--prevented{% endif %}"
+                                    {% if edit_draft_disabled %}disabled{% endif %}
                                     title="{{ 'tab.versions.table.action.draft.edit'|trans|desc('Edit draft') }}">
                                 <svg class="ez-icon ez-icon--secondary ez-icon-edit">
                                     <use xlink:href="{{ ez_icon_path('edit') }}"></use>
