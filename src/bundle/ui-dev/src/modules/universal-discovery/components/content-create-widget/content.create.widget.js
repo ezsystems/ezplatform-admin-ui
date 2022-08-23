@@ -78,6 +78,10 @@ const ContentCreateWidget = () => {
     });
 
     useEffect(() => {
+        setSelectedLanguage(preselectedLanguage || firstLanguageCode)
+    }, [preselectedLanguage, firstLanguageCode]);
+    
+    useEffect(() => {
         window.eZ.helpers.tooltips.parse(refContentTree.current);
     }, []);
 
