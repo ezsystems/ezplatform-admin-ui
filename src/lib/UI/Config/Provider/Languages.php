@@ -52,11 +52,9 @@ class Languages implements ProviderInterface
      */
     public function getConfig(): array
     {
-        $languagesMap = $this->getLanguagesMap();
-        $priority = $this->getLanguagesPriority($languagesMap);
-
         return [
-            'mappings' => array_merge(array_flip($priority), $languagesMap),
+            'mappings' => $languagesMap = $this->getLanguagesMap(),
+            'priority' => $this->getLanguagesPriority($languagesMap),
         ];
     }
 

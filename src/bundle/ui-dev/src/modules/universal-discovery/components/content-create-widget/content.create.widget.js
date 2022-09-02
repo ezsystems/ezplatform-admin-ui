@@ -13,7 +13,10 @@ import {
     AllowedContentTypesContext,
 } from '../../universal.discovery.module';
 
-const languages = Object.values(window.eZ.adminUiConfig.languages.mappings);
+const configLanguages = window.eZ.adminUiConfig.languages;
+const languages = configLanguages.priority.map((value) => {
+    return configLanguages.mappings[value];
+});
 const contentTypes = Object.entries(window.eZ.adminUiConfig.contentTypes);
 
 const ContentCreateWidget = () => {
