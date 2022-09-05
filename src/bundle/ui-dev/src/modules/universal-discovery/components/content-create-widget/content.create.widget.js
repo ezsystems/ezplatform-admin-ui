@@ -14,8 +14,8 @@ import {
 } from '../../universal.discovery.module';
 
 const configLanguages = window.eZ.adminUiConfig.languages;
-const languages = configLanguages.priority.map((value) => {
-    return configLanguages.mappings[value];
+const languages = configLanguages.priority.map((languageCode) => {
+    return configLanguages.mappings[languageCode];
 });
 const contentTypes = Object.entries(window.eZ.adminUiConfig.contentTypes);
 
