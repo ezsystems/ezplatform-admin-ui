@@ -91,18 +91,15 @@ class Languages implements ProviderInterface
     protected function getLanguagesPriority(array $languagesMap): array
     {
         $priority = [];
-        $fallback = [];
         $siteAccessName = $this->siteAccessService->getCurrent()->name;
         $siteAccesses = array_unique(array_merge([$siteAccessName], $this->siteAccesses));
 
         foreach ($siteAccesses as $siteAccess) {
             $siteAccessLanguages = $this->configResolver->getParameter('languages', null, $siteAccess);
-            $priority[] = array_shift($siteAccessLanguages);
-            $fallback = array_merge($fallback, $siteAccessLanguages);
+            $priority = array_merge($priority, $siteAccessLanguages);
         }
 
-        // Append fallback languages at the end of priority language list
-        $languageCodes = array_unique(array_merge($priority, $fallback));
+        $languageCodes = array_unique($priority);
 
         $languages = array_filter(array_values($languageCodes), static function ($languageCode) use ($languagesMap) {
             // Get only Languages defined and enabled in Admin
