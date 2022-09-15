@@ -57,8 +57,8 @@ class Matrix extends FieldTypeComponent
             new VisibleCSSLocator('matrixCellSelectorFormat', '[name="ezplatform_content_forms_content_edit[fieldsData][ezmatrix][value][entries][%d][%s]"]'),
             new VisibleCSSLocator('row', '.ez-table__matrix-entry'),
             new VisibleCSSLocator('addRowButton', '.ez-btn--add-matrix-entry'),
-            new VisibleCSSLocator('viewModeTableHeaders', '.ez-content-field-value thead th'),
-            new VisibleCSSLocator('viewModeTableRow', '.ez-content-field-value tbody tr'),
+            new VisibleCSSLocator('viewModeTableHeaders', 'thead th'),
+            new VisibleCSSLocator('viewModeTableRow', 'tbody tr'),
             new VisibleCSSLocator('editModeTableHeaders', '.ez-table thead th[data-identifier]'),
             new VisibleCSSLocator('editModeTableRow', '.ez-table tr.ez-table__matrix-entry'),
         ];
@@ -107,11 +107,11 @@ class Matrix extends FieldTypeComponent
     {
         $parsedTable = '';
 
-        $headers = $this->getHTMLPage()->findAll($headerSelector)->mapBy(new ElementTextMapper());
+        $headers = $this->getHTMLPage()->find($this->parentLocator)->findAll($headerSelector)->mapBy(new ElementTextMapper());
 
         $parsedTable .= implode(':', $headers);
 
-        $rows = $this->getHTMLPage()->findAll($rowSelector);
+        $rows = $this->getHTMLPage()->find($this->parentLocator)->findAll($rowSelector);
         foreach ($rows as $row) {
             $parsedTable .= ',';
             $cellValues = $row
