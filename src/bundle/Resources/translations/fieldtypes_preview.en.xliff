@@ -186,6 +186,11 @@
         <target state="new">Single relation</target>
         <note>key: ezobjectrelation.single_relation</note>
       </trans-unit>
+      <trans-unit id="6e9daae620a603c0ae30c9f97f7c1963f51f261a" resname="ezobjectrelation.version_created">
+        <source>Version created</source>
+        <target state="new">Version created</target>
+        <note>key: ezobjectrelation.version_created</note>
+      </trans-unit>
       <trans-unit id="61c7580e3e4d4547527322089f577eca2ff1ea5b" resname="ezobjectrelationlist.content_type">
         <source>Content Type</source>
         <target state="new">Content Type</target>
