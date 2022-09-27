@@ -12,13 +12,16 @@ Feature: Content fields setting and editing
       And I create a 'Image Asset CT2' Content Type in "Content" with 'ImageAssetCT2' identifier
       | Field Type  | Name         | Identifier        | Required | Searchable | Translatable | Settings        |
       | Image Asset | ImageAField  | imageafield       | yes      | no	       | yes          |                 |
+      And a "folder" Content item named "MediaFieldsContainer" exists in root
+      | name                 | short_name           |
+      | MediaFieldsContainer | MediaFieldsContainer |
       And I am logged as admin
-      And I'm on Content view Page for root
+      And I'm on Content view Page for MediaFieldsContainer
     When I start creating a new content 'Image Asset CT2'
       And I select "Media/Images/ImageAssetImage" from Image Asset Repository for "ImageAField" field
       And I click on the edit action bar button "Publish"
     Then success notification that "Content published." appears
-      And I should be on Content view Page for "ImageAssetImage"
+      And I should be on Content view Page for "MediaFieldsContainer/ImageAssetImage"
       And content attributes equal
       | label          | value      |
       | ImageAField    | small2.jpg |
@@ -30,7 +33,7 @@ Feature: Content fields setting and editing
       | <fieldName> | Field       | <fieldInternalName> | no      | no	      | yes          | <fieldSettings>  |
       | Text line   | Name        | name	            | no      | yes	      | yes          |                  |
       And I am logged as admin
-      And I'm on Content view Page for root
+      And I'm on Content view Page for MediaFieldsContainer
     When I start creating a new content "<fieldName> CT"
       And I set content fields
         | label    | <label1>    | <label2> | <label3> |
@@ -38,7 +41,7 @@ Feature: Content fields setting and editing
         | Name     | <fieldName> |          |          |
       And I click on the edit action bar button "Publish"
     Then success notification that "Content published." appears
-      And I should be on Content view Page for "<contentItemName>"
+      And I should be on Content view Page for "MediaFieldsContainer/<contentItemName>"
       And content attributes equal
           | label    | <label1> | <label2> | <label3> |
           | Field    | <value1> | <value2> | <value3> |
@@ -53,14 +56,14 @@ Feature: Content fields setting and editing
   @javascript @APIUser:admin
   Scenario Outline: Edit content item with given field
     Given I am logged as admin
-      And I'm on Content view Page for "<oldContentItemName>"
+      And I'm on Content view Page for "MediaFieldsContainer/<oldContentItemName>"
     When I click on the edit action bar button "Edit"
       And I set content fields
         | label    | <label1> | <label2> | <label3> |
         | Field    | <value1> | <value2> | <value3> |
       And I click on the edit action bar button "Publish"
     Then success notification that "Content published." appears
-      And I should be on Content view Page for "<newContentItemName>"
+      And I should be on Content view Page for "MediaFieldsContainer/<newContentItemName>"
       And content attributes equal
         | label    | <label1> | <label2> | <label3> |
         | Field    | <value1> | <value2> | <value3> |
