@@ -58,7 +58,7 @@ class ContentItemAdminPreview extends Component
         ];
     }
 
-    private function getFieldPosition(string $fieldLabel): int
+    protected function getFieldPosition(string $fieldLabel): int
     {
         $searchText = sprintf('%s:', $fieldLabel);
 
