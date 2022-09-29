@@ -16,5 +16,6 @@ jobs:
             project-version: '^3.3.x-dev'
             test-suite:  '--profile=browser --suite=admin-ui-full'
             test-setup-phase-1: '--profile=setup --suite=personas --mode=standard'
+            test-setup-phase-2: '--profile=setup --suite=content-translation --mode=standard'
         secrets:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

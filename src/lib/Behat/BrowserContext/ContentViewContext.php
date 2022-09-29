@@ -74,6 +74,23 @@ class ContentViewContext implements Context
     }
 
     /**
+     * @Given I add new translation :language without base translation
+     * @Given I add new translation :language basing on :base translation
+     */
+    public function iAddNewTranslation(string $language, string $base = 'none'): void
+    {
+        $this->contentViewPage->addTranslation($language, $base);
+    }
+
+    /**
+     * @Given I choose :language preview in Content View
+     */
+    public function iChoosePreview(string $language): void
+    {
+        $this->contentViewPage->choosePreview($language);
+    }
+
+    /**
      * @Given I start creating a new User
      */
     public function startCreatingUser(): void
