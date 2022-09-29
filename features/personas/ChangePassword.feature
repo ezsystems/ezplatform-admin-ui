@@ -1,4 +1,4 @@
-@javascript @changePassword
+@javascript @changePassword @IbexaOSS @IbexaContent @IbexaExperience @IbexaCommerce
 Feature: Verify that an User allowed to change password can change his password
 
   Scenario: I can change my password
