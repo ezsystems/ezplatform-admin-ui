@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target;
@@ -54,8 +54,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver */
     private $udwConfigResolver;
 
-    /** @var \eZ\Publish\API\Repository\SearchService */
-    private $searchService;
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
 
     /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
     private $udwExtension;
@@ -69,7 +69,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         PermissionResolver $permissionResolver,
         ConfigResolver $udwConfigResolver,
         ConfigResolverInterface $configResolver,
-        SearchService $searchService,
+        LocationService $locationService,
         UniversalDiscoveryExtension $udwExtension,
         PermissionCheckerInterface $permissionChecker
     ) {
@@ -78,7 +78,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
         $this->udwConfigResolver = $udwConfigResolver;
-        $this->searchService = $searchService;
+        $this->locationService = $locationService;
         $this->udwExtension = $udwExtension;
         $this->permissionChecker = $permissionChecker;
     }
@@ -100,7 +100,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function createStructure(array $options): ItemInterface
     {
@@ -408,7 +407,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         $canCopySubtree = (new IsWithinCopySubtreeLimit(
             $copyLimit,
-            $this->searchService
+            $this->locationService
         ))->and((new IsRoot())->not())->isSatisfiedBy($location);
 
         return $canCopySubtree && $hasCreatePermission;
