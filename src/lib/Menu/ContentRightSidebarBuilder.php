@@ -35,15 +35,15 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
     /* Menu items */
-    const ITEM__CREATE = 'content__sidebar_right__create';
-    const ITEM__EDIT = 'content__sidebar_right__edit';
-    const ITEM__SEND_TO_TRASH = 'content__sidebar_right__send_to_trash';
-    const ITEM__COPY = 'content__sidebar_right__copy';
-    const ITEM__COPY_SUBTREE = 'content__sidebar_right__copy_subtree';
-    const ITEM__MOVE = 'content__sidebar_right__move';
-    const ITEM__DELETE = 'content__sidebar_right__delete';
-    const ITEM__HIDE = 'content__sidebar_right__hide';
-    const ITEM__REVEAL = 'content__sidebar_right__reveal';
+    public const ITEM__CREATE = 'content__sidebar_right__create';
+    public const ITEM__EDIT = 'content__sidebar_right__edit';
+    public const ITEM__SEND_TO_TRASH = 'content__sidebar_right__send_to_trash';
+    public const ITEM__COPY = 'content__sidebar_right__copy';
+    public const ITEM__COPY_SUBTREE = 'content__sidebar_right__copy_subtree';
+    public const ITEM__MOVE = 'content__sidebar_right__move';
+    public const ITEM__DELETE = 'content__sidebar_right__delete';
+    public const ITEM__HIDE = 'content__sidebar_right__hide';
+    public const ITEM__REVEAL = 'content__sidebar_right__reveal';
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
