@@ -8,29 +8,28 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Specification\Location;
 
-use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
+use eZ\Publish\API\Repository\Values\Filter\Filter;
 use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
 
+/**
+ * @internal
+ */
 class IsWithinCopySubtreeLimit extends AbstractSpecification
 {
     /** @var int */
     private $copyLimit;
 
     /** @var \eZ\Publish\API\Repository\LocationService */
-    private $searchService;
+    private $locationService;
 
-    /**
-     * @param int $copyLimit
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     */
     public function __construct(
         int $copyLimit,
-        SearchService $searchService
+        LocationService $locationService
     ) {
         $this->copyLimit = $copyLimit;
-        $this->searchService = $searchService;
+        $this->locationService = $locationService;
     }
 
     /**
@@ -38,7 +37,7 @@ class IsWithinCopySubtreeLimit extends AbstractSpecification
      *
      * @return bool
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function isSatisfiedBy($item): bool
     {
@@ -50,17 +49,8 @@ class IsWithinCopySubtreeLimit extends AbstractSpecification
             return false;
         }
 
-        $query = new LocationQuery([
-            'filter' => new Criterion\Subtree($item->pathString),
-            'limit' => 0,
-        ]);
+        $filter = new Filter(new Criterion\Subtree($item->pathString));
 
-        $searchResults = $this->searchService->findLocations($query);
-
-        if ($this->copyLimit >= $searchResults->totalCount) {
-            return true;
-        }
-
-        return false;
+        return $this->copyLimit >= $this->locationService->count($filter);
     }
 }

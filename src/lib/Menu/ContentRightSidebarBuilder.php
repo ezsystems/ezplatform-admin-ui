@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Menu;
 
+use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\SPI\Limitation\Target;
@@ -35,15 +35,15 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationContainerInterface
 {
     /* Menu items */
-    const ITEM__CREATE = 'content__sidebar_right__create';
-    const ITEM__EDIT = 'content__sidebar_right__edit';
-    const ITEM__SEND_TO_TRASH = 'content__sidebar_right__send_to_trash';
-    const ITEM__COPY = 'content__sidebar_right__copy';
-    const ITEM__COPY_SUBTREE = 'content__sidebar_right__copy_subtree';
-    const ITEM__MOVE = 'content__sidebar_right__move';
-    const ITEM__DELETE = 'content__sidebar_right__delete';
-    const ITEM__HIDE = 'content__sidebar_right__hide';
-    const ITEM__REVEAL = 'content__sidebar_right__reveal';
+    public const ITEM__CREATE = 'content__sidebar_right__create';
+    public const ITEM__EDIT = 'content__sidebar_right__edit';
+    public const ITEM__SEND_TO_TRASH = 'content__sidebar_right__send_to_trash';
+    public const ITEM__COPY = 'content__sidebar_right__copy';
+    public const ITEM__COPY_SUBTREE = 'content__sidebar_right__copy_subtree';
+    public const ITEM__MOVE = 'content__sidebar_right__move';
+    public const ITEM__DELETE = 'content__sidebar_right__delete';
+    public const ITEM__HIDE = 'content__sidebar_right__hide';
+    public const ITEM__REVEAL = 'content__sidebar_right__reveal';
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
@@ -54,8 +54,8 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
     /** @var \EzSystems\EzPlatformAdminUi\UniversalDiscovery\ConfigResolver */
     private $udwConfigResolver;
 
-    /** @var \eZ\Publish\API\Repository\SearchService */
-    private $searchService;
+    /** @var \eZ\Publish\API\Repository\LocationService */
+    private $locationService;
 
     /** @var \EzSystems\EzPlatformAdminUiBundle\Templating\Twig\UniversalDiscoveryExtension */
     private $udwExtension;
@@ -69,7 +69,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         PermissionResolver $permissionResolver,
         ConfigResolver $udwConfigResolver,
         ConfigResolverInterface $configResolver,
-        SearchService $searchService,
+        LocationService $locationService,
         UniversalDiscoveryExtension $udwExtension,
         PermissionCheckerInterface $permissionChecker
     ) {
@@ -78,7 +78,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
         $this->permissionResolver = $permissionResolver;
         $this->configResolver = $configResolver;
         $this->udwConfigResolver = $udwConfigResolver;
-        $this->searchService = $searchService;
+        $this->locationService = $locationService;
         $this->udwExtension = $udwExtension;
         $this->permissionChecker = $permissionChecker;
     }
@@ -100,7 +100,6 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function createStructure(array $options): ItemInterface
     {
@@ -408,7 +407,7 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
         $canCopySubtree = (new IsWithinCopySubtreeLimit(
             $copyLimit,
-            $this->searchService
+            $this->locationService
         ))->and((new IsRoot())->not())->isSatisfiedBy($location);
 
         return $canCopySubtree && $hasCreatePermission;
