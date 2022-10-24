@@ -21,7 +21,7 @@ class LocationIsWithinCopySubtreeLimitValidatorTest extends TestCase
 {
     private const COPY_LIMIT = 10;
 
-    /** @var \eZ\Publish\API\Repository\SearchService|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \eZ\Publish\API\Repository\LocationService|\PHPUnit\Framework\MockObject\MockObject */
     private $locationService;
 
     /** @var \Symfony\Component\Validator\Context\ExecutionContextInterface */
