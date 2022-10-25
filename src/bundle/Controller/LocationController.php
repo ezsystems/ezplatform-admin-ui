@@ -354,10 +354,10 @@ class LocationController extends Controller
             if ($result instanceof Response) {
                 return $result;
             }
-    
+
             $data = $form->getData();
             $location = $data->getLocation();
-    
+
             return $this->redirectToLocation($location);
         }
 
