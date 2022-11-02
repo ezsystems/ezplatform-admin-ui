@@ -11,21 +11,15 @@ namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\Core\Pagination\Pagerfanta\LocationSearchAdapter;
 use eZ\Publish\Core\QueryType\QueryType;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use Ibexa\AdminUi\Tab\Dashboard\AbstractContentTab;
 use Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper;
 use Pagerfanta\Pagerfanta;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
-class MyMediaTab extends AbstractTab implements OrderedTabInterface
+class MyMediaTab extends AbstractContentTab implements OrderedTabInterface
 {
-    /** @var \Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper */
-    protected $pagerLocationToDataMapper;
-
-    /** @var \eZ\Publish\API\Repository\SearchService */
-    protected $searchService;
-
     /** @var \Ibexa\AdminUi\QueryType\MediaLocationSubtreeQueryType */
     private $mediaLocationSubtreeQueryType;
 
@@ -36,10 +30,8 @@ class MyMediaTab extends AbstractTab implements OrderedTabInterface
         SearchService $searchService,
         QueryType $mediaLocationSubtreeQueryType
     ) {
-        parent::__construct($twig, $translator);
+        parent::__construct($twig, $translator, $pagerLocationToDataMapper, $searchService);
 
-        $this->pagerLocationToDataMapper = $pagerLocationToDataMapper;
-        $this->searchService = $searchService;
         $this->mediaLocationSubtreeQueryType = $mediaLocationSubtreeQueryType;
     }
 
