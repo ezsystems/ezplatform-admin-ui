@@ -15,7 +15,7 @@ use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
-abstract class AbstractContentTab extends AbstractTab implements OrderedTabInterface
+abstract class AbstractMediaTab extends AbstractTab implements OrderedTabInterface
 {
     /** @var \Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper */
     protected $pagerLocationToDataMapper;
@@ -23,20 +23,20 @@ abstract class AbstractContentTab extends AbstractTab implements OrderedTabInter
     /** @var \eZ\Publish\API\Repository\SearchService */
     protected $searchService;
 
-    /** @var \Ibexa\AdminUi\QueryType\ContentLocationSubtreeQueryType */
-    protected $contentLocationSubtreeQueryType;
+    /** @var \Ibexa\AdminUi\QueryType\MediaLocationSubtreeQueryType */
+    protected $mediaLocationSubtreeQueryType;
 
     public function __construct(
         Environment $twig,
         TranslatorInterface $translator,
         PagerLocationToDataMapper $pagerLocationToDataMapper,
         SearchService $searchService,
-        QueryType $contentLocationSubtreeQueryType
+        QueryType $mediaLocationSubtreeQueryType
     ) {
         parent::__construct($twig, $translator);
 
         $this->pagerLocationToDataMapper = $pagerLocationToDataMapper;
         $this->searchService = $searchService;
-        $this->contentLocationSubtreeQueryType = $contentLocationSubtreeQueryType;
+        $this->mediaLocationSubtreeQueryType = $mediaLocationSubtreeQueryType;
     }
 }

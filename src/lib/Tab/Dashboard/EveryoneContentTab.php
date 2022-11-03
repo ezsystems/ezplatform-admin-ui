@@ -8,33 +8,13 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
-use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\Core\Pagination\Pagerfanta\LocationSearchAdapter;
-use eZ\Publish\Core\QueryType\QueryType;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Ibexa\AdminUi\Tab\Dashboard\AbstractContentTab;
-use Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper;
 use Pagerfanta\Pagerfanta;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Environment;
 
 class EveryoneContentTab extends AbstractContentTab implements OrderedTabInterface
 {
-    /** @var \Ibexa\AdminUi\QueryType\ContentLocationSubtreeQueryType */
-    private $contentLocationSubtreeQueryType;
-
-    public function __construct(
-        Environment $twig,
-        TranslatorInterface $translator,
-        PagerLocationToDataMapper $pagerLocationToDataMapper,
-        SearchService $searchService,
-        QueryType $contentLocationSubtreeQueryType
-    ) {
-        parent::__construct($twig, $translator, $pagerLocationToDataMapper, $searchService);
-
-        $this->contentLocationSubtreeQueryType = $contentLocationSubtreeQueryType;
-    }
-
     public function getIdentifier(): string
     {
         return 'everyone-content';
@@ -52,13 +32,7 @@ class EveryoneContentTab extends AbstractContentTab implements OrderedTabInterfa
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\SyntaxError
-     * @throws \eZ\Publish\API\Repository\Exceptions\ForbiddenException
+     * @inheritdoc
      */
     public function renderView(array $parameters): string
     {
