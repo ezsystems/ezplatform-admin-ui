@@ -1,0 +1,19 @@
+services:
+    Ibexa\AdminUi\Limitation\Mapper\MemberOfLimitationMapper:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        arguments:
+            $userService: '@ezpublish.api.service.user'
+            $repository: '@ezpublish.api.repository'
+            $searchService: '@ezpublish.api.service.search'
+            $translator: '@translator'
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: MemberOf }
+            - { name: ez.limitation.valueMapper, limitationType: MemberOf }
+
+    Ibexa\AdminUi\Limitation\Mapper\RoleLimitationMapper:
+        parent: ezrepoforms.limitation.form_mapper.multiple_selection
+        arguments:
+            $roleService: '@ezpublish.api.service.role'
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Role }
+            - { name: ez.limitation.valueMapper, limitationType: Role }

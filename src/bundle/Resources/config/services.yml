@@ -23,6 +23,7 @@ imports:
     - { resource: services/forms.yml }
     - { resource: services/query_types.yaml }
     - { resource: services/search.yml }
+    - { resource: services/role_form_mappers.yml }
 
 services:
     _defaults:

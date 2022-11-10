@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
           "EzSystems\\EzPlatformAdminUiBundle\\": "src/bundle/",
-          "EzSystems\\EzPlatformAdminUi\\": "src/lib/"
+          "EzSystems\\EzPlatformAdminUi\\": "src/lib/",
+          "Ibexa\\AdminUi\\": "src/lib/"
         }
     },
     "autoload-dev": {
