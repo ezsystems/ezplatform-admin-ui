@@ -166,7 +166,7 @@ const UniversalDiscoveryModule = (props) => {
             return;
         }
 
-        findLocationsById({ ...restInfo, id: props.selectedLocations.join(',') }, (locations) => {
+        findLocationsById({ ...restInfo, id: props.selectedLocations.join(','), limit: props.selectedLocations.length }, (locations) => {
             const mappedLocation = props.selectedLocations.map((locationId) => {
                 const location = locations.find((location) => location.id === parseInt(locationId, 10));
 
