@@ -26,6 +26,11 @@
         <target>Language</target>
         <note>key: policy.limitation.identifier.language</note>
       </trans-unit>
+      <trans-unit id="b40e3e09e55ef852a5d9e1592e9c895715b1313c" resname="policy.limitation.identifier.memberof">
+        <source>MemberOf</source>
+        <target>MemberOf</target>
+        <note>key: policy.limitation.identifier.memberof</note>
+      </trans-unit>
       <trans-unit id="ab9163a435d32610a7a1af8df07ab38eebc4c7c6" resname="policy.limitation.identifier.newsection">
         <source>New Section</source>
         <target>New Section</target>
@@ -70,6 +75,11 @@
         <source>PersonalizationAccess</source>
         <target>PersonalizationAccess</target>
         <note>key: policy.limitation.identifier.personalizationaccess</note>
+      </trans-unit>
+      <trans-unit id="9f2e53e094725bbc243ad777547724ab923a31d1" resname="policy.limitation.identifier.role">
+        <source>Role</source>
+        <target>Role</target>
+        <note>key: policy.limitation.identifier.role</note>
       </trans-unit>
       <trans-unit id="bb77b27363dad566197a200290f0f0b18baa4705" resname="policy.limitation.identifier.section">
         <source>Section</source>

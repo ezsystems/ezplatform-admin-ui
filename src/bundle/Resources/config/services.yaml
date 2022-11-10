@@ -30,6 +30,7 @@ imports:
     - { resource: services/events.yaml }
     - { resource: services/twig.yaml }
     - { resource: services/autosave.yaml }
+    - { resource: services/role_form_mappers.yaml }
 
 services:
     _defaults:

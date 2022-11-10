@@ -223,3 +223,22 @@ services:
         tags:
             - { name: ez.limitation.formMapper, limitationType: Subtree }
             - { name: ez.limitation.valueMapper, limitationType: Subtree }
+
+    Ibexa\AdminUi\Limitation\Mapper\MemberOfLimitationMapper:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        arguments:
+            $userService: '@ezpublish.api.service.user'
+            $repository: '@ezpublish.api.repository'
+            $contentService: '@ezpublish.api.service.content'
+            $translator: '@translator'
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: MemberOf }
+            - { name: ez.limitation.valueMapper, limitationType: MemberOf }
+
+    Ibexa\AdminUi\Limitation\Mapper\RoleLimitationMapper:
+        parent: ezplatform.content_forms.limitation.form_mapper.multiple_selection
+        arguments:
+            $roleService: '@ezpublish.api.service.role'
+        tags:
+            - { name: ez.limitation.formMapper, limitationType: Role }
+            - { name: ez.limitation.valueMapper, limitationType: Role }

@@ -11,6 +11,11 @@
         <target state="new">Self</target>
         <note>key: policy.limitation.group.self</note>
       </trans-unit>
+      <trans-unit id="e797dbd775ecc5788f41ceeb960b70a9d7a116ca" resname="policy.limitation.member_of.self_user_group">
+        <source>Self</source>
+        <target state="new">Self</target>
+        <note>key: policy.limitation.member_of.self_user_group</note>
+      </trans-unit>
       <trans-unit id="cc7c597ffa43ef724b881b127a4124fd35c8c6f6" resname="policy.limitation.owner.self">
         <source>Self</source>
         <target state="new">Self</target>
