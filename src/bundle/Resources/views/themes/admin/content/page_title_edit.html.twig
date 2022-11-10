@@ -36,9 +36,9 @@
 
             <div class="ez-content-edit-page-title__location">
                 {{ 'editing_details'|trans({
-                    '%language_name%': language.name,
-                    '%location_name%': parent_location.contentInfo.name})
-                    |desc('<b>in</b> %language_name% <b>under</b> %location_name%')|raw
+                    '%language_name%': language.name|e,
+                    '%location_name%': parent_location.contentInfo.name|e
+                    })|desc('<b>in</b> %language_name% <b>under</b> %location_name%')|raw
                 }}
 
                 {% if is_autosave_enabled and form_has_autosave %}
