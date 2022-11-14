@@ -1,4 +1,8 @@
-(function(moment) {
+(function(moment, eZ) {
+    const { backOfficeLanguage } = eZ.adminUiConfig;
+
+    moment.locale(backOfficeLanguage);
+
     /*
         ([yqLdDeEcaZ])\1* -> find any pattern of one or repeated one of these characters
         or
@@ -134,4 +138,4 @@
 
         return this.format(form);
     };
-})(window.moment);
+})(window.moment, window.eZ);
