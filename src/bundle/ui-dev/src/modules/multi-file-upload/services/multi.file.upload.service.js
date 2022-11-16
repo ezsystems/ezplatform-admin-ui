@@ -147,7 +147,7 @@ const prepareStruct = ({ parentInfo, config, languageCode }, data) => {
                 data: data.fileReader.result.replace(/^.*;base64,/, ''),
             };
 
-            if (data.file.type.startsWith('image/')) {
+            if (data.file.type.startsWith('image/') && !data.file.type.startsWith('image/svg')) {
                 fileValue.alternativeText = data.file.name;
             }
 
