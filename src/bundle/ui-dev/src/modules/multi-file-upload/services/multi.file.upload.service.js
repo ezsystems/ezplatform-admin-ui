@@ -147,7 +147,9 @@ const prepareStruct = ({ parentInfo, config, languageCode }, data) => {
                 data: data.fileReader.result.replace(/^.*;base64,/, ''),
             };
 
-            if (data.file.type.startsWith('image/') && !data.file.type.startsWith('image/svg')) {
+            const contentType = response.ContentTypeInfoList.ContentType[0];
+
+            if (contentType.imageFields.identifier.includes(mapping.contentFieldIdentifier)) {
                 fileValue.alternativeText = data.file.name;
             }
 
@@ -158,7 +160,7 @@ const prepareStruct = ({ parentInfo, config, languageCode }, data) => {
 
             const struct = {
                 ContentCreate: {
-                    ContentType: { _href: response.ContentTypeInfoList.ContentType[0]._href },
+                    ContentType: { _href: contentType._href },
                     mainLanguageCode: languageCode || parentInfo.language,
                     LocationCreate: { ParentLocation: { _href: parentLocation }, sortField: 'PATH', sortOrder: 'ASC' },
                     Section: null,
