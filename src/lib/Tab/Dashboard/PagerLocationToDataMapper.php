@@ -17,7 +17,7 @@ use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\Repository\LocationResolver\LocationResolver;
 use Pagerfanta\Pagerfanta;
 
-class PagerLocationToDataMapper
+final class PagerLocationToDataMapper
 {
     /** @var \eZ\Publish\API\Repository\ContentService */
     protected $contentService;
