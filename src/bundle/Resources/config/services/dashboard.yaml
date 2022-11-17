@@ -40,6 +40,7 @@ services:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper:
+        deprecated: 'Service "%service_id%" is deprecated. Use "Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper" instead'
         parent: EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper
         autowire: true
         public: false

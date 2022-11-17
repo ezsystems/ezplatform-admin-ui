@@ -54,6 +54,15 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
         LanguageService $languageService,
         LocationResolver $locationResolver
     ) {
+        @trigger_error(
+            sprintf(
+                'The "%s" class is deprecated. Use "%s" instead.',
+                __CLASS__,
+                'Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper'
+            ),
+            E_DEPRECATED
+        );
+
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->userService = $userService;
