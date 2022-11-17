@@ -20,16 +20,16 @@ use Pagerfanta\Pagerfanta;
 final class PagerLocationToDataMapper
 {
     /** @var \eZ\Publish\API\Repository\ContentService */
-    protected $contentService;
+    private $contentService;
 
     /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    protected $contentTypeService;
+    private $contentTypeService;
 
     /** @var \eZ\Publish\API\Repository\UserService */
-    protected $userService;
+    private $userService;
 
     /** @var \eZ\Publish\Core\Repository\LocationResolver\LocationResolver */
-    protected $locationResolver;
+    private $locationResolver;
 
     public function __construct(
         ContentService $contentService,

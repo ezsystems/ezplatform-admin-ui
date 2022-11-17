@@ -20,7 +20,6 @@ use Pagerfanta\Pagerfanta;
 
 /**
  * @deprecated in favour of PagerLocationToDataMapper
- *
  * @see \Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper
  */
 class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
