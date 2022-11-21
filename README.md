@@ -8,8 +8,7 @@ To use this package, [install Ibexa DXP](https://doc.ibexa.co/en/latest/install/
 
 ## Extending Back Office:
 
-- [General extensibility](https://doc.ibexa.co/en/latest/extending/extending_back_office/).
-- [Extending Back Office tutorial](https://doc.ibexa.co/en/latest/tutorials/extending_admin_ui/extending_admin_ui//).
+- [General extensibility](https://doc.ibexa.co/en/3.3/extending/extending_back_office/).
 
 ## COPYRIGHT
 
