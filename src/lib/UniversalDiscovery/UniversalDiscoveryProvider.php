@@ -22,6 +22,7 @@ use EzSystems\EzPlatformAdminUi\Permission\LookupLimitationsTransformer;
 use EzSystems\EzPlatformAdminUi\Permission\PermissionCheckerInterface;
 use EzSystems\EzPlatformAdminUi\QueryType\LocationPathQueryType;
 use EzSystems\EzPlatformRest\Output\Visitor;
+use EzSystems\EzPlatformRest\Server\Values\RestLocation;
 use EzSystems\EzPlatformRest\Server\Values\Version;
 
 class UniversalDiscoveryProvider implements Provider
@@ -248,7 +249,14 @@ class UniversalDiscoveryProvider implements Provider
         return [
             'locations' => array_map(
                 function (SearchHit $searchHit) {
-                    return $this->getRestFormat($searchHit->valueObject);
+                    /** @var Location $location */
+                    $location = $searchHit->valueObject;
+                    $restLocation = new RestLocation(
+                        $location,
+                        $this->locationService->getLocationChildCount($location)
+                    );
+
+                    return $this->getRestFormat($restLocation);
                 },
                 $searchResult->searchHits
             ),
