@@ -249,7 +249,7 @@ class UniversalDiscoveryProvider implements Provider
         return [
             'locations' => array_map(
                 function (SearchHit $searchHit) {
-                    /** @var Location $location */
+                    /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
                     $location = $searchHit->valueObject;
                     $restLocation = new RestLocation(
                         $location,
