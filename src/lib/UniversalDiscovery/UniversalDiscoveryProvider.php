@@ -253,7 +253,7 @@ class UniversalDiscoveryProvider implements Provider
                     $location = $searchHit->valueObject;
                     $restLocation = new RestLocation(
                         $location,
-                        $this->locationService->getLocationChildCount($location)
+                        0 // Putting '0' here should suffice as this is not important from UDW standpoint
                     );
 
                     return $this->getRestFormat($restLocation);
