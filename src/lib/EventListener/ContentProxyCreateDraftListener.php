@@ -132,11 +132,12 @@ class ContentProxyCreateDraftListener implements EventSubscriberInterface
         );
 
         $response = new RedirectResponse(
-            $this->router->generate('ezplatform.content.draft.edit', [
+            $this->router->generate('ezplatform.content.translate', [
                 'contentId' => $contentDraft->id,
                 'versionNo' => $contentDraft->getVersionInfo()->versionNo,
-                'language' => $toLanguageCode,
                 'locationId' => $event->getLocationId(),
+                'fromLanguageCode' => $fromLanguageCode,
+                'toLanguageCode' => $toLanguageCode,
             ])
         );
 
