@@ -256,7 +256,8 @@ class ContentTranslateViewBuilder implements ViewBuilder
 
         return $this->loadContent(
             (int) $parameters['contentId'],
-            null !== $language ? [$language->languageCode] : []
+            null !== $language ? [$language->languageCode] : [],
+            (int) $parameters['versionNo'] ?: null
         );
     }
 
