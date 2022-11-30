@@ -95,7 +95,7 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
         $request = $event->getRequest();
         $languageCode = $request->attributes->get('toLanguageCode');
         $baseLanguageCode = $request->attributes->get('fromLanguageCode');
-        $versionNo = $request->attributes->getInt('versionNo');
+        $versionNo = $request->query->getInt('versionNo');
         $content = $this->contentService->loadContent(
             (int)$request->attributes->get('contentId'),
             null !== $baseLanguageCode ? [$baseLanguageCode] : null,
@@ -120,7 +120,14 @@ class ContentTranslateViewFilter implements EventSubscriberInterface
             $content
         );
 
-        $event->getParameters()->add(['form' => $form->handleRequest($request)]);
+        $event->getParameters()->add([
+            'form' => $form->handleRequest($request),
+            'content' => $content,
+            'versionNo' => $versionNo,
+            'contentType' => $contentType,
+            'toLanguage' => $toLanguage,
+            'fromLanguage' => $fromLanguage,
+        ]);
     }
 
     /**

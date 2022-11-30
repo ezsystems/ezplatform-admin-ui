@@ -564,12 +564,11 @@ ibexa.content.translate_with_location.proxy:
         fromLanguageCode: ~
 
 ezplatform.content.translate:
-    path: /content/{contentId}/translate/{toLanguageCode}/{fromLanguageCode}/{versionNo}
+    path: /content/{contentId}/translate/{toLanguageCode}/{fromLanguageCode}
     methods: ['GET', 'POST']
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ContentEditController::translateAction'
         fromLanguageCode: ~
-        versionNo: ~
 
 ibexa.content.translate_with_location:
     path: /content/{contentId}/location/{locationId}/translate/{toLanguageCode}/{fromLanguageCode}
