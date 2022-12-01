@@ -18,6 +18,10 @@ use eZ\Publish\Core\Repository\LocationResolver\LocationResolver;
 use EzSystems\EzPlatformAdminUi\Pagination\Mapper\AbstractPagerContentToDataMapper;
 use Pagerfanta\Pagerfanta;
 
+/**
+ * @deprecated in favour of PagerLocationToDataMapper
+ * @see \Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper
+ */
 class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
 {
     /** @var \eZ\Publish\API\Repository\ContentService */
@@ -50,6 +54,15 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
         LanguageService $languageService,
         LocationResolver $locationResolver
     ) {
+        @trigger_error(
+            sprintf(
+                'The "%s" class is deprecated. Use "%s" instead.',
+                __CLASS__,
+                'Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper'
+            ),
+            E_DEPRECATED
+        );
+
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
         $this->userService = $userService;

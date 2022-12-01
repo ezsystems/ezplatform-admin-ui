@@ -8,47 +8,13 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Tab\Dashboard;
 
-use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
-use eZ\Publish\Core\QueryType\QueryType;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractTab;
+use eZ\Publish\Core\Pagination\Pagerfanta\LocationSearchAdapter;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use Ibexa\AdminUi\Tab\Dashboard\AbstractContentTab;
 use Pagerfanta\Pagerfanta;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Environment;
 
-class MyContentTab extends AbstractTab implements OrderedTabInterface
+class MyContentTab extends AbstractContentTab implements OrderedTabInterface
 {
-    /** @var \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper */
-    protected $pagerContentToDataMapper;
-
-    /** @var \eZ\Publish\API\Repository\SearchService */
-    protected $searchService;
-
-    /** @var \eZ\Publish\Core\QueryType\QueryType */
-    private $contentSubtreeQueryType;
-
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
-     * @param \EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper $pagerContentToDataMapper
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     * @param \eZ\Publish\Core\QueryType\QueryType $contentSubtreeQueryType
-     */
-    public function __construct(
-        Environment $twig,
-        TranslatorInterface $translator,
-        PagerContentToDataMapper $pagerContentToDataMapper,
-        SearchService $searchService,
-        QueryType $contentSubtreeQueryType
-    ) {
-        parent::__construct($twig, $translator);
-
-        $this->pagerContentToDataMapper = $pagerContentToDataMapper;
-        $this->searchService = $searchService;
-        $this->contentSubtreeQueryType = $contentSubtreeQueryType;
-    }
-
     public function getIdentifier(): string
     {
         return 'my-content';
@@ -65,6 +31,9 @@ class MyContentTab extends AbstractTab implements OrderedTabInterface
         return 200;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function renderView(array $parameters): string
     {
         /** @todo Handle pagination */
@@ -72,8 +41,8 @@ class MyContentTab extends AbstractTab implements OrderedTabInterface
         $limit = 10;
 
         $pager = new Pagerfanta(
-            new ContentSearchAdapter(
-                $this->contentSubtreeQueryType->getQuery(['owned' => true]),
+            new LocationSearchAdapter(
+                $this->contentLocationSubtreeQueryType->getQuery(['owned' => true]),
                 $this->searchService
             )
         );
@@ -81,7 +50,7 @@ class MyContentTab extends AbstractTab implements OrderedTabInterface
         $pager->setCurrentPage($page);
 
         return $this->twig->render('@ezdesign/ui/dashboard/tab/my_content.html.twig', [
-            'data' => $this->pagerContentToDataMapper->map($pager),
+            'data' => $this->pagerLocationToDataMapper->map($pager),
         ]);
     }
 }

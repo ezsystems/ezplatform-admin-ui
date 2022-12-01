@@ -11,15 +11,23 @@ services:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: false
         arguments:
-            $contentSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType'
+            $contentLocationSubtreeQueryType: '@Ibexa\AdminUi\QueryType\ContentLocationSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
+
+    EzSystems\EzPlatformAdminUi\Tab\Dashboard\EveryoneContentTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        public: false
+        arguments:
+            $contentLocationSubtreeQueryType: '@Ibexa\AdminUi\QueryType\ContentLocationSubtreeQueryType'
+        tags:
+            - { name: ezplatform.tab, group: dashboard-everyone }
 
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\MyMediaTab:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: false
         arguments:
-            $mediaSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType'
+            $mediaLocationSubtreeQueryType: '@Ibexa\AdminUi\QueryType\MediaLocationSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-my }
 
@@ -27,20 +35,17 @@ services:
         parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
         public: false
         arguments:
-            $mediaSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\MediaSubtreeQueryType'
-        tags:
-            - { name: ezplatform.tab, group: dashboard-everyone }
-
-    EzSystems\EzPlatformAdminUi\Tab\Dashboard\EveryoneContentTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
-        public: false
-        arguments:
-            $contentSubtreeQueryType: '@EzSystems\EzPlatformAdminUi\QueryType\ContentSubtreeQueryType'
+            $mediaLocationSubtreeQueryType: '@Ibexa\AdminUi\QueryType\MediaLocationSubtreeQueryType'
         tags:
             - { name: ezplatform.tab, group: dashboard-everyone }
 
     EzSystems\EzPlatformAdminUi\Tab\Dashboard\PagerContentToDataMapper:
+        deprecated: 'Service "%service_id%" is deprecated. Use "Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper" instead'
         parent: EzSystems\EzPlatformAdminUi\Search\AbstractPagerContentToDataMapper
+        autowire: true
+        public: false
+
+    Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper:
         autowire: true
         public: false
 
