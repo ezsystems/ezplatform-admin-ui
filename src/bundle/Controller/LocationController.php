@@ -354,6 +354,13 @@ class LocationController extends Controller
             if ($result instanceof Response) {
                 return $result;
             }
+
+            $data = $form->getData();
+            $location = $data->getLocation();
+
+            if ($location !== null) {
+                return $this->redirectToLocation($location);
+            }
         }
 
         return $this->redirect($this->generateUrl('ezplatform.trash.list'));
