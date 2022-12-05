@@ -15,6 +15,8 @@ export default class EzBtnImage extends EzEmbedImageButton {
      * @return {Boolean} True if the command is disabled, false otherwise.
      */
     isDisabled() {
+        console.warn('[DEPRECATED] EzBtnImage.isDisabled method is deprecated');
+        console.warn('[DEPRECATED] it will be removed from ezplatform-admin-ui 2.0');
         return !this.props.editor.get('nativeEditor').ezembed.canBeAdded();
     }
 
@@ -56,14 +58,12 @@ export default class EzBtnImage extends EzEmbedImageButton {
      * @return {Object} The content which should be rendered.
      */
     render() {
-        const css = 'ae-button ez-btn-ae ez-btn-ae--image ' + this.getStateClasses(),
-            disabled = this.isDisabled();
+        const css = 'ae-button ez-btn-ae ez-btn-ae--image ' + this.getStateClasses();
         const label = Translator.trans(/*@Desc("Image")*/ 'image_btn.label', {}, 'alloy_editor');
 
         return (
             <button
                 className={css}
-                disabled={disabled}
                 onClick={this.chooseContent.bind(this)}
                 tabIndex={this.props.tabIndex}
                 title={label}>
