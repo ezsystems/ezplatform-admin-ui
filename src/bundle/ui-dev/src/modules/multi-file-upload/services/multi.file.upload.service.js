@@ -136,7 +136,7 @@ const getFieldDefinitionByIdentifier = ({ token, siteaccess }, contentTypeId, fi
     const request = new Request(`/api/ezp/v2/content/types/${contentTypeId}/fieldDefinition/${fieldIdentifier}`, {
         method: 'GET',
         headers: {
-            Accept: 'application/vnd.ibexa.api.FieldDefinition+json',
+            Accept: 'application/vnd.ez.api.FieldDefinition+json',
             'X-Siteaccess': siteaccess,
             'X-CSRF-Token': token,
         },
@@ -164,7 +164,7 @@ const prepareStruct = ({ parentInfo, config, languageCode }, data) => {
 
     return getContentTypeByIdentifier(config, mapping.contentTypeIdentifier)
         .then((response) => response.json())
-        .catch(() => window.eZ.helpers.notification.showErrorNotification('Cannot get content type by identifier'))
+        .catch(() => window.eZ.helpers.notification.showErrorNotification(Translator.trans(/*@Desc("Cannot get content type by identifier")*/ 'cannot_get_content_type_identifier.message', {}, 'multi_file_upload')))
         .then((response) => {
             const fileValue = {
                 fileName: data.file.name,
@@ -176,7 +176,7 @@ const prepareStruct = ({ parentInfo, config, languageCode }, data) => {
 
             return getFieldDefinitionByIdentifier(config, contentType.id, contentFieldIdentifier)
                 .then((response) => response.json())
-                .catch(() => window.eZ.helpers.notification.showErrorNotification('Cannot get content type by identifier'))
+                .catch(() => window.eZ.helpers.notification.showErrorNotification(Translator.trans(/*@Desc("Cannot get content type by identifier")*/ 'cannot_get_content_type_identifier.message', {}, 'multi_file_upload')))
                 .then((response) => {
                     const fieldDefinition = response.FieldDefinition;
 
@@ -192,7 +192,7 @@ const prepareStruct = ({ parentInfo, config, languageCode }, data) => {
                     const struct = {
                         ContentCreate: {
                             ContentType: { _href: contentType._href },
-                            mainLanguageCode: languageCode || parentInfo.language,
+                            mainLanguageCode: languageCode ?? parentInfo.language,
                             LocationCreate: { ParentLocation: { _href: parentLocation }, sortField: 'PATH', sortOrder: 'ASC' },
                             Section: null,
                             alwaysAvailable: true,
@@ -204,9 +204,9 @@ const prepareStruct = ({ parentInfo, config, languageCode }, data) => {
 
                     return struct;
                 })
-                .catch(() => window.eZ.helpers.notification.showErrorNotification('Cannot create content structure'));
+                .catch(() => window.eZ.helpers.notification.showErrorNotification(Translator.trans(/*@Desc("Cannot create content structure")*/ 'cannot_create_content_structure.message', {}, 'multi_file_upload')));
         })
-        .catch(() => window.eZ.helpers.notification.showErrorNotification('Cannot create content structure'));
+        .catch(() => window.eZ.helpers.notification.showErrorNotification(Translator.trans(/*@Desc("Cannot create content structure")*/ 'cannot_create_content_structure.message', {}, 'multi_file_upload')));
 };
 
 /**
