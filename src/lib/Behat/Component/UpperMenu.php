@@ -28,7 +28,7 @@ class UpperMenu extends Component
 
     public function goToSubTab(string $tabName): void
     {
-        $this->getHTMLPage()->findAll($this->getLocator('submenuButton'))->getByCriterion(new ElementTextCriterion($tabName))->click();
+        $this->getHTMLPage()->setTimeout(3)->findAll($this->getLocator('submenuButton'))->getByCriterion(new ElementTextCriterion($tabName))->click();
     }
 
     public function getNotificationsCount(): int
