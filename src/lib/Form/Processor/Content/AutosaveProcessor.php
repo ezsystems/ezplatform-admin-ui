@@ -47,7 +47,7 @@ class AutosaveProcessor implements EventSubscriberInterface
         }
 
         $event->setResponse(
-        // Response content is irrelevant as it will be overwritten by ViewRenderer anyway
+            // Response content is irrelevant as it will be overwritten by ViewRenderer anyway
             new Response(null, $statusCode)
         );
     }
