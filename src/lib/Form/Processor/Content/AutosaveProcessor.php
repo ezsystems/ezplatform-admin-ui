@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\Form\Processor\Content;
 
 use eZ\Publish\API\Repository\Exceptions\Exception as APIException;
 use EzSystems\EzPlatformAdminUi\Event\AutosaveEvents;
+use EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData;
 use EzSystems\EzPlatformContentForms\Event\FormActionEvent;
 use EzSystems\EzPlatformContentForms\Form\Processor\ContentFormProcessor;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -35,15 +36,18 @@ class AutosaveProcessor implements EventSubscriberInterface
 
     public function processAutosave(FormActionEvent $event): void
     {
+        $statusCode = Response::HTTP_OK;
+
         try {
-            $this->innerContentFormProcessor->processSaveDraft($event);
-            $statusCode = Response::HTTP_OK;
+            if ($event->getData() instanceof ContentUpdateData) {
+                $this->innerContentFormProcessor->processSaveDraft($event);
+            }
         } catch (APIException $exception) {
             $statusCode = Response::HTTP_BAD_REQUEST;
         }
 
         $event->setResponse(
-            // Response content is irrelevant as it will be overwritten by ViewRenderer anyway
+        // Response content is irrelevant as it will be overwritten by ViewRenderer anyway
             new Response(null, $statusCode)
         );
     }
