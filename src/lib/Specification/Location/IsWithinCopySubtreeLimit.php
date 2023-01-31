@@ -10,8 +10,6 @@ namespace EzSystems\EzPlatformAdminUi\Specification\Location;
 
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
-use eZ\Publish\API\Repository\Values\Filter\Filter;
 use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
 
 /**
@@ -54,18 +52,11 @@ class IsWithinCopySubtreeLimit extends AbstractSpecification
             return true;
         }
 
-        return $this->copyLimit >= $this->getSubtreeSize($item);
-    }
-
-    private function getSubtreeSize(Location $location): int
-    {
-        return $this->locationService->count(
-            new Filter(new Criterion\Subtree($location->pathString))
-        );
+        return $this->copyLimit >= $this->locationService->getSubtreeSize($item);
     }
 
     private function isContainer(Location $location): bool
     {
-        return $location->getContentInfo()->getContentType()->isContainer;
+        return $location->getContentInfo()->getContentType()->isContainer();
     }
 }
