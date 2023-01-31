@@ -409,9 +409,9 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
             'subtree_operations.copy_subtree.limit'
         );
 
-        return (new IsWithinCopySubtreeLimit(
+        return ((new IsRoot())->not())->and(new IsWithinCopySubtreeLimit(
             $copyLimit,
             $this->locationService
-        ))->and((new IsRoot())->not())->isSatisfiedBy($location);
+        ))->isSatisfiedBy($location);
     }
 }
