@@ -81,12 +81,12 @@ class ContentRelationMultiple extends FieldTypeComponent
         $secondValue = $explodedValue[count($explodedValue) - 1];
 
         $viewPatternRegex = '/Multiple relations:[\w\/,: ]* %s [\w \/,:]*/';
-        Assert::assertRegExp(
+        Assert::assertMatchesRegularExpression(
             sprintf($viewPatternRegex, $firstValue),
             $this->getHTMLPage()->find($this->parentLocator)->getText(),
             'Field has wrong value'
         );
-        Assert::assertRegExp(
+        Assert::assertMatchesRegularExpression(
             sprintf($viewPatternRegex, $secondValue),
             $this->getHTMLPage()->find($this->parentLocator)->getText(),
             'Field has wrong value'
