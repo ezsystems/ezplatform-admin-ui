@@ -33,10 +33,6 @@ class IsWithinCopySubtreeLimit extends AbstractSpecification
 
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\Location $item
-     *
-     * @return bool
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function isSatisfiedBy($item): bool
     {
@@ -44,12 +40,8 @@ class IsWithinCopySubtreeLimit extends AbstractSpecification
             return true;
         }
 
-        if ($this->copyLimit === 0) {
+        if ($this->copyLimit === 0 || !$this->isContainer($item)) {
             return false;
-        }
-
-        if (!$this->isContainer($item)) {
-            return true;
         }
 
         return $this->copyLimit >= $this->locationService->getSubtreeSize($item);
