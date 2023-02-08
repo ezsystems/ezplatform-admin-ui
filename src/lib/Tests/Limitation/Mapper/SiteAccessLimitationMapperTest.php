@@ -46,7 +46,8 @@ class SiteAccessLimitationMapperTest extends TestCase
         $siteAccessService->method('getAll')->willReturn($siteAccesses);
 
         $mapper = new SiteAccessLimitationMapper(
-            $siteAccessService, $siteAccessesGeneratorInterface
+            $siteAccessService,
+            $siteAccessesGeneratorInterface
         );
         $result = $mapper->mapLimitationValue($limitation);
 
