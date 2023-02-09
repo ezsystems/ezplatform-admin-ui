@@ -200,8 +200,10 @@ services:
     ezplatform.content_forms.limitation.form_mapper.udw_based:
         class: EzSystems\EzPlatformAdminUi\Limitation\Mapper\UDWBasedMapper
         arguments:
-            - "@ezpublish.api.service.location"
-            - "@ezpublish.api.service.search"
+            $locationService: "@ezpublish.api.service.location"
+            $searchService: "@ezpublish.api.service.search"
+            $permissionResolver: '@eZ\Publish\API\Repository\PermissionResolver'
+            $repository: '@ezpublish.api.repository'
         calls:
             - [setFormTemplate, ["%ezplatform.content_forms.limitation.udw.template%"]]
 

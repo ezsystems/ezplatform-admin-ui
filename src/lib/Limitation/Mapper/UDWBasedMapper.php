@@ -7,9 +7,11 @@
 namespace EzSystems\EzPlatformAdminUi\Limitation\Mapper;
 
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Ancestor;
+use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Subtree;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Location\Path;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 use EzSystems\EzPlatformAdminUi\Form\DataTransformer\UDWBasedValueModelTransformer;
@@ -42,15 +44,22 @@ class UDWBasedMapper implements LimitationFormMapperInterface, LimitationValueMa
      */
     private $template;
 
-    /**
-     * UDWBasedMapper constructor.
-     *
-     * @param \eZ\Publish\API\Repository\SearchService $searchService
-     */
-    public function __construct(LocationService $locationService, SearchService $searchService)
-    {
+    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    private $permissionResolver;
+
+    /** @var \eZ\Publish\API\Repository\Repository */
+    private $repository;
+
+    public function __construct(
+        LocationService $locationService,
+        SearchService $searchService,
+        PermissionResolver $permissionResolver,
+        Repository $repository
+    ) {
         $this->locationService = $locationService;
         $this->searchService = $searchService;
+        $this->permissionResolver = $permissionResolver;
+        $this->repository = $repository;
     }
 
     public function setFormTemplate($template)
@@ -74,7 +83,13 @@ class UDWBasedMapper implements LimitationFormMapperInterface, LimitationValueMa
                     'label' => LimitationTranslationExtractor::identifierToLabel($data->getIdentifier()),
                 ])
                 ->addViewTransformer(new UDWBasedValueViewTransformer($this->locationService))
-                ->addModelTransformer(new UDWBasedValueModelTransformer($this->locationService))
+                ->addModelTransformer(
+                    new UDWBasedValueModelTransformer(
+                        $this->locationService,
+                        $this->permissionResolver,
+                        $this->repository
+                    )
+                )
                 // Deactivate auto-initialize as we're not on the root form.
                 ->setAutoInitialize(false)->getForm()
         );
@@ -92,7 +107,7 @@ class UDWBasedMapper implements LimitationFormMapperInterface, LimitationValueMa
             $location = $this->locationService->loadLocation($id);
 
             $query = new LocationQuery([
-                'filter' => new Ancestor($location->pathString),
+                'filter' => new Subtree($location->pathString),
                 'sortClauses' => [new Path()],
             ]);
 

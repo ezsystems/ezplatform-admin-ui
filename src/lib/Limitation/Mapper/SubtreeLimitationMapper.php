@@ -7,7 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Limitation\Mapper;
 
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Ancestor;
+use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Subtree;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Location\Path;
 use eZ\Publish\API\Repository\Values\User\Limitation;
 
@@ -33,13 +33,17 @@ class SubtreeLimitationMapper extends UDWBasedMapper
 
         foreach ($limitation->limitationValues as $pathString) {
             $query = new LocationQuery([
-                'filter' => new Ancestor($pathString),
+                'filter' => new Subtree($pathString),
                 'sortClauses' => [new Path()],
             ]);
 
             $path = [];
             foreach ($this->searchService->findLocations($query)->searchHits as $hit) {
                 $path[] = $hit->valueObject->getContentInfo();
+            }
+
+            if (empty($path)) {
+                continue;
             }
 
             $values[] = $path;

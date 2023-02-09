@@ -7,11 +7,13 @@
 namespace EzSystems\EzPlatformAdminUi\Tests\Limitation\Mapper;
 
 use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Ancestor;
+use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Subtree;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Location\Path;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
@@ -44,10 +46,12 @@ class SubtreeLimitationMapperTest extends TestCase
 
         $locationServiceMock = $this->createMock(LocationService::class);
         $searchServiceMock = $this->createMock(SearchService::class);
+        $permissionResolverMock = $this->createMock(PermissionResolver::class);
+        $repositoryMock = $this->createMock(Repository::class);
 
         foreach ($values as $i => $pathString) {
             $query = new LocationQuery([
-                'filter' => new Ancestor($pathString),
+                'filter' => new Subtree($pathString),
                 'sortClauses' => [new Path()],
             ]);
 
@@ -58,7 +62,12 @@ class SubtreeLimitationMapperTest extends TestCase
                 ->willReturn($this->createSearchResultsMock($expected[$i]));
         }
 
-        $mapper = new SubtreeLimitationMapper($locationServiceMock, $searchServiceMock);
+        $mapper = new SubtreeLimitationMapper(
+            $locationServiceMock,
+            $searchServiceMock,
+            $permissionResolverMock,
+            $repositoryMock
+        );
         $result = $mapper->mapLimitationValue(new SubtreeLimitation([
             'limitationValues' => $values,
         ]));
