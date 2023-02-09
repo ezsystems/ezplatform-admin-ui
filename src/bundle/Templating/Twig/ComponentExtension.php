@@ -8,22 +8,17 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUiBundle\Templating\Twig;
 
-use EzSystems\EzPlatformAdminUi\Component\Registry as ComponentRegistry;
 use EzSystems\EzPlatformAdminUi\Component\Renderer\RendererInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class ComponentExtension extends AbstractExtension
 {
-    protected $registry;
-
     protected $renderer;
 
     public function __construct(
-        ComponentRegistry $registry,
         RendererInterface $renderer
     ) {
-        $this->registry = $registry;
         $this->renderer = $renderer;
     }
 
