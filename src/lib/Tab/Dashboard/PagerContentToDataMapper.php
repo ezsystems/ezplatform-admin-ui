@@ -60,7 +60,7 @@ class PagerContentToDataMapper extends AbstractPagerContentToDataMapper
                 __CLASS__,
                 'Ibexa\AdminUi\Tab\Dashboard\PagerLocationToDataMapper'
             ),
-            E_DEPRECATED
+            E_USER_DEPRECATED
         );
 
         $this->contentService = $contentService;
