@@ -64,7 +64,7 @@ class UDWBasedValueModelTransformer implements DataTransformerInterface
             // Sudo is necessary as skipping non-accessible Locations
             // will prevent an administrator from editing policies
             return $this->permissionResolver->sudo(
-                function (Repository $repository) use ($locationId): Location {
+                function () use ($locationId): Location {
                     return $this->locationService->loadLocation($locationId);
                 },
                 $this->repository
