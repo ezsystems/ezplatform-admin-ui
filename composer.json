@@ -58,6 +58,11 @@
         "ezsystems/ezplatform-code-style": "^1.0",
         "ezsystems/ezplatform-http-cache": "^2.3@dev"
     },
+    "config": {
+        "allow-plugins": {
+            "*/*": false
+        }
+    },
     "scripts": {
         "fix-cs": "php-cs-fixer fix --config=.php-cs-fixer.php --show-progress=dots",
         "check-cs": "@fix-cs --dry-run",
