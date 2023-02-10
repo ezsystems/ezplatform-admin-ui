@@ -60,7 +60,7 @@
     },
     "config": {
         "allow-plugins": {
-            "*/*": false
+            "*": false
         }
     },
     "scripts": {
