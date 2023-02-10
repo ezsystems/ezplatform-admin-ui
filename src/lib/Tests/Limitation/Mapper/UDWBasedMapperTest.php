@@ -11,7 +11,7 @@ use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Subtree;
+use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Ancestor;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Location\Path;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
@@ -61,7 +61,7 @@ class UDWBasedMapperTest extends TestCase
                 ->willReturn($location);
 
             $query = new LocationQuery([
-                'filter' => new Subtree($location->pathString),
+                'filter' => new Ancestor($location->pathString),
                 'sortClauses' => [new Path()],
             ]);
 
