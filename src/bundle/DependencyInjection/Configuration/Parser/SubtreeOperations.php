@@ -30,34 +30,20 @@ class SubtreeOperations extends AbstractParser
     /**
      * @inheritdoc
      */
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer)
+    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {
-        if (empty($scopeSettings['subtree_operations'])) {
+        if (!isset($scopeSettings['subtree_operations']['copy_subtree']['limit'])) {
             return;
         }
 
-        $settings = $scopeSettings['subtree_operations'];
-        $nodes = ['copy_subtree' => ['limit']];
-
-        foreach ($nodes as $node => $keys) {
-            foreach ($keys as $key) {
-                if (!isset($settings[$node][$key]) || empty($settings[$node][$key])) {
-                    continue;
-                }
-
-                $contextualizer->setContextualParameter(
-                    sprintf('subtree_operations.%s.%s', $node, $key),
-                    $currentScope,
-                    $settings[$node][$key]
-                );
-            }
-        }
+        $contextualizer->setContextualParameter(
+            'subtree_operations.copy_subtree.limit',
+            $currentScope,
+            $scopeSettings['subtree_operations']['copy_subtree']['limit']
+        );
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function addSemanticConfig(NodeBuilder $nodeBuilder)
+    public function addSemanticConfig(NodeBuilder $nodeBuilder): void
     {
         $nodeBuilder
             ->arrayNode('subtree_operations')
