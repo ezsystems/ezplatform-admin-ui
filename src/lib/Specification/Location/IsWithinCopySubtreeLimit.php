@@ -9,8 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\Specification\Location;
 
 use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
-use eZ\Publish\API\Repository\Values\Filter\Filter;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use EzSystems\EzPlatformAdminUi\Specification\AbstractSpecification;
 
 /**
@@ -34,10 +33,6 @@ class IsWithinCopySubtreeLimit extends AbstractSpecification
 
     /**
      * @param \eZ\Publish\API\Repository\Values\Content\Location $item
-     *
-     * @return bool
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      */
     public function isSatisfiedBy($item): bool
     {
@@ -45,12 +40,15 @@ class IsWithinCopySubtreeLimit extends AbstractSpecification
             return true;
         }
 
-        if ($this->copyLimit === 0) {
+        if ($this->copyLimit === 0 || !$this->isContainer($item)) {
             return false;
         }
 
-        $filter = new Filter(new Criterion\Subtree($item->pathString));
+        return $this->copyLimit >= $this->locationService->getSubtreeSize($item);
+    }
 
-        return $this->copyLimit >= $this->locationService->count($filter);
+    private function isContainer(Location $location): bool
+    {
+        return $location->getContentInfo()->getContentType()->isContainer();
     }
 }

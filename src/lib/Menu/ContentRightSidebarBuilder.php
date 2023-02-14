@@ -401,15 +401,22 @@ class ContentRightSidebarBuilder extends AbstractBuilder implements TranslationC
 
     private function canCopySubtree(Location $location, bool $hasCreatePermission): bool
     {
-        $copyLimit = $this->configResolver->getParameter(
-            'subtree_operations.copy_subtree.limit'
+        if (!$hasCreatePermission) {
+            return false;
+        }
+
+        $isWithinCopySubtreeLimit = new IsWithinCopySubtreeLimit(
+            $this->getCopySubtreeLimit(),
+            $this->locationService
         );
 
-        $canCopySubtree = (new IsWithinCopySubtreeLimit(
-            $copyLimit,
-            $this->locationService
-        ))->and((new IsRoot())->not())->isSatisfiedBy($location);
+        return ((new IsRoot())->not())->and($isWithinCopySubtreeLimit)->isSatisfiedBy($location);
+    }
 
-        return $canCopySubtree && $hasCreatePermission;
+    private function getCopySubtreeLimit(): int
+    {
+        return $this->configResolver->getParameter(
+            'subtree_operations.copy_subtree.limit'
+        );
     }
 }
