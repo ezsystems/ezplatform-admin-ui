@@ -11,6 +11,16 @@
         <target state="new">Abort</target>
         <note>key: abort.label</note>
       </trans-unit>
+      <trans-unit id="44e1a07a310b2a69264788b3df5199d2f9a75472" resname="cannot_create_content_structure.message">
+        <source>Cannot create content structure</source>
+        <target state="new">Cannot create content structure</target>
+        <note>key: cannot_create_content_structure.message</note>
+      </trans-unit>
+      <trans-unit id="03b8fddcf897c997afa956d17e595ceed173463d" resname="cannot_get_content_type_identifier.message">
+        <source>Cannot get content type by identifier</source>
+        <target state="new">Cannot get content type by identifier</target>
+        <note>key: cannot_get_content_type_identifier.message</note>
+      </trans-unit>
       <trans-unit id="235e57ee5665f61ea5873be5e2f6cd15b05a51c0" resname="cannot_upload.message">
         <source>Cannot upload file</source>
         <target state="new">Cannot upload file</target>
@@ -70,16 +80,6 @@
         <source>Multi-file upload</source>
         <target state="new">Multi-file upload</target>
         <note>key: upload_popup.close</note>
-      </trans-unit>
-      <trans-unit id="6b2bc429ffc374b49b5de9e3563d3d5a7668e4b2" resname="cannot_get_content_type_identifier.message">
-        <source>Cannot get content type by identifier</source>
-        <target state="new">Cannot get content type by identifier</target>
-        <note>key: cannot_get_content_type.identifier</note>
-      </trans-unit>
-      <trans-unit id="6b2bc429ffc374b49b5de9e3563d3d5a7668e4b2" resname="cannot_create_content_structure.message">
-        <source>Cannot create content structure</source>
-        <target state="new">Cannot create content structure</target>
-        <note>key: cannot_get_content_type.identifier</note>
       </trans-unit>
     </body>
   </file>
