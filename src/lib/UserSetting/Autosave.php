@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UserSetting;
 
 use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformUser\UserSetting\FormMapperInterface;
 use EzSystems\EzPlatformUser\UserSetting\ValueDefinitionInterface;
 use JMS\TranslationBundle\Annotation\Desc;
@@ -24,10 +25,15 @@ class Autosave implements ValueDefinitionInterface, FormMapperInterface
     /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
+
     public function __construct(
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        ConfigResolverInterface $configResolver
     ) {
         $this->translator = $translator;
+        $this->configResolver = $configResolver;
     }
 
     public function getName(): string
@@ -57,7 +63,7 @@ class Autosave implements ValueDefinitionInterface, FormMapperInterface
 
     public function getDefaultValue(): string
     {
-        return self::ENABLED_OPTION;
+        return $this->configResolver->getParameter('autosave.enabled') == false ? self::DISABLED_OPTION : self::ENABLED_OPTION;
     }
 
     public function mapFieldForm(
