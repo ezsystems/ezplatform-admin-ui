@@ -1,6 +1,9 @@
 {% extends '@ezdesign/ui/base.html.twig' %}
 
-{% form_theme form_change_user_password '@ezdesign/account/change_password/form_fields.html.twig'  %}
+{% form_theme form_change_user_password with [
+    '@ezdesign/account/form_fields.html.twig',
+    '@ezdesign/account/change_password/form_fields.html.twig'
+] %}
 
 {% trans_default_domain 'user_change_password' %}
 
