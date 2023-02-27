@@ -144,8 +144,9 @@
     };
     const attachTagEventHandlers = (limitationBtn, tag) => {
         const removeTagBtn = tag.querySelector('.ez-tag__remove-btn');
-
-        removeTagBtn.addEventListener('click', () => handleTagRemove(limitationBtn, tag), false);
+        if (removeTagBtn !== null) {
+            removeTagBtn.addEventListener('click', () => handleTagRemove(limitationBtn, tag), false);
+        }
     };
     const closeUDW = () => ReactDOM.unmountComponentAtNode(udwContainer);
     const handleUdwConfirm = (limitationBtn, selectedItems) => {
