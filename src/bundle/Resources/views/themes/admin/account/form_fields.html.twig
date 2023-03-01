@@ -41,8 +41,10 @@
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ez-login__form-input')|trim}) %}
     {% set wrapper_attr = wrapper_attr|default({})|merge({'class': (wrapper_attr.class|default('') ~ ' ' ~ wrapper_class)|trim}) %}
     <div{% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
-        {{ block('form_errors') }}
-        {{ block('form_label') }}
+        <div class="ez-field__label-wrapper">
+            {{ block('form_label') }}
+            {{ block('form_errors') }}
+        </div>
         {{- form_widget(form, {'attr': attr}) -}}
     </div>
 {%- endblock %}

@@ -1,16 +1,6 @@
 {# @todo move to view/user/preferences in the future #}
 
-{% use 'bootstrap_4_layout.html.twig' %}
-
 {% trans_default_domain 'change_user_password' %}
-
-{%- block form_errors -%}
-    {%- if errors|length > 0 -%}
-        {%- for error in errors -%}
-            <em class="ez-field__error">{{ error.message }}</em>
-        {%- endfor -%}
-    {%- endif -%}
-{%- endblock -%}
 
 {% block form_row -%}
     {% set widget_wrapper_attr = widget_wrapper_attr|default({})|merge({'class': (widget_wrapper_attr.class|default('') ~ ' ez-field__data')|trim}) %}

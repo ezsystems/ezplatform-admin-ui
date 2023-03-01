@@ -7,8 +7,13 @@
     }
 
     .ez-field__error {
-        margin-left: 0;
-        color: $ibexa-color-warning-dark;
+        @include error-under-label();
+    }
+
+    &__form-input {
+        &.is-invalid {
+            @include input-invalid;
+        }
     }
 
     &__image-col {
@@ -106,12 +111,17 @@
 
     &__btn {
         &--sign-in,
-        &--reset-password {
+        &--reset-password,
+        &--change-password {
             padding: calculateRem(10px) calculateRem(80px);
         }
 
         &--cancel {
             padding: calculateRem(10px) calculateRem(24px);
+        }
+
+        &--change-password {
+            margin-top: calculateRem(32px);
         }
     }
 
