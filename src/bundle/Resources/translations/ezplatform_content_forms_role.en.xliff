@@ -46,6 +46,11 @@
         <target state="new">Select Location(s) to use as Limitation</target>
         <note>key: role.policy.limitation.location.udw_title</note>
       </trans-unit>
+      <trans-unit id="290f48ccc1eb2889852b730ac62b2b148594c85f" resname="role.policy.limitation.location_deleted">
+        <source>Location deleted</source>
+        <target state="new">Location deleted</target>
+        <note>key: role.policy.limitation.location_deleted</note>
+      </trans-unit>
       <trans-unit id="be8159ab7985797bd281cb0f7f58bb4d2c925159" resname="role.policy.limitation.not_implemented">
         <source>Editing Limitations for '%limitationTypeIdentifier%' is not available.</source>
         <target state="new">Editing Limitations for '%limitationTypeIdentifier%' is not available.</target>

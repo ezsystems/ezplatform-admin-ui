@@ -6,6 +6,7 @@
  */
 namespace EzSystems\EzPlatformAdminUi\Limitation\Mapper;
 
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Ancestor;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Location\Path;
@@ -32,6 +33,16 @@ class SubtreeLimitationMapper extends UDWBasedMapper
         $values = [];
 
         foreach ($limitation->limitationValues as $pathString) {
+            $pathParts = explode('/', trim($pathString, '/'));
+            $locationId = (int) array_pop($pathParts);
+
+            try {
+                $this->locationService->loadLocation($locationId);
+            } catch (NotFoundException $e) {
+                // Skip generating limitation value as Location doesn't exist at this point
+                continue;
+            }
+
             $query = new LocationQuery([
                 'filter' => new Ancestor($pathString),
                 'sortClauses' => [new Path()],

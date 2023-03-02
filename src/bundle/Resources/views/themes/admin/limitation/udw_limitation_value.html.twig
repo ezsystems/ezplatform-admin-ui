@@ -29,12 +29,18 @@
                         {% set content_breadcrumbs = content_breadcrumbs ~ ' / ' %}
                     {% endif %}
                 {% endfor %}
-                
+
                 {{ include('@ezdesign/limitation/udw_limitation_value_list_item.html.twig', {
                     'content_breadcrumbs': content_breadcrumbs,
                     'location_id': limitationValue.id,
                     'is_loading_state': false
                 }) }}
+            {% else %}
+                <li class="mt-2">
+                    <div class="ez-tag">
+                        {{ "role.policy.limitation.location_deleted"|trans({}, "ezplatform_content_forms_role")|desc("Location deleted") }}
+                    </div>
+                </li>
             {% endif %}
         {% endfor %}
     </ul>
