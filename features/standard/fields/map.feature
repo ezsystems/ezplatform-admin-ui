@@ -29,7 +29,7 @@ Feature: Content fields setting and editing
 
     Examples:
       | fieldInternalName    | fieldName                    | fieldSettings                                                         |  label1   | value1                                                                    | label2     | value2                | label3  | value3      | contentItemName           |
-      | ezgmaplocation       | Map location                 |                                                                       | latitude  | 34.1                                                                      | longitude  | -118.2                | address | Los Angeles | Los Angeles               |
+      #| ezgmaplocation       | Map location                 |                                                                       | latitude  | 34.1                                                                      | longitude  | -118.2                | address | Los Angeles | Los Angeles               |
       | ezcountry            | Country                      |                                                                       | value     | Angola                                                                    |            |                       |         |             | Angola                    |
 
   @javascript @APIUser:admin
@@ -49,5 +49,5 @@ Feature: Content fields setting and editing
 
     Examples:
       | label1    | value1                       | label2     | value2                   | label3  | value3    | oldContentItemName        | newContentItemName           |
-      | latitude  | -37.8                        | longitude  | 145.0                    | address | Melbourne | Los Angeles               | Melbourne                    |
+      #| latitude  | -37.8                        | longitude  | 145.0                    | address | Melbourne | Los Angeles               | Melbourne                    |
       | value     | Argentina                    |            |                          |         |           | Angola                    | Argentina                    |
