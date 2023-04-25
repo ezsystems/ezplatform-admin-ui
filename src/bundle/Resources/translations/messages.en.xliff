@@ -354,11 +354,6 @@
         <target state="new">Any time</target>
         <note>key: search.any_time</note>
       </trans-unit>
-      <trans-unit id="f32993c555744e5c203137f3ee0e380d27e9cfef" resname="search.date.range">
-        <source>From date - to date</source>
-        <target state="new">From date - to date</target>
-        <note>key: search.date.range</note>
-      </trans-unit>
       <trans-unit id="9567771350aff93580f743089937b0c8fe31058e" resname="section.assign,content">
         <source>Assign Content</source>
         <target state="new">Assign Content</target>
