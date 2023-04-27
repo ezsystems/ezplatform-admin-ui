@@ -1,0 +1,13 @@
+name: Call Automatic Changelog Generator for tag Workflow
+
+on:  
+  push:
+    tags:
+      - 'v*'
+      - '!v*-alpha*'
+
+jobs:
+  create_release_for_tag:
+    uses: ibexa/gh-workflows/.github/workflows/release_bundle.yml@main
+    secrets:
+      JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
