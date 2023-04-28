@@ -87,20 +87,20 @@ final class PagerLocationToDataMapper
     }
 
     /**
-     * @return iterable<\eZ\Publish\API\Repository\Values\Content\Language>
+     * @return \eZ\Publish\API\Repository\Values\Content\Language[]
      */
     private function getAvailableTranslations(
         VersionInfo $versionInfo
-    ): iterable {
+    ): array {
         $availableTranslationsLanguages = $this->languageService->loadLanguageListByCode(
             $versionInfo->languageCodes
         );
 
         return array_filter(
             $availableTranslationsLanguages,
-            (static function (Language $language): bool {
+            static function (Language $language): bool {
                 return $language->enabled;
-            })
+            }
         );
     }
 }
