@@ -9,9 +9,10 @@ declare(strict_types=1);
 namespace Ibexa\AdminUi\Tab\Dashboard;
 
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\LanguageService;
 use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\API\Repository\Values\Content\Language;
 use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\Core\Repository\LocationResolver\LocationResolver;
@@ -22,25 +23,25 @@ final class PagerLocationToDataMapper
     /** @var \eZ\Publish\API\Repository\ContentService */
     private $contentService;
 
-    /** @var \eZ\Publish\API\Repository\ContentTypeService */
-    private $contentTypeService;
-
     /** @var \eZ\Publish\API\Repository\UserService */
     private $userService;
 
     /** @var \eZ\Publish\Core\Repository\LocationResolver\LocationResolver */
     private $locationResolver;
 
+    /** @var \eZ\Publish\API\Repository\LanguageService */
+    private $languageService;
+
     public function __construct(
         ContentService $contentService,
-        ContentTypeService $contentTypeService,
         UserService $userService,
-        LocationResolver $locationResolver
+        LocationResolver $locationResolver,
+        LanguageService $languageService
     ) {
         $this->contentService = $contentService;
-        $this->contentTypeService = $contentTypeService;
         $this->userService = $userService;
         $this->locationResolver = $locationResolver;
+        $this->languageService = $languageService;
     }
 
     /**
@@ -65,7 +66,7 @@ final class PagerLocationToDataMapper
                 'name' => $contentInfo->name,
                 'type' => $contentType->getName(),
                 'language' => $contentInfo->mainLanguageCode,
-                'available_enabled_translations' => [],
+                'available_enabled_translations' => $versionInfo !== null ? $this->getAvailableTranslations($versionInfo) : [],
                 'contributor' => $versionInfo !== null ? $this->getVersionContributor($versionInfo) : null,
                 'content_type' => $contentType,
                 'modified' => $contentInfo->modificationDate,
@@ -83,5 +84,23 @@ final class PagerLocationToDataMapper
         } catch (NotFoundException $e) {
             return null;
         }
+    }
+
+    /**
+     * @return \eZ\Publish\API\Repository\Values\Content\Language[]
+     */
+    private function getAvailableTranslations(
+        VersionInfo $versionInfo
+    ): array {
+        $availableTranslationsLanguages = $this->languageService->loadLanguageListByCode(
+            $versionInfo->languageCodes
+        );
+
+        return array_filter(
+            $availableTranslationsLanguages,
+            static function (Language $language): bool {
+                return $language->enabled;
+            }
+        );
     }
 }
