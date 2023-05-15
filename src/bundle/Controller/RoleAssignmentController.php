@@ -22,7 +22,7 @@ use EzSystems\EzPlatformAdminUi\Form\Data\Role\RoleAssignmentsDeleteData;
 use EzSystems\EzPlatformAdminUi\Form\Factory\FormFactory;
 use EzSystems\EzPlatformAdminUi\Form\SubmitHandler;
 use EzSystems\EzPlatformAdminUi\Notification\TranslatableNotificationHandlerInterface;
-use Pagerfanta\Adapter\ArrayAdapter;
+use Ibexa\AdminUi\Pagination\Pagerfanta\RoleAssignmentsSearchAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,30 +60,32 @@ class RoleAssignmentController extends Controller
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\User\Role $role
-     * @param string $routeName
-     * @param int $assignmentPage
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function listAction(Role $role, string $routeName, int $assignmentPage = 1): Response
-    {
+    public function listAction(
+        Role $role,
+        string $routeName,
+        int $assignmentsCount,
+        int $assignmentPage = 1
+    ): Response {
+        $pagerfanta = new Pagerfanta(
+            new RoleAssignmentsSearchAdapter(
+                $this->roleService,
+                $role,
+                $assignmentsCount
+            )
+        );
+        $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination.role_assignment_limit'));
+        $pagerfanta->setCurrentPage($assignmentPage);
+
         // If user has no permission to content/read than he should see empty table.
         try {
-            $assignments = $this->roleService->getRoleAssignments($role);
+            /** @var \eZ\Publish\API\Repository\Values\User\RoleAssignment[] $assignments */
+            $assignments = $pagerfanta->getCurrentPageResults();
         } catch (UnauthorizedException $e) {
             $assignments = [];
         }
-
-        $pagerfanta = new Pagerfanta(
-            new ArrayAdapter($assignments)
-        );
-
-        $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination.role_assignment_limit'));
-        $pagerfanta->setCurrentPage(min($assignmentPage, $pagerfanta->getNbPages()));
-
-        /** @var \eZ\Publish\API\Repository\Values\User\RoleAssignment[] $assignments */
-        $assignments = $pagerfanta->getCurrentPageResults();
 
         $deleteRoleAssignmentsForm = $this->formFactory->deleteRoleAssignments(
             new RoleAssignmentsDeleteData($role, $this->getRoleAssignmentsNumbers($assignments))
