@@ -111,6 +111,11 @@
         <target>Subtree</target>
         <note>key: policy.limitation.identifier.subtree</note>
       </trans-unit>
+      <trans-unit id="ae8d9836b92dd7d303929104953d877fa9c14fed" resname="policy.limitation.identifier.versionlock">
+        <source>VersionLock</source>
+        <target>VersionLock</target>
+        <note>key: policy.limitation.identifier.versionlock</note>
+      </trans-unit>
       <trans-unit id="920f6a0525d6ba93ff83f46e22baa981ff0b483c" resname="policy.limitation.identifier.workflowstage">
         <source>WorkflowStage</source>
         <target>WorkflowStage</target>

@@ -331,6 +331,11 @@
         <target>Content / Translations</target>
         <note>key: role.policy.content.translations</note>
       </trans-unit>
+      <trans-unit id="74ccbb06e1226201f9642eefa451b67360a4145b" resname="role.policy.content.unlock">
+        <source>Content / Unlock</source>
+        <target>Content / Unlock</target>
+        <note>key: role.policy.content.unlock</note>
+      </trans-unit>
       <trans-unit id="79ffa7a2f2449d08574ef7c5b1f447b439db97b2" resname="role.policy.content.urltranslator">
         <source>Content / Urltranslator</source>
         <target>Content / Urltranslator</target>

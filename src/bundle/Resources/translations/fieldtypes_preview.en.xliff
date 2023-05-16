@@ -171,11 +171,6 @@
         <target state="new">Content Type</target>
         <note>key: ezobjectrelation.content_type</note>
       </trans-unit>
-      <trans-unit id="79f0c6856a30e0436b61aa28cfc859df8289edfb" resname="ezobjectrelation.created">
-        <source>Created</source>
-        <target state="new">Created</target>
-        <note>key: ezobjectrelation.created</note>
-      </trans-unit>
       <trans-unit id="feb25b24199466f077038c5e6e38209deae21471" resname="ezobjectrelation.name">
         <source>Name</source>
         <target state="new">Name</target>
