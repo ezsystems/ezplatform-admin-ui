@@ -77,17 +77,12 @@ class RoleController extends Controller
         $this->configResolver = $configResolver;
     }
 
-    /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
     public function listAction(Request $request): Response
     {
         $page = $request->query->get('page') ?? 1;
 
         $pagerfanta = new Pagerfanta(
-            new ArrayAdapter($this->roleService->listRoles())
+            new ArrayAdapter($this->roleService->loadRoles())
         );
 
         $pagerfanta->setMaxPerPage($this->configResolver->getParameter('pagination.role_limit'));
@@ -95,6 +90,8 @@ class RoleController extends Controller
 
         /** @var \eZ\Publish\API\Repository\Values\User\Role[] $sectionList */
         $roles = $pagerfanta->getCurrentPageResults();
+
+        dump($roles);
 
         $rolesNumbers = array_column($roles, 'id');
 
