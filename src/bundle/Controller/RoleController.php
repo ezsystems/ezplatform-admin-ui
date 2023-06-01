@@ -91,8 +91,6 @@ class RoleController extends Controller
         /** @var \eZ\Publish\API\Repository\Values\User\Role[] $sectionList */
         $roles = $pagerfanta->getCurrentPageResults();
 
-        dump($roles);
-
         $rolesNumbers = array_column($roles, 'id');
 
         $rolesDeleteData = new RolesDeleteData(
