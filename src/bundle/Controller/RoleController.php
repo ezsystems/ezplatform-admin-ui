@@ -128,7 +128,7 @@ class RoleController extends Controller
 
         return $this->render('@ezdesign/user/role/index.html.twig', [
             'role' => $role,
-            'assignmentsCount' => $assignmentsCount,
+            'assignments_count' => $assignmentsCount,
             'delete_form' => $deleteForm->createView(),
             'route_name' => $request->get('_route'),
             'policy_page' => $policyPage,
