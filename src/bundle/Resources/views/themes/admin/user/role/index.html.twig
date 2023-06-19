@@ -32,7 +32,7 @@
                         </li>
                         <li role="presentation" class="nav-item">
                             <a href="#users-and-groups" class="nav-link" role="tab" data-toggle="tab">
-                                {{ 'role_assignment.view.list.title.count'|trans({'%count%': assignments|length})|desc('Assignments (%count%)') }}
+                                {{ 'role_assignment.view.list.title.count'|trans({'%count%': assignments_count})|desc('Assignments (%count%)') }}
                             </a>
                         </li>
                     </ul>
@@ -51,7 +51,8 @@
                     {{ render(controller('EzSystems\\EzPlatformAdminUiBundle\\Controller\\RoleAssignmentController::listAction', {
                         roleId: role.id,
                         assignmentPage: assignment_page,
-                        routeName: route_name
+                        routeName: route_name,
+                        assignmentsCount: assignments_count
                     })) }}
                 </div>
             </div>

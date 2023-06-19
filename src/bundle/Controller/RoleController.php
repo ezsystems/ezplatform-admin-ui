@@ -77,13 +77,6 @@ class RoleController extends Controller
         $this->configResolver = $configResolver;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
     public function listAction(Request $request): Response
     {
         $page = $request->query->get('page') ?? 1;
@@ -117,12 +110,8 @@ class RoleController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \eZ\Publish\API\Repository\Values\User\Role $role
-     * @param int $policyPage
-     * @param int $assignmentPage
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function viewAction(Request $request, Role $role, int $policyPage = 1, int $assignmentPage = 1): Response
     {
@@ -132,14 +121,14 @@ class RoleController extends Controller
 
         // If user has no permission to content/read than he should see empty table.
         try {
-            $assignments = $this->roleService->getRoleAssignments($role);
+            $assignmentsCount = $this->roleService->countRoleAssignments($role);
         } catch (UnauthorizedException $e) {
-            $assignments = [];
+            $assignmentsCount = 0;
         }
 
         return $this->render('@ezdesign/user/role/index.html.twig', [
             'role' => $role,
-            'assignments' => $assignments,
+            'assignments_count' => $assignmentsCount,
             'delete_form' => $deleteForm->createView(),
             'route_name' => $request->get('_route'),
             'policy_page' => $policyPage,
