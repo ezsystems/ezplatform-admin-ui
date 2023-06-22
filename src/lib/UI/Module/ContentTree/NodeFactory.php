@@ -79,15 +79,22 @@ final class NodeFactory
     ): Node {
         $uninitializedContentInfoList = [];
         $containerLocations = [];
-        $node = $this->buildNode($location, $uninitializedContentInfoList, $containerLocations, $loadSubtreeRequestNode, $loadChildren, $depth, $sortClause, $sortOrder);
-        $contentById = $this->contentService->loadContentListByContentInfo($uninitializedContentInfoList);
+        $node = $this->buildNode(
+            $location,
+            $uninitializedContentInfoList,
+            $containerLocations,
+            $loadSubtreeRequestNode,
+            $loadChildren,
+            $depth,
+            $sortClause,
+            $sortOrder
+        );
 
         $aggregatedChildrenCount = null;
         if ($this->searchService->supports(SearchService::CAPABILITY_AGGREGATIONS)) {
             $aggregatedChildrenCount = $this->countAggregatedSubitems($containerLocations);
         }
 
-        $this->supplyTranslatedContentName($node, $contentById);
         $this->supplyChildrenCount($node, $aggregatedChildrenCount);
 
         return $node;
@@ -338,7 +345,7 @@ final class NodeFactory
             $depth,
             $location->id,
             $location->contentId,
-            '', // node name will be provided later by `supplyTranslatedContentName` method
+            $contentInfo->name,
             $contentType ? $contentType->identifier : '',
             $contentType ? $contentType->isContainer : true,
             $location->invisible || $location->hidden,
@@ -346,20 +353,6 @@ final class NodeFactory
             $totalChildrenCount,
             $children
         );
-    }
-
-    /**
-     * @param \eZ\Publish\API\Repository\Values\Content\Content[] $contentById
-     */
-    private function supplyTranslatedContentName(Node $node, array $contentById): void
-    {
-        if ($node->contentId !== self::TOP_NODE_CONTENT_ID) {
-            $node->name = $this->translationHelper->getTranslatedContentName($contentById[$node->contentId]);
-        }
-
-        foreach ($node->children as $child) {
-            $this->supplyTranslatedContentName($child, $contentById);
-        }
     }
 
     /**
