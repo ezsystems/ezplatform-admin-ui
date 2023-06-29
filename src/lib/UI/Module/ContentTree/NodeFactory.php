@@ -96,7 +96,6 @@ final class NodeFactory
             $aggregatedChildrenCount = $this->countAggregatedSubitems($containerLocations);
         }
 
-
         $this->supplyTranslatedContentName($node, $versionInfoById);
         $this->supplyChildrenCount($node, $aggregatedChildrenCount);
 
