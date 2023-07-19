@@ -41,6 +41,11 @@
         filterInput.addEventListener('change', filterItems.bind(filter, itemsMap, groups), false);
         filterInput.addEventListener('blur', filterItems.bind(filter, itemsMap, groups), false);
         filterInput.addEventListener('keyup', filterItems.bind(filter, itemsMap, groups), false);
+        filterInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        }, false);
     };
 
     filters.forEach(initFilter);
