@@ -13,8 +13,8 @@
         {% endif %}
         <title>{% block title %}Ibexa DXP{% endblock %}</title>
         {{ encore_entry_link_tags('ezplatform-admin-ui-layout-css', null, 'ezplatform') }}
-	    <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
-	    <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 	    
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
@@ -40,7 +40,6 @@
                 message: '{{ message }}',
                 badge: '{{ badge }}'
             })|e('html_attr')  }}"></div>
-        <div class="ez-modal-wrapper"></div>
 
         {{ encore_entry_script_tags('ezplatform-admin-ui-error-page-js', null, 'ezplatform') }}
         {{ ez_render_component_group('stylesheet-body') }}
