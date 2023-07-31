@@ -79,15 +79,24 @@ final class NodeFactory
     ): Node {
         $uninitializedContentInfoList = [];
         $containerLocations = [];
-        $node = $this->buildNode($location, $uninitializedContentInfoList, $containerLocations, $loadSubtreeRequestNode, $loadChildren, $depth, $sortClause, $sortOrder);
-        $contentById = $this->contentService->loadContentListByContentInfo($uninitializedContentInfoList);
+        $node = $this->buildNode(
+            $location,
+            $uninitializedContentInfoList,
+            $containerLocations,
+            $loadSubtreeRequestNode,
+            $loadChildren,
+            $depth,
+            $sortClause,
+            $sortOrder
+        );
+        $versionInfoById = $this->contentService->loadVersionInfoListByContentInfo($uninitializedContentInfoList);
 
         $aggregatedChildrenCount = null;
         if ($this->searchService->supports(SearchService::CAPABILITY_AGGREGATIONS)) {
             $aggregatedChildrenCount = $this->countAggregatedSubitems($containerLocations);
         }
 
-        $this->supplyTranslatedContentName($node, $contentById);
+        $this->supplyTranslatedContentName($node, $versionInfoById);
         $this->supplyChildrenCount($node, $aggregatedChildrenCount);
 
         return $node;
@@ -349,16 +358,16 @@ final class NodeFactory
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\Content\Content[] $contentById
+     * @param \eZ\Publish\API\Repository\Values\Content\VersionInfo[] $versionInfoById
      */
-    private function supplyTranslatedContentName(Node $node, array $contentById): void
+    private function supplyTranslatedContentName(Node $node, array $versionInfoById): void
     {
         if ($node->contentId !== self::TOP_NODE_CONTENT_ID) {
-            $node->name = $this->translationHelper->getTranslatedContentName($contentById[$node->contentId]);
+            $node->name = $this->translationHelper->getTranslatedContentNameByVersionInfo($versionInfoById[$node->contentId]);
         }
 
         foreach ($node->children as $child) {
-            $this->supplyTranslatedContentName($child, $contentById);
+            $this->supplyTranslatedContentName($child, $versionInfoById);
         }
     }
 
