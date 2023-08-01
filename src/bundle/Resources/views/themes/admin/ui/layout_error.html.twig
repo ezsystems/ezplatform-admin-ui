@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8" />
+        {% block meta %}
+        {% endblock %}
+        {% if app.request.locale == 'ach_UG' %}
+            <script type="text/javascript">
+                var _jipt = [];
+                _jipt.push(['project', 'ezplatform']);
+            </script>
+            <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+        {% endif %}
+        <title>{% block title %}Ibexa DXP{% endblock %}</title>
+        {{ encore_entry_link_tags('ezplatform-admin-ui-layout-css', null, 'ezplatform') }}
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/ezplatformadminuiassets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	    
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/ezplatformadminui/img/favicon.ico') }}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('bundles/ezplatformadminui/img/favicon-16x16.png') }}" />
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bundles/ezplatformadminui/img/favicon-32x32.png') }}" />
+	    
+    </head>
+    <body class="{% block body_class %}{% endblock %}">
+        <div class="container-fluid ez-main-container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+
+        {% block footer %}
+            {% include '@ezdesign/ui/footer.html.twig' %}
+        {% endblock %}
+
+        <div
+            class="ez-notifications-container"
+            data-notifications="{{ app.flashes|json_encode() }}"
+            data-template="{{ include('@ezdesign/ui/notification.html.twig', {
+                label: '{{ label }}',
+                message: '{{ message }}',
+                badge: '{{ badge }}'
+            })|e('html_attr')  }}"></div>
+
+        {{ encore_entry_script_tags('ezplatform-admin-ui-error-page-js', null, 'ezplatform') }}
+        {{ ez_render_component_group('stylesheet-body') }}
+    </body>
+</html>

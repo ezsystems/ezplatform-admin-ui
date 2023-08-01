@@ -1,10 +1,4 @@
-{% extends '@ezdesign/ui/layout.html.twig' %}
-
-{% block navigation %}
-    {% if ez_admin_ui_config.user.user is not empty %}
-        {{ parent() }}
-    {% endif %}
-{% endblock %}
+{% extends '@ezdesign/ui/layout_error.html.twig' %}
 
 {% block body_class %}ez-has-no-sidebars ez-error-site{% endblock %}
 

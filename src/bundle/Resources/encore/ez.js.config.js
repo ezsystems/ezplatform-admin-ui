@@ -48,6 +48,9 @@ if (fs.existsSync(fieldTypesPath)) {
 
 module.exports = (Encore) => {
     Encore.addEntry('ezplatform-admin-ui-layout-js', layout)
+        .addEntry('ezplatform-admin-ui-error-page-js', [
+            path.resolve(__dirname, '../public/js/scripts/admin.error.page.js'),
+        ])
         .addEntry('ezplatform-admin-ui-bookmark-list-js', [
             path.resolve(__dirname, '../public/js/scripts/button.state.toggle.js'),
             path.resolve(__dirname, '../public/js/scripts/button.content.edit.js'),
