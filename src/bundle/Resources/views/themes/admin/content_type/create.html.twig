@@ -122,13 +122,14 @@
 
     {{ form_widget(form.saveContentType, { attr: { hidden: 'hidden' }}) }}
     {{ form_widget(form.publishContentType, { attr: { hidden: 'hidden' }}) }}
+    {{ form_widget(form.removeDraft, {'attr': { 'hidden': 'hidden' }}) }}
 
     {{ form_widget(form._token) }}
     {{ form_end(form, {'render_rest': false }) }}
 {% endblock %}
 
 {% block right_sidebar %}
-    {% set content_type_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_create.sidebar_right', [], {'save_id': form.publishContentType.vars.id, 'group': content_type_group}) %}
+    {% set content_type_create_sidebar_right = knp_menu_get('ezplatform_admin_ui.menu.content_type_create.sidebar_right', [], {'form_view': form}) %}
     {{ knp_menu_render(content_type_create_sidebar_right, {'template': '@ezdesign/ui/menu/sidebar_right.html.twig'}) }}
 {% endblock %}
 
