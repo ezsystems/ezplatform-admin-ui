@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAdminUi\Menu\Admin\ContentType;
+namespace Ibexa\AdminUi\Menu\Admin\ContentType;
 
 use EzSystems\EzPlatformAdminUi\Menu\AbstractBuilder;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;

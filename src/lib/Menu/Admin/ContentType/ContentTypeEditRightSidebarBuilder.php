@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Menu\Admin\ContentType;
 
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
+use Ibexa\AdminUi\Menu\Admin\ContentType\AbstractContentTypeRightSidebarBuilder;
 use JMS\TranslationBundle\Model\Message;
 
 /**
