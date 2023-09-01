@@ -142,7 +142,9 @@
             }
 
             if (this.itemsContainer.closest(SELECTOR_MODAL)) {
-                return itemsContainerTop - DROPDOWN_MARGIN;
+                const modalHeight = this.itemsContainer.closest('.modal-content').getBoundingClientRect().height;
+
+                return modalHeight - itemsContainerTop;
             }
 
             return documentElementHeight - itemsContainerTop - DROPDOWN_MARGIN;
