@@ -63,7 +63,7 @@ class CustomUrlsDataset
                     'At least one custom alias belonging to location %d is broken. Fix it by using the ezplatform:urls:regenerate-aliases command.',
                     $location->id
                 ),
-                [$e->getMessage()]
+                ['exception' => $e]
             );
             $customUrlAliases = [];
         }

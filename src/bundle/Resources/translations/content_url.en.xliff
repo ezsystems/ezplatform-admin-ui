@@ -102,8 +102,8 @@
         <note>key: tab.urls.modal_close</note>
       </trans-unit>
       <trans-unit id="56d218db883ed4cc59dbbca53364dc2e725013e4" resname="tab.urls.no_custom_urls">
-        <source>This Content item has no custom URL aliases or they are broken.</source>
-        <target state="new">This Content item has no custom URL aliases or they are broken.</target>
+        <source>This Content item has no custom URL aliases.</source>
+        <target state="new">This Content item has no custom URL aliases.</target>
         <note>key: tab.urls.no_custom_urls</note>
       </trans-unit>
       <trans-unit id="c9fdd1434b44a4592626e8fe493c19141aab24d5" resname="tab.urls.no_system_urls">
