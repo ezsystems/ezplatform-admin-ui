@@ -59,6 +59,8 @@ services:
         lazy: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
+        calls:
+            - [setLogger, ['@?logger']]
 
     EzSystems\EzPlatformAdminUi\UI\Service\:
         resource: '../../../lib/UI/Service'
