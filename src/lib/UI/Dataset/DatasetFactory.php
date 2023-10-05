@@ -19,9 +19,15 @@ use eZ\Publish\API\Repository\URLAliasService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
-class DatasetFactory
+class DatasetFactory implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /** @var \eZ\Publish\API\Repository\ContentService */
     protected $contentService;
 
@@ -66,7 +72,8 @@ class DatasetFactory
         UserService $userService,
         BookmarkService $bookmarkService,
         ValueFactory $valueFactory,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        ?LoggerInterface $logger = null
     ) {
         $this->contentService = $contentService;
         $this->contentTypeService = $contentTypeService;
@@ -79,6 +86,7 @@ class DatasetFactory
         $this->bookmarkService = $bookmarkService;
         $this->valueFactory = $valueFactory;
         $this->configResolver = $configResolver;
+        $this->logger = $logger ?? new NullLogger();
     }
 
     /**
@@ -150,7 +158,7 @@ class DatasetFactory
      */
     public function customUrls(): CustomUrlsDataset
     {
-        return new CustomUrlsDataset($this->urlAliasService, $this->valueFactory);
+        return new CustomUrlsDataset($this->urlAliasService, $this->valueFactory, $this->logger);
     }
 
     /**

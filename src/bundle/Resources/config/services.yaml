@@ -59,6 +59,8 @@ services:
         lazy: true
         arguments:
             $configResolver: '@ezpublish.config.resolver'
+        tags:
+            - { name: 'monolog.logger', channel: 'ibexa.admin_ui' }
 
     EzSystems\EzPlatformAdminUi\UI\Service\:
         resource: '../../../lib/UI/Service'
