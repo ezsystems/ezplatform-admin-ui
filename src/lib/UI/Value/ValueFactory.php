@@ -253,22 +253,23 @@ class ValueFactory
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
-     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
-     *
-     * @return UIValue\ObjectState\ObjectState
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function createObjectState(
         ContentInfo $contentInfo,
-        ObjectStateGroup $objectStateGroup
+        ObjectStateGroup $objectStateGroup,
+        Location $location
     ): UIValue\ObjectState\ObjectState {
         $objectState = $this->objectStateService->getContentState($contentInfo, $objectStateGroup);
 
         return new UIValue\ObjectState\ObjectState($objectState, [
-            'userCanAssign' => $this->permissionResolver->canUser('state', 'assign', $contentInfo, [$objectState]),
+            'userCanAssign' => $this->permissionResolver->canUser(
+                'state',
+                'assign',
+                $contentInfo,
+                [$location, $objectState],
+            ),
         ]);
     }
 

@@ -10,6 +10,7 @@ namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
 use EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory;
@@ -25,31 +26,21 @@ class ObjectStatesDataset
     /** @var UIValue\ObjectState\ObjectState[] */
     protected $data;
 
-    /**
-     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
-     * @param \EzSystems\EzPlatformAdminUi\UI\Value\ValueFactory $valueFactory
-     */
     public function __construct(ObjectStateService $objectStateService, ValueFactory $valueFactory)
     {
         $this->objectStateService = $objectStateService;
         $this->valueFactory = $valueFactory;
     }
-
-    /**
-     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
-     *
-     * @return ObjectStatesDataset
-     */
-    public function load(ContentInfo $contentInfo): self
+    public function load(ContentInfo $contentInfo, Location $location): self
     {
         $data = array_map(
-            function (ObjectStateGroup $objectStateGroup) use ($contentInfo) {
+            function (ObjectStateGroup $objectStateGroup) use ($contentInfo, $location) {
                 $hasObjectStates = !empty($this->objectStateService->loadObjectStates($objectStateGroup));
                 if (!$hasObjectStates) {
                     return [];
                 }
 
-                return $this->valueFactory->createObjectState($contentInfo, $objectStateGroup);
+                return $this->valueFactory->createObjectState($contentInfo, $objectStateGroup, $location);
             },
             $this->objectStateService->loadObjectStateGroups()
         );

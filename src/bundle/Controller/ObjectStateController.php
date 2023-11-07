@@ -307,7 +307,8 @@ class ObjectStateController extends Controller
     public function updateContentStateAction(
         Request $request,
         ContentInfo $contentInfo,
-        ObjectStateGroup $objectStateGroup
+        ObjectStateGroup $objectStateGroup,
+        Location $location
     ): Response {
         if (!$this->permissionResolver->hasAccess('state', 'assign')) {
             $exception = $this->createAccessDeniedException();
@@ -319,7 +320,7 @@ class ObjectStateController extends Controller
 
         $form = $this->formFactory->create(
             ContentObjectStateUpdateType::class,
-            new ContentObjectStateUpdateData($contentInfo, $objectStateGroup)
+            new ContentObjectStateUpdateData($contentInfo, $objectStateGroup, null, $location)
         );
         $form->handleRequest($request);
 
@@ -328,7 +329,13 @@ class ObjectStateController extends Controller
                 $contentInfo = $data->getContentInfo();
                 $objectStateGroup = $data->getObjectStateGroup();
                 $objectState = $data->getObjectState();
-                $this->objectStateService->setContentState($contentInfo, $objectStateGroup, $objectState);
+                $location = $data->getLocation();
+                $this->objectStateService->setContentState(
+                    $contentInfo,
+                    $objectStateGroup,
+                    $objectState,
+                    $location
+                );
 
                 $this->notificationHandler->success(
                     /** @Desc("Content item's Object state changed to '%name%'.") */

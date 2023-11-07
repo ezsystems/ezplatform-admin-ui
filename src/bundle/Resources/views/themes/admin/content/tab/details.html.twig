@@ -125,7 +125,8 @@
                             'method': 'POST',
                             'action': path('ezplatform.object_state.contentstate.update', {
                                 'contentInfoId': content_info.id,
-                                'objectStateGroupId': object_state.objectStateGroup.id
+                                'objectStateGroupId': object_state.objectStateGroup.id,
+                                'locationId': location.id,
                             }),
                             'attr': {'class': 'form-inline ez-form-inline ez-form-inline--align-left'}
                         }) }}
