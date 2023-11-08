@@ -31,6 +31,7 @@ class ObjectStatesDataset
         $this->objectStateService = $objectStateService;
         $this->valueFactory = $valueFactory;
     }
+
     public function load(ContentInfo $contentInfo, Location $location): self
     {
         $data = array_map(

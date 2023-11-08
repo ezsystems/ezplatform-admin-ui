@@ -21,7 +21,7 @@ class ContentObjectStateUpdateData
     /** @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup|null */
     private $objectStateGroup;
 
-    /** @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectState|null rm -r*/
+    /** @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectState|null */
     private $objectState;
 
     /** @var \eZ\Publish\API\Repository\Values\Content\Location|null */
