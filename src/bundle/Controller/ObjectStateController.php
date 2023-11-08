@@ -10,7 +10,7 @@ namespace EzSystems\EzPlatformAdminUiBundle\Controller;
 
 use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
@@ -296,17 +296,10 @@ class ObjectStateController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
-     * @param \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup $objectStateGroup
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function updateContentStateAction(
         Request $request,
-        ContentInfo $contentInfo,
         ObjectStateGroup $objectStateGroup,
         Location $location
     ): Response {
@@ -320,18 +313,19 @@ class ObjectStateController extends Controller
 
         $form = $this->formFactory->create(
             ContentObjectStateUpdateType::class,
-            new ContentObjectStateUpdateData($contentInfo, $objectStateGroup, null, $location)
+            new ContentObjectStateUpdateData($objectStateGroup, null, $location)
         );
         $form->handleRequest($request);
 
+        $contentInfo = $location->getContentInfo();
+
         if ($form->isSubmitted()) {
             $result = $this->submitHandler->handle($form, function (ContentObjectStateUpdateData $data) {
-                $contentInfo = $data->getContentInfo();
+                $location = $data->getLocation();
                 $objectStateGroup = $data->getObjectStateGroup();
                 $objectState = $data->getObjectState();
-                $location = $data->getLocation();
                 $this->objectStateService->setContentState(
-                    $contentInfo,
+                    $location->getContentInfo(),
                     $objectStateGroup,
                     $objectState,
                     $location
@@ -351,8 +345,8 @@ class ObjectStateController extends Controller
         }
 
         return $this->redirectToRoute('_ez_content_view', [
-            'contentId' => $contentInfo->id,
-            'locationId' => $contentInfo->mainLocationId,
+            'contentId' => $contentInfo->getId(),
+            'locationId' => $contentInfo->getMainLocationId(),
             '_fragment' => 'ez-tab-location-view-details',
         ]);
     }

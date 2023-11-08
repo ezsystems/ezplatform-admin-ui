@@ -116,6 +116,8 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
 
     /**
      * @inheritdoc
+     *
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {
@@ -133,7 +135,7 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
         ]);
 
         $this->supplySectionParameters($viewParameters, $contentInfo, $location);
-        $this->supplyObjectStateParameters($viewParameters, $contentInfo, $location);
+        $this->supplyObjectStateParameters($viewParameters, $location);
         $this->supplyTranslations($viewParameters, $versionInfo);
         $this->supplyFormLocationUpdate($viewParameters, $location);
         $this->supplyCreator($viewParameters, $contentInfo);
@@ -185,13 +187,15 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
         }
     }
 
+    /**
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     */
     private function supplyObjectStateParameters(
         ArrayObject &$parameters,
-        ContentInfo $contentInfo,
         Location $location
     ): void {
         $objectStatesDataset = $this->datasetFactory->objectStates();
-        $objectStatesDataset->load($contentInfo, $location);
+        $objectStatesDataset->load($location);
 
         $canAssignObjectState = $this->canUserAssignObjectState();
 
@@ -205,7 +209,6 @@ class DetailsTab extends AbstractEventDispatchingTab implements OrderedTabInterf
                 $objectStateUpdateForm = $this->formFactory->create(
                     ContentObjectStateUpdateType::class,
                     new ContentObjectStateUpdateData(
-                        $contentInfo,
                         $objectStateGroup,
                         $objectState,
                         $location,

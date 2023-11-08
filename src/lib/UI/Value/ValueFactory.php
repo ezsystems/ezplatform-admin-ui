@@ -16,7 +16,6 @@ use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\UserService;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\DraftList\Item\ContentDraftListItem;
 use eZ\Publish\API\Repository\Values\Content\DraftList\Item\UnauthorizedContentDraftListItem;
 use eZ\Publish\API\Repository\Values\Content\Language;
@@ -257,10 +256,10 @@ class ValueFactory
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
     public function createObjectState(
-        ContentInfo $contentInfo,
         ObjectStateGroup $objectStateGroup,
         Location $location
     ): UIValue\ObjectState\ObjectState {
+        $contentInfo = $location->getContentInfo();
         $objectState = $this->objectStateService->getContentState($contentInfo, $objectStateGroup);
 
         return new UIValue\ObjectState\ObjectState($objectState, [

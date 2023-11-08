@@ -8,16 +8,12 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data\ObjectState;
 
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 
 class ContentObjectStateUpdateData
 {
-    /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo|null */
-    private $contentInfo;
-
     /** @var \eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup|null */
     private $objectStateGroup;
 
@@ -28,25 +24,13 @@ class ContentObjectStateUpdateData
     private $location;
 
     public function __construct(
-        ContentInfo $contentInfo = null,
         ObjectStateGroup $objectStateGroup = null,
         ObjectState $objectState = null,
         Location $location = null
     ) {
-        $this->contentInfo = $contentInfo;
         $this->objectStateGroup = $objectStateGroup;
         $this->objectState = $objectState;
         $this->location = $location;
-    }
-
-    public function getContentInfo(): ContentInfo
-    {
-        return $this->contentInfo;
-    }
-
-    public function setContentInfo(ContentInfo $contentInfo)
-    {
-        $this->contentInfo = $contentInfo;
     }
 
     public function getObjectStateGroup(): ObjectStateGroup

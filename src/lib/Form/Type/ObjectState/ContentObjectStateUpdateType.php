@@ -12,7 +12,7 @@ use eZ\Publish\API\Repository\ObjectStateService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectState;
 use EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData;
-use EzSystems\EzPlatformAdminUi\Form\Type\Content\ContentInfoType;
+use EzSystems\EzPlatformAdminUi\Form\Type\Content\LocationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,23 +29,16 @@ class ContentObjectStateUpdateType extends AbstractType
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /**
-     * @param \eZ\Publish\API\Repository\ObjectStateService $objectStateService
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     */
     public function __construct(ObjectStateService $objectStateService, PermissionResolver $permissionResolver)
     {
         $this->objectStateService = $objectStateService;
         $this->permissionResolver = $permissionResolver;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('contentInfo', ContentInfoType::class, [
+            ->add('location', LocationType::class, [
                 'label' => false,
             ])
             ->add('objectStateGroup', ObjectStateGroupType::class, [
@@ -59,21 +52,20 @@ class ContentObjectStateUpdateType extends AbstractType
             /** @var \EzSystems\EzPlatformAdminUi\Form\Data\ObjectState\ContentObjectStateUpdateData $contentObjectStateUpdateData */
             $contentObjectStateUpdateData = $event->getData();
             $objectStateGroup = $contentObjectStateUpdateData->getObjectStateGroup();
-            $contentInfo = $contentObjectStateUpdateData->getContentInfo();
             $location = $contentObjectStateUpdateData->getLocation();
             $form = $event->getForm();
 
             $form->add('objectState', ObjectStateChoiceType::class, [
                 'label' => false,
                 'choice_loader' => new CallbackChoiceLoader(
-                    function () use ($objectStateGroup, $contentInfo, $location) {
+                    function () use ($objectStateGroup, $location) {
                         return array_filter(
                             $this->objectStateService->loadObjectStates($objectStateGroup),
-                            function (ObjectState $objectState) use ($contentInfo, $location) {
+                            function (ObjectState $objectState) use ($location) {
                                 return $this->permissionResolver->canUser(
                                     'state',
                                     'assign',
-                                    $contentInfo,
+                                    $location->getContentInfo(),
                                     [$location, $objectState],
                                 );
                             }
@@ -83,10 +75,7 @@ class ContentObjectStateUpdateType extends AbstractType
         });
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => ContentObjectStateUpdateData::class,

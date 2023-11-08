@@ -821,7 +821,7 @@ ezplatform.object_state.state.bulk_delete:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ObjectStateController::bulkDeleteAction'
 
 ezplatform.object_state.contentstate.update:
-    path: /state/contentstate/update/{contentInfoId}/group/{objectStateGroupId}/{locationId}
+    path: /state/contentstate/update/{locationId}/group/{objectStateGroupId}
     defaults:
         _controller: 'EzSystems\EzPlatformAdminUiBundle\Controller\ObjectStateController::updateContentStateAction'
 

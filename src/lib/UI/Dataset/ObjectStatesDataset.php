@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace EzSystems\EzPlatformAdminUi\UI\Dataset;
 
 use eZ\Publish\API\Repository\ObjectStateService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup;
 use EzSystems\EzPlatformAdminUi\UI\Value as UIValue;
@@ -32,16 +31,16 @@ class ObjectStatesDataset
         $this->valueFactory = $valueFactory;
     }
 
-    public function load(ContentInfo $contentInfo, Location $location): self
+    public function load(Location $location): self
     {
         $data = array_map(
-            function (ObjectStateGroup $objectStateGroup) use ($contentInfo, $location) {
+            function (ObjectStateGroup $objectStateGroup) use ($location) {
                 $hasObjectStates = !empty($this->objectStateService->loadObjectStates($objectStateGroup));
                 if (!$hasObjectStates) {
                     return [];
                 }
 
-                return $this->valueFactory->createObjectState($contentInfo, $objectStateGroup, $location);
+                return $this->valueFactory->createObjectState($objectStateGroup, $location);
             },
             $this->objectStateService->loadObjectStateGroups()
         );

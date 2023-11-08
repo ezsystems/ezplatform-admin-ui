@@ -124,13 +124,11 @@
                         {{ form_start(form_state_update[object_state.objectStateGroup.id], {
                             'method': 'POST',
                             'action': path('ezplatform.object_state.contentstate.update', {
-                                'contentInfoId': content_info.id,
                                 'objectStateGroupId': object_state.objectStateGroup.id,
                                 'locationId': location.id,
                             }),
                             'attr': {'class': 'form-inline ez-form-inline ez-form-inline--align-left'}
                         }) }}
-                            {{ form_row(form_state_update[object_state.objectStateGroup.id].contentInfo) }}
                             {{ form_row(form_state_update[object_state.objectStateGroup.id].objectStateGroup) }}
                             {{ form_row(form_state_update[object_state.objectStateGroup.id].objectState, { 'attr': {'class': 'ez-form-autosubmit'} }) }}
                             {% do form_state_update[object_state.objectStateGroup.id].set.setRendered %}
