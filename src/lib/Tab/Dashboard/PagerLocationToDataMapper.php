@@ -56,8 +56,8 @@ final class PagerLocationToDataMapper
 
         /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
         foreach ($pager as $location) {
-            $contentInfo = $location->contentInfo;
-            $versionInfo = $doMapVersionInfoData ? $this->contentService->loadVersionInfo($contentInfo) : null;
+            $contentInfo = $location->getContentInfo();
+            $versionInfo = $doMapVersionInfoData ? $location->getContent()->getVersionInfo() : null;
             $contentType = $location->getContentInfo()->getContentType();
 
             $data[] = [
