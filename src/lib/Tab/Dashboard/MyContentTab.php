@@ -32,7 +32,10 @@ class MyContentTab extends AbstractContentTab implements OrderedTabInterface
     }
 
     /**
-     * @inheritdoc
+     * @throws \Twig\Error\Error
+     * @throws \eZ\Publish\API\Repository\Exceptions\ForbiddenException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function renderView(array $parameters): string
     {
@@ -50,7 +53,7 @@ class MyContentTab extends AbstractContentTab implements OrderedTabInterface
         $pager->setCurrentPage($page);
 
         return $this->twig->render('@ezdesign/ui/dashboard/tab/my_content.html.twig', [
-            'data' => $this->pagerLocationToDataMapper->map($pager),
+            'data' => $this->pagerLocationToDataMapper->map($pager, true),
         ]);
     }
 }
