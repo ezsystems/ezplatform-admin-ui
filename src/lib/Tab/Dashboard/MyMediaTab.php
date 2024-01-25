@@ -32,7 +32,10 @@ class MyMediaTab extends AbstractMediaTab implements OrderedTabInterface
     }
 
     /**
-     * @inheritdoc
+     * @throws \Twig\Error\Error
+     * @throws \eZ\Publish\API\Repository\Exceptions\ForbiddenException
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      */
     public function renderView(array $parameters): string
     {
@@ -50,7 +53,7 @@ class MyMediaTab extends AbstractMediaTab implements OrderedTabInterface
         $pager->setCurrentPage($page);
 
         return $this->twig->render('@ezdesign/ui/dashboard/tab/my_media.html.twig', [
-            'data' => $this->pagerLocationToDataMapper->map($pager),
+            'data' => $this->pagerLocationToDataMapper->map($pager, true),
         ]);
     }
 }
