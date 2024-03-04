@@ -45,7 +45,7 @@ final class LocationPathQueryType extends OptionsResolverBasedQueryType
 
         return new LocationQuery([
             'filter' => $filter,
-            'sortClauses' => [new Depth()]
+            'sortClauses' => [new Depth()],
         ]);
     }
 
