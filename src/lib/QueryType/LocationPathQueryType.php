@@ -11,6 +11,7 @@ namespace EzSystems\EzPlatformAdminUi\QueryType;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Location\Depth;
 use eZ\Publish\Core\QueryType\OptionsResolverBasedQueryType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -42,7 +43,10 @@ final class LocationPathQueryType extends OptionsResolverBasedQueryType
             ? new Query\Criterion\ParentLocationId($rootLocationId)
             : new Query\Criterion\LocationId($this->getParentLocationPath($location));
 
-        return new LocationQuery(['filter' => $filter]);
+        return new LocationQuery([
+            'filter' => $filter,
+            'sortClauses' => [new Depth()],
+        ]);
     }
 
     private function getParentLocationPath(Location $location): array
