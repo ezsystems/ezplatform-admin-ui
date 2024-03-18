@@ -81,6 +81,11 @@
         <target state="new">Alternative text</target>
         <note>key: ezimageasset.alternative_text</note>
       </trans-unit>
+      <trans-unit id="75c1175bca5f2a2334ffe321afdaedf7fa6887bd" resname="ezimageasset.empty_data.message.error">
+        <source>The chosen asset has no image data available.</source>
+        <target state="new">The chosen asset has no image data available.</target>
+        <note>key: ezimageasset.empty_data.message.error</note>
+      </trans-unit>
       <trans-unit id="6ccdfa3f93ea5a6c0c17a7a9f6fe8fac4d5b6926" resname="ezimageasset.file_name">
         <source>File name</source>
         <target state="new">File name</target>
