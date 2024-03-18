@@ -98,6 +98,18 @@
                 return field.fieldDefinitionIdentifier === imageAssetMapping['contentFieldIdentifier'];
             });
 
+            if (imageField.fieldValue === null) {
+                showErrorNotification(
+                    Translator.trans(
+                        /* @Desc("The chosen asset has no image data available.") */ 'ezimageasset.empty_data.message.error',
+                        {},
+                        'fieldtypes_preview'
+                    )
+                );
+
+                return;
+            }
+
             this.updateData(
                 response.ContentInfo.Content._id,
                 response.ContentInfo.Content.TranslatedName,
@@ -126,18 +138,6 @@
          * @param {Object} image
          */
         updateData(destinationContentId, destinationContentName, destinationLocationId, image) {
-            if (image === null) {
-                showErrorNotification(
-                    Translator.trans(
-                        /* @Desc("The chosen asset has no image data available.") */ 'ezimageasset.empty_data.message.error',
-                        {},
-                        'fieldtypes_preview'
-                    )
-                );
-
-                return;
-            }
-
             const preview = this.fieldContainer.querySelector('.ez-field-edit__preview');
             const previewVisual = preview.querySelector('.ez-field-edit-preview__visual');
             const previewImg = preview.querySelector('.ez-field-edit-preview__media');
