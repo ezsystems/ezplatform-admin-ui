@@ -80,6 +80,7 @@ final class ContentTranslationMapperTest extends TestCase
                 ],
                 new ContentTranslationData([
                     'content' => $content_with_1_field,
+                    'versionInfo' => $content_with_1_field->getVersionInfo(),
                     'initialLanguageCode' => self::LANGUAGE_CODE,
                     'fieldsData' => [
                         $field1->fieldDefIdentifier => new FieldData([
@@ -100,6 +101,7 @@ final class ContentTranslationMapperTest extends TestCase
                 ],
                 new ContentTranslationData([
                     'content' => $content_with_1_field,
+                    'versionInfo' => $content_with_1_field->getVersionInfo(),
                     'initialLanguageCode' => self::LANGUAGE_CODE,
                     'fieldsData' => [
                         $field1->fieldDefIdentifier => new FieldData([
@@ -120,6 +122,7 @@ final class ContentTranslationMapperTest extends TestCase
                 ],
                 new ContentTranslationData([
                     'content' => $content_with_3_fields,
+                    'versionInfo' => $content_with_3_fields->getVersionInfo(),
                     'initialLanguageCode' => self::LANGUAGE_CODE,
                     'fieldsData' => [
                         $field1->fieldDefIdentifier => new FieldData([
