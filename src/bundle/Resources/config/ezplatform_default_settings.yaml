@@ -41,6 +41,7 @@ parameters:
 
     # Subtree Operations
     ezsettings.admin_group.subtree_operations.copy_subtree.limit: 100
+    ezsettings.admin_group.subtree_operations.query_subtree.limit: 500
 
     # Notifications
     ezsettings.admin_group.notifications.error.timeout: 0

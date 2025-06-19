@@ -184,12 +184,18 @@ class LocationsTab extends AbstractEventDispatchingTab implements OrderedTabInte
             );
         }
 
+        $subItemQueryLimit = $this->configResolver->getParameter('subtree_operations.query_subtree.limit');
+        if ($subItemQueryLimit <= 0) {
+            $subItemQueryLimit = null;
+        }
+
         $viewParameters = [
             'pager' => $pagination,
             'pager_options' => [
                 'pageParameter' => sprintf('[%s]', self::PAGINATION_PARAM_NAME),
             ],
             'locations' => $locations,
+            'sub_item_query_limit' => $subItemQueryLimit,
             'form_content_location_add' => $formLocationAdd->createView(),
             'form_content_location_remove' => $formLocationRemove->createView(),
             'form_content_location_swap' => $formLocationSwap->createView(),

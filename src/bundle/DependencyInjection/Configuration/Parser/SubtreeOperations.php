@@ -30,17 +30,23 @@ class SubtreeOperations extends AbstractParser
     /**
      * @inheritdoc
      */
-    public function mapConfig(array &$scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
+    public function mapConfig(array & $scopeSettings, $currentScope, ContextualizerInterface $contextualizer): void
     {
-        if (!isset($scopeSettings['subtree_operations']['copy_subtree']['limit'])) {
-            return;
+        if (isset($scopeSettings['subtree_operations']['copy_subtree']['limit'])) {
+            $contextualizer->setContextualParameter(
+                'subtree_operations.copy_subtree.limit',
+                $currentScope,
+                $scopeSettings['subtree_operations']['copy_subtree']['limit']
+            );
         }
 
-        $contextualizer->setContextualParameter(
-            'subtree_operations.copy_subtree.limit',
-            $currentScope,
-            $scopeSettings['subtree_operations']['copy_subtree']['limit']
-        );
+        if (isset($scopeSettings['subtree_operations']['query_subtree']['limit'])) {
+            $contextualizer->setContextualParameter(
+                'subtree_operations.query_subtree.limit',
+                $currentScope,
+                $scopeSettings['subtree_operations']['query_subtree']['limit']
+            );
+        }
     }
 
     public function addSemanticConfig(NodeBuilder $nodeBuilder): void
@@ -57,6 +63,14 @@ class SubtreeOperations extends AbstractParser
                             ->end()
                         ->end()
                     ->end()
+                    ->arrayNode('query_subtree')
+                        ->children()
+                            ->integerNode('limit')
+                                ->info('Limit the total count of items queried for when calculating the the number of direct children a node has. -1 for no limit. Default is 500 for performance reasons.')
+                                ->defaultValue(500)
+                                ->isRequired()
+                            ->end()
+                        ->end()
                 ->end()
             ->end();
     }

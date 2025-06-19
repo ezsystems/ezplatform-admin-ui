@@ -16,6 +16,7 @@ use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use eZ\Publish\Core\Query\QueryFactoryInterface;
 use EzSystems\EzPlatformAdminUi\UI\Config\Provider\ContentTypeMappings;
@@ -71,6 +72,9 @@ class ContentViewParameterSupplier
     /** @var \eZ\Publish\API\Repository\SearchService */
     private $searchService;
 
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
+
     public function __construct(
         Visitor $outputVisitor,
         JsonOutputGenerator $outputGenerator,
@@ -83,7 +87,8 @@ class ContentViewParameterSupplier
         ContentTypeMappings $contentTypeMappings,
         UserSettingService $userSettingService,
         QueryFactoryInterface $queryFactory,
-        SearchService $searchService
+        SearchService $searchService,
+        ConfigResolverInterface $configResolver
     ) {
         $this->outputVisitor = $outputVisitor;
         $this->outputGenerator = $outputGenerator;
@@ -97,6 +102,7 @@ class ContentViewParameterSupplier
         $this->userSettingService = $userSettingService;
         $this->queryFactory = $queryFactory;
         $this->searchService = $searchService;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -187,7 +193,12 @@ class ContentViewParameterSupplier
     {
         return new RestLocation(
             $location,
-            $this->locationService->getLocationChildCount($location)
+            $this->locationService->getLocationChildCount(
+                $location,
+                 // For the sub items module we only ever use the count to determine if there are children (0 or 1+),
+                 // hence setting a limit of 1 is sufficient here.
+                1
+            )
         );
     }
 

@@ -34,7 +34,7 @@
                         <td class="ez-table__cell">
                             {% include '@ezdesign/ui/location_path.html.twig' with {'locations': location.pathLocations, 'link_last_element': true} %}
                         </td>
-                        <td class="ez-table__cell">{{ location.childCount }}</td>
+                        <td class="ez-table__cell">{% if sub_item_query_limit is not null and location.childCount > sub_item_query_limit %}{{ location.childCount -1 }}+{% else %}{{location.childCount}}{% endif %}</td>
                         <td class="ez-table__cell">
                             <label class="ez-checkbox-icon {{ not location.explicitlyHidden ? 'is-checked' }}{% if not can_hide[location.id] %} disabled{% endif %}"
                                    title="{{ 'tab.locations.visibility'|trans|desc('Visibility') }}">

@@ -297,7 +297,7 @@ class LocationController extends Controller
                 $currentLocation = $data->getCurrentLocation();
                 $newLocation = $data->getNewLocation();
 
-                $childCount = $this->locationService->getLocationChildCount($currentLocation);
+                $childCount = $this->locationService->getLocationChildCount($currentLocation, 1);
                 $contentType = $newLocation->getContent()->getContentType();
 
                 if (!$contentType->isContainer && $childCount) {
