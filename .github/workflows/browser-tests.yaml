@@ -19,3 +19,6 @@ jobs:
             test-setup-phase-2: '--profile=setup --suite=content-translation --mode=standard'
         secrets:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+            AUTOMATION_CLIENT_ID: ${{ secrets.AUTOMATION_CLIENT_ID }}
+            AUTOMATION_CLIENT_SECRET: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
+            EZROBOT_33: ${{ secrets.EZROBOT_33 }}
