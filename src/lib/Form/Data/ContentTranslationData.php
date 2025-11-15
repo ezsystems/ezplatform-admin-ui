@@ -8,11 +8,11 @@ declare(strict_types=1);
 
 namespace EzSystems\EzPlatformAdminUi\Form\Data;
 
-use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
+use EzSystems\EzPlatformContentForms\Data\ContentTranslationData as BaseContentTranslationData;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ContentTranslationData extends ContentUpdateStruct implements NewnessCheckable
+class ContentTranslationData extends BaseContentTranslationData implements NewnessCheckable
 {
     /**
      * @var \EzSystems\EzPlatformContentForms\Data\Content\FieldData[]
@@ -22,6 +22,9 @@ class ContentTranslationData extends ContentUpdateStruct implements NewnessCheck
 
     /** @var \eZ\Publish\API\Repository\Values\Content\Content */
     protected $content;
+
+    /** @var \eZ\Publish\API\Repository\Values\Content\VersionInfo */
+    protected $versionInfo;
 
     /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType */
     protected $contentType;

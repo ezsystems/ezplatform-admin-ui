@@ -7,6 +7,7 @@
 namespace EzSystems\EzPlatformAdminUi\Form\Processor;
 
 use eZ\Publish\API\Repository\ContentService;
+use eZ\Publish\API\Repository\Values\Content\VersionInfo;
 use EzSystems\EzPlatformAdminUi\Form\Data\ContentTranslationData;
 use EzSystems\EzPlatformContentForms\Data\Content\ContentUpdateData;
 use EzSystems\EzPlatformContentForms\Data\Content\FieldData;
@@ -54,7 +55,12 @@ class TranslationFormProcessor implements EventSubscriberInterface
             return;
         }
 
-        $contentDraft = $this->contentService->createContentDraft($data->content->contentInfo);
+        if ($data->content->getVersionInfo()->status === VersionInfo::STATUS_DRAFT) {
+            $contentDraft = $data->content;
+        } else {
+            $contentDraft = $this->contentService->createContentDraft($data->content->contentInfo);
+        }
+
         $fields = array_filter($data->fieldsData, static function (FieldData $fieldData) use ($contentDraft, $data) {
             $mainLanguageCode = $contentDraft->getVersionInfo()->getContentInfo()->mainLanguageCode;
 

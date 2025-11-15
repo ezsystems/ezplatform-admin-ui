@@ -57,7 +57,7 @@ class ContentEditController extends Controller
             return $event->getResponse();
         }
 
-        // Fallback to "translate"
+        // Fallback to default translation interface (no draft)
         return $this->redirectToRoute('ezplatform.content.translate', [
             'contentId' => $contentId,
             'fromLanguageCode' => $fromLanguageCode,

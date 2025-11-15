@@ -195,10 +195,11 @@ final class ContentProxyCreateDraftListenerTest extends TestCase
         $router = $this->createMock(RouterInterface::class);
         $router
             ->method('generate')
-            ->with('ezplatform.content.draft.edit', [
+            ->with('ezplatform.content.translate', [
                 'contentId' => null,
                 'versionNo' => null,
-                'language' => 'pol-PL',
+                'toLanguageCode' => 'pol-PL',
+                'fromLanguageCode' => 'eng-GB',
                 'locationId' => null,
             ])
             ->willReturn('redirect_test_url');
